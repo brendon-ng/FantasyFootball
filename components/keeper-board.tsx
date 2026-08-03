@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
+import { Tip } from "@/components/tooltip";
 import { Col, ListHeader, Panel, PanelHeader } from "@/components/ui";
 import { useSelectedKeepers } from "@/components/keeper-selection";
 import { LiveStatus } from "@/lib/sleeper-browser";
@@ -160,16 +161,15 @@ export function KeeperBoard({
                             Kept
                           </span>
                         ) : null}
-                        {/* A move Sleeper knows about but the committed data
-                            does not yet — applied live so the board is right
-                            before the deadline rather than after it. */}
+                        {/* A dot, not a banner: the row already shows the true
+                            current value, so this only says where it came from. */}
                         {adjustments.has(c.playerId) ? (
-                          <span
-                            className="shrink-0 rounded border border-gold/40 bg-gold/10 px-1.5 py-0.5 text-[9px] font-bold uppercase leading-normal tracking-wide text-gold"
-                            title={`${adjustments.get(c.playerId)} — applied live, not yet in the committed data`}
+                          <Tip
+                            className="shrink-0 text-[10px] leading-none text-gold"
+                            text={`${adjustments.get(c.playerId)}. Straight from Sleeper — this week has not been scored yet, so it is not in the committed data.`}
                           >
-                            Updated
-                          </span>
+                            ●
+                          </Tip>
                         ) : null}
                         <ValueBadge costRound={c.round} adp={adp[c.playerId]} />
                         <KeepPips used={c.keepsUsed} total={c.keepsUsed + c.keepsRemaining} />

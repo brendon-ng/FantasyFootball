@@ -31,17 +31,14 @@ export function OwnerContracts({
   const selected = byOwner.get(ownerSlug) ?? new Set<string>();
   const mine = live.filter((c) => c.ownerSlug === ownerSlug);
   const ordered = orderBySelection(mine, selected);
-  const pending = ordered.filter((c) => adjustments.has(c.playerId)).length;
 
   return (
     <>
       <div className="flex items-center justify-between gap-3 border-b border-ink-700 px-4 py-2 sm:px-5">
         <span className="text-[11px] text-chalk-600">
           {ready
-            ? `${selected.size} of ${maxKeepers} keepers selected · ${ordered.length} rostered${
-                pending ? ` · ${pending} updated since the last sync` : ""
-              }`
-            : "Selections load from Sleeper"}
+            ? `${selected.size} of ${maxKeepers} keepers selected · ${ordered.length} rostered`
+            : "Loading from Sleeper"}
         </span>
         <LiveStatus status={ready ? "ready" : "loading"} />
       </div>

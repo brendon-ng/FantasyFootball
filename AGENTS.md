@@ -147,7 +147,15 @@ purely baked board is wrong exactly when it is being used to decide keepers.
 
 `lib/keeper-live.ts` fetches the current season's unfinalised transactions in the
 browser and applies them on top of the derived contracts, then reconciles owner
-against the live roster. Changed rows carry an "Updated" chip naming what moved.
+against the live roster. `components/player-live.tsx` does the same for a player
+page's transaction list and owner.
+
+THE UI ALWAYS SHOWS THE CURRENT TRUE STATE. Live data is merged into the same
+rows, in the same order, as committed data — never fenced off in a banner or a
+separate list. A reader asking "was this player dropped" wants one answer. A
+small gold dot with a tooltip records that an event has not been archived yet;
+it disappears on its own once the sync catches up. Do not reintroduce a
+prominent unsynced treatment.
 
 ITS RULES MIRROR `resolveKeepers()` in `scripts/derive.ts`. If one changes,
 change both, or a contract will flicker the moment a week finalises.

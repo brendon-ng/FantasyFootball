@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
+import { Tip } from "@/components/tooltip";
 import { useLiveContracts } from "@/lib/keeper-live";
 import { useLiveRosters } from "@/lib/sleeper-browser";
 import type { AdpEntry } from "@/lib/data";
@@ -130,13 +131,15 @@ export function ContractRow({
           Kept
         </span>
       ) : null}
+      {/* A dot, not a banner: the row already shows the true current value, so
+          this only says where that value came from. */}
       {liveNote ? (
-        <span
-          className="shrink-0 rounded border border-gold/40 bg-gold/10 px-1.5 py-0.5 text-[9px] font-bold uppercase leading-normal tracking-wide text-gold"
-          title={`${liveNote} — applied live, not yet in the committed data`}
+        <Tip
+          className="shrink-0 text-[10px] leading-none text-gold"
+          text={`${liveNote}. Straight from Sleeper — this week has not been scored yet, so it is not in the committed data. It will archive automatically once it is.`}
         >
-          Updated
-        </span>
+          ●
+        </Tip>
       ) : null}
       <span className="hidden sm:block">
         <ValueBadge costRound={contract.round} adp={adp} compact />
