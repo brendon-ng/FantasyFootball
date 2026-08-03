@@ -6,6 +6,7 @@ import { Col, ListHeader, Panel, PanelHeader, fmt, placeColor } from "@/componen
 import {
   creditedNames,
   getAllMeetings,
+  getDrafts,
   getMatchupHistory,
   getOwnerMap,
   getSeasons,
@@ -52,6 +53,10 @@ export default async function SeasonPage({
     return existing.has(id) ? `/matchups/${id}/` : null;
   };
 
+  // Imported ESPN seasons kept no draft data, so the link would 404. The page
+  // only exists for seasons that have picks.
+  const hasDraft = getDrafts().some((p) => p.season === season);
+
   const matchups = getMatchupHistory().filter((m) => m.season === season);
   const weeks = [...new Set(matchups.map((m) => m.week))].sort((a, b) => a - b);
 
@@ -63,10 +68,22 @@ export default async function SeasonPage({
             ← History
           </Link>
           <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">{season} Season</h1>
+          {/* Kept on the title side. Beside the champion it read as an arrow
+              pointing AT the champion. */}
+          {hasDraft ? (
+            <Link
+              href={`/history/${season}/draft/`}
+              className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-ink-500 px-3 py-1.5 text-xs font-medium text-chalk-400 transition-colors hover:border-accent hover:text-accent"
+            >
+              View draft results
+            </Link>
+          ) : null}
         </div>
-        <div className="text-right text-sm">
-          <div className="eyebrow">Champion</div>
-          <div className="text-lg font-bold text-gold">{creditedNames(summary.standings, summary.champion, "TBD")}</div>
+        <div className="flex items-end gap-4">
+          <div className="text-right text-sm">
+            <div className="eyebrow">Champion</div>
+            <div className="text-lg font-bold text-gold">{creditedNames(summary.standings, summary.champion, "TBD")}</div>
+          </div>
         </div>
       </div>
 

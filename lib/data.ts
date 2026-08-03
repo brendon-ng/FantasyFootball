@@ -639,6 +639,17 @@ const ordinalOf = (n: number) => {
  * row there can never disagree — recomputing thresholds separately would let
  * them drift the moment the list length or tie-breaking changed.
  */
+/**
+ * How deep the record book goes on screen.
+ *
+ * The derived lists hold more than this (headroom for a future deeper view), so
+ * this is the number that must gate badges: a "#22 lowest scoring matchup" badge
+ * points at a rank the records page will not show, which reads as a bug because
+ * it is one. Keep the records page and the badges reading this same constant so
+ * they cannot drift apart.
+ */
+export const RECORD_BOOK_DEPTH = 20;
+
 export function getRecordFlags(
   season: number,
   week: number | null,
@@ -734,7 +745,8 @@ export function getRecordFlags(
     }
   });
 
-  return out.sort((a, b) => a.rank - b.rank);
+  // Only ranks the record book actually shows.
+  return out.filter((f) => f.rank <= RECORD_BOOK_DEPTH).sort((a, b) => a.rank - b.rank);
 }
 
 /**
@@ -745,8 +757,10 @@ export function getRecordFlags(
  */
 export function getRecordThresholds(): { high: number[]; low: number[] } {
   const r = getRecords();
+  // Capped the same way as the badges, so a live game cannot be "on pace for
+  // #22" when the record book stops at 20.
   return {
-    high: r.weeklyHigh.map((s) => s.points),
-    low: r.weeklyLow.map((s) => s.points),
+    high: r.weeklyHigh.slice(0, RECORD_BOOK_DEPTH).map((s) => s.points),
+    low: r.weeklyLow.slice(0, RECORD_BOOK_DEPTH).map((s) => s.points),
   };
 }

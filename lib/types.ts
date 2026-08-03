@@ -300,7 +300,17 @@ export interface DraftPickRecord {
   round: number;
   pickNo: number;
   draftSlot: number;
+  /** Who actually used the pick — the acquiring team if it was traded. */
   ownerSlug: string | null;
+  /**
+   * Whose draft slot this is, from the draft's `slot_to_roster_id`.
+   *
+   * Differs from `ownerSlug` exactly when the pick changed hands. Kept separate
+   * because a board column is a SLOT, so the column must be labelled by its
+   * original owner; inferring the label from picks would name the column after
+   * whoever happened to trade in.
+   */
+  slotOwnerSlug: string | null;
   playerId: string;
   isKeeper: boolean;
 }

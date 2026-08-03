@@ -1054,20 +1054,35 @@ function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransac
   return hist;
 }
 
+/**
+ * Draft picks, with the slot's original owner alongside the one who used it.
+ *
+ * A pick's `roster_id` is the roster that USED it, while the draft's
+ * `slot_to_roster_id` says whose slot it is. They differ exactly when the pick
+ * was traded — cross-checked against `traded-picks.json` for 2025: both report
+ * the same 23 picks. Deriving it from the pick itself rather than the traded-pick
+ * list keeps it correct for a past season even after later trades, since
+ * `traded-picks.json` describes current ownership.
+ */
 function buildDraftHistory(seasons: SeasonData[]): DraftPickRecord[] {
-  return seasons.flatMap((d) =>
-    d.picks
+  return seasons.flatMap((d) => {
+    const slotOwner = new Map<number, string | null>();
+    for (const [slot, rosterId] of Object.entries(d.draft?.slot_to_roster_id ?? {})) {
+      slotOwner.set(Number(slot), d.rosterToOwner.get(Number(rosterId)) ?? null);
+    }
+    return d.picks
       .filter((p) => !ignoredPlayers.has(p.player_id))
       .map((p) => ({
-      season: d.season,
-      round: p.round,
-      pickNo: p.pick_no,
-      draftSlot: p.draft_slot,
-      ownerSlug: d.rosterToOwner.get(Number(p.roster_id)) ?? null,
-      playerId: p.player_id,
-      isKeeper: Boolean(p.is_keeper),
-    })),
-  );
+        season: d.season,
+        round: p.round,
+        pickNo: p.pick_no,
+        draftSlot: p.draft_slot,
+        ownerSlug: d.rosterToOwner.get(Number(p.roster_id)) ?? null,
+        slotOwnerSlug: slotOwner.get(p.draft_slot) ?? null,
+        playerId: p.player_id,
+        isKeeper: Boolean(p.is_keeper),
+      }));
+  });
 }
 
 // --- imported (pre-Sleeper) seasons ------------------------------------------

@@ -102,8 +102,6 @@ Logan Dunn, Jaymie Lew, David Collier.
 
 ### Known gaps
 
-- **No draft history page.** `data/derived/drafts.json` is populated (340 picks
-  with keeper flags) and nothing renders it. Clearest next piece of work.
 - **Imported brackets have no bracket lines.** ESPN publishes routing for the
   consolation ladder but not the championship bracket, so 2020-23 render as
   round columns. Routing could be inferred further if wanted.
@@ -124,7 +122,24 @@ Logan Dunn, Jaymie Lew, David Collier.
   picks, and picks render as "7th Rd" rather than "7.10". Once an order exists,
   resolve slots there and label picks with them. The league intends to automate
   this for this season and future ones.
-- **Draft history page**: `drafts.json` holds all 340 picks and nothing renders it.
+
+`/history/<season>/draft/` renders a season's draft as the board it happened on
+— slots as columns, rounds as rows. Only seasons WITH picks get a page, so the
+2020-23 ESPN seasons have no link.
+
+Two things it deliberately does not do. There is no ADP column: `getAdp()` is the
+CURRENT market, so pricing a 2024 pick against it would compare that draft to a
+market that did not exist. And the trade marker lives inline on the pick's top
+row rather than in a banner, because a conditional extra row makes traded cells
+taller and knocks the whole grid row out of alignment.
+
+A traded pick is found by comparing the pick's own `roster_id` (who used it) with
+the draft's `slot_to_roster_id` (whose slot it is) — carried through as
+`DraftPickRecord.slotOwnerSlug`. Cross-checked against `traded-picks.json`: both
+report the same 23 picks for 2025. The pick is the better source for history,
+since `traded-picks.json` describes CURRENT ownership and would rewrite a past
+draft after a later trade. A board column is a SLOT, so it is labelled by
+`slotOwnerSlug`; labelling from picks names the column after whoever traded in.
 
 Keeper history shipped at `/keepers/history/` (by team and season) and on player
 pages (a "Times kept" tile plus a Keeper History panel). Both read `isKeeper`

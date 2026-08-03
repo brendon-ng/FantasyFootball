@@ -3,7 +3,16 @@ import Link from "next/link";
 import { ExpandableList, ExpandableRow } from "@/components/expandable-list";
 
 import { Panel, PanelHeader, fmt } from "@/components/ui";
-import { getAllMeetings, getMatchupHistory, getOwnerMap, getPlayers, getRecords, meetingId, pageTitle } from "@/lib/data";
+import {
+  RECORD_BOOK_DEPTH,
+  getAllMeetings,
+  getMatchupHistory,
+  getOwnerMap,
+  getPlayers,
+  getRecords,
+  meetingId,
+  pageTitle,
+} from "@/lib/data";
 import type { CombinedRecord, ScoreRecord } from "@/lib/types";
 
 export const generateMetadata = () => ({ title: pageTitle("Records") });
@@ -129,7 +138,7 @@ export default function RecordsPage() {
         />
         <ExpandableList
           noun="performances"
-          items={records.playerHigh.slice(0, 20).map((r, i) => {
+          items={records.playerHigh.slice(0, RECORD_BOOK_DEPTH).map((r, i) => {
             const opp = opponentOf.get(`${r.season}:${r.week}:${r.ownerSlug}`) ?? null;
             const href = meetingHref(r.ownerSlug, opp, r.season, r.week);
             return (
@@ -217,12 +226,12 @@ function ScoreList({
     <Panel>
       <PanelHeader
         title={title}
-        meta={`top ${Math.min(rows.length, 20)}`}
+        meta={`top ${Math.min(rows.length, RECORD_BOOK_DEPTH)}`}
         legend="Rank · owner · season, week and opponent (their score in brackets) · points scored"
       />
       <ExpandableList
         noun="scores"
-        items={rows.slice(0, 20).map((r, i) => {
+        items={rows.slice(0, RECORD_BOOK_DEPTH).map((r, i) => {
           const href = meetingHref(r.ownerSlug, r.opponentSlug, r.season, r.week);
           const body = (
             <>
@@ -292,12 +301,12 @@ function CombinedList({
     <Panel>
       <PanelHeader
         title={title}
-        meta={`top ${Math.min(rows.length, 20)}`}
+        meta={`top ${Math.min(rows.length, RECORD_BOOK_DEPTH)}`}
         legend="Both teams' scores added together. Rank · the matchup · combined total."
       />
       <ExpandableList
         noun="scores"
-        items={rows.slice(0, 20).map((r, i) => {
+        items={rows.slice(0, RECORD_BOOK_DEPTH).map((r, i) => {
           const href = meetingHref(r.ownerSlug, r.opponentSlug, r.season, r.week);
           const body = (
             <>
@@ -362,7 +371,7 @@ function MarginList({
       />
       <ExpandableList
         noun="matchups"
-        items={rows.slice(0, 20).map((r, i) => {
+        items={rows.slice(0, RECORD_BOOK_DEPTH).map((r, i) => {
           const href = meetingHref(r.ownerSlug, r.opponentSlug, r.season, r.week);
           const body = (
             <>
