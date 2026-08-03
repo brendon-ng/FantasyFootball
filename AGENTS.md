@@ -136,6 +136,26 @@ auditable. Corrections go in `config/keeper-overrides.json` — never in code.
 Ownership is reconciled against each season's final roster snapshot, because the
 transaction log is not a complete record of roster mutation.
 
+### Three layers of data
+
+1. **Imported** (`data/manual/`) — 2020-23 ESPN seasons, frozen forever.
+2. **Derived** (`data/derived/`) — built from committed Sleeper dumps by
+   `npm run derive`. Fixed between deploys.
+3. **Live** (`lib/sleeper-browser.tsx`) — fetched in the BROWSER at view time.
+
+Layer 3 exists because Sleeper sends `access-control-allow-origin: *`, so a
+no-server site on Pages can show data fresher than its last build. Use it only
+for facts that genuinely move faster than the deploy schedule — keeper
+selections before the deadline, live scores on a Sunday. Anything stable belongs
+in layer 2, where it costs the client nothing.
+
+`useLiveRosters()` fails soft on purpose: a Sleeper outage leaves the page
+showing its baked data rather than an error, because everything on it is still
+correct — just not annotated. Keep that property.
+
+Do not fetch in the browser from `lib/sleeper.ts`; it is build-time only and
+carries Node assumptions. `lib/sleeper-browser.tsx` must stay dependency-free.
+
 ### Two eras of data
 
 2020-23 are ESPN seasons imported ONCE from archived MHTML pages

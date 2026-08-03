@@ -1,8 +1,6 @@
-import Link from "next/link";
-
-import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
-import { Col, EmptyState, ListHeader, Panel, PanelHeader, Stat } from "@/components/ui";
-import { getAdp, getKeepers, getOwnerMap, getPlayers, getSeasons } from "@/lib/data";
+import { KeeperBoard } from "@/components/keeper-board";
+import { EmptyState, Panel, Stat } from "@/components/ui";
+import { getAdp, getConfig, getKeepers, getOwners, getPlayers, getSeasons } from "@/lib/data";
 import type { KeeperContract } from "@/lib/types";
 
 export const metadata = { title: "Keeper Tracker · Den Ops" };
@@ -12,28 +10,36 @@ const MAX_KEEPERS = 4;
 /**
  * The keeper tracker.
  *
- * Sleeper models none of this — `is_keeper` is a bare boolean with no round and
- * no contract length — so every value here is reconstructed by replaying drafts
- * and transactions in `scripts/derive.ts`. Each row therefore carries its own
- * provenance trail, so anyone can audit the number rather than take it on faith.
+ * Sleeper models no part of the contract system — `is_keeper` is a bare boolean
+ * with no round and no length — so every value here is reconstructed by
+ * replaying drafts and transactions in `scripts/derive.ts`, and each row carries
+ * its own provenance so the maths is auditable rather than taken on faith.
+ *
+ * That derived layer is baked at build time. Which players a team has actually
+ * LOCKED IN changes hour to hour before the deadline, so `KeeperBoard` fetches
+ * that from Sleeper in the browser and merges it on top.
  */
 export default function KeepersPage() {
   const keepers = getKeepers();
-  const owners = getOwnerMap();
+  const owners = getOwners();
   const players = getPlayers();
   const seasons = getSeasons();
   const adp = getAdp();
+  const cfg = getConfig();
 
   const nextSeason = Math.max(...seasons.map((s) => s.season), 0) + 1;
+  const leagueId = cfg.knownLeagueIds[String(nextSeason)] ?? null;
 
   const byOwner = new Map<string, KeeperContract[]>();
   for (const c of keepers.final) {
     if (!c.ownerSlug) continue;
     byOwner.set(c.ownerSlug, [...(byOwner.get(c.ownerSlug) ?? []), c]);
   }
-  for (const list of byOwner.values()) {
-    list.sort((a, b) => Number(a.expired) - Number(b.expired) || a.round - b.round);
-  }
+
+  const ownerNames = Object.fromEntries(owners.map((o) => [o.slug, o.name]));
+  const contractsByOwner = [...byOwner.entries()].sort(([a], [b]) =>
+    (ownerNames[a] ?? a).localeCompare(ownerNames[b] ?? b),
+  );
 
   const all = [...byOwner.values()].flat();
   const expiring = all.filter((c) => c.keepsRemaining === 1).length;
@@ -43,134 +49,39 @@ export default function KeepersPage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Keeper Tracker</h1>
         <p className="mt-1 max-w-2xl text-sm text-chalk-500">
-          Contracts entering the {nextSeason} draft. Keeping a player costs your pick in
-          their round; a contract survives {MAX_KEEPERS === 4 ? "two" : "two"} keeps before
-          the player is revalued to ADP.
+          Contracts entering the {nextSeason} draft. Keeping a player costs your pick in their
+          round; a contract survives two keeps before the player is revalued to ADP.
         </p>
       </div>
 
       <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
         <Stat label="Tracked contracts" value={all.length} />
         <Stat label="Max keepers / team" value={MAX_KEEPERS} />
-        <Stat label="Final keep year" value={expiring} tone="accent" sub="Revalued next offseason" />
         <Stat
-          label="Expired"
-          value={all.filter((c) => c.expired).length}
-          sub="Cost resets to ADP"
+          label="Final keep year"
+          value={expiring}
+          tone="accent"
+          sub="Revalued next offseason"
         />
+        <Stat label="Expired" value={all.filter((c) => c.expired).length} sub="Cost resets to ADP" />
       </div>
 
-      {byOwner.size === 0 ? (
+      {contractsByOwner.length === 0 ? (
         <Panel>
           <EmptyState>No contracts derived yet — run npm run data.</EmptyState>
         </Panel>
       ) : (
-        <div className="grid gap-5 lg:grid-cols-2">
-          {[...byOwner.entries()]
-            .sort(([a], [b]) =>
-              (owners.get(a)?.name ?? a).localeCompare(owners.get(b)?.name ?? b),
-            )
-            .map(([slug, contracts]) => {
-              const eligible = contracts.filter((c) => !c.expired);
-              return (
-                <Panel key={slug}>
-                  <PanelHeader
-                    title={owners.get(slug)?.name ?? slug}
-                    meta={`${eligible.length} eligible · ${contracts.length} rostered`}
-                    href={`/owners/${slug}/`}
-                    hrefLabel="Profile"
-                  />
-                  <ListHeader>
-                    <Col className="w-4 shrink-0">#</Col>
-                    <Col className="w-8 shrink-0 text-center">Pos</Col>
-                    <Col className="flex-1">Player</Col>
-                    <Col className="shrink-0 text-right" hint="Sleeper ADP (overall pick number), then how many rounds cheaper (+) or more expensive (−) keeping them is versus that market price">
-                      ADP · Value
-                    </Col>
-                    <Col className="shrink-0" hint="Keeps remaining on the contract before the player is revalued to ADP">
-                      Keeps
-                    </Col>
-                    <Col className="w-9 shrink-0 text-right" hint="Draft round it costs to keep this player">
-                      Cost
-                    </Col>
-                    <span className="w-3 shrink-0" />
-                  </ListHeader>
-                  <div className="divide-y divide-ink-700">
-                    {contracts.map((c, i) => {
-                      const p = players[c.playerId];
-                      // Only the best four eligible contracts can actually be
-                      // used, so everything past that is dimmed as reference.
-                      const usable = !c.expired && i < MAX_KEEPERS;
-                      return (
-                        <details key={c.playerId} className="group">
-                          <summary
-                            className={`flex cursor-pointer list-none items-center gap-2.5 px-3 py-2 transition-colors hover:bg-ink-700/40 sm:gap-3 sm:px-4 ${
-                              usable ? "" : "opacity-50"
-                            }`}
-                          >
-                            <span className="tabular w-4 shrink-0 text-[11px] text-chalk-600">
-                              {i + 1}
-                            </span>
-                            <PositionPill position={p?.position ?? null} />
-                            <span className="min-w-0 flex-1 truncate text-sm font-medium">
-                              {p?.full_name ?? c.playerId}
-                              {p?.team ? (
-                                <span className="ml-1.5 text-[11px] font-normal text-chalk-600">
-                                  {p.team}
-                                </span>
-                              ) : null}
-                            </span>
-                            <ValueBadge
-                              costRound={c.round}
-                              adp={adp.byPlayer.get(c.playerId)}
-                            />
-                            <KeepPips
-                              used={c.keepsUsed}
-                              total={c.keepsUsed + c.keepsRemaining}
-                            />
-                            <span
-                              className={`tabular w-9 shrink-0 text-right text-sm font-bold ${
-                                c.expired ? "text-loss" : "text-accent"
-                              }`}
-                            >
-                              {c.expired ? "ADP" : `R${c.round}`}
-                            </span>
-                            <span className="w-3 shrink-0 text-[10px] text-chalk-600 transition-transform group-open:rotate-90">
-                              ▸
-                            </span>
-                          </summary>
-                          <div className="bg-ink-850 px-4 py-3 text-[11px] leading-relaxed text-chalk-500 sm:px-5">
-                            <div className="eyebrow mb-1.5 text-[10px]">How this was derived</div>
-                            <ol className="space-y-0.5">
-                              {c.provenance.map((line, j) => (
-                                <li key={j} className="flex gap-2">
-                                  <span className="text-chalk-600">·</span>
-                                  <span>{line}</span>
-                                </li>
-                              ))}
-                            </ol>
-                            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 border-t border-ink-700 pt-2 text-chalk-600">
-                              <span>origin: {c.origin}</span>
-                              <span>since: {c.startSeason}</span>
-                              {c.originalDraftRound ? (
-                                <span>drafted: R{c.originalDraftRound}</span>
-                              ) : null}
-                              <Link
-                                href={`/players/${c.playerId}/`}
-                                className="text-accent hover:underline"
-                              >
-                                transaction history →
-                              </Link>
-                            </div>
-                          </div>
-                        </details>
-                      );
-                    })}
-                  </div>
-                </Panel>
-              );
-            })}
-        </div>
+        <KeeperBoard
+          contractsByOwner={contractsByOwner}
+          ownerNames={ownerNames}
+          userIdToSlug={Object.fromEntries(
+            owners.filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+          )}
+          players={players}
+          adp={Object.fromEntries(adp.byPlayer)}
+          leagueId={leagueId}
+          maxKeepers={MAX_KEEPERS}
+        />
       )}
     </div>
   );
