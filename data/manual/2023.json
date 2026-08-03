@@ -182,9 +182,9 @@
       "week": 17
     },
     {
-      "gameId": null,
+      "gameId": "GmC1",
       "round": 1,
-      "routing": null,
+      "routing": "W to GmC4, L to GmC5",
       "section": "consolation",
       "teams": [
         {
@@ -201,9 +201,9 @@
       "week": 15
     },
     {
-      "gameId": "GmC1",
+      "gameId": "GmC2",
       "round": 1,
-      "routing": "W to GmC4, L to GmC5",
+      "routing": "W to GmC4, L to GmC6",
       "section": "consolation",
       "teams": [
         {
@@ -220,9 +220,9 @@
       "week": 15
     },
     {
-      "gameId": "GmC2",
+      "gameId": "GmC3",
       "round": 1,
-      "routing": "W to GmC4, L to GmC6",
+      "routing": "W to GmC5, L to GmC6",
       "section": "consolation",
       "teams": [
         {
@@ -239,9 +239,9 @@
       "week": 15
     },
     {
-      "gameId": "GmC3",
+      "gameId": "GmC4",
       "round": 2,
-      "routing": "W to GmC5, L to GmC6",
+      "routing": "W to GmC7, L to GmC8",
       "section": "consolation",
       "teams": [
         {
@@ -258,9 +258,9 @@
       "week": 16
     },
     {
-      "gameId": "GmC4",
+      "gameId": "GmC5",
       "round": 2,
-      "routing": "W to GmC7, L to GmC8",
+      "routing": "W to GmC7, L to GmC9",
       "section": "consolation",
       "teams": [
         {
@@ -277,9 +277,9 @@
       "week": 16
     },
     {
-      "gameId": "GmC5",
+      "gameId": "GmC6",
       "round": 2,
-      "routing": "W to GmC7, L to GmC9",
+      "routing": "W to GmC8, L to GmC9",
       "section": "consolation",
       "teams": [
         {
@@ -296,9 +296,9 @@
       "week": 16
     },
     {
-      "gameId": "GmC6",
+      "gameId": "GmC7",
       "round": 3,
-      "routing": "W to GmC8, L to GmC9",
+      "routing": null,
       "section": "consolation",
       "teams": [
         {
@@ -315,7 +315,7 @@
       "week": 17
     },
     {
-      "gameId": "GmC7",
+      "gameId": "GmC8",
       "round": 3,
       "routing": null,
       "section": "consolation",
@@ -334,7 +334,7 @@
       "week": 17
     },
     {
-      "gameId": "GmC8",
+      "gameId": "GmC9",
       "round": 3,
       "routing": null,
       "section": "consolation",

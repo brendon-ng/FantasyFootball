@@ -113,7 +113,9 @@ function MatchCard({
     };
   };
 
-  const sides = [side(match.team1, match.team1From), side(match.team2, match.team2From)];
+  const sides = match.isBye
+    ? [side(match.team1, match.team1From), { label: "BYE", points: undefined, advancing: false, muted: true }]
+    : [side(match.team1, match.team1From), side(match.team2, match.team2From)];
 
   return (
     <div className="relative">
@@ -136,8 +138,10 @@ function MatchCard({
           <TeamRow key={i} {...s} inverted={match.inverted} />
         ))}
       </div>
-      {note ? (
-        <div className="mt-1 text-center text-[10px] text-chalk-600">{note}</div>
+      {note || match.label ? (
+        <div className="mt-1 text-center text-[10px] text-chalk-600">
+          {[match.label, note].filter(Boolean).join(" · ")}
+        </div>
       ) : null}
     </div>
   );
@@ -160,12 +164,15 @@ function ByeCard({ name, seed }: { name: string; seed: number | null }) {
 export function Bracket({
   matches,
   finalLabel,
+  finalPlace,
   nameOf,
   seedOf,
 }: {
   matches: BracketMatch[];
   /** e.g. "🏆 Championship" or "💩 King (Last Place)". */
   finalLabel: string;
+  /** The placement the marquee game decides — 1 for a title, 12 for last. */
+  finalPlace: number;
   nameOf: (s: string | null | undefined) => string;
   seedOf: (s: string | null) => number | null;
 }) {
@@ -173,20 +180,25 @@ export function Bracket({
 
   const byId = new Map(matches.map((m) => [m.matchId, m]));
 
-  // The final decides the extreme place: 1st in a playoff, last in a toilet bowl.
-  const allPlaces = matches.flatMap((m) => m.placesFor ?? []);
-  const target = matches[0].inverted ? Math.max(...allPlaces) : Math.min(...allPlaces);
-  const final = matches.find((m) => m.placesFor?.[0] === target) ?? null;
+  // Which game is the marquee one differs per bracket: the championship decides
+  // 1st, a toilet bowl or ladder decides last, a consolation ladder decides 3rd.
+  // The caller knows; guessing from placesFor alone picks the wrong game.
+  const final = matches.find((m) => !m.isBye && m.placesFor?.includes(finalPlace)) ?? null;
 
   // Anything with a placement that isn't the final is a side game.
   const sideGames = matches.filter((m) => m.placesFor != null && m.matchId !== final?.matchId);
 
   /**
-   * Sleeper publishes winner/loser routing; the imported ESPN brackets do not.
-   * Without routing there is no way to tell a bye from an unlinked match, and
-   * assuming one invents a bye for every team in every later round.
+   * Only invent byes when the data cannot express them and everyone starts in
+   * round 1. Sleeper omits byes entirely, so they must be inferred there. ESPN
+   * publishes them as real one-team games, and its winner's consolation ladder
+   * starts at round 2 with teams dropping in from the main bracket — inferring
+   * byes in either case conjures a phantom bye for every unlinked team.
    */
   const hasRouting = matches.some((m) => m.team1From || m.team2From);
+  const firstRoundInData = Math.min(...matches.map((m) => m.round));
+  const synthesiseByes =
+    hasRouting && !matches.some((m) => m.isBye) && firstRoundInData === 1;
 
   // --- depth-first slot assignment -----------------------------------------
   const positioned: Positioned[] = [];
@@ -210,7 +222,7 @@ export function Bracket({
       const feeder = feederId != null ? byId.get(feederId) : undefined;
       if (feeder) {
         spans.push(place(feeder));
-      } else if (hasRouting && match.round > 1 && team) {
+      } else if (synthesiseByes && match.round > 1 && team) {
         // With routing present, no feeder in a later round means a bye.
         const slot = nextSlot++;
         byes.push({ slug: team, round: match.round - 1, slot });

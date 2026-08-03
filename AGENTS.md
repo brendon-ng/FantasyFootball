@@ -158,6 +158,27 @@ winning moves you up a rung, losing moves you down, and the loser of the bottom
 rung in the final week finishes last. So `inverted` is false for imported
 brackets and true for Sleeper's losers bracket. Do not unify them.
 
+### ESPN brackets have three sections and a different consolation format
+
+Sleeper has two postseason sections; ESPN has THREE — championship bracket,
+winner's consolation ladder (3rd-6th), and the main ladder (7th-12th). Merging
+the last two loses both the structure and the placements.
+
+ESPN's consolation is a LADDER, not Sleeper's anti-tournament: winning moves you
+UP a rung, and the loser of the bottom rung in the final week finishes last. So
+`inverted` is false for imported brackets. `ladderConsolation` picks the right
+copy; do not unify the two formats.
+
+Three parsing traps, all of which produced plausible-looking wrong output:
+
+1. ESPN prints a ladder label AFTER its game ("… 109.72 | GmC1 - W to GmC4"),
+   so attaching it to the next game shifts every id and routing by one.
+2. Bye synthesis must be off when the data has explicit byes or the section
+   starts after round 1 — otherwise every unlinked team gets a phantom bye.
+   Sleeper omits byes and needs them inferred; ESPN publishes them.
+3. Feeder inference must pick the NEAREST earlier round. A finalist also won in
+   round 1, so matching the earliest link collapses the bracket.
+
 ### Co-owners are first-class owners
 
 Every person has their own slug and record. A co-owned team's record is credited

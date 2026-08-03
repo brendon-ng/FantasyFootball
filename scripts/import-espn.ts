@@ -236,18 +236,16 @@ function parsePlayoffs(html: string): ImportedGame[] {
   /** Weeks announced by the round headers, in order, per section. */
   const weeksBySection = new Map<ImportedGame["section"], number[]>();
   let pending: ImportedGame["teams"] = [];
-  let pendingLabel: { gameId: string; routing: string | null } | null = null;
 
   const emit = (teams: ImportedGame["teams"]) => {
     games.push({
       section: section!,
       round: 0, // assigned below from ROUND_SHAPE
       week: null,
-      gameId: pendingLabel?.gameId ?? null,
-      routing: pendingLabel?.routing ?? null,
+      gameId: null,
+      routing: null,
       teams,
     });
-    pendingLabel = null;
   };
 
   for (let i = 0; i < toks.length; i++) {
@@ -268,10 +266,16 @@ function parsePlayoffs(html: string): ImportedGame[] {
       continue;
     }
 
-    // A ladder label belongs to the game that follows it.
+    // ESPN prints the ladder label AFTER its game ("… 109.72 | GmC1 - W to
+    // GmC4, L to GmC5"), so it belongs to the game just emitted. Attaching it
+    // to the next one shifts every id and routing by one.
     const label = tok.match(/^(Gm[A-Z]?\d+)(?:\s*-\s*(.*))?$/);
     if (label) {
-      pendingLabel = { gameId: label[1], routing: label[2] ?? null };
+      const last = games[games.length - 1];
+      if (last && last.section === section && !last.gameId) {
+        last.gameId = label[1];
+        last.routing = label[2] ?? null;
+      }
       continue;
     }
 

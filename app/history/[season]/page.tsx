@@ -157,27 +157,59 @@ export default async function SeasonPage({
       </div>
 
       <Panel>
-        <PanelHeader title="Playoffs" meta={`top ${summary.standings.filter((r) => r.madePlayoffs).length} seeds`} />
+        <PanelHeader
+          title="Playoffs"
+          meta={`top ${summary.standings.filter((r) => r.madePlayoffs).length} seeds`}
+        />
         <div className="p-4 sm:p-5">
           <Bracket
             matches={summary.winnersBracket}
             finalLabel="🏆 Championship"
+            finalPlace={1}
             nameOf={name}
             seedOf={seedOf}
           />
         </div>
       </Panel>
 
+      {summary.extraBrackets.map((b) => (
+        <Panel key={b.key}>
+          <PanelHeader title={b.title} legend={b.note} />
+          <div className="p-4 sm:p-5">
+            <Bracket
+              matches={b.matches}
+              finalLabel={b.finalLabel}
+              finalPlace={b.finalPlace}
+              nameOf={name}
+              seedOf={seedOf}
+            />
+          </div>
+        </Panel>
+      ))}
+
       <Panel>
-        <PanelHeader title="Toilet Bowl" meta="lose to advance" />
+        <PanelHeader
+          title={summary.ladderConsolation ? "Consolation Ladder" : "Toilet Bowl"}
+          meta={summary.ladderConsolation ? "win to climb" : "lose to advance"}
+        />
         <div className="p-4 sm:p-5">
           <p className="mb-4 max-w-2xl text-[12px] leading-relaxed text-chalk-500">
-            An anti-tournament: the <em>loser</em> of each game advances, and whoever loses
-            the final is Last Place. Winning here is how you escape.
+            {summary.ladderConsolation ? (
+              <>
+                A ladder, not a bracket: winning moves you <em>up</em> a rung and losing moves
+                you down. The loser of the bottom rung in the final week finishes last.
+              </>
+            ) : (
+              <>
+                An anti-tournament: the <em>loser</em> of each game advances, and whoever loses
+                the final is Last Place. Winning here is how you escape.
+              </>
+            )}
           </p>
           <Bracket
             matches={summary.losersBracket}
-            finalLabel="💩 King (Last Place)"
+            finalLabel={summary.ladderConsolation ? "🚽 Last Place" : "💩 King (Last Place)"}
+            finalPlace={summary.teams}
             nameOf={name}
             seedOf={seedOf}
           />

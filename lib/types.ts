@@ -66,6 +66,10 @@ export interface BracketMatch {
   placesFor: [number, number] | null;
   /** Final scores, owner slug -> points. Empty until the game is played. */
   points: Record<string, number>;
+  /** A first-round bye: team1 sits the round out, team2 is null. */
+  isBye?: boolean;
+  /** ESPN ladder label, e.g. "GmC4". Shown so the routing is auditable. */
+  label?: string | null;
   /**
    * True for toilet-bowl matches, where advancing is bad and the advancing team
    * is the lower scorer. The UI must not render `winner` as "W" here.
@@ -91,6 +95,22 @@ export interface SeasonSummary {
   standings: StandingsRow[];
   winnersBracket: BracketMatch[];
   losersBracket: BracketMatch[];
+  /**
+   * Extra named brackets. ESPN seasons have THREE postseason sections, not two:
+   * the championship bracket, a winner's consolation ladder deciding 3rd-6th,
+   * and the main ladder deciding 7th-12th.
+   */
+  extraBrackets: Array<{
+    key: string;
+    title: string;
+    note: string;
+    finalLabel: string;
+    /** Placement the marquee game of this bracket decides. */
+    finalPlace: number;
+    matches: BracketMatch[];
+  }>;
+  /** True when the consolation format is a ladder (win = move up), as on ESPN. */
+  ladderConsolation: boolean;
   champion: string | null;
   runnerUp: string | null;
   thirdPlace: string | null;

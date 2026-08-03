@@ -203,14 +203,14 @@
     "ties": 0,
     "vs": {
       "brendon-ng": {
-        "losses": 4,
+        "losses": 3,
         "playoff": {
-          "losses": 3,
+          "losses": 2,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 816.36,
-        "pointsFor": 789.24,
+        "pointsAgainst": 693.8,
+        "pointsFor": 687.12,
         "ties": 0,
         "wins": 3
       },
@@ -227,16 +227,16 @@
         "wins": 0
       },
       "jake-gibbons": {
-        "losses": 3,
+        "losses": 2,
         "playoff": {
-          "losses": 1,
+          "losses": 0,
           "ties": 0,
-          "wins": 1
+          "wins": 0
         },
-        "pointsAgainst": 577.94,
-        "pointsFor": 576.7,
+        "pointsAgainst": 378.9,
+        "pointsFor": 379.62,
         "ties": 0,
-        "wins": 2
+        "wins": 1
       },
       "jaymie-lew": {
         "losses": 2,
@@ -263,16 +263,16 @@
         "wins": 2
       },
       "lauren-gross": {
-        "losses": 4,
+        "losses": 3,
         "playoff": {
-          "losses": 2,
+          "losses": 1,
           "ties": 0,
-          "wins": 2
+          "wins": 1
         },
-        "pointsAgainst": 936.3,
-        "pointsFor": 722.14,
+        "pointsAgainst": 619.76,
+        "pointsFor": 513.22,
         "ties": 0,
-        "wins": 2
+        "wins": 1
       },
       "logan-dunn": {
         "losses": 1,
@@ -298,18 +298,6 @@
         "ties": 0,
         "wins": 1
       },
-      "olivia-nelli": {
-        "losses": 1,
-        "playoff": {
-          "losses": 1,
-          "ties": 0,
-          "wins": 1
-        },
-        "pointsAgainst": 316.54,
-        "pointsFor": 208.92,
-        "ties": 0,
-        "wins": 1
-      },
       "reagan-schmidt": {
         "losses": 0,
         "playoff": {
@@ -327,12 +315,12 @@
         "playoff": {
           "losses": 0,
           "ties": 0,
-          "wins": 1
+          "wins": 0
         },
-        "pointsAgainst": 585.46,
-        "pointsFor": 646.34,
+        "pointsAgainst": 499.48,
+        "pointsFor": 526.04,
         "ties": 0,
-        "wins": 3
+        "wins": 2
       },
       "spencer-kim": {
         "losses": 4,
@@ -429,12 +417,12 @@
         "playoff": {
           "losses": 0,
           "ties": 0,
-          "wins": 3
+          "wins": 2
         },
-        "pointsAgainst": 789.24,
-        "pointsFor": 816.36,
+        "pointsAgainst": 687.12,
+        "pointsFor": 693.8,
         "ties": 0,
-        "wins": 4
+        "wins": 3
       },
       "jake-gibbons": {
         "losses": 3,
@@ -497,16 +485,16 @@
         "wins": 3
       },
       "olivia-nelli": {
-        "losses": 1,
+        "losses": 0,
         "playoff": {
-          "losses": 1,
+          "losses": 0,
           "ties": 0,
-          "wins": 2
+          "wins": 1
         },
-        "pointsAgainst": 329.34,
-        "pointsFor": 374.26,
+        "pointsAgainst": 118.76,
+        "pointsFor": 143.32,
         "ties": 0,
-        "wins": 2
+        "wins": 1
       },
       "reagan-schmidt": {
         "losses": 2,
@@ -525,12 +513,12 @@
         "playoff": {
           "losses": 0,
           "ties": 0,
-          "wins": 2
+          "wins": 1
         },
-        "pointsAgainst": 465.28,
-        "pointsFor": 507.14,
+        "pointsAgainst": 368.36,
+        "pointsFor": 390.86,
         "ties": 0,
-        "wins": 3
+        "wins": 2
       },
       "spencer-kim": {
         "losses": 1,
@@ -833,16 +821,16 @@
         "wins": 0
       },
       "david-collier": {
-        "losses": 2,
+        "losses": 1,
         "playoff": {
-          "losses": 1,
+          "losses": 0,
           "ties": 0,
-          "wins": 1
+          "wins": 0
         },
-        "pointsAgainst": 576.7,
-        "pointsFor": 577.94,
+        "pointsAgainst": 379.62,
+        "pointsFor": 378.9,
         "ties": 0,
-        "wins": 3
+        "wins": 2
       },
       "jaymie-lew": {
         "losses": 3,
@@ -1703,12 +1691,12 @@
         "playoff": {
           "losses": 0,
           "ties": 0,
-          "wins": 3
+          "wins": 1
         },
-        "pointsAgainst": 824.98,
-        "pointsFor": 997.16,
+        "pointsAgainst": 652.58,
+        "pointsFor": 727.88,
         "ties": 0,
-        "wins": 6
+        "wins": 4
       },
       "spencer-kim": {
         "losses": 2,
@@ -1789,14 +1777,14 @@
     "ties": 0,
     "vs": {
       "brendon-ng": {
-        "losses": 3,
+        "losses": 2,
         "playoff": {
-          "losses": 2,
+          "losses": 1,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 507.14,
-        "pointsFor": 465.28,
+        "pointsAgainst": 390.86,
+        "pointsFor": 368.36,
         "ties": 0,
         "wins": 1
       },
@@ -1805,22 +1793,22 @@
         "playoff": {
           "losses": 0,
           "ties": 0,
-          "wins": 2
+          "wins": 1
         },
-        "pointsAgainst": 551.46,
-        "pointsFor": 695.4,
+        "pointsAgainst": 483.88,
+        "pointsFor": 560.34,
         "ties": 0,
-        "wins": 3
+        "wins": 2
       },
       "david-collier": {
-        "losses": 3,
+        "losses": 2,
         "playoff": {
-          "losses": 1,
+          "losses": 0,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 646.34,
-        "pointsFor": 585.46,
+        "pointsAgainst": 526.04,
+        "pointsFor": 499.48,
         "ties": 0,
         "wins": 2
       },
@@ -1897,14 +1885,14 @@
         "wins": 2
       },
       "reagan-schmidt": {
-        "losses": 6,
+        "losses": 4,
         "playoff": {
-          "losses": 3,
+          "losses": 1,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 997.16,
-        "pointsFor": 824.98,
+        "pointsAgainst": 727.88,
+        "pointsFor": 652.58,
         "ties": 0,
         "wins": 1
       },
@@ -2261,14 +2249,14 @@
         "wins": 0
       },
       "safvet-besen": {
-        "losses": 3,
+        "losses": 2,
         "playoff": {
-          "losses": 2,
+          "losses": 1,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 695.4,
-        "pointsFor": 551.46,
+        "pointsAgainst": 560.34,
+        "pointsFor": 483.88,
         "ties": 0,
         "wins": 2
       },
@@ -2370,16 +2358,16 @@
         "wins": 0
       },
       "david-collier": {
-        "losses": 2,
+        "losses": 1,
         "playoff": {
-          "losses": 2,
+          "losses": 1,
           "ties": 0,
-          "wins": 2
+          "wins": 1
         },
-        "pointsAgainst": 722.14,
-        "pointsFor": 936.3,
+        "pointsAgainst": 513.22,
+        "pointsFor": 619.76,
         "ties": 0,
-        "wins": 4
+        "wins": 3
       },
       "jake-gibbons": {
         "losses": 4,
@@ -2546,28 +2534,16 @@
     "ties": 0,
     "vs": {
       "brendon-ng": {
-        "losses": 2,
-        "playoff": {
-          "losses": 2,
-          "ties": 0,
-          "wins": 1
-        },
-        "pointsAgainst": 374.26,
-        "pointsFor": 329.34,
-        "ties": 0,
-        "wins": 1
-      },
-      "david-collier": {
         "losses": 1,
         "playoff": {
           "losses": 1,
           "ties": 0,
-          "wins": 1
+          "wins": 0
         },
-        "pointsAgainst": 208.92,
-        "pointsFor": 316.54,
+        "pointsAgainst": 143.32,
+        "pointsFor": 118.76,
         "ties": 0,
-        "wins": 1
+        "wins": 0
       },
       "jake-gibbons": {
         "losses": 1,

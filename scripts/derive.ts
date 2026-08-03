@@ -348,6 +348,8 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
     standings,
     winnersBracket: winners,
     losersBracket: losers,
+    extraBrackets: [],
+    ladderConsolation: false,
     champion: at(1),
     runnerUp: at(2),
     thirdPlace: at(3),
@@ -978,12 +980,17 @@ interface ManualSeason {
  *
  * These carry standings, final placement and full playoff scores, but no weekly
  * matchups, rosters, drafts or transactions — so they feed standings, finishes
- * and the trophy case, and are excluded from head-to-head, weekly records,
- * player records and keeper contracts. `imported: true` is what the UI keys off
- * to say so out loud rather than silently mixing eras.
+ * and the trophy case, and are excluded from head-to-head regular-season
+ * records, weekly records, player records and keeper contracts.
  *
- * Placement is taken from ESPN's own RK column, which the importer has already
- * cross-validated against an independent reconstruction of the brackets.
+ * ESPN has THREE postseason sections, not two, and the consolation format is a
+ * LADDER rather than Sleeper's anti-tournament: winning moves you UP a rung.
+ * Merging them into one "toilet bowl" loses both the structure and the meaning.
+ *
+ * Routing is recovered so the brackets actually render as brackets:
+ *   - the ladder carries it explicitly ("GmC1 - W to GmC4, L to GmC5")
+ *   - the championship bracket is inferred by team identity, since a team in
+ *     round N either won a round N-1 match or had a bye
  */
 function importedSeasons(): SeasonSummary[] {
   const dir = join(DATA_DIR, "manual");
@@ -995,33 +1002,105 @@ function importedSeasons(): SeasonSummary[] {
     const m = readJson<ManualSeason>(join(dir, file));
     if (!m) continue;
 
-    const bySlug = new Map(m.standings.map((r) => [r.teamName, r.teamSlug]));
-    const toBracket = (section: ManualSeason["games"][number]["section"]): BracketMatch[] =>
-      m.games
-        .filter((g) => g.section === section && g.teams.length === 2)
-        .map((g, i) => {
-          const [a, b] = g.teams;
-          const [w, l] = a.points > b.points ? [a, b] : [b, a];
-          return {
-            round: g.round,
-            matchId: i + 1,
-            week: g.week,
-            team1: bySlug.get(a.teamName) ?? null,
-            team2: bySlug.get(b.teamName) ?? null,
-            winner: bySlug.get(w.teamName) ?? null,
-            loser: bySlug.get(l.teamName) ?? null,
-            team1From: null,
-            team2From: null,
-            placesFor: null,
-            points: {
-              ...(bySlug.get(a.teamName) ? { [bySlug.get(a.teamName)!]: a.points } : {}),
-              ...(bySlug.get(b.teamName) ? { [bySlug.get(b.teamName)!]: b.points } : {}),
-            },
-            // ESPN's consolation ladder is a ladder, not an inverted bracket:
-            // winning moves you UP a rung. So the higher scorer really did win.
-            inverted: false,
-          };
-        });
+    const slugOf = new Map(m.standings.map((r) => [r.teamName, r.teamSlug]));
+
+    /** Builds one section's matches, with byes, ids, scores and routing. */
+    const section = (
+      key: ManualSeason["games"][number]["section"],
+      idBase: number,
+    ): BracketMatch[] => {
+      const games = m.games.filter((g) => g.section === key);
+
+      const matches: BracketMatch[] = games.map((g, i) => {
+        const ladderId = g.gameId ? Number(g.gameId.replace(/\D/g, "")) : null;
+        const [a, b] = g.teams;
+        const bye = g.teams.length === 1;
+        const [w, l] = bye
+          ? [a, undefined]
+          : a.points > b.points
+            ? [a, b]
+            : [b, a];
+
+        const points: Record<string, number> = {};
+        for (const t of g.teams) {
+          const slug = slugOf.get(t.teamName);
+          if (slug) points[slug] = t.points;
+        }
+
+        return {
+          round: g.round,
+          matchId: ladderId ?? idBase + i,
+          week: g.week,
+          team1: slugOf.get(a.teamName) ?? null,
+          team2: bye ? null : (slugOf.get(b!.teamName) ?? null),
+          // A bye "advances" its team, which is what lets the next round link
+          // back to it and sit centred against the game beside it.
+          winner: slugOf.get(w.teamName) ?? null,
+          loser: l ? (slugOf.get(l.teamName) ?? null) : null,
+          team1From: null,
+          team2From: null,
+          placesFor: null,
+          points,
+          isBye: bye,
+          label: g.gameId,
+          // A ladder is not inverted — the higher scorer genuinely won and
+          // climbs a rung. Only Sleeper's losers bracket inverts.
+          inverted: false,
+        };
+      });
+
+      // Explicit ladder routing: "W to GmC4, L to GmC5" on the SOURCE game tells
+      // us where its winner and loser land, so write the ref onto the target.
+      const byId = new Map(matches.map((x) => [x.matchId, x]));
+      for (const g of games) {
+        if (!g.routing || !g.gameId) continue;
+        const from = Number(g.gameId.replace(/\D/g, ""));
+        for (const [, side, dest] of g.routing.matchAll(/([WL])\s*to\s*Gm[A-Z]?(\d+)/gi)) {
+          const target = byId.get(Number(dest));
+          if (!target) continue;
+          const ref = side.toUpperCase() === "W" ? { winnerOf: from } : { loserOf: from };
+          if (!target.team1From) target.team1From = ref;
+          else if (!target.team2From) target.team2From = ref;
+        }
+      }
+
+      // Inferred routing for sections ESPN doesn't label: a team appearing in a
+      // later round must have won an earlier match in this same section.
+      for (const match of matches) {
+        if (match.round <= Math.min(...matches.map((x) => x.round))) continue;
+        for (const side of ["team1", "team2"] as const) {
+          const fromKey = side === "team1" ? "team1From" : "team2From";
+          if (match[fromKey] || !match[side]) continue;
+          // Pick the NEAREST earlier round. A team that reached the final also
+          // won in round 1, and matching that first links the final back past
+          // the semi-final, collapsing the bracket.
+          const feeder = matches
+            .filter((x) => x.round < match.round && x.winner === match[side])
+            .sort((x, y) => y.round - x.round)[0];
+          if (feeder) match[fromKey] = { winnerOf: feeder.matchId };
+        }
+      }
+
+      return matches.sort((a, b) => a.round - b.round || a.matchId - b.matchId);
+    };
+
+    const winners = section("winners", 100);
+    const winnersConsolation = section("winners-consolation", 200);
+    const ladder = section("consolation", 300);
+
+    // Placement games, matching how the importer cross-validates placement.
+    const finalRound = (arr: BracketMatch[]) => Math.max(0, ...arr.map((x) => x.round));
+    for (const g of winners.filter((x) => x.round === finalRound(winners) && !x.isBye)) {
+      g.placesFor = [1, 2];
+    }
+    const wcFinal = winnersConsolation
+      .filter((x) => x.round === finalRound(winnersConsolation))
+      .sort((x, y) => (x.matchId ?? 0) - (y.matchId ?? 0));
+    wcFinal.forEach((g, i) => (g.placesFor = [3 + 2 * i, 4 + 2 * i]));
+    const ladderFinal = ladder
+      .filter((x) => x.round === finalRound(ladder))
+      .sort((x, y) => x.matchId - y.matchId);
+    ladderFinal.forEach((g, i) => (g.placesFor = [7 + 2 * i, 8 + 2 * i]));
 
     const standings: StandingsRow[] = m.standings.map((r) => ({
       ownerSlug: r.teamSlug,
@@ -1047,12 +1126,23 @@ function importedSeasons(): SeasonSummary[] {
       status: "complete",
       finalized: true,
       imported: true,
+      ladderConsolation: true,
       teams: m.teams,
       regularSeasonWeeks: m.regularSeasonWeeks,
       finalizedThroughWeek: m.finalWeek,
       standings: standings.sort((a, b) => a.seed - b.seed),
-      winnersBracket: toBracket("winners"),
-      losersBracket: [...toBracket("winners-consolation"), ...toBracket("consolation")],
+      winnersBracket: winners,
+      losersBracket: ladder,
+      extraBrackets: [
+        {
+          key: "winners-consolation",
+          title: "Winner's Consolation Ladder",
+          note: "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+          finalLabel: "🥉 3rd Place",
+          finalPlace: 3,
+          matches: winnersConsolation,
+        },
+      ],
       champion: at(1),
       runnerUp: at(2),
       thirdPlace: at(3),

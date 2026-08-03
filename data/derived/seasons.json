@@ -1,66 +1,94 @@
 [
   {
     "champion": "jake-gibbons",
+    "extraBrackets": [
+      {
+        "finalLabel": "🥉 3rd Place",
+        "finalPlace": 3,
+        "key": "winners-consolation",
+        "matches": [
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "brendon-ng",
+            "matchId": 200,
+            "placesFor": null,
+            "points": {
+              "brendon-ng": 119.4,
+              "olivia-nelli": 130.32
+            },
+            "round": 2,
+            "team1": "brendon-ng",
+            "team1From": null,
+            "team2": "olivia-nelli",
+            "team2From": null,
+            "week": 15,
+            "winner": "olivia-nelli"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "safvet-besen",
+            "matchId": 201,
+            "placesFor": [
+              3,
+              4
+            ],
+            "points": {
+              "david-collier": 120.3,
+              "safvet-besen": 85.98
+            },
+            "round": 3,
+            "team1": "safvet-besen",
+            "team1From": null,
+            "team2": "david-collier",
+            "team2From": null,
+            "week": 16,
+            "winner": "david-collier"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "olivia-nelli",
+            "matchId": 202,
+            "placesFor": [
+              5,
+              6
+            ],
+            "points": {
+              "brendon-ng": 111.54,
+              "olivia-nelli": 80.26
+            },
+            "round": 3,
+            "team1": "brendon-ng",
+            "team1From": null,
+            "team2": "olivia-nelli",
+            "team2From": {
+              "winnerOf": 200
+            },
+            "week": 16,
+            "winner": "brendon-ng"
+          }
+        ],
+        "note": "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+        "title": "Winner's Consolation Ladder"
+      }
+    ],
     "finalized": true,
     "finalizedThroughWeek": 16,
     "imported": true,
+    "ladderConsolation": true,
     "lastPlace": "logan-dunn",
     "leagueId": "espn-2020",
     "leagueName": "Den Ops Fantasy Football (ESPN)",
     "losersBracket": [
       {
         "inverted": false,
-        "loser": "brendon-ng",
-        "matchId": 1,
-        "placesFor": null,
-        "points": {
-          "brendon-ng": 119.4,
-          "olivia-nelli": 130.32
-        },
-        "round": 2,
-        "team1": "brendon-ng",
-        "team1From": null,
-        "team2": "olivia-nelli",
-        "team2From": null,
-        "week": 15,
-        "winner": "olivia-nelli"
-      },
-      {
-        "inverted": false,
-        "loser": "safvet-besen",
-        "matchId": 2,
-        "placesFor": null,
-        "points": {
-          "david-collier": 120.3,
-          "safvet-besen": 85.98
-        },
-        "round": 3,
-        "team1": "safvet-besen",
-        "team1From": null,
-        "team2": "david-collier",
-        "team2From": null,
-        "week": 16,
-        "winner": "david-collier"
-      },
-      {
-        "inverted": false,
-        "loser": "olivia-nelli",
-        "matchId": 3,
-        "placesFor": null,
-        "points": {
-          "brendon-ng": 111.54,
-          "olivia-nelli": 80.26
-        },
-        "round": 3,
-        "team1": "brendon-ng",
-        "team1From": null,
-        "team2": "olivia-nelli",
-        "team2From": null,
-        "week": 16,
-        "winner": "brendon-ng"
-      },
-      {
-        "inverted": false,
+        "isBye": false,
+        "label": "GmC1",
         "loser": "tyler-jung",
         "matchId": 1,
         "placesFor": null,
@@ -78,6 +106,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC2",
         "loser": "cassidy-pensa",
         "matchId": 2,
         "placesFor": null,
@@ -95,6 +125,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC3",
         "loser": "logan-dunn",
         "matchId": 3,
         "placesFor": null,
@@ -112,6 +144,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC4",
         "loser": "spencer-kim",
         "matchId": 4,
         "placesFor": null,
@@ -121,14 +155,20 @@
         },
         "round": 2,
         "team1": "spencer-kim",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 1
+        },
         "team2": "michaela-frederick",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 2
+        },
         "week": 15,
         "winner": "michaela-frederick"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC5",
         "loser": "reagan-schmidt",
         "matchId": 5,
         "placesFor": null,
@@ -138,14 +178,20 @@
         },
         "round": 2,
         "team1": "reagan-schmidt",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 1
+        },
         "team2": "tyler-jung",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 3
+        },
         "week": 15,
         "winner": "tyler-jung"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC6",
         "loser": "logan-dunn",
         "matchId": 6,
         "placesFor": null,
@@ -155,60 +201,91 @@
         },
         "round": 2,
         "team1": "logan-dunn",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 2
+        },
         "team2": "cassidy-pensa",
-        "team2From": null,
+        "team2From": {
+          "loserOf": 3
+        },
         "week": 15,
         "winner": "cassidy-pensa"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC7",
         "loser": "tyler-jung",
         "matchId": 7,
-        "placesFor": null,
+        "placesFor": [
+          7,
+          8
+        ],
         "points": {
           "michaela-frederick": 150.82,
           "tyler-jung": 131.48
         },
         "round": 3,
         "team1": "tyler-jung",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 4
+        },
         "team2": "michaela-frederick",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 5
+        },
         "week": 16,
         "winner": "michaela-frederick"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC8",
         "loser": "cassidy-pensa",
         "matchId": 8,
-        "placesFor": null,
+        "placesFor": [
+          9,
+          10
+        ],
         "points": {
           "cassidy-pensa": 78.44,
           "spencer-kim": 110.7
         },
         "round": 3,
         "team1": "cassidy-pensa",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 4
+        },
         "team2": "spencer-kim",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 6
+        },
         "week": 16,
         "winner": "spencer-kim"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC9",
         "loser": "logan-dunn",
         "matchId": 9,
-        "placesFor": null,
+        "placesFor": [
+          11,
+          12
+        ],
         "points": {
           "logan-dunn": 99.22,
           "reagan-schmidt": 144.92
         },
         "round": 3,
         "team1": "logan-dunn",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 5
+        },
         "team2": "reagan-schmidt",
-        "team2From": null,
+        "team2From": {
+          "loserOf": 6
+        },
         "week": 16,
         "winner": "reagan-schmidt"
       }
@@ -416,8 +493,28 @@
     "winnersBracket": [
       {
         "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 100,
+        "placesFor": null,
+        "points": {
+          "david-collier": 119.22
+        },
+        "round": 1,
+        "team1": "david-collier",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 14,
+        "winner": "david-collier"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "olivia-nelli",
-        "matchId": 1,
+        "matchId": 101,
         "placesFor": null,
         "points": {
           "jaymie-lew": 146.3,
@@ -433,8 +530,10 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "brendon-ng",
-        "matchId": 2,
+        "matchId": 102,
         "placesFor": null,
         "points": {
           "brendon-ng": 108.08,
@@ -450,8 +549,28 @@
       },
       {
         "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 103,
+        "placesFor": null,
+        "points": {
+          "safvet-besen": 113.66
+        },
+        "round": 1,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 14,
+        "winner": "safvet-besen"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "david-collier",
-        "matchId": 3,
+        "matchId": 104,
         "placesFor": null,
         "points": {
           "david-collier": 116.46,
@@ -459,16 +578,22 @@
         },
         "round": 2,
         "team1": "jaymie-lew",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 101
+        },
         "team2": "david-collier",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 100
+        },
         "week": 15,
         "winner": "jaymie-lew"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "safvet-besen",
-        "matchId": 4,
+        "matchId": 105,
         "placesFor": null,
         "points": {
           "jake-gibbons": 149.26,
@@ -476,26 +601,39 @@
         },
         "round": 2,
         "team1": "jake-gibbons",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 102
+        },
         "team2": "safvet-besen",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 103
+        },
         "week": 15,
         "winner": "jake-gibbons"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "jaymie-lew",
-        "matchId": 5,
-        "placesFor": null,
+        "matchId": 106,
+        "placesFor": [
+          1,
+          2
+        ],
         "points": {
           "jake-gibbons": 182.32,
           "jaymie-lew": 162.26
         },
         "round": 3,
         "team1": "jaymie-lew",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 104
+        },
         "team2": "jake-gibbons",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 105
+        },
         "week": 16,
         "winner": "jake-gibbons"
       }
@@ -503,66 +641,94 @@
   },
   {
     "champion": "brendon-ng",
+    "extraBrackets": [
+      {
+        "finalLabel": "🥉 3rd Place",
+        "finalPlace": 3,
+        "key": "winners-consolation",
+        "matches": [
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "david-collier",
+            "matchId": 200,
+            "placesFor": null,
+            "points": {
+              "david-collier": 82.08,
+              "jake-gibbons": 84.6
+            },
+            "round": 2,
+            "team1": "jake-gibbons",
+            "team1From": null,
+            "team2": "david-collier",
+            "team2From": null,
+            "week": 16,
+            "winner": "jake-gibbons"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "cassidy-pensa",
+            "matchId": 201,
+            "placesFor": [
+              3,
+              4
+            ],
+            "points": {
+              "cassidy-pensa": 67.58,
+              "safvet-besen": 135.06
+            },
+            "round": 3,
+            "team1": "safvet-besen",
+            "team1From": null,
+            "team2": "cassidy-pensa",
+            "team2From": null,
+            "week": 17,
+            "winner": "safvet-besen"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "jake-gibbons",
+            "matchId": 202,
+            "placesFor": [
+              5,
+              6
+            ],
+            "points": {
+              "david-collier": 115,
+              "jake-gibbons": 114.44
+            },
+            "round": 3,
+            "team1": "jake-gibbons",
+            "team1From": {
+              "winnerOf": 200
+            },
+            "team2": "david-collier",
+            "team2From": null,
+            "week": 17,
+            "winner": "david-collier"
+          }
+        ],
+        "note": "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+        "title": "Winner's Consolation Ladder"
+      }
+    ],
     "finalized": true,
     "finalizedThroughWeek": 17,
     "imported": true,
+    "ladderConsolation": true,
     "lastPlace": "reagan-schmidt",
     "leagueId": "espn-2021",
     "leagueName": "Den Ops Fantasy Football (ESPN)",
     "losersBracket": [
       {
         "inverted": false,
-        "loser": "david-collier",
-        "matchId": 1,
-        "placesFor": null,
-        "points": {
-          "david-collier": 82.08,
-          "jake-gibbons": 84.6
-        },
-        "round": 2,
-        "team1": "jake-gibbons",
-        "team1From": null,
-        "team2": "david-collier",
-        "team2From": null,
-        "week": 16,
-        "winner": "jake-gibbons"
-      },
-      {
-        "inverted": false,
-        "loser": "cassidy-pensa",
-        "matchId": 2,
-        "placesFor": null,
-        "points": {
-          "cassidy-pensa": 67.58,
-          "safvet-besen": 135.06
-        },
-        "round": 3,
-        "team1": "safvet-besen",
-        "team1From": null,
-        "team2": "cassidy-pensa",
-        "team2From": null,
-        "week": 17,
-        "winner": "safvet-besen"
-      },
-      {
-        "inverted": false,
-        "loser": "jake-gibbons",
-        "matchId": 3,
-        "placesFor": null,
-        "points": {
-          "david-collier": 115,
-          "jake-gibbons": 114.44
-        },
-        "round": 3,
-        "team1": "jake-gibbons",
-        "team1From": null,
-        "team2": "david-collier",
-        "team2From": null,
-        "week": 17,
-        "winner": "david-collier"
-      },
-      {
-        "inverted": false,
+        "isBye": false,
+        "label": "GmC1",
         "loser": "reagan-schmidt",
         "matchId": 1,
         "placesFor": null,
@@ -580,6 +746,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC2",
         "loser": "michaela-frederick",
         "matchId": 2,
         "placesFor": null,
@@ -597,6 +765,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC3",
         "loser": "jaymie-lew",
         "matchId": 3,
         "placesFor": null,
@@ -614,6 +784,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC4",
         "loser": "spencer-kim",
         "matchId": 4,
         "placesFor": null,
@@ -623,14 +795,20 @@
         },
         "round": 2,
         "team1": "olivia-nelli",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 1
+        },
         "team2": "spencer-kim",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 2
+        },
         "week": 16,
         "winner": "olivia-nelli"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC5",
         "loser": "reagan-schmidt",
         "matchId": 5,
         "placesFor": null,
@@ -640,14 +818,20 @@
         },
         "round": 2,
         "team1": "logan-dunn",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 1
+        },
         "team2": "reagan-schmidt",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 3
+        },
         "week": 16,
         "winner": "logan-dunn"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC6",
         "loser": "michaela-frederick",
         "matchId": 6,
         "placesFor": null,
@@ -657,60 +841,91 @@
         },
         "round": 2,
         "team1": "jaymie-lew",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 2
+        },
         "team2": "michaela-frederick",
-        "team2From": null,
+        "team2From": {
+          "loserOf": 3
+        },
         "week": 16,
         "winner": "jaymie-lew"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC7",
         "loser": "olivia-nelli",
         "matchId": 7,
-        "placesFor": null,
+        "placesFor": [
+          7,
+          8
+        ],
         "points": {
           "logan-dunn": 126.36,
           "olivia-nelli": 109.14
         },
         "round": 3,
         "team1": "logan-dunn",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 4
+        },
         "team2": "olivia-nelli",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 5
+        },
         "week": 17,
         "winner": "logan-dunn"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC8",
         "loser": "spencer-kim",
         "matchId": 8,
-        "placesFor": null,
+        "placesFor": [
+          9,
+          10
+        ],
         "points": {
           "jaymie-lew": 160.12,
           "spencer-kim": 105.06
         },
         "round": 3,
         "team1": "jaymie-lew",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 4
+        },
         "team2": "spencer-kim",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 6
+        },
         "week": 17,
         "winner": "jaymie-lew"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC9",
         "loser": "reagan-schmidt",
         "matchId": 9,
-        "placesFor": null,
+        "placesFor": [
+          11,
+          12
+        ],
         "points": {
           "michaela-frederick": 90.1,
           "reagan-schmidt": 63.44
         },
         "round": 3,
         "team1": "michaela-frederick",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 5
+        },
         "team2": "reagan-schmidt",
-        "team2From": null,
+        "team2From": {
+          "loserOf": 6
+        },
         "week": 17,
         "winner": "michaela-frederick"
       }
@@ -919,8 +1134,28 @@
     "winnersBracket": [
       {
         "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 100,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 110.34
+        },
+        "round": 1,
+        "team1": "cassidy-pensa",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "cassidy-pensa"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "david-collier",
-        "matchId": 1,
+        "matchId": 101,
         "placesFor": null,
         "points": {
           "brendon-ng": 93.7,
@@ -936,8 +1171,10 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "jake-gibbons",
-        "matchId": 2,
+        "matchId": 102,
         "placesFor": null,
         "points": {
           "jake-gibbons": 111.58,
@@ -953,8 +1190,28 @@
       },
       {
         "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 103,
+        "placesFor": null,
+        "points": {
+          "safvet-besen": 94.86
+        },
+        "round": 1,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "safvet-besen"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "cassidy-pensa",
-        "matchId": 3,
+        "matchId": 104,
         "placesFor": null,
         "points": {
           "brendon-ng": 137.06,
@@ -962,16 +1219,22 @@
         },
         "round": 2,
         "team1": "brendon-ng",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 101
+        },
         "team2": "cassidy-pensa",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 100
+        },
         "week": 16,
         "winner": "brendon-ng"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "safvet-besen",
-        "matchId": 4,
+        "matchId": 105,
         "placesFor": null,
         "points": {
           "safvet-besen": 114.98,
@@ -979,26 +1242,39 @@
         },
         "round": 2,
         "team1": "tyler-jung",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 102
+        },
         "team2": "safvet-besen",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 103
+        },
         "week": 16,
         "winner": "tyler-jung"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "tyler-jung",
-        "matchId": 5,
-        "placesFor": null,
+        "matchId": 106,
+        "placesFor": [
+          1,
+          2
+        ],
         "points": {
           "brendon-ng": 122.9,
           "tyler-jung": 103.56
         },
         "round": 3,
         "team1": "brendon-ng",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 104
+        },
         "team2": "tyler-jung",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 105
+        },
         "week": 17,
         "winner": "brendon-ng"
       }
@@ -1006,66 +1282,94 @@
   },
   {
     "champion": "tyler-jung",
+    "extraBrackets": [
+      {
+        "finalLabel": "🥉 3rd Place",
+        "finalPlace": 3,
+        "key": "winners-consolation",
+        "matches": [
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "safvet-besen",
+            "matchId": 200,
+            "placesFor": null,
+            "points": {
+              "reagan-schmidt": 144,
+              "safvet-besen": 101.5
+            },
+            "round": 2,
+            "team1": "safvet-besen",
+            "team1From": null,
+            "team2": "reagan-schmidt",
+            "team2From": null,
+            "week": 16,
+            "winner": "reagan-schmidt"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "david-collier",
+            "matchId": 201,
+            "placesFor": [
+              3,
+              4
+            ],
+            "points": {
+              "brendon-ng": 122.56,
+              "david-collier": 102.12
+            },
+            "round": 3,
+            "team1": "david-collier",
+            "team1From": null,
+            "team2": "brendon-ng",
+            "team2From": null,
+            "week": 17,
+            "winner": "brendon-ng"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "safvet-besen",
+            "matchId": 202,
+            "placesFor": [
+              5,
+              6
+            ],
+            "points": {
+              "reagan-schmidt": 125.28,
+              "safvet-besen": 70.9
+            },
+            "round": 3,
+            "team1": "safvet-besen",
+            "team1From": null,
+            "team2": "reagan-schmidt",
+            "team2From": {
+              "winnerOf": 200
+            },
+            "week": 17,
+            "winner": "reagan-schmidt"
+          }
+        ],
+        "note": "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+        "title": "Winner's Consolation Ladder"
+      }
+    ],
     "finalized": true,
     "finalizedThroughWeek": 17,
     "imported": true,
+    "ladderConsolation": true,
     "lastPlace": "logan-dunn",
     "leagueId": "espn-2022",
     "leagueName": "Den Ops Fantasy Football (ESPN)",
     "losersBracket": [
       {
         "inverted": false,
-        "loser": "safvet-besen",
-        "matchId": 1,
-        "placesFor": null,
-        "points": {
-          "reagan-schmidt": 144,
-          "safvet-besen": 101.5
-        },
-        "round": 2,
-        "team1": "safvet-besen",
-        "team1From": null,
-        "team2": "reagan-schmidt",
-        "team2From": null,
-        "week": 16,
-        "winner": "reagan-schmidt"
-      },
-      {
-        "inverted": false,
-        "loser": "david-collier",
-        "matchId": 2,
-        "placesFor": null,
-        "points": {
-          "brendon-ng": 122.56,
-          "david-collier": 102.12
-        },
-        "round": 3,
-        "team1": "david-collier",
-        "team1From": null,
-        "team2": "brendon-ng",
-        "team2From": null,
-        "week": 17,
-        "winner": "brendon-ng"
-      },
-      {
-        "inverted": false,
-        "loser": "safvet-besen",
-        "matchId": 3,
-        "placesFor": null,
-        "points": {
-          "reagan-schmidt": 125.28,
-          "safvet-besen": 70.9
-        },
-        "round": 3,
-        "team1": "safvet-besen",
-        "team1From": null,
-        "team2": "reagan-schmidt",
-        "team2From": null,
-        "week": 17,
-        "winner": "reagan-schmidt"
-      },
-      {
-        "inverted": false,
+        "isBye": false,
+        "label": "GmC1",
         "loser": "michaela-frederick",
         "matchId": 1,
         "placesFor": null,
@@ -1083,6 +1387,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC2",
         "loser": "logan-dunn",
         "matchId": 2,
         "placesFor": null,
@@ -1100,6 +1406,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC3",
         "loser": "jaymie-lew",
         "matchId": 3,
         "placesFor": null,
@@ -1117,6 +1425,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC4",
         "loser": "olivia-nelli",
         "matchId": 4,
         "placesFor": null,
@@ -1126,14 +1436,20 @@
         },
         "round": 2,
         "team1": "jake-gibbons",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 1
+        },
         "team2": "olivia-nelli",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 2
+        },
         "week": 16,
         "winner": "jake-gibbons"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC5",
         "loser": "cassidy-pensa",
         "matchId": 5,
         "placesFor": null,
@@ -1143,14 +1459,20 @@
         },
         "round": 2,
         "team1": "cassidy-pensa",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 1
+        },
         "team2": "michaela-frederick",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 3
+        },
         "week": 16,
         "winner": "michaela-frederick"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC6",
         "loser": "logan-dunn",
         "matchId": 6,
         "placesFor": null,
@@ -1160,60 +1482,91 @@
         },
         "round": 2,
         "team1": "jaymie-lew",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 2
+        },
         "team2": "logan-dunn",
-        "team2From": null,
+        "team2From": {
+          "loserOf": 3
+        },
         "week": 16,
         "winner": "jaymie-lew"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC7",
         "loser": "jake-gibbons",
         "matchId": 7,
-        "placesFor": null,
+        "placesFor": [
+          7,
+          8
+        ],
         "points": {
           "jake-gibbons": 77.1,
           "michaela-frederick": 106.28
         },
         "round": 3,
         "team1": "jake-gibbons",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 4
+        },
         "team2": "michaela-frederick",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 5
+        },
         "week": 17,
         "winner": "michaela-frederick"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC8",
         "loser": "olivia-nelli",
         "matchId": 8,
-        "placesFor": null,
+        "placesFor": [
+          9,
+          10
+        ],
         "points": {
           "jaymie-lew": 88.6,
           "olivia-nelli": 57.2
         },
         "round": 3,
         "team1": "jaymie-lew",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 4
+        },
         "team2": "olivia-nelli",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 6
+        },
         "week": 17,
         "winner": "jaymie-lew"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC9",
         "loser": "logan-dunn",
         "matchId": 9,
-        "placesFor": null,
+        "placesFor": [
+          11,
+          12
+        ],
         "points": {
           "cassidy-pensa": 82.9,
           "logan-dunn": 73.98
         },
         "round": 3,
         "team1": "cassidy-pensa",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 5
+        },
         "team2": "logan-dunn",
-        "team2From": null,
+        "team2From": {
+          "loserOf": 6
+        },
         "week": 17,
         "winner": "cassidy-pensa"
       }
@@ -1422,8 +1775,28 @@
     "winnersBracket": [
       {
         "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 100,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 130.1
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "reagan-schmidt",
-        "matchId": 1,
+        "matchId": 101,
         "placesFor": null,
         "points": {
           "reagan-schmidt": 88.94,
@@ -1439,8 +1812,10 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "safvet-besen",
-        "matchId": 2,
+        "matchId": 102,
         "placesFor": null,
         "points": {
           "safvet-besen": 102.06,
@@ -1456,8 +1831,28 @@
       },
       {
         "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 103,
+        "placesFor": null,
+        "points": {
+          "david-collier": 113.22
+        },
+        "round": 1,
+        "team1": "david-collier",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "david-collier"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "brendon-ng",
-        "matchId": 3,
+        "matchId": 104,
         "placesFor": null,
         "points": {
           "brendon-ng": 104.6,
@@ -1465,16 +1860,22 @@
         },
         "round": 2,
         "team1": "tyler-jung",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 101
+        },
         "team2": "brendon-ng",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 100
+        },
         "week": 16,
         "winner": "tyler-jung"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "david-collier",
-        "matchId": 4,
+        "matchId": 105,
         "placesFor": null,
         "points": {
           "david-collier": 72.1,
@@ -1482,26 +1883,39 @@
         },
         "round": 2,
         "team1": "spencer-kim",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 102
+        },
         "team2": "david-collier",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 103
+        },
         "week": 16,
         "winner": "spencer-kim"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "spencer-kim",
-        "matchId": 5,
-        "placesFor": null,
+        "matchId": 106,
+        "placesFor": [
+          1,
+          2
+        ],
         "points": {
           "spencer-kim": 97.52,
           "tyler-jung": 141.8
         },
         "round": 3,
         "team1": "tyler-jung",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 104
+        },
         "team2": "spencer-kim",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 105
+        },
         "week": 17,
         "winner": "tyler-jung"
       }
@@ -1509,66 +1923,94 @@
   },
   {
     "champion": "logan-dunn",
+    "extraBrackets": [
+      {
+        "finalLabel": "🥉 3rd Place",
+        "finalPlace": 3,
+        "key": "winners-consolation",
+        "matches": [
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "david-collier",
+            "matchId": 200,
+            "placesFor": null,
+            "points": {
+              "david-collier": 99.62,
+              "olivia-nelli": 210.18
+            },
+            "round": 2,
+            "team1": "david-collier",
+            "team1From": null,
+            "team2": "olivia-nelli",
+            "team2From": null,
+            "week": 16,
+            "winner": "olivia-nelli"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "safvet-besen",
+            "matchId": 201,
+            "placesFor": [
+              3,
+              4
+            ],
+            "points": {
+              "brendon-ng": 116.28,
+              "safvet-besen": 96.92
+            },
+            "round": 3,
+            "team1": "brendon-ng",
+            "team1From": null,
+            "team2": "safvet-besen",
+            "team2From": null,
+            "week": 17,
+            "winner": "brendon-ng"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "olivia-nelli",
+            "matchId": 202,
+            "placesFor": [
+              5,
+              6
+            ],
+            "points": {
+              "david-collier": 109.3,
+              "olivia-nelli": 106.36
+            },
+            "round": 3,
+            "team1": "david-collier",
+            "team1From": null,
+            "team2": "olivia-nelli",
+            "team2From": {
+              "winnerOf": 200
+            },
+            "week": 17,
+            "winner": "david-collier"
+          }
+        ],
+        "note": "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+        "title": "Winner's Consolation Ladder"
+      }
+    ],
     "finalized": true,
     "finalizedThroughWeek": 17,
     "imported": true,
+    "ladderConsolation": true,
     "lastPlace": "michaela-frederick",
     "leagueId": "espn-2023",
     "leagueName": "Den Ops Fantasy Football (ESPN)",
     "losersBracket": [
       {
         "inverted": false,
-        "loser": "david-collier",
-        "matchId": 1,
-        "placesFor": null,
-        "points": {
-          "david-collier": 99.62,
-          "olivia-nelli": 210.18
-        },
-        "round": 2,
-        "team1": "david-collier",
-        "team1From": null,
-        "team2": "olivia-nelli",
-        "team2From": null,
-        "week": 16,
-        "winner": "olivia-nelli"
-      },
-      {
-        "inverted": false,
-        "loser": "safvet-besen",
-        "matchId": 2,
-        "placesFor": null,
-        "points": {
-          "brendon-ng": 116.28,
-          "safvet-besen": 96.92
-        },
-        "round": 3,
-        "team1": "brendon-ng",
-        "team1From": null,
-        "team2": "safvet-besen",
-        "team2From": null,
-        "week": 17,
-        "winner": "brendon-ng"
-      },
-      {
-        "inverted": false,
-        "loser": "olivia-nelli",
-        "matchId": 3,
-        "placesFor": null,
-        "points": {
-          "david-collier": 109.3,
-          "olivia-nelli": 106.36
-        },
-        "round": 3,
-        "team1": "david-collier",
-        "team1From": null,
-        "team2": "olivia-nelli",
-        "team2From": null,
-        "week": 17,
-        "winner": "david-collier"
-      },
-      {
-        "inverted": false,
+        "isBye": false,
+        "label": "GmC1",
         "loser": "cassidy-pensa",
         "matchId": 1,
         "placesFor": null,
@@ -1586,6 +2028,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC2",
         "loser": "jake-gibbons",
         "matchId": 2,
         "placesFor": null,
@@ -1603,6 +2047,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC3",
         "loser": "jaymie-lew",
         "matchId": 3,
         "placesFor": null,
@@ -1620,6 +2066,8 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC4",
         "loser": "spencer-kim",
         "matchId": 4,
         "placesFor": null,
@@ -1629,14 +2077,20 @@
         },
         "round": 2,
         "team1": "spencer-kim",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 1
+        },
         "team2": "tyler-jung",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 2
+        },
         "week": 16,
         "winner": "tyler-jung"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC5",
         "loser": "michaela-frederick",
         "matchId": 5,
         "placesFor": null,
@@ -1646,14 +2100,20 @@
         },
         "round": 2,
         "team1": "michaela-frederick",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 1
+        },
         "team2": "cassidy-pensa",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 3
+        },
         "week": 16,
         "winner": "cassidy-pensa"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC6",
         "loser": "jaymie-lew",
         "matchId": 6,
         "placesFor": null,
@@ -1663,60 +2123,91 @@
         },
         "round": 2,
         "team1": "jaymie-lew",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 2
+        },
         "team2": "jake-gibbons",
-        "team2From": null,
+        "team2From": {
+          "loserOf": 3
+        },
         "week": 16,
         "winner": "jake-gibbons"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC7",
         "loser": "tyler-jung",
         "matchId": 7,
-        "placesFor": null,
+        "placesFor": [
+          7,
+          8
+        ],
         "points": {
           "cassidy-pensa": 110,
           "tyler-jung": 107.38
         },
         "round": 3,
         "team1": "tyler-jung",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 4
+        },
         "team2": "cassidy-pensa",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 5
+        },
         "week": 17,
         "winner": "cassidy-pensa"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC8",
         "loser": "spencer-kim",
         "matchId": 8,
-        "placesFor": null,
+        "placesFor": [
+          9,
+          10
+        ],
         "points": {
           "jake-gibbons": 117.5,
           "spencer-kim": 109.1
         },
         "round": 3,
         "team1": "jake-gibbons",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 4
+        },
         "team2": "spencer-kim",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 6
+        },
         "week": 17,
         "winner": "jake-gibbons"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": "GmC9",
         "loser": "michaela-frederick",
         "matchId": 9,
-        "placesFor": null,
+        "placesFor": [
+          11,
+          12
+        ],
         "points": {
           "jaymie-lew": 133.18,
           "michaela-frederick": 69.68
         },
         "round": 3,
         "team1": "jaymie-lew",
-        "team1From": null,
+        "team1From": {
+          "loserOf": 5
+        },
         "team2": "michaela-frederick",
-        "team2From": null,
+        "team2From": {
+          "loserOf": 6
+        },
         "week": 17,
         "winner": "jaymie-lew"
       }
@@ -1925,8 +2416,28 @@
     "winnersBracket": [
       {
         "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 100,
+        "placesFor": null,
+        "points": {
+          "reagan-schmidt": 139.44
+        },
+        "round": 1,
+        "team1": "reagan-schmidt",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "reagan-schmidt"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "olivia-nelli",
-        "matchId": 1,
+        "matchId": 101,
         "placesFor": null,
         "points": {
           "brendon-ng": 143.32,
@@ -1942,8 +2453,10 @@
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "david-collier",
-        "matchId": 2,
+        "matchId": 102,
         "placesFor": null,
         "points": {
           "david-collier": 92.26,
@@ -1959,8 +2472,28 @@
       },
       {
         "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 103,
+        "placesFor": null,
+        "points": {
+          "safvet-besen": 63.94
+        },
+        "round": 1,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "safvet-besen"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "brendon-ng",
-        "matchId": 3,
+        "matchId": 104,
         "placesFor": null,
         "points": {
           "brendon-ng": 113.84,
@@ -1968,16 +2501,22 @@
         },
         "round": 2,
         "team1": "brendon-ng",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 101
+        },
         "team2": "reagan-schmidt",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 100
+        },
         "week": 16,
         "winner": "reagan-schmidt"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "safvet-besen",
-        "matchId": 4,
+        "matchId": 105,
         "placesFor": null,
         "points": {
           "logan-dunn": 104.16,
@@ -1985,26 +2524,39 @@
         },
         "round": 2,
         "team1": "logan-dunn",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 102
+        },
         "team2": "safvet-besen",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 103
+        },
         "week": 16,
         "winner": "logan-dunn"
       },
       {
         "inverted": false,
+        "isBye": false,
+        "label": null,
         "loser": "reagan-schmidt",
-        "matchId": 5,
-        "placesFor": null,
+        "matchId": 106,
+        "placesFor": [
+          1,
+          2
+        ],
         "points": {
           "logan-dunn": 175.64,
           "reagan-schmidt": 127.24
         },
         "round": 3,
         "team1": "logan-dunn",
-        "team1From": null,
+        "team1From": {
+          "winnerOf": 105
+        },
         "team2": "reagan-schmidt",
-        "team2From": null,
+        "team2From": {
+          "winnerOf": 104
+        },
         "week": 17,
         "winner": "logan-dunn"
       }
@@ -2012,9 +2564,11 @@
   },
   {
     "champion": "jaymie-lew",
+    "extraBrackets": [],
     "finalized": true,
     "finalizedThroughWeek": 17,
     "imported": false,
+    "ladderConsolation": false,
     "lastPlace": "david-collier",
     "leagueId": "1048054415074205696",
     "leagueName": "Den Ops Super League",
@@ -2421,9 +2975,11 @@
   },
   {
     "champion": "david-collier",
+    "extraBrackets": [],
     "finalized": true,
     "finalizedThroughWeek": 17,
     "imported": false,
+    "ladderConsolation": false,
     "lastPlace": "cassidy-pensa",
     "leagueId": "1180273312919666688",
     "leagueName": "Den Ops Super League",

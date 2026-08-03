@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { AllTimeTable } from "@/components/all-time-table";
 import { Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
 import { getOwnerMap, getOwnerRecords, getSeasons } from "@/lib/data";
 
@@ -73,97 +74,9 @@ export default function HistoryPage() {
         <PanelHeader
           title="All-Time Table"
           meta="regular season"
-          legend="A co-owned team's record counts for each of its owners, so these columns will not sum to league totals."
+          legend="Click any column to sort. A co-owned team's record counts for each of its owners, so these columns will not sum to league totals."
         />
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[760px] text-sm">
-            <thead>
-              <tr className="border-b border-ink-600 text-left">
-                {(
-                  [
-                    ["Owner", ""],
-                    ["W-L-T", "All-time regular-season wins-losses-ties"],
-                    ["Win%", "Win percentage, counting a tie as half a win"],
-                    ["PF", "Points For — total points scored, all seasons"],
-                    ["PF/G", "Points For per game — comparable across seasons of different length"],
-                    ["PA", "Points Against — total points their opponents scored"],
-                    ["PA/G", "Points Against per game"],
-                    ["🏆", "Championships won"],
-                    ["2nd", "Runner-up finishes"],
-                    ["3rd", "Third-place finishes"],
-                    ["Last", "Last-place finishes (toilet bowl losers)"],
-                    ["Playoffs", "Playoff appearances out of seasons played"],
-                    ["Avg Finish", "Mean final placement, 1 is best"],
-                  ] as const
-                ).map(([h, hint], i) => (
-                    <th
-                      key={h}
-                      title={hint || undefined}
-                      className={`eyebrow px-3 py-2.5 font-semibold ${i === 0 ? "text-left" : "text-right"} ${hint ? "cursor-help" : ""}`}
-                    >
-                      {h}
-                    </th>
-                  ),
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {records.map((r) => (
-                <tr key={r.ownerSlug} className="border-b border-ink-700 last:border-0">
-                  <td className="px-3 py-2.5">
-                    <Link
-                      href={`/owners/${r.ownerSlug}/`}
-                      className="font-medium transition-colors hover:text-accent"
-                    >
-                      {name(r.ownerSlug)}
-                    </Link>
-                    {owners.get(r.ownerSlug)?.active === false ? (
-                      <span className="ml-1.5 text-[10px] text-chalk-600" title="Former owner">
-                        ·former
-                      </span>
-                    ) : null}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right text-chalk-300">
-                    {fmt.record(r.wins, r.losses, r.ties)}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right font-semibold">
-                    {fmt.pct(r.winPct)}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right text-chalk-500">
-                    {fmt.pts1(r.pointsFor)}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right font-medium text-chalk-300">
-                    {fmt.pts1(r.pointsForPerGame)}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right text-chalk-500">
-                    {fmt.pts1(r.pointsAgainst)}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right text-chalk-500">
-                    {fmt.pts1(r.pointsAgainstPerGame)}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right text-gold">
-                    {r.championships || "—"}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right text-chalk-500">
-                    {r.runnerUps || "—"}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right text-chalk-500">
-                    {r.thirdPlaces || "—"}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right text-loss">
-                    {r.lastPlaces || "—"}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right text-chalk-500">
-                    {r.playoffAppearances}/{r.seasonsPlayed}
-                  </td>
-                  <td className="tabular px-3 py-2.5 text-right font-semibold">
-                    {r.averageFinish?.toFixed(1) ?? "—"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <AllTimeTable records={records} owners={Object.fromEntries(owners)} />
       </Panel>
 
       <Panel>
