@@ -104,6 +104,7 @@ function MatchCard({
   seedOf,
   hasFeeders,
   href,
+  current,
 }: {
   match: BracketMatch;
   heading?: string;
@@ -113,6 +114,8 @@ function MatchCard({
   hasFeeders: boolean;
   /** Set only when a matchup page exists for this game. */
   href?: string | null;
+  /** The match being viewed, when the bracket is shown in context. */
+  current?: boolean;
 }) {
   const from = (f: BracketMatch["team1From"]) =>
     !f ? "TBD" : f.winnerOf != null ? `Winner of M${f.winnerOf}` : `Loser of M${f.loserOf}`;
@@ -135,6 +138,10 @@ function MatchCard({
       ]
     : [side(match.team1, match.team1From), side(match.team2, match.team2From)];
 
+  const shell = current
+    ? "border-me bg-me/[0.12] ring-2 ring-me/40"
+    : "border-ink-600 bg-ink-850";
+
   return (
     <div className="relative">
       {heading ? (
@@ -156,14 +163,14 @@ function MatchCard({
       {href ? (
         <Link
           href={href}
-          className="block divide-y divide-ink-700 overflow-hidden rounded-lg border border-ink-600 bg-ink-850 transition-colors hover:border-ink-400 hover:bg-ink-700/50"
+          className={`block divide-y divide-ink-700 overflow-hidden rounded-lg border transition-colors hover:border-ink-400 ${shell}`}
         >
           {sides.map((s, i) => (
             <TeamRow key={i} {...s} inverted={match.inverted} />
           ))}
         </Link>
       ) : (
-        <div className="divide-y divide-ink-700 overflow-hidden rounded-lg border border-ink-600 bg-ink-850">
+        <div className={`divide-y divide-ink-700 overflow-hidden rounded-lg border ${shell}`}>
           {sides.map((s, i) => (
             <TeamRow key={i} {...s} inverted={match.inverted} />
           ))}
@@ -199,6 +206,7 @@ export function Bracket({
   nameOf,
   seedOf,
   hrefFor,
+  isCurrent,
 }: {
   matches: BracketMatch[];
   /** e.g. "🏆 Championship" or "💩 King (Last Place)". */
@@ -209,6 +217,8 @@ export function Bracket({
   seedOf: (s: string | null) => number | null;
   /** Returns the matchup-page href for a game, or null if none exists. */
   hrefFor?: (match: BracketMatch) => string | null;
+  /** Marks the match currently being viewed, when shown in context. */
+  isCurrent?: (match: BracketMatch) => boolean;
 }) {
   if (!matches.length) return null;
 
@@ -353,6 +363,7 @@ export function Bracket({
                 }
                 hasFeeders={Boolean(match.team1From || match.team2From)}
                 href={hrefFor?.(match) ?? null}
+                current={isCurrent?.(match) ?? false}
                 nameOf={nameOf}
                 seedOf={seedOf}
               />
@@ -380,6 +391,7 @@ export function Bracket({
                 }
                 hasFeeders={false}
                 href={hrefFor?.(g) ?? null}
+                current={isCurrent?.(g) ?? false}
                 nameOf={nameOf}
                 seedOf={seedOf}
               />

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Bracket } from "@/components/bracket";
 import { PositionPill } from "@/components/keeper-table";
 import { Tip } from "@/components/tooltip";
 import { Col, ListHeader, Panel, PanelHeader, Stat, fmt } from "@/components/ui";
+import type { BracketMatch } from "@/lib/types";
 import {
   getAllMeetings,
   getMeetings,
@@ -12,6 +14,7 @@ import {
   getOwnerMap,
   getPlayers,
   getSeasons,
+  meetingId,
   type Meeting,
   type MeetingSide,
 } from "@/lib/data";
@@ -49,7 +52,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   const owners = getOwnerMap();
   const players = getPlayers();
   const season = getSeasons().find((s) => s.season === game.season);
-  const name = (slug: string) => owners.get(slug)?.name ?? slug;
+  const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || slug || "TBD";
 
   const winner = game.a.points === game.b.points ? null : game.a.points > game.b.points ? game.a : game.b;
   const margin = Math.abs(game.a.points - game.b.points);
@@ -74,6 +77,41 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   const flags = getRecordFlags(game.season, game.week, [game.a.ownerSlug, game.b.ownerSlug]);
   // Marks this game set when it was played, whether or not they still stand.
   const madeHistory = getAtTheTime()[game.id] ?? [];
+
+  /**
+   * The bracket this matchup belongs to, so a postseason game can be seen in
+   * the shape it was played in rather than in isolation.
+   *
+   * Matched on the two teams plus the week: a pairing can recur across rounds,
+   * and a season can run several brackets at once.
+   */
+  const isThisMatch = (m: BracketMatch) =>
+    m.week === game.week &&
+    !!m.team1 &&
+    !!m.team2 &&
+    [m.team1, m.team2].every((t) => [game.a.ownerSlug, game.b.ownerSlug].includes(t!));
+
+  const bracket =
+    game.kind === "regular" || !season
+      ? null
+      : ([
+          ["Playoff bracket", season.winnersBracket, 1] as const,
+          ...season.extraBrackets.map(
+            (b) => [b.title, b.matches, b.finalPlace] as const,
+          ),
+          [
+            season.ladderConsolation ? "Consolation ladder" : "Toilet bowl",
+            season.losersBracket,
+            season.teams,
+          ] as const,
+        ].find(([, matches]) => matches.some(isThisMatch)) ?? null);
+
+  const existingMeetings = new Set(getAllMeetings().map((m) => m.id));
+  const bracketHref = (m: BracketMatch) => {
+    if (!m.team1 || !m.team2 || m.isBye) return null;
+    const id = meetingId(game.season, m.week, m.team1, m.team2);
+    return existingMeetings.has(id) && id !== game.id ? `/matchups/${id}/` : null;
+  };
 
   return (
     <div className="space-y-5 sm:space-y-6">
@@ -243,6 +281,31 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
           </div>
         </Panel>
       )}
+
+      {bracket ? (
+        <Panel>
+          <PanelHeader
+            title={bracket[0]}
+            meta={`${game.season} postseason`}
+            legend="This matchup is highlighted. Open any other to see its lineups."
+            href={`/history/${game.season}/`}
+            hrefLabel="Season"
+          />
+          <div className="p-4 sm:p-5">
+            <Bracket
+              matches={bracket[1]}
+              finalLabel={bracket[2] === 1 ? "🏆 Championship" : "Placement"}
+              finalPlace={bracket[2]}
+              nameOf={name}
+              seedOf={(slug) =>
+                slug ? (season?.standings.find((r) => r.ownerSlug === slug)?.seed ?? null) : null
+              }
+              hrefFor={bracketHref}
+              isCurrent={isThisMatch}
+            />
+          </div>
+        </Panel>
+      ) : null}
 
       <Panel>
         <PanelHeader
