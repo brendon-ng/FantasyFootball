@@ -168,10 +168,14 @@ export function IdentityProvider({
     <Ctx.Provider value={value}>
       {mySlug ? (
         <style
-          // href + precedence makes React 19 hoist this into <head> and dedupe
-          // it, rather than leaving placement to render order.
-          href="denops-identity"
-          precedence="high"
+          // A PLAIN style element, deliberately. Giving it href + precedence
+          // makes React 19 hoist and dedupe it by href — after which switching
+          // identity never updates the rule, because React sees the same href
+          // and skips it. The highlight then only changed on a page load.
+          //
+          // Keyed on the slug so the element is replaced outright rather than
+          // patched, and priority comes from !important rather than placement.
+          key={mySlug}
           dangerouslySetInnerHTML={{
             __html: `
 /*
