@@ -13,6 +13,7 @@ import {
   placeColor,
 } from "@/components/ui";
 import {
+  creditedNames,
   features,
   getAdp,
   getConfig,
@@ -49,6 +50,16 @@ export default async function HomePage() {
   const inSeason = live?.seasonType === "regular" || live?.seasonType === "post";
   const currentSeason = live?.season ?? (lastSeason ? lastSeason.season + 1 : 0);
 
+  // Live rosters first — they are authoritative for the season being played, and
+  // are the only source in a league's first year, before any season finalizes.
+  const leagueSize = live?.teams.length || lastSeason?.teams || 0;
+
+  // Was hardcoded "10 teams · PPR keeper", which is wrong for any other league.
+  const format = `${leagueSize} teams · PPR ${features().keepers ? "keeper" : "redraft"}`;
+  const preDraftNote = features().keepers
+    ? "Pre-draft · keeper deadline is 3 days before the draft"
+    : "Pre-draft";
+
   const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || "—";
 
   // Live contracts grouped by owner, best (earliest round) first.
@@ -78,9 +89,14 @@ export default async function HomePage() {
 
   // Home is a snapshot of the league as it stands, so the leaderboard is current
   // owners only. Departed owners (and the full table) live on the history page.
+  //
+  // Length is the league's team count, not a fixed 10, so a 12-team league is
+  // not silently cut to 10. Note it is TEAMS, not active owners: co-owned teams
+  // mean Den Ops has 12 active owners across 10 teams, so the last couple still
+  // fall below the fold here. The full table on /history has everyone.
   const leaders = records
     .filter((r) => owners.get(r.ownerSlug)?.active)
-    .slice(0, 10);
+    .slice(0, leagueSize || 10);
 
   return (
     <div className="space-y-5 sm:space-y-6">
@@ -91,10 +107,10 @@ export default async function HomePage() {
           </h1>
           <p className="mt-1 text-sm text-chalk-500">
             {inSeason
-              ? `Week ${live?.displayWeek || live?.week} · 10 teams · PPR keeper`
+              ? `Week ${live?.displayWeek || live?.week} · ${format}`
               : live?.status === "pre_draft"
-                ? "Pre-draft · keeper deadline is 3 days before the draft"
-                : "Offseason · 10 teams · PPR keeper"}
+                ? preDraftNote
+                : `Offseason · ${format}`}
           </p>
         </div>
         {inSeason ? (
@@ -110,20 +126,20 @@ export default async function HomePage() {
         <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
           <Stat
             label={`${lastSeason.season} Champion`}
-            value={<span className="text-base sm:text-lg">{name(lastSeason.champion)}</span>}
+            value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.champion)}</span>}
             tone="gold"
           />
           <Stat
             label="Runner-up"
-            value={<span className="text-base sm:text-lg">{name(lastSeason.runnerUp)}</span>}
+            value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.runnerUp)}</span>}
           />
           <Stat
             label="Third"
-            value={<span className="text-base sm:text-lg">{name(lastSeason.thirdPlace)}</span>}
+            value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.thirdPlace)}</span>}
           />
           <Stat
             label="Last Place"
-            value={<span className="text-base sm:text-lg">{name(lastSeason.lastPlace)}</span>}
+            value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.lastPlace)}</span>}
             sub="Toilet bowl loser"
           />
         </div>

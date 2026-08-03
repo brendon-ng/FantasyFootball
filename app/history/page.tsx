@@ -2,7 +2,13 @@ import Link from "next/link";
 
 import { AllTimeTable } from "@/components/all-time-table";
 import { Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
-import { getOwnerMap, getOwnerRecords, getSeasons, pageTitle } from "@/lib/data";
+import {
+  creditedNames,
+  getOwnerMap,
+  getOwnerRecords,
+  getSeasons,
+  pageTitle,
+} from "@/lib/data";
 
 export const generateMetadata = () => ({ title: pageTitle("History") });
 
@@ -61,7 +67,7 @@ export default function HistoryPage() {
                     <span className={`w-8 shrink-0 text-[10px] font-semibold ${tone}`}>
                       {label}
                     </span>
-                    <span className="truncate">{name(slug)}</span>
+                    <span className="truncate">{creditedNames(s.standings, slug)}</span>
                   </div>
                 ))}
               </div>

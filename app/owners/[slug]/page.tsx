@@ -16,6 +16,7 @@ import {
   getOwners,
   getPlayers,
   getSeasons,
+  teamSeasonFor,
 } from "@/lib/data";
 
 export const dynamicParams = false;
@@ -173,7 +174,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                 </thead>
                 <tbody>
                   {seasons.map((s) => {
-                    const row = s.standings.find((r) => r.ownerSlug === slug);
+                    const row = teamSeasonFor(s.standings, slug);
                     if (!row) return null;
                     return (
                       <tr key={s.season} className="border-b border-ink-700 last:border-0">

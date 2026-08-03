@@ -3,7 +3,14 @@ import { notFound } from "next/navigation";
 
 import { Bracket } from "@/components/bracket";
 import { Col, ListHeader, Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
-import { getAllMeetings, getMatchupHistory, getOwnerMap, getSeasons, meetingId } from "@/lib/data";
+import {
+  creditedNames,
+  getAllMeetings,
+  getMatchupHistory,
+  getOwnerMap,
+  getSeasons,
+  meetingId,
+} from "@/lib/data";
 import type { BracketMatch } from "@/lib/types";
 
 // Static export: every season page is generated at build time.
@@ -59,7 +66,7 @@ export default async function SeasonPage({
         </div>
         <div className="text-right text-sm">
           <div className="eyebrow">Champion</div>
-          <div className="text-lg font-bold text-gold">{name(summary.champion)}</div>
+          <div className="text-lg font-bold text-gold">{creditedNames(summary.standings, summary.champion, "TBD")}</div>
         </div>
       </div>
 

@@ -130,6 +130,45 @@ export const features = (): LeagueFeatures => getConfig().features;
 /** `"Records"` -> `"Records · Den Ops"`, so no page hardcodes a league name. */
 export const pageTitle = (name: string): string => `${name} · ${getConfig().shortName}`;
 
+/**
+ * Everyone credited with a team-season, for a placement tile or headline.
+ *
+ * `SeasonSummary.champion` (and runnerUp/thirdPlace/lastPlace) is the PRIMARY
+ * owner only, because a placement is a property of a team and a team has one
+ * franchise key. But a co-owned team has two people who share the title equally,
+ * and naming one of them is simply wrong.
+ *
+ * Co-owned teams render as first names ("Robbie & Thomas") because these tiles
+ * are narrow; a solo owner keeps their full name, which fits.
+ */
+/**
+ * The team-season this owner was part of, co-owned or not.
+ *
+ * `StandingsRow.ownerSlug` is only the PRIMARY owner, so matching on it alone
+ * hides a co-owner's own seasons from their profile — Lauren co-owned 2021-23
+ * with Olivia and those years vanished from her season-by-season table while
+ * still appearing in her finish chart, which reads the credit list.
+ */
+export function teamSeasonFor<T extends { ownerSlug: string; ownerSlugs: string[] }>(
+  standings: T[],
+  slug: string,
+): T | undefined {
+  return standings.find((r) => (r.ownerSlugs?.length ? r.ownerSlugs : [r.ownerSlug]).includes(slug));
+}
+
+export function creditedNames(
+  standings: Array<{ ownerSlug: string; ownerSlugs: string[] }>,
+  primarySlug: string | null | undefined,
+  fallback = "—",
+): string {
+  if (!primarySlug) return fallback;
+  const owners = getOwnerMap();
+  const row = standings.find((r) => r.ownerSlug === primarySlug);
+  const slugs = row?.ownerSlugs?.length ? row.ownerSlugs : [primarySlug];
+  if (slugs.length === 1) return owners.get(slugs[0])?.name ?? fallback;
+  return slugs.map((sl) => owners.get(sl)?.firstName ?? sl).join(" & ");
+}
+
 export function getOwnerMap(): Map<string, Owner> {
   return new Map(getOwners().map((o) => [o.slug, o]));
 }
