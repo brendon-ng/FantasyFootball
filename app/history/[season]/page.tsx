@@ -27,13 +27,6 @@ export default async function SeasonPage({
   const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || "TBD";
   const seedOf = (slug: string | null) =>
     slug ? (summary.standings.find((r) => r.ownerSlug === slug)?.seed ?? null) : null;
-  const playoffWeekStart = Math.min(
-    ...[...summary.winnersBracket, ...summary.losersBracket]
-      .map((m) => m.week)
-      .filter((w): w is number => w != null),
-    15,
-  );
-
   const matchups = getMatchupHistory().filter((m) => m.season === season);
   const weeks = [...new Set(matchups.map((m) => m.week))].sort((a, b) => a - b);
 
@@ -140,9 +133,7 @@ export default async function SeasonPage({
         <div className="p-4 sm:p-5">
           <Bracket
             matches={summary.winnersBracket}
-            title="Championship bracket"
             finalLabel="🏆 Championship"
-            playoffWeekStart={playoffWeekStart}
             nameOf={name}
             seedOf={seedOf}
           />
@@ -158,9 +149,7 @@ export default async function SeasonPage({
           </p>
           <Bracket
             matches={summary.losersBracket}
-            title="Consolation bracket"
             finalLabel="💩 King (Last Place)"
-            playoffWeekStart={playoffWeekStart}
             nameOf={name}
             seedOf={seedOf}
           />
