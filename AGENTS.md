@@ -87,6 +87,15 @@ A working league hub, no database. Two leagues build and deploy: den-ops (735
 pages, six seasons, keepers) and masterbatters (503 pages, one season, redraft).
 `npm run preview` is the only way to see them at the real subpath.
 
+The home page's offseason slot carries a Record Book panel (top 3 of highest and
+lowest week, biggest blowout, closest win) for EVERY league. It is the whole
+offseason story for a redraft league: rosters are empty until the draft and there
+are no keeper contracts, so without it that page has nothing current to say.
+
+Rows say "def." or "lost to" from the two scores rather than assuming. A blowout
+or closest win is a win by construction, but a high or low week is not —
+Masterbatters' second-lowest week was won by the team that scored it.
+
 **Pages:** `/` (league at a glance, adapts to offseason), `/keepers`,
 `/keepers/history`, `/history`, `/history/[season]`, `/records`,
 `/owners/[slug]`, `/players/[id]`, `/h2h/[pair]`, `/matchups/[id]`.

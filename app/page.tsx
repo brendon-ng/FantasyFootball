@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { HomeKeeperBoard } from "@/components/home-keeper-board";
+import { RecordHighlights } from "@/components/record-highlights";
 import {
   Col,
   EmptyState,
@@ -16,6 +17,7 @@ import {
   creditedNames,
   features,
   getAdp,
+  getAllMeetings,
   getConfig,
   getKeepers,
   getLiveSeason,
@@ -23,6 +25,7 @@ import {
   getOwnerRecords,
   getPlayers,
   getRecordThresholds,
+  getRecords,
   getSeasons,
   meetingId,
 } from "@/lib/data";
@@ -79,6 +82,10 @@ export default async function HomePage() {
    * and a row there cannot disagree.
    */
   const thresholds = getRecordThresholds();
+  const recordBook = getRecords();
+  // Only link rows whose matchup page was actually generated; a dead link is
+  // worse than a plain row.
+  const meetings = new Set(getAllMeetings().map((m) => m.id));
   const pace = (points: number): { rank: number; tone: "good" | "bad" } | null => {
     const hi = thresholds.high.findIndex((p) => points > p);
     if (hi >= 0) return { rank: hi + 1, tone: "good" };
@@ -364,6 +371,28 @@ export default async function HomePage() {
           )}
         </Panel>
       ) : null}
+
+      {/* Shown for every league. It is the whole offseason panel for a redraft
+          league, where there is no keeper board and nothing current to say — a
+          redraft roster is empty until the draft. */}
+      <Panel>
+        <PanelHeader
+          title="Record Book"
+          meta="all-time · top 3"
+          href="/records/"
+          hrefLabel="Full records"
+          legend="Rank · the matchup · when it happened · points, or margin for the blowout and closest-win lists. A high or low week is not always a win, so the row says which. Click any row for the game."
+        />
+        <RecordHighlights
+          records={recordBook}
+          ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
+          href={(a, b, season, week) =>
+            b && meetings.has(meetingId(season, week, a, b))
+              ? `/matchups/${meetingId(season, week, a, b)}/`
+              : null
+          }
+        />
+      </Panel>
     </div>
   );
 }
