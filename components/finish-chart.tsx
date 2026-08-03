@@ -24,9 +24,11 @@ export interface FinishPoint {
   teams: number;
 }
 
-const W = 640;
-const H = 260;
-const PAD = { top: 18, right: 20, bottom: 30, left: 34 };
+// Wide and short: the chart sits in a half-width column beside the trophy case,
+// and six points need horizontal room far more than vertical.
+const W = 560;
+const H = 168;
+const PAD = { top: 14, right: 16, bottom: 24, left: 26 };
 
 const MEDAL: Record<number, string> = {
   1: "var(--color-gold)",
@@ -95,7 +97,7 @@ export function FinishChart({ points }: { points: FinishPoint[] }) {
               strokeWidth="1"
             />
             <text
-              x={PAD.left - 8}
+              x={PAD.left - 6}
               y={y(p) + 3.5}
               textAnchor="end"
               className="fill-chalk-600"
@@ -131,14 +133,14 @@ export function FinishChart({ points }: { points: FinishPoint[] }) {
             <circle
               cx={x(i)}
               cy={y(p.place)}
-              r={hover === i ? 6 : 4.5}
+              r={hover === i ? 5.5 : 4}
               fill={MEDAL[p.place] ?? "var(--color-accent)"}
               stroke="var(--color-ink-850)"
               strokeWidth="2"
             />
             <text
               x={x(i)}
-              y={H - 10}
+              y={H - 7}
               textAnchor="middle"
               className={hover === i ? "fill-chalk-300" : "fill-chalk-600"}
               style={{ fontSize: 10, fontVariantNumeric: "tabular-nums" }}
@@ -182,9 +184,8 @@ export function FinishChart({ points }: { points: FinishPoint[] }) {
         </div>
       ) : null}
 
-      <p className="mt-1 px-1 text-[10px] text-chalk-600">
-        1st is at the top. The dashed line is last place each season — the league had 12 teams
-        through 2023 and 10 from 2024.
+      <p className="mt-0.5 px-1 text-[10px] leading-tight text-chalk-600">
+        1st at top · dashed line is last place that season
       </p>
     </div>
   );

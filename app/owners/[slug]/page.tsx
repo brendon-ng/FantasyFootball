@@ -114,23 +114,25 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             <Stat label="Last places" value={record.lastPlaces} />
           </div>
 
-          <Panel>
-            <PanelHeader
-              title="Trophy Case"
-              meta={`${record.championships} title${record.championships === 1 ? "" : "s"}`}
-            />
-            <TrophyCase honours={honours} lastPlaces={lastPlaceSeasons} />
-          </Panel>
+          <div className="grid gap-5 lg:grid-cols-2">
+            <Panel>
+              <PanelHeader
+                title="Trophy Case"
+                meta={`${record.championships} title${record.championships === 1 ? "" : "s"}`}
+              />
+              <TrophyCase honours={honours} lastPlaces={lastPlaceSeasons} />
+            </Panel>
 
-          <Panel>
-            <PanelHeader
-              title="Finish by Season"
-              meta={`${finishPoints.length} season${finishPoints.length === 1 ? "" : "s"}`}
-            />
-            <div className="p-4 sm:p-5">
-              <FinishChart points={finishPoints} />
-            </div>
-          </Panel>
+            <Panel>
+              <PanelHeader
+                title="Finish by Season"
+                meta={`${finishPoints.length} season${finishPoints.length === 1 ? "" : "s"}`}
+              />
+              <div className="px-4 pb-3 pt-2 sm:px-5">
+                <FinishChart points={finishPoints} />
+              </div>
+            </Panel>
+          </div>
 
           <div className="grid gap-5 lg:grid-cols-2">
             <Panel>

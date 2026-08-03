@@ -65,16 +65,16 @@ export function TrophyCase({
   }
 
   return (
-    <div className="flex flex-wrap gap-2.5 p-4 sm:p-5">
+    <div className="flex flex-wrap gap-2 p-4 sm:p-5">
       {byTier.flatMap((tier) =>
         tier.seasons.map((season) => (
           <Link
             key={`${tier.place}-${season}`}
             href={`/history/${season}/`}
             title={`${tier.label} in ${season}`}
-            className={`group flex w-[104px] flex-col items-center gap-1 rounded-xl border bg-ink-850 px-3 py-3 transition-colors hover:bg-ink-700/50 ${tier.ring} ${tier.glow}`}
+            className={`group flex w-[88px] flex-col items-center gap-0.5 rounded-xl border bg-ink-850 px-2 py-2.5 transition-colors hover:bg-ink-700/50 ${tier.ring} ${tier.glow}`}
           >
-            <span className="text-2xl leading-none" aria-hidden>
+            <span className="text-xl leading-none" aria-hidden>
               {tier.icon}
             </span>
             <span className={`text-[10px] font-semibold uppercase tracking-wide ${tier.text}`}>
@@ -90,9 +90,9 @@ export function TrophyCase({
           key={`last-${season}`}
           href={`/history/${season}/`}
           title={`Finished last in ${season}`}
-          className="group flex w-[104px] flex-col items-center gap-1 rounded-xl border border-loss/30 bg-ink-850 px-3 py-3 transition-colors hover:bg-ink-700/50"
+          className="group flex w-[88px] flex-col items-center gap-0.5 rounded-xl border border-loss/30 bg-ink-850 px-2 py-2.5 transition-colors hover:bg-ink-700/50"
         >
-          <span className="text-2xl leading-none" aria-hidden>
+          <span className="text-xl leading-none" aria-hidden>
             🚽
           </span>
           <span className="text-[10px] font-semibold uppercase tracking-wide text-loss">
