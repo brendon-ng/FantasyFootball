@@ -32,6 +32,13 @@ import type { NavOwner } from "@/components/nav";
  * for free; `[data-owner]` covers the few places that render a name as plain
  * text, like bracket cards.
  *
+ * TWO OPT-OUTS, and they differ:
+ *   [data-me-exempt]  keep your own text colour, still get the tint. For marks
+ *                     whose colour means something — a bracket winner, a gold
+ *                     champion tile.
+ *   [data-me-ignore]  do not touch at all. For chrome that represents you
+ *                     rather than mentioning you, like the nav's My Team link.
+ *
  * `[data-me-exempt]` opts an element out. Some colours already carry meaning —
  * gold for a champion, the winner tint in a bracket — and those must win. The
  * identity rule is injected after the stylesheet, so without the exclusion it
@@ -165,13 +172,28 @@ export function IdentityProvider({
           precedence="high"
           dangerouslySetInnerHTML={{
             __html: `
-a[href$="/owners/${mySlug}/"]:not([data-me-exempt]),
-[data-owner="${mySlug}"]:not([data-me-exempt]) {
+/*
+ * TWO CHANNELS, deliberately.
+ *
+ * The tint applies ALWAYS — even to exempt elements — so "this is you" is
+ * present whether you won or lost. Text colour is a separate channel that keeps
+ * meaning outcome: green for a bracket winner, gold for a champion.
+ *
+ * Marking identity with colour alone made it appear only when the outcome
+ * colour happened to be free, so you were violet in games you lost and
+ * unmarked in games you won.
+ */
+a[href$="/owners/${mySlug}/"]:not([data-me-ignore]),
+[data-owner="${mySlug}"]:not([data-me-ignore]) {
+  background-color: color-mix(in srgb, ${ME_COLOR} 16%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, ${ME_COLOR} 30%, transparent);
+  border-radius: 4px;
+}
+/* Colour only where nothing else is using it. */
+a[href$="/owners/${mySlug}/"]:not([data-me-exempt]):not([data-me-ignore]),
+[data-owner="${mySlug}"]:not([data-me-exempt]):not([data-me-ignore]) {
   color: ${ME_COLOR} !important;
   font-weight: 600 !important;
-}
-[data-owner-row="${mySlug}"]:not([data-me-exempt]) {
-  background-color: color-mix(in srgb, ${ME_COLOR} 9%, transparent) !important;
 }
 `,
           }}
@@ -272,11 +294,11 @@ function IdentityPicker({
 }
 
 /**
- * Circular identity button for the nav.
+ * Circular identity control for the nav.
  *
- * Reads as an account control, which is what it is. Deliberately NOT wired into
- * the highlight rule — see the `data-me-exempt` note above; a chrome element
- * that repainted itself as "you" would be noise.
+ * Marked `data-me-exempt` and excluded from the tint by carrying no
+ * `data-owner`: it is chrome representing you, not a mention of you in the
+ * content, and tinting it would double up with its own styling.
  */
 export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
   const { identity, ready, openPicker } = useIdentity();
@@ -284,16 +306,15 @@ export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
 
   const me = identity.kind === "owner" ? owners.find((o) => o.slug === identity.slug) : null;
 
-  // Two initials from the first and last word, so "Reagan Schmidt" reads RS
-  // rather than RE.
+  // First and last word, so "Reagan Schmidt" reads RS rather than RE.
   const initials = me
     ? (() => {
         const parts = me.name.trim().split(/\s+/);
-        return ((parts[0]?.[0] ?? "") + (parts.length > 1 ? (parts.at(-1)?.[0] ?? "") : "")).toUpperCase();
+        return (
+          (parts[0]?.[0] ?? "") + (parts.length > 1 ? (parts.at(-1)?.[0] ?? "") : "")
+        ).toUpperCase();
       })()
     : null;
-
-  const browsing = identity.kind === "neutral";
 
   return (
     <button
@@ -302,37 +323,31 @@ export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
       title={
         me
           ? `You are ${me.name} — click to change`
-          : browsing
+          : identity.kind === "neutral"
             ? "Browsing anonymously — click to pick your team"
-            : "Tell us who you are"
+            : "Tell us which team is yours"
       }
-      aria-label={
-        me ? `Viewing as ${me.name}. Change.` : "Choose which team is yours"
-      }
-      data-me-exempt=""
-      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-colors ${
+      aria-label={me ? `Viewing as ${me.name}. Change.` : "Choose which team is yours"}
+      data-me-ignore=""
+      className={`group relative grid h-8 w-8 shrink-0 place-items-center rounded-full text-[11px] font-bold leading-none tracking-tight transition-all ${
         me
-          ? "border-me-dim bg-me/10 text-me hover:bg-me/20"
-          : "border-ink-500 bg-ink-800 text-chalk-500 hover:border-chalk-500 hover:text-chalk-200"
+          ? "bg-me/15 text-me ring-1 ring-me-dim hover:bg-me/25 hover:ring-me"
+          : "bg-ink-700 text-chalk-500 ring-1 ring-ink-500 hover:text-chalk-200 hover:ring-chalk-600"
       }`}
     >
-      {initials ? (
-        <span className="text-[10px] font-bold leading-none tracking-tight">{initials}</span>
-      ) : (
-        // A person glyph reads as "set who you are"; a bare "?" reads as an
-        // error state or unavailable data.
+      {initials ?? (
         <svg
           viewBox="0 0 16 16"
           aria-hidden
-          className="h-[15px] w-[15px]"
+          className="h-4 w-4"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.5"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
-          <circle cx="8" cy="5.4" r="2.6" />
-          <path d="M2.9 13.4a5.1 5.1 0 0 1 10.2 0" />
+          <circle cx="8" cy="5.6" r="2.7" />
+          <path d="M2.8 13.6a5.2 5.2 0 0 1 10.4 0" />
         </svg>
       )}
     </button>

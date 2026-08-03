@@ -9,6 +9,9 @@ import { IdentityBadge, useIdentity } from "@/components/identity";
  * Site nav. Horizontal and scrollable on mobile, so it never wraps or collapses
  * into a hamburger — with a handful of destinations a drawer costs a tap for
  * nothing.
+ *
+ * Identity lives in a single circular badge at the end — one control, always
+ * visible, in every state.
  */
 const LINKS = [
   { href: "/", label: "League" },
@@ -25,7 +28,7 @@ export interface NavOwner {
 export function Nav({ subtitle, owners }: { subtitle: string; owners: NavOwner[] }) {
   const pathname = usePathname();
   const { identity, ready } = useIdentity();
-
+  const mySlug = identity.kind === "owner" ? identity.slug : null;
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-600 bg-ink-900/85 backdrop-blur-md">
@@ -60,15 +63,16 @@ export function Nav({ subtitle, owners }: { subtitle: string; owners: NavOwner[]
             );
           })}
 
-          {/* Exempt from the identity highlight: this is chrome, not a mention
-              of you in the content, and it colours itself via text-me already. */}
-          {ready && identity.kind === "owner" ? (
+          {/* data-me-ignore, not just exempt: this is chrome representing you,
+              so it should get neither the tint nor the recolour. It styles
+              itself. */}
+          {ready && mySlug ? (
             <Link
-              href={`/owners/${identity.slug}/`}
-              data-me-exempt=""
-              aria-current={pathname.startsWith(`/owners/${identity.slug}/`) ? "page" : undefined}
+              href={`/owners/${mySlug}/`}
+              data-me-ignore=""
+              aria-current={pathname.startsWith(`/owners/${mySlug}/`) ? "page" : undefined}
               className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors sm:px-3 ${
-                pathname.startsWith(`/owners/${identity.slug}/`)
+                pathname.startsWith(`/owners/${mySlug}/`)
                   ? "bg-ink-700 text-me"
                   : "text-me hover:bg-ink-700/60"
               }`}
@@ -77,7 +81,7 @@ export function Nav({ subtitle, owners }: { subtitle: string; owners: NavOwner[]
             </Link>
           ) : null}
 
-          <span className="ml-1 shrink-0">
+          <span className="ml-1.5 shrink-0">
             <IdentityBadge owners={owners} />
           </span>
         </nav>
