@@ -282,7 +282,7 @@ export function getAdp(): {
   };
 }
 
-/** One meeting between two owners, from either data era. */
+/** One matchup between two owners, from either data era. */
 export interface Meeting {
   /** Stable URL key: "<season>-<week>-<slugA>-vs-<slugB>", slugs sorted. */
   id: string;
@@ -524,7 +524,7 @@ const ordinalOf = (n: number) => {
 };
 
 /**
- * Which record-book lists a given game appears in.
+ * Which record-book lists a given matchup appears in.
  *
  * Ranks come from the same arrays the record book renders, so a chip here and a
  * row there can never disagree — recomputing thresholds separately would let
@@ -590,8 +590,8 @@ export function getRecordFlags(
   r.highestCombined.forEach((s, i) => {
     if (hit(s)) {
       out.push({
-        short: `#${i + 1} highest game`,
-        full: `${ordinalOf(i + 1)}-highest combined score of any game in league history`,
+        short: `#${i + 1} highest scoring matchup`,
+        full: `${ordinalOf(i + 1)}-highest combined score of any matchup in league history`,
         rank: i + 1,
         tone: "good",
         ownerSlug: s.ownerSlug,
@@ -602,8 +602,8 @@ export function getRecordFlags(
   r.lowestCombined.forEach((s, i) => {
     if (hit(s)) {
       out.push({
-        short: `#${i + 1} lowest game`,
-        full: `${ordinalOf(i + 1)}-lowest combined score of any game in league history`,
+        short: `#${i + 1} lowest scoring matchup`,
+        full: `${ordinalOf(i + 1)}-lowest combined score of any matchup in league history`,
         rank: i + 1,
         tone: "bad",
         ownerSlug: s.ownerSlug,

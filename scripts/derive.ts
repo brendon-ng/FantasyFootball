@@ -832,7 +832,7 @@ function buildOwnerRecords(
 /**
  * The all-time record book.
  *
- * Includes the imported ESPN playoff and ladder games, which carry real scores
+ * Includes the imported ESPN playoff and ladder matchups, which carry real scores
  * even though those seasons kept no weekly matchups. Excluding them would leave
  * the second-highest score ever recorded off the list, and would disagree with
  * `recordsAtTheTime()`, which uses the same games to seed its baseline.
@@ -1288,14 +1288,14 @@ interface AtTheTimeFlag {
 }
 
 /**
- * Games that set a league record the moment they were played.
+ * Matchups that set a league record the moment they were played.
  *
- * Only #1 marks count — a game that became the best or worst the league had
+ * Only #1 marks count — a matchup that became the best or worst the league had
  * ever seen. Anything narrower would fire constantly and mean nothing.
  *
  * COVERAGE IS UNEVEN AND THE UI SAYS SO. The baseline is seeded with the ESPN
  * playoff and ladder games, which are the only pre-2024 scores that survived,
- * so a 2024 mark is measured against roughly 68 historical games rather than
+ * so a 2024 mark is measured against roughly 68 historical matchups rather than
  * the ~670 team-weeks actually played from 2020-23. Player-week marks are worse
  * still: ESPN kept no lineups, so that baseline genuinely starts empty in 2024.
  *
@@ -1411,7 +1411,7 @@ function recordsAtTheTime(
     if (!first && total > highestCombined) {
       add(ev.id, {
         kind: "combined-high",
-        label: "Highest scoring game in league history",
+        label: "Highest scoring matchup in league history",
         value: total,
         ownerSlug: (a.points >= b.points ? a : b).slug,
         opponentSlug: (a.points >= b.points ? b : a).slug,
@@ -1421,7 +1421,7 @@ function recordsAtTheTime(
     if (!first && total < lowestCombined) {
       add(ev.id, {
         kind: "combined-low",
-        label: "Lowest scoring game in league history",
+        label: "Lowest scoring matchup in league history",
         value: total,
         ownerSlug: (a.points >= b.points ? a : b).slug,
         opponentSlug: (a.points >= b.points ? b : a).slug,

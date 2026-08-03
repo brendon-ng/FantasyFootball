@@ -71,7 +71,7 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
           </Link>
         </h1>
         <p className="mt-1 text-sm text-chalk-500">
-          All meetings, including playoffs and consolation games.
+          Every matchup between these two, including playoffs and the toilet bowl.
         </p>
       </div>
 
@@ -86,7 +86,7 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
           }
           tone="accent"
         />
-        <Stat label="Meetings" value={overall.n} sub="regular season + postseason" />
+        <Stat label="Matchups" value={overall.n} sub="regular season + postseason" />
         <Stat
           label={`${owners.get(a)?.firstName} pts`}
           value={fmt.pts1(overall.pf)}
@@ -103,7 +103,7 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
         <PanelHeader
           title="Record Splits"
           meta={`from ${name(a)}'s perspective`}
-          legend="Regular-season games exist only for 2024 onward; imported ESPN seasons kept no weekly matchups, but their playoff games are counted."
+          legend="Regular-season matchups exist only for 2024 onward; the imported ESPN seasons kept no weekly matchups, but their playoff matchups are counted."
         />
         <ListHeader>
           <Col className="flex-1">Split</Col>
@@ -156,9 +156,9 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
 
       <Panel>
         <PanelHeader
-          title="Every Meeting"
-          meta={`${games.length} games`}
-          legend="Open a game for lineups and per-player scores."
+          title="Every Matchup"
+          meta={`${games.length} matchups`}
+          legend="Open a matchup for lineups and per-player scores."
         />
         {games.length === 0 ? (
           <EmptyState>These two have never played.</EmptyState>

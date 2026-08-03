@@ -18,13 +18,13 @@ import {
 export const dynamicParams = false;
 
 /**
- * One page per game ever played.
+ * One page per matchup ever played.
  *
  * This is where lineups live. The head-to-head page lists a series and links
  * here; duplicating the per-player breakdown in both would mean two renderers
  * for the same thing, drifting apart.
  *
- * Imported ESPN games get a page too, even though they kept no lineups — the
+ * Imported ESPN matchups get a page too, even though they kept no lineups — the
  * score, the round it decided, and the series context are all still real. A
  * missing page would leave dead links from the record book.
  */
@@ -104,7 +104,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
             </span>
             <span
               className="cursor-help text-[10px] text-chalk-600 decoration-dotted underline-offset-2 hover:underline"
-              title="Measured against every score on record at that moment. Weekly scores are complete from 2024; before that only ESPN playoff and ladder games survived, and no pre-2024 lineups did — so the earlier baseline is thinner than the games actually played."
+              title="Measured against every score on record at that moment. Weekly scores are complete from 2024; before that only ESPN playoff and ladder matchups survived, and no pre-2024 lineups did — so the earlier baseline is thinner than the matchups actually played."
             >
               coverage ⓘ
             </span>
@@ -246,7 +246,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
       <Panel>
         <PanelHeader
           title="Rest of the Series"
-          meta={`${series.length - 1} other meeting${series.length === 2 ? "" : "s"}`}
+          meta={`${series.length - 1} other matchup${series.length === 2 ? "" : "s"}`}
           href={pairHref}
           hrefLabel="Head to head"
         />

@@ -33,10 +33,10 @@ export default function RecordsPage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Record Book</h1>
         <p className="mt-1 text-sm text-chalk-500">
-          Extremes across every finalized game on record.{" "}
+          Extremes across every finalized matchup on record.{" "}
           <span className="text-chalk-600">
             Weekly scores are complete from 2024. For 2020–2023 only ESPN playoff and ladder
-            games survived, so those seasons are represented but under-counted — and player
+            matchups survived, so those seasons are represented but under-counted — and player
             records are 2024 onward, since ESPN kept no lineups.
           </span>
         </p>
@@ -114,14 +114,14 @@ export default function RecordsPage() {
         </Panel>
 
         <CombinedList
-          title="Highest Scoring Games"
+          title="Highest Scoring Matchups"
           rows={records.highestCombined}
           name={name}
           tone="text-accent"
           meetingHref={meetingHref}
         />
         <CombinedList
-          title="Lowest Scoring Games"
+          title="Lowest Scoring Matchups"
           rows={records.lowestCombined}
           name={name}
           tone="text-loss"
@@ -217,8 +217,8 @@ function ScoreList({
 }
 
 /**
- * Games ranked by both scores added together — a whole-game list, so one row
- * per game rather than one per team.
+ * Matchups ranked by both scores added together — a whole-matchup list, so one
+ * row per matchup rather than one per team.
  */
 function CombinedList({
   title,
@@ -238,7 +238,7 @@ function CombinedList({
       <PanelHeader
         title={title}
         meta={`top ${Math.min(rows.length, 20)}`}
-        legend="Both teams' scores added together. Rank · the game · combined total."
+        legend="Both teams' scores added together. Rank · the matchup · combined total."
       />
       <ol className="divide-y divide-ink-700">
         {rows.slice(0, 20).map((r, i) => {

@@ -2,7 +2,7 @@
   "2020-14-brendon-ng-vs-jake-gibbons": [
     {
       "kind": "combined-high",
-      "label": "Highest scoring game in league history",
+      "label": "Highest scoring matchup in league history",
       "opponentSlug": "brendon-ng",
       "ownerSlug": "jake-gibbons",
       "stillStands": false,
@@ -27,7 +27,7 @@
     },
     {
       "kind": "combined-high",
-      "label": "Highest scoring game in league history",
+      "label": "Highest scoring matchup in league history",
       "opponentSlug": "logan-dunn",
       "ownerSlug": "reagan-schmidt",
       "stillStands": false,
@@ -37,7 +37,7 @@
   "2020-14-michaela-frederick-vs-tyler-jung": [
     {
       "kind": "combined-low",
-      "label": "Lowest scoring game in league history",
+      "label": "Lowest scoring matchup in league history",
       "opponentSlug": "tyler-jung",
       "ownerSlug": "michaela-frederick",
       "stillStands": false,
@@ -62,7 +62,7 @@
     },
     {
       "kind": "combined-high",
-      "label": "Highest scoring game in league history",
+      "label": "Highest scoring matchup in league history",
       "opponentSlug": "david-collier",
       "ownerSlug": "jaymie-lew",
       "stillStands": false,
@@ -79,7 +79,7 @@
     },
     {
       "kind": "combined-low",
-      "label": "Lowest scoring game in league history",
+      "label": "Lowest scoring matchup in league history",
       "opponentSlug": "spencer-kim",
       "ownerSlug": "michaela-frederick",
       "stillStands": false,
@@ -96,7 +96,7 @@
     },
     {
       "kind": "combined-high",
-      "label": "Highest scoring game in league history",
+      "label": "Highest scoring matchup in league history",
       "opponentSlug": "jaymie-lew",
       "ownerSlug": "jake-gibbons",
       "stillStands": false,
@@ -113,7 +113,7 @@
     },
     {
       "kind": "combined-low",
-      "label": "Lowest scoring game in league history",
+      "label": "Lowest scoring matchup in league history",
       "opponentSlug": "david-collier",
       "ownerSlug": "brendon-ng",
       "stillStands": false,
@@ -140,7 +140,7 @@
     },
     {
       "kind": "combined-low",
-      "label": "Lowest scoring game in league history",
+      "label": "Lowest scoring matchup in league history",
       "opponentSlug": "reagan-schmidt",
       "ownerSlug": "spencer-kim",
       "stillStands": true,
@@ -220,7 +220,7 @@
     },
     {
       "kind": "combined-high",
-      "label": "Highest scoring game in league history",
+      "label": "Highest scoring matchup in league history",
       "opponentSlug": "jake-gibbons",
       "ownerSlug": "jaymie-lew",
       "stillStands": true,

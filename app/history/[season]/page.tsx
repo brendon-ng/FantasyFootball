@@ -232,8 +232,8 @@ export default async function SeasonPage({
       <Panel>
         <PanelHeader
           title="Every Matchup"
-          meta={`${matchups.length} games`}
-          legend="Open a game for lineups and per-player scores."
+          meta={`${matchups.length} matchups`}
+          legend="Open a matchup for lineups and per-player scores."
         />
         <div className="divide-y divide-ink-700">
           {weeks.map((week) => (

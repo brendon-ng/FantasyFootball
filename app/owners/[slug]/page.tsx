@@ -206,8 +206,8 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             <Panel>
               <PanelHeader
                 title="Head to Head"
-                meta="all meetings · best first"
-                legend="Every meeting, regular season and postseason combined. A ✻ marks a record that includes playoff or toilet-bowl games. Regular-season data starts in 2024 — the imported ESPN seasons kept no weekly matchups — so a pre-2024 opponent's record is postseason only."
+                meta="all matchups · best first"
+                legend="Every matchup, regular season and postseason combined. A ✻ marks a head-to-head record that includes playoff or toilet-bowl matchups. Regular-season data starts in 2024 — the imported ESPN seasons kept no weekly matchups — so a pre-2024 opponent's record is postseason only."
               />
               <ListHeader>
                 <Col className="flex-1">Opponent</Col>
