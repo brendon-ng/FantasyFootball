@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Bracket } from "@/components/bracket";
+import { WeeklyLowBadge } from "@/components/weekly-low";
 import { Col, ListHeader, Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
 import {
   creditedNames,
@@ -10,6 +11,7 @@ import {
   getMatchupHistory,
   getOwnerMap,
   getSeasons,
+  getWeeklyLowKeys,
   meetingId,
 } from "@/lib/data";
 import type { BracketMatch } from "@/lib/types";
@@ -56,6 +58,7 @@ export default async function SeasonPage({
   // Imported ESPN seasons kept no draft data, so the link would 404. The page
   // only exists for seasons that have picks.
   const hasDraft = getDrafts().some((p) => p.season === season);
+  const lowKeys = getWeeklyLowKeys();
 
   const matchups = getMatchupHistory().filter((m) => m.season === season);
   const weeks = [...new Set(matchups.map((m) => m.week))].sort((a, b) => a - b);
@@ -292,8 +295,13 @@ export default async function SeasonPage({
                               : "text-chalk-500"
                           }`}
                         >
-                          <span data-owner={side.ownerSlug} className="truncate">
-                            {name(side.ownerSlug)}
+                          <span className="flex min-w-0 items-center gap-1.5">
+                            <span data-owner={side.ownerSlug} className="truncate">
+                              {name(side.ownerSlug)}
+                            </span>
+                            {lowKeys.has(`${m.season}:${m.week}:${side.ownerSlug}`) ? (
+                              <WeeklyLowBadge size="glyph" />
+                            ) : null}
                           </span>
                           <span className="tabular">{fmt.pts(side.points)}</span>
                         </div>

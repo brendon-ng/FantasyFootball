@@ -2,18 +2,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Bracket } from "@/components/bracket";
+import { WeeklyLowBadge } from "@/components/weekly-low";
 import { PositionPill } from "@/components/keeper-table";
 import { Tip } from "@/components/tooltip";
 import { Col, ListHeader, Panel, PanelHeader, Stat, fmt } from "@/components/ui";
 import type { BracketMatch } from "@/lib/types";
 import {
   getAllMeetings,
-  getMeetings,
   getAtTheTime,
-  getRecordFlags,
+  getMeetings,
   getOwnerMap,
   getPlayers,
+  getRecordFlags,
   getSeasons,
+  getWeeklyLowKeys,
   meetingId,
   type Meeting,
   type MeetingSide,
@@ -50,6 +52,8 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   if (!game) notFound();
 
   const owners = getOwnerMap();
+  // Empty unless this league punishes the weekly low, so no flag check here.
+  const lowKeys = getWeeklyLowKeys();
   const players = getPlayers();
   const season = getSeasons().find((s) => s.season === game.season);
   const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || slug || "TBD";
@@ -236,8 +240,11 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                   {fmt.pts(side.points)}
                 </span>
               </div>
-              <div className="mt-1 text-[11px] text-chalk-600">
-                {won ? "Winner" : winner ? `Lost by ${fmt.pts(margin)}` : "Tie"}
+              <div className="mt-1 flex items-center gap-2 text-[11px] text-chalk-600">
+                <span>{won ? "Winner" : winner ? `Lost by ${fmt.pts(margin)}` : "Tie"}</span>
+                {lowKeys.has(`${game.season}:${game.week}:${side.ownerSlug}`) ? (
+                  <WeeklyLowBadge />
+                ) : null}
               </div>
             </div>
           );

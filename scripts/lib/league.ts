@@ -16,7 +16,7 @@ export interface ScriptLeague {
   slug: string;
   name: string;
   sport: string;
-  features: { keepers: boolean; adp: boolean; espnImport: boolean };
+  features: { keepers: boolean; adp: boolean; espnImport: boolean; weeklyLowPunishment: boolean };
   anchorUserId: string;
   knownLeagueIds: Record<string, string>;
 }

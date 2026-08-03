@@ -11,7 +11,8 @@
   "features": {
     "keepers": false,
     "adp": false,
-    "espnImport": false
+    "espnImport": false,
+    "weeklyLowPunishment": true
   },
   "sport": "nfl",
   "//discovery": [

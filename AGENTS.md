@@ -60,6 +60,7 @@ that is ever wanted, have `build-all.mjs` emit a shared cross-league JSON first.
 | `keepers` | no Keepers tab, no contracts on home/owner pages, `resolveKeepers()` not run, `/keepers` says the league does not use keepers |
 | `adp` | `npm run adp` skips the league entirely |
 | `espnImport` | `npm run import:espn` skips it |
+| `weeklyLowPunishment` | no weekly-low markers anywhere — no chip on a matchup, no glyph in a season's week list, no column or tally on an owner page |
 
 `slug` is load-bearing — it is the URL segment AND the data directory. It must
 never change once published.
@@ -173,6 +174,27 @@ draft data.
   contracts expire.
 - **All-time table sorts titles-first**, so a 2-season co-owner can top it. User
   has not asked to change it.
+
+## The weekly low scorer
+
+Masterbatters punishes whoever scores lowest in a regular-season week; Den Ops
+does not. `features.weeklyLowPunishment` gates every marker.
+
+`buildWeeklyLows()` in derive computes it for EVERY league regardless of the flag,
+because the low scorer is a FACT and only the punishment is league-specific. The
+flag is therefore purely presentational, and turning the rule on is a config
+change with no re-derive semantics to think about.
+
+REGULAR SEASON ONLY. A postseason week is not every team playing, so the lowest of
+a six-team playoff field would be ranked against a twelve-team regular-season
+field. Ties emit one row per tied team, since a shared low is shared.
+
+`getWeeklyLowKeys()` returns an empty set when the flag is off, so callers never
+re-check it — a league without the rule simply has no low scorers to mark.
+
+Surfaced in four places: a chip on the matchup page's scoreline, a 🚽 glyph beside
+the name in a season's week list, a 🚽 column in an owner's season-by-season table,
+and a career tally on their profile.
 
 ## Viewer identity
 

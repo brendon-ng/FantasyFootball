@@ -20,6 +20,8 @@ export interface LeagueFeatures {
   adp: boolean;
   /** Pre-Sleeper seasons imported from archived ESPN pages. */
   espnImport: boolean;
+  /** The lowest-scoring team of each regular-season week does a punishment. */
+  weeklyLowPunishment: boolean;
 }
 
 export interface LeagueConfig {

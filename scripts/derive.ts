@@ -27,6 +27,7 @@ import type {
   SeasonKeepers,
   SeasonSummary,
   StandingsRow,
+  WeeklyLow,
 } from "../lib/types.ts";
 import type {
   SleeperBracketMatch,
@@ -409,6 +410,46 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
 }
 
 // --- matchups ---------------------------------------------------------------
+
+/**
+ * The lowest-scoring team of each regular-season week.
+ *
+ * Regular season only, because a postseason week is not every team playing — the
+ * "lowest of the week" in a six-team playoff field would be compared against a
+ * twelve-team regular-season field and mean nothing.
+ *
+ * Computed for EVERY league even though only some attach a punishment to it: the
+ * low scorer is a fact, and `features.weeklyLowPunishment` only decides whether
+ * the UI says anything about it. That keeps enabling the rule a config change.
+ *
+ * A tie produces one row per tied team, since a shared low is shared.
+ */
+function buildWeeklyLows(matchups: Matchup[], summaries: SeasonSummary[]): WeeklyLow[] {
+  const regularWeeks = new Map(summaries.map((s) => [s.season, s.regularSeasonWeeks]));
+  const byWeek = new Map<string, Array<{ ownerSlug: string; points: number }>>();
+
+  for (const m of matchups) {
+    if (m.kind !== "regular") continue;
+    if (m.week > (regularWeeks.get(m.season) ?? 0)) continue;
+    const key = `${m.season}:${m.week}`;
+    const list = byWeek.get(key) ?? [];
+    for (const side of [m.home, m.away]) {
+      if (side.ownerSlug) list.push({ ownerSlug: side.ownerSlug, points: side.points });
+    }
+    byWeek.set(key, list);
+  }
+
+  const out: WeeklyLow[] = [];
+  for (const [key, teams] of byWeek) {
+    if (!teams.length) continue;
+    const [season, week] = key.split(":").map(Number);
+    const low = Math.min(...teams.map((t) => t.points));
+    for (const t of teams.filter((t) => t.points === low)) {
+      out.push({ season, week, ownerSlug: t.ownerSlug, points: t.points });
+    }
+  }
+  return out.sort((a, b) => a.season - b.season || a.week - b.week || a.ownerSlug.localeCompare(b.ownerSlug));
+}
 
 function buildMatchups(d: SeasonData, throughWeek: number): Matchup[] {
   const out: Matchup[] = [];
@@ -1566,6 +1607,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   const atTheTime = recordsAtTheTime(summaries, matchups);
   const playerHistory = buildPlayerHistory(loaded);
   const drafts = buildDraftHistory(loaded);
+  const weeklyLows = buildWeeklyLows(matchups, summaries);
 
   for (const o of owners.values()) o.seasons = [...new Set(o.seasons)].sort();
 
@@ -1584,6 +1626,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   out("keepers.json", keepers);
   out("player-history.json", playerHistory);
   out("drafts.json", drafts);
+  out("weekly-lows.json", weeklyLows);
 
   log.step("Summary");
   for (const s of summaries) {

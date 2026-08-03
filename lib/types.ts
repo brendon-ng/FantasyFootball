@@ -143,6 +143,21 @@ export interface Matchup {
   winner: string | null;
 }
 
+/**
+ * The lowest-scoring team of one regular-season week.
+ *
+ * Regular season only: a playoff or consolation week is not every team playing,
+ * so "lowest of the week" would compare a six-team field to a twelve-team one.
+ * Ties produce more than one row for the same week, which is correct — a shared
+ * low is shared by everyone in it.
+ */
+export interface WeeklyLow {
+  season: number;
+  week: number;
+  ownerSlug: string;
+  points: number;
+}
+
 export interface HeadToHead {
   /** All meetings — regular season and postseason combined. */
   wins: number;

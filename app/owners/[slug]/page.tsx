@@ -16,6 +16,7 @@ import {
   getOwners,
   getPlayers,
   getSeasons,
+  getWeeklyLows,
   teamSeasonFor,
 } from "@/lib/data";
 
@@ -38,6 +39,11 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
   const upcomingLeagueId = cfg.knownLeagueIds[String(upcoming)] ?? null;
   const contracts = getKeepers().final.filter((c) => c.ownerSlug === slug);
+  // Counted from every season on record, so it is a career tally.
+  const myLows = getWeeklyLows().filter((w) => w.ownerSlug === slug);
+  const weeklyLows = myLows.length;
+  const lowsBySeason = new Map<number, number>();
+  for (const w of myLows) lowsBySeason.set(w.season, (lowsBySeason.get(w.season) ?? 0) + 1);
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
 
   // Placement history needs each season's team count: 10th of 12 and 10th of 10
@@ -125,6 +131,13 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
               sub={`${fmt.pts1(record.pointsForPerGame)} per game`}
             />
             <Stat label="Last places" value={record.lastPlaces} />
+            {features().weeklyLowPunishment ? (
+              <Stat
+                label="Weekly lows"
+                value={weeklyLows}
+                sub={weeklyLows === 1 ? "punishment owed" : "punishments owed"}
+              />
+            ) : null}
           </div>
 
           <div className="grid gap-5 lg:grid-cols-2">
@@ -159,6 +172,11 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                         ["Seed", "Playoff seed, by wins then points for"],
                         ["Record", "Regular-season wins-losses-ties"],
                         ["PF", "Points For — total points scored that season"],
+                        // Only for leagues that punish the weekly low; the column
+                        // would be a meaningless zero everywhere else.
+                        ...(features().weeklyLowPunishment
+                          ? ([["🚽", "Weeks finishing lowest in the league — punishments owed"]] as const)
+                          : []),
                         ["Finish", "Final placement after playoffs"],
                       ] as const
                     ).map(([h, hint], i) => (
@@ -193,6 +211,15 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                         <td className="tabular px-3 py-2 text-right text-chalk-500">
                           {fmt.pts1(row.pointsFor)}
                         </td>
+                        {features().weeklyLowPunishment ? (
+                          <td className="tabular px-3 py-2 text-right">
+                            {lowsBySeason.get(s.season) ? (
+                              <span className="text-loss">{lowsBySeason.get(s.season)}</span>
+                            ) : (
+                              <span className="text-chalk-600">—</span>
+                            )}
+                          </td>
+                        ) : null}
                         <td
                           className={`tabular px-3 py-2 text-right font-bold ${placeColor(row.finalPlace)}`}
                         >

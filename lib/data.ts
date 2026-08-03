@@ -33,6 +33,7 @@ import type {
   PlayerTransaction,
   SeasonKeepers,
   SeasonSummary,
+  WeeklyLow,
 } from "./types.ts";
 
 /**
@@ -86,6 +87,20 @@ export const getPlayers = (): Record<string, PlayerMeta> => {
   if (!ignored.size) return scoped;
   return Object.fromEntries(Object.entries(scoped).filter(([id]) => !ignored.has(id)));
 };
+export const getWeeklyLows = (): WeeklyLow[] => load("derived/weekly-lows.json", []);
+
+/**
+ * Lookup for "was this team the low scorer that week", keyed `season:week:slug`.
+ *
+ * Returns an EMPTY set unless the league attaches a punishment to it, so callers
+ * do not each have to remember the flag — a league without the rule simply has no
+ * low scorers to mark.
+ */
+export function getWeeklyLowKeys(): Set<string> {
+  if (!features().weeklyLowPunishment) return new Set();
+  return new Set(getWeeklyLows().map((w) => `${w.season}:${w.week}:${w.ownerSlug}`));
+}
+
 export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []);
 export const getPlayerHistory = (): Record<string, PlayerTransaction[]> =>
   load("derived/player-history.json", {});
@@ -107,6 +122,12 @@ export interface LeagueFeatures {
   adp: boolean;
   /** Pre-Sleeper seasons imported from archived ESPN pages. */
   espnImport: boolean;
+  /**
+   * The lowest-scoring team of each regular-season week does a punishment, so
+   * the site marks who it was. Presentational only — the low scorer is a fact
+   * either way, and derive records it for every league.
+   */
+  weeklyLowPunishment: boolean;
 }
 export interface LeagueConfig {
   slug: string;
