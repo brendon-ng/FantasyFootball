@@ -203,16 +203,20 @@ looks like a punishment marker.
 
 ## Default all-time ordering
 
-`byAllTimeRank()` in `lib/ranking.ts` is the one definition: titles, then wins,
-then average finish, with win% last purely so the result does not depend on input
-array order. Used by derive (so `owner-records.json` ships in that order), the home
-leaderboard, and the sortable all-time table's default view. Three copies of that
-tie-break chain would drift.
+`byAllTimeRank()` in `lib/ranking.ts` is the one definition: titles, wins, average
+finish, 2nds, 3rds, playoff appearances — then win% purely so the result does not
+depend on input array order. Used by derive (so `owner-records.json` ships in that
+order), the home leaderboard, and the sortable all-time table's default view. Three
+copies of that chain would drift.
 
 It ranks achievement over accumulation — an owner with one title outranks a
-higher-win owner with none. Average finish sorts ASCENDING, because 1st beats 8th,
-and a null (no finished season) must sort LAST, which a naive numeric compare gets
-backwards.
+higher-win owner with none.
+
+Two terms break the pattern. Average finish sorts ASCENDING, because 1st beats 8th,
+and a null (no finished season) must sort LAST — a naive numeric compare gets both
+backwards. Playoff appearances is a COUNT, not the rate the table's Playoffs column
+sorts by, matching 2nds and 3rds; the rate-shaped signal is already carried by
+average finish earlier in the chain.
 
 The table's 🏆 column keys off the same comparator and carries the default sort
 indicator, so clicking back to it reproduces the shipped order rather than a

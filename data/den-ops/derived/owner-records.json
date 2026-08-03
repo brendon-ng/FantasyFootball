@@ -203,204 +203,6 @@
     "championships": 1,
     "finishes": [
       {
-        "place": 5,
-        "season": 2020,
-        "seed": 6
-      },
-      {
-        "place": 1,
-        "season": 2021,
-        "seed": 5
-      },
-      {
-        "place": 3,
-        "season": 2022,
-        "seed": 1
-      },
-      {
-        "place": 3,
-        "season": 2023,
-        "seed": 5
-      },
-      {
-        "place": 7,
-        "season": 2024,
-        "seed": 7
-      },
-      {
-        "place": 5,
-        "season": 2025,
-        "seed": 6
-      }
-    ],
-    "lastPlaces": 0,
-    "losses": 36,
-    "ownerSlug": "brendon-ng",
-    "playoffAppearances": 5,
-    "pointsAgainst": 9462.36,
-    "pointsAgainstPerGame": 114,
-    "pointsFor": 10077.64,
-    "pointsForPerGame": 121.42,
-    "runnerUps": 0,
-    "seasonsPlayed": 6,
-    "thirdPlaces": 2,
-    "ties": 0,
-    "vs": {
-      "cassidy-pensa": {
-        "losses": 1,
-        "playoff": {
-          "losses": 0,
-          "ties": 0,
-          "wins": 1
-        },
-        "pointsAgainst": 590.02,
-        "pointsFor": 738.74,
-        "ties": 0,
-        "wins": 4
-      },
-      "david-collier": {
-        "losses": 3,
-        "playoff": {
-          "losses": 0,
-          "ties": 0,
-          "wins": 2
-        },
-        "pointsAgainst": 687.12,
-        "pointsFor": 693.8,
-        "ties": 0,
-        "wins": 3
-      },
-      "jake-gibbons": {
-        "losses": 3,
-        "playoff": {
-          "losses": 1,
-          "ties": 0,
-          "wins": 1
-        },
-        "pointsAgainst": 731.96,
-        "pointsFor": 704.74,
-        "ties": 0,
-        "wins": 3
-      },
-      "jaymie-lew": {
-        "losses": 2,
-        "playoff": {
-          "losses": 0,
-          "ties": 0,
-          "wins": 0
-        },
-        "pointsAgainst": 287.54,
-        "pointsFor": 208.96,
-        "ties": 0,
-        "wins": 0
-      },
-      "katie-barnes": {
-        "losses": 2,
-        "playoff": {
-          "losses": 0,
-          "ties": 0,
-          "wins": 0
-        },
-        "pointsAgainst": 287.54,
-        "pointsFor": 208.96,
-        "ties": 0,
-        "wins": 0
-      },
-      "lauren-gross": {
-        "losses": 3,
-        "playoff": {
-          "losses": 1,
-          "ties": 0,
-          "wins": 1
-        },
-        "pointsAgainst": 593.66,
-        "pointsFor": 585.34,
-        "ties": 0,
-        "wins": 2
-      },
-      "maddy-perdue": {
-        "losses": 2,
-        "playoff": {
-          "losses": 0,
-          "ties": 0,
-          "wins": 1
-        },
-        "pointsAgainst": 596.86,
-        "pointsFor": 596.66,
-        "ties": 0,
-        "wins": 3
-      },
-      "olivia-nelli": {
-        "losses": 0,
-        "playoff": {
-          "losses": 0,
-          "ties": 0,
-          "wins": 1
-        },
-        "pointsAgainst": 118.76,
-        "pointsFor": 143.32,
-        "ties": 0,
-        "wins": 1
-      },
-      "reagan-schmidt": {
-        "losses": 2,
-        "playoff": {
-          "losses": 1,
-          "ties": 0,
-          "wins": 0
-        },
-        "pointsAgainst": 566.58,
-        "pointsFor": 508.06,
-        "ties": 0,
-        "wins": 2
-      },
-      "safvet-besen": {
-        "losses": 1,
-        "playoff": {
-          "losses": 0,
-          "ties": 0,
-          "wins": 1
-        },
-        "pointsAgainst": 368.36,
-        "pointsFor": 390.86,
-        "ties": 0,
-        "wins": 2
-      },
-      "spencer-kim": {
-        "losses": 1,
-        "playoff": {
-          "losses": 0,
-          "ties": 0,
-          "wins": 0
-        },
-        "pointsAgainst": 508.26,
-        "pointsFor": 536.12,
-        "ties": 0,
-        "wins": 3
-      },
-      "tyler-jung": {
-        "losses": 3,
-        "playoff": {
-          "losses": 1,
-          "ties": 0,
-          "wins": 1
-        },
-        "pointsAgainst": 494.02,
-        "pointsFor": 477.74,
-        "ties": 0,
-        "wins": 1
-      }
-    },
-    "winPct": 0.57,
-    "wins": 47,
-    "worstFinish": 7
-  },
-  {
-    "averageFinish": 4,
-    "bestFinish": 1,
-    "championships": 1,
-    "finishes": [
-      {
         "place": 8,
         "season": 2020,
         "seed": 8
@@ -592,6 +394,204 @@
     "winPct": 0.57,
     "wins": 47,
     "worstFinish": 8
+  },
+  {
+    "averageFinish": 4,
+    "bestFinish": 1,
+    "championships": 1,
+    "finishes": [
+      {
+        "place": 5,
+        "season": 2020,
+        "seed": 6
+      },
+      {
+        "place": 1,
+        "season": 2021,
+        "seed": 5
+      },
+      {
+        "place": 3,
+        "season": 2022,
+        "seed": 1
+      },
+      {
+        "place": 3,
+        "season": 2023,
+        "seed": 5
+      },
+      {
+        "place": 7,
+        "season": 2024,
+        "seed": 7
+      },
+      {
+        "place": 5,
+        "season": 2025,
+        "seed": 6
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 36,
+    "ownerSlug": "brendon-ng",
+    "playoffAppearances": 5,
+    "pointsAgainst": 9462.36,
+    "pointsAgainstPerGame": 114,
+    "pointsFor": 10077.64,
+    "pointsForPerGame": 121.42,
+    "runnerUps": 0,
+    "seasonsPlayed": 6,
+    "thirdPlaces": 2,
+    "ties": 0,
+    "vs": {
+      "cassidy-pensa": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 590.02,
+        "pointsFor": 738.74,
+        "ties": 0,
+        "wins": 4
+      },
+      "david-collier": {
+        "losses": 3,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 2
+        },
+        "pointsAgainst": 687.12,
+        "pointsFor": 693.8,
+        "ties": 0,
+        "wins": 3
+      },
+      "jake-gibbons": {
+        "losses": 3,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 731.96,
+        "pointsFor": 704.74,
+        "ties": 0,
+        "wins": 3
+      },
+      "jaymie-lew": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 287.54,
+        "pointsFor": 208.96,
+        "ties": 0,
+        "wins": 0
+      },
+      "katie-barnes": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 287.54,
+        "pointsFor": 208.96,
+        "ties": 0,
+        "wins": 0
+      },
+      "lauren-gross": {
+        "losses": 3,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 593.66,
+        "pointsFor": 585.34,
+        "ties": 0,
+        "wins": 2
+      },
+      "maddy-perdue": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 596.86,
+        "pointsFor": 596.66,
+        "ties": 0,
+        "wins": 3
+      },
+      "olivia-nelli": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 118.76,
+        "pointsFor": 143.32,
+        "ties": 0,
+        "wins": 1
+      },
+      "reagan-schmidt": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 566.58,
+        "pointsFor": 508.06,
+        "ties": 0,
+        "wins": 2
+      },
+      "safvet-besen": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 368.36,
+        "pointsFor": 390.86,
+        "ties": 0,
+        "wins": 2
+      },
+      "spencer-kim": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 508.26,
+        "pointsFor": 536.12,
+        "ties": 0,
+        "wins": 3
+      },
+      "tyler-jung": {
+        "losses": 3,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 494.02,
+        "pointsFor": 477.74,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.57,
+    "wins": 47,
+    "worstFinish": 7
   },
   {
     "averageFinish": 6,

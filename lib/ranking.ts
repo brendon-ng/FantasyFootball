@@ -1,16 +1,20 @@
 import type { OwnerRecord } from "./types.ts";
 
 /**
- * The league's default all-time ordering: titles, then wins, then average finish.
+ * The league's default all-time ordering.
  *
- * Titles lead, so this ranks achievement over accumulation — an owner with one
- * title outranks a higher-win owner with none. Wins break ties among equally
- * decorated owners, and average finish settles the rest, rewarding consistency
- * over a single good year.
+ * Titles, wins, average finish, 2nds, 3rds, playoff appearances — in that order.
+ * Titles lead, so this ranks achievement over accumulation: one title outranks a
+ * higher-win owner with none. The rest resolve owners who are genuinely level,
+ * moving from overall performance down to individual honours.
  *
- * Average finish sorts ASCENDING, since 1st is better than 8th. A null (an owner
- * with no finished season) sorts last rather than first, which a naive numeric
- * compare would get backwards.
+ * TWO TERMS DO NOT SORT DESCENDING LIKE THE OTHERS. Average finish is ascending,
+ * since 1st beats 8th, and a null (an owner with no finished season) must sort
+ * LAST rather than first — a naive numeric compare gets both backwards.
+ *
+ * Playoff appearances is a COUNT, not the rate the table's Playoffs column sorts
+ * by. Consistent with 2nds and 3rds also being counts; average finish already
+ * carries the rate-shaped signal earlier in the chain.
  *
  * ONE definition, used by the derive script (so `owner-records.json` ships in this
  * order), the home page leaderboard, and the sortable all-time table's default
@@ -24,6 +28,9 @@ export function byAllTimeRank(a: OwnerRecord, b: OwnerRecord): number {
     b.championships - a.championships ||
     b.wins - a.wins ||
     (a.averageFinish ?? Infinity) - (b.averageFinish ?? Infinity) ||
+    b.runnerUps - a.runnerUps ||
+    b.thirdPlaces - a.thirdPlaces ||
+    b.playoffAppearances - a.playoffAppearances ||
     b.winPct - a.winPct
   );
 }
