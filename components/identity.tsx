@@ -283,29 +283,58 @@ export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
   if (!ready) return null;
 
   const me = identity.kind === "owner" ? owners.find((o) => o.slug === identity.slug) : null;
+
+  // Two initials from the first and last word, so "Reagan Schmidt" reads RS
+  // rather than RE.
   const initials = me
-    ? me.name
-        .split(/\s+/)
-        .map((w) => w[0])
-        .join("")
-        .slice(0, 2)
-        .toUpperCase()
+    ? (() => {
+        const parts = me.name.trim().split(/\s+/);
+        return ((parts[0]?.[0] ?? "") + (parts.length > 1 ? (parts.at(-1)?.[0] ?? "") : "")).toUpperCase();
+      })()
     : null;
+
+  const browsing = identity.kind === "neutral";
 
   return (
     <button
       type="button"
       onClick={openPicker}
-      title={me ? `You are ${me.name} — click to change` : "Tell us who you are"}
-      aria-label={me ? `Viewing as ${me.name}. Change.` : "Tell us who you are"}
+      title={
+        me
+          ? `You are ${me.name} — click to change`
+          : browsing
+            ? "Browsing anonymously — click to pick your team"
+            : "Tell us who you are"
+      }
+      aria-label={
+        me ? `Viewing as ${me.name}. Change.` : "Choose which team is yours"
+      }
       data-me-exempt=""
-      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold tracking-tight transition-colors ${
+      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-colors ${
         me
           ? "border-me-dim bg-me/10 text-me hover:bg-me/20"
-          : "border-ink-500 text-chalk-500 hover:border-chalk-500 hover:text-chalk-300"
+          : "border-ink-500 bg-ink-800 text-chalk-500 hover:border-chalk-500 hover:text-chalk-200"
       }`}
     >
-      {initials ?? "?"}
+      {initials ? (
+        <span className="text-[10px] font-bold leading-none tracking-tight">{initials}</span>
+      ) : (
+        // A person glyph reads as "set who you are"; a bare "?" reads as an
+        // error state or unavailable data.
+        <svg
+          viewBox="0 0 16 16"
+          aria-hidden
+          className="h-[15px] w-[15px]"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="8" cy="5.4" r="2.6" />
+          <path d="M2.9 13.4a5.1 5.1 0 0 1 10.2 0" />
+        </svg>
+      )}
     </button>
   );
 }
