@@ -462,6 +462,16 @@ the 2024 league carries two abandoned drafts alongside the real one.
 
 ### Keeper contracts
 
+KEEPERS BEGIN IN 2024. The 2024 draft was the startup draft — the first time
+contracts were set — so nothing before it has keeper state, and the ESPN seasons
+(2019-23) never will, however much of them gets recovered. Weekly scoreboards for
+those years are now imported, which makes it tempting to backfill; do not. There
+were no keepers to track.
+
+Consequences already visible in the data: `keepers.json` covers 2024-25 only, the
+2024 draft has zero keeper picks against 2025's forty, and 53 contracts carry
+origin `startup`.
+
 Sleeper models no part of this — `is_keeper` is a bare boolean with no round and
 no contract length. `resolveKeepers()` in `scripts/derive.ts` replays every draft
 and transaction to reconstruct cost, keeps used, and lineage per bylaws 1.7.2.
