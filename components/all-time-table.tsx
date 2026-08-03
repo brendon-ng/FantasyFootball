@@ -95,7 +95,7 @@ export function AllTimeTable({
       {
         key: "pf",
         label: "PF",
-        hint: "Points For — total points scored, all seasons",
+        hint: "Points For — regular-season points scored, all seasons. Playoff scoring is not included here; head-to-head counts every meeting.",
         value: (r) => r.pointsFor,
         firstClick: "desc",
         render: (r) => <span className="text-chalk-500">{fmtPts(r.pointsFor)}</span>,
@@ -103,7 +103,7 @@ export function AllTimeTable({
       {
         key: "pfg",
         label: "PF/G",
-        hint: "Points For per game — comparable across seasons of different length",
+        hint: "Regular-season points scored per game — comparable across seasons of different length",
         value: (r) => r.pointsForPerGame,
         firstClick: "desc",
         render: (r) => (
@@ -113,7 +113,7 @@ export function AllTimeTable({
       {
         key: "pa",
         label: "PA",
-        hint: "Points Against — total points their opponents scored",
+        hint: "Points Against — regular-season points their opponents scored, all seasons",
         value: (r) => r.pointsAgainst,
         firstClick: "desc",
         render: (r) => <span className="text-chalk-500">{fmtPts(r.pointsAgainst)}</span>,
@@ -121,7 +121,7 @@ export function AllTimeTable({
       {
         key: "pag",
         label: "PA/G",
-        hint: "Points Against per game. Lowest first — fewer is better.",
+        hint: "Regular-season points against per game. Lowest first — fewer is better.",
         value: (r) => r.pointsAgainstPerGame,
         firstClick: "asc",
         render: (r) => <span className="text-chalk-500">{fmtPts(r.pointsAgainstPerGame)}</span>,

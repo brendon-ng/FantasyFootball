@@ -596,6 +596,25 @@ the site entirely, including their generated player pages.
 Left uncorrected this is not cosmetic: both players showed 0 keeps used, so the
 site claimed 2027 was their final keep year when it is really 2026.
 
+### What the all-time columns actually measure
+
+Audited against the raw games once every season had weekly scores, and all of it
+reconciles — but the SCOPE differs by column, deliberately:
+
+| Column | Scope |
+| --- | --- |
+| W-L, Win%, PF, PA, PF/G, PA/G | REGULAR SEASON only, summed from standings |
+| Head-to-head (incl. its PF/PA) | EVERY meeting, postseason included |
+| Championships / 2nd / 3rd / Last | final placement, so postseason by definition |
+
+Win% is `(wins + ties/2) / games`, a tie as half a win. Per-game rates divide by
+regular-season games, so a 13-game 2020 compares fairly with a 14-game 2021.
+
+Summing a single owner's head-to-head PF across opponents will EXCEED their career
+PF, and not only because of the postseason: a meeting with a co-owned team is
+credited against each of its owners. That is the same intentional double count as
+everywhere else — see below.
+
 ### Co-owners are first-class owners
 
 Every person has their own slug and record. A co-owned team's record is credited

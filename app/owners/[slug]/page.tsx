@@ -176,7 +176,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                         ["Season", ""],
                         ["Seed", "Playoff seed, by wins then points for"],
                         ["Record", "Regular-season wins-losses-ties"],
-                        ["PF", "Points For — total points scored that season"],
+                        ["PF", "Points For — regular-season points scored that season"],
                         // Only for leagues that punish the weekly low; the column
                         // would be a meaningless zero everywhere else.
                         ...(features().weeklyLowPunishment

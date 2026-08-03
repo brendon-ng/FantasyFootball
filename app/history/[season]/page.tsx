@@ -109,8 +109,8 @@ export default async function SeasonPage({
                     ["Seed", "Playoff seed, by wins then points for"],
                     ["Owner", ""],
                     ["W-L", "Wins-losses in the regular season; a tie shows as a third number"],
-                    ["PF", "Points For — total points scored"],
-                    ["PA", "Points Against — total points their opponents scored"],
+                    ["PF", "Points For — points scored in the regular season"],
+                    ["PA", "Points Against — regular-season points their opponents scored"],
                     ...(features().weeklyLowPunishment
                       ? ([["🚽", "Weeks finishing lowest in the league — punishments owed"]] as const)
                       : []),
