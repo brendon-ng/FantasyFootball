@@ -6,6 +6,7 @@ import { Col, ListHeader, Panel, PanelHeader, Stat, fmt } from "@/components/ui"
 import {
   getAllMeetings,
   getMeetings,
+  getAtTheTime,
   getRecordFlags,
   getOwnerMap,
   getPlayers,
@@ -70,6 +71,8 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
 
   // Any record-book list this game appears in.
   const flags = getRecordFlags(game.season, game.week, [game.a.ownerSlug, game.b.ownerSlug]);
+  // Marks this game set when it was played, whether or not they still stand.
+  const madeHistory = getAtTheTime()[game.id] ?? [];
 
   return (
     <div className="space-y-5 sm:space-y-6">
@@ -89,6 +92,47 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
           </Link>
         </p>
       </div>
+
+      {madeHistory.length ? (
+        <div className="rounded-xl border border-me-dim bg-me/[0.08] px-4 py-3">
+          <div className="mb-2 flex items-center gap-2">
+            <span aria-hidden className="text-base leading-none">
+              🏅
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-wide text-me">
+              Made history
+            </span>
+            <span
+              className="cursor-help text-[10px] text-chalk-600 decoration-dotted underline-offset-2 hover:underline"
+              title="Measured against every score on record at that moment. Weekly scores are complete from 2024; before that only ESPN playoff and ladder games survived, and no pre-2024 lineups did — so the earlier baseline is thinner than the games actually played."
+            >
+              coverage ⓘ
+            </span>
+          </div>
+          <ul className="space-y-1">
+            {madeHistory.map((f, i) => (
+              <li key={i} className="flex flex-wrap items-baseline gap-x-2 text-[13px]">
+                <span className="font-semibold text-me">{f.label}</span>
+                <span className="tabular text-chalk-300">{f.value.toFixed(2)}</span>
+                <span className="text-chalk-600">
+                  {f.playerId
+                    ? (players[f.playerId]?.full_name ?? "")
+                    : (owners.get(f.ownerSlug)?.name ?? "")}
+                </span>
+                <span
+                  className={`rounded-full border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide ${
+                    f.stillStands
+                      ? "border-gold/40 bg-gold/10 text-gold"
+                      : "border-ink-500 text-chalk-600"
+                  }`}
+                >
+                  {f.stillStands ? "Still stands" : "Since broken"}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       {flags.length ? (
         <div className="flex flex-wrap items-center gap-2 rounded-xl border border-gold/35 bg-gold/[0.07] px-4 py-3">

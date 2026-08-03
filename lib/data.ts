@@ -471,6 +471,24 @@ export function getAllMeetings(): Meeting[] {
   return [...seen.values()];
 }
 
+export interface AtTheTimeFlag {
+  kind: "weekly-high" | "weekly-low" | "blowout" | "narrowest" | "player-week";
+  label: string;
+  value: number;
+  ownerSlug: string;
+  playerId?: string;
+  /** Whether the mark still stands today. */
+  stillStands: boolean;
+}
+
+/**
+ * Records a game set the moment it was played, keyed by meeting id.
+ *
+ * Only #1 marks — the best or worst the league had seen at that point.
+ */
+export const getAtTheTime = (): Record<string, AtTheTimeFlag[]> =>
+  load("derived/at-the-time.json", {});
+
 // ---------------------------------------------------------------------------
 // Record-book flags
 // ---------------------------------------------------------------------------

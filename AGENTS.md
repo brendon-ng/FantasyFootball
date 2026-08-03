@@ -137,6 +137,23 @@ identity in green is invisible.
 State is read with `useSyncExternalStore`, not an effect: an effect that calls
 setState on mount is a cascading render and flashes the default for a frame.
 
+## Records set at the time
+
+`recordsAtTheTime()` in `derive.ts` flags games that set a league record the
+moment they were played — #1 marks only, so the badge stays rare and meaningful
+(17 games, 21 marks, 5 still standing).
+
+COVERAGE IS UNEVEN AND THE UI SAYS SO. The baseline is seeded with imported ESPN
+playoff and ladder games, the only pre-2024 scores that survived, so a 2024 mark
+is measured against roughly 68 historical games rather than the ~670 team-weeks
+actually played from 2020-23. Player-week marks are worse: ESPN kept no lineups,
+so that baseline genuinely starts empty in 2024. The matchup page carries a
+"coverage" tooltip stating this; do not remove it or the badge becomes a claim
+the data cannot support.
+
+If ESPN weekly scoreboards are ever recovered the same way the brackets were,
+this becomes fully correct with no code change — it is derived, not stored.
+
 ## Automation
 
 Three workflows, all free — Actions minutes are unlimited on public repos, and

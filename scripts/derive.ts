@@ -1196,6 +1196,192 @@ function importedSeasons(): SeasonSummary[] {
   return out;
 }
 
+// --- records set at the time ---------------------------------------------
+
+interface AtTheTimeFlag {
+  kind: "weekly-high" | "weekly-low" | "blowout" | "narrowest" | "player-week";
+  label: string;
+  value: number;
+  ownerSlug: string;
+  playerId?: string;
+  /** Whether the mark still stands today. */
+  stillStands: boolean;
+}
+
+/**
+ * Games that set a league record the moment they were played.
+ *
+ * Only #1 marks count — a game that became the best or worst the league had
+ * ever seen. Anything narrower would fire constantly and mean nothing.
+ *
+ * COVERAGE IS UNEVEN AND THE UI SAYS SO. The baseline is seeded with the ESPN
+ * playoff and ladder games, which are the only pre-2024 scores that survived,
+ * so a 2024 mark is measured against roughly 68 historical games rather than
+ * the ~670 team-weeks actually played from 2020-23. Player-week marks are worse
+ * still: ESPN kept no lineups, so that baseline genuinely starts empty in 2024.
+ *
+ * The first chronological event cannot set a record — there is nothing to beat —
+ * so it is skipped rather than credited with every category at once.
+ */
+function recordsAtTheTime(
+  summaries: SeasonSummary[],
+  matchups: Matchup[],
+): Record<string, AtTheTimeFlag[]> {
+  const key = (season: number, week: number | null, a: string, b: string) =>
+    `${season}-${week ?? 0}-${[a, b].sort().join("-vs-")}`;
+
+  interface Event {
+    season: number;
+    week: number;
+    id: string;
+    sides: Array<{ slug: string; points: number }>;
+    /** Only Sleeper games carry lineups. */
+    players: Array<{ slug: string; playerId: string; points: number }>;
+  }
+
+  const events: Event[] = [];
+
+  // Seed: ESPN playoff and ladder games, the only surviving pre-2024 scores.
+  for (const s of summaries) {
+    if (!s.imported) continue;
+    const brackets = [s.winnersBracket, s.losersBracket, ...s.extraBrackets.map((b) => b.matches)];
+    for (const matches of brackets) {
+      for (const m of matches) {
+        if (!m.team1 || !m.team2 || m.isBye) continue;
+        const p1 = m.points[m.team1];
+        const p2 = m.points[m.team2];
+        if (p1 == null || p2 == null) continue;
+        events.push({
+          season: s.season,
+          week: m.week ?? 0,
+          id: key(s.season, m.week, m.team1, m.team2),
+          sides: [
+            { slug: m.team1, points: p1 },
+            { slug: m.team2, points: p2 },
+          ],
+          players: [],
+        });
+      }
+    }
+  }
+
+  for (const m of matchups) {
+    const starters = (side: Matchup["home"]) =>
+      side.starters.map((pid) => ({
+        slug: side.ownerSlug,
+        playerId: pid,
+        points: side.playerPoints[pid] ?? 0,
+      }));
+    events.push({
+      season: m.season,
+      week: m.week,
+      id: key(m.season, m.week, m.home.ownerSlug, m.away.ownerSlug),
+      sides: [
+        { slug: m.home.ownerSlug, points: m.home.points },
+        { slug: m.away.ownerSlug, points: m.away.points },
+      ],
+      players: [...starters(m.home), ...starters(m.away)],
+    });
+  }
+
+  events.sort((a, b) => a.season - b.season || a.week - b.week);
+
+  const out: Record<string, AtTheTimeFlag[]> = {};
+  const add = (id: string, f: AtTheTimeFlag) => (out[id] ??= []).push(f);
+
+  let bestScore = -Infinity;
+  let worstScore = Infinity;
+  let widestMargin = -Infinity;
+  let tightestMargin = Infinity;
+  let bestPlayer = -Infinity;
+
+  events.forEach((ev, i) => {
+    const first = i === 0;
+    const [a, b] = ev.sides;
+    // Round: raw float subtraction yields 27.019999999999996 and that reaches
+    // the UI verbatim.
+    const margin = round2(Math.abs(a.points - b.points));
+    const winner = a.points === b.points ? null : a.points > b.points ? a : b;
+
+    for (const side of ev.sides) {
+      if (!first && side.points > bestScore) {
+        add(ev.id, {
+          kind: "weekly-high",
+          label: "Highest score in league history",
+          value: side.points,
+          ownerSlug: side.slug,
+          stillStands: false,
+        });
+      }
+      if (!first && side.points < worstScore) {
+        add(ev.id, {
+          kind: "weekly-low",
+          label: "Lowest score in league history",
+          value: side.points,
+          ownerSlug: side.slug,
+          stillStands: false,
+        });
+      }
+      bestScore = Math.max(bestScore, side.points);
+      worstScore = Math.min(worstScore, side.points);
+    }
+
+    if (winner) {
+      if (!first && margin > widestMargin) {
+        add(ev.id, {
+          kind: "blowout",
+          label: "Biggest margin in league history",
+          value: margin,
+          ownerSlug: winner.slug,
+          stillStands: false,
+        });
+      }
+      if (!first && margin < tightestMargin) {
+        add(ev.id, {
+          kind: "narrowest",
+          label: "Narrowest win in league history",
+          value: margin,
+          ownerSlug: winner.slug,
+          stillStands: false,
+        });
+      }
+      widestMargin = Math.max(widestMargin, margin);
+      tightestMargin = Math.min(tightestMargin, margin);
+    }
+
+    for (const p of ev.players) {
+      // Not gated on `first`: the player baseline starts empty in 2024 anyway,
+      // so the earliest lineup genuinely establishes rather than beats.
+      if (bestPlayer > -Infinity && p.points > bestPlayer) {
+        add(ev.id, {
+          kind: "player-week",
+          label: "Best single week by a player in league history",
+          value: p.points,
+          ownerSlug: p.slug,
+          playerId: p.playerId,
+          stillStands: false,
+        });
+      }
+      bestPlayer = Math.max(bestPlayer, p.points);
+    }
+  });
+
+  // A mark still stands if nothing later beat it — i.e. it equals the final
+  // running extreme.
+  const finals: Record<AtTheTimeFlag["kind"], number> = {
+    "weekly-high": bestScore,
+    "weekly-low": worstScore,
+    blowout: widestMargin,
+    narrowest: tightestMargin,
+    "player-week": bestPlayer,
+  };
+  for (const flags of Object.values(out)) {
+    for (const f of flags) f.stillStands = f.value === finals[f.kind];
+  }
+
+  return out;
+}
+
 // --- main -------------------------------------------------------------------
 
 log.step("Loading seasons");
@@ -1223,6 +1409,7 @@ const matchups = loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.se
 const ownerRecords = buildOwnerRecords(summaries, matchups);
 const records = buildLeagueRecords(matchups);
 const keepers = resolveKeepers(loaded);
+const atTheTime = recordsAtTheTime(summaries, matchups);
 const playerHistory = buildPlayerHistory(loaded);
 const drafts = buildDraftHistory(loaded);
 
@@ -1239,6 +1426,7 @@ out("seasons.json", summaries);
 out("matchups.json", matchups);
 out("owner-records.json", ownerRecords);
 out("records.json", records);
+out("at-the-time.json", atTheTime);
 out("keepers.json", keepers);
 out("player-history.json", playerHistory);
 out("drafts.json", drafts);
