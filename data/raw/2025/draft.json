@@ -1,0 +1,72 @@
+{
+  "created": 1755976283433,
+  "creators": [
+    "887589851141427200",
+    "999142984568557568"
+  ],
+  "draft_id": "1265059859338891264",
+  "draft_order": {
+    "1048521200416313344": 8,
+    "1049399449467871232": 2,
+    "1049492055615266816": 6,
+    "1132133697135869952": 3,
+    "1133573613518716928": 5,
+    "1133643357365972992": 7,
+    "609168288324321280": 4,
+    "868608373288034304": 1,
+    "887589851141427200": 10,
+    "999142984568557568": 9
+  },
+  "last_message_id": "1265889989472821248",
+  "last_message_time": 1756174201890,
+  "last_picked": 1756174201147,
+  "league_id": "1180273312919666688",
+  "metadata": {
+    "description": "",
+    "league_type": "1",
+    "name": "Den Ops Super League",
+    "scoring_type": "ppr",
+    "show_team_names": "0"
+  },
+  "season": "2025",
+  "season_type": "regular",
+  "settings": {
+    "alpha_sort": 0,
+    "autopause_enabled": 0,
+    "autopause_end_time": 1020,
+    "autopause_start_time": 300,
+    "autostart": 0,
+    "cpu_autopick": 1,
+    "enforce_position_limits": 1,
+    "nomination_timer": 60,
+    "pick_timer": 28800,
+    "player_type": 0,
+    "reversal_round": 0,
+    "rounds": 17,
+    "slots_bn": 7,
+    "slots_def": 1,
+    "slots_flex": 2,
+    "slots_k": 1,
+    "slots_qb": 1,
+    "slots_rb": 2,
+    "slots_te": 1,
+    "slots_wr": 2,
+    "teams": 10
+  },
+  "slot_to_roster_id": {
+    "1": 8,
+    "2": 4,
+    "3": 7,
+    "4": 6,
+    "5": 9,
+    "6": 5,
+    "7": 10,
+    "8": 2,
+    "9": 3,
+    "10": 1
+  },
+  "sport": "nfl",
+  "start_time": 1756168364881,
+  "status": "complete",
+  "type": "snake"
+}

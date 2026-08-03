@@ -1,67 +1,287 @@
-import Image from "next/image";
+import Link from "next/link";
 
-import { withBasePath } from "@/lib/base-path";
+import { KeeperRow } from "@/components/keeper-table";
+import { EmptyState, LiveBadge, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
+import {
+  getKeepers,
+  getLiveSeason,
+  getOwnerMap,
+  getOwnerRecords,
+  getPlayers,
+  getSeasons,
+} from "@/lib/data";
 
-export default function Home() {
+/**
+ * League at a glance.
+ *
+ * The page adapts to where the calendar actually is. In season it leads with
+ * standings and this week's matchups; in the offseason neither exists yet, so it
+ * leads with keeper contracts heading into the draft and last season's final
+ * table — which is what people are actually arguing about in August.
+ */
+export default async function HomePage() {
+  const live = await getLiveSeason();
+  const seasons = getSeasons();
+  const owners = getOwnerMap();
+  const records = getOwnerRecords();
+  const keepers = getKeepers();
+  const players = getPlayers();
+
+  const finalized = seasons.filter((s) => s.finalized).sort((a, b) => b.season - a.season);
+  const lastSeason = finalized[0];
+  const inSeason = live?.seasonType === "regular" || live?.seasonType === "post";
+  const currentSeason = live?.season ?? (lastSeason ? lastSeason.season + 1 : 0);
+
+  const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || "—";
+
+  // Live contracts grouped by owner, best (earliest round) first.
+  const byOwner = new Map<string, typeof keepers.final>();
+  for (const c of keepers.final) {
+    if (!c.ownerSlug) continue;
+    byOwner.set(c.ownerSlug, [...(byOwner.get(c.ownerSlug) ?? []), c]);
+  }
+  for (const list of byOwner.values()) list.sort((a, b) => a.round - b.round);
+
+  const MAX_KEEPERS = 4;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src={withBasePath("/next.svg")}
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="space-y-5 sm:space-y-6">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            {currentSeason} Season
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-1 text-sm text-chalk-500">
+            {inSeason
+              ? `Week ${live?.displayWeek || live?.week} · 10 teams · PPR keeper`
+              : live?.status === "pre_draft"
+                ? "Pre-draft · keeper deadline is 3 days before the draft"
+                : "Offseason · 10 teams · PPR keeper"}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src={withBasePath("/vercel.svg")}
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        {inSeason ? (
+          <LiveBadge label={`WEEK ${live?.displayWeek || live?.week}`} />
+        ) : (
+          <span className="rounded-full border border-ink-500 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-chalk-500">
+            {live?.status === "pre_draft" ? "PRE-DRAFT" : "OFFSEASON"}
+          </span>
+        )}
+      </div>
+
+      {lastSeason ? (
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+          <Stat
+            label={`${lastSeason.season} Champion`}
+            value={<span className="text-base sm:text-lg">{name(lastSeason.champion)}</span>}
+            tone="gold"
+          />
+          <Stat
+            label="Runner-up"
+            value={<span className="text-base sm:text-lg">{name(lastSeason.runnerUp)}</span>}
+          />
+          <Stat
+            label="Third"
+            value={<span className="text-base sm:text-lg">{name(lastSeason.thirdPlace)}</span>}
+          />
+          <Stat
+            label="Last Place"
+            value={<span className="text-base sm:text-lg">{name(lastSeason.lastPlace)}</span>}
+            sub="Toilet bowl loser"
+          />
         </div>
-      </main>
+      ) : null}
+
+      <div className="grid gap-5 lg:grid-cols-5 lg:gap-6">
+        <Panel className="lg:col-span-3">
+          <PanelHeader
+            title={inSeason ? "Standings" : `${lastSeason?.season ?? ""} Final Standings`}
+            meta={inSeason ? "live" : "final"}
+            href={lastSeason ? `/history/${lastSeason.season}/` : undefined}
+            hrefLabel="Season detail"
+          />
+          {inSeason && live ? (
+            <StandingsLive live={live} owners={owners} />
+          ) : lastSeason ? (
+            <ol>
+              {lastSeason.standings
+                .slice()
+                .sort((a, b) => (a.finalPlace ?? 99) - (b.finalPlace ?? 99))
+                .map((row) => (
+                  <li
+                    key={row.ownerSlug}
+                    className="flex items-center gap-3 border-b border-ink-700 px-4 py-2.5 last:border-0 sm:px-5"
+                  >
+                    <span
+                      className={`tabular w-5 shrink-0 text-sm font-bold ${placeColor(row.finalPlace)}`}
+                    >
+                      {row.finalPlace ?? "—"}
+                    </span>
+                    <Link
+                      href={`/owners/${row.ownerSlug}/`}
+                      className="min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-accent"
+                    >
+                      {name(row.ownerSlug)}
+                      {row.teamName ? (
+                        <span className="ml-2 hidden text-[11px] text-chalk-600 sm:inline">
+                          {row.teamName}
+                        </span>
+                      ) : null}
+                    </Link>
+                    <span className="tabular w-14 shrink-0 text-right text-sm text-chalk-300">
+                      {fmt.record(row.wins, row.losses, row.ties)}
+                    </span>
+                    <span className="tabular hidden w-20 shrink-0 text-right text-sm text-chalk-500 sm:block">
+                      {fmt.pts1(row.pointsFor)}
+                    </span>
+                  </li>
+                ))}
+            </ol>
+          ) : (
+            <EmptyState>No finalized season yet.</EmptyState>
+          )}
+        </Panel>
+
+        <Panel className="lg:col-span-2">
+          <PanelHeader
+            title={inSeason ? "This Week" : "All-Time Leaders"}
+            href={inSeason ? undefined : "/history/"}
+            hrefLabel="Full history"
+          />
+          {inSeason && live?.matchups.length ? (
+            <ul>
+              {live.matchups.map((m) => (
+                <li key={m.matchupId} className="border-b border-ink-700 last:border-0">
+                  <Link
+                    href={`/h2h/${[m.a.ownerSlug, m.b.ownerSlug].sort().join("-vs-")}/`}
+                    className="block px-4 py-3 transition-colors hover:bg-ink-700/40 sm:px-5"
+                  >
+                    {[m.a, m.b].map((side) => (
+                      <div key={side.ownerSlug} className="flex items-center justify-between gap-2">
+                        <span className="truncate text-sm font-medium">{name(side.ownerSlug)}</span>
+                        <span className="tabular text-sm font-bold">{fmt.pts1(side.points)}</span>
+                      </div>
+                    ))}
+                    <div className="mt-1.5 text-[11px] text-chalk-600">
+                      Head-to-head history <span aria-hidden>→</span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul>
+              {records.slice(0, 6).map((r, i) => (
+                <li
+                  key={r.ownerSlug}
+                  className="flex items-center gap-3 border-b border-ink-700 px-4 py-2.5 last:border-0 sm:px-5"
+                >
+                  <span className="tabular w-4 text-[11px] text-chalk-600">{i + 1}</span>
+                  <Link
+                    href={`/owners/${r.ownerSlug}/`}
+                    className="min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-accent"
+                  >
+                    {name(r.ownerSlug)}
+                  </Link>
+                  {r.championships > 0 ? (
+                    <span className="text-xs text-gold" title={`${r.championships} championship(s)`}>
+                      {"★".repeat(r.championships)}
+                    </span>
+                  ) : null}
+                  <span className="tabular w-14 shrink-0 text-right text-sm text-chalk-300">
+                    {fmt.record(r.wins, r.losses, r.ties)}
+                  </span>
+                  <span className="tabular w-12 shrink-0 text-right text-sm text-chalk-500">
+                    {fmt.pct(r.winPct)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </Panel>
+      </div>
+
+      <Panel>
+        <PanelHeader
+          title={`Keeper Board · Entering ${currentSeason}`}
+          meta={`top ${MAX_KEEPERS} eligible per team`}
+          href="/keepers/"
+          hrefLabel="Full keeper tracker"
+        />
+        {byOwner.size === 0 ? (
+          <EmptyState>No contracts yet — run npm run data.</EmptyState>
+        ) : (
+          <div className="grid gap-px bg-ink-600 sm:grid-cols-2 xl:grid-cols-3">
+            {[...byOwner.entries()]
+              .sort(([a], [b]) =>
+                (owners.get(a)?.name ?? a).localeCompare(owners.get(b)?.name ?? b),
+              )
+              .map(([slug, contracts]) => {
+                const eligible = contracts.filter((c) => !c.expired);
+                return (
+                  <div key={slug} className="bg-ink-800 p-1">
+                    <div className="flex items-baseline justify-between px-3 pb-1 pt-2">
+                      <Link
+                        href={`/owners/${slug}/`}
+                        className="text-sm font-semibold transition-colors hover:text-accent"
+                      >
+                        {name(slug)}
+                      </Link>
+                      <span className="text-[11px] text-chalk-600">{eligible.length} eligible</span>
+                    </div>
+                    {eligible.slice(0, MAX_KEEPERS).map((c, i) => (
+                      <KeeperRow
+                        key={c.playerId}
+                        contract={c}
+                        player={players[c.playerId]}
+                        rank={i + 1}
+                        eligible
+                      />
+                    ))}
+                  </div>
+                );
+              })}
+          </div>
+        )}
+      </Panel>
     </div>
+  );
+}
+
+/** In-season standings, ordered by wins then points for (bylaws 1.8.2.4). */
+function StandingsLive({
+  live,
+  owners,
+}: {
+  live: NonNullable<Awaited<ReturnType<typeof getLiveSeason>>>;
+  owners: ReturnType<typeof getOwnerMap>;
+}) {
+  const rows = live.teams.slice().sort((a, b) => b.wins - a.wins || b.pointsFor - a.pointsFor);
+
+  return (
+    <ol>
+      {rows.map((t, i) => (
+        <li
+          key={t.rosterId}
+          className={`flex items-center gap-3 border-b border-ink-700 px-4 py-2.5 last:border-0 sm:px-5 ${
+            // Playoff cut line after the 6th seed (bylaws 1.8.2.1).
+            i === 5 ? "border-b-accent-dim" : ""
+          }`}
+        >
+          <span className="tabular w-5 shrink-0 text-sm font-bold text-chalk-500">{i + 1}</span>
+          <Link
+            href={`/owners/${t.ownerSlug}/`}
+            className="min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-accent"
+          >
+            {owners.get(t.ownerSlug)?.name ?? t.ownerSlug}
+          </Link>
+          <span className="tabular w-14 shrink-0 text-right text-sm text-chalk-300">
+            {fmt.record(t.wins, t.losses, t.ties)}
+          </span>
+          <span className="tabular hidden w-20 shrink-0 text-right text-sm text-chalk-500 sm:block">
+            {fmt.pts1(t.pointsFor)}
+          </span>
+        </li>
+      ))}
+    </ol>
   );
 }

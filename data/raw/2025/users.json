@@ -1,0 +1,200 @@
+[
+  {
+    "avatar": "8b3a2922fd5f12df782b1ba4b51d6d58",
+    "display_name": "SafB",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "archived": "off",
+      "avatar": "https://sleepercdn.com/uploads/6ef03ed0669123594ac4a650651d7225.jpg",
+      "mention_pn": "on",
+      "team_name": "It’s Gonna Be Maye"
+    },
+    "settings": null,
+    "user_id": "609168288324321280"
+  },
+  {
+    "avatar": "8eb8f8bf999945d523f2c4033f70473e",
+    "display_name": "spencer004",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "avatar": "https://sleepercdn.com/uploads/87657d9a6f33a0411a49c01a6deddc93",
+      "mention_pn": "on",
+      "team_name": "Bunche Bombers"
+    },
+    "settings": null,
+    "user_id": "868608373288034304"
+  },
+  {
+    "avatar": "8eb8f8bf999945d523f2c4033f70473e",
+    "display_name": "brendonn8",
+    "is_bot": false,
+    "is_owner": true,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "archived": "off",
+      "avatar": "https://sleepercdn.com/uploads/845eab28f39aa677c495c843ceafede4.jpg",
+      "mention_pn": "on",
+      "team_name": "Ash n' TDs"
+    },
+    "settings": null,
+    "user_id": "887589851141427200"
+  },
+  {
+    "avatar": "b319fdf8b7b5b0359d3c78622ba4d70c",
+    "display_name": "tylerjung",
+    "is_bot": false,
+    "is_owner": true,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "archived": "off",
+      "avatar": "https://sleepercdn.com/uploads/47480974ca9b9f3d6a006bdd119a8975.jpg",
+      "league_report_pn": "off",
+      "mascot_message": "off",
+      "mention_pn": "on",
+      "player_like_pn": "on",
+      "player_nickname_update": "off",
+      "team_name": "Griddy and the JJets",
+      "team_name_update": "off",
+      "trade_block_pn": "on",
+      "transaction_commissioner": "on",
+      "transaction_free_agent": "on",
+      "transaction_trade": "on",
+      "transaction_waiver": "on",
+      "user_message_pn": "on"
+    },
+    "settings": null,
+    "user_id": "999142984568557568"
+  },
+  {
+    "avatar": "8eb8f8bf999945d523f2c4033f70473e",
+    "display_name": "davidrcollier",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "off",
+      "league_report_pn": "off",
+      "mascot_message": "off",
+      "mention_pn": "on",
+      "player_like_pn": "off",
+      "player_nickname_update": "off",
+      "team_name": "Legette it Shaty",
+      "team_name_update": "off",
+      "trade_block_pn": "off",
+      "transaction_commissioner": "off",
+      "transaction_free_agent": "off",
+      "transaction_trade": "off",
+      "transaction_waiver": "off",
+      "user_message_pn": "off"
+    },
+    "settings": null,
+    "user_id": "1048521200416313344"
+  },
+  {
+    "avatar": "b319fdf8b7b5b0359d3c78622ba4d70c",
+    "display_name": "Jgibby28",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "avatar": "https://sleepercdn.com/uploads/58973422491c80591cb6553e4fcbdb4a.jpg",
+      "mention_pn": "on",
+      "team_name": "Ray-Ray all Day-Day"
+    },
+    "settings": null,
+    "user_id": "1049399449467871232"
+  },
+  {
+    "avatar": "4f4090e5e9c3941414db40a871e3e909",
+    "display_name": "maddyperdue",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "mention_pn": "on",
+      "team_name": "Ray-Ray all Day-Day"
+    },
+    "settings": null,
+    "user_id": "1049401412565774336"
+  },
+  {
+    "avatar": "b3338675f635c2c1f42b469621d38ec6",
+    "display_name": "jeemo",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "mention_pn": "on",
+      "team_name": "twitch.tv/jamarrchase10"
+    },
+    "settings": null,
+    "user_id": "1049492055615266816"
+  },
+  {
+    "avatar": "4f4090e5e9c3941414db40a871e3e909",
+    "display_name": "katieeb",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "mention_pn": "on"
+    },
+    "settings": null,
+    "user_id": "1049498096055140352"
+  },
+  {
+    "avatar": "b3338675f635c2c1f42b469621d38ec6",
+    "display_name": "lmg0821",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "avatar": "https://sleepercdn.com/uploads/2f741ed39eb4f86da6058832aa627093.jpg",
+      "mention_pn": "on",
+      "team_name": "Bruin by Marriage"
+    },
+    "settings": null,
+    "user_id": "1132133697135869952"
+  },
+  {
+    "avatar": "4f4090e5e9c3941414db40a871e3e909",
+    "display_name": "cassidypensa",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "mention_pn": "on",
+      "team_name": "I wanna be a Brockstar"
+    },
+    "settings": null,
+    "user_id": "1133573613518716928"
+  },
+  {
+    "avatar": "b581b5ead040923c3c02813ddcbdc867",
+    "display_name": "reags98",
+    "is_bot": false,
+    "is_owner": false,
+    "league_id": "1180273312919666688",
+    "metadata": {
+      "allow_pn": "on",
+      "mention_pn": "on",
+      "team_name": "Butker’s Babes"
+    },
+    "settings": null,
+    "user_id": "1133643357365972992"
+  }
+]

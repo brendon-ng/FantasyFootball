@@ -1,0 +1,69 @@
+{
+  "created": 1724285477765,
+  "creators": [
+    "887589851141427200"
+  ],
+  "draft_id": "1132138986316845056",
+  "draft_order": {
+    "1048521200416313344": 7,
+    "1049399449467871232": 3,
+    "1049492055615266816": 5,
+    "1132133697135869952": 8,
+    "1133573613518716928": 9,
+    "1133643357365972992": 6,
+    "609168288324321280": 2,
+    "868608373288034304": 10,
+    "887589851141427200": 1,
+    "999142984568557568": 4
+  },
+  "last_message_id": "1134281194780033024",
+  "last_message_time": 1724796220063,
+  "last_picked": 1724796218996,
+  "league_id": "1048054415074205696",
+  "metadata": {
+    "description": "",
+    "name": "Den Ops Super League",
+    "scoring_type": "ppr"
+  },
+  "season": "2024",
+  "season_type": "regular",
+  "settings": {
+    "alpha_sort": 0,
+    "autopause_enabled": 1,
+    "autopause_end_time": 720,
+    "autopause_start_time": 360,
+    "autostart": 0,
+    "cpu_autopick": 1,
+    "enforce_position_limits": 1,
+    "nomination_timer": 60,
+    "pick_timer": 28800,
+    "player_type": 0,
+    "reversal_round": 0,
+    "rounds": 17,
+    "slots_bn": 7,
+    "slots_def": 1,
+    "slots_flex": 2,
+    "slots_k": 1,
+    "slots_qb": 1,
+    "slots_rb": 2,
+    "slots_te": 1,
+    "slots_wr": 2,
+    "teams": 10
+  },
+  "slot_to_roster_id": {
+    "1": 1,
+    "2": 6,
+    "3": 4,
+    "4": 3,
+    "5": 5,
+    "6": 10,
+    "7": 2,
+    "8": 7,
+    "9": 9,
+    "10": 8
+  },
+  "sport": "nfl",
+  "start_time": 1724720405667,
+  "status": "complete",
+  "type": "snake"
+}

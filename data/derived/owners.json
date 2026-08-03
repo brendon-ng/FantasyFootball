@@ -1,0 +1,116 @@
+[
+  {
+    "coOwners": [],
+    "firstName": "Brendon",
+    "name": "Brendon Ng",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "brendon-ng",
+    "userId": "887589851141427200"
+  },
+  {
+    "coOwners": [],
+    "firstName": "Cassidy",
+    "name": "Cassidy Pensa",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "cassidy-pensa",
+    "userId": "1133573613518716928"
+  },
+  {
+    "coOwners": [],
+    "firstName": "David",
+    "name": "David Collier",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "david-collier",
+    "userId": "1048521200416313344"
+  },
+  {
+    "coOwners": [
+      "Maddy Perdue"
+    ],
+    "firstName": "Jake",
+    "name": "Jake Gibbons",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "jake-gibbons",
+    "userId": "1049399449467871232"
+  },
+  {
+    "coOwners": [
+      "Katie Barnes"
+    ],
+    "firstName": "Jaymie",
+    "name": "Jaymie Lew",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "jaymie-lew",
+    "userId": "1049492055615266816"
+  },
+  {
+    "coOwners": [],
+    "firstName": "Lauren",
+    "name": "Lauren Gross",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "lauren-gross",
+    "userId": "1132133697135869952"
+  },
+  {
+    "coOwners": [],
+    "firstName": "Reagan",
+    "name": "Reagan Schmidt",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "reagan-schmidt",
+    "userId": "1133643357365972992"
+  },
+  {
+    "coOwners": [],
+    "firstName": "Safvet",
+    "name": "Safvet Besen",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "safvet-besen",
+    "userId": "609168288324321280"
+  },
+  {
+    "coOwners": [],
+    "firstName": "Spencer",
+    "name": "Spencer Kim",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "spencer-kim",
+    "userId": "868608373288034304"
+  },
+  {
+    "coOwners": [],
+    "firstName": "Tyler",
+    "name": "Tyler Jung",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "tyler-jung",
+    "userId": "999142984568557568"
+  }
+]

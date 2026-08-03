@@ -4,6 +4,20 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # The in-progress week is fetched at BUILD time (see lib/data.ts getLiveSeason),
+  # so "live" scores are only as fresh as the last deploy. These crons keep that
+  # gap under ~15 minutes during game windows and cost one build every 6h
+  # otherwise. All times UTC; 17:00 UTC is 1pm ET, the Sunday early kickoff.
+  #
+  # NOTE: GitHub disables scheduled workflows after 60 days with no repo
+  # activity. If live scores go stale in the offseason, that is why — push a
+  # commit or hit "Run workflow" to re-arm them.
+  schedule:
+    - cron: "*/15 17-23 * * 0" # Sunday afternoon + evening games
+    - cron: "*/15 0-4 * * 1" # Sunday night football (Monday UTC)
+    - cron: "*/15 0-4 * * 2" # Monday night football (Tuesday UTC)
+    - cron: "*/15 0-4 * * 5" # Thursday night football (Friday UTC)
+    - cron: "0 */6 * * *" # Baseline refresh year-round
 
 # Allow the workflow to publish to Pages.
 permissions:

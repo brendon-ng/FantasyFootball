@@ -87,3 +87,58 @@ catch basePath bugs.
   would strip the `_next/` directory.
 - Next 16 removed the `eslint` key from `next.config.ts` and `next lint`. Lint runs
   as its own step. Check the bundled docs before assuming any config key exists.
+
+## Data pipeline
+
+League data lives in `data/` as committed JSON. There is no database and no
+runtime API — the site reads these files at build time.
+
+```
+config/league.json        owners, league IDs, discovery anchor
+config/rules/<year>.json  per-season rules; NEVER edit a past season's file
+data/raw/<year>/          finalized Sleeper dumps (source of truth)
+data/derived/*.json       computed output (standings, keepers, records)
+data/players.json         slim player index (~44KB, not Sleeper's 5MB map)
+data/manual/              hand-entered pre-Sleeper seasons
+```
+
+`npm run data` = `sync` then `derive`.
+
+- **`npm run sync`** hits Sleeper and writes only *finalized* data — a week once
+  Sleeper has scored it, a season once its status is `complete`. It is
+  idempotent: an unchanged league produces an empty git diff, so any diff you
+  see is real new history. Flags: `--force`, `--season=2025`, `--skip-players`.
+- **`npm run derive`** is pure — no network, never touches `data/raw/`. Delete
+  `data/derived/` and re-run to rebuild from scratch.
+
+Rules are versioned per season so changing 2027's keeper rules cannot
+retroactively rewrite 2024's contracts. Adding a season means adding
+`config/rules/<year>.json`; `derive` throws if one is missing.
+
+### Season discovery
+
+Sleeper mints a new `league_id` every year and only links *backward* via
+`previous_league_id`. `sync` finds each new season by listing `anchorUserId`'s
+leagues and matching on `previous_league_id`, which also filters out that user's
+unrelated leagues. Nothing needs editing in September.
+
+Always resolve a draft through `league.draft_id`. `/league/:id/drafts` is unsafe:
+the 2024 league carries two abandoned drafts alongside the real one.
+
+### Keeper contracts
+
+Sleeper models no part of this — `is_keeper` is a bare boolean with no round and
+no contract length. `resolveKeepers()` in `scripts/derive.ts` replays every draft
+and transaction to reconstruct cost, keeps used, and lineage per bylaws 1.7.2.
+Every contract carries a `provenance` array that the UI renders, so the maths is
+auditable. Corrections go in `config/keeper-overrides.json` — never in code.
+
+Ownership is reconciled against each season's final roster snapshot, because the
+transaction log is not a complete record of roster mutation.
+
+### Local development
+
+Node's native TypeScript stripping runs `scripts/*.ts` directly, which is why
+relative imports there carry explicit `.ts` extensions and `tsconfig.json` sets
+`allowImportingTsExtensions`. Behind a proxy, `fetch` needs
+`NODE_USE_ENV_PROXY=1 npm run sync` — Node ignores `HTTP_PROXY` otherwise.

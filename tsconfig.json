@@ -11,6 +11,12 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    // `scripts/` runs through Node's native type stripping, which requires
+    // explicit `.ts` extensions on relative imports. Those scripts share
+    // `lib/sleeper.ts` and `lib/types.ts` with the app, so the app must accept
+    // the same specifiers. Safe here because `noEmit` is on — tsc never has to
+    // rewrite the extension, and Turbopack resolves it fine.
+    "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
     "incremental": true,
     "plugins": [

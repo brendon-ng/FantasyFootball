@@ -1,0 +1,952 @@
+[
+  {
+    "averageFinish": 5.5,
+    "bestFinish": 1,
+    "championships": 1,
+    "finishes": [
+      {
+        "place": 1,
+        "season": 2024,
+        "seed": 1
+      },
+      {
+        "place": 10,
+        "season": 2025,
+        "seed": 7
+      }
+    ],
+    "lastPlaces": 1,
+    "losses": 11,
+    "ownerSlug": "jaymie-lew",
+    "playoffAppearances": 1,
+    "pointsAgainst": 3752.88,
+    "pointsFor": 3883.62,
+    "runnerUps": 0,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "brendon-ng": {
+        "losses": 0,
+        "pointsAgainst": 208.96,
+        "pointsFor": 287.54,
+        "ties": 0,
+        "wins": 2
+      },
+      "cassidy-pensa": {
+        "losses": 1,
+        "pointsAgainst": 348.38,
+        "pointsFor": 382.2,
+        "ties": 0,
+        "wins": 2
+      },
+      "david-collier": {
+        "losses": 2,
+        "pointsAgainst": 488.68,
+        "pointsFor": 378.74,
+        "ties": 0,
+        "wins": 1
+      },
+      "jake-gibbons": {
+        "losses": 1,
+        "pointsAgainst": 528.58,
+        "pointsFor": 682.48,
+        "ties": 0,
+        "wins": 3
+      },
+      "lauren-gross": {
+        "losses": 2,
+        "pointsAgainst": 394.02,
+        "pointsFor": 365,
+        "ties": 0,
+        "wins": 1
+      },
+      "reagan-schmidt": {
+        "losses": 3,
+        "pointsAgainst": 647.34,
+        "pointsFor": 521.86,
+        "ties": 0,
+        "wins": 1
+      },
+      "safvet-besen": {
+        "losses": 0,
+        "pointsAgainst": 338.58,
+        "pointsFor": 446,
+        "ties": 0,
+        "wins": 3
+      },
+      "spencer-kim": {
+        "losses": 1,
+        "pointsAgainst": 406.68,
+        "pointsFor": 418.1,
+        "ties": 0,
+        "wins": 2
+      },
+      "tyler-jung": {
+        "losses": 1,
+        "pointsAgainst": 391.66,
+        "pointsFor": 401.7,
+        "ties": 0,
+        "wins": 2
+      }
+    },
+    "winPct": 0.61,
+    "wins": 17,
+    "worstFinish": 10
+  },
+  {
+    "averageFinish": 4,
+    "bestFinish": 1,
+    "championships": 1,
+    "finishes": [
+      {
+        "place": 7,
+        "season": 2024,
+        "seed": 10
+      },
+      {
+        "place": 1,
+        "season": 2025,
+        "seed": 2
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 16,
+    "ownerSlug": "david-collier",
+    "playoffAppearances": 1,
+    "pointsAgainst": 3715.96,
+    "pointsFor": 3640.38,
+    "runnerUps": 0,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "brendon-ng": {
+        "losses": 1,
+        "pointsAgainst": 489.54,
+        "pointsFor": 506.1,
+        "ties": 0,
+        "wins": 3
+      },
+      "cassidy-pensa": {
+        "losses": 3,
+        "pointsAgainst": 475.5,
+        "pointsFor": 372.9,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 2,
+        "pointsAgainst": 378.9,
+        "pointsFor": 379.62,
+        "ties": 0,
+        "wins": 1
+      },
+      "jaymie-lew": {
+        "losses": 1,
+        "pointsAgainst": 378.74,
+        "pointsFor": 488.68,
+        "ties": 0,
+        "wins": 2
+      },
+      "lauren-gross": {
+        "losses": 2,
+        "pointsAgainst": 337.48,
+        "pointsFor": 224.22,
+        "ties": 0,
+        "wins": 0
+      },
+      "reagan-schmidt": {
+        "losses": 0,
+        "pointsAgainst": 245.32,
+        "pointsFor": 296.3,
+        "ties": 0,
+        "wins": 2
+      },
+      "safvet-besen": {
+        "losses": 2,
+        "pointsAgainst": 499.48,
+        "pointsFor": 526.04,
+        "ties": 0,
+        "wins": 2
+      },
+      "spencer-kim": {
+        "losses": 3,
+        "pointsAgainst": 539.14,
+        "pointsFor": 482.72,
+        "ties": 0,
+        "wins": 1
+      },
+      "tyler-jung": {
+        "losses": 2,
+        "pointsAgainst": 371.86,
+        "pointsFor": 363.8,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.43,
+    "wins": 12,
+    "worstFinish": 7
+  },
+  {
+    "averageFinish": 2.5,
+    "bestFinish": 2,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 3,
+        "season": 2024,
+        "seed": 2
+      },
+      {
+        "place": 2,
+        "season": 2025,
+        "seed": 1
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 10,
+    "ownerSlug": "tyler-jung",
+    "playoffAppearances": 2,
+    "pointsAgainst": 3486.86,
+    "pointsFor": 4029,
+    "runnerUps": 1,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 1,
+    "ties": 0,
+    "vs": {
+      "brendon-ng": {
+        "losses": 0,
+        "pointsAgainst": 250.24,
+        "pointsFor": 282.46,
+        "ties": 0,
+        "wins": 2
+      },
+      "cassidy-pensa": {
+        "losses": 1,
+        "pointsAgainst": 516.9,
+        "pointsFor": 614.56,
+        "ties": 0,
+        "wins": 3
+      },
+      "david-collier": {
+        "losses": 1,
+        "pointsAgainst": 363.8,
+        "pointsFor": 371.86,
+        "ties": 0,
+        "wins": 2
+      },
+      "jake-gibbons": {
+        "losses": 1,
+        "pointsAgainst": 265.4,
+        "pointsFor": 286.8,
+        "ties": 0,
+        "wins": 1
+      },
+      "jaymie-lew": {
+        "losses": 2,
+        "pointsAgainst": 401.7,
+        "pointsFor": 391.66,
+        "ties": 0,
+        "wins": 1
+      },
+      "lauren-gross": {
+        "losses": 2,
+        "pointsAgainst": 497.8,
+        "pointsFor": 548.92,
+        "ties": 0,
+        "wins": 2
+      },
+      "reagan-schmidt": {
+        "losses": 0,
+        "pointsAgainst": 446.34,
+        "pointsFor": 655.1,
+        "ties": 0,
+        "wins": 4
+      },
+      "safvet-besen": {
+        "losses": 2,
+        "pointsAgainst": 522.06,
+        "pointsFor": 625.74,
+        "ties": 0,
+        "wins": 2
+      },
+      "spencer-kim": {
+        "losses": 1,
+        "pointsAgainst": 222.62,
+        "pointsFor": 251.9,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.64,
+    "wins": 18,
+    "worstFinish": 3
+  },
+  {
+    "averageFinish": 4.5,
+    "bestFinish": 4,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 5,
+        "season": 2024,
+        "seed": 3
+      },
+      {
+        "place": 4,
+        "season": 2025,
+        "seed": 4
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 12,
+    "ownerSlug": "spencer-kim",
+    "playoffAppearances": 2,
+    "pointsAgainst": 3518.1,
+    "pointsFor": 3660.5,
+    "runnerUps": 0,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "brendon-ng": {
+        "losses": 3,
+        "pointsAgainst": 536.12,
+        "pointsFor": 508.26,
+        "ties": 0,
+        "wins": 1
+      },
+      "cassidy-pensa": {
+        "losses": 0,
+        "pointsAgainst": 291.78,
+        "pointsFor": 380.3,
+        "ties": 0,
+        "wins": 3
+      },
+      "david-collier": {
+        "losses": 1,
+        "pointsAgainst": 482.72,
+        "pointsFor": 539.14,
+        "ties": 0,
+        "wins": 3
+      },
+      "jake-gibbons": {
+        "losses": 2,
+        "pointsAgainst": 498.2,
+        "pointsFor": 543.42,
+        "ties": 0,
+        "wins": 2
+      },
+      "jaymie-lew": {
+        "losses": 2,
+        "pointsAgainst": 418.1,
+        "pointsFor": 406.68,
+        "ties": 0,
+        "wins": 1
+      },
+      "lauren-gross": {
+        "losses": 2,
+        "pointsAgainst": 525.72,
+        "pointsFor": 477.5,
+        "ties": 0,
+        "wins": 2
+      },
+      "reagan-schmidt": {
+        "losses": 1,
+        "pointsAgainst": 293.32,
+        "pointsFor": 247.84,
+        "ties": 0,
+        "wins": 1
+      },
+      "safvet-besen": {
+        "losses": 0,
+        "pointsAgainst": 220.24,
+        "pointsFor": 334.74,
+        "ties": 0,
+        "wins": 2
+      },
+      "tyler-jung": {
+        "losses": 1,
+        "pointsAgainst": 251.9,
+        "pointsFor": 222.62,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.57,
+    "wins": 16,
+    "worstFinish": 5
+  },
+  {
+    "averageFinish": 5.5,
+    "bestFinish": 3,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 8,
+        "season": 2024,
+        "seed": 8
+      },
+      {
+        "place": 3,
+        "season": 2025,
+        "seed": 3
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 13,
+    "ownerSlug": "lauren-gross",
+    "playoffAppearances": 1,
+    "pointsAgainst": 3491.28,
+    "pointsFor": 3651.88,
+    "runnerUps": 0,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 1,
+    "ties": 0,
+    "vs": {
+      "brendon-ng": {
+        "losses": 1,
+        "pointsAgainst": 356.02,
+        "pointsFor": 355.02,
+        "ties": 0,
+        "wins": 2
+      },
+      "cassidy-pensa": {
+        "losses": 2,
+        "pointsAgainst": 313.96,
+        "pointsFor": 239.28,
+        "ties": 0,
+        "wins": 0
+      },
+      "david-collier": {
+        "losses": 0,
+        "pointsAgainst": 224.22,
+        "pointsFor": 337.48,
+        "ties": 0,
+        "wins": 2
+      },
+      "jake-gibbons": {
+        "losses": 3,
+        "pointsAgainst": 501.2,
+        "pointsFor": 523.98,
+        "ties": 0,
+        "wins": 1
+      },
+      "jaymie-lew": {
+        "losses": 1,
+        "pointsAgainst": 365,
+        "pointsFor": 394.02,
+        "ties": 0,
+        "wins": 2
+      },
+      "reagan-schmidt": {
+        "losses": 1,
+        "pointsAgainst": 343.28,
+        "pointsFor": 388.02,
+        "ties": 0,
+        "wins": 2
+      },
+      "safvet-besen": {
+        "losses": 1,
+        "pointsAgainst": 361.18,
+        "pointsFor": 390.56,
+        "ties": 0,
+        "wins": 2
+      },
+      "spencer-kim": {
+        "losses": 2,
+        "pointsAgainst": 477.5,
+        "pointsFor": 525.72,
+        "ties": 0,
+        "wins": 2
+      },
+      "tyler-jung": {
+        "losses": 2,
+        "pointsAgainst": 548.92,
+        "pointsFor": 497.8,
+        "ties": 0,
+        "wins": 2
+      }
+    },
+    "winPct": 0.54,
+    "wins": 15,
+    "worstFinish": 8
+  },
+  {
+    "averageFinish": 6,
+    "bestFinish": 6,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 6,
+        "season": 2024,
+        "seed": 5
+      },
+      {
+        "place": 6,
+        "season": 2025,
+        "seed": 5
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 14,
+    "ownerSlug": "jake-gibbons",
+    "playoffAppearances": 2,
+    "pointsAgainst": 3799.5,
+    "pointsFor": 3579.9,
+    "runnerUps": 0,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "brendon-ng": {
+        "losses": 2,
+        "pointsAgainst": 445.9,
+        "pointsFor": 489.46,
+        "ties": 0,
+        "wins": 2
+      },
+      "cassidy-pensa": {
+        "losses": 2,
+        "pointsAgainst": 279.1,
+        "pointsFor": 230.16,
+        "ties": 0,
+        "wins": 0
+      },
+      "david-collier": {
+        "losses": 1,
+        "pointsAgainst": 379.62,
+        "pointsFor": 378.9,
+        "ties": 0,
+        "wins": 2
+      },
+      "jaymie-lew": {
+        "losses": 3,
+        "pointsAgainst": 682.48,
+        "pointsFor": 528.58,
+        "ties": 0,
+        "wins": 1
+      },
+      "lauren-gross": {
+        "losses": 1,
+        "pointsAgainst": 523.98,
+        "pointsFor": 501.2,
+        "ties": 0,
+        "wins": 3
+      },
+      "reagan-schmidt": {
+        "losses": 0,
+        "pointsAgainst": 217,
+        "pointsFor": 309.92,
+        "ties": 0,
+        "wins": 2
+      },
+      "safvet-besen": {
+        "losses": 2,
+        "pointsAgainst": 441.2,
+        "pointsFor": 378.08,
+        "ties": 0,
+        "wins": 1
+      },
+      "spencer-kim": {
+        "losses": 2,
+        "pointsAgainst": 543.42,
+        "pointsFor": 498.2,
+        "ties": 0,
+        "wins": 2
+      },
+      "tyler-jung": {
+        "losses": 1,
+        "pointsAgainst": 286.8,
+        "pointsFor": 265.4,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.5,
+    "wins": 14,
+    "worstFinish": 6
+  },
+  {
+    "averageFinish": 7.5,
+    "bestFinish": 5,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 10,
+        "season": 2024,
+        "seed": 7
+      },
+      {
+        "place": 5,
+        "season": 2025,
+        "seed": 6
+      }
+    ],
+    "lastPlaces": 1,
+    "losses": 15,
+    "ownerSlug": "brendon-ng",
+    "playoffAppearances": 1,
+    "pointsAgainst": 3613.02,
+    "pointsFor": 3557.74,
+    "runnerUps": 0,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "cassidy-pensa": {
+        "losses": 1,
+        "pointsAgainst": 501.08,
+        "pointsFor": 601.68,
+        "ties": 0,
+        "wins": 3
+      },
+      "david-collier": {
+        "losses": 3,
+        "pointsAgainst": 506.1,
+        "pointsFor": 489.54,
+        "ties": 0,
+        "wins": 1
+      },
+      "jake-gibbons": {
+        "losses": 2,
+        "pointsAgainst": 489.46,
+        "pointsFor": 445.9,
+        "ties": 0,
+        "wins": 2
+      },
+      "jaymie-lew": {
+        "losses": 2,
+        "pointsAgainst": 287.54,
+        "pointsFor": 208.96,
+        "ties": 0,
+        "wins": 0
+      },
+      "lauren-gross": {
+        "losses": 2,
+        "pointsAgainst": 355.02,
+        "pointsFor": 356.02,
+        "ties": 0,
+        "wins": 1
+      },
+      "reagan-schmidt": {
+        "losses": 1,
+        "pointsAgainst": 405.42,
+        "pointsFor": 394.22,
+        "ties": 0,
+        "wins": 2
+      },
+      "safvet-besen": {
+        "losses": 1,
+        "pointsAgainst": 277.68,
+        "pointsFor": 275.06,
+        "ties": 0,
+        "wins": 1
+      },
+      "spencer-kim": {
+        "losses": 1,
+        "pointsAgainst": 508.26,
+        "pointsFor": 536.12,
+        "ties": 0,
+        "wins": 3
+      },
+      "tyler-jung": {
+        "losses": 2,
+        "pointsAgainst": 282.46,
+        "pointsFor": 250.24,
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "winPct": 0.46,
+    "wins": 13,
+    "worstFinish": 10
+  },
+  {
+    "averageFinish": 6.5,
+    "bestFinish": 4,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 4,
+        "season": 2024,
+        "seed": 4
+      },
+      {
+        "place": 9,
+        "season": 2025,
+        "seed": 8
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 15,
+    "ownerSlug": "reagan-schmidt",
+    "playoffAppearances": 1,
+    "pointsAgainst": 3736.64,
+    "pointsFor": 3655.96,
+    "runnerUps": 0,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "brendon-ng": {
+        "losses": 2,
+        "pointsAgainst": 394.22,
+        "pointsFor": 405.42,
+        "ties": 0,
+        "wins": 1
+      },
+      "cassidy-pensa": {
+        "losses": 0,
+        "pointsAgainst": 401.9,
+        "pointsFor": 543.36,
+        "ties": 0,
+        "wins": 4
+      },
+      "david-collier": {
+        "losses": 2,
+        "pointsAgainst": 296.3,
+        "pointsFor": 245.32,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 2,
+        "pointsAgainst": 309.92,
+        "pointsFor": 217,
+        "ties": 0,
+        "wins": 0
+      },
+      "jaymie-lew": {
+        "losses": 1,
+        "pointsAgainst": 521.86,
+        "pointsFor": 647.34,
+        "ties": 0,
+        "wins": 3
+      },
+      "lauren-gross": {
+        "losses": 2,
+        "pointsAgainst": 388.02,
+        "pointsFor": 343.28,
+        "ties": 0,
+        "wins": 1
+      },
+      "safvet-besen": {
+        "losses": 1,
+        "pointsAgainst": 521.48,
+        "pointsFor": 514.58,
+        "ties": 0,
+        "wins": 3
+      },
+      "spencer-kim": {
+        "losses": 1,
+        "pointsAgainst": 247.84,
+        "pointsFor": 293.32,
+        "ties": 0,
+        "wins": 1
+      },
+      "tyler-jung": {
+        "losses": 4,
+        "pointsAgainst": 655.1,
+        "pointsFor": 446.34,
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "winPct": 0.46,
+    "wins": 13,
+    "worstFinish": 9
+  },
+  {
+    "averageFinish": 4.5,
+    "bestFinish": 2,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 2,
+        "season": 2024,
+        "seed": 6
+      },
+      {
+        "place": 7,
+        "season": 2025,
+        "seed": 10
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 16,
+    "ownerSlug": "cassidy-pensa",
+    "playoffAppearances": 1,
+    "pointsAgainst": 3767.68,
+    "pointsFor": 3498.1,
+    "runnerUps": 1,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "brendon-ng": {
+        "losses": 3,
+        "pointsAgainst": 601.68,
+        "pointsFor": 501.08,
+        "ties": 0,
+        "wins": 1
+      },
+      "david-collier": {
+        "losses": 0,
+        "pointsAgainst": 372.9,
+        "pointsFor": 475.5,
+        "ties": 0,
+        "wins": 3
+      },
+      "jake-gibbons": {
+        "losses": 0,
+        "pointsAgainst": 230.16,
+        "pointsFor": 279.1,
+        "ties": 0,
+        "wins": 2
+      },
+      "jaymie-lew": {
+        "losses": 2,
+        "pointsAgainst": 382.2,
+        "pointsFor": 348.38,
+        "ties": 0,
+        "wins": 1
+      },
+      "lauren-gross": {
+        "losses": 0,
+        "pointsAgainst": 239.28,
+        "pointsFor": 313.96,
+        "ties": 0,
+        "wins": 2
+      },
+      "reagan-schmidt": {
+        "losses": 4,
+        "pointsAgainst": 543.36,
+        "pointsFor": 401.9,
+        "ties": 0,
+        "wins": 0
+      },
+      "safvet-besen": {
+        "losses": 1,
+        "pointsAgainst": 403.24,
+        "pointsFor": 369.5,
+        "ties": 0,
+        "wins": 2
+      },
+      "spencer-kim": {
+        "losses": 3,
+        "pointsAgainst": 380.3,
+        "pointsFor": 291.78,
+        "ties": 0,
+        "wins": 0
+      },
+      "tyler-jung": {
+        "losses": 3,
+        "pointsAgainst": 614.56,
+        "pointsFor": 516.9,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.43,
+    "wins": 12,
+    "worstFinish": 7
+  },
+  {
+    "averageFinish": 8.5,
+    "bestFinish": 8,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 9,
+        "season": 2024,
+        "seed": 9
+      },
+      {
+        "place": 8,
+        "season": 2025,
+        "seed": 9
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 18,
+    "ownerSlug": "safvet-besen",
+    "playoffAppearances": 0,
+    "pointsAgainst": 3860.3,
+    "pointsFor": 3585.14,
+    "runnerUps": 0,
+    "seasonsPlayed": 2,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "brendon-ng": {
+        "losses": 1,
+        "pointsAgainst": 275.06,
+        "pointsFor": 277.68,
+        "ties": 0,
+        "wins": 1
+      },
+      "cassidy-pensa": {
+        "losses": 2,
+        "pointsAgainst": 369.5,
+        "pointsFor": 403.24,
+        "ties": 0,
+        "wins": 1
+      },
+      "david-collier": {
+        "losses": 2,
+        "pointsAgainst": 526.04,
+        "pointsFor": 499.48,
+        "ties": 0,
+        "wins": 2
+      },
+      "jake-gibbons": {
+        "losses": 1,
+        "pointsAgainst": 378.08,
+        "pointsFor": 441.2,
+        "ties": 0,
+        "wins": 2
+      },
+      "jaymie-lew": {
+        "losses": 3,
+        "pointsAgainst": 446,
+        "pointsFor": 338.58,
+        "ties": 0,
+        "wins": 0
+      },
+      "lauren-gross": {
+        "losses": 2,
+        "pointsAgainst": 390.56,
+        "pointsFor": 361.18,
+        "ties": 0,
+        "wins": 1
+      },
+      "reagan-schmidt": {
+        "losses": 3,
+        "pointsAgainst": 514.58,
+        "pointsFor": 521.48,
+        "ties": 0,
+        "wins": 1
+      },
+      "spencer-kim": {
+        "losses": 2,
+        "pointsAgainst": 334.74,
+        "pointsFor": 220.24,
+        "ties": 0,
+        "wins": 0
+      },
+      "tyler-jung": {
+        "losses": 2,
+        "pointsAgainst": 625.74,
+        "pointsFor": 522.06,
+        "ties": 0,
+        "wins": 2
+      }
+    },
+    "winPct": 0.36,
+    "wins": 10,
+    "worstFinish": 9
+  }
+]

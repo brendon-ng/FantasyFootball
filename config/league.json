@@ -1,0 +1,43 @@
+{
+  "leagueName": "Den Ops Super League",
+  "shortName": "Den Ops",
+  "sport": "nfl",
+
+  "//discovery": [
+    "Sleeper creates a NEW league_id every season and links it backward via",
+    "`previous_league_id`. There is no forward pointer, so the sync script finds",
+    "next year's league by listing `anchorUserId`'s leagues for that season and",
+    "picking the one whose previous_league_id matches the latest known season.",
+    "That also disambiguates from other leagues the anchor user plays in.",
+    "`knownLeagueIds` is a safety net: if the anchor user ever leaves or Sleeper",
+    "changes behavior, these still resolve. Discovery appends to it in data/raw/seasons.json."
+  ],
+  "anchorUserId": "887589851141427200",
+  "knownLeagueIds": {
+    "2024": "1048054415074205696",
+    "2025": "1180273312919666688",
+    "2026": "1389328840093884416"
+  },
+
+  "//owners": [
+    "Owner is the unit of historical tracking, not team name or roster_id, because",
+    "team names change yearly and roster_id is only stable within a season.",
+    "Co-owned teams collapse to a single primary owner via `coOwnerOf` (see bylaws 1.1).",
+    "`slug` is the stable URL key and must never change once published."
+  ],
+  "owners": [
+    { "slug": "brendon-ng", "userId": "887589851141427200", "firstName": "Brendon", "lastName": "Ng" },
+    { "slug": "cassidy-pensa", "userId": "1133573613518716928", "firstName": "Cassidy", "lastName": "Pensa" },
+    { "slug": "david-collier", "userId": "1048521200416313344", "firstName": "David", "lastName": "Collier" },
+    { "slug": "jake-gibbons", "userId": "1049399449467871232", "firstName": "Jake", "lastName": "Gibbons" },
+    { "slug": "jaymie-lew", "userId": "1049492055615266816", "firstName": "Jaymie", "lastName": "Lew" },
+    { "slug": "lauren-gross", "userId": "1132133697135869952", "firstName": "Lauren", "lastName": "Gross" },
+    { "slug": "reagan-schmidt", "userId": "1133643357365972992", "firstName": "Reagan", "lastName": "Schmidt" },
+    { "slug": "safvet-besen", "userId": "609168288324321280", "firstName": "Safvet", "lastName": "Besen" },
+    { "slug": "spencer-kim", "userId": "868608373288034304", "firstName": "Spencer", "lastName": "Kim" },
+    { "slug": "tyler-jung", "userId": "999142984568557568", "firstName": "Tyler", "lastName": "Jung" },
+
+    { "userId": "1049401412565774336", "firstName": "Maddy", "lastName": "Perdue", "coOwnerOf": "jake-gibbons" },
+    { "userId": "1049498096055140352", "firstName": "Katie", "lastName": "Barnes", "coOwnerOf": "jaymie-lew" }
+  ]
+}

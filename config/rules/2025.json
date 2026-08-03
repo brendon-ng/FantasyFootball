@@ -1,0 +1,33 @@
+{
+  "season": 2025,
+  "note": "First keeper season. Players drafted in 2024 could be retained at their 2024 draft round, consuming keep 1 of 2.",
+
+  "teams": 10,
+  "regularSeasonWeeks": 14,
+  "playoffWeekStart": 15,
+  "playoffTeams": 6,
+  "playoffRounds": 3,
+  "firstRoundByes": 2,
+  "finalWeek": 17,
+  "seedingTiebreaker": "points-for",
+  "playoffTieGoesTo": "higher-seed",
+
+  "draftRounds": 17,
+  "faabBudget": 100,
+  "minBid": 0,
+  "tradeDeadlineWeek": 11,
+
+  "keepers": {
+    "enabled": true,
+    "maxKeepers": 4,
+    "maxKeepsAtOriginalCost": 2,
+    "undraftedFreeAgentRound": 11,
+    "reAcquiredValueRule": "min-of-fa-round-and-original",
+    "selfReclaimResetsContract": false,
+    "tradeInheritsContract": true,
+    "resetsToAdpAfterContract": true
+  },
+
+  "prizes": { "buyIn": 50, "split": { "1": 0.7, "2": 0.2, "3": 0.1 } },
+  "lastPlacePunishment": null
+}

@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Broadcast-dark design system.
+ *
+ * Two rules keep this coherent as pages get added:
+ *   1. Colour carries no meaning except through the semantic tokens below.
+ *      Accent is for "live" and primary emphasis, never decoration.
+ *   2. Every number compared vertically uses `.tabular`, so columns align and
+ *      digits don't jitter between renders.
+ */
+
+@theme {
+  --color-ink-900: #08080a;
+  --color-ink-850: #0b0b0e;
+  --color-ink-800: #0e0e11;
+  --color-ink-700: #16161b;
+  --color-ink-600: #1e1e25;
+  --color-ink-500: #2a2a33;
+  --color-ink-400: #3a3a46;
+
+  --color-chalk-100: #f4f4f6;
+  --color-chalk-300: #b8b8c4;
+  --color-chalk-500: #7a7a89;
+  --color-chalk-600: #55555f;
+
+  --color-accent: #00e5a0;
+  --color-accent-dim: #0b7a5a;
+
+  --color-win: #35d07f;
+  --color-loss: #ff5c6c;
+  --color-gold: #f5c451;
+  --color-silver: #c8ccd4;
+  --color-bronze: #cd8b5b;
+
+  --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: var(--color-ink-900);
+  color: var(--color-chalk-100);
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-display);
+}
+
+/*
+ * Tabular figures wherever numbers are compared vertically. Without this,
+ * proportional digits make a standings column look ragged.
+ */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Broadcast-style section label. */
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-chalk-500);
+}
+
+/* Hairline that reads as a broadcast lower-third rule. */
+.rule {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--color-ink-500) 0%,
+    var(--color-ink-500) 60%,
+    transparent 100%
+  );
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.live-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Horizontal scrollers on mobile shouldn't show a chrome scrollbar. */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }

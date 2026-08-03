@@ -1,0 +1,620 @@
+[
+  {
+    "champion": "jaymie-lew",
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "lastPlace": "brendon-ng",
+    "leagueId": "1048054415074205696",
+    "leagueName": "Den Ops Super League",
+    "losersBracket": [
+      {
+        "loser": "brendon-ng",
+        "matchId": 1,
+        "placesFor": null,
+        "round": 1,
+        "team1": "david-collier",
+        "team1From": null,
+        "team2": "brendon-ng",
+        "team2From": null,
+        "winner": "david-collier"
+      },
+      {
+        "loser": "safvet-besen",
+        "matchId": 2,
+        "placesFor": null,
+        "round": 1,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": "lauren-gross",
+        "team2From": null,
+        "winner": "lauren-gross"
+      },
+      {
+        "loser": "lauren-gross",
+        "matchId": 3,
+        "placesFor": [
+          7,
+          8
+        ],
+        "round": 2,
+        "team1": "david-collier",
+        "team1From": {
+          "winnerOf": 1
+        },
+        "team2": "lauren-gross",
+        "team2From": {
+          "winnerOf": 2
+        },
+        "winner": "david-collier"
+      },
+      {
+        "loser": "brendon-ng",
+        "matchId": 4,
+        "placesFor": [
+          9,
+          10
+        ],
+        "round": 2,
+        "team1": "brendon-ng",
+        "team1From": {
+          "loserOf": 1
+        },
+        "team2": "safvet-besen",
+        "team2From": {
+          "loserOf": 2
+        },
+        "winner": "safvet-besen"
+      }
+    ],
+    "regularSeasonWeeks": 14,
+    "runnerUp": "cassidy-pensa",
+    "season": 2024,
+    "standings": [
+      {
+        "finalPlace": 1,
+        "losses": 3,
+        "madePlayoffs": true,
+        "ownerSlug": "jaymie-lew",
+        "pointsAgainst": 1808.82,
+        "pointsFor": 2123.6,
+        "rosterId": 5,
+        "seed": 1,
+        "teamName": "twitch.tv/jamarrchase10",
+        "ties": 0,
+        "wins": 11
+      },
+      {
+        "finalPlace": 3,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "tyler-jung",
+        "pointsAgainst": 1718.94,
+        "pointsFor": 1986.66,
+        "rosterId": 3,
+        "seed": 2,
+        "teamName": "Griddy and the JJets",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 5,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "spencer-kim",
+        "pointsAgainst": 1700.24,
+        "pointsFor": 1789.98,
+        "rosterId": 8,
+        "seed": 3,
+        "teamName": "Bunche Bombers",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 4,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "reagan-schmidt",
+        "pointsAgainst": 1986.5,
+        "pointsFor": 1967.54,
+        "rosterId": 10,
+        "seed": 4,
+        "teamName": "Butker’s Babes",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 6,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "jake-gibbons",
+        "pointsAgainst": 1964.66,
+        "pointsFor": 1817.44,
+        "rosterId": 4,
+        "seed": 5,
+        "teamName": "Ray-Ray all Day-Day",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 2,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "cassidy-pensa",
+        "pointsAgainst": 1889.74,
+        "pointsFor": 1787.88,
+        "rosterId": 9,
+        "seed": 6,
+        "teamName": "I wanna be a Brockstar",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 10,
+        "losses": 7,
+        "madePlayoffs": false,
+        "ownerSlug": "brendon-ng",
+        "pointsAgainst": 1779.44,
+        "pointsFor": 1760.04,
+        "rosterId": 1,
+        "seed": 7,
+        "teamName": "4’s Kupp",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 8,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "lauren-gross",
+        "pointsAgainst": 1776.56,
+        "pointsFor": 1778.16,
+        "rosterId": 7,
+        "seed": 8,
+        "teamName": "Bruin by Marriage",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 9,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "safvet-besen",
+        "pointsAgainst": 1951.42,
+        "pointsFor": 1848.78,
+        "rosterId": 6,
+        "seed": 9,
+        "teamName": "My Arrakis, My Odunze",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 7,
+        "losses": 11,
+        "madePlayoffs": false,
+        "ownerSlug": "david-collier",
+        "pointsAgainst": 1940.64,
+        "pointsFor": 1656.88,
+        "rosterId": 2,
+        "seed": 10,
+        "teamName": "Legette it Shaty",
+        "ties": 0,
+        "wins": 3
+      }
+    ],
+    "status": "complete",
+    "thirdPlace": "tyler-jung",
+    "winnersBracket": [
+      {
+        "loser": "jake-gibbons",
+        "matchId": 1,
+        "placesFor": null,
+        "round": 1,
+        "team1": "reagan-schmidt",
+        "team1From": null,
+        "team2": "jake-gibbons",
+        "team2From": null,
+        "winner": "reagan-schmidt"
+      },
+      {
+        "loser": "spencer-kim",
+        "matchId": 2,
+        "placesFor": null,
+        "round": 1,
+        "team1": "cassidy-pensa",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "winner": "cassidy-pensa"
+      },
+      {
+        "loser": "reagan-schmidt",
+        "matchId": 3,
+        "placesFor": null,
+        "round": 2,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": {
+          "winnerOf": 1
+        },
+        "winner": "jaymie-lew"
+      },
+      {
+        "loser": "tyler-jung",
+        "matchId": 4,
+        "placesFor": null,
+        "round": 2,
+        "team1": "tyler-jung",
+        "team1From": null,
+        "team2": "cassidy-pensa",
+        "team2From": {
+          "winnerOf": 2
+        },
+        "winner": "cassidy-pensa"
+      },
+      {
+        "loser": "jake-gibbons",
+        "matchId": 5,
+        "placesFor": [
+          5,
+          6
+        ],
+        "round": 2,
+        "team1": "jake-gibbons",
+        "team1From": {
+          "loserOf": 1
+        },
+        "team2": "spencer-kim",
+        "team2From": {
+          "loserOf": 2
+        },
+        "winner": "spencer-kim"
+      },
+      {
+        "loser": "cassidy-pensa",
+        "matchId": 6,
+        "placesFor": [
+          1,
+          2
+        ],
+        "round": 3,
+        "team1": "jaymie-lew",
+        "team1From": {
+          "winnerOf": 3
+        },
+        "team2": "cassidy-pensa",
+        "team2From": {
+          "winnerOf": 4
+        },
+        "winner": "jaymie-lew"
+      },
+      {
+        "loser": "reagan-schmidt",
+        "matchId": 7,
+        "placesFor": [
+          3,
+          4
+        ],
+        "round": 3,
+        "team1": "reagan-schmidt",
+        "team1From": {
+          "loserOf": 3
+        },
+        "team2": "tyler-jung",
+        "team2From": {
+          "loserOf": 4
+        },
+        "winner": "tyler-jung"
+      }
+    ]
+  },
+  {
+    "champion": "david-collier",
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "lastPlace": "jaymie-lew",
+    "leagueId": "1180273312919666688",
+    "leagueName": "Den Ops Super League",
+    "losersBracket": [
+      {
+        "loser": "jaymie-lew",
+        "matchId": 1,
+        "placesFor": null,
+        "round": 1,
+        "team1": "cassidy-pensa",
+        "team1From": null,
+        "team2": "jaymie-lew",
+        "team2From": null,
+        "winner": "cassidy-pensa"
+      },
+      {
+        "loser": "reagan-schmidt",
+        "matchId": 2,
+        "placesFor": null,
+        "round": 1,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": null,
+        "winner": "safvet-besen"
+      },
+      {
+        "loser": "safvet-besen",
+        "matchId": 3,
+        "placesFor": [
+          7,
+          8
+        ],
+        "round": 2,
+        "team1": "cassidy-pensa",
+        "team1From": {
+          "winnerOf": 1
+        },
+        "team2": "safvet-besen",
+        "team2From": {
+          "winnerOf": 2
+        },
+        "winner": "cassidy-pensa"
+      },
+      {
+        "loser": "jaymie-lew",
+        "matchId": 4,
+        "placesFor": [
+          9,
+          10
+        ],
+        "round": 2,
+        "team1": "jaymie-lew",
+        "team1From": {
+          "loserOf": 1
+        },
+        "team2": "reagan-schmidt",
+        "team2From": {
+          "loserOf": 2
+        },
+        "winner": "reagan-schmidt"
+      }
+    ],
+    "regularSeasonWeeks": 14,
+    "runnerUp": "tyler-jung",
+    "season": 2025,
+    "standings": [
+      {
+        "finalPlace": 2,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "tyler-jung",
+        "pointsAgainst": 1767.92,
+        "pointsFor": 2042.34,
+        "rosterId": 3,
+        "seed": 1,
+        "teamName": "Griddy and the JJets",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 1,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "david-collier",
+        "pointsAgainst": 1775.32,
+        "pointsFor": 1983.5,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "Legette it Shaty",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 3,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "lauren-gross",
+        "pointsAgainst": 1714.72,
+        "pointsFor": 1873.72,
+        "rosterId": 7,
+        "seed": 3,
+        "teamName": "Bruin by Marriage",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 4,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "spencer-kim",
+        "pointsAgainst": 1817.86,
+        "pointsFor": 1870.52,
+        "rosterId": 8,
+        "seed": 4,
+        "teamName": "Bunche Bombers",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 6,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "jake-gibbons",
+        "pointsAgainst": 1834.84,
+        "pointsFor": 1762.46,
+        "rosterId": 4,
+        "seed": 5,
+        "teamName": "Ray-Ray all Day-Day",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 5,
+        "losses": 8,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "pointsAgainst": 1833.58,
+        "pointsFor": 1797.7,
+        "rosterId": 1,
+        "seed": 6,
+        "teamName": "Ash n' TDs",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 10,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "jaymie-lew",
+        "pointsAgainst": 1944.06,
+        "pointsFor": 1760.02,
+        "rosterId": 5,
+        "seed": 7,
+        "teamName": "twitch.tv/jamarrchase10",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 9,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "reagan-schmidt",
+        "pointsAgainst": 1750.14,
+        "pointsFor": 1688.42,
+        "rosterId": 10,
+        "seed": 8,
+        "teamName": "Butker’s Babes",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 8,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "safvet-besen",
+        "pointsAgainst": 1908.88,
+        "pointsFor": 1736.36,
+        "rosterId": 6,
+        "seed": 9,
+        "teamName": "It’s Gonna Be Maye",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 7,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "cassidy-pensa",
+        "pointsAgainst": 1877.94,
+        "pointsFor": 1710.22,
+        "rosterId": 9,
+        "seed": 10,
+        "teamName": "I wanna be a Brockstar",
+        "ties": 0,
+        "wins": 5
+      }
+    ],
+    "status": "complete",
+    "thirdPlace": "lauren-gross",
+    "winnersBracket": [
+      {
+        "loser": "jake-gibbons",
+        "matchId": 1,
+        "placesFor": null,
+        "round": 1,
+        "team1": "spencer-kim",
+        "team1From": null,
+        "team2": "jake-gibbons",
+        "team2From": null,
+        "winner": "spencer-kim"
+      },
+      {
+        "loser": "brendon-ng",
+        "matchId": 2,
+        "placesFor": null,
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "lauren-gross",
+        "team2From": null,
+        "winner": "lauren-gross"
+      },
+      {
+        "loser": "spencer-kim",
+        "matchId": 3,
+        "placesFor": null,
+        "round": 2,
+        "team1": "tyler-jung",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": {
+          "winnerOf": 1
+        },
+        "winner": "tyler-jung"
+      },
+      {
+        "loser": "lauren-gross",
+        "matchId": 4,
+        "placesFor": null,
+        "round": 2,
+        "team1": "david-collier",
+        "team1From": null,
+        "team2": "lauren-gross",
+        "team2From": {
+          "winnerOf": 2
+        },
+        "winner": "david-collier"
+      },
+      {
+        "loser": "jake-gibbons",
+        "matchId": 5,
+        "placesFor": [
+          5,
+          6
+        ],
+        "round": 2,
+        "team1": "jake-gibbons",
+        "team1From": {
+          "loserOf": 1
+        },
+        "team2": "brendon-ng",
+        "team2From": {
+          "loserOf": 2
+        },
+        "winner": "brendon-ng"
+      },
+      {
+        "loser": "tyler-jung",
+        "matchId": 6,
+        "placesFor": [
+          1,
+          2
+        ],
+        "round": 3,
+        "team1": "tyler-jung",
+        "team1From": {
+          "winnerOf": 3
+        },
+        "team2": "david-collier",
+        "team2From": {
+          "winnerOf": 4
+        },
+        "winner": "david-collier"
+      },
+      {
+        "loser": "spencer-kim",
+        "matchId": 7,
+        "placesFor": [
+          3,
+          4
+        ],
+        "round": 3,
+        "team1": "spencer-kim",
+        "team1From": {
+          "loserOf": 3
+        },
+        "team2": "lauren-gross",
+        "team2From": {
+          "loserOf": 4
+        },
+        "winner": "lauren-gross"
+      }
+    ]
+  }
+]

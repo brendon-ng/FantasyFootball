@@ -9,7 +9,10 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check": "npm run lint && npm run typecheck",
-    "clean": "rm -rf .next out .preview"
+    "clean": "rm -rf .next out .preview",
+    "sync": "node scripts/sync.ts",
+    "derive": "node scripts/derive.ts",
+    "data": "npm run sync && npm run derive"
   },
   "dependencies": {
     "next": "16.2.12",

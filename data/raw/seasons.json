@@ -1,0 +1,36 @@
+{
+  "seasons": [
+    {
+      "draftId": "1132138986316845056",
+      "finalized": true,
+      "finalizedThroughWeek": 17,
+      "leagueId": "1048054415074205696",
+      "previousLeagueId": null,
+      "season": "2024",
+      "status": "complete"
+    },
+    {
+      "draftId": "1265059859338891264",
+      "finalized": true,
+      "finalizedThroughWeek": 17,
+      "leagueId": "1180273312919666688",
+      "previousLeagueId": "1048054415074205696",
+      "season": "2025",
+      "status": "complete"
+    },
+    {
+      "draftId": "1389328840093884417",
+      "finalized": false,
+      "finalizedThroughWeek": 0,
+      "leagueId": "1389328840093884416",
+      "previousLeagueId": "1180273312919666688",
+      "season": "2026",
+      "status": "pre_draft"
+    }
+  ],
+  "syncedAgainst": {
+    "season": "2026",
+    "seasonType": "pre",
+    "week": 0
+  }
+}
