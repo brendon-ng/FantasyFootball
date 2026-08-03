@@ -1,0 +1,535 @@
+{
+  "finalWeek": 16,
+  "games": [
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 122.7,
+          "seed": 1,
+          "teamName": "Kip Chelly"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 140.74,
+          "seed": 5,
+          "teamName": "Shake n Bake(r)"
+        },
+        {
+          "points": 84.9,
+          "seed": 4,
+          "teamName": "Jack Doyle Is an Antivaxer"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 78.96,
+          "seed": 6,
+          "teamName": "Team Pensa"
+        },
+        {
+          "points": 126.84,
+          "seed": 3,
+          "teamName": "Projected Last Place"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 139.7,
+          "seed": 2,
+          "teamName": "Team Nelli"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 135.32,
+          "seed": 5,
+          "teamName": "Shake n Bake(r)"
+        },
+        {
+          "points": 88.68,
+          "seed": 1,
+          "teamName": "Kip Chelly"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 172.16,
+          "seed": 3,
+          "teamName": "Projected Last Place"
+        },
+        {
+          "points": 96.62,
+          "seed": 2,
+          "teamName": "Team Nelli"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 111.1,
+          "seed": 5,
+          "teamName": "Shake n Bake(r)"
+        },
+        {
+          "points": 145.58,
+          "seed": 3,
+          "teamName": "Projected Last Place"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 100.22,
+          "seed": 6,
+          "teamName": "Team Pensa"
+        },
+        {
+          "points": 91.14,
+          "seed": 4,
+          "teamName": "Jack Doyle Is an Antivaxer"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 97.64,
+          "seed": 2,
+          "teamName": "Team Nelli"
+        },
+        {
+          "points": 124.72,
+          "seed": 1,
+          "teamName": "Kip Chelly"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 62.54,
+          "seed": 6,
+          "teamName": "Team Pensa"
+        },
+        {
+          "points": 104.76,
+          "seed": 4,
+          "teamName": "Jack Doyle Is an Antivaxer"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC1",
+      "round": 1,
+      "routing": "W to GmC4, L to GmC5",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 106.3,
+          "seed": 8,
+          "teamName": "Team Dunn"
+        },
+        {
+          "points": 98.52,
+          "seed": 7,
+          "teamName": "In My Thielens"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": "GmC2",
+      "round": 1,
+      "routing": "W to GmC4, L to GmC6",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 86.72,
+          "seed": 10,
+          "teamName": "💸📈 Reaganomics"
+        },
+        {
+          "points": 98.1,
+          "seed": 9,
+          "teamName": "Skim 🥛"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": "GmC3",
+      "round": 1,
+      "routing": "W to GmC5, L to GmC6",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 117.22,
+          "seed": 12,
+          "teamName": "Team Frederick"
+        },
+        {
+          "points": 151.38,
+          "seed": 11,
+          "teamName": "Team Camina"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": "GmC4",
+      "round": 2,
+      "routing": "W to GmC7, L to GmC8",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 76.1,
+          "seed": 9,
+          "teamName": "Skim 🥛"
+        },
+        {
+          "points": 121.64,
+          "seed": 8,
+          "teamName": "Team Dunn"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC5",
+      "round": 2,
+      "routing": "W to GmC7, L to GmC9",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 138.92,
+          "seed": 11,
+          "teamName": "Team Camina"
+        },
+        {
+          "points": 120.76,
+          "seed": 7,
+          "teamName": "In My Thielens"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC6",
+      "round": 2,
+      "routing": "W to GmC8, L to GmC9",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 123.7,
+          "seed": 12,
+          "teamName": "Team Frederick"
+        },
+        {
+          "points": 133.4,
+          "seed": 10,
+          "teamName": "💸📈 Reaganomics"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC7",
+      "round": 3,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 81.26,
+          "seed": 11,
+          "teamName": "Team Camina"
+        },
+        {
+          "points": 77.66,
+          "seed": 8,
+          "teamName": "Team Dunn"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC8",
+      "round": 3,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 136.14,
+          "seed": 10,
+          "teamName": "💸📈 Reaganomics"
+        },
+        {
+          "points": 102.8,
+          "seed": 9,
+          "teamName": "Skim 🥛"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC9",
+      "round": 3,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 74.76,
+          "seed": 12,
+          "teamName": "Team Frederick"
+        },
+        {
+          "points": 59.42,
+          "seed": 7,
+          "teamName": "In My Thielens"
+        }
+      ],
+      "week": 16
+    }
+  ],
+  "hasDrafts": false,
+  "hasRosters": false,
+  "hasWeeklyMatchups": false,
+  "imported": true,
+  "playoffWeekStart": 14,
+  "regularSeasonWeeks": 13,
+  "season": 2019,
+  "source": "ESPN Fantasy (imported from archived MHTML)",
+  "standings": [
+    {
+      "finalPlace": 1,
+      "losses": 4,
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "pointsAgainst": 1440.38,
+      "pointsFor": 1527.94,
+      "seed": 3,
+      "teamName": "Projected Last Place",
+      "teamSlug": "david-collier",
+      "ties": 0,
+      "wins": 9
+    },
+    {
+      "finalPlace": 2,
+      "losses": 6,
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "pointsAgainst": 1452.7,
+      "pointsFor": 1537.68,
+      "seed": 5,
+      "teamName": "Shake n Bake(r)",
+      "teamSlug": "jake-gibbons",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 3,
+      "losses": 3,
+      "ownerSlugs": [
+        "jaymie-lew"
+      ],
+      "pointsAgainst": 1504.68,
+      "pointsFor": 1675.32,
+      "seed": 1,
+      "teamName": "Kip Chelly",
+      "teamSlug": "jaymie-lew",
+      "ties": 0,
+      "wins": 10
+    },
+    {
+      "finalPlace": 4,
+      "losses": 4,
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "pointsAgainst": 1410.5,
+      "pointsFor": 1587.54,
+      "seed": 2,
+      "teamName": "Team Nelli",
+      "teamSlug": "olivia-nelli",
+      "ties": 0,
+      "wins": 9
+    },
+    {
+      "finalPlace": 5,
+      "losses": 5,
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "pointsAgainst": 1457.8,
+      "pointsFor": 1636.04,
+      "seed": 4,
+      "teamName": "Jack Doyle Is an Antivaxer",
+      "teamSlug": "brendon-ng",
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "finalPlace": 6,
+      "losses": 6,
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "pointsAgainst": 1496.68,
+      "pointsFor": 1517.38,
+      "seed": 6,
+      "teamName": "Team Pensa",
+      "teamSlug": "cassidy-pensa",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 7,
+      "losses": 9,
+      "ownerSlugs": [
+        "camina-balmores"
+      ],
+      "pointsAgainst": 1557.36,
+      "pointsFor": 1317.64,
+      "seed": 11,
+      "teamName": "Team Camina",
+      "teamSlug": "camina-balmores",
+      "ties": 0,
+      "wins": 4
+    },
+    {
+      "finalPlace": 8,
+      "losses": 8,
+      "ownerSlugs": [
+        "logan-dunn"
+      ],
+      "pointsAgainst": 1566.42,
+      "pointsFor": 1553.74,
+      "seed": 8,
+      "teamName": "Team Dunn",
+      "teamSlug": "logan-dunn",
+      "ties": 0,
+      "wins": 5
+    },
+    {
+      "finalPlace": 9,
+      "losses": 8,
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "pointsAgainst": 1489.7,
+      "pointsFor": 1409.1,
+      "seed": 10,
+      "teamName": "💸📈 Reaganomics",
+      "teamSlug": "reagan-schmidt",
+      "ties": 0,
+      "wins": 5
+    },
+    {
+      "finalPlace": 10,
+      "losses": 8,
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "pointsAgainst": 1553.26,
+      "pointsFor": 1440.7,
+      "seed": 9,
+      "teamName": "Skim 🥛",
+      "teamSlug": "spencer-kim",
+      "ties": 0,
+      "wins": 5
+    },
+    {
+      "finalPlace": 11,
+      "losses": 10,
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "pointsAgainst": 1542.36,
+      "pointsFor": 1315.24,
+      "seed": 12,
+      "teamName": "Team Frederick",
+      "teamSlug": "michaela-frederick",
+      "ties": 0,
+      "wins": 3
+    },
+    {
+      "finalPlace": 12,
+      "losses": 7,
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "pointsAgainst": 1541.9,
+      "pointsFor": 1495.42,
+      "seed": 7,
+      "teamName": "In My Thielens",
+      "teamSlug": "safvet-besen",
+      "ties": 0,
+      "wins": 6
+    }
+  ],
+  "teams": 12
+}

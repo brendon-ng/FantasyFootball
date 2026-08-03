@@ -1,65 +1,151 @@
 {
-  "2020-14-brendon-ng-vs-jake-gibbons": [
-    {
-      "kind": "combined-high",
-      "label": "Highest scoring matchup in league history",
-      "opponentSlug": "brendon-ng",
-      "ownerSlug": "jake-gibbons",
-      "stillStands": false,
-      "value": 243.18
-    },
-    {
-      "kind": "narrowest",
-      "label": "Narrowest win in league history",
-      "opponentSlug": "brendon-ng",
-      "ownerSlug": "jake-gibbons",
-      "stillStands": false,
-      "value": 27.02
-    }
-  ],
-  "2020-14-logan-dunn-vs-reagan-schmidt": [
+  "2019-14-camina-balmores-vs-michaela-frederick": [
     {
       "kind": "weekly-high",
       "label": "Highest score in league history",
-      "ownerSlug": "reagan-schmidt",
+      "ownerSlug": "camina-balmores",
       "stillStands": false,
-      "value": 153.34
+      "value": 151.38
     },
     {
       "kind": "combined-high",
       "label": "Highest scoring matchup in league history",
-      "opponentSlug": "logan-dunn",
-      "ownerSlug": "reagan-schmidt",
+      "opponentSlug": "michaela-frederick",
+      "ownerSlug": "camina-balmores",
       "stillStands": false,
-      "value": 263.66
+      "value": 268.6
     }
   ],
-  "2020-14-michaela-frederick-vs-tyler-jung": [
+  "2019-14-cassidy-pensa-vs-david-collier": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "cassidy-pensa",
+      "stillStands": false,
+      "value": 78.96
+    },
     {
       "kind": "combined-low",
       "label": "Lowest scoring matchup in league history",
-      "opponentSlug": "tyler-jung",
-      "ownerSlug": "michaela-frederick",
+      "opponentSlug": "cassidy-pensa",
+      "ownerSlug": "david-collier",
       "stillStands": false,
-      "value": 213.46
+      "value": 205.8
     },
     {
       "kind": "narrowest",
       "label": "Narrowest win in league history",
-      "opponentSlug": "tyler-jung",
-      "ownerSlug": "michaela-frederick",
+      "opponentSlug": "cassidy-pensa",
+      "ownerSlug": "david-collier",
       "stillStands": false,
-      "value": 5.98
+      "value": 47.88
     }
   ],
-  "2020-15-david-collier-vs-jaymie-lew": [
+  "2019-14-logan-dunn-vs-safvet-besen": [
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
+      "opponentSlug": "safvet-besen",
+      "ownerSlug": "logan-dunn",
+      "stillStands": false,
+      "value": 204.82
+    },
+    {
+      "kind": "narrowest",
+      "label": "Narrowest win in league history",
+      "opponentSlug": "safvet-besen",
+      "ownerSlug": "logan-dunn",
+      "stillStands": false,
+      "value": 7.78
+    }
+  ],
+  "2019-14-reagan-schmidt-vs-spencer-kim": [
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
+      "opponentSlug": "reagan-schmidt",
+      "ownerSlug": "spencer-kim",
+      "stillStands": false,
+      "value": 184.82
+    }
+  ],
+  "2019-15-david-collier-vs-olivia-nelli": [
     {
       "kind": "weekly-high",
       "label": "Highest score in league history",
-      "ownerSlug": "jaymie-lew",
+      "ownerSlug": "david-collier",
       "stillStands": false,
-      "value": 164.92
+      "value": 172.16
     },
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "olivia-nelli",
+      "ownerSlug": "david-collier",
+      "stillStands": false,
+      "value": 268.78
+    },
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "olivia-nelli",
+      "ownerSlug": "david-collier",
+      "stillStands": false,
+      "value": 75.54
+    }
+  ],
+  "2019-15-logan-dunn-vs-spencer-kim": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "spencer-kim",
+      "stillStands": false,
+      "value": 76.1
+    }
+  ],
+  "2019-16-camina-balmores-vs-logan-dunn": [
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
+      "opponentSlug": "logan-dunn",
+      "ownerSlug": "camina-balmores",
+      "stillStands": false,
+      "value": 158.92
+    },
+    {
+      "kind": "narrowest",
+      "label": "Narrowest win in league history",
+      "opponentSlug": "logan-dunn",
+      "ownerSlug": "camina-balmores",
+      "stillStands": false,
+      "value": 3.6
+    }
+  ],
+  "2019-16-michaela-frederick-vs-safvet-besen": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "michaela-frederick",
+      "stillStands": false,
+      "value": 74.76
+    },
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "safvet-besen",
+      "stillStands": false,
+      "value": 59.42
+    },
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
+      "opponentSlug": "safvet-besen",
+      "ownerSlug": "michaela-frederick",
+      "stillStands": false,
+      "value": 134.18
+    }
+  ],
+  "2020-15-david-collier-vs-jaymie-lew": [
     {
       "kind": "combined-high",
       "label": "Highest scoring matchup in league history",
@@ -67,23 +153,6 @@
       "ownerSlug": "jaymie-lew",
       "stillStands": false,
       "value": 281.38
-    }
-  ],
-  "2020-15-michaela-frederick-vs-spencer-kim": [
-    {
-      "kind": "weekly-low",
-      "label": "Lowest score in league history",
-      "ownerSlug": "spencer-kim",
-      "stillStands": false,
-      "value": 74.44
-    },
-    {
-      "kind": "combined-low",
-      "label": "Lowest scoring matchup in league history",
-      "opponentSlug": "spencer-kim",
-      "ownerSlug": "michaela-frederick",
-      "stillStands": false,
-      "value": 173.4
     }
   ],
   "2020-16-jake-gibbons-vs-jaymie-lew": [
@@ -101,23 +170,6 @@
       "ownerSlug": "jake-gibbons",
       "stillStands": false,
       "value": 344.58
-    }
-  ],
-  "2021-15-brendon-ng-vs-david-collier": [
-    {
-      "kind": "weekly-low",
-      "label": "Lowest score in league history",
-      "ownerSlug": "david-collier",
-      "stillStands": false,
-      "value": 71.36
-    },
-    {
-      "kind": "combined-low",
-      "label": "Lowest scoring matchup in league history",
-      "opponentSlug": "david-collier",
-      "ownerSlug": "brendon-ng",
-      "stillStands": false,
-      "value": 165.06
     }
   ],
   "2021-15-jake-gibbons-vs-tyler-jung": [

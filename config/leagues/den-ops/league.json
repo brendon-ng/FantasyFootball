@@ -133,6 +133,13 @@
       "active": true
     },
     {
+      "slug": "camina-balmores",
+      "userId": null,
+      "firstName": "Camina",
+      "lastName": "Balmores",
+      "active": false
+    },
+    {
       "slug": "logan-dunn",
       "firstName": "Logan",
       "lastName": "Dunn",

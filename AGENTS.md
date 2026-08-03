@@ -9,7 +9,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This repo serves SEVERAL fantasy leagues from one codebase. Every feature is
 written once and benefits all of them; nothing is duplicated per league.
 
-Currently: **den-ops** (Den Ops Super League, keepers, ESPN history 2020-23) and
+Currently: **den-ops** (Den Ops Super League, keepers, ESPN history 2019-23) and
 **masterbatters** (Masterbatters Fantasy Football, redraft, Sleeper-only, 2025-).
 
 Static Next.js deployed to GitHub Pages. Pushing to `main` runs
@@ -110,13 +110,13 @@ renderers for the same thing drift apart. The id is
 `<season>-<week>-<slugA>-vs-<slugB>` with slugs sorted, deliberately not
 Sleeper's `matchup_id`, which is only unique within a week.
 
-**Seasons on record:** 2020-25. Champions: Jake Gibbons, Brendon Ng, Tyler Jung,
-Logan Dunn, Jaymie Lew, David Collier.
+**Seasons on record:** 2019-25. Champions: David Collier (2019, 2025), Jake
+Gibbons, Brendon Ng, Tyler Jung, Logan Dunn, Jaymie Lew.
 
 ### Known gaps
 
 - **Imported brackets have no bracket lines.** ESPN publishes routing for the
-  consolation ladder but not the championship bracket, so 2020-23 render as
+  consolation ladder but not the championship bracket, so 2019-23 render as
   round columns. Routing could be inferred further if wanted.
 - **Nothing has been verified in a browser by an agent.** Every visual bug this
   session was caught by the user from a screenshot: inverted toilet-bowl
@@ -138,7 +138,7 @@ Logan Dunn, Jaymie Lew, David Collier.
 
 `/history/<season>/draft/` renders a season's draft as the board it happened on
 — slots as columns, rounds as rows. Only seasons WITH picks get a page, so the
-2020-23 ESPN seasons have no link.
+2019-23 ESPN seasons have no link.
 
 Two things it deliberately does not do. There is no ADP column: `getAdp()` is the
 CURRENT market, so pricing a 2024 pick against it would compare that draft to a
@@ -302,7 +302,7 @@ moment they were played — #1 marks only, so the badge stays rare and meaningfu
 COVERAGE IS UNEVEN AND THE UI SAYS SO. The baseline is seeded with imported ESPN
 playoff and ladder games, the only pre-2024 scores that survived, so a 2024 mark
 is measured against roughly 68 historical games rather than the ~670 team-weeks
-actually played from 2020-23. Player-week marks are worse: ESPN kept no lineups,
+actually played from 2019-23. Player-week marks are worse: ESPN kept no lineups,
 so that baseline genuinely starts empty in 2024. The matchup page carries a
 "coverage" tooltip stating this; do not remove it or the badge becomes a claim
 the data cannot support.
@@ -473,7 +473,7 @@ transaction log is not a complete record of roster mutation.
 
 ### Three layers of data
 
-1. **Imported** (`data/manual/`) — 2020-23 ESPN seasons, frozen forever.
+1. **Imported** (`data/<slug>/manual/`) — 2019-23 ESPN seasons, frozen forever.
 2. **Derived** (`data/derived/`) — built from committed Sleeper dumps by
    `npm run derive`. Fixed between deploys.
 3. **Live** (`lib/sleeper-browser.tsx`) — fetched in the BROWSER at view time.
@@ -493,9 +493,16 @@ carries Node assumptions. `lib/sleeper-browser.tsx` must stay dependency-free.
 
 ### What imported seasons cannot support
 
-2020-23 came from archived ESPN pages, imported ONCE. The league is on Sleeper
-permanently now, so `npm run import:espn` is a historical artifact — the JSON it
-produced is the deliverable, not the script.
+2019-23 came from archived ESPN pages. The league is on Sleeper
+permanently now, but `npm run import:espn` is NOT a one-off: 2019 was recovered
+and imported long after the others. Drop both MHTML files for a season into
+`data/<slug>/manual/source/` and re-run it — the script reimports every season it
+finds and is idempotent, so existing years are rewritten identically.
+
+If a season introduces an owner nobody has seen, the import THROWS rather than
+inventing a slug. Add them to `league.json` with `active: false` (2019 brought in
+Camina Balmores this way), or as an `espnNames` alias if it is an existing owner
+under a different label.
 
 Those seasons have standings, final placement and full playoff scores. They have
 NO weekly matchups, rosters, drafts or transactions. So they feed standings,
@@ -505,8 +512,8 @@ contracts. `SeasonSummary.imported` is the flag, and every affected surface says
 so in the UI rather than silently mixing eras.
 
 The two ESPN pages cross-validate: placement reconstructed from the brackets
-must equal the standings RK column, or the import throws. All 48 placements
-across four seasons agree.
+must equal the standings RK column, or the import throws. All 60 placements
+across five seasons agree.
 
 ### ESPN brackets have three sections and a different consolation format
 

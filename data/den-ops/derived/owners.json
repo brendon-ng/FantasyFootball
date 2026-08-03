@@ -5,6 +5,7 @@
     "firstName": "Brendon",
     "name": "Brendon Ng",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -21,6 +22,7 @@
     "firstName": "Cassidy",
     "name": "Cassidy Pensa",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -37,6 +39,7 @@
     "firstName": "David",
     "name": "David Collier",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -55,6 +58,7 @@
     "firstName": "Jake",
     "name": "Jake Gibbons",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -73,6 +77,7 @@
     "firstName": "Jaymie",
     "name": "Jaymie Lew",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -134,6 +139,7 @@
     "firstName": "Reagan",
     "name": "Reagan Schmidt",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -150,6 +156,7 @@
     "firstName": "Safvet",
     "name": "Safvet Besen",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -166,6 +173,7 @@
     "firstName": "Spencer",
     "name": "Spencer Kim",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -195,9 +203,21 @@
   {
     "active": false,
     "coOwnedWith": [],
+    "firstName": "Camina",
+    "name": "Camina Balmores",
+    "seasons": [
+      2019
+    ],
+    "slug": "camina-balmores",
+    "userId": null
+  },
+  {
+    "active": false,
+    "coOwnedWith": [],
     "firstName": "Logan",
     "name": "Logan Dunn",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -212,6 +232,7 @@
     "firstName": "Michaela",
     "name": "Michaela Frederick",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
@@ -228,6 +249,7 @@
     "firstName": "Olivia",
     "name": "Olivia Nelli",
     "seasons": [
+      2019,
       2020,
       2021,
       2022,
