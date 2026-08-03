@@ -201,7 +201,7 @@ export default async function SeasonPage({
 
       <Panel>
         <PanelHeader
-          title={summary.ladderConsolation ? "Consolation Ladder" : "Toilet Bowl"}
+          title={summary.ladderConsolation ? "Consolation Ladder" : "Consolation Bracket"}
           meta={summary.ladderConsolation ? "win to climb" : "lose to advance"}
         />
         <div className="p-4 sm:p-5">
@@ -213,14 +213,15 @@ export default async function SeasonPage({
               </>
             ) : (
               <>
-                An anti-tournament: the <em>loser</em> of each game advances, and whoever loses
-                the final is Last Place. Winning here is how you escape.
+                An anti-tournament for the teams that missed the playoffs: the <em>loser</em> of
+                each matchup advances. The final is the <strong className="text-chalk-300">toilet
+                bowl</strong> — losing it means last place. Winning here is how you escape.
               </>
             )}
           </p>
           <Bracket
             matches={summary.losersBracket}
-            finalLabel={summary.ladderConsolation ? "🚽 Last Place" : "💩 King (Last Place)"}
+            finalLabel="🚽 Toilet Bowl · Last Place"
             finalPlace={summary.teams}
             nameOf={name}
             seedOf={seedOf}
@@ -275,11 +276,7 @@ export default async function SeasonPage({
                       ))}
                       <div className="mt-1 flex items-center justify-between text-[10px] uppercase tracking-wide text-chalk-600">
                         <span>
-                          {m.kind === "consolation"
-                            ? "toilet bowl"
-                            : m.kind !== "regular"
-                              ? m.kind
-                              : ""}
+                          {m.kind !== "regular" ? m.kind : ""}
                         </span>
                         <span
                           aria-hidden

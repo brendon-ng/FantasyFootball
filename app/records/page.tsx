@@ -30,14 +30,20 @@ export default function RecordsPage() {
 
   /**
    * Postseason label for a matchup, so the record book reads the same as the
-   * head-to-head page: Championship, 3rd place, toilet bowl rather than a bare
-   * week number.
+   * head-to-head page.
+   *
+   * Allowlisted rather than passing everything through. The raw ESPN ladder ids
+   * (GmC4) mean nothing without the bracket beside them, and a generic
+   * "consolation" chip adds a column of noise without saying what was at stake.
+   * Only labels a reader can act on survive; the rest render unbadged, and the
+   * matchup page still shows the full detail.
    */
+  const SHOWN_LABELS = new Set(["Championship", "Toilet bowl", "3rd place", "5th place", "playoff"]);
   const kindByMeeting = new Map(
-    getAllMeetings().map((m) => [
-      m.id,
-      m.kind === "regular" ? null : (m.label ?? (m.kind === "consolation" ? "toilet bowl" : m.kind)),
-    ]),
+    getAllMeetings().map((m) => {
+      const label = m.kind === "regular" ? null : (m.label ?? m.kind);
+      return [m.id, label && SHOWN_LABELS.has(label) ? label : null] as const;
+    }),
   );
   const kindOf = (a: string, b: string | null, season: number, week: number) =>
     b ? (kindByMeeting.get(meetingId(season, week, a, b)) ?? null) : null;

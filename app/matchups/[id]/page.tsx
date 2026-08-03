@@ -39,9 +39,9 @@ export function generateStaticParams() {
 const KIND_LABEL: Record<Meeting["kind"], string> = {
   regular: "Regular season",
   playoff: "Playoffs",
-  // The league calls it the toilet bowl; "consolation" is Sleeper's word, and
-  // only the imported ESPN seasons actually ran a consolation ladder.
-  consolation: "Toilet bowl",
+  // A postseason game among non-playoff teams. Only the one deciding last place
+  // is THE toilet bowl, and that comes through as the matchup's own label.
+  consolation: "Consolation",
 };
 
 export default async function MatchupPage({ params }: { params: Promise<{ id: string }> }) {
@@ -100,7 +100,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
             (b) => [b.title, b.matches, b.finalPlace] as const,
           ),
           [
-            season.ladderConsolation ? "Consolation ladder" : "Toilet bowl",
+            season.ladderConsolation ? "Consolation ladder" : "Consolation bracket",
             season.losersBracket,
             season.teams,
           ] as const,

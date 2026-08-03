@@ -320,10 +320,37 @@ export interface MeetingSide {
  */
 function placementLabel(place: number, teams: number): string {
   if (place === 1) return "Championship";
-  if (place >= teams) return "Last place";
+  // THE toilet bowl is the single game that decides last place. Every other
+  // postseason game among non-playoff teams is a consolation game.
+  if (place >= teams) return "Toilet bowl";
   const s = ["th", "st", "nd", "rd"];
   const v = place % 100;
   return `${place}${s[(v - 20) % 10] || s[v] || s[0]} place`;
+}
+
+/**
+ * What a postseason matchup decided, taken from that season's bracket.
+ *
+ * Sleeper's weekly matchups carry no placement, so a playoff week is otherwise
+ * indistinguishable from any other. Matched on both teams and the week, since a
+ * pairing can recur and a season runs several brackets at once.
+ */
+function bracketLabel(
+  season: number,
+  week: number,
+  a: string,
+  b: string,
+): string | null {
+  const s = getSeasons().find((x) => x.season === season);
+  if (!s) return null;
+  for (const matches of [s.winnersBracket, s.losersBracket, ...s.extraBrackets.map((x) => x.matches)]) {
+    for (const m of matches) {
+      if (m.week !== week || !m.team1 || !m.team2) continue;
+      if (![m.team1, m.team2].every((t) => [a, b].includes(t))) continue;
+      return m.placesFor ? placementLabel(m.placesFor[0], s.teams) : null;
+    }
+  }
+  return null;
 }
 
 export function meetingId(
@@ -370,7 +397,7 @@ export function getMeetings(slugA: string, slugB: string): Meeting[] {
         season: m.season,
         week: m.week,
         kind: m.kind,
-        label: null,
+        label: bracketLabel(m.season, m.week, x.ownerSlug, y.ownerSlug),
         a: { ownerSlug: x.ownerSlug, points: x.points, starters: x.starters, playerPoints: x.playerPoints },
         b: { ownerSlug: y.ownerSlug, points: y.points, starters: y.starters, playerPoints: y.playerPoints },
         hasLineups: true,
