@@ -123,10 +123,7 @@ export interface LiveTradedPick {
  * the roster that originally owned it, so the full picture is a baseline of
  * rounds 1..N per roster with these applied on top.
  */
-export function useLiveTradedPicks(
-  leagueId: string | null,
-  season: number,
-): LiveState<LiveTradedPick[]> {
+export function useLiveTradedPicks(leagueId: string | null): LiveState<LiveTradedPick[]> {
   const [state, setState] = useState<LiveState<LiveTradedPick[]>>({
     status: "loading",
     data: null,
@@ -151,9 +148,10 @@ export function useLiveTradedPicks(
         setState({
           status: "ready",
           error: null,
-          data: (raw ?? [])
-            .filter((p) => Number(p.season) === season)
-            .map((p) => ({
+          // Every season, not just the next one — Sleeper returns future years
+          // here too, and that is the only signal that a future draft's picks
+          // have started moving.
+          data: (raw ?? []).map((p) => ({
               season: p.season,
               round: p.round,
               rosterId: p.roster_id,
@@ -168,7 +166,7 @@ export function useLiveTradedPicks(
     return () => {
       cancelled = true;
     };
-  }, [leagueId, season]);
+  }, [leagueId]);
 
   if (!leagueId) return { status: "ready", data: [], error: null };
   return state;

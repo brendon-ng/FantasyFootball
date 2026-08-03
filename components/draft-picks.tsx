@@ -115,7 +115,7 @@ export function DraftPicks({
   ownerNames: Record<string, string>;
 }) {
   const rosters = useLiveRosters(leagueId);
-  const traded = useLiveTradedPicks(leagueId, season);
+  const traded = useLiveTradedPicks(leagueId);
   const loading = rosters.status === "loading" || traded.status === "loading";
   const failed = rosters.status === "error" || traded.status === "error";
 
@@ -126,38 +126,53 @@ export function DraftPicks({
   }
   const myRosterId = [...rosterToSlug.entries()].find(([, s]) => s === ownerSlug)?.[0];
 
-  // Baseline: you own each of your own rounds. Then apply every move.
-  const owned: OwnedPick[] = [];
-  if (myRosterId != null && rosters.status === "ready" && traded.status === "ready") {
+  /**
+   * Picks this owner holds in a given season.
+   *
+   * Baseline is rounds 1..N of your own; Sleeper only reports picks that MOVED,
+   * so those are layered over the top.
+   */
+  const picksFor = (yr: number): OwnedPick[] => {
+    if (myRosterId == null || rosters.status !== "ready" || traded.status !== "ready") return [];
+    const inYear = (traded.data ?? []).filter((p) => Number(p.season) === yr);
     const movedAway = new Set(
-      (traded.data ?? [])
+      inYear
         .filter((p) => p.rosterId === myRosterId && p.currentOwnerRosterId !== myRosterId)
-        .map((p) => `${p.round}:${p.rosterId}`),
+        .map((p) => p.round),
     );
+    const out: OwnedPick[] = [];
     for (let r = 1; r <= draftRounds; r++) {
-      if (!movedAway.has(`${r}:${myRosterId}`)) {
-        owned.push({ round: r, fromSlug: ownerSlug, acquired: false });
-      }
+      if (!movedAway.has(r)) out.push({ round: r, fromSlug: ownerSlug, acquired: false });
     }
-    for (const p of traded.data ?? []) {
+    for (const p of inYear) {
       if (p.currentOwnerRosterId !== myRosterId || p.rosterId === myRosterId) continue;
-      owned.push({
+      out.push({
         round: p.round,
         fromSlug: rosterToSlug.get(p.rosterId) ?? `roster-${p.rosterId}`,
         acquired: true,
       });
     }
-    owned.sort((a, b) => a.round - b.round || Number(a.acquired) - Number(b.acquired));
-  }
+    return out.sort((a, b) => a.round - b.round || Number(a.acquired) - Number(b.acquired));
+  };
 
+  // The upcoming draft, plus any later season whose picks have started moving.
+  // A season nobody has traded into is every team holding its own full slate,
+  // which Sleeper cannot distinguish from a season that does not exist.
+  const seasons = [
+    ...new Set([
+      season,
+      ...(traded.data ?? []).map((p) => Number(p.season)).filter((y) => y > season),
+    ]),
+  ].sort((a, b) => a - b);
+
+  const owned = picksFor(season);
   const selectedIds = new Set(
     (rosters.data ?? []).find((r) => r.rosterId === myRosterId)?.keepers ?? [],
   );
+  // Keepers only consume picks in the draft they are being kept for.
   const selected = contracts.filter((c) => selectedIds.has(c.playerId));
   const assignments = allocate(selected, owned);
 
-  // Which pick each keeper consumes, so the list can annotate it. Keyed by
-  // round with a count, since a round can hold more than one pick.
   const consumedByRound = new Map<number, Assignment[]>();
   for (const a of assignments) {
     if (a.usedRound == null) continue;
@@ -179,9 +194,11 @@ export function DraftPicks({
   return (
     <Panel>
       <PanelHeader
-        title={`${season} Draft Picks`}
+        title="Draft Picks"
         meta={
-          rosters.status === "ready" ? `${owned.length} picks · ${selected.length} keepers` : undefined
+          rosters.status === "ready"
+            ? `${seasons.length} draft${seasons.length === 1 ? "" : "s"} · ${selected.length} keepers selected`
+            : undefined
         }
         legend="Keeper selections and pick trades both come from Sleeper and change up to the deadline."
       />
@@ -216,53 +233,77 @@ export function DraftPicks({
           Could not read picks from Sleeper.
         </div>
       ) : (
-        <ol className="divide-y divide-ink-700">
-          {owned.map((pick, i) => {
-            const uses = consumedByRound.get(pick.round) ?? [];
-            // Nth pick within this round gets the Nth keeper assigned to it.
-            const indexInRound = owned
-              .slice(0, i)
-              .filter((p) => p.round === pick.round).length;
-            const use = uses[indexInRound];
-
+        <div className="divide-y divide-ink-700">
+          {seasons.map((yr) => {
+            const yearPicks = yr === season ? owned : picksFor(yr);
+            const isNext = yr === season;
             return (
-              <li
-                key={`${pick.round}-${pick.fromSlug}-${i}`}
-                className={`flex items-center gap-3 px-4 py-2 sm:px-5 ${
-                  use ? "bg-accent/[0.06]" : ""
-                }`}
-              >
-                <span className="tabular w-24 shrink-0 text-sm">
-                  {season} {ord(pick.round)} Rd
-                </span>
-                <span className="min-w-0 flex-1 truncate text-[11px] text-chalk-600">
-                  {pick.acquired ? `from ${ownerNames[pick.fromSlug] ?? pick.fromSlug}` : ""}
-                </span>
-                {use ? (
-                  <span className="flex min-w-0 shrink-0 items-center gap-1.5">
-                    <span className="rounded border border-accent-dim bg-accent/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-accent">
-                      Keeper
-                    </span>
-                    <Link
-                      href={`/players/${use.contract.playerId}/`}
-                      className="truncate text-sm font-medium transition-colors hover:text-accent"
-                    >
-                      {players[use.contract.playerId]?.full_name ?? use.contract.playerId}
-                    </Link>
-                    {use.bumpedFrom ? (
-                      <span
-                        className="text-[10px] text-gold"
-                        title={`Cost round is ${use.bumpedFrom}, but that pick was unavailable, so it falls to this earlier pick (bylaws 1.7.2.1.1)`}
-                      >
-                        ↑R{use.bumpedFrom}
-                      </span>
-                    ) : null}
+              <details key={yr} open={isNext} className="group">
+                <summary className="flex cursor-pointer list-none items-center gap-3 px-4 py-2.5 transition-colors hover:bg-ink-700/40 sm:px-5">
+                  <span className="tabular text-sm font-semibold">{yr} Draft</span>
+                  <span className="text-[11px] text-chalk-600">
+                    {yearPicks.length} pick{yearPicks.length === 1 ? "" : "s"}
+                    {isNext && selected.length
+                      ? ` · ${assignments.filter((a) => a.usedRound != null).length} to keepers`
+                      : ""}
                   </span>
-                ) : null}
-              </li>
+                  <span className="ml-auto text-[10px] text-chalk-600 transition-transform group-open:rotate-90">
+                    ▸
+                  </span>
+                </summary>
+                <ol className="divide-y divide-ink-700 border-t border-ink-700">
+                  {yearPicks.map((pick, i) => {
+                    // Keeper annotations belong only to the draft they apply to.
+                    const uses = isNext ? (consumedByRound.get(pick.round) ?? []) : [];
+                    const indexInRound = yearPicks
+                      .slice(0, i)
+                      .filter((p) => p.round === pick.round).length;
+                    const use = uses[indexInRound];
+
+                    return (
+                      <li
+                        key={`${pick.round}-${pick.fromSlug}-${i}`}
+                        className={`flex items-center gap-3 px-4 py-2 sm:px-5 ${
+                          use ? "bg-accent/[0.06]" : ""
+                        }`}
+                      >
+                        <span className="tabular w-24 shrink-0 text-sm">
+                          {yr} {ord(pick.round)} Rd
+                        </span>
+                        <span className="min-w-0 flex-1 truncate text-[11px] text-chalk-600">
+                          {pick.acquired
+                            ? `from ${ownerNames[pick.fromSlug] ?? pick.fromSlug}`
+                            : ""}
+                        </span>
+                        {use ? (
+                          <span className="flex min-w-0 shrink-0 items-center gap-1.5">
+                            <span className="rounded border border-accent-dim bg-accent/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-accent">
+                              Keeper
+                            </span>
+                            <Link
+                              href={`/players/${use.contract.playerId}/`}
+                              className="truncate text-sm font-medium transition-colors hover:text-accent"
+                            >
+                              {players[use.contract.playerId]?.full_name ?? use.contract.playerId}
+                            </Link>
+                            {use.bumpedFrom ? (
+                              <span
+                                className="text-[10px] text-gold"
+                                title={`Cost round is ${use.bumpedFrom}, but that pick was unavailable, so it falls to this earlier pick (bylaws 1.7.2.1.1)`}
+                              >
+                                ↑R{use.bumpedFrom}
+                              </span>
+                            ) : null}
+                          </span>
+                        ) : null}
+                      </li>
+                    );
+                  })}
+                </ol>
+              </details>
             );
           })}
-        </ol>
+        </div>
       )}
     </Panel>
   );
