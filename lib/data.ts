@@ -189,6 +189,25 @@ export const getConfig = (): LeagueConfig =>
  * league should not show a Keepers tab at all, and asking "does this league keep
  * players" reads better than asking which league it is.
  */
+/**
+ * Site-relative path to this league's avatar, or null if it has none.
+ *
+ * Downloaded by `npm run sync` into `public/avatars/<slug>.<ext>` rather than
+ * hotlinked from Sleeper's CDN — this is the favicon, and a Sleeper outage should
+ * not blank the tab icon of a site that otherwise needs no server.
+ *
+ * The extension varies by league because Sleeper stores whatever was uploaded, so
+ * it is probed rather than assumed.
+ */
+export function leagueAvatar(): string | null {
+  for (const ext of ["png", "jpg", "gif"]) {
+    if (existsSync(join(process.cwd(), "public", "avatars", `${LEAGUE}.${ext}`))) {
+      return `/avatars/${LEAGUE}.${ext}`;
+    }
+  }
+  return null;
+}
+
 export const features = (): LeagueFeatures => getConfig().features;
 
 /** `"Records"` -> `"Records · Den Ops"`, so no page hardcodes a league name. */

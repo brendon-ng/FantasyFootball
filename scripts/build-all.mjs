@@ -39,6 +39,16 @@ for (const league of leagues) {
     throw new Error(`${league.slug}: expected an exported site at ${exported}`);
   }
   cpSync(exported, join(STAGE, league.slug), { recursive: true });
+
+  // `public/` is copied wholesale into every build, so each league's output would
+  // otherwise carry the others' avatars. Harmless but wasteful, and it leaks one
+  // league's asset into another's site.
+  const avatars = join(STAGE, league.slug, "avatars");
+  if (existsSync(avatars)) {
+    for (const f of readdirSync(avatars)) {
+      if (!f.startsWith(`${league.slug}.`)) rmSync(join(avatars, f));
+    }
+  }
 }
 
 mkdirSync(join(ROOT, "out"), { recursive: true });

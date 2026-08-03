@@ -23,7 +23,7 @@
  *   --league=den-ops   only this league
  */
 
-import { existsSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import {
@@ -43,7 +43,7 @@ import {
   type SleeperLeague,
   type SleeperPlayer,
 } from "../lib/sleeper.ts";
-import { CACHE_DIR, SHARED_DATA_DIR, fileAgeMs, log, readJson, wk, writeJson } from "./lib/io.ts";
+import { CACHE_DIR, ROOT, SHARED_DATA_DIR, fileAgeMs, log, readJson, wk, writeJson } from "./lib/io.ts";
 import { allLeagues, configDir, dataDir, resolveLeagues, type ScriptLeague } from "./lib/league.ts";
 
 interface SeasonRecord {
@@ -368,6 +368,65 @@ async function syncPlayers(leagues: ScriptLeague[]): Promise<void> {
   writeIfChanged(join(SHARED_DATA_DIR, "players.json"), slim, `players.json (${Object.keys(slim).length})`);
 }
 
+/**
+ * The league's Sleeper avatar, downloaded into `public/avatars/<slug>.<ext>`.
+ *
+ * Self-hosted rather than hotlinked. The CDN is a live dependency otherwise, and
+ * this image is also the favicon — a Sleeper outage should not blank the tab icon
+ * of a site whose whole point is working without a server.
+ *
+ * The extension is decided by the BYTES, not assumed: Den Ops' avatar is a PNG and
+ * Masterbatters' is a JPEG, and the endpoint reports `application/octet-stream`
+ * for both. A stale file in the other format is removed so a format change cannot
+ * leave two candidates behind.
+ */
+async function syncLeagueAvatar(league: ScriptLeague, avatar: string | null): Promise<void> {
+  const dir = join(ROOT, "public", "avatars");
+  const clear = (keep: string) => {
+    for (const ext of ["png", "jpg", "gif"]) {
+      const path = join(dir, `${league.slug}.${ext}`);
+      if (ext !== keep && existsSync(path)) rmSync(path);
+    }
+  };
+
+  if (!avatar) {
+    clear("");
+    log.skip("no league avatar set on Sleeper");
+    return;
+  }
+
+  const res = await fetch(`https://sleepercdn.com/avatars/${avatar}`);
+  if (!res.ok) {
+    log.warn(`avatar ${avatar} returned ${res.status} — keeping any existing file`);
+    return;
+  }
+  const bytes = Buffer.from(await res.arrayBuffer());
+  const ext =
+    bytes.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))
+      ? "png"
+      : bytes[0] === 0xff && bytes[1] === 0xd8
+        ? "jpg"
+        : bytes.subarray(0, 3).toString() === "GIF"
+          ? "gif"
+          : null;
+  if (!ext) {
+    log.warn(`avatar ${avatar} is not a recognised image — skipping`);
+    return;
+  }
+
+  clear(ext);
+  const path = join(dir, `${league.slug}.${ext}`);
+  // Byte-compare so an unchanged avatar produces no git diff, same rule as the
+  // JSON writers.
+  if (existsSync(path) && readFileSync(path).equals(bytes)) {
+    log.skip(`avatars/${league.slug}.${ext} (unchanged)`);
+    return;
+  }
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(path, bytes);
+  log.write(`avatars/${league.slug}.${ext} (${Math.round(bytes.length / 1024)}KB)`);
+}
+
 async function syncLeague(league: ScriptLeague): Promise<void> {
   config = league;
   RAW_DIR = join(dataDir(league.slug), "raw");
@@ -384,7 +443,11 @@ async function syncLeague(league: ScriptLeague): Promise<void> {
   if (ONLY_SEASON) leagues = leagues.filter((l) => l.season === ONLY_SEASON);
 
   const records: SeasonRecord[] = [];
-  for (const league of leagues) records.push(await syncSeason(league));
+  for (const sleeperLeague of leagues) records.push(await syncSeason(sleeperLeague));
+
+  // Newest season's avatar — the league's current identity, not a historical one.
+  const newest = [...leagues].sort((a, b) => Number(b.season) - Number(a.season))[0];
+  await syncLeagueAvatar(league, newest?.avatar ?? null);
 
   log.step("Writing season index");
   writeIfChanged(

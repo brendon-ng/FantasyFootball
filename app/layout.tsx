@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { IdentityControl, IdentityProvider } from "@/components/identity";
 import { Nav } from "@/components/nav";
-import { getConfig, getOwners, getSeasons } from "@/lib/data";
+import { getConfig, getOwners, getSeasons, leagueAvatar } from "@/lib/data";
+import { withBasePath } from "@/lib/base-path";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -14,9 +15,16 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 export function generateMetadata(): Metadata {
   const cfg = getConfig();
   const extra = cfg.features.keepers ? "keeper contracts, " : "";
+  const avatar = leagueAvatar();
   return {
     title: `${cfg.shortName} Fantasy Football`,
     description: `League hub for the ${cfg.name} — standings, ${extra}and league history.`,
+    // The league's own Sleeper avatar as the favicon, so two leagues served from
+    // one repo are told apart in a tab strip. `app/favicon.ico` was deleted: the
+    // file convention is per BUILD-TREE, not per build, so it could only ever
+    // give both leagues the same icon — and it would also emit a competing
+    // <link rel="icon"> alongside this one.
+    icons: avatar ? { icon: withBasePath(avatar) } : undefined,
   };
 }
 

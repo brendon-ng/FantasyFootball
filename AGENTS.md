@@ -222,6 +222,27 @@ The table's 🏆 column keys off the same comparator and carries the default sor
 indicator, so clicking back to it reproduces the shipped order rather than a
 titles-then-win% approximation.
 
+## League avatar and favicon
+
+`npm run sync` downloads the league's Sleeper avatar to
+`public/avatars/<slug>.<ext>`, and `layout.tsx` sets it as the favicon via
+`metadata.icons`, so two leagues from one repo are distinguishable in a tab strip.
+
+SELF-HOSTED, NOT HOTLINKED. `sleepercdn.com` would otherwise be a live dependency
+for the tab icon of a site whose whole point is needing no server.
+
+Three things that are easy to get wrong:
+
+- The EXTENSION VARIES. Sleeper stores whatever was uploaded and serves it as
+  `application/octet-stream` regardless — Den Ops' is a PNG, Masterbatters' a JPEG.
+  Sync sniffs the magic bytes and deletes any stale file in the other format;
+  `leagueAvatar()` probes for the extension rather than assuming one.
+- `app/favicon.ico` WAS DELETED ON PURPOSE. That file convention is per build
+  TREE, not per build, so it could only ever give every league the same icon, and
+  it emits a competing `<link rel="icon">` next to the one from `metadata.icons`.
+- `public/` is copied into every build, so `build-all.mjs` prunes other leagues'
+  avatars from each output.
+
 ## Viewer identity
 
 `components/identity.tsx` remembers who the visitor is in localStorage, under
