@@ -17,7 +17,10 @@ export default function RecordsPage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Record Book</h1>
         <p className="mt-1 text-sm text-chalk-500">
-          All-time extremes across every finalized week, regular season and playoffs.
+          Extremes across every finalized week, regular season and playoffs.{" "}
+          <span className="text-chalk-600">
+            2024 onward only — the imported 2020–2023 ESPN seasons have no weekly matchup data.
+          </span>
         </p>
       </div>
 

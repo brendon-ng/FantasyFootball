@@ -1,0 +1,535 @@
+{
+  "finalWeek": 16,
+  "games": [
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 119.22,
+          "seed": 1,
+          "teamName": "James RB1nson"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 146.3,
+          "seed": 5,
+          "teamName": "Team Lew"
+        },
+        {
+          "points": 77.16,
+          "seed": 4,
+          "teamName": "Team Nelli"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 108.08,
+          "seed": 6,
+          "teamName": "Wet Ass Pigskin"
+        },
+        {
+          "points": 135.1,
+          "seed": 3,
+          "teamName": "All Mahomies Hate SamDarnold"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 113.66,
+          "seed": 2,
+          "teamName": "Kyler, The Creator"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 164.92,
+          "seed": 5,
+          "teamName": "Team Lew"
+        },
+        {
+          "points": 116.46,
+          "seed": 1,
+          "teamName": "James RB1nson"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 149.26,
+          "seed": 3,
+          "teamName": "All Mahomies Hate SamDarnold"
+        },
+        {
+          "points": 106.84,
+          "seed": 2,
+          "teamName": "Kyler, The Creator"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 162.26,
+          "seed": 5,
+          "teamName": "Team Lew"
+        },
+        {
+          "points": 182.32,
+          "seed": 3,
+          "teamName": "All Mahomies Hate SamDarnold"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 119.4,
+          "seed": 6,
+          "teamName": "Wet Ass Pigskin"
+        },
+        {
+          "points": 130.32,
+          "seed": 4,
+          "teamName": "Team Nelli"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 85.98,
+          "seed": 2,
+          "teamName": "Kyler, The Creator"
+        },
+        {
+          "points": 120.3,
+          "seed": 1,
+          "teamName": "James RB1nson"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 111.54,
+          "seed": 6,
+          "teamName": "Wet Ass Pigskin"
+        },
+        {
+          "points": 80.26,
+          "seed": 4,
+          "teamName": "Team Nelli"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 103.74,
+          "seed": 8,
+          "teamName": "D'Raheem Team"
+        },
+        {
+          "points": 109.72,
+          "seed": 7,
+          "teamName": "Team Frederick"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": "GmC1",
+      "round": 1,
+      "routing": "W to GmC4, L to GmC5",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 104.58,
+          "seed": 10,
+          "teamName": "Team Pensa"
+        },
+        {
+          "points": 110.84,
+          "seed": 9,
+          "teamName": "Skim othy"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": "GmC2",
+      "round": 1,
+      "routing": "W to GmC4, L to GmC6",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 110.32,
+          "seed": 12,
+          "teamName": "Fresh Prince of Helaire"
+        },
+        {
+          "points": 153.34,
+          "seed": 11,
+          "teamName": "Well-Endowed RichardNicholas"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": "GmC3",
+      "round": 2,
+      "routing": "W to GmC5, L to GmC6",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 74.44,
+          "seed": 9,
+          "teamName": "Skim othy"
+        },
+        {
+          "points": 98.96,
+          "seed": 7,
+          "teamName": "Team Frederick"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC4",
+      "round": 2,
+      "routing": "W to GmC7, L to GmC8",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 86.3,
+          "seed": 11,
+          "teamName": "Well-Endowed RichardNicholas"
+        },
+        {
+          "points": 136.32,
+          "seed": 8,
+          "teamName": "D'Raheem Team"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC5",
+      "round": 2,
+      "routing": "W to GmC7, L to GmC9",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 112.62,
+          "seed": 12,
+          "teamName": "Fresh Prince of Helaire"
+        },
+        {
+          "points": 123.72,
+          "seed": 10,
+          "teamName": "Team Pensa"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC6",
+      "round": 3,
+      "routing": "W to GmC8, L to GmC9",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 131.48,
+          "seed": 8,
+          "teamName": "D'Raheem Team"
+        },
+        {
+          "points": 150.82,
+          "seed": 7,
+          "teamName": "Team Frederick"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC7",
+      "round": 3,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 78.44,
+          "seed": 10,
+          "teamName": "Team Pensa"
+        },
+        {
+          "points": 110.7,
+          "seed": 9,
+          "teamName": "Skim othy"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC8",
+      "round": 3,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 99.22,
+          "seed": 12,
+          "teamName": "Fresh Prince of Helaire"
+        },
+        {
+          "points": 144.92,
+          "seed": 11,
+          "teamName": "Well-Endowed RichardNicholas"
+        }
+      ],
+      "week": 16
+    }
+  ],
+  "hasDrafts": false,
+  "hasRosters": false,
+  "hasWeeklyMatchups": false,
+  "imported": true,
+  "playoffWeekStart": 14,
+  "regularSeasonWeeks": 13,
+  "season": 2020,
+  "source": "ESPN Fantasy (imported from archived MHTML)",
+  "standings": [
+    {
+      "finalPlace": 1,
+      "losses": 3,
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "pointsAgainst": 1481.82,
+      "pointsFor": 1608.22,
+      "seed": 3,
+      "teamName": "All Mahomies Hate SamDarnold",
+      "teamSlug": "jake-gibbons",
+      "ties": 0,
+      "wins": 10
+    },
+    {
+      "finalPlace": 2,
+      "losses": 6,
+      "ownerSlugs": [
+        "jaymie-lew"
+      ],
+      "pointsAgainst": 1548.16,
+      "pointsFor": 1638.84,
+      "seed": 5,
+      "teamName": "Team Lew",
+      "teamSlug": "jaymie-lew",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 3,
+      "losses": 3,
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "pointsAgainst": 1381.06,
+      "pointsFor": 1629.16,
+      "seed": 1,
+      "teamName": "James RB1nson",
+      "teamSlug": "david-collier",
+      "ties": 0,
+      "wins": 10
+    },
+    {
+      "finalPlace": 4,
+      "losses": 4,
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "pointsAgainst": 1552.76,
+      "pointsFor": 1819.02,
+      "seed": 2,
+      "teamName": "Kyler, The Creator",
+      "teamSlug": "safvet-besen",
+      "ties": 0,
+      "wins": 9
+    },
+    {
+      "finalPlace": 5,
+      "losses": 6,
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "pointsAgainst": 1437.52,
+      "pointsFor": 1518.86,
+      "seed": 6,
+      "teamName": "Wet Ass Pigskin",
+      "teamSlug": "brendon-ng",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 6,
+      "losses": 5,
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "pointsAgainst": 1331.22,
+      "pointsFor": 1428.08,
+      "seed": 4,
+      "teamName": "Team Nelli",
+      "teamSlug": "olivia-nelli",
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "finalPlace": 7,
+      "losses": 6,
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "pointsAgainst": 1411.52,
+      "pointsFor": 1376.3,
+      "seed": 7,
+      "teamName": "Team Frederick",
+      "teamSlug": "michaela-frederick",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 8,
+      "losses": 8,
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "pointsAgainst": 1537.76,
+      "pointsFor": 1580.22,
+      "seed": 8,
+      "teamName": "D'Raheem Team",
+      "teamSlug": "tyler-jung",
+      "ties": 0,
+      "wins": 5
+    },
+    {
+      "finalPlace": 9,
+      "losses": 9,
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "pointsAgainst": 1706.98,
+      "pointsFor": 1511.38,
+      "seed": 9,
+      "teamName": "Skim othy",
+      "teamSlug": "spencer-kim",
+      "ties": 0,
+      "wins": 4
+    },
+    {
+      "finalPlace": 10,
+      "losses": 9,
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "pointsAgainst": 1667.28,
+      "pointsFor": 1394.48,
+      "seed": 10,
+      "teamName": "Team Pensa",
+      "teamSlug": "cassidy-pensa",
+      "ties": 0,
+      "wins": 4
+    },
+    {
+      "finalPlace": 11,
+      "losses": 9,
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "pointsAgainst": 1564.46,
+      "pointsFor": 1323.14,
+      "seed": 11,
+      "teamName": "Well-Endowed RichardNicholas",
+      "teamSlug": "reagan-schmidt",
+      "ties": 0,
+      "wins": 4
+    },
+    {
+      "finalPlace": 12,
+      "losses": 10,
+      "ownerSlugs": [
+        "logan-dunn"
+      ],
+      "pointsAgainst": 1525.48,
+      "pointsFor": 1318.32,
+      "seed": 12,
+      "teamName": "Fresh Prince of Helaire",
+      "teamSlug": "logan-dunn",
+      "ties": 0,
+      "wins": 3
+    }
+  ],
+  "teams": 12
+}

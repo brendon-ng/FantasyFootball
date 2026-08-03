@@ -44,9 +44,30 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
         <Link href="/history/" className="text-xs text-chalk-600 hover:text-accent">
           ← History
         </Link>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">{owner.name}</h1>
-        {owner.coOwners.length ? (
-          <p className="mt-1 text-sm text-chalk-500">Co-owned with {owner.coOwners.join(", ")}</p>
+        <div className="mt-1 flex flex-wrap items-center gap-2.5">
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{owner.name}</h1>
+          {!owner.active ? (
+            <span
+              className="rounded-full border border-ink-500 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-chalk-500"
+              title="No longer in the league; kept for the historical record"
+            >
+              Former owner
+            </span>
+          ) : null}
+        </div>
+        {owner.coOwnedWith.length ? (
+          <p className="mt-1 text-sm text-chalk-500">
+            Co-owned with{" "}
+            {owner.coOwnedWith.map((c, i) => (
+              <span key={c}>
+                {i > 0 ? ", " : ""}
+                <Link href={`/owners/${c}/`} className="hover:text-accent">
+                  {name(c)}
+                </Link>
+              </span>
+            ))}
+            . Their record is credited to both.
+          </p>
         ) : null}
       </div>
 
@@ -131,7 +152,11 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             </Panel>
 
             <Panel>
-              <PanelHeader title="Head to Head" meta="regular season · best first" />
+              <PanelHeader
+                title="Head to Head"
+                meta="regular season · best first"
+                legend="2024 onward — imported ESPN seasons have no weekly matchup data."
+              />
               <ListHeader>
                 <Col className="flex-1">Opponent</Col>
                 <Col className="hidden w-20 shrink-0 text-center sm:block" hint="Share of meetings won">

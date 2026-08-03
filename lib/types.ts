@@ -11,17 +11,26 @@ export interface Owner {
   slug: string;
   name: string;
   firstName: string;
-  userId: string;
-  coOwners: string[];
+  userId: string | null;
+  /** False once someone has left the league; kept for history. */
+  active: boolean;
   /** Seasons this owner fielded a team, ascending. */
   seasons: number[];
+  /** Other owners they have shared a team with, by slug. */
+  coOwnedWith: string[];
 }
 
 export type SeasonStatus = "pre_draft" | "drafting" | "in_season" | "complete";
 
 /** A single team's regular-season line for one season. */
 export interface StandingsRow {
+  /**
+   * Primary owner — the franchise key used for keeper grouping and URLs.
+   * For Sleeper this is the roster's owner_id; for ESPN, the first name listed.
+   */
   ownerSlug: string;
+  /** Every owner credited with this team-season, including co-owners. */
+  ownerSlugs: string[];
   rosterId: number;
   teamName: string | null;
   seed: number;
@@ -70,6 +79,13 @@ export interface SeasonSummary {
   leagueName: string;
   status: SeasonStatus;
   finalized: boolean;
+  /**
+   * True for the 2020-23 ESPN seasons reconstructed from archived pages. They
+   * have standings and brackets but NO weekly matchups, rosters or drafts, so
+   * they must be excluded from head-to-head, weekly records and keeper history.
+   */
+  imported: boolean;
+  teams: number;
   regularSeasonWeeks: number;
   finalizedThroughWeek: number;
   standings: StandingsRow[];

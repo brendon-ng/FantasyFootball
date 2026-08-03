@@ -1,8 +1,2020 @@
 [
   {
+    "champion": "jake-gibbons",
+    "finalized": true,
+    "finalizedThroughWeek": 16,
+    "imported": true,
+    "lastPlace": "logan-dunn",
+    "leagueId": "espn-2020",
+    "leagueName": "Den Ops Fantasy Football (ESPN)",
+    "losersBracket": [
+      {
+        "inverted": false,
+        "loser": "brendon-ng",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 119.4,
+          "olivia-nelli": 130.32
+        },
+        "round": 2,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "olivia-nelli",
+        "team2From": null,
+        "week": 15,
+        "winner": "olivia-nelli"
+      },
+      {
+        "inverted": false,
+        "loser": "safvet-besen",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "david-collier": 120.3,
+          "safvet-besen": 85.98
+        },
+        "round": 3,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": "david-collier",
+        "team2From": null,
+        "week": 16,
+        "winner": "david-collier"
+      },
+      {
+        "inverted": false,
+        "loser": "olivia-nelli",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 111.54,
+          "olivia-nelli": 80.26
+        },
+        "round": 3,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "olivia-nelli",
+        "team2From": null,
+        "week": 16,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "loser": "tyler-jung",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "michaela-frederick": 109.72,
+          "tyler-jung": 103.74
+        },
+        "round": 1,
+        "team1": "tyler-jung",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 14,
+        "winner": "michaela-frederick"
+      },
+      {
+        "inverted": false,
+        "loser": "cassidy-pensa",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 104.58,
+          "spencer-kim": 110.84
+        },
+        "round": 1,
+        "team1": "cassidy-pensa",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "week": 14,
+        "winner": "spencer-kim"
+      },
+      {
+        "inverted": false,
+        "loser": "logan-dunn",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "logan-dunn": 110.32,
+          "reagan-schmidt": 153.34
+        },
+        "round": 1,
+        "team1": "logan-dunn",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": null,
+        "week": 14,
+        "winner": "reagan-schmidt"
+      },
+      {
+        "inverted": false,
+        "loser": "spencer-kim",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "michaela-frederick": 98.96,
+          "spencer-kim": 74.44
+        },
+        "round": 2,
+        "team1": "spencer-kim",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 15,
+        "winner": "michaela-frederick"
+      },
+      {
+        "inverted": false,
+        "loser": "reagan-schmidt",
+        "matchId": 5,
+        "placesFor": null,
+        "points": {
+          "reagan-schmidt": 86.3,
+          "tyler-jung": 136.32
+        },
+        "round": 2,
+        "team1": "reagan-schmidt",
+        "team1From": null,
+        "team2": "tyler-jung",
+        "team2From": null,
+        "week": 15,
+        "winner": "tyler-jung"
+      },
+      {
+        "inverted": false,
+        "loser": "logan-dunn",
+        "matchId": 6,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 123.72,
+          "logan-dunn": 112.62
+        },
+        "round": 2,
+        "team1": "logan-dunn",
+        "team1From": null,
+        "team2": "cassidy-pensa",
+        "team2From": null,
+        "week": 15,
+        "winner": "cassidy-pensa"
+      },
+      {
+        "inverted": false,
+        "loser": "tyler-jung",
+        "matchId": 7,
+        "placesFor": null,
+        "points": {
+          "michaela-frederick": 150.82,
+          "tyler-jung": 131.48
+        },
+        "round": 3,
+        "team1": "tyler-jung",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 16,
+        "winner": "michaela-frederick"
+      },
+      {
+        "inverted": false,
+        "loser": "cassidy-pensa",
+        "matchId": 8,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 78.44,
+          "spencer-kim": 110.7
+        },
+        "round": 3,
+        "team1": "cassidy-pensa",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "week": 16,
+        "winner": "spencer-kim"
+      },
+      {
+        "inverted": false,
+        "loser": "logan-dunn",
+        "matchId": 9,
+        "placesFor": null,
+        "points": {
+          "logan-dunn": 99.22,
+          "reagan-schmidt": 144.92
+        },
+        "round": 3,
+        "team1": "logan-dunn",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": null,
+        "week": 16,
+        "winner": "reagan-schmidt"
+      }
+    ],
+    "regularSeasonWeeks": 13,
+    "runnerUp": "jaymie-lew",
+    "season": 2020,
+    "standings": [
+      {
+        "finalPlace": 3,
+        "losses": 3,
+        "madePlayoffs": true,
+        "ownerSlug": "david-collier",
+        "ownerSlugs": [
+          "david-collier"
+        ],
+        "pointsAgainst": 1381.06,
+        "pointsFor": 1629.16,
+        "rosterId": 1,
+        "seed": 1,
+        "teamName": "James RB1nson",
+        "ties": 0,
+        "wins": 10
+      },
+      {
+        "finalPlace": 4,
+        "losses": 4,
+        "madePlayoffs": true,
+        "ownerSlug": "safvet-besen",
+        "ownerSlugs": [
+          "safvet-besen"
+        ],
+        "pointsAgainst": 1552.76,
+        "pointsFor": 1819.02,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "Kyler, The Creator",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 1,
+        "losses": 3,
+        "madePlayoffs": true,
+        "ownerSlug": "jake-gibbons",
+        "ownerSlugs": [
+          "jake-gibbons"
+        ],
+        "pointsAgainst": 1481.82,
+        "pointsFor": 1608.22,
+        "rosterId": 3,
+        "seed": 3,
+        "teamName": "All Mahomies Hate SamDarnold",
+        "ties": 0,
+        "wins": 10
+      },
+      {
+        "finalPlace": 6,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "olivia-nelli",
+        "ownerSlugs": [
+          "olivia-nelli"
+        ],
+        "pointsAgainst": 1331.22,
+        "pointsFor": 1428.08,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "Team Nelli",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 2,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "jaymie-lew",
+        "ownerSlugs": [
+          "jaymie-lew"
+        ],
+        "pointsAgainst": 1548.16,
+        "pointsFor": 1638.84,
+        "rosterId": 5,
+        "seed": 5,
+        "teamName": "Team Lew",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 5,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1437.52,
+        "pointsFor": 1518.86,
+        "rosterId": 6,
+        "seed": 6,
+        "teamName": "Wet Ass Pigskin",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 7,
+        "losses": 6,
+        "madePlayoffs": false,
+        "ownerSlug": "michaela-frederick",
+        "ownerSlugs": [
+          "michaela-frederick"
+        ],
+        "pointsAgainst": 1411.52,
+        "pointsFor": 1376.3,
+        "rosterId": 7,
+        "seed": 7,
+        "teamName": "Team Frederick",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 8,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "tyler-jung",
+        "ownerSlugs": [
+          "tyler-jung"
+        ],
+        "pointsAgainst": 1537.76,
+        "pointsFor": 1580.22,
+        "rosterId": 8,
+        "seed": 8,
+        "teamName": "D'Raheem Team",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 9,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "spencer-kim",
+        "ownerSlugs": [
+          "spencer-kim"
+        ],
+        "pointsAgainst": 1706.98,
+        "pointsFor": 1511.38,
+        "rosterId": 9,
+        "seed": 9,
+        "teamName": "Skim othy",
+        "ties": 0,
+        "wins": 4
+      },
+      {
+        "finalPlace": 10,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "cassidy-pensa",
+        "ownerSlugs": [
+          "cassidy-pensa"
+        ],
+        "pointsAgainst": 1667.28,
+        "pointsFor": 1394.48,
+        "rosterId": 10,
+        "seed": 10,
+        "teamName": "Team Pensa",
+        "ties": 0,
+        "wins": 4
+      },
+      {
+        "finalPlace": 11,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "reagan-schmidt",
+        "ownerSlugs": [
+          "reagan-schmidt"
+        ],
+        "pointsAgainst": 1564.46,
+        "pointsFor": 1323.14,
+        "rosterId": 11,
+        "seed": 11,
+        "teamName": "Well-Endowed RichardNicholas",
+        "ties": 0,
+        "wins": 4
+      },
+      {
+        "finalPlace": 12,
+        "losses": 10,
+        "madePlayoffs": false,
+        "ownerSlug": "logan-dunn",
+        "ownerSlugs": [
+          "logan-dunn"
+        ],
+        "pointsAgainst": 1525.48,
+        "pointsFor": 1318.32,
+        "rosterId": 12,
+        "seed": 12,
+        "teamName": "Fresh Prince of Helaire",
+        "ties": 0,
+        "wins": 3
+      }
+    ],
+    "status": "complete",
+    "teams": 12,
+    "thirdPlace": "david-collier",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "loser": "olivia-nelli",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "jaymie-lew": 146.3,
+          "olivia-nelli": 77.16
+        },
+        "round": 1,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "olivia-nelli",
+        "team2From": null,
+        "week": 14,
+        "winner": "jaymie-lew"
+      },
+      {
+        "inverted": false,
+        "loser": "brendon-ng",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 108.08,
+          "jake-gibbons": 135.1
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "jake-gibbons",
+        "team2From": null,
+        "week": 14,
+        "winner": "jake-gibbons"
+      },
+      {
+        "inverted": false,
+        "loser": "david-collier",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "david-collier": 116.46,
+          "jaymie-lew": 164.92
+        },
+        "round": 2,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "david-collier",
+        "team2From": null,
+        "week": 15,
+        "winner": "jaymie-lew"
+      },
+      {
+        "inverted": false,
+        "loser": "safvet-besen",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "jake-gibbons": 149.26,
+          "safvet-besen": 106.84
+        },
+        "round": 2,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "safvet-besen",
+        "team2From": null,
+        "week": 15,
+        "winner": "jake-gibbons"
+      },
+      {
+        "inverted": false,
+        "loser": "jaymie-lew",
+        "matchId": 5,
+        "placesFor": null,
+        "points": {
+          "jake-gibbons": 182.32,
+          "jaymie-lew": 162.26
+        },
+        "round": 3,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "jake-gibbons",
+        "team2From": null,
+        "week": 16,
+        "winner": "jake-gibbons"
+      }
+    ]
+  },
+  {
+    "champion": "brendon-ng",
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "imported": true,
+    "lastPlace": "reagan-schmidt",
+    "leagueId": "espn-2021",
+    "leagueName": "Den Ops Fantasy Football (ESPN)",
+    "losersBracket": [
+      {
+        "inverted": false,
+        "loser": "david-collier",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "david-collier": 82.08,
+          "jake-gibbons": 84.6
+        },
+        "round": 2,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "david-collier",
+        "team2From": null,
+        "week": 16,
+        "winner": "jake-gibbons"
+      },
+      {
+        "inverted": false,
+        "loser": "cassidy-pensa",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 67.58,
+          "safvet-besen": 135.06
+        },
+        "round": 3,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": "cassidy-pensa",
+        "team2From": null,
+        "week": 17,
+        "winner": "safvet-besen"
+      },
+      {
+        "inverted": false,
+        "loser": "jake-gibbons",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "david-collier": 115,
+          "jake-gibbons": 114.44
+        },
+        "round": 3,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "david-collier",
+        "team2From": null,
+        "week": 17,
+        "winner": "david-collier"
+      },
+      {
+        "inverted": false,
+        "loser": "reagan-schmidt",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "reagan-schmidt": 41.58,
+          "spencer-kim": 86.9
+        },
+        "round": 1,
+        "team1": "reagan-schmidt",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "week": 15,
+        "winner": "spencer-kim"
+      },
+      {
+        "inverted": false,
+        "loser": "michaela-frederick",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "michaela-frederick": 95.88,
+          "olivia-nelli": 108.64
+        },
+        "round": 1,
+        "team1": "olivia-nelli",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 15,
+        "winner": "olivia-nelli"
+      },
+      {
+        "inverted": false,
+        "loser": "jaymie-lew",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "jaymie-lew": 84.08,
+          "logan-dunn": 96.24
+        },
+        "round": 1,
+        "team1": "logan-dunn",
+        "team1From": null,
+        "team2": "jaymie-lew",
+        "team2From": null,
+        "week": 15,
+        "winner": "logan-dunn"
+      },
+      {
+        "inverted": false,
+        "loser": "spencer-kim",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "olivia-nelli": 116.74,
+          "spencer-kim": 110.62
+        },
+        "round": 2,
+        "team1": "olivia-nelli",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "week": 16,
+        "winner": "olivia-nelli"
+      },
+      {
+        "inverted": false,
+        "loser": "reagan-schmidt",
+        "matchId": 5,
+        "placesFor": null,
+        "points": {
+          "logan-dunn": 107.36,
+          "reagan-schmidt": 71.5
+        },
+        "round": 2,
+        "team1": "logan-dunn",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": null,
+        "week": 16,
+        "winner": "logan-dunn"
+      },
+      {
+        "inverted": false,
+        "loser": "michaela-frederick",
+        "matchId": 6,
+        "placesFor": null,
+        "points": {
+          "jaymie-lew": 158.1,
+          "michaela-frederick": 121.7
+        },
+        "round": 2,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 16,
+        "winner": "jaymie-lew"
+      },
+      {
+        "inverted": false,
+        "loser": "olivia-nelli",
+        "matchId": 7,
+        "placesFor": null,
+        "points": {
+          "logan-dunn": 126.36,
+          "olivia-nelli": 109.14
+        },
+        "round": 3,
+        "team1": "logan-dunn",
+        "team1From": null,
+        "team2": "olivia-nelli",
+        "team2From": null,
+        "week": 17,
+        "winner": "logan-dunn"
+      },
+      {
+        "inverted": false,
+        "loser": "spencer-kim",
+        "matchId": 8,
+        "placesFor": null,
+        "points": {
+          "jaymie-lew": 160.12,
+          "spencer-kim": 105.06
+        },
+        "round": 3,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "week": 17,
+        "winner": "jaymie-lew"
+      },
+      {
+        "inverted": false,
+        "loser": "reagan-schmidt",
+        "matchId": 9,
+        "placesFor": null,
+        "points": {
+          "michaela-frederick": 90.1,
+          "reagan-schmidt": 63.44
+        },
+        "round": 3,
+        "team1": "michaela-frederick",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": null,
+        "week": 17,
+        "winner": "michaela-frederick"
+      }
+    ],
+    "regularSeasonWeeks": 14,
+    "runnerUp": "tyler-jung",
+    "season": 2021,
+    "standings": [
+      {
+        "finalPlace": 4,
+        "losses": 1,
+        "madePlayoffs": true,
+        "ownerSlug": "cassidy-pensa",
+        "ownerSlugs": [
+          "cassidy-pensa"
+        ],
+        "pointsAgainst": 1481.52,
+        "pointsFor": 1791.82,
+        "rosterId": 1,
+        "seed": 1,
+        "teamName": "Feels Great Baby",
+        "ties": 0,
+        "wins": 13
+      },
+      {
+        "finalPlace": 3,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "safvet-besen",
+        "ownerSlugs": [
+          "safvet-besen"
+        ],
+        "pointsAgainst": 1538.02,
+        "pointsFor": 1580.04,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "Hot Chubb Time Machine",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 2,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "tyler-jung",
+        "ownerSlugs": [
+          "tyler-jung"
+        ],
+        "pointsAgainst": 1501.82,
+        "pointsFor": 1759.82,
+        "rosterId": 3,
+        "seed": 3,
+        "teamName": "Trey Area",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 5,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "david-collier",
+        "ownerSlugs": [
+          "david-collier"
+        ],
+        "pointsAgainst": 1647.66,
+        "pointsFor": 1724.22,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "Big Waller Brand",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 1,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1441.52,
+        "pointsFor": 1500,
+        "rosterId": 5,
+        "seed": 5,
+        "teamName": "Wet Ass Pigskin",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 6,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "jake-gibbons",
+        "ownerSlugs": [
+          "jake-gibbons"
+        ],
+        "pointsAgainst": 1677.98,
+        "pointsFor": 1775.44,
+        "rosterId": 6,
+        "seed": 6,
+        "teamName": "All Mahomies Hate SamDarnold",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 10,
+        "losses": 7,
+        "madePlayoffs": false,
+        "ownerSlug": "spencer-kim",
+        "ownerSlugs": [
+          "spencer-kim"
+        ],
+        "pointsAgainst": 1606.46,
+        "pointsFor": 1507.1,
+        "rosterId": 7,
+        "seed": 7,
+        "teamName": "Skim othy",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 12,
+        "losses": 7,
+        "madePlayoffs": false,
+        "ownerSlug": "reagan-schmidt",
+        "ownerSlugs": [
+          "reagan-schmidt"
+        ],
+        "pointsAgainst": 1565.58,
+        "pointsFor": 1420.48,
+        "rosterId": 8,
+        "seed": 8,
+        "teamName": "Well-Endowed RichardNicholas",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 11,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "michaela-frederick",
+        "ownerSlugs": [
+          "michaela-frederick"
+        ],
+        "pointsAgainst": 1694.96,
+        "pointsFor": 1667.68,
+        "rosterId": 9,
+        "seed": 9,
+        "teamName": "Team Frederick",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 8,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "olivia-nelli",
+        "ownerSlugs": [
+          "olivia-nelli",
+          "lauren-gross"
+        ],
+        "pointsAgainst": 1567.9,
+        "pointsFor": 1455.76,
+        "rosterId": 10,
+        "seed": 10,
+        "teamName": "She Doesn't Even Go Here",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 9,
+        "losses": 10,
+        "madePlayoffs": false,
+        "ownerSlug": "jaymie-lew",
+        "ownerSlugs": [
+          "jaymie-lew"
+        ],
+        "pointsAgainst": 1620.68,
+        "pointsFor": 1488.58,
+        "rosterId": 11,
+        "seed": 11,
+        "teamName": "Team Lew",
+        "ties": 0,
+        "wins": 4
+      },
+      {
+        "finalPlace": 7,
+        "losses": 11,
+        "madePlayoffs": false,
+        "ownerSlug": "logan-dunn",
+        "ownerSlugs": [
+          "logan-dunn"
+        ],
+        "pointsAgainst": 1610.4,
+        "pointsFor": 1283.56,
+        "rosterId": 12,
+        "seed": 12,
+        "teamName": "Discount Double Check",
+        "ties": 0,
+        "wins": 3
+      }
+    ],
+    "status": "complete",
+    "teams": 12,
+    "thirdPlace": "safvet-besen",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "loser": "david-collier",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 93.7,
+          "david-collier": 71.36
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "david-collier",
+        "team2From": null,
+        "week": 15,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "loser": "jake-gibbons",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "jake-gibbons": 111.58,
+          "tyler-jung": 113.46
+        },
+        "round": 1,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "tyler-jung",
+        "team2From": null,
+        "week": 15,
+        "winner": "tyler-jung"
+      },
+      {
+        "inverted": false,
+        "loser": "cassidy-pensa",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 137.06,
+          "cassidy-pensa": 88.94
+        },
+        "round": 2,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "cassidy-pensa",
+        "team2From": null,
+        "week": 16,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "loser": "safvet-besen",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "safvet-besen": 114.98,
+          "tyler-jung": 157.56
+        },
+        "round": 2,
+        "team1": "tyler-jung",
+        "team1From": null,
+        "team2": "safvet-besen",
+        "team2From": null,
+        "week": 16,
+        "winner": "tyler-jung"
+      },
+      {
+        "inverted": false,
+        "loser": "tyler-jung",
+        "matchId": 5,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 122.9,
+          "tyler-jung": 103.56
+        },
+        "round": 3,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "tyler-jung",
+        "team2From": null,
+        "week": 17,
+        "winner": "brendon-ng"
+      }
+    ]
+  },
+  {
+    "champion": "tyler-jung",
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "imported": true,
+    "lastPlace": "logan-dunn",
+    "leagueId": "espn-2022",
+    "leagueName": "Den Ops Fantasy Football (ESPN)",
+    "losersBracket": [
+      {
+        "inverted": false,
+        "loser": "safvet-besen",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "reagan-schmidt": 144,
+          "safvet-besen": 101.5
+        },
+        "round": 2,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": null,
+        "week": 16,
+        "winner": "reagan-schmidt"
+      },
+      {
+        "inverted": false,
+        "loser": "david-collier",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 122.56,
+          "david-collier": 102.12
+        },
+        "round": 3,
+        "team1": "david-collier",
+        "team1From": null,
+        "team2": "brendon-ng",
+        "team2From": null,
+        "week": 17,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "loser": "safvet-besen",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "reagan-schmidt": 125.28,
+          "safvet-besen": 70.9
+        },
+        "round": 3,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": null,
+        "week": 17,
+        "winner": "reagan-schmidt"
+      },
+      {
+        "inverted": false,
+        "loser": "michaela-frederick",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "michaela-frederick": 111.04,
+          "olivia-nelli": 118.06
+        },
+        "round": 1,
+        "team1": "olivia-nelli",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 15,
+        "winner": "olivia-nelli"
+      },
+      {
+        "inverted": false,
+        "loser": "logan-dunn",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "jake-gibbons": 140.6,
+          "logan-dunn": 114.92
+        },
+        "round": 1,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "logan-dunn",
+        "team2From": null,
+        "week": 15,
+        "winner": "jake-gibbons"
+      },
+      {
+        "inverted": false,
+        "loser": "jaymie-lew",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 151.44,
+          "jaymie-lew": 92.28
+        },
+        "round": 1,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "cassidy-pensa",
+        "team2From": null,
+        "week": 15,
+        "winner": "cassidy-pensa"
+      },
+      {
+        "inverted": false,
+        "loser": "olivia-nelli",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "jake-gibbons": 112.96,
+          "olivia-nelli": 101.08
+        },
+        "round": 2,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "olivia-nelli",
+        "team2From": null,
+        "week": 16,
+        "winner": "jake-gibbons"
+      },
+      {
+        "inverted": false,
+        "loser": "cassidy-pensa",
+        "matchId": 5,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 127.76,
+          "michaela-frederick": 150.28
+        },
+        "round": 2,
+        "team1": "cassidy-pensa",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 16,
+        "winner": "michaela-frederick"
+      },
+      {
+        "inverted": false,
+        "loser": "logan-dunn",
+        "matchId": 6,
+        "placesFor": null,
+        "points": {
+          "jaymie-lew": 97.46,
+          "logan-dunn": 55
+        },
+        "round": 2,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "logan-dunn",
+        "team2From": null,
+        "week": 16,
+        "winner": "jaymie-lew"
+      },
+      {
+        "inverted": false,
+        "loser": "jake-gibbons",
+        "matchId": 7,
+        "placesFor": null,
+        "points": {
+          "jake-gibbons": 77.1,
+          "michaela-frederick": 106.28
+        },
+        "round": 3,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 17,
+        "winner": "michaela-frederick"
+      },
+      {
+        "inverted": false,
+        "loser": "olivia-nelli",
+        "matchId": 8,
+        "placesFor": null,
+        "points": {
+          "jaymie-lew": 88.6,
+          "olivia-nelli": 57.2
+        },
+        "round": 3,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "olivia-nelli",
+        "team2From": null,
+        "week": 17,
+        "winner": "jaymie-lew"
+      },
+      {
+        "inverted": false,
+        "loser": "logan-dunn",
+        "matchId": 9,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 82.9,
+          "logan-dunn": 73.98
+        },
+        "round": 3,
+        "team1": "cassidy-pensa",
+        "team1From": null,
+        "team2": "logan-dunn",
+        "team2From": null,
+        "week": 17,
+        "winner": "cassidy-pensa"
+      }
+    ],
+    "regularSeasonWeeks": 14,
+    "runnerUp": "spencer-kim",
+    "season": 2022,
+    "standings": [
+      {
+        "finalPlace": 3,
+        "losses": 3,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1418.78,
+        "pointsFor": 1899.86,
+        "rosterId": 1,
+        "seed": 1,
+        "teamName": "Wet Ass Pigskin",
+        "ties": 0,
+        "wins": 11
+      },
+      {
+        "finalPlace": 4,
+        "losses": 3,
+        "madePlayoffs": true,
+        "ownerSlug": "david-collier",
+        "ownerSlugs": [
+          "david-collier"
+        ],
+        "pointsAgainst": 1465.6,
+        "pointsFor": 1687.48,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "Genofinity and Beyond",
+        "ties": 0,
+        "wins": 11
+      },
+      {
+        "finalPlace": 2,
+        "losses": 4,
+        "madePlayoffs": true,
+        "ownerSlug": "spencer-kim",
+        "ownerSlugs": [
+          "spencer-kim"
+        ],
+        "pointsAgainst": 1446.32,
+        "pointsFor": 1796.74,
+        "rosterId": 3,
+        "seed": 3,
+        "teamName": "Skim othy",
+        "ties": 0,
+        "wins": 10
+      },
+      {
+        "finalPlace": 1,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "tyler-jung",
+        "ownerSlugs": [
+          "tyler-jung"
+        ],
+        "pointsAgainst": 1598.52,
+        "pointsFor": 1777.6,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "Joe Brrrr",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 5,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "reagan-schmidt",
+        "ownerSlugs": [
+          "reagan-schmidt"
+        ],
+        "pointsAgainst": 1510.34,
+        "pointsFor": 1384.66,
+        "rosterId": 5,
+        "seed": 5,
+        "teamName": "Salt Lake City MorMoms",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 6,
+        "losses": 8,
+        "madePlayoffs": true,
+        "ownerSlug": "safvet-besen",
+        "ownerSlugs": [
+          "safvet-besen"
+        ],
+        "pointsAgainst": 1634.56,
+        "pointsFor": 1596.24,
+        "rosterId": 6,
+        "seed": 6,
+        "teamName": "Tuafinity and Beyond",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 7,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "michaela-frederick",
+        "ownerSlugs": [
+          "michaela-frederick"
+        ],
+        "pointsAgainst": 1654.52,
+        "pointsFor": 1533.42,
+        "rosterId": 7,
+        "seed": 7,
+        "teamName": "Team Frederick",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 10,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "olivia-nelli",
+        "ownerSlugs": [
+          "olivia-nelli",
+          "lauren-gross"
+        ],
+        "pointsAgainst": 1533.68,
+        "pointsFor": 1526.62,
+        "rosterId": 8,
+        "seed": 8,
+        "teamName": "She Doesn't Even Go Here",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 12,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "logan-dunn",
+        "ownerSlugs": [
+          "logan-dunn"
+        ],
+        "pointsAgainst": 1520.42,
+        "pointsFor": 1439.96,
+        "rosterId": 9,
+        "seed": 9,
+        "teamName": "Herbie Fully Loaded",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 8,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "jake-gibbons",
+        "ownerSlugs": [
+          "jake-gibbons"
+        ],
+        "pointsAgainst": 1535.58,
+        "pointsFor": 1538.82,
+        "rosterId": 10,
+        "seed": 10,
+        "teamName": "All Mahomies Hate SamDarnold",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 11,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "cassidy-pensa",
+        "ownerSlugs": [
+          "cassidy-pensa"
+        ],
+        "pointsAgainst": 1795.02,
+        "pointsFor": 1521.8,
+        "rosterId": 11,
+        "seed": 11,
+        "teamName": "Feels Great Baby",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 9,
+        "losses": 13,
+        "madePlayoffs": false,
+        "ownerSlug": "jaymie-lew",
+        "ownerSlugs": [
+          "jaymie-lew"
+        ],
+        "pointsAgainst": 1662.4,
+        "pointsFor": 1072.54,
+        "rosterId": 12,
+        "seed": 12,
+        "teamName": "SuccopDeez Nuts",
+        "ties": 0,
+        "wins": 1
+      }
+    ],
+    "status": "complete",
+    "teams": 12,
+    "thirdPlace": "brendon-ng",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "loser": "reagan-schmidt",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "reagan-schmidt": 88.94,
+          "tyler-jung": 111.9
+        },
+        "round": 1,
+        "team1": "reagan-schmidt",
+        "team1From": null,
+        "team2": "tyler-jung",
+        "team2From": null,
+        "week": 15,
+        "winner": "tyler-jung"
+      },
+      {
+        "inverted": false,
+        "loser": "safvet-besen",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "safvet-besen": 102.06,
+          "spencer-kim": 148.24
+        },
+        "round": 1,
+        "team1": "safvet-besen",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "week": 15,
+        "winner": "spencer-kim"
+      },
+      {
+        "inverted": false,
+        "loser": "brendon-ng",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 104.6,
+          "tyler-jung": 108
+        },
+        "round": 2,
+        "team1": "tyler-jung",
+        "team1From": null,
+        "team2": "brendon-ng",
+        "team2From": null,
+        "week": 16,
+        "winner": "tyler-jung"
+      },
+      {
+        "inverted": false,
+        "loser": "david-collier",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "david-collier": 72.1,
+          "spencer-kim": 114.46
+        },
+        "round": 2,
+        "team1": "spencer-kim",
+        "team1From": null,
+        "team2": "david-collier",
+        "team2From": null,
+        "week": 16,
+        "winner": "spencer-kim"
+      },
+      {
+        "inverted": false,
+        "loser": "spencer-kim",
+        "matchId": 5,
+        "placesFor": null,
+        "points": {
+          "spencer-kim": 97.52,
+          "tyler-jung": 141.8
+        },
+        "round": 3,
+        "team1": "tyler-jung",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "week": 17,
+        "winner": "tyler-jung"
+      }
+    ]
+  },
+  {
+    "champion": "logan-dunn",
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "imported": true,
+    "lastPlace": "michaela-frederick",
+    "leagueId": "espn-2023",
+    "leagueName": "Den Ops Fantasy Football (ESPN)",
+    "losersBracket": [
+      {
+        "inverted": false,
+        "loser": "david-collier",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "david-collier": 99.62,
+          "olivia-nelli": 210.18
+        },
+        "round": 2,
+        "team1": "david-collier",
+        "team1From": null,
+        "team2": "olivia-nelli",
+        "team2From": null,
+        "week": 16,
+        "winner": "olivia-nelli"
+      },
+      {
+        "inverted": false,
+        "loser": "safvet-besen",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 116.28,
+          "safvet-besen": 96.92
+        },
+        "round": 3,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "safvet-besen",
+        "team2From": null,
+        "week": 17,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "loser": "olivia-nelli",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "david-collier": 109.3,
+          "olivia-nelli": 106.36
+        },
+        "round": 3,
+        "team1": "david-collier",
+        "team1From": null,
+        "team2": "olivia-nelli",
+        "team2From": null,
+        "week": 17,
+        "winner": "david-collier"
+      },
+      {
+        "inverted": false,
+        "loser": "cassidy-pensa",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 85.42,
+          "tyler-jung": 111.26
+        },
+        "round": 1,
+        "team1": "tyler-jung",
+        "team1From": null,
+        "team2": "cassidy-pensa",
+        "team2From": null,
+        "week": 15,
+        "winner": "tyler-jung"
+      },
+      {
+        "inverted": false,
+        "loser": "jake-gibbons",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "jake-gibbons": 101.18,
+          "spencer-kim": 134
+        },
+        "round": 1,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "week": 15,
+        "winner": "spencer-kim"
+      },
+      {
+        "inverted": false,
+        "loser": "jaymie-lew",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "jaymie-lew": 82.52,
+          "michaela-frederick": 112.86
+        },
+        "round": 1,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 15,
+        "winner": "michaela-frederick"
+      },
+      {
+        "inverted": false,
+        "loser": "spencer-kim",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "spencer-kim": 130.2,
+          "tyler-jung": 137.4
+        },
+        "round": 2,
+        "team1": "spencer-kim",
+        "team1From": null,
+        "team2": "tyler-jung",
+        "team2From": null,
+        "week": 16,
+        "winner": "tyler-jung"
+      },
+      {
+        "inverted": false,
+        "loser": "michaela-frederick",
+        "matchId": 5,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 120.52,
+          "michaela-frederick": 101.92
+        },
+        "round": 2,
+        "team1": "michaela-frederick",
+        "team1From": null,
+        "team2": "cassidy-pensa",
+        "team2From": null,
+        "week": 16,
+        "winner": "cassidy-pensa"
+      },
+      {
+        "inverted": false,
+        "loser": "jaymie-lew",
+        "matchId": 6,
+        "placesFor": null,
+        "points": {
+          "jake-gibbons": 90.8,
+          "jaymie-lew": 82.92
+        },
+        "round": 2,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "jake-gibbons",
+        "team2From": null,
+        "week": 16,
+        "winner": "jake-gibbons"
+      },
+      {
+        "inverted": false,
+        "loser": "tyler-jung",
+        "matchId": 7,
+        "placesFor": null,
+        "points": {
+          "cassidy-pensa": 110,
+          "tyler-jung": 107.38
+        },
+        "round": 3,
+        "team1": "tyler-jung",
+        "team1From": null,
+        "team2": "cassidy-pensa",
+        "team2From": null,
+        "week": 17,
+        "winner": "cassidy-pensa"
+      },
+      {
+        "inverted": false,
+        "loser": "spencer-kim",
+        "matchId": 8,
+        "placesFor": null,
+        "points": {
+          "jake-gibbons": 117.5,
+          "spencer-kim": 109.1
+        },
+        "round": 3,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "spencer-kim",
+        "team2From": null,
+        "week": 17,
+        "winner": "jake-gibbons"
+      },
+      {
+        "inverted": false,
+        "loser": "michaela-frederick",
+        "matchId": 9,
+        "placesFor": null,
+        "points": {
+          "jaymie-lew": 133.18,
+          "michaela-frederick": 69.68
+        },
+        "round": 3,
+        "team1": "jaymie-lew",
+        "team1From": null,
+        "team2": "michaela-frederick",
+        "team2From": null,
+        "week": 17,
+        "winner": "jaymie-lew"
+      }
+    ],
+    "regularSeasonWeeks": 14,
+    "runnerUp": "reagan-schmidt",
+    "season": 2023,
+    "standings": [
+      {
+        "finalPlace": 2,
+        "losses": 4,
+        "madePlayoffs": true,
+        "ownerSlug": "reagan-schmidt",
+        "ownerSlugs": [
+          "reagan-schmidt"
+        ],
+        "pointsAgainst": 1644.3,
+        "pointsFor": 1779.42,
+        "rosterId": 1,
+        "seed": 1,
+        "teamName": "Salt Lake City MorMoms",
+        "ties": 0,
+        "wins": 10
+      },
+      {
+        "finalPlace": 4,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "safvet-besen",
+        "ownerSlugs": [
+          "safvet-besen"
+        ],
+        "pointsAgainst": 1534.5,
+        "pointsFor": 1555.34,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "Fields of Dreams",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 1,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "logan-dunn",
+        "ownerSlugs": [
+          "logan-dunn"
+        ],
+        "pointsAgainst": 1666.96,
+        "pointsFor": 1705.78,
+        "rosterId": 3,
+        "seed": 3,
+        "teamName": "Cook n Lamb",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 6,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "olivia-nelli",
+        "ownerSlugs": [
+          "olivia-nelli",
+          "lauren-gross"
+        ],
+        "pointsAgainst": 1532.54,
+        "pointsFor": 1664.98,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "She Doesn't Even Go Here",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 3,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1551.52,
+        "pointsFor": 1601.18,
+        "rosterId": 5,
+        "seed": 5,
+        "teamName": "Wet Ass Pigskin",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 5,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "david-collier",
+        "ownerSlugs": [
+          "david-collier"
+        ],
+        "pointsAgainst": 1624.82,
+        "pointsFor": 1729.56,
+        "rosterId": 6,
+        "seed": 6,
+        "teamName": "Genofinity and Beyond",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 7,
+        "losses": 7,
+        "madePlayoffs": false,
+        "ownerSlug": "cassidy-pensa",
+        "ownerSlugs": [
+          "cassidy-pensa"
+        ],
+        "pointsAgainst": 1559.86,
+        "pointsFor": 1670.74,
+        "rosterId": 7,
+        "seed": 7,
+        "teamName": "Feels Great Baby",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 8,
+        "losses": 7,
+        "madePlayoffs": false,
+        "ownerSlug": "tyler-jung",
+        "ownerSlugs": [
+          "tyler-jung"
+        ],
+        "pointsAgainst": 1680.3,
+        "pointsFor": 1650.58,
+        "rosterId": 8,
+        "seed": 8,
+        "teamName": "Cheetah Penguins",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 10,
+        "losses": 7,
+        "madePlayoffs": false,
+        "ownerSlug": "spencer-kim",
+        "ownerSlugs": [
+          "spencer-kim"
+        ],
+        "pointsAgainst": 1612.88,
+        "pointsFor": 1644.08,
+        "rosterId": 9,
+        "seed": 9,
+        "teamName": "Skim othy",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 9,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "jake-gibbons",
+        "ownerSlugs": [
+          "jake-gibbons"
+        ],
+        "pointsAgainst": 1669.16,
+        "pointsFor": 1590.88,
+        "rosterId": 10,
+        "seed": 10,
+        "teamName": "All Mahomies Hate SamDarnold",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 12,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "michaela-frederick",
+        "ownerSlugs": [
+          "michaela-frederick"
+        ],
+        "pointsAgainst": 1585.74,
+        "pointsFor": 1499.34,
+        "rosterId": 11,
+        "seed": 11,
+        "teamName": "Team Frederick",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 11,
+        "losses": 11,
+        "madePlayoffs": false,
+        "ownerSlug": "jaymie-lew",
+        "ownerSlugs": [
+          "jaymie-lew"
+        ],
+        "pointsAgainst": 1791.74,
+        "pointsFor": 1362.44,
+        "rosterId": 12,
+        "seed": 12,
+        "teamName": "Digglett",
+        "ties": 0,
+        "wins": 3
+      }
+    ],
+    "status": "complete",
+    "teams": 12,
+    "thirdPlace": "brendon-ng",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "loser": "olivia-nelli",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 143.32,
+          "olivia-nelli": 118.76
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "olivia-nelli",
+        "team2From": null,
+        "week": 15,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "loser": "david-collier",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "david-collier": 92.26,
+          "logan-dunn": 132.06
+        },
+        "round": 1,
+        "team1": "david-collier",
+        "team1From": null,
+        "team2": "logan-dunn",
+        "team2From": null,
+        "week": 15,
+        "winner": "logan-dunn"
+      },
+      {
+        "inverted": false,
+        "loser": "brendon-ng",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 113.84,
+          "reagan-schmidt": 161.16
+        },
+        "round": 2,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": null,
+        "week": 16,
+        "winner": "reagan-schmidt"
+      },
+      {
+        "inverted": false,
+        "loser": "safvet-besen",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "logan-dunn": 104.16,
+          "safvet-besen": 84
+        },
+        "round": 2,
+        "team1": "logan-dunn",
+        "team1From": null,
+        "team2": "safvet-besen",
+        "team2From": null,
+        "week": 16,
+        "winner": "logan-dunn"
+      },
+      {
+        "inverted": false,
+        "loser": "reagan-schmidt",
+        "matchId": 5,
+        "placesFor": null,
+        "points": {
+          "logan-dunn": 175.64,
+          "reagan-schmidt": 127.24
+        },
+        "round": 3,
+        "team1": "logan-dunn",
+        "team1From": null,
+        "team2": "reagan-schmidt",
+        "team2From": null,
+        "week": 17,
+        "winner": "logan-dunn"
+      }
+    ]
+  },
+  {
     "champion": "jaymie-lew",
     "finalized": true,
     "finalizedThroughWeek": 17,
+    "imported": false,
     "lastPlace": "david-collier",
     "leagueId": "1048054415074205696",
     "leagueName": "Den Ops Super League",
@@ -99,6 +2111,10 @@
         "losses": 3,
         "madePlayoffs": true,
         "ownerSlug": "jaymie-lew",
+        "ownerSlugs": [
+          "jaymie-lew",
+          "katie-barnes"
+        ],
         "pointsAgainst": 1808.82,
         "pointsFor": 2123.6,
         "rosterId": 5,
@@ -112,6 +2128,9 @@
         "losses": 5,
         "madePlayoffs": true,
         "ownerSlug": "tyler-jung",
+        "ownerSlugs": [
+          "tyler-jung"
+        ],
         "pointsAgainst": 1718.94,
         "pointsFor": 1986.66,
         "rosterId": 3,
@@ -125,6 +2144,9 @@
         "losses": 6,
         "madePlayoffs": true,
         "ownerSlug": "spencer-kim",
+        "ownerSlugs": [
+          "spencer-kim"
+        ],
         "pointsAgainst": 1700.24,
         "pointsFor": 1789.98,
         "rosterId": 8,
@@ -138,6 +2160,9 @@
         "losses": 7,
         "madePlayoffs": true,
         "ownerSlug": "reagan-schmidt",
+        "ownerSlugs": [
+          "reagan-schmidt"
+        ],
         "pointsAgainst": 1986.5,
         "pointsFor": 1967.54,
         "rosterId": 10,
@@ -151,6 +2176,10 @@
         "losses": 7,
         "madePlayoffs": true,
         "ownerSlug": "jake-gibbons",
+        "ownerSlugs": [
+          "jake-gibbons",
+          "maddy-perdue"
+        ],
         "pointsAgainst": 1964.66,
         "pointsFor": 1817.44,
         "rosterId": 4,
@@ -164,6 +2193,9 @@
         "losses": 7,
         "madePlayoffs": true,
         "ownerSlug": "cassidy-pensa",
+        "ownerSlugs": [
+          "cassidy-pensa"
+        ],
         "pointsAgainst": 1889.74,
         "pointsFor": 1787.88,
         "rosterId": 9,
@@ -177,6 +2209,9 @@
         "losses": 7,
         "madePlayoffs": false,
         "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
         "pointsAgainst": 1779.44,
         "pointsFor": 1760.04,
         "rosterId": 1,
@@ -190,6 +2225,9 @@
         "losses": 8,
         "madePlayoffs": false,
         "ownerSlug": "lauren-gross",
+        "ownerSlugs": [
+          "lauren-gross"
+        ],
         "pointsAgainst": 1776.56,
         "pointsFor": 1778.16,
         "rosterId": 7,
@@ -203,6 +2241,9 @@
         "losses": 9,
         "madePlayoffs": false,
         "ownerSlug": "safvet-besen",
+        "ownerSlugs": [
+          "safvet-besen"
+        ],
         "pointsAgainst": 1951.42,
         "pointsFor": 1848.78,
         "rosterId": 6,
@@ -216,6 +2257,9 @@
         "losses": 11,
         "madePlayoffs": false,
         "ownerSlug": "david-collier",
+        "ownerSlugs": [
+          "david-collier"
+        ],
         "pointsAgainst": 1940.64,
         "pointsFor": 1656.88,
         "rosterId": 2,
@@ -226,6 +2270,7 @@
       }
     ],
     "status": "complete",
+    "teams": 10,
     "thirdPlace": "tyler-jung",
     "winnersBracket": [
       {
@@ -378,6 +2423,7 @@
     "champion": "david-collier",
     "finalized": true,
     "finalizedThroughWeek": 17,
+    "imported": false,
     "lastPlace": "cassidy-pensa",
     "leagueId": "1180273312919666688",
     "leagueName": "Den Ops Super League",
@@ -474,6 +2520,9 @@
         "losses": 5,
         "madePlayoffs": true,
         "ownerSlug": "tyler-jung",
+        "ownerSlugs": [
+          "tyler-jung"
+        ],
         "pointsAgainst": 1767.92,
         "pointsFor": 2042.34,
         "rosterId": 3,
@@ -487,6 +2536,9 @@
         "losses": 5,
         "madePlayoffs": true,
         "ownerSlug": "david-collier",
+        "ownerSlugs": [
+          "david-collier"
+        ],
         "pointsAgainst": 1775.32,
         "pointsFor": 1983.5,
         "rosterId": 2,
@@ -500,6 +2552,9 @@
         "losses": 5,
         "madePlayoffs": true,
         "ownerSlug": "lauren-gross",
+        "ownerSlugs": [
+          "lauren-gross"
+        ],
         "pointsAgainst": 1714.72,
         "pointsFor": 1873.72,
         "rosterId": 7,
@@ -513,6 +2568,9 @@
         "losses": 6,
         "madePlayoffs": true,
         "ownerSlug": "spencer-kim",
+        "ownerSlugs": [
+          "spencer-kim"
+        ],
         "pointsAgainst": 1817.86,
         "pointsFor": 1870.52,
         "rosterId": 8,
@@ -526,6 +2584,10 @@
         "losses": 7,
         "madePlayoffs": true,
         "ownerSlug": "jake-gibbons",
+        "ownerSlugs": [
+          "jake-gibbons",
+          "maddy-perdue"
+        ],
         "pointsAgainst": 1834.84,
         "pointsFor": 1762.46,
         "rosterId": 4,
@@ -539,6 +2601,9 @@
         "losses": 8,
         "madePlayoffs": true,
         "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
         "pointsAgainst": 1833.58,
         "pointsFor": 1797.7,
         "rosterId": 1,
@@ -552,6 +2617,10 @@
         "losses": 8,
         "madePlayoffs": false,
         "ownerSlug": "jaymie-lew",
+        "ownerSlugs": [
+          "jaymie-lew",
+          "katie-barnes"
+        ],
         "pointsAgainst": 1944.06,
         "pointsFor": 1760.02,
         "rosterId": 5,
@@ -565,6 +2634,9 @@
         "losses": 8,
         "madePlayoffs": false,
         "ownerSlug": "reagan-schmidt",
+        "ownerSlugs": [
+          "reagan-schmidt"
+        ],
         "pointsAgainst": 1750.14,
         "pointsFor": 1688.42,
         "rosterId": 10,
@@ -578,6 +2650,9 @@
         "losses": 9,
         "madePlayoffs": false,
         "ownerSlug": "safvet-besen",
+        "ownerSlugs": [
+          "safvet-besen"
+        ],
         "pointsAgainst": 1908.88,
         "pointsFor": 1736.36,
         "rosterId": 6,
@@ -591,6 +2666,9 @@
         "losses": 9,
         "madePlayoffs": false,
         "ownerSlug": "cassidy-pensa",
+        "ownerSlugs": [
+          "cassidy-pensa"
+        ],
         "pointsAgainst": 1877.94,
         "pointsFor": 1710.22,
         "rosterId": 9,
@@ -601,6 +2679,7 @@
       }
     ],
     "status": "complete",
+    "teams": 10,
     "thirdPlace": "lauren-gross",
     "winnersBracket": [
       {

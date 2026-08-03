@@ -136,6 +136,44 @@ auditable. Corrections go in `config/keeper-overrides.json` — never in code.
 Ownership is reconciled against each season's final roster snapshot, because the
 transaction log is not a complete record of roster mutation.
 
+### Two eras of data
+
+2020-23 are ESPN seasons imported ONCE from archived MHTML pages
+(`data/manual/source/`) into `data/manual/<year>.json`. The league is on Sleeper
+permanently now, so `npm run import:espn` is a historical artifact — the JSON it
+produced is the deliverable, not the script.
+
+Imported seasons have standings, final placement and full playoff scores, but NO
+weekly matchups, rosters, drafts or transactions. They therefore feed standings,
+finishes and the trophy case, and are excluded from head-to-head, weekly
+records, player records and keeper contracts. `SeasonSummary.imported` is the
+flag; the UI states the limitation rather than silently mixing eras.
+
+The two ESPN pages cross-validate: final placement reconstructed from the
+brackets must equal the standings RK column, or the import throws. All 48
+placements across four seasons agree.
+
+ESPN's consolation ladder is NOT the Sleeper toilet bowl. It is a ladder —
+winning moves you up a rung, losing moves you down, and the loser of the bottom
+rung in the final week finishes last. So `inverted` is false for imported
+brackets and true for Sleeper's losers bracket. Do not unify them.
+
+### Co-owners are first-class owners
+
+Every person has their own slug and record. A co-owned team's record is credited
+to EACH owner, so Maddy is credited for Jake's seasons and Katie for Jaymie's.
+Consequence: all-time columns double-count co-owned seasons and will not sum to
+league totals. That is intended — these are personal records — and the UI says
+so on the all-time table.
+
+A team-season still has one primary owner (`StandingsRow.ownerSlug`) used to
+group keeper contracts and key franchise URLs; `ownerSlugs` is the full credit
+list. For Sleeper that is `owner_id` plus `co_owners`; for ESPN, the order in
+"Olivia Nelli, Lauren Gross".
+
+Departed owners carry `active: false`. They stay in all history — Logan Dunn won
+2023 — but never appear on the keeper board or current-season views.
+
 ### Events must be replayed chronologically, not draft-then-transactions
 
 Sleeper stamps every preseason move as `leg: 1`, but many happen BEFORE that

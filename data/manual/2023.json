@@ -1,0 +1,536 @@
+{
+  "finalWeek": 17,
+  "games": [
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 139.44,
+          "seed": 1,
+          "teamName": "Salt Lake City MorMoms"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 143.32,
+          "seed": 5,
+          "teamName": "Wet Ass Pigskin"
+        },
+        {
+          "points": 118.76,
+          "seed": 4,
+          "teamName": "She Doesn't Even Go Here"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 92.26,
+          "seed": 6,
+          "teamName": "Genofinity and Beyond"
+        },
+        {
+          "points": 132.06,
+          "seed": 3,
+          "teamName": "Cook n Lamb"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 63.94,
+          "seed": 2,
+          "teamName": "Fields of Dreams"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 113.84,
+          "seed": 5,
+          "teamName": "Wet Ass Pigskin"
+        },
+        {
+          "points": 161.16,
+          "seed": 1,
+          "teamName": "Salt Lake City MorMoms"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 104.16,
+          "seed": 3,
+          "teamName": "Cook n Lamb"
+        },
+        {
+          "points": 84,
+          "seed": 2,
+          "teamName": "Fields of Dreams"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 175.64,
+          "seed": 3,
+          "teamName": "Cook n Lamb"
+        },
+        {
+          "points": 127.24,
+          "seed": 1,
+          "teamName": "Salt Lake City MorMoms"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 99.62,
+          "seed": 6,
+          "teamName": "Genofinity and Beyond"
+        },
+        {
+          "points": 210.18,
+          "seed": 4,
+          "teamName": "She Doesn't Even Go Here"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 116.28,
+          "seed": 5,
+          "teamName": "Wet Ass Pigskin"
+        },
+        {
+          "points": 96.92,
+          "seed": 2,
+          "teamName": "Fields of Dreams"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 109.3,
+          "seed": 6,
+          "teamName": "Genofinity and Beyond"
+        },
+        {
+          "points": 106.36,
+          "seed": 4,
+          "teamName": "She Doesn't Even Go Here"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 111.26,
+          "seed": 8,
+          "teamName": "Cheetah Penguins"
+        },
+        {
+          "points": 85.42,
+          "seed": 7,
+          "teamName": "Feels Great Baby"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC1",
+      "round": 1,
+      "routing": "W to GmC4, L to GmC5",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 101.18,
+          "seed": 10,
+          "teamName": "All Mahomies Hate SamDarnold"
+        },
+        {
+          "points": 134,
+          "seed": 9,
+          "teamName": "Skim othy"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC2",
+      "round": 1,
+      "routing": "W to GmC4, L to GmC6",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 82.52,
+          "seed": 12,
+          "teamName": "Digglett"
+        },
+        {
+          "points": 112.86,
+          "seed": 11,
+          "teamName": "Team Frederick"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC3",
+      "round": 2,
+      "routing": "W to GmC5, L to GmC6",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 130.2,
+          "seed": 9,
+          "teamName": "Skim othy"
+        },
+        {
+          "points": 137.4,
+          "seed": 8,
+          "teamName": "Cheetah Penguins"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC4",
+      "round": 2,
+      "routing": "W to GmC7, L to GmC8",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 101.92,
+          "seed": 11,
+          "teamName": "Team Frederick"
+        },
+        {
+          "points": 120.52,
+          "seed": 7,
+          "teamName": "Feels Great Baby"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC5",
+      "round": 2,
+      "routing": "W to GmC7, L to GmC9",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 82.92,
+          "seed": 12,
+          "teamName": "Digglett"
+        },
+        {
+          "points": 90.8,
+          "seed": 10,
+          "teamName": "All Mahomies Hate SamDarnold"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC6",
+      "round": 3,
+      "routing": "W to GmC8, L to GmC9",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 107.38,
+          "seed": 8,
+          "teamName": "Cheetah Penguins"
+        },
+        {
+          "points": 110,
+          "seed": 7,
+          "teamName": "Feels Great Baby"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": "GmC7",
+      "round": 3,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 117.5,
+          "seed": 10,
+          "teamName": "All Mahomies Hate SamDarnold"
+        },
+        {
+          "points": 109.1,
+          "seed": 9,
+          "teamName": "Skim othy"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": "GmC8",
+      "round": 3,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 133.18,
+          "seed": 12,
+          "teamName": "Digglett"
+        },
+        {
+          "points": 69.68,
+          "seed": 11,
+          "teamName": "Team Frederick"
+        }
+      ],
+      "week": 17
+    }
+  ],
+  "hasDrafts": false,
+  "hasRosters": false,
+  "hasWeeklyMatchups": false,
+  "imported": true,
+  "playoffWeekStart": 15,
+  "regularSeasonWeeks": 14,
+  "season": 2023,
+  "source": "ESPN Fantasy (imported from archived MHTML)",
+  "standings": [
+    {
+      "finalPlace": 1,
+      "losses": 6,
+      "ownerSlugs": [
+        "logan-dunn"
+      ],
+      "pointsAgainst": 1666.96,
+      "pointsFor": 1705.78,
+      "seed": 3,
+      "teamName": "Cook n Lamb",
+      "teamSlug": "logan-dunn",
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "finalPlace": 2,
+      "losses": 4,
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "pointsAgainst": 1644.3,
+      "pointsFor": 1779.42,
+      "seed": 1,
+      "teamName": "Salt Lake City MorMoms",
+      "teamSlug": "reagan-schmidt",
+      "ties": 0,
+      "wins": 10
+    },
+    {
+      "finalPlace": 3,
+      "losses": 6,
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "pointsAgainst": 1551.52,
+      "pointsFor": 1601.18,
+      "seed": 5,
+      "teamName": "Wet Ass Pigskin",
+      "teamSlug": "brendon-ng",
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "finalPlace": 4,
+      "losses": 5,
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "pointsAgainst": 1534.5,
+      "pointsFor": 1555.34,
+      "seed": 2,
+      "teamName": "Fields of Dreams",
+      "teamSlug": "safvet-besen",
+      "ties": 0,
+      "wins": 9
+    },
+    {
+      "finalPlace": 5,
+      "losses": 7,
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "pointsAgainst": 1624.82,
+      "pointsFor": 1729.56,
+      "seed": 6,
+      "teamName": "Genofinity and Beyond",
+      "teamSlug": "david-collier",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 6,
+      "losses": 6,
+      "ownerSlugs": [
+        "olivia-nelli",
+        "lauren-gross"
+      ],
+      "pointsAgainst": 1532.54,
+      "pointsFor": 1664.98,
+      "seed": 4,
+      "teamName": "She Doesn't Even Go Here",
+      "teamSlug": "olivia-nelli",
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "finalPlace": 7,
+      "losses": 7,
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "pointsAgainst": 1559.86,
+      "pointsFor": 1670.74,
+      "seed": 7,
+      "teamName": "Feels Great Baby",
+      "teamSlug": "cassidy-pensa",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 8,
+      "losses": 7,
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "pointsAgainst": 1680.3,
+      "pointsFor": 1650.58,
+      "seed": 8,
+      "teamName": "Cheetah Penguins",
+      "teamSlug": "tyler-jung",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 9,
+      "losses": 9,
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "pointsAgainst": 1669.16,
+      "pointsFor": 1590.88,
+      "seed": 10,
+      "teamName": "All Mahomies Hate SamDarnold",
+      "teamSlug": "jake-gibbons",
+      "ties": 0,
+      "wins": 5
+    },
+    {
+      "finalPlace": 10,
+      "losses": 7,
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "pointsAgainst": 1612.88,
+      "pointsFor": 1644.08,
+      "seed": 9,
+      "teamName": "Skim othy",
+      "teamSlug": "spencer-kim",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 11,
+      "losses": 11,
+      "ownerSlugs": [
+        "jaymie-lew"
+      ],
+      "pointsAgainst": 1791.74,
+      "pointsFor": 1362.44,
+      "seed": 12,
+      "teamName": "Digglett",
+      "teamSlug": "jaymie-lew",
+      "ties": 0,
+      "wins": 3
+    },
+    {
+      "finalPlace": 12,
+      "losses": 9,
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "pointsAgainst": 1585.74,
+      "pointsFor": 1499.34,
+      "seed": 11,
+      "teamName": "Team Frederick",
+      "teamSlug": "michaela-frederick",
+      "ties": 0,
+      "wins": 5
+    }
+  ],
+  "teams": 12
+}

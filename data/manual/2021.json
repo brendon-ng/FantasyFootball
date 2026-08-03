@@ -1,0 +1,536 @@
+{
+  "finalWeek": 17,
+  "games": [
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 110.34,
+          "seed": 1,
+          "teamName": "Feels Great Baby"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 93.7,
+          "seed": 5,
+          "teamName": "Wet Ass Pigskin"
+        },
+        {
+          "points": 71.36,
+          "seed": 4,
+          "teamName": "Big Waller Brand"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 111.58,
+          "seed": 6,
+          "teamName": "All Mahomies Hate SamDarnold"
+        },
+        {
+          "points": 113.46,
+          "seed": 3,
+          "teamName": "Trey Area"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 94.86,
+          "seed": 2,
+          "teamName": "Hot Chubb Time Machine"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 137.06,
+          "seed": 5,
+          "teamName": "Wet Ass Pigskin"
+        },
+        {
+          "points": 88.94,
+          "seed": 1,
+          "teamName": "Feels Great Baby"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 157.56,
+          "seed": 3,
+          "teamName": "Trey Area"
+        },
+        {
+          "points": 114.98,
+          "seed": 2,
+          "teamName": "Hot Chubb Time Machine"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 122.9,
+          "seed": 5,
+          "teamName": "Wet Ass Pigskin"
+        },
+        {
+          "points": 103.56,
+          "seed": 3,
+          "teamName": "Trey Area"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 84.6,
+          "seed": 6,
+          "teamName": "All Mahomies Hate SamDarnold"
+        },
+        {
+          "points": 82.08,
+          "seed": 4,
+          "teamName": "Big Waller Brand"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 135.06,
+          "seed": 2,
+          "teamName": "Hot Chubb Time Machine"
+        },
+        {
+          "points": 67.58,
+          "seed": 1,
+          "teamName": "Feels Great Baby"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": null,
+      "round": 3,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 114.44,
+          "seed": 6,
+          "teamName": "All Mahomies Hate SamDarnold"
+        },
+        {
+          "points": 115,
+          "seed": 4,
+          "teamName": "Big Waller Brand"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 41.58,
+          "seed": 8,
+          "teamName": "Well-Endowed RichardNicholas"
+        },
+        {
+          "points": 86.9,
+          "seed": 7,
+          "teamName": "Skim othy"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC1",
+      "round": 1,
+      "routing": "W to GmC4, L to GmC5",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 108.64,
+          "seed": 10,
+          "teamName": "She Doesn't Even Go Here"
+        },
+        {
+          "points": 95.88,
+          "seed": 9,
+          "teamName": "Team Frederick"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC2",
+      "round": 1,
+      "routing": "W to GmC4, L to GmC6",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 96.24,
+          "seed": 12,
+          "teamName": "Discount Double Check"
+        },
+        {
+          "points": 84.08,
+          "seed": 11,
+          "teamName": "Team Lew"
+        }
+      ],
+      "week": 15
+    },
+    {
+      "gameId": "GmC3",
+      "round": 2,
+      "routing": "W to GmC5, L to GmC6",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 116.74,
+          "seed": 10,
+          "teamName": "She Doesn't Even Go Here"
+        },
+        {
+          "points": 110.62,
+          "seed": 7,
+          "teamName": "Skim othy"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC4",
+      "round": 2,
+      "routing": "W to GmC7, L to GmC8",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 107.36,
+          "seed": 12,
+          "teamName": "Discount Double Check"
+        },
+        {
+          "points": 71.5,
+          "seed": 8,
+          "teamName": "Well-Endowed RichardNicholas"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC5",
+      "round": 2,
+      "routing": "W to GmC7, L to GmC9",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 158.1,
+          "seed": 11,
+          "teamName": "Team Lew"
+        },
+        {
+          "points": 121.7,
+          "seed": 9,
+          "teamName": "Team Frederick"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": "GmC6",
+      "round": 3,
+      "routing": "W to GmC8, L to GmC9",
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 126.36,
+          "seed": 12,
+          "teamName": "Discount Double Check"
+        },
+        {
+          "points": 109.14,
+          "seed": 10,
+          "teamName": "She Doesn't Even Go Here"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": "GmC7",
+      "round": 3,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 160.12,
+          "seed": 11,
+          "teamName": "Team Lew"
+        },
+        {
+          "points": 105.06,
+          "seed": 7,
+          "teamName": "Skim othy"
+        }
+      ],
+      "week": 17
+    },
+    {
+      "gameId": "GmC8",
+      "round": 3,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 90.1,
+          "seed": 9,
+          "teamName": "Team Frederick"
+        },
+        {
+          "points": 63.44,
+          "seed": 8,
+          "teamName": "Well-Endowed RichardNicholas"
+        }
+      ],
+      "week": 17
+    }
+  ],
+  "hasDrafts": false,
+  "hasRosters": false,
+  "hasWeeklyMatchups": false,
+  "imported": true,
+  "playoffWeekStart": 15,
+  "regularSeasonWeeks": 14,
+  "season": 2021,
+  "source": "ESPN Fantasy (imported from archived MHTML)",
+  "standings": [
+    {
+      "finalPlace": 1,
+      "losses": 6,
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "pointsAgainst": 1441.52,
+      "pointsFor": 1500,
+      "seed": 5,
+      "teamName": "Wet Ass Pigskin",
+      "teamSlug": "brendon-ng",
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "finalPlace": 2,
+      "losses": 6,
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "pointsAgainst": 1501.82,
+      "pointsFor": 1759.82,
+      "seed": 3,
+      "teamName": "Trey Area",
+      "teamSlug": "tyler-jung",
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "finalPlace": 3,
+      "losses": 6,
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "pointsAgainst": 1538.02,
+      "pointsFor": 1580.04,
+      "seed": 2,
+      "teamName": "Hot Chubb Time Machine",
+      "teamSlug": "safvet-besen",
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "finalPlace": 4,
+      "losses": 1,
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "pointsAgainst": 1481.52,
+      "pointsFor": 1791.82,
+      "seed": 1,
+      "teamName": "Feels Great Baby",
+      "teamSlug": "cassidy-pensa",
+      "ties": 0,
+      "wins": 13
+    },
+    {
+      "finalPlace": 5,
+      "losses": 6,
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "pointsAgainst": 1647.66,
+      "pointsFor": 1724.22,
+      "seed": 4,
+      "teamName": "Big Waller Brand",
+      "teamSlug": "david-collier",
+      "ties": 0,
+      "wins": 8
+    },
+    {
+      "finalPlace": 6,
+      "losses": 7,
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "pointsAgainst": 1677.98,
+      "pointsFor": 1775.44,
+      "seed": 6,
+      "teamName": "All Mahomies Hate SamDarnold",
+      "teamSlug": "jake-gibbons",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 7,
+      "losses": 11,
+      "ownerSlugs": [
+        "logan-dunn"
+      ],
+      "pointsAgainst": 1610.4,
+      "pointsFor": 1283.56,
+      "seed": 12,
+      "teamName": "Discount Double Check",
+      "teamSlug": "logan-dunn",
+      "ties": 0,
+      "wins": 3
+    },
+    {
+      "finalPlace": 8,
+      "losses": 9,
+      "ownerSlugs": [
+        "olivia-nelli",
+        "lauren-gross"
+      ],
+      "pointsAgainst": 1567.9,
+      "pointsFor": 1455.76,
+      "seed": 10,
+      "teamName": "She Doesn't Even Go Here",
+      "teamSlug": "olivia-nelli",
+      "ties": 0,
+      "wins": 5
+    },
+    {
+      "finalPlace": 9,
+      "losses": 10,
+      "ownerSlugs": [
+        "jaymie-lew"
+      ],
+      "pointsAgainst": 1620.68,
+      "pointsFor": 1488.58,
+      "seed": 11,
+      "teamName": "Team Lew",
+      "teamSlug": "jaymie-lew",
+      "ties": 0,
+      "wins": 4
+    },
+    {
+      "finalPlace": 10,
+      "losses": 7,
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "pointsAgainst": 1606.46,
+      "pointsFor": 1507.1,
+      "seed": 7,
+      "teamName": "Skim othy",
+      "teamSlug": "spencer-kim",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 11,
+      "losses": 8,
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "pointsAgainst": 1694.96,
+      "pointsFor": 1667.68,
+      "seed": 9,
+      "teamName": "Team Frederick",
+      "teamSlug": "michaela-frederick",
+      "ties": 0,
+      "wins": 6
+    },
+    {
+      "finalPlace": 12,
+      "losses": 7,
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "pointsAgainst": 1565.58,
+      "pointsFor": 1420.48,
+      "seed": 8,
+      "teamName": "Well-Endowed RichardNicholas",
+      "teamSlug": "reagan-schmidt",
+      "ties": 0,
+      "wins": 7
+    }
+  ],
+  "teams": 12
+}

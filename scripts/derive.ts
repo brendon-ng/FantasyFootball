@@ -43,11 +43,12 @@ const CONFIG_DIR = join(DATA_DIR, "..", "config");
 const DERIVED_DIR = join(DATA_DIR, "derived");
 
 interface OwnerConfig {
-  slug?: string;
-  userId: string;
+  slug: string;
+  userId: string | null;
   firstName: string;
   lastName: string;
-  coOwnerOf?: string;
+  active: boolean;
+  espnNames?: string[];
 }
 interface LeagueConfig {
   leagueName: string;
@@ -93,28 +94,28 @@ const rulesFor = (season: number): Rules => {
 
 // --- owner identity ---------------------------------------------------------
 
-/** userId -> primary owner slug. Co-owners collapse onto the primary. */
+/**
+ * EVERY PERSON IS A FIRST-CLASS OWNER, co-owners included.
+ *
+ * A co-owned team's record is credited to each of its owners, so Maddy is
+ * credited for Jake's seasons and Katie for Jaymie's. The consequence is that
+ * summing all-time wins across owners double-counts co-owned seasons; these are
+ * personal records, not a league ledger, and the UI says so.
+ */
 const slugByUserId = new Map<string, string>();
 const owners = new Map<string, Owner>();
 
 for (const o of config.owners) {
-  if (o.coOwnerOf) continue;
-  owners.set(o.slug!, {
-    slug: o.slug!,
+  owners.set(o.slug, {
+    slug: o.slug,
     name: `${o.firstName} ${o.lastName}`,
     firstName: o.firstName,
     userId: o.userId,
-    coOwners: [],
+    active: o.active,
     seasons: [],
+    coOwnedWith: [],
   });
-  slugByUserId.set(o.userId, o.slug!);
-}
-for (const o of config.owners) {
-  if (!o.coOwnerOf) continue;
-  const primary = owners.get(o.coOwnerOf);
-  if (!primary) throw new Error(`${o.firstName} lists unknown coOwnerOf "${o.coOwnerOf}"`);
-  primary.coOwners.push(`${o.firstName} ${o.lastName}`);
-  slugByUserId.set(o.userId, o.coOwnerOf);
+  if (o.userId) slugByUserId.set(o.userId, o.slug);
 }
 
 // --- per-season loading -----------------------------------------------------
@@ -130,8 +131,10 @@ interface SeasonData {
   losers: SleeperBracketMatch[];
   matchups: Map<number, SleeperMatchup[]>;
   transactions: Map<number, SleeperTransaction[]>;
-  /** roster_id -> owner slug for this season. */
+  /** roster_id -> primary owner slug (franchise key). */
   rosterToOwner: Map<number, string>;
+  /** roster_id -> every owner credited, primary first. */
+  rosterToOwners: Map<number, string[]>;
   rules: Rules;
 }
 
@@ -142,6 +145,7 @@ function loadSeason(season: number): SeasonData | null {
 
   const rosters = readJson<SleeperRoster[]>(join(dir, "rosters.json")) ?? [];
   const rosterToOwner = new Map<number, string>();
+  const rosterToOwners = new Map<number, string[]>();
   for (const r of rosters) {
     const slug = r.owner_id ? slugByUserId.get(r.owner_id) : undefined;
     if (!slug) {
@@ -150,6 +154,11 @@ function loadSeason(season: number): SeasonData | null {
       );
     }
     rosterToOwner.set(r.roster_id, slug);
+    // Sleeper lists co-owners separately from the primary owner_id.
+    const co = (r.co_owners ?? [])
+      .map((id) => slugByUserId.get(id))
+      .filter((x): x is string => Boolean(x));
+    rosterToOwners.set(r.roster_id, [...new Set([slug, ...co])]);
   }
 
   const matchups = new Map<number, SleeperMatchup[]>();
@@ -177,6 +186,7 @@ function loadSeason(season: number): SeasonData | null {
     matchups,
     transactions,
     rosterToOwner,
+    rosterToOwners,
     rules: rulesFor(season),
   };
 }
@@ -309,6 +319,7 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
     const slug = d.rosterToOwner.get(r.roster_id)!;
     return {
       ownerSlug: slug,
+      ownerSlugs: d.rosterToOwners.get(r.roster_id) ?? [slug],
       rosterId: r.roster_id,
       teamName: r.owner_id ? (teamNameByUser.get(r.owner_id) ?? null) : null,
       seed: i + 1,
@@ -330,6 +341,8 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
     leagueName: d.league.name,
     status: d.league.status,
     finalized: d.league.status === "complete",
+    imported: false,
+    teams: d.rosters.length,
     regularSeasonWeeks: d.rules.regularSeasonWeeks,
     finalizedThroughWeek,
     standings,
@@ -658,46 +671,74 @@ function buildOwnerRecords(
   });
   for (const slug of owners.keys()) rec.set(slug, blank(slug));
 
+  // Head-to-head needs the full owner set on each side, so a co-owned team's
+  // record lands on every co-owner and against every opponent co-owner.
+  const ownersOfTeam = new Map<string, string[]>();
+  for (const s of summaries) {
+    for (const row of s.standings) ownersOfTeam.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
+  }
+  const sideOwners = (season: number, slug: string) =>
+    ownersOfTeam.get(`${season}:${slug}`) ?? [slug];
+
   // Regular-season head-to-head only: playoff and consolation games are tracked
   // separately via placements, and mixing them distorts "record against".
+  // Imported ESPN seasons have no weekly matchups at all, so they contribute
+  // nothing here — head-to-head is 2024-onward by necessity.
   for (const m of matchups) {
     if (m.kind !== "regular") continue;
     for (const [self, opp] of [
       [m.home, m.away],
       [m.away, m.home],
     ] as const) {
-      const r = rec.get(self.ownerSlug);
-      if (!r) continue;
-      const h2h = (r.vs[opp.ownerSlug] ??= {
-        wins: 0, losses: 0, ties: 0, pointsFor: 0, pointsAgainst: 0,
-      });
-      h2h.pointsFor = round2(h2h.pointsFor + self.points);
-      h2h.pointsAgainst = round2(h2h.pointsAgainst + opp.points);
-      if (m.winner === null) h2h.ties++;
-      else if (m.winner === self.ownerSlug) h2h.wins++;
-      else h2h.losses++;
+      const selfOwners = sideOwners(m.season, self.ownerSlug);
+      const oppOwners = sideOwners(m.season, opp.ownerSlug);
+      for (const me of selfOwners) {
+        const r = rec.get(me);
+        if (!r) continue;
+        for (const them of oppOwners) {
+          if (them === me) continue;
+          const h2h = (r.vs[them] ??= {
+            wins: 0, losses: 0, ties: 0, pointsFor: 0, pointsAgainst: 0,
+          });
+          h2h.pointsFor = round2(h2h.pointsFor + self.points);
+          h2h.pointsAgainst = round2(h2h.pointsAgainst + opp.points);
+          if (m.winner === null) h2h.ties++;
+          else if (m.winner === self.ownerSlug) h2h.wins++;
+          else h2h.losses++;
+        }
+      }
     }
   }
 
   for (const s of summaries) {
     if (!s.finalized) continue;
     for (const row of s.standings) {
-      const r = rec.get(row.ownerSlug);
-      if (!r) continue;
-      r.seasonsPlayed++;
-      r.wins += row.wins;
-      r.losses += row.losses;
-      r.ties += row.ties;
-      r.pointsFor = round2(r.pointsFor + row.pointsFor);
-      r.pointsAgainst = round2(r.pointsAgainst + row.pointsAgainst);
-      if (row.madePlayoffs) r.playoffAppearances++;
-      r.finishes.push({ season: s.season, place: row.finalPlace, seed: row.seed });
-      owners.get(row.ownerSlug)!.seasons.push(s.season);
+      for (const slug of row.ownerSlugs) {
+        const r = rec.get(slug);
+        if (!r) continue;
+        r.seasonsPlayed++;
+        r.wins += row.wins;
+        r.losses += row.losses;
+        r.ties += row.ties;
+        r.pointsFor = round2(r.pointsFor + row.pointsFor);
+        r.pointsAgainst = round2(r.pointsAgainst + row.pointsAgainst);
+        if (row.madePlayoffs) r.playoffAppearances++;
+        r.finishes.push({ season: s.season, place: row.finalPlace, seed: row.seed });
+
+        const owner = owners.get(slug)!;
+        owner.seasons.push(s.season);
+        for (const other of row.ownerSlugs) {
+          if (other !== slug && !owner.coOwnedWith.includes(other)) owner.coOwnedWith.push(other);
+        }
+      }
     }
-    if (s.champion) rec.get(s.champion)!.championships++;
-    if (s.runnerUp) rec.get(s.runnerUp)!.runnerUps++;
-    if (s.thirdPlace) rec.get(s.thirdPlace)!.thirdPlaces++;
-    if (s.lastPlace) rec.get(s.lastPlace)!.lastPlaces++;
+    // Honours credit the whole team, so a co-owned title counts for both.
+    const teamOwners = (slug: string | null) =>
+      slug ? (s.standings.find((r) => r.ownerSlug === slug)?.ownerSlugs ?? [slug]) : [];
+    for (const slug of teamOwners(s.champion)) rec.get(slug)!.championships++;
+    for (const slug of teamOwners(s.runnerUp)) rec.get(slug)!.runnerUps++;
+    for (const slug of teamOwners(s.thirdPlace)) rec.get(slug)!.thirdPlaces++;
+    for (const slug of teamOwners(s.lastPlace)) rec.get(slug)!.lastPlaces++;
   }
 
   for (const r of rec.values()) {
@@ -876,6 +917,122 @@ function buildDraftHistory(seasons: SeasonData[]): DraftPickRecord[] {
   );
 }
 
+// --- imported (pre-Sleeper) seasons ------------------------------------------
+
+interface ManualSeason {
+  season: number;
+  teams: number;
+  playoffWeekStart: number;
+  finalWeek: number;
+  regularSeasonWeeks: number;
+  standings: Array<{
+    finalPlace: number;
+    teamName: string;
+    teamSlug: string;
+    ownerSlugs: string[];
+    wins: number; losses: number; ties: number;
+    pointsFor: number; pointsAgainst: number;
+    seed: number | null;
+  }>;
+  games: Array<{
+    section: "winners" | "winners-consolation" | "consolation";
+    round: number;
+    week: number | null;
+    gameId: string | null;
+    routing: string | null;
+    teams: Array<{ seed: number; teamName: string; points: number }>;
+  }>;
+}
+
+/**
+ * Folds the ESPN-era seasons (2020-23) into the same SeasonSummary shape.
+ *
+ * These carry standings, final placement and full playoff scores, but no weekly
+ * matchups, rosters, drafts or transactions — so they feed standings, finishes
+ * and the trophy case, and are excluded from head-to-head, weekly records,
+ * player records and keeper contracts. `imported: true` is what the UI keys off
+ * to say so out loud rather than silently mixing eras.
+ *
+ * Placement is taken from ESPN's own RK column, which the importer has already
+ * cross-validated against an independent reconstruction of the brackets.
+ */
+function importedSeasons(): SeasonSummary[] {
+  const dir = join(DATA_DIR, "manual");
+  if (!existsSync(dir)) return [];
+
+  const out: SeasonSummary[] = [];
+  for (const file of readdirSync(dir).sort()) {
+    if (!/^\d{4}\.json$/.test(file)) continue;
+    const m = readJson<ManualSeason>(join(dir, file));
+    if (!m) continue;
+
+    const bySlug = new Map(m.standings.map((r) => [r.teamName, r.teamSlug]));
+    const toBracket = (section: ManualSeason["games"][number]["section"]): BracketMatch[] =>
+      m.games
+        .filter((g) => g.section === section && g.teams.length === 2)
+        .map((g, i) => {
+          const [a, b] = g.teams;
+          const [w, l] = a.points > b.points ? [a, b] : [b, a];
+          return {
+            round: g.round,
+            matchId: i + 1,
+            week: g.week,
+            team1: bySlug.get(a.teamName) ?? null,
+            team2: bySlug.get(b.teamName) ?? null,
+            winner: bySlug.get(w.teamName) ?? null,
+            loser: bySlug.get(l.teamName) ?? null,
+            team1From: null,
+            team2From: null,
+            placesFor: null,
+            points: {
+              ...(bySlug.get(a.teamName) ? { [bySlug.get(a.teamName)!]: a.points } : {}),
+              ...(bySlug.get(b.teamName) ? { [bySlug.get(b.teamName)!]: b.points } : {}),
+            },
+            // ESPN's consolation ladder is a ladder, not an inverted bracket:
+            // winning moves you UP a rung. So the higher scorer really did win.
+            inverted: false,
+          };
+        });
+
+    const standings: StandingsRow[] = m.standings.map((r) => ({
+      ownerSlug: r.teamSlug,
+      ownerSlugs: r.ownerSlugs,
+      rosterId: r.seed ?? r.finalPlace,
+      teamName: r.teamName,
+      seed: r.seed ?? r.finalPlace,
+      wins: r.wins,
+      losses: r.losses,
+      ties: r.ties,
+      pointsFor: r.pointsFor,
+      pointsAgainst: r.pointsAgainst,
+      finalPlace: r.finalPlace,
+      madePlayoffs: (r.seed ?? 99) <= 6,
+    }));
+
+    const at = (place: number) => standings.find((r) => r.finalPlace === place)?.ownerSlug ?? null;
+
+    out.push({
+      season: m.season,
+      leagueId: `espn-${m.season}`,
+      leagueName: "Den Ops Fantasy Football (ESPN)",
+      status: "complete",
+      finalized: true,
+      imported: true,
+      teams: m.teams,
+      regularSeasonWeeks: m.regularSeasonWeeks,
+      finalizedThroughWeek: m.finalWeek,
+      standings: standings.sort((a, b) => a.seed - b.seed),
+      winnersBracket: toBracket("winners"),
+      losersBracket: [...toBracket("winners-consolation"), ...toBracket("consolation")],
+      champion: at(1),
+      runnerUp: at(2),
+      thirdPlace: at(3),
+      lastPlace: at(m.teams),
+    });
+  }
+  return out;
+}
+
 // --- main -------------------------------------------------------------------
 
 log.step("Loading seasons");
@@ -895,7 +1052,10 @@ for (const s of index.seasons) {
 loaded.sort((a, b) => a.season - b.season);
 
 log.step("Deriving");
-const summaries = loaded.map((d) => summariseSeason(d, throughByseason.get(d.season) ?? 0));
+const summaries = [
+  ...importedSeasons(),
+  ...loaded.map((d) => summariseSeason(d, throughByseason.get(d.season) ?? 0)),
+].sort((a, b) => a.season - b.season);
 const matchups = loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0));
 const ownerRecords = buildOwnerRecords(summaries, matchups);
 const records = buildLeagueRecords(matchups);

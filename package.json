@@ -14,7 +14,8 @@
     "derive": "node scripts/derive.ts",
     "data": "npm run sync && npm run adp && npm run derive",
     "adp": "node scripts/adp.ts",
-    "adp:lock": "node scripts/adp.ts --lock"
+    "adp:lock": "node scripts/adp.ts --lock",
+    "import:espn": "node scripts/import-espn.ts"
   },
   "dependencies": {
     "next": "16.2.12",

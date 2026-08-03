@@ -27,7 +27,8 @@ export default function HistoryPage() {
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">League History</h1>
         <p className="mt-1 text-sm text-chalk-500">
           {seasons.length} completed season{seasons.length === 1 ? "" : "s"} · tracked by owner,
-          so team-name changes never break the record.
+          so team-name changes never break the record. 2020–2023 are imported from ESPN and have
+          standings and playoff results only.
         </p>
       </div>
 
@@ -69,7 +70,11 @@ export default function HistoryPage() {
       </Panel>
 
       <Panel>
-        <PanelHeader title="All-Time Table" meta="regular season" />
+        <PanelHeader
+          title="All-Time Table"
+          meta="regular season"
+          legend="A co-owned team's record counts for each of its owners, so these columns will not sum to league totals."
+        />
         <div className="overflow-x-auto">
           <table className="w-full min-w-[640px] text-sm">
             <thead>
@@ -110,6 +115,11 @@ export default function HistoryPage() {
                     >
                       {name(r.ownerSlug)}
                     </Link>
+                    {owners.get(r.ownerSlug)?.active === false ? (
+                      <span className="ml-1.5 text-[10px] text-chalk-600" title="Former owner">
+                        ·former
+                      </span>
+                    ) : null}
                   </td>
                   <td className="tabular px-3 py-2.5 text-right text-chalk-300">
                     {fmt.record(r.wins, r.losses, r.ties)}

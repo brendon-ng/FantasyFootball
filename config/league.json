@@ -8,9 +8,7 @@
     "`previous_league_id`. There is no forward pointer, so the sync script finds",
     "next year's league by listing `anchorUserId`'s leagues for that season and",
     "picking the one whose previous_league_id matches the latest known season.",
-    "That also disambiguates from other leagues the anchor user plays in.",
-    "`knownLeagueIds` is a safety net: if the anchor user ever leaves or Sleeper",
-    "changes behavior, these still resolve. Discovery appends to it in data/raw/seasons.json."
+    "That also disambiguates from other leagues the anchor user plays in."
   ],
   "anchorUserId": "887589851141427200",
   "knownLeagueIds": {
@@ -20,24 +18,37 @@
   },
 
   "//owners": [
-    "Owner is the unit of historical tracking, not team name or roster_id, because",
-    "team names change yearly and roster_id is only stable within a season.",
-    "Co-owned teams collapse to a single primary owner via `coOwnerOf` (see bylaws 1.1).",
-    "`slug` is the stable URL key and must never change once published."
+    "EVERY PERSON IS A FIRST-CLASS OWNER, including co-owners. A co-owned team's",
+    "record is credited to every owner on it, so Maddy is credited for Jake's",
+    "seasons and Katie for Jaymie's. Consequence: summing all-time wins across",
+    "owners double-counts co-owned seasons. That is intended — these are personal",
+    "records, not a league ledger — and the UI says so.",
+    "",
+    "A team-season still has ONE primary owner (`teamSlug`), used to group keeper",
+    "contracts and to key franchise URLs. For Sleeper seasons that is the roster's",
+    "`owner_id`; for imported ESPN seasons it is the first owner ESPN lists.",
+    "",
+    "`slug` is the stable URL key and must never change once published.",
+    "`active: false` marks someone who has left; they still appear throughout",
+    "history but never on the keeper board or current-season views.",
+    "`espnNames` maps the display names ESPN used to this owner."
   ],
   "owners": [
-    { "slug": "brendon-ng", "userId": "887589851141427200", "firstName": "Brendon", "lastName": "Ng" },
-    { "slug": "cassidy-pensa", "userId": "1133573613518716928", "firstName": "Cassidy", "lastName": "Pensa" },
-    { "slug": "david-collier", "userId": "1048521200416313344", "firstName": "David", "lastName": "Collier" },
-    { "slug": "jake-gibbons", "userId": "1049399449467871232", "firstName": "Jake", "lastName": "Gibbons" },
-    { "slug": "jaymie-lew", "userId": "1049492055615266816", "firstName": "Jaymie", "lastName": "Lew" },
-    { "slug": "lauren-gross", "userId": "1132133697135869952", "firstName": "Lauren", "lastName": "Gross" },
-    { "slug": "reagan-schmidt", "userId": "1133643357365972992", "firstName": "Reagan", "lastName": "Schmidt" },
-    { "slug": "safvet-besen", "userId": "609168288324321280", "firstName": "Safvet", "lastName": "Besen" },
-    { "slug": "spencer-kim", "userId": "868608373288034304", "firstName": "Spencer", "lastName": "Kim" },
-    { "slug": "tyler-jung", "userId": "999142984568557568", "firstName": "Tyler", "lastName": "Jung" },
+    { "slug": "brendon-ng", "firstName": "Brendon", "lastName": "Ng", "userId": "887589851141427200", "active": true },
+    { "slug": "cassidy-pensa", "firstName": "Cassidy", "lastName": "Pensa", "userId": "1133573613518716928", "active": true },
+    { "slug": "david-collier", "firstName": "David", "lastName": "Collier", "userId": "1048521200416313344", "active": true },
+    { "slug": "jake-gibbons", "firstName": "Jake", "lastName": "Gibbons", "userId": "1049399449467871232", "active": true },
+    { "slug": "jaymie-lew", "firstName": "Jaymie", "lastName": "Lew", "userId": "1049492055615266816", "active": true, "espnNames": ["Jaymie L"] },
+    { "slug": "katie-barnes", "firstName": "Katie", "lastName": "Barnes", "userId": "1049498096055140352", "active": true },
+    { "slug": "lauren-gross", "firstName": "Lauren", "lastName": "Gross", "userId": "1132133697135869952", "active": true },
+    { "slug": "maddy-perdue", "firstName": "Maddy", "lastName": "Perdue", "userId": "1049401412565774336", "active": true },
+    { "slug": "reagan-schmidt", "firstName": "Reagan", "lastName": "Schmidt", "userId": "1133643357365972992", "active": true },
+    { "slug": "safvet-besen", "firstName": "Safvet", "lastName": "Besen", "userId": "609168288324321280", "active": true },
+    { "slug": "spencer-kim", "firstName": "Spencer", "lastName": "Kim", "userId": "868608373288034304", "active": true },
+    { "slug": "tyler-jung", "firstName": "Tyler", "lastName": "Jung", "userId": "999142984568557568", "active": true },
 
-    { "userId": "1049401412565774336", "firstName": "Maddy", "lastName": "Perdue", "coOwnerOf": "jake-gibbons" },
-    { "userId": "1049498096055140352", "firstName": "Katie", "lastName": "Barnes", "coOwnerOf": "jaymie-lew" }
+    { "slug": "logan-dunn", "firstName": "Logan", "lastName": "Dunn", "userId": null, "active": false },
+    { "slug": "michaela-frederick", "firstName": "Michaela", "lastName": "Frederick", "userId": null, "active": false },
+    { "slug": "olivia-nelli", "firstName": "Olivia", "lastName": "Nelli", "userId": null, "active": false }
   ]
 }

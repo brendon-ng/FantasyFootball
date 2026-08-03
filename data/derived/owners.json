@@ -1,9 +1,14 @@
 [
   {
-    "coOwners": [],
+    "active": true,
+    "coOwnedWith": [],
     "firstName": "Brendon",
     "name": "Brendon Ng",
     "seasons": [
+      2020,
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
@@ -11,10 +16,15 @@
     "userId": "887589851141427200"
   },
   {
-    "coOwners": [],
+    "active": true,
+    "coOwnedWith": [],
     "firstName": "Cassidy",
     "name": "Cassidy Pensa",
     "seasons": [
+      2020,
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
@@ -22,10 +32,15 @@
     "userId": "1133573613518716928"
   },
   {
-    "coOwners": [],
+    "active": true,
+    "coOwnedWith": [],
     "firstName": "David",
     "name": "David Collier",
     "seasons": [
+      2020,
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
@@ -33,12 +48,17 @@
     "userId": "1048521200416313344"
   },
   {
-    "coOwners": [
-      "Maddy Perdue"
+    "active": true,
+    "coOwnedWith": [
+      "maddy-perdue"
     ],
     "firstName": "Jake",
     "name": "Jake Gibbons",
     "seasons": [
+      2020,
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
@@ -46,12 +66,17 @@
     "userId": "1049399449467871232"
   },
   {
-    "coOwners": [
-      "Katie Barnes"
+    "active": true,
+    "coOwnedWith": [
+      "katie-barnes"
     ],
     "firstName": "Jaymie",
     "name": "Jaymie Lew",
     "seasons": [
+      2020,
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
@@ -59,10 +84,30 @@
     "userId": "1049492055615266816"
   },
   {
-    "coOwners": [],
+    "active": true,
+    "coOwnedWith": [
+      "jaymie-lew"
+    ],
+    "firstName": "Katie",
+    "name": "Katie Barnes",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "katie-barnes",
+    "userId": "1049498096055140352"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [
+      "olivia-nelli"
+    ],
     "firstName": "Lauren",
     "name": "Lauren Gross",
     "seasons": [
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
@@ -70,10 +115,29 @@
     "userId": "1132133697135869952"
   },
   {
-    "coOwners": [],
+    "active": true,
+    "coOwnedWith": [
+      "jake-gibbons"
+    ],
+    "firstName": "Maddy",
+    "name": "Maddy Perdue",
+    "seasons": [
+      2024,
+      2025
+    ],
+    "slug": "maddy-perdue",
+    "userId": "1049401412565774336"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
     "firstName": "Reagan",
     "name": "Reagan Schmidt",
     "seasons": [
+      2020,
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
@@ -81,10 +145,15 @@
     "userId": "1133643357365972992"
   },
   {
-    "coOwners": [],
+    "active": true,
+    "coOwnedWith": [],
     "firstName": "Safvet",
     "name": "Safvet Besen",
     "seasons": [
+      2020,
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
@@ -92,10 +161,15 @@
     "userId": "609168288324321280"
   },
   {
-    "coOwners": [],
+    "active": true,
+    "coOwnedWith": [],
     "firstName": "Spencer",
     "name": "Spencer Kim",
     "seasons": [
+      2020,
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
@@ -103,14 +177,63 @@
     "userId": "868608373288034304"
   },
   {
-    "coOwners": [],
+    "active": true,
+    "coOwnedWith": [],
     "firstName": "Tyler",
     "name": "Tyler Jung",
     "seasons": [
+      2020,
+      2021,
+      2022,
+      2023,
       2024,
       2025
     ],
     "slug": "tyler-jung",
     "userId": "999142984568557568"
+  },
+  {
+    "active": false,
+    "coOwnedWith": [],
+    "firstName": "Logan",
+    "name": "Logan Dunn",
+    "seasons": [
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "slug": "logan-dunn",
+    "userId": null
+  },
+  {
+    "active": false,
+    "coOwnedWith": [],
+    "firstName": "Michaela",
+    "name": "Michaela Frederick",
+    "seasons": [
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "slug": "michaela-frederick",
+    "userId": null
+  },
+  {
+    "active": false,
+    "coOwnedWith": [
+      "lauren-gross"
+    ],
+    "firstName": "Olivia",
+    "name": "Olivia Nelli",
+    "seasons": [
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "slug": "olivia-nelli",
+    "userId": null
   }
 ]
