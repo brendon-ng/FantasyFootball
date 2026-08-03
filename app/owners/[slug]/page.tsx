@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { FinishChart } from "@/components/finish-chart";
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
+import { TrophyCase } from "@/components/trophy-case";
 import { Col, ListHeader, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
 import {
   getAdp,
@@ -30,6 +32,25 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const adp = getAdp();
   const contracts = getKeepers().final.filter((c) => c.ownerSlug === slug);
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
+
+  // Placement history needs each season's team count: 10th of 12 and 10th of 10
+  // are very different results, and the chart has to say which.
+  const teamsBySeason = new Map(getSeasons().map((x) => [x.season, x.teams]));
+  const finishPoints = (record?.finishes ?? [])
+    .slice()
+    .sort((a, b) => a.season - b.season)
+    .map((f) => ({
+      season: f.season,
+      place: f.place,
+      teams: teamsBySeason.get(f.season) ?? 10,
+    }));
+
+  const honours = (record?.finishes ?? [])
+    .filter((f) => f.place != null && f.place <= 3)
+    .map((f) => ({ season: f.season, place: f.place as number }));
+  const lastPlaceSeasons = (record?.finishes ?? [])
+    .filter((f) => f.place != null && f.place === (teamsBySeason.get(f.season) ?? 10))
+    .map((f) => f.season);
 
   // Sort opponents by how well this owner does against them.
   const vs = Object.entries(record?.vs ?? {}).sort(([, a], [, b]) => {
@@ -92,6 +113,24 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             <Stat label="Points for" value={fmt.pts1(record.pointsFor)} />
             <Stat label="Last places" value={record.lastPlaces} />
           </div>
+
+          <Panel>
+            <PanelHeader
+              title="Trophy Case"
+              meta={`${record.championships} title${record.championships === 1 ? "" : "s"}`}
+            />
+            <TrophyCase honours={honours} lastPlaces={lastPlaceSeasons} />
+          </Panel>
+
+          <Panel>
+            <PanelHeader
+              title="Finish by Season"
+              meta={`${finishPoints.length} season${finishPoints.length === 1 ? "" : "s"}`}
+            />
+            <div className="p-4 sm:p-5">
+              <FinishChart points={finishPoints} />
+            </div>
+          </Panel>
 
           <div className="grid gap-5 lg:grid-cols-2">
             <Panel>
