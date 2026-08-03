@@ -35,8 +35,18 @@ import type {
   SeasonSummary,
 } from "./types.ts";
 
-const DATA = join(process.cwd(), "data");
-const CONFIG = join(process.cwd(), "config");
+/**
+ * INTERIM: the data layer still resolves one hardcoded league.
+ *
+ * The config and data directories are already split per league, and the scripts
+ * already loop them. Converting these accessors to a per-league factory and
+ * moving the routes under `app/[league]/` is the next step; until then the app
+ * serves den-ops so the build stays green.
+ */
+const LEAGUE = "den-ops";
+const DATA = join(process.cwd(), "data", LEAGUE);
+const SHARED_DATA = join(process.cwd(), "data");
+const CONFIG = join(process.cwd(), "config", "leagues", LEAGUE);
 
 function load<T>(relPath: string, fallback: T): T {
   const p = join(DATA, relPath);
@@ -56,7 +66,10 @@ export const getOwnerRecords = (): OwnerRecord[] => load("derived/owner-records.
  * returned, and the correction lives in one declarative place.
  */
 export const getPlayers = (): Record<string, PlayerMeta> => {
-  const all = load<Record<string, PlayerMeta>>("players.json", {});
+  const all = JSON.parse(readFileSync(join(SHARED_DATA, "players.json"), "utf8")) as Record<
+    string,
+    PlayerMeta
+  >;
   const ignored = new Set(
     (JSON.parse(readFileSync(join(CONFIG, "keeper-overrides.json"), "utf8")) as {
       ignorePlayerIds?: string[];

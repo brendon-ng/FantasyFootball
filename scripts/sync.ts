@@ -1,6 +1,8 @@
 /**
- * Pulls finalized league data from Sleeper into `data/raw/`, then rebuilds the
- * slim player index. Run with `npm run sync`.
+ * Pulls finalized league data from Sleeper into `data/<league>/raw/`, then
+ * rebuilds the shared player index. Run with `npm run sync`.
+ *
+ * Operates on EVERY configured league by default; `--league=<slug>` scopes it.
  *
  * Two invariants govern this script:
  *
@@ -18,6 +20,7 @@
  *   --force            rewrite finalized files even if they already exist
  *   --season=2025      restrict to one season
  *   --skip-players     don't refresh the player index (fast iteration)
+ *   --league=den-ops   only this league
  */
 
 import { existsSync } from "node:fs";
@@ -40,13 +43,8 @@ import {
   type SleeperLeague,
   type SleeperPlayer,
 } from "../lib/sleeper.ts";
-import { CACHE_DIR, DATA_DIR, RAW_DIR, fileAgeMs, log, readJson, wk, writeJson } from "./lib/io.ts";
-
-interface LeagueConfig {
-  anchorUserId: string;
-  sport: string;
-  knownLeagueIds: Record<string, string>;
-}
+import { CACHE_DIR, SHARED_DATA_DIR, fileAgeMs, log, readJson, wk, writeJson } from "./lib/io.ts";
+import { configDir, dataDir, resolveLeagues, type ScriptLeague } from "./lib/league.ts";
 
 interface SeasonRecord {
   season: string;
@@ -65,9 +63,11 @@ const FORCE = args.has("--force");
 const SKIP_PLAYERS = args.has("--skip-players");
 const ONLY_SEASON = [...args].find((a) => a.startsWith("--season="))?.split("=")[1];
 
-const configPath = join(DATA_DIR, "..", "config", "league.json");
-const config = readJson<LeagueConfig>(configPath);
-if (!config) throw new Error(`Missing ${configPath}`);
+// Set per league by syncLeague(); every helper below reads these. Definite
+// assignment because the helpers only ever run inside a league pass.
+let config!: ScriptLeague;
+let RAW_DIR = "";
+let LEAGUE_CONFIG_DIR = "";
 
 /**
  * Writes only if the serialized content differs, preserving idempotency.
@@ -116,7 +116,7 @@ async function discoverSeasons(currentSeason: number): Promise<SleeperLeague[]> 
   const byId = new Map<string, SleeperLeague>();
 
   // Seed from configured IDs, then walk backward to pick up anything older.
-  const queue = Object.values(config!.knownLeagueIds);
+  const queue = Object.values(config.knownLeagueIds);
   while (queue.length) {
     const id = queue.pop()!;
     if (byId.has(id)) continue;
@@ -135,7 +135,7 @@ async function discoverSeasons(currentSeason: number): Promise<SleeperLeague[]> 
   for (let season = currentSeason - 1; season <= currentSeason + 1; season++) {
     if ([...byId.values()].some((l) => l.season === String(season))) continue;
 
-    const candidates = await getUserLeagues(config!.anchorUserId, season, config!.sport);
+    const candidates = await getUserLeagues(config.anchorUserId, season, config.sport);
     const match = candidates?.find(
       (l) => l.previous_league_id && byId.has(l.previous_league_id),
     );
@@ -170,9 +170,7 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
   const dir = join(RAW_DIR, season);
   const complete = league.status === "complete";
 
-  const rules = readJson<{ finalWeek?: number }>(
-    join(DATA_DIR, "..", "config", "rules", `${season}.json`),
-  );
+  const rules = readJson<{ finalWeek?: number }>(join(LEAGUE_CONFIG_DIR, "rules", `${season}.json`));
   const finalWeek = rules?.finalWeek ?? 17;
   const through = finalizedThrough(league, finalWeek);
 
@@ -303,7 +301,7 @@ async function syncPlayers(seasons: SeasonRecord[]): Promise<void> {
   }
 
   // Also index whoever is currently rostered, so in-progress pages resolve names.
-  for (const [season, leagueId] of Object.entries(config!.knownLeagueIds)) {
+  for (const [season, leagueId] of Object.entries(config.knownLeagueIds)) {
     if (seasons.find((s) => s.season === season)?.finalized) continue;
     for (const r of (await getRosters(leagueId)) ?? []) {
       collect(r.players);
@@ -319,7 +317,7 @@ async function syncPlayers(seasons: SeasonRecord[]): Promise<void> {
   let all = readJson<Record<string, SleeperPlayer>>(cachePath);
   if (!all || fileAgeMs(cachePath) > 24 * 60 * 60 * 1000) {
     log.info("fetching full player map (~5MB, max once/day)");
-    all = await getAllPlayers(config!.sport);
+    all = await getAllPlayers(config.sport);
     if (all) writeJson(cachePath, all);
   } else {
     log.skip("using cached player map (<24h old)");
@@ -346,11 +344,16 @@ async function syncPlayers(seasons: SeasonRecord[]): Promise<void> {
     };
   }
 
-  writeIfChanged(join(DATA_DIR, "players.json"), slim, `players.json (${Object.keys(slim).length})`);
+  writeIfChanged(join(SHARED_DATA_DIR, "players.json"), slim, `players.json (${Object.keys(slim).length})`);
 }
 
-async function main(): Promise<void> {
-  const state = await getState(config!.sport);
+async function syncLeague(league: ScriptLeague): Promise<void> {
+  config = league;
+  RAW_DIR = join(dataDir(league.slug), "raw");
+  LEAGUE_CONFIG_DIR = configDir(league.slug);
+
+  log.step(`■ ${league.name} (${league.slug})`);
+  const state = await getState(config.sport);
   if (!state) throw new Error("Could not read NFL state");
   log.info(
     `NFL state: ${state.season} ${state.season_type}, week ${state.week} (display ${state.display_week})`,
@@ -378,8 +381,9 @@ async function main(): Promise<void> {
   );
 
   if (!SKIP_PLAYERS) await syncPlayers(records);
-
-  log.step("Done");
 }
 
-await main();
+for (const league of resolveLeagues(process.argv.slice(2))) {
+  await syncLeague(league);
+}
+log.step("Done");

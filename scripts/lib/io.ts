@@ -2,9 +2,8 @@ import { mkdirSync, readFileSync, writeFileSync, existsSync, statSync } from "no
 import { dirname, join, resolve } from "node:path";
 
 export const ROOT = resolve(import.meta.dirname, "..", "..");
-export const DATA_DIR = join(ROOT, "data");
-export const RAW_DIR = join(DATA_DIR, "raw");
-export const MANUAL_DIR = join(DATA_DIR, "manual");
+/** Shared across leagues: player metadata is league-agnostic. */
+export const SHARED_DATA_DIR = join(ROOT, "data");
 export const CACHE_DIR = join(ROOT, ".cache");
 
 export function readJson<T>(path: string): T | null {

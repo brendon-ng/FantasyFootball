@@ -38,10 +38,15 @@ import type {
   SleeperTransaction,
   SleeperUser,
 } from "../lib/sleeper.ts";
-import { DATA_DIR, RAW_DIR, log, readJson, writeJson } from "./lib/io.ts";
+import { log, readJson, writeJson } from "./lib/io.ts";
+import { configDir, dataDir, resolveLeagues, type ScriptLeague } from "./lib/league.ts";
 
-const CONFIG_DIR = join(DATA_DIR, "..", "config");
-const DERIVED_DIR = join(DATA_DIR, "derived");
+// Set per league by deriveLeague(); every helper below reads these. Definite
+// assignment because nothing runs outside a league pass.
+let CONFIG_DIR!: string;
+let DATA_DIR!: string;
+let RAW_DIR!: string;
+let DERIVED_DIR!: string;
 
 interface OwnerConfig {
   slug: string;
@@ -83,9 +88,8 @@ interface SeasonIndex {
   }>;
 }
 
-const config = readJson<LeagueConfig>(join(CONFIG_DIR, "league.json"))!;
-const index = readJson<SeasonIndex>(join(RAW_DIR, "seasons.json"));
-if (!index) throw new Error("data/raw/seasons.json missing — run `npm run sync` first");
+let config!: LeagueConfig;
+let index!: SeasonIndex;
 
 /**
  * Manual corrections, see config/keeper-overrides.json.
@@ -107,8 +111,8 @@ interface Overrides {
   ignorePlayerIds?: string[];
   contracts?: Record<string, Partial<KeeperContract>>;
 }
-const overrides = readJson<Overrides>(join(CONFIG_DIR, "keeper-overrides.json")) ?? {};
-const ignoredPlayers = new Set(overrides.ignorePlayerIds ?? []);
+let overrides: Overrides = {};
+let ignoredPlayers = new Set<string>();
 
 const rulesFor = (season: number): Rules => {
   const r = readJson<Rules>(join(CONFIG_DIR, "rules", `${season}.json`));
@@ -129,17 +133,22 @@ const rulesFor = (season: number): Rules => {
 const slugByUserId = new Map<string, string>();
 const owners = new Map<string, Owner>();
 
-for (const o of config.owners) {
-  owners.set(o.slug, {
-    slug: o.slug,
-    name: `${o.firstName} ${o.lastName}`,
-    firstName: o.firstName,
-    userId: o.userId,
-    active: o.active,
-    seasons: [],
-    coOwnedWith: [],
-  });
-  if (o.userId) slugByUserId.set(o.userId, o.slug);
+/** Rebuilds the owner registry for the league currently being derived. */
+function loadOwners(): void {
+  slugByUserId.clear();
+  owners.clear();
+  for (const o of config.owners) {
+    owners.set(o.slug!, {
+      slug: o.slug!,
+      name: `${o.firstName} ${o.lastName}`,
+      firstName: o.firstName,
+      userId: o.userId,
+      active: o.active,
+      seasons: [],
+      coOwnedWith: [],
+    });
+    if (o.userId) slugByUserId.set(o.userId, o.slug!);
+  }
 }
 
 // --- per-season loading -----------------------------------------------------
@@ -1493,58 +1502,81 @@ function recordsAtTheTime(
 
 // --- main -------------------------------------------------------------------
 
-log.step("Loading seasons");
-const loaded: SeasonData[] = [];
-const throughByseason = new Map<number, number>();
-for (const s of index.seasons) {
-  const season = Number(s.season);
-  const d = loadSeason(season);
-  if (!d) {
-    log.skip(`${season} — no finalized data yet (${s.status})`);
-    continue;
+async function deriveLeague(league: ScriptLeague): Promise<void> {
+  CONFIG_DIR = configDir(league.slug);
+  DATA_DIR = dataDir(league.slug);
+  RAW_DIR = join(DATA_DIR, "raw");
+  DERIVED_DIR = join(DATA_DIR, "derived");
+
+  log.step(`■ ${league.name} (${league.slug})`);
+
+  config = readJson<LeagueConfig>(join(CONFIG_DIR, "league.json"))!;
+  const idx = readJson<SeasonIndex>(join(RAW_DIR, "seasons.json"));
+  if (!idx) throw new Error(`data/${league.slug}/raw/seasons.json missing — run \`npm run sync\` first`);
+  index = idx;
+
+  overrides = readJson<Overrides>(join(CONFIG_DIR, "keeper-overrides.json")) ?? {};
+  ignoredPlayers = new Set(overrides.ignorePlayerIds ?? []);
+  loadOwners();
+
+  log.step("Loading seasons");
+  const loaded: SeasonData[] = [];
+  const throughByseason = new Map<number, number>();
+  for (const s of index.seasons) {
+    const season = Number(s.season);
+    const d = loadSeason(season);
+    if (!d) {
+      log.skip(`${season} — no finalized data yet (${s.status})`);
+      continue;
+    }
+    throughByseason.set(season, s.finalizedThroughWeek);
+    loaded.push(d);
+    log.info(`${season}: ${d.rosters.length} rosters, ${d.picks.length} picks, ${d.matchups.size} weeks`);
   }
-  throughByseason.set(season, s.finalizedThroughWeek);
-  loaded.push(d);
-  log.info(`${season}: ${d.rosters.length} rosters, ${d.picks.length} picks, ${d.matchups.size} weeks`);
+  loaded.sort((a, b) => a.season - b.season);
+
+  log.step("Deriving");
+  const summaries = [
+    ...importedSeasons(),
+    ...loaded.map((d) => summariseSeason(d, throughByseason.get(d.season) ?? 0)),
+  ].sort((a, b) => a.season - b.season);
+  const matchups = loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0));
+  const ownerRecords = buildOwnerRecords(summaries, matchups);
+  const records = buildLeagueRecords(matchups, summaries);
+  const keepers = resolveKeepers(loaded);
+  const atTheTime = recordsAtTheTime(summaries, matchups);
+  const playerHistory = buildPlayerHistory(loaded);
+  const drafts = buildDraftHistory(loaded);
+
+  for (const o of owners.values()) o.seasons = [...new Set(o.seasons)].sort();
+
+  log.step("Writing derived data");
+  const out = (name: string, value: unknown) => {
+    writeJson(join(DERIVED_DIR, name), value);
+    log.write(`derived/${name}`);
+  };
+
+  out("owners.json", [...owners.values()]);
+  out("seasons.json", summaries);
+  out("matchups.json", matchups);
+  out("owner-records.json", ownerRecords);
+  out("records.json", records);
+  out("at-the-time.json", atTheTime);
+  out("keepers.json", keepers);
+  out("player-history.json", playerHistory);
+  out("drafts.json", drafts);
+
+  log.step("Summary");
+  for (const s of summaries) {
+    const name = (slug: string | null) => (slug ? owners.get(slug)?.name : "—");
+    log.info(
+      `${s.season}: champ ${name(s.champion)} · 2nd ${name(s.runnerUp)} · 3rd ${name(s.thirdPlace)} · last ${name(s.lastPlace)}`,
+    );
+  }
+  log.info(`${matchups.length} matchups, ${keepers.final.length} tracked contracts`);
+
 }
-loaded.sort((a, b) => a.season - b.season);
 
-log.step("Deriving");
-const summaries = [
-  ...importedSeasons(),
-  ...loaded.map((d) => summariseSeason(d, throughByseason.get(d.season) ?? 0)),
-].sort((a, b) => a.season - b.season);
-const matchups = loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0));
-const ownerRecords = buildOwnerRecords(summaries, matchups);
-const records = buildLeagueRecords(matchups, summaries);
-const keepers = resolveKeepers(loaded);
-const atTheTime = recordsAtTheTime(summaries, matchups);
-const playerHistory = buildPlayerHistory(loaded);
-const drafts = buildDraftHistory(loaded);
-
-for (const o of owners.values()) o.seasons = [...new Set(o.seasons)].sort();
-
-log.step("Writing derived data");
-const out = (name: string, value: unknown) => {
-  writeJson(join(DERIVED_DIR, name), value);
-  log.write(`derived/${name}`);
-};
-
-out("owners.json", [...owners.values()]);
-out("seasons.json", summaries);
-out("matchups.json", matchups);
-out("owner-records.json", ownerRecords);
-out("records.json", records);
-out("at-the-time.json", atTheTime);
-out("keepers.json", keepers);
-out("player-history.json", playerHistory);
-out("drafts.json", drafts);
-
-log.step("Summary");
-for (const s of summaries) {
-  const name = (slug: string | null) => (slug ? owners.get(slug)?.name : "—");
-  log.info(
-    `${s.season}: champ ${name(s.champion)} · 2nd ${name(s.runnerUp)} · 3rd ${name(s.thirdPlace)} · last ${name(s.lastPlace)}`,
-  );
+for (const league of resolveLeagues(process.argv.slice(2))) {
+  await deriveLeague(league);
 }
-log.info(`${matchups.length} matchups, ${keepers.final.length} tracked contracts`);

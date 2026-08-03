@@ -30,7 +30,8 @@
 import { join } from "node:path";
 
 import { getAllPlayers, type SleeperPlayer } from "../lib/sleeper.ts";
-import { CACHE_DIR, DATA_DIR, fileAgeMs, log, readJson, writeJson } from "./lib/io.ts";
+import { CACHE_DIR, fileAgeMs, log, readJson, writeJson } from "./lib/io.ts";
+import { configDir, dataDir, resolveLeagues } from "./lib/league.ts";
 
 const SOURCE = "https://www.beatadp.com/platform-adp";
 
@@ -143,8 +144,8 @@ async function loadPlayerMap(): Promise<Record<string, SleeperPlayer>> {
   return all;
 }
 
-async function main(): Promise<void> {
-  const outPath = join(DATA_DIR, "adp", LOCK ? `${SEASON}.json` : "live.json");
+async function captureFor(slug: string): Promise<void> {
+  const outPath = join(dataDir(slug), "adp", LOCK ? `${SEASON}.json` : "live.json");
 
   if (LOCK) {
     const existing = readJson<{ capturedAt: string }>(outPath);
@@ -157,9 +158,7 @@ async function main(): Promise<void> {
     }
   }
 
-  const rules = readJson<{ teams: number }>(
-    join(DATA_DIR, "..", "config", "rules", `${SEASON}.json`),
-  );
+  const rules = readJson<{ teams: number }>(join(configDir(slug), "rules", `${SEASON}.json`));
   const teams = rules?.teams ?? 10;
 
   log.step(`Capturing ${SEASON} Sleeper ADP (${LOCK ? "FROZEN snapshot" : "live refresh"})`);
@@ -232,7 +231,7 @@ async function main(): Promise<void> {
       "`round` converts Sleeper ADP to a keeper cost round for this league's size.",
     entries,
   });
-  log.write(`data/adp/${LOCK ? SEASON : "live"}.json (${entries.length} players)`);
+  log.write(`data/${slug}/adp/${LOCK ? SEASON : "live"}.json (${entries.length} players)`);
 
   if (!LOCK) return;
 
@@ -245,4 +244,12 @@ async function main(): Promise<void> {
   }
 }
 
-await main();
+// Only leagues that use keepers need ADP; it exists to reprice expired contracts.
+for (const league of resolveLeagues(process.argv.slice(2))) {
+  if (!league.features?.adp) {
+    log.skip(`${league.slug} — ADP not enabled for this league`);
+    continue;
+  }
+  log.step(`■ ${league.name} (${league.slug})`);
+  await captureFor(league.slug);
+}

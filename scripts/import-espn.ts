@@ -27,10 +27,13 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
-import { DATA_DIR, log, readJson, writeJson } from "./lib/io.ts";
+import { log, readJson, writeJson } from "./lib/io.ts";
+import { configDir, dataDir, resolveLeagues } from "./lib/league.ts";
 
-const SOURCE_DIR = join(DATA_DIR, "manual", "source");
-const CONFIG_DIR = join(DATA_DIR, "..", "config");
+// Set per league before importing.
+let SOURCE_DIR!: string;
+let MANUAL_DIR!: string;
+let CONFIG_DIR!: string;
 
 interface OwnerConfig {
   slug: string;
@@ -106,12 +109,16 @@ function tokens(html: string): string[] {
 
 // --- owner resolution --------------------------------------------------------
 
-const ownersCfg = readJson<{ owners: OwnerConfig[] }>(join(CONFIG_DIR, "league.json"))!.owners;
-
 const slugByName = new Map<string, string>();
-for (const o of ownersCfg) {
-  slugByName.set(`${o.firstName} ${o.lastName}`.toLowerCase(), o.slug);
-  for (const alias of o.espnNames ?? []) slugByName.set(alias.toLowerCase(), o.slug);
+
+/** Rebuilds the ESPN-name lookup for the league being imported. */
+function loadOwnerAliases(): void {
+  slugByName.clear();
+  const cfg = readJson<{ owners: OwnerConfig[] }>(join(CONFIG_DIR, "league.json"));
+  for (const o of cfg?.owners ?? []) {
+    slugByName.set(`${o.firstName} ${o.lastName}`.toLowerCase(), o.slug);
+    for (const alias of o.espnNames ?? []) slugByName.set(alias.toLowerCase(), o.slug);
+  }
 }
 
 /**
@@ -391,11 +398,24 @@ function seasonFiles(): Map<number, { standings: string; playoffs: string }> {
   return found;
 }
 
-log.step("Importing ESPN seasons");
-const bySeason = seasonFiles();
-if (!bySeason.size) throw new Error(`No MHTML files in ${SOURCE_DIR}`);
+for (const league of resolveLeagues(process.argv.slice(2))) {
+  if (!league.features?.espnImport) {
+    log.skip(`${league.slug} — no ESPN history to import`);
+    continue;
+  }
+  CONFIG_DIR = configDir(league.slug);
+  MANUAL_DIR = join(dataDir(league.slug), "manual");
+  SOURCE_DIR = join(MANUAL_DIR, "source");
+  loadOwnerAliases();
 
-for (const [season, paths] of [...bySeason].sort((a, b) => a[0] - b[0])) {
+  log.step(`■ ${league.name} (${league.slug})`);
+  const bySeason = seasonFiles();
+  if (!bySeason.size) {
+    log.warn(`no MHTML files in ${SOURCE_DIR}`);
+    continue;
+  }
+
+  for (const [season, paths] of [...bySeason].sort((a, b) => a[0] - b[0])) {
   if (!paths.standings || !paths.playoffs) {
     log.warn(`${season}: need both Standings and Playoffs pages — skipping`);
     continue;
@@ -415,7 +435,7 @@ for (const [season, paths] of [...bySeason].sort((a, b) => a[0] - b[0])) {
   const weeks = games.map((g) => g.week).filter((w): w is number => w != null);
   const playoffWeekStart = Math.min(...weeks);
 
-  writeJson(join(DATA_DIR, "manual", `${season}.json`), {
+  writeJson(join(MANUAL_DIR, `${season}.json`), {
     season,
     source: "ESPN Fantasy (imported from archived MHTML)",
     imported: true,
@@ -433,12 +453,13 @@ for (const [season, paths] of [...bySeason].sort((a, b) => a[0] - b[0])) {
 
   const missingSeed = standings.filter((r) => r.seed == null).length;
   log.write(
-    `manual/${season}.json — ${standings.length} teams, ${games.length} playoff games` +
+    `${MANUAL_DIR.split("/data/")[1]}/${season}.json — ${standings.length} teams, ${games.length} playoff games` +
       (missingSeed ? `, ${missingSeed} without a seed` : ""),
   );
-  log.info(
-    `champion ${standings[0].ownerSlugs.join(" + ")} · last ${standings[standings.length - 1].ownerSlugs.join(" + ")}`,
-  );
+    log.info(
+      `champion ${standings[0].ownerSlugs.join(" + ")} · last ${standings[standings.length - 1].ownerSlugs.join(" + ")}`,
+    );
+  }
 }
 
 log.step("Done");
