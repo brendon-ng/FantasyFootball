@@ -2,10 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { KeepPips, PositionPill } from "@/components/keeper-table";
+import { PlayerLiveActivity } from "@/components/player-live";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
 import {
   getAdp,
+  getConfig,
   getKeepers,
+  getOwners,
+  getSeasons,
   getOwnerMap,
   getPlayerHistory,
   getPlayerKeepHistory,
@@ -60,6 +64,14 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   const contract = getKeepers().final.find((c) => c.playerId === id);
   const keeps = getPlayerKeepHistory(id);
   const adpAll = getAdp();
+  const cfg = getConfig();
+  // Weeks after this are not yet in the committed data, so anything there has to
+  // come from Sleeper directly.
+  const lastFinalized = Math.max(
+    0,
+    ...getSeasons().filter((x) => x.finalized).map((x) => x.finalizedThroughWeek),
+  );
+  const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
   const adp = adpAll.byPlayer.get(id);
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
 
@@ -169,9 +181,29 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
         </Panel>
       ) : null}
 
+      <PlayerLiveActivity
+        playerId={id}
+        leagueId={cfg.knownLeagueIds[String(upcoming)] ?? null}
+        season={upcoming}
+        fromWeek={1}
+        userIdToSlug={Object.fromEntries(
+          getOwners().filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+        )}
+        ownerNames={Object.fromEntries(getOwners().map((o) => [o.slug, o.name]))}
+        bakedOwnerSlug={contract?.ownerSlug ?? null}
+      />
+
       <div className="grid gap-5 lg:grid-cols-2">
         <Panel>
-          <PanelHeader title="Transaction History" meta={`${history.length} events`} />
+          <PanelHeader
+            title="Transaction History"
+            meta={`${history.length} events`}
+            legend={
+              lastFinalized
+                ? "Committed history. Anything since the last completed week appears above."
+                : undefined
+            }
+          />
           {history.length === 0 ? (
             <EmptyState>No recorded transactions.</EmptyState>
           ) : (
