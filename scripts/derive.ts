@@ -1280,6 +1280,8 @@ interface AtTheTimeFlag {
   label: string;
   value: number;
   ownerSlug: string;
+  /** Set for whole-game marks, where one name is only half the fact. */
+  opponentSlug?: string;
   playerId?: string;
   /** Whether the mark still stands today. */
   stillStands: boolean;
@@ -1412,6 +1414,7 @@ function recordsAtTheTime(
         label: "Highest scoring game in league history",
         value: total,
         ownerSlug: (a.points >= b.points ? a : b).slug,
+        opponentSlug: (a.points >= b.points ? b : a).slug,
         stillStands: false,
       });
     }
@@ -1421,6 +1424,7 @@ function recordsAtTheTime(
         label: "Lowest scoring game in league history",
         value: total,
         ownerSlug: (a.points >= b.points ? a : b).slug,
+        opponentSlug: (a.points >= b.points ? b : a).slug,
         stillStands: false,
       });
     }
@@ -1434,6 +1438,7 @@ function recordsAtTheTime(
           label: "Biggest margin in league history",
           value: margin,
           ownerSlug: winner.slug,
+          opponentSlug: (winner === a ? b : a).slug,
           stillStands: false,
         });
       }
@@ -1443,6 +1448,7 @@ function recordsAtTheTime(
           label: "Narrowest win in league history",
           value: margin,
           ownerSlug: winner.slug,
+          opponentSlug: (winner === a ? b : a).slug,
           stillStands: false,
         });
       }

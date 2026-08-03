@@ -117,7 +117,9 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                 <span className="text-chalk-600">
                   {f.playerId
                     ? (players[f.playerId]?.full_name ?? "")
-                    : (owners.get(f.ownerSlug)?.name ?? "")}
+                    : f.opponentSlug
+                      ? `${name(f.ownerSlug)} def. ${name(f.opponentSlug)}`
+                      : (owners.get(f.ownerSlug)?.name ?? "")}
                 </span>
                 <span
                   className={`rounded-full border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide ${
@@ -150,11 +152,20 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
               }`}
             >
               {f.short}
-              {f.ownerSlug ? (
+              {/* Whole-game records name both sides — one name is only half
+                  the fact for a blowout or a combined total. */}
+              {f.playerId ? (
                 <span className="ml-1 font-normal opacity-80">
-                  {f.playerId
-                    ? (players[f.playerId]?.full_name ?? "")
-                    : (owners.get(f.ownerSlug)?.firstName ?? "")}
+                  {players[f.playerId]?.full_name ?? ""}
+                </span>
+              ) : f.opponentSlug ? (
+                <span className="ml-1 font-normal opacity-80">
+                  {owners.get(f.ownerSlug ?? "")?.firstName ?? ""} def.{" "}
+                  {owners.get(f.opponentSlug)?.firstName ?? ""}
+                </span>
+              ) : f.ownerSlug ? (
+                <span className="ml-1 font-normal opacity-80">
+                  {owners.get(f.ownerSlug)?.firstName ?? ""}
                 </span>
               ) : null}
             </span>

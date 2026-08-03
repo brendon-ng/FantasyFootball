@@ -3,6 +3,7 @@
     {
       "kind": "combined-high",
       "label": "Highest scoring game in league history",
+      "opponentSlug": "brendon-ng",
       "ownerSlug": "jake-gibbons",
       "stillStands": false,
       "value": 243.18
@@ -10,6 +11,7 @@
     {
       "kind": "narrowest",
       "label": "Narrowest win in league history",
+      "opponentSlug": "brendon-ng",
       "ownerSlug": "jake-gibbons",
       "stillStands": false,
       "value": 27.02
@@ -26,6 +28,7 @@
     {
       "kind": "combined-high",
       "label": "Highest scoring game in league history",
+      "opponentSlug": "logan-dunn",
       "ownerSlug": "reagan-schmidt",
       "stillStands": false,
       "value": 263.66
@@ -35,6 +38,7 @@
     {
       "kind": "combined-low",
       "label": "Lowest scoring game in league history",
+      "opponentSlug": "tyler-jung",
       "ownerSlug": "michaela-frederick",
       "stillStands": false,
       "value": 213.46
@@ -42,6 +46,7 @@
     {
       "kind": "narrowest",
       "label": "Narrowest win in league history",
+      "opponentSlug": "tyler-jung",
       "ownerSlug": "michaela-frederick",
       "stillStands": false,
       "value": 5.98
@@ -58,6 +63,7 @@
     {
       "kind": "combined-high",
       "label": "Highest scoring game in league history",
+      "opponentSlug": "david-collier",
       "ownerSlug": "jaymie-lew",
       "stillStands": false,
       "value": 281.38
@@ -74,6 +80,7 @@
     {
       "kind": "combined-low",
       "label": "Lowest scoring game in league history",
+      "opponentSlug": "spencer-kim",
       "ownerSlug": "michaela-frederick",
       "stillStands": false,
       "value": 173.4
@@ -90,6 +97,7 @@
     {
       "kind": "combined-high",
       "label": "Highest scoring game in league history",
+      "opponentSlug": "jaymie-lew",
       "ownerSlug": "jake-gibbons",
       "stillStands": false,
       "value": 344.58
@@ -106,6 +114,7 @@
     {
       "kind": "combined-low",
       "label": "Lowest scoring game in league history",
+      "opponentSlug": "david-collier",
       "ownerSlug": "brendon-ng",
       "stillStands": false,
       "value": 165.06
@@ -115,6 +124,7 @@
     {
       "kind": "narrowest",
       "label": "Narrowest win in league history",
+      "opponentSlug": "jake-gibbons",
       "ownerSlug": "tyler-jung",
       "stillStands": false,
       "value": 1.88
@@ -131,6 +141,7 @@
     {
       "kind": "combined-low",
       "label": "Lowest scoring game in league history",
+      "opponentSlug": "reagan-schmidt",
       "ownerSlug": "spencer-kim",
       "stillStands": true,
       "value": 128.48
@@ -140,6 +151,7 @@
     {
       "kind": "narrowest",
       "label": "Narrowest win in league history",
+      "opponentSlug": "jake-gibbons",
       "ownerSlug": "david-collier",
       "stillStands": false,
       "value": 0.56
@@ -156,6 +168,7 @@
     {
       "kind": "blowout",
       "label": "Biggest margin in league history",
+      "opponentSlug": "david-collier",
       "ownerSlug": "olivia-nelli",
       "stillStands": false,
       "value": 110.56
@@ -208,6 +221,7 @@
     {
       "kind": "combined-high",
       "label": "Highest scoring game in league history",
+      "opponentSlug": "jake-gibbons",
       "ownerSlug": "jaymie-lew",
       "stillStands": true,
       "value": 408.1
@@ -215,6 +229,7 @@
     {
       "kind": "blowout",
       "label": "Biggest margin in league history",
+      "opponentSlug": "jake-gibbons",
       "ownerSlug": "jaymie-lew",
       "stillStands": false,
       "value": 111.26
@@ -234,6 +249,7 @@
     {
       "kind": "blowout",
       "label": "Biggest margin in league history",
+      "opponentSlug": "jaymie-lew",
       "ownerSlug": "reagan-schmidt",
       "stillStands": true,
       "value": 113.6
@@ -243,6 +259,7 @@
     {
       "kind": "narrowest",
       "label": "Narrowest win in league history",
+      "opponentSlug": "safvet-besen",
       "ownerSlug": "reagan-schmidt",
       "stillStands": true,
       "value": 0.26

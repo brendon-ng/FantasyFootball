@@ -485,6 +485,8 @@ export interface AtTheTimeFlag {
   label: string;
   value: number;
   ownerSlug: string;
+  /** Set for whole-game marks, where one name is only half the fact. */
+  opponentSlug?: string;
   playerId?: string;
   /** Whether the mark still stands today. */
   stillStands: boolean;
@@ -510,6 +512,8 @@ export interface RecordFlag {
   rank: number;
   tone: "good" | "bad";
   ownerSlug: string | null;
+  /** Set for whole-game records, where naming one side is only half the fact. */
+  opponentSlug?: string | null;
   playerId?: string;
 }
 
@@ -567,6 +571,7 @@ export function getRecordFlags(
         rank: i + 1,
         tone: "good",
         ownerSlug: s.ownerSlug,
+        opponentSlug: s.opponentSlug,
       });
     }
   });
@@ -589,7 +594,8 @@ export function getRecordFlags(
         full: `${ordinalOf(i + 1)}-highest combined score of any game in league history`,
         rank: i + 1,
         tone: "good",
-        ownerSlug: null,
+        ownerSlug: s.ownerSlug,
+        opponentSlug: s.opponentSlug,
       });
     }
   });
@@ -600,7 +606,8 @@ export function getRecordFlags(
         full: `${ordinalOf(i + 1)}-lowest combined score of any game in league history`,
         rank: i + 1,
         tone: "bad",
-        ownerSlug: null,
+        ownerSlug: s.ownerSlug,
+        opponentSlug: s.opponentSlug,
       });
     }
   });
