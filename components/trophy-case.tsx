@@ -20,8 +20,8 @@ const TIERS = [
     place: 1,
     label: "Champion",
     icon: "🏆",
-    ring: "border-gold/45",
-    glow: "shadow-[0_0_18px_-6px_var(--color-gold)]",
+    ring: "border-gold/55 bg-gold/[0.07]",
+    glow: "shadow-[0_0_26px_-6px_var(--color-gold)] hover:shadow-[0_0_34px_-4px_var(--color-gold)]",
     text: "text-gold",
   },
   {
@@ -72,9 +72,9 @@ export function TrophyCase({
             key={`${tier.place}-${season}`}
             href={`/history/${season}/`}
             title={`${tier.label} in ${season}`}
-            className={`group flex w-[88px] flex-col items-center gap-0.5 rounded-xl border bg-ink-850 px-2 py-2.5 transition-colors hover:bg-ink-700/50 ${tier.ring} ${tier.glow}`}
+            className={`group flex w-[96px] flex-col items-center gap-0.5 rounded-xl border px-2 py-3 transition-shadow ${tier.place === 1 ? "" : "bg-ink-850 hover:bg-ink-700/50"} ${tier.ring} ${tier.glow}`}
           >
-            <span className="text-xl leading-none" aria-hidden>
+            <span className="text-2xl leading-none" aria-hidden>
               {tier.icon}
             </span>
             <span className={`text-[10px] font-semibold uppercase tracking-wide ${tier.text}`}>
@@ -90,9 +90,9 @@ export function TrophyCase({
           key={`last-${season}`}
           href={`/history/${season}/`}
           title={`Finished last in ${season}`}
-          className="group flex w-[88px] flex-col items-center gap-0.5 rounded-xl border border-loss/30 bg-ink-850 px-2 py-2.5 transition-colors hover:bg-ink-700/50"
+          className="group flex w-[96px] flex-col items-center gap-0.5 rounded-xl border border-loss/30 bg-ink-850 px-2 py-3 transition-colors hover:bg-ink-700/50"
         >
-          <span className="text-xl leading-none" aria-hidden>
+          <span className="text-2xl leading-none" aria-hidden>
             🚽
           </span>
           <span className="text-[10px] font-semibold uppercase tracking-wide text-loss">

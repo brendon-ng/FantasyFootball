@@ -25,10 +25,12 @@ export interface FinishPoint {
 }
 
 // Wide and short: the chart sits in a half-width column beside the trophy case,
-// and six points need horizontal room far more than vertical.
+// and a handful of points need horizontal room far more than vertical. The
+// aspect ratio is what controls rendered height — the SVG scales to its column,
+// so height comes from W:H, not from a pixel value.
 const W = 560;
-const H = 168;
-const PAD = { top: 14, right: 16, bottom: 24, left: 26 };
+const H = 132;
+const PAD = { top: 12, right: 16, bottom: 20, left: 24 };
 
 const MEDAL: Record<number, string> = {
   1: "var(--color-gold)",
@@ -140,7 +142,7 @@ export function FinishChart({ points }: { points: FinishPoint[] }) {
             />
             <text
               x={x(i)}
-              y={H - 7}
+              y={H - 5}
               textAnchor="middle"
               className={hover === i ? "fill-chalk-300" : "fill-chalk-600"}
               style={{ fontSize: 10, fontVariantNumeric: "tabular-nums" }}
