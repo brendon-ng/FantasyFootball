@@ -71,7 +71,9 @@ export const getPlayerHistory = (): Record<string, PlayerTransaction[]> =>
 
 export const getRecords = (): LeagueRecords =>
   load("derived/records.json", {
-    weeklyHigh: [], weeklyLow: [], playerHigh: [], biggestBlowout: [], narrowestWin: [],
+    weeklyHigh: [], weeklyLow: [], playerHigh: [],
+    biggestBlowout: [], narrowestWin: [],
+    highestCombined: [], lowestCombined: [],
   });
 
 export const getKeepers = (): { perSeason: SeasonKeepers[]; final: KeeperContract[] } =>

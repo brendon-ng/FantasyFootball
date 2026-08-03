@@ -13,6 +13,7 @@ import { join } from "node:path";
 
 import type {
   BracketMatch,
+  CombinedRecord,
   DraftPickRecord,
   KeeperContract,
   LeagueRecords,
@@ -842,6 +843,26 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
   const scores: ScoreRecord[] = [];
   const playerScores: PlayerScoreRecord[] = [];
   const margins: Array<ScoreRecord & { margin: number }> = [];
+  const combined: CombinedRecord[] = [];
+
+  /** One entry per GAME, unlike `scores`, which has one per team. */
+  const addCombined = (
+    season: number,
+    week: number,
+    x: { slug: string; pts: number },
+    y: { slug: string; pts: number },
+  ) => {
+    const [hi, lo] = x.pts >= y.pts ? [x, y] : [y, x];
+    combined.push({
+      season,
+      week,
+      total: round2(x.pts + y.pts),
+      ownerSlug: hi.slug,
+      points: hi.pts,
+      opponentSlug: lo.slug,
+      opponentPoints: lo.pts,
+    });
+  };
 
   for (const s of summaries) {
     if (!s.imported) continue;
@@ -869,11 +890,18 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
             margins.push({ ...base, margin: round2(self.pts - opp.pts) });
           }
         }
+        addCombined(s.season, m.week ?? 0, { slug: m.team1, pts: p1 }, { slug: m.team2, pts: p2 });
       }
     }
   }
 
   for (const m of matchups) {
+    addCombined(
+      m.season,
+      m.week,
+      { slug: m.home.ownerSlug, pts: m.home.points },
+      { slug: m.away.ownerSlug, pts: m.away.points },
+    );
     for (const [self, opp] of [
       [m.home, m.away],
       [m.away, m.home],
@@ -914,6 +942,8 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
     playerHigh: top(playerScores, (s) => s.points),
     biggestBlowout: top(margins, (s) => s.margin),
     narrowestWin: top(margins, (s) => s.margin, 25, true),
+    highestCombined: top(combined, (s) => s.total),
+    lowestCombined: top(combined, (s) => s.total, 25, true),
   };
 }
 

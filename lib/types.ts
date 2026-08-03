@@ -198,12 +198,27 @@ export interface PlayerScoreRecord {
   started: boolean;
 }
 
+/** A whole game, ranked by the two scores added together. */
+export interface CombinedRecord {
+  season: number;
+  week: number;
+  /** Both scores summed — what the list ranks on. */
+  total: number;
+  /** Higher scorer first, so the row reads as a result. */
+  ownerSlug: string;
+  points: number;
+  opponentSlug: string;
+  opponentPoints: number;
+}
+
 export interface LeagueRecords {
   weeklyHigh: ScoreRecord[];
   weeklyLow: ScoreRecord[];
   playerHigh: PlayerScoreRecord[];
   biggestBlowout: Array<ScoreRecord & { margin: number }>;
   narrowestWin: Array<ScoreRecord & { margin: number }>;
+  highestCombined: CombinedRecord[];
+  lowestCombined: CombinedRecord[];
 }
 
 // ---------------------------------------------------------------------------

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Panel, PanelHeader, fmt } from "@/components/ui";
 import { getMatchupHistory, getOwnerMap, getPlayers, getRecords, meetingId } from "@/lib/data";
-import type { ScoreRecord } from "@/lib/types";
+import type { CombinedRecord, ScoreRecord } from "@/lib/types";
 
 export const metadata = { title: "Records · Den Ops" };
 
@@ -113,6 +113,21 @@ export default function RecordsPage() {
           </ol>
         </Panel>
 
+        <CombinedList
+          title="Highest Scoring Games"
+          rows={records.highestCombined}
+          name={name}
+          tone="text-accent"
+          meetingHref={meetingHref}
+        />
+        <CombinedList
+          title="Lowest Scoring Games"
+          rows={records.lowestCombined}
+          name={name}
+          tone="text-loss"
+          meetingHref={meetingHref}
+        />
+
         <div className="space-y-5">
           <MarginList
             title="Biggest Blowouts"
@@ -192,6 +207,74 @@ function ScoreList({
                   {body}
                   <span className="w-3 shrink-0" />
                 </div>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </Panel>
+  );
+}
+
+/**
+ * Games ranked by both scores added together — a whole-game list, so one row
+ * per game rather than one per team.
+ */
+function CombinedList({
+  title,
+  rows,
+  name,
+  tone,
+  meetingHref,
+}: {
+  title: string;
+  rows: CombinedRecord[];
+  name: (s: string | null | undefined) => string;
+  tone: string;
+  meetingHref: MeetingHref;
+}) {
+  return (
+    <Panel>
+      <PanelHeader
+        title={title}
+        meta={`top ${Math.min(rows.length, 20)}`}
+        legend="Both teams' scores added together. Rank · the game · combined total."
+      />
+      <ol className="divide-y divide-ink-700">
+        {rows.slice(0, 20).map((r, i) => {
+          const href = meetingHref(r.ownerSlug, r.opponentSlug, r.season, r.week);
+          const body = (
+            <>
+              <span className="tabular w-5 shrink-0 text-[11px] text-chalk-600">{i + 1}</span>
+              <div className="min-w-0 flex-1">
+                <div className="truncate text-sm font-medium">
+                  <span data-owner={r.ownerSlug}>{name(r.ownerSlug)}</span>{" "}
+                  <span className="text-chalk-600">vs</span>{" "}
+                  <span data-owner={r.opponentSlug}>{name(r.opponentSlug)}</span>
+                </div>
+                <div className="truncate text-[11px] text-chalk-600">
+                  {r.season} wk{r.week} · {fmt.pts1(r.points)}–{fmt.pts1(r.opponentPoints)}
+                </div>
+              </div>
+              <span className={`tabular shrink-0 text-sm font-bold ${tone}`}>
+                {fmt.pts(r.total)}
+              </span>
+            </>
+          );
+          return (
+            <li key={`${r.season}-${r.week}-${r.ownerSlug}`}>
+              {href ? (
+                <Link
+                  href={href}
+                  className="flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-ink-700/40"
+                >
+                  {body}
+                  <span aria-hidden className="shrink-0 text-[10px] text-chalk-600">
+                    →
+                  </span>
+                </Link>
+              ) : (
+                <div className="flex items-center gap-3 px-4 py-2.5">{body}</div>
               )}
             </li>
           );
