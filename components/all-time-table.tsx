@@ -71,7 +71,7 @@ export function AllTimeTable({
         value: (r) => r.wins,
         firstClick: "desc",
         render: (r) => (
-          <span className="text-chalk-300">
+          <span className="whitespace-nowrap text-chalk-300">
             {r.ties ? `${r.wins}-${r.losses}-${r.ties}` : `${r.wins}-${r.losses}`}
           </span>
         ),
@@ -157,7 +157,7 @@ export function AllTimeTable({
         value: (r) => (r.seasonsPlayed ? r.playoffAppearances / r.seasonsPlayed : 0),
         firstClick: "desc",
         render: (r) => (
-          <span className="text-chalk-500">
+          <span className="whitespace-nowrap text-chalk-500">
             {r.playoffAppearances}/{r.seasonsPlayed}
           </span>
         ),

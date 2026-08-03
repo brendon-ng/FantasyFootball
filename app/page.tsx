@@ -128,7 +128,7 @@ export default async function HomePage() {
                   #
                 </Col>
                 <Col className="flex-1">Owner · Team name</Col>
-                <Col className="w-14 shrink-0 text-right" hint="Regular-season wins-losses">
+                <Col className="w-16 shrink-0 text-right" hint="Regular-season wins-losses">
                   W-L
                 </Col>
                 <Col
@@ -165,7 +165,7 @@ export default async function HomePage() {
                         </span>
                       ) : null}
                     </Link>
-                    <span className="tabular w-14 shrink-0 text-right text-sm text-chalk-300">
+                    <span className="tabular w-16 shrink-0 whitespace-nowrap text-right text-sm text-chalk-300">
                       {fmt.record(row.wins, row.losses, row.ties)}
                     </span>
                     <span className="tabular hidden w-20 shrink-0 text-right text-sm text-chalk-500 sm:block">
@@ -216,7 +216,7 @@ export default async function HomePage() {
                 <Col className="shrink-0" hint="Championships won">
                   Titles
                 </Col>
-                <Col className="w-14 shrink-0 text-right" hint="All-time regular-season wins-losses">
+                <Col className="w-16 shrink-0 text-right" hint="All-time regular-season wins-losses">
                   W-L
                 </Col>
                 <Col
@@ -239,13 +239,15 @@ export default async function HomePage() {
                   >
                     {name(r.ownerSlug)}
                   </Link>
+                  {/* Fixed-width slot LEFT of the numbers, so a team with no
+                      titles does not shift its record out of column. */}
                   <span
                     className="w-8 shrink-0 text-center text-xs text-gold"
                     title={`${r.championships} championship${r.championships === 1 ? "" : "s"}`}
                   >
                     {r.championships > 0 ? "★".repeat(r.championships) : ""}
                   </span>
-                  <span className="tabular w-14 shrink-0 text-right text-sm text-chalk-300">
+                  <span className="tabular w-16 shrink-0 whitespace-nowrap text-right text-sm text-chalk-300">
                     {fmt.record(r.wins, r.losses, r.ties)}
                   </span>
                   <span className="tabular w-12 shrink-0 text-right text-sm text-chalk-500">
@@ -327,7 +329,7 @@ function StandingsLive({
           >
             {owners.get(t.ownerSlug)?.name ?? t.ownerSlug}
           </Link>
-          <span className="tabular w-14 shrink-0 text-right text-sm text-chalk-300">
+          <span className="tabular w-16 shrink-0 whitespace-nowrap text-right text-sm text-chalk-300">
             {fmt.record(t.wins, t.losses, t.ties)}
           </span>
           <span className="tabular hidden w-20 shrink-0 text-right text-sm text-chalk-500 sm:block">

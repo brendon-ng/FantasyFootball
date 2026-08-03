@@ -111,7 +111,7 @@ export default async function SeasonPage({
                       <div className="truncate text-[11px] text-chalk-600">{r.teamName}</div>
                     ) : null}
                   </td>
-                  <td className="tabular px-3 py-2 text-right text-chalk-300">
+                  <td className="tabular whitespace-nowrap px-3 py-2 text-right text-chalk-300">
                     {fmt.record(r.wins, r.losses, r.ties)}
                   </td>
                   <td className="tabular px-3 py-2 text-right text-chalk-500">

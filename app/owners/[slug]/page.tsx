@@ -185,7 +185,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                           </Link>
                         </td>
                         <td className="tabular px-3 py-2 text-right text-chalk-500">{row.seed}</td>
-                        <td className="tabular px-3 py-2 text-right text-chalk-300">
+                        <td className="tabular whitespace-nowrap px-3 py-2 text-right text-chalk-300">
                           {fmt.record(row.wins, row.losses, row.ties)}
                         </td>
                         <td className="tabular px-3 py-2 text-right text-chalk-500">
@@ -214,7 +214,10 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                 <Col className="hidden w-20 shrink-0 text-center sm:block" hint="Share of meetings won">
                   Win share
                 </Col>
-                <Col className="w-14 shrink-0 text-right" hint="Wins-losses against this opponent">
+                <Col
+                  className="w-[74px] shrink-0 text-right"
+                  hint="Wins-losses against this opponent, all meetings. ✻ marks a record that includes postseason games."
+                >
                   W-L
                 </Col>
                 <Col
@@ -243,20 +246,23 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                           style={{ width: `${pct * 100}%` }}
                         />
                       </span>
+                      {/* Marker sits LEFT of the value in its own fixed slot,
+                          so the numbers stay in a straight column whether or
+                          not a row carries one. */}
                       <span
-                        className="tabular w-14 shrink-0 text-right text-sm text-chalk-300"
+                        className="flex shrink-0 items-baseline gap-1"
                         title={
                           h.playoff.wins + h.playoff.losses + h.playoff.ties
                             ? `${fmt.record(h.playoff.wins, h.playoff.losses, h.playoff.ties)} of these were postseason meetings`
                             : "No postseason meetings"
                         }
                       >
-                        {fmt.record(h.wins, h.losses, h.ties)}
-                        {h.playoff.wins + h.playoff.losses + h.playoff.ties ? (
-                          <span className="ml-1 text-[10px] text-chalk-600" aria-hidden>
-                            ✻
-                          </span>
-                        ) : null}
+                        <span className="w-2 text-right text-[10px] text-chalk-600" aria-hidden>
+                          {h.playoff.wins + h.playoff.losses + h.playoff.ties ? "✻" : ""}
+                        </span>
+                        <span className="tabular w-16 whitespace-nowrap text-right text-sm text-chalk-300">
+                          {fmt.record(h.wins, h.losses, h.ties)}
+                        </span>
                       </span>
                       <span className="tabular hidden w-16 shrink-0 text-right text-[11px] text-chalk-600 sm:block">
                         {fmt.pts1(h.pointsFor)}
