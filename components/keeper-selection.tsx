@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
+import { useLiveContracts } from "@/lib/keeper-live";
 import { useLiveRosters } from "@/lib/sleeper-browser";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
@@ -17,14 +18,45 @@ import type { KeeperContract, PlayerMeta } from "@/lib/types";
 export function useSelectedKeepers(
   leagueId: string | null,
   userIdToSlug: Record<string, string>,
-): { byOwner: Map<string, Set<string>>; ready: boolean } {
+  /** Baked contracts to reconcile against live rosters and pending moves. */
+  contracts: KeeperContract[] = [],
+  /** First week not yet baked into the derived data. */
+  fromWeek = 1,
+): {
+  byOwner: Map<string, Set<string>>;
+  /** Contracts with pending preseason and in-week moves applied. */
+  contracts: KeeperContract[];
+  adjustments: Map<string, string>;
+  ready: boolean;
+} {
   const live = useLiveRosters(leagueId);
+
   const byOwner = new Map<string, Set<string>>();
+  const rosterToOwner = new Map<number, string>();
+  const liveRosterPlayers = new Map<string, Set<string>>();
   for (const r of live.data ?? []) {
     const slug = r.ownerId ? userIdToSlug[r.ownerId] : undefined;
-    if (slug) byOwner.set(slug, new Set(r.keepers));
+    if (!slug) continue;
+    byOwner.set(slug, new Set(r.keepers));
+    rosterToOwner.set(r.rosterId, slug);
+    liveRosterPlayers.set(slug, new Set(r.players));
   }
-  return { byOwner, ready: live.status === "ready" };
+
+  const adjusted = useLiveContracts({
+    leagueId,
+    fromWeek,
+    contracts,
+    rosterToOwner,
+    liveRosterPlayers,
+    rostersReady: live.status === "ready",
+  });
+
+  return {
+    byOwner,
+    contracts: adjusted.contracts,
+    adjustments: new Map(adjusted.adjustments.map((a) => [a.playerId, a.note])),
+    ready: live.status === "ready" && adjusted.ready,
+  };
 }
 
 /**
@@ -54,12 +86,15 @@ export function ContractRow({
   adp,
   selected,
   rank,
+  liveNote,
 }: {
   contract: KeeperContract;
   player: PlayerMeta | undefined;
   adp: AdpEntry | undefined;
   selected: boolean;
   rank?: number;
+  /** Set when a pending move changed this contract since the last sync. */
+  liveNote?: string;
 }) {
   return (
     <div
@@ -93,6 +128,14 @@ export function ContractRow({
           title="Locked in as a keeper on Sleeper"
         >
           Kept
+        </span>
+      ) : null}
+      {liveNote ? (
+        <span
+          className="shrink-0 rounded border border-gold/40 bg-gold/10 px-1.5 py-0.5 text-[9px] font-bold uppercase leading-normal tracking-wide text-gold"
+          title={`${liveNote} — applied live, not yet in the committed data`}
+        >
+          Updated
         </span>
       ) : null}
       <span className="hidden sm:block">

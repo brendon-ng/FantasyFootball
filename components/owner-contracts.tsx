@@ -23,16 +23,24 @@ export function OwnerContracts({
   leagueId: string | null;
   maxKeepers: number;
 }) {
-  const { byOwner, ready } = useSelectedKeepers(leagueId, userIdToSlug);
+  const { byOwner, contracts: live, adjustments, ready } = useSelectedKeepers(
+    leagueId,
+    userIdToSlug,
+    contracts,
+  );
   const selected = byOwner.get(ownerSlug) ?? new Set<string>();
-  const ordered = orderBySelection(contracts, selected);
+  const mine = live.filter((c) => c.ownerSlug === ownerSlug);
+  const ordered = orderBySelection(mine, selected);
+  const pending = ordered.filter((c) => adjustments.has(c.playerId)).length;
 
   return (
     <>
       <div className="flex items-center justify-between gap-3 border-b border-ink-700 px-4 py-2 sm:px-5">
         <span className="text-[11px] text-chalk-600">
           {ready
-            ? `${selected.size} of ${maxKeepers} keepers selected`
+            ? `${selected.size} of ${maxKeepers} keepers selected · ${ordered.length} rostered${
+                pending ? ` · ${pending} updated since the last sync` : ""
+              }`
             : "Selections load from Sleeper"}
         </span>
         <LiveStatus status={ready ? "ready" : "loading"} />
@@ -45,6 +53,7 @@ export function OwnerContracts({
               player={players[c.playerId]}
               adp={adp[c.playerId]}
               selected={selected.has(c.playerId)}
+              liveNote={adjustments.get(c.playerId)}
             />
           </div>
         ))}

@@ -35,13 +35,25 @@ export function HomeKeeperBoard({
   leagueId: string | null;
   maxKeepers: number;
 }) {
-  const { byOwner, ready } = useSelectedKeepers(leagueId, userIdToSlug);
+  const allBaked = contractsByOwner.flatMap(([, cs]) => cs);
+  const { byOwner, contracts: live, adjustments, ready } = useSelectedKeepers(
+    leagueId,
+    userIdToSlug,
+    allBaked,
+  );
+  // Regroup from the adjusted set so a dropped player disappears and a pending
+  // pickup appears, rather than the board showing last week's roster.
+  const liveByOwner = new Map<string, KeeperContract[]>();
+  for (const c of live) {
+    if (!c.ownerSlug) continue;
+    liveByOwner.set(c.ownerSlug, [...(liveByOwner.get(c.ownerSlug) ?? []), c]);
+  }
 
   return (
     <div className="grid gap-px bg-ink-600 sm:grid-cols-2 xl:grid-cols-3">
-      {contractsByOwner.map(([slug, contracts]) => {
+      {contractsByOwner.map(([slug]) => {
         const selected = byOwner.get(slug) ?? new Set<string>();
-        const eligible = contracts.filter((c) => !c.expired);
+        const eligible = (liveByOwner.get(slug) ?? []).filter((c) => !c.expired);
         const shown = orderBySelection(eligible, selected).slice(0, maxKeepers);
 
         return (
@@ -66,6 +78,7 @@ export function HomeKeeperBoard({
                 player={players[c.playerId]}
                 adp={adp[c.playerId]}
                 selected={selected.has(c.playerId)}
+                liveNote={adjustments.get(c.playerId)}
                 rank={i + 1}
               />
             ))}

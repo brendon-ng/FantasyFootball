@@ -137,6 +137,25 @@ identity in green is invisible.
 State is read with `useSyncExternalStore`, not an effect: an effect that calls
 setState on mount is a cascading render and flashes the default for a frame.
 
+## Preseason moves must be applied live
+
+`sync.ts` only persists a week once Sleeper has scored it, so NOTHING that
+happens in the preseason reaches `data/raw` until week 1 finalises — which is
+after the keeper deadline and after the draft. Drops and trades genuinely happen
+in that window, and bylaws 1.7.2.4 reprices a dropped-and-re-added player, so a
+purely baked board is wrong exactly when it is being used to decide keepers.
+
+`lib/keeper-live.ts` fetches the current season's unfinalised transactions in the
+browser and applies them on top of the derived contracts, then reconciles owner
+against the live roster. Changed rows carry an "Updated" chip naming what moved.
+
+ITS RULES MIRROR `resolveKeepers()` in `scripts/derive.ts`. If one changes,
+change both, or a contract will flicker the moment a week finalises.
+
+Real case that motivated it: Brendon dropped the SF and NE defences in the 2026
+preseason. The board showed 19 contracts for a 17-man roster and still listed
+both as his.
+
 ## Records set at the time
 
 `recordsAtTheTime()` in `derive.ts` flags games that set a league record the

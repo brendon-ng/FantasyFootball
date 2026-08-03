@@ -4,7 +4,8 @@ import Link from "next/link";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
 import { Col, ListHeader, Panel, PanelHeader } from "@/components/ui";
-import { LiveStatus, useLiveRosters } from "@/lib/sleeper-browser";
+import { useSelectedKeepers } from "@/components/keeper-selection";
+import { LiveStatus } from "@/lib/sleeper-browser";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
@@ -41,17 +42,24 @@ export function KeeperBoard({
   leagueId: string | null;
   maxKeepers: number;
 }) {
-  const live = useLiveRosters(leagueId);
+  const allBaked = contractsByOwner.flatMap(([, cs]) => cs);
+  const {
+    byOwner: selectedByOwner,
+    contracts: liveContracts,
+    adjustments,
+    ready,
+  } = useSelectedKeepers(leagueId, userIdToSlug, allBaked);
 
-  // ownerSlug -> set of player_ids that owner has locked in.
-  const selectedByOwner = new Map<string, Set<string>>();
-  for (const roster of live.data ?? []) {
-    const slug = roster.ownerId ? userIdToSlug[roster.ownerId] : undefined;
-    if (!slug) continue;
-    selectedByOwner.set(slug, new Set(roster.keepers));
+  // Regroup from the adjusted set: a player dropped in the preseason should
+  // leave the board, and a pickup should appear, before week 1 finalises.
+  const liveByOwner = new Map<string, KeeperContract[]>();
+  for (const c of liveContracts) {
+    if (!c.ownerSlug) continue;
+    liveByOwner.set(c.ownerSlug, [...(liveByOwner.get(c.ownerSlug) ?? []), c]);
   }
 
   const totalSelected = [...selectedByOwner.values()].reduce((n, s) => n + s.size, 0);
+  const live = { status: ready ? ("ready" as const) : ("loading" as const), data: liveContracts };
 
   return (
     <>
@@ -65,8 +73,9 @@ export function KeeperBoard({
       </div>
 
       <div className="grid gap-5 lg:grid-cols-2">
-        {contractsByOwner.map(([slug, contracts]) => {
+        {contractsByOwner.map(([slug]) => {
           const selected = selectedByOwner.get(slug) ?? new Set<string>();
+          const contracts = liveByOwner.get(slug) ?? [];
           const eligible = contracts.filter((c) => !c.expired);
 
           // Selected players float to the top; everything else keeps its
@@ -149,6 +158,17 @@ export function KeeperBoard({
                             title="This team has locked this player in as a keeper on Sleeper"
                           >
                             Kept
+                          </span>
+                        ) : null}
+                        {/* A move Sleeper knows about but the committed data
+                            does not yet — applied live so the board is right
+                            before the deadline rather than after it. */}
+                        {adjustments.has(c.playerId) ? (
+                          <span
+                            className="shrink-0 rounded border border-gold/40 bg-gold/10 px-1.5 py-0.5 text-[9px] font-bold uppercase leading-normal tracking-wide text-gold"
+                            title={`${adjustments.get(c.playerId)} — applied live, not yet in the committed data`}
+                          >
+                            Updated
                           </span>
                         ) : null}
                         <ValueBadge costRound={c.round} adp={adp[c.playerId]} />
