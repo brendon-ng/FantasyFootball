@@ -828,10 +828,50 @@ function buildOwnerRecords(
   );
 }
 
-function buildLeagueRecords(matchups: Matchup[]): LeagueRecords {
+/**
+ * The all-time record book.
+ *
+ * Includes the imported ESPN playoff and ladder games, which carry real scores
+ * even though those seasons kept no weekly matchups. Excluding them would leave
+ * the second-highest score ever recorded off the list, and would disagree with
+ * `recordsAtTheTime()`, which uses the same games to seed its baseline.
+ *
+ * Player records stay Sleeper-only by necessity: ESPN kept no lineups.
+ */
+function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): LeagueRecords {
   const scores: ScoreRecord[] = [];
   const playerScores: PlayerScoreRecord[] = [];
   const margins: Array<ScoreRecord & { margin: number }> = [];
+
+  for (const s of summaries) {
+    if (!s.imported) continue;
+    const brackets = [s.winnersBracket, s.losersBracket, ...s.extraBrackets.map((b) => b.matches)];
+    for (const matches of brackets) {
+      for (const m of matches) {
+        if (!m.team1 || !m.team2 || m.isBye) continue;
+        const p1 = m.points[m.team1];
+        const p2 = m.points[m.team2];
+        if (p1 == null || p2 == null) continue;
+        for (const [self, opp] of [
+          [{ slug: m.team1, pts: p1 }, { slug: m.team2, pts: p2 }],
+          [{ slug: m.team2, pts: p2 }, { slug: m.team1, pts: p1 }],
+        ] as const) {
+          const base: ScoreRecord = {
+            season: s.season,
+            week: m.week ?? 0,
+            ownerSlug: self.slug,
+            points: self.pts,
+            opponentSlug: opp.slug,
+            opponentPoints: opp.pts,
+          };
+          scores.push(base);
+          if (self.pts > opp.pts) {
+            margins.push({ ...base, margin: round2(self.pts - opp.pts) });
+          }
+        }
+      }
+    }
+  }
 
   for (const m of matchups) {
     for (const [self, opp] of [
@@ -1407,7 +1447,7 @@ const summaries = [
 ].sort((a, b) => a.season - b.season);
 const matchups = loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0));
 const ownerRecords = buildOwnerRecords(summaries, matchups);
-const records = buildLeagueRecords(matchups);
+const records = buildLeagueRecords(matchups, summaries);
 const keepers = resolveKeepers(loaded);
 const atTheTime = recordsAtTheTime(summaries, matchups);
 const playerHistory = buildPlayerHistory(loaded);

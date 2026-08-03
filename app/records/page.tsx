@@ -33,9 +33,11 @@ export default function RecordsPage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Record Book</h1>
         <p className="mt-1 text-sm text-chalk-500">
-          Extremes across every finalized week, regular season and playoffs.{" "}
+          Extremes across every finalized game on record.{" "}
           <span className="text-chalk-600">
-            2024 onward only — the imported 2020–2023 ESPN seasons have no weekly matchup data.
+            Weekly scores are complete from 2024. For 2020–2023 only ESPN playoff and ladder
+            games survived, so those seasons are represented but under-counted — and player
+            records are 2024 onward, since ESPN kept no lineups.
           </span>
         </p>
       </div>
@@ -60,7 +62,7 @@ export default function RecordsPage() {
           <PanelHeader
             title="Best Player Weeks"
             meta="started only"
-            legend="Highest single-week scores by a started player. Bench performances are excluded."
+            legend="Highest single-week scores by a started player. Bench performances are excluded, and this list is 2024 onward — the imported ESPN seasons kept no lineups."
           />
           <ol className="divide-y divide-ink-700">
             {records.playerHigh.slice(0, 20).map((r, i) => {
