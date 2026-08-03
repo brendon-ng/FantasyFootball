@@ -177,7 +177,12 @@ export function FinishChart({ points }: { points: FinishPoint[] }) {
       {active ? (
         <div
           className="pointer-events-none absolute -translate-x-1/2 rounded-md border border-ink-500 bg-ink-900/95 px-2.5 py-1.5 text-center shadow-lg"
-          style={{ left: `${(x(hover!) / W) * 100}%`, top: 0 }}
+          // Clamped so the first and last points don't push the tooltip past
+          // the panel edge, which now clips.
+          style={{
+            left: `${Math.min(86, Math.max(14, (x(hover!) / W) * 100))}%`,
+            top: 0,
+          }}
         >
           <div className="tabular text-[11px] font-semibold text-chalk-100">
             {active.season} · {ordinal(active.place)}

@@ -10,8 +10,11 @@ export function Panel({
   className?: string;
 }) {
   return (
+    // overflow-hidden clips full-bleed children (row backgrounds, divide-y
+    // borders, the last row in a list) to the rounded corners. Without it the
+    // final row's square corners bleed past the border and read as a cut-off.
     <section
-      className={`rounded-xl border border-ink-600 bg-ink-800/80 ${className}`}
+      className={`overflow-hidden rounded-xl border border-ink-600 bg-ink-800/80 ${className}`}
     >
       {children}
     </section>

@@ -22,6 +22,7 @@ import {
   type SleeperState,
 } from "./sleeper.ts";
 import type {
+  BracketMatch,
   DraftPickRecord,
   KeeperContract,
   LeagueRecords,
@@ -261,4 +262,103 @@ export function getAdp(): {
     capturedAt: snapshot?.capturedAt ?? null,
     season: snapshot?.season ?? null,
   };
+}
+
+/** One meeting between two owners, from either data era. */
+export interface Meeting {
+  season: number;
+  week: number | null;
+  kind: "regular" | "playoff" | "consolation";
+  /** Bracket/game label where one exists, e.g. "Championship" or "GmC7". */
+  label: string | null;
+  a: MeetingSide;
+  b: MeetingSide;
+  /** Sleeper matchups carry lineups; imported ESPN games carry only scores. */
+  hasLineups: boolean;
+}
+
+export interface MeetingSide {
+  ownerSlug: string;
+  points: number;
+  starters: string[];
+  playerPoints: Record<string, number>;
+}
+
+/**
+ * Every recorded meeting between two owners, newest first.
+ *
+ * Pulls from BOTH eras. Sleeper weeks come from `matchups.json` with full
+ * lineups; imported ESPN seasons have no weekly matchups at all, but their
+ * playoff and ladder games were recovered with scores, so those meetings still
+ * count. Reading only `matchups.json` under-reports the series — which is how
+ * a page could show "2 meetings" beside a 1-3 record.
+ *
+ * Co-owned teams resolve through each season's owner set, so a game counts for
+ * every owner on either side.
+ */
+export function getMeetings(slugA: string, slugB: string): Meeting[] {
+  const seasons = getSeasons();
+  const out: Meeting[] = [];
+
+  // season:primarySlug -> everyone credited on that team
+  const teamOwners = new Map<string, string[]>();
+  for (const s of seasons) {
+    for (const row of s.standings) teamOwners.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
+  }
+  const owns = (season: number, primary: string, who: string) =>
+    (teamOwners.get(`${season}:${primary}`) ?? [primary]).includes(who);
+
+  for (const m of getMatchupHistory()) {
+    for (const [x, y] of [
+      [m.home, m.away],
+      [m.away, m.home],
+    ] as const) {
+      if (!owns(m.season, x.ownerSlug, slugA) || !owns(m.season, y.ownerSlug, slugB)) continue;
+      out.push({
+        season: m.season,
+        week: m.week,
+        kind: m.kind,
+        label: null,
+        a: { ownerSlug: x.ownerSlug, points: x.points, starters: x.starters, playerPoints: x.playerPoints },
+        b: { ownerSlug: y.ownerSlug, points: y.points, starters: y.starters, playerPoints: y.playerPoints },
+        hasLineups: true,
+      });
+      break;
+    }
+  }
+
+  for (const s of seasons) {
+    if (!s.imported) continue;
+    const brackets: Array<[BracketMatch[], Meeting["kind"]]> = [
+      [s.winnersBracket, "playoff"],
+      [s.losersBracket, "consolation"],
+      ...s.extraBrackets.map((b) => [b.matches, "consolation"] as [BracketMatch[], Meeting["kind"]]),
+    ];
+    for (const [matches, kind] of brackets) {
+      for (const bm of matches) {
+        if (!bm.team1 || !bm.team2) continue;
+        for (const [t1, t2] of [
+          [bm.team1, bm.team2],
+          [bm.team2, bm.team1],
+        ] as const) {
+          if (!owns(s.season, t1, slugA) || !owns(s.season, t2, slugB)) continue;
+          const p1 = bm.points[t1];
+          const p2 = bm.points[t2];
+          if (p1 == null || p2 == null) continue;
+          out.push({
+            season: s.season,
+            week: bm.week,
+            kind,
+            label: bm.label ?? (bm.placesFor ? `${bm.placesFor[0]}th place` : null),
+            a: { ownerSlug: t1, points: p1, starters: [], playerPoints: {} },
+            b: { ownerSlug: t2, points: p2, starters: [], playerPoints: {} },
+            hasLineups: false,
+          });
+          break;
+        }
+      }
+    }
+  }
+
+  return out.sort((x, y) => y.season - x.season || (y.week ?? 0) - (x.week ?? 0));
 }

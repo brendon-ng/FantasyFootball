@@ -18,6 +18,58 @@ second Pages deploy that races this one. That sample also passes
 `basePath` and bypasses the `env` block in `next.config.ts` — `withBasePath()`
 then returns unprefixed URLs and assets 404. If `nextjs.yml` reappears, delete it.
 
+## Where this stands
+
+A working league hub, ~506 static pages, no database. Nothing has been pushed —
+`main` is ahead of `origin/main` by the whole build. `npm run preview` is the
+only way to see it at the real subpath.
+
+**Pages:** `/` (league at a glance, adapts to offseason), `/keepers`,
+`/history`, `/history/[season]`, `/records`, `/owners/[slug]`, `/players/[id]`,
+`/h2h/[pair]`.
+
+**Seasons on record:** 2020-25. Champions: Jake Gibbons, Brendon Ng, Tyler Jung,
+Logan Dunn, Jaymie Lew, David Collier.
+
+### Known gaps
+
+- **No draft history page.** `data/derived/drafts.json` is populated (340 picks
+  with keeper flags) and nothing renders it. Clearest next piece of work.
+- **Imported brackets have no bracket lines.** ESPN publishes routing for the
+  consolation ladder but not the championship bracket, so 2020-23 render as
+  round columns. Routing could be inferred further if wanted.
+- **Nothing has been verified in a browser by an agent.** Every visual bug this
+  session was caught by the user from a screenshot: inverted toilet-bowl
+  placements, bracket misalignment, duplicate React keys, a panel clipping its
+  last row. Build output and DOM inspection do not catch layout. Ask the user to
+  look, or run `npm run preview` and screenshot it.
+- **Tooltips are native `title` attributes**, so column hints are unreachable on
+  touch devices.
+
+### Requested, not yet built
+
+- **Keeper history page** under the Keepers tab: which players each team kept,
+  season by season. The data exists — `SeasonKeepers.keptPlayerIds` per season in
+  `data/derived/keepers.json`, plus `isKeeper` on every pick in `drafts.json`.
+- **Keeper history on the player page**: how many times a player has been kept
+  and by whom. Same source; `KeeperContract.provenance` already narrates it, but
+  it is not summarised as counts.
+- **Draft history page**: `drafts.json` holds all 340 picks and nothing renders it.
+
+### Open decisions the user has parked
+
+- **Bylaws 1.7.2.4.2 vs 1.7.2.4.3 contradict each other** on whether dropping
+  and re-adding your own player resets the contract. 4.2 is implemented because
+  that matches the real 2025 data (Chase Brown). The user said "let's go with
+  4.2 for now, we'll hash this out."
+- **Trade deadline**: bylaws say week 11, Sleeper 2025 said 12. Rules files say
+  11. User said ignore for now.
+- **ADP beyond pick 170** converts to a round past 17, which is meaningless as a
+  keeper cost in a 10-team, 17-round draft. Bites in 2027, when the first
+  contracts expire.
+- **All-time table sorts titles-first**, so a 2-season co-owner can top it. User
+  has not asked to change it.
+
 ## Two constraints govern almost every change here
 
 ### 1. There is no server
@@ -156,27 +208,22 @@ correct — just not annotated. Keep that property.
 Do not fetch in the browser from `lib/sleeper.ts`; it is build-time only and
 carries Node assumptions. `lib/sleeper-browser.tsx` must stay dependency-free.
 
-### Two eras of data
+### What imported seasons cannot support
 
-2020-23 are ESPN seasons imported ONCE from archived MHTML pages
-(`data/manual/source/`) into `data/manual/<year>.json`. The league is on Sleeper
+2020-23 came from archived ESPN pages, imported ONCE. The league is on Sleeper
 permanently now, so `npm run import:espn` is a historical artifact — the JSON it
 produced is the deliverable, not the script.
 
-Imported seasons have standings, final placement and full playoff scores, but NO
-weekly matchups, rosters, drafts or transactions. They therefore feed standings,
-finishes and the trophy case, and are excluded from head-to-head, weekly
-records, player records and keeper contracts. `SeasonSummary.imported` is the
-flag; the UI states the limitation rather than silently mixing eras.
+Those seasons have standings, final placement and full playoff scores. They have
+NO weekly matchups, rosters, drafts or transactions. So they feed standings,
+finishes, the trophy case and postseason head-to-head, and are excluded from
+regular-season head-to-head, weekly records, player records and keeper
+contracts. `SeasonSummary.imported` is the flag, and every affected surface says
+so in the UI rather than silently mixing eras.
 
-The two ESPN pages cross-validate: final placement reconstructed from the
-brackets must equal the standings RK column, or the import throws. All 48
-placements across four seasons agree.
-
-ESPN's consolation ladder is NOT the Sleeper toilet bowl. It is a ladder —
-winning moves you up a rung, losing moves you down, and the loser of the bottom
-rung in the final week finishes last. So `inverted` is false for imported
-brackets and true for Sleeper's losers bracket. Do not unify them.
+The two ESPN pages cross-validate: placement reconstructed from the brackets
+must equal the standings RK column, or the import throws. All 48 placements
+across four seasons agree.
 
 ### ESPN brackets have three sections and a different consolation format
 
