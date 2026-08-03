@@ -91,10 +91,22 @@ states, and they are not interchangeable:
 Collapsing `unset` and `neutral` into one falsy value re-prompts someone who
 explicitly opted out. Keep them distinct.
 
-Emphasis is ONE injected CSS rule, not a prop threaded through every table.
-Nearly every owner mention is already a link to `/owners/<slug>/`, so
-`a[href$=...]` catches them for free; `[data-owner]` covers plain-text cases like
-bracket cards.
+Emphasis is ONE injected CSS rule, not a prop threaded through every table:
+
+```
+a[href$="/owners/<slug>/"]:not([data-me-exempt]),
+[data-owner="<slug>"]:not([data-me-exempt])
+```
+
+The link form catches owner names that link to a profile. `[data-owner]` covers
+everything else — and that is most surfaces now, because rows on the record
+book, season matchups, head-to-head and matchup pages link to the GAME, so the
+name inside them is a plain span. WHEN ADDING A NEW SURFACE THAT SHOWS AN OWNER
+NAME, put `data-owner={slug}` on it unless it is already a profile link.
+
+The rule uses a literal hex, not `var(--color-me)`. Tailwind tree-shakes theme
+tokens to the utilities actually used, so dropping the last `text-me` class
+would silently resolve the var to nothing and fall back to inherited white.
 
 `[data-me-exempt]` opts an element out, and matters: the rule is injected after
 the stylesheet, so it beats every Tailwind text colour including semantic ones.

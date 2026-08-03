@@ -187,7 +187,9 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
                             : "text-chalk-500"
                         }`}
                       >
-                        <span className="truncate">{name(s.ownerSlug)}</span>
+                        <span data-owner={s.ownerSlug} className="truncate">
+                          {name(s.ownerSlug)}
+                        </span>
                         <span className="tabular">{fmt.pts(s.points)}</span>
                       </div>
                     ))}

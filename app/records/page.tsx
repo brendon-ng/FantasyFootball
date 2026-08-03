@@ -86,8 +86,15 @@ export default function RecordsPage() {
                         href={href}
                         className="block truncate text-[11px] text-chalk-600 transition-colors hover:text-accent"
                       >
-                        {name(r.ownerSlug)} · {r.season} wk{r.week}
-                        {opp ? ` vs ${name(opp)}` : ""} <span aria-hidden>→</span>
+                        <span data-owner={r.ownerSlug}>{name(r.ownerSlug)}</span> · {r.season} wk
+                        {r.week}
+                        {opp ? (
+                          <>
+                            {" vs "}
+                            <span data-owner={opp}>{name(opp)}</span>
+                          </>
+                        ) : null}{" "}
+                        <span aria-hidden>→</span>
                       </Link>
                     ) : (
                       <div className="truncate text-[11px] text-chalk-600">
@@ -152,9 +159,12 @@ function ScoreList({
             <>
               <span className="tabular w-5 shrink-0 text-[11px] text-chalk-600">{i + 1}</span>
               <div className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-medium">{name(r.ownerSlug)}</span>
+                <span data-owner={r.ownerSlug} className="block truncate text-sm font-medium">
+                  {name(r.ownerSlug)}
+                </span>
                 <div className="truncate text-[11px] text-chalk-600">
-                  {r.season} wk{r.week} vs {name(r.opponentSlug)}
+                  {r.season} wk{r.week} vs{" "}
+                  <span data-owner={r.opponentSlug ?? undefined}>{name(r.opponentSlug)}</span>
                   {r.opponentPoints != null ? ` (${fmt.pts1(r.opponentPoints)})` : ""}
                 </div>
               </div>
@@ -214,8 +224,9 @@ function MarginList({
               <span className="tabular w-5 shrink-0 text-[11px] text-chalk-600">{i + 1}</span>
               <div className="min-w-0 flex-1">
                 <div className="truncate text-sm font-medium">
-                  {name(r.ownerSlug)} <span className="text-chalk-600">def.</span>{" "}
-                  {name(r.opponentSlug)}
+                  <span data-owner={r.ownerSlug}>{name(r.ownerSlug)}</span>{" "}
+                  <span className="text-chalk-600">def.</span>{" "}
+                  <span data-owner={r.opponentSlug ?? undefined}>{name(r.opponentSlug)}</span>
                 </div>
                 <div className="text-[11px] text-chalk-600">
                   {r.season} wk{r.week} · {fmt.pts1(r.points)}–{fmt.pts1(r.opponentPoints ?? 0)}

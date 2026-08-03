@@ -40,6 +40,17 @@ import type { NavOwner } from "@/components/nav";
 
 const STORAGE_KEY = "denops:identity";
 
+/**
+ * Literal, not `var(--color-me)`.
+ *
+ * The injected rule is written at runtime and cannot rely on Tailwind having
+ * emitted that custom property — theme tokens are tree-shaken to the utilities
+ * actually used, so a refactor that drops the last `text-me` class would
+ * silently resolve this to nothing and fall back to inherited white. Keep this
+ * in step with `--color-me` in globals.css.
+ */
+const ME_COLOR = "#a78bfa";
+
 export type Identity =
   | { kind: "unset" }
   | { kind: "neutral" }
@@ -148,16 +159,19 @@ export function IdentityProvider({
     <Ctx.Provider value={value}>
       {mySlug ? (
         <style
-          // One rule, injected once. `href$=` tolerates the /DenOpsFF basePath.
+          // href + precedence makes React 19 hoist this into <head> and dedupe
+          // it, rather than leaving placement to render order.
+          href="denops-identity"
+          precedence="high"
           dangerouslySetInnerHTML={{
             __html: `
 a[href$="/owners/${mySlug}/"]:not([data-me-exempt]),
 [data-owner="${mySlug}"]:not([data-me-exempt]) {
-  color: var(--color-me) !important;
-  font-weight: 600;
+  color: ${ME_COLOR} !important;
+  font-weight: 600 !important;
 }
-[data-owner-row="${mySlug}"] {
-  background-color: color-mix(in srgb, var(--color-me) 9%, transparent);
+[data-owner-row="${mySlug}"]:not([data-me-exempt]) {
+  background-color: color-mix(in srgb, ${ME_COLOR} 9%, transparent) !important;
 }
 `,
           }}

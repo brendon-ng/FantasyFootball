@@ -267,7 +267,9 @@ export default async function SeasonPage({
                               : "text-chalk-500"
                           }`}
                         >
-                          <span className="truncate">{name(side.ownerSlug)}</span>
+                          <span data-owner={side.ownerSlug} className="truncate">
+                            {name(side.ownerSlug)}
+                          </span>
                           <span className="tabular">{fmt.pts(side.points)}</span>
                         </div>
                       ))}
