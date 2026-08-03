@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import type { BracketMatch } from "@/lib/types";
 
 /**
@@ -92,6 +94,7 @@ function MatchCard({
   nameOf,
   seedOf,
   hasFeeders,
+  href,
 }: {
   match: BracketMatch;
   heading?: string;
@@ -99,6 +102,8 @@ function MatchCard({
   nameOf: (s: string | null | undefined) => string;
   seedOf: (s: string | null) => number | null;
   hasFeeders: boolean;
+  /** Set only when a matchup page exists for this game. */
+  href?: string | null;
 }) {
   const from = (f: BracketMatch["team1From"]) =>
     !f ? "TBD" : f.winnerOf != null ? `Winner of M${f.winnerOf}` : `Loser of M${f.loserOf}`;
@@ -133,11 +138,24 @@ function MatchCard({
           style={{ marginTop: heading ? "0.5rem" : 0 }}
         />
       ) : null}
-      <div className="divide-y divide-ink-700 overflow-hidden rounded-lg border border-ink-600 bg-ink-850">
-        {sides.map((s, i) => (
-          <TeamRow key={i} {...s} inverted={match.inverted} />
-        ))}
-      </div>
+      {/* Only games that were actually played get a page, so an undecided or
+          bye card stays inert rather than becoming a dead link. */}
+      {href ? (
+        <Link
+          href={href}
+          className="block divide-y divide-ink-700 overflow-hidden rounded-lg border border-ink-600 bg-ink-850 transition-colors hover:border-ink-400 hover:bg-ink-700/50"
+        >
+          {sides.map((s, i) => (
+            <TeamRow key={i} {...s} inverted={match.inverted} />
+          ))}
+        </Link>
+      ) : (
+        <div className="divide-y divide-ink-700 overflow-hidden rounded-lg border border-ink-600 bg-ink-850">
+          {sides.map((s, i) => (
+            <TeamRow key={i} {...s} inverted={match.inverted} />
+          ))}
+        </div>
+      )}
       {note || match.label ? (
         <div className="mt-1 text-center text-[10px] text-chalk-600">
           {[match.label, note].filter(Boolean).join(" · ")}
@@ -167,6 +185,7 @@ export function Bracket({
   finalPlace,
   nameOf,
   seedOf,
+  hrefFor,
 }: {
   matches: BracketMatch[];
   /** e.g. "🏆 Championship" or "💩 King (Last Place)". */
@@ -175,6 +194,8 @@ export function Bracket({
   finalPlace: number;
   nameOf: (s: string | null | undefined) => string;
   seedOf: (s: string | null) => number | null;
+  /** Returns the matchup-page href for a game, or null if none exists. */
+  hrefFor?: (match: BracketMatch) => string | null;
 }) {
   if (!matches.length) return null;
 
@@ -318,6 +339,7 @@ export function Bracket({
                     : undefined
                 }
                 hasFeeders={Boolean(match.team1From || match.team2From)}
+                href={hrefFor?.(match) ?? null}
                 nameOf={nameOf}
                 seedOf={seedOf}
               />
@@ -344,6 +366,7 @@ export function Bracket({
                     : undefined
                 }
                 hasFeeders={false}
+                href={hrefFor?.(g) ?? null}
                 nameOf={nameOf}
                 seedOf={seedOf}
               />

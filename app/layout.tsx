@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { Nav } from "@/components/nav";
-import { getConfig, getSeasons } from "@/lib/data";
+import { getConfig, getOwners, getSeasons } from "@/lib/data";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -18,6 +18,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const cfg = getConfig();
   const latest = Math.max(...Object.keys(cfg.knownLeagueIds).map(Number));
   const seasonCount = getSeasons().filter((s) => s.finalized).length;
+  // Current owners only — the dropdown is a way to reach a live team, and
+  // former owners would be dead weight in it. They stay in the all-time table.
+  const navOwners = getOwners()
+    .filter((o) => o.active)
+    .map((o) => ({ slug: o.slug, name: o.name }))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <html
@@ -25,7 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-ink-900 text-chalk-100">
-        <Nav subtitle={`${latest} SEASON`} />
+        <Nav subtitle={`${latest} SEASON`} owners={navOwners} />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
           {children}
         </main>

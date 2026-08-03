@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 
 import { Bracket } from "@/components/bracket";
 import { Col, ListHeader, Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
-import { getMatchupHistory, getOwnerMap, getSeasons } from "@/lib/data";
+import { getAllMeetings, getMatchupHistory, getOwnerMap, getSeasons, meetingId } from "@/lib/data";
+import type { BracketMatch } from "@/lib/types";
 
 // Static export: every season page is generated at build time.
 export const dynamicParams = false;
@@ -35,6 +36,15 @@ export default async function SeasonPage({
 
   const seedOf = (slug: string | null) =>
     slug ? (summary.standings.find((r) => r.ownerSlug === slug)?.seed ?? null) : null;
+  // Only link to games that actually generated a page — an undecided bracket
+  // slot or a bye has no matchup page, and a dead link is worse than no link.
+  const existing = new Set(getAllMeetings().map((m) => m.id));
+  const hrefFor = (m: BracketMatch) => {
+    if (!m.team1 || !m.team2 || m.isBye) return null;
+    const id = meetingId(season, m.week, m.team1, m.team2);
+    return existing.has(id) ? `/matchups/${id}/` : null;
+  };
+
   const matchups = getMatchupHistory().filter((m) => m.season === season);
   const weeks = [...new Set(matchups.map((m) => m.week))].sort((a, b) => a - b);
 
@@ -168,6 +178,7 @@ export default async function SeasonPage({
             finalPlace={1}
             nameOf={name}
             seedOf={seedOf}
+            hrefFor={hrefFor}
           />
         </div>
       </Panel>
@@ -182,6 +193,7 @@ export default async function SeasonPage({
               finalPlace={b.finalPlace}
               nameOf={name}
               seedOf={seedOf}
+              hrefFor={hrefFor}
             />
           </div>
         </Panel>
@@ -212,12 +224,17 @@ export default async function SeasonPage({
             finalPlace={summary.teams}
             nameOf={name}
             seedOf={seedOf}
+            hrefFor={hrefFor}
           />
         </div>
       </Panel>
 
       <Panel>
-        <PanelHeader title="Every Matchup" meta={`${matchups.length} games`} />
+        <PanelHeader
+          title="Every Matchup"
+          meta={`${matchups.length} games`}
+          legend="Open a game for lineups and per-player scores."
+        />
         <div className="divide-y divide-ink-700">
           {weeks.map((week) => (
             <details key={week} className="group">
@@ -236,7 +253,11 @@ export default async function SeasonPage({
                 {matchups
                   .filter((m) => m.week === week)
                   .map((m) => (
-                    <div key={m.matchupId} className="bg-ink-850 px-4 py-2.5">
+                    <Link
+                      key={m.matchupId}
+                      href={`/matchups/${meetingId(m.season, m.week, m.home.ownerSlug, m.away.ownerSlug)}/`}
+                      className="group/game bg-ink-850 px-4 py-2.5 transition-colors hover:bg-ink-700/50"
+                    >
                       {[m.home, m.away].map((side) => (
                         <div
                           key={side.ownerSlug}
@@ -250,12 +271,16 @@ export default async function SeasonPage({
                           <span className="tabular">{fmt.pts(side.points)}</span>
                         </div>
                       ))}
-                      {m.kind !== "regular" ? (
-                        <div className="mt-1 text-[10px] uppercase tracking-wide text-chalk-600">
-                          {m.kind}
-                        </div>
-                      ) : null}
-                    </div>
+                      <div className="mt-1 flex items-center justify-between text-[10px] uppercase tracking-wide text-chalk-600">
+                        <span>{m.kind !== "regular" ? m.kind : ""}</span>
+                        <span
+                          aria-hidden
+                          className="opacity-0 transition-opacity group-hover/game:opacity-100"
+                        >
+                          lineups →
+                        </span>
+                      </div>
+                    </Link>
                   ))}
               </div>
             </details>
