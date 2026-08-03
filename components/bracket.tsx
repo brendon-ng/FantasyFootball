@@ -57,12 +57,14 @@ function ordinal(n: number): string {
 }
 
 function TeamRow({
+  slug,
   label,
   points,
   advancing,
   inverted,
   muted,
 }: {
+  slug: string | null;
   label: string;
   points: number | undefined;
   advancing: boolean;
@@ -77,8 +79,16 @@ function TeamRow({
         : "text-accent font-semibold"
       : "text-chalk-300";
 
+  // An advancing row is already coloured to mean something. Tag it exempt so the
+  // "this is me" highlight cannot overwrite that signal.
+  const semantic = advancing || muted;
+
   return (
-    <div className={`flex items-center justify-between gap-2 px-2.5 py-1.5 text-[13px] ${tone}`}>
+    <div
+      data-owner={slug ?? undefined}
+      data-me-exempt={semantic ? "" : undefined}
+      className={`flex items-center justify-between gap-2 px-2.5 py-1.5 text-[13px] ${tone}`}
+    >
       <span className="truncate">{label}</span>
       <span className="tabular shrink-0 text-[12px]">
         {points != null ? points.toFixed(2) : ""}
@@ -111,6 +121,7 @@ function MatchCard({
   const side = (team: string | null, fromRef: BracketMatch["team1From"]) => {
     const seed = seedOf(team);
     return {
+      slug: team,
       label: team ? `${seed ? `${seed}· ` : ""}${nameOf(team)}` : from(fromRef),
       points: team ? match.points[team] : undefined,
       advancing: Boolean(team && match.winner === team),
@@ -119,7 +130,10 @@ function MatchCard({
   };
 
   const sides = match.isBye
-    ? [side(match.team1, match.team1From), { label: "BYE", points: undefined, advancing: false, muted: true }]
+    ? [
+        side(match.team1, match.team1From),
+        { slug: null, label: "BYE", points: undefined, advancing: false, muted: true },
+      ]
     : [side(match.team1, match.team1From), side(match.team2, match.team2From)];
 
   return (

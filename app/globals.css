@@ -27,6 +27,15 @@
   --color-accent: #00e5a0;
   --color-accent-dim: #0b7a5a;
 
+  /*
+   * "You" gets its own hue. The accent green is already overloaded — live
+   * state, winners, keeper surplus, cost rounds — so reusing it for identity
+   * would make the highlight invisible against everything else that is green.
+   * Violet appears nowhere else in the system.
+   */
+  --color-me: #a78bfa;
+  --color-me-dim: #5b3fa8;
+
   --color-win: #35d07f;
   --color-loss: #ff5c6c;
   --color-gold: #f5c451;

@@ -96,7 +96,12 @@ export function Stat({
   return (
     <div className="rounded-lg border border-ink-600 bg-ink-850 px-3 py-3">
       <div className="eyebrow mb-1.5 text-[10px]">{label}</div>
-      <div className={`tabular text-xl font-semibold leading-none sm:text-2xl ${toneClass}`}>
+      <div
+        // A gold or accent tile already encodes something; identity must not
+        // repaint it.
+        data-me-exempt={tone === "default" ? undefined : ""}
+        className={`tabular text-xl font-semibold leading-none sm:text-2xl ${toneClass}`}
+      >
         {value}
       </div>
       {sub ? <div className="mt-1 text-[11px] text-chalk-600">{sub}</div> : null}

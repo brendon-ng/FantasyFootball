@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { IdentityControl, IdentityProvider } from "@/components/identity";
 import { Nav } from "@/components/nav";
 import { getConfig, getOwners, getSeasons } from "@/lib/data";
 import "./globals.css";
@@ -31,7 +32,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-ink-900 text-chalk-100">
-        <Nav subtitle={`${latest} SEASON`} owners={navOwners} />
+        <IdentityProvider owners={navOwners}>
+        <Nav subtitle={`${latest} SEASON`} />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
           {children}
         </main>
@@ -41,11 +43,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               Den Ops Super League · {seasonCount} completed season
               {seasonCount === 1 ? "" : "s"} on record
             </span>
-            <span>
-              Reference only — manage your team in Sleeper. Data via the Sleeper API.
+            <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <IdentityControl owners={navOwners} />
+              <span>Reference only — manage your team in Sleeper. Data via the Sleeper API.</span>
             </span>
           </div>
         </footer>
+        </IdentityProvider>
       </body>
     </html>
   );

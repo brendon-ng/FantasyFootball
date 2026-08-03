@@ -77,6 +77,37 @@ draft data.
 - **All-time table sorts titles-first**, so a 2-season co-owner can top it. User
   has not asked to change it.
 
+## Viewer identity
+
+`components/identity.tsx` remembers who the visitor is in localStorage. THREE
+states, and they are not interchangeable:
+
+| State | Prompt on load? | "My Team" in nav? | Highlight? |
+| --- | --- | --- | --- |
+| `unset` — never answered | yes | no | no |
+| `neutral` — chose to browse | no | no | no |
+| `owner` — picked a team | no | yes | yes |
+
+Collapsing `unset` and `neutral` into one falsy value re-prompts someone who
+explicitly opted out. Keep them distinct.
+
+Emphasis is ONE injected CSS rule, not a prop threaded through every table.
+Nearly every owner mention is already a link to `/owners/<slug>/`, so
+`a[href$=...]` catches them for free; `[data-owner]` covers plain-text cases like
+bracket cards.
+
+`[data-me-exempt]` opts an element out, and matters: the rule is injected after
+the stylesheet, so it beats every Tailwind text colour including semantic ones.
+Gold champions, bracket winner tints and toned `Stat` tiles are all exempt —
+those colours already mean something.
+
+Identity uses `--color-me` (violet), never the accent. The accent green is
+overloaded across live state, winners, keeper surplus and cost rounds, so
+identity in green is invisible.
+
+State is read with `useSyncExternalStore`, not an effect: an effect that calls
+setState on mount is a cascading render and flashes the default for a frame.
+
 ## Automation
 
 Three workflows, all free — Actions minutes are unlimited on public repos, and
