@@ -330,6 +330,14 @@ Bylaws 1.7.2.4.2 is confirmed by the data: of 38 keepers in 2025, 36 match their
 2024 draft round exactly, and both exceptions are drop-and-re-add — Chase Brown
 R12 to R11 and Jakobi Meyers R16 to R11.
 
+### Known gaps in the implementation
+
+**1.7.2.2.2 — keeper takes the lower draft slot.** Not implemented. Draft order
+is set after the keeper deadline (Appendix A), so while picks are only known by
+round there are no slots to choose between; a team holding two picks in one
+round currently has an arbitrary one assigned. Once the order exists this
+becomes resolvable, and picks should display as "7.10" instead of "7th Rd".
+
 ### Open discrepancies
 
 1. **1.7.2.4.2 contradicts 1.7.2.4.3.** 4.2's Example 1 has Tyler dropping and

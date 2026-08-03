@@ -49,6 +49,13 @@ interface Assignment {
  * first: a R1 keeper can only ever use a R1 pick, while a R12 keeper has eleven
  * fallbacks. Placing cheap keepers first would let one consume a pick an
  * expensive keeper had no alternative to.
+ *
+ * NOT YET IMPLEMENTED — bylaws 1.7.2.2.2. Holding two picks in the same round,
+ * the keeper must take the LOWER draft slot (3.10 rather than 3.05). Draft
+ * order does not exist until after the keeper deadline — Appendix A's whole
+ * point — so there are no slots to choose between and this currently picks an
+ * arbitrary one of the two. Once the order is set, resolve slots here and
+ * render picks as "7.10" rather than "7th Rd".
  */
 function allocate(contracts: KeeperContract[], picks: OwnedPick[]): Assignment[] {
   const pool = new Map<number, number>();

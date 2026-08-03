@@ -64,6 +64,13 @@ Logan Dunn, Jaymie Lew, David Collier.
 
 ### Requested, not yet built
 
+- **Draft slots for keepers — bylaws 1.7.2.2.2.** With two picks in the same
+  round, the keeper takes the LOWER slot (3.10 over 3.05). Draft order is not
+  known until after the keeper deadline (Appendix A), so `allocate()` in
+  `components/draft-picks.tsx` currently picks an arbitrary one of two same-round
+  picks, and picks render as "7th Rd" rather than "7.10". Once an order exists,
+  resolve slots there and label picks with them. The league intends to automate
+  this for this season and future ones.
 - **Draft history page**: `drafts.json` holds all 340 picks and nothing renders it.
 
 Keeper history shipped at `/keepers/history/` (by team and season) and on player
