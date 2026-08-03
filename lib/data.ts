@@ -571,8 +571,14 @@ export function getMeetings(slugA: string, slugB: string): Meeting[] {
     }
   }
 
+  // Imported seasons whose weekly scoreboards are still lost: their brackets are
+  // the only record of those games. A season that HAS weekly matchups already
+  // emitted them above, and scraping its brackets too produces two Meetings with
+  // the same id — which React surfaces as a duplicate-key warning on the
+  // head-to-head series. Mirrors `seasonsWithWeeklyData()` in derive.
+  const weeklySeasons = new Set(getMatchupHistory().map((m) => m.season));
   for (const s of seasons) {
-    if (!s.imported) continue;
+    if (!s.imported || weeklySeasons.has(s.season)) continue;
     const brackets: Array<[BracketMatch[], Meeting["kind"]]> = [
       [s.winnersBracket, "playoff"],
       [s.losersBracket, "consolation"],
@@ -605,7 +611,7 @@ export function getMeetings(slugA: string, slugB: string): Meeting[] {
     }
   }
 
-  return out.sort((x, y) => y.season - x.season || (y.week ?? 0) - (x.week ?? 0));
+  return uniqueById(out).sort((x, y) => y.season - x.season || (y.week ?? 0) - (x.week ?? 0));
 }
 
 /** One instance of a player being retained, taken from that season's draft. */
@@ -652,6 +658,13 @@ export function getPlayerKeepHistory(playerId: string): KeepEvent[] {
  * Deduped by id: `getMeetings` is written from one owner's perspective, so
  * calling it for both sides of a pair would yield the same game twice.
  */
+/** Deduped by id — two sources can describe the same game, and callers key on it. */
+function uniqueById(list: Meeting[]): Meeting[] {
+  const seen = new Map<string, Meeting>();
+  for (const m of list) if (!seen.has(m.id)) seen.set(m.id, m);
+  return [...seen.values()];
+}
+
 export function getAllMeetings(): Meeting[] {
   const seen = new Map<string, Meeting>();
   const slugs = getOwners().map((o) => o.slug);
