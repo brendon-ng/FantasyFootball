@@ -7,8 +7,13 @@ name: Archive finalized data
 # week. `scripts/sync.ts` only ever persists data Sleeper has finalized and is
 # idempotent, so a run with nothing new produces no commit at all.
 #
-# The push to main triggers deploy.yml normally, so the site picks up the new
-# history without any extra wiring.
+# NOTE: this push does NOT trigger deploy.yml. GitHub deliberately suppresses
+# workflow triggers for pushes made with the default GITHUB_TOKEN, to stop
+# workflows recursively triggering themselves. The newly archived data therefore
+# ships on deploy.yml's next scheduled run, which is at most six hours later.
+# That is fine — the data being archived is by definition already finalized and
+# in no hurry. If it ever needs to be immediate, dispatch deploy.yml by hand or
+# push with a PAT instead.
 
 on:
   schedule:
