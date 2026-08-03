@@ -56,6 +56,12 @@ export default async function HomePage() {
 
   const MAX_KEEPERS = 4;
 
+  // Home is a snapshot of the league as it stands, so the leaderboard is current
+  // owners only. Departed owners (and the full table) live on the history page.
+  const leaders = records
+    .filter((r) => owners.get(r.ownerSlug)?.active)
+    .slice(0, 10);
+
   return (
     <div className="space-y-5 sm:space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -175,6 +181,7 @@ export default async function HomePage() {
         <Panel className="lg:col-span-2">
           <PanelHeader
             title={inSeason ? "This Week" : "All-Time Leaders"}
+            meta={inSeason ? undefined : "current owners"}
             href={inSeason ? undefined : "/history/"}
             hrefLabel="Full history"
           />
@@ -218,7 +225,7 @@ export default async function HomePage() {
                 </Col>
               </ListHeader>
               <ul>
-              {records.map((r, i) => (
+              {leaders.map((r, i) => (
                 <li
                   key={r.ownerSlug}
                   className="flex items-center gap-3 border-b border-ink-700 px-4 py-2.5 last:border-0 sm:px-5"
