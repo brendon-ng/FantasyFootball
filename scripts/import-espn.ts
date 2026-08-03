@@ -418,9 +418,11 @@ function buildWeeklyMatchups(
 ): WeeklyMatchup[] {
   if (!weekFiles.size) return [];
 
-  const slugOfTeam = new Map(standings.map((r) => [r.teamName, r.ownerSlugs[0]]));
+  const slugOfTeam = new Map(
+    standings.map((r) => [normaliseTeamName(r.teamName), r.ownerSlugs[0]]),
+  );
   const resolve = (teamName: string): string => {
-    const slug = slugOfTeam.get(teamName);
+    const slug = slugOfTeam.get(normaliseTeamName(teamName));
     if (!slug) {
       throw new Error(
         `${season}: scoreboard team "${teamName}" is not in the standings page. ` +
@@ -435,7 +437,9 @@ function buildWeeklyMatchups(
   const sectionOf = new Map<string, ImportedGame["section"]>();
   for (const g of games) {
     if (g.week == null || g.teams.length < 2) continue;
-    const pair = g.teams.map((t: { teamName: string }) => slugOfTeam.get(t.teamName) ?? t.teamName).sort();
+    const pair = g.teams
+      .map((t: { teamName: string }) => slugOfTeam.get(normaliseTeamName(t.teamName)) ?? t.teamName)
+      .sort();
     sectionOf.set(`${g.week}:${pair.join("|")}`, g.section);
   }
 
@@ -536,6 +540,17 @@ interface WeekSide {
 }
 
 /**
+ * Team names as a join key.
+ *
+ * The two archives disagree on internal whitespace — 2021's scoreboard renders
+ * "She Doesn't  Even Go Here" with a double space where the standings page has
+ * one. The standings parser already collapses runs on its way through, so this
+ * makes the weekly side match rather than failing a real team.
+ */
+const normaliseTeamName = (s: string): string =>
+  decodeEntities(s).replace(/\s+/g, " ").trim();
+
+/**
  * One week's games from an archived ESPN scoreboard.
  *
  * Joined on TEAM NAME rather than ESPN's numeric teamId. The id is stable and
@@ -550,7 +565,7 @@ function parseWeek(html: string): Array<{ away: WeekSide; home: WeekSide }> {
   for (const m of html.matchAll(
     /teamId=(\d+)&amp;scoringPeriodId=\d+"[^>]*>[\s\S]{0,400}?ScoreCell__TeamName[^>]*>([^<]+)</g,
   )) {
-    if (!nameById.has(m[1])) nameById.set(m[1], decodeEntities(m[2]).trim());
+    if (!nameById.has(m[1])) nameById.set(m[1], normaliseTeamName(m[2]));
   }
 
   const out: Array<{ away: WeekSide; home: WeekSide }> = [];

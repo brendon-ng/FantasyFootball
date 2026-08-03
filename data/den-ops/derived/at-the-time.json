@@ -299,24 +299,24 @@
       "value": 83.46
     }
   ],
-  "2021-15-reagan-schmidt-vs-spencer-kim": [
+  "2021-12-david-collier-vs-logan-dunn": [
     {
       "kind": "weekly-low",
       "label": "Lowest score in league history",
-      "ownerSlug": "reagan-schmidt",
-      "stillStands": true,
-      "value": 41.58
+      "ownerSlug": "logan-dunn",
+      "stillStands": false,
+      "value": 29.96
     },
     {
       "kind": "combined-low",
       "label": "Lowest scoring matchup in league history",
-      "opponentSlug": "reagan-schmidt",
-      "ownerSlug": "spencer-kim",
+      "opponentSlug": "logan-dunn",
+      "ownerSlug": "david-collier",
       "stillStands": true,
-      "value": 128.48
+      "value": 114.46
     }
   ],
-  "2021-17-david-collier-vs-jake-gibbons": [
+  "2021-2-david-collier-vs-jake-gibbons": [
     {
       "kind": "narrowest",
       "label": "Narrowest win in league history",
@@ -324,6 +324,51 @@
       "ownerSlug": "david-collier",
       "stillStands": false,
       "value": 0.56
+    }
+  ],
+  "2021-5-david-collier-vs-tyler-jung": [
+    {
+      "kind": "weekly-high",
+      "label": "Highest score in league history",
+      "ownerSlug": "tyler-jung",
+      "stillStands": false,
+      "value": 195.28
+    }
+  ],
+  "2022-1-brendon-ng-vs-spencer-kim": [
+    {
+      "kind": "narrowest",
+      "label": "Narrowest win in league history",
+      "opponentSlug": "brendon-ng",
+      "ownerSlug": "spencer-kim",
+      "stillStands": true,
+      "value": 0.08
+    }
+  ],
+  "2022-12-jaymie-lew-vs-logan-dunn": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "jaymie-lew",
+      "stillStands": false,
+      "value": 20.9
+    }
+  ],
+  "2022-14-brendon-ng-vs-jaymie-lew": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "jaymie-lew",
+      "stillStands": true,
+      "value": 8.5
+    },
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "jaymie-lew",
+      "ownerSlug": "brendon-ng",
+      "stillStands": true,
+      "value": 168.78
     }
   ],
   "2023-16-david-collier-vs-olivia-nelli": [
@@ -396,26 +441,6 @@
       "playerId": "4035",
       "stillStands": false,
       "value": 44
-    }
-  ],
-  "2025-12-jaymie-lew-vs-reagan-schmidt": [
-    {
-      "kind": "blowout",
-      "label": "Biggest margin in league history",
-      "opponentSlug": "jaymie-lew",
-      "ownerSlug": "reagan-schmidt",
-      "stillStands": true,
-      "value": 113.6
-    }
-  ],
-  "2025-4-reagan-schmidt-vs-safvet-besen": [
-    {
-      "kind": "narrowest",
-      "label": "Narrowest win in league history",
-      "opponentSlug": "safvet-besen",
-      "ownerSlug": "reagan-schmidt",
-      "stillStands": true,
-      "value": 0.26
     }
   ]
 }

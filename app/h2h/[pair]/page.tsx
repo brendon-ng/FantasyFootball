@@ -112,7 +112,7 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
           meta={`from ${name(a)}'s perspective`}
           legend={`Week-by-week scores exist for ${coverage.label}. ${
             coverage.missing.length
-              ? `For ${coverage.missingLabel} only the postseason survived, so those years contribute playoff and ladder matchups only.`
+              ? `For ${coverage.missingLabel} only the postseason survived, so ${coverage.missing.length === 1 ? "that year contributes" : "those years contribute"} playoff and ladder matchups only.`
               : "Every season is complete."
           }`}
         />

@@ -243,7 +243,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                 meta="all matchups · best first"
                 legend={`Every matchup, regular season and postseason combined. A ✻ marks a head-to-head record that includes playoff or toilet-bowl matchups. Week-by-week scores exist for ${coverage.label}${
                   coverage.missing.length
-                    ? `; for ${coverage.missingLabel} only the postseason survived, so those years contribute playoff and ladder matchups only`
+                    ? `; for ${coverage.missingLabel} only the postseason survived, so ${coverage.missing.length === 1 ? "that year contributes" : "those years contribute"} playoff and ladder matchups only`
                     : ""
                 }.`}
               />

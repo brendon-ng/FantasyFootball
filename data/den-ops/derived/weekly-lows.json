@@ -162,6 +162,174 @@
     "week": 13
   },
   {
+    "ownerSlug": "tyler-jung",
+    "points": 88.2,
+    "season": 2021,
+    "week": 1
+  },
+  {
+    "ownerSlug": "spencer-kim",
+    "points": 90.62,
+    "season": 2021,
+    "week": 2
+  },
+  {
+    "ownerSlug": "olivia-nelli",
+    "points": 72.82,
+    "season": 2021,
+    "week": 3
+  },
+  {
+    "ownerSlug": "david-collier",
+    "points": 76.96,
+    "season": 2021,
+    "week": 4
+  },
+  {
+    "ownerSlug": "olivia-nelli",
+    "points": 84.68,
+    "season": 2021,
+    "week": 5
+  },
+  {
+    "ownerSlug": "cassidy-pensa",
+    "points": 68.2,
+    "season": 2021,
+    "week": 6
+  },
+  {
+    "ownerSlug": "spencer-kim",
+    "points": 84.54,
+    "season": 2021,
+    "week": 7
+  },
+  {
+    "ownerSlug": "logan-dunn",
+    "points": 78.12,
+    "season": 2021,
+    "week": 8
+  },
+  {
+    "ownerSlug": "jaymie-lew",
+    "points": 59.5,
+    "season": 2021,
+    "week": 9
+  },
+  {
+    "ownerSlug": "logan-dunn",
+    "points": 51.32,
+    "season": 2021,
+    "week": 10
+  },
+  {
+    "ownerSlug": "logan-dunn",
+    "points": 56.18,
+    "season": 2021,
+    "week": 11
+  },
+  {
+    "ownerSlug": "logan-dunn",
+    "points": 29.96,
+    "season": 2021,
+    "week": 12
+  },
+  {
+    "ownerSlug": "logan-dunn",
+    "points": 46.2,
+    "season": 2021,
+    "week": 13
+  },
+  {
+    "ownerSlug": "logan-dunn",
+    "points": 57.1,
+    "season": 2021,
+    "week": 14
+  },
+  {
+    "ownerSlug": "jaymie-lew",
+    "points": 78,
+    "season": 2022,
+    "week": 1
+  },
+  {
+    "ownerSlug": "reagan-schmidt",
+    "points": 74.66,
+    "season": 2022,
+    "week": 2
+  },
+  {
+    "ownerSlug": "safvet-besen",
+    "points": 85.54,
+    "season": 2022,
+    "week": 3
+  },
+  {
+    "ownerSlug": "jaymie-lew",
+    "points": 56.76,
+    "season": 2022,
+    "week": 4
+  },
+  {
+    "ownerSlug": "jaymie-lew",
+    "points": 81.02,
+    "season": 2022,
+    "week": 5
+  },
+  {
+    "ownerSlug": "reagan-schmidt",
+    "points": 74.12,
+    "season": 2022,
+    "week": 6
+  },
+  {
+    "ownerSlug": "jake-gibbons",
+    "points": 76.7,
+    "season": 2022,
+    "week": 7
+  },
+  {
+    "ownerSlug": "logan-dunn",
+    "points": 99.96,
+    "season": 2022,
+    "week": 8
+  },
+  {
+    "ownerSlug": "reagan-schmidt",
+    "points": 65.56,
+    "season": 2022,
+    "week": 9
+  },
+  {
+    "ownerSlug": "cassidy-pensa",
+    "points": 75.38,
+    "season": 2022,
+    "week": 10
+  },
+  {
+    "ownerSlug": "jaymie-lew",
+    "points": 56.02,
+    "season": 2022,
+    "week": 11
+  },
+  {
+    "ownerSlug": "jaymie-lew",
+    "points": 20.9,
+    "season": 2022,
+    "week": 12
+  },
+  {
+    "ownerSlug": "jaymie-lew",
+    "points": 76.66,
+    "season": 2022,
+    "week": 13
+  },
+  {
+    "ownerSlug": "jaymie-lew",
+    "points": 8.5,
+    "season": 2022,
+    "week": 14
+  },
+  {
     "ownerSlug": "reagan-schmidt",
     "points": 99.52,
     "season": 2024,

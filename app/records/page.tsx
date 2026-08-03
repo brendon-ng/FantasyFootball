@@ -70,8 +70,9 @@ export default function RecordsPage() {
           <span className="text-chalk-600">
             Week-by-week scores exist for {coverage.label}.
             {coverage.missing.length
-              ? ` For ${coverage.missingLabel} only ESPN playoff and ladder matchups survived, so those
-                 seasons are represented but under-counted.`
+              ? ` For ${coverage.missingLabel} only ESPN playoff and ladder matchups survived, so ${
+                  coverage.missing.length === 1 ? "that season is" : "those seasons are"
+                } represented but under-counted.`
               : ""}{" "}
             Player records are Sleeper-era only, since ESPN kept no lineups.
           </span>
