@@ -381,7 +381,7 @@ export default async function HomePage() {
           meta="all-time · top 3"
           href="/records/"
           hrefLabel="Full records"
-          legend="Rank · the matchup · when it happened · points, or margin for the blowout and closest-win lists. A high or low week is not always a win, so the row says which. Click any row for the game."
+          legend="Rank · team · when it happened · points, or margin for the blowout and closest-win lists. Click any row for the game."
         />
         <RecordHighlights
           records={recordBook}

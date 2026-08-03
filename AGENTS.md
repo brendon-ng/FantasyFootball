@@ -92,9 +92,12 @@ lowest week, biggest blowout, closest win) for EVERY league. It is the whole
 offseason story for a redraft league: rosters are empty until the draft and there
 are no keeper contracts, so without it that page has nothing current to say.
 
-Rows say "def." or "lost to" from the two scores rather than assuming. A blowout
-or closest win is a win by construction, but a high or low week is not —
-Masterbatters' second-lowest week was won by the team that scored it.
+The weekly high and low rows name only the team: a single-week score is a
+property of ONE team, and the opponent had nothing to do with it. The blowout and
+closest-win rows are inherently about both, so they name both. Those are wins by
+construction, but the verb is still derived from the two scores rather than
+hardcoded — a high or low week can go either way, and Masterbatters' second-lowest
+week was won by the team that scored it.
 
 **Pages:** `/` (league at a glance, adapts to offseason), `/keepers`,
 `/keepers/history`, `/history`, `/history/[season]`, `/records`,

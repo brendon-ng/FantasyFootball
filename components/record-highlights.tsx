@@ -56,18 +56,29 @@ export function RecordHighlights({
     (slug && ownerNames[slug]?.split(" ")[0]) || "—";
   const full = (slug: string | null | undefined) => (slug && ownerNames[slug]) || "—";
 
-  const sections: Array<{ title: string; hint: string; tone: string; rows: Entry[] }> = [
+  // A high or low week is a property of ONE team, so naming the opponent adds a
+  // name that had nothing to do with the record. A blowout or closest win is
+  // inherently about both teams, so those rows name them.
+  const sections: Array<{
+    title: string;
+    hint: string;
+    tone: string;
+    rows: Entry[];
+    showOpponent: boolean;
+  }> = [
     {
       title: "Highest week",
       hint: "Most points by one team in a single week",
       tone: "text-accent",
       rows: records.weeklyHigh.slice(0, SHOWN).map((r) => ({ ...r, value: r.points })),
+      showOpponent: false,
     },
     {
       title: "Lowest week",
       hint: "Fewest points by one team in a single week",
       tone: "text-loss",
       rows: records.weeklyLow.slice(0, SHOWN).map((r) => ({ ...r, value: r.points })),
+      showOpponent: false,
     },
     {
       title: "Biggest blowout",
@@ -76,6 +87,7 @@ export function RecordHighlights({
       rows: records.biggestBlowout
         .slice(0, SHOWN)
         .map((r) => ({ ...r, value: r.margin, signed: true })),
+      showOpponent: true,
     },
     {
       title: "Closest win",
@@ -84,6 +96,7 @@ export function RecordHighlights({
       rows: records.narrowestWin
         .slice(0, SHOWN)
         .map((r) => ({ ...r, value: r.margin, signed: true })),
+      showOpponent: true,
     },
   ];
 
@@ -111,7 +124,7 @@ export function RecordHighlights({
                       <span data-owner={r.ownerSlug} className="font-medium">
                         {full(r.ownerSlug)}
                       </span>
-                      {r.opponentSlug ? (
+                      {section.showOpponent && r.opponentSlug ? (
                         <>
                           <span className="text-chalk-600">
                             {r.opponentPoints == null
