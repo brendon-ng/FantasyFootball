@@ -206,12 +206,27 @@ export interface SeasonKeepers {
 export interface PlayerTransaction {
   season: number;
   week: number;
+  /**
+   * True when this happened before that season's draft.
+   *
+   * Sleeper stamps every preseason move as `leg: 1`, so week alone implies these
+   * happened during week 1 of the season when they may have been weeks earlier.
+   */
+  preseason: boolean;
   type: "trade" | "waiver" | "free_agent" | "commissioner" | "draft";
-  /** "add" | "drop" from the perspective of this player. */
-  action: "add" | "drop" | "draft";
+  /**
+   * A trade is ONE event, not an add plus a drop. Sleeper represents it as both
+   * sides of a single transaction; splitting them produces two half-events that
+   * read as unrelated.
+   */
+  action: "add" | "drop" | "draft" | "keep" | "trade";
+  /** Acquiring owner for add/draft/keep; the dropping owner for a drop. */
   ownerSlug: string | null;
-  counterpartySlug: string | null;
+  /** Trades only: who the player came from and went to. */
+  fromSlug: string | null;
+  toSlug: string | null;
   faabSpent: number | null;
+  /** Milliseconds. Sorting on this is what puts preseason moves before the draft. */
   timestamp: number;
   round?: number;
   pickNo?: number;

@@ -17,12 +17,30 @@ export function generateStaticParams() {
 }
 
 const TYPE_LABEL: Record<string, string> = {
-  draft: "Drafted",
+  draft: "Draft",
   trade: "Trade",
   waiver: "Waiver",
   free_agent: "Free agent",
   commissioner: "Commissioner",
 };
+
+/** Colour of the event's left rail: acquisitions, departures, and moves. */
+const ACTION_RAIL: Record<string, string> = {
+  draft: "bg-win/60",
+  keep: "bg-accent/70",
+  add: "bg-win/60",
+  trade: "bg-sky-400/60",
+  drop: "bg-loss/60",
+};
+
+function OwnerLink({ slug, name }: { slug: string | null; name: string }) {
+  if (!slug) return <span className="text-chalk-400">{name}</span>;
+  return (
+    <Link href={`/owners/${slug}/`} className="transition-colors hover:text-accent">
+      {name}
+    </Link>
+  );
+}
 
 export default async function PlayerPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -37,7 +55,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   const adp = adpAll.byPlayer.get(id);
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
 
-  const seasonsSeen = [...new Set(history.map((h) => h.season))].sort((a, b) => b - a);
+  const seasonsSeen = [...new Set(history.map((h) => h.season))].sort((a, b) => a - b);
 
   return (
     <div className="space-y-5 sm:space-y-6">
@@ -115,45 +133,49 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
                   <ol>
                     {history
                       .filter((h) => h.season === season)
-                      .slice()
-                      .reverse()
                       .map((h, i) => (
                         <li
                           key={i}
-                          className="flex items-center gap-3 border-b border-ink-700 px-4 py-2.5 last:border-0"
+                          className="flex items-stretch gap-3 border-b border-ink-700 px-4 py-2.5 last:border-0"
                         >
                           <span
-                            className={`w-1 shrink-0 self-stretch rounded-full ${
-                              h.action === "drop" ? "bg-loss/60" : "bg-win/60"
-                            }`}
+                            className={`w-1 shrink-0 rounded-full ${ACTION_RAIL[h.action] ?? "bg-ink-500"}`}
                           />
                           <div className="min-w-0 flex-1">
-                            <div className="truncate text-sm">
-                              <span className="font-medium">
-                                {h.action === "draft"
-                                  ? `Drafted R${h.round} (pick ${h.pickNo})`
-                                  : h.action === "add"
-                                    ? "Added"
-                                    : "Dropped"}
-                              </span>
-                              {h.ownerSlug ? (
+                            <div className="text-sm">
+                              {h.action === "trade" ? (
                                 <>
-                                  {" "}
-                                  <span className="text-chalk-600">
-                                    {h.action === "drop" ? "by" : "by"}
-                                  </span>{" "}
-                                  <Link
-                                    href={`/owners/${h.ownerSlug}/`}
-                                    className="transition-colors hover:text-accent"
-                                  >
-                                    {name(h.ownerSlug)}
-                                  </Link>
+                                  <span className="font-medium">Traded</span>{" "}
+                                  <span className="text-chalk-600">from</span>{" "}
+                                  <OwnerLink slug={h.fromSlug} name={name(h.fromSlug)} />{" "}
+                                  <span className="text-chalk-600">to</span>{" "}
+                                  <OwnerLink slug={h.toSlug} name={name(h.toSlug)} />
                                 </>
-                              ) : null}
+                              ) : (
+                                <>
+                                  <span className="font-medium">
+                                    {h.action === "draft"
+                                      ? `Drafted R${h.round} (pick ${h.pickNo})`
+                                      : h.action === "keep"
+                                        ? `Kept at R${h.round} (pick ${h.pickNo})`
+                                        : h.action === "add"
+                                          ? "Added"
+                                          : "Dropped"}
+                                  </span>{" "}
+                                  <span className="text-chalk-600">by</span>{" "}
+                                  <OwnerLink slug={h.ownerSlug} name={name(h.ownerSlug)} />
+                                </>
+                              )}
                             </div>
                             <div className="text-[11px] text-chalk-600">
                               {TYPE_LABEL[h.type] ?? h.type}
-                              {h.week ? ` · week ${h.week}` : ""}
+                              {/* "Draft · preseason" is redundant; only in-season
+                                  moves need timing. Sleeper stamps every preseason
+                                  transaction as week 1, so the raw week would
+                                  misdate them — say "preseason" instead. */}
+                              {h.type === "draft"
+                                ? ""
+                                : ` · ${h.preseason ? "preseason" : `week ${h.week}`}`}
                               {h.faabSpent != null ? ` · $${h.faabSpent} FAAB` : ""}
                             </div>
                           </div>

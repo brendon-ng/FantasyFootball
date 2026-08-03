@@ -398,6 +398,52 @@ function buildMatchups(d: SeasonData, throughWeek: number): Matchup[] {
   return out;
 }
 
+// --- season timeline ---------------------------------------------------------
+
+type SeasonEvent =
+  | { kind: "pick"; ts: number; week: 0; preseason: true; pick: SleeperDraftPick }
+  | { kind: "txn"; ts: number; week: number; preseason: boolean; txn: SleeperTransaction };
+
+/**
+ * Merges a season's draft and transactions into one chronologically ordered
+ * stream.
+ *
+ * This exists because processing the draft first and transactions second is
+ * WRONG. Sleeper stamps every preseason move as `leg: 1`, but many of them
+ * happen before the draft — 15 across 2024-25, including the trade that sent
+ * Joe Burrow from Lauren to Brendon four days before the 2025 draft, after
+ * which Brendon kept him. Replaying draft-first claims Brendon kept a player
+ * he did not yet own.
+ *
+ * Draft picks are timestamped `start_time + pick_no`, which keeps them in pick
+ * order and anchored to the draft. A transaction takes effect when it is
+ * processed, so `status_updated` wins over `created`.
+ */
+function seasonTimeline(d: SeasonData): SeasonEvent[] {
+  const draftStart = d.draft?.start_time ?? 0;
+  const events: SeasonEvent[] = [];
+
+  for (const p of d.picks) {
+    events.push({ kind: "pick", ts: draftStart + p.pick_no, week: 0, preseason: true, pick: p });
+  }
+
+  for (const [week, txns] of d.transactions) {
+    for (const txn of txns) {
+      if (txn.status !== "complete") continue;
+      const ts = txn.status_updated || txn.created;
+      events.push({
+        kind: "txn",
+        ts,
+        week,
+        preseason: draftStart > 0 && ts < draftStart,
+        txn,
+      });
+    }
+  }
+
+  return events.sort((a, b) => a.ts - b.ts);
+}
+
 // --- keeper resolver --------------------------------------------------------
 
 /**
@@ -436,112 +482,113 @@ function resolveKeepers(seasons: SeasonData[]): {
     const { keepers: kr } = d.rules;
     const kept: string[] = [];
 
-    // 1. Draft. Keeper picks continue an existing contract; everything else
-    //    starts a fresh one at the round it was taken.
-    for (const p of d.picks.slice().sort((a, b) => a.pick_no - b.pick_no)) {
-      const owner = d.rosterToOwner.get(Number(p.roster_id)) ?? null;
-      const existing = contracts.get(p.player_id);
+    // Replay draft picks and transactions in true chronological order. A
+    // preseason trade must be applied before the draft that follows it.
+    for (const ev of seasonTimeline(d)) {
+      if (ev.kind === "pick") {
+        const p = ev.pick;
+        const owner = d.rosterToOwner.get(Number(p.roster_id)) ?? null;
+        const existing = contracts.get(p.player_id);
 
-      if (p.is_keeper && existing) {
-        existing.ownerSlug = owner;
-        existing.keepsUsed += 1;
-        existing.provenance.push(
-          `${d.season}: kept at R${existing.round} (keep ${existing.keepsUsed} of ${kr.maxKeepsAtOriginalCost})`,
-        );
-        kept.push(p.player_id);
-      } else {
-        if (p.is_keeper && !existing) {
-          log.warn(
-            `${d.season}: ${p.player_id} flagged is_keeper but has no prior contract — treating as a fresh R${p.round} draft pick`,
+        if (p.is_keeper && existing) {
+          existing.ownerSlug = owner;
+          existing.keepsUsed += 1;
+          existing.provenance.push(
+            `${d.season}: kept at R${existing.round} by ${owner} (keep ${existing.keepsUsed} of ${kr.maxKeepsAtOriginalCost})`,
           );
+          kept.push(p.player_id);
+        } else {
+          if (p.is_keeper && !existing) {
+            log.warn(
+              `${d.season}: ${p.player_id} flagged is_keeper but has no prior contract — treating as a fresh R${p.round} draft pick`,
+            );
+          }
+          contracts.set(p.player_id, {
+            playerId: p.player_id,
+            ownerSlug: owner,
+            round: p.round,
+            keepsUsed: 0,
+            keepsRemaining: kr.maxKeepsAtOriginalCost,
+            expired: false,
+            origin: d.season === seasons[0].season ? "startup" : "drafted",
+            startSeason: d.season,
+            originalDraftRound: p.round,
+            provenance: [`${d.season}: drafted R${p.round} pick ${p.pick_no} by ${owner}`],
+          });
         }
-        contracts.set(p.player_id, {
-          playerId: p.player_id,
-          ownerSlug: owner,
-          round: p.round,
-          keepsUsed: 0,
-          keepsRemaining: kr.maxKeepsAtOriginalCost,
-          expired: false,
-          origin: d.season === seasons[0].season ? "startup" : "drafted",
-          startSeason: d.season,
-          originalDraftRound: p.round,
-          provenance: [`${d.season}: drafted R${p.round} pick ${p.pick_no}`],
-        });
+        continue;
       }
-    }
 
-    // 2. In-season transactions, chronologically. A drop leaves the contract in
-    //    place (owner cleared) so a later re-add can consult its original round.
-    const weeks = [...d.transactions.keys()].sort((a, b) => a - b);
-    for (const week of weeks) {
-      const txns = (d.transactions.get(week) ?? [])
-        .filter((t) => t.status === "complete")
-        .sort((a, b) => a.created - b.created);
+      const { txn: t, week, preseason } = ev;
+      const when = preseason ? `${d.season} preseason` : `${d.season} wk${week}`;
 
-      for (const t of txns) {
-        for (const [playerId, rosterId] of Object.entries(t.drops ?? {})) {
-          const c = contracts.get(playerId);
-          if (!c) continue;
-          c.ownerSlug = null;
-          c.provenance.push(
-            `${d.season} wk${week}: dropped by ${d.rosterToOwner.get(rosterId) ?? "?"}`,
-          );
+      // Drops first: a waiver add paired with a drop of a different player is
+      // unambiguous either way, and this keeps a same-transaction drop from
+      // clobbering the add that follows it.
+      for (const [playerId, rosterId] of Object.entries(t.drops ?? {})) {
+        // In a trade the "drop" side is the sending team, handled by the add.
+        if (t.type === "trade") continue;
+        const c = contracts.get(playerId);
+        if (!c) continue;
+        c.ownerSlug = null;
+        c.provenance.push(`${when}: dropped by ${d.rosterToOwner.get(rosterId) ?? "?"}`);
+      }
+
+      for (const [playerId, rosterId] of Object.entries(t.adds ?? {})) {
+        const owner = d.rosterToOwner.get(rosterId) ?? null;
+        const prior = contracts.get(playerId);
+
+        // A trade transfers the contract untouched (bylaws 1.7.2.5). A
+        // commissioner move is a roster correction under bylaws 1.3.1, not a
+        // real acquisition, so it must not reset a contract either.
+        if (t.type === "trade" || t.type === "commissioner") {
+          const fromRoster = (t.drops ?? {})[playerId];
+          const from = fromRoster != null ? d.rosterToOwner.get(fromRoster) : undefined;
+          if (prior) {
+            prior.ownerSlug = owner;
+            prior.provenance.push(
+              t.type === "trade"
+                ? `${when}: traded from ${from ?? prior.ownerSlug ?? "?"} to ${owner} (contract inherited)`
+                : `${when}: commissioner move to ${owner} (contract unchanged)`,
+            );
+          }
+          continue;
         }
 
-        for (const [playerId, rosterId] of Object.entries(t.adds ?? {})) {
-          const owner = d.rosterToOwner.get(rosterId) ?? null;
-          const prior = contracts.get(playerId);
-
-          // A trade transfers the contract untouched (bylaws 1.7.2.5). A
-          // commissioner move is a roster correction under bylaws 1.3.1, not a
-          // real acquisition, so it must not reset a contract either.
-          if (t.type === "trade" || t.type === "commissioner") {
-            if (prior) {
-              prior.ownerSlug = owner;
-              prior.provenance.push(
-                t.type === "trade"
-                  ? `${d.season} wk${week}: traded to ${owner} (contract inherited)`
-                  : `${d.season} wk${week}: commissioner move to ${owner} (contract unchanged)`,
-              );
-            }
-            continue;
-          }
-
-          const faRound = kr.undraftedFreeAgentRound;
-          if (!prior) {
-            contracts.set(playerId, {
-              playerId,
-              ownerSlug: owner,
-              round: faRound,
-              keepsUsed: 0,
-              keepsRemaining: kr.maxKeepsAtOriginalCost,
-              expired: false,
-              origin: "undrafted-fa",
-              startSeason: d.season,
-              originalDraftRound: null,
-              provenance: [`${d.season} wk${week}: undrafted FA pickup — R${faRound} value`],
-            });
-          } else {
-            // "11th round OR the round originally drafted, whichever is EARLIER"
-            // — earlier round means the smaller number.
-            const base = prior.originalDraftRound ?? faRound;
-            const newRound = Math.min(faRound, base);
-            contracts.set(playerId, {
-              playerId,
-              ownerSlug: owner,
-              round: newRound,
-              keepsUsed: 0,
-              keepsRemaining: kr.maxKeepsAtOriginalCost,
-              expired: false,
-              origin: "reacquired",
-              startSeason: d.season,
-              originalDraftRound: prior.originalDraftRound,
-              provenance: [
-                ...prior.provenance,
-                `${d.season} wk${week}: re-acquired via ${t.type} — min(R${faRound}, R${base}) = R${newRound}, contract reset`,
-              ],
-            });
-          }
+        const faRound = kr.undraftedFreeAgentRound;
+        if (!prior) {
+          contracts.set(playerId, {
+            playerId,
+            ownerSlug: owner,
+            round: faRound,
+            keepsUsed: 0,
+            keepsRemaining: kr.maxKeepsAtOriginalCost,
+            expired: false,
+            origin: "undrafted-fa",
+            startSeason: d.season,
+            originalDraftRound: null,
+            provenance: [`${when}: undrafted FA pickup by ${owner} — R${faRound} value`],
+          });
+        } else {
+          // "11th round OR the round originally drafted, whichever is EARLIER"
+          // — earlier round means the smaller number.
+          const base = prior.originalDraftRound ?? faRound;
+          const newRound = Math.min(faRound, base);
+          contracts.set(playerId, {
+            playerId,
+            ownerSlug: owner,
+            round: newRound,
+            keepsUsed: 0,
+            keepsRemaining: kr.maxKeepsAtOriginalCost,
+            expired: false,
+            origin: "reacquired",
+            startSeason: d.season,
+            originalDraftRound: prior.originalDraftRound,
+            provenance: [
+              ...prior.provenance,
+              `${when}: re-acquired by ${owner} via ${t.type} — min(R${faRound}, R${base}) = R${newRound}, contract reset`,
+            ],
+          });
         }
       }
     }
@@ -720,58 +767,97 @@ function buildLeagueRecords(matchups: Matchup[]): LeagueRecords {
 
 // --- transactions & drafts --------------------------------------------------
 
+/**
+ * Per-player event log, chronological.
+ *
+ * A trade is emitted as ONE event with both sides. Sleeper stores it as an add
+ * and a drop inside a single transaction; emitting those separately renders as
+ * "Dropped by Lauren / Added by Brendon", two half-events that never say a trade
+ * happened.
+ */
 function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransaction[]> {
   const hist: Record<string, PlayerTransaction[]> = {};
   const push = (playerId: string, t: PlayerTransaction) => (hist[playerId] ??= []).push(t);
 
   for (const d of seasons) {
-    for (const p of d.picks) {
-      push(p.player_id, {
-        season: d.season,
-        week: 0,
-        type: "draft",
-        action: "draft",
-        ownerSlug: d.rosterToOwner.get(Number(p.roster_id)) ?? null,
-        counterpartySlug: null,
-        faabSpent: null,
-        timestamp: d.draft?.start_time ?? 0,
-        round: p.round,
-        pickNo: p.pick_no,
-      });
-    }
+    for (const ev of seasonTimeline(d)) {
+      if (ev.kind === "pick") {
+        const p = ev.pick;
+        push(p.player_id, {
+          season: d.season,
+          week: 0,
+          preseason: true,
+          type: "draft",
+          action: p.is_keeper ? "keep" : "draft",
+          ownerSlug: d.rosterToOwner.get(Number(p.roster_id)) ?? null,
+          fromSlug: null,
+          toSlug: null,
+          faabSpent: null,
+          timestamp: ev.ts,
+          round: p.round,
+          pickNo: p.pick_no,
+        });
+        continue;
+      }
 
-    for (const [week, txns] of d.transactions) {
-      for (const t of txns) {
-        if (t.status !== "complete") continue;
-        const bid = t.settings?.waiver_bid ?? null;
-        const parties = t.roster_ids.map((r) => d.rosterToOwner.get(r) ?? null);
+      const { txn: t, week, preseason, ts } = ev;
+      const base = { season: d.season, week, preseason, timestamp: ts, type: t.type } as const;
 
-        for (const [playerId, rosterId] of Object.entries(t.adds ?? {})) {
-          const owner = d.rosterToOwner.get(rosterId) ?? null;
+      if (t.type === "trade") {
+        // Pair each traded player with the roster that gave them up.
+        for (const [playerId, toRoster] of Object.entries(t.adds ?? {})) {
+          const fromRoster = (t.drops ?? {})[playerId];
           push(playerId, {
-            season: d.season, week, type: t.type, action: "add",
-            ownerSlug: owner,
-            counterpartySlug: parties.find((p) => p && p !== owner) ?? null,
-            faabSpent: t.type === "waiver" ? bid : null,
-            timestamp: t.status_updated,
-          });
-        }
-        for (const [playerId, rosterId] of Object.entries(t.drops ?? {})) {
-          const owner = d.rosterToOwner.get(rosterId) ?? null;
-          push(playerId, {
-            season: d.season, week, type: t.type, action: "drop",
-            ownerSlug: owner,
-            counterpartySlug: parties.find((p) => p && p !== owner) ?? null,
+            ...base,
+            action: "trade",
+            ownerSlug: d.rosterToOwner.get(toRoster) ?? null,
+            fromSlug: fromRoster != null ? (d.rosterToOwner.get(fromRoster) ?? null) : null,
+            toSlug: d.rosterToOwner.get(toRoster) ?? null,
             faabSpent: null,
-            timestamp: t.status_updated,
           });
         }
+        // A drop with no matching add means the player was released as part of
+        // the trade rather than moved between rosters.
+        for (const [playerId, fromRoster] of Object.entries(t.drops ?? {})) {
+          if ((t.adds ?? {})[playerId] != null) continue;
+          push(playerId, {
+            ...base,
+            action: "drop",
+            ownerSlug: d.rosterToOwner.get(fromRoster) ?? null,
+            fromSlug: null,
+            toSlug: null,
+            faabSpent: null,
+          });
+        }
+        continue;
+      }
+
+      for (const [playerId, rosterId] of Object.entries(t.adds ?? {})) {
+        push(playerId, {
+          ...base,
+          action: "add",
+          ownerSlug: d.rosterToOwner.get(rosterId) ?? null,
+          fromSlug: null,
+          toSlug: null,
+          faabSpent: t.type === "waiver" ? (t.settings?.waiver_bid ?? null) : null,
+        });
+      }
+      for (const [playerId, rosterId] of Object.entries(t.drops ?? {})) {
+        push(playerId, {
+          ...base,
+          action: "drop",
+          ownerSlug: d.rosterToOwner.get(rosterId) ?? null,
+          fromSlug: null,
+          toSlug: null,
+          faabSpent: null,
+        });
       }
     }
   }
 
+  // Sort on the real timestamp, not season/week — that is the whole point.
   for (const list of Object.values(hist)) {
-    list.sort((a, b) => a.season - b.season || a.week - b.week || a.timestamp - b.timestamp);
+    list.sort((a, b) => a.season - b.season || a.timestamp - b.timestamp);
   }
   return hist;
 }

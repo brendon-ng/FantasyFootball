@@ -136,6 +136,24 @@ auditable. Corrections go in `config/keeper-overrides.json` — never in code.
 Ownership is reconciled against each season's final roster snapshot, because the
 transaction log is not a complete record of roster mutation.
 
+### Events must be replayed chronologically, not draft-then-transactions
+
+Sleeper stamps every preseason move as `leg: 1`, but many happen BEFORE that
+season's draft — 15 across 2024-25. Joe Burrow was traded from Lauren to Brendon
+on 2025-08-22, four days before the 2025 draft, after which Brendon kept him.
+Replaying the draft first claims Brendon kept a player he did not yet own.
+
+`seasonTimeline()` in `scripts/derive.ts` merges picks and transactions into one
+stream ordered by timestamp — picks at `draft.start_time + pick_no`, transactions
+at `status_updated`. Both the keeper resolver and the player history read from
+it. `PlayerTransaction.preseason` carries the distinction to the UI so a
+pre-draft trade never renders as "week 1".
+
+A TRADE IS ONE EVENT. Sleeper stores it as an add and a drop inside a single
+transaction; emitting those separately renders as "Dropped by Lauren / Added by
+Brendon", two half-events that never say a trade happened. `buildPlayerHistory`
+pairs them into a single `trade` action with `fromSlug`/`toSlug`.
+
 ### The toilet bowl is inverted
 
 Sleeper's `w` field means "advances", and in the losers bracket you advance by
