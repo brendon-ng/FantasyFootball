@@ -1,0 +1,54 @@
+"use client";
+
+import { ContractRow, orderBySelection, useSelectedKeepers } from "@/components/keeper-selection";
+import { LiveStatus } from "@/lib/sleeper-browser";
+import type { AdpEntry } from "@/lib/data";
+import type { KeeperContract, PlayerMeta } from "@/lib/types";
+
+/** One owner's full contract list, with live selections marked and floated up. */
+export function OwnerContracts({
+  ownerSlug,
+  contracts,
+  players,
+  adp,
+  userIdToSlug,
+  leagueId,
+  maxKeepers,
+}: {
+  ownerSlug: string;
+  contracts: KeeperContract[];
+  players: Record<string, PlayerMeta>;
+  adp: Record<string, AdpEntry>;
+  userIdToSlug: Record<string, string>;
+  leagueId: string | null;
+  maxKeepers: number;
+}) {
+  const { byOwner, ready } = useSelectedKeepers(leagueId, userIdToSlug);
+  const selected = byOwner.get(ownerSlug) ?? new Set<string>();
+  const ordered = orderBySelection(contracts, selected);
+
+  return (
+    <>
+      <div className="flex items-center justify-between gap-3 border-b border-ink-700 px-4 py-2 sm:px-5">
+        <span className="text-[11px] text-chalk-600">
+          {ready
+            ? `${selected.size} of ${maxKeepers} keepers selected`
+            : "Selections load from Sleeper"}
+        </span>
+        <LiveStatus status={ready ? "ready" : "loading"} />
+      </div>
+      <div className="grid gap-px bg-ink-600 sm:grid-cols-2">
+        {ordered.map((c) => (
+          <div key={c.playerId} className="bg-ink-800">
+            <ContractRow
+              contract={c}
+              player={players[c.playerId]}
+              adp={adp[c.playerId]}
+              selected={selected.has(c.playerId)}
+            />
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { DraftPicks } from "@/components/draft-picks";
 import { FinishChart } from "@/components/finish-chart";
-import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
+import { OwnerContracts } from "@/components/owner-contracts";
 import { TrophyCase } from "@/components/trophy-case";
 import { Col, ListHeader, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
 import {
@@ -286,32 +286,17 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             </>
           }
         />
-        <div className="grid gap-px bg-ink-600 sm:grid-cols-2">
-          {contracts
-            .slice()
-            .sort((a, b) => Number(a.expired) - Number(b.expired) || a.round - b.round)
-            .map((c) => (
-              <div
-                key={c.playerId}
-                className={`flex items-center gap-2.5 bg-ink-800 px-3 py-2 ${c.expired ? "opacity-50" : ""}`}
-              >
-                <PositionPill position={players[c.playerId]?.position ?? null} />
-                <Link
-                  href={`/players/${c.playerId}/`}
-                  className="min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-accent"
-                >
-                  {players[c.playerId]?.full_name ?? c.playerId}
-                </Link>
-                <ValueBadge costRound={c.round} adp={adp.byPlayer.get(c.playerId)} />
-                <KeepPips used={c.keepsUsed} total={c.keepsUsed + c.keepsRemaining} />
-                <span
-                  className={`tabular w-9 shrink-0 text-right text-sm font-bold ${c.expired ? "text-loss" : "text-accent"}`}
-                >
-                  {c.expired ? "ADP" : `R${c.round}`}
-                </span>
-              </div>
-            ))}
-        </div>
+        <OwnerContracts
+          ownerSlug={slug}
+          contracts={contracts}
+          players={players}
+          adp={Object.fromEntries(adp.byPlayer)}
+          userIdToSlug={Object.fromEntries(
+            getOwners().filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+          )}
+          leagueId={upcomingLeagueId}
+          maxKeepers={4}
+        />
       </Panel>
 
       <DraftPicks

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { KeeperRow } from "@/components/keeper-table";
+import { HomeKeeperBoard } from "@/components/home-keeper-board";
 import {
   Col,
   EmptyState,
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui";
 import {
   getAdp,
+  getConfig,
   getKeepers,
   getLiveSeason,
   getOwnerMap,
@@ -38,6 +39,7 @@ export default async function HomePage() {
   const keepers = getKeepers();
   const players = getPlayers();
   const adp = getAdp();
+  const cfg = getConfig();
 
   const finalized = seasons.filter((s) => s.finalized).sort((a, b) => b.season - a.season);
   const lastSeason = finalized[0];
@@ -279,38 +281,19 @@ export default async function HomePage() {
         {byOwner.size === 0 ? (
           <EmptyState>No contracts yet — run npm run data.</EmptyState>
         ) : (
-          <div className="grid gap-px bg-ink-600 sm:grid-cols-2 xl:grid-cols-3">
-            {[...byOwner.entries()]
-              .sort(([a], [b]) =>
-                (owners.get(a)?.name ?? a).localeCompare(owners.get(b)?.name ?? b),
-              )
-              .map(([slug, contracts]) => {
-                const eligible = contracts.filter((c) => !c.expired);
-                return (
-                  <div key={slug} className="bg-ink-800 p-1">
-                    <div className="flex items-baseline justify-between px-3 pb-1 pt-2">
-                      <Link
-                        href={`/owners/${slug}/`}
-                        className="text-sm font-semibold transition-colors hover:text-accent"
-                      >
-                        {name(slug)}
-                      </Link>
-                      <span className="text-[11px] text-chalk-600">{eligible.length} eligible</span>
-                    </div>
-                    {eligible.slice(0, MAX_KEEPERS).map((c, i) => (
-                      <KeeperRow
-                        key={c.playerId}
-                        contract={c}
-                        player={players[c.playerId]}
-                        adp={adp.byPlayer.get(c.playerId)}
-                        rank={i + 1}
-                        eligible
-                      />
-                    ))}
-                  </div>
-                );
-              })}
-          </div>
+          <HomeKeeperBoard
+            contractsByOwner={[...byOwner.entries()].sort(([a], [b]) =>
+              (owners.get(a)?.name ?? a).localeCompare(owners.get(b)?.name ?? b),
+            )}
+            ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
+            userIdToSlug={Object.fromEntries(
+              [...owners.values()].filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+            )}
+            players={players}
+            adp={Object.fromEntries(adp.byPlayer)}
+            leagueId={cfg.knownLeagueIds[String(currentSeason)] ?? null}
+            maxKeepers={MAX_KEEPERS}
+          />
         )}
       </Panel>
     </div>
