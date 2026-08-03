@@ -318,6 +318,23 @@ Three parsing traps, all of which produced plausible-looking wrong output:
 3. Feeder inference must pick the NEAREST earlier round. A finalist also won in
    round 1, so matching the earliest link collapses the bracket.
 
+### Placeholder keeper picks
+
+Sleeper will not let a team attach a keeper to a draft pick it ACQUIRED BY
+TRADE. When that happened, the league drafted a similarly-named scrub into the
+slot as a stand-in. In 2025: Devin Smith stood in for DeVonta Smith (David
+Collier) and Malik Earl for Malik Nabers (Tyler Jung), both at R5.
+
+`config/keeper-overrides.json` records the substitutions and `derive.ts` applies
+them AT LOAD TIME, rewriting the pick to the real player with `is_keeper` set.
+Correcting the record rather than patching the result means the resolver, draft
+history, keeper history and player pages all see what actually happened with no
+special cases. Placeholders are listed in `ignorePlayerIds` and disappear from
+the site entirely, including their generated player pages.
+
+Left uncorrected this is not cosmetic: both players showed 0 keeps used, so the
+site claimed 2027 was their final keep year when it is really 2026.
+
 ### Co-owners are first-class owners
 
 Every person has their own slug and record. A co-owned team's record is credited

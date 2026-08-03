@@ -48,7 +48,23 @@ export const getOwners = (): Owner[] => load("derived/owners.json", []);
 export const getSeasons = (): SeasonSummary[] => load("derived/seasons.json", []);
 export const getMatchupHistory = (): Matchup[] => load("derived/matchups.json", []);
 export const getOwnerRecords = (): OwnerRecord[] => load("derived/owner-records.json", []);
-export const getPlayers = (): Record<string, PlayerMeta> => load("players.json", {});
+/**
+ * Slim player index, minus anyone the overrides ignore.
+ *
+ * Placeholder players drafted as keeper stand-ins are filtered here rather than
+ * at sync time: `data/raw` stays a faithful record of what Sleeper actually
+ * returned, and the correction lives in one declarative place.
+ */
+export const getPlayers = (): Record<string, PlayerMeta> => {
+  const all = load<Record<string, PlayerMeta>>("players.json", {});
+  const ignored = new Set(
+    (JSON.parse(readFileSync(join(CONFIG, "keeper-overrides.json"), "utf8")) as {
+      ignorePlayerIds?: string[];
+    }).ignorePlayerIds ?? [],
+  );
+  if (!ignored.size) return all;
+  return Object.fromEntries(Object.entries(all).filter(([id]) => !ignored.has(id)));
+};
 export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []);
 export const getPlayerHistory = (): Record<string, PlayerTransaction[]> =>
   load("derived/player-history.json", {});

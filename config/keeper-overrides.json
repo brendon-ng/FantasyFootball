@@ -1,0 +1,50 @@
+{
+  "//": [
+    "Manual corrections to the derived keeper record. Data, not code, so that",
+    "re-running `npm run data` can never lose them.",
+    "",
+    "PLACEHOLDER PICKS.",
+    "Sleeper will not let a team attach a keeper to a draft pick it ACQUIRED BY",
+    "TRADE. When that happened, the league worked around it by drafting a",
+    "similarly-named scrub into the pick slot as a stand-in for the real keeper.",
+    "",
+    "`scripts/derive.ts` rewrites these picks at load time: the pick becomes the",
+    "real player, flagged is_keeper. Everything downstream — the keeper resolver,",
+    "draft history, the keeper history page, player pages — then sees what",
+    "actually happened, with no special cases anywhere else.",
+    "",
+    "The placeholders are listed in `ignorePlayerIds` so they vanish from the site",
+    "entirely rather than lingering as orphaned contracts and empty player pages."
+  ],
+
+  "placeholderPicks": [
+    {
+      "season": 2025,
+      "pickNo": 46,
+      "placeholderPlayerId": "2342",
+      "placeholderName": "Devin Smith",
+      "actualPlayerId": "7525",
+      "actualName": "DeVonta Smith",
+      "keptBy": "david-collier",
+      "note": "DeVonta Smith kept at R5. The R5 pick was traded in, so Sleeper could not flag him as a keeper; Devin Smith was drafted into the slot instead."
+    },
+    {
+      "season": 2025,
+      "pickNo": 48,
+      "placeholderPlayerId": "5169",
+      "placeholderName": "Malik Earl",
+      "actualPlayerId": "11632",
+      "actualName": "Malik Nabers",
+      "keptBy": "tyler-jung",
+      "note": "Malik Nabers kept at R5 by Tyler Jung, who later traded him to Brendon Ng — the contract travels with the player. Same traded-pick limitation as above."
+    }
+  ],
+
+  "ignorePlayerIds": ["2342", "5169"],
+
+  "//contracts": [
+    "Direct patches onto a resolved contract, keyed by player_id. Use only when a",
+    "substitution cannot express the correction; prefer fixing the source event."
+  ],
+  "contracts": {}
+}

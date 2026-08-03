@@ -1936,10 +1936,10 @@
   },
   {
     "draftSlot": 6,
-    "isKeeper": false,
+    "isKeeper": true,
     "ownerSlug": "david-collier",
     "pickNo": 46,
-    "playerId": "2342",
+    "playerId": "7525",
     "round": 5,
     "season": 2025
   },
@@ -1954,10 +1954,10 @@
   },
   {
     "draftSlot": 8,
-    "isKeeper": false,
+    "isKeeper": true,
     "ownerSlug": "tyler-jung",
     "pickNo": 48,
-    "playerId": "5169",
+    "playerId": "11632",
     "round": 5,
     "season": 2025
   },

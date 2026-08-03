@@ -623,14 +623,15 @@
     },
     {
       "expired": false,
-      "keepsRemaining": 2,
-      "keepsUsed": 0,
+      "keepsRemaining": 1,
+      "keepsUsed": 1,
       "origin": "startup",
       "originalDraftRound": 5,
       "ownerSlug": "brendon-ng",
       "playerId": "11632",
       "provenance": [
         "2024: drafted R5 pick 44 by tyler-jung",
+        "2025: kept at R5 by tyler-jung (keep 1 of 2)",
         "2025 wk12: traded from tyler-jung to brendon-ng (contract inherited)"
       ],
       "round": 5,
@@ -653,14 +654,15 @@
     },
     {
       "expired": false,
-      "keepsRemaining": 2,
-      "keepsUsed": 0,
+      "keepsRemaining": 1,
+      "keepsUsed": 1,
       "origin": "startup",
       "originalDraftRound": 5,
       "ownerSlug": "david-collier",
       "playerId": "7525",
       "provenance": [
-        "2024: drafted R5 pick 47 by david-collier"
+        "2024: drafted R5 pick 47 by david-collier",
+        "2025: kept at R5 by david-collier (keep 1 of 2)"
       ],
       "round": 5,
       "startSeason": 2024
@@ -721,36 +723,6 @@
       "playerId": "11563",
       "provenance": [
         "2025: drafted R5 pick 45 by cassidy-pensa"
-      ],
-      "round": 5,
-      "startSeason": 2025
-    },
-    {
-      "expired": false,
-      "keepsRemaining": 2,
-      "keepsUsed": 0,
-      "origin": "drafted",
-      "originalDraftRound": 5,
-      "ownerSlug": null,
-      "playerId": "2342",
-      "provenance": [
-        "2025: drafted R5 pick 46 by david-collier",
-        "2025 wk1: dropped by david-collier"
-      ],
-      "round": 5,
-      "startSeason": 2025
-    },
-    {
-      "expired": false,
-      "keepsRemaining": 2,
-      "keepsUsed": 0,
-      "origin": "drafted",
-      "originalDraftRound": 5,
-      "ownerSlug": null,
-      "playerId": "5169",
-      "provenance": [
-        "2025: drafted R5 pick 48 by tyler-jung",
-        "2025 wk1: dropped by tyler-jung"
       ],
       "round": 5,
       "startSeason": 2025
@@ -11036,33 +11008,19 @@
         },
         {
           "expired": false,
-          "keepsRemaining": 2,
-          "keepsUsed": 0,
+          "keepsRemaining": 1,
+          "keepsUsed": 1,
           "origin": "startup",
           "originalDraftRound": 5,
           "ownerSlug": "brendon-ng",
           "playerId": "11632",
           "provenance": [
             "2024: drafted R5 pick 44 by tyler-jung",
+            "2025: kept at R5 by tyler-jung (keep 1 of 2)",
             "2025 wk12: traded from tyler-jung to brendon-ng (contract inherited)"
           ],
           "round": 5,
           "startSeason": 2024
-        },
-        {
-          "expired": false,
-          "keepsRemaining": 2,
-          "keepsUsed": 0,
-          "origin": "drafted",
-          "originalDraftRound": 5,
-          "ownerSlug": null,
-          "playerId": "2342",
-          "provenance": [
-            "2025: drafted R5 pick 46 by david-collier",
-            "2025 wk1: dropped by david-collier"
-          ],
-          "round": 5,
-          "startSeason": 2025
         },
         {
           "expired": false,
@@ -11125,21 +11083,6 @@
         },
         {
           "expired": false,
-          "keepsRemaining": 2,
-          "keepsUsed": 0,
-          "origin": "drafted",
-          "originalDraftRound": 5,
-          "ownerSlug": null,
-          "playerId": "5169",
-          "provenance": [
-            "2025: drafted R5 pick 48 by tyler-jung",
-            "2025 wk1: dropped by tyler-jung"
-          ],
-          "round": 5,
-          "startSeason": 2025
-        },
-        {
-          "expired": false,
           "keepsRemaining": 1,
           "keepsUsed": 1,
           "origin": "startup",
@@ -11171,14 +11114,15 @@
         },
         {
           "expired": false,
-          "keepsRemaining": 2,
-          "keepsUsed": 0,
+          "keepsRemaining": 1,
+          "keepsUsed": 1,
           "origin": "startup",
           "originalDraftRound": 5,
           "ownerSlug": "david-collier",
           "playerId": "7525",
           "provenance": [
-            "2024: drafted R5 pick 47 by david-collier"
+            "2024: drafted R5 pick 47 by david-collier",
+            "2025: kept at R5 by david-collier (keep 1 of 2)"
           ],
           "round": 5,
           "startSeason": 2024
@@ -16407,6 +16351,7 @@
         "11624",
         "11626",
         "11631",
+        "11632",
         "11635",
         "11637",
         "3198",
@@ -16424,6 +16369,7 @@
         "6794",
         "6801",
         "6904",
+        "7525",
         "7547",
         "7564",
         "7569",

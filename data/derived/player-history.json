@@ -1045,20 +1045,6 @@
   ],
   "2342": [
     {
-      "action": "draft",
-      "faabSpent": null,
-      "fromSlug": null,
-      "ownerSlug": "david-collier",
-      "pickNo": 46,
-      "preseason": true,
-      "round": 5,
-      "season": 2025,
-      "timestamp": 1756168364927,
-      "toSlug": null,
-      "type": "draft",
-      "week": 0
-    },
-    {
       "action": "drop",
       "faabSpent": null,
       "fromSlug": null,
@@ -3773,20 +3759,6 @@
   ],
   "5169": [
     {
-      "action": "draft",
-      "faabSpent": null,
-      "fromSlug": null,
-      "ownerSlug": "tyler-jung",
-      "pickNo": 48,
-      "preseason": true,
-      "round": 5,
-      "season": 2025,
-      "timestamp": 1756168364929,
-      "toSlug": null,
-      "type": "draft",
-      "week": 0
-    },
-    {
       "action": "drop",
       "faabSpent": null,
       "fromSlug": null,
@@ -6374,6 +6346,20 @@
       "round": 5,
       "season": 2024,
       "timestamp": 1724720405714,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 46,
+      "preseason": true,
+      "round": 5,
+      "season": 2025,
+      "timestamp": 1756168364927,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -12628,6 +12614,20 @@
       "round": 5,
       "season": 2024,
       "timestamp": 1724720405711,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 48,
+      "preseason": true,
+      "round": 5,
+      "season": 2025,
+      "timestamp": 1756168364929,
       "toSlug": null,
       "type": "draft",
       "week": 0

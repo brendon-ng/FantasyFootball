@@ -86,6 +86,29 @@ const config = readJson<LeagueConfig>(join(CONFIG_DIR, "league.json"))!;
 const index = readJson<SeasonIndex>(join(RAW_DIR, "seasons.json"));
 if (!index) throw new Error("data/raw/seasons.json missing — run `npm run sync` first");
 
+/**
+ * Manual corrections, see config/keeper-overrides.json.
+ *
+ * Placeholder picks are applied at LOAD time rather than patched afterwards: a
+ * stand-in player drafted into a keeper's slot is a defect in the source
+ * record, so correcting the record leaves every downstream consumer — resolver,
+ * draft history, player pages — with nothing to special-case.
+ */
+interface PlaceholderPick {
+  season: number;
+  pickNo: number;
+  placeholderPlayerId: string;
+  actualPlayerId: string;
+  note?: string;
+}
+interface Overrides {
+  placeholderPicks?: PlaceholderPick[];
+  ignorePlayerIds?: string[];
+  contracts?: Record<string, Partial<KeeperContract>>;
+}
+const overrides = readJson<Overrides>(join(CONFIG_DIR, "keeper-overrides.json")) ?? {};
+const ignoredPlayers = new Set(overrides.ignorePlayerIds ?? []);
+
 const rulesFor = (season: number): Rules => {
   const r = readJson<Rules>(join(CONFIG_DIR, "rules", `${season}.json`));
   if (!r) throw new Error(`No rules file for ${season} — add config/rules/${season}.json`);
@@ -174,13 +197,29 @@ function loadSeason(season: number): SeasonData | null {
     }
   }
 
+  // Swap any placeholder pick for the keeper it stood in for.
+  const rawPicks = readJson<SleeperDraftPick[]>(join(dir, "draft-picks.json")) ?? [];
+  const picks = rawPicks.map((p) => {
+    const sub = (overrides.placeholderPicks ?? []).find(
+      (x) =>
+        x.season === season &&
+        x.pickNo === p.pick_no &&
+        String(x.placeholderPlayerId) === String(p.player_id),
+    );
+    if (!sub) return p;
+    log.info(
+      `${season}: pick ${p.pick_no} — substituting ${sub.actualPlayerId} for placeholder ${sub.placeholderPlayerId}, flagged as a keeper`,
+    );
+    return { ...p, player_id: sub.actualPlayerId, is_keeper: true };
+  });
+
   return {
     season,
     league,
     users: readJson<SleeperUser[]>(join(dir, "users.json")) ?? [],
     rosters,
     draft: readJson<SleeperDraft>(join(dir, "draft.json")),
-    picks: readJson<SleeperDraftPick[]>(join(dir, "draft-picks.json")) ?? [],
+    picks,
     winners: readJson<SleeperBracketMatch[]>(join(dir, "winners-bracket.json")) ?? [],
     losers: readJson<SleeperBracketMatch[]>(join(dir, "losers-bracket.json")) ?? [],
     matchups,
@@ -486,11 +525,6 @@ function resolveKeepers(seasons: SeasonData[]): {
   perSeason: SeasonKeepers[];
   final: KeeperContract[];
 } {
-  const overrides =
-    readJson<Record<string, Partial<KeeperContract>>>(
-      join(CONFIG_DIR, "keeper-overrides.json"),
-    ) ?? {};
-
   /** playerId -> live contract. Survives drops so a re-add can consult it. */
   const contracts = new Map<string, KeeperContract>();
   const perSeason: SeasonKeepers[] = [];
@@ -504,6 +538,7 @@ function resolveKeepers(seasons: SeasonData[]): {
     for (const ev of seasonTimeline(d)) {
       if (ev.kind === "pick") {
         const p = ev.pick;
+        if (ignoredPlayers.has(p.player_id)) continue;
         const owner = d.rosterToOwner.get(Number(p.roster_id)) ?? null;
         const existing = contracts.get(p.player_id);
 
@@ -552,6 +587,7 @@ function resolveKeepers(seasons: SeasonData[]): {
       }
 
       for (const [playerId, rosterId] of Object.entries(t.adds ?? {})) {
+        if (ignoredPlayers.has(playerId)) continue;
         const owner = d.rosterToOwner.get(rosterId) ?? null;
         const prior = contracts.get(playerId);
 
@@ -620,7 +656,9 @@ function resolveKeepers(seasons: SeasonData[]): {
     const ownedBy = new Map<string, string>();
     for (const r of d.rosters) {
       const slug = d.rosterToOwner.get(r.roster_id)!;
-      for (const pid of [...(r.players ?? []), ...(r.reserve ?? [])]) ownedBy.set(pid, slug);
+      for (const pid of [...(r.players ?? []), ...(r.reserve ?? [])]) {
+        if (!ignoredPlayers.has(pid)) ownedBy.set(pid, slug);
+      }
     }
     for (const c of contracts.values()) {
       const actual = ownedBy.get(c.playerId) ?? null;
@@ -644,7 +682,7 @@ function resolveKeepers(seasons: SeasonData[]): {
     });
   }
 
-  for (const [playerId, patch] of Object.entries(overrides)) {
+  for (const [playerId, patch] of Object.entries(overrides.contracts ?? {})) {
     const c = contracts.get(playerId);
     if (!c) continue;
     Object.assign(c, patch);
@@ -857,6 +895,7 @@ function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransac
     for (const ev of seasonTimeline(d)) {
       if (ev.kind === "pick") {
         const p = ev.pick;
+        if (ignoredPlayers.has(p.player_id)) continue;
         push(p.player_id, {
           season: d.season,
           week: 0,
@@ -938,7 +977,9 @@ function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransac
 
 function buildDraftHistory(seasons: SeasonData[]): DraftPickRecord[] {
   return seasons.flatMap((d) =>
-    d.picks.map((p) => ({
+    d.picks
+      .filter((p) => !ignoredPlayers.has(p.player_id))
+      .map((p) => ({
       season: d.season,
       round: p.round,
       pickNo: p.pick_no,
