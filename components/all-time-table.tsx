@@ -226,6 +226,7 @@ export function AllTimeTable({
                     type="button"
                     onClick={() => toggle(col)}
                     title={col.hint}
+                    aria-label={col.hint ? `${col.label} — ${col.hint}` : col.label}
                     className={`eyebrow flex w-full items-center gap-1 px-3 py-2.5 text-[10px] font-semibold transition-colors hover:text-chalk-100 ${
                       i === 0 ? "justify-start" : "justify-end"
                     } ${active ? "text-accent" : ""}`}

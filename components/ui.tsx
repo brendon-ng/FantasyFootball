@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import { Tip } from "@/components/tooltip";
 import type { ReactNode } from "react";
 
 /** Card surface used for every panel on the site. */
@@ -156,24 +158,15 @@ export function Col({
   hint?: string;
   className?: string;
 }) {
+  if (!hint) return <span className={`eyebrow text-[10px] ${className}`}>{children}</span>;
   return (
-    <span
-      className={`eyebrow text-[10px] ${hint ? "cursor-help decoration-dotted underline-offset-2 hover:underline" : ""} ${className}`}
-      title={hint}
-    >
-      {children}
+    <span className={`eyebrow text-[10px] ${className}`}>
+      <Tip text={hint}>{children}</Tip>
     </span>
   );
 }
 
 /** Inline abbreviation with an explanatory tooltip, for jargon inside prose. */
 export function Abbr({ short, long }: { short: string; long: string }) {
-  return (
-    <abbr
-      title={long}
-      className="cursor-help no-underline decoration-dotted underline-offset-2 hover:underline"
-    >
-      {short}
-    </abbr>
-  );
+  return <Tip text={long}>{short}</Tip>;
 }

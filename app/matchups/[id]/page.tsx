@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { PositionPill } from "@/components/keeper-table";
+import { Tip } from "@/components/tooltip";
 import { Col, ListHeader, Panel, PanelHeader, Stat, fmt } from "@/components/ui";
 import {
   getAllMeetings,
@@ -102,12 +103,12 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
             <span className="text-[10px] font-bold uppercase tracking-wide text-me">
               Made history
             </span>
-            <span
-              className="cursor-help text-[10px] text-chalk-600 decoration-dotted underline-offset-2 hover:underline"
-              title="Measured against every score on record at that moment. Weekly scores are complete from 2024; before that only ESPN playoff and ladder matchups survived, and no pre-2024 lineups did — so the earlier baseline is thinner than the matchups actually played."
+            <Tip
+              className="text-[10px] text-chalk-600"
+              text="Measured against every score on record at that moment. Weekly scores are complete from 2024; before that only ESPN playoff and ladder matchups survived, and no pre-2024 lineups did — so the earlier baseline is thinner than the matchups actually played."
             >
               coverage ⓘ
-            </span>
+            </Tip>
           </div>
           <ul className="space-y-1">
             {madeHistory.map((f, i) => (
