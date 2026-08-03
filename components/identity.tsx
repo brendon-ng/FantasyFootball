@@ -324,10 +324,13 @@ export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
       }
       aria-label={me ? `Viewing as ${me.name}. Change.` : "Choose which team is yours"}
       data-me-ignore=""
-      className={`group relative grid h-8 w-8 shrink-0 place-items-center rounded-full text-[11px] font-bold leading-none tracking-tight transition-all ${
+      // A solid fill, not a tint. At 15% opacity over a near-black surface the
+      // circle was effectively invisible and the initials read as loose text
+      // floating in the nav.
+      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-[11px] font-bold leading-none tracking-wide transition-all ${
         me
-          ? "bg-me/15 text-me ring-1 ring-me-dim hover:bg-me/25 hover:ring-me"
-          : "bg-ink-700 text-chalk-500 ring-1 ring-ink-500 hover:text-chalk-200 hover:ring-chalk-600"
+          ? "bg-me text-ink-900 ring-2 ring-me/25 hover:ring-me/50"
+          : "bg-ink-600 text-chalk-400 ring-1 ring-ink-500 hover:bg-ink-500 hover:text-chalk-100"
       }`}
     >
       {initials ?? (
