@@ -92,6 +92,12 @@ export interface SeasonSummary {
   teams: number;
   regularSeasonWeeks: number;
   finalizedThroughWeek: number;
+  /**
+   * Starting slots in order, e.g. QB/RB/RB/WR/WR/TE/FLEX/FLEX/K/DEF. A matchup's
+   * `starters` array is positionally aligned to this. Empty for imported ESPN
+   * seasons, which kept no lineups.
+   */
+  rosterPositions: string[];
   standings: StandingsRow[];
   winnersBracket: BracketMatch[];
   losersBracket: BracketMatch[];

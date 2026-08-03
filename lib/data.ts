@@ -266,6 +266,8 @@ export function getAdp(): {
 
 /** One meeting between two owners, from either data era. */
 export interface Meeting {
+  /** Stable URL key: "<season>-<week>-<slugA>-vs-<slugB>", slugs sorted. */
+  id: string;
   season: number;
   week: number | null;
   kind: "regular" | "playoff" | "consolation";
@@ -282,6 +284,22 @@ export interface MeetingSide {
   points: number;
   starters: string[];
   playerPoints: Record<string, number>;
+}
+
+/**
+ * Stable, readable key for one game.
+ *
+ * Owner slugs rather than Sleeper's matchup_id, which is only unique within a
+ * week and would silently collide across seasons. Sorted so both directions
+ * resolve to the same page.
+ */
+export function meetingId(
+  season: number,
+  week: number | null,
+  a: string,
+  b: string,
+): string {
+  return `${season}-${week ?? 0}-${[a, b].sort().join("-vs-")}`;
 }
 
 /**
@@ -315,6 +333,7 @@ export function getMeetings(slugA: string, slugB: string): Meeting[] {
     ] as const) {
       if (!owns(m.season, x.ownerSlug, slugA) || !owns(m.season, y.ownerSlug, slugB)) continue;
       out.push({
+        id: meetingId(m.season, m.week, x.ownerSlug, y.ownerSlug),
         season: m.season,
         week: m.week,
         kind: m.kind,
@@ -346,6 +365,7 @@ export function getMeetings(slugA: string, slugB: string): Meeting[] {
           const p2 = bm.points[t2];
           if (p1 == null || p2 == null) continue;
           out.push({
+            id: meetingId(s.season, bm.week, t1, t2),
             season: s.season,
             week: bm.week,
             kind,
@@ -399,4 +419,23 @@ export function getPlayerKeepHistory(playerId: string): KeepEvent[] {
   return getKeepHistory()
     .filter((k) => k.playerId === playerId)
     .sort((a, b) => a.season - b.season);
+}
+
+/**
+ * Every meeting in league history, for static generation.
+ *
+ * Deduped by id: `getMeetings` is written from one owner's perspective, so
+ * calling it for both sides of a pair would yield the same game twice.
+ */
+export function getAllMeetings(): Meeting[] {
+  const seen = new Map<string, Meeting>();
+  const slugs = getOwners().map((o) => o.slug);
+  for (let i = 0; i < slugs.length; i++) {
+    for (let j = i + 1; j < slugs.length; j++) {
+      for (const m of getMeetings(slugs[i], slugs[j])) {
+        if (!seen.has(m.id)) seen.set(m.id, m);
+      }
+    }
+  }
+  return [...seen.values()];
 }

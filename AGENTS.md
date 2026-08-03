@@ -25,8 +25,14 @@ A working league hub, ~506 static pages, no database. Nothing has been pushed â€
 only way to see it at the real subpath.
 
 **Pages:** `/` (league at a glance, adapts to offseason), `/keepers`,
-`/history`, `/history/[season]`, `/records`, `/owners/[slug]`, `/players/[id]`,
-`/h2h/[pair]`.
+`/keepers/history`, `/history`, `/history/[season]`, `/records`,
+`/owners/[slug]`, `/players/[id]`, `/h2h/[pair]`, `/matchups/[id]`.
+
+`/matchups/[id]` is the single home for lineups â€” the head-to-head page lists a
+series and links into it. Never render a per-player breakdown in both; two
+renderers for the same thing drift apart. The id is
+`<season>-<week>-<slugA>-vs-<slugB>` with slugs sorted, deliberately not
+Sleeper's `matchup_id`, which is only unique within a week.
 
 **Seasons on record:** 2020-25. Champions: Jake Gibbons, Brendon Ng, Tyler Jung,
 Logan Dunn, Jaymie Lew, David Collier.

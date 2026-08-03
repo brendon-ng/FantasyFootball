@@ -345,6 +345,8 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
     teams: d.rosters.length,
     regularSeasonWeeks: d.rules.regularSeasonWeeks,
     finalizedThroughWeek,
+    // Bench slots are not part of the starting lineup ordering.
+    rosterPositions: (d.league.roster_positions ?? []).filter((x) => x !== "BN"),
     standings,
     winnersBracket: winners,
     losersBracket: losers,
@@ -1130,6 +1132,7 @@ function importedSeasons(): SeasonSummary[] {
       teams: m.teams,
       regularSeasonWeeks: m.regularSeasonWeeks,
       finalizedThroughWeek: m.finalWeek,
+      rosterPositions: [],
       standings: standings.sort((a, b) => a.seed - b.seed),
       winnersBracket: winners,
       losersBracket: ladder,

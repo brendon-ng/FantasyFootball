@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Panel, PanelHeader, fmt } from "@/components/ui";
-import { getMatchupHistory, getOwnerMap, getPlayers, getRecords } from "@/lib/data";
+import { getMatchupHistory, getOwnerMap, getPlayers, getRecords, meetingId } from "@/lib/data";
 import type { ScoreRecord } from "@/lib/types";
 
 export const metadata = { title: "Records · Den Ops" };
@@ -19,7 +19,7 @@ export default function RecordsPage() {
    * the fragment targets the anchor that page puts on every meeting.
    */
   const meetingHref = (a: string, b: string | null, season: number, week: number) =>
-    b ? `/h2h/${[a, b].sort().join("-vs-")}/#m-${season}-${week}` : null;
+    b ? `/matchups/${meetingId(season, week, a, b)}/` : null;
 
   // Player records store no opponent, so recover it from the matchup that week.
   const opponentOf = new Map<string, string>();
@@ -207,10 +207,11 @@ function MarginList({
         legend="Winner def. loser · season, week and final score · margin of victory"
       />
       <ol className="divide-y divide-ink-700">
-        {rows.slice(0, 8).map((r) => {
+        {rows.slice(0, 8).map((r, i) => {
           const href = meetingHref(r.ownerSlug, r.opponentSlug, r.season, r.week);
           const body = (
             <>
+              <span className="tabular w-5 shrink-0 text-[11px] text-chalk-600">{i + 1}</span>
               <div className="min-w-0 flex-1">
                 <div className="truncate text-sm font-medium">
                   {name(r.ownerSlug)} <span className="text-chalk-600">def.</span>{" "}

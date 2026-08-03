@@ -291,6 +291,7 @@
       }
     ],
     "regularSeasonWeeks": 13,
+    "rosterPositions": [],
     "runnerUp": "jaymie-lew",
     "season": 2020,
     "standings": [
@@ -931,6 +932,7 @@
       }
     ],
     "regularSeasonWeeks": 14,
+    "rosterPositions": [],
     "runnerUp": "tyler-jung",
     "season": 2021,
     "standings": [
@@ -1572,6 +1574,7 @@
       }
     ],
     "regularSeasonWeeks": 14,
+    "rosterPositions": [],
     "runnerUp": "spencer-kim",
     "season": 2022,
     "standings": [
@@ -2213,6 +2216,7 @@
       }
     ],
     "regularSeasonWeeks": 14,
+    "rosterPositions": [],
     "runnerUp": "reagan-schmidt",
     "season": 2023,
     "standings": [
@@ -2657,6 +2661,18 @@
       }
     ],
     "regularSeasonWeeks": 14,
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "FLEX",
+      "K",
+      "DEF"
+    ],
     "runnerUp": "cassidy-pensa",
     "season": 2024,
     "standings": [
@@ -3068,6 +3084,18 @@
       }
     ],
     "regularSeasonWeeks": 14,
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "FLEX",
+      "K",
+      "DEF"
+    ],
     "runnerUp": "tyler-jung",
     "season": 2025,
     "standings": [

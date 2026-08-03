@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Col, EmptyState, ListHeader, Panel, PanelHeader, Stat, fmt } from "@/components/ui";
-import { getMeetings, getOwnerMap, getOwners, getPlayers } from "@/lib/data";
+import { getMeetings, getOwnerMap, getOwners } from "@/lib/data";
 
 export const dynamicParams = false;
 
@@ -34,7 +34,6 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
   // Both eras. Sleeper weeks plus playoff games recovered from imported ESPN
   // seasons — reading only the weekly matchups under-reports the series.
   const games = getMeetings(a, b);
-  const players = getPlayers();
 
   const tally = (subset: typeof games) => {
     let w = 0, l = 0, t = 0, pf = 0, pa = 0;
@@ -156,25 +155,24 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
       </Panel>
 
       <Panel>
-        <PanelHeader title="Every Meeting" meta={`${games.length} games`} />
+        <PanelHeader
+          title="Every Meeting"
+          meta={`${games.length} games`}
+          legend="Open a game for lineups and per-player scores."
+        />
         {games.length === 0 ? (
           <EmptyState>These two have never played.</EmptyState>
         ) : (
           <div className="divide-y divide-ink-700">
             {games.map((g) => {
-              const top = (side: typeof g.a) => {
-                const starters = new Set(side.starters);
-                const entries = Object.entries(side.playerPoints).filter(([pid]) =>
-                  starters.has(pid),
-                );
-                if (!entries.length) return null;
-                return entries.reduce((best, cur) => (cur[1] > best[1] ? cur : best));
-              };
               const winner =
                 g.a.points === g.b.points ? null : g.a.points > g.b.points ? g.a : g.b;
-
-              const row = (
-                <>
+              return (
+                <Link
+                  key={g.id}
+                  href={`/matchups/${g.id}/`}
+                  className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-ink-700/40 sm:px-5"
+                >
                   <span className="tabular w-24 shrink-0 text-[11px] text-chalk-600">
                     {g.season}
                     {g.week ? ` wk${g.week}` : ""}
@@ -199,80 +197,10 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
                       {g.label ?? g.kind}
                     </span>
                   ) : null}
-                </>
-              );
-
-              // Imported ESPN games have scores but no lineups, so there is
-              // nothing to expand into — render them as a plain row instead of
-              // a disclosure that opens onto an empty panel.
-              if (!g.hasLineups) {
-                return (
-                  <div
-                    key={`${g.season}-${g.week}-${g.label ?? ""}`}
-                    id={`m-${g.season}-${g.week}`}
-                    // scroll-mt clears the sticky header when deep-linked from
-                    // the record book.
-                    className="flex scroll-mt-24 items-center gap-3 px-4 py-3 target:bg-accent/[0.07] sm:px-5"
-                  >
-                    {row}
-                    <span className="w-3 shrink-0" />
-                  </div>
-                );
-              }
-
-              return (
-                <details
-                  key={`${g.season}-${g.week}`}
-                  id={`m-${g.season}-${g.week}`}
-                  className="group scroll-mt-24 target:bg-accent/[0.07]"
-                >
-                  <summary className="flex cursor-pointer list-none items-center gap-3 px-4 py-3 transition-colors hover:bg-ink-700/40 sm:px-5">
-                    {row}
-                    <span className="w-3 shrink-0 text-[10px] text-chalk-600 transition-transform group-open:rotate-90">
-                      ▸
-                    </span>
-                  </summary>
-                  <div className="grid gap-px bg-ink-600 sm:grid-cols-2">
-                    {[g.a, g.b].map((s) => {
-                      const t = top(s);
-                      return (
-                        <div key={s.ownerSlug} className="bg-ink-850 px-4 py-3">
-                          <div className="eyebrow mb-2">{name(s.ownerSlug)}</div>
-                          {t ? (
-                            <div className="mb-2 text-[11px] text-chalk-500">
-                              Top starter:{" "}
-                              <Link
-                                href={`/players/${t[0]}/`}
-                                className="text-chalk-300 hover:text-accent"
-                              >
-                                {players[t[0]]?.full_name ?? t[0]}
-                              </Link>{" "}
-                              <span className="tabular text-accent">{fmt.pts(t[1])}</span>
-                            </div>
-                          ) : null}
-                          <ol className="space-y-0.5">
-                            {s.starters.map((pid) => (
-                              <li
-                                key={pid}
-                                className="flex items-center justify-between gap-2 text-[12px]"
-                              >
-                                <Link
-                                  href={`/players/${pid}/`}
-                                  className="min-w-0 truncate text-chalk-400 transition-colors hover:text-accent"
-                                >
-                                  {players[pid]?.full_name ?? pid}
-                                </Link>
-                                <span className="tabular shrink-0 text-chalk-500">
-                                  {fmt.pts(s.playerPoints[pid] ?? 0)}
-                                </span>
-                              </li>
-                            ))}
-                          </ol>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </details>
+                  <span aria-hidden className="shrink-0 text-[10px] text-chalk-600">
+                    →
+                  </span>
+                </Link>
               );
             })}
           </div>
