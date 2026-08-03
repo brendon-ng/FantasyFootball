@@ -10,6 +10,15 @@
       "week": 12
     },
     {
+      "margin": 111.7,
+      "opponentPoints": 63.1,
+      "opponentSlug": "reagan-schmidt",
+      "ownerSlug": "jaymie-lew",
+      "points": 174.8,
+      "season": 2020,
+      "week": 13
+    },
+    {
       "margin": 111.26,
       "opponentPoints": 148.42,
       "opponentSlug": "jake-gibbons",
@@ -53,6 +62,24 @@
       "points": 174.82,
       "season": 2025,
       "week": 11
+    },
+    {
+      "margin": 83.46,
+      "opponentPoints": 86.34,
+      "opponentSlug": "cassidy-pensa",
+      "ownerSlug": "tyler-jung",
+      "points": 169.8,
+      "season": 2020,
+      "week": 4
+    },
+    {
+      "margin": 83.32,
+      "opponentPoints": 102.12,
+      "opponentSlug": "spencer-kim",
+      "ownerSlug": "safvet-besen",
+      "points": 185.44,
+      "season": 2020,
+      "week": 2
     },
     {
       "margin": 82.2,
@@ -163,6 +190,24 @@
       "week": 17
     },
     {
+      "margin": 66.78,
+      "opponentPoints": 72.04,
+      "opponentSlug": "reagan-schmidt",
+      "ownerSlug": "tyler-jung",
+      "points": 138.82,
+      "season": 2020,
+      "week": 11
+    },
+    {
+      "margin": 66.72,
+      "opponentPoints": 89.48,
+      "opponentSlug": "logan-dunn",
+      "ownerSlug": "spencer-kim",
+      "points": 156.2,
+      "season": 2020,
+      "week": 3
+    },
+    {
       "margin": 66.44,
       "opponentPoints": 107.54,
       "opponentSlug": "cassidy-pensa",
@@ -172,58 +217,13 @@
       "week": 4
     },
     {
-      "margin": 64.68,
-      "opponentPoints": 80.16,
-      "opponentSlug": "david-collier",
-      "ownerSlug": "lauren-gross",
-      "points": 144.84,
-      "season": 2024,
-      "week": 9
-    },
-    {
-      "margin": 63.5,
-      "opponentPoints": 69.68,
-      "opponentSlug": "michaela-frederick",
-      "ownerSlug": "jaymie-lew",
-      "points": 133.18,
-      "season": 2023,
-      "week": 17
-    },
-    {
-      "margin": 63.36,
-      "opponentPoints": 104.3,
-      "opponentSlug": "jake-gibbons",
-      "ownerSlug": "spencer-kim",
-      "points": 167.66,
-      "season": 2025,
-      "week": 15
-    },
-    {
-      "margin": 62.52,
-      "opponentPoints": 90.94,
-      "opponentSlug": "david-collier",
-      "ownerSlug": "spencer-kim",
-      "points": 153.46,
-      "season": 2024,
-      "week": 5
-    },
-    {
-      "margin": 59.66,
-      "opponentPoints": 99.52,
-      "opponentSlug": "reagan-schmidt",
-      "ownerSlug": "tyler-jung",
-      "points": 159.18,
-      "season": 2024,
-      "week": 1
-    },
-    {
-      "margin": 59.16,
-      "opponentPoints": 92.28,
-      "opponentSlug": "jaymie-lew",
-      "ownerSlug": "cassidy-pensa",
-      "points": 151.44,
-      "season": 2022,
-      "week": 15
+      "margin": 66.4,
+      "opponentPoints": 82.86,
+      "opponentSlug": "cassidy-pensa",
+      "ownerSlug": "olivia-nelli",
+      "points": 149.26,
+      "season": 2020,
+      "week": 11
     }
   ],
   "highestCombined": [
@@ -235,6 +235,15 @@
       "season": 2024,
       "total": 408.1,
       "week": 14
+    },
+    {
+      "opponentPoints": 167.68,
+      "opponentSlug": "tyler-jung",
+      "ownerSlug": "jaymie-lew",
+      "points": 184.3,
+      "season": 2020,
+      "total": 351.98,
+      "week": 2
     },
     {
       "opponentPoints": 163.3,
@@ -442,15 +451,6 @@
       "season": 2025,
       "total": 305.86,
       "week": 7
-    },
-    {
-      "opponentPoints": 136.52,
-      "opponentSlug": "spencer-kim",
-      "ownerSlug": "jake-gibbons",
-      "points": 169.08,
-      "season": 2025,
-      "total": 305.6,
-      "week": 1
     }
   ],
   "lowestCombined": [
@@ -480,6 +480,15 @@
       "season": 2022,
       "total": 145.8,
       "week": 17
+    },
+    {
+      "opponentPoints": 59,
+      "opponentSlug": "olivia-nelli",
+      "ownerSlug": "david-collier",
+      "points": 90.36,
+      "season": 2020,
+      "total": 149.36,
+      "week": 8
     },
     {
       "opponentPoints": 46.94,
@@ -545,6 +554,15 @@
       "week": 7
     },
     {
+      "opponentPoints": 73.6,
+      "opponentSlug": "logan-dunn",
+      "ownerSlug": "tyler-jung",
+      "points": 90.86,
+      "season": 2020,
+      "total": 164.46,
+      "week": 12
+    },
+    {
       "opponentPoints": 67.22,
       "opponentSlug": "camina-balmores",
       "ownerSlug": "logan-dunn",
@@ -563,6 +581,15 @@
       "week": 15
     },
     {
+      "opponentPoints": 78.56,
+      "opponentSlug": "olivia-nelli",
+      "ownerSlug": "brendon-ng",
+      "points": 86.56,
+      "season": 2020,
+      "total": 165.12,
+      "week": 7
+    },
+    {
       "opponentPoints": 82.08,
       "opponentSlug": "david-collier",
       "ownerSlug": "jake-gibbons",
@@ -579,6 +606,15 @@
       "season": 2019,
       "total": 167.3,
       "week": 16
+    },
+    {
+      "opponentPoints": 74.72,
+      "opponentSlug": "brendon-ng",
+      "ownerSlug": "michaela-frederick",
+      "points": 92.58,
+      "season": 2020,
+      "total": 167.3,
+      "week": 10
     },
     {
       "opponentPoints": 83.36,
@@ -626,57 +662,21 @@
       "week": 13
     },
     {
+      "opponentPoints": 67.52,
+      "opponentSlug": "logan-dunn",
+      "ownerSlug": "jaymie-lew",
+      "points": 109.44,
+      "season": 2020,
+      "total": 176.96,
+      "week": 8
+    },
+    {
       "opponentPoints": 71.5,
       "opponentSlug": "reagan-schmidt",
       "ownerSlug": "logan-dunn",
       "points": 107.36,
       "season": 2021,
       "total": 178.86,
-      "week": 16
-    },
-    {
-      "opponentPoints": 86.7,
-      "opponentSlug": "michaela-frederick",
-      "ownerSlug": "david-collier",
-      "points": 93.12,
-      "season": 2019,
-      "total": 179.82,
-      "week": 2
-    },
-    {
-      "opponentPoints": 84.08,
-      "opponentSlug": "jaymie-lew",
-      "ownerSlug": "logan-dunn",
-      "points": 96.24,
-      "season": 2021,
-      "total": 180.32,
-      "week": 15
-    },
-    {
-      "opponentPoints": 77.1,
-      "opponentSlug": "jake-gibbons",
-      "ownerSlug": "michaela-frederick",
-      "points": 106.28,
-      "season": 2022,
-      "total": 183.38,
-      "week": 17
-    },
-    {
-      "opponentPoints": 86.72,
-      "opponentSlug": "reagan-schmidt",
-      "ownerSlug": "spencer-kim",
-      "points": 98.1,
-      "season": 2019,
-      "total": 184.82,
-      "week": 14
-    },
-    {
-      "opponentPoints": 72.1,
-      "opponentSlug": "david-collier",
-      "ownerSlug": "spencer-kim",
-      "points": 114.46,
-      "season": 2022,
-      "total": 186.56,
       "week": 16
     }
   ],
@@ -745,6 +745,24 @@
       "week": 15
     },
     {
+      "margin": 1,
+      "opponentPoints": 134.4,
+      "opponentSlug": "david-collier",
+      "ownerSlug": "brendon-ng",
+      "points": 135.4,
+      "season": 2020,
+      "week": 2
+    },
+    {
+      "margin": 1.14,
+      "opponentPoints": 114.3,
+      "opponentSlug": "tyler-jung",
+      "ownerSlug": "jake-gibbons",
+      "points": 115.44,
+      "season": 2020,
+      "week": 1
+    },
+    {
       "margin": 1.56,
       "opponentPoints": 121.56,
       "opponentSlug": "brendon-ng",
@@ -761,6 +779,24 @@
       "points": 85,
       "season": 2019,
       "week": 9
+    },
+    {
+      "margin": 1.72,
+      "opponentPoints": 99.64,
+      "opponentSlug": "brendon-ng",
+      "ownerSlug": "reagan-schmidt",
+      "points": 101.36,
+      "season": 2020,
+      "week": 8
+    },
+    {
+      "margin": 1.84,
+      "opponentPoints": 101.94,
+      "opponentSlug": "tyler-jung",
+      "ownerSlug": "michaela-frederick",
+      "points": 103.78,
+      "season": 2020,
+      "week": 7
     },
     {
       "margin": 1.86,
@@ -790,6 +826,33 @@
       "week": 1
     },
     {
+      "margin": 2.04,
+      "opponentPoints": 91.22,
+      "opponentSlug": "reagan-schmidt",
+      "ownerSlug": "olivia-nelli",
+      "points": 93.26,
+      "season": 2020,
+      "week": 5
+    },
+    {
+      "margin": 2.46,
+      "opponentPoints": 124.06,
+      "opponentSlug": "reagan-schmidt",
+      "ownerSlug": "jaymie-lew",
+      "points": 126.52,
+      "season": 2020,
+      "week": 7
+    },
+    {
+      "margin": 2.5,
+      "opponentPoints": 116.96,
+      "opponentSlug": "logan-dunn",
+      "ownerSlug": "david-collier",
+      "points": 119.46,
+      "season": 2020,
+      "week": 10
+    },
+    {
       "margin": 2.52,
       "opponentPoints": 82.08,
       "opponentSlug": "david-collier",
@@ -817,6 +880,15 @@
       "week": 14
     },
     {
+      "margin": 2.68,
+      "opponentPoints": 147.02,
+      "opponentSlug": "jaymie-lew",
+      "ownerSlug": "cassidy-pensa",
+      "points": 149.7,
+      "season": 2020,
+      "week": 5
+    },
+    {
       "margin": 2.78,
       "opponentPoints": 98.86,
       "opponentSlug": "brendon-ng",
@@ -833,78 +905,6 @@
       "points": 110.62,
       "season": 2019,
       "week": 2
-    },
-    {
-      "margin": 2.94,
-      "opponentPoints": 106.36,
-      "opponentSlug": "olivia-nelli",
-      "ownerSlug": "david-collier",
-      "points": 109.3,
-      "season": 2023,
-      "week": 17
-    },
-    {
-      "margin": 3.06,
-      "opponentPoints": 118.82,
-      "opponentSlug": "lauren-gross",
-      "ownerSlug": "jake-gibbons",
-      "points": 121.88,
-      "season": 2024,
-      "week": 10
-    },
-    {
-      "margin": 3.28,
-      "opponentPoints": 149.98,
-      "opponentSlug": "spencer-kim",
-      "ownerSlug": "tyler-jung",
-      "points": 153.26,
-      "season": 2025,
-      "week": 16
-    },
-    {
-      "margin": 3.4,
-      "opponentPoints": 104.6,
-      "opponentSlug": "brendon-ng",
-      "ownerSlug": "tyler-jung",
-      "points": 108,
-      "season": 2022,
-      "week": 16
-    },
-    {
-      "margin": 3.42,
-      "opponentPoints": 115.16,
-      "opponentSlug": "spencer-kim",
-      "ownerSlug": "cassidy-pensa",
-      "points": 118.58,
-      "season": 2024,
-      "week": 15
-    },
-    {
-      "margin": 3.6,
-      "opponentPoints": 77.66,
-      "opponentSlug": "logan-dunn",
-      "ownerSlug": "camina-balmores",
-      "points": 81.26,
-      "season": 2019,
-      "week": 16
-    },
-    {
-      "margin": 4.38,
-      "opponentPoints": 141.24,
-      "opponentSlug": "safvet-besen",
-      "ownerSlug": "jaymie-lew",
-      "points": 145.62,
-      "season": 2025,
-      "week": 9
-    },
-    {
-      "margin": 4.46,
-      "opponentPoints": 142.04,
-      "opponentSlug": "lauren-gross",
-      "ownerSlug": "jake-gibbons",
-      "points": 146.5,
-      "season": 2025,
-      "week": 4
     }
   ],
   "playerHigh": [
@@ -1183,6 +1183,14 @@
       "week": 3
     },
     {
+      "opponentPoints": 102.12,
+      "opponentSlug": "spencer-kim",
+      "ownerSlug": "safvet-besen",
+      "points": 185.44,
+      "season": 2020,
+      "week": 2
+    },
+    {
       "opponentPoints": 142.8,
       "opponentSlug": "reagan-schmidt",
       "ownerSlug": "tyler-jung",
@@ -1197,6 +1205,14 @@
       "points": 184.42,
       "season": 2025,
       "week": 12
+    },
+    {
+      "opponentPoints": 167.68,
+      "opponentSlug": "tyler-jung",
+      "ownerSlug": "jaymie-lew",
+      "points": 184.3,
+      "season": 2020,
+      "week": 2
     },
     {
       "opponentPoints": 130.1,
@@ -1293,22 +1309,6 @@
       "points": 174.82,
       "season": 2025,
       "week": 11
-    },
-    {
-      "opponentPoints": 131.5,
-      "opponentSlug": "jaymie-lew",
-      "ownerSlug": "david-collier",
-      "points": 174.36,
-      "season": 2025,
-      "week": 7
-    },
-    {
-      "opponentPoints": 143.66,
-      "opponentSlug": "cassidy-pensa",
-      "ownerSlug": "tyler-jung",
-      "points": 173.98,
-      "season": 2024,
-      "week": 11
     }
   ],
   "weeklyLow": [
@@ -1345,6 +1345,14 @@
       "week": 17
     },
     {
+      "opponentPoints": 90.36,
+      "opponentSlug": "david-collier",
+      "ownerSlug": "olivia-nelli",
+      "points": 59,
+      "season": 2020,
+      "week": 8
+    },
+    {
       "opponentPoints": 74.76,
       "opponentSlug": "michaela-frederick",
       "ownerSlug": "safvet-besen",
@@ -1361,12 +1369,36 @@
       "week": 16
     },
     {
+      "opponentPoints": 174.8,
+      "opponentSlug": "jaymie-lew",
+      "ownerSlug": "reagan-schmidt",
+      "points": 63.1,
+      "season": 2020,
+      "week": 13
+    },
+    {
+      "opponentPoints": 120.3,
+      "opponentSlug": "david-collier",
+      "ownerSlug": "reagan-schmidt",
+      "points": 63.36,
+      "season": 2020,
+      "week": 9
+    },
+    {
       "opponentPoints": 90.1,
       "opponentSlug": "michaela-frederick",
       "ownerSlug": "reagan-schmidt",
       "points": 63.44,
       "season": 2021,
       "week": 17
+    },
+    {
+      "opponentPoints": 126.8,
+      "opponentSlug": "jaymie-lew",
+      "ownerSlug": "spencer-kim",
+      "points": 65.22,
+      "season": 2020,
+      "week": 10
     },
     {
       "opponentPoints": 91.52,
@@ -1383,6 +1415,14 @@
       "points": 67.22,
       "season": 2019,
       "week": 10
+    },
+    {
+      "opponentPoints": 109.44,
+      "opponentSlug": "jaymie-lew",
+      "ownerSlug": "logan-dunn",
+      "points": 67.52,
+      "season": 2020,
+      "week": 8
     },
     {
       "opponentPoints": 135.06,
@@ -1441,6 +1481,14 @@
       "week": 16
     },
     {
+      "opponentPoints": 138.82,
+      "opponentSlug": "tyler-jung",
+      "ownerSlug": "reagan-schmidt",
+      "points": 72.04,
+      "season": 2020,
+      "week": 11
+    },
+    {
       "opponentPoints": 114.46,
       "opponentSlug": "spencer-kim",
       "ownerSlug": "david-collier",
@@ -1449,68 +1497,20 @@
       "week": 16
     },
     {
+      "opponentPoints": 90.86,
+      "opponentSlug": "tyler-jung",
+      "ownerSlug": "logan-dunn",
+      "points": 73.6,
+      "season": 2020,
+      "week": 12
+    },
+    {
       "opponentPoints": 82.9,
       "opponentSlug": "cassidy-pensa",
       "ownerSlug": "logan-dunn",
       "points": 73.98,
       "season": 2022,
       "week": 17
-    },
-    {
-      "opponentPoints": 101.28,
-      "opponentSlug": "safvet-besen",
-      "ownerSlug": "reagan-schmidt",
-      "points": 74.14,
-      "season": 2025,
-      "week": 13
-    },
-    {
-      "opponentPoints": 98.96,
-      "opponentSlug": "michaela-frederick",
-      "ownerSlug": "spencer-kim",
-      "points": 74.44,
-      "season": 2020,
-      "week": 15
-    },
-    {
-      "opponentPoints": 59.42,
-      "opponentSlug": "safvet-besen",
-      "ownerSlug": "michaela-frederick",
-      "points": 74.76,
-      "season": 2019,
-      "week": 16
-    },
-    {
-      "opponentPoints": 121.64,
-      "opponentSlug": "logan-dunn",
-      "ownerSlug": "spencer-kim",
-      "points": 76.1,
-      "season": 2019,
-      "week": 15
-    },
-    {
-      "opponentPoints": 97.18,
-      "opponentSlug": "lauren-gross",
-      "ownerSlug": "reagan-schmidt",
-      "points": 76.3,
-      "season": 2025,
-      "week": 8
-    },
-    {
-      "opponentPoints": 172.84,
-      "opponentSlug": "david-collier",
-      "ownerSlug": "jaymie-lew",
-      "points": 76.36,
-      "season": 2024,
-      "week": 2
-    },
-    {
-      "opponentPoints": 112.88,
-      "opponentSlug": "spencer-kim",
-      "ownerSlug": "cassidy-pensa",
-      "points": 76.66,
-      "season": 2025,
-      "week": 6
     }
   ]
 }

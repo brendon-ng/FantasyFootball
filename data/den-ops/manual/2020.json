@@ -355,9 +355,1150 @@
   ],
   "hasDrafts": false,
   "hasRosters": false,
-  "hasWeeklyMatchups": false,
+  "hasWeeklyMatchups": true,
   "imported": true,
-  "matchups": [],
+  "matchups": [
+    {
+      "away": {
+        "ownerSlug": "jaymie-lew",
+        "points": 141.48
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 121.34
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "jake-gibbons",
+        "points": 115.44
+      },
+      "home": {
+        "ownerSlug": "tyler-jung",
+        "points": 114.3
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 115.5
+      },
+      "home": {
+        "ownerSlug": "david-collier",
+        "points": 121.18
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "michaela-frederick",
+        "points": 103
+      },
+      "home": {
+        "ownerSlug": "logan-dunn",
+        "points": 134.5
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 124.46
+      },
+      "home": {
+        "ownerSlug": "spencer-kim",
+        "points": 139.88
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "olivia-nelli",
+        "points": 123.02
+      },
+      "home": {
+        "ownerSlug": "safvet-besen",
+        "points": 140
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "david-collier",
+        "points": 134.4
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 135.4
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 156.58
+      },
+      "home": {
+        "ownerSlug": "jake-gibbons",
+        "points": 140.08
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "tyler-jung",
+        "points": 167.68
+      },
+      "home": {
+        "ownerSlug": "jaymie-lew",
+        "points": 184.3
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 79.88
+      },
+      "home": {
+        "ownerSlug": "michaela-frederick",
+        "points": 99.72
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "logan-dunn",
+        "points": 105.36
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 143.2
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "spencer-kim",
+        "points": 102.12
+      },
+      "home": {
+        "ownerSlug": "safvet-besen",
+        "points": 185.44
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 112.78
+      },
+      "home": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 88.92
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "jake-gibbons",
+        "points": 152.8
+      },
+      "home": {
+        "ownerSlug": "jaymie-lew",
+        "points": 111.72
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "david-collier",
+        "points": 169.64
+      },
+      "home": {
+        "ownerSlug": "tyler-jung",
+        "points": 124.48
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "michaela-frederick",
+        "points": 74.42
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 105.26
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "safvet-besen",
+        "points": 144.1
+      },
+      "home": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 136.12
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "spencer-kim",
+        "points": 156.2
+      },
+      "home": {
+        "ownerSlug": "logan-dunn",
+        "points": 89.48
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 148.58
+      },
+      "home": {
+        "ownerSlug": "jake-gibbons",
+        "points": 102.72
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "jaymie-lew",
+        "points": 84.68
+      },
+      "home": {
+        "ownerSlug": "david-collier",
+        "points": 145.52
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 86.34
+      },
+      "home": {
+        "ownerSlug": "tyler-jung",
+        "points": 169.8
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "safvet-besen",
+        "points": 133.02
+      },
+      "home": {
+        "ownerSlug": "michaela-frederick",
+        "points": 140
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "olivia-nelli",
+        "points": 122.9
+      },
+      "home": {
+        "ownerSlug": "spencer-kim",
+        "points": 115.1
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 109.86
+      },
+      "home": {
+        "ownerSlug": "logan-dunn",
+        "points": 102.32
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "tyler-jung",
+        "points": 132.04
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 118.14
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "jake-gibbons",
+        "points": 113.3
+      },
+      "home": {
+        "ownerSlug": "david-collier",
+        "points": 81.98
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 149.7
+      },
+      "home": {
+        "ownerSlug": "jaymie-lew",
+        "points": 147.02
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "michaela-frederick",
+        "points": 157.86
+      },
+      "home": {
+        "ownerSlug": "spencer-kim",
+        "points": 126.18
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "logan-dunn",
+        "points": 101.9
+      },
+      "home": {
+        "ownerSlug": "safvet-besen",
+        "points": 130.7
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 91.22
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 93.26
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "safvet-besen",
+        "points": 131.82
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 105.14
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "michaela-frederick",
+        "points": 88.04
+      },
+      "home": {
+        "ownerSlug": "jake-gibbons",
+        "points": 109.5
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "logan-dunn",
+        "points": 118.54
+      },
+      "home": {
+        "ownerSlug": "tyler-jung",
+        "points": 112.28
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 112.14
+      },
+      "home": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 86.96
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "olivia-nelli",
+        "points": 127.5
+      },
+      "home": {
+        "ownerSlug": "jaymie-lew",
+        "points": 108.5
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "spencer-kim",
+        "points": 88.62
+      },
+      "home": {
+        "ownerSlug": "david-collier",
+        "points": 114.18
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 86.56
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 78.56
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "tyler-jung",
+        "points": 101.94
+      },
+      "home": {
+        "ownerSlug": "michaela-frederick",
+        "points": 103.78
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 99.9
+      },
+      "home": {
+        "ownerSlug": "logan-dunn",
+        "points": 126.72
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "jaymie-lew",
+        "points": 126.52
+      },
+      "home": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 124.06
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "david-collier",
+        "points": 172.32
+      },
+      "home": {
+        "ownerSlug": "safvet-besen",
+        "points": 123.3
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "jake-gibbons",
+        "points": 137.5
+      },
+      "home": {
+        "ownerSlug": "spencer-kim",
+        "points": 151.32
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 101.36
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 99.64
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "michaela-frederick",
+        "points": 109.92
+      },
+      "home": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 105.42
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "logan-dunn",
+        "points": 67.52
+      },
+      "home": {
+        "ownerSlug": "jaymie-lew",
+        "points": 109.44
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "olivia-nelli",
+        "points": 59
+      },
+      "home": {
+        "ownerSlug": "david-collier",
+        "points": 90.36
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "safvet-besen",
+        "points": 118.42
+      },
+      "home": {
+        "ownerSlug": "jake-gibbons",
+        "points": 125.74
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "spencer-kim",
+        "points": 129.94
+      },
+      "home": {
+        "ownerSlug": "tyler-jung",
+        "points": 124.26
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 122.4
+      },
+      "home": {
+        "ownerSlug": "logan-dunn",
+        "points": 80.9
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "jaymie-lew",
+        "points": 112.9
+      },
+      "home": {
+        "ownerSlug": "michaela-frederick",
+        "points": 77.54
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "david-collier",
+        "points": 120.3
+      },
+      "home": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 63.36
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "jake-gibbons",
+        "points": 104.28
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 99.04
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "tyler-jung",
+        "points": 106.16
+      },
+      "home": {
+        "ownerSlug": "safvet-besen",
+        "points": 164.32
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 116.02
+      },
+      "home": {
+        "ownerSlug": "spencer-kim",
+        "points": 104.1
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "michaela-frederick",
+        "points": 92.58
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 74.72
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "logan-dunn",
+        "points": 116.96
+      },
+      "home": {
+        "ownerSlug": "david-collier",
+        "points": 119.46
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 113.84
+      },
+      "home": {
+        "ownerSlug": "jake-gibbons",
+        "points": 142.4
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "olivia-nelli",
+        "points": 107.92
+      },
+      "home": {
+        "ownerSlug": "tyler-jung",
+        "points": 91.92
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "safvet-besen",
+        "points": 132.3
+      },
+      "home": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 90.48
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "spencer-kim",
+        "points": 65.22
+      },
+      "home": {
+        "ownerSlug": "jaymie-lew",
+        "points": 126.8
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 149.44
+      },
+      "home": {
+        "ownerSlug": "spencer-kim",
+        "points": 111.88
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "david-collier",
+        "points": 92.84
+      },
+      "home": {
+        "ownerSlug": "michaela-frederick",
+        "points": 138.94
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "jake-gibbons",
+        "points": 108.12
+      },
+      "home": {
+        "ownerSlug": "logan-dunn",
+        "points": 90.24
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "tyler-jung",
+        "points": 138.82
+      },
+      "home": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 72.04
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 82.86
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 149.26
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "jaymie-lew",
+        "points": 108.04
+      },
+      "home": {
+        "ownerSlug": "safvet-besen",
+        "points": 155.66
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 106.72
+      },
+      "home": {
+        "ownerSlug": "safvet-besen",
+        "points": 152.22
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "jake-gibbons",
+        "points": 129.68
+      },
+      "home": {
+        "ownerSlug": "michaela-frederick",
+        "points": 96.74
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "tyler-jung",
+        "points": 90.86
+      },
+      "home": {
+        "ownerSlug": "logan-dunn",
+        "points": 73.6
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 95.74
+      },
+      "home": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 131.7
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "jaymie-lew",
+        "points": 102.64
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 130.52
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "david-collier",
+        "points": 131.98
+      },
+      "home": {
+        "ownerSlug": "spencer-kim",
+        "points": 109.8
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "olivia-nelli",
+        "points": 88.64
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 138
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "michaela-frederick",
+        "points": 93.76
+      },
+      "home": {
+        "ownerSlug": "tyler-jung",
+        "points": 105.68
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "logan-dunn",
+        "points": 110.28
+      },
+      "home": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 120.06
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 63.1
+      },
+      "home": {
+        "ownerSlug": "jaymie-lew",
+        "points": 174.8
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "safvet-besen",
+        "points": 107.72
+      },
+      "home": {
+        "ownerSlug": "david-collier",
+        "points": 135
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "spencer-kim",
+        "points": 111.02
+      },
+      "home": {
+        "ownerSlug": "jake-gibbons",
+        "points": 126.66
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 108.08
+      },
+      "home": {
+        "ownerSlug": "jake-gibbons",
+        "points": 135.1
+      },
+      "kind": "playoff",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "jaymie-lew",
+        "points": 146.3
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 77.16
+      },
+      "kind": "playoff",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "tyler-jung",
+        "points": 103.74
+      },
+      "home": {
+        "ownerSlug": "michaela-frederick",
+        "points": 109.72
+      },
+      "kind": "consolation",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 104.58
+      },
+      "home": {
+        "ownerSlug": "spencer-kim",
+        "points": 110.84
+      },
+      "kind": "consolation",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "logan-dunn",
+        "points": 110.32
+      },
+      "home": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 153.34
+      },
+      "kind": "consolation",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "jaymie-lew",
+        "points": 164.92
+      },
+      "home": {
+        "ownerSlug": "david-collier",
+        "points": 116.46
+      },
+      "kind": "playoff",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "jake-gibbons",
+        "points": 149.26
+      },
+      "home": {
+        "ownerSlug": "safvet-besen",
+        "points": 106.84
+      },
+      "kind": "playoff",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 119.4
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 130.32
+      },
+      "kind": "consolation",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "spencer-kim",
+        "points": 74.44
+      },
+      "home": {
+        "ownerSlug": "michaela-frederick",
+        "points": 98.96
+      },
+      "kind": "consolation",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 86.3
+      },
+      "home": {
+        "ownerSlug": "tyler-jung",
+        "points": 136.32
+      },
+      "kind": "consolation",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "logan-dunn",
+        "points": 112.62
+      },
+      "home": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 123.72
+      },
+      "kind": "consolation",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "jaymie-lew",
+        "points": 162.26
+      },
+      "home": {
+        "ownerSlug": "jake-gibbons",
+        "points": 182.32
+      },
+      "kind": "playoff",
+      "week": 16
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 111.54
+      },
+      "home": {
+        "ownerSlug": "olivia-nelli",
+        "points": 80.26
+      },
+      "kind": "consolation",
+      "week": 16
+    },
+    {
+      "away": {
+        "ownerSlug": "safvet-besen",
+        "points": 85.98
+      },
+      "home": {
+        "ownerSlug": "david-collier",
+        "points": 120.3
+      },
+      "kind": "consolation",
+      "week": 16
+    },
+    {
+      "away": {
+        "ownerSlug": "tyler-jung",
+        "points": 131.48
+      },
+      "home": {
+        "ownerSlug": "michaela-frederick",
+        "points": 150.82
+      },
+      "kind": "consolation",
+      "week": 16
+    },
+    {
+      "away": {
+        "ownerSlug": "cassidy-pensa",
+        "points": 78.44
+      },
+      "home": {
+        "ownerSlug": "spencer-kim",
+        "points": 110.7
+      },
+      "kind": "consolation",
+      "week": 16
+    },
+    {
+      "away": {
+        "ownerSlug": "logan-dunn",
+        "points": 99.22
+      },
+      "home": {
+        "ownerSlug": "reagan-schmidt",
+        "points": 144.92
+      },
+      "kind": "consolation",
+      "week": 16
+    }
+  ],
   "playoffWeekStart": 14,
   "regularSeasonWeeks": 13,
   "season": 2020,

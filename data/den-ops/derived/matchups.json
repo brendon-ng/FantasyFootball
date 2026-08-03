@@ -1806,6 +1806,1811 @@
   },
   {
     "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 141.48,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 121.34,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 1,
+    "season": 2020,
+    "week": 1,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 115.44,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 114.3,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 2,
+    "season": 2020,
+    "week": 1,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 115.5,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 121.18,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 3,
+    "season": 2020,
+    "week": 1,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 103,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 134.5,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 4,
+    "season": 2020,
+    "week": 1,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 124.46,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 139.88,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 5,
+    "season": 2020,
+    "week": 1,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 123.02,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 140,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 6,
+    "season": 2020,
+    "week": 1,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 134.4,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 135.4,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 7,
+    "season": 2020,
+    "week": 2,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 156.58,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 140.08,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 8,
+    "season": 2020,
+    "week": 2,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 167.68,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 184.3,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 9,
+    "season": 2020,
+    "week": 2,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 79.88,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 99.72,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 10,
+    "season": 2020,
+    "week": 2,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 105.36,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 143.2,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 11,
+    "season": 2020,
+    "week": 2,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 102.12,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 185.44,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 12,
+    "season": 2020,
+    "week": 2,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 112.78,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 88.92,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 13,
+    "season": 2020,
+    "week": 3,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 152.8,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 111.72,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 14,
+    "season": 2020,
+    "week": 3,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 169.64,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 124.48,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 15,
+    "season": 2020,
+    "week": 3,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 74.42,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 105.26,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 16,
+    "season": 2020,
+    "week": 3,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 144.1,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 136.12,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 17,
+    "season": 2020,
+    "week": 3,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 156.2,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 89.48,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 18,
+    "season": 2020,
+    "week": 3,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 148.58,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 102.72,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 19,
+    "season": 2020,
+    "week": 4,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 84.68,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 145.52,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 20,
+    "season": 2020,
+    "week": 4,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 86.34,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 169.8,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 21,
+    "season": 2020,
+    "week": 4,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 133.02,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 140,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 22,
+    "season": 2020,
+    "week": 4,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 122.9,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 115.1,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 23,
+    "season": 2020,
+    "week": 4,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 109.86,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 102.32,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 24,
+    "season": 2020,
+    "week": 4,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 132.04,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 118.14,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 25,
+    "season": 2020,
+    "week": 5,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 113.3,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 81.98,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 26,
+    "season": 2020,
+    "week": 5,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 149.7,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 147.02,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 27,
+    "season": 2020,
+    "week": 5,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 157.86,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 126.18,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 28,
+    "season": 2020,
+    "week": 5,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 101.9,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 130.7,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 29,
+    "season": 2020,
+    "week": 5,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 91.22,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 93.26,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 30,
+    "season": 2020,
+    "week": 5,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 131.82,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 105.14,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 31,
+    "season": 2020,
+    "week": 6,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 88.04,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 109.5,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 32,
+    "season": 2020,
+    "week": 6,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 118.54,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 112.28,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 33,
+    "season": 2020,
+    "week": 6,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 112.14,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 86.96,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 34,
+    "season": 2020,
+    "week": 6,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 127.5,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 108.5,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 35,
+    "season": 2020,
+    "week": 6,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 88.62,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 114.18,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 36,
+    "season": 2020,
+    "week": 6,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 86.56,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 78.56,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 37,
+    "season": 2020,
+    "week": 7,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 101.94,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 103.78,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 38,
+    "season": 2020,
+    "week": 7,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 99.9,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 126.72,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 39,
+    "season": 2020,
+    "week": 7,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 126.52,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 124.06,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 40,
+    "season": 2020,
+    "week": 7,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 172.32,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 123.3,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 41,
+    "season": 2020,
+    "week": 7,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 137.5,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 151.32,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 42,
+    "season": 2020,
+    "week": 7,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 101.36,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 99.64,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 43,
+    "season": 2020,
+    "week": 8,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 109.92,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 105.42,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 44,
+    "season": 2020,
+    "week": 8,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 67.52,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 109.44,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 45,
+    "season": 2020,
+    "week": 8,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 59,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 90.36,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 46,
+    "season": 2020,
+    "week": 8,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 118.42,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 125.74,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 47,
+    "season": 2020,
+    "week": 8,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 129.94,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 124.26,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 48,
+    "season": 2020,
+    "week": 8,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 122.4,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 80.9,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 49,
+    "season": 2020,
+    "week": 9,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 112.9,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 77.54,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 50,
+    "season": 2020,
+    "week": 9,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 120.3,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 63.36,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 51,
+    "season": 2020,
+    "week": 9,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 104.28,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 99.04,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 52,
+    "season": 2020,
+    "week": 9,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 106.16,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 164.32,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 53,
+    "season": 2020,
+    "week": 9,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 116.02,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 104.1,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 54,
+    "season": 2020,
+    "week": 9,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 92.58,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 74.72,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 55,
+    "season": 2020,
+    "week": 10,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 116.96,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 119.46,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 56,
+    "season": 2020,
+    "week": 10,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 113.84,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 142.4,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 57,
+    "season": 2020,
+    "week": 10,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 107.92,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 91.92,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 58,
+    "season": 2020,
+    "week": 10,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 132.3,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 90.48,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 59,
+    "season": 2020,
+    "week": 10,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 65.22,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 126.8,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 60,
+    "season": 2020,
+    "week": 10,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 149.44,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 111.88,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 61,
+    "season": 2020,
+    "week": 11,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 92.84,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 138.94,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 62,
+    "season": 2020,
+    "week": 11,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 108.12,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 90.24,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 63,
+    "season": 2020,
+    "week": 11,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 138.82,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 72.04,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 64,
+    "season": 2020,
+    "week": 11,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 82.86,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 149.26,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 65,
+    "season": 2020,
+    "week": 11,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 108.04,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 155.66,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 66,
+    "season": 2020,
+    "week": 11,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 106.72,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 152.22,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 67,
+    "season": 2020,
+    "week": 12,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 129.68,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 96.74,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 68,
+    "season": 2020,
+    "week": 12,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 90.86,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 73.6,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 69,
+    "season": 2020,
+    "week": 12,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 95.74,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 131.7,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 70,
+    "season": 2020,
+    "week": 12,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 102.64,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 130.52,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 71,
+    "season": 2020,
+    "week": 12,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 131.98,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 109.8,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 72,
+    "season": 2020,
+    "week": 12,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 88.64,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 138,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 73,
+    "season": 2020,
+    "week": 13,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 93.76,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 105.68,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 74,
+    "season": 2020,
+    "week": 13,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 110.28,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 120.06,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 75,
+    "season": 2020,
+    "week": 13,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 63.1,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 174.8,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 76,
+    "season": 2020,
+    "week": 13,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 107.72,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 135,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 77,
+    "season": 2020,
+    "week": 13,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 111.02,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 126.66,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 78,
+    "season": 2020,
+    "week": 13,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 108.08,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 135.1,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 79,
+    "season": 2020,
+    "week": 14,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 146.3,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 77.16,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 80,
+    "season": 2020,
+    "week": 14,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 103.74,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 109.72,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 81,
+    "season": 2020,
+    "week": 14,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 104.58,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 110.84,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 82,
+    "season": 2020,
+    "week": 14,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 110.32,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 153.34,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 83,
+    "season": 2020,
+    "week": 14,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 164.92,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 116.46,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 84,
+    "season": 2020,
+    "week": 15,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 149.26,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 106.84,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 85,
+    "season": 2020,
+    "week": 15,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 119.4,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 130.32,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 86,
+    "season": 2020,
+    "week": 15,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 74.44,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 98.96,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 87,
+    "season": 2020,
+    "week": 15,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 86.3,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 136.32,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 88,
+    "season": 2020,
+    "week": 15,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 112.62,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 123.72,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 89,
+    "season": 2020,
+    "week": 15,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 162.26,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 182.32,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 90,
+    "season": 2020,
+    "week": 16,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 111.54,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 80.26,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 91,
+    "season": 2020,
+    "week": 16,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 85.98,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 120.3,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 92,
+    "season": 2020,
+    "week": 16,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 131.48,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 150.82,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 93,
+    "season": 2020,
+    "week": 16,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 78.44,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 110.7,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 94,
+    "season": 2020,
+    "week": 16,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 99.22,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 144.92,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 95,
+    "season": 2020,
+    "week": 16,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
       "ownerSlug": "spencer-kim",
       "playerPoints": {
         "96": 8.58,

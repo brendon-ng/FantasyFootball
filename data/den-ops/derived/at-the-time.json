@@ -259,6 +259,46 @@
       "value": 162.1
     }
   ],
+  "2020-13-jaymie-lew-vs-reagan-schmidt": [
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "reagan-schmidt",
+      "ownerSlug": "jaymie-lew",
+      "stillStands": false,
+      "value": 111.7
+    }
+  ],
+  "2020-2-jaymie-lew-vs-tyler-jung": [
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "tyler-jung",
+      "ownerSlug": "jaymie-lew",
+      "stillStands": false,
+      "value": 351.98
+    }
+  ],
+  "2020-2-safvet-besen-vs-spencer-kim": [
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "spencer-kim",
+      "ownerSlug": "safvet-besen",
+      "stillStands": false,
+      "value": 83.32
+    }
+  ],
+  "2020-4-cassidy-pensa-vs-tyler-jung": [
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "cassidy-pensa",
+      "ownerSlug": "tyler-jung",
+      "stillStands": false,
+      "value": 83.46
+    }
+  ],
   "2021-15-reagan-schmidt-vs-spencer-kim": [
     {
       "kind": "weekly-low",
@@ -293,14 +333,6 @@
       "ownerSlug": "olivia-nelli",
       "stillStands": false,
       "value": 210.18
-    },
-    {
-      "kind": "blowout",
-      "label": "Biggest margin in league history",
-      "opponentSlug": "david-collier",
-      "ownerSlug": "olivia-nelli",
-      "stillStands": false,
-      "value": 110.56
     }
   ],
   "2024-1-brendon-ng-vs-spencer-kim": [
@@ -354,14 +386,6 @@
       "ownerSlug": "jaymie-lew",
       "stillStands": true,
       "value": 408.1
-    },
-    {
-      "kind": "blowout",
-      "label": "Biggest margin in league history",
-      "opponentSlug": "jake-gibbons",
-      "ownerSlug": "jaymie-lew",
-      "stillStands": false,
-      "value": 111.26
     }
   ],
   "2024-2-reagan-schmidt-vs-safvet-besen": [
