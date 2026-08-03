@@ -177,28 +177,44 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
                     {g.season}
                     {g.week ? ` wk${g.week}` : ""}
                   </span>
+                  {/* Names, badge and scores are separate columns so the badge
+                      sits LEFT of the numbers and the numbers stay aligned
+                      whether or not a row carries one. */}
                   <div className="min-w-0 flex-1">
                     {[g.a, g.b].map((s) => (
                       <div
                         key={s.ownerSlug}
-                        className={`flex items-center justify-between gap-2 text-sm ${
+                        className={`truncate text-sm ${
                           winner?.ownerSlug === s.ownerSlug
                             ? "font-semibold text-chalk-100"
                             : "text-chalk-500"
                         }`}
                       >
-                        <span data-owner={s.ownerSlug} className="truncate">
-                          {name(s.ownerSlug)}
-                        </span>
-                        <span className="tabular">{fmt.pts(s.points)}</span>
+                        <span data-owner={s.ownerSlug}>{name(s.ownerSlug)}</span>
                       </div>
                     ))}
                   </div>
-                  {g.kind !== "regular" ? (
-                    <span className="shrink-0 rounded border border-ink-500 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-chalk-500">
-                      {g.label ?? g.kind}
-                    </span>
-                  ) : null}
+                  <span className="hidden w-[92px] shrink-0 text-right sm:block">
+                    {g.kind !== "regular" ? (
+                      <span className="rounded border border-ink-500 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-chalk-500">
+                        {g.label ?? g.kind}
+                      </span>
+                    ) : null}
+                  </span>
+                  <div className="w-20 shrink-0 text-right">
+                    {[g.a, g.b].map((s) => (
+                      <div
+                        key={s.ownerSlug}
+                        className={`tabular text-sm ${
+                          winner?.ownerSlug === s.ownerSlug
+                            ? "font-semibold text-chalk-100"
+                            : "text-chalk-500"
+                        }`}
+                      >
+                        {fmt.pts(s.points)}
+                      </div>
+                    ))}
+                  </div>
                   <span aria-hidden className="shrink-0 text-[10px] text-chalk-600">
                     →
                   </span>

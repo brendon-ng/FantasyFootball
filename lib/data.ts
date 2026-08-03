@@ -309,6 +309,21 @@ export interface MeetingSide {
  * week and would silently collide across seasons. Sorted so both directions
  * resolve to the same page.
  */
+/**
+ * Names the game a placement decides.
+ *
+ * "1th place" was a hardcoded "th"; place 1 is also not a placement game at all
+ * but the championship, and the bottom place is the last-place game rather than
+ * "12th place".
+ */
+function placementLabel(place: number, teams: number): string {
+  if (place === 1) return "Championship";
+  if (place >= teams) return "Last place";
+  const s = ["th", "st", "nd", "rd"];
+  const v = place % 100;
+  return `${place}${s[(v - 20) % 10] || s[v] || s[0]} place`;
+}
+
 export function meetingId(
   season: number,
   week: number | null,
@@ -385,7 +400,7 @@ export function getMeetings(slugA: string, slugB: string): Meeting[] {
             season: s.season,
             week: bm.week,
             kind,
-            label: bm.label ?? (bm.placesFor ? `${bm.placesFor[0]}th place` : null),
+            label: bm.label ?? (bm.placesFor ? placementLabel(bm.placesFor[0], s.teams) : null),
             a: { ownerSlug: t1, points: p1, starters: [], playerPoints: {} },
             b: { ownerSlug: t2, points: p2, starters: [], playerPoints: {} },
             hasLineups: false,

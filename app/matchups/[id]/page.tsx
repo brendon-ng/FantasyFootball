@@ -180,16 +180,35 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                     {[g.a, g.b].map((s) => (
                       <div
                         key={s.ownerSlug}
-                        className={`flex items-center justify-between gap-2 text-sm ${
+                        className={`truncate text-sm ${
                           gw?.ownerSlug === s.ownerSlug
                             ? "font-semibold text-chalk-100"
                             : "text-chalk-500"
                         }`}
                       >
-                        <span data-owner={s.ownerSlug} className="truncate">
-                          {name(s.ownerSlug)}
-                        </span>
-                        <span className="tabular">{fmt.pts(s.points)}</span>
+                        <span data-owner={s.ownerSlug}>{name(s.ownerSlug)}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Badge left of the numbers, in a slot that is always there. */}
+                  <span className="hidden w-[92px] shrink-0 text-right sm:block">
+                    {g.kind !== "regular" ? (
+                      <span className="rounded border border-ink-500 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-chalk-500">
+                        {g.label ?? g.kind}
+                      </span>
+                    ) : null}
+                  </span>
+                  <div className="w-20 shrink-0 text-right">
+                    {[g.a, g.b].map((s) => (
+                      <div
+                        key={s.ownerSlug}
+                        className={`tabular text-sm ${
+                          gw?.ownerSlug === s.ownerSlug
+                            ? "font-semibold text-chalk-100"
+                            : "text-chalk-500"
+                        }`}
+                      >
+                        {fmt.pts(s.points)}
                       </div>
                     ))}
                   </div>
