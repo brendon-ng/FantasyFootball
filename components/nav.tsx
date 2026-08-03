@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { useIdentity } from "@/components/identity";
+import { IdentityBadge, useIdentity } from "@/components/identity";
 
 /**
  * Site nav. Horizontal and scrollable on mobile, so it never wraps or collapses
@@ -22,9 +22,9 @@ export interface NavOwner {
   name: string;
 }
 
-export function Nav({ subtitle }: { subtitle: string }) {
+export function Nav({ subtitle, owners }: { subtitle: string; owners: NavOwner[] }) {
   const pathname = usePathname();
-  const { identity, ready, openPicker } = useIdentity();
+  const { identity, ready } = useIdentity();
 
 
   return (
@@ -60,44 +60,26 @@ export function Nav({ subtitle }: { subtitle: string }) {
             );
           })}
 
-          {/* Identity control. Always present once hydrated, in every state —
-              the previous footer-only affordance was undiscoverable, and the
-              static HTML does not contain it at all until hydration. */}
+          {/* Exempt from the identity highlight: this is chrome, not a mention
+              of you in the content, and it colours itself via text-me already. */}
           {ready && identity.kind === "owner" ? (
-            <span className="flex shrink-0 items-center">
-              <Link
-                href={`/owners/${identity.slug}/`}
-                aria-current={
-                  pathname.startsWith(`/owners/${identity.slug}/`) ? "page" : undefined
-                }
-                className={`flex items-center gap-1.5 whitespace-nowrap rounded-l-md py-1.5 pl-2.5 pr-2 text-sm font-medium transition-colors ${
-                  pathname.startsWith(`/owners/${identity.slug}/`)
-                    ? "bg-ink-700 text-me"
-                    : "text-me hover:bg-ink-700/60"
-                }`}
-              >
-                <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-me" />
-                My Team
-              </Link>
-              <button
-                type="button"
-                onClick={openPicker}
-                title="Change who you are"
-                aria-label="Change who you are"
-                className="rounded-r-md py-1.5 pl-1 pr-2 text-[9px] text-chalk-600 transition-colors hover:bg-ink-700/60 hover:text-me"
-              >
-                ▼
-              </button>
-            </span>
-          ) : ready ? (
-            <button
-              type="button"
-              onClick={openPicker}
-              className="shrink-0 whitespace-nowrap rounded-md border border-ink-500 px-2.5 py-1 text-xs font-medium text-chalk-400 transition-colors hover:border-me-dim hover:text-me sm:px-3"
+            <Link
+              href={`/owners/${identity.slug}/`}
+              data-me-exempt=""
+              aria-current={pathname.startsWith(`/owners/${identity.slug}/`) ? "page" : undefined}
+              className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors sm:px-3 ${
+                pathname.startsWith(`/owners/${identity.slug}/`)
+                  ? "bg-ink-700 text-me"
+                  : "text-me hover:bg-ink-700/60"
+              }`}
             >
-              Who are you?
-            </button>
+              My Team
+            </Link>
           ) : null}
+
+          <span className="ml-1 shrink-0">
+            <IdentityBadge owners={owners} />
+          </span>
         </nav>
       </div>
     </header>

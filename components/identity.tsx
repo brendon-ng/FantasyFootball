@@ -155,9 +155,6 @@ a[href$="/owners/${mySlug}/"]:not([data-me-exempt]),
 [data-owner="${mySlug}"]:not([data-me-exempt]) {
   color: var(--color-me) !important;
   font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--color-me) 45%, transparent);
-  text-underline-offset: 3px;
 }
 [data-owner-row="${mySlug}"] {
   background-color: color-mix(in srgb, var(--color-me) 9%, transparent);
@@ -257,6 +254,45 @@ function IdentityPicker({
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Circular identity button for the nav.
+ *
+ * Reads as an account control, which is what it is. Deliberately NOT wired into
+ * the highlight rule — see the `data-me-exempt` note above; a chrome element
+ * that repainted itself as "you" would be noise.
+ */
+export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
+  const { identity, ready, openPicker } = useIdentity();
+  if (!ready) return null;
+
+  const me = identity.kind === "owner" ? owners.find((o) => o.slug === identity.slug) : null;
+  const initials = me
+    ? me.name
+        .split(/\s+/)
+        .map((w) => w[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase()
+    : null;
+
+  return (
+    <button
+      type="button"
+      onClick={openPicker}
+      title={me ? `You are ${me.name} — click to change` : "Tell us who you are"}
+      aria-label={me ? `Viewing as ${me.name}. Change.` : "Tell us who you are"}
+      data-me-exempt=""
+      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold tracking-tight transition-colors ${
+        me
+          ? "border-me-dim bg-me/10 text-me hover:bg-me/20"
+          : "border-ink-500 text-chalk-500 hover:border-chalk-500 hover:text-chalk-300"
+      }`}
+    >
+      {initials ?? "?"}
+    </button>
   );
 }
 

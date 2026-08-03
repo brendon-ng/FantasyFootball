@@ -33,7 +33,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     >
       <body className="flex min-h-full flex-col bg-ink-900 text-chalk-100">
         <IdentityProvider owners={navOwners}>
-        <Nav subtitle={`${latest} SEASON`} />
+        <Nav subtitle={`${latest} SEASON`} owners={navOwners} />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
           {children}
         </main>
