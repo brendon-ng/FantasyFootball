@@ -11,6 +11,13 @@ Pushing to `main` runs `.github/workflows/deploy.yml`, which lints, typechecks,
 builds, and publishes `out/`. Pages **Source** is set to *GitHub Actions* — do not
 switch it to a branch deploy, and never commit `out/`.
 
+`deploy.yml` must be the **only** workflow that calls `actions/deploy-pages`. The
+Pages settings UI offers to commit a sample `nextjs.yml`; accepting it creates a
+second Pages deploy that races this one. That sample also passes
+`static_site_generator: next` to `actions/configure-pages`, which injects its own
+`basePath` and bypasses the `env` block in `next.config.ts` — `withBasePath()`
+then returns unprefixed URLs and assets 404. If `nextjs.yml` reappears, delete it.
+
 ## Two constraints govern almost every change here
 
 ### 1. There is no server

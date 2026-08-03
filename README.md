@@ -45,6 +45,11 @@ the homepage instead of the app.
 `out/` is gitignored and must never be committed — CI is the only thing that
 builds it.
 
+`deploy.yml` must stay the only workflow that deploys to Pages. The Pages
+settings UI offers to commit a sample `nextjs.yml`; **decline it**. It races this
+workflow, and its `static_site_generator: next` option injects a competing
+`basePath` that breaks `withBasePath()`. If it shows up, delete it.
+
 ## Working under a subpath
 
 Pages serves project repos from `https://<user>.github.io/<repo>/`, so every URL
