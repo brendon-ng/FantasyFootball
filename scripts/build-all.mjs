@@ -62,13 +62,34 @@ writeFileSync(join(ROOT, "out", ".nojekyll"), "");
 
 const repo = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "DenOpsFF";
 const base = `/${repo}`;
+// Read from the assembled output rather than public/, so the picker can only
+// reference an avatar that actually shipped. The extension varies by league —
+// Sleeper stores whatever was uploaded.
+const avatarFor = (slug) => {
+  for (const ext of ["png", "jpg", "gif"]) {
+    if (existsSync(join(ROOT, "out", slug, "avatars", `${slug}.${ext}`))) {
+      return `${base}/${slug}/avatars/${slug}.${ext}`;
+    }
+  }
+  return null;
+};
+
 const cards = leagues
-  .map(
-    (l) => `      <a class="card" href="${base}/${l.slug}/">
-        <span class="name">${l.name}</span>
-        <span class="meta">${l.features?.keepers ? "Keeper league" : "Redraft league"}</span>
-      </a>`,
-  )
+  .map((l) => {
+    const src = avatarFor(l.slug);
+    // Falls back to initials so a league with no avatar set on Sleeper still gets
+    // a card the same shape as the others.
+    const badge = src
+      ? `<img class="avatar" src="${src}" alt="" width="48" height="48" loading="lazy">`
+      : `<span class="avatar fallback">${l.shortName.slice(0, 2).toUpperCase()}</span>`;
+    return `      <a class="card" href="${base}/${l.slug}/">
+        ${badge}
+        <span class="text">
+          <span class="name">${l.name}</span>
+          <span class="meta">${l.features?.keepers ? "Keeper league" : "Redraft league"}</span>
+        </span>
+      </a>`;
+  })
   .join("\n");
 
 // Hand-written rather than a third Next build: it has no data behind it, and a
@@ -89,10 +110,15 @@ writeFileSync(
   main { width:100%; max-width:34rem; padding:2rem 1.5rem; }
   h1 { margin:0 0 .25rem; font-size:1.5rem; letter-spacing:-.02em; }
   p { margin:0 0 1.75rem; color:#7a7a89; font-size:.875rem; }
-  .card { display:flex; flex-direction:column; gap:.2rem; padding:1rem 1.1rem;
+  .card { display:flex; align-items:center; gap:.9rem; padding:.9rem 1.1rem;
           margin-bottom:.75rem; border:1px solid #1e1e25; border-radius:.75rem;
           background:#0e0e11; text-decoration:none; color:inherit;
           transition:border-color .15s, background .15s; }
+  .avatar { width:48px; height:48px; flex:0 0 48px; border-radius:.6rem;
+            object-fit:cover; background:#16161b; }
+  .fallback { display:grid; place-items:center; font-size:.8rem; font-weight:700;
+              letter-spacing:.04em; color:#7a7a89; }
+  .text { display:flex; flex-direction:column; gap:.2rem; min-width:0; }
   .card:hover { border-color:#0b7a5a; background:#16161b; }
   .name { font-weight:600; }
   .meta { font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase; color:#55555f; }
