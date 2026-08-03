@@ -12,7 +12,8 @@
     "clean": "rm -rf .next out .preview",
     "sync": "node scripts/sync.ts",
     "derive": "node scripts/derive.ts",
-    "data": "npm run sync && npm run derive"
+    "data": "npm run sync && npm run derive",
+    "adp": "node scripts/adp.ts"
   },
   "dependencies": {
     "next": "16.2.12",
