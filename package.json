@@ -1,11 +1,11 @@
 {
-  "name": "denopsff",
+  "name": "fantasy-football",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "node scripts/build-all.mjs",
-    "preview": "npm run build && rm -rf .preview && mkdir -p .preview && cp -R out .preview/DenOpsFF && npx --yes serve .preview -l 3000",
+    "preview": "npm run build && rm -rf .preview && mkdir -p .preview && cp -R out .preview/FantasyFootball && npx --yes serve .preview -l 3000",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check": "npm run lint && npm run typecheck",

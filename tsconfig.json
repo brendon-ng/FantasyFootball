@@ -48,7 +48,9 @@
     ".next/den-ops/types/**/*.ts",
     ".next/den-ops/dev/types/**/*.ts",
     ".next/dev-den-ops/types/**/*.ts",
-    ".next/dev-den-ops/dev/types/**/*.ts"
+    ".next/dev-den-ops/dev/types/**/*.ts",
+    ".next/dev-masterbatters/types/**/*.ts",
+    ".next/dev-masterbatters/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

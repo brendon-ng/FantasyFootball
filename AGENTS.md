@@ -17,6 +17,10 @@ Static Next.js deployed to GitHub Pages. Pushing to `main` runs
 publishes `out/`. Pages **Source** is set to *GitHub Actions* — do not switch it
 to a branch deploy, and never commit `out/`.
 
+Live at `https://brendon-ng.github.io/FantasyFootball/`. The repo was renamed
+from `DenOpsFF`, which now holds nothing but path-preserving redirects to
+`/FantasyFootball/den-ops/` so published links keep working.
+
 ## The league is chosen at BUILD time, not request time
 
 `npm run build` runs `next build` ONCE PER LEAGUE with `LEAGUE=<slug>` set, then
@@ -276,7 +280,7 @@ deliberately; there is no middle ground.
 
 ### 2. The site is served from a subpath, not a domain root
 
-Production URLs are prefixed with `/<repo>/<league>` — e.g. `/DenOpsFF/den-ops`.
+Production URLs are prefixed with `/<repo>/<league>` — e.g. `/FantasyFootball/den-ops`.
 Dev (`npm run dev`) is **not** —
 this asymmetry is the single most common way to break the deployed site while
 everything looks fine locally.
@@ -309,7 +313,7 @@ in `package.json` would need updating by hand.
 
 ```bash
 npm run check     # lint + typecheck, same as CI
-npm run preview   # builds EVERY league, served at localhost:3000/DenOpsFF/
+npm run preview   # builds EVERY league, served at localhost:3000/FantasyFootball/
 ```
 
 `npm run preview` is the only local check that reproduces the subpath. Use it

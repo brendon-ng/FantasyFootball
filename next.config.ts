@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-// GitHub Pages serves this repo from a subpath, https://<user>.github.io/DenOpsFF,
+// GitHub Pages serves this repo from a subpath, https://<user>.github.io/FantasyFootball,
 // so every route and asset URL needs the repo name in front of it.
 //
 // In Actions, GITHUB_REPOSITORY is "owner/repo", so renaming the repo updates the
@@ -16,7 +16,7 @@ import type { NextConfig } from "next";
 //
 // Each build is therefore a single-league site and needs no league plumbing of
 // its own — see scripts/build-all.mjs for the assembly.
-const repo = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "DenOpsFF";
+const repo = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "FantasyFootball";
 const league = process.env.LEAGUE ?? "den-ops";
 const basePath = process.env.NODE_ENV === "production" ? `/${repo}/${league}` : "";
 
