@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
-import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
+import { Col, EmptyState, ListHeader, Panel, PanelHeader, Stat } from "@/components/ui";
 import { getAdp, getKeepers, getOwnerMap, getPlayers, getSeasons } from "@/lib/data";
 import type { KeeperContract } from "@/lib/types";
 
@@ -80,6 +80,21 @@ export default function KeepersPage() {
                     href={`/owners/${slug}/`}
                     hrefLabel="Profile"
                   />
+                  <ListHeader>
+                    <Col className="w-4 shrink-0">#</Col>
+                    <Col className="w-8 shrink-0 text-center">Pos</Col>
+                    <Col className="flex-1">Player</Col>
+                    <Col className="shrink-0 text-right" hint="Sleeper ADP (overall pick number), then how many rounds cheaper (+) or more expensive (−) keeping them is versus that market price">
+                      ADP · Value
+                    </Col>
+                    <Col className="shrink-0" hint="Keeps remaining on the contract before the player is revalued to ADP">
+                      Keeps
+                    </Col>
+                    <Col className="w-9 shrink-0 text-right" hint="Draft round it costs to keep this player">
+                      Cost
+                    </Col>
+                    <span className="w-3 shrink-0" />
+                  </ListHeader>
                   <div className="divide-y divide-ink-700">
                     {contracts.map((c, i) => {
                       const p = players[c.playerId];

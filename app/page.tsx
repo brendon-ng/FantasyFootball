@@ -1,7 +1,17 @@
 import Link from "next/link";
 
 import { KeeperRow } from "@/components/keeper-table";
-import { EmptyState, LiveBadge, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
+import {
+  Col,
+  EmptyState,
+  ListHeader,
+  LiveBadge,
+  Panel,
+  PanelHeader,
+  Stat,
+  fmt,
+  placeColor,
+} from "@/components/ui";
 import {
   getAdp,
   getKeepers,
@@ -104,7 +114,23 @@ export default async function HomePage() {
           {inSeason && live ? (
             <StandingsLive live={live} owners={owners} />
           ) : lastSeason ? (
-            <ol>
+            <>
+              <ListHeader>
+                <Col className="w-5 shrink-0" hint="Final placement after playoffs">
+                  #
+                </Col>
+                <Col className="flex-1">Owner · Team name</Col>
+                <Col className="w-14 shrink-0 text-right" hint="Regular-season wins-losses">
+                  W-L
+                </Col>
+                <Col
+                  className="hidden w-20 shrink-0 text-right sm:block"
+                  hint="Points For — total points scored across the regular season"
+                >
+                  PF
+                </Col>
+              </ListHeader>
+              <ol>
               {lastSeason.standings
                 .slice()
                 .sort((a, b) => (a.finalPlace ?? 99) - (b.finalPlace ?? 99))
@@ -137,7 +163,8 @@ export default async function HomePage() {
                     </span>
                   </li>
                 ))}
-            </ol>
+              </ol>
+            </>
           ) : (
             <EmptyState>No finalized season yet.</EmptyState>
           )}
@@ -171,8 +198,25 @@ export default async function HomePage() {
               ))}
             </ul>
           ) : (
-            <ul>
-              {records.slice(0, 6).map((r, i) => (
+            <>
+              <ListHeader>
+                <Col className="w-4 shrink-0">#</Col>
+                <Col className="flex-1">Owner</Col>
+                <Col className="shrink-0" hint="Championships won">
+                  Titles
+                </Col>
+                <Col className="w-14 shrink-0 text-right" hint="All-time regular-season wins-losses">
+                  W-L
+                </Col>
+                <Col
+                  className="w-12 shrink-0 text-right"
+                  hint="Win percentage, counting a tie as half a win"
+                >
+                  Win%
+                </Col>
+              </ListHeader>
+              <ul>
+              {records.map((r, i) => (
                 <li
                   key={r.ownerSlug}
                   className="flex items-center gap-3 border-b border-ink-700 px-4 py-2.5 last:border-0 sm:px-5"
@@ -184,11 +228,12 @@ export default async function HomePage() {
                   >
                     {name(r.ownerSlug)}
                   </Link>
-                  {r.championships > 0 ? (
-                    <span className="text-xs text-gold" title={`${r.championships} championship(s)`}>
-                      {"★".repeat(r.championships)}
-                    </span>
-                  ) : null}
+                  <span
+                    className="w-8 shrink-0 text-center text-xs text-gold"
+                    title={`${r.championships} championship${r.championships === 1 ? "" : "s"}`}
+                  >
+                    {r.championships > 0 ? "★".repeat(r.championships) : ""}
+                  </span>
                   <span className="tabular w-14 shrink-0 text-right text-sm text-chalk-300">
                     {fmt.record(r.wins, r.losses, r.ties)}
                   </span>
@@ -197,7 +242,8 @@ export default async function HomePage() {
                   </span>
                 </li>
               ))}
-            </ul>
+              </ul>
+            </>
           )}
         </Panel>
       </div>
@@ -209,6 +255,14 @@ export default async function HomePage() {
             adp.capturedAt
               ? `top ${MAX_KEEPERS} per team · ADP ${adp.frozen ? "locked" : "live"}`
               : `top ${MAX_KEEPERS} eligible per team`
+          }
+          legend={
+            <>
+              Columns: <span className="text-chalk-400">Sleeper ADP</span> ·{" "}
+              <span className="text-chalk-400">rounds cheaper (+) or dearer (−) than market</span>{" "}
+              · <span className="text-chalk-400">keeps left</span> ·{" "}
+              <span className="text-chalk-400">round it costs to keep</span>
+            </>
           }
           href="/keepers/"
           hrefLabel="Full keeper tracker"

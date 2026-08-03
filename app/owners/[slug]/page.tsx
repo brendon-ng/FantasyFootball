@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
-import { Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
+import { Col, ListHeader, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
 import {
   getAdp,
   getKeepers,
@@ -78,10 +78,19 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-ink-600">
-                    {["Season", "Seed", "Record", "PF", "Finish"].map((h, i) => (
+                    {(
+                      [
+                        ["Season", ""],
+                        ["Seed", "Playoff seed, by wins then points for"],
+                        ["Record", "Regular-season wins-losses-ties"],
+                        ["PF", "Points For — total points scored that season"],
+                        ["Finish", "Final placement after playoffs"],
+                      ] as const
+                    ).map(([h, hint], i) => (
                       <th
                         key={h}
-                        className={`eyebrow px-3 py-2 ${i === 0 ? "text-left" : "text-right"}`}
+                        title={hint || undefined}
+                        className={`eyebrow px-3 py-2 ${i === 0 ? "text-left" : "text-right"} ${hint ? "cursor-help" : ""}`}
                       >
                         {h}
                       </th>
@@ -123,6 +132,21 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
 
             <Panel>
               <PanelHeader title="Head to Head" meta="regular season · best first" />
+              <ListHeader>
+                <Col className="flex-1">Opponent</Col>
+                <Col className="hidden w-20 shrink-0 text-center sm:block" hint="Share of meetings won">
+                  Win share
+                </Col>
+                <Col className="w-14 shrink-0 text-right" hint="Wins-losses against this opponent">
+                  W-L
+                </Col>
+                <Col
+                  className="hidden w-16 shrink-0 text-right sm:block"
+                  hint="Points For — total scored against this opponent"
+                >
+                  PF
+                </Col>
+              </ListHeader>
               <ul className="divide-y divide-ink-700">
                 {vs.map(([opp, h]) => {
                   const games = h.wins + h.losses + h.ties;
@@ -163,6 +187,15 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
           meta={`${contracts.filter((c) => !c.expired).length} eligible`}
           href="/keepers/"
           hrefLabel="Full tracker"
+          legend={
+            <>
+              Columns: <span className="text-chalk-400">position</span> ·{" "}
+              <span className="text-chalk-400">player</span> ·{" "}
+              <span className="text-chalk-400">ADP and value vs market</span> ·{" "}
+              <span className="text-chalk-400">keeps left</span> ·{" "}
+              <span className="text-chalk-400">round it costs to keep</span>
+            </>
+          }
         />
         <div className="grid gap-px bg-ink-600 sm:grid-cols-2">
           {contracts

@@ -36,7 +36,11 @@ export default function RecordsPage() {
         />
 
         <Panel>
-          <PanelHeader title="Best Player Weeks" meta="started only" />
+          <PanelHeader
+            title="Best Player Weeks"
+            meta="started only"
+            legend="Highest single-week scores by a started player. Bench performances are excluded."
+          />
           <ol className="divide-y divide-ink-700">
             {records.playerHigh.slice(0, 20).map((r, i) => (
               <li key={`${r.season}-${r.week}-${r.playerId}`} className="flex items-center gap-3 px-4 py-2.5">
@@ -82,7 +86,11 @@ function ScoreList({
 }) {
   return (
     <Panel>
-      <PanelHeader title={title} meta={`top ${Math.min(rows.length, 20)}`} />
+      <PanelHeader
+        title={title}
+        meta={`top ${Math.min(rows.length, 20)}`}
+        legend="Rank · owner · season, week and opponent (their score in brackets) · points scored"
+      />
       <ol className="divide-y divide-ink-700">
         {rows.slice(0, 20).map((r, i) => (
           <li key={`${r.season}-${r.week}-${r.ownerSlug}`} className="flex items-center gap-3 px-4 py-2.5">
@@ -118,7 +126,10 @@ function MarginList({
 }) {
   return (
     <Panel>
-      <PanelHeader title={title} />
+      <PanelHeader
+        title={title}
+        legend="Winner def. loser · season, week and final score · margin of victory"
+      />
       <ol className="divide-y divide-ink-700">
         {rows.slice(0, 8).map((r) => (
           <li key={`${r.season}-${r.week}-${r.ownerSlug}`} className="flex items-center gap-3 px-4 py-2.5">

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Bracket } from "@/components/bracket";
-import { Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
+import { Col, ListHeader, Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
 import { getMatchupHistory, getOwnerMap, getSeasons } from "@/lib/data";
 
 // Static export: every season page is generated at build time.
@@ -51,10 +51,21 @@ export default async function SeasonPage({
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-ink-600">
-                {["Seed", "Owner", "W-L-T", "PF", "PA"].map((h, i) => (
+                {(
+                  [
+                    ["Seed", "Playoff seed, by wins then points for"],
+                    ["Owner", ""],
+                    ["W-L-T", "Wins-losses-ties in the regular season"],
+                    ["PF", "Points For — total points scored"],
+                    ["PA", "Points Against — total points their opponents scored"],
+                  ] as const
+                ).map(([h, hint], i) => (
                   <th
                     key={h}
-                    className={`eyebrow px-3 py-2 ${i <= 1 ? "text-left" : "text-right"}`}
+                    title={hint || undefined}
+                    className={`eyebrow px-3 py-2 ${i <= 1 ? "text-left" : "text-right"} ${
+                      hint ? "cursor-help" : ""
+                    }`}
                   >
                     {h}
                   </th>
@@ -99,6 +110,15 @@ export default async function SeasonPage({
 
         <Panel>
           <PanelHeader title="Final Standings" meta="after playoffs" />
+          <ListHeader>
+            <Col className="w-6 shrink-0" hint="Final placement after playoffs and the toilet bowl">
+              #
+            </Col>
+            <Col className="flex-1">Owner</Col>
+            <Col className="shrink-0" hint="Where they entered the postseason">
+              Entered as
+            </Col>
+          </ListHeader>
           <ol>
             {summary.standings
               .slice()

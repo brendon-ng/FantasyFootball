@@ -74,11 +74,25 @@ export default function HistoryPage() {
           <table className="w-full min-w-[640px] text-sm">
             <thead>
               <tr className="border-b border-ink-600 text-left">
-                {["Owner", "W-L-T", "Win%", "PF", "PA", "🏆", "2nd", "3rd", "Last", "Playoffs", "Avg Finish"].map(
-                  (h, i) => (
+                {(
+                  [
+                    ["Owner", ""],
+                    ["W-L-T", "All-time regular-season wins-losses-ties"],
+                    ["Win%", "Win percentage, counting a tie as half a win"],
+                    ["PF", "Points For — total points scored, all seasons"],
+                    ["PA", "Points Against — total points their opponents scored"],
+                    ["🏆", "Championships won"],
+                    ["2nd", "Runner-up finishes"],
+                    ["3rd", "Third-place finishes"],
+                    ["Last", "Last-place finishes (toilet bowl losers)"],
+                    ["Playoffs", "Playoff appearances out of seasons played"],
+                    ["Avg Finish", "Mean final placement, 1 is best"],
+                  ] as const
+                ).map(([h, hint], i) => (
                     <th
                       key={h}
-                      className={`eyebrow px-3 py-2.5 font-semibold ${i === 0 ? "text-left" : "text-right"}`}
+                      title={hint || undefined}
+                      className={`eyebrow px-3 py-2.5 font-semibold ${i === 0 ? "text-left" : "text-right"} ${hint ? "cursor-help" : ""}`}
                     >
                       {h}
                     </th>
@@ -135,7 +149,11 @@ export default function HistoryPage() {
       </Panel>
 
       <Panel>
-        <PanelHeader title="Finish by Season" meta="1st is brightest" />
+        <PanelHeader
+          title="Finish by Season"
+          meta="1st is brightest"
+          legend="Each cell is that owner's final placement for the season; brighter means a better finish. Hover a cell for the exact result."
+        />
         <div className="overflow-x-auto p-4 sm:p-5">
           <div className="min-w-[420px]">
             <div

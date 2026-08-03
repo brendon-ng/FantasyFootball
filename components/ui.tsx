@@ -27,26 +27,35 @@ export function PanelHeader({
   meta,
   href,
   hrefLabel = "View all",
+  legend,
 }: {
   title: string;
   meta?: ReactNode;
   href?: string;
   hrefLabel?: string;
+  /**
+   * Explains the columns for panels whose rows are too compact to carry their
+   * own header row — the keeper cards, mainly.
+   */
+  legend?: ReactNode;
 }) {
   return (
-    <header className="flex items-baseline justify-between gap-3 border-b border-ink-600 px-4 py-3 sm:px-5">
-      <div className="flex items-baseline gap-3">
-        <h2 className="eyebrow">{title}</h2>
-        {meta ? <span className="text-xs text-chalk-600 tabular">{meta}</span> : null}
+    <header className="border-b border-ink-600 px-4 py-3 sm:px-5">
+      <div className="flex items-baseline justify-between gap-3">
+        <div className="flex items-baseline gap-3">
+          <h2 className="eyebrow">{title}</h2>
+          {meta ? <span className="text-xs text-chalk-600 tabular">{meta}</span> : null}
+        </div>
+        {href ? (
+          <Link
+            href={href}
+            className="shrink-0 text-xs font-medium text-chalk-500 transition-colors hover:text-accent"
+          >
+            {hrefLabel} <span aria-hidden>→</span>
+          </Link>
+        ) : null}
       </div>
-      {href ? (
-        <Link
-          href={href}
-          className="text-xs font-medium text-chalk-500 transition-colors hover:text-accent"
-        >
-          {hrefLabel} <span aria-hidden>→</span>
-        </Link>
-      ) : null}
+      {legend ? <div className="mt-1.5 text-[11px] text-chalk-600">{legend}</div> : null}
     </header>
   );
 }
@@ -109,3 +118,54 @@ export const fmt = {
     return n + (s[(v - 20) % 10] || s[v] || s[0]);
   },
 };
+
+/**
+ * Column header for the flex-row "tables" used throughout the site.
+ *
+ * These lists aren't <table>s (they need links, bars, and pills per cell), so
+ * headers can't come for free — the header cell must repeat the same width class
+ * as the row cell below it. Keeping both in one place per list is the trade-off
+ * for rows that can hold arbitrary content.
+ */
+export function ListHeader({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex items-center gap-3 border-b border-ink-600 bg-ink-850/60 px-4 py-1.5 sm:px-5">
+      {children}
+    </div>
+  );
+}
+
+/**
+ * A header cell. `hint` becomes a native tooltip — used for anything a newcomer
+ * wouldn't decode, like PF or the keeper value delta.
+ */
+export function Col({
+  children,
+  hint,
+  className = "",
+}: {
+  children: ReactNode;
+  hint?: string;
+  className?: string;
+}) {
+  return (
+    <span
+      className={`eyebrow text-[10px] ${hint ? "cursor-help decoration-dotted underline-offset-2 hover:underline" : ""} ${className}`}
+      title={hint}
+    >
+      {children}
+    </span>
+  );
+}
+
+/** Inline abbreviation with an explanatory tooltip, for jargon inside prose. */
+export function Abbr({ short, long }: { short: string; long: string }) {
+  return (
+    <abbr
+      title={long}
+      className="cursor-help no-underline decoration-dotted underline-offset-2 hover:underline"
+    >
+      {short}
+    </abbr>
+  );
+}
