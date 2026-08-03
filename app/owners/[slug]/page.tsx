@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { DraftPicks } from "@/components/draft-picks";
 import { FinishChart } from "@/components/finish-chart";
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
 import { TrophyCase } from "@/components/trophy-case";
 import { Col, ListHeader, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
 import {
   getAdp,
+  getConfig,
   getKeepers,
   getOwnerMap,
   getOwnerRecords,
@@ -30,6 +32,9 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const seasons = getSeasons().filter((s) => s.finalized).sort((a, b) => b.season - a.season);
   const players = getPlayers();
   const adp = getAdp();
+  const cfg = getConfig();
+  const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
+  const upcomingLeagueId = cfg.knownLeagueIds[String(upcoming)] ?? null;
   const contracts = getKeepers().final.filter((c) => c.ownerSlug === slug);
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
 
@@ -306,6 +311,20 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             ))}
         </div>
       </Panel>
+
+      <DraftPicks
+        ownerSlug={slug}
+        leagueId={upcomingLeagueId}
+        season={upcoming}
+        draftRounds={17}
+        maxKeepers={4}
+        contracts={contracts}
+        players={players}
+        userIdToSlug={Object.fromEntries(
+          getOwners().filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+        )}
+        ownerNames={Object.fromEntries(getOwners().map((o) => [o.slug, o.name]))}
+      />
     </div>
   );
 }

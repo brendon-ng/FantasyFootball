@@ -108,6 +108,72 @@ export function useLiveRosters(leagueId: string | null): LiveState<LiveRoster[]>
   return state;
 }
 
+export interface LiveTradedPick {
+  season: string;
+  round: number;
+  /** Roster the pick originally belonged to. */
+  rosterId: number;
+  currentOwnerRosterId: number;
+}
+
+/**
+ * Traded picks for a season, fetched in the browser.
+ *
+ * Sleeper only returns picks that have MOVED. Every other pick still sits with
+ * the roster that originally owned it, so the full picture is a baseline of
+ * rounds 1..N per roster with these applied on top.
+ */
+export function useLiveTradedPicks(
+  leagueId: string | null,
+  season: number,
+): LiveState<LiveTradedPick[]> {
+  const [state, setState] = useState<LiveState<LiveTradedPick[]>>({
+    status: "loading",
+    data: null,
+    error: null,
+  });
+
+  useEffect(() => {
+    if (!leagueId) return;
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const res = await fetch(`https://api.sleeper.app/v1/league/${leagueId}/traded_picks`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const raw = (await res.json()) as Array<{
+          season: string;
+          round: number;
+          roster_id: number;
+          owner_id: number;
+        }> | null;
+        if (cancelled) return;
+        setState({
+          status: "ready",
+          error: null,
+          data: (raw ?? [])
+            .filter((p) => Number(p.season) === season)
+            .map((p) => ({
+              season: p.season,
+              round: p.round,
+              rosterId: p.roster_id,
+              currentOwnerRosterId: p.owner_id,
+            })),
+        });
+      } catch (err) {
+        if (!cancelled) setState({ status: "error", data: null, error: String(err) });
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [leagueId, season]);
+
+  if (!leagueId) return { status: "ready", data: [], error: null };
+  return state;
+}
+
 /** Small badge describing where the live layer stands. */
 export function LiveStatus({ status }: { status: LiveState<unknown>["status"] }) {
   if (status === "loading") {
