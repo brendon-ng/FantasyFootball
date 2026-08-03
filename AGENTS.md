@@ -299,17 +299,15 @@ both as his.
 moment they were played — #1 marks only, so the badge stays rare and meaningful
 (17 games, 21 marks, 5 still standing).
 
-COVERAGE IS UNEVEN AND THE UI SAYS SO. The baseline is seeded with imported ESPN
-playoff and ladder games, the only pre-2024 scores that survived, so a 2024 mark
-is measured against roughly 68 historical games rather than the ~670 team-weeks
-actually played from 2019-23. Player-week marks are worse: ESPN kept no lineups,
-so that baseline genuinely starts empty in 2024. The matchup page carries a
-"coverage" tooltip stating this; do not remove it or the badge becomes a claim
-the data cannot support.
+TEAM-SCORE MARKS ARE NOW EXACT. Every season 2019-2025 has week-by-week scores, so
+a mark is measured against the full history rather than a bracket-only sample. It
+took no change to this function when each year arrived — the baseline is derived,
+not stored.
 
-2019's scoreboards WERE recovered, and it took no change to this function — it is
-derived, not stored. 20 of the 29 marks are now 2019 games. Recovering 2020-23
-would do the same again.
+PLAYER-WEEK MARKS ARE NOT, and the UI still says so. ESPN kept no lineups, so that
+baseline genuinely starts empty in 2024 and a 2024 player mark is measured against
+nothing earlier. The matchup page's "coverage" tooltip states this; do not remove
+it or the badge becomes a claim the data cannot support.
 
 ## Automation
 
@@ -538,17 +536,18 @@ inventing a slug. Add them to `league.json` with `active: false` (2019 brought i
 Camina Balmores this way), or as an `espnNames` alias if it is an existing owner
 under a different label.
 
-Every imported season has standings, final placement and full playoff scores.
-Some also have WEEKLY SCOREBOARDS, recovered later — 2019 does, 2020-23 do not
-yet. A season with them is a full participant in head-to-head, the record book
-and every weekly list; a season without contributes postseason meetings only.
-`ManualSeason.matchups` carries them and `hasWeeklyMatchups` states it plainly.
+Every imported season now has standings, final placement, full playoff scores AND
+weekly scoreboards — 2019-23 were all recovered, so every ESPN year is a full
+participant in head-to-head, the record book and every weekly list. No season
+contributes postseason-only meetings any more, though the code path for one still
+exists and is still correct.
 
-NEVER HARDCODE THE COVERAGE. It was "2024 onward" until 2019's scoreboards turned
-up, which silently falsified that sentence everywhere it was written. `weeklyCoverage()`
-in `lib/data.ts` derives it and renders phrases like "2019 and 2024-2025"; every
-surface that describes coverage reads from it, so the next recovered season
-updates the copy for free.
+`ManualSeason.matchups` carries the weekly games and `hasWeeklyMatchups` states it.
+
+NEVER HARDCODE THE COVERAGE. It read "2024 onward" until 2019 turned up, which
+silently falsified that sentence in five places. `weeklyCoverage()` in
+`lib/data.ts` derives it — it now renders "2019-2025" and drops the caveat clause
+on its own.
 
 Rosters, drafts and transactions are still absent for every ESPN year, so player
 records and keeper contracts stay Sleeper-only, and a matchup page for one of

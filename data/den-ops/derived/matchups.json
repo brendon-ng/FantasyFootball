@@ -7449,6 +7449,1925 @@
   },
   {
     "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 119.4,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 64.34,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 1,
+    "season": 2023,
+    "week": 1,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 107.92,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 117.04,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 2,
+    "season": 2023,
+    "week": 1,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 76.86,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 104.66,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 3,
+    "season": 2023,
+    "week": 1,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 79.84,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 131.76,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 4,
+    "season": 2023,
+    "week": 1,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 94.58,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 101.94,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 5,
+    "season": 2023,
+    "week": 1,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 120.86,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 130.46,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 6,
+    "season": 2023,
+    "week": 1,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 144.78,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 120.72,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 7,
+    "season": 2023,
+    "week": 2,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 134.36,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 105.4,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 8,
+    "season": 2023,
+    "week": 2,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 79.34,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 121.14,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 9,
+    "season": 2023,
+    "week": 2,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 95.44,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 134.3,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 10,
+    "season": 2023,
+    "week": 2,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 155.46,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 128.7,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 11,
+    "season": 2023,
+    "week": 2,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 142.8,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 148.98,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 12,
+    "season": 2023,
+    "week": 2,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 114.58,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 139.66,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 13,
+    "season": 2023,
+    "week": 3,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 103.36,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 133.36,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 14,
+    "season": 2023,
+    "week": 3,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 143.3,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 115.38,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 15,
+    "season": 2023,
+    "week": 3,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 101.78,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 120.52,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 16,
+    "season": 2023,
+    "week": 3,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 109.98,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 149.36,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 17,
+    "season": 2023,
+    "week": 3,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 141.38,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 106.32,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 18,
+    "season": 2023,
+    "week": 3,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 99.34,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 133.66,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 19,
+    "season": 2023,
+    "week": 4,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 73.18,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 132.2,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 20,
+    "season": 2023,
+    "week": 4,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 113.42,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 115.52,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 21,
+    "season": 2023,
+    "week": 4,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 112.86,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 113.3,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 22,
+    "season": 2023,
+    "week": 4,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 101.9,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 145.02,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 23,
+    "season": 2023,
+    "week": 4,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 94.1,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 139.2,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 24,
+    "season": 2023,
+    "week": 4,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 115.52,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 103.94,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 25,
+    "season": 2023,
+    "week": 5,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 174.34,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 93.46,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 26,
+    "season": 2023,
+    "week": 5,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 120.98,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 135.12,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 27,
+    "season": 2023,
+    "week": 5,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 154.26,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 101.88,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 28,
+    "season": 2023,
+    "week": 5,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 100.16,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 91.64,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 29,
+    "season": 2023,
+    "week": 5,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 104.38,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 163.04,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 30,
+    "season": 2023,
+    "week": 5,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 87.1,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 112.88,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 31,
+    "season": 2023,
+    "week": 6,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 84.96,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 104.52,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 32,
+    "season": 2023,
+    "week": 6,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 96.5,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 146.68,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 33,
+    "season": 2023,
+    "week": 6,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 79.7,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 104.6,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 34,
+    "season": 2023,
+    "week": 6,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 150.72,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 135.78,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 35,
+    "season": 2023,
+    "week": 6,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 106.14,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 117.04,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 36,
+    "season": 2023,
+    "week": 6,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 121.06,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 108.16,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 37,
+    "season": 2023,
+    "week": 7,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 94.74,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 128.8,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 38,
+    "season": 2023,
+    "week": 7,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 122.38,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 123,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 39,
+    "season": 2023,
+    "week": 7,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 125.66,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 72.36,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 40,
+    "season": 2023,
+    "week": 7,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 85.14,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 135.38,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 41,
+    "season": 2023,
+    "week": 7,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 97.76,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 107.16,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 42,
+    "season": 2023,
+    "week": 7,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 136.76,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 113.76,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 43,
+    "season": 2023,
+    "week": 8,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 135.36,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 102.8,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 44,
+    "season": 2023,
+    "week": 8,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 151.32,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 105.52,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 45,
+    "season": 2023,
+    "week": 8,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 140.96,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 84.78,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 46,
+    "season": 2023,
+    "week": 8,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 129.38,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 118.58,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 47,
+    "season": 2023,
+    "week": 8,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 119.4,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 147.08,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 48,
+    "season": 2023,
+    "week": 8,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 90.4,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 104.38,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 49,
+    "season": 2023,
+    "week": 9,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 85.24,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 127.92,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 50,
+    "season": 2023,
+    "week": 9,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 103.98,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 108.12,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 51,
+    "season": 2023,
+    "week": 9,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 124.96,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 102.82,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 52,
+    "season": 2023,
+    "week": 9,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 98.6,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 124.8,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 53,
+    "season": 2023,
+    "week": 9,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 94.52,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 84.2,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 54,
+    "season": 2023,
+    "week": 9,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 92.6,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 133.12,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 55,
+    "season": 2023,
+    "week": 10,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 144.58,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 98.86,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 56,
+    "season": 2023,
+    "week": 10,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 101.28,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 109.06,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 57,
+    "season": 2023,
+    "week": 10,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 118.6,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 138.18,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 58,
+    "season": 2023,
+    "week": 10,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 114.92,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 90,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 59,
+    "season": 2023,
+    "week": 10,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 113.16,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 84.3,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 60,
+    "season": 2023,
+    "week": 10,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 66.32,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 130.8,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 61,
+    "season": 2023,
+    "week": 11,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 138.86,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 136.24,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 62,
+    "season": 2023,
+    "week": 11,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 85.24,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 119.34,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 63,
+    "season": 2023,
+    "week": 11,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 41.7,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 113.36,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 64,
+    "season": 2023,
+    "week": 11,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 139.52,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 122.26,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 65,
+    "season": 2023,
+    "week": 11,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 157.9,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 83.38,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 66,
+    "season": 2023,
+    "week": 11,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 156.14,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 116.1,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 67,
+    "season": 2023,
+    "week": 12,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 108.48,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 107.06,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 68,
+    "season": 2023,
+    "week": 12,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 98.92,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 112.02,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 69,
+    "season": 2023,
+    "week": 12,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 116.06,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 121.56,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 70,
+    "season": 2023,
+    "week": 12,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 120.18,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 169.88,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 71,
+    "season": 2023,
+    "week": 12,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 111.1,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 145.22,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 72,
+    "season": 2023,
+    "week": 12,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 92.32,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 91.58,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 73,
+    "season": 2023,
+    "week": 13,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 101.56,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 111.1,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 74,
+    "season": 2023,
+    "week": 13,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 152.48,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 168.46,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 75,
+    "season": 2023,
+    "week": 13,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 133.76,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 77.68,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 76,
+    "season": 2023,
+    "week": 13,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 127.64,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 88.02,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 77,
+    "season": 2023,
+    "week": 13,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 169.3,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 126.46,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 78,
+    "season": 2023,
+    "week": 13,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 114.2,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 129.08,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 79,
+    "season": 2023,
+    "week": 14,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 112.72,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 133.02,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 80,
+    "season": 2023,
+    "week": 14,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 91.84,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 154.52,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 81,
+    "season": 2023,
+    "week": 14,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 96.34,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 133.46,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 82,
+    "season": 2023,
+    "week": 14,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 121.64,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 124.04,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 83,
+    "season": 2023,
+    "week": 14,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 109.42,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 81.04,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 84,
+    "season": 2023,
+    "week": 14,
+    "winner": "safvet-besen"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 143.32,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 118.76,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 85,
+    "season": 2023,
+    "week": 15,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 92.26,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 132.06,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 86,
+    "season": 2023,
+    "week": 15,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 111.26,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 85.42,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 87,
+    "season": 2023,
+    "week": 15,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 101.18,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 134,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 88,
+    "season": 2023,
+    "week": 15,
+    "winner": "spencer-kim"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 82.52,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 112.86,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 89,
+    "season": 2023,
+    "week": 15,
+    "winner": "michaela-frederick"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 113.84,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 161.16,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 90,
+    "season": 2023,
+    "week": 16,
+    "winner": "reagan-schmidt"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 104.16,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 84,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 91,
+    "season": 2023,
+    "week": 16,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 99.62,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 210.18,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 92,
+    "season": 2023,
+    "week": 16,
+    "winner": "olivia-nelli"
+  },
+  {
+    "away": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 130.2,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 137.4,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 93,
+    "season": 2023,
+    "week": 16,
+    "winner": "tyler-jung"
+  },
+  {
+    "away": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 101.92,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 120.52,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 94,
+    "season": 2023,
+    "week": 16,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 82.92,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 90.8,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 95,
+    "season": 2023,
+    "week": 16,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "logan-dunn",
+      "playerPoints": {},
+      "points": 175.64,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "reagan-schmidt",
+      "playerPoints": {},
+      "points": 127.24,
+      "starters": []
+    },
+    "kind": "playoff",
+    "matchupId": 96,
+    "season": 2023,
+    "week": 17,
+    "winner": "logan-dunn"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 116.28,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "safvet-besen",
+      "playerPoints": {},
+      "points": 96.92,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 97,
+    "season": 2023,
+    "week": 17,
+    "winner": "brendon-ng"
+  },
+  {
+    "away": {
+      "ownerSlug": "david-collier",
+      "playerPoints": {},
+      "points": 109.3,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "olivia-nelli",
+      "playerPoints": {},
+      "points": 106.36,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 98,
+    "season": 2023,
+    "week": 17,
+    "winner": "david-collier"
+  },
+  {
+    "away": {
+      "ownerSlug": "tyler-jung",
+      "playerPoints": {},
+      "points": 107.38,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "cassidy-pensa",
+      "playerPoints": {},
+      "points": 110,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 99,
+    "season": 2023,
+    "week": 17,
+    "winner": "cassidy-pensa"
+  },
+  {
+    "away": {
+      "ownerSlug": "jake-gibbons",
+      "playerPoints": {},
+      "points": 117.5,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "spencer-kim",
+      "playerPoints": {},
+      "points": 109.1,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 100,
+    "season": 2023,
+    "week": 17,
+    "winner": "jake-gibbons"
+  },
+  {
+    "away": {
+      "ownerSlug": "jaymie-lew",
+      "playerPoints": {},
+      "points": 133.18,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "michaela-frederick",
+      "playerPoints": {},
+      "points": 69.68,
+      "starters": []
+    },
+    "kind": "consolation",
+    "matchupId": 101,
+    "season": 2023,
+    "week": 17,
+    "winner": "jaymie-lew"
+  },
+  {
+    "away": {
       "ownerSlug": "spencer-kim",
       "playerPoints": {
         "96": 8.58,

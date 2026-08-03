@@ -151,9 +151,9 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
               className="text-[10px] text-chalk-600"
               text={`Measured against every score on record at that moment. Week-by-week scores exist for ${coverage.label}${
                 coverage.missing.length
-                  ? `; for ${coverage.missingLabel} only playoff and ladder matchups survived`
-                  : ""
-              }, and ESPN kept no lineups — so the earlier baseline is thinner than the matchups actually played.`}
+                  ? `; for ${coverage.missingLabel} only playoff and ladder matchups survived, so the earlier baseline is thinner than the matchups actually played`
+                  : ", so team-score marks are measured against a complete history"
+              }. Player marks are Sleeper-era only — ESPN kept no lineups — so that baseline starts empty in 2024.`}
             >
               coverage ⓘ
             </Tip>
