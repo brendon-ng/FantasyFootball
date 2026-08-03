@@ -130,14 +130,17 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
               // weeks, and co-owners share a total across differing tenures.
               sub={`${fmt.pts1(record.pointsForPerGame)} per game`}
             />
-            <Stat label="Last places" value={record.lastPlaces} />
-            {features().weeklyLowPunishment ? (
-              <Stat
-                label="Weekly lows"
-                value={weeklyLows}
-                sub={weeklyLows === 1 ? "punishment owed" : "punishments owed"}
-              />
-            ) : null}
+            {/* Weekly lows ride along as this tile's subtitle rather than taking
+                a fifth slot, which would wrap to a row of one. */}
+            <Stat
+              label="Last places"
+              value={record.lastPlaces}
+              sub={
+                features().weeklyLowPunishment
+                  ? `${weeklyLows} weekly low${weeklyLows === 1 ? "" : "s"}`
+                  : undefined
+              }
+            />
           </div>
 
           <div className="grid gap-5 lg:grid-cols-2">

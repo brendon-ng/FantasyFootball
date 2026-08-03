@@ -77,7 +77,7 @@ export default function RecordsPage() {
           and the two halves expand together. */}
       <ExpandableRow>
         <ScoreList
-          title="Highest Weekly Scores"
+          title="Highest Scores"
           rows={records.weeklyHigh}
           name={name}
           tone="text-accent"
@@ -85,7 +85,7 @@ export default function RecordsPage() {
           kindOf={kindOf}
         />
         <ScoreList
-          title="Lowest Weekly Scores"
+          title="Lowest Scores"
           rows={records.weeklyLow}
           name={name}
           tone="text-loss"

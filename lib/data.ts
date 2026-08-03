@@ -635,7 +635,14 @@ export const getAtTheTime = (): Record<string, AtTheTimeFlag[]> =>
 // ---------------------------------------------------------------------------
 
 export interface RecordFlag {
-  /** Short chip text, e.g. "#3 weekly high". */
+  /**
+   * Short chip text, e.g. "#3 highest score".
+   *
+   * Says "score", never "weekly high/low" — `features.weeklyLowPunishment` uses
+   * "weekly low" for the ONE team that scored lowest in a given week, which is a
+   * different idea from an all-time ranking. Sharing the wording made a record
+   * badge look like a punishment marker.
+   */
   short: string;
   /** Full sentence for a tooltip. */
   full: string;
@@ -685,7 +692,7 @@ export function getRecordFlags(
   r.weeklyHigh.forEach((s, i) => {
     if (hit(s)) {
       out.push({
-        short: `#${i + 1} weekly high`,
+        short: `#${i + 1} highest score`,
         full: `${ordinalOf(i + 1)}-highest single-week score in league history`,
         rank: i + 1,
         tone: "good",
@@ -696,7 +703,7 @@ export function getRecordFlags(
   r.weeklyLow.forEach((s, i) => {
     if (hit(s)) {
       out.push({
-        short: `#${i + 1} weekly low`,
+        short: `#${i + 1} lowest score`,
         full: `${ordinalOf(i + 1)}-lowest single-week score in league history`,
         rank: i + 1,
         tone: "bad",

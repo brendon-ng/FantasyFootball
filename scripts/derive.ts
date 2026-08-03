@@ -29,6 +29,7 @@ import type {
   StandingsRow,
   WeeklyLow,
 } from "../lib/types.ts";
+import { byAllTimeRank } from "../lib/ranking.ts";
 import type {
   SleeperBracketMatch,
   SleeperDraft,
@@ -875,7 +876,7 @@ function buildOwnerRecords(
   }
 
   return [...rec.values()].sort(
-    (a, b) => b.championships - a.championships || b.winPct - a.winPct,
+    byAllTimeRank,
   );
 }
 

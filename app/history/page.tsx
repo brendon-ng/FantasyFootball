@@ -4,9 +4,11 @@ import { AllTimeTable } from "@/components/all-time-table";
 import { Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
 import {
   creditedNames,
+  features,
   getOwnerMap,
   getOwnerRecords,
   getSeasons,
+  getWeeklyLows,
   pageTitle,
 } from "@/lib/data";
 
@@ -24,6 +26,13 @@ export default function HistoryPage() {
   const seasons = getSeasons().filter((s) => s.finalized).sort((a, b) => b.season - a.season);
   const records = getOwnerRecords();
   const owners = getOwnerMap();
+  // Null when the league has no such rule, so the column disappears entirely.
+  const lowsByOwner = features().weeklyLowPunishment
+    ? getWeeklyLows().reduce<Record<string, number>>((acc, w) => {
+        acc[w.ownerSlug] = (acc[w.ownerSlug] ?? 0) + 1;
+        return acc;
+      }, {})
+    : null;
   const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || "—";
 
   const allSeasons = seasons.map((s) => s.season).sort((a, b) => a - b);
@@ -82,7 +91,11 @@ export default function HistoryPage() {
           meta="regular season"
           legend="Click any column to sort. A co-owned team's record counts for each of its owners, so these columns will not sum to league totals."
         />
-        <AllTimeTable records={records} owners={Object.fromEntries(owners)} />
+        <AllTimeTable
+          records={records}
+          owners={Object.fromEntries(owners)}
+          weeklyLows={lowsByOwner}
+        />
       </Panel>
 
       <Panel>

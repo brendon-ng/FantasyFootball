@@ -6,12 +6,14 @@ import { WeeklyLowBadge } from "@/components/weekly-low";
 import { Col, ListHeader, Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
 import {
   creditedNames,
+  features,
   getAllMeetings,
   getDrafts,
   getMatchupHistory,
   getOwnerMap,
   getSeasons,
   getWeeklyLowKeys,
+  getWeeklyLows,
   meetingId,
 } from "@/lib/data";
 import type { BracketMatch } from "@/lib/types";
@@ -59,6 +61,12 @@ export default async function SeasonPage({
   // only exists for seasons that have picks.
   const hasDraft = getDrafts().some((p) => p.season === season);
   const lowKeys = getWeeklyLowKeys();
+  // Counted per team for THIS season's standings. Credited to the primary owner,
+  // matching how the standings row is keyed.
+  const lowsByOwner = new Map<string, number>();
+  for (const w of getWeeklyLows().filter((w) => w.season === season)) {
+    lowsByOwner.set(w.ownerSlug, (lowsByOwner.get(w.ownerSlug) ?? 0) + 1);
+  }
 
   const matchups = getMatchupHistory().filter((m) => m.season === season);
   const weeks = [...new Set(matchups.map((m) => m.week))].sort((a, b) => a - b);
@@ -100,9 +108,12 @@ export default async function SeasonPage({
                   [
                     ["Seed", "Playoff seed, by wins then points for"],
                     ["Owner", ""],
-                    ["W-L-T", "Wins-losses-ties in the regular season"],
+                    ["W-L", "Wins-losses in the regular season; a tie shows as a third number"],
                     ["PF", "Points For — total points scored"],
                     ["PA", "Points Against — total points their opponents scored"],
+                    ...(features().weeklyLowPunishment
+                      ? ([["🚽", "Weeks finishing lowest in the league — punishments owed"]] as const)
+                      : []),
                   ] as const
                 ).map(([h, hint], i) => (
                   <th
@@ -147,6 +158,15 @@ export default async function SeasonPage({
                   <td className="tabular px-3 py-2 text-right text-chalk-500">
                     {fmt.pts1(r.pointsAgainst)}
                   </td>
+                  {features().weeklyLowPunishment ? (
+                    <td className="tabular px-3 py-2 text-right">
+                      {lowsByOwner.get(r.ownerSlug) ? (
+                        <span className="text-loss">{lowsByOwner.get(r.ownerSlug)}</span>
+                      ) : (
+                        <span className="text-chalk-600">—</span>
+                      )}
+                    </td>
+                  ) : null}
                 </tr>
               ))}
             </tbody>

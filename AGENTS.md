@@ -172,8 +172,6 @@ draft data.
 - **ADP beyond pick 170** converts to a round past 17, which is meaningless as a
   keeper cost in a 10-team, 17-round draft. Bites in 2027, when the first
   contracts expire.
-- **All-time table sorts titles-first**, so a 2-season co-owner can top it. User
-  has not asked to change it.
 
 ## The weekly low scorer
 
@@ -192,9 +190,27 @@ field. Ties emit one row per tied team, since a shared low is shared.
 `getWeeklyLowKeys()` returns an empty set when the flag is off, so callers never
 re-check it — a league without the rule simply has no low scorers to mark.
 
-Surfaced in four places: a chip on the matchup page's scoreline, a 🚽 glyph beside
-the name in a season's week list, a 🚽 column in an owner's season-by-season table,
-and a career tally on their profile.
+Surfaced in six places: a chip on the matchup page's scoreline, a 🚽 glyph beside
+the name in a season's week list, a 🚽 column in the season standings, a 🚽 column
+in an owner's season-by-season table, a sortable 🚽 column in the all-time table,
+and a career count as the subtitle of the owner profile's "Last places" tile —
+subtitle rather than its own tile, which would wrap to a row of one.
+
+TERMINOLOGY. "Weekly low" means lowest in THAT week, i.e. who owes a punishment.
+The all-time record lists deliberately say "Highest score" / "Lowest score", never
+"weekly high/low" — the two read identically otherwise, and a record badge then
+looks like a punishment marker.
+
+## Default all-time ordering
+
+`byAllTimeRank()` in `lib/ranking.ts` is the one definition: wins, then titles,
+then 2nds, then 3rds, with win% last purely so the result does not depend on input
+array order. Used by derive (so `owner-records.json` ships in that order), the home
+leaderboard, and the sortable all-time table's default view. Three copies of that
+tie-break chain would drift.
+
+The table's W-L column keys off it too, so clicking back to the default reproduces
+the shipped order rather than a wins-then-win% approximation.
 
 ## Viewer identity
 

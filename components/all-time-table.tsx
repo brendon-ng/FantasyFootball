@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
+import { byAllTimeRank } from "@/lib/ranking";
 import type { Owner, OwnerRecord } from "@/lib/types";
 
 /**
@@ -36,9 +37,16 @@ const fmtPct = (n: number) => `${(n * 100).toFixed(1)}%`;
 export function AllTimeTable({
   records,
   owners,
+  weeklyLows,
 }: {
   records: OwnerRecord[];
   owners: Record<string, Owner>;
+  /**
+   * Career weekly-low counts by owner slug, or null for a league that does not
+   * punish the weekly low — in which case the column is absent rather than a
+   * row of zeroes.
+   */
+  weeklyLows: Record<string, number> | null;
 }) {
   const columns: Column[] = useMemo(
     () => [
@@ -66,7 +74,7 @@ export function AllTimeTable({
       },
       {
         key: "record",
-        label: "W-L-T",
+        label: "W-L",
         hint: "All-time regular-season wins-losses-ties. Sorts by wins.",
         value: (r) => r.wins,
         firstClick: "desc",
@@ -150,6 +158,20 @@ export function AllTimeTable({
         firstClick: "asc",
         render: (r) => <span className="text-loss">{r.lastPlaces || "—"}</span>,
       },
+      ...(weeklyLows
+        ? [
+            {
+              key: "weeklyLows",
+              label: "🚽",
+              hint: "Weeks finishing lowest in the league — punishments owed. Lowest first, fewer is better.",
+              value: (r: OwnerRecord) => weeklyLows[r.ownerSlug] ?? 0,
+              firstClick: "asc" as const,
+              render: (r: OwnerRecord) => (
+                <span className="text-loss">{weeklyLows[r.ownerSlug] || "—"}</span>
+              ),
+            },
+          ]
+        : []),
       {
         key: "playoffs",
         label: "Playoffs",
@@ -173,18 +195,24 @@ export function AllTimeTable({
         ),
       },
     ],
-    [owners],
+    [owners, weeklyLows],
   );
 
-  // Default view: most decorated first, which is what a trophy table implies.
+  // Default view: wins, with hardware breaking ties. See byAllTimeRank.
   const [sort, setSort] = useState<{ key: string; dir: "asc" | "desc" }>({
-    key: "titles",
+    key: "record",
     dir: "desc",
   });
 
   const sorted = useMemo(() => {
     const col = columns.find((c) => c.key === sort.key) ?? columns[0];
     const rows = [...records];
+    // The W-L column IS the default ranking, so it uses the shared chain rather
+    // than falling through to the generic win% tie-break.
+    if (col.key === "record") {
+      rows.sort(byAllTimeRank);
+      return sort.dir === "desc" ? rows : rows.reverse();
+    }
     rows.sort((a, b) => {
       const va = col.value(a);
       const vb = col.value(b);

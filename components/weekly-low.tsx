@@ -10,10 +10,14 @@ import { Tip } from "@/components/tooltip";
  * Two sizes because the same fact appears at very different scales: a full chip
  * beside a scoreboard, and a bare glyph in a dense list where a word of text
  * would push the score out of column.
+ *
+ * "WEEKLY LOW" MEANS LOWEST IN THAT WEEK, not an all-time ranking. The record book
+ * deliberately says "highest score" / "lowest score" instead, because the two read
+ * identically otherwise and a record badge then looks like a punishment marker.
  */
 export function WeeklyLowBadge({ size = "chip" }: { size?: "chip" | "glyph" }) {
   const text =
-    "Lowest score in the league that week — this team owed the weekly punishment.";
+    "Lowest score in the league that week — this team owed the weekly punishment. Not an all-time record; see the record book for those.";
 
   if (size === "glyph") {
     return (

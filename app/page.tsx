@@ -253,8 +253,8 @@ export default async function HomePage() {
                               <span
                                 title={
                                   p.tone === "good"
-                                    ? `On pace for the ${p.rank === 1 ? "highest" : `#${p.rank}`} weekly score in league history`
-                                    : `On pace for the ${p.rank === 1 ? "lowest" : `#${p.rank}`} weekly score in league history`
+                                    ? `On pace for the ${p.rank === 1 ? "highest" : `#${p.rank}`} single-week score in league history`
+                                    : `On pace for the ${p.rank === 1 ? "lowest" : `#${p.rank}`} single-week score in league history`
                                 }
                                 className={`rounded-full border px-1.5 py-0.5 text-[9px] font-bold ${
                                   p.tone === "bad"

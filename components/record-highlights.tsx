@@ -67,15 +67,15 @@ export function RecordHighlights({
     showOpponent: boolean;
   }> = [
     {
-      title: "Highest week",
-      hint: "Most points by one team in a single week",
+      title: "Highest score",
+      hint: "Most points by one team in a single week, all time",
       tone: "text-accent",
       rows: records.weeklyHigh.slice(0, SHOWN).map((r) => ({ ...r, value: r.points })),
       showOpponent: false,
     },
     {
-      title: "Lowest week",
-      hint: "Fewest points by one team in a single week",
+      title: "Lowest score",
+      hint: "Fewest points by one team in a single week, all time",
       tone: "text-loss",
       rows: records.weeklyLow.slice(0, SHOWN).map((r) => ({ ...r, value: r.points })),
       showOpponent: false,
