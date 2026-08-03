@@ -1,7 +1,14 @@
 import Link from "next/link";
 
 import { Panel, PanelHeader, fmt } from "@/components/ui";
-import { getMatchupHistory, getOwnerMap, getPlayers, getRecords, meetingId } from "@/lib/data";
+import {
+  getAllMeetings,
+  getMatchupHistory,
+  getOwnerMap,
+  getPlayers,
+  getRecords,
+  meetingId,
+} from "@/lib/data";
 import type { CombinedRecord, ScoreRecord } from "@/lib/types";
 
 export const metadata = { title: "Records · Den Ops" };
@@ -20,6 +27,20 @@ export default function RecordsPage() {
    */
   const meetingHref = (a: string, b: string | null, season: number, week: number) =>
     b ? `/matchups/${meetingId(season, week, a, b)}/` : null;
+
+  /**
+   * Postseason label for a matchup, so the record book reads the same as the
+   * head-to-head page: Championship, 3rd place, toilet bowl rather than a bare
+   * week number.
+   */
+  const kindByMeeting = new Map(
+    getAllMeetings().map((m) => [
+      m.id,
+      m.kind === "regular" ? null : (m.label ?? (m.kind === "consolation" ? "toilet bowl" : m.kind)),
+    ]),
+  );
+  const kindOf = (a: string, b: string | null, season: number, week: number) =>
+    b ? (kindByMeeting.get(meetingId(season, week, a, b)) ?? null) : null;
 
   // Player records store no opponent, so recover it from the matchup that week.
   const opponentOf = new Map<string, string>();
@@ -49,6 +70,7 @@ export default function RecordsPage() {
           name={name}
           tone="text-accent"
           meetingHref={meetingHref}
+          kindOf={kindOf}
         />
         <ScoreList
           title="Lowest Weekly Scores"
@@ -56,6 +78,7 @@ export default function RecordsPage() {
           name={name}
           tone="text-loss"
           meetingHref={meetingHref}
+          kindOf={kindOf}
         />
 
         <Panel>
@@ -104,6 +127,7 @@ export default function RecordsPage() {
                       </div>
                     )}
                   </div>
+                  <KindChip kind={kindOf(r.ownerSlug, opp, r.season, r.week)} />
                   <span className="tabular shrink-0 text-sm font-bold text-accent">
                     {fmt.pts(r.points)}
                   </span>
@@ -119,6 +143,7 @@ export default function RecordsPage() {
           name={name}
           tone="text-accent"
           meetingHref={meetingHref}
+          kindOf={kindOf}
         />
         <CombinedList
           title="Lowest Scoring Matchups"
@@ -126,6 +151,7 @@ export default function RecordsPage() {
           name={name}
           tone="text-loss"
           meetingHref={meetingHref}
+          kindOf={kindOf}
         />
 
         <div className="space-y-5">
@@ -134,12 +160,14 @@ export default function RecordsPage() {
             rows={records.biggestBlowout}
             name={name}
             meetingHref={meetingHref}
+            kindOf={kindOf}
           />
           <MarginList
             title="Narrowest Wins"
             rows={records.narrowestWin}
             name={name}
             meetingHref={meetingHref}
+            kindOf={kindOf}
           />
         </div>
       </div>
@@ -148,6 +176,23 @@ export default function RecordsPage() {
 }
 
 type MeetingHref = (a: string, b: string | null, season: number, week: number) => string | null;
+type KindOf = (a: string, b: string | null, season: number, week: number) => string | null;
+
+/**
+ * Postseason chip in a fixed slot, always rendered so the numbers beside it
+ * stay in column whether or not a row carries one.
+ */
+function KindChip({ kind }: { kind: string | null }) {
+  return (
+    <span className="hidden w-[86px] shrink-0 text-right sm:block">
+      {kind ? (
+        <span className="rounded border border-ink-500 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-chalk-500">
+          {kind}
+        </span>
+      ) : null}
+    </span>
+  );
+}
 
 function ScoreList({
   title,
@@ -155,12 +200,14 @@ function ScoreList({
   name,
   tone,
   meetingHref,
+  kindOf,
 }: {
   title: string;
   rows: ScoreRecord[];
   name: (s: string | null | undefined) => string;
   tone: string;
   meetingHref: MeetingHref;
+  kindOf: KindOf;
 }) {
   return (
     <Panel>
@@ -185,6 +232,7 @@ function ScoreList({
                   {r.opponentPoints != null ? ` (${fmt.pts1(r.opponentPoints)})` : ""}
                 </div>
               </div>
+              <KindChip kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
               <span className={`tabular shrink-0 text-sm font-bold ${tone}`}>
                 {fmt.pts(r.points)}
               </span>
@@ -226,12 +274,14 @@ function CombinedList({
   name,
   tone,
   meetingHref,
+  kindOf,
 }: {
   title: string;
   rows: CombinedRecord[];
   name: (s: string | null | undefined) => string;
   tone: string;
   meetingHref: MeetingHref;
+  kindOf: KindOf;
 }) {
   return (
     <Panel>
@@ -256,6 +306,7 @@ function CombinedList({
                   {r.season} wk{r.week} · {fmt.pts1(r.points)}–{fmt.pts1(r.opponentPoints)}
                 </div>
               </div>
+              <KindChip kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
               <span className={`tabular shrink-0 text-sm font-bold ${tone}`}>
                 {fmt.pts(r.total)}
               </span>
@@ -289,11 +340,13 @@ function MarginList({
   rows,
   name,
   meetingHref,
+  kindOf,
 }: {
   title: string;
   rows: Array<ScoreRecord & { margin: number }>;
   name: (s: string | null | undefined) => string;
   meetingHref: MeetingHref;
+  kindOf: KindOf;
 }) {
   return (
     <Panel>
@@ -317,6 +370,7 @@ function MarginList({
                   {r.season} wk{r.week} · {fmt.pts1(r.points)}–{fmt.pts1(r.opponentPoints ?? 0)}
                 </div>
               </div>
+              <KindChip kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
               <span className="tabular shrink-0 text-sm font-bold text-chalk-300">
                 +{fmt.pts(r.margin)}
               </span>
