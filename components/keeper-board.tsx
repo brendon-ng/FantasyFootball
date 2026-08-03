@@ -132,6 +132,9 @@ export function KeeperBoard({
                           }`}
                         />
                         <PositionPill position={p?.position ?? null} />
+                        {/* The badge must sit OUTSIDE the truncating span.
+                            `truncate` sets overflow:hidden, which clips a taller
+                            inline-block child's border top and bottom. */}
                         <span className="min-w-0 flex-1 truncate text-sm font-medium">
                           {p?.full_name ?? c.playerId}
                           {p?.team ? (
@@ -139,15 +142,15 @@ export function KeeperBoard({
                               {p.team}
                             </span>
                           ) : null}
-                          {isSelected ? (
-                            <span
-                              className="ml-2 rounded border border-accent-dim bg-accent/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-accent"
-                              title="This team has locked this player in as a keeper on Sleeper"
-                            >
-                              Kept
-                            </span>
-                          ) : null}
                         </span>
+                        {isSelected ? (
+                          <span
+                            className="shrink-0 rounded border border-accent-dim bg-accent/10 px-1.5 py-0.5 text-[9px] font-bold uppercase leading-normal tracking-wide text-accent"
+                            title="This team has locked this player in as a keeper on Sleeper"
+                          >
+                            Kept
+                          </span>
+                        ) : null}
                         <ValueBadge costRound={c.round} adp={adp[c.playerId]} />
                         <KeepPips used={c.keepsUsed} total={c.keepsUsed + c.keepsRemaining} />
                         <span
