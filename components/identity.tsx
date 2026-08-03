@@ -32,12 +32,14 @@ import type { NavOwner } from "@/components/nav";
  * for free; `[data-owner]` covers the few places that render a name as plain
  * text, like bracket cards.
  *
- * TWO OPT-OUTS, and they differ:
- *   [data-me-exempt]  keep your own text colour, still get the tint. For marks
- *                     whose colour means something — a bracket winner, a gold
+ * OPT-OUTS:
+ *   [data-me-exempt]  keep your own text colour — a bracket winner, a gold
  *                     champion tile.
- *   [data-me-ignore]  do not touch at all. For chrome that represents you
- *                     rather than mentioning you, like the nav's My Team link.
+ *   [data-me-ignore]  do not touch at all. Chrome that represents you rather
+ *                     than mentioning you, like the nav's My Team link.
+ *   [data-owner-tint] opt IN to a background tint instead of a recolour. Only
+ *                     the bracket uses it, because there text colour is
+ *                     already carrying the result.
  *
  * `[data-me-exempt]` opts an element out. Some colours already carry meaning —
  * gold for a champion, the winner tint in a bracket — and those must win. The
@@ -173,23 +175,16 @@ export function IdentityProvider({
           dangerouslySetInnerHTML={{
             __html: `
 /*
- * TWO CHANNELS, deliberately.
+ * Colour is the default marker.
  *
- * The tint applies ALWAYS — even to exempt elements — so "this is you" is
- * present whether you won or lost. Text colour is a separate channel that keeps
- * meaning outcome: green for a bracket winner, gold for a champion.
- *
- * Marking identity with colour alone made it appear only when the outcome
- * colour happened to be free, so you were violet in games you lost and
- * unmarked in games you won.
+ * The one place it cannot be used is the bracket, where text colour already
+ * means won or lost, so a bracket row opts into a tint instead via
+ * data-owner-tint. Everywhere else, plain violet text.
  */
-a[href$="/owners/${mySlug}/"]:not([data-me-ignore]),
-[data-owner="${mySlug}"]:not([data-me-ignore]) {
-  background-color: color-mix(in srgb, ${ME_COLOR} 16%, transparent);
-  box-shadow: 0 0 0 1px color-mix(in srgb, ${ME_COLOR} 30%, transparent);
-  border-radius: 4px;
+[data-owner-tint="${mySlug}"] {
+  background-color: color-mix(in srgb, ${ME_COLOR} 15%, transparent);
+  box-shadow: inset 2px 0 0 0 ${ME_COLOR};
 }
-/* Colour only where nothing else is using it. */
 a[href$="/owners/${mySlug}/"]:not([data-me-exempt]):not([data-me-ignore]),
 [data-owner="${mySlug}"]:not([data-me-exempt]):not([data-me-ignore]) {
   color: ${ME_COLOR} !important;

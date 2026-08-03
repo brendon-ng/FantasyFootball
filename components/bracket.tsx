@@ -79,14 +79,13 @@ function TeamRow({
         : "text-accent font-semibold"
       : "text-chalk-300";
 
-  // An advancing row is already coloured to mean something. Tag it exempt so the
-  // "this is me" highlight cannot overwrite that signal.
-  const semantic = advancing || muted;
-
   return (
     <div
       data-owner={slug ?? undefined}
-      data-me-exempt={semantic ? "" : undefined}
+      // The bracket marks identity with a tint, because text colour here
+      // already means won or lost.
+      data-owner-tint={slug ?? undefined}
+      data-me-exempt=""
       className={`flex items-center justify-between gap-2 px-2.5 py-1.5 text-[13px] ${tone}`}
     >
       <span className="truncate">{label}</span>
