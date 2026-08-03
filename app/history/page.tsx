@@ -76,7 +76,7 @@ export default function HistoryPage() {
           legend="A co-owned team's record counts for each of its owners, so these columns will not sum to league totals."
         />
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[640px] text-sm">
+          <table className="w-full min-w-[760px] text-sm">
             <thead>
               <tr className="border-b border-ink-600 text-left">
                 {(
@@ -85,7 +85,9 @@ export default function HistoryPage() {
                     ["W-L-T", "All-time regular-season wins-losses-ties"],
                     ["Win%", "Win percentage, counting a tie as half a win"],
                     ["PF", "Points For — total points scored, all seasons"],
+                    ["PF/G", "Points For per game — comparable across seasons of different length"],
                     ["PA", "Points Against — total points their opponents scored"],
+                    ["PA/G", "Points Against per game"],
                     ["🏆", "Championships won"],
                     ["2nd", "Runner-up finishes"],
                     ["3rd", "Third-place finishes"],
@@ -130,8 +132,14 @@ export default function HistoryPage() {
                   <td className="tabular px-3 py-2.5 text-right text-chalk-500">
                     {fmt.pts1(r.pointsFor)}
                   </td>
+                  <td className="tabular px-3 py-2.5 text-right font-medium text-chalk-300">
+                    {fmt.pts1(r.pointsForPerGame)}
+                  </td>
                   <td className="tabular px-3 py-2.5 text-right text-chalk-500">
                     {fmt.pts1(r.pointsAgainst)}
+                  </td>
+                  <td className="tabular px-3 py-2.5 text-right text-chalk-500">
+                    {fmt.pts1(r.pointsAgainstPerGame)}
                   </td>
                   <td className="tabular px-3 py-2.5 text-right text-gold">
                     {r.championships || "—"}

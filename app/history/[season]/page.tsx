@@ -25,6 +25,14 @@ export default async function SeasonPage({
 
   const owners = getOwnerMap();
   const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || "TBD";
+  /**
+   * A co-owned team is ONE team here — one row, both owners named. Personal
+   * records credit each owner separately, but a season table is a table of
+   * teams, so splitting them would invent standings positions that never existed.
+   */
+  const teamLabel = (row: { ownerSlugs: string[]; ownerSlug: string }) =>
+    (row.ownerSlugs.length ? row.ownerSlugs : [row.ownerSlug]).map(name).join(" & ");
+
   const seedOf = (slug: string | null) =>
     slug ? (summary.standings.find((r) => r.ownerSlug === slug)?.seed ?? null) : null;
   const matchups = getMatchupHistory().filter((m) => m.season === season);
@@ -87,7 +95,7 @@ export default async function SeasonPage({
                       href={`/owners/${r.ownerSlug}/`}
                       className="font-medium transition-colors hover:text-accent"
                     >
-                      {name(r.ownerSlug)}
+                      {teamLabel(r)}
                     </Link>
                     {r.teamName ? (
                       <div className="truncate text-[11px] text-chalk-600">{r.teamName}</div>
@@ -137,7 +145,7 @@ export default async function SeasonPage({
                     href={`/owners/${r.ownerSlug}/`}
                     className="min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-accent"
                   >
-                    {name(r.ownerSlug)}
+                    {teamLabel(r)}
                   </Link>
                   <span className="text-[11px] text-chalk-600">
                     {r.seed <= 6 ? `${fmt.ordinal(r.seed)} seed` : "toilet bowl"}

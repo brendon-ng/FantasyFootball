@@ -118,11 +118,14 @@ export interface Matchup {
 }
 
 export interface HeadToHead {
+  /** All meetings — regular season and postseason combined. */
   wins: number;
   losses: number;
   ties: number;
   pointsFor: number;
   pointsAgainst: number;
+  /** The postseason subset of the above (playoffs, consolation and toilet bowl). */
+  playoff: { wins: number; losses: number; ties: number };
 }
 
 export interface OwnerRecord {
@@ -133,6 +136,9 @@ export interface OwnerRecord {
   winPct: number;
   pointsFor: number;
   pointsAgainst: number;
+  /** Regular-season scoring rate, which is comparable across eras of different length. */
+  pointsForPerGame: number;
+  pointsAgainstPerGame: number;
   championships: number;
   runnerUps: number;
   thirdPlaces: number;

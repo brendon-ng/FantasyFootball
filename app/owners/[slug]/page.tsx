@@ -155,7 +155,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
               <PanelHeader
                 title="Head to Head"
                 meta="regular season · best first"
-                legend="2024 onward — imported ESPN seasons have no weekly matchup data."
+                legend="Includes playoff and toilet-bowl meetings. Regular-season games are 2024 onward — imported ESPN seasons have no weekly matchups — but their playoff games are counted."
               />
               <ListHeader>
                 <Col className="flex-1">Opponent</Col>
@@ -191,8 +191,18 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                           style={{ width: `${pct * 100}%` }}
                         />
                       </span>
-                      <span className="tabular w-14 shrink-0 text-right text-sm text-chalk-300">
+                      <span
+                        className="tabular w-14 shrink-0 text-right text-sm text-chalk-300"
+                        title={
+                          h.playoff.wins + h.playoff.losses + h.playoff.ties
+                            ? `${fmt.record(h.playoff.wins, h.playoff.losses, h.playoff.ties)} of these were postseason meetings`
+                            : "No postseason meetings"
+                        }
+                      >
                         {fmt.record(h.wins, h.losses, h.ties)}
+                        {h.playoff.wins + h.playoff.losses + h.playoff.ties ? (
+                          <span className="ml-1 text-[10px] text-chalk-600">*</span>
+                        ) : null}
                       </span>
                       <span className="tabular hidden w-16 shrink-0 text-right text-[11px] text-chalk-600 sm:block">
                         {fmt.pts1(h.pointsFor)}

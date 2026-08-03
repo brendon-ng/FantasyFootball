@@ -148,7 +148,9 @@ export default async function HomePage() {
                       href={`/owners/${row.ownerSlug}/`}
                       className="min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-accent"
                     >
-                      {name(row.ownerSlug)}
+                      {(row.ownerSlugs?.length ? row.ownerSlugs : [row.ownerSlug])
+                        .map(name)
+                        .join(" & ")}
                       {row.teamName ? (
                         <span className="ml-2 hidden text-[11px] text-chalk-600 sm:inline">
                           {row.teamName}

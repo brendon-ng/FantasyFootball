@@ -181,6 +181,13 @@ export function Bracket({
   // Anything with a placement that isn't the final is a side game.
   const sideGames = matches.filter((m) => m.placesFor != null && m.matchId !== final?.matchId);
 
+  /**
+   * Sleeper publishes winner/loser routing; the imported ESPN brackets do not.
+   * Without routing there is no way to tell a bye from an unlinked match, and
+   * assuming one invents a bye for every team in every later round.
+   */
+  const hasRouting = matches.some((m) => m.team1From || m.team2From);
+
   // --- depth-first slot assignment -----------------------------------------
   const positioned: Positioned[] = [];
   const byes: ByeLeaf[] = [];
@@ -203,8 +210,8 @@ export function Bracket({
       const feeder = feederId != null ? byId.get(feederId) : undefined;
       if (feeder) {
         spans.push(place(feeder));
-      } else if (match.round > 1 && team) {
-        // No feeder in an later round means this team had a bye.
+      } else if (hasRouting && match.round > 1 && team) {
+        // With routing present, no feeder in a later round means a bye.
         const slot = nextSlot++;
         byes.push({ slug: team, round: match.round - 1, slot });
         spans.push({ start: slot, end: slot });
@@ -268,7 +275,7 @@ export function Bracket({
 
         {byes.map((b) => (
           <div
-            key={`bye-${b.slug}`}
+            key={`bye-${b.round}-${b.slot}-${b.slug}`}
             className="self-center"
             style={{
               gridColumn: (roundIndex.get(b.round) ?? 0) + 1,

@@ -664,6 +664,7 @@ function buildOwnerRecords(
     ownerSlug: slug,
     wins: 0, losses: 0, ties: 0, winPct: 0,
     pointsFor: 0, pointsAgainst: 0,
+    pointsForPerGame: 0, pointsAgainstPerGame: 0,
     championships: 0, runnerUps: 0, thirdPlaces: 0, lastPlaces: 0,
     playoffAppearances: 0, seasonsPlayed: 0,
     averageFinish: null, bestFinish: null, worstFinish: null,
@@ -680,33 +681,58 @@ function buildOwnerRecords(
   const sideOwners = (season: number, slug: string) =>
     ownersOfTeam.get(`${season}:${slug}`) ?? [slug];
 
-  // Regular-season head-to-head only: playoff and consolation games are tracked
-  // separately via placements, and mixing them distorts "record against".
-  // Imported ESPN seasons have no weekly matchups at all, so they contribute
-  // nothing here — head-to-head is 2024-onward by necessity.
-  for (const m of matchups) {
-    if (m.kind !== "regular") continue;
+  /** Credits one meeting to every pairing across the two teams' owner sets. */
+  const credit = (
+    season: number,
+    a: { slug: string; points: number },
+    b: { slug: string; points: number },
+    isPlayoff: boolean,
+  ) => {
     for (const [self, opp] of [
-      [m.home, m.away],
-      [m.away, m.home],
+      [a, b],
+      [b, a],
     ] as const) {
-      const selfOwners = sideOwners(m.season, self.ownerSlug);
-      const oppOwners = sideOwners(m.season, opp.ownerSlug);
-      for (const me of selfOwners) {
+      for (const me of sideOwners(season, self.slug)) {
         const r = rec.get(me);
         if (!r) continue;
-        for (const them of oppOwners) {
+        for (const them of sideOwners(season, opp.slug)) {
           if (them === me) continue;
           const h2h = (r.vs[them] ??= {
             wins: 0, losses: 0, ties: 0, pointsFor: 0, pointsAgainst: 0,
+            playoff: { wins: 0, losses: 0, ties: 0 },
           });
           h2h.pointsFor = round2(h2h.pointsFor + self.points);
           h2h.pointsAgainst = round2(h2h.pointsAgainst + opp.points);
-          if (m.winner === null) h2h.ties++;
-          else if (m.winner === self.ownerSlug) h2h.wins++;
-          else h2h.losses++;
+          const bucket = self.points === opp.points ? "ties" : self.points > opp.points ? "wins" : "losses";
+          h2h[bucket]++;
+          if (isPlayoff) h2h.playoff[bucket]++;
         }
       }
+    }
+  };
+
+  // Sleeper seasons: every meeting, postseason included. Playoff and toilet-bowl
+  // games are genuine head-to-head results and excluding them discarded data.
+  for (const m of matchups) {
+    credit(
+      m.season,
+      { slug: m.home.ownerSlug, points: m.home.points },
+      { slug: m.away.ownerSlug, points: m.away.points },
+      m.kind !== "regular",
+    );
+  }
+
+  // Imported ESPN seasons have no weekly matchups, but their playoff, winner's
+  // consolation and ladder games were recovered with full scores — so those
+  // meetings can still be counted even though the regular season cannot.
+  for (const s of summaries) {
+    if (!s.imported) continue;
+    for (const m of [...s.winnersBracket, ...s.losersBracket]) {
+      if (!m.team1 || !m.team2) continue;
+      const p1 = m.points[m.team1];
+      const p2 = m.points[m.team2];
+      if (p1 == null || p2 == null) continue;
+      credit(s.season, { slug: m.team1, points: p1 }, { slug: m.team2, points: p2 }, true);
     }
   }
 
@@ -744,6 +770,9 @@ function buildOwnerRecords(
   for (const r of rec.values()) {
     const games = r.wins + r.losses + r.ties;
     r.winPct = games ? round2((r.wins + r.ties / 2) / games) : 0;
+    // Per-game rates, so a 13-game 2020 season compares fairly with a 14-game one.
+    r.pointsForPerGame = games ? round2(r.pointsFor / games) : 0;
+    r.pointsAgainstPerGame = games ? round2(r.pointsAgainst / games) : 0;
     const places = r.finishes.map((f) => f.place).filter((p): p is number => p != null);
     if (places.length) {
       r.averageFinish = round2(places.reduce((a, b) => a + b, 0) / places.length);
