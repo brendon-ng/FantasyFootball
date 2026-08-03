@@ -2,7 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Col, EmptyState, ListHeader, Panel, PanelHeader, Stat, fmt } from "@/components/ui";
-import { getMeetings, getOwnerMap, getOwners } from "@/lib/data";
+import {
+  getMeetings,
+  getOwnerMap,
+  getOwners,
+  weeklyCoverage,
+} from "@/lib/data";
 
 export const dynamicParams = false;
 
@@ -21,6 +26,8 @@ export function generateStaticParams() {
   }
   return pairs;
 }
+
+const coverage = weeklyCoverage();
 
 export default async function H2HPage({ params }: { params: Promise<{ pair: string }> }) {
   const { pair } = await params;
@@ -103,7 +110,11 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
         <PanelHeader
           title="Record Splits"
           meta={`from ${name(a)}'s perspective`}
-          legend="Regular-season matchups exist only for 2024 onward; the imported ESPN seasons kept no weekly matchups, but their playoff matchups are counted."
+          legend={`Week-by-week scores exist for ${coverage.label}. ${
+            coverage.missing.length
+              ? `For ${coverage.missingLabel} only the postseason survived, so those years contribute playoff and ladder matchups only.`
+              : "Every season is complete."
+          }`}
         />
         <ListHeader>
           <Col className="flex-1">Split</Col>

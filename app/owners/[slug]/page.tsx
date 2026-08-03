@@ -18,6 +18,7 @@ import {
   getSeasons,
   getWeeklyLows,
   teamSeasonFor,
+  weeklyCoverage,
 } from "@/lib/data";
 
 export const dynamicParams = false;
@@ -27,6 +28,7 @@ export function generateStaticParams() {
 
 export default async function OwnerPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const coverage = weeklyCoverage();
   const owners = getOwnerMap();
   const owner = owners.get(slug);
   if (!owner) notFound();
@@ -239,7 +241,11 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
               <PanelHeader
                 title="Head to Head"
                 meta="all matchups · best first"
-                legend="Every matchup, regular season and postseason combined. A ✻ marks a head-to-head record that includes playoff or toilet-bowl matchups. Regular-season data starts in 2024 — the imported ESPN seasons kept no weekly matchups — so a pre-2024 opponent's record is postseason only."
+                legend={`Every matchup, regular season and postseason combined. A ✻ marks a head-to-head record that includes playoff or toilet-bowl matchups. Week-by-week scores exist for ${coverage.label}${
+                  coverage.missing.length
+                    ? `; for ${coverage.missingLabel} only the postseason survived, so those years contribute playoff and ladder matchups only`
+                    : ""
+                }.`}
               />
               <ListHeader>
                 <Col className="flex-1">Opponent</Col>

@@ -749,6 +749,18 @@ function resolveKeepers(seasons: SeasonData[]): {
 
 // --- records & head-to-head -------------------------------------------------
 
+/**
+ * Seasons whose scores already arrive as weekly matchups.
+ *
+ * The three fallbacks below scrape scores out of imported BRACKETS, which was the
+ * only way to see a pre-Sleeper game before the weekly scoreboards were
+ * recovered. For a season that now has both, scraping the bracket counts every
+ * postseason game a second time — inflating head-to-head records and putting
+ * duplicate entries in the record book.
+ */
+const seasonsWithWeeklyData = (matchups: Matchup[]): Set<number> =>
+  new Set(matchups.map((m) => m.season));
+
 function buildOwnerRecords(
   summaries: SeasonSummary[],
   matchups: Matchup[],
@@ -816,12 +828,22 @@ function buildOwnerRecords(
     );
   }
 
-  // Imported ESPN seasons have no weekly matchups, but their playoff, winner's
-  // consolation and ladder games were recovered with full scores — so those
-  // meetings can still be counted even though the regular season cannot.
+  // Imported ESPN seasons whose weekly scoreboards are still lost: their playoff,
+  // winner's consolation and ladder games were recovered with full scores, so
+  // those meetings can still be counted even though the regular season cannot.
+  const weekly = seasonsWithWeeklyData(matchups);
   for (const s of summaries) {
-    if (!s.imported) continue;
-    for (const m of [...s.winnersBracket, ...s.losersBracket]) {
+    if (!s.imported || weekly.has(s.season)) continue;
+    // extraBrackets included: ESPN has THREE postseason sections, and the
+    // winner's consolation ladder (3rd-6th) lives there. Omitting it dropped
+    // those meetings from head-to-head while the record book counted them, so the
+    // two disagreed about how many times a pair had played.
+    const imported = [
+      ...s.winnersBracket,
+      ...s.losersBracket,
+      ...s.extraBrackets.flatMap((b) => b.matches),
+    ];
+    for (const m of imported) {
       if (!m.team1 || !m.team2) continue;
       const p1 = m.points[m.team1];
       const p2 = m.points[m.team2];
@@ -915,8 +937,9 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
     });
   };
 
+  const weeklyRecordSeasons = seasonsWithWeeklyData(matchups);
   for (const s of summaries) {
-    if (!s.imported) continue;
+    if (!s.imported || weeklyRecordSeasons.has(s.season)) continue;
     const brackets = [s.winnersBracket, s.losersBracket, ...s.extraBrackets.map((b) => b.matches)];
     for (const matches of brackets) {
       for (const m of matches) {
@@ -1152,6 +1175,62 @@ interface ManualSeason {
     routing: string | null;
     teams: Array<{ seed: number; teamName: string; points: number }>;
   }>;
+  /** True once weekly scoreboards have been recovered for the season. */
+  hasWeeklyMatchups?: boolean;
+  /** Week-by-week results. Absent for seasons whose scoreboards are still lost. */
+  matchups?: Array<{
+    week: number;
+    kind: "regular" | "playoff" | "consolation";
+    home: { ownerSlug: string; points: number };
+    away: { ownerSlug: string; points: number };
+  }>;
+}
+
+/**
+ * Weekly matchups from imported seasons, in the same shape as Sleeper's.
+ *
+ * Once a season's scoreboards exist it is a full participant in head-to-head,
+ * the record book and every weekly list — the only thing still missing is
+ * lineups, so `starters` and `playerPoints` are empty and player records stay
+ * Sleeper-only.
+ *
+ * Callers MUST stop scraping that season's brackets for scores once this returns
+ * games for it, or every postseason game is counted twice.
+ */
+function importedMatchups(): Matchup[] {
+  const dir = join(DATA_DIR, "manual");
+  if (!existsSync(dir)) return [];
+
+  const out: Matchup[] = [];
+  for (const file of readdirSync(dir).sort()) {
+    if (!/^\d{4}\.json$/.test(file)) continue;
+    const m = readJson<ManualSeason>(join(dir, file));
+    if (!m?.matchups?.length) continue;
+
+    m.matchups.forEach((g, i) => {
+      const side = (x: { ownerSlug: string; points: number }): MatchupSide => ({
+        ownerSlug: x.ownerSlug,
+        points: x.points,
+        starters: [],
+        playerPoints: {},
+      });
+      out.push({
+        season: m.season,
+        week: g.week,
+        kind: g.kind,
+        matchupId: i + 1,
+        home: side(g.home),
+        away: side(g.away),
+        winner:
+          g.home.points > g.away.points
+            ? g.home.ownerSlug
+            : g.away.points > g.home.points
+              ? g.away.ownerSlug
+              : null,
+      });
+    });
+  }
+  return out;
 }
 
 /**
@@ -1386,9 +1465,11 @@ function recordsAtTheTime(
 
   const events: Event[] = [];
 
-  // Seed: ESPN playoff and ladder games, the only surviving pre-2024 scores.
+  // Seed: ESPN playoff and ladder games for seasons whose weekly scoreboards are
+  // still lost. A season with weekly data feeds the timeline through `matchups`.
+  const weeklySeeded = seasonsWithWeeklyData(matchups);
   for (const s of summaries) {
-    if (!s.imported) continue;
+    if (!s.imported || weeklySeeded.has(s.season)) continue;
     const brackets = [s.winnersBracket, s.losersBracket, ...s.extraBrackets.map((b) => b.matches)];
     for (const matches of brackets) {
       for (const m of matches) {
@@ -1597,7 +1678,10 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
     ...importedSeasons(),
     ...loaded.map((d) => summariseSeason(d, throughByseason.get(d.season) ?? 0)),
   ].sort((a, b) => a.season - b.season);
-  const matchups = loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0));
+  const matchups = [
+    ...importedMatchups(),
+    ...loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0)),
+  ];
   const ownerRecords = buildOwnerRecords(summaries, matchups);
   const records = buildLeagueRecords(matchups, summaries);
   // A redraft league has no contracts to reconstruct. Gated on the feature flag

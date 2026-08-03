@@ -383,19 +383,192 @@ function crossValidate(season: number, standings: ImportedTeam[], games: Importe
 
 // --- main --------------------------------------------------------------------
 
-function seasonFiles(): Map<number, { standings: string; playoffs: string }> {
+interface SeasonSources {
+  standings: string;
+  playoffs: string;
+  /** week -> scoreboard page. Optional; only some seasons have been recovered. */
+  weeks: Map<number, string>;
+}
+
+interface WeeklyMatchup {
+  week: number;
+  kind: "regular" | "playoff" | "consolation";
+  home: { ownerSlug: string; points: number };
+  away: { ownerSlug: string; points: number };
+}
+
+/**
+ * Weekly matchups for a season, if its scoreboards were recovered.
+ *
+ * CROSS-VALIDATED, not trusted. Every team's regular-season scores must sum to
+ * its standings Points For, and its win-loss-tie derived from those games must
+ * equal the standings record — otherwise a mis-parsed or missing week would
+ * quietly corrupt every all-time record. Both are exact matches, and the import
+ * throws rather than writing something that disagrees with itself.
+ *
+ * Postseason weeks are classified against the bracket, which is the only source
+ * that knows whether a given game was a playoff or a consolation match.
+ */
+function buildWeeklyMatchups(
+  season: number,
+  weekFiles: Map<number, string>,
+  standings: ImportedTeam[],
+  games: ImportedGame[],
+  playoffWeekStart: number,
+): WeeklyMatchup[] {
+  if (!weekFiles.size) return [];
+
+  const slugOfTeam = new Map(standings.map((r) => [r.teamName, r.ownerSlugs[0]]));
+  const resolve = (teamName: string): string => {
+    const slug = slugOfTeam.get(teamName);
+    if (!slug) {
+      throw new Error(
+        `${season}: scoreboard team "${teamName}" is not in the standings page. ` +
+          `Team names must match between the two archives.`,
+      );
+    }
+    return slug;
+  };
+
+  // Bracket section by week and unordered slug pair, so a postseason game is
+  // labelled by what it actually was rather than by which week it fell in.
+  const sectionOf = new Map<string, ImportedGame["section"]>();
+  for (const g of games) {
+    if (g.week == null || g.teams.length < 2) continue;
+    const pair = g.teams.map((t: { teamName: string }) => slugOfTeam.get(t.teamName) ?? t.teamName).sort();
+    sectionOf.set(`${g.week}:${pair.join("|")}`, g.section);
+  }
+
+  const out: WeeklyMatchup[] = [];
+  for (const week of [...weekFiles.keys()].sort((a, b) => a - b)) {
+    const parsed = parseWeek(mhtmlBody(weekFiles.get(week)!));
+    if (!parsed.length) throw new Error(`${season} week ${week}: no games parsed`);
+    for (const g of parsed) {
+      const home = { ownerSlug: resolve(g.home.teamName), points: g.home.points };
+      const away = { ownerSlug: resolve(g.away.teamName), points: g.away.points };
+      let kind: WeeklyMatchup["kind"] = "regular";
+      if (week >= playoffWeekStart) {
+        const section = sectionOf.get(
+          `${week}:${[home.ownerSlug, away.ownerSlug].sort().join("|")}`,
+        );
+        kind = section === "winners" ? "playoff" : "consolation";
+      }
+      out.push({ week, kind, home, away });
+    }
+  }
+
+  // --- the invariants ---
+  const pf = new Map<string, number>();
+  const rec = new Map<string, { w: number; l: number; t: number }>();
+  const bump = (slug: string, k: "w" | "l" | "t") => {
+    const r = rec.get(slug) ?? { w: 0, l: 0, t: 0 };
+    r[k] += 1;
+    rec.set(slug, r);
+  };
+  for (const m of out.filter((m) => m.week < playoffWeekStart)) {
+    for (const side of [m.home, m.away]) {
+      pf.set(side.ownerSlug, Number(((pf.get(side.ownerSlug) ?? 0) + side.points).toFixed(2)));
+    }
+    if (m.home.points > m.away.points) {
+      bump(m.home.ownerSlug, "w");
+      bump(m.away.ownerSlug, "l");
+    } else if (m.away.points > m.home.points) {
+      bump(m.away.ownerSlug, "w");
+      bump(m.home.ownerSlug, "l");
+    } else {
+      bump(m.home.ownerSlug, "t");
+      bump(m.away.ownerSlug, "t");
+    }
+  }
+
+  for (const row of standings) {
+    const slug = row.ownerSlugs[0];
+    const got = pf.get(slug);
+    if (got == null || Math.abs(got - row.pointsFor) > 0.05) {
+      throw new Error(
+        `${season}: ${slug} scores sum to ${got ?? 0} across the weekly pages but the ` +
+          `standings say ${row.pointsFor}. A week is missing or mis-parsed.`,
+      );
+    }
+    const r = rec.get(slug) ?? { w: 0, l: 0, t: 0 };
+    if (r.w !== row.wins || r.l !== row.losses || r.t !== row.ties) {
+      throw new Error(
+        `${season}: ${slug} is ${r.w}-${r.l}-${r.t} across the weekly pages but the ` +
+          `standings say ${row.wins}-${row.losses}-${row.ties}.`,
+      );
+    }
+  }
+  log.info(
+    `${standings.length}/${standings.length} teams reconcile on points for and record`,
+  );
+  return out;
+}
+
+function seasonFiles(): Map<number, SeasonSources> {
   const files = existsSync(SOURCE_DIR) ? readdirSync(SOURCE_DIR) : [];
-  const found = new Map<number, { standings: string; playoffs: string }>();
+  const found = new Map<number, SeasonSources>();
+  const entry = (year: number): SeasonSources => {
+    const e = found.get(year) ?? { standings: "", playoffs: "", weeks: new Map() };
+    found.set(year, e);
+    return e;
+  };
+
   for (const f of files) {
-    const m = f.match(/(\d{4})(Standings|Playoffs)\.mhtml$/i);
-    if (!m) continue;
-    const year = Number(m[1]);
-    const entry = found.get(year) ?? { standings: "", playoffs: "" };
-    if (m[2].toLowerCase() === "standings") entry.standings = join(SOURCE_DIR, f);
-    else entry.playoffs = join(SOURCE_DIR, f);
-    found.set(year, entry);
+    const season = f.match(/(\d{4})(Standings|Playoffs)\.mhtml$/i);
+    if (season) {
+      const e = entry(Number(season[1]));
+      if (season[2].toLowerCase() === "standings") e.standings = join(SOURCE_DIR, f);
+      else e.playoffs = join(SOURCE_DIR, f);
+      continue;
+    }
+    // Weekly scoreboards, e.g. DenOps2019W7.mhtml / DenOps2019W14playoffs.mhtml.
+    const week = f.match(/(\d{4})W(\d{1,2})[a-z]*\.mhtml$/i);
+    if (week) entry(Number(week[1])).weeks.set(Number(week[2]), join(SOURCE_DIR, f));
   }
   return found;
+}
+
+// --- weekly scoreboards ------------------------------------------------------
+
+interface WeekSide {
+  teamName: string;
+  points: number;
+}
+
+/**
+ * One week's games from an archived ESPN scoreboard.
+ *
+ * Joined on TEAM NAME rather than ESPN's numeric teamId. The id is stable and
+ * tempting, but the standings page only labels 11 of 12 teams with an owner — the
+ * logged-in account is listed separately as "My Team" with no owner attached — so
+ * an id-based join silently loses one team. Both pages were archived at the same
+ * moment, so their team names agree exactly; the importer throws below if any
+ * name fails to resolve.
+ */
+function parseWeek(html: string): Array<{ away: WeekSide; home: WeekSide }> {
+  const nameById = new Map<string, string>();
+  for (const m of html.matchAll(
+    /teamId=(\d+)&amp;scoringPeriodId=\d+"[^>]*>[\s\S]{0,400}?ScoreCell__TeamName[^>]*>([^<]+)</g,
+  )) {
+    if (!nameById.has(m[1])) nameById.set(m[1], decodeEntities(m[2]).trim());
+  }
+
+  const out: Array<{ away: WeekSide; home: WeekSide }> = [];
+  for (const block of html.matchAll(
+    /<ul class="ScoreboardScoreCell__Competitors[^"]*"[^>]*>([\s\S]*?)<\/ul>/g,
+  )) {
+    const sides: Record<string, WeekSide> = {};
+    for (const item of block[1].matchAll(
+      /ScoreboardScoreCell__Item--(away|home)[^"]*"([\s\S]*?)(?=<li class="ScoreboardScoreCell__Item|$)/g,
+    )) {
+      const id = item[2].match(/teamId=(\d+)/)?.[1];
+      const score = item[2].match(/ScoreCell__Score[^>]*>([\d.]+)</)?.[1];
+      const teamName = id ? nameById.get(id) : undefined;
+      if (teamName && score != null) sides[item[1]] = { teamName, points: Number(score) };
+    }
+    if (sides.away && sides.home) out.push({ away: sides.away, home: sides.home });
+  }
+  return out;
 }
 
 for (const league of resolveLeagues(process.argv.slice(2))) {
@@ -434,6 +607,7 @@ for (const league of resolveLeagues(process.argv.slice(2))) {
 
   const weeks = games.map((g) => g.week).filter((w): w is number => w != null);
   const playoffWeekStart = Math.min(...weeks);
+  const matchups = buildWeeklyMatchups(season, paths.weeks, standings, games, playoffWeekStart);
 
   writeJson(join(MANUAL_DIR, `${season}.json`), {
     season,
@@ -444,16 +618,18 @@ for (const league of resolveLeagues(process.argv.slice(2))) {
     finalWeek: Math.max(...weeks),
     regularSeasonWeeks: playoffWeekStart - 1,
     // Says plainly what this data cannot support, so derive never over-reaches.
-    hasWeeklyMatchups: false,
+    hasWeeklyMatchups: matchups.length > 0,
     hasRosters: false,
     hasDrafts: false,
     standings,
     games,
+    matchups,
   });
 
   const missingSeed = standings.filter((r) => r.seed == null).length;
   log.write(
     `${MANUAL_DIR.split("/data/")[1]}/${season}.json — ${standings.length} teams, ${games.length} playoff games` +
+      (matchups.length ? `, ${matchups.length} weekly matchups` : "") +
       (missingSeed ? `, ${missingSeed} without a seed` : ""),
   );
     log.info(

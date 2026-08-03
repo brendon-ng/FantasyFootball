@@ -19,6 +19,7 @@ import {
   meetingId,
   type Meeting,
   type MeetingSide,
+  weeklyCoverage,
 } from "@/lib/data";
 
 export const dynamicParams = false;
@@ -51,6 +52,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   const game = getAllMeetings().find((m) => m.id === id);
   if (!game) notFound();
 
+  const coverage = weeklyCoverage();
   const owners = getOwnerMap();
   // Empty unless this league punishes the weekly low, so no flag check here.
   const lowKeys = getWeeklyLowKeys();
@@ -147,7 +149,11 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
             </span>
             <Tip
               className="text-[10px] text-chalk-600"
-              text="Measured against every score on record at that moment. Weekly scores are complete from 2024; before that only ESPN playoff and ladder matchups survived, and no pre-2024 lineups did — so the earlier baseline is thinner than the matchups actually played."
+              text={`Measured against every score on record at that moment. Week-by-week scores exist for ${coverage.label}${
+                coverage.missing.length
+                  ? `; for ${coverage.missingLabel} only playoff and ladder matchups survived`
+                  : ""
+              }, and ESPN kept no lineups — so the earlier baseline is thinner than the matchups actually played.`}
             >
               coverage ⓘ
             </Tip>
@@ -441,6 +447,21 @@ function Lineup({
       </div>
     );
   };
+
+  // ESPN kept no lineups, so a recovered season has scores but no roster. Saying
+  // so beats an empty table headed "0.00 from starters", which reads as a team
+  // that scored nothing.
+  if (!side.starters.length && !Object.keys(side.playerPoints).length) {
+    return (
+      <Panel>
+        <PanelHeader title={name} meta={`${fmt.pts(side.points)} total`} />
+        <div className="px-4 py-8 text-center text-xs text-chalk-600 sm:px-5">
+          No lineup on record — this season was recovered from archived ESPN pages,
+          which kept scores but not rosters.
+        </div>
+      </Panel>
+    );
+  }
 
   return (
     <Panel>

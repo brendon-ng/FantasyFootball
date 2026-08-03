@@ -307,8 +307,9 @@ so that baseline genuinely starts empty in 2024. The matchup page carries a
 "coverage" tooltip stating this; do not remove it or the badge becomes a claim
 the data cannot support.
 
-If ESPN weekly scoreboards are ever recovered the same way the brackets were,
-this becomes fully correct with no code change — it is derived, not stored.
+2019's scoreboards WERE recovered, and it took no change to this function — it is
+derived, not stored. 20 of the 29 marks are now 2019 games. Recovering 2020-23
+would do the same again.
 
 ## Automation
 
@@ -491,6 +492,29 @@ correct — just not annotated. Keep that property.
 Do not fetch in the browser from `lib/sleeper.ts`; it is build-time only and
 carries Node assumptions. `lib/sleeper-browser.tsx` must stay dependency-free.
 
+### Recovering a season's weekly scoreboards
+
+Drop `<anything><season>W<week>.mhtml` into `data/<slug>/manual/source/` — one per
+week, postseason included — and re-run `npm run import:espn`.
+
+Teams are joined on TEAM NAME, not ESPN's numeric `teamId`. The id is stable and
+tempting, but the standings page labels only 11 of 12 teams with an owner: the
+logged-in account is listed separately as "My Team" with no owner attached, so an
+id-based join silently loses a team. Both archives were saved at the same moment,
+so their names agree exactly.
+
+TWO INVARIANTS, both enforced by throwing. Each team's regular-season scores must
+sum to its standings Points For, and its win-loss-tie derived from those games must
+equal the standings record. A missing or mis-parsed week would otherwise corrupt
+every all-time record silently. 2019: 12/12 teams reconcile on both.
+
+Postseason weeks are classified against the bracket, the only source that knows
+whether a game was a playoff or a consolation match.
+
+Once a season has weekly data, derive MUST STOP scraping its brackets for scores —
+`seasonsWithWeeklyData()` guards the three fallbacks that do. Otherwise every
+postseason game is counted twice.
+
 ### What imported seasons cannot support
 
 2019-23 came from archived ESPN pages. The league is on Sleeper
@@ -504,12 +528,22 @@ inventing a slug. Add them to `league.json` with `active: false` (2019 brought i
 Camina Balmores this way), or as an `espnNames` alias if it is an existing owner
 under a different label.
 
-Those seasons have standings, final placement and full playoff scores. They have
-NO weekly matchups, rosters, drafts or transactions. So they feed standings,
-finishes, the trophy case and postseason head-to-head, and are excluded from
-regular-season head-to-head, weekly records, player records and keeper
-contracts. `SeasonSummary.imported` is the flag, and every affected surface says
-so in the UI rather than silently mixing eras.
+Every imported season has standings, final placement and full playoff scores.
+Some also have WEEKLY SCOREBOARDS, recovered later — 2019 does, 2020-23 do not
+yet. A season with them is a full participant in head-to-head, the record book
+and every weekly list; a season without contributes postseason meetings only.
+`ManualSeason.matchups` carries them and `hasWeeklyMatchups` states it plainly.
+
+NEVER HARDCODE THE COVERAGE. It was "2024 onward" until 2019's scoreboards turned
+up, which silently falsified that sentence everywhere it was written. `weeklyCoverage()`
+in `lib/data.ts` derives it and renders phrases like "2019 and 2024-2025"; every
+surface that describes coverage reads from it, so the next recovered season
+updates the copy for free.
+
+Rosters, drafts and transactions are still absent for every ESPN year, so player
+records and keeper contracts stay Sleeper-only, and a matchup page for one of
+those games says it has no lineup rather than rendering an empty table headed
+"0.00 from starters".
 
 The two ESPN pages cross-validate: placement reconstructed from the brackets
 must equal the standings RK column, or the import throws. All 60 placements

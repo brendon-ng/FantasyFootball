@@ -12,6 +12,7 @@ import {
   getRecords,
   meetingId,
   pageTitle,
+  weeklyCoverage,
 } from "@/lib/data";
 import type { CombinedRecord, ScoreRecord } from "@/lib/types";
 
@@ -29,6 +30,7 @@ export default function RecordsPage() {
    * The pair slug is sorted so both directions resolve to the same page, and
    * the fragment targets the anchor that page puts on every meeting.
    */
+  const coverage = weeklyCoverage();
   const meetingHref = (a: string, b: string | null, season: number, week: number) =>
     b ? `/matchups/${meetingId(season, week, a, b)}/` : null;
 
@@ -66,9 +68,12 @@ export default function RecordsPage() {
         <p className="mt-1 text-sm text-chalk-500">
           Extremes across every finalized matchup on record.{" "}
           <span className="text-chalk-600">
-            Weekly scores are complete from 2024. For 2020–2023 only ESPN playoff and ladder
-            matchups survived, so those seasons are represented but under-counted — and player
-            records are 2024 onward, since ESPN kept no lineups.
+            Week-by-week scores exist for {coverage.label}.
+            {coverage.missing.length
+              ? ` For ${coverage.missingLabel} only ESPN playoff and ladder matchups survived, so those
+                 seasons are represented but under-counted.`
+              : ""}{" "}
+            Player records are Sleeper-era only, since ESPN kept no lineups.
           </span>
         </p>
       </div>
@@ -134,7 +139,7 @@ export default function RecordsPage() {
         <PanelHeader
           title="Best Player Weeks"
           meta="started only"
-          legend="Highest single-week scores by a started player. Bench performances are excluded, and this list is 2024 onward — the imported ESPN seasons kept no lineups."
+          legend="Highest single-week scores by a started player. Bench performances are excluded, and this list is Sleeper-era only — the imported ESPN seasons kept no lineups."
         />
         <ExpandableList
           noun="performances"

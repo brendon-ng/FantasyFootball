@@ -357,6 +357,7 @@
   "hasRosters": false,
   "hasWeeklyMatchups": false,
   "imported": true,
+  "matchups": [],
   "playoffWeekStart": 14,
   "regularSeasonWeeks": 13,
   "season": 2020,

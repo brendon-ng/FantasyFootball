@@ -43,7 +43,7 @@ export default function HistoryPage() {
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">League History</h1>
         <p className="mt-1 text-sm text-chalk-500">
           {seasons.length} completed season{seasons.length === 1 ? "" : "s"} · tracked by owner,
-          so team-name changes never break the record. 2020–2023 are imported from ESPN and have
+          so team-name changes never break the record. The ESPN years are imported from archived pages and have
           standings and playoff results only.
         </p>
       </div>

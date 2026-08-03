@@ -87,6 +87,49 @@ export const getPlayers = (): Record<string, PlayerMeta> => {
   if (!ignored.size) return scoped;
   return Object.fromEntries(Object.entries(scoped).filter(([id]) => !ignored.has(id)));
 };
+/**
+ * Which seasons have week-by-week scores, as a phrase for UI copy.
+ *
+ * Derived, never hardcoded. Coverage used to be "2024 onward"; recovering the
+ * 2019 ESPN scoreboards made that wrong everywhere it was written down. Anything
+ * that describes coverage should read it from here so the next recovered season
+ * updates the copy for free.
+ */
+export function weeklyCoverage(): {
+  seasons: number[];
+  /** e.g. "2019 and 2024-2025", or "no seasons". */
+  label: string;
+  /** Seasons on record with postseason scores only. */
+  missing: number[];
+  missingLabel: string;
+} {
+  const withWeekly = new Set(getMatchupHistory().map((m) => m.season));
+  const all = getSeasons().map((s) => s.season);
+  const seasons = all.filter((y) => withWeekly.has(y)).sort((a, b) => a - b);
+  const missing = all.filter((y) => !withWeekly.has(y)).sort((a, b) => a - b);
+  return { seasons, label: rangeLabel(seasons), missing, missingLabel: rangeLabel(missing) };
+}
+
+/** [2019,2024,2025] -> "2019 and 2024-2025". Collapses runs so copy stays short. */
+function rangeLabel(years: number[]): string {
+  if (!years.length) return "no seasons";
+  const runs: string[] = [];
+  let start = years[0];
+  let prev = years[0];
+  for (const y of years.slice(1)) {
+    if (y === prev + 1) {
+      prev = y;
+      continue;
+    }
+    runs.push(start === prev ? `${start}` : `${start}-${prev}`);
+    start = prev = y;
+  }
+  runs.push(start === prev ? `${start}` : `${start}-${prev}`);
+  return runs.length === 1
+    ? runs[0]
+    : `${runs.slice(0, -1).join(", ")} and ${runs[runs.length - 1]}`;
+}
+
 export const getWeeklyLows = (): WeeklyLow[] => load("derived/weekly-lows.json", []);
 
 /**
