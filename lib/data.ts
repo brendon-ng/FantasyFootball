@@ -470,3 +470,116 @@ export function getAllMeetings(): Meeting[] {
   }
   return [...seen.values()];
 }
+
+// ---------------------------------------------------------------------------
+// Record-book flags
+// ---------------------------------------------------------------------------
+
+export interface RecordFlag {
+  /** Short chip text, e.g. "#3 weekly high". */
+  short: string;
+  /** Full sentence for a tooltip. */
+  full: string;
+  rank: number;
+  tone: "good" | "bad";
+  ownerSlug: string | null;
+  playerId?: string;
+}
+
+const ordinalOf = (n: number) => {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return `${n}${s[(v - 20) % 10] || s[v] || s[0]}`;
+};
+
+/**
+ * Which record-book lists a given game appears in.
+ *
+ * Ranks come from the same arrays the record book renders, so a chip here and a
+ * row there can never disagree — recomputing thresholds separately would let
+ * them drift the moment the list length or tie-breaking changed.
+ */
+export function getRecordFlags(
+  season: number,
+  week: number | null,
+  slugs: string[],
+): RecordFlag[] {
+  if (week == null) return [];
+  const r = getRecords();
+  const out: RecordFlag[] = [];
+  const hit = (s: { season: number; week: number; ownerSlug: string }) =>
+    s.season === season && s.week === week && slugs.includes(s.ownerSlug);
+
+  r.weeklyHigh.forEach((s, i) => {
+    if (hit(s)) {
+      out.push({
+        short: `#${i + 1} weekly high`,
+        full: `${ordinalOf(i + 1)}-highest single-week score in league history`,
+        rank: i + 1,
+        tone: "good",
+        ownerSlug: s.ownerSlug,
+      });
+    }
+  });
+  r.weeklyLow.forEach((s, i) => {
+    if (hit(s)) {
+      out.push({
+        short: `#${i + 1} weekly low`,
+        full: `${ordinalOf(i + 1)}-lowest single-week score in league history`,
+        rank: i + 1,
+        tone: "bad",
+        ownerSlug: s.ownerSlug,
+      });
+    }
+  });
+  r.biggestBlowout.forEach((s, i) => {
+    if (hit(s)) {
+      out.push({
+        short: `#${i + 1} blowout`,
+        full: `${ordinalOf(i + 1)}-biggest margin of victory in league history`,
+        rank: i + 1,
+        tone: "good",
+        ownerSlug: s.ownerSlug,
+      });
+    }
+  });
+  r.narrowestWin.forEach((s, i) => {
+    if (hit(s)) {
+      out.push({
+        short: `#${i + 1} closest win`,
+        full: `${ordinalOf(i + 1)}-narrowest margin of victory in league history`,
+        rank: i + 1,
+        tone: "good",
+        ownerSlug: s.ownerSlug,
+      });
+    }
+  });
+  r.playerHigh.forEach((s, i) => {
+    if (hit(s)) {
+      out.push({
+        short: `#${i + 1} player week`,
+        full: `${ordinalOf(i + 1)}-best single week by a started player in league history`,
+        rank: i + 1,
+        tone: "good",
+        ownerSlug: s.ownerSlug,
+        playerId: s.playerId,
+      });
+    }
+  });
+
+  return out.sort((a, b) => a.rank - b.rank);
+}
+
+/**
+ * Thresholds a live score would have to beat to enter the record book.
+ *
+ * Shipped to the client so an in-progress game can say "on pace for #4" without
+ * refetching history — the record arrays are build-time data.
+ */
+export function getRecordThresholds(): { high: number[]; low: number[] } {
+  const r = getRecords();
+  return {
+    high: r.weeklyHigh.map((s) => s.points),
+    low: r.weeklyLow.map((s) => s.points),
+  };
+}

@@ -20,7 +20,9 @@ import {
   getOwnerMap,
   getOwnerRecords,
   getPlayers,
+  getRecordThresholds,
   getSeasons,
+  meetingId,
 } from "@/lib/data";
 
 /**
@@ -57,6 +59,21 @@ export default async function HomePage() {
   for (const list of byOwner.values()) list.sort((a, b) => a.round - b.round);
 
   const MAX_KEEPERS = 4;
+
+  /**
+   * Where a live score would land in the record book if the week ended now.
+   *
+   * Compared against the same arrays the record page renders, so a chip here
+   * and a row there cannot disagree.
+   */
+  const thresholds = getRecordThresholds();
+  const pace = (points: number): { rank: number; tone: "good" | "bad" } | null => {
+    const hi = thresholds.high.findIndex((p) => points > p);
+    if (hi >= 0) return { rank: hi + 1, tone: "good" };
+    const lo = thresholds.low.findIndex((p) => points < p);
+    if (lo >= 0) return { rank: lo + 1, tone: "bad" };
+    return null;
+  };
 
   // Home is a snapshot of the league as it stands, so the leaderboard is current
   // owners only. Departed owners (and the full table) live on the history page.
@@ -192,17 +209,47 @@ export default async function HomePage() {
               {live.matchups.map((m) => (
                 <li key={m.matchupId} className="border-b border-ink-700 last:border-0">
                   <Link
-                    href={`/h2h/${[m.a.ownerSlug, m.b.ownerSlug].sort().join("-vs-")}/`}
+                    href={`/matchups/${meetingId(live!.season, live!.week, m.a.ownerSlug, m.b.ownerSlug)}/`}
                     className="block px-4 py-3 transition-colors hover:bg-ink-700/40 sm:px-5"
                   >
-                    {[m.a, m.b].map((side) => (
-                      <div key={side.ownerSlug} className="flex items-center justify-between gap-2">
-                        <span className="truncate text-sm font-medium">{name(side.ownerSlug)}</span>
-                        <span className="tabular text-sm font-bold">{fmt.pts1(side.points)}</span>
-                      </div>
-                    ))}
+                    {[m.a, m.b].map((side) => {
+                      const p = pace(side.points);
+                      return (
+                        <div
+                          key={side.ownerSlug}
+                          className="flex items-center justify-between gap-2"
+                        >
+                          <span className="truncate text-sm font-medium">
+                            {name(side.ownerSlug)}
+                          </span>
+                          <span className="flex shrink-0 items-center gap-1.5">
+                            {/* Chip sits LEFT of the score so the numbers stay
+                                in column whether or not a game is on pace. */}
+                            {p ? (
+                              <span
+                                title={
+                                  p.tone === "good"
+                                    ? `On pace for the ${p.rank === 1 ? "highest" : `#${p.rank}`} weekly score in league history`
+                                    : `On pace for the ${p.rank === 1 ? "lowest" : `#${p.rank}`} weekly score in league history`
+                                }
+                                className={`rounded-full border px-1.5 py-0.5 text-[9px] font-bold ${
+                                  p.tone === "bad"
+                                    ? "border-loss/40 bg-loss/10 text-loss"
+                                    : "border-gold/40 bg-gold/10 text-gold"
+                                }`}
+                              >
+                                #{p.rank}
+                              </span>
+                            ) : null}
+                            <span className="tabular text-sm font-bold">
+                              {fmt.pts1(side.points)}
+                            </span>
+                          </span>
+                        </div>
+                      );
+                    })}
                     <div className="mt-1.5 text-[11px] text-chalk-600">
-                      Head-to-head history <span aria-hidden>→</span>
+                      Matchup detail <span aria-hidden>→</span>
                     </div>
                   </Link>
                 </li>

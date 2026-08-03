@@ -274,7 +274,13 @@ export default async function SeasonPage({
                         </div>
                       ))}
                       <div className="mt-1 flex items-center justify-between text-[10px] uppercase tracking-wide text-chalk-600">
-                        <span>{m.kind !== "regular" ? m.kind : ""}</span>
+                        <span>
+                          {m.kind === "consolation"
+                            ? "toilet bowl"
+                            : m.kind !== "regular"
+                              ? m.kind
+                              : ""}
+                        </span>
                         <span
                           aria-hidden
                           className="opacity-0 transition-opacity group-hover/game:opacity-100"

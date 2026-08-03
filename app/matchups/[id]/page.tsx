@@ -6,6 +6,7 @@ import { Col, ListHeader, Panel, PanelHeader, Stat, fmt } from "@/components/ui"
 import {
   getAllMeetings,
   getMeetings,
+  getRecordFlags,
   getOwnerMap,
   getPlayers,
   getSeasons,
@@ -33,7 +34,9 @@ export function generateStaticParams() {
 const KIND_LABEL: Record<Meeting["kind"], string> = {
   regular: "Regular season",
   playoff: "Playoffs",
-  consolation: "Consolation",
+  // The league calls it the toilet bowl; "consolation" is Sleeper's word, and
+  // only the imported ESPN seasons actually ran a consolation ladder.
+  consolation: "Toilet bowl",
 };
 
 export default async function MatchupPage({ params }: { params: Promise<{ id: string }> }) {
@@ -65,6 +68,9 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   const prior = tally(series.filter((g) => g.season < game.season || (g.season === game.season && (g.week ?? 0) < (game.week ?? 0))));
   const pairHref = `/h2h/${[game.a.ownerSlug, game.b.ownerSlug].sort().join("-vs-")}/`;
 
+  // Any record-book list this game appears in.
+  const flags = getRecordFlags(game.season, game.week, [game.a.ownerSlug, game.b.ownerSlug]);
+
   return (
     <div className="space-y-5 sm:space-y-6">
       <div>
@@ -83,6 +89,34 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
           </Link>
         </p>
       </div>
+
+      {flags.length ? (
+        <div className="flex flex-wrap items-center gap-2 rounded-xl border border-gold/35 bg-gold/[0.07] px-4 py-3">
+          <span className="text-[10px] font-bold uppercase tracking-wide text-gold">
+            Record book
+          </span>
+          {flags.map((f, i) => (
+            <span
+              key={i}
+              title={`${f.full}${f.ownerSlug ? ` — ${name(f.ownerSlug)}` : ""}`}
+              className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${
+                f.tone === "bad"
+                  ? "border-loss/40 bg-loss/10 text-loss"
+                  : "border-gold/40 bg-gold/10 text-gold"
+              }`}
+            >
+              {f.short}
+              {f.ownerSlug ? (
+                <span className="ml-1 font-normal opacity-80">
+                  {f.playerId
+                    ? (players[f.playerId]?.full_name ?? "")
+                    : (owners.get(f.ownerSlug)?.firstName ?? "")}
+                </span>
+              ) : null}
+            </span>
+          ))}
+        </div>
+      ) : null}
 
       {/* Scoreboard */}
       <div className="grid gap-2.5 sm:grid-cols-2">
