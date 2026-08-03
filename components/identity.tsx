@@ -327,17 +327,24 @@ export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
       // A solid fill, not a tint. At 15% opacity over a near-black surface the
       // circle was effectively invisible and the initials read as loose text
       // floating in the nav.
-      className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-[11px] font-bold leading-none tracking-wide transition-all ${
+      className={`inline-flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full transition-all ${
         me
           ? "bg-me text-ink-900 ring-2 ring-me/25 hover:ring-me/50"
           : "bg-ink-600 text-chalk-400 ring-1 ring-ink-500 hover:bg-ink-500 hover:text-chalk-100"
       }`}
     >
-      {initials ?? (
+      {initials ? (
+        // tracking adds space AFTER the last letter too, which pushes the pair
+        // visibly left of centre; the indent gives that half back. The nudge
+        // down accounts for uppercase sitting high in its line box.
+        <span className="block translate-y-[0.5px] indent-[0.06em] text-[11px] font-bold leading-none tracking-[0.06em]">
+          {initials}
+        </span>
+      ) : (
         <svg
           viewBox="0 0 16 16"
           aria-hidden
-          className="h-4 w-4"
+          className="block h-[17px] w-[17px] translate-y-[0.5px]"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.6"
