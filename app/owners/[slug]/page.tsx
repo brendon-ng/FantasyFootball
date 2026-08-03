@@ -206,8 +206,8 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             <Panel>
               <PanelHeader
                 title="Head to Head"
-                meta="regular season · best first"
-                legend="Includes playoff and toilet-bowl meetings. Regular-season games are 2024 onward — imported ESPN seasons have no weekly matchups — but their playoff games are counted."
+                meta="all meetings · best first"
+                legend="Every meeting, regular season and postseason combined. A ✻ marks a record that includes playoff or toilet-bowl games. Regular-season data starts in 2024 — the imported ESPN seasons kept no weekly matchups — so a pre-2024 opponent's record is postseason only."
               />
               <ListHeader>
                 <Col className="flex-1">Opponent</Col>
@@ -253,7 +253,9 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                       >
                         {fmt.record(h.wins, h.losses, h.ties)}
                         {h.playoff.wins + h.playoff.losses + h.playoff.ties ? (
-                          <span className="ml-1 text-[10px] text-chalk-600">*</span>
+                          <span className="ml-1 text-[10px] text-chalk-600" aria-hidden>
+                            ✻
+                          </span>
                         ) : null}
                       </span>
                       <span className="tabular hidden w-16 shrink-0 text-right text-[11px] text-chalk-600 sm:block">
