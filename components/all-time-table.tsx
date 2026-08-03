@@ -198,18 +198,19 @@ export function AllTimeTable({
     [owners, weeklyLows],
   );
 
-  // Default view: wins, with hardware breaking ties. See byAllTimeRank.
+  // Default view: hardware first, wins breaking ties. See byAllTimeRank. Keyed to
+  // the titles column so the sort indicator sits on what actually leads the order.
   const [sort, setSort] = useState<{ key: string; dir: "asc" | "desc" }>({
-    key: "record",
+    key: "titles",
     dir: "desc",
   });
 
   const sorted = useMemo(() => {
     const col = columns.find((c) => c.key === sort.key) ?? columns[0];
     const rows = [...records];
-    // The W-L column IS the default ranking, so it uses the shared chain rather
-    // than falling through to the generic win% tie-break.
-    if (col.key === "record") {
+    // The titles column IS the default ranking, so it uses the shared chain
+    // rather than falling through to the generic win% tie-break.
+    if (col.key === "titles") {
       rows.sort(byAllTimeRank);
       return sort.dir === "desc" ? rows : rows.reverse();
     }
