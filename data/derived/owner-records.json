@@ -1,6 +1,6 @@
 [
   {
-    "averageFinish": 5.5,
+    "averageFinish": 4,
     "bestFinish": 1,
     "championships": 1,
     "finishes": [
@@ -10,12 +10,12 @@
         "seed": 1
       },
       {
-        "place": 10,
+        "place": 7,
         "season": 2025,
         "seed": 7
       }
     ],
-    "lastPlaces": 1,
+    "lastPlaces": 0,
     "losses": 11,
     "ownerSlug": "jaymie-lew",
     "playoffAppearances": 1,
@@ -92,15 +92,15 @@
     },
     "winPct": 0.61,
     "wins": 17,
-    "worstFinish": 10
+    "worstFinish": 7
   },
   {
-    "averageFinish": 4,
+    "averageFinish": 5.5,
     "bestFinish": 1,
     "championships": 1,
     "finishes": [
       {
-        "place": 7,
+        "place": 10,
         "season": 2024,
         "seed": 10
       },
@@ -110,7 +110,7 @@
         "seed": 2
       }
     ],
-    "lastPlaces": 0,
+    "lastPlaces": 1,
     "losses": 16,
     "ownerSlug": "david-collier",
     "playoffAppearances": 1,
@@ -187,7 +187,7 @@
     },
     "winPct": 0.43,
     "wins": 12,
-    "worstFinish": 7
+    "worstFinish": 10
   },
   {
     "averageFinish": 2.5,
@@ -380,12 +380,12 @@
     "worstFinish": 5
   },
   {
-    "averageFinish": 5.5,
+    "averageFinish": 6,
     "bestFinish": 3,
     "championships": 0,
     "finishes": [
       {
-        "place": 8,
+        "place": 9,
         "season": 2024,
         "seed": 8
       },
@@ -472,7 +472,7 @@
     },
     "winPct": 0.54,
     "wins": 15,
-    "worstFinish": 8
+    "worstFinish": 9
   },
   {
     "averageFinish": 6,
@@ -570,12 +570,12 @@
     "worstFinish": 6
   },
   {
-    "averageFinish": 7.5,
+    "averageFinish": 6,
     "bestFinish": 5,
     "championships": 0,
     "finishes": [
       {
-        "place": 10,
+        "place": 7,
         "season": 2024,
         "seed": 7
       },
@@ -585,7 +585,7 @@
         "seed": 6
       }
     ],
-    "lastPlaces": 1,
+    "lastPlaces": 0,
     "losses": 15,
     "ownerSlug": "brendon-ng",
     "playoffAppearances": 1,
@@ -662,10 +662,10 @@
     },
     "winPct": 0.46,
     "wins": 13,
-    "worstFinish": 10
+    "worstFinish": 7
   },
   {
-    "averageFinish": 6.5,
+    "averageFinish": 6,
     "bestFinish": 4,
     "championships": 0,
     "finishes": [
@@ -675,7 +675,7 @@
         "seed": 4
       },
       {
-        "place": 9,
+        "place": 8,
         "season": 2025,
         "seed": 8
       }
@@ -757,10 +757,10 @@
     },
     "winPct": 0.46,
     "wins": 13,
-    "worstFinish": 9
+    "worstFinish": 8
   },
   {
-    "averageFinish": 4.5,
+    "averageFinish": 6,
     "bestFinish": 2,
     "championships": 0,
     "finishes": [
@@ -770,12 +770,12 @@
         "seed": 6
       },
       {
-        "place": 7,
+        "place": 10,
         "season": 2025,
         "seed": 10
       }
     ],
-    "lastPlaces": 0,
+    "lastPlaces": 1,
     "losses": 16,
     "ownerSlug": "cassidy-pensa",
     "playoffAppearances": 1,
@@ -852,7 +852,7 @@
     },
     "winPct": 0.43,
     "wins": 12,
-    "worstFinish": 7
+    "worstFinish": 10
   },
   {
     "averageFinish": 8.5,
@@ -860,12 +860,12 @@
     "championships": 0,
     "finishes": [
       {
-        "place": 9,
+        "place": 8,
         "season": 2024,
         "seed": 9
       },
       {
-        "place": 8,
+        "place": 9,
         "season": 2025,
         "seed": 9
       }

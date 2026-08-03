@@ -38,6 +38,8 @@ export interface StandingsRow {
 export interface BracketMatch {
   round: number;
   matchId: number;
+  /** Playoff week this round was played. */
+  week: number | null;
   /** Resolved owner slugs; null until the feeding match is decided. */
   team1: string | null;
   team2: string | null;
@@ -45,8 +47,21 @@ export interface BracketMatch {
   loser: string | null;
   team1From: { winnerOf?: number; loserOf?: number } | null;
   team2From: { winnerOf?: number; loserOf?: number } | null;
-  /** Placement this match decides, in overall league terms (1 = championship). */
+  /**
+   * Overall league placements this match decides, as [place for `winner`,
+   * place for `loser`].
+   *
+   * In the toilet bowl `winner` is the team Sleeper advances, which is the team
+   * that LOST the game — so this pair counts downward there.
+   */
   placesFor: [number, number] | null;
+  /** Final scores, owner slug -> points. Empty until the game is played. */
+  points: Record<string, number>;
+  /**
+   * True for toilet-bowl matches, where advancing is bad and the advancing team
+   * is the lower scorer. The UI must not render `winner` as "W" here.
+   */
+  inverted: boolean;
 }
 
 export interface SeasonSummary {

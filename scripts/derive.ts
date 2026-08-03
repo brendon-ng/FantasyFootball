@@ -193,14 +193,31 @@ const round2 = (n: number): number => Number(n.toFixed(2));
  * Converts a Sleeper bracket into owner-slug terms and works out which overall
  * placement each match decides.
  *
- * Sleeper's `p` field is placement *within that bracket*. In the winners bracket
- * that is the overall place. In the losers bracket it is offset by the number of
- * playoff teams — losers-bracket `p:1` is really 7th overall in a 6-team playoff.
+ * THE TOILET BOWL IS AN ANTI-TOURNAMENT and Sleeper encodes it confusingly.
+ * `w` always means "the team that advances", but in the losers bracket the team
+ * that advances is the one that LOST the game — you play your way down to last
+ * place, not up. Verified against 2024 match 1: Sleeper reports `w: 2`
+ * (davidrcollier, 109.66) over brendonn8 (110.56); the lower scorer advanced.
+ *
+ * Placement therefore counts in opposite directions:
+ *
+ *   Winners bracket   p:1 -> [1st, 2nd]     w takes the better place
+ *   Losers bracket    p:1 -> [10th, 9th]    w takes the WORSE place
+ *                     p:3 -> [8th,  7th]
+ *
+ * So for the losers bracket, winner = totalTeams - p + 1 and loser one better.
+ * Getting this backwards silently swaps the champion of the toilet bowl with
+ * the team that escaped it.
  */
 function buildBracket(
   raw: SleeperBracketMatch[],
   rosterToOwner: Map<number, string>,
-  placeOffset: number,
+  opts: {
+    inverted: boolean;
+    totalTeams: number;
+    playoffWeekStart: number;
+    pointsByWeek: Map<number, Map<string, number>>;
+  },
 ): BracketMatch[] {
   const slug = (rid: number | null | undefined) =>
     rid == null ? null : (rosterToOwner.get(rid) ?? null);
@@ -208,21 +225,41 @@ function buildBracket(
   return raw
     .slice()
     .sort((a, b) => a.r - b.r || a.m - b.m)
-    .map((m) => ({
-      round: m.r,
-      matchId: m.m,
-      team1: slug(m.t1),
-      team2: slug(m.t2),
-      winner: slug(m.w),
-      loser: slug(m.l),
-      team1From: m.t1_from
-        ? { winnerOf: m.t1_from.w, loserOf: m.t1_from.l }
-        : null,
-      team2From: m.t2_from
-        ? { winnerOf: m.t2_from.w, loserOf: m.t2_from.l }
-        : null,
-      placesFor: m.p == null ? null : [m.p + placeOffset, m.p + placeOffset + 1],
-    }));
+    .map((m) => {
+      // Bracket round N is played in playoff week N. Both brackets start in the
+      // same week; the toilet bowl simply finishes a week earlier.
+      const week = opts.playoffWeekStart + m.r - 1;
+      const t1 = slug(m.t1);
+      const t2 = slug(m.t2);
+
+      const points: Record<string, number> = {};
+      const weekPoints = opts.pointsByWeek.get(week);
+      for (const t of [t1, t2]) {
+        if (t && weekPoints?.has(t)) points[t] = weekPoints.get(t)!;
+      }
+
+      const placesFor: [number, number] | null =
+        m.p == null
+          ? null
+          : opts.inverted
+            ? [opts.totalTeams - m.p + 1, opts.totalTeams - m.p]
+            : [m.p, m.p + 1];
+
+      return {
+        round: m.r,
+        matchId: m.m,
+        week,
+        team1: t1,
+        team2: t2,
+        winner: slug(m.w),
+        loser: slug(m.l),
+        team1From: m.t1_from ? { winnerOf: m.t1_from.w, loserOf: m.t1_from.l } : null,
+        team2From: m.t2_from ? { winnerOf: m.t2_from.w, loserOf: m.t2_from.l } : null,
+        placesFor,
+        points,
+        inverted: opts.inverted,
+      };
+    });
 }
 
 function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSummary {
@@ -240,8 +277,24 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
     );
   });
 
-  const winners = buildBracket(d.winners, d.rosterToOwner, 0);
-  const losers = buildBracket(d.losers, d.rosterToOwner, d.rules.playoffTeams);
+  // Per-week scores, so the bracket can render real numbers like Sleeper does.
+  const pointsByWeek = new Map<number, Map<string, number>>();
+  for (const [week, rows] of d.matchups) {
+    const byOwner = new Map<string, number>();
+    for (const r of rows) {
+      const slug = d.rosterToOwner.get(r.roster_id);
+      if (slug) byOwner.set(slug, round2(r.custom_points ?? r.points ?? 0));
+    }
+    pointsByWeek.set(week, byOwner);
+  }
+
+  const bracketOpts = {
+    totalTeams: d.rosters.length,
+    playoffWeekStart: d.rules.playoffWeekStart,
+    pointsByWeek,
+  };
+  const winners = buildBracket(d.winners, d.rosterToOwner, { ...bracketOpts, inverted: false });
+  const losers = buildBracket(d.losers, d.rosterToOwner, { ...bracketOpts, inverted: true });
 
   // Final placement comes from whichever match declared it.
   const placeByOwner = new Map<string, number>();
@@ -285,7 +338,7 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
     champion: at(1),
     runnerUp: at(2),
     thirdPlace: at(3),
-    lastPlace: at(d.rules.playoffTeams + 4),
+    lastPlace: at(d.rosters.length),
   };
 }
 

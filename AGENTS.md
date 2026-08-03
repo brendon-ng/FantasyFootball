@@ -136,6 +136,30 @@ auditable. Corrections go in `config/keeper-overrides.json` — never in code.
 Ownership is reconciled against each season's final roster snapshot, because the
 transaction log is not a complete record of roster mutation.
 
+### The toilet bowl is inverted
+
+Sleeper's `w` field means "advances", and in the losers bracket you advance by
+LOSING — you play your way down to last place. So the advancing team is the
+LOWER scorer. Verified against 2024 match 1: Sleeper reports `w: 2`
+(davidrcollier, 109.66) over brendonn8 (110.56).
+
+Placement therefore counts in opposite directions:
+
+| Bracket | Sleeper `p` | Overall places `[winner, loser]` |
+| --- | --- | --- |
+| Winners | 1 | `[1, 2]` |
+| Winners | 3 | `[3, 4]` |
+| Losers | 1 | `[10, 9]`  ← winner takes LAST |
+| Losers | 3 | `[8, 7]` |
+
+Losers-bracket formula: winner = `totalTeams - p + 1`, loser one better. Getting
+this backwards silently swaps the toilet-bowl champion with the team that
+escaped it. `BracketMatch.inverted` carries the flag through to the UI so it
+never renders the advancing team as "W".
+
+Both derived seasons are verified against screenshots of the Sleeper app — all
+20 placements match.
+
 ### Local development
 
 Node's native TypeScript stripping runs `scripts/*.ts` directly, which is why

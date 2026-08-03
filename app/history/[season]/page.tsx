@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Bracket } from "@/components/bracket";
 import { Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
 import { getMatchupHistory, getOwnerMap, getSeasons } from "@/lib/data";
-import type { BracketMatch } from "@/lib/types";
 
 // Static export: every season page is generated at build time.
 export const dynamicParams = false;
@@ -25,6 +25,15 @@ export default async function SeasonPage({
 
   const owners = getOwnerMap();
   const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || "TBD";
+  const seedOf = (slug: string | null) =>
+    slug ? (summary.standings.find((r) => r.ownerSlug === slug)?.seed ?? null) : null;
+  const playoffWeekStart = Math.min(
+    ...[...summary.winnersBracket, ...summary.losersBracket]
+      .map((m) => m.week)
+      .filter((w): w is number => w != null),
+    15,
+  );
+
   const matchups = getMatchupHistory().filter((m) => m.season === season);
   const weeks = [...new Set(matchups.map((m) => m.week))].sort((a, b) => a - b);
 
@@ -126,10 +135,37 @@ export default async function SeasonPage({
         </Panel>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-2">
-        <Bracket title="Playoff Bracket" matches={summary.winnersBracket} name={name} />
-        <Bracket title="Toilet Bowl" matches={summary.losersBracket} name={name} />
-      </div>
+      <Panel>
+        <PanelHeader title="Playoffs" meta={`top ${summary.standings.filter((r) => r.madePlayoffs).length} seeds`} />
+        <div className="p-4 sm:p-5">
+          <Bracket
+            matches={summary.winnersBracket}
+            title="Championship bracket"
+            finalLabel="🏆 Championship"
+            playoffWeekStart={playoffWeekStart}
+            nameOf={name}
+            seedOf={seedOf}
+          />
+        </div>
+      </Panel>
+
+      <Panel>
+        <PanelHeader title="Toilet Bowl" meta="lose to advance" />
+        <div className="p-4 sm:p-5">
+          <p className="mb-4 max-w-2xl text-[12px] leading-relaxed text-chalk-500">
+            An anti-tournament: the <em>loser</em> of each game advances, and whoever loses
+            the final is Last Place. Winning here is how you escape.
+          </p>
+          <Bracket
+            matches={summary.losersBracket}
+            title="Consolation bracket"
+            finalLabel="💩 King (Last Place)"
+            playoffWeekStart={playoffWeekStart}
+            nameOf={name}
+            seedOf={seedOf}
+          />
+        </div>
+      </Panel>
 
       <Panel>
         <PanelHeader title="Every Matchup" meta={`${matchups.length} games`} />
@@ -178,76 +214,5 @@ export default async function SeasonPage({
         </div>
       </Panel>
     </div>
-  );
-}
-
-/**
- * Bracket rendered as rounds of matches rather than connector lines — SVG
- * connectors don't survive a 375px viewport, and the `from` labels carry the
- * same progression information textually.
- */
-function Bracket({
-  title,
-  matches,
-  name,
-}: {
-  title: string;
-  matches: BracketMatch[];
-  name: (s: string | null | undefined) => string;
-}) {
-  const rounds = [...new Set(matches.map((m) => m.round))].sort((a, b) => a - b);
-  const from = (f: BracketMatch["team1From"]) =>
-    !f ? null : f.winnerOf != null ? `W of M${f.winnerOf}` : `L of M${f.loserOf}`;
-
-  return (
-    <Panel>
-      <PanelHeader title={title} />
-      <div className="space-y-4 p-4 sm:p-5">
-        {rounds.map((round) => (
-          <div key={round}>
-            <div className="eyebrow mb-2">Round {round}</div>
-            <div className="space-y-2">
-              {matches
-                .filter((m) => m.round === round)
-                .map((m) => (
-                  <div
-                    key={m.matchId}
-                    className="rounded-lg border border-ink-600 bg-ink-850 px-3 py-2"
-                  >
-                    <div className="mb-1 flex items-center justify-between">
-                      <span className="text-[10px] text-chalk-600">M{m.matchId}</span>
-                      {m.placesFor ? (
-                        <span className="text-[10px] font-semibold text-chalk-500">
-                          {fmt.ordinal(m.placesFor[0])} / {fmt.ordinal(m.placesFor[1])}
-                        </span>
-                      ) : null}
-                    </div>
-                    {(
-                      [
-                        [m.team1, m.team1From],
-                        [m.team2, m.team2From],
-                      ] as const
-                    ).map(([team, fromRef], i) => (
-                      <div
-                        key={i}
-                        className={`flex items-center justify-between gap-2 text-sm ${
-                          m.winner && m.winner === team
-                            ? "font-semibold text-accent"
-                            : "text-chalk-400"
-                        }`}
-                      >
-                        <span className="truncate">
-                          {team ? name(team) : (from(fromRef) ?? "TBD")}
-                        </span>
-                        {m.winner === team ? <span className="text-[10px]">W</span> : null}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </Panel>
   );
 }
