@@ -1,12 +1,16 @@
 import type { OwnerRecord } from "./types.ts";
 
 /**
- * The league's default all-time ordering: hardware, then wins.
+ * The league's default all-time ordering: titles, then wins, then average finish.
  *
- * Titles lead, then 2nds, then 3rds, with total wins breaking ties among owners
- * who have won the same silverware. A consequence worth knowing: a short-tenured
- * owner with one title outranks a long-tenured one with none, because this ranks
- * achievement rather than accumulation.
+ * Titles lead, so this ranks achievement over accumulation — an owner with one
+ * title outranks a higher-win owner with none. Wins break ties among equally
+ * decorated owners, and average finish settles the rest, rewarding consistency
+ * over a single good year.
+ *
+ * Average finish sorts ASCENDING, since 1st is better than 8th. A null (an owner
+ * with no finished season) sorts last rather than first, which a naive numeric
+ * compare would get backwards.
  *
  * ONE definition, used by the derive script (so `owner-records.json` ships in this
  * order), the home page leaderboard, and the sortable all-time table's default
@@ -18,9 +22,8 @@ import type { OwnerRecord } from "./types.ts";
 export function byAllTimeRank(a: OwnerRecord, b: OwnerRecord): number {
   return (
     b.championships - a.championships ||
-    b.runnerUps - a.runnerUps ||
-    b.thirdPlaces - a.thirdPlaces ||
     b.wins - a.wins ||
+    (a.averageFinish ?? Infinity) - (b.averageFinish ?? Infinity) ||
     b.winPct - a.winPct
   );
 }
