@@ -1269,7 +1269,14 @@ function importedSeasons(): SeasonSummary[] {
 // --- records set at the time ---------------------------------------------
 
 interface AtTheTimeFlag {
-  kind: "weekly-high" | "weekly-low" | "blowout" | "narrowest" | "player-week";
+  kind:
+    | "weekly-high"
+    | "weekly-low"
+    | "blowout"
+    | "narrowest"
+    | "player-week"
+    | "combined-high"
+    | "combined-low";
   label: string;
   value: number;
   ownerSlug: string;
@@ -1364,6 +1371,8 @@ function recordsAtTheTime(
   let widestMargin = -Infinity;
   let tightestMargin = Infinity;
   let bestPlayer = -Infinity;
+  let highestCombined = -Infinity;
+  let lowestCombined = Infinity;
 
   events.forEach((ev, i) => {
     const first = i === 0;
@@ -1395,6 +1404,28 @@ function recordsAtTheTime(
       bestScore = Math.max(bestScore, side.points);
       worstScore = Math.min(worstScore, side.points);
     }
+
+    const total = round2(a.points + b.points);
+    if (!first && total > highestCombined) {
+      add(ev.id, {
+        kind: "combined-high",
+        label: "Highest scoring game in league history",
+        value: total,
+        ownerSlug: (a.points >= b.points ? a : b).slug,
+        stillStands: false,
+      });
+    }
+    if (!first && total < lowestCombined) {
+      add(ev.id, {
+        kind: "combined-low",
+        label: "Lowest scoring game in league history",
+        value: total,
+        ownerSlug: (a.points >= b.points ? a : b).slug,
+        stillStands: false,
+      });
+    }
+    highestCombined = Math.max(highestCombined, total);
+    lowestCombined = Math.min(lowestCombined, total);
 
     if (winner) {
       if (!first && margin > widestMargin) {
@@ -1444,6 +1475,8 @@ function recordsAtTheTime(
     blowout: widestMargin,
     narrowest: tightestMargin,
     "player-week": bestPlayer,
+    "combined-high": highestCombined,
+    "combined-low": lowestCombined,
   };
   for (const flags of Object.values(out)) {
     for (const f of flags) f.stillStands = f.value === finals[f.kind];

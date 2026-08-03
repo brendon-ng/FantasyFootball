@@ -474,7 +474,14 @@ export function getAllMeetings(): Meeting[] {
 }
 
 export interface AtTheTimeFlag {
-  kind: "weekly-high" | "weekly-low" | "blowout" | "narrowest" | "player-week";
+  kind:
+    | "weekly-high"
+    | "weekly-low"
+    | "blowout"
+    | "narrowest"
+    | "player-week"
+    | "combined-high"
+    | "combined-low";
   label: string;
   value: number;
   ownerSlug: string;
@@ -574,6 +581,30 @@ export function getRecordFlags(
       });
     }
   });
+  // Combined lists rank the GAME, so a hit on either participant is a hit.
+  r.highestCombined.forEach((s, i) => {
+    if (hit(s)) {
+      out.push({
+        short: `#${i + 1} highest game`,
+        full: `${ordinalOf(i + 1)}-highest combined score of any game in league history`,
+        rank: i + 1,
+        tone: "good",
+        ownerSlug: null,
+      });
+    }
+  });
+  r.lowestCombined.forEach((s, i) => {
+    if (hit(s)) {
+      out.push({
+        short: `#${i + 1} lowest game`,
+        full: `${ordinalOf(i + 1)}-lowest combined score of any game in league history`,
+        rank: i + 1,
+        tone: "bad",
+        ownerSlug: null,
+      });
+    }
+  });
+
   r.playerHigh.forEach((s, i) => {
     if (hit(s)) {
       out.push({

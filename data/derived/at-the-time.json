@@ -1,6 +1,13 @@
 {
   "2020-14-brendon-ng-vs-jake-gibbons": [
     {
+      "kind": "combined-high",
+      "label": "Highest scoring game in league history",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 243.18
+    },
+    {
       "kind": "narrowest",
       "label": "Narrowest win in league history",
       "ownerSlug": "jake-gibbons",
@@ -15,9 +22,23 @@
       "ownerSlug": "reagan-schmidt",
       "stillStands": false,
       "value": 153.34
+    },
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring game in league history",
+      "ownerSlug": "reagan-schmidt",
+      "stillStands": false,
+      "value": 263.66
     }
   ],
   "2020-14-michaela-frederick-vs-tyler-jung": [
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring game in league history",
+      "ownerSlug": "michaela-frederick",
+      "stillStands": false,
+      "value": 213.46
+    },
     {
       "kind": "narrowest",
       "label": "Narrowest win in league history",
@@ -33,6 +54,13 @@
       "ownerSlug": "jaymie-lew",
       "stillStands": false,
       "value": 164.92
+    },
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring game in league history",
+      "ownerSlug": "jaymie-lew",
+      "stillStands": false,
+      "value": 281.38
     }
   ],
   "2020-15-michaela-frederick-vs-spencer-kim": [
@@ -42,6 +70,13 @@
       "ownerSlug": "spencer-kim",
       "stillStands": false,
       "value": 74.44
+    },
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring game in league history",
+      "ownerSlug": "michaela-frederick",
+      "stillStands": false,
+      "value": 173.4
     }
   ],
   "2020-16-jake-gibbons-vs-jaymie-lew": [
@@ -51,6 +86,13 @@
       "ownerSlug": "jake-gibbons",
       "stillStands": false,
       "value": 182.32
+    },
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring game in league history",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 344.58
     }
   ],
   "2021-15-brendon-ng-vs-david-collier": [
@@ -60,6 +102,13 @@
       "ownerSlug": "david-collier",
       "stillStands": false,
       "value": 71.36
+    },
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring game in league history",
+      "ownerSlug": "brendon-ng",
+      "stillStands": false,
+      "value": 165.06
     }
   ],
   "2021-15-jake-gibbons-vs-tyler-jung": [
@@ -78,6 +127,13 @@
       "ownerSlug": "reagan-schmidt",
       "stillStands": true,
       "value": 41.58
+    },
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring game in league history",
+      "ownerSlug": "spencer-kim",
+      "stillStands": true,
+      "value": 128.48
     }
   ],
   "2021-17-david-collier-vs-jake-gibbons": [
@@ -148,6 +204,13 @@
       "ownerSlug": "jaymie-lew",
       "stillStands": true,
       "value": 259.68
+    },
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring game in league history",
+      "ownerSlug": "jaymie-lew",
+      "stillStands": true,
+      "value": 408.1
     },
     {
       "kind": "blowout",
