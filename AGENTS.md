@@ -18,6 +18,16 @@ second Pages deploy that races this one. That sample also passes
 `basePath` and bypasses the `env` block in `next.config.ts` — `withBasePath()`
 then returns unprefixed URLs and assets 404. If `nextjs.yml` reappears, delete it.
 
+## The bylaws are the spec
+
+`docs/BYLAWS.md` is the league's constitution and the source of truth for every
+rule this site models — keeper contracts above all. Read it before changing
+anything in `resolveKeepers()`, and check any rule question against it rather
+than inferring intent from the code.
+
+It ends with implementation notes: which bylaw lives where, what has been
+verified against real data, and four open discrepancies the league has parked.
+
 ## Where this stands
 
 A working league hub, ~506 static pages, no database. Nothing has been pushed —
