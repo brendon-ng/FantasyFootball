@@ -24,9 +24,8 @@ export interface NavOwner {
 
 export function Nav({ subtitle }: { subtitle: string }) {
   const pathname = usePathname();
-  const { identity } = useIdentity();
+  const { identity, ready, openPicker } = useIdentity();
 
-  const onOwnerPage = pathname.startsWith("/owners/");
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-600 bg-ink-900/85 backdrop-blur-md">
@@ -61,21 +60,43 @@ export function Nav({ subtitle }: { subtitle: string }) {
             );
           })}
 
-          {/* Only for someone who has told us who they are. "Just browsing"
-              and "never answered" are different states, and neither gets it. */}
-          {identity.kind === "owner" ? (
-            <Link
-              href={`/owners/${identity.slug}/`}
-              aria-current={onOwnerPage ? "page" : undefined}
-              className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors sm:px-3 ${
-                pathname.startsWith(`/owners/${identity.slug}/`)
-                  ? "bg-ink-700 text-me"
-                  : "text-me/80 hover:bg-ink-700/60 hover:text-me"
-              }`}
+          {/* Identity control. Always present once hydrated, in every state —
+              the previous footer-only affordance was undiscoverable, and the
+              static HTML does not contain it at all until hydration. */}
+          {ready && identity.kind === "owner" ? (
+            <span className="flex shrink-0 items-center">
+              <Link
+                href={`/owners/${identity.slug}/`}
+                aria-current={
+                  pathname.startsWith(`/owners/${identity.slug}/`) ? "page" : undefined
+                }
+                className={`flex items-center gap-1.5 whitespace-nowrap rounded-l-md py-1.5 pl-2.5 pr-2 text-sm font-medium transition-colors ${
+                  pathname.startsWith(`/owners/${identity.slug}/`)
+                    ? "bg-ink-700 text-me"
+                    : "text-me hover:bg-ink-700/60"
+                }`}
+              >
+                <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-me" />
+                My Team
+              </Link>
+              <button
+                type="button"
+                onClick={openPicker}
+                title="Change who you are"
+                aria-label="Change who you are"
+                className="rounded-r-md py-1.5 pl-1 pr-2 text-[9px] text-chalk-600 transition-colors hover:bg-ink-700/60 hover:text-me"
+              >
+                ▼
+              </button>
+            </span>
+          ) : ready ? (
+            <button
+              type="button"
+              onClick={openPicker}
+              className="shrink-0 whitespace-nowrap rounded-md border border-ink-500 px-2.5 py-1 text-xs font-medium text-chalk-400 transition-colors hover:border-me-dim hover:text-me sm:px-3"
             >
-              <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-me" />
-              My Team
-            </Link>
+              Who are you?
+            </button>
           ) : null}
         </nav>
       </div>

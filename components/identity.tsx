@@ -155,6 +155,9 @@ a[href$="/owners/${mySlug}/"]:not([data-me-exempt]),
 [data-owner="${mySlug}"]:not([data-me-exempt]) {
   color: var(--color-me) !important;
   font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-me) 45%, transparent);
+  text-underline-offset: 3px;
 }
 [data-owner-row="${mySlug}"] {
   background-color: color-mix(in srgb, var(--color-me) 9%, transparent);
@@ -215,7 +218,7 @@ function IdentityPicker({
           <h2 className="text-lg font-bold tracking-tight">Who are you?</h2>
           <p className="mt-1 text-[13px] leading-relaxed text-chalk-500">
             Pick your team and we&apos;ll highlight you everywhere on the site. Saved in this
-            browser only — change it any time from the footer.
+            browser only — change it any time from the nav.
           </p>
         </div>
 
