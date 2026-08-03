@@ -256,7 +256,10 @@ export function AllTimeTable({
                     onClick={() => toggle(col)}
                     title={col.hint}
                     aria-label={col.hint ? `${col.label} — ${col.hint}` : col.label}
-                    className={`eyebrow flex w-full items-center gap-1 px-3 py-2.5 text-[10px] font-semibold transition-colors hover:text-chalk-100 ${
+                    // whitespace-nowrap: the eyebrow style adds letter-spacing, so
+                    // a short label like "W-L" was wrapping onto two lines and
+                    // pushing the header row taller than its neighbours.
+                    className={`eyebrow flex w-full items-center gap-1 whitespace-nowrap px-3 py-2.5 text-[10px] font-semibold transition-colors hover:text-chalk-100 ${
                       i === 0 ? "justify-start" : "justify-end"
                     } ${active ? "text-accent" : ""}`}
                   >

@@ -88,7 +88,7 @@ export default function HistoryPage() {
       <Panel>
         <PanelHeader
           title="All-Time Table"
-          meta="regular season"
+          meta="every game"
           legend="Click any column to sort. A co-owned team's record counts for each of its owners, so these columns will not sum to league totals."
         />
         <AllTimeTable
