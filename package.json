@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "preview": "npx --yes serve out",
-    "lint": "eslint"
+    "preview": "next build && rm -rf .preview && mkdir -p .preview && cp -R out .preview/DenOpsFF && npx --yes serve .preview -l 3000",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck",
+    "clean": "rm -rf .next out .preview"
   },
   "dependencies": {
     "next": "16.2.12",

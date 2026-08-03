@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+# local subpath preview staged by `npm run preview`
+/.preview/
 
 # production
 /build

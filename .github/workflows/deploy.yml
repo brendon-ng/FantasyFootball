@@ -24,11 +24,34 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version-file: .nvmrc
           cache: npm
 
       - run: npm ci
-      - run: npm run build
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # GITHUB_REPOSITORY ("owner/repo") is set by Actions; next.config.ts reads it
+      # to derive the /DenOpsFF basePath, so a repo rename can't break asset URLs.
+      - name: Build static export
+        run: npm run build
+
+      # Guard against the classic Pages subpath regression: assets referenced from
+      # the domain root instead of /<repo>/ silently 404 in production.
+      - name: Verify asset URLs are prefixed with the repo subpath
+        run: |
+          repo="${GITHUB_REPOSITORY#*/}"
+          if grep -rEoh '(src|href)="/[^"]*"' out --include='*.html' \
+             | grep -vE "\"/${repo}/" ; then
+            echo "::error::Found root-relative URLs above that bypass the /${repo} basePath."
+            echo "Wrap them with withBasePath() from @/lib/base-path."
+            exit 1
+          fi
+          echo "All root-relative asset URLs are correctly prefixed."
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
