@@ -48,13 +48,14 @@ Logan Dunn, Jaymie Lew, David Collier.
 
 ### Requested, not yet built
 
-- **Keeper history page** under the Keepers tab: which players each team kept,
-  season by season. The data exists — `SeasonKeepers.keptPlayerIds` per season in
-  `data/derived/keepers.json`, plus `isKeeper` on every pick in `drafts.json`.
-- **Keeper history on the player page**: how many times a player has been kept
-  and by whom. Same source; `KeeperContract.provenance` already narrates it, but
-  it is not summarised as counts.
 - **Draft history page**: `drafts.json` holds all 340 picks and nothing renders it.
+
+Keeper history shipped at `/keepers/history/` (by team and season) and on player
+pages (a "Times kept" tile plus a Keeper History panel). Both read `isKeeper`
+off draft picks rather than contract state — a pick records what happened, a
+contract asserts what a player is worth. Only Sleeper drafts contribute, so the
+record starts at 2025: 2024 was the startup draft and the ESPN seasons kept no
+draft data.
 
 ### Open decisions the user has parked
 

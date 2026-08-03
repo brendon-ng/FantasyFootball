@@ -362,3 +362,41 @@ export function getMeetings(slugA: string, slugB: string): Meeting[] {
 
   return out.sort((x, y) => y.season - x.season || (y.week ?? 0) - (x.week ?? 0));
 }
+
+/** One instance of a player being retained, taken from that season's draft. */
+export interface KeepEvent {
+  season: number;
+  ownerSlug: string | null;
+  round: number;
+  pickNo: number;
+  playerId: string;
+}
+
+/**
+ * Every keeper ever declared, from the draft record.
+ *
+ * Sourced from `isKeeper` on draft picks rather than from contract state,
+ * because a pick is a fact about what happened while a contract is a derived
+ * assertion about what a player is worth. Only seasons with a Sleeper draft can
+ * contribute — the imported ESPN seasons kept no draft data at all — so this
+ * currently begins at 2025, the league's first keeper year.
+ */
+export function getKeepHistory(): KeepEvent[] {
+  return getDrafts()
+    .filter((p) => p.isKeeper)
+    .map((p) => ({
+      season: p.season,
+      ownerSlug: p.ownerSlug,
+      round: p.round,
+      pickNo: p.pickNo,
+      playerId: p.playerId,
+    }))
+    .sort((a, b) => b.season - a.season || a.round - b.round || a.pickNo - b.pickNo);
+}
+
+/** Keep events for one player, oldest first. */
+export function getPlayerKeepHistory(playerId: string): KeepEvent[] {
+  return getKeepHistory()
+    .filter((k) => k.playerId === playerId)
+    .sort((a, b) => a.season - b.season);
+}

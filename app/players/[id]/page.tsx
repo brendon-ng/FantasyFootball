@@ -3,7 +3,14 @@ import { notFound } from "next/navigation";
 
 import { KeepPips, PositionPill } from "@/components/keeper-table";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
-import { getAdp, getKeepers, getOwnerMap, getPlayerHistory, getPlayers } from "@/lib/data";
+import {
+  getAdp,
+  getKeepers,
+  getOwnerMap,
+  getPlayerHistory,
+  getPlayerKeepHistory,
+  getPlayers,
+} from "@/lib/data";
 
 export const dynamicParams = false;
 
@@ -51,6 +58,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   const owners = getOwnerMap();
   const history = getPlayerHistory()[id] ?? [];
   const contract = getKeepers().final.find((c) => c.playerId === id);
+  const keeps = getPlayerKeepHistory(id);
   const adpAll = getAdp();
   const adp = adpAll.byPlayer.get(id);
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
@@ -72,7 +80,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
       </div>
 
       {contract ? (
-        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
           <Stat
             label="Current owner"
             value={
@@ -101,6 +109,16 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
             sub={`${contract.keepsRemaining} of ${contract.keepsUsed + contract.keepsRemaining}`}
           />
           <Stat
+            label="Times kept"
+            value={keeps.length}
+            tone={keeps.length ? "accent" : "default"}
+            sub={
+              keeps.length
+                ? keeps.map((k) => k.season).join(", ")
+                : `On contract since ${contract.startSeason}`
+            }
+          />
+          <Stat
             label={`Sleeper ADP${adpAll.frozen ? " (locked)" : ""}`}
             value={adp?.sleeper != null ? adp.sleeper.toFixed(1) : "—"}
             sub={
@@ -116,6 +134,39 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
         <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
           <Stat label="Sleeper ADP" value={adp.sleeper.toFixed(1)} sub={`round ${adp.round}`} />
         </div>
+      ) : null}
+
+      {keeps.length ? (
+        <Panel>
+          <PanelHeader
+            title="Keeper History"
+            meta={`kept ${keeps.length} time${keeps.length === 1 ? "" : "s"}`}
+            legend="Each retention consumed the owner's pick in that round. A contract survives two keeps at its original cost before the player is revalued to ADP."
+          />
+          <div className="divide-y divide-ink-700">
+            {keeps.map((k) => (
+              <div
+                key={`${k.season}-${k.pickNo}`}
+                className="flex items-center gap-3 px-4 py-2.5 sm:px-5"
+              >
+                <span className="tabular w-12 shrink-0 text-sm font-bold text-chalk-100">
+                  {k.season}
+                </span>
+                <span className="min-w-0 flex-1 truncate text-sm">
+                  <span className="text-chalk-600">kept by</span>{" "}
+                  <OwnerLink slug={k.ownerSlug} name={name(k.ownerSlug)} />
+                </span>
+                <span
+                  className="tabular shrink-0 text-sm font-semibold text-accent"
+                  title={`Round ${k.round}, pick ${k.pickNo} overall`}
+                >
+                  R{k.round}
+                  <span className="ml-1 text-[10px] font-normal text-chalk-600">#{k.pickNo}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+        </Panel>
       ) : null}
 
       <div className="grid gap-5 lg:grid-cols-2">

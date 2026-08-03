@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { KeeperBoard } from "@/components/keeper-board";
 import { EmptyState, Panel, Stat } from "@/components/ui";
 import { getAdp, getConfig, getKeepers, getOwners, getPlayers, getSeasons } from "@/lib/data";
@@ -46,12 +48,20 @@ export default function KeepersPage() {
 
   return (
     <div className="space-y-5 sm:space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Keeper Tracker</h1>
-        <p className="mt-1 max-w-2xl text-sm text-chalk-500">
-          Contracts entering the {nextSeason} draft. Keeping a player costs your pick in their
-          round; a contract survives two keeps before the player is revalued to ADP.
-        </p>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Keeper Tracker</h1>
+          <p className="mt-1 max-w-2xl text-sm text-chalk-500">
+            Contracts entering the {nextSeason} draft. Keeping a player costs your pick in their
+            round; a contract survives two keeps before the player is revalued to ADP.
+          </p>
+        </div>
+        <Link
+          href="/keepers/history/"
+          className="shrink-0 rounded-lg border border-ink-500 px-3 py-1.5 text-xs font-medium text-chalk-300 transition-colors hover:border-accent-dim hover:text-accent"
+        >
+          Keeper history <span aria-hidden>→</span>
+        </Link>
       </div>
 
       <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
