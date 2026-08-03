@@ -852,6 +852,28 @@ function buildOwnerRecords(
     }
   }
 
+  // A career record counts EVERY game — regular season and postseason alike.
+  // Standings only ever describe the regular season, so the totals are summed
+  // from matchups now that every season on record has them. A season with no
+  // matchups (an import whose weekly scoreboards are still lost) falls back to
+  // its standings row, which is regular-season only but better than nothing.
+  const playedSeasons = new Set(matchups.map((m) => m.season));
+  for (const m of matchups) {
+    for (const [me, opp] of [
+      [m.home, m.away],
+      [m.away, m.home],
+    ] as const) {
+      const bucket = me.points === opp.points ? "ties" : me.points > opp.points ? "wins" : "losses";
+      for (const slug of sideOwners(m.season, me.ownerSlug)) {
+        const r = rec.get(slug);
+        if (!r) continue;
+        r[bucket]++;
+        r.pointsFor = round2(r.pointsFor + me.points);
+        r.pointsAgainst = round2(r.pointsAgainst + opp.points);
+      }
+    }
+  }
+
   for (const s of summaries) {
     if (!s.finalized) continue;
     for (const row of s.standings) {
@@ -859,11 +881,13 @@ function buildOwnerRecords(
         const r = rec.get(slug);
         if (!r) continue;
         r.seasonsPlayed++;
-        r.wins += row.wins;
-        r.losses += row.losses;
-        r.ties += row.ties;
-        r.pointsFor = round2(r.pointsFor + row.pointsFor);
-        r.pointsAgainst = round2(r.pointsAgainst + row.pointsAgainst);
+        if (!playedSeasons.has(s.season)) {
+          r.wins += row.wins;
+          r.losses += row.losses;
+          r.ties += row.ties;
+          r.pointsFor = round2(r.pointsFor + row.pointsFor);
+          r.pointsAgainst = round2(r.pointsAgainst + row.pointsAgainst);
+        }
         if (row.madePlayoffs) r.playoffAppearances++;
         r.finishes.push({ season: s.season, place: row.finalPlace, seed: row.seed });
 
@@ -885,8 +909,11 @@ function buildOwnerRecords(
 
   for (const r of rec.values()) {
     const games = r.wins + r.losses + r.ties;
-    r.winPct = games ? round2((r.wins + r.ties / 2) / games) : 0;
-    // Per-game rates, so a 13-game 2020 season compares fairly with a 14-game one.
+    // Four decimals, not two: the UI renders one decimal place of a PERCENTAGE,
+    // so a value rounded to 0.59 can only ever print "59.0%".
+    r.winPct = games ? Number(((r.wins + r.ties / 2) / games).toFixed(4)) : 0;
+    // Per-game rates over every game played, so a 13-game 2020 season compares
+    // fairly with a 14-game one and a deep playoff run is not free.
     r.pointsForPerGame = games ? round2(r.pointsFor / games) : 0;
     r.pointsAgainstPerGame = games ? round2(r.pointsAgainst / games) : 0;
     const places = r.finishes.map((f) => f.place).filter((p): p is number => p != null);

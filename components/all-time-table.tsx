@@ -75,7 +75,7 @@ export function AllTimeTable({
       {
         key: "record",
         label: "W-L",
-        hint: "All-time regular-season wins-losses-ties. Sorts by wins.",
+        hint: "All-time record across every game, regular season and postseason. Sorts by wins.",
         value: (r) => r.wins,
         firstClick: "desc",
         render: (r) => (
@@ -87,7 +87,7 @@ export function AllTimeTable({
       {
         key: "winPct",
         label: "Win%",
-        hint: "Win percentage, counting a tie as half a win",
+        hint: "Win percentage across every game, counting a tie as half a win",
         value: (r) => r.winPct,
         firstClick: "desc",
         render: (r) => <span className="font-semibold">{fmtPct(r.winPct)}</span>,
@@ -95,7 +95,7 @@ export function AllTimeTable({
       {
         key: "pf",
         label: "PF",
-        hint: "Points For — regular-season points scored, all seasons. Playoff scoring is not included here; head-to-head counts every meeting.",
+        hint: "Points For — every point scored, regular season and postseason, across all seasons",
         value: (r) => r.pointsFor,
         firstClick: "desc",
         render: (r) => <span className="text-chalk-500">{fmtPts(r.pointsFor)}</span>,
@@ -103,7 +103,7 @@ export function AllTimeTable({
       {
         key: "pfg",
         label: "PF/G",
-        hint: "Regular-season points scored per game — comparable across seasons of different length",
+        hint: "Points scored per game played — comparable across seasons of different length",
         value: (r) => r.pointsForPerGame,
         firstClick: "desc",
         render: (r) => (
@@ -113,7 +113,7 @@ export function AllTimeTable({
       {
         key: "pa",
         label: "PA",
-        hint: "Points Against — regular-season points their opponents scored, all seasons",
+        hint: "Points Against — every point their opponents scored, regular season and postseason",
         value: (r) => r.pointsAgainst,
         firstClick: "desc",
         render: (r) => <span className="text-chalk-500">{fmtPts(r.pointsAgainst)}</span>,
@@ -121,7 +121,7 @@ export function AllTimeTable({
       {
         key: "pag",
         label: "PA/G",
-        hint: "Regular-season points against per game. Lowest first — fewer is better.",
+        hint: "Points against per game played. Lowest first — fewer is better.",
         value: (r) => r.pointsAgainstPerGame,
         firstClick: "asc",
         render: (r) => <span className="text-chalk-500">{fmtPts(r.pointsAgainstPerGame)}</span>,

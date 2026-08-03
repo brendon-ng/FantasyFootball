@@ -287,12 +287,12 @@ export default async function HomePage() {
                 <Col className="shrink-0" hint="Championships won">
                   Titles
                 </Col>
-                <Col className="w-16 shrink-0 text-right" hint="All-time regular-season wins-losses">
+                <Col className="w-16 shrink-0 text-right" hint="All-time record across every game, regular season and postseason">
                   W-L
                 </Col>
                 <Col
                   className="w-12 shrink-0 text-right"
-                  hint="Win percentage, counting a tie as half a win"
+                  hint="Win percentage across every game, counting a tie as half a win"
                 >
                   Win%
                 </Col>

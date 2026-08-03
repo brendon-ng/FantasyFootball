@@ -598,17 +598,26 @@ site claimed 2027 was their final keep year when it is really 2026.
 
 ### What the all-time columns actually measure
 
-Audited against the raw games once every season had weekly scores, and all of it
-reconciles — but the SCOPE differs by column, deliberately:
+Career totals count EVERY game, regular season and postseason. They are summed
+from `matchups`, not from standings — standings only ever describe the regular
+season, so they cannot express this. A season with no matchups (an import whose
+weekly scoreboards are still lost) falls back to its standings row; nothing is in
+that state today, but the path exists so a partial import degrades rather than
+disappears.
 
 | Column | Scope |
 | --- | --- |
-| W-L, Win%, PF, PA, PF/G, PA/G | REGULAR SEASON only, summed from standings |
+| W-L, Win%, PF, PA, PF/G, PA/G | EVERY game, postseason included |
 | Head-to-head (incl. its PF/PA) | EVERY meeting, postseason included |
 | Championships / 2nd / 3rd / Last | final placement, so postseason by definition |
+| A SEASON's standings table (PF, PA, W-L) | regular season — that is what standings are |
 
-Win% is `(wins + ties/2) / games`, a tie as half a win. Per-game rates divide by
-regular-season games, so a 13-game 2020 compares fairly with a 14-game 2021.
+Win% is `(wins + ties/2) / games`, a tie as half a win. It is stored to FOUR
+decimals: the UI prints one decimal place of a percentage, so a value rounded to
+two could only ever render "59.0%".
+
+Per-game rates divide by games actually played, so a 13-game 2020 compares fairly
+with a 14-game 2021 and a deep playoff run is not free.
 
 Summing a single owner's head-to-head PF across opponents will EXCEED their career
 PF, and not only because of the postseason: a meeting with a co-owned team is
