@@ -1,0 +1,347 @@
+{
+  "2025-1-aidan-kelleher-vs-kate-olson": [
+    {
+      "kind": "weekly-high",
+      "label": "Highest score in league history",
+      "ownerSlug": "kate-olson",
+      "stillStands": false,
+      "value": 127.96
+    },
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "aidan-kelleher",
+      "ownerSlug": "kate-olson",
+      "stillStands": false,
+      "value": 242.48
+    },
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "kate-olson",
+      "playerId": "4984",
+      "stillStands": false,
+      "value": 38.76
+    }
+  ],
+  "2025-1-allison-fosbery-vs-jake-gibbons": [
+    {
+      "kind": "weekly-high",
+      "label": "Highest score in league history",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 116.18
+    },
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "allison-fosbery",
+      "stillStands": false,
+      "value": 89.72
+    },
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "allison-fosbery",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 205.9
+    },
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "allison-fosbery",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 26.46
+    }
+  ],
+  "2025-1-brendon-ng-vs-ross-bechtel": [
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "brendon-ng",
+      "playerId": "4866",
+      "stillStands": false,
+      "value": 18.4
+    },
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "ross-bechtel",
+      "playerId": "3198",
+      "stillStands": false,
+      "value": 29.2
+    }
+  ],
+  "2025-1-josh-greenebaum-vs-srishti-dhawan": [
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
+      "opponentSlug": "josh-greenebaum",
+      "ownerSlug": "srishti-dhawan",
+      "stillStands": false,
+      "value": 191.96
+    }
+  ],
+  "2025-1-kaitlin-zarbis-vs-lindsey-freeze": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "kaitlin-zarbis",
+      "stillStands": false,
+      "value": 86.84
+    },
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "kaitlin-zarbis",
+      "ownerSlug": "lindsey-freeze",
+      "stillStands": false,
+      "value": 33.72
+    }
+  ],
+  "2025-10-jake-gibbons-vs-lindsey-freeze": [
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "jake-gibbons",
+      "playerId": "6813",
+      "stillStands": false,
+      "value": 49.6
+    }
+  ],
+  "2025-11-brendon-ng-vs-josh-greenebaum": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "brendon-ng",
+      "stillStands": false,
+      "value": 66.06
+    },
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "josh-greenebaum",
+      "stillStands": true,
+      "value": 62.3
+    },
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
+      "opponentSlug": "josh-greenebaum",
+      "ownerSlug": "brendon-ng",
+      "stillStands": true,
+      "value": 128.36
+    }
+  ],
+  "2025-12-allison-fosbery-vs-jake-gibbons": [
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "jake-gibbons",
+      "playerId": "9221",
+      "stillStands": true,
+      "value": 55.4
+    }
+  ],
+  "2025-15-josh-greenebaum-vs-srishti-dhawan": [
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "srishti-dhawan",
+      "ownerSlug": "josh-greenebaum",
+      "stillStands": true,
+      "value": 305.6
+    }
+  ],
+  "2025-16-allison-fosbery-vs-kate-olson": [
+    {
+      "kind": "weekly-high",
+      "label": "Highest score in league history",
+      "ownerSlug": "allison-fosbery",
+      "stillStands": true,
+      "value": 185.44
+    }
+  ],
+  "2025-2-brendon-ng-vs-kate-olson": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "kate-olson",
+      "stillStands": false,
+      "value": 74.72
+    },
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
+      "opponentSlug": "kate-olson",
+      "ownerSlug": "brendon-ng",
+      "stillStands": false,
+      "value": 189.66
+    },
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "kate-olson",
+      "ownerSlug": "brendon-ng",
+      "stillStands": false,
+      "value": 40.22
+    }
+  ],
+  "2025-2-jake-gibbons-vs-robbie-goodman": [
+    {
+      "kind": "weekly-high",
+      "label": "Highest score in league history",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 138.1
+    },
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "robbie-goodman",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 254
+    }
+  ],
+  "2025-2-josh-greenebaum-vs-kaitlin-zarbis": [
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "kaitlin-zarbis",
+      "ownerSlug": "josh-greenebaum",
+      "stillStands": false,
+      "value": 268.68
+    },
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "josh-greenebaum",
+      "playerId": "7547",
+      "stillStands": false,
+      "value": 39.2
+    }
+  ],
+  "2025-2-lindsey-freeze-vs-srishti-dhawan": [
+    {
+      "kind": "weekly-high",
+      "label": "Highest score in league history",
+      "ownerSlug": "srishti-dhawan",
+      "stillStands": false,
+      "value": 140.82
+    },
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "lindsey-freeze",
+      "ownerSlug": "srishti-dhawan",
+      "stillStands": false,
+      "value": 270.32
+    }
+  ],
+  "2025-3-jake-gibbons-vs-vance-armstrong": [
+    {
+      "kind": "weekly-high",
+      "label": "Highest score in league history",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 168.92
+    },
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "vance-armstrong",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 68.82
+    }
+  ],
+  "2025-5-aidan-kelleher-vs-jake-gibbons": [
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "aidan-kelleher",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": false,
+      "value": 280.62
+    }
+  ],
+  "2025-7-aidan-kelleher-vs-srishti-dhawan": [
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
+      "opponentSlug": "srishti-dhawan",
+      "ownerSlug": "aidan-kelleher",
+      "stillStands": false,
+      "value": 178.22
+    }
+  ],
+  "2025-7-jake-gibbons-vs-ross-bechtel": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "ross-bechtel",
+      "stillStands": false,
+      "value": 74.14
+    },
+    {
+      "kind": "blowout",
+      "label": "Biggest margin in league history",
+      "opponentSlug": "ross-bechtel",
+      "ownerSlug": "jake-gibbons",
+      "stillStands": true,
+      "value": 91.68
+    }
+  ],
+  "2025-7-josh-greenebaum-vs-kate-olson": [
+    {
+      "kind": "weekly-high",
+      "label": "Highest score in league history",
+      "ownerSlug": "josh-greenebaum",
+      "stillStands": false,
+      "value": 180.14
+    }
+  ],
+  "2025-7-kaitlin-zarbis-vs-robbie-goodman": [
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "kaitlin-zarbis",
+      "playerId": "11563",
+      "stillStands": false,
+      "value": 39.96
+    }
+  ],
+  "2025-8-allison-fosbery-vs-josh-greenebaum": [
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "josh-greenebaum",
+      "ownerSlug": "allison-fosbery",
+      "stillStands": false,
+      "value": 284.62
+    }
+  ],
+  "2025-8-kate-olson-vs-lindsey-freeze": [
+    {
+      "kind": "narrowest",
+      "label": "Narrowest win in league history",
+      "opponentSlug": "lindsey-freeze",
+      "ownerSlug": "kate-olson",
+      "stillStands": true,
+      "value": 0.3
+    }
+  ],
+  "2025-9-kaitlin-zarbis-vs-kate-olson": [
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "kate-olson",
+      "playerId": "11604",
+      "stillStands": false,
+      "value": 43.3
+    }
+  ]
+}

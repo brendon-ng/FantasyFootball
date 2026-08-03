@@ -1,10 +1,24 @@
 import Link from "next/link";
 
 import { PositionPill } from "@/components/keeper-table";
-import { Col, EmptyState, ListHeader, Panel, PanelHeader, Stat } from "@/components/ui";
-import { getKeepHistory, getOwnerMap, getPlayers, getSeasons } from "@/lib/data";
+import {
+  Col,
+  EmptyState,
+  ListHeader,
+  Panel,
+  PanelHeader,
+  Stat,
+} from "@/components/ui";
+import {
+  features,
+  getKeepHistory,
+  getOwnerMap,
+  getPlayers,
+  getSeasons,
+  pageTitle,
+} from "@/lib/data";
 
-export const metadata = { title: "Keeper History · Den Ops" };
+export const generateMetadata = () => ({ title: pageTitle("Keeper History") });
 
 /**
  * Who kept whom, season by season.
@@ -17,6 +31,17 @@ export const metadata = { title: "Keeper History · Den Ops" };
  * definition.
  */
 export default function KeeperHistoryPage() {
+  // Routes still exist in a redraft league's build (static export generates every
+  // page), but the nav hides them and this says why rather than rendering a board
+  // with nothing on it.
+  if (!features().keepers) {
+    return (
+      <Panel>
+        <EmptyState>This league does not use keepers.</EmptyState>
+      </Panel>
+    );
+  }
+
   const keeps = getKeepHistory();
   const owners = getOwnerMap();
   const players = getPlayers();

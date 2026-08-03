@@ -50,22 +50,33 @@ jobs:
         run: npm run typecheck
 
       # GITHUB_REPOSITORY ("owner/repo") is set by Actions; next.config.ts reads it
-      # to derive the /DenOpsFF basePath, so a repo rename can't break asset URLs.
+      # to derive the /<repo>/<league> basePath, so a repo rename can't break asset
+      # URLs. `npm run build` builds EVERY configured league and assembles them.
       - name: Build static export
         run: npm run build
 
       # Guard against the classic Pages subpath regression: assets referenced from
       # the domain root instead of /<repo>/ silently 404 in production.
-      - name: Verify asset URLs are prefixed with the repo subpath
+      # Checked per league, not just against /<repo>/: a league whose pages linked
+      # into another league's subtree would still pass a repo-only check, and that
+      # is exactly the regression a one-build-per-league layout can introduce.
+      - name: Verify asset URLs are prefixed with the league subpath
         run: |
           repo="${GITHUB_REPOSITORY#*/}"
-          if grep -rEoh '(src|href)="/[^"]*"' out --include='*.html' \
-             | grep -vE "\"/${repo}/" ; then
-            echo "::error::Found root-relative URLs above that bypass the /${repo} basePath."
+          fail=0
+          for dir in out/*/; do
+            slug="$(basename "$dir")"
+            if grep -rEoh '(src|href)="/[^"]*"' "$dir" --include='*.html' \
+               | grep -vE "\"/${repo}/${slug}/" ; then
+              echo "::error::${slug}: URLs above bypass the /${repo}/${slug} basePath."
+              fail=1
+            fi
+          done
+          if [ "$fail" = 1 ]; then
             echo "Wrap them with withBasePath() from @/lib/base-path."
             exit 1
           fi
-          echo "All root-relative asset URLs are correctly prefixed."
+          echo "All root-relative asset URLs are correctly prefixed, per league."
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

@@ -9,11 +9,16 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Den Ops Fantasy Football",
-  description:
-    "League hub for the Den Ops Super League — standings, keeper contracts, and league history.",
-};
+// Built from config, not literal, so a second league does not inherit the
+// first one's name in its <title>.
+export function generateMetadata(): Metadata {
+  const cfg = getConfig();
+  const extra = cfg.features.keepers ? "keeper contracts, " : "";
+  return {
+    title: `${cfg.shortName} Fantasy Football`,
+    description: `League hub for the ${cfg.name} — standings, ${extra}and league history.`,
+  };
+}
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const cfg = getConfig();
@@ -33,14 +38,19 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     >
       <body className="flex min-h-full flex-col bg-ink-900 text-chalk-100">
         <IdentityProvider owners={navOwners}>
-        <Nav subtitle={`${latest} SEASON`} owners={navOwners} />
+        <Nav
+          subtitle={`${latest} SEASON`}
+          owners={navOwners}
+          wordmark={cfg.shortName.toUpperCase()}
+          features={cfg.features}
+        />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
           {children}
         </main>
         <footer className="mt-8 border-t border-ink-600 px-4 py-6 sm:px-6">
           <div className="mx-auto flex max-w-6xl flex-col gap-1 text-[11px] text-chalk-600 sm:flex-row sm:items-center sm:justify-between">
             <span>
-              Den Ops Super League · {seasonCount} completed season
+              {cfg.name} · {seasonCount} completed season
               {seasonCount === 1 ? "" : "s"} on record
             </span>
             <span className="flex flex-wrap items-center gap-x-3 gap-y-1">

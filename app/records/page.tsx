@@ -3,17 +3,10 @@ import Link from "next/link";
 import { ExpandableList, ExpandableRow } from "@/components/expandable-list";
 
 import { Panel, PanelHeader, fmt } from "@/components/ui";
-import {
-  getAllMeetings,
-  getMatchupHistory,
-  getOwnerMap,
-  getPlayers,
-  getRecords,
-  meetingId,
-} from "@/lib/data";
+import { getAllMeetings, getMatchupHistory, getOwnerMap, getPlayers, getRecords, meetingId, pageTitle } from "@/lib/data";
 import type { CombinedRecord, ScoreRecord } from "@/lib/types";
 
-export const metadata = { title: "Records · Den Ops" };
+export const generateMetadata = () => ({ title: pageTitle("Records") });
 
 export default function RecordsPage() {
   const records = getRecords();

@@ -44,7 +44,7 @@ import {
   type SleeperPlayer,
 } from "../lib/sleeper.ts";
 import { CACHE_DIR, SHARED_DATA_DIR, fileAgeMs, log, readJson, wk, writeJson } from "./lib/io.ts";
-import { configDir, dataDir, resolveLeagues, type ScriptLeague } from "./lib/league.ts";
+import { allLeagues, configDir, dataDir, resolveLeagues, type ScriptLeague } from "./lib/league.ts";
 
 interface SeasonRecord {
   season: string;
@@ -264,60 +264,81 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
  * browser. Restricting it to referenced players cuts it by well over 95% while
  * still resolving every ID that appears in a roster, draft, matchup, or trade.
  */
-async function syncPlayers(seasons: SeasonRecord[]): Promise<void> {
+async function syncPlayers(leagues: ScriptLeague[]): Promise<void> {
   log.step("Building player index");
 
-  const ids = new Set<string>();
+  // Per league AND unioned. The metadata file is shared because player metadata
+  // is league-agnostic, but each league also records which players it actually
+  // references, so a build only generates pages for its own players.
+  const byLeague = new Map<string, Set<string>>();
+  let current = new Set<string>();
   const collect = (v: unknown) => {
-    if (Array.isArray(v)) v.forEach((x) => typeof x === "string" && ids.add(x));
-    else if (v && typeof v === "object") Object.keys(v).forEach((k) => ids.add(k));
+    if (Array.isArray(v)) v.forEach((x) => typeof x === "string" && current.add(x));
+    else if (v && typeof v === "object") Object.keys(v).forEach((k) => current.add(k));
   };
 
-  for (const s of seasons) {
-    const dir = join(RAW_DIR, s.season);
+  for (const league of leagues) {
+    current = new Set<string>();
+    byLeague.set(league.slug, current);
+    const rawDir = join(dataDir(league.slug), "raw");
+    const seasons =
+      readJson<{ seasons: SeasonRecord[] }>(join(rawDir, "seasons.json"))?.seasons ?? [];
 
-    for (const r of readJson<Array<Record<string, unknown>>>(join(dir, "rosters.json")) ?? []) {
-      collect(r.players);
-      collect(r.reserve);
-      collect(r.starters);
-    }
-    for (const p of readJson<Array<{ player_id: string }>>(join(dir, "draft-picks.json")) ?? []) {
-      ids.add(p.player_id);
-    }
-    for (let week = 1; week <= s.finalizedThroughWeek; week++) {
-      for (const m of readJson<Array<Record<string, unknown>>>(
-        join(dir, "matchups", `${wk(week)}.json`),
-      ) ?? []) {
-        collect(m.players);
-        collect(m.players_points);
+    for (const s of seasons) {
+      const dir = join(rawDir, s.season);
+
+      for (const r of readJson<Array<Record<string, unknown>>>(join(dir, "rosters.json")) ?? []) {
+        collect(r.players);
+        collect(r.reserve);
+        collect(r.starters);
       }
-      for (const t of readJson<Array<Record<string, unknown>>>(
-        join(dir, "transactions", `${wk(week)}.json`),
-      ) ?? []) {
-        collect(t.adds);
-        collect(t.drops);
+      for (const p of readJson<Array<{ player_id: string }>>(join(dir, "draft-picks.json")) ?? []) {
+        current.add(p.player_id);
+      }
+      for (let week = 1; week <= s.finalizedThroughWeek; week++) {
+        for (const m of readJson<Array<Record<string, unknown>>>(
+          join(dir, "matchups", `${wk(week)}.json`),
+        ) ?? []) {
+          collect(m.players);
+          collect(m.players_points);
+        }
+        for (const t of readJson<Array<Record<string, unknown>>>(
+          join(dir, "transactions", `${wk(week)}.json`),
+        ) ?? []) {
+          collect(t.adds);
+          collect(t.drops);
+        }
+      }
+    }
+
+    // Also index whoever is currently rostered, so in-progress pages resolve names.
+    for (const [season, leagueId] of Object.entries(league.knownLeagueIds)) {
+      if (seasons.find((s) => s.season === season)?.finalized) continue;
+      for (const r of (await getRosters(leagueId)) ?? []) {
+        collect(r.players);
+        collect(r.reserve);
       }
     }
   }
 
-  // Also index whoever is currently rostered, so in-progress pages resolve names.
-  for (const [season, leagueId] of Object.entries(config.knownLeagueIds)) {
-    if (seasons.find((s) => s.season === season)?.finalized) continue;
-    for (const r of (await getRosters(leagueId)) ?? []) {
-      collect(r.players);
-      collect(r.reserve);
-    }
+  const ids = new Set<string>();
+  for (const [slug, set] of byLeague) {
+    set.delete("");
+    for (const id of set) ids.add(id);
+    writeIfChanged(
+      join(dataDir(slug), "raw", "player-ids.json"),
+      [...set].sort(),
+      `${slug}: player-ids.json (${set.size})`,
+    );
   }
-
-  ids.delete("");
-  log.info(`${ids.size} distinct players referenced`);
+  log.info(`${ids.size} distinct players referenced across ${leagues.length} league(s)`);
 
   // Cache the 5MB payload locally so repeated syncs in a day cost one request.
   const cachePath = join(CACHE_DIR, "players-nfl.json");
   let all = readJson<Record<string, SleeperPlayer>>(cachePath);
   if (!all || fileAgeMs(cachePath) > 24 * 60 * 60 * 1000) {
     log.info("fetching full player map (~5MB, max once/day)");
-    all = await getAllPlayers(config.sport);
+    all = await getAllPlayers(leagues[0]?.sport ?? "nfl");
     if (all) writeJson(cachePath, all);
   } else {
     log.skip("using cached player map (<24h old)");
@@ -380,10 +401,16 @@ async function syncLeague(league: ScriptLeague): Promise<void> {
     "raw/seasons.json",
   );
 
-  if (!SKIP_PLAYERS) await syncPlayers(records);
 }
 
 for (const league of resolveLeagues(process.argv.slice(2))) {
   await syncLeague(league);
 }
+
+// Built from EVERY league, once, after the per-league passes. The index is shared
+// (player metadata is league-agnostic), so building it from only the league being
+// synced would drop every player the others reference — `--league=x` would quietly
+// delete league y's names.
+if (!SKIP_PLAYERS) await syncPlayers(allLeagues());
+
 log.step("Done");

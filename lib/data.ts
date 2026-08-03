@@ -36,14 +36,13 @@ import type {
 } from "./types.ts";
 
 /**
- * INTERIM: the data layer still resolves one hardcoded league.
+ * The league this build serves.
  *
- * The config and data directories are already split per league, and the scripts
- * already loop them. Converting these accessors to a per-league factory and
- * moving the routes under `app/[league]/` is the next step; until then the app
- * serves den-ops so the build stays green.
+ * One build per league (see next.config.ts), so a single slug is correct for the
+ * whole process — there is no request-scoped league to thread through. Adding a
+ * league adds a build, not a code path.
  */
-const LEAGUE = "den-ops";
+export const LEAGUE = process.env.LEAGUE ?? "den-ops";
 const DATA = join(process.cwd(), "data", LEAGUE);
 const SHARED_DATA = join(process.cwd(), "data");
 const CONFIG = join(process.cwd(), "config", "leagues", LEAGUE);
@@ -70,13 +69,22 @@ export const getPlayers = (): Record<string, PlayerMeta> => {
     string,
     PlayerMeta
   >;
+  // `data/players.json` is the union across leagues, so it must be narrowed to
+  // the players THIS league references — otherwise every league would generate a
+  // player page for the others' players, with no data on it.
+  const mine = load<string[] | null>("raw/player-ids.json", null);
+  const scoped = mine ? Object.fromEntries(mine.filter((id) => all[id]).map((id) => [id, all[id]])) : all;
+  // Optional: only a keeper league needs corrections, and a league with nothing
+  // to correct should not have to carry an empty file.
+  const overridesPath = join(CONFIG, "keeper-overrides.json");
   const ignored = new Set(
-    (JSON.parse(readFileSync(join(CONFIG, "keeper-overrides.json"), "utf8")) as {
-      ignorePlayerIds?: string[];
-    }).ignorePlayerIds ?? [],
+    existsSync(overridesPath)
+      ? ((JSON.parse(readFileSync(overridesPath, "utf8")) as { ignorePlayerIds?: string[] })
+          .ignorePlayerIds ?? [])
+      : [],
   );
-  if (!ignored.size) return all;
-  return Object.fromEntries(Object.entries(all).filter(([id]) => !ignored.has(id)));
+  if (!ignored.size) return scoped;
+  return Object.fromEntries(Object.entries(scoped).filter(([id]) => !ignored.has(id)));
 };
 export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []);
 export const getPlayerHistory = (): Record<string, PlayerTransaction[]> =>
@@ -92,13 +100,35 @@ export const getRecords = (): LeagueRecords =>
 export const getKeepers = (): { perSeason: SeasonKeepers[]; final: KeeperContract[] } =>
   load("derived/keepers.json", { perSeason: [], final: [] });
 
+export interface LeagueFeatures {
+  /** Keeper contracts, the keeper tracker, keeper history. */
+  keepers: boolean;
+  /** ADP capture, and the surplus-value column that depends on it. */
+  adp: boolean;
+  /** Pre-Sleeper seasons imported from archived ESPN pages. */
+  espnImport: boolean;
+}
 export interface LeagueConfig {
-  leagueName: string;
+  slug: string;
+  name: string;
   shortName: string;
+  features: LeagueFeatures;
   knownLeagueIds: Record<string, string>;
 }
 export const getConfig = (): LeagueConfig =>
   JSON.parse(readFileSync(join(CONFIG, "league.json"), "utf8"));
+
+/**
+ * Feature flags for the league this build serves.
+ *
+ * Gates whole subsystems rather than scattering `if (slug === ...)` — a redraft
+ * league should not show a Keepers tab at all, and asking "does this league keep
+ * players" reads better than asking which league it is.
+ */
+export const features = (): LeagueFeatures => getConfig().features;
+
+/** `"Records"` -> `"Records · Den Ops"`, so no page hardcodes a league name. */
+export const pageTitle = (name: string): string => `${name} · ${getConfig().shortName}`;
 
 export function getOwnerMap(): Map<string, Owner> {
   return new Map(getOwners().map((o) => [o.slug, o]));

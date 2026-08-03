@@ -29,6 +29,18 @@
     "team": "LAR",
     "years_exp": 17
   },
+  "650": {
+    "full_name": "Nick Folk",
+    "position": "K",
+    "team": "ATL",
+    "years_exp": 19
+  },
+  "827": {
+    "full_name": "Tyrod Taylor",
+    "position": "QB",
+    "team": "GB",
+    "years_exp": 15
+  },
   "829": {
     "full_name": "Andy Dalton",
     "position": "QB",
@@ -68,6 +80,12 @@
   "1426": {
     "full_name": "DeAndre Hopkins",
     "position": "WR",
+    "team": null,
+    "years_exp": 13
+  },
+  "1433": {
+    "full_name": "Brandon McManus",
+    "position": "K",
     "team": null,
     "years_exp": 13
   },
@@ -124,6 +142,12 @@
     "position": "WR",
     "team": "SF",
     "years_exp": 12
+  },
+  "2307": {
+    "full_name": "Marcus Mariota",
+    "position": "QB",
+    "team": "WAS",
+    "years_exp": 11
   },
   "2309": {
     "full_name": "Amari Cooper",
@@ -545,6 +569,12 @@
     "team": "SF",
     "years_exp": 8
   },
+  "5230": {
+    "full_name": "Michael Badgley",
+    "position": "K",
+    "team": null,
+    "years_exp": 7
+  },
   "5248": {
     "full_name": "Gus Edwards",
     "position": "RB",
@@ -611,6 +641,12 @@
     "team": "HOU",
     "years_exp": 7
   },
+  "5906": {
+    "full_name": "Dawson Knox",
+    "position": "TE",
+    "team": "BUF",
+    "years_exp": 7
+  },
   "5927": {
     "full_name": "Terry McLaurin",
     "position": "WR",
@@ -659,6 +695,12 @@
     "team": "BAL",
     "years_exp": 7
   },
+  "6039": {
+    "full_name": "Ty Johnson",
+    "position": "RB",
+    "team": "BUF",
+    "years_exp": 7
+  },
   "6083": {
     "full_name": "Matt Gay",
     "position": "K",
@@ -688,6 +730,12 @@
     "position": "K",
     "team": null,
     "years_exp": 6
+  },
+  "6528": {
+    "full_name": "Joey Slye",
+    "position": "K",
+    "team": "TEN",
+    "years_exp": 7
   },
   "6650": {
     "full_name": "Chase McLaughlin",
@@ -1013,6 +1061,12 @@
     "team": "BUF",
     "years_exp": 5
   },
+  "7694": {
+    "full_name": "Tommy Tremble",
+    "position": "TE",
+    "team": "CAR",
+    "years_exp": 5
+  },
   "7828": {
     "full_name": "Noah Gray",
     "position": "TE",
@@ -1029,6 +1083,12 @@
     "full_name": "Brock Wright",
     "position": "TE",
     "team": "DET",
+    "years_exp": 5
+  },
+  "7922": {
+    "full_name": "Riley Patterson",
+    "position": "K",
+    "team": "MIA",
     "years_exp": 5
   },
   "8110": {
@@ -1283,6 +1343,24 @@
     "team": "SF",
     "years_exp": 4
   },
+  "8800": {
+    "full_name": "Malik Davis",
+    "position": "RB",
+    "team": "DAL",
+    "years_exp": 4
+  },
+  "8917": {
+    "full_name": "KaVontae Turpin",
+    "position": "WR",
+    "team": "DAL",
+    "years_exp": 4
+  },
+  "9220": {
+    "full_name": "Evan Hull",
+    "position": "RB",
+    "team": "HOU",
+    "years_exp": 3
+  },
   "9221": {
     "full_name": "Jahmyr Gibbs",
     "position": "RB",
@@ -1329,6 +1407,12 @@
     "full_name": "Luke Musgrave",
     "position": "TE",
     "team": "GB",
+    "years_exp": 3
+  },
+  "9482": {
+    "full_name": "Michael Mayer",
+    "position": "TE",
+    "team": "LV",
     "years_exp": 3
   },
   "9484": {
@@ -1533,6 +1617,12 @@
     "full_name": "Emari Demercado",
     "position": "RB",
     "team": "KC",
+    "years_exp": 3
+  },
+  "11299": {
+    "full_name": "Zavier Scott",
+    "position": "RB",
+    "team": "MIN",
     "years_exp": 3
   },
   "11435": {
@@ -1811,6 +1901,12 @@
     "team": null,
     "years_exp": 2
   },
+  "11792": {
+    "full_name": "Will Reichard",
+    "position": "K",
+    "team": "MIN",
+    "years_exp": 2
+  },
   "11834": {
     "full_name": "Devaughn Vele",
     "position": "WR",
@@ -1837,6 +1933,12 @@
   },
   "12469": {
     "full_name": "Dylan Sampson",
+    "position": "RB",
+    "team": "CLE",
+    "years_exp": 1
+  },
+  "12472": {
+    "full_name": "Raheim Sanders",
     "position": "RB",
     "team": "CLE",
     "years_exp": 1
@@ -2021,6 +2123,18 @@
     "team": "CHI",
     "years_exp": 1
   },
+  "12535": {
+    "full_name": "Isaac TeSlaa",
+    "position": "WR",
+    "team": "DET",
+    "years_exp": 1
+  },
+  "12540": {
+    "full_name": "Chimere Dike",
+    "position": "WR",
+    "team": "TEN",
+    "years_exp": 1
+  },
   "12541": {
     "full_name": "Dont'e Thornton",
     "position": "WR",
@@ -2043,6 +2157,12 @@
     "full_name": "Tyler Loop",
     "position": "K",
     "team": "BAL",
+    "years_exp": 1
+  },
+  "12713": {
+    "full_name": "Andy Borregales",
+    "position": "K",
+    "team": "NE",
     "years_exp": 1
   },
   "ARI": {

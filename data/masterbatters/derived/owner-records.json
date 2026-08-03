@@ -1,0 +1,2227 @@
+[
+  {
+    "averageFinish": 1,
+    "bestFinish": 1,
+    "championships": 1,
+    "finishes": [
+      {
+        "place": 1,
+        "season": 2025,
+        "seed": 1
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 4,
+    "ownerSlug": "jake-gibbons",
+    "playoffAppearances": 1,
+    "pointsAgainst": 1522.72,
+    "pointsAgainstPerGame": 108.77,
+    "pointsFor": 1849.7,
+    "pointsForPerGame": 132.12,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 256.06,
+        "pointsFor": 308.96,
+        "ties": 0,
+        "wins": 2
+      },
+      "allison-fosbery": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 203.2,
+        "pointsFor": 277.52,
+        "ties": 0,
+        "wins": 2
+      },
+      "brendon-ng": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 193.8,
+        "pointsFor": 226.08,
+        "ties": 0,
+        "wins": 2
+      },
+      "josh-greenebaum": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 121.6,
+        "pointsFor": 92.82,
+        "ties": 0,
+        "wins": 0
+      },
+      "kaitlin-zarbis": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 129.5,
+        "pointsFor": 94.12,
+        "ties": 0,
+        "wins": 0
+      },
+      "kate-olson": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 132.86,
+        "pointsFor": 118.46,
+        "ties": 0,
+        "wins": 0
+      },
+      "lindsey-freeze": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 112.14,
+        "pointsFor": 170.62,
+        "ties": 0,
+        "wins": 1
+      },
+      "robbie-goodman": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 241.56,
+        "pointsFor": 223.26,
+        "ties": 0,
+        "wins": 1
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 74.14,
+        "pointsFor": 165.82,
+        "ties": 0,
+        "wins": 1
+      },
+      "srishti-dhawan": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 100.12,
+        "pointsFor": 112.78,
+        "ties": 0,
+        "wins": 1
+      },
+      "thomas-moore": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 241.56,
+        "pointsFor": 223.26,
+        "ties": 0,
+        "wins": 1
+      },
+      "vance-armstrong": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 185.86,
+        "pointsFor": 314.2,
+        "ties": 0,
+        "wins": 2
+      }
+    },
+    "winPct": 0.71,
+    "wins": 10,
+    "worstFinish": 1
+  },
+  {
+    "averageFinish": 4,
+    "bestFinish": 4,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 4,
+        "season": 2025,
+        "seed": 4
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 5,
+    "ownerSlug": "aidan-kelleher",
+    "playoffAppearances": 1,
+    "pointsAgainst": 1577.7,
+    "pointsAgainstPerGame": 112.69,
+    "pointsFor": 1626.46,
+    "pointsForPerGame": 116.18,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "allison-fosbery": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 212.46,
+        "pointsFor": 235.78,
+        "ties": 0,
+        "wins": 2
+      },
+      "brendon-ng": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 187.62,
+        "pointsFor": 200.66,
+        "ties": 0,
+        "wins": 1
+      },
+      "jake-gibbons": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 308.96,
+        "pointsFor": 256.06,
+        "ties": 0,
+        "wins": 0
+      },
+      "josh-greenebaum": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 107.12,
+        "pointsFor": 143.18,
+        "ties": 0,
+        "wins": 1
+      },
+      "kaitlin-zarbis": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 274.74,
+        "pointsFor": 207.44,
+        "ties": 0,
+        "wins": 0
+      },
+      "kate-olson": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 236.18,
+        "pointsFor": 239.38,
+        "ties": 0,
+        "wins": 1
+      },
+      "lindsey-freeze": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 131.66,
+        "pointsFor": 134.76,
+        "ties": 0,
+        "wins": 1
+      },
+      "robbie-goodman": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 98.2,
+        "pointsFor": 116.14,
+        "ties": 0,
+        "wins": 1
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 185.44,
+        "pointsFor": 237.62,
+        "ties": 0,
+        "wins": 2
+      },
+      "srishti-dhawan": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 82.44,
+        "pointsFor": 95.78,
+        "ties": 0,
+        "wins": 1
+      },
+      "thomas-moore": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 98.2,
+        "pointsFor": 116.14,
+        "ties": 0,
+        "wins": 1
+      },
+      "vance-armstrong": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 147.8,
+        "pointsFor": 128.9,
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "winPct": 0.64,
+    "wins": 9,
+    "worstFinish": 4
+  },
+  {
+    "averageFinish": 6,
+    "bestFinish": 6,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 6,
+        "season": 2025,
+        "seed": 3
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 5,
+    "ownerSlug": "kate-olson",
+    "playoffAppearances": 1,
+    "pointsAgainst": 1565.12,
+    "pointsAgainstPerGame": 111.79,
+    "pointsFor": 1627.44,
+    "pointsForPerGame": 116.25,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 239.38,
+        "pointsFor": 236.18,
+        "ties": 0,
+        "wins": 1
+      },
+      "allison-fosbery": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 314.86,
+        "pointsFor": 225.42,
+        "ties": 0,
+        "wins": 0
+      },
+      "brendon-ng": {
+        "losses": 3,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 328.06,
+        "pointsFor": 264.16,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 118.46,
+        "pointsFor": 132.86,
+        "ties": 0,
+        "wins": 1
+      },
+      "josh-greenebaum": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 180.14,
+        "pointsFor": 93.52,
+        "ties": 0,
+        "wins": 0
+      },
+      "kaitlin-zarbis": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 133.54,
+        "pointsFor": 147.02,
+        "ties": 0,
+        "wins": 1
+      },
+      "lindsey-freeze": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 92.52,
+        "pointsFor": 92.82,
+        "ties": 0,
+        "wins": 1
+      },
+      "robbie-goodman": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 89.22,
+        "pointsFor": 112.14,
+        "ties": 0,
+        "wins": 1
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 185.12,
+        "pointsFor": 254.36,
+        "ties": 0,
+        "wins": 2
+      },
+      "srishti-dhawan": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 83.3,
+        "pointsFor": 129.3,
+        "ties": 0,
+        "wins": 1
+      },
+      "thomas-moore": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 89.22,
+        "pointsFor": 112.14,
+        "ties": 0,
+        "wins": 1
+      },
+      "vance-armstrong": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 93.24,
+        "pointsFor": 136.68,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.64,
+    "wins": 9,
+    "worstFinish": 6
+  },
+  {
+    "averageFinish": 3,
+    "bestFinish": 3,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 3,
+        "season": 2025,
+        "seed": 2
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 5,
+    "ownerSlug": "kaitlin-zarbis",
+    "playoffAppearances": 1,
+    "pointsAgainst": 1530.32,
+    "pointsAgainstPerGame": 109.31,
+    "pointsFor": 1848.64,
+    "pointsForPerGame": 132.05,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 1,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 207.44,
+        "pointsFor": 274.74,
+        "ties": 0,
+        "wins": 2
+      },
+      "allison-fosbery": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 109.74,
+        "pointsFor": 139,
+        "ties": 0,
+        "wins": 1
+      },
+      "brendon-ng": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 228.6,
+        "pointsFor": 219.76,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 94.12,
+        "pointsFor": 129.5,
+        "ties": 0,
+        "wins": 1
+      },
+      "josh-greenebaum": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 228.84,
+        "pointsFor": 284.56,
+        "ties": 0,
+        "wins": 1
+      },
+      "kate-olson": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 147.02,
+        "pointsFor": 133.54,
+        "ties": 0,
+        "wins": 0
+      },
+      "lindsey-freeze": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 218.78,
+        "pointsFor": 222.66,
+        "ties": 0,
+        "wins": 1
+      },
+      "robbie-goodman": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 117.54,
+        "pointsFor": 162.16,
+        "ties": 0,
+        "wins": 1
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 118.62,
+        "pointsFor": 144.64,
+        "ties": 0,
+        "wins": 1
+      },
+      "srishti-dhawan": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 183.22,
+        "pointsFor": 280.86,
+        "ties": 0,
+        "wins": 2
+      },
+      "thomas-moore": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 117.54,
+        "pointsFor": 162.16,
+        "ties": 0,
+        "wins": 1
+      },
+      "vance-armstrong": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 103.86,
+        "pointsFor": 100.96,
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "winPct": 0.64,
+    "wins": 9,
+    "worstFinish": 3
+  },
+  {
+    "averageFinish": 2,
+    "bestFinish": 2,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 2,
+        "season": 2025,
+        "seed": 6
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 6,
+    "ownerSlug": "brendon-ng",
+    "playoffAppearances": 1,
+    "pointsAgainst": 1420.66,
+    "pointsAgainstPerGame": 101.48,
+    "pointsFor": 1447.24,
+    "pointsForPerGame": 103.37,
+    "runnerUps": 1,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 200.66,
+        "pointsFor": 187.62,
+        "ties": 0,
+        "wins": 1
+      },
+      "allison-fosbery": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 114.04,
+        "pointsFor": 106.22,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 226.08,
+        "pointsFor": 193.8,
+        "ties": 0,
+        "wins": 0
+      },
+      "josh-greenebaum": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 62.3,
+        "pointsFor": 66.06,
+        "ties": 0,
+        "wins": 1
+      },
+      "kaitlin-zarbis": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 219.76,
+        "pointsFor": 228.6,
+        "ties": 0,
+        "wins": 2
+      },
+      "kate-olson": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 264.16,
+        "pointsFor": 328.06,
+        "ties": 0,
+        "wins": 3
+      },
+      "lindsey-freeze": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 123.58,
+        "pointsFor": 90.28,
+        "ties": 0,
+        "wins": 0
+      },
+      "robbie-goodman": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 120.82,
+        "pointsFor": 123.68,
+        "ties": 0,
+        "wins": 1
+      },
+      "ross-bechtel": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 205.48,
+        "pointsFor": 199.56,
+        "ties": 0,
+        "wins": 0
+      },
+      "srishti-dhawan": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 91.92,
+        "pointsFor": 133.9,
+        "ties": 0,
+        "wins": 1
+      },
+      "thomas-moore": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 120.82,
+        "pointsFor": 123.68,
+        "ties": 0,
+        "wins": 1
+      },
+      "vance-armstrong": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 103.8,
+        "pointsFor": 111.08,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.57,
+    "wins": 8,
+    "worstFinish": 2
+  },
+  {
+    "averageFinish": 5,
+    "bestFinish": 5,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 5,
+        "season": 2025,
+        "seed": 5
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 6,
+    "ownerSlug": "allison-fosbery",
+    "playoffAppearances": 1,
+    "pointsAgainst": 1627.5,
+    "pointsAgainstPerGame": 116.25,
+    "pointsFor": 1617.46,
+    "pointsForPerGame": 115.53,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 235.78,
+        "pointsFor": 212.46,
+        "ties": 0,
+        "wins": 0
+      },
+      "brendon-ng": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 106.22,
+        "pointsFor": 114.04,
+        "ties": 0,
+        "wins": 1
+      },
+      "jake-gibbons": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 277.52,
+        "pointsFor": 203.2,
+        "ties": 0,
+        "wins": 0
+      },
+      "josh-greenebaum": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 138.16,
+        "pointsFor": 146.46,
+        "ties": 0,
+        "wins": 1
+      },
+      "kaitlin-zarbis": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 139,
+        "pointsFor": 109.74,
+        "ties": 0,
+        "wins": 0
+      },
+      "kate-olson": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 225.42,
+        "pointsFor": 314.86,
+        "ties": 0,
+        "wins": 2
+      },
+      "lindsey-freeze": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 96.12,
+        "pointsFor": 146.94,
+        "ties": 0,
+        "wins": 1
+      },
+      "robbie-goodman": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 223.74,
+        "pointsFor": 207.06,
+        "ties": 0,
+        "wins": 1
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 105.72,
+        "pointsFor": 126.28,
+        "ties": 0,
+        "wins": 1
+      },
+      "srishti-dhawan": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 123.7,
+        "pointsFor": 106,
+        "ties": 0,
+        "wins": 0
+      },
+      "thomas-moore": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 223.74,
+        "pointsFor": 207.06,
+        "ties": 0,
+        "wins": 1
+      },
+      "vance-armstrong": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 188.32,
+        "pointsFor": 231.22,
+        "ties": 0,
+        "wins": 2
+      }
+    },
+    "winPct": 0.57,
+    "wins": 8,
+    "worstFinish": 5
+  },
+  {
+    "averageFinish": 11,
+    "bestFinish": 11,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 11,
+        "season": 2025,
+        "seed": 8
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 7,
+    "ownerSlug": "vance-armstrong",
+    "playoffAppearances": 0,
+    "pointsAgainst": 1671.99,
+    "pointsAgainstPerGame": 119.43,
+    "pointsFor": 1556.22,
+    "pointsForPerGame": 111.16,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 128.9,
+        "pointsFor": 147.8,
+        "ties": 0,
+        "wins": 1
+      },
+      "allison-fosbery": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 231.22,
+        "pointsFor": 188.32,
+        "ties": 0,
+        "wins": 0
+      },
+      "brendon-ng": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 111.08,
+        "pointsFor": 103.8,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 314.2,
+        "pointsFor": 185.86,
+        "ties": 0,
+        "wins": 0
+      },
+      "josh-greenebaum": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 100.8,
+        "pointsFor": 152.12,
+        "ties": 0,
+        "wins": 1
+      },
+      "kaitlin-zarbis": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 100.96,
+        "pointsFor": 103.86,
+        "ties": 0,
+        "wins": 1
+      },
+      "kate-olson": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 136.68,
+        "pointsFor": 93.24,
+        "ties": 0,
+        "wins": 0
+      },
+      "lindsey-freeze": {
+        "losses": 1,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 253.06,
+        "pointsFor": 239.7,
+        "ties": 0,
+        "wins": 1
+      },
+      "robbie-goodman": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 296.96,
+        "pointsFor": 324.08,
+        "ties": 0,
+        "wins": 3
+      },
+      "ross-bechtel": {
+        "losses": 1,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 223.3,
+        "pointsFor": 203.98,
+        "ties": 0,
+        "wins": 1
+      },
+      "srishti-dhawan": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 151.12,
+        "pointsFor": 128.54,
+        "ties": 0,
+        "wins": 0
+      },
+      "thomas-moore": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 296.96,
+        "pointsFor": 324.08,
+        "ties": 0,
+        "wins": 3
+      }
+    },
+    "winPct": 0.5,
+    "wins": 7,
+    "worstFinish": 11
+  },
+  {
+    "averageFinish": 9,
+    "bestFinish": 9,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 9,
+        "season": 2025,
+        "seed": 7
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 7,
+    "ownerSlug": "srishti-dhawan",
+    "playoffAppearances": 0,
+    "pointsAgainst": 1663.62,
+    "pointsAgainstPerGame": 118.83,
+    "pointsFor": 1577.02,
+    "pointsForPerGame": 112.64,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 95.78,
+        "pointsFor": 82.44,
+        "ties": 0,
+        "wins": 0
+      },
+      "allison-fosbery": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 106,
+        "pointsFor": 123.7,
+        "ties": 0,
+        "wins": 1
+      },
+      "brendon-ng": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 133.9,
+        "pointsFor": 91.92,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 112.78,
+        "pointsFor": 100.12,
+        "ties": 0,
+        "wins": 0
+      },
+      "josh-greenebaum": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 434.74,
+        "pointsFor": 339.3,
+        "ties": 0,
+        "wins": 1
+      },
+      "kaitlin-zarbis": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 280.86,
+        "pointsFor": 183.22,
+        "ties": 0,
+        "wins": 0
+      },
+      "kate-olson": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 129.3,
+        "pointsFor": 83.3,
+        "ties": 0,
+        "wins": 0
+      },
+      "lindsey-freeze": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 228.54,
+        "pointsFor": 262.84,
+        "ties": 0,
+        "wins": 2
+      },
+      "robbie-goodman": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 202.86,
+        "pointsFor": 275.16,
+        "ties": 0,
+        "wins": 2
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 210.68,
+        "pointsFor": 274.52,
+        "ties": 0,
+        "wins": 2
+      },
+      "thomas-moore": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 202.86,
+        "pointsFor": 275.16,
+        "ties": 0,
+        "wins": 2
+      },
+      "vance-armstrong": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 128.54,
+        "pointsFor": 151.12,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.5,
+    "wins": 7,
+    "worstFinish": 9
+  },
+  {
+    "averageFinish": 8,
+    "bestFinish": 8,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 8,
+        "season": 2025,
+        "seed": 9
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 8,
+    "ownerSlug": "lindsey-freeze",
+    "playoffAppearances": 0,
+    "pointsAgainst": 1712.62,
+    "pointsAgainstPerGame": 122.33,
+    "pointsFor": 1679.92,
+    "pointsForPerGame": 119.99,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 134.76,
+        "pointsFor": 131.66,
+        "ties": 0,
+        "wins": 0
+      },
+      "allison-fosbery": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 146.94,
+        "pointsFor": 96.12,
+        "ties": 0,
+        "wins": 0
+      },
+      "brendon-ng": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 90.28,
+        "pointsFor": 123.58,
+        "ties": 0,
+        "wins": 1
+      },
+      "jake-gibbons": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 170.62,
+        "pointsFor": 112.14,
+        "ties": 0,
+        "wins": 0
+      },
+      "josh-greenebaum": {
+        "losses": 1,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 352.24,
+        "pointsFor": 358.3,
+        "ties": 0,
+        "wins": 2
+      },
+      "kaitlin-zarbis": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 222.66,
+        "pointsFor": 218.78,
+        "ties": 0,
+        "wins": 1
+      },
+      "kate-olson": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 92.82,
+        "pointsFor": 92.52,
+        "ties": 0,
+        "wins": 0
+      },
+      "robbie-goodman": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 112.74,
+        "pointsFor": 158.86,
+        "ties": 0,
+        "wins": 1
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 106.52,
+        "pointsFor": 139.9,
+        "ties": 0,
+        "wins": 1
+      },
+      "srishti-dhawan": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 262.84,
+        "pointsFor": 228.54,
+        "ties": 0,
+        "wins": 0
+      },
+      "thomas-moore": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 112.74,
+        "pointsFor": 158.86,
+        "ties": 0,
+        "wins": 1
+      },
+      "vance-armstrong": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 239.7,
+        "pointsFor": 253.06,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.43,
+    "wins": 6,
+    "worstFinish": 8
+  },
+  {
+    "averageFinish": 7,
+    "bestFinish": 7,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 7,
+        "season": 2025,
+        "seed": 10
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 9,
+    "ownerSlug": "josh-greenebaum",
+    "playoffAppearances": 0,
+    "pointsAgainst": 1668.72,
+    "pointsAgainstPerGame": 119.19,
+    "pointsFor": 1650.46,
+    "pointsForPerGame": 117.89,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 143.18,
+        "pointsFor": 107.12,
+        "ties": 0,
+        "wins": 0
+      },
+      "allison-fosbery": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 146.46,
+        "pointsFor": 138.16,
+        "ties": 0,
+        "wins": 0
+      },
+      "brendon-ng": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 66.06,
+        "pointsFor": 62.3,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 92.82,
+        "pointsFor": 121.6,
+        "ties": 0,
+        "wins": 1
+      },
+      "kaitlin-zarbis": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 284.56,
+        "pointsFor": 228.84,
+        "ties": 0,
+        "wins": 1
+      },
+      "kate-olson": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 93.52,
+        "pointsFor": 180.14,
+        "ties": 0,
+        "wins": 1
+      },
+      "lindsey-freeze": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 358.3,
+        "pointsFor": 352.24,
+        "ties": 0,
+        "wins": 1
+      },
+      "robbie-goodman": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 116.84,
+        "pointsFor": 90.7,
+        "ties": 0,
+        "wins": 0
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 106.5,
+        "pointsFor": 117.72,
+        "ties": 0,
+        "wins": 1
+      },
+      "srishti-dhawan": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 339.3,
+        "pointsFor": 434.74,
+        "ties": 0,
+        "wins": 2
+      },
+      "thomas-moore": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 116.84,
+        "pointsFor": 90.7,
+        "ties": 0,
+        "wins": 0
+      },
+      "vance-armstrong": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 152.12,
+        "pointsFor": 100.8,
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "winPct": 0.36,
+    "wins": 5,
+    "worstFinish": 7
+  },
+  {
+    "averageFinish": 12,
+    "bestFinish": 12,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 12,
+        "season": 2025,
+        "seed": 11
+      }
+    ],
+    "lastPlaces": 1,
+    "losses": 10,
+    "ownerSlug": "robbie-goodman",
+    "playoffAppearances": 0,
+    "pointsAgainst": 1666.52,
+    "pointsAgainstPerGame": 119.04,
+    "pointsFor": 1540.1,
+    "pointsForPerGame": 110.01,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 116.14,
+        "pointsFor": 98.2,
+        "ties": 0,
+        "wins": 0
+      },
+      "allison-fosbery": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 207.06,
+        "pointsFor": 223.74,
+        "ties": 0,
+        "wins": 1
+      },
+      "brendon-ng": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 123.68,
+        "pointsFor": 120.82,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 223.26,
+        "pointsFor": 241.56,
+        "ties": 0,
+        "wins": 1
+      },
+      "josh-greenebaum": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 90.7,
+        "pointsFor": 116.84,
+        "ties": 0,
+        "wins": 1
+      },
+      "kaitlin-zarbis": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 162.16,
+        "pointsFor": 117.54,
+        "ties": 0,
+        "wins": 0
+      },
+      "kate-olson": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 112.14,
+        "pointsFor": 89.22,
+        "ties": 0,
+        "wins": 0
+      },
+      "lindsey-freeze": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 158.86,
+        "pointsFor": 112.74,
+        "ties": 0,
+        "wins": 0
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 113.36,
+        "pointsFor": 120.92,
+        "ties": 0,
+        "wins": 1
+      },
+      "srishti-dhawan": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 275.16,
+        "pointsFor": 202.86,
+        "ties": 0,
+        "wins": 0
+      },
+      "vance-armstrong": {
+        "losses": 3,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 324.08,
+        "pointsFor": 296.96,
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "winPct": 0.29,
+    "wins": 4,
+    "worstFinish": 12
+  },
+  {
+    "averageFinish": 12,
+    "bestFinish": 12,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 12,
+        "season": 2025,
+        "seed": 11
+      }
+    ],
+    "lastPlaces": 1,
+    "losses": 10,
+    "ownerSlug": "thomas-moore",
+    "playoffAppearances": 0,
+    "pointsAgainst": 1666.52,
+    "pointsAgainstPerGame": 119.04,
+    "pointsFor": 1540.1,
+    "pointsForPerGame": 110.01,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 116.14,
+        "pointsFor": 98.2,
+        "ties": 0,
+        "wins": 0
+      },
+      "allison-fosbery": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 207.06,
+        "pointsFor": 223.74,
+        "ties": 0,
+        "wins": 1
+      },
+      "brendon-ng": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 123.68,
+        "pointsFor": 120.82,
+        "ties": 0,
+        "wins": 0
+      },
+      "jake-gibbons": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 223.26,
+        "pointsFor": 241.56,
+        "ties": 0,
+        "wins": 1
+      },
+      "josh-greenebaum": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 90.7,
+        "pointsFor": 116.84,
+        "ties": 0,
+        "wins": 1
+      },
+      "kaitlin-zarbis": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 162.16,
+        "pointsFor": 117.54,
+        "ties": 0,
+        "wins": 0
+      },
+      "kate-olson": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 112.14,
+        "pointsFor": 89.22,
+        "ties": 0,
+        "wins": 0
+      },
+      "lindsey-freeze": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 158.86,
+        "pointsFor": 112.74,
+        "ties": 0,
+        "wins": 0
+      },
+      "ross-bechtel": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 113.36,
+        "pointsFor": 120.92,
+        "ties": 0,
+        "wins": 1
+      },
+      "srishti-dhawan": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 275.16,
+        "pointsFor": 202.86,
+        "ties": 0,
+        "wins": 0
+      },
+      "vance-armstrong": {
+        "losses": 3,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 324.08,
+        "pointsFor": 296.96,
+        "ties": 0,
+        "wins": 0
+      }
+    },
+    "winPct": 0.29,
+    "wins": 4,
+    "worstFinish": 12
+  },
+  {
+    "averageFinish": 10,
+    "bestFinish": 10,
+    "championships": 0,
+    "finishes": [
+      {
+        "place": 10,
+        "season": 2025,
+        "seed": 12
+      }
+    ],
+    "lastPlaces": 0,
+    "losses": 12,
+    "ownerSlug": "ross-bechtel",
+    "playoffAppearances": 0,
+    "pointsAgainst": 1760.9,
+    "pointsAgainstPerGame": 125.78,
+    "pointsFor": 1367.74,
+    "pointsForPerGame": 97.7,
+    "runnerUps": 0,
+    "seasonsPlayed": 1,
+    "thirdPlaces": 0,
+    "ties": 0,
+    "vs": {
+      "aidan-kelleher": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 237.62,
+        "pointsFor": 185.44,
+        "ties": 0,
+        "wins": 0
+      },
+      "allison-fosbery": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 126.28,
+        "pointsFor": 105.72,
+        "ties": 0,
+        "wins": 0
+      },
+      "brendon-ng": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 199.56,
+        "pointsFor": 205.48,
+        "ties": 0,
+        "wins": 2
+      },
+      "jake-gibbons": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 165.82,
+        "pointsFor": 74.14,
+        "ties": 0,
+        "wins": 0
+      },
+      "josh-greenebaum": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 117.72,
+        "pointsFor": 106.5,
+        "ties": 0,
+        "wins": 0
+      },
+      "kaitlin-zarbis": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 144.64,
+        "pointsFor": 118.62,
+        "ties": 0,
+        "wins": 0
+      },
+      "kate-olson": {
+        "losses": 2,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 254.36,
+        "pointsFor": 185.12,
+        "ties": 0,
+        "wins": 0
+      },
+      "lindsey-freeze": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 139.9,
+        "pointsFor": 106.52,
+        "ties": 0,
+        "wins": 0
+      },
+      "robbie-goodman": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 120.92,
+        "pointsFor": 113.36,
+        "ties": 0,
+        "wins": 0
+      },
+      "srishti-dhawan": {
+        "losses": 2,
+        "playoff": {
+          "losses": 1,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 274.52,
+        "pointsFor": 210.68,
+        "ties": 0,
+        "wins": 0
+      },
+      "thomas-moore": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 120.92,
+        "pointsFor": 113.36,
+        "ties": 0,
+        "wins": 0
+      },
+      "vance-armstrong": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 1
+        },
+        "pointsAgainst": 203.98,
+        "pointsFor": 223.3,
+        "ties": 0,
+        "wins": 1
+      }
+    },
+    "winPct": 0.14,
+    "wins": 2,
+    "worstFinish": 10
+  }
+]

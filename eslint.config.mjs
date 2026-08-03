@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Staging area for the per-league builds (scripts/build-all.mjs) — build
+    // output, not source.
+    ".assembled/**",
   ]),
 ]);
 

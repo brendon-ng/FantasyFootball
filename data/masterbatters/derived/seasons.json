@@ -1,0 +1,517 @@
+[
+  {
+    "champion": "jake-gibbons",
+    "extraBrackets": [],
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "imported": false,
+    "ladderConsolation": false,
+    "lastPlace": "robbie-goodman",
+    "leagueId": "1263422021434363904",
+    "leagueName": "Masterbatters Fantasy Football",
+    "losersBracket": [
+      {
+        "inverted": true,
+        "loser": "lindsey-freeze",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "lindsey-freeze": 134.9,
+          "vance-armstrong": 108.9
+        },
+        "round": 1,
+        "team1": "lindsey-freeze",
+        "team1From": null,
+        "team2": "vance-armstrong",
+        "team2From": null,
+        "week": 15,
+        "winner": "vance-armstrong"
+      },
+      {
+        "inverted": true,
+        "loser": "josh-greenebaum",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "josh-greenebaum": 173.3,
+          "srishti-dhawan": 132.3
+        },
+        "round": 1,
+        "team1": "srishti-dhawan",
+        "team1From": null,
+        "team2": "josh-greenebaum",
+        "team2From": null,
+        "week": 15,
+        "winner": "srishti-dhawan"
+      },
+      {
+        "inverted": true,
+        "loser": "ross-bechtel",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "ross-bechtel": 144.16,
+          "vance-armstrong": 96
+        },
+        "round": 2,
+        "team1": "ross-bechtel",
+        "team1From": null,
+        "team2": "vance-armstrong",
+        "team2From": {
+          "winnerOf": 1
+        },
+        "week": 16,
+        "winner": "vance-armstrong"
+      },
+      {
+        "inverted": true,
+        "loser": "srishti-dhawan",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "robbie-goodman": 104.08,
+          "srishti-dhawan": 129.9
+        },
+        "round": 2,
+        "team1": "robbie-goodman",
+        "team1From": null,
+        "team2": "srishti-dhawan",
+        "team2From": {
+          "winnerOf": 2
+        },
+        "week": 16,
+        "winner": "robbie-goodman"
+      },
+      {
+        "inverted": true,
+        "loser": "josh-greenebaum",
+        "matchId": 5,
+        "placesFor": [
+          8,
+          7
+        ],
+        "points": {
+          "josh-greenebaum": 110.6,
+          "lindsey-freeze": 98.64
+        },
+        "round": 2,
+        "team1": "lindsey-freeze",
+        "team1From": {
+          "loserOf": 1
+        },
+        "team2": "josh-greenebaum",
+        "team2From": {
+          "loserOf": 2
+        },
+        "week": 16,
+        "winner": "lindsey-freeze"
+      },
+      {
+        "inverted": true,
+        "loser": "vance-armstrong",
+        "matchId": 6,
+        "placesFor": [
+          12,
+          11
+        ],
+        "points": {
+          "robbie-goodman": 97.22,
+          "vance-armstrong": 110.18
+        },
+        "round": 3,
+        "team1": "vance-armstrong",
+        "team1From": {
+          "winnerOf": 3
+        },
+        "team2": "robbie-goodman",
+        "team2From": {
+          "winnerOf": 4
+        },
+        "week": 17,
+        "winner": "robbie-goodman"
+      },
+      {
+        "inverted": true,
+        "loser": "srishti-dhawan",
+        "matchId": 7,
+        "placesFor": [
+          10,
+          9
+        ],
+        "points": {
+          "ross-bechtel": 122.98,
+          "srishti-dhawan": 128.42
+        },
+        "round": 3,
+        "team1": "ross-bechtel",
+        "team1From": {
+          "loserOf": 3
+        },
+        "team2": "srishti-dhawan",
+        "team2From": {
+          "loserOf": 4
+        },
+        "week": 17,
+        "winner": "ross-bechtel"
+      }
+    ],
+    "regularSeasonWeeks": 14,
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "K",
+      "DEF"
+    ],
+    "runnerUp": "brendon-ng",
+    "season": 2025,
+    "standings": [
+      {
+        "finalPlace": 1,
+        "losses": 4,
+        "madePlayoffs": true,
+        "ownerSlug": "jake-gibbons",
+        "ownerSlugs": [
+          "jake-gibbons"
+        ],
+        "pointsAgainst": 1522.72,
+        "pointsFor": 1849.7,
+        "rosterId": 2,
+        "seed": 1,
+        "teamName": "Jgibby28",
+        "ties": 0,
+        "wins": 10
+      },
+      {
+        "finalPlace": 3,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "kaitlin-zarbis",
+        "ownerSlugs": [
+          "kaitlin-zarbis"
+        ],
+        "pointsAgainst": 1530.32,
+        "pointsFor": 1848.64,
+        "rosterId": 7,
+        "seed": 2,
+        "teamName": "Intercept THIS",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 6,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "kate-olson",
+        "ownerSlugs": [
+          "kate-olson"
+        ],
+        "pointsAgainst": 1565.12,
+        "pointsFor": 1627.44,
+        "rosterId": 6,
+        "seed": 3,
+        "teamName": "The Bosa Constrictor ",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 4,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "aidan-kelleher",
+        "ownerSlugs": [
+          "aidan-kelleher"
+        ],
+        "pointsAgainst": 1577.7,
+        "pointsFor": 1626.46,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "Crashee Rice",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 5,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "allison-fosbery",
+        "ownerSlugs": [
+          "allison-fosbery"
+        ],
+        "pointsAgainst": 1627.5,
+        "pointsFor": 1617.46,
+        "rosterId": 12,
+        "seed": 5,
+        "teamName": "afosb",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 2,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1420.66,
+        "pointsFor": 1447.24,
+        "rosterId": 1,
+        "seed": 6,
+        "teamName": "GunnaGetTheChoppaOnU LADD",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 9,
+        "losses": 7,
+        "madePlayoffs": false,
+        "ownerSlug": "srishti-dhawan",
+        "ownerSlugs": [
+          "srishti-dhawan"
+        ],
+        "pointsAgainst": 1663.62,
+        "pointsFor": 1577.02,
+        "rosterId": 11,
+        "seed": 7,
+        "teamName": "swishdh1",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 11,
+        "losses": 7,
+        "madePlayoffs": false,
+        "ownerSlug": "vance-armstrong",
+        "ownerSlugs": [
+          "vance-armstrong"
+        ],
+        "pointsAgainst": 1671.99,
+        "pointsFor": 1556.22,
+        "rosterId": 5,
+        "seed": 8,
+        "teamName": "varms34",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 8,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "lindsey-freeze",
+        "ownerSlugs": [
+          "lindsey-freeze"
+        ],
+        "pointsAgainst": 1712.62,
+        "pointsFor": 1679.92,
+        "rosterId": 9,
+        "seed": 9,
+        "teamName": "Is Lamar OK?",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 7,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "josh-greenebaum",
+        "ownerSlugs": [
+          "josh-greenebaum"
+        ],
+        "pointsAgainst": 1668.72,
+        "pointsFor": 1650.46,
+        "rosterId": 3,
+        "seed": 10,
+        "teamName": "Hukuna Mailata ",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 12,
+        "losses": 10,
+        "madePlayoffs": false,
+        "ownerSlug": "robbie-goodman",
+        "ownerSlugs": [
+          "robbie-goodman",
+          "thomas-moore"
+        ],
+        "pointsAgainst": 1666.52,
+        "pointsFor": 1540.1,
+        "rosterId": 10,
+        "seed": 11,
+        "teamName": "Robbie&thomas win fantasy",
+        "ties": 0,
+        "wins": 4
+      },
+      {
+        "finalPlace": 10,
+        "losses": 12,
+        "madePlayoffs": false,
+        "ownerSlug": "ross-bechtel",
+        "ownerSlugs": [
+          "ross-bechtel"
+        ],
+        "pointsAgainst": 1760.9,
+        "pointsFor": 1367.74,
+        "rosterId": 8,
+        "seed": 12,
+        "teamName": "#PunishBrendon",
+        "ties": 0,
+        "wins": 2
+      }
+    ],
+    "status": "complete",
+    "teams": 12,
+    "thirdPlace": "kaitlin-zarbis",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "loser": "allison-fosbery",
+        "matchId": 1,
+        "placesFor": null,
+        "points": {
+          "aidan-kelleher": 128,
+          "allison-fosbery": 115.36
+        },
+        "round": 1,
+        "team1": "aidan-kelleher",
+        "team1From": null,
+        "team2": "allison-fosbery",
+        "team2From": null,
+        "week": 15,
+        "winner": "aidan-kelleher"
+      },
+      {
+        "inverted": false,
+        "loser": "kate-olson",
+        "matchId": 2,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 107.28,
+          "kate-olson": 92.82
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "kate-olson",
+        "team2From": null,
+        "week": 15,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "loser": "aidan-kelleher",
+        "matchId": 3,
+        "placesFor": null,
+        "points": {
+          "aidan-kelleher": 133.2,
+          "jake-gibbons": 151.2
+        },
+        "round": 2,
+        "team1": "jake-gibbons",
+        "team1From": null,
+        "team2": "aidan-kelleher",
+        "team2From": {
+          "winnerOf": 1
+        },
+        "week": 16,
+        "winner": "jake-gibbons"
+      },
+      {
+        "inverted": false,
+        "loser": "kaitlin-zarbis",
+        "matchId": 4,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 119.42,
+          "kaitlin-zarbis": 115.38
+        },
+        "round": 2,
+        "team1": "kaitlin-zarbis",
+        "team1From": null,
+        "team2": "brendon-ng",
+        "team2From": {
+          "winnerOf": 2
+        },
+        "week": 16,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "loser": "kate-olson",
+        "matchId": 5,
+        "placesFor": [
+          5,
+          6
+        ],
+        "points": {
+          "allison-fosbery": 185.44,
+          "kate-olson": 104.2
+        },
+        "round": 2,
+        "team1": "allison-fosbery",
+        "team1From": {
+          "loserOf": 1
+        },
+        "team2": "kate-olson",
+        "team2From": {
+          "loserOf": 2
+        },
+        "week": 16,
+        "winner": "allison-fosbery"
+      },
+      {
+        "inverted": false,
+        "loser": "brendon-ng",
+        "matchId": 6,
+        "placesFor": [
+          1,
+          2
+        ],
+        "points": {
+          "brendon-ng": 94.92,
+          "jake-gibbons": 103.74
+        },
+        "round": 3,
+        "team1": "jake-gibbons",
+        "team1From": {
+          "winnerOf": 3
+        },
+        "team2": "brendon-ng",
+        "team2From": {
+          "winnerOf": 4
+        },
+        "week": 17,
+        "winner": "jake-gibbons"
+      },
+      {
+        "inverted": false,
+        "loser": "aidan-kelleher",
+        "matchId": 7,
+        "placesFor": [
+          3,
+          4
+        ],
+        "points": {
+          "aidan-kelleher": 108.04,
+          "kaitlin-zarbis": 128.36
+        },
+        "round": 3,
+        "team1": "aidan-kelleher",
+        "team1From": {
+          "loserOf": 3
+        },
+        "team2": "kaitlin-zarbis",
+        "team2From": {
+          "loserOf": 4
+        },
+        "week": 17,
+        "winner": "kaitlin-zarbis"
+      }
+    ]
+  }
+]

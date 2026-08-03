@@ -1,11 +1,24 @@
 import Link from "next/link";
 
 import { KeeperBoard } from "@/components/keeper-board";
-import { EmptyState, Panel, Stat } from "@/components/ui";
-import { getAdp, getConfig, getKeepers, getOwners, getPlayers, getSeasons } from "@/lib/data";
+import {
+  EmptyState,
+  Panel,
+  Stat,
+} from "@/components/ui";
+import {
+  features,
+  getAdp,
+  getConfig,
+  getKeepers,
+  getOwners,
+  getPlayers,
+  getSeasons,
+  pageTitle,
+} from "@/lib/data";
 import type { KeeperContract } from "@/lib/types";
 
-export const metadata = { title: "Keeper Tracker · Den Ops" };
+export const generateMetadata = () => ({ title: pageTitle("Keeper Tracker") });
 
 const MAX_KEEPERS = 4;
 
@@ -22,6 +35,17 @@ const MAX_KEEPERS = 4;
  * that from Sleeper in the browser and merges it on top.
  */
 export default function KeepersPage() {
+  // Routes still exist in a redraft league's build (static export generates every
+  // page), but the nav hides them and this says why rather than rendering a board
+  // with nothing on it.
+  if (!features().keepers) {
+    return (
+      <Panel>
+        <EmptyState>This league does not use keepers.</EmptyState>
+      </Panel>
+    );
+  }
+
   const keepers = getKeepers();
   const owners = getOwners();
   const players = getPlayers();

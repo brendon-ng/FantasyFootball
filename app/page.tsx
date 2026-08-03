@@ -13,6 +13,7 @@ import {
   placeColor,
 } from "@/components/ui";
 import {
+  features,
   getAdp,
   getConfig,
   getKeepers,
@@ -308,43 +309,45 @@ export default async function HomePage() {
         </Panel>
       </div>
 
-      <Panel>
-        <PanelHeader
-          title={`Keeper Board · Entering ${currentSeason}`}
-          meta={
-            adp.capturedAt
-              ? `top ${MAX_KEEPERS} per team · ADP ${adp.frozen ? "locked" : "live"}`
-              : `top ${MAX_KEEPERS} eligible per team`
-          }
-          legend={
-            <>
-              Columns: <span className="text-chalk-400">Sleeper ADP</span> ·{" "}
-              <span className="text-chalk-400">rounds cheaper (+) or dearer (−) than market</span>{" "}
-              · <span className="text-chalk-400">keeps left</span> ·{" "}
-              <span className="text-chalk-400">round it costs to keep</span>
-            </>
-          }
-          href="/keepers/"
-          hrefLabel="Full keeper tracker"
-        />
-        {byOwner.size === 0 ? (
-          <EmptyState>No contracts yet — run npm run data.</EmptyState>
-        ) : (
-          <HomeKeeperBoard
-            contractsByOwner={[...byOwner.entries()].sort(([a], [b]) =>
-              (owners.get(a)?.name ?? a).localeCompare(owners.get(b)?.name ?? b),
-            )}
-            ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
-            userIdToSlug={Object.fromEntries(
-              [...owners.values()].filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-            )}
-            players={players}
-            adp={Object.fromEntries(adp.byPlayer)}
-            leagueId={cfg.knownLeagueIds[String(currentSeason)] ?? null}
-            maxKeepers={MAX_KEEPERS}
+      {features().keepers ? (
+        <Panel>
+          <PanelHeader
+            title={`Keeper Board · Entering ${currentSeason}`}
+            meta={
+              adp.capturedAt
+                ? `top ${MAX_KEEPERS} per team · ADP ${adp.frozen ? "locked" : "live"}`
+                : `top ${MAX_KEEPERS} eligible per team`
+            }
+            legend={
+              <>
+                Columns: <span className="text-chalk-400">Sleeper ADP</span> ·{" "}
+                <span className="text-chalk-400">rounds cheaper (+) or dearer (−) than market</span>{" "}
+                · <span className="text-chalk-400">keeps left</span> ·{" "}
+                <span className="text-chalk-400">round it costs to keep</span>
+              </>
+            }
+            href="/keepers/"
+            hrefLabel="Full keeper tracker"
           />
-        )}
-      </Panel>
+          {byOwner.size === 0 ? (
+            <EmptyState>No contracts yet — run npm run data.</EmptyState>
+          ) : (
+            <HomeKeeperBoard
+              contractsByOwner={[...byOwner.entries()].sort(([a], [b]) =>
+                (owners.get(a)?.name ?? a).localeCompare(owners.get(b)?.name ?? b),
+              )}
+              ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
+              userIdToSlug={Object.fromEntries(
+                [...owners.values()].filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+              )}
+              players={players}
+              adp={Object.fromEntries(adp.byPlayer)}
+              leagueId={cfg.knownLeagueIds[String(currentSeason)] ?? null}
+              maxKeepers={MAX_KEEPERS}
+            />
+          )}
+        </Panel>
+      ) : null}
     </div>
   );
 }

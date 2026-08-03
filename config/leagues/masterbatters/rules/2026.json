@@ -1,0 +1,28 @@
+{
+  "season": 2026,
+  "note": "Redraft \u2014 no keepers. Settings unchanged from 2025.",
+  "teams": 12,
+  "regularSeasonWeeks": 14,
+  "playoffWeekStart": 15,
+  "playoffTeams": 6,
+  "playoffRounds": 3,
+  "firstRoundByes": 2,
+  "finalWeek": 17,
+  "seedingTiebreaker": "points-for",
+  "playoffTieGoesTo": "higher-seed",
+  "draftRounds": 14,
+  "faabBudget": 100,
+  "minBid": 0,
+  "tradeDeadlineWeek": 12,
+  "keepers": {
+    "enabled": false,
+    "maxKeepers": 0,
+    "maxKeepsAtOriginalCost": 0,
+    "undraftedFreeAgentRound": 0,
+    "reAcquiredValueRule": "none",
+    "selfReclaimResetsContract": false,
+    "tradeInheritsContract": false
+  },
+  "prizes": null,
+  "lastPlacePunishment": null
+}

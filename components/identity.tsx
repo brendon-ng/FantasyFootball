@@ -47,7 +47,9 @@ import type { NavOwner } from "@/components/nav";
  * would silently repaint every one of them.
  */
 
-const STORAGE_KEY = "denops:identity";
+// Scoped to the league. One browser visits both leagues, and the owner lists
+// differ, so a shared key would carry a slug that does not exist in the other.
+const STORAGE_KEY = `ff:${process.env.NEXT_PUBLIC_LEAGUE ?? "den-ops"}:identity`;
 
 /**
  * Literal, not `var(--color-me)`.

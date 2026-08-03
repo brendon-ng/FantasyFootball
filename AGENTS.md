@@ -4,12 +4,61 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
-# DenOpsFF
+# One codebase, many leagues
 
-Static Next.js site deployed to GitHub Pages at `https://brendon-ng.github.io/DenOpsFF/`.
-Pushing to `main` runs `.github/workflows/deploy.yml`, which lints, typechecks,
-builds, and publishes `out/`. Pages **Source** is set to *GitHub Actions* — do not
-switch it to a branch deploy, and never commit `out/`.
+This repo serves SEVERAL fantasy leagues from one codebase. Every feature is
+written once and benefits all of them; nothing is duplicated per league.
+
+Currently: **den-ops** (Den Ops Super League, keepers, ESPN history 2020-23) and
+**masterbatters** (Masterbatters Fantasy Football, redraft, Sleeper-only, 2025-).
+
+Static Next.js deployed to GitHub Pages. Pushing to `main` runs
+`.github/workflows/deploy.yml`, which lints, typechecks, builds every league, and
+publishes `out/`. Pages **Source** is set to *GitHub Actions* — do not switch it
+to a branch deploy, and never commit `out/`.
+
+## The league is chosen at BUILD time, not request time
+
+`npm run build` runs `next build` ONCE PER LEAGUE with `LEAGUE=<slug>` set, then
+assembles the results (`scripts/build-all.mjs`):
+
+```
+out/den-ops/        a whole site
+out/masterbatters/  a whole site
+out/index.html      hand-written league picker
+```
+
+So each build is a single-league site and needs NO league plumbing: pages call
+`getSeasons()`, never `getSeasons(league)`. `lib/data.ts` resolves `LEAGUE` once
+and every accessor reads that league's directory.
+
+Consequence worth knowing: a page showing TWO leagues' data at once is not
+possible as things stand, because a build only loads its own league's JSON. If
+that is ever wanted, have `build-all.mjs` emit a shared cross-league JSON first.
+
+`LEAGUE=masterbatters npm run build:one` builds one league for quick iteration.
+`npm run dev` serves `LEAGUE` too, defaulting to den-ops.
+
+### Adding a league is a config change, not a code change
+
+1. `config/leagues/<slug>/league.json` — `slug` (must equal the directory),
+   `name`, `shortName`, `features`, `sport`, `anchorUserId`, `knownLeagueIds`
+   (at least one season to bootstrap discovery), `owners`.
+2. `config/leagues/<slug>/rules/<year>.json` for every season — `derive` throws
+   without one.
+3. `npm run data`. Sync, ADP and derive all loop every league by default;
+   `--league=<slug>` scopes a run.
+
+`features` gates whole subsystems rather than scattering `if (slug === ...)`:
+
+| Flag | Off means |
+| --- | --- |
+| `keepers` | no Keepers tab, no contracts on home/owner pages, `resolveKeepers()` not run, `/keepers` says the league does not use keepers |
+| `adp` | `npm run adp` skips the league entirely |
+| `espnImport` | `npm run import:espn` skips it |
+
+`slug` is load-bearing — it is the URL segment AND the data directory. It must
+never change once published.
 
 `deploy.yml` must be the **only** workflow that calls `actions/deploy-pages`. The
 Pages settings UI offers to commit a sample `nextjs.yml`; accepting it creates a
@@ -20,7 +69,7 @@ then returns unprefixed URLs and assets 404. If `nextjs.yml` reappears, delete i
 
 ## The bylaws are the spec
 
-`docs/BYLAWS.md` is the league's constitution and the source of truth for every
+`docs/bylaws/den-ops.md` is that league's constitution and the source of truth for every
 rule this site models — keeper contracts above all. Read it before changing
 anything in `resolveKeepers()`, and check any rule question against it rather
 than inferring intent from the code.
@@ -30,9 +79,9 @@ verified against real data, and four open discrepancies the league has parked.
 
 ## Where this stands
 
-A working league hub, ~506 static pages, no database. Nothing has been pushed —
-`main` is ahead of `origin/main` by the whole build. `npm run preview` is the
-only way to see it at the real subpath.
+A working league hub, no database. Two leagues build and deploy: den-ops (735
+pages, six seasons, keepers) and masterbatters (503 pages, one season, redraft).
+`npm run preview` is the only way to see them at the real subpath.
 
 **Pages:** `/` (league at a glance, adapts to offseason), `/keepers`,
 `/keepers/history`, `/history`, `/history/[season]`, `/records`,
@@ -96,8 +145,9 @@ draft data.
 
 ## Viewer identity
 
-`components/identity.tsx` remembers who the visitor is in localStorage. THREE
-states, and they are not interchangeable:
+`components/identity.tsx` remembers who the visitor is in localStorage, under
+`ff:<league>:identity` — scoped per league, because one browser visits both and
+the owner lists differ. THREE states, and they are not interchangeable:
 
 | State | Prompt on load? | "My Team" in nav? | Highlight? |
 | --- | --- | --- | --- |
@@ -200,8 +250,9 @@ deploy; its data ships on the next scheduled build, at most six hours later.
 `keepalive.yml` relies on the same suppression to avoid causing rebuilds.
 
 Manual work is twice a year: `npm run adp:lock` before the keeper deadline, and
-adding `config/rules/<year>.json` each new season (`derive` throws without it).
-Season discovery finds the new league ID on its own.
+adding `config/leagues/<slug>/rules/<year>.json` for each league each new season
+(`derive` throws without it). Season discovery finds the new league IDs on its
+own.
 
 ## Two constraints govern almost every change here
 
@@ -225,7 +276,8 @@ deliberately; there is no middle ground.
 
 ### 2. The site is served from a subpath, not a domain root
 
-Production URLs are prefixed with `/DenOpsFF`. Dev (`npm run dev`) is **not** —
+Production URLs are prefixed with `/<repo>/<league>` — e.g. `/DenOpsFF/den-ops`.
+Dev (`npm run dev`) is **not** —
 this asymmetry is the single most common way to break the deployed site while
 everything looks fine locally.
 
@@ -244,8 +296,10 @@ const data = await fetch(withBasePath("/data/rosters.json")).then(r => r.json())
 
 Also unprefixed by default: raw `<img>`/`<video>` tags, `url()` in CSS,
 `router.push()` with a string literal, and anything in `public/` you reference by
-hand. CI fails the build if any root-relative `src`/`href` in the output HTML
-lacks the `/DenOpsFF` prefix — trust that check, don't work around it.
+hand. CI fails the build if any root-relative `src`/`href` in a league's output HTML
+lacks that league's `/<repo>/<slug>/` prefix — checked per league, so a page
+linking into another league's subtree fails too. Trust that check, don't work
+around it.
 
 `basePath` is derived from `GITHUB_REPOSITORY` in CI, so renaming the repo updates
 it automatically. The literal fallback in `next.config.ts` and the `preview` script
@@ -255,7 +309,7 @@ in `package.json` would need updating by hand.
 
 ```bash
 npm run check     # lint + typecheck, same as CI
-npm run preview   # real production build served at localhost:3000/DenOpsFF/
+npm run preview   # builds EVERY league, served at localhost:3000/DenOpsFF/
 ```
 
 `npm run preview` is the only local check that reproduces the subpath. Use it
@@ -278,14 +332,30 @@ catch basePath bugs.
 League data lives in `data/` as committed JSON. There is no database and no
 runtime API — the site reads these files at build time.
 
+Everything is per league except the player index.
+
 ```
-config/league.json        owners, league IDs, discovery anchor
-config/rules/<year>.json  per-season rules; NEVER edit a past season's file
-data/raw/<year>/          finalized Sleeper dumps (source of truth)
-data/derived/*.json       computed output (standings, keepers, records)
-data/players.json         slim player index (~44KB, not Sleeper's 5MB map)
-data/manual/              hand-entered pre-Sleeper seasons
+config/leagues/<slug>/league.json        owners, league IDs, features, anchor
+config/leagues/<slug>/rules/<year>.json  per-season rules; NEVER edit a past one
+config/leagues/<slug>/keeper-overrides.json  optional; keeper leagues only
+data/<slug>/raw/<year>/                  finalized Sleeper dumps (source of truth)
+data/<slug>/raw/player-ids.json          which players THIS league references
+data/<slug>/derived/*.json               computed output
+data/<slug>/manual/                      hand-entered pre-Sleeper seasons
+data/<slug>/adp/                         captured ADP
+data/players.json                        SHARED slim player index (~44KB)
+docs/bylaws/<slug>.md                    that league's bylaws
 ```
+
+`data/players.json` is shared because player metadata is league-agnostic, and it
+is the UNION across leagues — so it is built ONCE, after every per-league pass,
+from ALL leagues regardless of any `--league=` filter. Building it from only the
+league being synced silently deletes the others' player names (this happened;
+`--league=masterbatters` dropped 88 Den Ops players).
+
+Each league also records `raw/player-ids.json`, and `getPlayers()` narrows the
+shared map to it. Without that narrowing every league generates a player page
+for every other league's players, with no data on them.
 
 `npm run data` = `sync` then `derive`.
 
@@ -316,7 +386,8 @@ Sleeper models no part of this — `is_keeper` is a bare boolean with no round a
 no contract length. `resolveKeepers()` in `scripts/derive.ts` replays every draft
 and transaction to reconstruct cost, keeps used, and lineage per bylaws 1.7.2.
 Every contract carries a `provenance` array that the UI renders, so the maths is
-auditable. Corrections go in `config/keeper-overrides.json` — never in code.
+auditable. Corrections go in `config/leagues/<slug>/keeper-overrides.json` — never in code.
+The file is optional; a league with nothing to correct omits it.
 
 Ownership is reconciled against each season's final roster snapshot, because the
 transaction log is not a complete record of roster mutation.

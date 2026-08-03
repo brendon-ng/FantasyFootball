@@ -1543,7 +1543,11 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   const matchups = loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0));
   const ownerRecords = buildOwnerRecords(summaries, matchups);
   const records = buildLeagueRecords(matchups, summaries);
-  const keepers = resolveKeepers(loaded);
+  // A redraft league has no contracts to reconstruct. Gated on the feature flag
+  // rather than on the per-season rules so the whole subsystem is off in one place.
+  const keepers = league.features?.keepers
+    ? resolveKeepers(loaded)
+    : { perSeason: [], final: [] };
   const atTheTime = recordsAtTheTime(summaries, matchups);
   const playerHistory = buildPlayerHistory(loaded);
   const drafts = buildDraftHistory(loaded);

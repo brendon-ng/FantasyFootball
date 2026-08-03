@@ -7,6 +7,7 @@ import { OwnerContracts } from "@/components/owner-contracts";
 import { TrophyCase } from "@/components/trophy-case";
 import { Col, ListHeader, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
 import {
+  features,
   getAdp,
   getConfig,
   getKeepers,
@@ -276,34 +277,36 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
         </>
       ) : null}
 
-      <Panel>
-        <PanelHeader
-          title="Keeper Contracts"
-          meta={`${contracts.filter((c) => !c.expired).length} eligible`}
-          href="/keepers/"
-          hrefLabel="Full tracker"
-          legend={
-            <>
-              Columns: <span className="text-chalk-400">position</span> ·{" "}
-              <span className="text-chalk-400">player</span> ·{" "}
-              <span className="text-chalk-400">ADP and value vs market</span> ·{" "}
-              <span className="text-chalk-400">keeps left</span> ·{" "}
-              <span className="text-chalk-400">round it costs to keep</span>
-            </>
-          }
-        />
-        <OwnerContracts
-          ownerSlug={slug}
-          contracts={contracts}
-          players={players}
-          adp={Object.fromEntries(adp.byPlayer)}
-          userIdToSlug={Object.fromEntries(
-            getOwners().filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-          )}
-          leagueId={upcomingLeagueId}
-          maxKeepers={4}
-        />
-      </Panel>
+      {features().keepers ? (
+        <Panel>
+          <PanelHeader
+            title="Keeper Contracts"
+            meta={`${contracts.filter((c) => !c.expired).length} eligible`}
+            href="/keepers/"
+            hrefLabel="Full tracker"
+            legend={
+              <>
+                Columns: <span className="text-chalk-400">position</span> ·{" "}
+                <span className="text-chalk-400">player</span> ·{" "}
+                <span className="text-chalk-400">ADP and value vs market</span> ·{" "}
+                <span className="text-chalk-400">keeps left</span> ·{" "}
+                <span className="text-chalk-400">round it costs to keep</span>
+              </>
+            }
+          />
+          <OwnerContracts
+            ownerSlug={slug}
+            contracts={contracts}
+            players={players}
+            adp={Object.fromEntries(adp.byPlayer)}
+            userIdToSlug={Object.fromEntries(
+              getOwners().filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+            )}
+            leagueId={upcomingLeagueId}
+            maxKeepers={4}
+          />
+        </Panel>
+      ) : null}
 
       <DraftPicks
         ownerSlug={slug}

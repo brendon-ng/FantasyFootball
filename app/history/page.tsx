@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import { AllTimeTable } from "@/components/all-time-table";
 import { Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
-import { getOwnerMap, getOwnerRecords, getSeasons } from "@/lib/data";
+import { getOwnerMap, getOwnerRecords, getSeasons, pageTitle } from "@/lib/data";
 
-export const metadata = { title: "History · Den Ops" };
+export const generateMetadata = () => ({ title: pageTitle("History") });
 
 /**
  * League history: the trophy case, the all-time table, and a finish-over-time

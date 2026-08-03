@@ -1,0 +1,149 @@
+[
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Brendon",
+    "name": "Brendon Ng",
+    "seasons": [
+      2025
+    ],
+    "slug": "brendon-ng",
+    "userId": "887589851141427200"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Jake",
+    "name": "Jake Gibbons",
+    "seasons": [
+      2025
+    ],
+    "slug": "jake-gibbons",
+    "userId": "1049399449467871232"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Josh",
+    "name": "Josh Greenebaum",
+    "seasons": [
+      2025
+    ],
+    "slug": "josh-greenebaum",
+    "userId": "839620800469393408"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Aidan",
+    "name": "Aidan Kelleher",
+    "seasons": [
+      2025
+    ],
+    "slug": "aidan-kelleher",
+    "userId": "720192568591196160"
+  },
+  {
+    "active": false,
+    "coOwnedWith": [],
+    "firstName": "Vance",
+    "name": "Vance Armstrong",
+    "seasons": [
+      2025
+    ],
+    "slug": "vance-armstrong",
+    "userId": "866032709837914112"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Kate",
+    "name": "Kate Olson",
+    "seasons": [
+      2025
+    ],
+    "slug": "kate-olson",
+    "userId": "1264677752292790272"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Kaitlin",
+    "name": "Kaitlin Zarbis",
+    "seasons": [
+      2025
+    ],
+    "slug": "kaitlin-zarbis",
+    "userId": "1265012191099113472"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Ross",
+    "name": "Ross Bechtel",
+    "seasons": [
+      2025
+    ],
+    "slug": "ross-bechtel",
+    "userId": "1265042302645059584"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Lindsey",
+    "name": "Lindsey Freeze",
+    "seasons": [
+      2025
+    ],
+    "slug": "lindsey-freeze",
+    "userId": "1265548297288810497"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [
+      "thomas-moore"
+    ],
+    "firstName": "Robbie",
+    "name": "Robbie Goodman",
+    "seasons": [
+      2025
+    ],
+    "slug": "robbie-goodman",
+    "userId": "889292760992305152"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [
+      "robbie-goodman"
+    ],
+    "firstName": "Thomas",
+    "name": "Thomas Moore",
+    "seasons": [
+      2025
+    ],
+    "slug": "thomas-moore",
+    "userId": "999045098342080512"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Srishti",
+    "name": "Srishti Dhawan",
+    "seasons": [
+      2025
+    ],
+    "slug": "srishti-dhawan",
+    "userId": "1266651929774133248"
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Allison",
+    "name": "Allison Fosbery",
+    "seasons": [
+      2025
+    ],
+    "slug": "allison-fosbery",
+    "userId": "1266656315036405760"
+  }
+]

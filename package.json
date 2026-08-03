@@ -4,18 +4,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "preview": "next build && rm -rf .preview && mkdir -p .preview && cp -R out .preview/DenOpsFF && npx --yes serve .preview -l 3000",
+    "build": "node scripts/build-all.mjs",
+    "preview": "npm run build && rm -rf .preview && mkdir -p .preview && cp -R out .preview/DenOpsFF && npx --yes serve .preview -l 3000",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check": "npm run lint && npm run typecheck",
-    "clean": "rm -rf .next out .preview",
+    "clean": "rm -rf .next out .preview .assembled",
     "sync": "node scripts/sync.ts",
     "derive": "node scripts/derive.ts",
     "data": "npm run sync && npm run adp && npm run derive",
     "adp": "node scripts/adp.ts",
     "adp:lock": "node scripts/adp.ts --lock",
-    "import:espn": "node scripts/import-espn.ts"
+    "import:espn": "node scripts/import-espn.ts",
+    "build:one": "next build"
   },
   "dependencies": {
     "next": "16.2.12",

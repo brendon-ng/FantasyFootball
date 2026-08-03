@@ -1,0 +1,135 @@
+{
+  "slug": "masterbatters",
+  "//identity": [
+    "`slug` is the URL segment and the data directory name. It must never change",
+    "once published \u2014 every owner, player and matchup URL sits underneath it.",
+    "`features` gates whole subsystems: this league is redraft, so keepers, ADP",
+    "capture and the Keepers tab are all off."
+  ],
+  "name": "Masterbatters Fantasy Football",
+  "shortName": "Masterbatters",
+  "features": {
+    "keepers": false,
+    "adp": false,
+    "espnImport": false
+  },
+  "sport": "nfl",
+  "//discovery": [
+    "Sleeper creates a NEW league_id every season and links it backward via",
+    "`previous_league_id`. There is no forward pointer, so the sync script finds",
+    "next year's league by listing `anchorUserId`'s leagues for that season and",
+    "picking the one whose previous_league_id matches the latest known season.",
+    "That also disambiguates from Den Ops, which the same anchor user plays in."
+  ],
+  "anchorUserId": "887589851141427200",
+  "knownLeagueIds": {
+    "2025": "1263422021434363904",
+    "2026": "1314672262581850112"
+  },
+  "//owners": [
+    "Sleeper is the only source this league has ever used, so there are no",
+    "`espnNames` aliases and no imported seasons.",
+    "",
+    "Thomas Moore co-owns roster 10 with Robbie Goodman. Co-owners are",
+    "first-class: the team's record is credited to BOTH, so all-time columns",
+    "double-count that team-season. Intended \u2014 these are personal records.",
+    "",
+    "Vance Armstrong played 2025 and is not in the 2026 league, so `active` is",
+    "false: he stays in all history but off current-season views.",
+    "",
+    "Roster 5 is unclaimed in 2026 and has no owner in Sleeper yet."
+  ],
+  "owners": [
+    {
+      "slug": "brendon-ng",
+      "userId": "887589851141427200",
+      "firstName": "Brendon",
+      "lastName": "Ng",
+      "active": true
+    },
+    {
+      "slug": "jake-gibbons",
+      "userId": "1049399449467871232",
+      "firstName": "Jake",
+      "lastName": "Gibbons",
+      "active": true
+    },
+    {
+      "slug": "josh-greenebaum",
+      "userId": "839620800469393408",
+      "firstName": "Josh",
+      "lastName": "Greenebaum",
+      "active": true
+    },
+    {
+      "slug": "aidan-kelleher",
+      "userId": "720192568591196160",
+      "firstName": "Aidan",
+      "lastName": "Kelleher",
+      "active": true
+    },
+    {
+      "slug": "vance-armstrong",
+      "userId": "866032709837914112",
+      "firstName": "Vance",
+      "lastName": "Armstrong",
+      "active": false
+    },
+    {
+      "slug": "kate-olson",
+      "userId": "1264677752292790272",
+      "firstName": "Kate",
+      "lastName": "Olson",
+      "active": true
+    },
+    {
+      "slug": "kaitlin-zarbis",
+      "userId": "1265012191099113472",
+      "firstName": "Kaitlin",
+      "lastName": "Zarbis",
+      "active": true
+    },
+    {
+      "slug": "ross-bechtel",
+      "userId": "1265042302645059584",
+      "firstName": "Ross",
+      "lastName": "Bechtel",
+      "active": true
+    },
+    {
+      "slug": "lindsey-freeze",
+      "userId": "1265548297288810497",
+      "firstName": "Lindsey",
+      "lastName": "Freeze",
+      "active": true
+    },
+    {
+      "slug": "robbie-goodman",
+      "userId": "889292760992305152",
+      "firstName": "Robbie",
+      "lastName": "Goodman",
+      "active": true
+    },
+    {
+      "slug": "thomas-moore",
+      "userId": "999045098342080512",
+      "firstName": "Thomas",
+      "lastName": "Moore",
+      "active": true
+    },
+    {
+      "slug": "srishti-dhawan",
+      "userId": "1266651929774133248",
+      "firstName": "Srishti",
+      "lastName": "Dhawan",
+      "active": true
+    },
+    {
+      "slug": "allison-fosbery",
+      "userId": "1266656315036405760",
+      "firstName": "Allison",
+      "lastName": "Fosbery",
+      "active": true
+    }
+  ]
+}

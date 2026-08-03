@@ -25,6 +25,9 @@ export const LEAGUES_DIR = join(ROOT, "config", "leagues");
 export const dataDir = (slug: string) => join(ROOT, "data", slug);
 export const configDir = (slug: string) => join(LEAGUES_DIR, slug);
 
+/** Every configured league, ignoring any `--league=` filter. */
+export const allLeagues = (): ScriptLeague[] => resolveLeagues([]);
+
 export function resolveLeagues(argv: string[]): ScriptLeague[] {
   const only = argv.find((a) => a.startsWith("--league="))?.split("=")[1];
   const slugs = existsSync(LEAGUES_DIR)
