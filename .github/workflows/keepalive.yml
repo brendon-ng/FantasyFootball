@@ -1,0 +1,66 @@
+name: Keepalive
+
+# Keeps the scheduled workflows alive.
+#
+# GitHub disables cron-triggered workflows after 60 days with no repository
+# activity. In season that never happens — archive.yml commits newly finalized
+# weeks — but a quiet offseason easily runs past 60 days, and the failure is
+# silent and badly timed: you notice in September when live scores have stopped
+# refreshing.
+#
+# This job commits a timestamp once a month, which is the activity the 60-day
+# clock measures. Monthly gives roughly 2x margin on the window.
+#
+# It is self-sustaining once enabled: its own commits keep it (and every other
+# schedule) from ever reaching 60 days idle. GitHub also emails a warning before
+# disabling anything, so that is the backstop if this job itself ever fails.
+#
+# The commit uses the default GITHUB_TOKEN, whose pushes deliberately do NOT
+# trigger other workflows — so this costs one ~10-second job a month and does
+# not cause a rebuild or deploy.
+
+on:
+  schedule:
+    # 09:12 UTC on the 3rd of each month. Off the hour on purpose: GitHub's
+    # cron queue is heavily contended at :00, and a delayed keepalive is a
+    # keepalive that might not run.
+    - cron: "12 9 3 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: keepalive
+  cancel-in-progress: false
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stamp and push
+        run: |
+          set -euo pipefail
+          printf 'Last keepalive: %s\n' "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+            > .github/keepalive.txt
+          printf '\nThis file exists only to generate repository activity, so GitHub does\n' \
+            >> .github/keepalive.txt
+          printf 'not disable the scheduled workflows in deploy.yml and archive.yml.\n' \
+            >> .github/keepalive.txt
+          printf 'See .github/workflows/keepalive.yml. Nothing reads this file.\n' \
+            >> .github/keepalive.txt
+
+          if [ -z "$(git status --porcelain .github/keepalive.txt)" ]; then
+            echo "No change — nothing to commit."
+            exit 0
+          fi
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/keepalive.txt
+          git commit -m "Keepalive: keep scheduled workflows enabled
+
+          Automated by .github/workflows/keepalive.yml"
+          git push

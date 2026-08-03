@@ -71,6 +71,28 @@ draft data.
 - **All-time table sorts titles-first**, so a 2-season co-owner can top it. User
   has not asked to change it.
 
+## Automation
+
+Three workflows, all free — Actions minutes are unlimited on public repos, and
+this repo is public. If it ever goes private, thin the game-window crons: the
+current config is ~500 builds/month and would eat most of the 2,000-minute
+free tier.
+
+| Workflow | Cadence | Does |
+| --- | --- | --- |
+| `deploy.yml` | push + every 15 min in NFL game windows, else 6-hourly | build & publish; bakes in-progress Sleeper data |
+| `archive.yml` | Tuesdays 12:00 UTC | `sync` + `derive`, commits only if something newly finalized |
+| `keepalive.yml` | 3rd of each month | commits a timestamp so cron workflows are never auto-disabled |
+
+Pushes made with the default `GITHUB_TOKEN` do NOT trigger other workflows —
+GitHub suppresses that to prevent recursion. So `archive.yml` does not trigger a
+deploy; its data ships on the next scheduled build, at most six hours later.
+`keepalive.yml` relies on the same suppression to avoid causing rebuilds.
+
+Manual work is twice a year: `npm run adp:lock` before the keeper deadline, and
+adding `config/rules/<year>.json` each new season (`derive` throws without it).
+Season discovery finds the new league ID on its own.
+
 ## Two constraints govern almost every change here
 
 ### 1. There is no server

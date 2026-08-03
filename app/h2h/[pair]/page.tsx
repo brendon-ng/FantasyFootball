@@ -209,7 +209,10 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
                 return (
                   <div
                     key={`${g.season}-${g.week}-${g.label ?? ""}`}
-                    className="flex items-center gap-3 px-4 py-3 sm:px-5"
+                    id={`m-${g.season}-${g.week}`}
+                    // scroll-mt clears the sticky header when deep-linked from
+                    // the record book.
+                    className="flex scroll-mt-24 items-center gap-3 px-4 py-3 target:bg-accent/[0.07] sm:px-5"
                   >
                     {row}
                     <span className="w-3 shrink-0" />
@@ -218,7 +221,11 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
               }
 
               return (
-                <details key={`${g.season}-${g.week}`} className="group">
+                <details
+                  key={`${g.season}-${g.week}`}
+                  id={`m-${g.season}-${g.week}`}
+                  className="group scroll-mt-24 target:bg-accent/[0.07]"
+                >
                   <summary className="flex cursor-pointer list-none items-center gap-3 px-4 py-3 transition-colors hover:bg-ink-700/40 sm:px-5">
                     {row}
                     <span className="w-3 shrink-0 text-[10px] text-chalk-600 transition-transform group-open:rotate-90">
