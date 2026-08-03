@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { ExpandableList, ExpandableRow } from "@/components/expandable-list";
+
 import { Panel, PanelHeader, fmt } from "@/components/ui";
 import {
   getAllMeetings,
@@ -69,7 +71,9 @@ export default function RecordsPage() {
         </p>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-2">
+      {/* Paired deliberately: each row is a high/low or wide/narrow comparison,
+          and the two halves expand together. */}
+      <ExpandableRow>
         <ScoreList
           title="Highest Weekly Scores"
           rows={records.weeklyHigh}
@@ -86,63 +90,9 @@ export default function RecordsPage() {
           meetingHref={meetingHref}
           kindOf={kindOf}
         />
+      </ExpandableRow>
 
-        <Panel>
-          <PanelHeader
-            title="Best Player Weeks"
-            meta="started only"
-            legend="Highest single-week scores by a started player. Bench performances are excluded, and this list is 2024 onward — the imported ESPN seasons kept no lineups."
-          />
-          <ol className="divide-y divide-ink-700">
-            {records.playerHigh.slice(0, 20).map((r, i) => {
-              const opp = opponentOf.get(`${r.season}:${r.week}:${r.ownerSlug}`) ?? null;
-              const href = meetingHref(r.ownerSlug, opp, r.season, r.week);
-              return (
-                <li
-                  key={`${r.season}-${r.week}-${r.playerId}`}
-                  className="flex items-center gap-3 px-4 py-2.5"
-                >
-                  <span className="tabular w-5 shrink-0 text-[11px] text-chalk-600">{i + 1}</span>
-                  <div className="min-w-0 flex-1">
-                    <Link
-                      href={`/players/${r.playerId}/`}
-                      className="block truncate text-sm font-medium transition-colors hover:text-accent"
-                    >
-                      {players[r.playerId]?.full_name ?? r.playerId}
-                    </Link>
-                    {/* Two destinations in one row, so each is its own link
-                        rather than nesting anchors, which is invalid HTML. */}
-                    {href ? (
-                      <Link
-                        href={href}
-                        className="block truncate text-[11px] text-chalk-600 transition-colors hover:text-accent"
-                      >
-                        <span data-owner={r.ownerSlug}>{name(r.ownerSlug)}</span> · {r.season} wk
-                        {r.week}
-                        {opp ? (
-                          <>
-                            {" vs "}
-                            <span data-owner={opp}>{name(opp)}</span>
-                          </>
-                        ) : null}{" "}
-                        <span aria-hidden>→</span>
-                      </Link>
-                    ) : (
-                      <div className="truncate text-[11px] text-chalk-600">
-                        {name(r.ownerSlug)} · {r.season} wk{r.week}
-                      </div>
-                    )}
-                  </div>
-                  <KindChip kind={kindOf(r.ownerSlug, opp, r.season, r.week)} />
-                  <span className="tabular shrink-0 text-sm font-bold text-accent">
-                    {fmt.pts(r.points)}
-                  </span>
-                </li>
-              );
-            })}
-          </ol>
-        </Panel>
-
+      <ExpandableRow>
         <CombinedList
           title="Highest Scoring Matchups"
           rows={records.highestCombined}
@@ -159,24 +109,79 @@ export default function RecordsPage() {
           meetingHref={meetingHref}
           kindOf={kindOf}
         />
+      </ExpandableRow>
 
-        <div className="space-y-5">
-          <MarginList
-            title="Biggest Blowouts"
-            rows={records.biggestBlowout}
-            name={name}
-            meetingHref={meetingHref}
-            kindOf={kindOf}
-          />
-          <MarginList
-            title="Narrowest Wins"
-            rows={records.narrowestWin}
-            name={name}
-            meetingHref={meetingHref}
-            kindOf={kindOf}
-          />
-        </div>
-      </div>
+      <ExpandableRow>
+        <MarginList
+          title="Biggest Blowouts"
+          rows={records.biggestBlowout}
+          name={name}
+          meetingHref={meetingHref}
+          kindOf={kindOf}
+        />
+        <MarginList
+          title="Narrowest Wins"
+          rows={records.narrowestWin}
+          name={name}
+          meetingHref={meetingHref}
+          kindOf={kindOf}
+        />
+      </ExpandableRow>
+
+      <Panel>
+        <PanelHeader
+          title="Best Player Weeks"
+          meta="started only"
+          legend="Highest single-week scores by a started player. Bench performances are excluded, and this list is 2024 onward — the imported ESPN seasons kept no lineups."
+        />
+        <ExpandableList
+          noun="performances"
+          items={records.playerHigh.slice(0, 20).map((r, i) => {
+            const opp = opponentOf.get(`${r.season}:${r.week}:${r.ownerSlug}`) ?? null;
+            const href = meetingHref(r.ownerSlug, opp, r.season, r.week);
+            return (
+              <li
+                key={`${r.season}-${r.week}-${r.playerId}`}
+                className="flex items-center gap-3 px-4 py-2.5"
+              >
+                <span className="tabular w-5 shrink-0 text-[11px] text-chalk-600">{i + 1}</span>
+                <div className="min-w-0 flex-1">
+                  <Link
+                    href={`/players/${r.playerId}/`}
+                    className="block truncate text-sm font-medium transition-colors hover:text-accent"
+                  >
+                    {players[r.playerId]?.full_name ?? r.playerId}
+                  </Link>
+                  {href ? (
+                    <Link
+                      href={href}
+                      className="block truncate text-[11px] text-chalk-600 transition-colors hover:text-accent"
+                    >
+                      <span data-owner={r.ownerSlug}>{name(r.ownerSlug)}</span> · {r.season} wk
+                      {r.week}
+                      {opp ? (
+                        <>
+                          {" vs "}
+                          <span data-owner={opp}>{name(opp)}</span>
+                        </>
+                      ) : null}{" "}
+                      <span aria-hidden>→</span>
+                    </Link>
+                  ) : (
+                    <div className="truncate text-[11px] text-chalk-600">
+                      {name(r.ownerSlug)} · {r.season} wk{r.week}
+                    </div>
+                  )}
+                </div>
+                <KindChip kind={kindOf(r.ownerSlug, opp, r.season, r.week)} />
+                <span className="tabular shrink-0 text-sm font-bold text-accent">
+                  {fmt.pts(r.points)}
+                </span>
+              </li>
+            );
+          })}
+        />
+      </Panel>
     </div>
   );
 }
@@ -222,8 +227,9 @@ function ScoreList({
         meta={`top ${Math.min(rows.length, 20)}`}
         legend="Rank · owner · season, week and opponent (their score in brackets) · points scored"
       />
-      <ol className="divide-y divide-ink-700">
-        {rows.slice(0, 20).map((r, i) => {
+      <ExpandableList
+        noun="scores"
+        items={rows.slice(0, 20).map((r, i) => {
           const href = meetingHref(r.ownerSlug, r.opponentSlug, r.season, r.week);
           const body = (
             <>
@@ -265,7 +271,7 @@ function ScoreList({
             </li>
           );
         })}
-      </ol>
+      />
     </Panel>
   );
 }
@@ -296,8 +302,9 @@ function CombinedList({
         meta={`top ${Math.min(rows.length, 20)}`}
         legend="Both teams' scores added together. Rank · the matchup · combined total."
       />
-      <ol className="divide-y divide-ink-700">
-        {rows.slice(0, 20).map((r, i) => {
+      <ExpandableList
+        noun="scores"
+        items={rows.slice(0, 20).map((r, i) => {
           const href = meetingHref(r.ownerSlug, r.opponentSlug, r.season, r.week);
           const body = (
             <>
@@ -336,7 +343,7 @@ function CombinedList({
             </li>
           );
         })}
-      </ol>
+      />
     </Panel>
   );
 }
@@ -360,8 +367,9 @@ function MarginList({
         title={title}
         legend="Winner def. loser · season, week and final score · margin of victory"
       />
-      <ol className="divide-y divide-ink-700">
-        {rows.slice(0, 8).map((r, i) => {
+      <ExpandableList
+        noun="matchups"
+        items={rows.slice(0, 20).map((r, i) => {
           const href = meetingHref(r.ownerSlug, r.opponentSlug, r.season, r.week);
           const body = (
             <>
@@ -400,7 +408,7 @@ function MarginList({
             </li>
           );
         })}
-      </ol>
+      />
     </Panel>
   );
 }
