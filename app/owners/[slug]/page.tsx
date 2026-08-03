@@ -110,7 +110,13 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
               label="Playoffs"
               value={`${record.playoffAppearances}/${record.seasonsPlayed}`}
             />
-            <Stat label="Points for" value={fmt.pts1(record.pointsFor)} />
+            <Stat
+              label="Points for"
+              value={fmt.pts1(record.pointsFor)}
+              // Per-game is the comparable figure: seasons have run 13 and 14
+              // weeks, and co-owners share a total across differing tenures.
+              sub={`${fmt.pts1(record.pointsForPerGame)} per game`}
+            />
             <Stat label="Last places" value={record.lastPlaces} />
           </div>
 
