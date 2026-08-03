@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { KeepPips, PositionPill } from "@/components/keeper-table";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
-import { getKeepers, getOwnerMap, getPlayerHistory, getPlayers } from "@/lib/data";
+import { getAdp, getKeepers, getOwnerMap, getPlayerHistory, getPlayers } from "@/lib/data";
 
 export const dynamicParams = false;
 
@@ -33,6 +33,8 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   const owners = getOwnerMap();
   const history = getPlayerHistory()[id] ?? [];
   const contract = getKeepers().final.find((c) => c.playerId === id);
+  const adpAll = getAdp();
+  const adp = adpAll.byPlayer.get(id);
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
 
   const seasonsSeen = [...new Set(history.map((h) => h.season))].sort((a, b) => b - a);
@@ -81,10 +83,20 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
             sub={`${contract.keepsRemaining} of ${contract.keepsUsed + contract.keepsRemaining}`}
           />
           <Stat
-            label="Contract since"
-            value={contract.startSeason}
-            sub={contract.origin}
+            label={`Sleeper ADP${adpAll.frozen ? " (locked)" : ""}`}
+            value={adp?.sleeper != null ? adp.sleeper.toFixed(1) : "—"}
+            sub={
+              adp?.round
+                ? `round ${adp.round}${
+                    !contract.expired ? ` · keeping saves ${contract.round - adp.round}` : ""
+                  }`
+                : "not in top 372"
+            }
           />
+        </div>
+      ) : adp?.sleeper != null ? (
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+          <Stat label="Sleeper ADP" value={adp.sleeper.toFixed(1)} sub={`round ${adp.round}`} />
         </div>
       ) : null}
 

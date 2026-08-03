@@ -202,3 +202,63 @@ export async function getLiveSeason(): Promise<LiveSeason | null> {
     return null;
   }
 }
+
+// ---------------------------------------------------------------------------
+// ADP
+// ---------------------------------------------------------------------------
+
+export interface AdpEntry {
+  rank: number;
+  name: string;
+  team: string | null;
+  consensus: number | null;
+  /** Sleeper ADP as an overall pick number, e.g. 15.4. */
+  sleeper: number | null;
+  playerId: string | null;
+  position: string | null;
+  /** `sleeper` converted to a round for this league's size. */
+  round: number | null;
+}
+
+export interface AdpSnapshot {
+  season: number;
+  source: string;
+  frozen: boolean;
+  capturedAt: string;
+  leagueTeams: number;
+  entries: AdpEntry[];
+}
+
+/**
+ * ADP for the upcoming season, keyed by Sleeper player_id.
+ *
+ * Two files with different authority: `<season>.json` is the frozen snapshot
+ * that actually revalues expired contracts (bylaws 1.7.2.2.1), and `live.json`
+ * is refreshed on every build purely so the UI can show current market value
+ * before the deadline locks anything in.
+ *
+ * Baked at build time rather than fetched in the browser — beatadp sends no
+ * CORS headers, so a client-side fetch is blocked outright, and the page is
+ * 826KB of HTML that no one should download to read one column.
+ */
+export function getAdp(): {
+  byPlayer: Map<string, AdpEntry>;
+  frozen: boolean;
+  capturedAt: string | null;
+  season: number | null;
+} {
+  const season = Math.max(0, ...getSeasons().map((s) => s.season)) + 1;
+  const frozen = load<AdpSnapshot | null>(`adp/${season}.json`, null);
+  const snapshot = frozen ?? load<AdpSnapshot | null>("adp/live.json", null);
+
+  const byPlayer = new Map<string, AdpEntry>();
+  for (const e of snapshot?.entries ?? []) {
+    if (e.playerId) byPlayer.set(e.playerId, e);
+  }
+  return {
+    byPlayer,
+    frozen: Boolean(frozen),
+    capturedAt: snapshot?.capturedAt ?? null,
+    season: snapshot?.season ?? null,
+  };
+}

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import { KeepPips, PositionPill } from "@/components/keeper-table";
+import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
-import { getKeepers, getOwnerMap, getPlayers, getSeasons } from "@/lib/data";
+import { getAdp, getKeepers, getOwnerMap, getPlayers, getSeasons } from "@/lib/data";
 import type { KeeperContract } from "@/lib/types";
 
 export const metadata = { title: "Keeper Tracker · Den Ops" };
@@ -22,6 +22,7 @@ export default function KeepersPage() {
   const owners = getOwnerMap();
   const players = getPlayers();
   const seasons = getSeasons();
+  const adp = getAdp();
 
   const nextSeason = Math.max(...seasons.map((s) => s.season), 0) + 1;
 
@@ -104,6 +105,10 @@ export default function KeepersPage() {
                                 </span>
                               ) : null}
                             </span>
+                            <ValueBadge
+                              costRound={c.round}
+                              adp={adp.byPlayer.get(c.playerId)}
+                            />
                             <KeepPips
                               used={c.keepsUsed}
                               total={c.keepsUsed + c.keepsRemaining}

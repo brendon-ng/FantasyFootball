@@ -142,3 +142,33 @@ Node's native TypeScript stripping runs `scripts/*.ts` directly, which is why
 relative imports there carry explicit `.ts` extensions and `tsconfig.json` sets
 `allowImportingTsExtensions`. Behind a proxy, `fetch` needs
 `NODE_USE_ENV_PROXY=1 npm run sync` — Node ignores `HTTP_PROXY` otherwise.
+
+### ADP
+
+Sleeper publishes no ADP — verified, not assumed: the REST player object exposes
+only `search_rank` (positional; Bijan Robinson and Josh Allen are both `1`), and
+the GraphQL schema at `sleeper.com/graphql` has 238 root fields with zero ADP
+types. So it is scraped from beatadp.com's server-rendered Sleeper column, whose
+default state is already PPR / Redraft / 1QB.
+
+**Baked at build time, never fetched in the browser.** beatadp sends no
+`access-control-allow-origin`, so a client-side fetch is blocked outright, and
+the page is 826KB of HTML. Since deploys already run on a schedule and ADP moves
+daily at most, build-time capture is effectively live and costs the client zero
+bytes and zero JS.
+
+Two files with different authority:
+
+| File | Written by | Authority |
+| --- | --- | --- |
+| `data/adp/live.json` | every `npm run data` | display only |
+| `data/adp/<season>.json` | `npm run adp:lock` | revalues expired contracts |
+
+`adp:lock` refuses to overwrite without `--force`, because bylaws 1.7.2.2.1 fixes
+ADP a week before the keeper deadline and a silent re-capture would move keeper
+costs after the fact. `getAdp()` prefers the frozen file and falls back to live.
+
+Round conversion divides ADP by *this league's* team count, so pick 15 is round 2
+in a 10-team league. Surplus value shown in the UI is `costRound - adpRound`:
+positive means the keeper pick is cheaper than market. Mind the direction —
+round numbers count up as value counts down.

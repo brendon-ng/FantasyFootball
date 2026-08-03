@@ -12,8 +12,18 @@
  * an existing snapshot unless you pass --force. ADP drifts daily; a silently
  * re-captured file would change keeper costs after the deadline.
  *
- *   npm run adp                  capture for the upcoming season
- *   npm run adp -- --force       re-capture, overwriting the frozen snapshot
+ * TWO OUTPUTS, different lifetimes:
+ *
+ *   data/adp/live.json      Refreshed on every sync/build. Not authoritative —
+ *                           purely so the UI can show current market value
+ *                           before the keeper deadline locks anything in.
+ *   data/adp/<season>.json  The frozen snapshot. Written once and never
+ *                           silently overwritten; this is what revalues an
+ *                           expired keeper contract.
+ *
+ *   npm run adp                  refresh live.json (part of `npm run data`)
+ *   npm run adp:lock             freeze this season's snapshot
+ *   npm run adp:lock -- --force  re-freeze, overwriting
  *   npm run adp -- --season=2027
  */
 
@@ -26,6 +36,8 @@ const SOURCE = "https://www.beatadp.com/platform-adp";
 
 const args = new Set(process.argv.slice(2));
 const FORCE = args.has("--force");
+/** Lock mode writes the frozen per-season snapshot; default refreshes live.json. */
+const LOCK = args.has("--lock");
 const SEASON =
   [...args].find((a) => a.startsWith("--season="))?.split("=")[1] ??
   String(new Date().getUTCFullYear());
@@ -132,14 +144,17 @@ async function loadPlayerMap(): Promise<Record<string, SleeperPlayer>> {
 }
 
 async function main(): Promise<void> {
-  const outPath = join(DATA_DIR, "adp", `${SEASON}.json`);
-  const existing = readJson<{ capturedAt: string }>(outPath);
-  if (existing && !FORCE) {
-    log.warn(
-      `${SEASON} ADP was already frozen at ${existing.capturedAt}. ` +
-        `Bylaws 1.7.2.2.1 fixes ADP before the keeper deadline — pass --force to overwrite.`,
-    );
-    return;
+  const outPath = join(DATA_DIR, "adp", LOCK ? `${SEASON}.json` : "live.json");
+
+  if (LOCK) {
+    const existing = readJson<{ capturedAt: string }>(outPath);
+    if (existing && !FORCE) {
+      log.warn(
+        `${SEASON} ADP was already frozen at ${existing.capturedAt}. ` +
+          `Bylaws 1.7.2.2.1 fixes ADP before the keeper deadline — pass --force to overwrite.`,
+      );
+      return;
+    }
   }
 
   const rules = readJson<{ teams: number }>(
@@ -147,7 +162,7 @@ async function main(): Promise<void> {
   );
   const teams = rules?.teams ?? 10;
 
-  log.step(`Capturing ${SEASON} Sleeper ADP`);
+  log.step(`Capturing ${SEASON} Sleeper ADP (${LOCK ? "FROZEN snapshot" : "live refresh"})`);
   log.info(`source: ${SOURCE} (PPR · Redraft · 1QB — the page's default state)`);
 
   const res = await fetch(SOURCE, { headers: { "User-Agent": "Mozilla/5.0" } });
@@ -208,14 +223,18 @@ async function main(): Promise<void> {
     format: "redraft",
     quarterbacks: 1,
     leagueTeams: teams,
-    // Frozen timestamp — this is the whole point of the file.
+    frozen: LOCK,
+    // For the frozen file this timestamp is the whole point; for live.json it
+    // just tells the UI how stale the number on screen is.
     capturedAt: new Date().toISOString(),
     note:
       "Sleeper publishes no ADP via API; this is scraped from beatadp.com's server-rendered Sleeper column. " +
       "`round` converts Sleeper ADP to a keeper cost round for this league's size.",
     entries,
   });
-  log.write(`data/adp/${SEASON}.json (${entries.length} players)`);
+  log.write(`data/adp/${LOCK ? SEASON : "live"}.json (${entries.length} players)`);
+
+  if (!LOCK) return;
 
   log.step("Round breakdown");
   for (let round = 1; round <= 17; round++) {

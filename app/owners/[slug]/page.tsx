@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { KeepPips, PositionPill } from "@/components/keeper-table";
+import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
 import { Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
 import {
+  getAdp,
   getKeepers,
   getOwnerMap,
   getOwnerRecords,
@@ -26,6 +27,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const record = getOwnerRecords().find((r) => r.ownerSlug === slug);
   const seasons = getSeasons().filter((s) => s.finalized).sort((a, b) => b.season - a.season);
   const players = getPlayers();
+  const adp = getAdp();
   const contracts = getKeepers().final.filter((c) => c.ownerSlug === slug);
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
 
@@ -178,6 +180,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                 >
                   {players[c.playerId]?.full_name ?? c.playerId}
                 </Link>
+                <ValueBadge costRound={c.round} adp={adp.byPlayer.get(c.playerId)} />
                 <KeepPips used={c.keepsUsed} total={c.keepsUsed + c.keepsRemaining} />
                 <span
                   className={`tabular w-9 shrink-0 text-right text-sm font-bold ${c.expired ? "text-loss" : "text-accent"}`}

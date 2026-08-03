@@ -3,6 +3,7 @@ import Link from "next/link";
 import { KeeperRow } from "@/components/keeper-table";
 import { EmptyState, LiveBadge, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
 import {
+  getAdp,
   getKeepers,
   getLiveSeason,
   getOwnerMap,
@@ -26,6 +27,7 @@ export default async function HomePage() {
   const records = getOwnerRecords();
   const keepers = getKeepers();
   const players = getPlayers();
+  const adp = getAdp();
 
   const finalized = seasons.filter((s) => s.finalized).sort((a, b) => b.season - a.season);
   const lastSeason = finalized[0];
@@ -203,7 +205,11 @@ export default async function HomePage() {
       <Panel>
         <PanelHeader
           title={`Keeper Board · Entering ${currentSeason}`}
-          meta={`top ${MAX_KEEPERS} eligible per team`}
+          meta={
+            adp.capturedAt
+              ? `top ${MAX_KEEPERS} per team · ADP ${adp.frozen ? "locked" : "live"}`
+              : `top ${MAX_KEEPERS} eligible per team`
+          }
           href="/keepers/"
           hrefLabel="Full keeper tracker"
         />
@@ -233,6 +239,7 @@ export default async function HomePage() {
                         key={c.playerId}
                         contract={c}
                         player={players[c.playerId]}
+                        adp={adp.byPlayer.get(c.playerId)}
                         rank={i + 1}
                         eligible
                       />
