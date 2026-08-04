@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import { AllTimeTable } from "@/components/all-time-table";
-import { Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
+import { FinishBySeason } from "@/components/finish-by-season";
+import { Panel, PanelHeader } from "@/components/ui";
 import {
   creditedNames,
   features,
@@ -98,82 +99,16 @@ export default function HistoryPage() {
         />
       </Panel>
 
-      <Panel>
-        <PanelHeader
-          title="Finish by Season"
-          meta="1st is brightest"
-          legend="Each cell is that owner's final placement for the season; brighter means a better finish. Hover a cell for the exact result."
-        />
-        {/* No fixed min-width, and the name column is CAPPED rather than 1fr.
-            A flat 420px floor plus a stretching name column meant a league with
-            one season pushed its only cell off the right of a phone — you had to
-            scroll to find it. Capped, the cells always sit just after the names,
-            and the grid overflows into a scroll only when the seasons genuinely
-            need the room. */}
-        <div className="overflow-x-auto p-4 sm:p-5">
-          <div>
-            <div
-              className="grid items-center gap-1"
-              style={{ gridTemplateColumns: `minmax(110px,200px) repeat(${allSeasons.length}, 44px)` }}
-            >
-              <div />
-              {allSeasons.map((s) => (
-                <div key={s} className="eyebrow text-center text-[10px]">
-                  {s}
-                </div>
-              ))}
-              {records.map((r) => (
-                <FinishRow key={r.ownerSlug} name={name(r.ownerSlug)} slug={r.ownerSlug} finishes={r.finishes} seasons={allSeasons} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </Panel>
+      <FinishBySeason
+        seasons={allSeasons}
+        rows={records.map((r) => ({
+          slug: r.ownerSlug,
+          name: name(r.ownerSlug),
+          finishes: r.finishes,
+        }))}
+        teamsBySeason={Object.fromEntries(seasons.map((x) => [x.season, x.teams]))}
+      />
     </div>
   );
 }
 
-function FinishRow({
-  name,
-  slug,
-  finishes,
-  seasons,
-}: {
-  name: string;
-  slug: string;
-  finishes: Array<{ season: number; place: number | null }>;
-  seasons: number[];
-}) {
-  const byYear = new Map(finishes.map((f) => [f.season, f.place]));
-  return (
-    <>
-      <Link
-        href={`/owners/${slug}/`}
-        className="truncate pr-2 text-sm font-medium transition-colors hover:text-accent"
-      >
-        {name}
-      </Link>
-      {seasons.map((s) => {
-        const place = byYear.get(s) ?? null;
-        // Opacity encodes finish: 1st is fully opaque, 10th nearly transparent.
-        const strength = place ? 1 - (place - 1) / 11 : 0;
-        return (
-          <div
-            key={s}
-            title={place ? `${s}: ${fmt.ordinal(place)}` : `${s}: did not play`}
-            className="flex h-8 items-center justify-center rounded"
-            style={{
-              backgroundColor: place
-                ? `color-mix(in srgb, var(--color-accent) ${Math.round(strength * 70)}%, var(--color-ink-700))`
-                : "var(--color-ink-850)",
-            }}
-          >
-            <span className={`tabular text-xs font-bold ${placeColor(place)}`}>
-              {place ?? "·"}
-            </span>
-          </div>
-        );
-      })}
-    </>
-  );
-}

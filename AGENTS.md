@@ -293,6 +293,29 @@ track overflows the card rather than letting its truncating cell shrink. The hom
 keeper board needed `min-w-0` on each owner card for exactly this reason — the
 cost column was being clipped while the player name refused to truncate.
 
+## Charts
+
+`components/finish-timeline.tsx` uses eight hues from the dataviz skill's dark
+categorical palette, in that ORDER. They were checked with its validator against
+this surface — lightness band, chroma floor, adjacent CVD separation (worst ΔE 8.4
+protan), normal-vision separation (worst ΔE 19.3), 3:1 contrast, all pass. The
+order is what makes adjacent slots separable, so do not reorder or substitute
+without re-running:
+
+```
+node <dataviz-skill>/scripts/validate_palette.js "#3987e5,#d95926,#199e70,#c98500,#d55181,#008300,#9085e9,#e66767" --mode dark
+```
+
+COLOUR ALONE DOES NOT SCALE TO 16 OWNERS. Past eight the palette repeats with a
+DASHED stroke rather than inventing more hues, which stop being separable — that
+is composite encoding, and it is the documented answer for a ninth series. The
+legend is always present and doubles as the control: hovering or tapping isolates
+one line. Without that a 16-line chart is unreadable whatever the palette.
+
+Finish charts invert Y — 1st at the TOP, since a championship is a peak — and
+scale to each season's team count, so 12th of 12 and 10th of 10 both sit on the
+floor.
+
 ## Viewer identity
 
 `components/identity.tsx` remembers who the visitor is in localStorage, under

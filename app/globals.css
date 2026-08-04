@@ -105,3 +105,21 @@ body {
     transition-duration: 0.001ms !important;
   }
 }
+
+/*
+ * Finish-by-season grid: the name column stretches on desktop so the year cells
+ * sit right-justified against the card edge, which is the shape that reads best
+ * when there are several seasons. On a phone that stretch pushes a short league's
+ * only column off screen, so there it is capped instead.
+ *
+ * A CSS variable rather than two rendered grids: the column count is dynamic, so
+ * Tailwind cannot generate an arbitrary `grid-cols-[...]` class for it.
+ */
+.finish-grid {
+  --finish-name-col: minmax(110px, 200px);
+}
+@media (min-width: 40rem) {
+  .finish-grid {
+    --finish-name-col: minmax(110px, 1fr);
+  }
+}
