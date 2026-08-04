@@ -297,13 +297,21 @@ export interface H2HRecord {
  * what the score slot holds, never in how a card is built, so a card does not
  * move or resize as Sunday progresses.
  *
- * PLAIN FLEX, DELIBERATELY. Equal cards filling a row is `sm:flex-1`, and the
- * count takes care of itself — five for a ten-team league, six for a twelve.
- * Two attempts to express this as a grid failed silently, because the column
- * count is dynamic and neither a Tailwind class nor `repeat(var(--n), …)` can
- * carry it: browsers reject a `var()` as a repeat count and drop the whole
- * declaration, collapsing every card into one column. Do not "improve" this
- * back into a grid.
+ THE CARD WIDTH IS AN INLINE STYLE, and that is not laziness. Four attempts to
+ * express it in CSS did not reach the element — a grid template with a dynamic
+ * column count (browsers reject `var()` as a `repeat()` count and drop the whole
+ * declaration), and then `sm:flex-1`, which is present in the served stylesheet
+ * and still did not apply. `flex: 1 0 10rem` inline cannot lose a cascade fight,
+ * cannot be purged and cannot be served stale, and it needs no breakpoint:
+ *
+ *   desktop — free space splits evenly across equal bases, so the cards fill the
+ *             row and stay the same width, five for a ten-team league or six for
+ *             a twelve
+ *   phone   — `flex-shrink: 0` holds each at 10rem, the row overflows, and the
+ *             container scrolls it
+ *
+ * Stacking is what this avoids: five cards down a phone screen would push the
+ * standings out of sight entirely.
  *
  * Scores appear only once someone has scored. A row of 0.00s before kickoff reads
  * as "everyone scored nothing" rather than "not started".
@@ -339,12 +347,13 @@ function MatchupStrip({
   };
 
   return (
-    <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:overflow-x-visible sm:px-0">
+    <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:px-0">
       {live.matchups.map((m) => (
         <Link
           key={m.matchupId}
           href={`/matchups/${meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug)}/`}
-          className="w-[13rem] min-w-0 shrink-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim sm:w-auto sm:flex-1"
+          className="min-w-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim"
+          style={{ flex: "1 0 10rem" }}
         >
           {[m.a, m.b].map((side, i) => {
             const other = i === 0 ? m.b : m.a;
