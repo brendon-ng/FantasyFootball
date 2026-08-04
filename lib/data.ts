@@ -13,6 +13,8 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
+import { meetingId } from "./meeting.ts";
+
 import {
   getLeague,
   getLeagueUsers,
@@ -509,14 +511,7 @@ function bracketLabel(
   return null;
 }
 
-export function meetingId(
-  season: number,
-  week: number | null,
-  a: string,
-  b: string,
-): string {
-  return `${season}-${week ?? 0}-${[a, b].sort().join("-vs-")}`;
-}
+export { meetingId } from "./meeting.ts";
 
 /**
  * Every recorded meeting between two owners, newest first.
