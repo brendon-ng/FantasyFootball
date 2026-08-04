@@ -144,15 +144,23 @@ export default async function SeasonPage({
                 >
                   <td className="tabular px-3 py-2 font-bold text-chalk-500">{r.seed}</td>
                   <td className="px-3 py-2">
-                    <Link
-                      href={`/owners/${r.ownerSlug}/`}
-                      className="font-medium transition-colors hover:text-accent"
-                    >
-                      {teamLabel(r)}
-                    </Link>
-                    {r.teamName ? (
-                      <div className="truncate text-[11px] text-chalk-600">{r.teamName}</div>
-                    ) : null}
+                    {/* Capped on an inner block, not the <td>: under table
+                        auto-layout a cell's max-width is only a hint, and the cell
+                        would still stretch to fit an unbreakable team name like
+                        "twitch.tv/jamarrchase10". Capping here bounds the column so
+                        W-L is on screen without scrolling, and gives `truncate`
+                        below something to truncate against. */}
+                    <div className="max-sm:max-w-[9.5rem]">
+                      <Link
+                        href={`/owners/${r.ownerSlug}/`}
+                        className="font-medium transition-colors hover:text-accent"
+                      >
+                        {teamLabel(r)}
+                      </Link>
+                      {r.teamName ? (
+                        <div className="truncate text-[11px] text-chalk-600">{r.teamName}</div>
+                      ) : null}
+                    </div>
                   </td>
                   <td className="tabular whitespace-nowrap px-3 py-2 text-right text-chalk-300">
                     {fmt.record(r.wins, r.losses, r.ties)}
