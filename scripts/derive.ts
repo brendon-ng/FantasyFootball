@@ -616,7 +616,7 @@ function seasonTimeline(d: SeasonData): SeasonEvent[] {
  * `config/keeper-overrides.json` lets the commissioner correct any contract the
  * replay gets wrong without editing code.
  */
-function resolveKeepers(seasons: SeasonData[]): {
+function resolveKeepers(seasons: SeasonData[], draftOnly: DraftOnlySeason[] = []): {
   perSeason: SeasonKeepers[];
   final: KeeperContract[];
 } {
@@ -768,6 +768,69 @@ function resolveKeepers(seasons: SeasonData[]): {
       c.keepsRemaining = Math.max(0, kr.maxKeepsAtOriginalCost - c.keepsUsed);
       c.expired = c.keepsRemaining === 0;
     }
+    perSeason.push({
+      season: d.season,
+      contracts: structuredClone([...contracts.values()]).sort(
+        (a, b) => a.round - b.round || a.playerId.localeCompare(b.playerId),
+      ),
+      keptPlayerIds: kept.sort(),
+    });
+  }
+
+  // A completed draft whose SEASON is still running.
+  //
+  // This is what rolls the league onto the next keeper cycle: the moment the
+  // draft finishes, every cost on the keeper page should be next year's. Waiting
+  // for the season to finalize would leave stale values on screen for four
+  // months, right when people are using them.
+  //
+  // THE DRAFT IS THE ROSTER SNAPSHOT. A keeper league drafts a full squad, so
+  // anyone not drafted or kept is in the free-agent pool — which is the same job
+  // the final-roster reconciliation does for a finished season. Post-draft
+  // waiver moves are applied on top in the browser by lib/keeper-live.ts.
+  for (const d of draftOnly) {
+    const kr = d.rules.keepers;
+    const kept: string[] = [];
+    const drafted = new Set<string>();
+
+    for (const p of [...d.picks].sort((a, b) => a.pick_no - b.pick_no)) {
+      if (ignoredPlayers.has(p.player_id)) continue;
+      drafted.add(p.player_id);
+      const owner = d.rosterToOwner.get(Number(p.roster_id)) ?? null;
+      const existing = contracts.get(p.player_id);
+
+      if (p.is_keeper && existing) {
+        existing.ownerSlug = owner;
+        existing.keepsUsed += 1;
+        existing.provenance.push(
+          `${d.season}: kept at R${existing.round} by ${owner} (keep ${existing.keepsUsed} of ${kr.maxKeepsAtOriginalCost})`,
+        );
+        kept.push(p.player_id);
+      } else {
+        contracts.set(p.player_id, {
+          playerId: p.player_id,
+          ownerSlug: owner,
+          round: p.round,
+          keepsUsed: 0,
+          keepsRemaining: kr.maxKeepsAtOriginalCost,
+          expired: false,
+          origin: "drafted",
+          startSeason: d.season,
+          originalDraftRound: p.round,
+          provenance: [`${d.season}: drafted R${p.round} pick ${p.pick_no} by ${owner}`],
+        });
+      }
+    }
+
+    for (const c of contracts.values()) {
+      if (!drafted.has(c.playerId) && c.ownerSlug !== null) {
+        c.ownerSlug = null;
+        c.provenance.push(`${d.season} draft: went undrafted — free agent`);
+      }
+      c.keepsRemaining = Math.max(0, kr.maxKeepsAtOriginalCost - c.keepsUsed);
+      c.expired = c.keepsRemaining === 0;
+    }
+
     perSeason.push({
       season: d.season,
       contracts: structuredClone([...contracts.values()]).sort(
@@ -1214,9 +1277,18 @@ function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransac
  * composing them gives roster -> user without a roster snapshot. `picked_by` is
  * the fallback, since it is empty on an autopick.
  */
-function draftOnlySeasons(loaded: SeasonData[]): DraftPickRecord[] {
+interface DraftOnlySeason {
+  season: number;
+  rules: Rules;
+  picks: SleeperDraftPick[];
+  /** roster -> owner slug, composed out of draft.json. */
+  rosterToOwner: Map<number, string | null>;
+  slotOwner: Map<number, string | null>;
+}
+
+function loadDraftOnly(loaded: SeasonData[]): DraftOnlySeason[] {
   const done = new Set(loaded.map((d) => d.season));
-  const out: DraftPickRecord[] = [];
+  const out: DraftOnlySeason[] = [];
 
   for (const s of index.seasons) {
     const season = Number(s.season);
@@ -1236,27 +1308,36 @@ function draftOnlySeasons(loaded: SeasonData[]): DraftPickRecord[] {
       return userId ? (slugByUserId.get(userId) ?? null) : null;
     };
 
+    const rosterToOwner = new Map<number, string | null>();
+    for (const rosterId of rosterToUser.keys()) rosterToOwner.set(rosterId, ownerOf(rosterId, null));
     const slotOwner = new Map<number, string | null>();
     for (const [slot, rosterId] of Object.entries(draft.slot_to_roster_id ?? {})) {
       slotOwner.set(Number(slot), ownerOf(Number(rosterId), null));
     }
 
-    for (const p of picks) {
-      if (ignoredPlayers.has(p.player_id)) continue;
-      out.push({
-        season,
+    log.info(`${season}: draft complete but season in progress — ${picks.length} picks recorded`);
+    out.push({ season, rules: rulesFor(season), picks, rosterToOwner, slotOwner });
+  }
+  return out;
+}
+
+function draftOnlySeasons(draftOnly: DraftOnlySeason[]): DraftPickRecord[] {
+  return draftOnly.flatMap((d) =>
+    d.picks
+      .filter((p) => !ignoredPlayers.has(p.player_id))
+      .map((p) => ({
+        season: d.season,
         round: p.round,
         pickNo: p.pick_no,
         draftSlot: p.draft_slot,
-        ownerSlug: ownerOf(Number(p.roster_id), p.picked_by ?? null),
-        slotOwnerSlug: slotOwner.get(p.draft_slot) ?? null,
+        ownerSlug:
+          d.rosterToOwner.get(Number(p.roster_id)) ??
+          (p.picked_by ? (slugByUserId.get(p.picked_by) ?? null) : null),
+        slotOwnerSlug: d.slotOwner.get(p.draft_slot) ?? null,
         playerId: p.player_id,
         isKeeper: Boolean(p.is_keeper),
-      });
-    }
-    log.info(`${season}: draft complete but season in progress — ${picks.length} picks recorded`);
-  }
-  return out;
+      })),
+  );
 }
 
 function buildDraftHistory(seasons: SeasonData[]): DraftPickRecord[] {
@@ -1816,12 +1897,15 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   const records = buildLeagueRecords(matchups, summaries);
   // A redraft league has no contracts to reconstruct. Gated on the feature flag
   // rather than on the per-season rules so the whole subsystem is off in one place.
+  // Loaded before the keeper pass: a completed draft advances every contract to
+  // the next cycle, so the resolver needs it.
+  const draftOnly = loadDraftOnly(loaded);
   const keepers = league.features?.keepers
-    ? resolveKeepers(loaded)
+    ? resolveKeepers(loaded, draftOnly)
     : { perSeason: [], final: [] };
   const atTheTime = recordsAtTheTime(summaries, matchups);
   const playerHistory = buildPlayerHistory(loaded);
-  const drafts = [...buildDraftHistory(loaded), ...draftOnlySeasons(loaded)].sort(
+  const drafts = [...buildDraftHistory(loaded), ...draftOnlySeasons(draftOnly)].sort(
     (a, b) => a.season - b.season || a.pickNo - b.pickNo,
   );
   const weeklyLows = buildWeeklyLows(matchups, summaries);

@@ -755,6 +755,23 @@ Consequences already visible in the data: `keepers.json` covers 2024-25 only, th
 2024 draft has zero keeper picks against 2025's forty, and 53 contracts carry
 origin `startup`.
 
+THE CYCLE ADVANCES THE MOMENT THE DRAFT FINISHES, not when the season does.
+`resolveKeepers` takes the draft-only seasons alongside the finished ones, so a
+completed draft rolls every contract onto the next year: drafted players get a
+fresh cost, kept players burn a keep, and one that exhausts its keeps expires and
+is revalued to ADP. Waiting for the season to finalize would leave last year's
+costs on screen for four months, exactly while people are using them to plan.
+
+THE DRAFT IS THE ROSTER SNAPSHOT for that pass. A keeper league drafts a full
+squad, so anyone neither drafted nor kept is in the free-agent pool — the same job
+the final-roster reconciliation does for a finished season. Post-draft waiver moves
+land on top in the browser via `lib/keeper-live.ts`, which is unaffected: a draft
+is not a transaction, so there is nothing for it to double-apply.
+
+Verified with a fixture 2026 draft: the 2024 and 2025 cycles came out
+byte-identical, a 2026 cycle appeared, 36 contracts expired on their second keep,
+and the 184 rostered players fell to the 168 actually drafted.
+
 Sleeper models no part of this — `is_keeper` is a bare boolean with no round and
 no contract length. `resolveKeepers()` in `scripts/derive.ts` replays every draft
 and transaction to reconstruct cost, keeps used, and lineage per bylaws 1.7.2.
