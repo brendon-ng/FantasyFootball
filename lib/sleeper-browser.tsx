@@ -286,7 +286,8 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
         let startTime = raw.start_time ?? null;
         const wantsOrder = !orderSet && flags.order;
         const wantsComplete = status !== "complete" && flags.complete;
-        const mocked = wantsOrder || wantsComplete;
+        const wantsDate = !startTime && flags.date;
+        const mocked = wantsOrder || wantsComplete || wantsDate;
 
         if (wantsOrder) {
           slotToRoster = mockDraftOrder(slotToRoster, raw.draft_id);
@@ -296,10 +297,9 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
           status = "complete";
           // Backdated, so the keeper deadline reads as closed and picks frozen.
           startTime = mockCompletedDraftDate();
-        } else if (wantsOrder) {
-          // A date as well as an order: the two are set together in practice, and
-          // the home page needs both to say anything. Two weeks out, so the keeper
-          // deadline still lands in the future.
+        } else if (wantsDate) {
+          // Two weeks out, so the keeper deadline — three days before the draft —
+          // still lands in the future and the countdown has something to count.
           startTime ??= mockDraftDate();
         }
         setState({

@@ -16,6 +16,7 @@ import type { LiveSeason } from "./types.ts";
 
 export const PHASES = [
   "offseason",
+  "scheduled",
   "preDraft",
   "drafted",
   "weekPreview",
@@ -27,6 +28,7 @@ export type LeaguePhase = (typeof PHASES)[number];
 
 export const PHASE_LABEL: Record<LeaguePhase, string> = {
   offseason: "Offseason",
+  scheduled: "Draft scheduled",
   preDraft: "Pre-draft",
   drafted: "Drafted",
   weekPreview: "Week preview",
@@ -37,7 +39,7 @@ export const PHASE_LABEL: Record<LeaguePhase, string> = {
 export interface PhaseInput {
   live: Pick<LiveSeason, "seasonType" | "week" | "lastScoredLeg" | "matchups"> | null;
   /** From `useLiveDraft`. Null when Sleeper has no draft for the season. */
-  draft: { status: string; orderSet: boolean } | null;
+  draft: { status: string; orderSet: boolean; startTime: number | null } | null;
 }
 
 /**
@@ -62,9 +64,15 @@ export function resolvePhase({ live, draft }: PhaseInput): LeaguePhase {
 
   if (draft?.status === "complete") return "drafted";
   if (draft?.orderSet) return "preDraft";
+  // A DATE WITHOUT AN ORDER IS ITS OWN STATE, and by bylaw 1.7 it is the normal
+  // one: the order is drawn AFTER the keeper deadline, so every year passes
+  // through a window where the draft is booked, keepers are due, and the order is
+  // still unknown. Folding it into `offseason` meant the site had nothing to say
+  // for exactly the weeks it mattered most.
+  if (draft?.startTime) return "scheduled";
   return "offseason";
 }
 
 /** True once the season has begun — the draft has run and history is last year's. */
 export const isCurrentSeason = (phase: LeaguePhase): boolean =>
-  phase !== "offseason" && phase !== "preDraft";
+  phase !== "offseason" && phase !== "scheduled" && phase !== "preDraft";

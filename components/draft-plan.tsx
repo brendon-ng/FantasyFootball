@@ -10,12 +10,18 @@ import { useLiveDraft, useLiveRosters } from "@/lib/sleeper-browser";
 /**
  * When the draft is, when keepers are due, and the order.
  *
- * Renders NOTHING until Sleeper has both a date and an order. Before that there
- * is no news, and an empty "draft: TBD" panel on the home page is worse than the
- * space it takes — the keeper board below it is the actual offseason story.
+ * THE DATE IS THE GATE, NOT THE ORDER. Bylaw 1.7 draws the order AFTER the keeper
+ * deadline — Appendix A explains why: an early order lets teams trade keeper picks
+ * into better non-keeper slots. So every year runs through a window where the
+ * draft is booked and keepers are due but nobody knows the order, and requiring
+ * both meant this panel could not appear until the deadline it exists to warn
+ * about had already passed.
  *
- * Live for the same reason as everything else here: the order is drawn after the
- * keeper deadline and the date moves, neither of which waits for a deploy.
+ * Renders nothing before a date is set, which is genuinely no news, and nothing
+ * once the draft is complete.
+ *
+ * Live for the same reason as everything else here: dates move and orders are
+ * drawn, neither of which waits for a deploy.
  */
 
 const dateFmt = new Intl.DateTimeFormat(undefined, {
@@ -72,8 +78,8 @@ export function DraftPlan({
   const now = minute === 0 ? null : minute * 60_000;
   const d = draft.data;
 
-  // Nothing to say until both exist, and nothing to say once it has happened.
-  if (!d || !d.orderSet || !d.startTime || d.status === "complete") return null;
+  // Nothing to say before a date exists, and nothing to say once it has happened.
+  if (!d || !d.startTime || d.status === "complete") return null;
 
   const deadline = keeperDeadline(d.startTime);
   const passed = now !== null && deadline < now;
@@ -105,7 +111,11 @@ export function DraftPlan({
             {d.mocked ? (
               <span
                 className="rounded border border-gold/50 bg-gold/10 px-1.5 text-[9px] font-bold uppercase tracking-wide text-gold"
-                title="Stand-in date and order. Sleeper has not set these."
+                title={
+                  d.orderSet
+                    ? "Stand-in date and order. Sleeper has not set these."
+                    : "Stand-in date. Sleeper has not set one."
+                }
               >
                 Mock
               </span>
@@ -145,33 +155,44 @@ export function DraftPlan({
 
       <div className="border-t border-ink-600 px-4 pb-4 pt-3 sm:px-5">
         <div className="eyebrow mb-2 text-[10px]">Draft order</div>
-        {/* One line that scrolls, not a wrapping list. Wrapping left a ragged
-            second row of one or two names, and a draft order reads 1..N — a
-            column-major grid would fix the ragged edge but break the reading. */}
-        <ol className="-mx-1 flex flex-nowrap gap-x-4 overflow-x-auto px-1 pb-1">
-          {slots.map((slot) => {
-            const slug = rosterToSlug.get(d.slotToRoster[slot]) ?? null;
-            return (
-              <li key={slot} className="flex shrink-0 items-center gap-1.5 text-sm">
-                <span className="tabular shrink-0 text-[11px] text-chalk-600">{slot}</span>
-                {slug ? (
-                  <Link
-                    href={`/owners/${slug}/`}
-                    className="whitespace-nowrap transition-colors hover:text-accent"
-                    data-owner={slug}
-                    title={ownerNames[slug] ?? slug}
-                  >
-                    {/* First names only — ten of them have to sit on one line, and
-                        the full name is a hover away. */}
-                    {(ownerNames[slug] ?? slug).split(" ")[0]}
-                  </Link>
-                ) : (
-                  <span className="text-chalk-600">—</span>
-                )}
-              </li>
-            );
-          })}
-        </ol>
+        {d.orderSet ? (
+          /* One line that scrolls, not a wrapping list. Wrapping left a ragged
+             second row of one or two names, and a draft order reads 1..N — a
+             column-major grid would fix the ragged edge but break the reading. */
+          <ol className="-mx-1 flex flex-nowrap gap-x-4 overflow-x-auto px-1 pb-1">
+            {slots.map((slot) => {
+              const slug = rosterToSlug.get(d.slotToRoster[slot]) ?? null;
+              return (
+                <li key={slot} className="flex shrink-0 items-center gap-1.5 text-sm">
+                  <span className="tabular shrink-0 text-[11px] text-chalk-600">{slot}</span>
+                  {slug ? (
+                    <Link
+                      href={`/owners/${slug}/`}
+                      className="whitespace-nowrap transition-colors hover:text-accent"
+                      data-owner={slug}
+                      title={ownerNames[slug] ?? slug}
+                    >
+                      {/* First names only — ten of them have to sit on one line, and
+                          the full name is a hover away. */}
+                      {(ownerNames[slug] ?? slug).split(" ")[0]}
+                    </Link>
+                  ) : (
+                    <span className="text-chalk-600">—</span>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        ) : (
+          /* Says WHY, not just "not yet". Waiting on the order is the expected
+             state for most of this window, and a reader who knows the reason is
+             not left wondering whether the site is behind. */
+          <p className="text-[11px] leading-relaxed text-chalk-600">
+            {keepers
+              ? "Not drawn yet — the order is determined after the keeper deadline, so nobody can move a keeper pick into a better slot once it is known (bylaws 1.7, Appendix A)."
+              : "Not drawn yet."}
+          </p>
+        )}
       </div>
     </Panel>
   );

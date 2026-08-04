@@ -173,7 +173,8 @@ Sleeper alone — nothing stored, nothing to edit each September:
 
 | Phase | Test |
 | --- | --- |
-| `offseason` | no `draft_order` |
+| `offseason` | no draft date |
+| `scheduled` | date set, order not drawn |
 | `preDraft` | order drawn |
 | `drafted` | draft complete, no week scored |
 | `weekPreview` | in season, nobody has points yet |
@@ -183,6 +184,15 @@ Sleeper alone — nothing stored, nothing to edit each September:
 PREVIEW VS LIVE KEYS ON POINTS ON THE BOARD, not the day of the week. Thursday
 kickoffs move, December has Saturday games, and a clock rule would be wrong
 several weeks a season.
+
+`scheduled` IS THE NORMAL STATE FOR WEEKS, not a brief edge case. Bylaw 1.7 draws
+the order AFTER the keeper deadline (Appendix A: an early order lets teams trade
+keeper picks into better non-keeper slots), so every year runs through a window
+where the draft is booked and keepers are due but nobody knows the order.
+`DraftPlan` therefore gates on the DATE, not the order — gating on both meant the
+panel could not appear until the deadline it exists to warn about had passed, and
+`mockDraftOrder` hid that by mocking date and order together. With no order drawn
+it says so, and says why.
 
 ### Previewing a phase
 

@@ -111,15 +111,16 @@ export function mockWeek(): number | undefined {
 /**
  * What the draft has to look like for a phase to be believable.
  *
- * Every phase from `drafted` onwards implies a finished draft, and a finished
- * draft implies an order — so these are derived from the phase rather than being
+ * Each implies the one before it — a finished draft implies an order, and an
+ * order implies a date — so these are derived from the phase rather than being
  * separate flags that could contradict each other.
  */
-export function draftMocks(): { order: boolean; complete: boolean } {
+export function draftMocks(): { date: boolean; order: boolean; complete: boolean } {
   const phase = mockPhase();
-  if (!phase) return { order: false, complete: false };
-  const complete = phase !== "offseason" && phase !== "preDraft";
-  return { complete, order: complete || phase === "preDraft" };
+  if (!phase) return { date: false, order: false, complete: false };
+  const complete = phase !== "offseason" && phase !== "scheduled" && phase !== "preDraft";
+  const order = complete || phase === "preDraft";
+  return { complete, order, date: order || phase === "scheduled" };
 }
 
 /** True when this session asked for a stand-in draft order. */
