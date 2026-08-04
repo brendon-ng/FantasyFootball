@@ -31,11 +31,14 @@ export function Nav({
   owners,
   wordmark,
   features,
+  avatarSrc,
 }: {
   subtitle: string;
   owners: NavOwner[];
   wordmark: string;
   features: LeagueFeatures;
+  /** Already basePath-prefixed by the layout — a raw <img> is not rewritten. */
+  avatarSrc: string | null;
 }) {
   const pathname = usePathname();
   const links = LINKS.filter((l) => !l.needs || features[l.needs]);
@@ -45,7 +48,19 @@ export function Nav({
   return (
     <header className="sticky top-0 z-50 border-b border-ink-600 bg-ink-900/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="group flex shrink-0 items-baseline gap-2.5">
+        <Link href="/" className="group flex shrink-0 items-center gap-2.5">
+          {avatarSrc ? (
+            // Plain <img>, not next/image: this is a static export and the file is
+            // a build artifact of known size, so the loader would add nothing.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={avatarSrc}
+              alt=""
+              width={26}
+              height={26}
+              className="h-[26px] w-[26px] shrink-0 rounded-md object-cover"
+            />
+          ) : null}
           <span className="text-base font-bold tracking-tight text-chalk-100 transition-colors group-hover:text-accent sm:text-lg">
             {wordmark}
           </span>

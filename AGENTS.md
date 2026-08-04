@@ -225,8 +225,13 @@ titles-then-win% approximation.
 ## League avatar and favicon
 
 `npm run sync` downloads the league's Sleeper avatar to
-`public/avatars/<slug>.<ext>`, and `layout.tsx` sets it as the favicon via
-`metadata.icons`, so two leagues from one repo are distinguishable in a tab strip.
+`public/avatars/<slug>.<ext>`. It appears in three places: the favicon (via
+`metadata.icons` in `layout.tsx`), the nav wordmark, and the root league picker —
+so two leagues from one repo are distinguishable in a tab strip and at a glance.
+
+The nav takes an ALREADY-PREFIXED src. It renders a plain `<img>`, which Next does
+not rewrite for `basePath`, so the layout wraps it in `withBasePath()` — see the
+subpath section.
 
 SELF-HOSTED, NOT HOTLINKED. `sleepercdn.com` would otherwise be a live dependency
 for the tab icon of a site whose whole point is needing no server.

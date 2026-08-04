@@ -30,6 +30,7 @@ export function generateMetadata(): Metadata {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const cfg = getConfig();
+  const avatar = leagueAvatar();
   const latest = Math.max(...Object.keys(cfg.knownLeagueIds).map(Number));
   const seasonCount = getSeasons().filter((s) => s.finalized).length;
   // Current owners only — the dropdown is a way to reach a live team, and
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           owners={navOwners}
           wordmark={cfg.shortName.toUpperCase()}
           features={cfg.features}
+          avatarSrc={avatar ? withBasePath(avatar) : null}
         />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
           {children}
