@@ -28,12 +28,19 @@ if (!leagues.length) throw new Error(`No leagues in ${LEAGUES_DIR}`);
 rmSync(STAGE, { recursive: true, force: true });
 mkdirSync(STAGE, { recursive: true });
 
+// SEQUENTIAL, and it has to be: Next takes a project-level build lock and refuses
+// a second concurrent `next build` even with a separate distDir per league
+// ("Another next build process is already running"). Parallelising would mean a
+// separate checkout per league, which is not worth it — the cost is page
+// generation, not the number of leagues.
 for (const league of leagues) {
+  const started = Date.now();
   console.log(`\n=== building ${league.name} (${league.slug}) ===`);
   execFileSync("npx", ["next", "build"], {
     stdio: "inherit",
     env: { ...process.env, LEAGUE: league.slug },
   });
+  console.log(`=== ${league.slug} done in ${((Date.now() - started) / 1000).toFixed(1)}s ===`);
   const exported = join(ROOT, ".next", `export-${league.slug}`);
   if (!existsSync(join(exported, "index.html"))) {
     throw new Error(`${league.slug}: expected an exported site at ${exported}`);

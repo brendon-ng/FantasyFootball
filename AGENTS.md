@@ -476,6 +476,30 @@ catch basePath bugs.
 - Next 16 removed the `eslint` key from `next.config.ts` and `next lint`. Lint runs
   as its own step. Check the bundled docs before assuming any config key exists.
 
+## Build speed
+
+`npm run build` is ~27s for both leagues. It was ~4 MINUTES until the data
+accessors were memoised.
+
+The cost was never the page count — Masterbatters did 503 pages in 5.5s while Den
+Ops took 104s for 1178. It was that `load()` re-read and re-parsed its JSON on
+EVERY call, and `getAllMeetings()` is O(owners²): 120 owner pairs, each rescanning
+all 655 matchups, recomputed on every one of ~750 matchup pages. Den Ops page
+generation is now 2.3s.
+
+Cached: `load()` by path, plus `getAllMeetings`, `getMeetings` (per pair),
+`getOwnerMap`, `getWeeklyLowKeys` and `weeklyCoverage` via `once()`.
+
+THE HAZARD IS MUTATION. Every caller now shares one object, so a single in-place
+`sort`/`push` on an accessor's return value would corrupt every later read. Nothing
+does today — the two `getSeasons().filter(...).sort(...)` sites are safe because
+`filter` copies first — but if you add one, copy before mutating.
+
+Builds run SEQUENTIALLY per league and must: Next takes a project-level build lock
+and rejects a second concurrent `next build` even with a separate distDir
+("Another next build process is already running"). Parallelising would need a
+separate checkout per league, which buys nothing now that the whole build is 27s.
+
 ## Data pipeline
 
 League data lives in `data/` as committed JSON. There is no database and no

@@ -5,7 +5,15 @@ import { Bracket } from "@/components/bracket";
 import { WeeklyLowBadge } from "@/components/weekly-low";
 import { PositionPill } from "@/components/keeper-table";
 import { Tip } from "@/components/tooltip";
-import { Col, ListHeader, Panel, PanelHeader, Stat, fmt } from "@/components/ui";
+import {
+  Col,
+  ListHeader,
+  Panel,
+  PanelHeader,
+  Stat,
+  fmt,
+  verboseKind,
+} from "@/components/ui";
 import type { BracketMatch } from "@/lib/types";
 import {
   getAllMeetings,
@@ -348,7 +356,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                     </span>
                     {g.kind !== "regular" ? (
                       <span className="mt-0.5 block truncate text-[9px] uppercase tracking-wide text-chalk-500 sm:hidden">
-                        {g.label ?? g.kind}
+                        {verboseKind(g.label ?? g.kind)}
                       </span>
                     ) : null}
                   </span>

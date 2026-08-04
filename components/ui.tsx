@@ -117,6 +117,18 @@ export function EmptyState({ children }: { children: ReactNode }) {
   );
 }
 
+/**
+ * A terse postseason label, spelled out for the narrow layouts.
+ *
+ * The wide layouts show these in a fixed-width chip beside a bracket, where "3RD
+ * PLACE" is unambiguous. On a phone the label stands alone on its own line, where
+ * it reads as a FINISH rather than the game that decided it — so placement labels
+ * gain "matchup" there. Named labels ("Championship", "Toilet bowl") already say
+ * what they are.
+ */
+export const verboseKind = (kind: string): string =>
+  /^\d+(st|nd|rd|th) place$/i.test(kind) ? `${kind} matchup` : kind;
+
 export const fmt = {
   pts: (n: number) => n.toFixed(2),
   pts1: (n: number) => n.toFixed(1),

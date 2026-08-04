@@ -48,10 +48,28 @@ const DATA = join(process.cwd(), "data", LEAGUE);
 const SHARED_DATA = join(process.cwd(), "data");
 const CONFIG = join(process.cwd(), "config", "leagues", LEAGUE);
 
+/**
+ * Reads a derived JSON file, ONCE per process.
+ *
+ * Without the cache every accessor re-read and re-parsed its file on every call,
+ * and these are called per page across a static export of ~1200 pages. The data
+ * cannot change mid-build — the whole point of committing it — so a plain module
+ * map is safe. Each of Next's workers keeps its own copy, which is fine.
+ */
+const fileCache = new Map<string, unknown>();
+
 function load<T>(relPath: string, fallback: T): T {
+  if (fileCache.has(relPath)) return fileCache.get(relPath) as T;
   const p = join(DATA, relPath);
-  if (!existsSync(p)) return fallback;
-  return JSON.parse(readFileSync(p, "utf8")) as T;
+  const value = existsSync(p) ? (JSON.parse(readFileSync(p, "utf8")) as T) : fallback;
+  fileCache.set(relPath, value);
+  return value;
+}
+
+/** Memoises a zero-argument accessor. Same reasoning as `load`. */
+function once<T>(fn: () => T): () => T {
+  let cached: { v: T } | null = null;
+  return () => (cached ??= { v: fn() }).v;
 }
 
 export const getOwners = (): Owner[] => load("derived/owners.json", []);
@@ -95,20 +113,20 @@ export const getPlayers = (): Record<string, PlayerMeta> => {
  * that describes coverage should read it from here so the next recovered season
  * updates the copy for free.
  */
-export function weeklyCoverage(): {
+export const weeklyCoverage = once((): {
   seasons: number[];
   /** e.g. "2019 and 2024-2025", or "no seasons". */
   label: string;
   /** Seasons on record with postseason scores only. */
   missing: number[];
   missingLabel: string;
-} {
+} => {
   const withWeekly = new Set(getMatchupHistory().map((m) => m.season));
   const all = getSeasons().map((s) => s.season);
   const seasons = all.filter((y) => withWeekly.has(y)).sort((a, b) => a - b);
   const missing = all.filter((y) => !withWeekly.has(y)).sort((a, b) => a - b);
   return { seasons, label: rangeLabel(seasons), missing, missingLabel: rangeLabel(missing) };
-}
+});
 
 /** [2019,2024,2025] -> "2019 and 2024-2025". Collapses runs so copy stays short. */
 function rangeLabel(years: number[]): string {
@@ -139,10 +157,10 @@ export const getWeeklyLows = (): WeeklyLow[] => load("derived/weekly-lows.json",
  * do not each have to remember the flag — a league without the rule simply has no
  * low scorers to mark.
  */
-export function getWeeklyLowKeys(): Set<string> {
+export const getWeeklyLowKeys = once((): Set<string> => {
   if (!features().weeklyLowPunishment) return new Set();
   return new Set(getWeeklyLows().map((w) => `${w.season}:${w.week}:${w.ownerSlug}`));
-}
+});
 
 export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []);
 export const getPlayerHistory = (): Record<string, PlayerTransaction[]> =>
@@ -252,9 +270,9 @@ export function creditedNames(
   return slugs.map((sl) => owners.get(sl)?.firstName ?? sl).join(" & ");
 }
 
-export function getOwnerMap(): Map<string, Owner> {
-  return new Map(getOwners().map((o) => [o.slug, o]));
-}
+export const getOwnerMap = once(
+  (): Map<string, Owner> => new Map(getOwners().map((o) => [o.slug, o])),
+);
 
 // ---------------------------------------------------------------------------
 // Live (in-progress) season
@@ -539,7 +557,23 @@ export function meetingId(
  * Co-owned teams resolve through each season's owner set, so a game counts for
  * every owner on either side.
  */
+const meetingsCache = new Map<string, Meeting[]>();
+
 export function getMeetings(slugA: string, slugB: string): Meeting[] {
+  const key = `${slugA}|${slugB}`;
+  const hit = meetingsCache.get(key);
+  if (hit) return hit;
+  const computed = computeMeetings(slugA, slugB);
+  meetingsCache.set(key, computed);
+  return computed;
+}
+
+/**
+ * The uncached body. Scans every matchup plus the brackets of seasons without
+ * weekly data, so it is far too expensive to repeat — `getAllMeetings()` alone
+ * asks for every owner PAIR, which is 120 calls in Den Ops.
+ */
+function computeMeetings(slugA: string, slugB: string): Meeting[] {
   const seasons = getSeasons();
   const out: Meeting[] = [];
 
@@ -665,7 +699,7 @@ function uniqueById(list: Meeting[]): Meeting[] {
   return [...seen.values()];
 }
 
-export function getAllMeetings(): Meeting[] {
+export const getAllMeetings = once((): Meeting[] => {
   const seen = new Map<string, Meeting>();
   const slugs = getOwners().map((o) => o.slug);
   for (let i = 0; i < slugs.length; i++) {
@@ -676,7 +710,7 @@ export function getAllMeetings(): Meeting[] {
     }
   }
   return [...seen.values()];
-}
+});
 
 export interface AtTheTimeFlag {
   kind:

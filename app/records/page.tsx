@@ -2,7 +2,12 @@ import Link from "next/link";
 
 import { ExpandableList, ExpandableRow } from "@/components/expandable-list";
 
-import { Panel, PanelHeader, fmt } from "@/components/ui";
+import {
+  Panel,
+  PanelHeader,
+  fmt,
+  verboseKind,
+} from "@/components/ui";
 import {
   RECORD_BOOK_DEPTH,
   getAllMeetings,
@@ -159,11 +164,10 @@ export default function RecordsPage() {
                   >
                     {players[r.playerId]?.full_name ?? r.playerId}
                   </Link>
-                  <div className="flex items-baseline gap-1.5 text-[11px] text-chalk-600">
                   {href ? (
                     <Link
                       href={href}
-                      className="truncate transition-colors hover:text-accent"
+                      className="block truncate text-[11px] text-chalk-600 transition-colors hover:text-accent"
                     >
                       <span data-owner={r.ownerSlug}>{name(r.ownerSlug)}</span> · {r.season} wk
                       {r.week}
@@ -176,12 +180,11 @@ export default function RecordsPage() {
                       <span aria-hidden>→</span>
                     </Link>
                   ) : (
-                    <span className="truncate">
+                    <div className="truncate text-[11px] text-chalk-600">
                       {name(r.ownerSlug)} · {r.season} wk{r.week}
-                    </span>
+                    </div>
                   )}
                   <KindInline kind={kindOf(r.ownerSlug, opp, r.season, r.week)} />
-                  </div>
                 </div>
                 <KindChip kind={kindOf(r.ownerSlug, opp, r.season, r.week)} />
                 <span className="tabular shrink-0 text-sm font-bold text-accent">
@@ -202,15 +205,17 @@ type KindOf = (a: string, b: string | null, season: number, week: number) => str
 /**
  * The same label as `KindChip`, for widths where that column is hidden.
  *
- * Pinned to the end of the meta line and `shrink-0`, so the opponent name
- * truncates before the label does — the label is the thing a reader cannot infer
- * from the rest of the row, and the full detail is one tap away on the matchup
- * page. Costs no vertical space, which matters on a page of seven stacked tables.
+ * ITS OWN LINE, not pinned to the end of the meta line. Sharing that line meant
+ * something had to give when both did not fit, and what gave was the SCORE —
+ * "2020 wk16 · 182.3–1… · CHAMPIONSHIP". Losing the score is worse than a taller
+ * row, and only a handful of rows carry a label at all.
  */
 function KindInline({ kind }: { kind: string | null }) {
   if (!kind) return null;
   return (
-    <span className="shrink-0 uppercase tracking-wide text-chalk-500 sm:hidden">· {kind}</span>
+    <span className="mt-0.5 block text-[9px] uppercase tracking-wide text-chalk-500 sm:hidden">
+      {verboseKind(kind)}
+    </span>
   );
 }
 
@@ -263,14 +268,12 @@ function ScoreList({
                 <span data-owner={r.ownerSlug} className="block truncate text-sm font-medium">
                   {name(r.ownerSlug)}
                 </span>
-                <div className="flex items-baseline gap-1.5 text-[11px] text-chalk-600">
-                  <span className="truncate">
-                    {r.season} wk{r.week} vs{" "}
-                    <span data-owner={r.opponentSlug ?? undefined}>{name(r.opponentSlug)}</span>
-                    {r.opponentPoints != null ? ` (${fmt.pts1(r.opponentPoints)})` : ""}
-                  </span>
-                  <KindInline kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
+                <div className="truncate text-[11px] text-chalk-600">
+                  {r.season} wk{r.week} vs{" "}
+                  <span data-owner={r.opponentSlug ?? undefined}>{name(r.opponentSlug)}</span>
+                  {r.opponentPoints != null ? ` (${fmt.pts1(r.opponentPoints)})` : ""}
                 </div>
+                <KindInline kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
               </div>
               <KindChip kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
               <span className={`tabular shrink-0 text-sm font-bold ${tone}`}>
@@ -343,12 +346,10 @@ function CombinedList({
                   <span className="text-chalk-600">vs</span>{" "}
                   <span data-owner={r.opponentSlug}>{name(r.opponentSlug)}</span>
                 </div>
-                <div className="flex items-baseline gap-1.5 text-[11px] text-chalk-600">
-                  <span className="truncate">
-                    {r.season} wk{r.week} · {fmt.pts1(r.points)}–{fmt.pts1(r.opponentPoints)}
-                  </span>
-                  <KindInline kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
+                <div className="truncate text-[11px] text-chalk-600">
+                  {r.season} wk{r.week} · {fmt.pts1(r.points)}–{fmt.pts1(r.opponentPoints)}
                 </div>
+                <KindInline kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
               </div>
               <KindChip kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
               <span className={`tabular shrink-0 text-sm font-bold ${tone}`}>
@@ -411,12 +412,10 @@ function MarginList({
                   <span className="text-chalk-600">def.</span>{" "}
                   <span data-owner={r.opponentSlug ?? undefined}>{name(r.opponentSlug)}</span>
                 </div>
-                <div className="flex items-baseline gap-1.5 text-[11px] text-chalk-600">
-                  <span className="truncate">
-                    {r.season} wk{r.week} · {fmt.pts1(r.points)}–{fmt.pts1(r.opponentPoints ?? 0)}
-                  </span>
-                  <KindInline kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
+                <div className="truncate text-[11px] text-chalk-600">
+                  {r.season} wk{r.week} · {fmt.pts1(r.points)}–{fmt.pts1(r.opponentPoints ?? 0)}
                 </div>
+                <KindInline kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
               </div>
               <KindChip kind={kindOf(r.ownerSlug, r.opponentSlug, r.season, r.week)} />
               <span className="tabular shrink-0 text-sm font-bold text-chalk-300">

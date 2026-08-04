@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Col, EmptyState, ListHeader, Panel, PanelHeader, Stat, fmt } from "@/components/ui";
+import {
+  Col,
+  EmptyState,
+  ListHeader,
+  Panel,
+  PanelHeader,
+  Stat,
+  fmt,
+  verboseKind,
+} from "@/components/ui";
 import {
   getMeetings,
   getOwnerMap,
@@ -200,7 +209,7 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
                     </span>
                     {g.kind !== "regular" ? (
                       <span className="mt-0.5 block truncate text-[9px] uppercase tracking-wide text-chalk-500 sm:hidden">
-                        {g.label ?? g.kind}
+                        {verboseKind(g.label ?? g.kind)}
                       </span>
                     ) : null}
                   </span>

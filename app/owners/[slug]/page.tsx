@@ -243,7 +243,9 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
               <PanelHeader
                 title="Head to Head"
                 meta="all matchups · best first"
-                legend={`Every matchup, regular season and postseason combined. A ✻ marks a head-to-head record that includes playoff or toilet-bowl matchups.${
+                // The ✻ is explained by the W-L column's own hint, so the legend
+                // does not need to repeat it.
+                legend={`Every matchup, regular season and postseason combined.${
                   coverage.missing.length
                     ? ` Week-by-week scores exist for ${coverage.label}; for ${coverage.missingLabel} only the postseason survived, so ${coverage.missing.length === 1 ? "that year contributes" : "those years contribute"} playoff and ladder matchups only.`
                     : ""
