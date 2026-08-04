@@ -42,35 +42,42 @@ const write = (bag: Bag): void => {
 };
 
 /**
- * Folds anything in the CURRENT url into storage, and returns the merged set.
+ * THE URL WINS ON A FULL PAGE LOAD. Storage only survives client navigation.
  *
- * The URL wins when it names a param, which is what makes a flag switchable:
- * `?mockDraftOrder=false` (or any falsy value) clears it rather than being
- * shadowed by what was stored earlier.
+ * Runs once per document load, before anything reads a flag — module state, not
+ * an effect, because effects in child components run before the layout's and
+ * would otherwise read a stale value.
+ *
+ * This is what makes a flag switchable by hand. Editing the address bar to drop
+ * `?mockDraft=true` and pressing enter is a full load, so storage is rebuilt from
+ * the bare URL and the flag is genuinely gone. Treating storage as authoritative
+ * meant the app kept putting the param back, which is a horrible thing to fight.
  */
-export function syncStickyParams(): Bag {
-  if (typeof window === "undefined") return {};
-  const bag = read();
+let adopted = false;
+
+function adoptUrl(): Bag {
+  const bag: Bag = {};
   const url = new URLSearchParams(window.location.search);
-  let changed = false;
   for (const name of STICKY_PARAMS) {
-    if (!url.has(name)) continue;
-    const value = url.get(name) ?? "";
-    if (value === "" || value === "false") {
-      if (name in bag) {
-        delete bag[name];
-        changed = true;
-      }
-    } else if (bag[name] !== value) {
-      bag[name] = value;
-      changed = true;
-    }
+    const value = url.get(name);
+    // An explicit falsy value is a way to switch a flag off in one navigation.
+    if (value && value !== "false") bag[name] = value;
   }
-  if (changed) write(bag);
+  write(bag);
   return bag;
 }
 
-/** The live value of a sticky param, url or storage. */
+/** The sticky set for this page view. */
+export function syncStickyParams(): Bag {
+  if (typeof window === "undefined") return {};
+  if (!adopted) {
+    adopted = true;
+    return adoptUrl();
+  }
+  return read();
+}
+
+/** The live value of a sticky param. */
 export function stickyParam(name: (typeof STICKY_PARAMS)[number]): string | null {
   if (typeof window === "undefined") return null;
   return syncStickyParams()[name] ?? null;
