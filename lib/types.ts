@@ -336,3 +336,52 @@ export interface PlayerMeta {
   team: string | null;
   years_exp?: number | null;
 }
+
+// ---------------------------------------------------------------------------
+// The in-progress season
+// ---------------------------------------------------------------------------
+
+/**
+ * Lives here, not in `lib/data.ts`, so a CLIENT component can import the shape
+ * without dragging in a module that reads the filesystem.
+ */
+export type SeasonType = "pre" | "regular" | "post" | "off";
+
+export interface LiveTeam {
+  ownerSlug: string;
+  rosterId: number;
+  teamName: string | null;
+  wins: number;
+  losses: number;
+  ties: number;
+  pointsFor: number;
+  pointsAgainst: number;
+  waiverBudgetUsed: number;
+  players: string[];
+  starters: string[];
+}
+
+export interface LiveMatchup {
+  matchupId: number;
+  a: { ownerSlug: string; points: number };
+  b: { ownerSlug: string; points: number };
+}
+
+export interface LiveSeason {
+  season: number;
+  week: number;
+  displayWeek: number;
+  seasonType: SeasonType;
+  status: string;
+  teams: LiveTeam[];
+  matchups: LiveMatchup[];
+  /** True when Sleeper could not be reached; the UI degrades rather than erroring. */
+  unavailable: boolean;
+  /**
+   * Last week Sleeper has fully scored. Null before any week finalizes.
+   *
+   * The finalization signal throughout — safer than comparing against the
+   * current NFL week, which advances before stat corrections settle.
+   */
+  lastScoredLeg: number | null;
+}

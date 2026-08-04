@@ -14,6 +14,9 @@
 
 import { useEffect, useState } from "react";
 
+/** Same base as lib/sleeper.ts, repeated because this module must stay dependency-free. */
+const BASE = "https://api.sleeper.app/v1";
+
 import {
   mockCompletedDraftDate,
   mockDraftDate,
@@ -21,6 +24,7 @@ import {
   orderIsSet,
 } from "@/lib/draft-slots";
 import { draftMocks } from "@/lib/sticky-params";
+import type { LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "@/lib/types";
 
 export interface LiveRoster {
   rosterId: number;
@@ -327,4 +331,158 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
 
   if (!leagueId) return { status: "ready", data: null, error: null };
   return state;
+}
+
+/**
+ * The in-progress season, refreshed in the browser.
+ *
+ * Mirrors `getLiveSeason()` in lib/data.ts, which produces the same shape at
+ * BUILD time. The build-time value is passed in as `initial` and rendered
+ * immediately, so this never shows a loading state and never blanks the page
+ * when Sleeper is down — it only ever replaces a good value with a fresher one.
+ *
+ * Worth having despite the 15-minute game-window rebuilds: standings and rosters
+ * tolerate being a quarter-hour stale, but a live score does not.
+ *
+ * Takes the whole season -> leagueId map rather than one id, because the NFL
+ * state decides which season is current. In September that flips to a league
+ * Sleeper only just created, and the map is what `sync` keeps current.
+ */
+export function useLiveSeason(
+  leagueIdBySeason: Record<string, string>,
+  initial: LiveSeason | null,
+): LiveSeason | null {
+  const [live, setLive] = useState<LiveSeason | null>(initial);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const state = (await (await fetch(`${BASE}/state/nfl`)).json()) as {
+          season: string;
+          season_type: SeasonType;
+          week: number;
+          display_week: number;
+        } | null;
+        if (!state) return;
+        const leagueId = leagueIdBySeason[state.season];
+        if (!leagueId) return;
+
+        const [league, users, rosters] = await Promise.all([
+          fetch(`${BASE}/league/${leagueId}`).then((r) => (r.ok ? r.json() : null)),
+          fetch(`${BASE}/league/${leagueId}/users`).then((r) => (r.ok ? r.json() : [])),
+          fetch(`${BASE}/league/${leagueId}/rosters`).then((r) => (r.ok ? r.json() : [])),
+        ]);
+        if (!league || !rosters?.length) return;
+
+        const slugByUser = initialSlugMap(initial);
+        const teamNameByUser = new Map<string, string>(
+          (users ?? []).map((u: RawUser) => [
+            u.user_id,
+            u.metadata?.team_name ?? u.display_name,
+          ]),
+        );
+
+        const teams: LiveTeam[] = (rosters as RawRosterFull[]).map((r) => ({
+          ownerSlug: (r.owner_id && slugByUser.get(r.owner_id)) || `roster-${r.roster_id}`,
+          rosterId: r.roster_id,
+          teamName: r.owner_id ? (teamNameByUser.get(r.owner_id) ?? null) : null,
+          wins: r.settings.wins,
+          losses: r.settings.losses,
+          ties: r.settings.ties,
+          pointsFor: round2((r.settings.fpts ?? 0) + (r.settings.fpts_decimal ?? 0) / 100),
+          pointsAgainst: round2(
+            (r.settings.fpts_against ?? 0) + (r.settings.fpts_against_decimal ?? 0) / 100,
+          ),
+          waiverBudgetUsed: r.settings.waiver_budget_used ?? 0,
+          players: r.players ?? [],
+          starters: r.starters ?? [],
+        }));
+
+        const week = Math.max(1, state.display_week || state.week || 1);
+        let matchups: LiveMatchup[] = [];
+        if (state.season_type === "regular" || state.season_type === "post") {
+          const raw = (await fetch(`${BASE}/league/${leagueId}/matchups/${week}`).then((r) =>
+            r.ok ? r.json() : [],
+          )) as RawMatchup[];
+          const byId = new Map<number, RawMatchup[]>();
+          for (const m of raw ?? []) {
+            if (m.matchup_id == null) continue;
+            byId.set(m.matchup_id, [...(byId.get(m.matchup_id) ?? []), m]);
+          }
+          const slugOf = (rid: number) =>
+            teams.find((t) => t.rosterId === rid)?.ownerSlug ?? `roster-${rid}`;
+          matchups = [...byId.entries()]
+            .filter(([, pair]) => pair.length === 2)
+            .map(([matchupId, [x, y]]) => ({
+              matchupId,
+              a: { ownerSlug: slugOf(x.roster_id), points: round2(x.points ?? 0) },
+              b: { ownerSlug: slugOf(y.roster_id), points: round2(y.points ?? 0) },
+            }));
+        }
+
+        if (cancelled) return;
+        setLive({
+          season: Number(state.season),
+          week,
+          displayWeek: state.display_week,
+          seasonType: state.season_type,
+          status: league.status,
+          teams,
+          matchups,
+          unavailable: false,
+          lastScoredLeg: league.settings?.last_scored_leg ?? null,
+        });
+      } catch {
+        // Fails soft: `initial` stays on screen. A Sleeper outage should not
+        // blank the page, it should just stop it getting fresher.
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [leagueIdBySeason, initial]);
+
+  return live;
+}
+
+const round2 = (n: number) => Number(n.toFixed(2));
+
+/**
+ * user_id -> owner slug, recovered from the baked value.
+ *
+ * The browser has no access to `config/leagues/*`, and the build already did this
+ * resolution — including co-owners — so the mapping is lifted from `initial`
+ * rather than duplicated. A roster missing from it falls back to `roster-N`,
+ * which is what the build-time version does too.
+ */
+function initialSlugMap(initial: LiveSeason | null): Map<string, string> {
+  return new Map((initial?.teams ?? []).map((t) => [String(t.rosterId), t.ownerSlug]));
+}
+
+interface RawUser {
+  user_id: string;
+  display_name: string;
+  metadata?: { team_name?: string } | null;
+}
+
+interface RawRosterFull {
+  roster_id: number;
+  owner_id: string | null;
+  players: string[] | null;
+  starters: string[] | null;
+  settings: {
+    wins: number; losses: number; ties: number;
+    fpts?: number; fpts_decimal?: number;
+    fpts_against?: number; fpts_against_decimal?: number;
+    waiver_budget_used?: number;
+  };
+}
+
+interface RawMatchup {
+  matchup_id: number | null;
+  roster_id: number;
+  points: number | null;
 }

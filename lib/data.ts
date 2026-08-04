@@ -19,7 +19,6 @@ import {
   getMatchups,
   getRosters,
   getState,
-  type SleeperState,
 } from "./sleeper.ts";
 import type {
   BracketMatch,
@@ -32,6 +31,9 @@ import type {
   PlayerMeta,
   PlayerTransaction,
   SeasonKeepers,
+  LiveMatchup,
+  LiveSeason,
+  LiveTeam,
   SeasonSummary,
   WeeklyLow,
 } from "./types.ts";
@@ -278,37 +280,7 @@ export const getOwnerMap = once(
 // Live (in-progress) season
 // ---------------------------------------------------------------------------
 
-export interface LiveTeam {
-  ownerSlug: string;
-  rosterId: number;
-  teamName: string | null;
-  wins: number;
-  losses: number;
-  ties: number;
-  pointsFor: number;
-  pointsAgainst: number;
-  waiverBudgetUsed: number;
-  players: string[];
-  starters: string[];
-}
-
-export interface LiveMatchup {
-  matchupId: number;
-  a: { ownerSlug: string; points: number };
-  b: { ownerSlug: string; points: number };
-}
-
-export interface LiveSeason {
-  season: number;
-  week: number;
-  displayWeek: number;
-  seasonType: SleeperState["season_type"];
-  status: string;
-  teams: LiveTeam[];
-  matchups: LiveMatchup[];
-  /** True when the build could not reach Sleeper; the UI degrades gracefully. */
-  unavailable: boolean;
-}
+export type { LiveMatchup, LiveSeason, LiveTeam } from "./types.ts";
 
 /**
  * Fetches the in-progress season at build time.
@@ -319,7 +291,7 @@ export interface LiveSeason {
 export async function getLiveSeason(): Promise<LiveSeason | null> {
   const empty = (season: number): LiveSeason => ({
     season, week: 0, displayWeek: 0, seasonType: "off",
-    status: "unknown", teams: [], matchups: [], unavailable: true,
+    status: "unknown", teams: [], matchups: [], unavailable: true, lastScoredLeg: null,
   });
 
   try {
@@ -398,6 +370,7 @@ export async function getLiveSeason(): Promise<LiveSeason | null> {
       teams,
       matchups,
       unavailable: false,
+      lastScoredLeg: league.settings?.last_scored_leg ?? null,
     };
   } catch {
     // Swallow deliberately — see docstring.
