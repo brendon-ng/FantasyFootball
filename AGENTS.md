@@ -308,9 +308,22 @@ node <dataviz-skill>/scripts/validate_palette.js "#3987e5,#d95926,#199e70,#c9850
 
 COLOUR ALONE DOES NOT SCALE TO 16 OWNERS. Past eight the palette repeats with a
 DASHED stroke rather than inventing more hues, which stop being separable — that
-is composite encoding, and it is the documented answer for a ninth series. The
-legend is always present and doubles as the control: hovering or tapping isolates
-one line. Without that a 16-line chart is unreadable whatever the palette.
+is composite encoding, and it is the documented answer for a ninth series.
+
+Four things about that chart were got wrong first and are worth not repeating:
+
+- A LABEL SITS ON ITS LAST DOT. Stacking labels in a right-hand gutter to dodge
+  collisions removed the only cue tying a name to a line.
+- CO-OWNERS SHARE A TEAM, so they share a line and a final placement and their
+  names landed on top of each other. They merge into one label — "Jake & Maddy" —
+  each first name in its own hue, and each name is its own click target.
+- OWNERS WHO HAVE LEFT get a key below the chart, not an in-plot label: their line
+  stops mid-chart, so a label there floats free of any axis.
+- CLICK PINS, hover only previews. Without pinning, moving the cursor off the line
+  you just selected silently deselects it.
+
+Give the SVG `h-auto`, never a fixed height. With a fixed height the viewBox
+scales to fit it and centres, leaving dead space either side of a wide card.
 
 Finish charts invert Y — 1st at the TOP, since a championship is a peak — and
 scale to each season's team count, so 12th of 12 and 10th of 10 both sit on the
