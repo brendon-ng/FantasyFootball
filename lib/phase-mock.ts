@@ -24,7 +24,13 @@ import type { LiveMatchup, LiveSeason, LiveTeam } from "./types.ts";
 export interface Replay {
   season: number;
   regularSeasonWeeks: number;
-  teams: Array<{ ownerSlug: string; rosterId: number; teamName: string | null }>;
+  teams: Array<{
+    ownerSlug: string;
+    /** Co-owners included, so a replayed shared team reads "Jaymie & Katie". */
+    ownerSlugs: string[];
+    rosterId: number;
+    teamName: string | null;
+  }>;
   weeks: Record<string, Array<{ a: [string, number]; b: [string, number] }>>;
   draft: {
     startTime: number | null;
@@ -56,6 +62,7 @@ function standingsThrough(replay: Replay, throughWeek: number): LiveTeam[] {
       t.ownerSlug,
       {
         ownerSlug: t.ownerSlug,
+        ownerSlugs: t.ownerSlugs ?? [t.ownerSlug],
         rosterId: t.rosterId,
         teamName: t.teamName,
         wins: 0,

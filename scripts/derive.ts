@@ -1399,6 +1399,7 @@ function writeReplay(slug: string, summaries: SeasonSummary[], matchups: Matchup
     regularSeasonWeeks: latest.regularSeasonWeeks,
     teams: latest.standings.map((r) => ({
       ownerSlug: r.ownerSlug,
+      ownerSlugs: r.ownerSlugs,
       rosterId: r.rosterId,
       teamName: r.teamName,
     })),

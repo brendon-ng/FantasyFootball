@@ -324,8 +324,18 @@ export async function getLiveSeason(): Promise<LiveSeason | null> {
       (users ?? []).map((u) => [u.user_id, u.metadata?.team_name ?? u.display_name]),
     );
 
+    const slugsOf = (r: { owner_id: string | null; co_owners: string[] | null }): string[] => {
+      const out: string[] = [];
+      for (const id of [r.owner_id, ...(r.co_owners ?? [])]) {
+        const slug = id ? ownerBySlug.get(id) : undefined;
+        if (slug && !out.includes(slug)) out.push(slug);
+      }
+      return out;
+    };
+
     const teams: LiveTeam[] = rosters.map((r) => ({
       ownerSlug: (r.owner_id && ownerBySlug.get(r.owner_id)) || `roster-${r.roster_id}`,
+      ownerSlugs: slugsOf(r),
       rosterId: r.roster_id,
       teamName: r.owner_id ? (teamNameByUser.get(r.owner_id) ?? null) : null,
       wins: r.settings.wins,

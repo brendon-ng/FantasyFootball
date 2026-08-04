@@ -25,61 +25,98 @@
   "teams": [
     {
       "ownerSlug": "jake-gibbons",
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
       "rosterId": 2,
       "teamName": "Jgibby28"
     },
     {
       "ownerSlug": "kaitlin-zarbis",
+      "ownerSlugs": [
+        "kaitlin-zarbis"
+      ],
       "rosterId": 7,
       "teamName": "Intercept THIS"
     },
     {
       "ownerSlug": "kate-olson",
+      "ownerSlugs": [
+        "kate-olson"
+      ],
       "rosterId": 6,
       "teamName": "The Bosa Constrictor "
     },
     {
       "ownerSlug": "aidan-kelleher",
+      "ownerSlugs": [
+        "aidan-kelleher"
+      ],
       "rosterId": 4,
       "teamName": "Crashee Rice"
     },
     {
       "ownerSlug": "allison-fosbery",
+      "ownerSlugs": [
+        "allison-fosbery"
+      ],
       "rosterId": 12,
       "teamName": "afosb"
     },
     {
       "ownerSlug": "brendon-ng",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
       "rosterId": 1,
       "teamName": "GunnaGetTheChoppaOnU LADD"
     },
     {
       "ownerSlug": "srishti-dhawan",
+      "ownerSlugs": [
+        "srishti-dhawan"
+      ],
       "rosterId": 11,
       "teamName": "swishdh1"
     },
     {
       "ownerSlug": "vance-armstrong",
+      "ownerSlugs": [
+        "vance-armstrong"
+      ],
       "rosterId": 5,
       "teamName": "varms34"
     },
     {
       "ownerSlug": "lindsey-freeze",
+      "ownerSlugs": [
+        "lindsey-freeze"
+      ],
       "rosterId": 9,
       "teamName": "Is Lamar OK?"
     },
     {
       "ownerSlug": "josh-greenebaum",
+      "ownerSlugs": [
+        "josh-greenebaum"
+      ],
       "rosterId": 3,
       "teamName": "Hukuna Mailata "
     },
     {
       "ownerSlug": "robbie-goodman",
+      "ownerSlugs": [
+        "robbie-goodman",
+        "thomas-moore"
+      ],
       "rosterId": 10,
       "teamName": "Robbie&thomas win fantasy"
     },
     {
       "ownerSlug": "ross-bechtel",
+      "ownerSlugs": [
+        "ross-bechtel"
+      ],
       "rosterId": 8,
       "teamName": "#PunishBrendon"
     }

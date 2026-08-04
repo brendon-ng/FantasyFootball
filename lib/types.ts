@@ -349,6 +349,14 @@ export type SeasonType = "pre" | "regular" | "post" | "off";
 
 export interface LiveTeam {
   ownerSlug: string;
+  /**
+   * Everyone credited with this team, primary first.
+   *
+   * Co-owners are first-class owners here, so a shared team reads "Jaymie &
+   * Katie" wherever a name is shown — matching what a finished season's
+   * standings already do off `StandingsRow.ownerSlugs`.
+   */
+  ownerSlugs: string[];
   rosterId: number;
   teamName: string | null;
   wins: number;

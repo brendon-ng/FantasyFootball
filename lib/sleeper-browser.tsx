@@ -353,6 +353,8 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
 export function useLiveSeason(
   leagueIdBySeason: Record<string, string>,
   initial: LiveSeason | null,
+  /** Sleeper user id -> owner slug. Only co-owners need it; see `creditedSlugs`. */
+  userIdToSlug: Record<string, string> = {},
 ): LiveSeason | null {
   const [live, setLive] = useState<LiveSeason | null>(initial);
   const [replay, setReplay] = useState<Replay | null>(null);
@@ -402,8 +404,23 @@ export function useLiveSeason(
           ]),
         );
 
+        // The primary owner comes from the BAKED season, keyed by roster id, so a
+        // roster whose user is not in config still gets its name. Co-owners have
+        // only user ids on the roster payload, so they go through the map.
+        const creditedSlugs = (r: RawRosterFull): string[] => {
+          const out: string[] = [];
+          const primary = slugByRoster.get(r.roster_id);
+          if (primary) out.push(primary);
+          for (const id of r.co_owners ?? []) {
+            const slug = userIdToSlug[id];
+            if (slug && !out.includes(slug)) out.push(slug);
+          }
+          return out;
+        };
+
         const teams: LiveTeam[] = (rosters as RawRosterFull[]).map((r) => ({
           ownerSlug: slugByRoster.get(r.roster_id) ?? `roster-${r.roster_id}`,
+          ownerSlugs: creditedSlugs(r),
           rosterId: r.roster_id,
           teamName: r.owner_id ? (teamNameByUser.get(r.owner_id) ?? null) : null,
           wins: r.settings.wins,
@@ -461,7 +478,7 @@ export function useLiveSeason(
     return () => {
       cancelled = true;
     };
-  }, [leagueIdBySeason, initial, replay]);
+  }, [leagueIdBySeason, initial, replay, userIdToSlug]);
 
   return live;
 }
@@ -492,6 +509,7 @@ interface RawUser {
 interface RawRosterFull {
   roster_id: number;
   owner_id: string | null;
+  co_owners: string[] | null;
   players: string[] | null;
   starters: string[] | null;
   settings: {

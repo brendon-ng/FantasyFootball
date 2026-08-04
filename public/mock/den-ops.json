@@ -23,51 +23,83 @@
   "teams": [
     {
       "ownerSlug": "tyler-jung",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
       "rosterId": 3,
       "teamName": "Griddy and the JJets"
     },
     {
       "ownerSlug": "david-collier",
+      "ownerSlugs": [
+        "david-collier"
+      ],
       "rosterId": 2,
       "teamName": "Legette it Shaty"
     },
     {
       "ownerSlug": "lauren-gross",
+      "ownerSlugs": [
+        "lauren-gross"
+      ],
       "rosterId": 7,
       "teamName": "Bruin by Marriage"
     },
     {
       "ownerSlug": "spencer-kim",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
       "rosterId": 8,
       "teamName": "Bunche Bombers"
     },
     {
       "ownerSlug": "jake-gibbons",
+      "ownerSlugs": [
+        "jake-gibbons",
+        "maddy-perdue"
+      ],
       "rosterId": 4,
       "teamName": "Ray-Ray all Day-Day"
     },
     {
       "ownerSlug": "brendon-ng",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
       "rosterId": 1,
       "teamName": "Ash n' TDs"
     },
     {
       "ownerSlug": "jaymie-lew",
+      "ownerSlugs": [
+        "jaymie-lew",
+        "katie-barnes"
+      ],
       "rosterId": 5,
       "teamName": "twitch.tv/jamarrchase10"
     },
     {
       "ownerSlug": "reagan-schmidt",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
       "rosterId": 10,
       "teamName": "Butker’s Babes"
     },
     {
       "ownerSlug": "safvet-besen",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
       "rosterId": 6,
       "teamName": "It’s Gonna Be Maye"
     },
     {
       "ownerSlug": "cassidy-pensa",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
       "rosterId": 9,
       "teamName": "I wanna be a Brockstar"
     }

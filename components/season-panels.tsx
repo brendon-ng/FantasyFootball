@@ -43,6 +43,7 @@ export function SeasonPanels({
   initial,
   leagueIdBySeason,
   ownerNames,
+  userIdToSlug,
   lastSeason,
   leaders,
   thresholds,
@@ -56,6 +57,8 @@ export function SeasonPanels({
   initial: LiveSeason | null;
   leagueIdBySeason: Record<string, string>;
   ownerNames: Record<string, string>;
+  /** Sleeper user id -> slug. Needed to credit co-owners on a live roster. */
+  userIdToSlug: Record<string, string>;
   lastSeason: SeasonSummary | null;
   leaders: OwnerRecord[];
   thresholds: { high: number[]; low: number[] };
@@ -80,7 +83,7 @@ export function SeasonPanels({
    */
   children?: React.ReactNode;
 }) {
-  const live = useLiveSeason(leagueIdBySeason, initial);
+  const live = useLiveSeason(leagueIdBySeason, initial, userIdToSlug);
   const draft = useLiveDraft(leagueIdBySeason[String(live?.season ?? fallbackSeason)] ?? null);
   const phase = resolvePhase({ live, draft: draft.data });
 
@@ -333,6 +336,18 @@ function MatchupStrip({
   const first = (slug: string) => name(slug).split(" ")[0];
   const recordOf = (slug: string) => live.teams.find((t) => t.ownerSlug === slug);
 
+  /**
+   * Every owner of the team, first names joined — "Jaymie & Katie".
+   *
+   * A co-owned team is one team with two people on it, and naming only the
+   * primary makes the card disagree with the standings, which have credited both
+   * since the ESPN import. First names because five of these share a row.
+   */
+  const credited = (slug: string): string => {
+    const slugs = recordOf(slug)?.ownerSlugs;
+    return (slugs?.length ? slugs : [slug]).map(first).join(" & ");
+  };
+
   /** "Jake leads 5-4", "even at 3-3", or nothing when they have never met. */
   const series = (a: string, b: string): string => {
     const r = h2h[a]?.[b];
@@ -368,7 +383,7 @@ function MatchupStrip({
                     winning ? "font-semibold text-chalk-100" : "text-chalk-400"
                   }`}
                 >
-                  {first(side.ownerSlug)}
+                  {credited(side.ownerSlug)}
                 </span>
                 {rec ? (
                   <span className="tabular shrink-0 text-[10px] text-chalk-600">
@@ -447,7 +462,9 @@ function StandingsLive({
               href={`/owners/${t.ownerSlug}/`}
               className="min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-accent"
             >
-              {ownerNames[t.ownerSlug] ?? t.ownerSlug}
+              {(t.ownerSlugs?.length ? t.ownerSlugs : [t.ownerSlug])
+                .map((s) => ownerNames[s] ?? s)
+                .join(" & ")}
               {t.teamName ? (
                 <span className="ml-2 hidden text-[11px] text-chalk-600 sm:inline">
                   {t.teamName}

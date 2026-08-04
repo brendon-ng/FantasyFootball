@@ -87,6 +87,9 @@ export default async function HomePage() {
         initial={live}
         leagueIdBySeason={cfg.knownLeagueIds}
         ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
+        userIdToSlug={Object.fromEntries(
+          [...owners.values()].filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+        )}
         lastSeason={lastSeason ?? null}
         leaders={leaders}
         thresholds={thresholds}
