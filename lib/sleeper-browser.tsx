@@ -14,7 +14,7 @@
 
 import { useEffect, useState } from "react";
 
-import { orderIsSet } from "@/lib/draft-slots";
+import { mockDraftOrder, orderIsSet, wantsMockOrder } from "@/lib/draft-slots";
 
 export interface LiveRoster {
   rosterId: number;
@@ -206,8 +206,10 @@ export interface LiveDraft {
   reversalRound: number;
   /** Slot -> roster. Meaningless until `orderSet`; see lib/draft-slots.ts. */
   slotToRoster: Record<number, number>;
-  /** True once the order has actually been drawn. */
+  /** True once the order has actually been drawn — or stood in for. */
   orderSet: boolean;
+  /** True when `?mockDraftOrder=true` supplied the order. Surface it. */
+  mocked: boolean;
   startTime: number | null;
 }
 
@@ -260,9 +262,17 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
           return;
         }
 
-        const slotToRoster: Record<number, number> = {};
+        let slotToRoster: Record<number, number> = {};
         for (const [slot, roster] of Object.entries(raw.slot_to_roster_id ?? {})) {
           slotToRoster[Number(slot)] = roster;
+        }
+        let orderSet = orderIsSet(raw.draft_order, slotToRoster);
+        // Only ever stands in for a MISSING order; it can never override a real
+        // one, so the flag is harmless on a drafted league.
+        const mocked = !orderSet && wantsMockOrder();
+        if (mocked) {
+          slotToRoster = mockDraftOrder(slotToRoster, raw.draft_id);
+          orderSet = true;
         }
         setState({
           status: "ready",
@@ -275,7 +285,8 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
             teams: raw.settings?.teams ?? Object.keys(slotToRoster).length,
             reversalRound: raw.settings?.reversal_round ?? 0,
             slotToRoster,
-            orderSet: orderIsSet(raw.draft_order, slotToRoster),
+            orderSet,
+            mocked,
             startTime: raw.start_time ?? null,
           },
         });

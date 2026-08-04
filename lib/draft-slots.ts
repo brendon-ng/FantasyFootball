@@ -166,3 +166,40 @@ export function assignKeeperSlots(
       };
     });
 }
+
+/**
+ * A stand-in draft order, for working on the board before one is drawn.
+ *
+ * Enabled per page view with `?mockDraftOrder=true`. Deliberately NOT gated on
+ * NODE_ENV: `npm run preview` builds production, and the subpath it serves is the
+ * only place basePath bugs show up, so a dev-only gate would disable this exactly
+ * where the board most needs looking at.
+ *
+ * Deterministic — the permutation is seeded by the draft id, so a reload does not
+ * reshuffle and a screenshot stays reproducible. `Math.random()` would also
+ * re-order on every React render.
+ *
+ * Anything consuming this MUST surface that it is fake. A mocked order renders
+ * identically to a real one, and "the order is out" is exactly the kind of thing
+ * someone would screenshot and believe.
+ */
+export function mockDraftOrder(
+  slotToRoster: Record<number, number>,
+  seed: string,
+): Record<number, number> {
+  const hash = (str: string): number => {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619);
+    return h >>> 0;
+  };
+  const slots = Object.keys(slotToRoster).map(Number).sort((a, b) => a - b);
+  const rosters = slots
+    .map((s) => slotToRoster[s])
+    .sort((a, b) => hash(`${seed}:${a}`) - hash(`${seed}:${b}`));
+  return Object.fromEntries(slots.map((slot, i) => [slot, rosters[i]]));
+}
+
+/** True when this page view asked for a stand-in order. Client-only. */
+export const wantsMockOrder = (): boolean =>
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).get("mockDraftOrder") === "true";

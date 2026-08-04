@@ -210,6 +210,7 @@ export function DraftPicks({
   };
 
   const owned = picksWithSlots(season);
+  const mockedOrder = Boolean(draft.data?.mocked);
   const selectedIds = new Set(
     (rosters.data ?? []).find((r) => r.rosterId === myRosterId)?.keepers ?? [],
   );
@@ -264,7 +265,19 @@ export function DraftPicks({
           A keeper costs your pick in their round; without one it falls to the next earlier round
           (bylaws 1.7.2.1).
         </span>
-        <LiveStatus status={loading ? "loading" : failed ? "error" : "ready"} />
+        <span className="flex items-center gap-2">
+          {/* Slots come from a stand-in order under ?mockDraftOrder=true, so the
+              "7.10" labels below are illustrative rather than real. */}
+          {mockedOrder ? (
+            <span
+              className="rounded border border-gold/50 bg-gold/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-gold"
+              title="?mockDraftOrder=true — slots come from a stand-in order, not from Sleeper."
+            >
+              Mock order
+            </span>
+          ) : null}
+          <LiveStatus status={loading ? "loading" : failed ? "error" : "ready"} />
+        </span>
       </div>
 
       {problems.length ? (

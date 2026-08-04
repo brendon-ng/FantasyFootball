@@ -147,6 +147,22 @@ Verified against the real 2025 draft: `pickLabel` reproduces Sleeper's own numbe
 on all 170 picks, `buildBoard` names the right owner for all 170 including the 23
 traded, and a team holding 3.01 and 3.07 puts its keeper on 3.07.
 
+### Previewing the board before an order exists
+
+`?mockDraftOrder=true` on any page stands in a draft order, so the projected board
+and the "7.10" pick labels can be worked on before one is drawn. It only ever
+fills a MISSING order — it cannot override a real one, so the flag is inert once
+the league drafts.
+
+Deterministic, seeded by the draft id: a reload does not reshuffle and a
+screenshot stays reproducible. `Math.random()` would also re-order on every render.
+
+NOT gated on NODE_ENV, deliberately. `npm run preview` builds production, and that
+subpath is the only place basePath bugs appear, so a dev-only gate would disable
+this exactly where the board most needs looking at. Both surfaces badge it "MOCK
+ORDER" instead — a stand-in renders identically to a real one, and "the order is
+out" is exactly what gets screenshotted and believed.
+
 `/keepers` renders a projected board — pick ownership after trades, with locked-in
 keepers filled into the pick they will consume. ENTIRELY LIVE: order, trades and
 selections all move until the draft runs, at which point `derive` commits the real

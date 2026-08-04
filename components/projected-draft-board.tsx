@@ -72,6 +72,10 @@ export function ProjectedDraftBoard({
           Bylaws set it after the keeper deadline. This board fills in as soon as
           Sleeper has it — nothing here needs a redeploy.
         </p>
+        <p className="mt-2 text-[11px]">
+          Add <code className="text-chalk-500">?mockDraftOrder=true</code> to preview
+          it with a stand-in order.
+        </p>
       </div>
     );
   }
@@ -124,9 +128,21 @@ export function ProjectedDraftBoard({
   return (
     <div>
       <div className="flex flex-wrap items-baseline justify-between gap-2 px-4 pb-1 pt-3 text-[11px] text-chalk-600 sm:px-5">
-        <span>
-          {shape.rounds} rounds · {shape.teams} teams · {totalKept} keeper
-          {totalKept === 1 ? "" : "s"} placed
+        <span className="flex flex-wrap items-center gap-2">
+          {/* A mocked order renders exactly like a real one, so it says so loudly
+              — this is the sort of thing that gets screenshotted and believed. */}
+          {d.mocked ? (
+            <span
+              className="rounded border border-gold/50 bg-gold/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-gold"
+              title="?mockDraftOrder=true — a stand-in order, seeded from the draft id. Sleeper has not drawn one."
+            >
+              Mock order
+            </span>
+          ) : null}
+          <span>
+            {shape.rounds} rounds · {shape.teams} teams · {totalKept} keeper
+            {totalKept === 1 ? "" : "s"} placed
+          </span>
         </span>
         <LiveStatus status={draft.status} />
       </div>
