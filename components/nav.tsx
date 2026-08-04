@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { IdentityBadge, useIdentity } from "@/components/identity";
+import { MockBadge } from "@/components/mock-badge";
 import type { LeagueFeatures } from "@/lib/data";
 
 /**
@@ -107,6 +108,10 @@ export function Nav({
               My Team
             </Link>
           ) : null}
+
+          {/* Sits next to the identity badge so a faked phase is visible on
+              every page, not just the one being worked on. */}
+          <MockBadge />
 
           <span className="ml-1.5 shrink-0">
             <IdentityBadge owners={owners} />

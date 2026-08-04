@@ -166,19 +166,43 @@ roster snapshot. `picked_by` is the fallback, since it is empty on an autopick.
 and its back link falls through to `/history/` when the season page does not exist
 yet. Exercised with a fixture: 168 picks, every owner attributed.
 
-### Previewing the draft before it happens
+### League phase
 
-Two sticky flags, both of which only ever fill in a MISSING value — once Sleeper
-has the real thing they quietly stop doing anything:
+`resolvePhase()` in `lib/phase.ts` derives where in the year the league is, from
+Sleeper alone — nothing stored, nothing to edit each September:
 
-| Flag | Stands in |
+| Phase | Test |
 | --- | --- |
-| `?mockDraftOrder=true` | an order and a date two weeks out, so the keeper deadline is still ahead |
-| `?mockDraft=true` | the above PLUS a completed draft dated three days ago, so the deadline reads as passed |
+| `offseason` | no `draft_order` |
+| `preDraft` | order drawn |
+| `drafted` | draft complete, no week scored |
+| `weekPreview` | in season, nobody has points yet |
+| `weekLive` | in season, some team has points |
+| `weekComplete` | `last_scored_leg >= week` |
 
-MUTUALLY EXCLUSIVE, and `mockDraft` wins — it is the later state of the same
-timeline, so a finished draft implies an order. Both persist across navigation via
-`lib/sticky-params.ts`.
+PREVIEW VS LIVE KEYS ON POINTS ON THE BOARD, not the day of the week. Thursday
+kickoffs move, December has Saturday games, and a clock rule would be wrong
+several weeks a season.
+
+### Previewing a phase
+
+`?mockPhase=weekLive` (any name above). `?mockDraftOrder` and `?mockDraft` still
+work as aliases for `preDraft` and `drafted` — they were shared around before the
+general form existed.
+
+Every mock ONLY FILLS IN WHAT IS MISSING. Ask for `weekLive` in October and it
+does nothing, because the real data already says so — the flags go quiet on their
+own as the season catches up, so a stale one cannot fake a state the league has
+genuinely reached.
+
+Week phases FABRICATE scores, the only invented data in the app. There is no way
+to preview a scoreboard without one; they are deterministic (seeded from slug and
+week) so a reload shows the same game. `<MockBadge />` sits in the nav for as long
+as any flag is on, because a mocked surface renders identically to a real one.
+
+Sticky rules: a FULL PAGE LOAD rebuilds the flags from the URL, so editing the
+address bar to drop one works; storage only carries them across CLIENT navigation,
+where `<Link>` hrefs are written without them.
 
 A client flag CANNOT fabricate a static page, so neither mocks
 `/history/<season>/draft/`; that route only exists once the real picks are

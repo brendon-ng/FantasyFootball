@@ -1,5 +1,7 @@
 "use client";
 
+import { PHASES, type LeaguePhase } from "./phase.ts";
+
 /**
  * Query params that survive navigation.
  *
@@ -18,7 +20,7 @@
  */
 
 /** Params worth carrying. Add sparingly — each one is global state. */
-export const STICKY_PARAMS = ["mockDraftOrder", "mockDraft"] as const;
+export const STICKY_PARAMS = ["mockPhase", "mockDraftOrder", "mockDraft"] as const;
 
 const KEY = "ff:sticky-params";
 
@@ -84,15 +86,33 @@ export function stickyParam(name: (typeof STICKY_PARAMS)[number]): string | null
 }
 
 /**
- * The two draft mocks, resolved together.
+ * The phase this session wants to see, or null for whatever is really happening.
  *
- * MUTUALLY EXCLUSIVE, and `mockDraft` wins. It is the later state of the same
- * timeline — a finished draft implies an order — so honouring both would mean
- * asking for a drafted league and an undrafted one at once.
+ * `?mockPhase=weekLive` is the general form. `?mockDraftOrder` and `?mockDraft`
+ * predate it and still work, mapped onto the phases they described — they were
+ * shared around before this existed and breaking a bookmarked URL to save two
+ * lines is a poor trade.
+ */
+export function mockPhase(): LeaguePhase | null {
+  const named = stickyParam("mockPhase");
+  if (named && (PHASES as readonly string[]).includes(named)) return named as LeaguePhase;
+  if (stickyParam("mockDraft") === "true") return "drafted";
+  if (stickyParam("mockDraftOrder") === "true") return "preDraft";
+  return null;
+}
+
+/**
+ * What the draft has to look like for a phase to be believable.
+ *
+ * Every phase from `drafted` onwards implies a finished draft, and a finished
+ * draft implies an order — so these are derived from the phase rather than being
+ * separate flags that could contradict each other.
  */
 export function draftMocks(): { order: boolean; complete: boolean } {
-  const complete = stickyParam("mockDraft") === "true";
-  return { complete, order: complete || stickyParam("mockDraftOrder") === "true" };
+  const phase = mockPhase();
+  if (!phase) return { order: false, complete: false };
+  const complete = phase !== "offseason" && phase !== "preDraft";
+  return { complete, order: complete || phase === "preDraft" };
 }
 
 /** True when this session asked for a stand-in draft order. */

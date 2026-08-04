@@ -23,7 +23,8 @@ import {
   mockDraftOrder,
   orderIsSet,
 } from "@/lib/draft-slots";
-import { draftMocks } from "@/lib/sticky-params";
+import { applyPhaseMock } from "@/lib/phase-mock";
+import { draftMocks, mockPhase } from "@/lib/sticky-params";
 import type { LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "@/lib/types";
 
 export interface LiveRoster {
@@ -423,7 +424,7 @@ export function useLiveSeason(
         }
 
         if (cancelled) return;
-        setLive({
+        setLive(applyPhaseMock({
           season: Number(state.season),
           week,
           displayWeek: state.display_week,
@@ -433,7 +434,7 @@ export function useLiveSeason(
           matchups,
           unavailable: false,
           lastScoredLeg: league.settings?.last_scored_leg ?? null,
-        });
+        }, mockPhase()));
       } catch {
         // Fails soft: `initial` stays on screen. A Sleeper outage should not
         // blank the page, it should just stop it getting fresher.
