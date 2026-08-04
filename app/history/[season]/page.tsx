@@ -3,7 +3,15 @@ import { notFound } from "next/navigation";
 
 import { Bracket } from "@/components/bracket";
 import { WeeklyLowBadge } from "@/components/weekly-low";
-import { Col, ListHeader, Panel, PanelHeader, fmt, placeColor } from "@/components/ui";
+import {
+  Col,
+  ListHeader,
+  Panel,
+  PanelHeader,
+  fmt,
+  placeColor,
+  verboseKind,
+} from "@/components/ui";
 import {
   creditedNames,
   features,
@@ -64,11 +72,15 @@ export default async function SeasonPage({
    * both read as their bracket name. `Meeting.label` carries the placement the
    * game decided — Championship, 3rd place, Toilet bowl — and falls back to the
    * bracket when a game decided no particular place.
+   *
+   * Spelled out at every width here, unlike the record book: this row has the
+   * space, and "3rd place" sitting under two team names would otherwise read as a
+   * season finish rather than the game that settled it.
    */
   const gameLabel = (m: Matchup): string => {
     if (m.kind === "regular") return "";
     const id = meetingId(m.season, m.week, m.home.ownerSlug, m.away.ownerSlug);
-    return meetings.get(id)?.label ?? m.kind;
+    return verboseKind(meetings.get(id)?.label ?? m.kind);
   };
 
   // Imported ESPN seasons kept no draft data, so the link would 404. The page

@@ -104,11 +104,17 @@ export default function HistoryPage() {
           meta="1st is brightest"
           legend="Each cell is that owner's final placement for the season; brighter means a better finish. Hover a cell for the exact result."
         />
+        {/* No fixed min-width, and the name column is CAPPED rather than 1fr.
+            A flat 420px floor plus a stretching name column meant a league with
+            one season pushed its only cell off the right of a phone — you had to
+            scroll to find it. Capped, the cells always sit just after the names,
+            and the grid overflows into a scroll only when the seasons genuinely
+            need the room. */}
         <div className="overflow-x-auto p-4 sm:p-5">
-          <div className="min-w-[420px]">
+          <div>
             <div
               className="grid items-center gap-1"
-              style={{ gridTemplateColumns: `minmax(120px,1fr) repeat(${allSeasons.length}, 44px)` }}
+              style={{ gridTemplateColumns: `minmax(110px,200px) repeat(${allSeasons.length}, 44px)` }}
             >
               <div />
               {allSeasons.map((s) => (
