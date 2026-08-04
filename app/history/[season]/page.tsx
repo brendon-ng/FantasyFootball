@@ -16,7 +16,7 @@ import {
   getWeeklyLows,
   meetingId,
 } from "@/lib/data";
-import type { BracketMatch } from "@/lib/types";
+import type { BracketMatch, Matchup } from "@/lib/types";
 
 // Static export: every season page is generated at build time.
 export const dynamicParams = false;
@@ -50,11 +50,25 @@ export default async function SeasonPage({
     slug ? (summary.standings.find((r) => r.ownerSlug === slug)?.seed ?? null) : null;
   // Only link to games that actually generated a page — an undecided bracket
   // slot or a bye has no matchup page, and a dead link is worse than no link.
-  const existing = new Set(getAllMeetings().map((m) => m.id));
+  const meetings = new Map(getAllMeetings().map((m) => [m.id, m]));
   const hrefFor = (m: BracketMatch) => {
     if (!m.team1 || !m.team2 || m.isBye) return null;
     const id = meetingId(season, m.week, m.team1, m.team2);
-    return existing.has(id) ? `/matchups/${id}/` : null;
+    return meetings.has(id) ? `/matchups/${id}/` : null;
+  };
+
+  /**
+   * What a postseason game actually was, not just which bracket it sat in.
+   *
+   * `Matchup.kind` only distinguishes playoff from consolation, so the finals of
+   * both read as their bracket name. `Meeting.label` carries the placement the
+   * game decided — Championship, 3rd place, Toilet bowl — and falls back to the
+   * bracket when a game decided no particular place.
+   */
+  const gameLabel = (m: Matchup): string => {
+    if (m.kind === "regular") return "";
+    const id = meetingId(m.season, m.week, m.home.ownerSlug, m.away.ownerSlug);
+    return meetings.get(id)?.label ?? m.kind;
   };
 
   // Imported ESPN seasons kept no draft data, so the link would 404. The page
@@ -346,9 +360,7 @@ export default async function SeasonPage({
                         </div>
                       ))}
                       <div className="mt-1 flex items-center justify-between text-[10px] uppercase tracking-wide text-chalk-600">
-                        <span>
-                          {m.kind !== "regular" ? m.kind : ""}
-                        </span>
+                        <span>{gameLabel(m)}</span>
                         <span
                           aria-hidden
                           className="opacity-0 transition-opacity group-hover/game:opacity-100"
