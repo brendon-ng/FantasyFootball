@@ -102,9 +102,11 @@ export default async function SeasonPage({
         <Panel>
           <PanelHeader title="Regular Season" meta={`${summary.regularSeasonWeeks} weeks`} />
           {/* Scrolls rather than clipping: PF/PA and the weekly-low column do not
-              fit a phone, and Panel is overflow-hidden. */}
+              fit a phone, and Panel is overflow-hidden. The min-width is
+              max-sm ONLY — forcing it at every breakpoint made the table overflow
+              its card by a few pixels on desktop, where it used to squish to fit. */}
           <div className="overflow-x-auto">
-          <table className="w-full min-w-[34rem] text-sm">
+          <table className="w-full text-sm max-sm:min-w-[34rem]">
             <thead>
               <tr className="border-b border-ink-600">
                 {(

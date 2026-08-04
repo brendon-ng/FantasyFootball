@@ -251,13 +251,19 @@ Three things that are easy to get wrong:
 ## Wide tables on mobile
 
 Anything with more than a few fixed-width columns needs
-`overflow-x-auto` around it and a `min-w-[Nrem]` on the inner table, or a `Panel`
+`overflow-x-auto` around it and a min-width on the inner table, or a `Panel`
 (which is `overflow-hidden`) silently CLIPS the right-hand columns instead of
 scrolling them. Currently wrapped: the all-time table, a season's standings, an
 owner's season-by-season, and the head-to-head record splits.
 
+THE MIN-WIDTH MUST BE `max-sm:` SCOPED. An unconditional `min-w-[34rem]` fixed
+mobile and broke desktop: the table stopped squishing to its card and overflowed by
+a few pixels, which reads as a scrollbar appearing for no reason. Desktop already
+fits — only the phone needs the floor. (`components/all-time-table.tsx` is the one
+exception; it is wide at every size and has always scrolled.)
+
 Do not wrap everything. A list whose fixed columns total well under the ~21.5rem a
-phone gives fits fine, and a needless `min-w` introduces scrolling that was not
+phone gives fits fine, and a needless min-width introduces scrolling that was not
 there. Measure before adding: sum the `w-*` classes in the `ListHeader`.
 
 Separately, a CSS GRID ITEM defaults to `min-width: auto`, so a row wider than its
