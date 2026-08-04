@@ -101,7 +101,10 @@ export default async function SeasonPage({
       <div className="grid gap-5 lg:grid-cols-2">
         <Panel>
           <PanelHeader title="Regular Season" meta={`${summary.regularSeasonWeeks} weeks`} />
-          <table className="w-full text-sm">
+          {/* Scrolls rather than clipping: PF/PA and the weekly-low column do not
+              fit a phone, and Panel is overflow-hidden. */}
+          <div className="overflow-x-auto">
+          <table className="w-full min-w-[34rem] text-sm">
             <thead>
               <tr className="border-b border-ink-600">
                 {(
@@ -171,6 +174,7 @@ export default async function SeasonPage({
               ))}
             </tbody>
           </table>
+          </div>
         </Panel>
 
         <Panel>

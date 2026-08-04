@@ -57,7 +57,10 @@ export function HomeKeeperBoard({
         const shown = orderBySelection(eligible, selected).slice(0, maxKeepers);
 
         return (
-          <div key={slug} className="bg-ink-800 p-1">
+          // min-w-0: a grid item defaults to min-width:auto, so without it the
+          // row refuses to shrink and the cost column is clipped off the card
+          // instead of the player name truncating.
+          <div key={slug} className="min-w-0 bg-ink-800 p-1">
             <div className="flex items-baseline justify-between px-3 pb-1 pt-2">
               <Link
                 href={`/owners/${slug}/`}

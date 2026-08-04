@@ -248,6 +248,23 @@ Three things that are easy to get wrong:
 - `public/` is copied into every build, so `build-all.mjs` prunes other leagues'
   avatars from each output.
 
+## Wide tables on mobile
+
+Anything with more than a few fixed-width columns needs
+`overflow-x-auto` around it and a `min-w-[Nrem]` on the inner table, or a `Panel`
+(which is `overflow-hidden`) silently CLIPS the right-hand columns instead of
+scrolling them. Currently wrapped: the all-time table, a season's standings, an
+owner's season-by-season, and the head-to-head record splits.
+
+Do not wrap everything. A list whose fixed columns total well under the ~21.5rem a
+phone gives fits fine, and a needless `min-w` introduces scrolling that was not
+there. Measure before adding: sum the `w-*` classes in the `ListHeader`.
+
+Separately, a CSS GRID ITEM defaults to `min-width: auto`, so a row wider than its
+track overflows the card rather than letting its truncating cell shrink. The home
+keeper board needed `min-w-0` on each owner card for exactly this reason — the
+cost column was being clipped while the player name refused to truncate.
+
 ## Viewer identity
 
 `components/identity.tsx` remembers who the visitor is in localStorage, under

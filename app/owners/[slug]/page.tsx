@@ -168,7 +168,8 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
           <div className="grid gap-5 lg:grid-cols-2">
             <Panel>
               <PanelHeader title="Season by Season" />
-              <table className="w-full text-sm">
+              <div className="overflow-x-auto">
+              <table className="w-full min-w-[30rem] text-sm">
                 <thead>
                   <tr className="border-b border-ink-600">
                     {(
@@ -235,6 +236,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                   })}
                 </tbody>
               </table>
+              </div>
             </Panel>
 
             <Panel>

@@ -116,6 +116,10 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
               : "Every season is complete."
           }`}
         />
+        {/* Fixed-width numeric columns plus a label that will not wrap short
+            enough to fit a phone — scroll instead of clipping "Avg PA". */}
+        <div className="overflow-x-auto">
+        <div className="min-w-[30rem]">
         <ListHeader>
           <Col className="flex-1">Split</Col>
           <Col className="w-16 shrink-0 text-right" hint="Wins-losses in this split">
@@ -163,6 +167,8 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
             </span>
           </div>
         ))}
+        </div>
+        </div>
       </Panel>
 
       <Panel>
