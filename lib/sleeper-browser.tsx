@@ -377,7 +377,7 @@ export function useLiveSeason(
         ]);
         if (!league || !rosters?.length) return;
 
-        const slugByUser = initialSlugMap(initial);
+        const slugByRoster = initialSlugMap(initial);
         const teamNameByUser = new Map<string, string>(
           (users ?? []).map((u: RawUser) => [
             u.user_id,
@@ -386,7 +386,7 @@ export function useLiveSeason(
         );
 
         const teams: LiveTeam[] = (rosters as RawRosterFull[]).map((r) => ({
-          ownerSlug: (r.owner_id && slugByUser.get(r.owner_id)) || `roster-${r.roster_id}`,
+          ownerSlug: slugByRoster.get(r.roster_id) ?? `roster-${r.roster_id}`,
           rosterId: r.roster_id,
           teamName: r.owner_id ? (teamNameByUser.get(r.owner_id) ?? null) : null,
           wins: r.settings.wins,
@@ -452,15 +452,18 @@ export function useLiveSeason(
 const round2 = (n: number) => Number(n.toFixed(2));
 
 /**
- * user_id -> owner slug, recovered from the baked value.
+ * roster_id -> owner slug, recovered from the baked value.
  *
  * The browser has no access to `config/leagues/*`, and the build already did this
  * resolution — including co-owners — so the mapping is lifted from `initial`
- * rather than duplicated. A roster missing from it falls back to `roster-N`,
- * which is what the build-time version does too.
+ * rather than duplicated.
+ *
+ * KEYED ON ROSTER, not user. Keying it on roster id and then looking it up by
+ * `owner_id` silently missed every time, and the whole page rendered "roster-1",
+ * "roster-2" in place of names — in a real season, not just under a mock.
  */
-function initialSlugMap(initial: LiveSeason | null): Map<string, string> {
-  return new Map((initial?.teams ?? []).map((t) => [String(t.rosterId), t.ownerSlug]));
+function initialSlugMap(initial: LiveSeason | null): Map<number, string> {
+  return new Map((initial?.teams ?? []).map((t) => [t.rosterId, t.ownerSlug]));
 }
 
 interface RawUser {

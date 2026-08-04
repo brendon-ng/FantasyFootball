@@ -282,12 +282,15 @@ function MatchupStrip({
   const name = (slug: string) => ownerNames[slug] ?? slug;
 
   return (
-    <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1">
+    // Scrolls on a phone, fills the row above it. auto-fit rather than a fixed
+    // column count so five matchups and six both stretch edge to edge — a fixed
+    // card width left Den Ops with dead space and pushed Masterbatters off screen.
+    <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:grid sm:grid-cols-[repeat(auto-fit,minmax(11rem,1fr))] sm:overflow-visible sm:px-0">
       {live.matchups.map((m) => (
         <Link
           key={m.matchupId}
           href={`/matchups/${meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug)}/`}
-          className="w-[15rem] shrink-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim"
+          className="w-[13rem] shrink-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim sm:w-auto"
         >
           {[m.a, m.b].map((side, i) => {
             const other = i === 0 ? m.b : m.a;
@@ -339,34 +342,59 @@ function StandingsLive({
   live: NonNullable<LiveSeason>;
   ownerNames: Record<string, string>;
 }) {
+  // Structurally the same table as the final standings below it — same columns,
+  // same widths, same playoff cut line. Only the contents differ, and two tables
+  // that mean the same thing should not look different.
   const rows = live.teams.slice().sort((a, b) => b.wins - a.wins || b.pointsFor - a.pointsFor);
 
   return (
-    <ol>
-      {rows.map((t, i) => (
-        <li
-          key={t.rosterId}
-          className={`flex items-center gap-3 border-b border-ink-700 px-4 py-2.5 last:border-0 sm:px-5 ${
-            // Playoff cut line after the 6th seed (bylaws 1.8.2.1).
-            i === 5 ? "border-b-accent-dim" : ""
-          }`}
+    <>
+      <ListHeader>
+        <Col className="w-5 shrink-0" hint="Standing, by wins then points for">
+          #
+        </Col>
+        <Col className="flex-1">Owner · Team name</Col>
+        <Col className="w-16 shrink-0 text-right" hint="Regular-season wins-losses">
+          W-L
+        </Col>
+        <Col
+          className="hidden w-20 shrink-0 text-right sm:block"
+          hint="Points For — total points scored so far this season"
         >
-          <span className="tabular w-5 shrink-0 text-sm font-bold text-chalk-500">{i + 1}</span>
-          <Link
-            href={`/owners/${t.ownerSlug}/`}
-            className="min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-accent"
+          PF
+        </Col>
+      </ListHeader>
+      <ol>
+        {rows.map((t, i) => (
+          <li
+            key={t.rosterId}
+            className={`flex items-center gap-3 border-b border-ink-700 px-4 py-2.5 last:border-0 sm:px-5 ${
+              // Playoff cut line after the 6th seed (bylaws 1.8.2.1).
+              i === 5 ? "border-b-accent-dim" : ""
+            }`}
           >
-            {ownerNames[t.ownerSlug] ?? t.ownerSlug}
-          </Link>
-          <span className="tabular w-16 shrink-0 whitespace-nowrap text-right text-sm text-chalk-300">
-            {fmt.record(t.wins, t.losses, t.ties)}
-          </span>
-          <span className="tabular hidden w-20 shrink-0 text-right text-sm text-chalk-500 sm:block">
-            {fmt.pts1(t.pointsFor)}
-          </span>
-        </li>
-      ))}
-    </ol>
+            <span className="tabular w-5 shrink-0 text-sm font-bold text-chalk-500">{i + 1}</span>
+            <Link
+              href={`/owners/${t.ownerSlug}/`}
+              className="min-w-0 flex-1 truncate text-sm font-medium transition-colors hover:text-accent"
+            >
+              {ownerNames[t.ownerSlug] ?? t.ownerSlug}
+              {t.teamName ? (
+                <span className="ml-2 hidden text-[11px] text-chalk-600 sm:inline">
+                  {t.teamName}
+                </span>
+              ) : null}
+            </Link>
+            <span className="tabular w-16 shrink-0 whitespace-nowrap text-right text-sm text-chalk-300">
+              {fmt.record(t.wins, t.losses, t.ties)}
+            </span>
+            <span className="tabular hidden w-20 shrink-0 text-right text-sm text-chalk-500 sm:block">
+              {fmt.pts1(t.pointsFor)}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </>
   );
 }
 
