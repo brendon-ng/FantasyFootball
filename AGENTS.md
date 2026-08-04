@@ -60,6 +60,7 @@ that is ever wanted, have `build-all.mjs` emit a shared cross-league JSON first.
 | `keepers` | no Keepers tab, no contracts on home/owner pages, `resolveKeepers()` not run, `/keepers` says the league does not use keepers |
 | `adp` | `npm run adp` skips the league entirely |
 | `espnImport` | `npm run import:espn` skips it |
+| `keepers` (home) | no keeper-deadline card on the draft panel — a redraft league has no deadline |
 | `weeklyLowPunishment` | no weekly-low markers anywhere — no chip on a matchup, no glyph in a season's week list, no column or tally on an owner page |
 
 `slug` is load-bearing — it is the URL segment AND the data directory. It must

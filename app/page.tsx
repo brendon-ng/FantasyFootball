@@ -138,6 +138,7 @@ export default async function HomePage() {
           [...owners.values()].filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
         )}
         ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
+        keepers={features().keepers}
       />
 
       {lastSeason ? (

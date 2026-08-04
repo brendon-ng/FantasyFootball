@@ -57,11 +57,14 @@ export function DraftPlan({
   season,
   userIdToSlug,
   ownerNames,
+  keepers,
 }: {
   leagueId: string | null;
   season: number;
   userIdToSlug: Record<string, string>;
   ownerNames: Record<string, string>;
+  /** False for a redraft league, which has no deadline to show. */
+  keepers: boolean;
 }) {
   const draft = useLiveDraft(leagueId);
   const rosters = useLiveRosters(leagueId);
@@ -89,9 +92,13 @@ export function DraftPlan({
       <PanelHeader
         title={`${season} Draft`}
         meta={d.mocked ? undefined : "live from Sleeper"}
-        legend="Keeper selections are due three days before the draft (bylaws 1.7). After that, keeper picks are frozen and can no longer be traded."
+        legend={
+          keepers
+            ? "Keeper selections are due three days before the draft (bylaws 1.7). After that, keeper picks are frozen and can no longer be traded."
+            : undefined
+        }
       />
-      <div className="grid gap-2.5 p-4 sm:grid-cols-2 sm:p-5">
+      <div className={`grid gap-2.5 p-4 sm:p-5 ${keepers ? "sm:grid-cols-2" : ""}`}>
         <div className="rounded-lg border border-ink-600 bg-ink-850 px-3 py-3">
           <div className="eyebrow mb-1.5 flex items-center gap-2 text-[10px]">
             Draft
@@ -109,19 +116,31 @@ export function DraftPlan({
             {now === null ? "" : until(d.startTime, now)}
           </div>
         </div>
-        <div className="rounded-lg border border-ink-600 bg-ink-850 px-3 py-3">
-          <div className="eyebrow mb-1.5 text-[10px]">Keeper deadline</div>
-          <div
-            className={`text-base font-semibold sm:text-lg ${
-              passed ? "text-chalk-500" : "text-accent"
-            }`}
+        {/* The whole card is the link: the deadline is the one thing on this page
+            that needs an action, and the action is on the keeper tracker. */}
+        {keepers ? (
+          <Link
+            href="/keepers/"
+            className="group rounded-lg border border-ink-600 bg-ink-850 px-3 py-3 transition-colors hover:border-accent-dim"
           >
-            {dateFmt.format(deadline)}
-          </div>
-          <div className="mt-1 text-[11px] text-chalk-600">
-            {now === null ? "" : passed ? "passed — picks are frozen" : until(deadline, now)}
-          </div>
-        </div>
+            <div className="eyebrow mb-1.5 text-[10px]">Keeper deadline</div>
+            <div
+              className={`text-base font-semibold sm:text-lg ${
+                passed ? "text-chalk-500" : "text-accent"
+              }`}
+            >
+              {dateFmt.format(deadline)}
+            </div>
+            <div className="mt-1 flex items-baseline justify-between gap-2 text-[11px] text-chalk-600">
+              <span>
+                {now === null ? "" : passed ? "passed — picks are frozen" : until(deadline, now)}
+              </span>
+              <span className="shrink-0 transition-colors group-hover:text-accent">
+                Keeper tracker <span aria-hidden>→</span>
+              </span>
+            </div>
+          </Link>
+        ) : null}
       </div>
 
       <div className="border-t border-ink-600 px-4 pb-4 pt-3 sm:px-5">
@@ -140,8 +159,11 @@ export function DraftPlan({
                     href={`/owners/${slug}/`}
                     className="whitespace-nowrap transition-colors hover:text-accent"
                     data-owner={slug}
+                    title={ownerNames[slug] ?? slug}
                   >
-                    {ownerNames[slug] ?? slug}
+                    {/* First names only — ten of them have to sit on one line, and
+                        the full name is a hover away. */}
+                    {(ownerNames[slug] ?? slug).split(" ")[0]}
                   </Link>
                 ) : (
                   <span className="text-chalk-600">—</span>
