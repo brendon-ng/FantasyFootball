@@ -275,8 +275,19 @@ export interface H2HRecord {
  *
  * Each card is the two teams with their season record, and beneath them the
  * all-time head-to-head — the thing that makes a fixture interesting before
- * anyone has scored. Column count is the matchup count, so ten teams give five
- * across and twelve give six, both edge to edge.
+ * anyone has scored.
+ *
+ * ONE STRUCTURE FOR EVERY WEEK PHASE. Preview, live and complete differ only in
+ * what the score slot holds, never in how a card is built, so a card does not
+ * move or resize as Sunday progresses.
+ *
+ * PLAIN FLEX, DELIBERATELY. Equal cards filling a row is `sm:flex-1`, and the
+ * count takes care of itself — five for a ten-team league, six for a twelve.
+ * Two attempts to express this as a grid failed silently, because the column
+ * count is dynamic and neither a Tailwind class nor `repeat(var(--n), …)` can
+ * carry it: browsers reject a `var()` as a repeat count and drop the whole
+ * declaration, collapsing every card into one column. Do not "improve" this
+ * back into a grid.
  *
  * Scores appear only once someone has scored. A row of 0.00s before kickoff reads
  * as "everyone scored nothing" rather than "not started".
@@ -312,12 +323,12 @@ function MatchupStrip({
   };
 
   return (
-    <div className="matchup-strip -mx-1 gap-2.5 px-1 pb-1 sm:mx-0 sm:px-0">
+    <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:overflow-x-visible sm:px-0">
       {live.matchups.map((m) => (
         <Link
           key={m.matchupId}
           href={`/matchups/${meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug)}/`}
-          className="min-w-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim"
+          className="w-[13rem] min-w-0 shrink-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim sm:w-auto sm:flex-1"
         >
           {[m.a, m.b].map((side, i) => {
             const other = i === 0 ? m.b : m.a;

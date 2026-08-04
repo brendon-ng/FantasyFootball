@@ -124,35 +124,4 @@ body {
   }
 }
 
-/*
- * The week's matchup strip: one card per matchup, filling the row.
- *
- * NO COLUMN COUNT ANYWHERE. `grid-auto-flow: column` with a `grid-auto-columns`
- * track makes one implicit column per card, so ten teams give five across and
- * twelve give six with nothing to configure — only the track size changes between
- * a phone and a desktop.
- *
- * THE OBVIOUS VERSION DOES NOT WORK: `repeat(var(--matchup-cols), minmax(0, 1fr))`
- * is invalid, because browsers will not take a `var()` as the repeat count. It
- * fails silently to a single column, and a fallback inside the var does not save
- * it — the whole declaration is dropped. Do not reintroduce it.
- *
- * Every layout property lives here, none on the element. An earlier version set
- * `flex` and `overflow-x-auto` as utilities and overrode them from this rule; two
- * rules fighting over `display` is a bug you cannot see in the markup.
- */
-.matchup-strip {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 13rem;
-  overflow-x: auto;
-}
-@media (min-width: 40rem) {
-  .matchup-strip {
-    /* Equal shares of the row. `minmax(0, …)` rather than a bare `1fr` so a long
-       head-to-head line truncates instead of widening its own column. */
-    grid-auto-columns: minmax(0, 1fr);
-    overflow-x: visible;
-  }
-}
 
