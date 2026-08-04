@@ -18,19 +18,17 @@ import { getDrafts, getOwnerMap, getPlayers, getSeasons, pageTitle } from "@/lib
  * board would be comparing picks to a market that did not exist yet. Historical
  * ADP is not captured, so the honest move is to omit the column.
  *
- * Only seasons with draft data get a page: the 2020-23 ESPN seasons kept none,
- * so `generateStaticParams` filters rather than rendering four empty boards.
+ * Only seasons with draft data get a page: the 2019-23 ESPN seasons kept none, so
+ * `generateStaticParams` filters rather than rendering five empty boards.
+ *
+ * Keyed on the DRAFTS, not on finalized seasons. A draft completes months before
+ * its season does, and derive records those picks as soon as it happens — gating
+ * on `finalized` would have hidden the board until January.
  */
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  const finalized = new Set(
-    getSeasons()
-      .filter((s) => s.finalized)
-      .map((s) => s.season),
-  );
   return [...new Set(getDrafts().map((p) => p.season))]
-    .filter((s) => finalized.has(s))
     .sort()
     .map((season) => ({ season: String(season) }));
 }
@@ -45,6 +43,9 @@ export default async function DraftPage({ params }: { params: Promise<{ season: 
   const picks = getDrafts().filter((p) => p.season === season);
   if (!picks.length) notFound();
 
+  // A season page only exists once the season is finalized; a draft page can
+  // exist months earlier, so the way back has to degrade to the history index.
+  const hasSeasonPage = getSeasons().some((s) => s.season === season && s.finalized);
   const owners = getOwnerMap();
   const players = getPlayers();
   const ownerNames = Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]));
@@ -60,8 +61,11 @@ export default async function DraftPage({ params }: { params: Promise<{ season: 
     <div className="space-y-5 sm:space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <Link href={`/history/${season}/`} className="text-xs text-chalk-600 hover:text-accent">
-            ← {season} Season
+          <Link
+            href={hasSeasonPage ? `/history/${season}/` : "/history/"}
+            className="text-xs text-chalk-600 hover:text-accent"
+          >
+            ← {hasSeasonPage ? `${season} Season` : "History"}
           </Link>
           <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">{season} Draft</h1>
         </div>

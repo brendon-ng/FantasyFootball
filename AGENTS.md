@@ -148,12 +148,41 @@ Verified against the real 2025 draft: `pickLabel` reproduces Sleeper's own numbe
 on all 170 picks, `buildBoard` names the right owner for all 170 including the 23
 traded, and a team holding 3.01 and 3.07 puts its keeper on 3.07.
 
-### Previewing the board before an order exists
+### A completed draft reaches the site immediately
 
-`?mockDraftOrder=true` on any page stands in a draft order, so the projected board
-and the "7.10" pick labels can be worked on before one is drawn. It only ever
-fills a MISSING order — it cannot override a real one, so the flag is inert once
-the league drafts.
+`sync` commits `draft.json` and `draft-picks.json` the MOMENT a draft completes,
+but withholds `league.json`, `rosters.json` and `users.json` until the SEASON is
+over — those keep moving, and committing a moving target would break the
+empty-diff property. `loadSeason` needs `league.json`, so a mid-season draft used
+to be skipped entirely by derive: the picks sat in `raw/` and reached no page
+until January.
+
+`draftOnlySeasons()` closes that. Attribution comes out of `draft.json` alone,
+which carries both halves — `slot_to_roster_id` is slot -> roster and
+`draft_order` is user -> slot, so composing them gives roster -> user with no
+roster snapshot. `picked_by` is the fallback, since it is empty on an autopick.
+
+`/history/<season>/draft/` therefore keys on the DRAFTS, not on finalized seasons,
+and its back link falls through to `/history/` when the season page does not exist
+yet. Exercised with a fixture: 168 picks, every owner attributed.
+
+### Previewing the draft before it happens
+
+Two sticky flags, both of which only ever fill in a MISSING value — once Sleeper
+has the real thing they quietly stop doing anything:
+
+| Flag | Stands in |
+| --- | --- |
+| `?mockDraftOrder=true` | an order and a date two weeks out, so the keeper deadline is still ahead |
+| `?mockDraft=true` | the above PLUS a completed draft dated three days ago, so the deadline reads as passed |
+
+MUTUALLY EXCLUSIVE, and `mockDraft` wins — it is the later state of the same
+timeline, so a finished draft implies an order. Both persist across navigation via
+`lib/sticky-params.ts`.
+
+A client flag CANNOT fabricate a static page, so neither mocks
+`/history/<season>/draft/`; that route only exists once the real picks are
+committed. They reach the live surfaces only.
 
 Deterministic, seeded by the draft id: a reload does not reshuffle and a
 screenshot stays reproducible. `Math.random()` would also re-order on every render.

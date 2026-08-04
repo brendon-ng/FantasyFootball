@@ -14,8 +14,13 @@
 
 import { useEffect, useState } from "react";
 
-import { mockDraftDate, mockDraftOrder, orderIsSet } from "@/lib/draft-slots";
-import { wantsMockOrder } from "@/lib/sticky-params";
+import {
+  mockCompletedDraftDate,
+  mockDraftDate,
+  mockDraftOrder,
+  orderIsSet,
+} from "@/lib/draft-slots";
+import { draftMocks } from "@/lib/sticky-params";
 
 export interface LiveRoster {
   rosterId: number;
@@ -267,17 +272,28 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
         for (const [slot, roster] of Object.entries(raw.slot_to_roster_id ?? {})) {
           slotToRoster[Number(slot)] = roster;
         }
+        // Every mock below only ever fills in a MISSING value, so once Sleeper
+        // has the real thing the flags quietly stop doing anything.
+        const flags = draftMocks();
+        let status = raw.status;
         let orderSet = orderIsSet(raw.draft_order, slotToRoster);
-        // Only ever stands in for MISSING values; it can never override real
-        // ones, so the flag is harmless on a league that has drafted.
-        const mocked = !orderSet && wantsMockOrder();
         let startTime = raw.start_time ?? null;
-        if (mocked) {
+        const wantsOrder = !orderSet && flags.order;
+        const wantsComplete = status !== "complete" && flags.complete;
+        const mocked = wantsOrder || wantsComplete;
+
+        if (wantsOrder) {
           slotToRoster = mockDraftOrder(slotToRoster, raw.draft_id);
           orderSet = true;
+        }
+        if (wantsComplete) {
+          status = "complete";
+          // Backdated, so the keeper deadline reads as closed and picks frozen.
+          startTime = mockCompletedDraftDate();
+        } else if (wantsOrder) {
           // A date as well as an order: the two are set together in practice, and
-          // the home page needs both to say anything. Two weeks out at 7pm, so the
-          // keeper deadline still lands in the future.
+          // the home page needs both to say anything. Two weeks out, so the keeper
+          // deadline still lands in the future.
           startTime ??= mockDraftDate();
         }
         setState({
@@ -285,7 +301,7 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
           error: null,
           data: {
             draftId: raw.draft_id,
-            status: raw.status,
+            status,
             type: raw.type,
             rounds: raw.settings?.rounds ?? 0,
             teams: raw.settings?.teams ?? Object.keys(slotToRoster).length,

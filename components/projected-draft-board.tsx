@@ -61,6 +61,37 @@ export function ProjectedDraftBoard({
 
   const d = draft.data;
 
+  // Once the draft has run this board is a projection of the past. The real one
+  // is derived from the committed picks — `sync` writes them the moment the draft
+  // completes, and derive records them without waiting for the season to end.
+  if (d.status === "complete") {
+    return (
+      <div className="px-4 py-8 text-center text-sm text-chalk-600 sm:px-5">
+        <p className="flex items-center justify-center gap-2">
+          {d.mocked ? (
+            <span
+              className="rounded border border-gold/50 bg-gold/10 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-gold"
+              title="?mockDraft=true — the draft has not actually run."
+            >
+              Mock
+            </span>
+          ) : null}
+          The {season} draft is done.
+        </p>
+        <p className="mt-2 text-[11px]">
+          <Link href={`/history/${season}/draft/`} className="hover:text-accent">
+            See the board as it happened →
+          </Link>
+          {d.mocked ? (
+            <span className="ml-2 text-chalk-600">
+              (that page exists once the real picks are committed)
+            </span>
+          ) : null}
+        </p>
+      </div>
+    );
+  }
+
   // The order is what makes a board possible. Before it is drawn Sleeper still
   // reports a slot map, but it is the identity placeholder — rendering it would
   // claim a running order nobody has drawn.

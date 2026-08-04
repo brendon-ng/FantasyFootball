@@ -1156,6 +1156,66 @@ function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransac
  * list keeps it correct for a past season even after later trades, since
  * `traded-picks.json` describes current ownership.
  */
+/**
+ * Picks from a season whose DRAFT is done but whose season is not.
+ *
+ * `sync` commits `draft.json` the moment a draft completes, but withholds
+ * `league.json`, `rosters.json` and `users.json` until the season is over —
+ * those keep moving all year, and committing a moving target would break the
+ * "an unchanged league produces an empty diff" property. `loadSeason` needs
+ * `league.json`, so it returns null and the whole season used to be skipped:
+ * the draft results sat in `raw/` and reached no page until January.
+ *
+ * The attribution comes out of `draft.json` alone. It carries both halves —
+ * `slot_to_roster_id` is slot -> roster and `draft_order` is user -> slot — so
+ * composing them gives roster -> user without a roster snapshot. `picked_by` is
+ * the fallback, since it is empty on an autopick.
+ */
+function draftOnlySeasons(loaded: SeasonData[]): DraftPickRecord[] {
+  const done = new Set(loaded.map((d) => d.season));
+  const out: DraftPickRecord[] = [];
+
+  for (const s of index.seasons) {
+    const season = Number(s.season);
+    if (done.has(season)) continue;
+    const dir = join(RAW_DIR, String(season));
+    const draft = readJson<SleeperDraft>(join(dir, "draft.json"));
+    const picks = readJson<SleeperDraftPick[]>(join(dir, "draft-picks.json"));
+    if (!draft || !picks?.length) continue;
+
+    const rosterToUser = new Map<number, string>();
+    for (const [userId, slot] of Object.entries(draft.draft_order ?? {})) {
+      const roster = draft.slot_to_roster_id?.[String(slot)];
+      if (roster != null) rosterToUser.set(Number(roster), userId);
+    }
+    const ownerOf = (rosterId: number, pickedBy: string | null): string | null => {
+      const userId = rosterToUser.get(rosterId) ?? pickedBy ?? null;
+      return userId ? (slugByUserId.get(userId) ?? null) : null;
+    };
+
+    const slotOwner = new Map<number, string | null>();
+    for (const [slot, rosterId] of Object.entries(draft.slot_to_roster_id ?? {})) {
+      slotOwner.set(Number(slot), ownerOf(Number(rosterId), null));
+    }
+
+    for (const p of picks) {
+      if (ignoredPlayers.has(p.player_id)) continue;
+      out.push({
+        season,
+        round: p.round,
+        pickNo: p.pick_no,
+        draftSlot: p.draft_slot,
+        ownerSlug: ownerOf(Number(p.roster_id), p.picked_by ?? null),
+        slotOwnerSlug: slotOwner.get(p.draft_slot) ?? null,
+        playerId: p.player_id,
+        isKeeper: Boolean(p.is_keeper),
+      });
+    }
+    log.info(`${season}: draft complete but season in progress — ${picks.length} picks recorded`);
+  }
+  return out;
+}
+
 function buildDraftHistory(seasons: SeasonData[]): DraftPickRecord[] {
   return seasons.flatMap((d) => {
     const slotOwner = new Map<number, string | null>();
@@ -1718,7 +1778,9 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
     : { perSeason: [], final: [] };
   const atTheTime = recordsAtTheTime(summaries, matchups);
   const playerHistory = buildPlayerHistory(loaded);
-  const drafts = buildDraftHistory(loaded);
+  const drafts = [...buildDraftHistory(loaded), ...draftOnlySeasons(loaded)].sort(
+    (a, b) => a.season - b.season || a.pickNo - b.pickNo,
+  );
   const weeklyLows = buildWeeklyLows(matchups, summaries);
 
   for (const o of owners.values()) o.seasons = [...new Set(o.seasons)].sort();

@@ -18,7 +18,7 @@
  */
 
 /** Params worth carrying. Add sparingly — each one is global state. */
-export const STICKY_PARAMS = ["mockDraftOrder"] as const;
+export const STICKY_PARAMS = ["mockDraftOrder", "mockDraft"] as const;
 
 const KEY = "ff:sticky-params";
 
@@ -76,5 +76,20 @@ export function stickyParam(name: (typeof STICKY_PARAMS)[number]): string | null
   return syncStickyParams()[name] ?? null;
 }
 
+/**
+ * The two draft mocks, resolved together.
+ *
+ * MUTUALLY EXCLUSIVE, and `mockDraft` wins. It is the later state of the same
+ * timeline — a finished draft implies an order — so honouring both would mean
+ * asking for a drafted league and an undrafted one at once.
+ */
+export function draftMocks(): { order: boolean; complete: boolean } {
+  const complete = stickyParam("mockDraft") === "true";
+  return { complete, order: complete || stickyParam("mockDraftOrder") === "true" };
+}
+
 /** True when this session asked for a stand-in draft order. */
-export const wantsMockOrder = (): boolean => stickyParam("mockDraftOrder") === "true";
+export const wantsMockOrder = (): boolean => draftMocks().order;
+
+/** True when this session asked to see the league as if the draft had run. */
+export const wantsMockCompleteDraft = (): boolean => draftMocks().complete;

@@ -217,3 +217,17 @@ export function mockDraftDate(now = Date.now()): number {
 /** Keeper deadline: three days before the draft (bylaws 1.7). */
 export const keeperDeadline = (draftStart: number): number =>
   draftStart - 3 * 24 * 60 * 60 * 1000;
+
+/**
+ * A stand-in date for a draft that has already happened.
+ *
+ * Three days ago, so the keeper deadline — three days before the draft — is six
+ * days past and reads as closed. That is the state `mockDraft` exists to show:
+ * picks frozen, results in, first week not yet played.
+ */
+export function mockCompletedDraftDate(now = Date.now()): number {
+  const d = new Date(now);
+  d.setDate(d.getDate() - 3);
+  d.setHours(19, 0, 0, 0);
+  return d.getTime();
+}
