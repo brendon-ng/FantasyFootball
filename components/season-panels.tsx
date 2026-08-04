@@ -313,14 +313,14 @@ function MatchupStrip({
 
   return (
     <div
-      className="matchup-strip -mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:px-0"
+      className="matchup-strip -mx-1 gap-2.5 px-1 pb-1 sm:mx-0 sm:px-0"
       style={{ "--matchup-cols": live.matchups.length } as React.CSSProperties}
     >
       {live.matchups.map((m) => (
         <Link
           key={m.matchupId}
           href={`/matchups/${meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug)}/`}
-          className="w-[13rem] shrink-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim sm:w-auto"
+          className="min-w-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim"
         >
           {[m.a, m.b].map((side, i) => {
             const other = i === 0 ? m.b : m.a;

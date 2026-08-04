@@ -129,13 +129,31 @@ body {
  *
  * The column count is the matchup count — five for a ten-team league, six for a
  * twelve — which Tailwind cannot express as a class because it is dynamic, hence
- * a variable. Below sm it stays a scrolling flex row; stacking five cards would
- * push the standings off a phone screen entirely.
+ * a variable. Below sm it is a scrolling row of fixed-width cards; stacking five
+ * would push the standings off a phone screen entirely.
+ *
+ * EVERY LAYOUT PROPERTY LIVES HERE, none on the element. An earlier version set
+ * `flex` and `overflow-x-auto` as utilities and overrode them from this rule,
+ * which left the cards content-sized instead of filling — two rules fighting over
+ * `display` is a bug you cannot see in the markup. The element now carries no
+ * display, width or overflow class at all, so there is nothing to lose to.
+ *
+ * `grid-auto-columns` sizes the mobile cards and equal `1fr` tracks size the
+ * desktop ones, so the cards themselves need no width either.
  */
+.matchup-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 13rem;
+  overflow-x: auto;
+}
 @media (min-width: 40rem) {
   .matchup-strip {
-    display: grid;
-    grid-template-columns: repeat(var(--matchup-cols), minmax(0, 1fr));
-    overflow: visible;
+    grid-auto-flow: row;
+    /* The fallback matters: without a column count this would collapse to a
+       single stacked column rather than merely being mis-sized. */
+    grid-template-columns: repeat(var(--matchup-cols, 5), minmax(0, 1fr));
+    overflow-x: visible;
   }
 }
+
