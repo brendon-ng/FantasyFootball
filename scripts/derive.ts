@@ -40,7 +40,7 @@ import type {
   SleeperTransaction,
   SleeperUser,
 } from "../lib/sleeper.ts";
-import { log, readJson, writeJson } from "./lib/io.ts";
+import { ROOT, log, readJson, writeJson } from "./lib/io.ts";
 import { configDir, dataDir, resolveLeagues, type ScriptLeague } from "./lib/league.ts";
 
 // Set per league by deriveLeague(); every helper below reads these. Definite
@@ -1361,6 +1361,62 @@ function buildDraftHistory(seasons: SeasonData[]): DraftPickRecord[] {
   });
 }
 
+/**
+ * A replay of the most recent finished season, for the phase mocks.
+ *
+ * The mocks used to FABRICATE fixtures and scores. Replaying a real season is
+ * strictly better: the layouts get built against the shape of actual data —
+ * blowouts, ties, a 40-point week, co-owned teams — rather than against numbers
+ * chosen to look reasonable. When this season reaches the same phase, the UI has
+ * already been seen with data like it.
+ *
+ * Written to `public/`, not `data/`, because only a browser needs it and only
+ * when a mock is on. Nobody who is not developing ever downloads it.
+ *
+ * Everything derives from a week number at read time — standings are the sum of
+ * weeks 1..N — so the file is one season, not one file per phase.
+ */
+function writeReplay(slug: string, summaries: SeasonSummary[], matchups: Matchup[]): void {
+  const finished = summaries.filter((s) => s.finalized && !s.imported).sort((a, b) => b.season - a.season);
+  const latest = finished[0];
+  if (!latest) return;
+
+  const weeks: Record<string, Array<{ a: [string, number]; b: [string, number] }>> = {};
+  for (const m of matchups.filter((m) => m.season === latest.season)) {
+    const key = String(m.week);
+    weeks[key] = [
+      ...(weeks[key] ?? []),
+      {
+        a: [m.home.ownerSlug, m.home.points],
+        b: [m.away.ownerSlug, m.away.points],
+      },
+    ];
+  }
+
+  const draft = readJson<SleeperDraft>(join(RAW_DIR, String(latest.season), "draft.json"));
+  writeJson(join(ROOT, "public", "mock", `${slug}.json`), {
+    season: latest.season,
+    regularSeasonWeeks: latest.regularSeasonWeeks,
+    teams: latest.standings.map((r) => ({
+      ownerSlug: r.ownerSlug,
+      rosterId: r.rosterId,
+      teamName: r.teamName,
+    })),
+    weeks,
+    draft: draft
+      ? {
+          startTime: draft.start_time ?? null,
+          type: draft.type,
+          rounds: draft.settings?.rounds ?? 0,
+          teams: draft.settings?.teams ?? latest.teams,
+          reversalRound: draft.settings?.reversal_round ?? 0,
+          slotToRoster: draft.slot_to_roster_id ?? {},
+        }
+      : null,
+  });
+  log.write(`public/mock/${slug}.json — ${latest.season} replay`);
+}
+
 // --- imported (pre-Sleeper) seasons ------------------------------------------
 
 interface ManualSeason {
@@ -1928,6 +1984,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   out("player-history.json", playerHistory);
   out("drafts.json", drafts);
   out("weekly-lows.json", weeklyLows);
+  writeReplay(league.slug, summaries, matchups);
 
   log.step("Summary");
   for (const s of summaries) {

@@ -1,73 +1,114 @@
 "use client";
 
 /**
- * Bends the live season into a requested phase, for development.
+ * Replays a real past season, so a phase can be developed before it arrives.
  *
- * ONLY EVER FILLS IN WHAT IS MISSING. Ask for `weekLive` in October and it does
- * nothing, because the real data already says that. So the flags go quiet on
- * their own as the season catches up with them — no cleanup, and no risk of a
- * stale flag silently faking a state the league has genuinely reached.
+ * REPLAY, NOT FABRICATION. An earlier version invented fixtures and scores; a
+ * real season is strictly better, because the layout gets built against the shape
+ * of actual data — blowouts, near-ties, a 40-point disaster week, co-owned teams —
+ * rather than against numbers chosen to look reasonable. When this season reaches
+ * the same phase, the UI has already been seen with data like it.
  *
- * Scores are FABRICATED here, unlike everywhere else in the app. There is no way
- * to preview a live scoreboard without inventing one, so they are at least
- * deterministic — seeded from slug and week, so a reload shows the same game and a
- * screenshot is reproducible. Anything rendering a mocked phase badges it.
+ * The source is `public/mock/<league>.json`, written by derive from the most
+ * recent finished season. Fetched ONLY when a mock is on, so nobody who is not
+ * developing ever downloads it.
+ *
+ * ONLY FILLS IN WHAT IS MISSING. Once the real season reaches a phase, its own
+ * data wins and the flag goes quiet — no cleanup, and no risk of a stale flag
+ * faking a state the league has genuinely reached.
  */
 
 import type { LeaguePhase } from "./phase.ts";
-import type { LiveMatchup, LiveSeason } from "./types.ts";
+import type { LiveMatchup, LiveSeason, LiveTeam } from "./types.ts";
 
-/** Stable pseudo-score in a plausible fantasy range, 60-160. */
-function fakePoints(seed: string): number {
-  let h = 2166136261;
-  for (let i = 0; i < seed.length; i++) h = Math.imul(h ^ seed.charCodeAt(i), 16777619);
-  return Number((60 + ((h >>> 0) % 10000) / 100).toFixed(2));
+export interface Replay {
+  season: number;
+  regularSeasonWeeks: number;
+  teams: Array<{ ownerSlug: string; rosterId: number; teamName: string | null }>;
+  weeks: Record<string, Array<{ a: [string, number]; b: [string, number] }>>;
+  draft: {
+    startTime: number | null;
+    type: string;
+    rounds: number;
+    teams: number;
+    reversalRound: number;
+    slotToRoster: Record<string, number>;
+  } | null;
 }
+
+/** The week each phase replays. `drafted` is week 1 not yet played. */
+export const DEFAULT_REPLAY_WEEK: Partial<Record<LeaguePhase, number>> = {
+  drafted: 1,
+  weekPreview: 6,
+  weekLive: 6,
+  weekComplete: 6,
+};
 
 /**
- * Pairs teams for a week that Sleeper has not scheduled yet.
+ * Standings as they stood after a given week.
  *
- * A fixed rotation rather than anything clever: the point is to have plausible
- * pairings to lay out, not to reproduce Sleeper's scheduler.
+ * Summed from the replayed results rather than stored, so any week can be asked
+ * for without a file per week.
  */
-function fakeMatchups(live: LiveSeason, week: number, scored: boolean): LiveMatchup[] {
-  const teams = [...live.teams].sort((a, b) => a.rosterId - b.rosterId);
-  const out: LiveMatchup[] = [];
-  for (let i = 0; i + 1 < teams.length; i += 2) {
-    const a = teams[i];
-    const b = teams[i + 1];
-    out.push({
-      matchupId: i / 2 + 1,
-      a: {
-        ownerSlug: a.ownerSlug,
-        points: scored ? fakePoints(`${week}:${a.ownerSlug}`) : 0,
+function standingsThrough(replay: Replay, throughWeek: number): LiveTeam[] {
+  const acc = new Map<string, LiveTeam>(
+    replay.teams.map((t) => [
+      t.ownerSlug,
+      {
+        ownerSlug: t.ownerSlug,
+        rosterId: t.rosterId,
+        teamName: t.teamName,
+        wins: 0,
+        losses: 0,
+        ties: 0,
+        pointsFor: 0,
+        pointsAgainst: 0,
+        waiverBudgetUsed: 0,
+        players: [],
+        starters: [],
       },
-      b: {
-        ownerSlug: b.ownerSlug,
-        points: scored ? fakePoints(`${week}:${b.ownerSlug}`) : 0,
-      },
-    });
+    ]),
+  );
+
+  for (let week = 1; week <= throughWeek; week++) {
+    for (const game of replay.weeks[String(week)] ?? []) {
+      for (const [self, other] of [
+        [game.a, game.b],
+        [game.b, game.a],
+      ] as const) {
+        const team = acc.get(self[0]);
+        if (!team) continue;
+        team.pointsFor = Number((team.pointsFor + self[1]).toFixed(2));
+        team.pointsAgainst = Number((team.pointsAgainst + other[1]).toFixed(2));
+        if (self[1] > other[1]) team.wins += 1;
+        else if (self[1] < other[1]) team.losses += 1;
+        else team.ties += 1;
+      }
+    }
   }
-  return out;
+  return [...acc.values()];
 }
 
-export function applyPhaseMock(live: LiveSeason, phase: LeaguePhase | null): LiveSeason {
-  if (!phase) return live;
+function weekMatchups(replay: Replay, week: number, scored: boolean): LiveMatchup[] {
+  return (replay.weeks[String(week)] ?? []).map((g, i) => ({
+    matchupId: i + 1,
+    a: { ownerSlug: g.a[0], points: scored ? g.a[1] : 0 },
+    b: { ownerSlug: g.b[0], points: scored ? g.b[1] : 0 },
+  }));
+}
 
-  // `drafted` is week 1 not yet played, so it needs the same fixtures a preview
-  // does. Its seasonType stays "pre" — that is what Sleeper really reports until
-  // week 1, and it is how resolvePhase still tells the two apart.
-  if (phase === "drafted") {
-    return live.matchups.length
-      ? live
-      : { ...live, week: 1, displayWeek: 1, matchups: fakeMatchups(live, 1, false), lastScoredLeg: null };
-  }
+export function applyPhaseMock(
+  live: LiveSeason,
+  phase: LeaguePhase | null,
+  replay: Replay | null,
+  week?: number,
+): LiveSeason {
+  if (!phase || !replay) return live;
+  const target = week ?? DEFAULT_REPLAY_WEEK[phase];
+  if (!target) return live;
 
+  // The real season already got here — leave it alone.
   const inSeason = live.seasonType === "regular" || live.seasonType === "post";
-  const weekPhases: LeaguePhase[] = ["weekPreview", "weekLive", "weekComplete"];
-  if (!weekPhases.includes(phase)) return live;
-
-  // Already there for real — leave it alone.
   if (inSeason && live.matchups.length) {
     const started = live.matchups.some((m) => m.a.points > 0 || m.b.points > 0);
     const complete = (live.lastScoredLeg ?? 0) >= live.week;
@@ -75,15 +116,22 @@ export function applyPhaseMock(live: LiveSeason, phase: LeaguePhase | null): Liv
     if (actual === phase) return live;
   }
 
-  const week = Math.max(1, live.week || 1);
-  const scored = phase !== "weekPreview";
+  const done = phase === "weekComplete";
+  const scored = phase === "weekLive" || done;
+
   return {
     ...live,
-    seasonType: "regular",
-    week,
-    displayWeek: week,
-    status: "in_season",
-    matchups: fakeMatchups(live, week, scored),
-    lastScoredLeg: phase === "weekComplete" ? week : week - 1,
+    // The season number stays the CURRENT one. The replay supplies the shape of
+    // a week, not a claim about which year it is — the page is previewing what
+    // this season will look like, not showing last season again.
+    week: target,
+    displayWeek: target,
+    // `drafted` keeps "pre": that is what Sleeper reports until week 1, and it is
+    // how resolvePhase still tells it apart from a genuine week preview.
+    seasonType: phase === "drafted" ? live.seasonType : "regular",
+    status: phase === "drafted" ? live.status : "in_season",
+    teams: standingsThrough(replay, done ? target : target - 1),
+    matchups: weekMatchups(replay, target, scored),
+    lastScoredLeg: done ? target : target - 1,
   };
 }

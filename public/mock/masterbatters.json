@@ -1,0 +1,1103 @@
+{
+  "draft": {
+    "reversalRound": 0,
+    "rounds": 14,
+    "slotToRoster": {
+      "1": 12,
+      "2": 1,
+      "3": 9,
+      "4": 2,
+      "5": 6,
+      "6": 3,
+      "7": 10,
+      "8": 7,
+      "9": 8,
+      "10": 11,
+      "11": 4,
+      "12": 5
+    },
+    "startTime": 1756437048229,
+    "teams": 12,
+    "type": "snake"
+  },
+  "regularSeasonWeeks": 14,
+  "season": 2025,
+  "teams": [
+    {
+      "ownerSlug": "jake-gibbons",
+      "rosterId": 2,
+      "teamName": "Jgibby28"
+    },
+    {
+      "ownerSlug": "kaitlin-zarbis",
+      "rosterId": 7,
+      "teamName": "Intercept THIS"
+    },
+    {
+      "ownerSlug": "kate-olson",
+      "rosterId": 6,
+      "teamName": "The Bosa Constrictor "
+    },
+    {
+      "ownerSlug": "aidan-kelleher",
+      "rosterId": 4,
+      "teamName": "Crashee Rice"
+    },
+    {
+      "ownerSlug": "allison-fosbery",
+      "rosterId": 12,
+      "teamName": "afosb"
+    },
+    {
+      "ownerSlug": "brendon-ng",
+      "rosterId": 1,
+      "teamName": "GunnaGetTheChoppaOnU LADD"
+    },
+    {
+      "ownerSlug": "srishti-dhawan",
+      "rosterId": 11,
+      "teamName": "swishdh1"
+    },
+    {
+      "ownerSlug": "vance-armstrong",
+      "rosterId": 5,
+      "teamName": "varms34"
+    },
+    {
+      "ownerSlug": "lindsey-freeze",
+      "rosterId": 9,
+      "teamName": "Is Lamar OK?"
+    },
+    {
+      "ownerSlug": "josh-greenebaum",
+      "rosterId": 3,
+      "teamName": "Hukuna Mailata "
+    },
+    {
+      "ownerSlug": "robbie-goodman",
+      "rosterId": 10,
+      "teamName": "Robbie&thomas win fantasy"
+    },
+    {
+      "ownerSlug": "ross-bechtel",
+      "rosterId": 8,
+      "teamName": "#PunishBrendon"
+    }
+  ],
+  "weeks": {
+    "1": [
+      {
+        "a": [
+          "brendon-ng",
+          96.92
+        ],
+        "b": [
+          "ross-bechtel",
+          98.12
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          116.18
+        ],
+        "b": [
+          "allison-fosbery",
+          89.72
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          94.88
+        ],
+        "b": [
+          "srishti-dhawan",
+          97.08
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          114.52
+        ],
+        "b": [
+          "kate-olson",
+          127.96
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          116.22
+        ],
+        "b": [
+          "robbie-goodman",
+          110.72
+        ]
+      },
+      {
+        "a": [
+          "kaitlin-zarbis",
+          86.84
+        ],
+        "b": [
+          "lindsey-freeze",
+          120.56
+        ]
+      }
+    ],
+    "2": [
+      {
+        "a": [
+          "brendon-ng",
+          114.94
+        ],
+        "b": [
+          "kate-olson",
+          74.72
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          138.1
+        ],
+        "b": [
+          "robbie-goodman",
+          115.9
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          135.44
+        ],
+        "b": [
+          "kaitlin-zarbis",
+          133.24
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          118.84
+        ],
+        "b": [
+          "ross-bechtel",
+          101.5
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          84.78
+        ],
+        "b": [
+          "allison-fosbery",
+          123.38
+        ]
+      },
+      {
+        "a": [
+          "lindsey-freeze",
+          129.5
+        ],
+        "b": [
+          "srishti-dhawan",
+          140.82
+        ]
+      }
+    ],
+    "3": [
+      {
+        "a": [
+          "brendon-ng",
+          111.22
+        ],
+        "b": [
+          "aidan-kelleher",
+          82.84
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          168.92
+        ],
+        "b": [
+          "vance-armstrong",
+          100.1
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          123.54
+        ],
+        "b": [
+          "lindsey-freeze",
+          135.52
+        ]
+      },
+      {
+        "a": [
+          "kate-olson",
+          110.72
+        ],
+        "b": [
+          "ross-bechtel",
+          95.36
+        ]
+      },
+      {
+        "a": [
+          "kaitlin-zarbis",
+          136.42
+        ],
+        "b": [
+          "srishti-dhawan",
+          108.26
+        ]
+      },
+      {
+        "a": [
+          "robbie-goodman",
+          134.22
+        ],
+        "b": [
+          "allison-fosbery",
+          106.76
+        ]
+      }
+    ],
+    "4": [
+      {
+        "a": [
+          "brendon-ng",
+          90.28
+        ],
+        "b": [
+          "lindsey-freeze",
+          123.58
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          118.46
+        ],
+        "b": [
+          "kate-olson",
+          132.86
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          100.8
+        ],
+        "b": [
+          "vance-armstrong",
+          152.12
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          107.78
+        ],
+        "b": [
+          "allison-fosbery",
+          97.1
+        ]
+      },
+      {
+        "a": [
+          "kaitlin-zarbis",
+          144.64
+        ],
+        "b": [
+          "ross-bechtel",
+          118.62
+        ]
+      },
+      {
+        "a": [
+          "robbie-goodman",
+          98.78
+        ],
+        "b": [
+          "srishti-dhawan",
+          145.26
+        ]
+      }
+    ],
+    "5": [
+      {
+        "a": [
+          "brendon-ng",
+          109.18
+        ],
+        "b": [
+          "kaitlin-zarbis",
+          104.38
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          157.76
+        ],
+        "b": [
+          "aidan-kelleher",
+          122.86
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          90.7
+        ],
+        "b": [
+          "robbie-goodman",
+          116.84
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          128.54
+        ],
+        "b": [
+          "srishti-dhawan",
+          151.12
+        ]
+      },
+      {
+        "a": [
+          "kate-olson",
+          121.22
+        ],
+        "b": [
+          "allison-fosbery",
+          129.42
+        ]
+      },
+      {
+        "a": [
+          "ross-bechtel",
+          106.52
+        ],
+        "b": [
+          "lindsey-freeze",
+          139.9
+        ]
+      }
+    ],
+    "6": [
+      {
+        "a": [
+          "brendon-ng",
+          98.88
+        ],
+        "b": [
+          "jake-gibbons",
+          122.34
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          107.12
+        ],
+        "b": [
+          "aidan-kelleher",
+          143.18
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          103.86
+        ],
+        "b": [
+          "kaitlin-zarbis",
+          100.96
+        ]
+      },
+      {
+        "a": [
+          "kate-olson",
+          129.3
+        ],
+        "b": [
+          "srishti-dhawan",
+          83.3
+        ]
+      },
+      {
+        "a": [
+          "ross-bechtel",
+          105.72
+        ],
+        "b": [
+          "allison-fosbery",
+          126.28
+        ]
+      },
+      {
+        "a": [
+          "lindsey-freeze",
+          158.86
+        ],
+        "b": [
+          "robbie-goodman",
+          112.74
+        ]
+      }
+    ],
+    "7": [
+      {
+        "a": [
+          "brendon-ng",
+          106.22
+        ],
+        "b": [
+          "allison-fosbery",
+          114.04
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          165.82
+        ],
+        "b": [
+          "ross-bechtel",
+          74.14
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          180.14
+        ],
+        "b": [
+          "kate-olson",
+          93.52
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          95.78
+        ],
+        "b": [
+          "srishti-dhawan",
+          82.44
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          130.8
+        ],
+        "b": [
+          "lindsey-freeze",
+          118.16
+        ]
+      },
+      {
+        "a": [
+          "kaitlin-zarbis",
+          162.16
+        ],
+        "b": [
+          "robbie-goodman",
+          117.54
+        ]
+      }
+    ],
+    "8": [
+      {
+        "a": [
+          "brendon-ng",
+          123.68
+        ],
+        "b": [
+          "robbie-goodman",
+          120.82
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          112.78
+        ],
+        "b": [
+          "srishti-dhawan",
+          100.12
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          138.16
+        ],
+        "b": [
+          "allison-fosbery",
+          146.46
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          99.4
+        ],
+        "b": [
+          "kaitlin-zarbis",
+          146.38
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          107.98
+        ],
+        "b": [
+          "ross-bechtel",
+          79.14
+        ]
+      },
+      {
+        "a": [
+          "kate-olson",
+          92.82
+        ],
+        "b": [
+          "lindsey-freeze",
+          92.52
+        ]
+      }
+    ],
+    "9": [
+      {
+        "a": [
+          "brendon-ng",
+          111.08
+        ],
+        "b": [
+          "vance-armstrong",
+          103.8
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          92.82
+        ],
+        "b": [
+          "josh-greenebaum",
+          121.6
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          134.76
+        ],
+        "b": [
+          "lindsey-freeze",
+          131.66
+        ]
+      },
+      {
+        "a": [
+          "kate-olson",
+          147.02
+        ],
+        "b": [
+          "kaitlin-zarbis",
+          133.54
+        ]
+      },
+      {
+        "a": [
+          "ross-bechtel",
+          113.36
+        ],
+        "b": [
+          "robbie-goodman",
+          120.92
+        ]
+      },
+      {
+        "a": [
+          "srishti-dhawan",
+          123.7
+        ],
+        "b": [
+          "allison-fosbery",
+          106
+        ]
+      }
+    ],
+    "10": [
+      {
+        "a": [
+          "brendon-ng",
+          133.9
+        ],
+        "b": [
+          "srishti-dhawan",
+          91.92
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          170.62
+        ],
+        "b": [
+          "lindsey-freeze",
+          112.14
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          117.72
+        ],
+        "b": [
+          "ross-bechtel",
+          106.5
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          128.9
+        ],
+        "b": [
+          "vance-armstrong",
+          147.8
+        ]
+      },
+      {
+        "a": [
+          "kate-olson",
+          112.14
+        ],
+        "b": [
+          "robbie-goodman",
+          89.22
+        ]
+      },
+      {
+        "a": [
+          "kaitlin-zarbis",
+          139
+        ],
+        "b": [
+          "allison-fosbery",
+          109.74
+        ]
+      }
+    ],
+    "11": [
+      {
+        "a": [
+          "brendon-ng",
+          66.06
+        ],
+        "b": [
+          "josh-greenebaum",
+          62.3
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          94.12
+        ],
+        "b": [
+          "kaitlin-zarbis",
+          129.5
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          116.14
+        ],
+        "b": [
+          "robbie-goodman",
+          98.2
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          93.24
+        ],
+        "b": [
+          "kate-olson",
+          136.68
+        ]
+      },
+      {
+        "a": [
+          "ross-bechtel",
+          87.7
+        ],
+        "b": [
+          "srishti-dhawan",
+          146.1
+        ]
+      },
+      {
+        "a": [
+          "lindsey-freeze",
+          96.12
+        ],
+        "b": [
+          "allison-fosbery",
+          146.94
+        ]
+      }
+    ],
+    "12": [
+      {
+        "a": [
+          "brendon-ng",
+          102.64
+        ],
+        "b": [
+          "ross-bechtel",
+          107.36
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          161.34
+        ],
+        "b": [
+          "allison-fosbery",
+          113.48
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          166.56
+        ],
+        "b": [
+          "srishti-dhawan",
+          109.92
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          124.86
+        ],
+        "b": [
+          "kate-olson",
+          108.22
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          97.68
+        ],
+        "b": [
+          "robbie-goodman",
+          89.02
+        ]
+      },
+      {
+        "a": [
+          "kaitlin-zarbis",
+          135.82
+        ],
+        "b": [
+          "lindsey-freeze",
+          98.22
+        ]
+      }
+    ],
+    "13": [
+      {
+        "a": [
+          "brendon-ng",
+          105.84
+        ],
+        "b": [
+          "kate-olson",
+          96.62
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          85.16
+        ],
+        "b": [
+          "robbie-goodman",
+          125.66
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          93.4
+        ],
+        "b": [
+          "kaitlin-zarbis",
+          151.32
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          118.78
+        ],
+        "b": [
+          "ross-bechtel",
+          83.94
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          103.54
+        ],
+        "b": [
+          "allison-fosbery",
+          107.84
+        ]
+      },
+      {
+        "a": [
+          "lindsey-freeze",
+          99.04
+        ],
+        "b": [
+          "srishti-dhawan",
+          122.02
+        ]
+      }
+    ],
+    "14": [
+      {
+        "a": [
+          "brendon-ng",
+          76.4
+        ],
+        "b": [
+          "aidan-kelleher",
+          117.82
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          145.28
+        ],
+        "b": [
+          "vance-armstrong",
+          85.76
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          118.1
+        ],
+        "b": [
+          "lindsey-freeze",
+          124.14
+        ]
+      },
+      {
+        "a": [
+          "kate-olson",
+          143.64
+        ],
+        "b": [
+          "ross-bechtel",
+          89.76
+        ]
+      },
+      {
+        "a": [
+          "kaitlin-zarbis",
+          144.44
+        ],
+        "b": [
+          "srishti-dhawan",
+          74.96
+        ]
+      },
+      {
+        "a": [
+          "robbie-goodman",
+          89.52
+        ],
+        "b": [
+          "allison-fosbery",
+          100.3
+        ]
+      }
+    ],
+    "15": [
+      {
+        "a": [
+          "brendon-ng",
+          107.28
+        ],
+        "b": [
+          "kate-olson",
+          92.82
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          173.3
+        ],
+        "b": [
+          "srishti-dhawan",
+          132.3
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          128
+        ],
+        "b": [
+          "allison-fosbery",
+          115.36
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          108.9
+        ],
+        "b": [
+          "lindsey-freeze",
+          134.9
+        ]
+      }
+    ],
+    "16": [
+      {
+        "a": [
+          "brendon-ng",
+          119.42
+        ],
+        "b": [
+          "kaitlin-zarbis",
+          115.38
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          151.2
+        ],
+        "b": [
+          "aidan-kelleher",
+          133.2
+        ]
+      },
+      {
+        "a": [
+          "josh-greenebaum",
+          110.6
+        ],
+        "b": [
+          "lindsey-freeze",
+          98.64
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          96
+        ],
+        "b": [
+          "ross-bechtel",
+          144.16
+        ]
+      },
+      {
+        "a": [
+          "kate-olson",
+          104.2
+        ],
+        "b": [
+          "allison-fosbery",
+          185.44
+        ]
+      },
+      {
+        "a": [
+          "robbie-goodman",
+          104.08
+        ],
+        "b": [
+          "srishti-dhawan",
+          129.9
+        ]
+      }
+    ],
+    "17": [
+      {
+        "a": [
+          "brendon-ng",
+          94.92
+        ],
+        "b": [
+          "jake-gibbons",
+          103.74
+        ]
+      },
+      {
+        "a": [
+          "aidan-kelleher",
+          108.04
+        ],
+        "b": [
+          "kaitlin-zarbis",
+          128.36
+        ]
+      },
+      {
+        "a": [
+          "vance-armstrong",
+          110.18
+        ],
+        "b": [
+          "robbie-goodman",
+          97.22
+        ]
+      },
+      {
+        "a": [
+          "ross-bechtel",
+          122.98
+        ],
+        "b": [
+          "srishti-dhawan",
+          128.42
+        ]
+      }
+    ]
+  }
+}

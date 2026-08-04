@@ -1,0 +1,921 @@
+{
+  "draft": {
+    "reversalRound": 0,
+    "rounds": 17,
+    "slotToRoster": {
+      "1": 8,
+      "2": 4,
+      "3": 7,
+      "4": 6,
+      "5": 9,
+      "6": 5,
+      "7": 10,
+      "8": 2,
+      "9": 3,
+      "10": 1
+    },
+    "startTime": 1756168364881,
+    "teams": 10,
+    "type": "snake"
+  },
+  "regularSeasonWeeks": 14,
+  "season": 2025,
+  "teams": [
+    {
+      "ownerSlug": "tyler-jung",
+      "rosterId": 3,
+      "teamName": "Griddy and the JJets"
+    },
+    {
+      "ownerSlug": "david-collier",
+      "rosterId": 2,
+      "teamName": "Legette it Shaty"
+    },
+    {
+      "ownerSlug": "lauren-gross",
+      "rosterId": 7,
+      "teamName": "Bruin by Marriage"
+    },
+    {
+      "ownerSlug": "spencer-kim",
+      "rosterId": 8,
+      "teamName": "Bunche Bombers"
+    },
+    {
+      "ownerSlug": "jake-gibbons",
+      "rosterId": 4,
+      "teamName": "Ray-Ray all Day-Day"
+    },
+    {
+      "ownerSlug": "brendon-ng",
+      "rosterId": 1,
+      "teamName": "Ash n' TDs"
+    },
+    {
+      "ownerSlug": "jaymie-lew",
+      "rosterId": 5,
+      "teamName": "twitch.tv/jamarrchase10"
+    },
+    {
+      "ownerSlug": "reagan-schmidt",
+      "rosterId": 10,
+      "teamName": "Butker’s Babes"
+    },
+    {
+      "ownerSlug": "safvet-besen",
+      "rosterId": 6,
+      "teamName": "It’s Gonna Be Maye"
+    },
+    {
+      "ownerSlug": "cassidy-pensa",
+      "rosterId": 9,
+      "teamName": "I wanna be a Brockstar"
+    }
+  ],
+  "weeks": {
+    "1": [
+      {
+        "a": [
+          "brendon-ng",
+          86.62
+        ],
+        "b": [
+          "david-collier",
+          120.42
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          123.08
+        ],
+        "b": [
+          "safvet-besen",
+          136.42
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          169.08
+        ],
+        "b": [
+          "spencer-kim",
+          136.52
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          112.46
+        ],
+        "b": [
+          "lauren-gross",
+          120.58
+        ]
+      },
+      {
+        "a": [
+          "cassidy-pensa",
+          98.24
+        ],
+        "b": [
+          "reagan-schmidt",
+          100.26
+        ]
+      }
+    ],
+    "2": [
+      {
+        "a": [
+          "brendon-ng",
+          117.24
+        ],
+        "b": [
+          "spencer-kim",
+          137.88
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          126
+        ],
+        "b": [
+          "jake-gibbons",
+          94.54
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          185.44
+        ],
+        "b": [
+          "reagan-schmidt",
+          142.8
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          150.62
+        ],
+        "b": [
+          "cassidy-pensa",
+          129.54
+        ]
+      },
+      {
+        "a": [
+          "safvet-besen",
+          115
+        ],
+        "b": [
+          "lauren-gross",
+          126.8
+        ]
+      }
+    ],
+    "3": [
+      {
+        "a": [
+          "brendon-ng",
+          114.4
+        ],
+        "b": [
+          "jake-gibbons",
+          105.04
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          163.06
+        ],
+        "b": [
+          "spencer-kim",
+          122.76
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          123.94
+        ],
+        "b": [
+          "lauren-gross",
+          128.82
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          126.62
+        ],
+        "b": [
+          "reagan-schmidt",
+          153.12
+        ]
+      },
+      {
+        "a": [
+          "safvet-besen",
+          124.52
+        ],
+        "b": [
+          "cassidy-pensa",
+          130.02
+        ]
+      }
+    ],
+    "4": [
+      {
+        "a": [
+          "brendon-ng",
+          173.98
+        ],
+        "b": [
+          "cassidy-pensa",
+          107.54
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          128.6
+        ],
+        "b": [
+          "tyler-jung",
+          134.36
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          146.5
+        ],
+        "b": [
+          "lauren-gross",
+          142.04
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          161.06
+        ],
+        "b": [
+          "spencer-kim",
+          137.8
+        ]
+      },
+      {
+        "a": [
+          "safvet-besen",
+          138.72
+        ],
+        "b": [
+          "reagan-schmidt",
+          138.98
+        ]
+      }
+    ],
+    "5": [
+      {
+        "a": [
+          "brendon-ng",
+          139.08
+        ],
+        "b": [
+          "reagan-schmidt",
+          132.24
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          171.6
+        ],
+        "b": [
+          "safvet-besen",
+          113.92
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          181.28
+        ],
+        "b": [
+          "cassidy-pensa",
+          149.6
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          145.8
+        ],
+        "b": [
+          "jaymie-lew",
+          126.42
+        ]
+      },
+      {
+        "a": [
+          "lauren-gross",
+          149.62
+        ],
+        "b": [
+          "spencer-kim",
+          111.12
+        ]
+      }
+    ],
+    "6": [
+      {
+        "a": [
+          "brendon-ng",
+          151.98
+        ],
+        "b": [
+          "safvet-besen",
+          121.34
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          144.06
+        ],
+        "b": [
+          "lauren-gross",
+          192.64
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          121.36
+        ],
+        "b": [
+          "jaymie-lew",
+          105.6
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          127.42
+        ],
+        "b": [
+          "reagan-schmidt",
+          86.9
+        ]
+      },
+      {
+        "a": [
+          "spencer-kim",
+          112.88
+        ],
+        "b": [
+          "cassidy-pensa",
+          76.66
+        ]
+      }
+    ],
+    "7": [
+      {
+        "a": [
+          "brendon-ng",
+          126.42
+        ],
+        "b": [
+          "tyler-jung",
+          142.26
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          174.36
+        ],
+        "b": [
+          "jaymie-lew",
+          131.5
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          89.94
+        ],
+        "b": [
+          "safvet-besen",
+          144.34
+        ]
+      },
+      {
+        "a": [
+          "lauren-gross",
+          115.32
+        ],
+        "b": [
+          "cassidy-pensa",
+          161.76
+        ]
+      },
+      {
+        "a": [
+          "spencer-kim",
+          148.54
+        ],
+        "b": [
+          "reagan-schmidt",
+          135.48
+        ]
+      }
+    ],
+    "8": [
+      {
+        "a": [
+          "brendon-ng",
+          115.98
+        ],
+        "b": [
+          "jaymie-lew",
+          143.32
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          134.7
+        ],
+        "b": [
+          "cassidy-pensa",
+          178.24
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          134.22
+        ],
+        "b": [
+          "jake-gibbons",
+          144.16
+        ]
+      },
+      {
+        "a": [
+          "safvet-besen",
+          94.88
+        ],
+        "b": [
+          "spencer-kim",
+          199.46
+        ]
+      },
+      {
+        "a": [
+          "lauren-gross",
+          97.18
+        ],
+        "b": [
+          "reagan-schmidt",
+          76.3
+        ]
+      }
+    ],
+    "9": [
+      {
+        "a": [
+          "brendon-ng",
+          129.98
+        ],
+        "b": [
+          "lauren-gross",
+          136.8
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          135.92
+        ],
+        "b": [
+          "reagan-schmidt",
+          111.66
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          140.3
+        ],
+        "b": [
+          "spencer-kim",
+          99.9
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          129.5
+        ],
+        "b": [
+          "cassidy-pensa",
+          137.72
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          145.62
+        ],
+        "b": [
+          "safvet-besen",
+          141.24
+        ]
+      }
+    ],
+    "10": [
+      {
+        "a": [
+          "brendon-ng",
+          131.18
+        ],
+        "b": [
+          "david-collier",
+          151.24
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          195.7
+        ],
+        "b": [
+          "safvet-besen",
+          126
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          119.42
+        ],
+        "b": [
+          "spencer-kim",
+          140.1
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          100.34
+        ],
+        "b": [
+          "lauren-gross",
+          151.42
+        ]
+      },
+      {
+        "a": [
+          "cassidy-pensa",
+          86.9
+        ],
+        "b": [
+          "reagan-schmidt",
+          120.44
+        ]
+      }
+    ],
+    "11": [
+      {
+        "a": [
+          "brendon-ng",
+          128.3
+        ],
+        "b": [
+          "spencer-kim",
+          118.74
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          130.96
+        ],
+        "b": [
+          "jake-gibbons",
+          140.8
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          174.82
+        ],
+        "b": [
+          "reagan-schmidt",
+          79.02
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          122.58
+        ],
+        "b": [
+          "cassidy-pensa",
+          87.7
+        ]
+      },
+      {
+        "a": [
+          "safvet-besen",
+          138.74
+        ],
+        "b": [
+          "lauren-gross",
+          133.32
+        ]
+      }
+    ],
+    "12": [
+      {
+        "a": [
+          "brendon-ng",
+          125.82
+        ],
+        "b": [
+          "jake-gibbons",
+          133.96
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          123.16
+        ],
+        "b": [
+          "spencer-kim",
+          123.48
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          137.62
+        ],
+        "b": [
+          "lauren-gross",
+          113.24
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          70.82
+        ],
+        "b": [
+          "reagan-schmidt",
+          184.42
+        ]
+      },
+      {
+        "a": [
+          "safvet-besen",
+          157.36
+        ],
+        "b": [
+          "cassidy-pensa",
+          99.28
+        ]
+      }
+    ],
+    "13": [
+      {
+        "a": [
+          "brendon-ng",
+          137.56
+        ],
+        "b": [
+          "cassidy-pensa",
+          130.14
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          150.46
+        ],
+        "b": [
+          "tyler-jung",
+          131.02
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          91.2
+        ],
+        "b": [
+          "lauren-gross",
+          142.86
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          116.52
+        ],
+        "b": [
+          "spencer-kim",
+          155.64
+        ]
+      },
+      {
+        "a": [
+          "safvet-besen",
+          101.28
+        ],
+        "b": [
+          "reagan-schmidt",
+          74.14
+        ]
+      }
+    ],
+    "14": [
+      {
+        "a": [
+          "brendon-ng",
+          119.16
+        ],
+        "b": [
+          "reagan-schmidt",
+          152.66
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          128.96
+        ],
+        "b": [
+          "safvet-besen",
+          82.6
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          116.94
+        ],
+        "b": [
+          "cassidy-pensa",
+          136.88
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          125.1
+        ],
+        "b": [
+          "jaymie-lew",
+          146.54
+        ]
+      },
+      {
+        "a": [
+          "lauren-gross",
+          123.08
+        ],
+        "b": [
+          "spencer-kim",
+          125.7
+        ]
+      }
+    ],
+    "15": [
+      {
+        "a": [
+          "brendon-ng",
+          86
+        ],
+        "b": [
+          "lauren-gross",
+          119.88
+        ]
+      },
+      {
+        "a": [
+          "jake-gibbons",
+          104.3
+        ],
+        "b": [
+          "spencer-kim",
+          167.66
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          144.62
+        ],
+        "b": [
+          "cassidy-pensa",
+          114.68
+        ]
+      },
+      {
+        "a": [
+          "safvet-besen",
+          131.1
+        ],
+        "b": [
+          "reagan-schmidt",
+          213.3
+        ]
+      }
+    ],
+    "16": [
+      {
+        "a": [
+          "brendon-ng",
+          150.76
+        ],
+        "b": [
+          "jake-gibbons",
+          107.4
+        ]
+      },
+      {
+        "a": [
+          "david-collier",
+          145.02
+        ],
+        "b": [
+          "lauren-gross",
+          118.2
+        ]
+      },
+      {
+        "a": [
+          "tyler-jung",
+          153.26
+        ],
+        "b": [
+          "spencer-kim",
+          149.98
+        ]
+      },
+      {
+        "a": [
+          "jaymie-lew",
+          154
+        ],
+        "b": [
+          "reagan-schmidt",
+          125.54
+        ]
+      },
+      {
+        "a": [
+          "safvet-besen",
+          157.1
+        ],
+        "b": [
+          "cassidy-pensa",
+          114.38
+        ]
+      }
+    ],
+    "17": [
+      {
+        "a": [
+          "david-collier",
+          158.42
+        ],
+        "b": [
+          "tyler-jung",
+          133.88
+        ]
+      },
+      {
+        "a": [
+          "lauren-gross",
+          137.42
+        ],
+        "b": [
+          "spencer-kim",
+          108.78
+        ]
+      }
+    ]
+  }
+}

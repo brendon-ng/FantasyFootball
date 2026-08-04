@@ -20,7 +20,7 @@ import { PHASES, type LeaguePhase } from "./phase.ts";
  */
 
 /** Params worth carrying. Add sparingly — each one is global state. */
-export const STICKY_PARAMS = ["mockPhase", "mockDraftOrder", "mockDraft"] as const;
+export const STICKY_PARAMS = ["mockPhase", "mockWeek", "mockDraftOrder", "mockDraft"] as const;
 
 const KEY = "ff:sticky-params";
 
@@ -99,6 +99,13 @@ export function mockPhase(): LeaguePhase | null {
   if (stickyParam("mockDraft") === "true") return "drafted";
   if (stickyParam("mockDraftOrder") === "true") return "preDraft";
   return null;
+}
+
+/** Which week to replay, when the default for the phase is not the one wanted. */
+export function mockWeek(): number | undefined {
+  const raw = stickyParam("mockWeek");
+  const n = raw ? Number(raw) : NaN;
+  return Number.isFinite(n) && n >= 1 ? n : undefined;
 }
 
 /**

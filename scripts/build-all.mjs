@@ -48,12 +48,13 @@ for (const league of leagues) {
   cpSync(exported, join(STAGE, league.slug), { recursive: true });
 
   // `public/` is copied wholesale into every build, so each league's output would
-  // otherwise carry the others' avatars. Harmless but wasteful, and it leaks one
-  // league's asset into another's site.
-  const avatars = join(STAGE, league.slug, "avatars");
-  if (existsSync(avatars)) {
-    for (const f of readdirSync(avatars)) {
-      if (!f.startsWith(`${league.slug}.`)) rmSync(join(avatars, f));
+  // otherwise carry the others' avatars and mock replays. Harmless but wasteful,
+  // and it leaks one league's data into another's site.
+  for (const dir of ["avatars", "mock"]) {
+    const path = join(STAGE, league.slug, dir);
+    if (!existsSync(path)) continue;
+    for (const f of readdirSync(path)) {
+      if (!f.startsWith(`${league.slug}.`)) rmSync(join(path, f));
     }
   }
 }

@@ -195,10 +195,21 @@ does nothing, because the real data already says so — the flags go quiet on th
 own as the season catches up, so a stale one cannot fake a state the league has
 genuinely reached.
 
-Week phases FABRICATE scores, the only invented data in the app. There is no way
-to preview a scoreboard without one; they are deterministic (seeded from slug and
-week) so a reload shows the same game. `<MockBadge />` sits in the nav for as long
-as any flag is on, because a mocked surface renders identically to a real one.
+The mocks REPLAY A REAL SEASON rather than inventing one. `derive` writes the most
+recent finished season to `public/mock/<slug>.json` (~14KB), and the phases read a
+week out of it: `drafted` is week 1 unplayed, and the week phases default to week
+6 — before it, during it, after it. `?mockWeek=12` picks another.
+
+That matters for building layouts: they get exercised against the shape of real
+data — blowouts, near-ties, a 40-point disaster, co-owned teams — instead of
+numbers chosen to look reasonable. Standings are summed from the replayed results
+at read time, so any week works from one file.
+
+Fetched ONLY when a flag is on, so nobody who is not developing downloads it, and
+`build-all.mjs` prunes other leagues' copies the same way it does avatars.
+
+`<MockBadge />` sits in the nav for as long as any flag is on, because a mocked
+surface renders identically to a real one.
 
 Sticky rules: a FULL PAGE LOAD rebuilds the flags from the URL, so editing the
 address bar to drop one works; storage only carries them across CLIENT navigation,

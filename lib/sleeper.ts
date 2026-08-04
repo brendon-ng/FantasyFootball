@@ -166,7 +166,7 @@ export interface SleeperDraft {
   season: string;
   status: string;
   type: string;
-  settings: { rounds: number; teams: number; pick_timer?: number };
+  settings: { rounds: number; teams: number; pick_timer?: number; reversal_round?: number };
   metadata: Record<string, unknown> | null;
   start_time: number | null;
   /** user_id -> draft slot. Only present on the single-draft endpoint. */

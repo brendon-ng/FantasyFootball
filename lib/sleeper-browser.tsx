@@ -23,8 +23,9 @@ import {
   mockDraftOrder,
   orderIsSet,
 } from "@/lib/draft-slots";
-import { applyPhaseMock } from "@/lib/phase-mock";
-import { draftMocks, mockPhase } from "@/lib/sticky-params";
+import { applyPhaseMock, type Replay } from "@/lib/phase-mock";
+import { withBasePath } from "@/lib/base-path";
+import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
 import type { LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "@/lib/types";
 
 export interface LiveRoster {
@@ -354,6 +355,22 @@ export function useLiveSeason(
   initial: LiveSeason | null,
 ): LiveSeason | null {
   const [live, setLive] = useState<LiveSeason | null>(initial);
+  const [replay, setReplay] = useState<Replay | null>(null);
+
+  // Only when a mock is on: a real visitor never downloads the replay.
+  useEffect(() => {
+    if (!mockPhase()) return;
+    let cancelled = false;
+    fetch(withBasePath(`/mock/${process.env.NEXT_PUBLIC_LEAGUE ?? "den-ops"}.json`))
+      .then((r) => (r.ok ? r.json() : null))
+      .then((r) => {
+        if (!cancelled) setReplay(r as Replay | null);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -434,7 +451,7 @@ export function useLiveSeason(
           matchups,
           unavailable: false,
           lastScoredLeg: league.settings?.last_scored_leg ?? null,
-        }, mockPhase()));
+        }, mockPhase(), replay, mockWeek()));
       } catch {
         // Fails soft: `initial` stays on screen. A Sleeper outage should not
         // blank the page, it should just stop it getting fresher.
@@ -444,7 +461,7 @@ export function useLiveSeason(
     return () => {
       cancelled = true;
     };
-  }, [leagueIdBySeason, initial]);
+  }, [leagueIdBySeason, initial, replay]);
 
   return live;
 }
