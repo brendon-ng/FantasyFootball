@@ -126,11 +126,27 @@ export function SeasonPanels({
         )}
       </div>
 
-      {children}
+      {/*
+        BOTH SLOTS ARE WRAPPED, and the wrapper is load-bearing rather than tidy.
+        `children` and `lastSeasonTiles` arrive as props, so React never saw them
+        created by JSX in this file and has not stamped them as validated. Dropped
+        straight into this fragment they become entries in the array this component
+        returns, and the reconciler reports them as list children with no key —
+        which is where "check the top-level render call using <SeasonPanels>" came
+        from. A fragment makes the array entry an element created here, and the
+        prop becomes its only child rather than a member of a list.
+      */}
+      <>{children}</>
 
       {/* Same slot last season's champion tiles occupy in the offseason: the
           top strip is for whatever the league is currently about. */}
-      {inSeason ? <MatchupStrip live={live} ownerNames={ownerNames} pace={pace} h2h={h2h} /> : lastSeasonTiles}
+      <>
+        {inSeason ? (
+          <MatchupStrip live={live} ownerNames={ownerNames} pace={pace} h2h={h2h} />
+        ) : (
+          lastSeasonTiles
+        )}
+      </>
 
       <div className="grid gap-5 lg:grid-cols-5 lg:gap-6">
         <Panel className="lg:col-span-3">
