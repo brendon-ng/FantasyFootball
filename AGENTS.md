@@ -262,6 +262,13 @@ a few pixels, which reads as a scrollbar appearing for no reason. Desktop alread
 fits — only the phone needs the floor. (`components/all-time-table.tsx` is the one
 exception; it is wide at every size and has always scrolled.)
 
+PREFER `max-sm:min-w-max` OVER A FIXED FLOOR. A fixed floor leaves surplus width
+that table auto-layout dumps somewhere arbitrary, and where it lands depends on the
+column count — the same `34rem` put W-L flush against the card edge in a 5-column
+league and left a wide gap before it in a 6-column one. Sizing to content puts
+every column where it belongs whatever shape the league is. Pair it with a
+`max-w` on the widest text cell (see below) so content sizing has a bound.
+
 Do not wrap everything. A list whose fixed columns total well under the ~21.5rem a
 phone gives fits fine, and a needless min-width introduces scrolling that was not
 there. Measure before adding: sum the `w-*` classes in the `ListHeader`.

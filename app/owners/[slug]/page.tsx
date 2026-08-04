@@ -169,7 +169,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             <Panel>
               <PanelHeader title="Season by Season" />
               <div className="overflow-x-auto">
-              <table className="w-full text-sm max-sm:min-w-[30rem]">
+              <table className="w-full text-sm max-sm:min-w-max">
                 <thead>
                   <tr className="border-b border-ink-600">
                     {(

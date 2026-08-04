@@ -102,11 +102,16 @@ export default async function SeasonPage({
         <Panel>
           <PanelHeader title="Regular Season" meta={`${summary.regularSeasonWeeks} weeks`} />
           {/* Scrolls rather than clipping: PF/PA and the weekly-low column do not
-              fit a phone, and Panel is overflow-hidden. The min-width is
-              max-sm ONLY — forcing it at every breakpoint made the table overflow
-              its card by a few pixels on desktop, where it used to squish to fit. */}
+              fit a phone, and Panel is overflow-hidden.
+              `min-w-max` sizes each column to its content instead of a fixed
+              floor. A fixed floor left surplus width for auto-layout to dump
+              somewhere arbitrary — flush against the card edge with five columns,
+              a wide gap before W-L with six. Content sizing puts every column
+              where it belongs whatever the league's shape.
+              max-sm ONLY: at desktop the table is plain w-full and squishes to fit
+              its card, which is how it looked before any of this. */}
           <div className="overflow-x-auto">
-          <table className="w-full text-sm max-sm:min-w-[34rem]">
+          <table className="w-full text-sm max-sm:min-w-max">
             <thead>
               <tr className="border-b border-ink-600">
                 {(
