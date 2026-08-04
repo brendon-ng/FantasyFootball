@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { DraftPlan } from "@/components/draft-plan";
 import { HomeKeeperBoard } from "@/components/home-keeper-board";
 import { RecordHighlights } from "@/components/record-highlights";
 import {
@@ -128,6 +129,16 @@ export default async function HomePage() {
           </span>
         )}
       </div>
+
+      {/* Renders nothing until Sleeper has both a draft date and an order. */}
+      <DraftPlan
+        leagueId={cfg.knownLeagueIds[String(currentSeason)] ?? null}
+        season={currentSeason}
+        userIdToSlug={Object.fromEntries(
+          [...owners.values()].filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+        )}
+        ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
+      />
 
       {lastSeason ? (
         <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">

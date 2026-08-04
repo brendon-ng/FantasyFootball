@@ -14,7 +14,8 @@
 
 import { useEffect, useState } from "react";
 
-import { mockDraftOrder, orderIsSet, wantsMockOrder } from "@/lib/draft-slots";
+import { mockDraftDate, mockDraftOrder, orderIsSet } from "@/lib/draft-slots";
+import { wantsMockOrder } from "@/lib/sticky-params";
 
 export interface LiveRoster {
   rosterId: number;
@@ -267,12 +268,17 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
           slotToRoster[Number(slot)] = roster;
         }
         let orderSet = orderIsSet(raw.draft_order, slotToRoster);
-        // Only ever stands in for a MISSING order; it can never override a real
-        // one, so the flag is harmless on a drafted league.
+        // Only ever stands in for MISSING values; it can never override real
+        // ones, so the flag is harmless on a league that has drafted.
         const mocked = !orderSet && wantsMockOrder();
+        let startTime = raw.start_time ?? null;
         if (mocked) {
           slotToRoster = mockDraftOrder(slotToRoster, raw.draft_id);
           orderSet = true;
+          // A date as well as an order: the two are set together in practice, and
+          // the home page needs both to say anything. Two weeks out at 7pm, so the
+          // keeper deadline still lands in the future.
+          startTime ??= mockDraftDate();
         }
         setState({
           status: "ready",
@@ -287,7 +293,7 @@ export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | nul
             slotToRoster,
             orderSet,
             mocked,
-            startTime: raw.start_time ?? null,
+            startTime,
           },
         });
       } catch (e) {

@@ -72,10 +72,6 @@ export function ProjectedDraftBoard({
           Bylaws set it after the keeper deadline. This board fills in as soon as
           Sleeper has it — nothing here needs a redeploy.
         </p>
-        <p className="mt-2 text-[11px]">
-          Add <code className="text-chalk-500">?mockDraftOrder=true</code> to preview
-          it with a stand-in order.
-        </p>
       </div>
     );
   }

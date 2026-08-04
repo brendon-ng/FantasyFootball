@@ -170,7 +170,8 @@ export function assignKeeperSlots(
 /**
  * A stand-in draft order, for working on the board before one is drawn.
  *
- * Enabled per page view with `?mockDraftOrder=true`. Deliberately NOT gated on
+ * Enabled with `?mockDraftOrder=true`, which sticks for the session — see
+ * lib/sticky-params.ts. Deliberately NOT gated on
  * NODE_ENV: `npm run preview` builds production, and the subpath it serves is the
  * only place basePath bugs show up, so a dev-only gate would disable this exactly
  * where the board most needs looking at.
@@ -199,7 +200,20 @@ export function mockDraftOrder(
   return Object.fromEntries(slots.map((slot, i) => [slot, rosters[i]]));
 }
 
-/** True when this page view asked for a stand-in order. Client-only. */
-export const wantsMockOrder = (): boolean =>
-  typeof window !== "undefined" &&
-  new URLSearchParams(window.location.search).get("mockDraftOrder") === "true";
+/**
+ * A stand-in draft date, paired with `mockDraftOrder`.
+ *
+ * Two weeks out at 7pm local. Far enough that the keeper deadline — three days
+ * before the draft, bylaws 1.7 — is still in the future, which is the state worth
+ * previewing; a deadline that had already passed would exercise the wrong branch.
+ */
+export function mockDraftDate(now = Date.now()): number {
+  const d = new Date(now);
+  d.setDate(d.getDate() + 14);
+  d.setHours(19, 0, 0, 0);
+  return d.getTime();
+}
+
+/** Keeper deadline: three days before the draft (bylaws 1.7). */
+export const keeperDeadline = (draftStart: number): number =>
+  draftStart - 3 * 24 * 60 * 60 * 1000;
