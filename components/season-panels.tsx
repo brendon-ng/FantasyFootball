@@ -125,7 +125,9 @@ export function SeasonPanels({
 
       {children}
 
-      {inSeason ? null : lastSeasonTiles}
+      {/* Same slot last season's champion tiles occupy in the offseason: the
+          top strip is for whatever the league is currently about. */}
+      {inSeason ? <MatchupStrip live={live} ownerNames={ownerNames} pace={pace} /> : lastSeasonTiles}
 
       <div className="grid gap-5 lg:grid-cols-5 lg:gap-6">
         <Panel className="lg:col-span-3">
@@ -200,70 +202,12 @@ export function SeasonPanels({
 
         <Panel className="lg:col-span-2">
           <PanelHeader
-            title={
-              inSeason
-                ? phase === "drafted" || phase === "weekPreview"
-                  ? `Week ${live?.week ?? 1} Preview`
-                  : "This Week"
-                : "All-Time Leaders"
-            }
-            meta={inSeason ? undefined : "current owners"}
-            href={inSeason ? undefined : "/history/"}
+            title="All-Time Leaders"
+            meta="current owners"
+            href="/history/"
             hrefLabel="Full history"
           />
-          {inSeason && live?.matchups.length ? (
-            <ul>
-              {live.matchups.map((m) => (
-                <li key={m.matchupId} className="border-b border-ink-700 last:border-0">
-                  <Link
-                    href={`/matchups/${meetingId(live!.season, live!.week, m.a.ownerSlug, m.b.ownerSlug)}/`}
-                    className="block px-4 py-3 transition-colors hover:bg-ink-700/40 sm:px-5"
-                  >
-                    {[m.a, m.b].map((side) => {
-                      const p = pace(side.points);
-                      return (
-                        <div
-                          key={side.ownerSlug}
-                          className="flex items-center justify-between gap-2"
-                        >
-                          <span className="truncate text-sm font-medium">
-                            {name(side.ownerSlug)}
-                          </span>
-                          <span className="flex shrink-0 items-center gap-1.5">
-                            {/* Chip sits LEFT of the score so the numbers stay
-                                in column whether or not a game is on pace. */}
-                            {p ? (
-                              <span
-                                title={
-                                  p.tone === "good"
-                                    ? `On pace for the ${p.rank === 1 ? "highest" : `#${p.rank}`} single-week score in league history`
-                                    : `On pace for the ${p.rank === 1 ? "lowest" : `#${p.rank}`} single-week score in league history`
-                                }
-                                className={`rounded-full border px-1.5 py-0.5 text-[9px] font-bold ${
-                                  p.tone === "bad"
-                                    ? "border-loss/40 bg-loss/10 text-loss"
-                                    : "border-gold/40 bg-gold/10 text-gold"
-                                }`}
-                              >
-                                #{p.rank}
-                              </span>
-                            ) : null}
-                            <span className="tabular text-sm font-bold">
-                              {fmt.pts1(side.points)}
-                            </span>
-                          </span>
-                        </div>
-                      );
-                    })}
-                    <div className="mt-1.5 text-[11px] text-chalk-600">
-                      Matchup detail <span aria-hidden>→</span>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <>
+          <>
               <ListHeader>
                 <Col className="w-4 shrink-0">#</Col>
                 <Col className="flex-1">Owner</Col>
@@ -311,10 +255,80 @@ export function SeasonPanels({
               ))}
               </ul>
             </>
-          )}
         </Panel>
       </div>
     </>
+  );
+}
+
+/**
+ * The week's matchups as a horizontal strip.
+ *
+ * Scrolls rather than wrapping, so a 10-team league is one row and a 12-team one
+ * is the same row with more in it. Scores are omitted entirely before kickoff —
+ * a column of 0.00s reads as "everyone scored nothing", not "not started".
+ */
+function MatchupStrip({
+  live,
+  ownerNames,
+  pace,
+}: {
+  live: LiveSeason | null;
+  ownerNames: Record<string, string>;
+  pace: (points: number) => { rank: number; tone: "good" | "bad" } | null;
+}) {
+  if (!live?.matchups.length) return null;
+  const started = live.matchups.some((m) => m.a.points > 0 || m.b.points > 0);
+  const name = (slug: string) => ownerNames[slug] ?? slug;
+
+  return (
+    <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1">
+      {live.matchups.map((m) => (
+        <Link
+          key={m.matchupId}
+          href={`/matchups/${meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug)}/`}
+          className="w-[15rem] shrink-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim"
+        >
+          {[m.a, m.b].map((side, i) => {
+            const other = i === 0 ? m.b : m.a;
+            const winning = started && side.points > other.points;
+            const p = started ? pace(side.points) : null;
+            return (
+              <div key={side.ownerSlug} className="flex items-baseline justify-between gap-2">
+                <span
+                  data-owner={side.ownerSlug}
+                  className={`min-w-0 truncate text-sm ${
+                    winning ? "font-semibold text-chalk-100" : "text-chalk-400"
+                  }`}
+                >
+                  {name(side.ownerSlug)}
+                </span>
+                {started ? (
+                  <span className="flex shrink-0 items-center gap-1">
+                    {p ? (
+                      <span
+                        className={`text-[9px] font-bold ${p.tone === "good" ? "text-accent" : "text-loss"}`}
+                        title={`On pace for the ${p.rank === 1 ? "" : `#${p.rank} `}${p.tone === "good" ? "highest" : "lowest"} single-week score in league history`}
+                      >
+                        {p.tone === "good" ? "\u25b2" : "\u25bc"}
+                      </span>
+                    ) : null}
+                    <span
+                      className={`tabular text-sm ${winning ? "font-semibold text-accent" : "text-chalk-500"}`}
+                    >
+                      {fmt.pts1(side.points)}
+                    </span>
+                  </span>
+                ) : null}
+              </div>
+            );
+          })}
+          <div className="mt-1 text-[10px] uppercase tracking-wide text-chalk-600">
+            {started ? `Week ${live.week}` : `Week ${live.week} \u00b7 not started`}
+          </div>
+        </Link>
+      ))}
+    </div>
   );
 }
 
