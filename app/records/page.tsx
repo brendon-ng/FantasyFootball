@@ -68,12 +68,11 @@ export default function RecordsPage() {
         <p className="mt-1 text-sm text-chalk-500">
           Extremes across every finalized matchup on record.{" "}
           <span className="text-chalk-600">
-            Week-by-week scores exist for {coverage.label}.
             {coverage.missing.length
-              ? ` For ${coverage.missingLabel} only ESPN playoff and ladder matchups survived, so ${
+              ? `Week-by-week scores exist for ${coverage.label}. For ${coverage.missingLabel} only ESPN playoff and ladder matchups survived, so ${
                   coverage.missing.length === 1 ? "that season is" : "those seasons are"
-                } represented but under-counted.`
-              : ""}{" "}
+                } represented but under-counted. `
+              : ""}
             Player records are Sleeper-era only, since ESPN kept no lineups.
           </span>
         </p>

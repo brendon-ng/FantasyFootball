@@ -243,11 +243,11 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
               <PanelHeader
                 title="Head to Head"
                 meta="all matchups · best first"
-                legend={`Every matchup, regular season and postseason combined. A ✻ marks a head-to-head record that includes playoff or toilet-bowl matchups. Week-by-week scores exist for ${coverage.label}${
+                legend={`Every matchup, regular season and postseason combined. A ✻ marks a head-to-head record that includes playoff or toilet-bowl matchups.${
                   coverage.missing.length
-                    ? `; for ${coverage.missingLabel} only the postseason survived, so ${coverage.missing.length === 1 ? "that year contributes" : "those years contribute"} playoff and ladder matchups only`
+                    ? ` Week-by-week scores exist for ${coverage.label}; for ${coverage.missingLabel} only the postseason survived, so ${coverage.missing.length === 1 ? "that year contributes" : "those years contribute"} playoff and ladder matchups only.`
                     : ""
-                }.`}
+                }`}
               />
               <ListHeader>
                 <Col className="flex-1">Opponent</Col>

@@ -110,11 +110,11 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
         <PanelHeader
           title="Record Splits"
           meta={`from ${name(a)}'s perspective`}
-          legend={`Week-by-week scores exist for ${coverage.label}. ${
+          legend={
             coverage.missing.length
-              ? `For ${coverage.missingLabel} only the postseason survived, so ${coverage.missing.length === 1 ? "that year contributes" : "those years contribute"} playoff and ladder matchups only.`
-              : "Every season is complete."
-          }`}
+              ? `Week-by-week scores exist for ${coverage.label}. For ${coverage.missingLabel} only the postseason survived, so ${coverage.missing.length === 1 ? "that year contributes" : "those years contribute"} playoff and ladder matchups only.`
+              : undefined
+          }
         />
         {/* Fixed-width numeric columns plus a label that will not wrap short
             enough to fit a phone — scroll instead of clipping "Avg PA". */}

@@ -658,8 +658,12 @@ exists and is still correct.
 
 NEVER HARDCODE THE COVERAGE. It read "2024 onward" until 2019 turned up, which
 silently falsified that sentence in five places. `weeklyCoverage()` in
-`lib/data.ts` derives it — it now renders "2019-2025" and drops the caveat clause
-on its own.
+`lib/data.ts` derives it.
+
+The caveat only RENDERS when `coverage.missing.length` is non-zero. Every season is
+complete today, so it says nothing — "week-by-week scores exist for 2019-2025,
+every season is complete" is noise that makes a reader look for a problem. The
+machinery stays so a partially-imported league starts warning again by itself.
 
 Rosters, drafts and transactions are still absent for every ESPN year, so player
 records and keeper contracts stay Sleeper-only, and a matchup page for one of
