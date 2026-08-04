@@ -320,7 +320,10 @@ Four things about that chart were got wrong first and are worth not repeating:
 - OWNERS WHO HAVE LEFT get a key below the chart, not an in-plot label: their line
   stops mid-chart, so a label there floats free of any axis.
 - CLICK PINS, hover only previews. Without pinning, moving the cursor off the line
-  you just selected silently deselects it.
+  you just selected silently deselects it. A click ANYWHERE clears the pin, via a
+  document listener; the series handlers `stopPropagation` so the click that makes
+  a selection does not immediately undo it. Requiring a second hit on the same
+  thin line to release was a selection you could get stuck in.
 
 Give the SVG `h-auto`, never a fixed height. With a fixed height the viewBox
 scales to fit it and centres, leaving dead space either side of a wide card.

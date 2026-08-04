@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Every owner's finish over time, as lines.
@@ -93,12 +93,28 @@ export function FinishTimeline({
   const leave = () => {
     if (!pinned) setHovered(null);
   };
-  const toggle = (slug: string) => {
+  const toggle = (slug: string, e: { stopPropagation: () => void }) => {
+    // Stops the document listener below from clearing the very selection this
+    // click is making.
+    e.stopPropagation();
     // Unpinning leaves the cursor's own line lit, so releasing a selection does
     // not blink the whole field back at once.
     setPinned(pinned === slug ? null : slug);
     setHovered(pinned === slug ? slug : null);
   };
+
+  // A click ANYWHERE else clears the pin — on the chart background, elsewhere on
+  // the page, anywhere. Requiring a second click on the same thin line to release
+  // it meant a selection you could get stuck in.
+  useEffect(() => {
+    if (!pinned) return;
+    const clear = () => {
+      setPinned(null);
+      setHovered(null);
+    };
+    document.addEventListener("click", clear);
+    return () => document.removeEventListener("click", clear);
+  }, [pinned]);
 
   const maxTeams = Math.max(...seasons.map((s) => teamsBySeason[s] ?? 12), 2);
   const lastSeason = seasons[seasons.length - 1];
@@ -185,7 +201,7 @@ export function FinishTimeline({
               style={{ cursor: "pointer" }}
               onMouseEnter={() => enter(r.slug)}
               onMouseLeave={leave}
-              onClick={() => toggle(r.slug)}
+              onClick={(e) => toggle(r.slug, e)}
             >
               <polyline
                 points={r.pts.map((p) => `${x(p.s)},${y(p.place)}`).join(" ")}
@@ -229,7 +245,7 @@ export function FinishTimeline({
                       fill={g.color}
                       opacity={dim(g.slug)}
                       style={{ cursor: "pointer" }}
-                      onClick={() => toggle(g.slug)}
+                      onClick={(e) => toggle(g.slug, e)}
                       onMouseEnter={() => enter(g.slug)}
                       onMouseLeave={leave}
                     >
@@ -252,7 +268,7 @@ export function FinishTimeline({
             <button
               key={r.slug}
               type="button"
-              onClick={() => toggle(r.slug)}
+              onClick={(e) => toggle(r.slug, e)}
               onMouseEnter={() => enter(r.slug)}
               onMouseLeave={leave}
               className="flex items-center gap-1.5 text-[10px] transition-opacity"
@@ -283,7 +299,7 @@ export function FinishTimeline({
             <Link href={`/owners/${active}/`} className="hover:text-accent">
               Open {rows.find((r) => r.slug === active)?.name}&rsquo;s profile →
             </Link>
-            {pinned ? <span className="ml-2">· click again to clear</span> : null}
+            {pinned ? <span className="ml-2">· click anywhere to clear</span> : null}
           </>
         ) : (
           <span>Hover to preview a line, click to keep it selected.</span>
