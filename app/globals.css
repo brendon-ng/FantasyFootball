@@ -127,19 +127,19 @@ body {
 /*
  * The week's matchup strip: one card per matchup, filling the row.
  *
- * The column count is the matchup count — five for a ten-team league, six for a
- * twelve — which Tailwind cannot express as a class because it is dynamic, hence
- * a variable. Below sm it is a scrolling row of fixed-width cards; stacking five
- * would push the standings off a phone screen entirely.
+ * NO COLUMN COUNT ANYWHERE. `grid-auto-flow: column` with a `grid-auto-columns`
+ * track makes one implicit column per card, so ten teams give five across and
+ * twelve give six with nothing to configure — only the track size changes between
+ * a phone and a desktop.
  *
- * EVERY LAYOUT PROPERTY LIVES HERE, none on the element. An earlier version set
- * `flex` and `overflow-x-auto` as utilities and overrode them from this rule,
- * which left the cards content-sized instead of filling — two rules fighting over
- * `display` is a bug you cannot see in the markup. The element now carries no
- * display, width or overflow class at all, so there is nothing to lose to.
+ * THE OBVIOUS VERSION DOES NOT WORK: `repeat(var(--matchup-cols), minmax(0, 1fr))`
+ * is invalid, because browsers will not take a `var()` as the repeat count. It
+ * fails silently to a single column, and a fallback inside the var does not save
+ * it — the whole declaration is dropped. Do not reintroduce it.
  *
- * `grid-auto-columns` sizes the mobile cards and equal `1fr` tracks size the
- * desktop ones, so the cards themselves need no width either.
+ * Every layout property lives here, none on the element. An earlier version set
+ * `flex` and `overflow-x-auto` as utilities and overrode them from this rule; two
+ * rules fighting over `display` is a bug you cannot see in the markup.
  */
 .matchup-strip {
   display: grid;
@@ -149,10 +149,9 @@ body {
 }
 @media (min-width: 40rem) {
   .matchup-strip {
-    grid-auto-flow: row;
-    /* The fallback matters: without a column count this would collapse to a
-       single stacked column rather than merely being mis-sized. */
-    grid-template-columns: repeat(var(--matchup-cols, 5), minmax(0, 1fr));
+    /* Equal shares of the row. `minmax(0, …)` rather than a bare `1fr` so a long
+       head-to-head line truncates instead of widening its own column. */
+    grid-auto-columns: minmax(0, 1fr);
     overflow-x: visible;
   }
 }

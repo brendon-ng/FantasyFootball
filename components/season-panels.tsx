@@ -312,10 +312,7 @@ function MatchupStrip({
   };
 
   return (
-    <div
-      className="matchup-strip -mx-1 gap-2.5 px-1 pb-1 sm:mx-0 sm:px-0"
-      style={{ "--matchup-cols": live.matchups.length } as React.CSSProperties}
-    >
+    <div className="matchup-strip -mx-1 gap-2.5 px-1 pb-1 sm:mx-0 sm:px-0">
       {live.matchups.map((m) => (
         <Link
           key={m.matchupId}
