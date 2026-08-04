@@ -190,9 +190,19 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
                   href={`/matchups/${g.id}/`}
                   className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-ink-700/40 sm:px-5"
                 >
-                  <span className="tabular w-24 shrink-0 text-[11px] text-chalk-600">
-                    {g.season}
-                    {g.week ? ` wk${g.week}` : ""}
+                  {/* Below sm the postseason chip column is hidden, so the label
+                      rides under the date instead. sm:hidden keeps it from
+                      double-labelling once that column reappears. */}
+                  <span className="w-24 shrink-0 text-[11px] text-chalk-600">
+                    <span className="tabular">
+                      {g.season}
+                      {g.week ? ` wk${g.week}` : ""}
+                    </span>
+                    {g.kind !== "regular" ? (
+                      <span className="mt-0.5 block truncate text-[9px] uppercase tracking-wide text-chalk-500 sm:hidden">
+                        {g.label ?? g.kind}
+                      </span>
+                    ) : null}
                   </span>
                   {/* Names, badge and scores are separate columns so the badge
                       sits LEFT of the numbers and the numbers stay aligned
