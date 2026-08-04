@@ -121,9 +121,12 @@ export function applyPhaseMock(
 
   return {
     ...live,
-    // The season number stays the CURRENT one. The replay supplies the shape of
-    // a week, not a claim about which year it is — the page is previewing what
-    // this season will look like, not showing last season again.
+    // The REPLAYED season, not the current one. Keeping 2026 on screen while
+    // showing 2025's results left every link dead — matchup pages are keyed by
+    // season, so /matchups/2026-6-... does not exist, and neither does
+    // /history/2026/. Naming the year the data comes from makes the whole page
+    // navigable and stops it claiming results that have not happened.
+    season: replay.season,
     week: target,
     displayWeek: target,
     // `drafted` keeps "pre": that is what Sleeper reports until week 1, and it is
