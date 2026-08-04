@@ -93,6 +93,30 @@ export default async function HomePage() {
         format={format}
         preDraftNote={preDraftNote}
         fallbackSeason={currentSeason}
+        lastSeasonTiles={
+          lastSeason ? (
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+              <Stat
+                label={`${lastSeason.season} Champion`}
+                value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.champion)}</span>}
+                tone="gold"
+              />
+              <Stat
+                label="Runner-up"
+                value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.runnerUp)}</span>}
+              />
+              <Stat
+                label="Third"
+                value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.thirdPlace)}</span>}
+              />
+              <Stat
+                label="Last Place"
+                value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.lastPlace)}</span>}
+                sub="Toilet bowl loser"
+              />
+            </div>
+          ) : null
+        }
       >
       {/* Renders nothing until Sleeper has both a draft date and an order. */}
       <DraftPlan
@@ -105,28 +129,6 @@ export default async function HomePage() {
         keepers={features().keepers}
       />
 
-      {lastSeason ? (
-        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-          <Stat
-            label={`${lastSeason.season} Champion`}
-            value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.champion)}</span>}
-            tone="gold"
-          />
-          <Stat
-            label="Runner-up"
-            value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.runnerUp)}</span>}
-          />
-          <Stat
-            label="Third"
-            value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.thirdPlace)}</span>}
-          />
-          <Stat
-            label="Last Place"
-            value={<span className="text-base sm:text-lg">{creditedNames(lastSeason.standings, lastSeason.lastPlace)}</span>}
-            sub="Toilet bowl loser"
-          />
-        </div>
-      ) : null}
       </SeasonPanels>
 
       {features().keepers ? (

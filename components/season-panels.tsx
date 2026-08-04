@@ -13,7 +13,8 @@ import {
   placeColor,
 } from "@/components/ui";
 import { meetingId } from "@/lib/meeting";
-import { useLiveSeason } from "@/lib/sleeper-browser";
+import { isCurrentSeason, resolvePhase } from "@/lib/phase";
+import { useLiveDraft, useLiveSeason } from "@/lib/sleeper-browser";
 import type { LiveSeason, OwnerRecord, SeasonSummary } from "@/lib/types";
 
 /**
@@ -48,6 +49,7 @@ export function SeasonPanels({
   format,
   preDraftNote,
   fallbackSeason,
+  lastSeasonTiles,
   children,
 }: {
   initial: LiveSeason | null;
@@ -62,6 +64,11 @@ export function SeasonPanels({
   /** Used before Sleeper answers at all. */
   fallbackSeason: number;
   /**
+   * Last season's champion tiles. Dropped once the new season starts — the draft
+   * has run, so who won last year is history rather than the state of play.
+   */
+  lastSeasonTiles?: React.ReactNode;
+  /**
    * Rendered between the header and the panels.
    *
    * The draft panel and last season's tiles sit there and are SERVER content, so
@@ -71,8 +78,13 @@ export function SeasonPanels({
   children?: React.ReactNode;
 }) {
   const live = useLiveSeason(leagueIdBySeason, initial);
+  const draft = useLiveDraft(leagueIdBySeason[String(live?.season ?? fallbackSeason)] ?? null);
+  const phase = resolvePhase({ live, draft: draft.data });
 
-  const inSeason = live?.seasonType === "regular" || live?.seasonType === "post";
+  // Keyed on the PHASE, not on seasonType. Sleeper still reports "pre" between
+  // the draft and week 1, but by then last season is over — the draft is what
+  // starts the new one, so that is when the page stops looking backwards.
+  const inSeason = isCurrentSeason(phase);
   const currentSeason = live?.season ?? fallbackSeason;
   const name = (slug: string | null | undefined) => (slug && ownerNames[slug]) || "\u2014";
 
@@ -113,11 +125,15 @@ export function SeasonPanels({
 
       {children}
 
+      {inSeason ? null : lastSeasonTiles}
+
       <div className="grid gap-5 lg:grid-cols-5 lg:gap-6">
         <Panel className="lg:col-span-3">
           <PanelHeader
-            title={inSeason ? "Standings" : `${lastSeason?.season ?? ""} Final Standings`}
-            meta={inSeason ? "live" : "final"}
+            title={
+              inSeason ? `${currentSeason} Standings` : `${lastSeason?.season ?? ""} Final Standings`
+            }
+            meta={inSeason ? (phase === "drafted" ? "season not started" : "live") : "final"}
             href={lastSeason ? `/history/${lastSeason.season}/` : undefined}
             hrefLabel="Season detail"
           />
@@ -184,7 +200,13 @@ export function SeasonPanels({
 
         <Panel className="lg:col-span-2">
           <PanelHeader
-            title={inSeason ? "This Week" : "All-Time Leaders"}
+            title={
+              inSeason
+                ? phase === "drafted" || phase === "weekPreview"
+                  ? `Week ${live?.week ?? 1} Preview`
+                  : "This Week"
+                : "All-Time Leaders"
+            }
             meta={inSeason ? undefined : "current owners"}
             href={inSeason ? undefined : "/history/"}
             hrefLabel="Full history"

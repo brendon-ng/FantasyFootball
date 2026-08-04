@@ -54,6 +54,15 @@ function fakeMatchups(live: LiveSeason, week: number, scored: boolean): LiveMatc
 export function applyPhaseMock(live: LiveSeason, phase: LeaguePhase | null): LiveSeason {
   if (!phase) return live;
 
+  // `drafted` is week 1 not yet played, so it needs the same fixtures a preview
+  // does. Its seasonType stays "pre" — that is what Sleeper really reports until
+  // week 1, and it is how resolvePhase still tells the two apart.
+  if (phase === "drafted") {
+    return live.matchups.length
+      ? live
+      : { ...live, week: 1, displayWeek: 1, matchups: fakeMatchups(live, 1, false), lastScoredLeg: null };
+  }
+
   const inSeason = live.seasonType === "regular" || live.seasonType === "post";
   const weekPhases: LeaguePhase[] = ["weekPreview", "weekLive", "weekComplete"];
   if (!weekPhases.includes(phase)) return live;
