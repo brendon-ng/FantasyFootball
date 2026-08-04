@@ -83,6 +83,22 @@ export function DraftPlan({
 
   const deadline = keeperDeadline(d.startTime);
   const passed = now !== null && deadline < now;
+  const draftPassed = now !== null && d.startTime < now;
+
+  /**
+   * Which date is next on the clock. Only that one is green.
+   *
+   * The accent means "this is the thing you have to act on", so exactly one card
+   * can wear it. The deadline comes first (three days earlier), so it holds the
+   * accent until it passes and then hands it to the draft — which is the moment
+   * the thing worth watching genuinely changes. A redraft league has only the
+   * draft, so it starts there.
+   *
+   * Before the clock is known (`now === null`, the server render) the earlier date
+   * is assumed next, which is right for all but the last three days.
+   */
+  const nextUp: "deadline" | "draft" | null =
+    keepers && !passed ? "deadline" : !draftPassed ? "draft" : null;
 
   const rosterToSlug = new Map<number, string>();
   for (const r of rosters.data ?? []) {
@@ -97,7 +113,6 @@ export function DraftPlan({
     <Panel>
       <PanelHeader
         title={`${season} Draft`}
-        meta={d.mocked ? undefined : "live from Sleeper"}
         legend={
           keepers
             ? "Keeper selections are due three days before the draft (bylaws 1.7). After that, keeper picks are frozen and can no longer be traded."
@@ -121,7 +136,13 @@ export function DraftPlan({
               </span>
             ) : null}
           </div>
-          <div className="text-base font-semibold sm:text-lg">{dateFmt.format(d.startTime)}</div>
+          <div
+            className={`text-base font-semibold sm:text-lg ${
+              nextUp === "draft" ? "text-accent" : draftPassed ? "text-chalk-500" : ""
+            }`}
+          >
+            {dateFmt.format(d.startTime)}
+          </div>
           <div className="mt-1 text-[11px] text-chalk-600">
             {now === null ? "" : until(d.startTime, now)}
           </div>
@@ -136,7 +157,7 @@ export function DraftPlan({
             <div className="eyebrow mb-1.5 text-[10px]">Keeper deadline</div>
             <div
               className={`text-base font-semibold sm:text-lg ${
-                passed ? "text-chalk-500" : "text-accent"
+                nextUp === "deadline" ? "text-accent" : passed ? "text-chalk-500" : ""
               }`}
             >
               {dateFmt.format(deadline)}
@@ -153,12 +174,16 @@ export function DraftPlan({
         ) : null}
       </div>
 
-      <div className="border-t border-ink-600 px-4 pb-4 pt-3 sm:px-5">
-        <div className="eyebrow mb-2 text-[10px]">Draft order</div>
-        {d.orderSet ? (
-          /* One line that scrolls, not a wrapping list. Wrapping left a ragged
-             second row of one or two names, and a draft order reads 1..N — a
-             column-major grid would fix the ragged edge but break the reading. */
+      {/* HIDDEN ENTIRELY until the order exists, header and all. By bylaw 1.7 it
+          is not drawn until after the keeper deadline, so "not drawn yet" is the
+          expected state for most of this window and saying so every time is noise
+          around the two dates that actually need acting on. */}
+      {d.orderSet ? (
+        <div className="border-t border-ink-600 px-4 pb-4 pt-3 sm:px-5">
+          <div className="eyebrow mb-2 text-[10px]">Draft order</div>
+          {/* One line that scrolls, not a wrapping list. Wrapping left a ragged
+              second row of one or two names, and a draft order reads 1..N — a
+              column-major grid would fix the ragged edge but break the reading. */}
           <ol className="-mx-1 flex flex-nowrap gap-x-4 overflow-x-auto px-1 pb-1">
             {slots.map((slot) => {
               const slug = rosterToSlug.get(d.slotToRoster[slot]) ?? null;
@@ -183,17 +208,8 @@ export function DraftPlan({
               );
             })}
           </ol>
-        ) : (
-          /* Says WHY, not just "not yet". Waiting on the order is the expected
-             state for most of this window, and a reader who knows the reason is
-             not left wondering whether the site is behind. */
-          <p className="text-[11px] leading-relaxed text-chalk-600">
-            {keepers
-              ? "Not drawn yet — the order is determined after the keeper deadline, so nobody can move a keeper pick into a better slot once it is known (bylaws 1.7, Appendix A)."
-              : "Not drawn yet."}
-          </p>
-        )}
-      </div>
+        </div>
+      ) : null}
     </Panel>
   );
 }

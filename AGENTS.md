@@ -191,8 +191,10 @@ keeper picks into better non-keeper slots), so every year runs through a window
 where the draft is booked and keepers are due but nobody knows the order.
 `DraftPlan` therefore gates on the DATE, not the order — gating on both meant the
 panel could not appear until the deadline it exists to warn about had passed, and
-`mockDraftOrder` hid that by mocking date and order together. With no order drawn
-it says so, and says why.
+`mockDraftOrder` hid that by mocking date and order together. With no order
+drawn the order section is hidden outright, header included — it is the expected
+state for most of that window, so saying "not drawn yet" every time is noise
+around the two dates that do need acting on.
 
 ### Previewing a phase
 
