@@ -248,6 +248,21 @@ Three things that are easy to get wrong:
 - `public/` is copied into every build, so `build-all.mjs` prunes other leagues'
   avatars from each output.
 
+## Postseason labels at phone width
+
+The chip column that marks a playoff, consolation or placement game is `hidden`
+below `sm`, so without help every row reads as a regular-season game on a phone.
+Two shapes, both `sm:hidden` so nothing is double-labelled once the column returns:
+
+- Head-to-head series and a matchup's rest-of-series: a line UNDER the season/week.
+- The record book: pinned to the END of the meta line (`KindInline`), because that
+  page stacks seven tables and an extra line per row costs real height. The label
+  is `shrink-0` so the OPPONENT truncates first — the label is what a reader cannot
+  infer from the rest of the row.
+
+The record book also filters to labels worth showing (`SHOWN_LABELS`), so only a
+handful of rows carry one — 4 of ~60 in Den Ops. Most keep the full meta line.
+
 ## Wide tables on mobile
 
 Anything with more than a few fixed-width columns needs
