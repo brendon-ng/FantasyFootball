@@ -93,6 +93,21 @@ export default async function HomePage() {
         format={format}
         preDraftNote={preDraftNote}
         fallbackSeason={currentSeason}
+        // ACTIVE OWNERS ONLY. Which pairs play is decided client-side, so the
+        // whole matrix has to ship — but a departed owner cannot appear in this
+        // week's fixtures, and dropping them cuts it by about a third.
+        h2h={Object.fromEntries(
+          records
+            .filter((r) => owners.get(r.ownerSlug)?.active)
+            .map((r) => [
+              r.ownerSlug,
+              Object.fromEntries(
+                Object.entries(r.vs)
+                  .filter(([opp]) => owners.get(opp)?.active)
+                  .map(([opp, v]) => [opp, { wins: v.wins, losses: v.losses, ties: v.ties }]),
+              ),
+            ]),
+        )}
         lastSeasonTiles={
           lastSeason ? (
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">

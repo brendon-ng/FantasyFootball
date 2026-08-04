@@ -50,6 +50,7 @@ export function SeasonPanels({
   preDraftNote,
   fallbackSeason,
   lastSeasonTiles,
+  h2h,
   children,
 }: {
   initial: LiveSeason | null;
@@ -68,6 +69,8 @@ export function SeasonPanels({
    * has run, so who won last year is history rather than the state of play.
    */
   lastSeasonTiles?: React.ReactNode;
+  /** All-time head-to-head, owner -> opponent -> record. */
+  h2h: Record<string, Record<string, H2HRecord>>;
   /**
    * Rendered between the header and the panels.
    *
@@ -127,7 +130,7 @@ export function SeasonPanels({
 
       {/* Same slot last season's champion tiles occupy in the offseason: the
           top strip is for whatever the league is currently about. */}
-      {inSeason ? <MatchupStrip live={live} ownerNames={ownerNames} pace={pace} /> : lastSeasonTiles}
+      {inSeason ? <MatchupStrip live={live} ownerNames={ownerNames} pace={pace} h2h={h2h} /> : lastSeasonTiles}
 
       <div className="grid gap-5 lg:grid-cols-5 lg:gap-6">
         <Panel className="lg:col-span-3">
@@ -261,31 +264,58 @@ export function SeasonPanels({
   );
 }
 
+export interface H2HRecord {
+  wins: number;
+  losses: number;
+  ties: number;
+}
+
 /**
- * The week's matchups as a horizontal strip.
+ * The week's matchups, one card per game, filling the row.
  *
- * Scrolls rather than wrapping, so a 10-team league is one row and a 12-team one
- * is the same row with more in it. Scores are omitted entirely before kickoff —
- * a column of 0.00s reads as "everyone scored nothing", not "not started".
+ * Each card is the two teams with their season record, and beneath them the
+ * all-time head-to-head — the thing that makes a fixture interesting before
+ * anyone has scored. Column count is the matchup count, so ten teams give five
+ * across and twelve give six, both edge to edge.
+ *
+ * Scores appear only once someone has scored. A row of 0.00s before kickoff reads
+ * as "everyone scored nothing" rather than "not started".
  */
 function MatchupStrip({
   live,
   ownerNames,
   pace,
+  h2h,
 }: {
   live: LiveSeason | null;
   ownerNames: Record<string, string>;
   pace: (points: number) => { rank: number; tone: "good" | "bad" } | null;
+  h2h: Record<string, Record<string, H2HRecord>>;
 }) {
   if (!live?.matchups.length) return null;
   const started = live.matchups.some((m) => m.a.points > 0 || m.b.points > 0);
   const name = (slug: string) => ownerNames[slug] ?? slug;
+  const first = (slug: string) => name(slug).split(" ")[0];
+  const recordOf = (slug: string) => live.teams.find((t) => t.ownerSlug === slug);
+
+  /** "Jake leads 5-4", "even at 3-3", or nothing when they have never met. */
+  const series = (a: string, b: string): string => {
+    const r = h2h[a]?.[b];
+    if (!r) return "First meeting";
+    const total = r.wins + r.losses + r.ties;
+    if (!total) return "First meeting";
+    const score = r.ties ? `${r.wins}-${r.losses}-${r.ties}` : `${r.wins}-${r.losses}`;
+    if (r.wins === r.losses) return `Even at ${score}`;
+    const leader = r.wins > r.losses ? a : b;
+    const flipped = r.ties ? `${r.losses}-${r.wins}-${r.ties}` : `${r.losses}-${r.wins}`;
+    return `${first(leader)} leads ${r.wins > r.losses ? score : flipped}`;
+  };
 
   return (
-    // Scrolls on a phone, fills the row above it. auto-fit rather than a fixed
-    // column count so five matchups and six both stretch edge to edge — a fixed
-    // card width left Den Ops with dead space and pushed Masterbatters off screen.
-    <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:grid sm:grid-cols-[repeat(auto-fit,minmax(11rem,1fr))] sm:overflow-visible sm:px-0">
+    <div
+      className="matchup-strip -mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:px-0"
+      style={{ "--matchup-cols": live.matchups.length } as React.CSSProperties}
+    >
       {live.matchups.map((m) => (
         <Link
           key={m.matchupId}
@@ -296,18 +326,24 @@ function MatchupStrip({
             const other = i === 0 ? m.b : m.a;
             const winning = started && side.points > other.points;
             const p = started ? pace(side.points) : null;
+            const rec = recordOf(side.ownerSlug);
             return (
-              <div key={side.ownerSlug} className="flex items-baseline justify-between gap-2">
+              <div key={side.ownerSlug} className="flex items-baseline gap-1.5">
                 <span
                   data-owner={side.ownerSlug}
                   className={`min-w-0 truncate text-sm ${
                     winning ? "font-semibold text-chalk-100" : "text-chalk-400"
                   }`}
                 >
-                  {name(side.ownerSlug)}
+                  {first(side.ownerSlug)}
                 </span>
+                {rec ? (
+                  <span className="tabular shrink-0 text-[10px] text-chalk-600">
+                    {fmt.record(rec.wins, rec.losses, rec.ties)}
+                  </span>
+                ) : null}
                 {started ? (
-                  <span className="flex shrink-0 items-center gap-1">
+                  <span className="ml-auto flex shrink-0 items-center gap-1">
                     {p ? (
                       <span
                         className={`text-[9px] font-bold ${p.tone === "good" ? "text-accent" : "text-loss"}`}
@@ -326,8 +362,8 @@ function MatchupStrip({
               </div>
             );
           })}
-          <div className="mt-1 text-[10px] uppercase tracking-wide text-chalk-600">
-            {started ? `Week ${live.week}` : `Week ${live.week} \u00b7 not started`}
+          <div className="mt-1 truncate text-[10px] text-chalk-600" title="All-time head to head">
+            {series(m.a.ownerSlug, m.b.ownerSlug)}
           </div>
         </Link>
       ))}
