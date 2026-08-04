@@ -14,6 +14,8 @@
 
 import { useEffect, useState } from "react";
 
+import { orderIsSet } from "@/lib/draft-slots";
+
 export interface LiveRoster {
   rosterId: number;
   ownerId: string | null;
@@ -193,4 +195,103 @@ export function LiveStatus({ status }: { status: LiveState<unknown>["status"] })
       live from Sleeper
     </span>
   );
+}
+
+export interface LiveDraft {
+  draftId: string;
+  status: string;
+  type: string;
+  rounds: number;
+  teams: number;
+  reversalRound: number;
+  /** Slot -> roster. Meaningless until `orderSet`; see lib/draft-slots.ts. */
+  slotToRoster: Record<number, number>;
+  /** True once the order has actually been drawn. */
+  orderSet: boolean;
+  startTime: number | null;
+}
+
+/**
+ * The upcoming draft, fetched in the browser.
+ *
+ * Two requests: the league, then its `draft_id`. Deliberately NOT
+ * `/league/:id/drafts`, which returns abandoned drafts alongside the real one —
+ * the 2024 league carries two — and omits `slot_to_roster_id` entirely.
+ *
+ * Live because none of this is settled until the draft runs: the order is drawn
+ * after the keeper deadline, and picks are traded up to the last minute. It gets
+ * committed to `data/<slug>/derived/drafts.json` once the draft completes.
+ */
+export function useLiveDraft(leagueId: string | null): LiveState<LiveDraft | null> {
+  const [state, setState] = useState<LiveState<LiveDraft | null>>({
+    status: "loading",
+    data: null,
+    error: null,
+  });
+
+  useEffect(() => {
+    if (!leagueId) return;
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const leagueRes = await fetch(`https://api.sleeper.app/v1/league/${leagueId}`);
+        if (!leagueRes.ok) throw new Error(`HTTP ${leagueRes.status}`);
+        const league = (await leagueRes.json()) as { draft_id?: string | null } | null;
+        const draftId = league?.draft_id;
+        if (!draftId) {
+          if (!cancelled) setState({ status: "ready", data: null, error: null });
+          return;
+        }
+
+        const res = await fetch(`https://api.sleeper.app/v1/draft/${draftId}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const raw = (await res.json()) as {
+          draft_id: string;
+          status: string;
+          type: string;
+          start_time: number | null;
+          draft_order: Record<string, number> | null;
+          slot_to_roster_id: Record<string, number> | null;
+          settings?: { rounds?: number; teams?: number; reversal_round?: number };
+        } | null;
+        if (cancelled || !raw) {
+          if (!cancelled) setState({ status: "ready", data: null, error: null });
+          return;
+        }
+
+        const slotToRoster: Record<number, number> = {};
+        for (const [slot, roster] of Object.entries(raw.slot_to_roster_id ?? {})) {
+          slotToRoster[Number(slot)] = roster;
+        }
+        setState({
+          status: "ready",
+          error: null,
+          data: {
+            draftId: raw.draft_id,
+            status: raw.status,
+            type: raw.type,
+            rounds: raw.settings?.rounds ?? 0,
+            teams: raw.settings?.teams ?? Object.keys(slotToRoster).length,
+            reversalRound: raw.settings?.reversal_round ?? 0,
+            slotToRoster,
+            orderSet: orderIsSet(raw.draft_order, slotToRoster),
+            startTime: raw.start_time ?? null,
+          },
+        });
+      } catch (e) {
+        // Fails soft, like the other hooks: the page keeps its baked content.
+        if (!cancelled) {
+          setState({ status: "error", data: null, error: (e as Error).message });
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [leagueId]);
+
+  if (!leagueId) return { status: "ready", data: null, error: null };
+  return state;
 }

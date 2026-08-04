@@ -126,15 +126,32 @@ Gibbons, Brendon Ng, Tyler Jung, Logan Dunn, Jaymie Lew.
 - **Tooltips are native `title` attributes**, so column hints are unreachable on
   touch devices.
 
-### Requested, not yet built
+### Draft slots and the projected board
 
-- **Draft slots for keepers — bylaws 1.7.2.2.2.** With two picks in the same
-  round, the keeper takes the LOWER slot (3.10 over 3.05). Draft order is not
-  known until after the keeper deadline (Appendix A), so `allocate()` in
-  `components/draft-picks.tsx` currently picks an arbitrary one of two same-round
-  picks, and picks render as "7th Rd" rather than "7.10". Once an order exists,
-  resolve slots there and label picks with them. The league intends to automate
-  this for this season and future ones.
+`lib/draft-slots.ts` is the one implementation of bylaws 1.7.2.2.2 — with two
+picks in the same round the keeper takes the LOWER slot, 3.10 over 3.05, so the
+team keeps its earlier pick to draft with. Shared by the owner profile's pick
+list and the keeper page's projected board; two copies of a bylaw would drift.
+
+Keepers are placed in ASCENDING cost round (most constrained first — a round 1
+keeper has no fallback, a round 12 keeper has eleven) and take the LATEST pick
+within a round. Those are different rules doing different jobs; do not merge them.
+
+WAIT FOR `draft_order`, NOT FOR `slot_to_roster_id`. Sleeper ships the slot map as
+an identity placeholder (slot 1 -> roster 1, ...) from the moment a draft exists —
+confirmed against a 2024 draft that had a start time set and was still unordered,
+so the DATE being set proves nothing either. Trusting the placeholder would render
+a confident running order in roster-creation sequence. `orderIsSet()` is the gate.
+
+Verified against the real 2025 draft: `pickLabel` reproduces Sleeper's own numbering
+on all 170 picks, `buildBoard` names the right owner for all 170 including the 23
+traded, and a team holding 3.01 and 3.07 puts its keeper on 3.07.
+
+`/keepers` renders a projected board — pick ownership after trades, with locked-in
+keepers filled into the pick they will consume. ENTIRELY LIVE: order, trades and
+selections all move until the draft runs, at which point `derive` commits the real
+thing to `drafts.json` and `/history/<season>/draft/` takes over. Before the order
+is drawn it says so rather than guessing.
 
 `/history/<season>/draft/` renders a season's draft as the board it happened on
 — slots as columns, rounds as rows. Only seasons WITH picks get a page, so the

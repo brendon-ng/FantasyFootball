@@ -3,7 +3,13 @@
 import Link from "next/link";
 
 import { Panel, PanelHeader } from "@/components/ui";
-import { LiveStatus, useLiveRosters, useLiveTradedPicks } from "@/lib/sleeper-browser";
+import {
+  LiveStatus,
+  useLiveDraft,
+  useLiveRosters,
+  useLiveTradedPicks,
+} from "@/lib/sleeper-browser";
+import { assignKeeperSlots, buildBoard, type DraftShape } from "@/lib/draft-slots";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
 /**
@@ -27,12 +33,18 @@ interface OwnedPick {
   fromSlug: string;
   /** True when it came from another team. */
   acquired: boolean;
+  /** Draft slot, once the order has been drawn. Null before that. */
+  slot: number | null;
+  /** Position within the round, once known — the "10" in "3.10". */
+  inRound: number | null;
 }
 
 interface Assignment {
   contract: KeeperContract;
   /** Round of the pick consumed, or null when no legal pick exists. */
   usedRound: number | null;
+  /** Slot consumed, when the order is known. */
+  usedSlot?: number | null;
   /** Set when the keeper could not be placed at its own cost round. */
   bumpedFrom: number | null;
   reason: string | null;
@@ -50,12 +62,12 @@ interface Assignment {
  * fallbacks. Placing cheap keepers first would let one consume a pick an
  * expensive keeper had no alternative to.
  *
- * NOT YET IMPLEMENTED — bylaws 1.7.2.2.2. Holding two picks in the same round,
- * the keeper must take the LOWER draft slot (3.10 rather than 3.05). Draft
- * order does not exist until after the keeper deadline — Appendix A's whole
- * point — so there are no slots to choose between and this currently picks an
- * arbitrary one of the two. Once the order is set, resolve slots here and
- * render picks as "7.10" rather than "7th Rd".
+ * ROUND-ONLY FALLBACK. Bylaws 1.7.2.2.2 says a keeper takes the LOWER of two
+ * picks in the same round (3.10 rather than 3.05), which needs an order that does
+ * not exist until after the keeper deadline — Appendix A's whole point. When the
+ * order IS drawn this defers to `assignKeeperSlots` in lib/draft-slots.ts, which
+ * applies the rule properly and is shared with the projected board; a season with
+ * no order yet still lands here.
  */
 function allocate(contracts: KeeperContract[], picks: OwnedPick[]): Assignment[] {
   const pool = new Map<number, number>();
@@ -116,6 +128,7 @@ export function DraftPicks({
 }) {
   const rosters = useLiveRosters(leagueId);
   const traded = useLiveTradedPicks(leagueId);
+  const draft = useLiveDraft(leagueId);
   const loading = rosters.status === "loading" || traded.status === "loading";
   const failed = rosters.status === "error" || traded.status === "error";
 
@@ -142,7 +155,9 @@ export function DraftPicks({
     );
     const out: OwnedPick[] = [];
     for (let r = 1; r <= draftRounds; r++) {
-      if (!movedAway.has(r)) out.push({ round: r, fromSlug: ownerSlug, acquired: false });
+      if (!movedAway.has(r)) {
+        out.push({ round: r, fromSlug: ownerSlug, acquired: false, slot: null, inRound: null });
+      }
     }
     for (const p of inYear) {
       if (p.currentOwnerRosterId !== myRosterId || p.rosterId === myRosterId) continue;
@@ -150,6 +165,8 @@ export function DraftPicks({
         round: p.round,
         fromSlug: rosterToSlug.get(p.rosterId) ?? `roster-${p.rosterId}`,
         acquired: true,
+        slot: null,
+        inRound: null,
       });
     }
     return out.sort((a, b) => a.round - b.round || Number(a.acquired) - Number(b.acquired));
@@ -165,13 +182,52 @@ export function DraftPicks({
     ]),
   ].sort((a, b) => a - b);
 
-  const owned = picksFor(season);
+  // Once the order is drawn the upcoming season's picks carry real slots, and
+  // the keeper assignment defers to the shared rule. Later seasons never will —
+  // Sleeper has no draft for them yet — so they keep the round-only view.
+  const shape: DraftShape | null =
+    draft.data?.orderSet && draft.data.rounds > 0
+      ? {
+          rounds: draft.data.rounds,
+          teams: draft.data.teams,
+          type: draft.data.type,
+          slotToRoster: draft.data.slotToRoster,
+          reversalRound: draft.data.reversalRound,
+        }
+      : null;
+
+  const picksWithSlots = (yr: number): OwnedPick[] => {
+    if (!shape || yr !== season || myRosterId == null) return picksFor(yr);
+    return buildBoard(shape, traded.data ?? [])
+      .filter((p) => p.ownerRoster === myRosterId)
+      .map((p) => ({
+        round: p.round,
+        fromSlug: rosterToSlug.get(p.fromRoster) ?? `roster-${p.fromRoster}`,
+        acquired: p.traded,
+        slot: p.slot,
+        inRound: p.inRound,
+      }));
+  };
+
+  const owned = picksWithSlots(season);
   const selectedIds = new Set(
     (rosters.data ?? []).find((r) => r.rosterId === myRosterId)?.keepers ?? [],
   );
   // Keepers only consume picks in the draft they are being kept for.
   const selected = contracts.filter((c) => selectedIds.has(c.playerId));
-  const assignments = allocate(selected, owned);
+  // Same rule either way; only the precision differs.
+  const assignments: Assignment[] = shape
+    ? assignKeeperSlots(
+        selected.map((c) => ({ playerId: c.playerId, round: c.round, expired: c.expired })),
+        buildBoard(shape, traded.data ?? []).filter((p) => p.ownerRoster === myRosterId),
+      ).map((a) => ({
+        contract: selected.find((c) => c.playerId === a.playerId)!,
+        usedRound: a.pick?.round ?? null,
+        usedSlot: a.pick?.slot ?? null,
+        bumpedFrom: a.bumpedFrom,
+        reason: a.reason,
+      }))
+    : allocate(selected, owned);
 
   const consumedByRound = new Map<number, Assignment[]>();
   for (const a of assignments) {
@@ -268,7 +324,10 @@ export function DraftPicks({
                         }`}
                       >
                         <span className="tabular w-24 shrink-0 text-sm">
-                          {yr} {ord(pick.round)} Rd
+                          {yr}{" "}
+                          {pick.inRound != null
+                            ? `${pick.round}.${String(pick.inRound).padStart(2, "0")}`
+                            : `${ord(pick.round)} Rd`}
                         </span>
                         <span className="min-w-0 flex-1 truncate text-[11px] text-chalk-600">
                           {pick.acquired

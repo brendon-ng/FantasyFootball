@@ -1,9 +1,11 @@
 import Link from "next/link";
 
 import { KeeperBoard } from "@/components/keeper-board";
+import { ProjectedDraftBoard } from "@/components/projected-draft-board";
 import {
   EmptyState,
   Panel,
+  PanelHeader,
   Stat,
 } from "@/components/ui";
 import {
@@ -117,6 +119,28 @@ export default function KeepersPage() {
           maxKeepers={MAX_KEEPERS}
         />
       )}
+
+      {/* Entirely live: the order is drawn after the keeper deadline, picks trade
+          until the last minute, and selections change hourly. Once the draft runs,
+          `derive` commits the real board and /history/<season>/draft/ takes over. */}
+      <Panel>
+        <PanelHeader
+          title={`Projected ${nextSeason} Draft Board`}
+          meta="live from Sleeper"
+          legend="Who owns each pick after trades, with locked-in keepers placed on the pick they will consume. A green cell is a pick already spent on a keeper."
+        />
+        <ProjectedDraftBoard
+          leagueId={leagueId}
+          season={nextSeason}
+          contracts={all}
+          players={players}
+          userIdToSlug={Object.fromEntries(
+            owners.filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
+          )}
+          ownerNames={ownerNames}
+          maxKeepers={MAX_KEEPERS}
+        />
+      </Panel>
     </div>
   );
 }
