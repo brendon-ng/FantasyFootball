@@ -116,11 +116,54 @@ interface Overrides {
 let overrides: Overrides = {};
 let ignoredPlayers = new Set<string>();
 
-const rulesFor = (season: number): Rules => {
-  const r = readJson<Rules>(join(CONFIG_DIR, "rules", `${season}.json`));
-  if (!r) throw new Error(`No rules file for ${season} — add config/rules/${season}.json`);
-  return r;
-};
+/**
+ * A season's rules, inheriting the previous year's when it has none of its own.
+ *
+ * Most years nothing changes, and requiring a hand-written file for each one made
+ * a new season a manual chore that BREAKS THE BUILD when forgotten — a bad
+ * failure for something that happens while nobody is looking, on a schedule.
+ * Carrying the last file forward is what the league actually does.
+ *
+ * Only ever inherits FORWARD, and only for a season with no file. History stays
+ * immutable: a past season keeps whatever its own file said, and changing next
+ * year's rules is still just writing `rules/<year>.json`.
+ *
+ * Throws when there is nothing to inherit from — a season older than every rules
+ * file is a genuine gap, not a new year.
+ */
+const rulesCache = new Map<number, Rules>();
+
+function rulesFor(season: number): Rules {
+  const hit = rulesCache.get(season);
+  if (hit) return hit;
+
+  const own = readJson<Rules>(join(CONFIG_DIR, "rules", `${season}.json`));
+  if (own) {
+    rulesCache.set(season, own);
+    return own;
+  }
+
+  const dir = join(CONFIG_DIR, "rules");
+  const years = (existsSync(dir) ? readdirSync(dir) : [])
+    .map((f) => Number(f.replace(".json", "")))
+    .filter((y) => Number.isFinite(y) && y < season)
+    .sort((a, b) => b - a);
+
+  if (!years.length) {
+    throw new Error(
+      `No rules file for ${season} and nothing earlier to inherit — add ${CONFIG_DIR}/rules/${season}.json`,
+    );
+  }
+
+  const inheritedFrom = years[0];
+  const inherited = readJson<Rules>(join(dir, `${inheritedFrom}.json`))!;
+  log.info(
+    `${season}: no rules file — inheriting ${inheritedFrom}'s (write rules/${season}.json to change them)`,
+  );
+  const rules = { ...inherited, season };
+  rulesCache.set(season, rules);
+  return rules;
+}
 
 // --- owner identity ---------------------------------------------------------
 

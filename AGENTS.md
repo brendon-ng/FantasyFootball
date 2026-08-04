@@ -666,8 +666,16 @@ for every other league's players, with no data on them.
   `data/derived/` and re-run to rebuild from scratch.
 
 Rules are versioned per season so changing 2027's keeper rules cannot
-retroactively rewrite 2024's contracts. Adding a season means adding
-`config/rules/<year>.json`; `derive` throws if one is missing.
+retroactively rewrite 2024's contracts.
+
+A season with NO file of its own INHERITS the most recent earlier one. Most years
+nothing changes, and requiring a hand-written file for every season made a new
+year a manual chore that BREAKS THE BUILD when forgotten — a bad failure for
+something that runs on a schedule while nobody is watching. Changing next year's
+rules is still just writing `rules/<year>.json`; that file always wins.
+
+Inheritance is forward-only, so history stays immutable, and derive still throws
+for a season older than every rules file — that is a real gap, not a new year.
 
 ### Sleeper API reference
 
