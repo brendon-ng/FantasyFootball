@@ -474,6 +474,62 @@ Rules are versioned per season so changing 2027's keeper rules cannot
 retroactively rewrite 2024's contracts. Adding a season means adding
 `config/rules/<year>.json`; `derive` throws if one is missing.
 
+### Sleeper API reference
+
+`https://docs.sleeper.com` is a SINGLE-PAGE Slate doc, so every `#anchor` below
+returns the same HTML. Fetch the root once; do not fetch per section.
+
+`WebFetch` is blocked in this environment (a hook rejects it), but plain `curl` in
+Bash reaches the internet. Pipe through an HTML-to-text strip.
+
+The sections the user pointed at, in their order:
+
+```
+https://docs.sleeper.com
+https://docs.sleeper.com/#user
+https://docs.sleeper.com/#avatars
+https://docs.sleeper.com/#leagues
+https://docs.sleeper.com/#get-all-leagues-for-user
+https://docs.sleeper.com/#get-a-specific-league
+https://docs.sleeper.com/#getting-rosters-in-a-league
+https://docs.sleeper.com/#getting-users-in-a-league
+https://docs.sleeper.com/#getting-matchups-in-a-league
+https://docs.sleeper.com/#getting-the-playoff-bracket
+https://docs.sleeper.com/#get-transactions
+https://docs.sleeper.com/#get-traded-picks
+https://docs.sleeper.com/#get-nfl-state
+https://docs.sleeper.com/#drafts
+https://docs.sleeper.com/#get-all-drafts-for-user
+https://docs.sleeper.com/#get-all-drafts-for-a-league
+https://docs.sleeper.com/#get-a-specific-draft
+https://docs.sleeper.com/#get-all-picks-in-a-draft
+https://docs.sleeper.com/#get-traded-picks-in-a-draft
+https://docs.sleeper.com/#players
+https://docs.sleeper.com/#fetch-all-players
+https://docs.sleeper.com/#trending-players
+https://docs.sleeper.com/#errors
+```
+
+Base `https://api.sleeper.app/v1`, read-only, no auth, stay under ~1000 calls/min.
+Every endpoint this site uses is a typed function in `lib/sleeper.ts` — read that
+first, since it also records where the docs are WRONG or incomplete:
+
+- The docs say `loses_bracket`; the real path is `losers_bracket`.
+- `/draft/<id>` returns `draft_order` and `slot_to_roster_id`, which the draft-LIST
+  endpoints omit. Always resolve a draft through `league.draft_id`.
+- `/state/nfl` returns an undocumented `season_has_scores`, and `week`,
+  `display_week` and `leg` are three different numbers.
+- Fantasy points are split integer/decimal: `fpts` + `fpts_decimal` (1617 + 78 =
+  1617.78). Same for `fpts_against`.
+- `adds`/`drops` on a transaction are `{player_id: roster_id}` maps, not arrays.
+- Player ids are numeric strings EXCEPT team defences, which use abbreviations
+  ("DET").
+- `/players/nfl` is ~5MB. Cache it; call at most once a day.
+- A missing resource returns `null` with HTTP 200, not a 404.
+- Avatars: `https://sleepercdn.com/avatars/<id>` and `.../avatars/thumbs/<id>`.
+  Not under `api.sleeper.app`, and the content type is `application/octet-stream`
+  whatever the real format is.
+
 ### Season discovery
 
 Sleeper mints a new `league_id` every year and only links *backward* via
