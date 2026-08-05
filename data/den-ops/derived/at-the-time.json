@@ -220,6 +220,14 @@
       "ownerSlug": "logan-dunn",
       "stillStands": false,
       "value": 350.94
+    },
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "logan-dunn",
+      "playerId": "2216",
+      "stillStands": false,
+      "value": 45
     }
   ],
   "2019-4-camina-balmores-vs-david-collier": [
@@ -238,6 +246,26 @@
       "ownerSlug": "logan-dunn",
       "stillStands": false,
       "value": 83.9
+    }
+  ],
+  "2019-5-camina-balmores-vs-olivia-nelli": [
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "olivia-nelli",
+      "playerId": "4034",
+      "stillStands": false,
+      "value": 47.7
+    }
+  ],
+  "2019-5-david-collier-vs-safvet-besen": [
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "david-collier",
+      "playerId": "4199",
+      "stillStands": false,
+      "value": 49.2
     }
   ],
   "2019-6-david-collier-vs-jaymie-lew": [
@@ -431,16 +459,6 @@
       "ownerSlug": "jaymie-lew",
       "stillStands": true,
       "value": 408.1
-    }
-  ],
-  "2024-2-reagan-schmidt-vs-safvet-besen": [
-    {
-      "kind": "player-week",
-      "label": "Best single week by a player in league history",
-      "ownerSlug": "safvet-besen",
-      "playerId": "4035",
-      "stillStands": false,
-      "value": 44
     }
   ]
 }

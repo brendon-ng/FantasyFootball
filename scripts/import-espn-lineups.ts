@@ -270,7 +270,14 @@ async function main(): Promise<void> {
         );
 
     for (const season of seasons) {
-      const manual = readJson<{ finalWeek?: number }>(join(manualDir, `${season}.json`));
+      const manual = readJson<{
+        finalWeek?: number;
+        matchups?: Array<{
+          week: number;
+          home: { ownerSlug: string; points: number };
+          away: { ownerSlug: string; points: number };
+        }>;
+      }>(join(manualDir, `${season}.json`));
       const last = manual?.finalWeek ?? 17;
       const weeks = weekArg
         ? weekArg.split(",").map(Number)
@@ -284,6 +291,13 @@ async function main(): Promise<void> {
         weeks: {},
         espnOnly: {},
       };
+
+      // The score each team actually posted, from the already-verified scoreboard
+      // import. Every recovered lineup is checked against it below.
+      const expected = new Map<string, number>();
+      for (const g of manual?.matchups ?? []) {
+        for (const side of [g.home, g.away]) expected.set(`${g.week}:${side.ownerSlug}`, side.points);
+      }
 
       const unmatched = new Set<string>();
       for (const week of weeks) {
@@ -348,8 +362,35 @@ async function main(): Promise<void> {
             forWeek[owner] = { starters: started.map((s) => s.id), playerPoints };
           }
         }
+        // THE INVARIANT, enforced here rather than trusted. Started points must
+        // equal the score the team posted, which is already reconciled against
+        // ESPN's own standings page. It is the check that catches the failure
+        // this import is most exposed to: ESPN's `matchupPeriodId` and
+        // `scoringPeriodId` are not the same number in every postseason format,
+        // and attaching week 15's roster to week 14's game would otherwise look
+        // completely plausible.
+        const wrong: string[] = [];
+        for (const [owner, side] of Object.entries(forWeek)) {
+          const want = expected.get(`${week}:${owner}`);
+          if (want == null) continue;
+          const got = side.starters.reduce((t, id) => t + (side.playerPoints[id] ?? 0), 0);
+          if (Math.abs(got - want) > 0.02) {
+            wrong.push(`${owner} lineup ${got.toFixed(2)} vs scoreboard ${want.toFixed(2)}`);
+          }
+        }
+        if (wrong.length) {
+          throw new Error(
+            `${slug} ${season} week ${week}: started points do not match the scoreboard —\n    ` +
+              wrong.join("\n    "),
+          );
+        }
+
         out.weeks[String(week)] = forWeek;
-        log.info(`${slug} ${season} week ${week}: ${Object.keys(forWeek).length} lineups`);
+        const checked = Object.keys(forWeek).filter((o) => expected.has(`${week}:${o}`)).length;
+        log.info(
+          `${slug} ${season} week ${week}: ${Object.keys(forWeek).length} lineups` +
+            ` (${checked} reconciled)`,
+        );
       }
 
       writeJson(outPath, out);

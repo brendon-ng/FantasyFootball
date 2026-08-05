@@ -941,6 +941,22 @@
       "week": 10
     },
     {
+      "ownerSlug": "david-collier",
+      "playerId": "4199",
+      "points": 49.2,
+      "season": 2019,
+      "started": true,
+      "week": 5
+    },
+    {
+      "ownerSlug": "olivia-nelli",
+      "playerId": "4034",
+      "points": 47.7,
+      "season": 2019,
+      "started": true,
+      "week": 5
+    },
+    {
       "ownerSlug": "jaymie-lew",
       "playerId": "9493",
       "points": 46.5,
@@ -973,12 +989,60 @@
       "week": 14
     },
     {
+      "ownerSlug": "logan-dunn",
+      "playerId": "2216",
+      "points": 45,
+      "season": 2019,
+      "started": true,
+      "week": 3
+    },
+    {
       "ownerSlug": "safvet-besen",
       "playerId": "4035",
       "points": 44,
       "season": 2024,
       "started": true,
       "week": 2
+    },
+    {
+      "ownerSlug": "spencer-kim",
+      "playerId": "4866",
+      "points": 43.9,
+      "season": 2019,
+      "started": true,
+      "week": 16
+    },
+    {
+      "ownerSlug": "olivia-nelli",
+      "playerId": "96",
+      "points": 43.76,
+      "season": 2019,
+      "started": true,
+      "week": 7
+    },
+    {
+      "ownerSlug": "jaymie-lew",
+      "playerId": "1479",
+      "points": 43.6,
+      "season": 2019,
+      "started": true,
+      "week": 3
+    },
+    {
+      "ownerSlug": "michaela-frederick",
+      "playerId": "2449",
+      "points": 43.5,
+      "season": 2019,
+      "started": true,
+      "week": 6
+    },
+    {
+      "ownerSlug": "brendon-ng",
+      "playerId": "1067",
+      "points": 43.3,
+      "season": 2019,
+      "started": true,
+      "week": 7
     },
     {
       "ownerSlug": "jaymie-lew",
@@ -995,6 +1059,14 @@
       "season": 2019,
       "started": true,
       "week": 1
+    },
+    {
+      "ownerSlug": "logan-dunn",
+      "playerId": "2216",
+      "points": 42.8,
+      "season": 2019,
+      "started": true,
+      "week": 8
     },
     {
       "ownerSlug": "jake-gibbons",
@@ -1021,92 +1093,20 @@
       "week": 14
     },
     {
-      "ownerSlug": "reagan-schmidt",
-      "playerId": "7547",
-      "points": 41.4,
-      "season": 2025,
-      "started": true,
-      "week": 15
-    },
-    {
-      "ownerSlug": "jaymie-lew",
-      "playerId": "7564",
-      "points": 41.3,
-      "season": 2024,
+      "ownerSlug": "camina-balmores",
+      "playerId": "4017",
+      "points": 41.74,
+      "season": 2019,
       "started": true,
       "week": 5
     },
     {
-      "ownerSlug": "lauren-gross",
-      "playerId": "9226",
-      "points": 40.5,
-      "season": 2025,
-      "started": true,
-      "week": 10
-    },
-    {
-      "ownerSlug": "cassidy-pensa",
-      "playerId": "6801",
-      "points": 40.1,
-      "season": 2024,
-      "started": true,
-      "week": 17
-    },
-    {
-      "ownerSlug": "cassidy-pensa",
-      "playerId": "11563",
-      "points": 39.96,
-      "season": 2025,
-      "started": true,
-      "week": 7
-    },
-    {
-      "ownerSlug": "lauren-gross",
-      "playerId": "9509",
-      "points": 39.9,
-      "season": 2025,
-      "started": true,
-      "week": 17
-    },
-    {
-      "ownerSlug": "spencer-kim",
-      "playerId": "6813",
-      "points": 39.8,
-      "season": 2024,
-      "started": true,
-      "week": 16
-    },
-    {
-      "ownerSlug": "safvet-besen",
-      "playerId": "6786",
-      "points": 39.6,
-      "season": 2024,
-      "started": true,
-      "week": 8
-    },
-    {
-      "ownerSlug": "spencer-kim",
-      "playerId": "4663",
-      "points": 39.4,
+      "ownerSlug": "david-collier",
+      "playerId": "4199",
+      "points": 41.6,
       "season": 2019,
       "started": true,
-      "week": 1
-    },
-    {
-      "ownerSlug": "jaymie-lew",
-      "playerId": "9756",
-      "points": 39.3,
-      "season": 2024,
-      "started": true,
-      "week": 14
-    },
-    {
-      "ownerSlug": "reagan-schmidt",
-      "playerId": "7547",
-      "points": 39.2,
-      "season": 2025,
-      "started": true,
-      "week": 2
+      "week": 8
     }
   ],
   "weeklyHigh": [
