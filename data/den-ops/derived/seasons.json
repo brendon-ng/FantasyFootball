@@ -1593,7 +1593,17 @@
       }
     ],
     "regularSeasonWeeks": 14,
-    "rosterPositions": [],
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "D/ST",
+      "K"
+    ],
     "runnerUp": "tyler-jung",
     "season": 2021,
     "standings": [

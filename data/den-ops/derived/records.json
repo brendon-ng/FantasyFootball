@@ -927,6 +927,14 @@
     {
       "ownerSlug": "jaymie-lew",
       "playerId": "7564",
+      "points": 55.6,
+      "season": 2021,
+      "started": true,
+      "week": 17
+    },
+    {
+      "ownerSlug": "jaymie-lew",
+      "playerId": "7564",
       "points": 55.4,
       "season": 2024,
       "started": true,
@@ -939,6 +947,14 @@
       "season": 2025,
       "started": true,
       "week": 12
+    },
+    {
+      "ownerSlug": "michaela-frederick",
+      "playerId": "6813",
+      "points": 53.4,
+      "season": 2021,
+      "started": true,
+      "week": 11
     },
     {
       "ownerSlug": "david-collier",
@@ -987,6 +1003,22 @@
       "season": 2019,
       "started": true,
       "week": 5
+    },
+    {
+      "ownerSlug": "reagan-schmidt",
+      "playerId": "3198",
+      "points": 47.7,
+      "season": 2021,
+      "started": true,
+      "week": 2
+    },
+    {
+      "ownerSlug": "olivia-nelli",
+      "playerId": "3321",
+      "points": 47.6,
+      "season": 2021,
+      "started": true,
+      "week": 4
     },
     {
       "ownerSlug": "jaymie-lew",
@@ -1061,52 +1093,20 @@
       "week": 7
     },
     {
+      "ownerSlug": "jake-gibbons",
+      "playerId": "3969",
+      "points": 44.1,
+      "season": 2021,
+      "started": true,
+      "week": 12
+    },
+    {
       "ownerSlug": "safvet-besen",
       "playerId": "4035",
       "points": 44,
       "season": 2024,
       "started": true,
       "week": 2
-    },
-    {
-      "ownerSlug": "spencer-kim",
-      "playerId": "4866",
-      "points": 43.9,
-      "season": 2019,
-      "started": true,
-      "week": 16
-    },
-    {
-      "ownerSlug": "olivia-nelli",
-      "playerId": "96",
-      "points": 43.76,
-      "season": 2019,
-      "started": true,
-      "week": 7
-    },
-    {
-      "ownerSlug": "jaymie-lew",
-      "playerId": "1479",
-      "points": 43.6,
-      "season": 2019,
-      "started": true,
-      "week": 3
-    },
-    {
-      "ownerSlug": "michaela-frederick",
-      "playerId": "2449",
-      "points": 43.5,
-      "season": 2019,
-      "started": true,
-      "week": 6
-    },
-    {
-      "ownerSlug": "brendon-ng",
-      "playerId": "1067",
-      "points": 43.3,
-      "season": 2019,
-      "started": true,
-      "week": 7
     }
   ],
   "weeklyHigh": [

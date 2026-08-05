@@ -149,6 +149,8 @@ interface Index {
   /** ESPN player id -> Sleeper id. The exact join; everything else is a guess. */
   byEspn: Map<string, string>;
   byName: Map<string, Array<{ id: string; p: SleeperPlayer }>>;
+  /** "gainwell|RB" -> candidates. Last resort, for nicknames. */
+  byLastPos: Map<string, Array<{ id: string; p: SleeperPlayer }>>;
 }
 
 /**
@@ -171,7 +173,15 @@ function sleeperIndex(): Index {
   }
   const byEspn = new Map<string, string>();
   const byName = new Map<string, Array<{ id: string; p: SleeperPlayer }>>();
+  const byLastPos = new Map<string, Array<{ id: string; p: SleeperPlayer }>>();
   for (const [id, p] of Object.entries(all)) {
+    const last = normalise(p.last_name ?? "");
+    if (last && p.position) {
+      const k = `${last}|${p.position}`;
+      const b = byLastPos.get(k) ?? [];
+      b.push({ id, p });
+      byLastPos.set(k, b);
+    }
     if (p.espn_id) byEspn.set(String(p.espn_id), id);
     // Both spellings indexed: `search_full_name` keeps suffixes ("willfullerv")
     // while `normalise` strips them, and either can be the one that matches.
@@ -185,14 +195,16 @@ function sleeperIndex(): Index {
       byName.set(key, bucket);
     }
   }
-  return { byEspn, byName };
+  return { byEspn, byName, byLastPos };
 }
 
 interface MatchResult {
   id: string;
   matched: boolean;
   /** How it was matched, for the run summary. */
-  via: "espn-id" | "defence" | "name" | "none";
+  via: "espn-id" | "defence" | "name" | "nickname" | "none";
+  /** Set when the two databases spell the player differently. */
+  renamed?: string;
 }
 
 /**
@@ -223,9 +235,32 @@ function matchPlayer(pl: EspnPlayer, idx: Index): MatchResult {
     const pool = byPos.length ? byPos : cands;
     const team = PRO_TEAM[pl.proTeamId ?? -1];
     const byTeam = team ? pool.filter((c) => c.p.team === team) : [];
-    return { id: (byTeam[0] ?? pool[0]).id, matched: true, via: "name" };
+    const hit = byTeam[0] ?? pool[0];
+    return { id: hit.id, matched: true, via: "name", renamed: label(pl, hit.p) };
+  }
+
+  // LAST RESORT: surname plus position, and only when that is UNIQUE and the
+  // first initial agrees. Catches the nickname case the other two tiers cannot —
+  // Sleeper's "Kenny Gainwell" against ESPN's "Kenneth" — without opening the
+  // door to matching two different people who happen to share a surname. Bounded
+  // this tightly because a wrong match here is invisible: the points still sum to
+  // the team score, they are just credited to the wrong player.
+  if (pos) {
+    const surname = normalise(pl.fullName.split(/\s+/).slice(1).join(" "));
+    const cands2 = (idx.byLastPos.get(`${surname}|${pos}`) ?? []).filter(
+      (c) => normalise(c.p.first_name ?? "")[0] === normalise(pl.fullName)[0],
+    );
+    if (cands2.length === 1) {
+      return { id: cands2[0].id, matched: true, via: "nickname", renamed: label(pl, cands2[0].p) };
+    }
   }
   return { id: `espn-${pl.id}`, matched: false, via: "none" };
+}
+
+/** "Kenneth Gainwell -> Kenny Gainwell", or nothing when they agree. */
+function label(pl: EspnPlayer, sp: SleeperPlayer): string | undefined {
+  const theirs = sp.full_name ?? `${sp.first_name ?? ""} ${sp.last_name ?? ""}`.trim();
+  return normalise(theirs) === normalise(pl.fullName) ? undefined : `${pl.fullName} -> ${theirs}`;
 }
 
 async function fetchWeek(leagueId: string, season: number, week: number): Promise<EspnLeague> {
@@ -247,7 +282,9 @@ async function main(): Promise<void> {
 
   const idx = sleeperIndex();
   log.info(`Sleeper index: ${idx.byEspn.size} espn ids, ${idx.byName.size} names`);
-  const via = { "espn-id": 0, defence: 0, name: 0, none: 0 };
+  const via = { "espn-id": 0, defence: 0, name: 0, nickname: 0, none: 0 };
+  /** Every match where the two databases disagree on the name, for eyeballing. */
+  const renames = new Set<string>();
 
   for (const league of resolveLeagues(onlyLeague ? [`--league=${onlyLeague}`] : [])) {
     const slug = league.slug;
@@ -352,6 +389,7 @@ async function main(): Promise<void> {
             for (const e of entries) {
               const m = matchPlayer(e.playerPoolEntry.player, idx);
               via[m.via] += 1;
+              if (m.renamed) renames.add(`${m.renamed} (${m.via})`);
               if (!m.matched) {
                 unmatched.add(e.playerPoolEntry.player.fullName);
                 out.espnOnly[m.id] = {
@@ -420,8 +458,15 @@ async function main(): Promise<void> {
       writeJson(outPath, out);
       log.info(
         `matched via espn id ${via["espn-id"]}, defence ${via.defence}, ` +
-          `name ${via.name}, unmatched ${via.none}`,
+          `name ${via.name}, nickname ${via.nickname}, unmatched ${via.none}`,
       );
+      // PRINTED, NOT BURIED. A wrong name match still sums to the right team
+      // score, so the reconciliation check cannot catch it — these are the only
+      // rows a human has to look at.
+      if (renames.size) {
+        log.warn(`${slug} ${season}: matched under a different name, check these —`);
+        for (const r of [...renames].sort()) log.warn(`      ${r}`);
+      }
       if (unmatched.size) {
         log.warn(
           `${slug} ${season}: ${unmatched.size} player(s) not in Sleeper, kept under espn- ids: ` +
