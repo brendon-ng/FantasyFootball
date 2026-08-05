@@ -283,8 +283,12 @@ async function snapshotTeams(
   if (!all) return;
 
   const path = join(SHARED_DATA_DIR, "player-teams.json");
-  const file = readJson<PlayerTeams>(path) ?? { seasons: {}, weekly: {} };
+  const file = readJson<PlayerTeams>(path) ?? { seasons: {}, weekly: {}, byes: {} };
   const baseline = file.seasons[String(season)] ?? {};
+  // A season with no baseline yet — the first week of a new year — would make
+  // EVERY player a difference and put three hundred entries in the weekly bucket
+  // seventeen times over. Seed it instead, and diff from there.
+  const seeding = !Object.keys(baseline).length;
 
   const ids = new Set<string>();
   for (const m of matchups) {
@@ -296,8 +300,11 @@ async function snapshotTeams(
     // A defence IS its team, and cannot be traded.
     if (/^[A-Z]{2,4}$/.test(id)) continue;
     const team = all[id]?.team;
-    if (team && team !== baseline[id]) diffs[id] = team;
+    if (!team) continue;
+    if (seeding) baseline[id] = team;
+    else if (team !== baseline[id]) diffs[id] = team;
   }
+  if (seeding) file.seasons[String(season)] = baseline;
 
   const bySeason = (file.weekly[String(season)] ??= {});
   if (Object.keys(diffs).length) {
@@ -309,8 +316,10 @@ async function snapshotTeams(
 }
 
 interface PlayerTeams {
-  /** Season baseline, from `import:player-teams`. */
+  /** Season baseline, seeded here for a new season and filled by `import:player-teams`. */
   seasons: Record<string, Record<string, string>>;
+  /** `season -> team -> bye week`, written by `import:player-teams`. */
+  byes?: Record<string, Record<string, number>>;
   /** `season -> week -> playerId -> team`, only where a week disagrees. */
   weekly: Record<string, Record<string, Record<string, string>>>;
 }

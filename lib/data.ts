@@ -248,7 +248,11 @@ export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
     // went DET to MIN in 2022; without this guard his real week 7 for Detroit was
     // discarded as Minnesota's bye, quietly deleting 8.8 points he scored.
     if (points !== 0) return false;
-    const team = teams.seasons[String(season)]?.[playerId];
+    // Weekly first: from 2026 `sync` records the exact team as each week
+    // finalizes, which is the only way a midseason trade gets the right bye.
+    const team =
+      teams.weekly[String(season)]?.[String(week)]?.[playerId] ??
+      teams.seasons[String(season)]?.[playerId];
     return team ? teams.byes[String(season)]?.[team] === week : false;
   };
 

@@ -48,6 +48,13 @@ jobs:
       - name: Rebuild derived data
         run: npm run derive
 
+      # AFTER derive, which is what tells it which players a season involves — and
+      # the only thing that fetches bye weeks. Without it a new season's byes are
+      # never known, and every bye counts as a zero against a player's averages.
+      # Cached in the output file, so a run with nothing new costs a few requests.
+      - name: Recover player teams and bye weeks
+        run: npm run import:player-teams
+
       - name: Commit if anything finalized
         run: |
           if [ -z "$(git status --porcelain data/)" ]; then
