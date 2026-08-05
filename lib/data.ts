@@ -33,6 +33,7 @@ import type {
   OwnerRecord,
   PlayerMeta,
   PlayerTransaction,
+  PlayerUsage,
   SeasonKeepers,
   Trade,
   LiveMatchup,
@@ -214,6 +215,60 @@ export const getWeeklyLowKeys = once((): Set<string> => {
 });
 
 export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []);
+
+/**
+ * Per player, what each owner got out of them each season.
+ *
+ * ONE PASS FOR THE WHOLE BUILD. A player page that scanned every matchup itself
+ * would be O(pages x matchups) — 650 pages against 800 games — which is exactly
+ * the shape that made the build four minutes before the accessors were memoised.
+ *
+ * Summed rather than derived at import: `playerPoints` already carries the whole
+ * roster and `starters` the subset that counted, for both providers, so there is
+ * nothing to reconcile and no new file to keep in step.
+ */
+export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
+  const acc = new Map<string, PlayerUsage>();
+  for (const m of getMatchupHistory()) {
+    for (const side of [m.home, m.away]) {
+      const started = new Set(side.starters);
+      for (const [playerId, points] of Object.entries(side.playerPoints)) {
+        const key = `${playerId}|${m.season}|${side.ownerSlug}`;
+        const row =
+          acc.get(key) ??
+          {
+            season: m.season,
+            ownerSlug: side.ownerSlug,
+            rostered: 0,
+            started: 0,
+            startPoints: 0,
+            benchPoints: 0,
+          };
+        row.rostered += 1;
+        if (started.has(playerId)) {
+          row.started += 1;
+          row.startPoints += points;
+        } else {
+          row.benchPoints += points;
+        }
+        acc.set(key, row);
+      }
+    }
+  }
+
+  const out: Record<string, PlayerUsage[]> = {};
+  for (const [key, row] of acc) {
+    const playerId = key.slice(0, key.indexOf("|"));
+    row.startPoints = Number(row.startPoints.toFixed(2));
+    row.benchPoints = Number(row.benchPoints.toFixed(2));
+    (out[playerId] ??= []).push(row);
+  }
+  // Newest first, matching the transaction timeline on the same page.
+  for (const rows of Object.values(out)) {
+    rows.sort((a, b) => b.season - a.season || a.ownerSlug.localeCompare(b.ownerSlug));
+  }
+  return out;
+});
 /** Every completed trade, oldest first. Vetoed and withdrawn ones never reach here. */
 export const getTrades = (): Trade[] => load("derived/trades.json", []);
 

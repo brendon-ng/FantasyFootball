@@ -367,6 +367,25 @@ export interface Trade {
   vetoed: boolean;
 }
 
+/**
+ * What one owner got out of one player in one season.
+ *
+ * Rostered and started are counted in GAMES, not weeks: a week the team did not
+ * play — a playoff bye — is not a game the player was any use in, and it is
+ * absent from the matchup record that this is summed from.
+ */
+export interface PlayerUsage {
+  season: number;
+  ownerSlug: string;
+  /** Games the player was on this owner's roster, bench included. */
+  rostered: number;
+  started: number;
+  /** Points scored while STARTED, so points that counted. */
+  startPoints: number;
+  /** Points scored while on the bench, which counted for nothing. */
+  benchPoints: number;
+}
+
 export interface DraftPickRecord {
   season: number;
   round: number;

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { KeepPips, PositionPill } from "@/components/keeper-table";
 import { BackLink } from "@/components/back-link";
 import { LiveOwner, PlayerTransactions } from "@/components/player-live";
+import { PlayerUsageTable } from "@/components/player-usage";
 import { Panel, PanelHeader, Stat } from "@/components/ui";
 import {
   features,
@@ -15,6 +16,7 @@ import {
   getOwnerMap,
   getPickOutcomes,
   getPlayerHistory,
+  getPlayerUsage,
   getTrades,
   getPlayerKeepHistory,
   getPlayers,
@@ -62,6 +64,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   const ownerNames = Object.fromEntries(getOwners().map((o) => [o.slug, o.name]));
   const adp = adpAll.byPlayer.get(id);
   const trades = getTrades().filter((t) => t.legs.some((l) => l.playerId === id));
+  const usage = getPlayerUsage()[id] ?? [];
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
 
 
@@ -145,6 +148,10 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
         </div>
       ) : null}
 
+      {/* PAIRED ON DESKTOP: keeper history beside the derivation that explains it,
+          then the transaction log beside what each owner actually got out of him.
+          Each pair is one subject read two ways, so they belong on a line. */}
+      <div className="grid gap-5 lg:grid-cols-2">
       {keeps.length ? (
         <Panel>
           <PanelHeader
@@ -178,6 +185,26 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
         </Panel>
       ) : null}
 
+        {contract ? (
+          <Panel>
+            <PanelHeader title="Contract Derivation" meta="auditable" />
+            <ol className="space-y-1.5 p-4 text-[12px] leading-relaxed text-chalk-400 sm:p-5">
+              {contract.provenance.map((line, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="tabular shrink-0 text-chalk-600">{i + 1}.</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ol>
+            <div className="border-t border-ink-700 px-4 py-3 text-[11px] text-chalk-600 sm:px-5">
+              Derived by replaying drafts and transactions — Sleeper stores no keeper cost or
+              contract length. Corrections go in{" "}
+              <code className="text-chalk-500">config/keeper-overrides.json</code>.
+            </div>
+          </Panel>
+        ) : null}
+      </div>
+
       <div className="grid gap-5 lg:grid-cols-2">
         <Panel>
           <PanelHeader
@@ -199,25 +226,16 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
           />
         </Panel>
 
-        {contract ? (
+        {usage.length ? (
           <Panel>
-            <PanelHeader title="Contract Derivation" meta="auditable" />
-            <ol className="space-y-1.5 p-4 text-[12px] leading-relaxed text-chalk-400 sm:p-5">
-              {contract.provenance.map((line, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="tabular shrink-0 text-chalk-600">{i + 1}.</span>
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ol>
-            <div className="border-t border-ink-700 px-4 py-3 text-[11px] text-chalk-600 sm:px-5">
-              Derived by replaying drafts and transactions — Sleeper stores no keeper cost or
-              contract length. Corrections go in{" "}
-              <code className="text-chalk-500">config/keeper-overrides.json</code>.
-            </div>
+            <PanelHeader
+              title="By Season and Owner"
+              meta={`${usage.length} owner-season${usage.length === 1 ? "" : "s"}`}
+              legend="Games on the roster and games started, with the points each owner got out of him. Bench points are what he scored for nobody."
+            />
+            <PlayerUsageTable rows={usage} ownerNames={ownerNames} />
           </Panel>
         ) : null}
-
       </div>
     </div>
   );
