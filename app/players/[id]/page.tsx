@@ -247,7 +247,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
             <PanelHeader
               title="By Season and Owner"
               meta={`${usage.length} owner-season${usage.length === 1 ? "" : "s"}`}
-              legend="Games on the roster and games started, with the points each owner got out of him. Bench points are what he scored for nobody."
+              legend="Games on the roster and games started, with the points each owner got out of him. Bench points are what he scored for nobody. Bye weeks are left out — his team was idle, so a zero there is the schedule, not the player."
             />
             <PlayerUsageTable rows={usage} ownerLabels={ownerLabels} />
           </Panel>

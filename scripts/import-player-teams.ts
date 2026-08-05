@@ -43,6 +43,14 @@ interface Teams {
   seasons: Record<string, Record<string, string>>;
   /** Week-level exceptions, written by `sync` as each week finalizes. */
   weekly: Record<string, Record<string, Record<string, string>>>;
+  /**
+   * `season -> team -> bye week`.
+   *
+   * A player whose NFL team was idle could not have scored, so counting that week
+   * as a zero punishes an owner for the schedule. Needed to leave those weeks out
+   * of per-game averages entirely.
+   */
+  byes: Record<string, Record<string, number>>;
 }
 
 interface Matchup {
@@ -80,6 +88,7 @@ async function main(): Promise<void> {
     // time. Dropping them on a re-run would throw away the one thing that cannot
     // be recovered later.
     weekly: existing?.weekly ?? {},
+    byes: existing?.byes ?? {},
   };
 
   // Every player-season any league has on record, bench included — a bench row
@@ -106,6 +115,27 @@ async function main(): Promise<void> {
   const espnOf = new Map<string, string>();
   for (const [id, p] of Object.entries(cache ?? {})) {
     if (p.espn_id) espnOf.set(id, String(p.espn_id));
+  }
+
+  // One call per season: ESPN publishes each pro team's bye alongside its schedule.
+  for (const season of [...wanted.keys()].sort()) {
+    if (!out.byes[String(season)]) {
+      const res = await fetch(
+        `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${season}?view=proTeamSchedules_wl`,
+      );
+      if (res.ok) {
+        const d = (await res.json()) as {
+          settings?: { proTeams?: Array<{ id: number; byeWeek?: number }> };
+        };
+        const map: Record<string, number> = {};
+        for (const t of d.settings?.proTeams ?? []) {
+          const abbr = PRO_TEAM[t.id];
+          if (abbr && t.byeWeek) map[abbr] = t.byeWeek;
+        }
+        if (Object.keys(map).length) out.byes[String(season)] = map;
+        log.info(`${season}: ${Object.keys(map).length} bye weeks`);
+      }
+    }
   }
 
   for (const season of [...wanted.keys()].sort()) {

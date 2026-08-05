@@ -117,13 +117,15 @@ export const getOwnerRecords = (): OwnerRecord[] => load("derived/owner-records.
 interface PlayerTeamFile {
   seasons: Record<string, Record<string, string>>;
   weekly: Record<string, Record<string, Record<string, string>>>;
+  /** `season -> team -> bye week`. */
+  byes: Record<string, Record<string, number>>;
 }
 
 const playerTeamFile = once((): PlayerTeamFile => {
   const p = join(SHARED_DATA, "player-teams.json");
   return existsSync(p)
     ? (JSON.parse(readFileSync(p, "utf8")) as PlayerTeamFile)
-    : { seasons: {}, weekly: {} };
+    : { seasons: {}, weekly: {}, byes: {} };
 });
 
 /** Team by player for one week, ready to hand to a lineup. */
@@ -228,11 +230,34 @@ export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []
  * nothing to reconcile and no new file to keep in step.
  */
 export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
+  const teams = playerTeamFile();
+  /**
+   * A BYE IS NOT A GAME HE PLAYED BADLY. His NFL team was idle, so a zero there
+   * says nothing about the player or about the owner who started him, and
+   * counting it drags every average down by the schedule. Left out of the counts
+   * entirely rather than shown as a zero.
+   *
+   * Needs both his team that season and that team's bye, so the 2% of players
+   * with no team on file still count their bye — better than dropping a real
+   * week for someone we cannot place.
+   */
+  const onBye = (season: number, week: number, playerId: string, points: number): boolean => {
+    // A BYE SCORES ZERO, ALWAYS. So a non-zero week is proof this is not one, and
+    // the team on file must be wrong for that week — which happens, because the
+    // team is recorded per SEASON and players are traded mid-season. Hockenson
+    // went DET to MIN in 2022; without this guard his real week 7 for Detroit was
+    // discarded as Minnesota's bye, quietly deleting 8.8 points he scored.
+    if (points !== 0) return false;
+    const team = teams.seasons[String(season)]?.[playerId];
+    return team ? teams.byes[String(season)]?.[team] === week : false;
+  };
+
   const acc = new Map<string, PlayerUsage>();
   for (const m of getMatchupHistory()) {
     for (const side of [m.home, m.away]) {
       const started = new Set(side.starters);
       for (const [playerId, points] of Object.entries(side.playerPoints)) {
+        if (onBye(m.season, m.week, playerId, points)) continue;
         const key = `${playerId}|${m.season}|${side.ownerSlug}`;
         const row =
           acc.get(key) ??

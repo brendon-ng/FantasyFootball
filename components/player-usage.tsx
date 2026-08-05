@@ -17,6 +17,9 @@ import type { PlayerUsage } from "@/lib/types";
  * started twice and benched twelve times has a start average over two, which is
  * the number that answers "was he any good when I played him".
  */
+/** Shared by the header and every row, so the columns cannot drift apart. */
+const SPACING = "gap-2 px-3 sm:px-4";
+
 export function PlayerUsageTable({
   rows,
   ownerLabels,
@@ -40,26 +43,32 @@ export function PlayerUsageTable({
     // been removed rather than scrolled past.
     <div className="overflow-x-auto">
       <div className="max-sm:min-w-max">
-        <ListHeader>
+        <ListHeader className={SPACING}>
           <Col className="w-10 shrink-0">Season</Col>
-          <Col className="min-w-[5rem] flex-1">Owner</Col>
+          <Col className="min-w-[4.5rem] flex-1">Owner</Col>
           <Col className="w-7 shrink-0 text-right" hint="Games on the roster, bench included">
             G
           </Col>
           <Col className="w-8 shrink-0 text-right" hint="Games started">
             GS
           </Col>
-          <Col className="w-[3.25rem] shrink-0 text-right" hint="Points scored while started — points that counted">
+          <Col className="w-12 shrink-0 text-right" hint="Points scored while started — points that counted">
             Start
           </Col>
           <Col className="w-11 shrink-0 text-right" hint="Points per game started">
             /GS
           </Col>
-          <Col className="w-[3.25rem] shrink-0 text-right" hint="Points scored while benched — points that counted for nobody">
+          <Col className="w-12 shrink-0 text-right" hint="Points scored while benched — points that counted for nobody">
             Bench
           </Col>
           <Col className="w-11 shrink-0 text-right" hint="Points per game benched">
             /G
+          </Col>
+          <Col
+            className="w-12 shrink-0 text-right"
+            hint="Every point he scored on this roster, started or benched, per game rostered"
+          >
+            All/G
           </Col>
         </ListHeader>
         <ol>
@@ -73,7 +82,7 @@ export function PlayerUsageTable({
             return (
               <li
                 key={`${r.season}-${r.ownerSlug}`}
-                className={`flex items-center gap-2 px-3 py-2 sm:px-4 ${
+                className={`flex items-center py-2 ${SPACING} ${
                   i === 0
                     ? ""
                     : newSeason
@@ -94,7 +103,7 @@ export function PlayerUsageTable({
                 >
                   {r.season}
                 </span>
-                <span className="min-w-[5rem] flex-1 truncate text-sm">
+                <span className="min-w-[4.5rem] flex-1 truncate text-sm">
                   <Link
                     href={`/owners/${r.ownerSlug}/`}
                     data-owner={r.ownerSlug}
@@ -109,14 +118,14 @@ export function PlayerUsageTable({
                 <span className="tabular w-8 shrink-0 text-right text-sm text-chalk-300">
                   {r.started}
                 </span>
-                <span className="tabular w-[3.25rem] shrink-0 text-right text-sm font-semibold text-chalk-100">
+                <span className="tabular w-12 shrink-0 text-right text-sm font-semibold text-chalk-100">
                   {fmt.pts1(r.startPoints)}
                 </span>
                 {/* Green: this is the number that counted for the owner. */}
                 <span className="tabular w-11 shrink-0 text-right text-sm text-accent">
                   {per(r.startPoints, r.started)}
                 </span>
-                <span className="tabular w-[3.25rem] shrink-0 text-right text-sm text-chalk-300">
+                <span className="tabular w-12 shrink-0 text-right text-sm text-chalk-300">
                   {fmt.pts1(r.benchPoints)}
                 </span>
                 {/* The RATE carries the colour, not the total. A big bench total
@@ -129,6 +138,12 @@ export function PlayerUsageTable({
                   }`}
                 >
                   {per(r.benchPoints, benched)}
+                </span>
+                {/* Everything he produced while on this roster, however he was
+                    used. The two rates either side are about the owner's choices;
+                    this one is about the player. */}
+                <span className="tabular w-12 shrink-0 text-right text-sm text-chalk-400">
+                  {per(r.startPoints + r.benchPoints, r.rostered)}
                 </span>
               </li>
             );

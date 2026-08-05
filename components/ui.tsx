@@ -149,9 +149,25 @@ export const fmt = {
  * as the row cell below it. Keeping both in one place per list is the trade-off
  * for rows that can hold arbitrary content.
  */
-export function ListHeader({ children }: { children: ReactNode }) {
+/**
+ * The header row for a list whose "cells" are flex children.
+ *
+ * `className` OVERRIDES THE SPACING, and a table with tight columns has to use
+ * it: the gap and padding here must match the rows below or every column sits
+ * off its heading. That is exactly what happened when one table tightened its
+ * rows and left this alone.
+ */
+export function ListHeader({
+  children,
+  className = "gap-3 px-4 sm:px-5",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="flex items-center gap-3 border-b border-ink-600 bg-ink-850/60 px-4 py-1.5 sm:px-5">
+    <div
+      className={`flex items-center border-b border-ink-600 bg-ink-850/60 py-1.5 ${className}`}
+    >
       {children}
     </div>
   );
