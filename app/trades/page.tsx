@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { BackLink } from "@/components/back-link";
 import { TradeCard } from "@/components/trade-card";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
 import { getOwnerMap, getPickOutcomes, getPlayers, getTrades } from "@/lib/data";
@@ -31,6 +32,7 @@ export default function TradesPage() {
 
   return (
     <div className="space-y-5 sm:space-y-6">
+      <BackLink fallback={{ href: "/history/", label: "History" }} />
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Trades</h1>
         <p className="mt-1 text-sm text-chalk-500">

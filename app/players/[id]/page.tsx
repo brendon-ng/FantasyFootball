@@ -2,9 +2,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { KeepPips, PositionPill } from "@/components/keeper-table";
+import { BackLink } from "@/components/back-link";
 import { LiveOwner, PlayerTransactions } from "@/components/player-live";
 import { Panel, PanelHeader, Stat } from "@/components/ui";
 import {
+  features,
   getAdp,
   getConfig,
   getKeepers,
@@ -65,6 +67,18 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
 
   return (
     <div className="space-y-5 sm:space-y-6">
+      {/* A player page is a leaf reached from matchups, lineups, trades, the
+          record book and the keeper board — so it needs the back control more
+          than most, and had none. The fallback is the keeper tracker where the
+          league has one, since that is the only page listing players; a redraft
+          league falls back to the league home. */}
+      <BackLink
+        fallback={
+          features().keepers
+            ? { href: "/keepers/", label: "Keeper tracker" }
+            : { href: "/", label: "League" }
+        }
+      />
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <PositionPill position={player.position} />
