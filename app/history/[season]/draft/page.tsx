@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
+
+import { BackLink } from "@/components/back-link";
 
 import { DraftBoard, DraftList } from "@/components/draft-board";
 import { Panel, PanelHeader } from "@/components/ui";
@@ -61,12 +62,13 @@ export default async function DraftPage({ params }: { params: Promise<{ season: 
     <div className="space-y-5 sm:space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <Link
-            href={hasSeasonPage ? `/history/${season}/` : "/history/"}
-            className="text-xs text-chalk-600 hover:text-accent"
-          >
-            ← {hasSeasonPage ? `${season} Season` : "History"}
-          </Link>
+          <BackLink
+            fallback={
+              hasSeasonPage
+                ? { href: `/history/${season}/`, label: `${season} Season` }
+                : { href: "/history/", label: "History" }
+            }
+          />
           <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">{season} Draft</h1>
         </div>
         <div className="text-right text-xs text-chalk-600">

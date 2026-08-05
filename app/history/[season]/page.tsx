@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BackLink } from "@/components/back-link";
+
 import { Bracket } from "@/components/bracket";
 import { TradeCard } from "@/components/trade-card";
 import { WeeklyLowBadge } from "@/components/weekly-low";
@@ -107,9 +109,7 @@ export default async function SeasonPage({
     <div className="space-y-5 sm:space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <Link href="/history/" className="text-xs text-chalk-600 hover:text-accent">
-            ← History
-          </Link>
+          <BackLink fallback={{ href: "/history/", label: "History" }} />
           <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">{season} Season</h1>
           {/* Kept on the title side. Beside the champion it read as an arrow
               pointing AT the champion. */}

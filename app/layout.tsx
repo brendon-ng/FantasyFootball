@@ -5,6 +5,7 @@ import { IdentityControl, IdentityProvider } from "@/components/identity";
 import { Nav } from "@/components/nav";
 import { StickyParams } from "@/components/sticky-params";
 import { getConfig, getOwners, getSeasons, leagueAvatar } from "@/lib/data";
+import { BackTrail } from "@/components/back-link";
 import { leaguePickerHref, withBasePath } from "@/lib/base-path";
 import "./globals.css";
 
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           features={cfg.features}
           avatarSrc={avatar ? withBasePath(avatar) : null}
         />
+        <BackTrail />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
           {children}
         </main>

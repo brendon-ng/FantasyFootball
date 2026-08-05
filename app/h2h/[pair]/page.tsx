@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BackLink } from "@/components/back-link";
+
 import {
   Col,
   EmptyState,
@@ -114,9 +116,7 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
   return (
     <div className="space-y-5 sm:space-y-6">
       <div>
-        <Link href="/history/" className="text-xs text-chalk-600 hover:text-accent">
-          ← History
-        </Link>
+        <BackLink fallback={{ href: "/history/", label: "History" }} />
         <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
           <Link href={`/owners/${a}/`} className="hover:text-accent">
             {name(a)}

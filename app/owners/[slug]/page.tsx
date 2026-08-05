@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BackLink } from "@/components/back-link";
+
 import { DraftPicks } from "@/components/draft-picks";
 import { FinishChart } from "@/components/finish-chart";
 import { OwnerContracts } from "@/components/owner-contracts";
@@ -84,9 +86,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   return (
     <div className="space-y-5 sm:space-y-6">
       <div>
-        <Link href="/history/" className="text-xs text-chalk-600 hover:text-accent">
-          ← History
-        </Link>
+        <BackLink fallback={{ href: "/history/", label: "History" }} />
         <div className="mt-1 flex flex-wrap items-center gap-2.5">
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{owner.name}</h1>
           {!owner.active ? (

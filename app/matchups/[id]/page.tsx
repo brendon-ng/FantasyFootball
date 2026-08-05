@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BackLink } from "@/components/back-link";
+
 import { Bracket } from "@/components/bracket";
 import { WeeklyLowBadge } from "@/components/weekly-low";
 import { PositionPill } from "@/components/keeper-table";
@@ -158,9 +160,12 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   return (
     <div className="space-y-5 sm:space-y-6">
       <div>
-        <Link href={pairHref} className="text-xs text-chalk-600 hover:text-accent">
-          ← {name(game.a.ownerSlug)} vs {name(game.b.ownerSlug)}
-        </Link>
+        <BackLink
+          fallback={{
+            href: pairHref,
+            label: `${name(game.a.ownerSlug)} vs ${name(game.b.ownerSlug)}`,
+          }}
+        />
         <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
           {game.season} · Week {game.week ?? "—"}
         </h1>

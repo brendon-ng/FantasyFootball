@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { BackLink } from "@/components/back-link";
+
 import { PositionPill } from "@/components/keeper-table";
 import {
   Col,
@@ -66,9 +68,7 @@ export default function KeeperHistoryPage() {
   return (
     <div className="space-y-5 sm:space-y-6">
       <div>
-        <Link href="/keepers/" className="text-xs text-chalk-600 hover:text-accent">
-          ← Keeper tracker
-        </Link>
+        <BackLink fallback={{ href: "/keepers/", label: "Keeper tracker" }} />
         <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">Keeper History</h1>
         <p className="mt-1 max-w-2xl text-sm text-chalk-500">
           Every player retained, by team and season. Drawn from the draft record, so it begins in
