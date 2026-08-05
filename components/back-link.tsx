@@ -26,7 +26,7 @@ import { useEffect, useSyncExternalStore } from "react";
  */
 
 const TRAIL = "ff:trail";
-const LAST = "ff:trail-last";
+const CURRENT = "ff:trail-at";
 
 interface Entry {
   path: string;
@@ -105,11 +105,23 @@ export function BackTrail() {
     let idx = state.ffIdx;
 
     if (typeof idx !== "number") {
-      // A fresh entry: Next pushed it without our marker. Number it one past the
-      // furthest we have seen, so a pop later reads a LOWER index and is not
-      // mistaken for a new page.
-      idx = read<number>(LAST, -1) + 1;
+      // A fresh entry, pushed by Next without our marker. It goes one past the
+      // entry we are ON, not one past the furthest ever seen — pushing from
+      // position N lands at N+1 and DISCARDS everything beyond, which is what
+      // the browser does to forward history. Numbering from the high-water mark
+      // instead left a gap after any back: David(0) → Blake(1) → back to David(0)
+      // → a new page got 2 and read its "previous" as Blake, while back() went
+      // where it should. The label disagreed with the destination.
+      idx = read<number>(CURRENT, -1) + 1;
       window.history.replaceState({ ...state, ffIdx: idx }, "");
+
+      // Those forward entries are now unreachable, so drop them rather than
+      // leave labels behind that nothing can navigate to.
+      const stale = read<Record<string, Entry>>(TRAIL, {});
+      for (const k of Object.keys(stale)) {
+        if (Number(k) > idx) delete stale[k];
+      }
+      write(TRAIL, stale);
     }
 
     const h1 = document.querySelector("h1")?.textContent ?? "";
@@ -118,7 +130,7 @@ export function BackTrail() {
     const trail = read<Record<string, Entry>>(TRAIL, {});
     trail[String(idx)] = { path: pathname, label };
     write(TRAIL, trail);
-    write(LAST, Math.max(idx, read<number>(LAST, -1)));
+    write(CURRENT, idx);
     emit();
   }, [pathname]);
 
