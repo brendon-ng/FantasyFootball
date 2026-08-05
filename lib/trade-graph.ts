@@ -20,10 +20,43 @@
 import type { TradeTree, TreeNode } from "./trade-tree.ts";
 import type { Trade } from "./types.ts";
 
-export const NODE_W = 150;
-export const NODE_H = 34;
+export const NODE_W = 172;
+/**
+ * Three lines: the asset, what it returned, and — for a player kept across
+ * seasons — a year-by-year line.
+ *
+ * ONE HEIGHT FOR EVERY NODE, even though only some need the third line. Variable
+ * heights would have to feed back into the row assignment to avoid collisions,
+ * and the vertical space that wastes is cheaper than that coupling.
+ */
+export const NODE_H = 58;
 export const COL_GAP = 54;
-export const ROW_H = 44;
+export const ROW_H = 72;
+/** Room down the left for the owner lane labels. */
+export const LANE_PAD = 74;
+
+/**
+ * One hue per side of the trade, assigned in this fixed order.
+ *
+ * WHOSE BRANCH IS WHOSE is the question the graph is worst at — several chains
+ * fan across one canvas and the arrows do not say which party they belong to. A
+ * faint band was not enough to answer it, so the hue also carries the lane rail,
+ * the owner's name, each node's left edge and every edge drawn from it.
+ *
+ * From the validated dark categorical palette, in order, skipping the hues this
+ * system already spends on meaning — accent green, trade blue would be first but
+ * is kept for the trade boxes themselves, identity violet, loss red. Checked with
+ * the dataviz validator against this surface: lightness band, chroma floor,
+ * adjacent CVD separation (worst ΔE 13.2 deutan), normal-vision separation (19.3)
+ * and 3:1 contrast all pass. Re-run it before reordering:
+ *
+ *   node <dataviz-skill>/scripts/validate_palette.js \
+ *     "#d95926,#3987e5,#d55181,#c98500" --mode dark
+ *
+ * Four is plenty — a trade has two sides and Den Ops' largest ever had three.
+ * Colour is never the only cue: the owner's name is written on the lane.
+ */
+export const LANE_HUES = ["#d95926", "#3987e5", "#d55181", "#c98500"];
 
 export interface GraphNode {
   id: string;
@@ -56,8 +89,8 @@ export interface Graph {
   edges: GraphEdge[];
   width: number;
   height: number;
-  /** Row bands per owner, for the lane labels down the left. */
-  lanes: Array<{ owner: string; top: number; bottom: number }>;
+  /** Pixel bands per owner, for the lane tints and labels down the left. */
+  lanes: Array<{ owner: string; top: number; bottom: number; hue: string }>;
 }
 
 export function layoutTradeGraph(trade: Trade, tree: TradeTree): Graph {
@@ -178,7 +211,41 @@ export function layoutTradeGraph(trade: Trade, tree: TradeTree): Graph {
 
   const width = Math.max(...nodes.map((n) => n.x + NODE_W), NODE_W);
   const height = Math.max(...nodes.map((n) => n.y + NODE_H), NODE_H);
-  return { nodes, edges, width, height, lanes };
+
+  // Lane bands come from where the nodes ACTUALLY landed, not from the row
+  // counter — the tidy pass centres parents on children, so a lane's extent is
+  // only known once every position is final.
+  const bands = lanes
+    .map((l) => {
+      const own = nodes.filter((n) => n.owner === l.owner);
+      return {
+        owner: l.owner,
+        top: Math.min(...own.map((n) => n.y)) - 6,
+        bottom: Math.max(...own.map((n) => n.y + NODE_H)) + 6,
+      };
+    })
+    .sort((a, b) => a.top - b.top);
+
+  // Padding either side of adjacent bands would otherwise overlap by a few
+  // pixels, which puts a node inside two owners' tints and defeats the point.
+  for (let i = 1; i < bands.length; i++) {
+    if (bands[i].top < bands[i - 1].bottom) {
+      const mid = (bands[i].top + bands[i - 1].bottom) / 2;
+      bands[i - 1].bottom = mid - 1;
+      bands[i].top = mid + 1;
+    }
+  }
+
+  // Hue by band position, not by owner slug: a stable order down the page, and
+  // the two-side case always gets the most separable pair in the list.
+  const tinted = bands.map((b, i) => ({ ...b, hue: LANE_HUES[i % LANE_HUES.length] }));
+
+  return { nodes, edges, width, height, lanes: tinted };
+}
+
+/** The lane hue for a node's owner. Null for the root trade, which owns no side. */
+export function hueFor(lanes: Graph["lanes"], owner: string | null): string | null {
+  return owner ? (lanes.find((l) => l.owner === owner)?.hue ?? null) : null;
 }
 
 /** An elbow from the right edge of one node to the left edge of another. */

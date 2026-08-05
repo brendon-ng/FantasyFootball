@@ -69,7 +69,21 @@ export type NodeEnd =
 export interface TradeTree {
   tradeId: string;
   /** One root per party, in the trade's own column order. */
-  roots: Array<{ owner: string; nodes: TreeNode[]; total: TradeStat; pure: TradeStat }>;
+  roots: Array<{
+    owner: string;
+    nodes: TreeNode[];
+    total: TradeStat;
+    pure: TradeStat;
+    /**
+     * The side's whole return split by season, ascending.
+     *
+     * A TRADE PAYS OUT OVER YEARS, and one total cannot say whether that was a
+     * rental or a contract that kept giving. Summed here rather than at each
+     * caller: the tree already walks every node, and two implementations of the
+     * same rollup would drift.
+     */
+    bySeason: Array<{ season: number; stat: TradeStat }>;
+  }>;
   /** The deepest chain, so a caller can skip the whole thing when it is flat. */
   depth: number;
 }
@@ -322,7 +336,19 @@ export function buildTradeTree(trade: Trade): TradeTree {
       total = add(total, t);
       pure = add(pure, p);
     }
-    return { owner, nodes, total, pure };
+    // Season rollup over the WHOLE subtree, not just the assets the side received
+    // — a player drafted three deals later still pays into the season he played.
+    const seasons = new Map<number, TradeStat>();
+    const collect = (n: TreeNode) => {
+      for (const s of n.bySeason) seasons.set(s.season, add(seasons.get(s.season) ?? blank(), s.stat));
+      n.children.forEach(collect);
+    };
+    nodes.forEach(collect);
+    const bySeason = [...seasons.entries()]
+      .sort((a, b) => a[0] - b[0])
+      .map(([season, stat]) => ({ season, stat }));
+
+    return { owner, nodes, total, pure, bySeason };
   });
 
   return { tradeId: trade.id, roots, depth };

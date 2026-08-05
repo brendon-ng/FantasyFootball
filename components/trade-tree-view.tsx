@@ -69,19 +69,16 @@ export function TradeTreeView({
               ) : null}
             </span>
           </div>
-          {side.pure.startPoints !== side.total.startPoints ? (
+          {/* Only when there is a FIGURE to give. When nothing traces purely to
+              this trade the sentence was three lines of prose carrying no number,
+              and the ·mixed badges on the nodes below already say why. */}
+          {side.pure.startPoints !== side.total.startPoints && side.pure.startPoints > 0 ? (
             // Named, not just numbered: "traceable" says which of the two figures
             // is the strict one, where "unmixed" read as a different statistic.
             <p className="mb-2 text-[10px] leading-snug text-chalk-600">
-              {side.pure.startPoints === 0 ? (
-                <>Every one of those points arrived through a later deal that also sent out assets from elsewhere, so none of it traces purely to this trade.</>
-              ) : (
-                <>
-                  <span className="tabular text-chalk-400">{fmt.pts1(side.pure.startPoints)}</span>{" "}
-                  of those points trace purely to this trade; the rest came through a later deal
-                  that also sent out assets from elsewhere.
-                </>
-              )}
+              <span className="tabular text-chalk-400">{fmt.pts1(side.pure.startPoints)}</span> of
+              those points trace purely to this trade; the rest came through a later deal that also
+              sent out assets from elsewhere.
             </p>
           ) : null}
           <ul className="space-y-1.5">
