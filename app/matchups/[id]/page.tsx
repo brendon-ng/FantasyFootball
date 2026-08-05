@@ -22,6 +22,7 @@ import {
   getOwnerMap,
   getPlayers,
   getRecordFlags,
+  type RecordFlag,
   getSeasons,
   getWeeklyLowKeys,
   meetingId,
@@ -290,6 +291,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
               name={name(side.ownerSlug)}
               players={players}
               won={winner?.ownerSlug === side.ownerSlug}
+              playerFlags={flags.filter((f) => f.playerId)}
             />
           ))}
         </div>
@@ -415,18 +417,37 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
  * is the only way to know a given player filled the FLEX rather than RB2 — the
  * player object itself just says "RB".
  */
+/**
+ * Appended to every inline player-record tooltip.
+ *
+ * The same caveat the "coverage" tip carries at the top of the page, repeated
+ * because a chip on a lineup row can be read without ever seeing that tip — and
+ * without it the chip claims a league-history rank the data cannot support.
+ */
+const PLAYER_RECORD_CAVEAT =
+  " Player marks are Sleeper-era only — ESPN kept no lineups — so that baseline starts empty in 2024.";
+
 function Lineup({
   side,
   slots,
   name,
   players,
   won,
+  playerFlags,
 }: {
   side: MeetingSide;
   slots: string[];
   name: string;
   players: Record<string, { full_name: string; position: string | null; team: string | null }>;
   won: boolean;
+  /**
+   * Every player-week record set in this game, either side.
+   *
+   * Filtered by player id here rather than by owner: `getRecordFlags` already
+   * scoped them to these two teams, and a bench player who out-scored the league
+   * still belongs on the row that shows him.
+   */
+  playerFlags: RecordFlag[];
 }) {
   const startersTotal = side.starters.reduce((t, pid) => t + (side.playerPoints[pid] ?? 0), 0);
   const bench = Object.keys(side.playerPoints).filter((pid) => !side.starters.includes(pid));
@@ -436,6 +457,7 @@ function Lineup({
   const row = (pid: string, slot: string | null) => {
     const p = players[pid];
     const pts = side.playerPoints[pid] ?? 0;
+    const mark = playerFlags.find((f) => f.playerId === pid) ?? null;
     return (
       <div key={pid} className="flex items-center gap-2.5 px-3 py-1.5 sm:px-4">
         {slot ? (
@@ -453,6 +475,17 @@ function Lineup({
           {p?.full_name ?? pid}
           {p?.team ? (
             <span className="ml-1.5 text-[11px] text-chalk-600">{p.team}</span>
+          ) : null}
+          {/* ON THE ROW, not only in the badge strip at the top. The strip names
+              the player in prose, so finding him in a 17-man lineup meant reading
+              both and matching by eye. */}
+          {mark ? (
+            <span
+              title={`${mark.full}${PLAYER_RECORD_CAVEAT}`}
+              className="ml-1.5 whitespace-nowrap rounded border border-gold/50 bg-gold/10 px-1 py-px align-middle text-[9px] font-bold uppercase tracking-wide text-gold"
+            >
+              {`#${mark.rank} player week`}
+            </span>
           ) : null}
         </Link>
         <span
