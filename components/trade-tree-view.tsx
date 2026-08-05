@@ -45,24 +45,45 @@ export function TradeTreeView({
             >
               {ownerNames[side.owner] ?? side.owner}
             </Link>
+            {/* VOLUME AND RATE TOGETHER. 500 points off 100 starts and 100 off
+                ten are not the same trade, and the total alone cannot tell them
+                apart — the second team got the same return from a tenth of the
+                lineup slots. */}
             <span className="text-[11px] text-chalk-600">
               <span className="tabular font-semibold text-chalk-100">
                 {fmt.pts1(side.total.startPoints)}
               </span>{" "}
-              started
-              {side.pure.startPoints !== side.total.startPoints ? (
+              pts
+              {side.total.started ? (
                 <>
                   {" · "}
+                  <span className="tabular">{side.total.started}</span> starts
+                  {" · "}
                   <span
-                    className="tabular text-chalk-500"
-                    title="Only the part whose every input traces back to this trade. The rest arrived through a later deal that also sent out assets from elsewhere."
+                    className="tabular text-accent"
+                    title="Started points per game started — what the trade returned each time it filled a lineup slot"
                   >
-                    {fmt.pts1(side.pure.startPoints)} unmixed
+                    {fmt.pts1(side.total.startPoints / side.total.started)}/GS
                   </span>
                 </>
               ) : null}
             </span>
           </div>
+          {side.pure.startPoints !== side.total.startPoints ? (
+            // Named, not just numbered: "traceable" says which of the two figures
+            // is the strict one, where "unmixed" read as a different statistic.
+            <p className="mb-2 text-[10px] leading-snug text-chalk-600">
+              {side.pure.startPoints === 0 ? (
+                <>Every one of those points arrived through a later deal that also sent out assets from elsewhere, so none of it traces purely to this trade.</>
+              ) : (
+                <>
+                  <span className="tabular text-chalk-400">{fmt.pts1(side.pure.startPoints)}</span>{" "}
+                  of those points trace purely to this trade; the rest came through a later deal
+                  that also sent out assets from elsewhere.
+                </>
+              )}
+            </p>
+          ) : null}
           <ul className="space-y-1.5">
             {side.nodes.map((n) => (
               <Branch
@@ -153,6 +174,20 @@ function NodeCard({
         {from ? <span className="text-[10px] text-chalk-600">({from}&apos;s)</span> : null}
         <Ending node={node} onOpenTrade={onOpenTrade} />
       </div>
+      {node.ended.kind === "traded" && node.ended.alsoSent?.length ? (
+        <div className="mt-1 text-[10px] leading-snug text-chalk-600">
+          <span className="text-chalk-500">Sent with it:</span>{" "}
+          {node.ended.alsoSent
+            .map((a) =>
+              a.kind === "player"
+                ? (players[a.playerId ?? ""]?.full_name ?? a.playerId ?? "?")
+                : a.kind === "pick" && a.pick
+                  ? `${a.pick.season} ${ordinal(a.pick.round)}`
+                  : `$${a.amount} FAAB`,
+            )
+            .join(", ")}
+        </div>
+      ) : null}
       {node.bySeason.length ? (
         <div className="mt-1 flex flex-wrap gap-1">
           {node.bySeason.map((s) => (

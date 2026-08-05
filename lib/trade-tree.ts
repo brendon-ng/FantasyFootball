@@ -55,6 +55,14 @@ export type NodeEnd =
       week: number;
       /** True when that trade also sent out assets from outside this lineage. */
       diluted: boolean;
+      /**
+       * What else this owner sent in that deal.
+       *
+       * The reason the return is not purely attributable, named rather than
+       * merely flagged — "also sent Kyren Williams" says far more about why the
+       * credit is shared than a badge reading "mixed" ever could.
+       */
+      alsoSent: Array<{ kind: "player" | "pick" | "faab"; playerId?: string; pick?: { season: number; round: number; originalSlug: string | null }; amount?: number }>;
     }
   | { kind: "drafted"; season: number; round: number; slot: number };
 
@@ -216,7 +224,7 @@ export function buildTradeTree(trade: Trade): TradeTree {
     if (onwards) {
       // Diluted when that trade also sent out something this lineage never
       // contained — the return is then not purely attributable to the root.
-      const alsoSent = onwards.legs.some(
+      const alsoSent = onwards.legs.filter(
         (l) =>
           l.fromSlug === owner &&
           !(l.kind === leg.kind &&
@@ -229,7 +237,13 @@ export function buildTradeTree(trade: Trade): TradeTree {
         tradeId: onwards.id,
         season: onwards.season,
         week: onwards.week,
-        diluted: alsoSent,
+        diluted: alsoSent.length > 0,
+        alsoSent: alsoSent.map((l) => ({
+          kind: l.kind,
+          playerId: l.playerId,
+          pick: l.pick,
+          amount: l.amount,
+        })),
       };
       for (const back of onwards.legs) {
         if (back.toSlug !== owner) continue;

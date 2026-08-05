@@ -102,7 +102,7 @@ export default async function TradePage({ params }: { params: Promise<{ id: stri
           meta={tree.depth ? `${tree.depth + 1} generations` : "nothing moved on"}
           legend={
             mixed
-              ? "Follows every asset until it leaves for good. A deal marked ·mixed also sent out assets from outside this lineage, so what came back is not purely attributable — both totals are given above each side."
+              ? "Follows every asset until it leaves for good: traded on, drafted, kept, or dropped. A deal marked ·mixed also sent out assets from outside this lineage — what it sent is named on the node, and each side says how much of its return traces purely to this trade."
               : "Follows every asset until it leaves for good: traded on, drafted, kept, or dropped."
           }
         />
