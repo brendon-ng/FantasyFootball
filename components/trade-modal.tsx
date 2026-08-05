@@ -18,8 +18,9 @@ import type { DraftPickRecord, PlayerMeta, Trade, TradeReturn } from "@/lib/type
  * A LITTLE WIDER THAN A DIALOG USUALLY WANTS TO BE, because the card carries a
  * return table per side and the point is reading them against each other. At the
  * original width the two stacked and the comparison was a scroll apart; at the
- * width after that it sprawled. This is the narrowest that still fits them
- * side by side.
+ * width after that it sprawled. 45rem is between Tailwind's 2xl and 3xl — an
+ * arbitrary value because the scale has no step there — and is the narrowest
+ * that still fits both tables on a line.
  */
 export function TradeModal({
   trade,
@@ -63,7 +64,7 @@ export function TradeModal({
         // The backdrop closes; a click INSIDE must not bubble up to it, or
         // selecting text in the dialog would dismiss it.
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
+        className="max-h-[85vh] w-full max-w-[45rem] overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
       >
         <div className="sticky top-0 flex items-center justify-between border-b border-ink-600 bg-ink-800 px-4 py-3 sm:px-5">
           <div>

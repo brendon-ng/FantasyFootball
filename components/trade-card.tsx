@@ -194,7 +194,7 @@ function RestOfSeason({
         <span className="eyebrow text-[10px]">Rest of {trade.season}</span>
         <span className="text-[10px] text-chalk-600">while still on that roster</span>
       </div>
-      <div className={sides.length === 2 ? "grid gap-x-4 gap-y-3 sm:grid-cols-2" : "space-y-3"}>
+      <div className={sides.length === 2 ? "grid gap-x-3 gap-y-3 sm:grid-cols-2" : "space-y-3"}>
         {sides.map((slug) => {
           const r = returns[slug];
           const ids = Object.keys(r.byPlayer);
@@ -204,8 +204,8 @@ function RestOfSeason({
                 <div className="mb-0.5 text-[11px] font-semibold text-chalk-300">
                   {ownerNames[slug] ?? slug}
                 </div>
-                <div className="flex items-center gap-1.5 border-b border-ink-700 pb-1 text-[9px] font-bold uppercase tracking-wide text-chalk-600">
-                  <span className="min-w-[5rem] flex-1">Player</span>
+                <div className="flex items-center gap-1 border-b border-ink-700 pb-1 text-[9px] font-bold uppercase tracking-wide text-chalk-600">
+                  <span className="min-w-[4.5rem] flex-1">Player</span>
                   {COLUMNS.map((c) => (
                     <span key={c.label} className={cell} title={c.hint}>
                       {c.label}
@@ -286,8 +286,8 @@ function Row({
 }) {
   const cells = statCells(stat);
   return (
-    <div className={`flex items-center gap-1.5 py-0.5 ${bold ? "border-t border-ink-700" : ""}`}>
-      <span className={`min-w-[5rem] flex-1 truncate ${bold ? "text-chalk-300" : "text-chalk-400"}`}>
+    <div className={`flex items-center gap-1 py-0.5 ${bold ? "border-t border-ink-700" : ""}`}>
+      <span className={`min-w-[4.5rem] flex-1 truncate ${bold ? "text-chalk-300" : "text-chalk-400"}`}>
         {label}
       </span>
       {cells.map((c, i) => {
