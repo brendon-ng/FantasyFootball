@@ -943,6 +943,31 @@ indistinguishable from a normal one.
 Keeper flags are all false, correctly — ESPN's `keeperCount` was 0 every year, and
 keepers began with the 2024 startup draft on Sleeper.
 
+### Bye weeks, and the one ESPN dependency that outlives the import
+
+A bye must not count as a zero: the player's NFL team was idle, so it says nothing
+about him or about the owner who started him, and counting it docks a per-game
+average for the schedule. `getPlayerUsage()` drops those weeks.
+
+SLEEPER DOES NOT PUBLISH BYE WEEKS. Its player record has no such field — checked,
+not assumed. So `import:player-teams` fetches them from ESPN, one unauthenticated
+call per season, and this remains the only part of the FORWARD pipeline that needs
+ESPN at all. It runs inside `npm run data` and in `archive.yml`; if it stops
+running, a new season simply has no byes and every one counts as a zero again,
+with nothing on a page to say so. That is why the importer warns loudly rather
+than quietly writing nothing.
+
+A ZERO IS ALSO REQUIRED before a week is dropped. Team is recorded per SEASON, and
+a player traded mid-season carries the wrong team — and therefore the wrong bye.
+Hockenson went DET to MIN in 2022, and matching on the bye week alone discarded
+his real week 7 for Detroit as Minnesota's bye, deleting 8.8 points he scored. A
+bye always scores zero, so a non-zero week proves it was not one.
+
+From 2026 `sync` records the exact team as each week finalizes and the bye lookup
+prefers it, so a midseason trade resolves to the right bye. Sync also SEEDS a new
+season's baseline the first time it sees one — without that every player counts as
+a difference and the weekly bucket takes three hundred entries a week.
+
 ### Recovering ESPN-era transactions
 
 `npm run import:espn:transactions`. FOUND ON THE PLAYER CARD, not a league view —

@@ -136,6 +136,16 @@ async function main(): Promise<void> {
         log.info(`${season}: ${Object.keys(map).length} bye weeks`);
       }
     }
+    // LOUD, because the failure is otherwise invisible: with no byes on file the
+    // site silently goes back to counting a bye as a zero against every average,
+    // and nothing on a page says so. This is the one thing in the forward pipeline
+    // that still needs ESPN — Sleeper's player record has no bye field at all.
+    if (!Object.keys(out.byes[String(season)] ?? {}).length) {
+      log.warn(
+        `${season}: NO BYE WEEKS. Per-game averages will count byes as zeros. ` +
+          `Check https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${season}?view=proTeamSchedules_wl`,
+      );
+    }
   }
 
   for (const season of [...wanted.keys()].sort()) {
