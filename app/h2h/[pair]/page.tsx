@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BackLink } from "@/components/back-link";
+import { TradeList } from "@/components/trade-list";
 
 import {
   Col,
@@ -17,6 +18,12 @@ import {
   getMeetings,
   getOwnerMap,
   getOwners,
+  getPickHandoffs,
+  getPickOutcomes,
+  getPlayers,
+  getTradeParties,
+  getTradeReturns,
+  getTrades,
   weeklyCoverage,
 } from "@/lib/data";
 
@@ -64,6 +71,27 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
     }
     return { w, l, t, pf: Number(pf.toFixed(2)), pa: Number(pa.toFixed(2)), n: subset.length };
   };
+
+  /**
+   * Deals these two did with each other.
+   *
+   * BOTH ENDS, ON DIFFERENT SIDES. Requiring only that each of them was in the
+   * deal is not enough: co-owners are both credited with their team's trades, so
+   * Jaymie vs Katie claimed eight deals between two people who share one roster.
+   * They have to be on opposite sides of it.
+   *
+   * A three-team trade counts for any pairing that held two of its sides — all
+   * three agreed to one deal, and the card shows all three columns.
+   */
+  const parties = getTradeParties();
+  const trades = getTrades()
+    .filter((t) => {
+      const sides = parties[t.id] ?? t.ownerSlugs.map((s) => [s]);
+      const sideA = sides.findIndex((side) => side.includes(a));
+      const sideB = sides.findIndex((side) => side.includes(b));
+      return sideA !== -1 && sideB !== -1 && sideA !== sideB;
+    })
+    .reverse();
 
   const overall = tally(games);
   const regular = tally(games.filter((g) => g.kind === "regular"));
@@ -332,6 +360,29 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
           </div>
         )}
       </Panel>
+
+      {/* Only when there is something to show. Twenty-four trades across a
+          hundred and twenty pairings means most pages would carry an empty panel
+          saying nothing, which reads as a section that failed to load. */}
+      {trades.length ? (
+        <Panel>
+          <PanelHeader
+            title="Trades"
+            meta={`${trades.length} between them`}
+            href="/trades/"
+            hrefLabel="All trades"
+          />
+          <TradeList
+            trades={trades}
+            players={getPlayers()}
+            ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
+            outcomes={getPickOutcomes()}
+            returns={getTradeReturns()}
+            handoffs={getPickHandoffs()}
+            allTrades={Object.fromEntries(getTrades().map((t) => [t.id, t]))}
+          />
+        </Panel>
+      ) : null}
     </div>
   );
 }

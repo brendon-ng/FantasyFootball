@@ -558,6 +558,40 @@ export const getPickHandoffs = once((): Record<string, string> => {
 export const getTrades = (): Trade[] => load("derived/trades.json", []);
 
 /**
+ * Everyone credited with each trade, GROUPED BY SIDE and aligned to
+ * `Trade.ownerSlugs`.
+ *
+ * `Trade.ownerSlugs` IS THE LIST OF PARTIES, and a party is a TEAM — it drives
+ * the card's columns, so a co-owned team must appear there once or a two-team
+ * deal grows a third column and gets badged "3-team". But co-owners are
+ * first-class everywhere else here, and matching on the parties alone meant
+ * Katie's and Maddy's pages reported no trades while their teams had made eight
+ * and three. The two jobs are different, so they get different lists.
+ *
+ * GROUPED, NOT FLATTENED, and that is the whole point of the shape. A flat list
+ * of credited people cannot tell "both were in this deal" from "both are on the
+ * same side of it", so the Jaymie-vs-Katie head-to-head claimed eight trades
+ * between two people who co-own one team and have never traded with anybody but
+ * together.
+ *
+ * Expanded through the SEASON'S standings row, not a current roster: who co-owned
+ * a team is a fact about that year, and a partnership that has since ended still
+ * made the trade.
+ */
+export const getTradeParties = once((): Record<string, string[][]> => {
+  const team = new Map<string, string[]>();
+  for (const s of getSeasons()) {
+    for (const row of s.standings) team.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
+  }
+  return Object.fromEntries(
+    getTrades().map((t) => [
+      t.id,
+      t.ownerSlugs.map((party) => team.get(`${t.season}:${party}`) ?? [party]),
+    ]),
+  );
+});
+
+/**
  * What a traded draft pick turned into, keyed `season:round:originalOwner`.
  *
  * ONLY FOR DRAFTS THAT HAVE HAPPENED. A pick traded for a future year has no

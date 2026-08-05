@@ -21,6 +21,7 @@ import {
   getPickOutcomes,
   getTradeReturns,
   getPlayers,
+  getTradeParties,
   getTrades,
   getSeasons,
   getWeeklyLows,
@@ -45,7 +46,11 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const players = getPlayers();
   const ownerNames = Object.fromEntries(getOwners().map((o) => [o.slug, o.name]));
   // Newest first: a recent deal is the one people are still arguing about.
-  const trades = getTrades().filter((t) => t.ownerSlugs.includes(slug)).reverse();
+  // Credited, not party: a co-owner is not on the trade record itself.
+  const tradeParties = getTradeParties();
+  const trades = getTrades()
+    .filter((t) => tradeParties[t.id]?.some((side) => side.includes(slug)))
+    .reverse();
   const outcomes = getPickOutcomes();
   const returns = getTradeReturns();
   const handoffs = getPickHandoffs();
