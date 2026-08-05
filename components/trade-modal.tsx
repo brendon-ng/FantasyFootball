@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 import { TradeCard } from "@/components/trade-card";
-import type { PlayerMeta, Trade } from "@/lib/types";
+import type { DraftPickRecord, PlayerMeta, Trade } from "@/lib/types";
 
 /**
  * The whole deal, over the page that mentioned one leg of it.
@@ -19,11 +19,13 @@ export function TradeModal({
   trade,
   players,
   ownerNames,
+  outcomes,
   onClose,
 }: {
   trade: Trade;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
+  outcomes?: Record<string, DraftPickRecord>;
   onClose: () => void;
 }) {
   // Escape closes, and the page behind does not scroll while it is open —
@@ -75,6 +77,7 @@ export function TradeModal({
           trade={trade}
           players={players}
           ownerNames={ownerNames}
+          outcomes={outcomes}
           showSeason={false}
         />
       </div>

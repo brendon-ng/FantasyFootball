@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Tip } from "@/components/tooltip";
 import { TradeModal } from "@/components/trade-modal";
 import { useLiveRosters } from "@/lib/sleeper-browser";
-import type { PlayerMeta, PlayerTransaction, Trade } from "@/lib/types";
+import type { DraftPickRecord, PlayerMeta, PlayerTransaction, Trade } from "@/lib/types";
 
 /**
  * Player transaction history, live.
@@ -173,6 +173,7 @@ export function PlayerTransactions({
   ownerNames,
   trades = {},
   players = {},
+  pickOutcomes = {},
 }: {
   playerId: string;
   baked: PlayerTransaction[];
@@ -184,6 +185,7 @@ export function PlayerTransactions({
   /** Trades this player was in, by id, so a row can open the whole deal. */
   trades?: Record<string, Trade>;
   players?: Record<string, PlayerMeta>;
+  pickOutcomes?: Record<string, DraftPickRecord>;
 }) {
   const [openTrade, setOpenTrade] = useState<Trade | null>(null);
   const { events: pending } = usePendingTransactions({
@@ -229,6 +231,7 @@ export function PlayerTransactions({
           trade={openTrade}
           players={players}
           ownerNames={ownerNames}
+          outcomes={pickOutcomes}
           onClose={() => setOpenTrade(null)}
         />
       ) : null}

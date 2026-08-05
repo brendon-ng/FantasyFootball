@@ -15,6 +15,7 @@ import {
   getOwnerMap,
   getOwnerRecords,
   getOwners,
+  getPickOutcomes,
   getPlayers,
   getTrades,
   getSeasons,
@@ -41,6 +42,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const ownerNames = Object.fromEntries(getOwners().map((o) => [o.slug, o.name]));
   // Newest first: a recent deal is the one people are still arguing about.
   const trades = getTrades().filter((t) => t.ownerSlugs.includes(slug)).reverse();
+  const outcomes = getPickOutcomes();
   const adp = getAdp();
   const cfg = getConfig();
   const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
@@ -376,7 +378,13 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
           hrefLabel="All trades"
         />
         {trades.slice(0, 8).map((t) => (
-          <TradeCard key={t.id} trade={t} players={players} ownerNames={ownerNames} />
+          <TradeCard
+            key={t.id}
+            trade={t}
+            players={players}
+            ownerNames={ownerNames}
+            outcomes={outcomes}
+          />
         ))}
       </Panel>
     ) : null}

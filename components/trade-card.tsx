@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-import { verboseKind } from "@/components/ui";
-import type { PlayerMeta, Trade, TradeLeg } from "@/lib/types";
+import type { DraftPickRecord, PlayerMeta, Trade, TradeLeg } from "@/lib/types";
 
 /**
  * One trade, grouped by who RECEIVED what.
@@ -18,11 +17,14 @@ export function TradeCard({
   trade,
   players,
   ownerNames,
+  outcomes = {},
   showSeason = true,
 }: {
   trade: Trade;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
+  /** What each traded pick became, keyed `season:round:originalOwner`. */
+  outcomes?: Record<string, DraftPickRecord>;
   showSeason?: boolean;
 }) {
   const name = (slug: string | null) => (slug && ownerNames[slug]) || "—";
@@ -75,7 +77,12 @@ export function TradeCard({
               {received.get(slug)!.length ? (
                 received.get(slug)!.map((leg, i) => (
                   <li key={i} className="text-[13px] leading-snug text-chalk-300">
-                    <LegText leg={leg} players={players} ownerNames={ownerNames} />
+                    <LegText
+                      leg={leg}
+                      players={players}
+                      ownerNames={ownerNames}
+                      outcomes={outcomes}
+                    />
                   </li>
                 ))
               ) : (
@@ -94,10 +101,12 @@ function LegText({
   leg,
   players,
   ownerNames,
+  outcomes,
 }: {
   leg: TradeLeg;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
+  outcomes: Record<string, DraftPickRecord>;
 }) {
   if (leg.kind === "faab") {
     return <span className="text-accent">${leg.amount} FAAB</span>;
@@ -108,10 +117,47 @@ function LegText({
     // than once, and "Reagan's 2026 4th" is how the league refers to it however
     // many owners it has passed through.
     const from = p.originalSlug ? (ownerNames[p.originalSlug] ?? p.originalSlug) : null;
+    // Absent until that draft has actually run — a pick traded for a future year
+    // has no outcome, and guessing one would be inventing history.
+    const became = outcomes[`${p.season}:${p.round}:${p.originalSlug}`];
+    // WHO ACTUALLY PICKED, when it is not the team that received it here. A pick
+    // can be traded again afterwards, so the receiver is not always the user, and
+    // "we got their 9th" reads very differently once you know it was flipped on.
+    const usedBy =
+      became && became.ownerSlug && became.ownerSlug !== leg.toSlug
+        ? (ownerNames[became.ownerSlug] ?? became.ownerSlug)
+        : null;
     return (
-      <span>
-        {p.season} {verboseKind(`${p.round}${ordinal(p.round)}`)}
+      <span className="block">
+        {p.season} {`${p.round}${ordinal(p.round)}`}
         {from ? <span className="text-chalk-600"> ({from.split(" ")[0]}&apos;s)</span> : null}
+        {became ? (
+          /* Indented under its pick with a turnstile, so it reads as a note ABOUT
+             the line above rather than another thing received. Without either cue
+             a two-line leg looks like two legs. */
+          <span className="mt-0.5 flex gap-1 pl-2 text-[11px] leading-snug text-chalk-600">
+            <span aria-hidden className="shrink-0 text-chalk-700">
+              &#8627;
+            </span>
+            <span className="min-w-0">
+            <span className="tabular">
+              {became.round}.{String(became.draftSlot).padStart(2, "0")}
+            </span>{" "}
+            <Link
+              href={`/players/${became.playerId}/`}
+              className="transition-colors hover:text-accent"
+            >
+              {players[became.playerId]?.full_name ?? became.playerId}
+            </Link>
+            {usedBy ? (
+              <>
+                {" "}
+                <span className="text-loss">· picked by {usedBy.split(" ")[0]}</span>
+              </>
+            ) : null}
+            </span>
+          </span>
+        ) : null}
       </span>
     );
   }

@@ -171,6 +171,26 @@ export const getWeeklyLowKeys = once((): Set<string> => {
 export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []);
 /** Every completed trade, oldest first. Vetoed and withdrawn ones never reach here. */
 export const getTrades = (): Trade[] => load("derived/trades.json", []);
+
+/**
+ * What a traded draft pick turned into, keyed `season:round:originalOwner`.
+ *
+ * ONLY FOR DRAFTS THAT HAVE HAPPENED. A pick traded for a future year has no
+ * outcome yet, and the key is simply absent — callers render the pick alone
+ * rather than inventing one.
+ *
+ * Keyed on the ORIGINAL owner because that is how a pick is identified once it
+ * moves: "Reagan's 2026 4th" is the same pick whoever is holding it, and
+ * `slotOwnerSlug` on a draft pick is that same original owner.
+ */
+export const getPickOutcomes = once(
+  (): Record<string, DraftPickRecord> =>
+    Object.fromEntries(
+      getDrafts()
+        .filter((p) => p.slotOwnerSlug)
+        .map((p) => [`${p.season}:${p.round}:${p.slotOwnerSlug}`, p]),
+    ),
+);
 export const getPlayerHistory = (): Record<string, PlayerTransaction[]> =>
   load("derived/player-history.json", {});
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { TradeCard } from "@/components/trade-card";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
-import { getOwnerMap, getPlayers, getTrades } from "@/lib/data";
+import { getOwnerMap, getPickOutcomes, getPlayers, getTrades } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Trades" };
 
@@ -17,6 +17,7 @@ export default function TradesPage() {
   const trades = getTrades();
   const players = getPlayers();
   const owners = getOwnerMap();
+  const outcomes = getPickOutcomes();
   const ownerNames = Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]));
 
   const bySeason = new Map<number, typeof trades>();
@@ -67,6 +68,7 @@ export default function TradesPage() {
                     trade={t}
                     players={players}
                     ownerNames={ownerNames}
+                    outcomes={outcomes}
                     showSeason={false}
                   />
                 ))}
