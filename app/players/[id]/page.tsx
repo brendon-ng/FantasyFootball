@@ -65,6 +65,22 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   const adp = adpAll.byPlayer.get(id);
   const trades = getTrades().filter((t) => t.legs.some((l) => l.playerId === id));
   const usage = getPlayerUsage()[id] ?? [];
+  // Credit is per season: who co-owns a team changes, so the label has to be
+  // looked up against that season's standings rather than the owner list.
+  const standingsBySeason = new Map(getSeasons().map((x) => [x.season, x.standings]));
+  const ownerLabels = Object.fromEntries(
+    usage.map((u) => {
+      const row = standingsBySeason.get(u.season)?.find((r) => r.ownerSlug === u.ownerSlug);
+      const slugs = row?.ownerSlugs?.length ? row.ownerSlugs : [u.ownerSlug];
+      // FIRST NAMES THROUGHOUT, not just for shared teams. The column is narrow
+      // in a half-width panel and a surname earns nothing here — the league has
+      // no two owners who share a first name.
+      return [
+        `${u.season}|${u.ownerSlug}`,
+        slugs.map((sl) => owners.get(sl)?.firstName ?? sl).join(" & "),
+      ];
+    }),
+  );
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
 
 
@@ -233,7 +249,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
               meta={`${usage.length} owner-season${usage.length === 1 ? "" : "s"}`}
               legend="Games on the roster and games started, with the points each owner got out of him. Bench points are what he scored for nobody."
             />
-            <PlayerUsageTable rows={usage} ownerNames={ownerNames} />
+            <PlayerUsageTable rows={usage} ownerLabels={ownerLabels} />
           </Panel>
         ) : null}
       </div>

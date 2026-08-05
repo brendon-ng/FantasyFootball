@@ -243,8 +243,10 @@ export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
             started: 0,
             startPoints: 0,
             benchPoints: 0,
+            lastWeek: 0,
           };
         row.rostered += 1;
+        row.lastWeek = Math.max(row.lastWeek, m.week);
         if (started.has(playerId)) {
           row.started += 1;
           row.startPoints += points;
@@ -263,9 +265,11 @@ export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
     row.benchPoints = Number(row.benchPoints.toFixed(2));
     (out[playerId] ??= []).push(row);
   }
-  // Newest first, matching the transaction timeline on the same page.
+  // Newest first, matching the transaction timeline beside it — and WITHIN a
+  // season by who had him last, so the order tracks the moves that produced it
+  // rather than the alphabet.
   for (const rows of Object.values(out)) {
-    rows.sort((a, b) => b.season - a.season || a.ownerSlug.localeCompare(b.ownerSlug));
+    rows.sort((a, b) => b.season - a.season || b.lastWeek - a.lastWeek);
   }
   return out;
 });

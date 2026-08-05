@@ -384,6 +384,16 @@ export interface PlayerUsage {
   startPoints: number;
   /** Points scored while on the bench, which counted for nothing. */
   benchPoints: number;
+  /**
+   * The last week this owner had him, used to order a season's rows.
+   *
+   * An owner who picked a player up in week 11 belongs ABOVE one who dropped him
+   * in week 7, because the table reads newest first. Where a player went out and
+   * came back to the same owner the two spells are one row, placed by the later
+   * of them — the alternative is a row per spell, which turns a single season
+   * into a ledger.
+   */
+  lastWeek: number;
 }
 
 export interface DraftPickRecord {
