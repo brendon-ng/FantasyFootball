@@ -66,8 +66,13 @@ jobs:
           fail=0
           for dir in out/*/; do
             slug="$(basename "$dir")"
+            # The league picker at /<repo>/ is the one legitimate exception: it
+            # is written after both builds and belongs to neither league, so the
+            # footer link to it can never carry a league prefix. Matched exactly,
+            # so a link into ANOTHER league's subtree still fails.
             if grep -rEoh '(src|href)="/[^"]*"' "$dir" --include='*.html' \
-               | grep -vE "\"/${repo}/${slug}/" ; then
+               | grep -vE "\"/${repo}/${slug}/" \
+               | grep -vE "^(src|href)=\"/${repo}/\"$" ; then
               echo "::error::${slug}: URLs above bypass the /${repo}/${slug} basePath."
               fail=1
             fi

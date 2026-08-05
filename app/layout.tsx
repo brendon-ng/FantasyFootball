@@ -5,7 +5,7 @@ import { IdentityControl, IdentityProvider } from "@/components/identity";
 import { Nav } from "@/components/nav";
 import { StickyParams } from "@/components/sticky-params";
 import { getConfig, getOwners, getSeasons, leagueAvatar } from "@/lib/data";
-import { withBasePath } from "@/lib/base-path";
+import { leaguePickerHref, withBasePath } from "@/lib/base-path";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -34,6 +34,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const avatar = leagueAvatar();
   const latest = Math.max(...Object.keys(cfg.knownLeagueIds).map(Number));
   const seasonCount = getSeasons().filter((s) => s.finalized).length;
+  // Null in dev, where only one league is built and no picker exists.
+  const pickerHref = leaguePickerHref();
   // Current owners only — the dropdown is a way to reach a live team, and
   // former owners would be dead weight in it. They stay in the all-time table.
   const navOwners = getOwners()
@@ -67,6 +69,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </span>
             <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <IdentityControl owners={navOwners} />
+              {pickerHref ? (
+                <a href={pickerHref} className="transition-colors hover:text-accent">
+                  All leagues
+                </a>
+              ) : null}
               <span>Reference only — manage your team in Sleeper. Data via the Sleeper API.</span>
             </span>
           </div>
