@@ -207,7 +207,11 @@ export function PlayerTransactions({
     pendingKeys.has(`${t.season}:${t.week}:${t.action}:${t.ownerSlug}`) &&
     !baked.some((b) => `${b.season}:${b.week}:${b.action}:${b.ownerSlug}` === `${t.season}:${t.week}:${t.action}:${t.ownerSlug}`);
 
-  const seasons = [...new Set(merged.map((h) => h.season))].sort((a, b) => a - b);
+  // NEWEST FIRST, both between seasons and within one. What a player is doing now
+  // is what people open the page for; his 2019 draft slot is history you scroll to.
+  // Only the DISPLAY reverses — `player-history.json` stays chronological, because
+  // the keeper resolver replays it in order and would break if the file did.
+  const seasons = [...new Set(merged.map((h) => h.season))].sort((a, b) => b - a);
   const name = (slug: string | null | undefined) => (slug && ownerNames[slug]) || "—";
 
   if (!merged.length) {
@@ -236,7 +240,7 @@ export function PlayerTransactions({
           <ol>
             {merged
               .filter((h) => h.season === yr)
-              .sort((a, b) => a.week - b.week || a.timestamp - b.timestamp)
+              .sort((a, b) => b.week - a.week || b.timestamp - a.timestamp)
               .map((h, i) => (
                 <li
                   key={i}
