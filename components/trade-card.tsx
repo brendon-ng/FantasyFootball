@@ -8,6 +8,7 @@ import type {
   Trade,
   TradeLeg,
   TradeReturn,
+  TradeSeason,
   TradeStat,
 } from "@/lib/types";
 
@@ -37,7 +38,7 @@ export function TradeCard({
   /** What each traded pick became, keyed `season:round:originalOwner`. */
   outcomes?: Record<string, DraftPickRecord>;
   /** What each side got for the rest of that season, by owner slug. */
-  returns?: Record<string, TradeReturn>;
+  returns?: TradeReturn;
   showSeason?: boolean;
   /** Set in a list, where the detail lives behind a click rather than inline. */
   onOpen?: () => void;
@@ -128,7 +129,7 @@ export function TradeCard({
         ))}
       </div>
 
-      {returns ? <RestOfSeason trade={trade} players={players} ownerNames={ownerNames} returns={returns} /> : null}
+      {returns ? <RestOfSeason players={players} ownerNames={ownerNames} returns={returns} /> : null}
     </div>
   );
 }
@@ -153,52 +154,90 @@ export function TradeCard({
  * return is a different deal from one where both did, and a total hides that.
  */
 function RestOfSeason({
-  trade,
   players,
   ownerNames,
   returns,
 }: {
-  trade: Trade;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
-  returns: Record<string, TradeReturn>;
+  returns: TradeReturn;
 }) {
-  const sides = trade.ownerSlugs.filter((s) => Object.keys(returns[s]?.byPlayer ?? {}).length);
-  if (!sides.length) return null;
+  const withPlayers = returns.seasons.filter((s) =>
+    Object.values(s.byOwner).some((o) => Object.keys(o.byPlayer).length),
+  );
+  if (!withPlayers.length) return null;
 
+  return (
+    <div className="mt-4 border-t-2 border-ink-600 pt-3">
+      {withPlayers.map((season, i) => (
+        <SeasonBlock
+          key={season.season}
+          season={season}
+          order={returns.order}
+          players={players}
+          ownerNames={ownerNames}
+          first={i === 0}
+        />
+      ))}
+    </div>
+  );
+}
+
+/**
+ * One season of the trade's return.
+ *
+ * A SECTION PER SEASON, for as long as somebody is still being kept. The first is
+ * the year of the trade and covers only the weeks after it; each one after that
+ * is a full season narrowed to the players still on that roster, because a keep
+ * is this trade continuing to pay rather than a new decision.
+ */
+function SeasonBlock({
+  season,
+  order,
+  players,
+  ownerNames,
+  first,
+}: {
+  season: TradeSeason;
+  /** Every party to the trade, in the order the columns above use. */
+  order: string[];
+  players: Record<string, PlayerMeta>;
+  ownerNames: Record<string, string>;
+  first: boolean;
+}) {
+  // Sides WITH data, for the padding and the best-of comparison.
+  const sides = order.filter((s) => Object.keys(season.byOwner[s]?.byPlayer ?? {}).length);
+  if (!sides.length) return null;
   const cell = "tabular w-9 shrink-0 text-right";
   // Padded to the longest side so the Total rows sit on the same line. Comparing
-  // two totals that are three rows apart vertically is the thing this table
-  // exists to make easy, and ragged columns undo it.
-  const rows = Math.max(...sides.map((s) => Object.keys(returns[s].byPlayer).length));
+  // two totals three rows apart is the thing this table exists to make easy.
+  const rows = Math.max(...sides.map((s) => Object.keys(season.byOwner[s].byPlayer).length));
 
-  /**
-   * The highest figure in each column across the sides, for the TOTALS only.
-   *
-   * Greater wins in every column, bench rate included. It is tempting to invert
-   * that one as a cost, but a high bench rate here means the player was scoring
-   * while he sat — which is the owner's usage, not the trade's return, and this
-   * table is about what the players did. A tie marks both, since neither side
-   * came out ahead.
-   */
-  const totals = sides.map((s) => statCells(returns[s].total));
+  const totals = sides.map((s) => statCells(season.byOwner[s].total));
   const best = COLUMNS.map((_, i) => {
     const values = totals.map((t) => t[i].value).filter((v): v is number => v !== null);
     return values.length < 2 ? null : Math.max(...values);
   });
 
   return (
-    // A heavier rule and real space above it: this is a different subject from
-    // the deal itself, and a single hairline read as another row of the trade.
-    <div className="mt-4 border-t-2 border-ink-600 pt-3">
+    <div className={first ? "" : "mt-4 border-t border-ink-700 pt-3"}>
       <div className="mb-1.5 flex items-baseline gap-2">
-        <span className="eyebrow text-[10px]">Rest of {trade.season}</span>
-        <span className="text-[10px] text-chalk-600">while still on that roster</span>
+        <span className="eyebrow text-[10px]">
+          {season.partial ? `Rest of ${season.season}` : season.season}
+        </span>
+        <span className="text-[10px] text-chalk-600">
+          {season.partial ? "while still on that roster" : "kept, and still on that roster"}
+        </span>
       </div>
-      <div className={sides.length === 2 ? "grid gap-x-3 gap-y-3 sm:grid-cols-2" : "space-y-3"}>
-        {sides.map((slug) => {
-          const r = returns[slug];
-          const ids = Object.keys(r.byPlayer);
+      {/* COLUMNS FOLLOW THE TRADE, not the data. In a keeper year usually only one
+          side still holds anybody, and letting that table span both columns put
+          it under the wrong owner — it belongs beneath the side it describes,
+          with the other column simply empty. */}
+      <div className={order.length === 2 ? "grid gap-x-3 gap-y-3 sm:grid-cols-2" : "space-y-3"}>
+        {order.map((slug) => {
+          const side = season.byOwner[slug];
+          const ids = Object.keys(side?.byPlayer ?? {});
+          if (!ids.length) return <div key={slug} aria-hidden />;
           return (
             <div key={slug} className="min-w-0 overflow-x-auto">
               <div className="min-w-max text-[11px]">
@@ -220,17 +259,16 @@ function RestOfSeason({
                   <Row
                     key={pid}
                     label={players[pid]?.full_name ?? pid}
-                    stat={r.byPlayer[pid]}
+                    stat={side.byPlayer[pid]}
                     cell={cell}
                   />
                 ))}
-                {/* Blank rows so this side ends level with the other. */}
                 {Array.from({ length: rows - ids.length }, (_, i) => (
                   <div key={`pad-${i}`} className="py-0.5 text-[11px]" aria-hidden>
                     &nbsp;
                   </div>
                 ))}
-                <Row label="Total" stat={r.total} cell={cell} best={best} bold />
+                <Row label="Total" stat={side.total} cell={cell} best={best} bold />
               </div>
             </div>
           );

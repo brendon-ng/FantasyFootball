@@ -38,7 +38,7 @@ export function TradeModal({
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
   outcomes?: Record<string, DraftPickRecord>;
-  returns?: Record<string, TradeReturn>;
+  returns?: TradeReturn;
   onClose: () => void;
 }) {
   // Escape closes, and the page behind does not scroll while it is open —

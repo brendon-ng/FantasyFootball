@@ -194,7 +194,7 @@ export function PlayerTransactions({
   players?: Record<string, PlayerMeta>;
   pickOutcomes?: Record<string, DraftPickRecord>;
   /** tradeId -> ownerSlug -> what that side got for the rest of the season. */
-  tradeReturns?: Record<string, Record<string, TradeReturn>>;
+  tradeReturns?: Record<string, TradeReturn>;
 }) {
   const [openTrade, setOpenTrade] = useState<Trade | null>(null);
   const { events: pending } = usePendingTransactions({

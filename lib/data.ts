@@ -37,6 +37,8 @@ import type {
   SeasonKeepers,
   Trade,
   TradeReturn,
+  TradeSeason,
+  TradeSide,
   TradeStat,
   LiveMatchup,
   LiveSeason,
@@ -332,7 +334,7 @@ export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
  * Vetoed trades are included — they are in the lists, and their return is
  * correctly nothing, since nobody ever rostered anyone.
  */
-export const getTradeReturns = once((): Record<string, Record<string, TradeReturn>> => {
+export const getTradeReturns = once((): Record<string, TradeReturn> => {
   const onBye = byeFilter();
   const byWeek = new Map<string, Map<string, Matchup["home"]>>();
   for (const m of getMatchupHistory()) {
@@ -342,87 +344,116 @@ export const getTradeReturns = once((): Record<string, Record<string, TradeRetur
     byWeek.set(key, at);
   }
 
-  // Keeper picks by season and owner, so the loop below is a lookup rather than a
-  // scan of every draft pick per trade.
-  const keeperPicks = new Map<string, DraftPickRecord[]>();
+  // Keeper picks by season and owner, so the chain below is a lookup rather than
+  // a scan of 1,300 draft picks per trade.
+  const keptBy = new Map<string, Map<string, number>>();
   for (const p of getDrafts()) {
     if (!p.isKeeper || !p.ownerSlug) continue;
     const key = `${p.season}|${p.ownerSlug}`;
-    keeperPicks.set(key, [...(keeperPicks.get(key) ?? []), p]);
+    const m = keptBy.get(key) ?? new Map<string, number>();
+    m.set(p.playerId, p.round);
+    keptBy.set(key, m);
   }
 
-  const out: Record<string, Record<string, TradeReturn>> = {};
-  for (const trade of getTrades()) {
-    const perOwner: Record<string, TradeReturn> = {};
-    for (const owner of trade.ownerSlugs) {
-      const got = trade.legs
-        .filter((l) => l.kind === "player" && l.toSlug === owner && l.playerId)
-        .map((l) => l.playerId as string);
-      const blank = (): TradeStat => ({ games: 0, started: 0, startPoints: 0, benchPoints: 0 });
-      const byPlayer: Record<string, TradeStat> = Object.fromEntries(
-        got.map((id) => [id, blank()]),
-      );
-      if (got.length && !trade.vetoed) {
-        for (let week = trade.week; week <= 25; week++) {
-          const side = byWeek.get(`${trade.season}|${week}`)?.get(owner);
-          if (!side) continue;
-          const started = new Set(side.starters);
-          for (const playerId of got) {
-            const points = side.playerPoints[playerId];
-            if (points === undefined) continue;
-            if (onBye(trade.season, week, playerId, points)) continue;
-            const one = byPlayer[playerId];
-            one.games += 1;
-            if (started.has(playerId)) {
-              one.started += 1;
-              one.startPoints += points;
-            } else {
-              one.benchPoints += points;
-            }
-          }
-        }
-      }
-      // Did this owner give him up again before the season was out? The
-      // transaction log is the only place that distinguishes "dropped" from
-      // "the season ended" — a roster simply stopping is not an exit.
-      const history = getPlayerHistory();
-      for (const playerId of got) {
-        for (const e of history[playerId] ?? []) {
-          if (e.season !== trade.season || e.timestamp <= trade.timestamp) continue;
-          if (e.action === "drop" && e.ownerSlug === owner) {
-            byPlayer[playerId].exit = { kind: "dropped", week: e.week };
-            break;
-          }
-          if (e.action === "trade" && e.fromSlug === owner) {
-            byPlayer[playerId].exit = { kind: "traded", week: e.week };
-            break;
-          }
-        }
-      }
+  const history = getPlayerHistory();
+  const blank = (): TradeStat => ({ games: 0, started: 0, startPoints: 0, benchPoints: 0 });
 
-      // Kept the next season by the same owner. Only the NEXT one: a keep two
-      // years later is its own decision, not this trade still paying out. There
-      // are none of those on record anyway.
-      for (const pick of keeperPicks.get(`${trade.season + 1}|${owner}`) ?? []) {
-        if (byPlayer[pick.playerId]) {
-          byPlayer[pick.playerId].kept = { season: pick.season, round: pick.round };
+  /** One owner's totals for a set of players over one season, from `fromWeek`. */
+  const tally = (season: number, owner: string, ids: string[], fromWeek: number): TradeSide => {
+    const byPlayer: Record<string, TradeStat> = Object.fromEntries(ids.map((id) => [id, blank()]));
+    for (let week = fromWeek; week <= 25; week++) {
+      const side = byWeek.get(`${season}|${week}`)?.get(owner);
+      if (!side) continue;
+      const started = new Set(side.starters);
+      for (const playerId of ids) {
+        const points = side.playerPoints[playerId];
+        if (points === undefined) continue;
+        if (onBye(season, week, playerId, points)) continue;
+        const one = byPlayer[playerId];
+        one.games += 1;
+        if (started.has(playerId)) {
+          one.started += 1;
+          one.startPoints += points;
+        } else {
+          one.benchPoints += points;
         }
       }
-
-      const total = blank();
-      for (const one of Object.values(byPlayer)) {
-        one.startPoints = Number(one.startPoints.toFixed(2));
-        one.benchPoints = Number(one.benchPoints.toFixed(2));
-        total.games += one.games;
-        total.started += one.started;
-        total.startPoints += one.startPoints;
-        total.benchPoints += one.benchPoints;
-      }
-      total.startPoints = Number(total.startPoints.toFixed(2));
-      total.benchPoints = Number(total.benchPoints.toFixed(2));
-      perOwner[owner] = { byPlayer, total };
     }
-    out[trade.id] = perOwner;
+
+    // Given up again before the season was out. The transaction log is the only
+    // thing that separates "dropped" from "the season ended".
+    for (const playerId of ids) {
+      for (const e of history[playerId] ?? []) {
+        if (e.season !== season || e.week < fromWeek) continue;
+        if (e.action === "drop" && e.ownerSlug === owner) {
+          byPlayer[playerId].exit = { kind: "dropped", week: e.week };
+          break;
+        }
+        if (e.action === "trade" && e.fromSlug === owner) {
+          byPlayer[playerId].exit = { kind: "traded", week: e.week };
+          break;
+        }
+      }
+      const round = keptBy.get(`${season + 1}|${owner}`)?.get(playerId);
+      if (round) byPlayer[playerId].kept = { season: season + 1, round };
+    }
+
+    const total = blank();
+    for (const one of Object.values(byPlayer)) {
+      one.startPoints = Number(one.startPoints.toFixed(2));
+      one.benchPoints = Number(one.benchPoints.toFixed(2));
+      total.games += one.games;
+      total.started += one.started;
+      total.startPoints += one.startPoints;
+      total.benchPoints += one.benchPoints;
+    }
+    total.startPoints = Number(total.startPoints.toFixed(2));
+    total.benchPoints = Number(total.benchPoints.toFixed(2));
+    return { byPlayer, total };
+  };
+
+  const out: Record<string, TradeReturn> = {};
+  for (const trade of getTrades()) {
+    const seasons: TradeSeason[] = [];
+
+    // Who each owner is still holding, narrowing year by year.
+    let holding = new Map<string, string[]>(
+      trade.ownerSlugs.map((owner) => [
+        owner,
+        trade.vetoed
+          ? []
+          : trade.legs
+              .filter((l) => l.kind === "player" && l.toSlug === owner && l.playerId)
+              .map((l) => l.playerId as string),
+      ]),
+    );
+
+    let season = trade.season;
+    let fromWeek = trade.week;
+    while ([...holding.values()].some((ids) => ids.length)) {
+      const byOwner: Record<string, TradeSide> = {};
+      for (const [owner, ids] of holding) {
+        if (ids.length) byOwner[owner] = tally(season, owner, ids, fromWeek);
+      }
+      seasons.push({ season, partial: season === trade.season, byOwner });
+
+      // THE CHAIN CONTINUES ONLY THROUGH A KEEP. Anyone not retained by the same
+      // owner for the next season drops out; when nobody is left the trade has
+      // finished paying and there is no further section.
+      holding = new Map(
+        [...holding].map(([owner, ids]) => [
+          owner,
+          ids.filter((id) => keptBy.get(`${season + 1}|${owner}`)?.has(id)),
+        ]),
+      );
+      season += 1;
+      fromWeek = 1;
+      // A guard, not a limit anyone will reach: a contract cannot outlive the
+      // seasons on file.
+      if (season > trade.season + 20) break;
+    }
+
+    out[trade.id] = { order: trade.ownerSlugs, seasons };
   }
   return out;
 });

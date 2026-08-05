@@ -32,7 +32,7 @@ export function TradeList({
   ownerNames: Record<string, string>;
   outcomes: Record<string, DraftPickRecord>;
   /** Only handed to the modal — the list itself stays a summary. */
-  returns: Record<string, Record<string, TradeReturn>>;
+  returns: Record<string, TradeReturn>;
   showSeason?: boolean;
 }) {
   const [open, setOpen] = useState<Trade | null>(null);

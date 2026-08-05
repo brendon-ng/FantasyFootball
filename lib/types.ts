@@ -426,10 +426,32 @@ export interface TradeStat {
   kept?: { season: number; round: number };
 }
 
-export interface TradeReturn {
-  /** Per incoming player, so a lopsided haul is not hidden inside a total. */
+/** One side's haul in one season. */
+export interface TradeSide {
+  /** Per player, so a lopsided haul is not hidden inside a total. */
   byPlayer: Record<string, TradeStat>;
   total: TradeStat;
+}
+
+/**
+ * A trade's return, season by season.
+ *
+ * MORE THAN THE YEAR IT HAPPENED. A player kept the next season is this trade
+ * still paying out — the deal bought a contract, not just a run of games — so the
+ * chain continues for as long as somebody involved is retained, narrowing each
+ * year to whoever is still on the roster that acquired him.
+ */
+export interface TradeReturn {
+  /** Every party, in the order the trade's own columns use. */
+  order: string[];
+  seasons: TradeSeason[];
+}
+
+export interface TradeSeason {
+  season: number;
+  /** True for the trade's own season, where only the weeks after it count. */
+  partial: boolean;
+  byOwner: Record<string, TradeSide>;
 }
 
 export interface DraftPickRecord {
