@@ -14,6 +14,7 @@ import {
 } from "@/components/ui";
 import { meetingId } from "@/lib/meeting";
 import { isCurrentSeason, resolvePhase } from "@/lib/phase";
+import { matchupMarks, type RecordMark, type RecordThresholds } from "@/lib/record-marks";
 import { useLiveDraft, useLiveSeason } from "@/lib/sleeper-browser";
 import type { LiveSeason, OwnerRecord, SeasonSummary } from "@/lib/types";
 
@@ -61,7 +62,7 @@ export function SeasonPanels({
   userIdToSlug: Record<string, string>;
   lastSeason: SeasonSummary | null;
   leaders: OwnerRecord[];
-  thresholds: { high: number[]; low: number[] };
+  thresholds: RecordThresholds;
   /** "10 teams · PPR keeper", built from config on the server. */
   format: string;
   preDraftNote: string;
@@ -93,17 +94,6 @@ export function SeasonPanels({
   const inSeason = isCurrentSeason(phase);
   const currentSeason = live?.season ?? fallbackSeason;
   const name = (slug: string | null | undefined) => (slug && ownerNames[slug]) || "\u2014";
-
-  /**
-   * Where a live score would land in the record book if the week ended now.
-   */
-  const pace = (points: number): { rank: number; tone: "good" | "bad" } | null => {
-    const hi = thresholds.high.findIndex((p) => points > p);
-    if (hi >= 0) return { rank: hi + 1, tone: "good" };
-    const lo = thresholds.low.findIndex((p) => points < p);
-    if (lo >= 0) return { rank: lo + 1, tone: "bad" };
-    return null;
-  };
 
   return (
     <>
@@ -145,7 +135,7 @@ export function SeasonPanels({
           top strip is for whatever the league is currently about. */}
       <>
         {inSeason ? (
-          <MatchupStrip live={live} ownerNames={ownerNames} pace={pace} h2h={h2h} />
+          <MatchupStrip live={live} ownerNames={ownerNames} thresholds={thresholds} h2h={h2h} />
         ) : (
           lastSeasonTiles
         )}
@@ -322,16 +312,20 @@ export interface H2HRecord {
 function MatchupStrip({
   live,
   ownerNames,
-  pace,
+  thresholds,
   h2h,
 }: {
   live: LiveSeason | null;
   ownerNames: Record<string, string>;
-  pace: (points: number) => { rank: number; tone: "good" | "bad" } | null;
+  thresholds: RecordThresholds;
   h2h: Record<string, Record<string, H2HRecord>>;
 }) {
   if (!live?.matchups.length) return null;
   const started = live.matchups.some((m) => m.a.points > 0 || m.b.points > 0);
+  // MARKS ONLY ONCE THE WEEK IS SCORED. A record is a fact about a finished game;
+  // a partial score cannot have set one, and half a lineup sitting on 40 points
+  // is not the lowest week in league history, it is Sunday lunchtime.
+  const scored = (live.lastScoredLeg ?? 0) >= live.week;
   const name = (slug: string) => ownerNames[slug] ?? slug;
   const first = (slug: string) => name(slug).split(" ")[0];
   const recordOf = (slug: string) => live.teams.find((t) => t.ownerSlug === slug);
@@ -348,22 +342,28 @@ function MatchupStrip({
     return (slugs?.length ? slugs : [slug]).map(first).join(" & ");
   };
 
-  /** "Jake leads 5-4", "even at 3-3", or nothing when they have never met. */
+  /**
+   * "All time: Jake leads 5-4".
+   *
+   * PREFIXED, because a bare "Jake leads 5-4" under two names and two records
+   * reads as this season. It is the whole series, going back to 2019.
+   */
   const series = (a: string, b: string): string => {
     const r = h2h[a]?.[b];
-    if (!r) return "First meeting";
-    const total = r.wins + r.losses + r.ties;
-    if (!total) return "First meeting";
+    const total = r ? r.wins + r.losses + r.ties : 0;
+    if (!r || !total) return "All time: first meeting";
     const score = r.ties ? `${r.wins}-${r.losses}-${r.ties}` : `${r.wins}-${r.losses}`;
-    if (r.wins === r.losses) return `Even at ${score}`;
+    if (r.wins === r.losses) return `All time: even at ${score}`;
     const leader = r.wins > r.losses ? a : b;
     const flipped = r.ties ? `${r.losses}-${r.wins}-${r.ties}` : `${r.losses}-${r.wins}`;
-    return `${first(leader)} leads ${r.wins > r.losses ? score : flipped}`;
+    return `All time: ${first(leader)} leads ${r.wins > r.losses ? score : flipped}`;
   };
 
   return (
     <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:px-0">
-      {live.matchups.map((m) => (
+      {live.matchups.map((m) => {
+        const marks = scored ? matchupMarks(m.a.points, m.b.points, thresholds) : [];
+        return (
         <Link
           key={m.matchupId}
           href={`/matchups/${meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug)}/`}
@@ -373,7 +373,6 @@ function MatchupStrip({
           {[m.a, m.b].map((side, i) => {
             const other = i === 0 ? m.b : m.a;
             const winning = started && side.points > other.points;
-            const p = started ? pace(side.points) : null;
             const rec = recordOf(side.ownerSlug);
             return (
               <div key={side.ownerSlug} className="flex items-baseline gap-1.5">
@@ -392,14 +391,6 @@ function MatchupStrip({
                 ) : null}
                 {started ? (
                   <span className="ml-auto flex shrink-0 items-center gap-1">
-                    {p ? (
-                      <span
-                        className={`text-[9px] font-bold ${p.tone === "good" ? "text-accent" : "text-loss"}`}
-                        title={`On pace for the ${p.rank === 1 ? "" : `#${p.rank} `}${p.tone === "good" ? "highest" : "lowest"} single-week score in league history`}
-                      >
-                        {p.tone === "good" ? "\u25b2" : "\u25bc"}
-                      </span>
-                    ) : null}
                     <span
                       className={`tabular text-sm ${winning ? "font-semibold text-accent" : "text-chalk-500"}`}
                     >
@@ -410,12 +401,41 @@ function MatchupStrip({
               </div>
             );
           })}
-          <div className="mt-1 truncate text-[10px] text-chalk-600" title="All-time head to head">
+          <div className="mt-1 truncate text-[10px] text-chalk-600">
             {series(m.a.ownerSlug, m.b.ownerSlug)}
           </div>
+          {/* Only a game that actually made a record book gets chips, which is
+              what keeps them worth reading — most weeks no card has one. */}
+          {marks.length ? (
+            <div className="mt-1.5 flex flex-wrap gap-1">
+              {marks.map((mark) => (
+                <RecordChip key={`${mark.short}-${mark.side ?? "game"}`} mark={mark} />
+              ))}
+            </div>
+          ) : null}
         </Link>
-      ))}
+        );
+      })}
     </div>
+  );
+}
+
+/**
+ * A record this game entered. Tone carries the direction — green for a peak, red
+ * for a floor — and the title spells the rank out, since "#3 low" is terse.
+ */
+function RecordChip({ mark }: { mark: RecordMark }) {
+  return (
+    <span
+      title={mark.full}
+      className={`rounded border px-1 py-px text-[9px] font-bold uppercase tracking-wide ${
+        mark.tone === "good"
+          ? "border-accent-dim/60 bg-accent/10 text-accent"
+          : "border-loss/50 bg-loss/10 text-loss"
+      }`}
+    >
+      {mark.short}
+    </span>
   );
 }
 

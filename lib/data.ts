@@ -14,6 +14,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
 import { meetingId } from "./meeting.ts";
+import type { RecordThresholds } from "./record-marks.ts";
 
 import {
   getLeague,
@@ -865,17 +866,23 @@ export function getRecordFlags(
 }
 
 /**
- * Thresholds a live score would have to beat to enter the record book.
+ * Cut-offs a finished game has to beat to enter each record book.
  *
- * Shipped to the client so an in-progress game can say "on pace for #4" without
- * refetching history — the record arrays are build-time data.
+ * Shipped to the client so a card can mark a record the moment a week is scored,
+ * without refetching history — the record arrays are build-time data.
+ *
+ * Capped at the depth the record book actually shows, so nothing can be marked
+ * "#22" against a list that stops at 20.
  */
-export function getRecordThresholds(): { high: number[]; low: number[] } {
+export function getRecordThresholds(): RecordThresholds {
   const r = getRecords();
-  // Capped the same way as the badges, so a live game cannot be "on pace for
-  // #22" when the record book stops at 20.
+  const cap = <T,>(xs: T[]) => xs.slice(0, RECORD_BOOK_DEPTH);
   return {
-    high: r.weeklyHigh.slice(0, RECORD_BOOK_DEPTH).map((s) => s.points),
-    low: r.weeklyLow.slice(0, RECORD_BOOK_DEPTH).map((s) => s.points),
+    high: cap(r.weeklyHigh).map((s) => s.points),
+    low: cap(r.weeklyLow).map((s) => s.points),
+    blowout: cap(r.biggestBlowout).map((s) => s.margin),
+    narrow: cap(r.narrowestWin).map((s) => s.margin),
+    combinedHigh: cap(r.highestCombined).map((s) => s.total),
+    combinedLow: cap(r.lowestCombined).map((s) => s.total),
   };
 }
