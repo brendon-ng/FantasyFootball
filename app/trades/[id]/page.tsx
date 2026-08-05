@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { BackLink } from "@/components/back-link";
 import { TradeCard } from "@/components/trade-card";
-import { TradeTreeView } from "@/components/trade-tree-view";
+import { TradeTreeSection } from "@/components/trade-tree-section";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
 import {
   getOwnerMap,
@@ -108,7 +108,15 @@ export default async function TradePage({ params }: { params: Promise<{ id: stri
         />
         <div className="p-4 sm:p-5">
           {assets ? (
-            <TradeTreeView tree={tree} players={players} ownerNames={ownerNames} />
+            <TradeTreeSection
+              tree={tree}
+              players={players}
+              ownerNames={ownerNames}
+              outcomes={getPickOutcomes()}
+              returns={getTradeReturns()}
+              handoffs={getPickHandoffs()}
+              allTrades={Object.fromEntries(getTrades().map((t) => [t.id, t]))}
+            />
           ) : (
             <EmptyState>
               Nothing to follow — this trade moved only FAAB, which is spent rather than held.

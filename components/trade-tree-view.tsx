@@ -22,10 +22,13 @@ export function TradeTreeView({
   tree,
   players,
   ownerNames,
+  onOpenTrade,
 }: {
   tree: TradeTree;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
+  /** Opens the deal a node was traded on in. Absent renders a plain badge. */
+  onOpenTrade?: (tradeId: string) => void;
 }) {
   const sides = tree.roots.filter((r) => r.nodes.length);
   if (!sides.length) return null;
@@ -62,7 +65,13 @@ export function TradeTreeView({
           </div>
           <ul className="space-y-1.5">
             {side.nodes.map((n) => (
-              <Branch key={n.id} node={n} players={players} ownerNames={ownerNames} />
+              <Branch
+                key={n.id}
+                node={n}
+                players={players}
+                ownerNames={ownerNames}
+                onOpenTrade={onOpenTrade}
+              />
             ))}
           </ul>
         </div>
@@ -75,20 +84,28 @@ function Branch({
   node,
   players,
   ownerNames,
+  onOpenTrade,
 }: {
   node: TreeNode;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
+  onOpenTrade?: (tradeId: string) => void;
 }) {
   return (
     <li>
-      <NodeCard node={node} players={players} ownerNames={ownerNames} />
+      <NodeCard node={node} players={players} ownerNames={ownerNames} onOpenTrade={onOpenTrade} />
       {node.children.length ? (
         // The rail is the edge. A left border plus indentation says "these came
         // from that" as clearly as a drawn line, and survives a narrow column.
         <ul className="ml-2 space-y-1.5 border-l border-ink-600 pl-3 pt-1.5">
           {node.children.map((c) => (
-            <Branch key={c.id} node={c} players={players} ownerNames={ownerNames} />
+            <Branch
+              key={c.id}
+              node={c}
+              players={players}
+              ownerNames={ownerNames}
+              onOpenTrade={onOpenTrade}
+            />
           ))}
         </ul>
       ) : null}
@@ -100,10 +117,12 @@ function NodeCard({
   node,
   players,
   ownerNames,
+  onOpenTrade,
 }: {
   node: TreeNode;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
+  onOpenTrade?: (tradeId: string) => void;
 }) {
   const meta = node.playerId ? players[node.playerId] : undefined;
   const label =
@@ -132,7 +151,7 @@ function NodeCard({
           <span className="text-[13px] font-medium">{label}</span>
         )}
         {from ? <span className="text-[10px] text-chalk-600">({from}&apos;s)</span> : null}
-        <Ending node={node} />
+        <Ending node={node} onOpenTrade={onOpenTrade} />
       </div>
       {node.bySeason.length ? (
         <div className="mt-1 flex flex-wrap gap-1">
@@ -153,29 +172,46 @@ function NodeCard({
 }
 
 /** How the spell finished — the part that says whether it is still paying. */
-function Ending({ node }: { node: TreeNode }) {
+function Ending({
+  node,
+  onOpenTrade,
+}: {
+  node: TreeNode;
+  onOpenTrade?: (tradeId: string) => void;
+}) {
   const e = node.ended;
   const base = "ml-auto shrink-0 rounded border px-1 text-[9px] font-bold uppercase tracking-wide";
   if (e.kind === "traded") {
-    return (
-      <span
-        className={`${base} border-trade/50 text-trade`}
-        title={
-          e.diluted
-            ? `Traded on in ${e.season} week ${e.week}. That deal also sent out assets from outside this lineage, so what came back is not purely attributable to this trade.`
-            : `Traded on in ${e.season} week ${e.week}`
-        }
+    const label = `Traded ${e.season}${e.diluted ? " ·mixed" : ""}`;
+    const title = e.diluted
+      ? `Traded on in ${e.season} week ${e.week}. That deal also sent out assets from outside this lineage, so what came back is not purely attributable to this trade. Click to see it.`
+      : `Traded on in ${e.season} week ${e.week} — click to see that deal`;
+    // The badge names another trade, so it IS the way into it.
+    return onOpenTrade ? (
+      <button
+        type="button"
+        onClick={() => onOpenTrade(e.tradeId)}
+        title={title}
+        className={`${base} border-trade/50 text-trade transition-colors hover:border-trade hover:bg-trade/10`}
       >
-        Traded {e.season}
-        {e.diluted ? " ·mixed" : ""}
+        {label}
+      </button>
+    ) : (
+      <span className={`${base} border-trade/50 text-trade`} title={title}>
+        {label}
       </span>
     );
   }
   if (e.kind === "drafted") {
+    // Straight to the board it was made on, which shows the picks around it.
     return (
-      <span className={`${base} border-accent-dim/60 text-accent`} title="The pick was used here">
+      <Link
+        href={`/history/${e.season}/draft/`}
+        title={`Used at ${e.round}.${String(e.slot).padStart(2, "0")} — see the ${e.season} draft board`}
+        className={`${base} border-accent-dim/60 text-accent transition-colors hover:border-accent hover:bg-accent/10`}
+      >
         {e.round}.{String(e.slot).padStart(2, "0")}
-      </span>
+      </Link>
     );
   }
   if (e.kind === "dropped") {
