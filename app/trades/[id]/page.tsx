@@ -109,6 +109,7 @@ export default async function TradePage({ params }: { params: Promise<{ id: stri
         <div className="p-4 sm:p-5">
           {assets ? (
             <TradeTreeSection
+              trade={trade}
               tree={tree}
               players={players}
               ownerNames={ownerNames}
