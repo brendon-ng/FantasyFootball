@@ -37,7 +37,13 @@ export function TradeCard({
   }
 
   return (
-    <div className="border-b border-ink-700 px-4 py-3 last:border-0 sm:px-5">
+    <div
+      className={`border-b border-ink-700 px-4 py-3 last:border-0 sm:px-5 ${
+        // Dimmed, because none of it happened. Still legible — it is a real thing
+        // the league did and then undid — but it must not read as a result.
+        trade.vetoed ? "opacity-60" : ""
+      }`}
+    >
       <div className="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[11px] text-chalk-600">
         {showSeason ? (
           <Link
@@ -48,6 +54,11 @@ export function TradeCard({
           </Link>
         ) : null}
         <span>{trade.preseason ? "Preseason" : `Week ${trade.week}`}</span>
+        {trade.vetoed ? (
+          <span className="rounded border border-loss/60 bg-loss/10 px-1 text-[9px] font-bold uppercase tracking-wide text-loss">
+            Vetoed
+          </span>
+        ) : null}
         {trade.ownerSlugs.length > 2 ? (
           <span className="rounded border border-me-dim px-1 text-[9px] font-bold uppercase tracking-wide text-me">
             {trade.ownerSlugs.length}-team

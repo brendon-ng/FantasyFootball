@@ -1283,6 +1283,9 @@ function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransac
   }
 
   for (const t of espn) {
+    // A vetoed trade never happened, so it produces no event here — it appears in
+    // the trade lists only.
+    if (t.vetoed) continue;
     for (const [playerId, ev] of espnEvents(t)) {
       if (ignoredPlayers.has(playerId)) continue;
       (hist[playerId] ??= []).push(ev);
@@ -1503,9 +1506,10 @@ function writeReplay(slug: string, summaries: SeasonSummary[], matchups: Matchup
  * together, and a trade of nothing but picks produces no events at all and
  * vanishes. Two of Den Ops' seventeen Sleeper trades are picks-only.
  *
- * ONLY COMPLETED TRADES. Sleeper marks a vetoed or withdrawn trade `failed` and
- * ESPN marks it anything other than `EXECUTED`; both are dropped here, so a trade
- * the league threw out never reaches a page. ESPN's `isPending` is deliberately
+ * VETOED TRADES ARE KEPT, and flagged. A deal the league agreed and then threw
+ * out is league history and belongs in a list of trades; what it must never do is
+ * reach a player's timeline, where it would assert a move that did not happen.
+ * `buildPlayerHistory` therefore still emits events only for completed ones. ESPN's `isPending` is deliberately
  * NOT used — see the importer, where two "pending" 2021 trades are shown to have
  * actually happened.
  */
@@ -1516,7 +1520,8 @@ function buildTrades(seasons: SeasonData[]): Trade[] {
     const draftStart = d.draft?.start_time ?? 0;
     for (const [week, txns] of d.transactions) {
       for (const t of txns) {
-        if (t.type !== "trade" || t.status !== "complete") continue;
+        if (t.type !== "trade") continue;
+        const vetoed = t.status !== "complete";
         const ts = t.status_updated || t.created;
         const legs: TradeLeg[] = [];
         const involved = new Set<string>();
@@ -1567,6 +1572,7 @@ function buildTrades(seasons: SeasonData[]): Trade[] {
           ownerSlugs: [...involved].sort(),
           legs,
           source: "sleeper",
+          vetoed,
         });
       }
     }
@@ -1588,6 +1594,7 @@ function buildTrades(seasons: SeasonData[]): Trade[] {
         toSlug: i.toSlug,
       })),
       source: "espn",
+      vetoed: t.vetoed ?? false,
     });
   }
 
@@ -1616,6 +1623,7 @@ function importedTransactions(): Array<ManualTx & { season: number }> {
 interface ManualTx {
   id: string;
   kind: string;
+  vetoed?: boolean;
   week: number;
   timestamp: number;
   faab: number;

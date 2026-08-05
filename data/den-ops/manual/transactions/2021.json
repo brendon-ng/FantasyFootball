@@ -21,6 +21,7 @@
         "david-collier"
       ],
       "timestamp": 1631059245161,
+      "vetoed": false,
       "week": 1
     },
     {
@@ -43,6 +44,7 @@
         "safvet-besen"
       ],
       "timestamp": 1631217888552,
+      "vetoed": false,
       "week": 1
     },
     {
@@ -65,6 +67,7 @@
         "safvet-besen"
       ],
       "timestamp": 1631240980954,
+      "vetoed": false,
       "week": 1
     },
     {
@@ -87,6 +90,7 @@
         "brendon-ng"
       ],
       "timestamp": 1631258478954,
+      "vetoed": false,
       "week": 1
     },
     {
@@ -104,6 +108,7 @@
         "tyler-jung"
       ],
       "timestamp": 1631463488374,
+      "vetoed": false,
       "week": 1
     },
     {
@@ -126,6 +131,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1631463600294,
+      "vetoed": false,
       "week": 1
     },
     {
@@ -143,6 +149,7 @@
         "tyler-jung"
       ],
       "timestamp": 1631634301024,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -160,6 +167,7 @@
         "spencer-kim"
       ],
       "timestamp": 1631677477338,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -177,6 +185,7 @@
         "spencer-kim"
       ],
       "timestamp": 1631677484792,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -199,6 +208,7 @@
         "tyler-jung"
       ],
       "timestamp": 1631690862308,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -221,6 +231,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1631690862308,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -243,6 +254,7 @@
         "david-collier"
       ],
       "timestamp": 1631690862308,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -265,6 +277,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1631690862308,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -282,6 +295,7 @@
         "spencer-kim"
       ],
       "timestamp": 1631690862308,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -304,6 +318,7 @@
         "brendon-ng"
       ],
       "timestamp": 1631723219912,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -326,6 +341,7 @@
         "david-collier"
       ],
       "timestamp": 1631752756473,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -348,6 +364,7 @@
         "david-collier"
       ],
       "timestamp": 1631820600410,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -370,6 +387,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1631834369585,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -387,6 +405,7 @@
         "david-collier"
       ],
       "timestamp": 1631841968506,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -409,6 +428,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1632015202808,
+      "vetoed": false,
       "week": 2
     },
     {
@@ -431,6 +451,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1632295302095,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -453,6 +474,7 @@
         "david-collier"
       ],
       "timestamp": 1632295302095,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -475,6 +497,7 @@
         "david-collier"
       ],
       "timestamp": 1632295302095,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -497,6 +520,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1632295302095,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -519,6 +543,7 @@
         "tyler-jung"
       ],
       "timestamp": 1632295302095,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -541,6 +566,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1632295302095,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -558,6 +584,7 @@
         "logan-dunn"
       ],
       "timestamp": 1632311703858,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -575,6 +602,7 @@
         "brendon-ng"
       ],
       "timestamp": 1632328919974,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -597,6 +625,7 @@
         "david-collier"
       ],
       "timestamp": 1632345285603,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -614,6 +643,7 @@
         "spencer-kim"
       ],
       "timestamp": 1632430487179,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -631,6 +661,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1632598947064,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -653,6 +684,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1632663151434,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -675,6 +707,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1632663186298,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -697,6 +730,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1632671337285,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -714,6 +748,7 @@
         "tyler-jung"
       ],
       "timestamp": 1632701690992,
+      "vetoed": false,
       "week": 3
     },
     {
@@ -731,6 +766,7 @@
         "tyler-jung"
       ],
       "timestamp": 1632813602136,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -753,6 +789,7 @@
         "david-collier"
       ],
       "timestamp": 1632900395339,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -775,6 +812,7 @@
         "spencer-kim"
       ],
       "timestamp": 1632900395339,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -797,6 +835,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1632900395339,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -819,6 +858,7 @@
         "brendon-ng"
       ],
       "timestamp": 1632900395339,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -841,6 +881,7 @@
         "tyler-jung"
       ],
       "timestamp": 1632900395339,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -863,6 +904,7 @@
         "brendon-ng"
       ],
       "timestamp": 1632900395339,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -885,6 +927,7 @@
         "david-collier"
       ],
       "timestamp": 1632900395339,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -902,6 +945,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1633247406519,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -919,6 +963,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1633247461008,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -936,6 +981,7 @@
         "tyler-jung"
       ],
       "timestamp": 1633290645491,
+      "vetoed": false,
       "week": 4
     },
     {
@@ -953,6 +999,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1633499145700,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -975,6 +1022,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1633509252552,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -997,6 +1045,7 @@
         "david-collier"
       ],
       "timestamp": 1633509252552,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1019,6 +1068,7 @@
         "david-collier"
       ],
       "timestamp": 1633509252552,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1041,6 +1091,7 @@
         "brendon-ng"
       ],
       "timestamp": 1633509252552,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1063,6 +1114,7 @@
         "logan-dunn"
       ],
       "timestamp": 1633509252552,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1085,6 +1137,7 @@
         "brendon-ng"
       ],
       "timestamp": 1633543121199,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1107,6 +1160,7 @@
         "david-collier"
       ],
       "timestamp": 1633588600273,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1129,6 +1183,7 @@
         "spencer-kim"
       ],
       "timestamp": 1633648301566,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1146,6 +1201,7 @@
         "tyler-jung"
       ],
       "timestamp": 1633670543118,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1168,6 +1224,7 @@
         "tyler-jung"
       ],
       "timestamp": 1633670596211,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1185,6 +1242,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1633704786639,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1202,6 +1260,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1633755513270,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1219,6 +1278,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1633847583796,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1241,6 +1301,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1633884987134,
+      "vetoed": false,
       "week": 5
     },
     {
@@ -1258,6 +1319,7 @@
         "david-collier"
       ],
       "timestamp": 1634069333559,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1280,6 +1342,7 @@
         "david-collier"
       ],
       "timestamp": 1634110562737,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1302,6 +1365,7 @@
         "tyler-jung"
       ],
       "timestamp": 1634110562737,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1324,6 +1388,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1634110562737,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1346,6 +1411,7 @@
         "brendon-ng"
       ],
       "timestamp": 1634110562737,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1363,6 +1429,7 @@
         "david-collier"
       ],
       "timestamp": 1634110562737,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1385,6 +1452,7 @@
         "brendon-ng"
       ],
       "timestamp": 1634110562737,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1407,6 +1475,7 @@
         "brendon-ng"
       ],
       "timestamp": 1634110562737,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1429,6 +1498,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1634190502580,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1451,6 +1521,7 @@
         "tyler-jung"
       ],
       "timestamp": 1634200760911,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1468,6 +1539,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1634214388573,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1485,6 +1557,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1634214524837,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1507,6 +1580,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1634214621028,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1529,6 +1603,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1634214726433,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1551,6 +1626,7 @@
         "safvet-besen"
       ],
       "timestamp": 1634229078958,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1573,6 +1649,7 @@
         "safvet-besen"
       ],
       "timestamp": 1634229105818,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1595,6 +1672,7 @@
         "david-collier"
       ],
       "timestamp": 1634241820316,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1617,6 +1695,7 @@
         "spencer-kim"
       ],
       "timestamp": 1634255597160,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1650,6 +1729,7 @@
         "spencer-kim"
       ],
       "timestamp": 1634350327183,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1672,6 +1752,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1634371148700,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1694,6 +1775,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1634406239553,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1716,6 +1798,7 @@
         "jake-gibbons"
       ],
       "timestamp": 1634435860187,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1733,6 +1816,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1634447430412,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1750,6 +1834,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1634447441787,
+      "vetoed": false,
       "week": 6
     },
     {
@@ -1767,6 +1852,7 @@
         "david-collier"
       ],
       "timestamp": 1634688115936,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1789,6 +1875,7 @@
         "logan-dunn"
       ],
       "timestamp": 1634716164235,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1811,6 +1898,7 @@
         "david-collier"
       ],
       "timestamp": 1634716164235,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1833,6 +1921,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1634716164235,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1855,6 +1944,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1634716164235,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1877,6 +1967,7 @@
         "logan-dunn"
       ],
       "timestamp": 1634716164235,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1899,6 +1990,7 @@
         "tyler-jung"
       ],
       "timestamp": 1634716164235,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1921,6 +2013,7 @@
         "brendon-ng"
       ],
       "timestamp": 1634716164235,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1943,6 +2036,7 @@
         "brendon-ng"
       ],
       "timestamp": 1634716164235,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1960,6 +2054,7 @@
         "jake-gibbons"
       ],
       "timestamp": 1634721735176,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -1982,6 +2077,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1634828541417,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -2004,6 +2100,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1634828873297,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -2026,6 +2123,7 @@
         "safvet-besen"
       ],
       "timestamp": 1634931846586,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -2048,6 +2146,7 @@
         "david-collier"
       ],
       "timestamp": 1635011776937,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -2070,6 +2169,7 @@
         "spencer-kim"
       ],
       "timestamp": 1635046136899,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -2092,6 +2192,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1635062091110,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -2114,6 +2215,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1635062214284,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -2131,6 +2233,7 @@
         "logan-dunn"
       ],
       "timestamp": 1635086219480,
+      "vetoed": false,
       "week": 7
     },
     {
@@ -2164,6 +2267,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1635231901216,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2181,6 +2285,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635264370071,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2198,6 +2303,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635264377112,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2220,6 +2326,7 @@
         "david-collier"
       ],
       "timestamp": 1635321794503,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2242,6 +2349,7 @@
         "david-collier"
       ],
       "timestamp": 1635321794503,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2264,6 +2372,7 @@
         "brendon-ng"
       ],
       "timestamp": 1635321794503,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2281,6 +2390,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635321794503,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2298,6 +2408,7 @@
         "david-collier"
       ],
       "timestamp": 1635321794503,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2315,6 +2426,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635321794503,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2337,6 +2449,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1635342980249,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2359,6 +2472,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1635343046797,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2381,6 +2495,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1635343187376,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2403,6 +2518,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635351649123,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2425,6 +2541,7 @@
         "jake-gibbons"
       ],
       "timestamp": 1635447848481,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2447,6 +2564,7 @@
         "brendon-ng"
       ],
       "timestamp": 1635533503671,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2469,6 +2587,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1635659852834,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2486,6 +2605,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635694900151,
+      "vetoed": false,
       "week": 8
     },
     {
@@ -2503,6 +2623,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635836694349,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2520,6 +2641,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635836700073,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2537,6 +2659,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635836704965,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2559,6 +2682,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1635929014941,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2576,6 +2700,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635929014941,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2598,6 +2723,7 @@
         "jake-gibbons"
       ],
       "timestamp": 1635929014941,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2620,6 +2746,7 @@
         "david-collier"
       ],
       "timestamp": 1635929014941,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2642,6 +2769,7 @@
         "brendon-ng"
       ],
       "timestamp": 1635929014941,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2659,6 +2787,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635929014941,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2676,6 +2805,7 @@
         "tyler-jung"
       ],
       "timestamp": 1635929014941,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2698,6 +2828,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1635929014941,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2720,6 +2851,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1635952727203,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2742,6 +2874,7 @@
         "david-collier"
       ],
       "timestamp": 1635957103752,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2764,6 +2897,7 @@
         "safvet-besen"
       ],
       "timestamp": 1636012076629,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2786,6 +2920,7 @@
         "brendon-ng"
       ],
       "timestamp": 1636012076629,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2808,6 +2943,7 @@
         "spencer-kim"
       ],
       "timestamp": 1636069281114,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2830,6 +2966,7 @@
         "brendon-ng"
       ],
       "timestamp": 1636091495553,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2852,6 +2989,7 @@
         "tyler-jung"
       ],
       "timestamp": 1636134039057,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2869,6 +3007,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1636257249896,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2891,6 +3030,7 @@
         "david-collier"
       ],
       "timestamp": 1636305669751,
+      "vetoed": false,
       "week": 9
     },
     {
@@ -2908,6 +3048,7 @@
         "tyler-jung"
       ],
       "timestamp": 1636477938907,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -2930,6 +3071,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1636538061059,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -2952,6 +3094,7 @@
         "david-collier"
       ],
       "timestamp": 1636538061059,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -2974,6 +3117,7 @@
         "tyler-jung"
       ],
       "timestamp": 1636538061059,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -2996,6 +3140,7 @@
         "brendon-ng"
       ],
       "timestamp": 1636538061059,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3018,6 +3163,7 @@
         "brendon-ng"
       ],
       "timestamp": 1636538061059,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3040,6 +3186,7 @@
         "tyler-jung"
       ],
       "timestamp": 1636538061059,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3062,6 +3209,7 @@
         "jake-gibbons"
       ],
       "timestamp": 1636652674814,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3079,6 +3227,7 @@
         "tyler-jung"
       ],
       "timestamp": 1636654363317,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3101,6 +3250,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1636744287351,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3123,6 +3273,7 @@
         "brendon-ng"
       ],
       "timestamp": 1636825665737,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3145,6 +3296,7 @@
         "david-collier"
       ],
       "timestamp": 1636877873587,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3162,6 +3314,7 @@
         "spencer-kim"
       ],
       "timestamp": 1636910157352,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3179,6 +3332,7 @@
         "spencer-kim"
       ],
       "timestamp": 1636910206281,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3196,6 +3350,7 @@
         "spencer-kim"
       ],
       "timestamp": 1636910371505,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3213,6 +3368,7 @@
         "spencer-kim"
       ],
       "timestamp": 1636910446615,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3235,6 +3391,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1636911510960,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3257,6 +3414,7 @@
         "david-collier"
       ],
       "timestamp": 1636947938011,
+      "vetoed": false,
       "week": 10
     },
     {
@@ -3279,6 +3437,7 @@
         "brendon-ng"
       ],
       "timestamp": 1637139428859,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3301,6 +3460,7 @@
         "david-collier"
       ],
       "timestamp": 1637139428859,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3323,6 +3483,7 @@
         "brendon-ng"
       ],
       "timestamp": 1637139428859,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3345,6 +3506,7 @@
         "tyler-jung"
       ],
       "timestamp": 1637155291837,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3367,6 +3529,7 @@
         "safvet-besen"
       ],
       "timestamp": 1637264317470,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3389,6 +3552,7 @@
         "safvet-besen"
       ],
       "timestamp": 1637264330379,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3411,6 +3575,7 @@
         "spencer-kim"
       ],
       "timestamp": 1637281113925,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3433,6 +3598,7 @@
         "spencer-kim"
       ],
       "timestamp": 1637283494970,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3455,6 +3621,7 @@
         "david-collier"
       ],
       "timestamp": 1637354192407,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3472,6 +3639,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1637360446678,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3494,6 +3662,7 @@
         "brendon-ng"
       ],
       "timestamp": 1637373667531,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3516,6 +3685,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1637383501167,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3533,6 +3703,7 @@
         "tyler-jung"
       ],
       "timestamp": 1637515122568,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3550,6 +3721,7 @@
         "tyler-jung"
       ],
       "timestamp": 1637515154885,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3572,6 +3744,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1637525119550,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3594,6 +3767,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1637525207964,
+      "vetoed": false,
       "week": 11
     },
     {
@@ -3611,6 +3785,7 @@
         "tyler-jung"
       ],
       "timestamp": 1637687177702,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3628,6 +3803,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1637724369448,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3650,6 +3826,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1637741335667,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3672,6 +3849,7 @@
         "david-collier"
       ],
       "timestamp": 1637741335667,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3694,6 +3872,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1637770320987,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3716,6 +3895,7 @@
         "david-collier"
       ],
       "timestamp": 1637777217435,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3738,6 +3918,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1637811354636,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3760,6 +3941,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1637856532243,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3782,6 +3964,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1637856576204,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3804,6 +3987,7 @@
         "spencer-kim"
       ],
       "timestamp": 1637859606044,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3826,6 +4010,7 @@
         "david-collier"
       ],
       "timestamp": 1637889479239,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3848,6 +4033,7 @@
         "tyler-jung"
       ],
       "timestamp": 1637905776621,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3865,6 +4051,7 @@
         "tyler-jung"
       ],
       "timestamp": 1637905904675,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3887,6 +4074,7 @@
         "reagan-schmidt"
       ],
       "timestamp": 1637914844883,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3909,6 +4097,7 @@
         "jake-gibbons"
       ],
       "timestamp": 1638083711559,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3926,6 +4115,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1638122254098,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3943,6 +4133,7 @@
         "michaela-frederick"
       ],
       "timestamp": 1638122269623,
+      "vetoed": false,
       "week": 12
     },
     {
@@ -3960,6 +4151,7 @@
         "tyler-jung"
       ],
       "timestamp": 1638259309642,
+      "vetoed": false,
       "week": 13
     },
     {
@@ -3982,6 +4174,7 @@
         "tyler-jung"
       ],
       "timestamp": 1638347622426,
+      "vetoed": false,
       "week": 13
     },
     {
@@ -4004,6 +4197,7 @@
         "brendon-ng"
       ],
       "timestamp": 1638347622426,
+      "vetoed": false,
       "week": 13
     },
     {
@@ -4026,6 +4220,7 @@
         "david-collier"
       ],
       "timestamp": 1638347622426,
+      "vetoed": false,
       "week": 13
     },
     {
@@ -4048,6 +4243,7 @@
         "spencer-kim"
       ],
       "timestamp": 1638471117893,
+      "vetoed": false,
       "week": 13
     },
     {
@@ -4070,6 +4266,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1638501454192,
+      "vetoed": false,
       "week": 13
     },
     {
@@ -4087,6 +4284,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1638735743698,
+      "vetoed": false,
       "week": 13
     },
     {
@@ -4109,6 +4307,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1638735829483,
+      "vetoed": false,
       "week": 13
     },
     {
@@ -4126,6 +4325,7 @@
         "tyler-jung"
       ],
       "timestamp": 1638865169778,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4148,6 +4348,7 @@
         "david-collier"
       ],
       "timestamp": 1638953719361,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4170,6 +4371,7 @@
         "david-collier"
       ],
       "timestamp": 1638953719361,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4192,6 +4394,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1638953719361,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4209,6 +4412,7 @@
         "tyler-jung"
       ],
       "timestamp": 1638953719361,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4231,6 +4435,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1638953719361,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4253,6 +4458,7 @@
         "tyler-jung"
       ],
       "timestamp": 1638988780650,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4270,6 +4476,7 @@
         "tyler-jung"
       ],
       "timestamp": 1639261494632,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4292,6 +4499,7 @@
         "tyler-jung"
       ],
       "timestamp": 1639261538752,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4309,6 +4517,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1639331934818,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4331,6 +4540,7 @@
         "jaymie-lew"
       ],
       "timestamp": 1639339150503,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4353,6 +4563,7 @@
         "tyler-jung"
       ],
       "timestamp": 1639344004948,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4375,6 +4586,7 @@
         "tyler-jung"
       ],
       "timestamp": 1639358379555,
+      "vetoed": false,
       "week": 14
     },
     {
@@ -4392,6 +4604,7 @@
         "tyler-jung"
       ],
       "timestamp": 1639504117970,
+      "vetoed": false,
       "week": 15
     },
     {
@@ -4409,6 +4622,7 @@
         "tyler-jung"
       ],
       "timestamp": 1639504413948,
+      "vetoed": false,
       "week": 15
     },
     {
@@ -4431,6 +4645,7 @@
         "brendon-ng"
       ],
       "timestamp": 1639556947789,
+      "vetoed": false,
       "week": 15
     },
     {
@@ -4448,6 +4663,7 @@
         "tyler-jung"
       ],
       "timestamp": 1639556947789,
+      "vetoed": false,
       "week": 15
     },
     {
@@ -4470,6 +4686,7 @@
         "tyler-jung"
       ],
       "timestamp": 1639557779200,
+      "vetoed": false,
       "week": 15
     },
     {
@@ -4492,6 +4709,7 @@
         "david-collier"
       ],
       "timestamp": 1639600492837,
+      "vetoed": false,
       "week": 15
     },
     {
@@ -4514,6 +4732,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1639809902091,
+      "vetoed": false,
       "week": 15
     },
     {
@@ -4531,6 +4750,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640163705471,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4548,6 +4768,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640163725806,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4570,6 +4791,7 @@
         "brendon-ng"
       ],
       "timestamp": 1640252619581,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4587,6 +4809,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640252619581,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4609,6 +4832,7 @@
         "brendon-ng"
       ],
       "timestamp": 1640252619581,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4626,6 +4850,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640252619581,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4648,6 +4873,7 @@
         "safvet-besen"
       ],
       "timestamp": 1640252619581,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4665,6 +4891,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640252619581,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4687,6 +4914,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640252619581,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4709,6 +4937,7 @@
         "brendon-ng"
       ],
       "timestamp": 1640268617300,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4731,6 +4960,7 @@
         "olivia-nelli"
       ],
       "timestamp": 1640276797118,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4748,6 +4978,7 @@
         "david-collier"
       ],
       "timestamp": 1640281032448,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4770,6 +5001,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640289274507,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4792,6 +5024,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640289884387,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4814,6 +5047,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1640331613018,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4836,6 +5070,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640460266095,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4858,6 +5093,7 @@
         "cassidy-pensa"
       ],
       "timestamp": 1640461325314,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4875,6 +5111,7 @@
         "brendon-ng"
       ],
       "timestamp": 1640482847206,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4892,6 +5129,7 @@
         "brendon-ng"
       ],
       "timestamp": 1640482853686,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4914,6 +5152,7 @@
         "safvet-besen"
       ],
       "timestamp": 1640532840793,
+      "vetoed": false,
       "week": 16
     },
     {
@@ -4931,6 +5170,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640679739738,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -4948,6 +5188,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640679745782,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -4965,6 +5206,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640679765296,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -4987,6 +5229,7 @@
         "brendon-ng"
       ],
       "timestamp": 1640767519883,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5004,6 +5247,7 @@
         "brendon-ng"
       ],
       "timestamp": 1640767519883,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5021,6 +5265,7 @@
         "brendon-ng"
       ],
       "timestamp": 1640767519883,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5038,6 +5283,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640767519883,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5055,6 +5301,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640768474320,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5072,6 +5319,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640768613708,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5094,6 +5342,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640801164219,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5116,6 +5365,7 @@
         "brendon-ng"
       ],
       "timestamp": 1640805395444,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5133,6 +5383,7 @@
         "tyler-jung"
       ],
       "timestamp": 1640970919201,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5150,6 +5401,7 @@
         "tyler-jung"
       ],
       "timestamp": 1641144405243,
+      "vetoed": false,
       "week": 17
     },
     {
@@ -5167,6 +5419,7 @@
         "tyler-jung"
       ],
       "timestamp": 1641319850996,
+      "vetoed": false,
       "week": 18
     },
     {
@@ -5189,6 +5442,7 @@
         "brendon-ng"
       ],
       "timestamp": 1641372788606,
+      "vetoed": false,
       "week": 18
     },
     {
@@ -5211,6 +5465,7 @@
         "brendon-ng"
       ],
       "timestamp": 1641372788606,
+      "vetoed": false,
       "week": 18
     }
   ]

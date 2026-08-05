@@ -23,6 +23,7 @@
     "season": 2019,
     "source": "espn",
     "timestamp": 1569308641373,
+    "vetoed": false,
     "week": 4
   },
   {
@@ -73,6 +74,7 @@
     "season": 2020,
     "source": "espn",
     "timestamp": 1600561491733,
+    "vetoed": false,
     "week": 2
   },
   {
@@ -111,6 +113,7 @@
     "season": 2020,
     "source": "espn",
     "timestamp": 1605243724090,
+    "vetoed": false,
     "week": 10
   },
   {
@@ -137,6 +140,7 @@
     "season": 2020,
     "source": "espn",
     "timestamp": 1605335884550,
+    "vetoed": false,
     "week": 10
   },
   {
@@ -175,6 +179,7 @@
     "season": 2021,
     "source": "espn",
     "timestamp": 1634350327183,
+    "vetoed": false,
     "week": 6
   },
   {
@@ -213,6 +218,7 @@
     "season": 2021,
     "source": "espn",
     "timestamp": 1635231901216,
+    "vetoed": false,
     "week": 8
   },
   {
@@ -239,6 +245,7 @@
     "season": 2022,
     "source": "espn",
     "timestamp": 1662674762510,
+    "vetoed": false,
     "week": 1
   },
   {
@@ -273,6 +280,7 @@
     "season": 2024,
     "source": "sleeper",
     "timestamp": 1724912278244,
+    "vetoed": false,
     "week": 1
   },
   {
@@ -311,6 +319,7 @@
     "season": 2024,
     "source": "sleeper",
     "timestamp": 1726785951193,
+    "vetoed": false,
     "week": 3
   },
   {
@@ -369,6 +378,7 @@
     "season": 2024,
     "source": "sleeper",
     "timestamp": 1726976915801,
+    "vetoed": false,
     "week": 3
   },
   {
@@ -439,6 +449,7 @@
     "season": 2024,
     "source": "sleeper",
     "timestamp": 1727277362190,
+    "vetoed": false,
     "week": 3
   },
   {
@@ -465,6 +476,7 @@
     "season": 2024,
     "source": "sleeper",
     "timestamp": 1727936373573,
+    "vetoed": false,
     "week": 4
   },
   {
@@ -491,6 +503,7 @@
     "season": 2024,
     "source": "sleeper",
     "timestamp": 1730441965119,
+    "vetoed": false,
     "week": 9
   },
   {
@@ -523,6 +536,7 @@
     "season": 2024,
     "source": "sleeper",
     "timestamp": 1730877552264,
+    "vetoed": false,
     "week": 9
   },
   {
@@ -555,6 +569,7 @@
     "season": 2024,
     "source": "sleeper",
     "timestamp": 1731050353401,
+    "vetoed": false,
     "week": 10
   },
   {
@@ -636,6 +651,7 @@
     "season": 2025,
     "source": "sleeper",
     "timestamp": 1755151912583,
+    "vetoed": false,
     "week": 1
   },
   {
@@ -676,6 +692,7 @@
     "season": 2025,
     "source": "sleeper",
     "timestamp": 1755723609580,
+    "vetoed": false,
     "week": 1
   },
   {
@@ -716,6 +733,7 @@
     "season": 2025,
     "source": "sleeper",
     "timestamp": 1755723615211,
+    "vetoed": false,
     "week": 1
   },
   {
@@ -762,6 +780,7 @@
     "season": 2025,
     "source": "sleeper",
     "timestamp": 1755906317798,
+    "vetoed": false,
     "week": 1
   },
   {
@@ -856,6 +875,7 @@
     "season": 2025,
     "source": "sleeper",
     "timestamp": 1756103070821,
+    "vetoed": false,
     "week": 1
   },
   {
@@ -902,6 +922,7 @@
     "season": 2025,
     "source": "sleeper",
     "timestamp": 1758583826927,
+    "vetoed": false,
     "week": 3
   },
   {
@@ -934,6 +955,7 @@
     "season": 2025,
     "source": "sleeper",
     "timestamp": 1758824397508,
+    "vetoed": false,
     "week": 3
   },
   {
@@ -966,6 +988,7 @@
     "season": 2025,
     "source": "sleeper",
     "timestamp": 1761847885836,
+    "vetoed": false,
     "week": 9
   },
   {
@@ -1012,6 +1035,7 @@
     "season": 2025,
     "source": "sleeper",
     "timestamp": 1764054763164,
+    "vetoed": false,
     "week": 12
   }
 ]

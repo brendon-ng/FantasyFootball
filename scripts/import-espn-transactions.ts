@@ -71,6 +71,8 @@ export interface ManualTxItem {
 
 export interface ManualTx {
   id: string;
+  /** True when ESPN reports anything other than EXECUTED. */
+  vetoed?: boolean;
   /** "add" | "drop" | "waiver" | "trade" | "draft" */
   kind: string;
   week: number;
@@ -128,9 +130,14 @@ async function main(): Promise<void> {
       const rejected = new Map<string, number>();
       const out: ManualTx[] = [];
       for (const t of raw.values()) {
-        if (t.status !== "EXECUTED") {
+        // A NON-EXECUTED TRADE IS STILL HISTORY, so it is kept and flagged rather
+        // than dropped: the league agreed it and then threw it out, which belongs
+        // in a list of trades. Anything else that failed is noise — a lost waiver
+        // claim is not an event, it is an attempt.
+        const vetoed = t.status !== "EXECUTED";
+        if (vetoed) {
           rejected.set(t.status, (rejected.get(t.status) ?? 0) + 1);
-          continue;
+          if (t.type !== "TRADE_ACCEPT") continue;
         }
         // Draft picks are already recovered by `import:espn:drafts`, in a shape
         // that knows about slots. Repeating them here would double-count.
@@ -157,6 +164,7 @@ async function main(): Promise<void> {
 
         out.push({
           id: t.id,
+          vetoed,
           kind: KIND[t.type] ?? t.type.toLowerCase(),
           week: t.scoringPeriodId,
           timestamp: t.proposedDate,
@@ -185,8 +193,9 @@ async function main(): Promise<void> {
       );
       if (rejected.size) {
         log.warn(
-          `${slug} ${season}: skipped non-executed — ` +
-            [...rejected].map(([s, n]) => `${s} ${n}`).join(", "),
+          `${slug} ${season}: non-executed — ` +
+            [...rejected].map(([s, n]) => `${s} ${n}`).join(", ") +
+            " (trades kept and flagged, everything else dropped)",
         );
       }
     }

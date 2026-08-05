@@ -353,6 +353,18 @@ export interface Trade {
   ownerSlugs: string[];
   legs: TradeLeg[];
   source: "sleeper" | "espn";
+  /**
+   * Whether the deal actually took effect.
+   *
+   * A vetoed trade belongs in a LIST of trades — the league agreed it and then
+   * threw it out, which is league history — but not in a player's timeline, where
+   * it would assert a move that never happened.
+   *
+   * Sleeper reports any non-completion as `failed`, so a withdrawn offer and a
+   * vetoed one look identical; there are none on record to tell apart yet. ESPN
+   * reports anything other than `EXECUTED`.
+   */
+  vetoed: boolean;
 }
 
 export interface DraftPickRecord {
