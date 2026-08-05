@@ -206,8 +206,11 @@ function RestOfSeason({
                 </div>
                 <div className="flex items-center gap-1 border-b border-ink-700 pb-1 text-[9px] font-bold uppercase tracking-wide text-chalk-600">
                   <span className="min-w-[4.5rem] flex-1">Player</span>
+                  {/* `px-1` to match the padding the body cells carry on their
+                      inner span, or every heading sits a quarter-rem right of the
+                      column it labels. */}
                   {COLUMNS.map((c) => (
-                    <span key={c.label} className={cell} title={c.hint}>
+                    <span key={c.label} className={`${cell} px-1`} title={c.hint}>
                       {c.label}
                     </span>
                   ))}
