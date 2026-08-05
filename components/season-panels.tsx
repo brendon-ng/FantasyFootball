@@ -372,14 +372,19 @@ function MatchupStrip({
         >
           {[m.a, m.b].map((side, i) => {
             const other = i === 0 ? m.b : m.a;
-            const winning = started && side.points > other.points;
+            // LEADING IS NOT WINNING. Bold marks who is ahead; the accent is
+            // reserved for a result, so it waits until the week is scored — a
+            // green number at 2pm on Sunday asserts an outcome that has not
+            // happened, and half these leads will not survive the late games.
+            const leading = started && side.points > other.points;
+            const won = scored && side.points > other.points;
             const rec = recordOf(side.ownerSlug);
             return (
               <div key={side.ownerSlug} className="flex items-baseline gap-1.5">
                 <span
                   data-owner={side.ownerSlug}
                   className={`min-w-0 truncate text-sm ${
-                    winning ? "font-semibold text-chalk-100" : "text-chalk-400"
+                    leading ? "font-semibold text-chalk-100" : "text-chalk-400"
                   }`}
                 >
                   {credited(side.ownerSlug)}
@@ -392,7 +397,13 @@ function MatchupStrip({
                 {started ? (
                   <span className="ml-auto flex shrink-0 items-center gap-1">
                     <span
-                      className={`tabular text-sm ${winning ? "font-semibold text-accent" : "text-chalk-500"}`}
+                      className={`tabular text-sm ${
+                        won
+                          ? "font-semibold text-accent"
+                          : leading
+                            ? "font-semibold text-chalk-200"
+                            : "text-chalk-500"
+                      }`}
                     >
                       {fmt.pts1(side.points)}
                     </span>
