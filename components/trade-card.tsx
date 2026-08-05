@@ -83,6 +83,15 @@ export function TradeCard({
             {trade.ownerSlugs.length}-team
           </span>
         ) : null}
+        {!onOpen ? (
+          // Only in the modal, where "Details" has already been used to get here.
+          <Link
+            href={`/trades/${trade.id}/`}
+            className="ml-auto shrink-0 text-[11px] text-chalk-500 transition-colors hover:text-accent"
+          >
+            Trade tree <span aria-hidden>→</span>
+          </Link>
+        ) : null}
         {onOpen ? (
           <button
             type="button"

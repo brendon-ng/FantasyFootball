@@ -267,6 +267,16 @@ const byeFilter = once(() => {
   };
 });
 
+/**
+ * Whether a player's NFL team was idle that week, for callers outside this file.
+ *
+ * Exported so the trade tree discounts a bye the same way every other per-game
+ * figure does. Duplicating the rule would be the only alternative, and two copies
+ * of "a bye is not a game he played badly" is exactly how they drift.
+ */
+export const onBye = (season: number, week: number, playerId: string, points: number): boolean =>
+  byeFilter()(season, week, playerId, points);
+
 export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
   const onBye = byeFilter();
   const acc = new Map<string, PlayerUsage>();
