@@ -155,6 +155,7 @@ export default async function TradePage({ params }: { params: Promise<{ id: stri
           returns={getTradeReturns()[trade.id]}
           handoffs={getPickHandoffs()}
           showSeason={false}
+          showTreeLink={false}
         />
       </Panel>
 

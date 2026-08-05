@@ -6,6 +6,7 @@ import { TradeGraphView } from "@/components/trade-graph-view";
 import { TradeModal } from "@/components/trade-modal";
 import { TradeTreeView } from "@/components/trade-tree-view";
 import type { TradeTree } from "@/lib/trade-tree";
+import { useUrlState } from "@/lib/url-state";
 import type { DraftPickRecord, PlayerMeta, Trade, TradeReturn } from "@/lib/types";
 
 /**
@@ -20,6 +21,8 @@ import type { DraftPickRecord, PlayerMeta, Trade, TradeReturn } from "@/lib/type
  * Also owns the cascade/graph toggle, since both views share the modal and the
  * same jump handler.
  */
+const VIEWS = ["cascade", "graph"] as const;
+
 export function TradeTreeSection({
   trade,
   tree,
@@ -45,8 +48,11 @@ export function TradeTreeSection({
    * horizontal scrolling, and answers "what came from what" perfectly well. The
    * graph earns its place only when a deal was mixed, where seeing the outside
    * assets arrive beats reading about them.
+   *
+   * IN THE URL so the view can be linked and survives a reload. Not sticky —
+   * see `useUrlState`.
    */
-  const [view, setView] = useState<"cascade" | "graph">("cascade");
+  const [view, setView] = useUrlState("view", VIEWS, "cascade");
   // Nothing branches: a graph would be one box and a row of assets.
   const worthGraphing = tree.depth > 0;
 
@@ -66,7 +72,7 @@ export function TradeTreeSection({
       ) : null}
       {worthGraphing ? (
         <div className="mb-3 flex items-center gap-1 text-[11px]">
-          {(["cascade", "graph"] as const).map((v) => (
+          {VIEWS.map((v) => (
             <button
               key={v}
               type="button"

@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
-
 import { Tip } from "@/components/tooltip";
 import { fmt } from "@/components/ui";
 import type { PlayerMeta, TradeReturn, TradeSeason, TradeStat } from "@/lib/types";
+import { useUrlFlag } from "@/lib/url-state";
 
 /**
  * How the incoming players actually did, season by season.
@@ -35,8 +34,12 @@ export function TradeReturns({
    * one first-rounder swamps the players who were actually named in the deal, and
    * the question people usually bring is player-for-player. Opt in when the picks
    * are the point.
+   *
+   * IN THE URL so a link can arrive with the picks already folded in — the state
+   * worth sending someone is usually the one you had to switch on. Not sticky, so
+   * it does not follow a reader onto the next trade.
    */
-  const [withPicks, setWithPicks] = useState(false);
+  const [withPicks, setWithPicks] = useUrlFlag("picks");
 
   const visible = returns.seasons.filter((s) =>
     Object.values(s.byOwner).some(

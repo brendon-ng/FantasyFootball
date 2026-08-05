@@ -28,6 +28,7 @@ export function TradeCard({
   returns,
   handoffs = {},
   showSeason = true,
+  showTreeLink = true,
   onOpen,
   onOpenTrade,
 }: {
@@ -41,6 +42,12 @@ export function TradeCard({
   /** `season|round|originalOwner|from` -> the trade that moved that pick on. */
   handoffs?: Record<string, string>;
   showSeason?: boolean;
+  /**
+   * Off on the trade's own page, where the link would point at the page being
+   * read. Separate from `showSeason`, which is off there for its own reason —
+   * one flag doing both jobs breaks the moment either is wanted alone.
+   */
+  showTreeLink?: boolean;
   /** Set in a list, where the detail lives behind a click rather than inline. */
   onOpen?: () => void;
   /** Jump to another trade — the one that moved a pick on, or moved a player. */
@@ -83,7 +90,7 @@ export function TradeCard({
             {trade.ownerSlugs.length}-team
           </span>
         ) : null}
-        {!onOpen ? (
+        {!onOpen && showTreeLink ? (
           // Only in the modal, where "Details" has already been used to get here.
           <Link
             href={`/trades/${trade.id}/`}
