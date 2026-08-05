@@ -52,18 +52,40 @@ const write = (key: string, value: unknown): void => {
 
 /** Notifies mounted BackLinks that the trail moved. */
 const listeners = new Set<() => void>();
-const emit = () => listeners.forEach((fn) => fn());
+/** Bumped on every write, so the snapshot cache below knows to recompute. */
+let version = 0;
+const emit = () => {
+  version += 1;
+  listeners.forEach((fn) => fn());
+};
 const subscribe = (fn: () => void) => {
   listeners.add(fn);
   return () => listeners.delete(fn);
 };
 
-/** The entry before the one being viewed, or null at the start of a session. */
+/**
+ * The entry before the one being viewed, or null at the start of a session.
+ *
+ * CACHED, and it has to be: `useSyncExternalStore` compares snapshots by
+ * IDENTITY, and this parses JSON out of session storage. Returning a freshly
+ * parsed object each call means the snapshot never settles and React loops. The
+ * key covers both what could change it — a write to the trail, and moving to a
+ * different history entry.
+ */
+let snapshot: { key: string; value: Entry | null } = { key: "", value: null };
+
 function previous(): Entry | null {
   if (typeof window === "undefined") return null;
   const idx = (window.history.state as { ffIdx?: number } | null)?.ffIdx;
-  if (typeof idx !== "number" || idx <= 0) return null;
-  return read<Record<string, Entry>>(TRAIL, {})[String(idx - 1)] ?? null;
+  const key = `${version}:${idx ?? "-"}`;
+  if (snapshot.key === key) return snapshot.value;
+
+  const value =
+    typeof idx === "number" && idx > 0
+      ? (read<Record<string, Entry>>(TRAIL, {})[String(idx - 1)] ?? null)
+      : null;
+  snapshot = { key, value };
+  return value;
 }
 
 const noneOnServer = () => null;
