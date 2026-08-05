@@ -305,6 +305,16 @@ function Row({
         {/* One glyph, because the name column is narrow and this is context
             rather than a finding. A modest return reads differently once you know
             he was cut in week 4. */}
+        {stat.kept ? (
+          // The ROUND is on the glyph, not hidden in the tooltip: "K12" says what
+          // the contract cost, which is the whole point of noting the keep.
+          <Tip
+            text={`Kept in ${stat.kept.season} at round ${stat.kept.round}`}
+            className="shrink-0 text-[9px] font-bold text-accent"
+          >
+            K{stat.kept.round}
+          </Tip>
+        ) : null}
         {stat.exit ? (
           // `Tip`, not a `title`: native tooltips take a second to appear and do
           // nothing at all on touch, and a glyph nobody can decode is worse than

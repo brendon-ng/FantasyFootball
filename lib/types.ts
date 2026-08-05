@@ -416,6 +416,14 @@ export interface TradeStat {
    * held all year and another if he was cut in week 4.
    */
   exit?: { kind: "dropped" | "traded"; week: number };
+  /**
+   * Set when the acquiring owner kept the player the FOLLOWING season.
+   *
+   * The other end of the same story `exit` tells: a trade whose return looks thin
+   * within the season may have been made for the contract, and a keeper round is
+   * what that was worth.
+   */
+  kept?: { season: number; round: number };
 }
 
 export interface TradeReturn {

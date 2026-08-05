@@ -342,6 +342,15 @@ export const getTradeReturns = once((): Record<string, Record<string, TradeRetur
     byWeek.set(key, at);
   }
 
+  // Keeper picks by season and owner, so the loop below is a lookup rather than a
+  // scan of every draft pick per trade.
+  const keeperPicks = new Map<string, DraftPickRecord[]>();
+  for (const p of getDrafts()) {
+    if (!p.isKeeper || !p.ownerSlug) continue;
+    const key = `${p.season}|${p.ownerSlug}`;
+    keeperPicks.set(key, [...(keeperPicks.get(key) ?? []), p]);
+  }
+
   const out: Record<string, Record<string, TradeReturn>> = {};
   for (const trade of getTrades()) {
     const perOwner: Record<string, TradeReturn> = {};
@@ -388,6 +397,15 @@ export const getTradeReturns = once((): Record<string, Record<string, TradeRetur
             byPlayer[playerId].exit = { kind: "traded", week: e.week };
             break;
           }
+        }
+      }
+
+      // Kept the next season by the same owner. Only the NEXT one: a keep two
+      // years later is its own decision, not this trade still paying out. There
+      // are none of those on record anyway.
+      for (const pick of keeperPicks.get(`${trade.season + 1}|${owner}`) ?? []) {
+        if (byPlayer[pick.playerId]) {
+          byPlayer[pick.playerId].kept = { season: pick.season, round: pick.round };
         }
       }
 
