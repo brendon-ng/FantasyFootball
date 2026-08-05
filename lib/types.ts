@@ -94,8 +94,9 @@ export interface SeasonSummary {
   finalizedThroughWeek: number;
   /**
    * Starting slots in order, e.g. QB/RB/RB/WR/WR/TE/FLEX/FLEX/K/DEF. A matchup's
-   * `starters` array is positionally aligned to this. Empty for imported ESPN
-   * seasons, which kept no lineups.
+   * `starters` array is positionally aligned to this. Imported seasons take
+   * theirs from the recovered lineups, so they read QB/RB/RB/WR/WR/TE/FLEX/D_ST/K
+   * rather than falling back to an unlabelled column.
    */
   rosterPositions: string[];
   standings: StandingsRow[];

@@ -354,7 +354,7 @@
     }
   ],
   "hasDrafts": false,
-  "hasRosters": false,
+  "hasRosters": true,
   "hasWeeklyMatchups": true,
   "imported": true,
   "matchups": [

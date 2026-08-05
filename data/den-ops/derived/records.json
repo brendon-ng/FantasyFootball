@@ -973,12 +973,28 @@
       "week": 7
     },
     {
+      "ownerSlug": "cassidy-pensa",
+      "playerId": "7564",
+      "points": 52.2,
+      "season": 2023,
+      "started": true,
+      "week": 5
+    },
+    {
       "ownerSlug": "jaymie-lew",
       "playerId": "4984",
       "points": 51.88,
       "season": 2024,
       "started": true,
       "week": 14
+    },
+    {
+      "ownerSlug": "olivia-nelli",
+      "playerId": "2309",
+      "points": 51.5,
+      "season": 2023,
+      "started": true,
+      "week": 16
     },
     {
       "ownerSlug": "tyler-jung",
@@ -997,12 +1013,28 @@
       "week": 5
     },
     {
+      "ownerSlug": "david-collier",
+      "playerId": "4983",
+      "points": 49,
+      "season": 2023,
+      "started": true,
+      "week": 5
+    },
+    {
       "ownerSlug": "tyler-jung",
       "playerId": "2216",
       "points": 48.7,
       "season": 2022,
       "started": true,
       "week": 17
+    },
+    {
+      "ownerSlug": "spencer-kim",
+      "playerId": "4034",
+      "points": 48.7,
+      "season": 2023,
+      "started": true,
+      "week": 4
     },
     {
       "ownerSlug": "tyler-jung",
@@ -1075,38 +1107,6 @@
       "season": 2025,
       "started": true,
       "week": 15
-    },
-    {
-      "ownerSlug": "jaymie-lew",
-      "playerId": "7564",
-      "points": 45.1,
-      "season": 2024,
-      "started": true,
-      "week": 14
-    },
-    {
-      "ownerSlug": "logan-dunn",
-      "playerId": "2216",
-      "points": 45,
-      "season": 2019,
-      "started": true,
-      "week": 3
-    },
-    {
-      "ownerSlug": "jaymie-lew",
-      "playerId": "2505",
-      "points": 45,
-      "season": 2020,
-      "started": true,
-      "week": 13
-    },
-    {
-      "ownerSlug": "david-collier",
-      "playerId": "2449",
-      "points": 44.8,
-      "season": 2022,
-      "started": true,
-      "week": 2
     }
   ],
   "weeklyHigh": [

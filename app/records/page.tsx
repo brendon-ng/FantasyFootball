@@ -78,7 +78,6 @@ export default function RecordsPage() {
                   coverage.missing.length === 1 ? "that season is" : "those seasons are"
                 } represented but under-counted. `
               : ""}
-            Player records are Sleeper-era only, since ESPN kept no lineups.
           </span>
         </p>
       </div>
@@ -144,7 +143,7 @@ export default function RecordsPage() {
         <PanelHeader
           title="Best Player Weeks"
           meta="started only"
-          legend="Highest single-week scores by a started player. Bench performances are excluded, and this list is Sleeper-era only — the imported ESPN seasons kept no lineups."
+          legend="Highest single-week scores by a started player. Bench performances are excluded — a big week that never left the bench scored the team nothing."
         />
         <ExpandableList
           noun="performances"

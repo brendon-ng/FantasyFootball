@@ -634,6 +634,9 @@ for (const league of resolveLeagues(process.argv.slice(2))) {
     regularSeasonWeeks: playoffWeekStart - 1,
     // Says plainly what this data cannot support, so derive never over-reaches.
     hasWeeklyMatchups: matchups.length > 0,
+    // Set by `import:espn:lineups`, which runs after this and is what actually
+    // recovers them. Left false here so a freshly scraped season is honest until
+    // its lineups land.
     hasRosters: false,
     hasDrafts: false,
     standings,

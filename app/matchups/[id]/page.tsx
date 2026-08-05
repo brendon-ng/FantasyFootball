@@ -40,7 +40,7 @@ export const dynamicParams = false;
  * here; duplicating the per-player breakdown in both would mean two renderers
  * for the same thing, drifting apart.
  *
- * Imported ESPN matchups get a page too, even though they kept no lineups — the
+ * Imported ESPN matchups get a page too, and now carry lineups of their own — the
  * score, the round it decided, and the series context are all still real. A
  * missing page would leave dead links from the record book.
  */
@@ -162,7 +162,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                 coverage.missing.length
                   ? ` Week-by-week scores exist for ${coverage.label}; for ${coverage.missingLabel} only playoff and ladder matchups survived, so the earlier baseline is thinner than the matchups actually played.`
                   : ""
-              } Player marks are Sleeper-era only — ESPN kept no lineups — so that baseline starts empty in 2024.`}
+              }`}
             >
               coverage ⓘ
             </Tip>
@@ -417,16 +417,6 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
  * is the only way to know a given player filled the FLEX rather than RB2 — the
  * player object itself just says "RB".
  */
-/**
- * Appended to every inline player-record tooltip.
- *
- * The same caveat the "coverage" tip carries at the top of the page, repeated
- * because a chip on a lineup row can be read without ever seeing that tip — and
- * without it the chip claims a league-history rank the data cannot support.
- */
-const PLAYER_RECORD_CAVEAT =
-  " Player marks are Sleeper-era only — ESPN kept no lineups — so that baseline starts empty in 2024.";
-
 function Lineup({
   side,
   slots,
@@ -488,7 +478,7 @@ function Lineup({
               both and matching by eye. */}
           {mark ? (
             <span
-              title={`${mark.full}${PLAYER_RECORD_CAVEAT}`}
+              title={mark.full}
               className="ml-1.5 whitespace-nowrap rounded border border-gold/50 bg-gold/10 px-1 py-px align-middle text-[9px] font-bold uppercase tracking-wide text-gold"
             >
               {`#${mark.rank} player week`}
@@ -506,16 +496,16 @@ function Lineup({
     );
   };
 
-  // ESPN kept no lineups, so a recovered season has scores but no roster. Saying
-  // so beats an empty table headed "0.00 from starters", which reads as a team
-  // that scored nothing.
+  // Nothing is in this state today: every game in league history has a lineup on
+  // file. The path stays because a newly imported season has scores before it has
+  // been through the lineup importer, and saying so beats an empty table headed
+  // "0.00 from starters", which reads as a team that scored nothing.
   if (!side.starters.length && !Object.keys(side.playerPoints).length) {
     return (
       <Panel>
         <PanelHeader title={name} meta={`${fmt.pts(side.points)} total`} />
         <div className="px-4 py-8 text-center text-xs text-chalk-600 sm:px-5">
-          No lineup on record — this season was recovered from archived ESPN pages,
-          which kept scores but not rosters.
+          No lineup on record for this game yet.
         </div>
       </Panel>
     );

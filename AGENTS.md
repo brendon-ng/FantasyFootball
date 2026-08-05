@@ -530,10 +530,10 @@ results. `buildLeagueRecords` skips non-starters, and the matchup page's inline
 chip re-checks it — a chip on a bench row would assert a record the book does not
 contain, inside a collapsed section where nobody would catch it.
 
-PLAYER-WEEK MARKS ARE NOT EXACT, and the UI still says so. ESPN kept no lineups, so that
-baseline genuinely starts empty in 2024 and a 2024 player mark is measured against
-nothing earlier. The matchup page's "coverage" tooltip states this; do not remove
-it or the badge becomes a claim the data cannot support.
+PLAYER-WEEK MARKS ARE NOW EXACT TOO. They were Sleeper-only until ESPN's read API
+turned out to serve full box scores; `import:espn:lineups` recovered 2019-23, so
+the baseline starts in 2019 like every other list and the caveat that used to sit
+on the matchup page has been deleted rather than reworded.
 
 ## Automation
 
@@ -854,6 +854,62 @@ Once a season has weekly data, derive MUST STOP scraping its brackets for scores
 `seasonsWithWeeklyData()` guards the three fallbacks that do. Otherwise every
 postseason game is counted twice.
 
+### Recovering ESPN-era lineups
+
+`npm run import:espn:lineups` fills the one gap the MHTML archives could not:
+lineups. ESPN's read API serves the whole box score and needs no auth for these
+leagues, so the caveat that player records were "Sleeper-era only" is gone rather
+than reworded. The page fantasy.espn.com serves is a React shell with nothing in
+its HTML; the endpoint it calls is what this uses.
+
+```
+lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/<year>/segments/0/leagues/<id>
+  ?view=mBoxscore&view=mRoster&view=mTeam&scoringPeriodId=<week>
+```
+
+`espnLeagueIds` in `league.json` is keyed BY SEASON: ESPN mints a new league each
+year exactly as Sleeper does, and Den Ops' 2019 id is unrelated to 2020-23's.
+
+IDS ARE NORMALISED TO SLEEPER'S, in three tiers, and the order matters:
+
+| Tier | How | 2019 | 2023 |
+| --- | --- | --- | --- |
+| `espn_id` | Sleeper publishes ESPN's id for ~6,700 players | 2787 | 1881 |
+| defence | pro-team id -> abbreviation; a D/ST is a team, not a person | 278 | 280 |
+| name, then surname+position | last resort | 0 | 1202 |
+
+Coverage of `espn_id` thins for players who arrived after about 2020, so the
+NEWER the season the more it falls through to names — which is the opposite of
+what you would guess. Names alone are not enough either: people are not stored
+under the name they played under. Nyheim Hines is "Nyheim Miller-Hines", Will
+Fuller V is "William Fuller", Kenneth Gainwell is "Kenny".
+
+THE SURNAME TIER IS DELIBERATELY NARROW — unique candidate, matching position,
+matching first initial. A wrong match there is invisible: the points still sum to
+the right team score and are merely credited to the wrong player.
+
+Two reports print for exactly that reason, and they are the only output a human
+has to read:
+
+- **renamed** — the two databases spell the player differently. Two lines across
+  five seasons, both Gainwell, plus Chig Okonkwo in 2023.
+- **same name, several candidates** — the dangerous one, because the names agree
+  so nothing looks wrong. NONE in five seasons: DeVonta Smith and Michael Carter
+  each collide with a defensive back and both resolve on position.
+
+THE INVARIANT IS ENFORCED IN THE IMPORTER AND THROWS. Started points must equal
+the score the team posted on the already-reconciled scoreboard. It guards the
+failure this import is most exposed to: `matchupPeriodId` and `scoringPeriodId`
+are not the same number in every postseason format, and hanging week 15's roster
+on week 14's game would look entirely plausible. 986 of 990 ESPN team-weeks
+reconcile to the cent; the four that cannot are first-round byes, which have a
+roster but no game — and the bye week MOVES (14 in 2019-20, 15 from 2021).
+
+`manual/lineups/<season>.json` is merged into, not rewritten, so `espnOnly` is
+pruned to ids a lineup still references on every run — otherwise a player the
+importer later resolved properly lingers as a phantom and sync publishes a page
+for someone who does not exist. Re-running is byte-identical.
+
 ### What imported seasons cannot support
 
 2019-23 came from archived ESPN pages. The league is on Sleeper
@@ -884,10 +940,9 @@ complete today, so it says nothing — "week-by-week scores exist for 2019-2025,
 every season is complete" is noise that makes a reader look for a problem. The
 machinery stays so a partially-imported league starts warning again by itself.
 
-Rosters, drafts and transactions are still absent for every ESPN year, so player
-records and keeper contracts stay Sleeper-only, and a matchup page for one of
-those games says it has no lineup rather than rendering an empty table headed
-"0.00 from starters".
+ROSTERS ARE NO LONGER ABSENT — see the lineup importer below. Drafts and
+transactions still are, so keeper contracts stay Sleeper-only (correctly: keepers
+began in 2024), but player records now span every season the league has played.
 
 The two ESPN pages cross-validate: placement reconstructed from the brackets
 must equal the standings RK column, or the import throws. All 60 placements

@@ -395,6 +395,12 @@
     "team": null,
     "years_exp": 13
   },
+  "1348": {
+    "full_name": "Dustin Hopkins",
+    "position": "K",
+    "team": null,
+    "years_exp": 12
+  },
   "1352": {
     "full_name": "Robert Woods",
     "position": "WR",
@@ -1239,6 +1245,12 @@
     "full_name": "Mack Hollins",
     "position": "WR",
     "team": "NE",
+    "years_exp": 9
+  },
+  "4179": {
+    "full_name": "Joshua Dobbs",
+    "position": "QB",
+    "team": null,
     "years_exp": 9
   },
   "4187": {
@@ -2477,6 +2489,12 @@
     "team": "TB",
     "years_exp": 5
   },
+  "7568": {
+    "full_name": "Brevin Jordan",
+    "position": "TE",
+    "team": "HOU",
+    "years_exp": 5
+  },
   "7569": {
     "full_name": "Nico Collins",
     "position": "WR",
@@ -2801,6 +2819,18 @@
     "team": "NYJ",
     "years_exp": 4
   },
+  "8160": {
+    "full_name": "Kenny Pickett",
+    "position": "QB",
+    "team": "CAR",
+    "years_exp": 4
+  },
+  "8162": {
+    "full_name": "Sam Howell",
+    "position": "QB",
+    "team": "DAL",
+    "years_exp": 4
+  },
   "8167": {
     "full_name": "Christian Watson",
     "position": "WR",
@@ -2849,6 +2879,12 @@
     "team": "DET",
     "years_exp": 4
   },
+  "8210": {
+    "full_name": "Chig Okonkwo",
+    "position": "TE",
+    "team": "WAS",
+    "years_exp": 4
+  },
   "8211": {
     "full_name": "Tyrion Davis-Price",
     "position": "RB",
@@ -2859,6 +2895,12 @@
     "full_name": "Sincere McCormick",
     "position": "RB",
     "team": "SF",
+    "years_exp": 4
+  },
+  "8221": {
+    "full_name": "Keaontay Ingram",
+    "position": "RB",
+    "team": null,
     "years_exp": 4
   },
   "8228": {
@@ -2933,6 +2975,12 @@
     "team": "DET",
     "years_exp": 3
   },
+  "9222": {
+    "full_name": "Zach Evans",
+    "position": "RB",
+    "team": null,
+    "years_exp": 2
+  },
   "9224": {
     "full_name": "Chase Brown",
     "position": "RB",
@@ -2961,6 +3009,12 @@
     "full_name": "Anthony Richardson",
     "position": "QB",
     "team": "IND",
+    "years_exp": 3
+  },
+  "9230": {
+    "full_name": "Tanner McKee",
+    "position": "QB",
+    "team": "PHI",
     "years_exp": 3
   },
   "9480": {
@@ -3101,6 +3155,12 @@
     "team": "BAL",
     "years_exp": 3
   },
+  "9999": {
+    "full_name": "Will Levis",
+    "position": "QB",
+    "team": "TEN",
+    "years_exp": 3
+  },
   "10213": {
     "full_name": "Tre Tucker",
     "position": "WR",
@@ -3117,6 +3177,12 @@
     "full_name": "Jayden Reed",
     "position": "WR",
     "team": "GB",
+    "years_exp": 3
+  },
+  "10225": {
+    "full_name": "Jonathan Mingo",
+    "position": "WR",
+    "team": "DAL",
     "years_exp": 3
   },
   "10226": {
@@ -3177,6 +3243,18 @@
     "full_name": "Jake Moody",
     "position": "K",
     "team": "WAS",
+    "years_exp": 3
+  },
+  "11008": {
+    "full_name": "Anders Carlson",
+    "position": "K",
+    "team": null,
+    "years_exp": 2
+  },
+  "11058": {
+    "full_name": "Blake Grupe",
+    "position": "K",
+    "team": "IND",
     "years_exp": 3
   },
   "11199": {
