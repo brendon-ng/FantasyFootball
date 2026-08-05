@@ -457,7 +457,14 @@ function Lineup({
   const row = (pid: string, slot: string | null) => {
     const p = players[pid];
     const pts = side.playerPoints[pid] ?? 0;
-    const mark = playerFlags.find((f) => f.playerId === pid) ?? null;
+    // STARTERS ONLY, asserted here rather than assumed. The all-time list is
+    // built from started players (`buildLeagueRecords` skips the bench), so this
+    // is belt-and-braces — but a chip on a bench row would claim a record that
+    // the record book does not contain, and the bench is collapsed, so it would
+    // be a wrong badge that is also hard to spot.
+    const mark = side.starters.includes(pid)
+      ? (playerFlags.find((f) => f.playerId === pid) ?? null)
+      : null;
     return (
       <div key={pid} className="flex items-center gap-2.5 px-3 py-1.5 sm:px-4">
         {slot ? (

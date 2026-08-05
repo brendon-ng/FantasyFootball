@@ -1125,6 +1125,11 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
       if (m.winner === self.ownerSlug) {
         margins.push({ ...base, margin: round2(self.points - opp.points) });
       }
+      // STARTED PLAYERS ONLY. A monster week on the bench scored the team
+      // nothing, so ranking it alongside points that actually counted would make
+      // the list measure roster luck rather than results. Every surface that
+      // marks a player record depends on this: the record book, the matchup
+      // badges, and the chip on a lineup row.
       const starters = new Set(self.starters);
       for (const [playerId, p] of Object.entries(self.playerPoints)) {
         if (!starters.has(playerId)) continue;

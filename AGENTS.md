@@ -524,7 +524,13 @@ a mark is measured against the full history rather than a bracket-only sample. I
 took no change to this function when each year arrived — the baseline is derived,
 not stored.
 
-PLAYER-WEEK MARKS ARE NOT, and the UI still says so. ESPN kept no lineups, so that
+PLAYER-WEEK MARKS ARE STARTERS ONLY. A big week on the bench scored the team
+nothing, so ranking it would make the list measure roster luck rather than
+results. `buildLeagueRecords` skips non-starters, and the matchup page's inline
+chip re-checks it — a chip on a bench row would assert a record the book does not
+contain, inside a collapsed section where nobody would catch it.
+
+PLAYER-WEEK MARKS ARE NOT EXACT, and the UI still says so. ESPN kept no lineups, so that
 baseline genuinely starts empty in 2024 and a 2024 player mark is measured against
 nothing earlier. The matchup page's "coverage" tooltip states this; do not remove
 it or the badge becomes a claim the data cannot support.
