@@ -85,7 +85,34 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
     return { w, l, t };
   };
   const overall = tally(series);
-  const prior = tally(series.filter((g) => g.season < game.season || (g.season === game.season && (g.week ?? 0) < (game.week ?? 0))));
+  const before = series.filter(
+    (g) => g.season < game.season || (g.season === game.season && (g.week ?? 0) < (game.week ?? 0)),
+  );
+  const prior = tally(before);
+
+  /**
+   * The run one of them was on WALKING INTO this game.
+   *
+   * `getMeetings` is newest first and `before` preserves that, so this walks
+   * forward from the meeting immediately preceding. A tie ends a streak — nobody
+   * won it, so nobody carried anything into the next one.
+   *
+   * Folded into the "series before this" tile rather than given its own: both
+   * describe the state of the rivalry at kickoff, and as a subtitle the streak
+   * reads as context for the record rather than a competing number.
+   */
+  const firstName = (slug: string) => owners.get(slug)?.firstName ?? name(slug);
+  const winnerOf = (g: (typeof series)[number]) =>
+    g.a.points === g.b.points ? null : g.a.points > g.b.points ? g.a.ownerSlug : g.b.ownerSlug;
+  let runSlug: string | null = null;
+  let run = 0;
+  for (const g of before) {
+    const w = winnerOf(g);
+    if (!w) break;
+    if (runSlug === null) runSlug = w;
+    else if (w !== runSlug) break;
+    run += 1;
+  }
   const pairHref = `/h2h/${[game.a.ownerSlug, game.b.ownerSlug].sort().join("-vs-")}/`;
 
   // Any record-book list this game appears in.
@@ -272,7 +299,17 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
         <Stat
           label="Series before this"
           value={prior.w + prior.l + prior.t === 0 ? "First meeting" : `${prior.w}-${prior.l}`}
-          sub={prior.w + prior.l + prior.t ? `${name(game.a.ownerSlug)} perspective` : undefined}
+          sub={
+            // "won 1 straight" is not a streak, it is the previous game. A run
+            // only reads as a run from two.
+            run >= 2
+              ? `${firstName(runSlug!)} had won ${run} straight`
+              : run === 1
+                ? `${firstName(runSlug!)} won the last one`
+                : prior.w + prior.l + prior.t
+                  ? `${name(game.a.ownerSlug)} perspective`
+                  : undefined
+          }
         />
         <Stat
           label="Series all-time"
@@ -334,21 +371,28 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
 
       <Panel>
         <PanelHeader
-          title="Rest of the Series"
-          meta={`${series.length - 1} other matchup${series.length === 2 ? "" : "s"}`}
+          title="The Series"
+          meta={`${series.length} meeting${series.length === 1 ? "" : "s"}`}
           href={pairHref}
           hrefLabel="Head to head"
         />
         <div className="divide-y divide-ink-700">
-          {series
-            .filter((g) => g.id !== game.id)
-            .map((g) => {
+          {series.map((g) => {
               const gw = g.a.points === g.b.points ? null : g.a.points > g.b.points ? g.a : g.b;
+              // THIS game is in the list rather than cut from it, so the series
+              // reads as a sequence with a "you are here" instead of a run of
+              // games with a hole where the one you are looking at should be.
+              const here = g.id === game.id;
               return (
                 <Link
                   key={g.id}
                   href={`/matchups/${g.id}/`}
-                  className="flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-ink-700/40 sm:px-5"
+                  aria-current={here ? "page" : undefined}
+                  className={`flex items-center gap-3 px-4 py-2.5 transition-colors sm:px-5 ${
+                    here
+                      ? "border-l-2 border-l-accent bg-accent/[0.07]"
+                      : "hover:bg-ink-700/40"
+                  }`}
                 >
                   {/* Below sm the postseason chip column is hidden, so the label
                       rides under the date instead. sm:hidden keeps it from
@@ -400,8 +444,11 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                       </div>
                     ))}
                   </div>
-                  <span aria-hidden className="shrink-0 text-[10px] text-chalk-600">
-                    →
+                  <span
+                    aria-hidden
+                    className={`shrink-0 text-[10px] ${here ? "text-accent" : "text-chalk-600"}`}
+                  >
+                    {here ? "\u25cf" : "\u2192"}
                   </span>
                 </Link>
               );
