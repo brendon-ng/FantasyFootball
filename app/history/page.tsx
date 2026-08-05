@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { AllTimeTable } from "@/components/all-time-table";
 import { FinishBySeason } from "@/components/finish-by-season";
-import { Panel, PanelHeader } from "@/components/ui";
+import { Panel, PanelHeader, Stat } from "@/components/ui";
 import {
   creditedNames,
   features,
@@ -28,7 +28,22 @@ export default function HistoryPage() {
   const seasons = getSeasons().filter((s) => s.finalized).sort((a, b) => b.season - a.season);
   const records = getOwnerRecords();
   const owners = getOwnerMap();
-  const tradeCount = getTrades().length;
+  const trades = getTrades();
+  // Counted by LEG, not by trade: one deal can move four players and six picks,
+  // and "24 trades" alone says nothing about how much actually changed hands.
+  const legs = trades.flatMap((t) => t.legs);
+  const faab = legs.filter((l) => l.kind === "faab").reduce((n, l) => n + (l.amount ?? 0), 0);
+  // Credited to every party, so a two-team trade counts for both. The totals are
+  // therefore per-owner activity, not a partition of the trades.
+  const byOwner = new Map<string, number>();
+  for (const t of trades) {
+    for (const o of t.ownerSlugs) byOwner.set(o, (byOwner.get(o) ?? 0) + 1);
+  }
+  const busiest = [...byOwner.entries()].sort((a, b) => b[1] - a[1])[0];
+  const perSeason = new Map<number, number>();
+  for (const t of trades) perSeason.set(t.season, (perSeason.get(t.season) ?? 0) + 1);
+  const busiestSeason = [...perSeason.entries()].sort((a, b) => b[1] - a[1] || b[0] - a[0])[0];
+  const multiTeam = trades.filter((t) => t.ownerSlugs.length > 2).length;
   // Null when the league has no such rule, so the column disappears entirely.
   const lowsByOwner = features().weeklyLowPunishment
     ? getWeeklyLows().reduce<Record<string, number>>((acc, w) => {
@@ -90,19 +105,6 @@ export default function HistoryPage() {
 
       <Panel>
         <PanelHeader
-          title="Trades"
-          meta={`${tradeCount} in league history`}
-          href="/trades/"
-          hrefLabel="All trades"
-        />
-        <div className="px-4 py-3 text-[13px] text-chalk-500 sm:px-5">
-          Every completed trade, by season — players, draft picks and FAAB, with what
-          each traded pick turned out to be.
-        </div>
-      </Panel>
-
-      <Panel>
-        <PanelHeader
           title="All-Time Table"
           meta="every game"
           legend="Click any column to sort. A co-owned team's record counts for each of its owners, so these columns will not sum to league totals."
@@ -123,6 +125,49 @@ export default function HistoryPage() {
         }))}
         teamsBySeason={Object.fromEntries(seasons.map((x) => [x.season, x.teams]))}
       />
+
+      {trades.length ? (
+        <Panel>
+          <PanelHeader
+            title="Trades"
+            meta={`${perSeason.size} season${perSeason.size === 1 ? "" : "s"} with a deal`}
+            href="/trades/"
+            hrefLabel="All trades"
+          />
+          {/* Counts, not a list: the full history is one click away, and a strip
+              of totals says something the list cannot — how much this league
+              actually trades. */}
+          <div className="grid grid-cols-2 gap-2.5 p-4 sm:grid-cols-4 sm:p-5">
+            <Stat
+              label="Trades"
+              value={trades.length}
+              sub={multiTeam ? `${multiTeam} with 3+ teams` : undefined}
+            />
+            <Stat
+              label="Players moved"
+              value={legs.filter((l) => l.kind === "player").length}
+            />
+            <Stat
+              label="Picks moved"
+              value={legs.filter((l) => l.kind === "pick").length}
+              sub={faab ? `plus $${faab} FAAB` : undefined}
+            />
+            <Stat
+              label="Most active"
+              value={
+                <span className="text-base sm:text-lg">
+                  {busiest ? name(busiest[0]).split(" ")[0] : "—"}
+                </span>
+              }
+              sub={busiest ? `${busiest[1]} deals` : undefined}
+            />
+          </div>
+          <div className="border-t border-ink-700 px-4 py-2.5 text-[11px] text-chalk-600 sm:px-5">
+            Busiest season was {busiestSeason?.[0]} with {busiestSeason?.[1]}. A trade
+            counts for every owner in it, so these do not sum to the league total.
+          </div>
+        </Panel>
+      ) : null}
     </div>
   );
 }
