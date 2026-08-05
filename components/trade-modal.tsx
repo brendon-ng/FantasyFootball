@@ -15,9 +15,11 @@ import type { DraftPickRecord, PlayerMeta, Trade, TradeReturn } from "@/lib/type
  * Reuses `TradeCard`, so the trade reads identically here, on the trades page and
  * on an owner page. Three renderings of one thing would drift.
  *
- * WIDER THAN A DIALOG USUALLY WANTS TO BE, because the card now carries a return
- * table per side and the whole point is reading them against each other. At the
- * old width they stacked and the comparison was a scroll apart.
+ * A LITTLE WIDER THAN A DIALOG USUALLY WANTS TO BE, because the card carries a
+ * return table per side and the point is reading them against each other. At the
+ * original width the two stacked and the comparison was a scroll apart; at the
+ * width after that it sprawled. This is the narrowest that still fits them
+ * side by side.
  */
 export function TradeModal({
   trade,
@@ -61,7 +63,7 @@ export function TradeModal({
         // The backdrop closes; a click INSIDE must not bubble up to it, or
         // selecting text in the dialog would dismiss it.
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[85vh] w-full max-w-4xl overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
+        className="max-h-[85vh] w-full max-w-3xl overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
       >
         <div className="sticky top-0 flex items-center justify-between border-b border-ink-600 bg-ink-800 px-4 py-3 sm:px-5">
           <div>

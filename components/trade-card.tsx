@@ -165,7 +165,7 @@ function RestOfSeason({
   const sides = trade.ownerSlugs.filter((s) => Object.keys(returns[s]?.byPlayer ?? {}).length);
   if (!sides.length) return null;
 
-  const cell = "tabular w-9 shrink-0 text-right";
+  const cell = "tabular w-8 shrink-0 text-right";
   // Padded to the longest side so the Total rows sit on the same line. Comparing
   // two totals that are three rows apart vertically is the thing this table
   // exists to make easy, and ragged columns undo it.
@@ -187,12 +187,14 @@ function RestOfSeason({
   });
 
   return (
-    <div className="mt-3 border-t border-ink-700 pt-2">
-      <div className="mb-1 flex items-baseline gap-2">
+    // A heavier rule and real space above it: this is a different subject from
+    // the deal itself, and a single hairline read as another row of the trade.
+    <div className="mt-4 border-t-2 border-ink-600 pt-3">
+      <div className="mb-1.5 flex items-baseline gap-2">
         <span className="eyebrow text-[10px]">Rest of {trade.season}</span>
         <span className="text-[10px] text-chalk-600">while still on that roster</span>
       </div>
-      <div className={sides.length === 2 ? "grid gap-x-6 gap-y-3 sm:grid-cols-2" : "space-y-3"}>
+      <div className={sides.length === 2 ? "grid gap-x-4 gap-y-3 sm:grid-cols-2" : "space-y-3"}>
         {sides.map((slug) => {
           const r = returns[slug];
           const ids = Object.keys(r.byPlayer);
@@ -202,8 +204,8 @@ function RestOfSeason({
                 <div className="mb-0.5 text-[11px] font-semibold text-chalk-300">
                   {ownerNames[slug] ?? slug}
                 </div>
-                <div className="flex items-center gap-2 border-b border-ink-700 pb-1 text-[9px] font-bold uppercase tracking-wide text-chalk-600">
-                  <span className="min-w-[6rem] flex-1">Player</span>
+                <div className="flex items-center gap-1.5 border-b border-ink-700 pb-1 text-[9px] font-bold uppercase tracking-wide text-chalk-600">
+                  <span className="min-w-[5rem] flex-1">Player</span>
                   {COLUMNS.map((c) => (
                     <span key={c.label} className={cell} title={c.hint}>
                       {c.label}
@@ -284,22 +286,18 @@ function Row({
 }) {
   const cells = statCells(stat);
   return (
-    <div className={`flex items-center gap-2 py-0.5 ${bold ? "border-t border-ink-700 font-semibold" : ""}`}>
-      <span className={`min-w-[6rem] flex-1 truncate ${bold ? "text-chalk-300" : "text-chalk-400"}`}>
+    <div className={`flex items-center gap-1.5 py-0.5 ${bold ? "border-t border-ink-700" : ""}`}>
+      <span className={`min-w-[5rem] flex-1 truncate ${bold ? "text-chalk-300" : "text-chalk-400"}`}>
         {label}
       </span>
       {cells.map((c, i) => {
-        // Emphasis is ADDED to the column's colour, never instead of it. A pill
-        // background replaced the tone, so the green start-rate and the red
-        // bench-rate turned plain grey exactly on the row where they matter most
-        // — and it padded the cell out of line with the rows above.
+        // The colour stays on the cell and the highlight sits BEHIND THE TEXT
+        // only, on an inner span — so the column keeps its meaning, the numbers
+        // stay on their baseline, and the cell does not change width.
         const won = best?.[i] != null && c.value !== null && Math.abs(c.value - best[i]!) < 0.005;
         return (
-          <span
-            key={COLUMNS[i].label}
-            className={`${cell} ${TONE[i]} ${won ? "font-bold brightness-125" : ""}`}
-          >
-            {c.text}
+          <span key={COLUMNS[i].label} className={`${cell} ${TONE[i]}`}>
+            <span className={won ? "rounded-sm bg-chalk-100/15 px-1 py-px" : ""}>{c.text}</span>
           </span>
         );
       })}
