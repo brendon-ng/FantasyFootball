@@ -334,6 +334,16 @@ async function syncPlayers(leagues: ScriptLeague[]): Promise<void> {
       }
     }
 
+    // Recovered ESPN drafts. A player drafted and cut before week 1 appears in no
+    // lineup, so without this his pick renders as a bare id on the draft board.
+    const draftDir = join(dataDir(league.slug), "manual", "drafts");
+    if (existsSync(draftDir)) {
+      for (const file of readdirSync(draftDir).filter((f) => f.endsWith(".json"))) {
+        const d = readJson<{ picks?: Array<{ playerId: string }> }>(join(draftDir, file));
+        for (const p of d?.picks ?? []) current.add(p.playerId);
+      }
+    }
+
     // Also index whoever is currently rostered, so in-progress pages resolve names.
     for (const [season, leagueId] of Object.entries(league.knownLeagueIds)) {
       if (seasons.find((s) => s.season === season)?.finalized) continue;

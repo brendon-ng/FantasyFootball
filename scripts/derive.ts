@@ -1425,6 +1425,33 @@ function writeReplay(slug: string, summaries: SeasonSummary[], matchups: Matchup
 
 // --- imported (pre-Sleeper) seasons ------------------------------------------
 
+/**
+ * ESPN drafts recovered by `import:espn:drafts`.
+ *
+ * Already translated to `DraftPickRecord` at import time, so this is a read and a
+ * flatten rather than a conversion — nothing downstream can tell an ESPN draft
+ * from a Sleeper one, which is the point.
+ */
+function importedDrafts(): DraftPickRecord[] {
+  const dir = join(DATA_DIR, "manual", "drafts");
+  if (!existsSync(dir)) return [];
+  const out: DraftPickRecord[] = [];
+  for (const file of readdirSync(dir).sort()) {
+    if (!/^\d{4}\.json$/.test(file)) continue;
+    const d = readJson<ManualDraft>(join(dir, file));
+    for (const p of d?.picks ?? []) out.push({ season: d!.season, ...p });
+  }
+  return out;
+}
+
+/** What `import:espn:drafts` writes for one season. */
+interface ManualDraft {
+  season: number;
+  rounds: number;
+  teams: number;
+  picks: Array<Omit<DraftPickRecord, "season">>;
+}
+
 /** What `import:espn:lineups` writes for one season. */
 interface ManualLineups {
   season: number;
@@ -1986,7 +2013,11 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
     : { perSeason: [], final: [] };
   const atTheTime = recordsAtTheTime(summaries, matchups);
   const playerHistory = buildPlayerHistory(loaded);
-  const drafts = [...buildDraftHistory(loaded), ...draftOnlySeasons(draftOnly)].sort(
+  const drafts = [
+    ...buildDraftHistory(loaded),
+    ...draftOnlySeasons(draftOnly),
+    ...importedDrafts(),
+  ].sort(
     (a, b) => a.season - b.season || a.pickNo - b.pickNo,
   );
   const weeklyLows = buildWeeklyLows(matchups, summaries);

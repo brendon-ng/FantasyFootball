@@ -910,6 +910,39 @@ pruned to ids a lineup still references on every run — otherwise a player the
 importer later resolved properly lingers as a phantom and sync publishes a page
 for someone who does not exist. Re-running is byte-identical.
 
+### Recovering ESPN-era drafts
+
+`npm run import:espn:drafts` fills the last gap. `/history/<season>/draft/` now
+exists for every season the league has played, with no change to the page that
+draws it — the importer writes `DraftPickRecord` directly, so nothing downstream
+can tell an ESPN draft from a Sleeper one.
+
+Three things ESPN models differently, all translated at import time:
+
+- **The slot is computed, not given.** ESPN records `roundPickNumber` — which pick
+  of the round — not which board column it came from, and in a snake those differ
+  in every even round. Verified by the numbers falling out right: 2019 round 1
+  runs slots 1..12 and round 2 runs 12..1.
+- **`pickOrder` is `slot_to_roster_id`.** Slot -> ESPN team id, which is what makes
+  a traded pick visible: the team that used the pick is not the team the slot
+  belongs to.
+- **A pick carries a bare `playerId` and no name.** So the season's player
+  universe is fetched too — `/seasons/<year>/players?view=players_wl`, whose page
+  size defaults to 50 and needs `x-fantasy-filter` to lift. Without it the name
+  tiers are blind and any player Sleeper has no `espn_id` for is unresolvable.
+
+NO PICK WAS EVER TRADED IN THE ESPN ERA — zero across all five seasons, all 960
+picks. That is a real finding rather than a modelling artefact: pick trading was
+ENABLED in 2020 and 2023, and a wrong snake model would have shown roughly half of
+every even round as traded rather than none.
+
+Two invariants throw: the pick count must equal rounds x teams, and a missing
+`pickOrder` is fatal rather than assumed, since without it a traded pick is
+indistinguishable from a normal one.
+
+Keeper flags are all false, correctly — ESPN's `keeperCount` was 0 every year, and
+keepers began with the 2024 startup draft on Sleeper.
+
 ### What imported seasons cannot support
 
 2019-23 came from archived ESPN pages. The league is on Sleeper
@@ -940,9 +973,10 @@ complete today, so it says nothing — "week-by-week scores exist for 2019-2025,
 every season is complete" is noise that makes a reader look for a problem. The
 machinery stays so a partially-imported league starts warning again by itself.
 
-ROSTERS ARE NO LONGER ABSENT — see the lineup importer below. Drafts and
-transactions still are, so keeper contracts stay Sleeper-only (correctly: keepers
-began in 2024), but player records now span every season the league has played.
+ROSTERS AND DRAFTS ARE NO LONGER ABSENT — see the two importers below. Only
+TRANSACTIONS still are: ESPN returns an empty log for these closed leagues, with
+or without a filter header, so player pages show no add/drop/trade history before
+2024. Keeper contracts are unaffected, since keepers began in 2024 anyway.
 
 The two ESPN pages cross-validate: placement reconstructed from the brackets
 must equal the standings RK column, or the import throws. All 60 placements
