@@ -22,6 +22,7 @@ import {
   getAtTheTime,
   getMeetings,
   getOwnerMap,
+  getPlayerTeams,
   getPlayers,
   getRecordFlags,
   type RecordFlag,
@@ -332,6 +333,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
               slots={season?.rosterPositions ?? []}
               name={name(side.ownerSlug)}
               players={players}
+              teamsThen={getPlayerTeams()[String(game.season)] ?? {}}
               won={winner?.ownerSlug === side.ownerSlug}
               playerFlags={flags.filter((f) => f.playerId)}
             />
@@ -476,6 +478,7 @@ function Lineup({
   slots,
   name,
   players,
+  teamsThen,
   won,
   playerFlags,
 }: {
@@ -483,6 +486,11 @@ function Lineup({
   slots: string[];
   name: string;
   players: Record<string, { full_name: string; position: string | null; team: string | null }>;
+  /**
+   * Team by player FOR THIS SEASON. Falls back to the player's current team,
+   * which is what the page showed before and is still right for a recent game.
+   */
+  teamsThen: Record<string, string>;
   won: boolean;
   /**
    * Every player-week record set in this game, either side.
@@ -524,8 +532,10 @@ function Lineup({
           className="min-w-0 flex-1 truncate text-sm transition-colors hover:text-accent"
         >
           {p?.full_name ?? pid}
-          {p?.team ? (
-            <span className="ml-1.5 text-[11px] text-chalk-600">{p.team}</span>
+          {teamsThen[pid] ?? p?.team ? (
+            <span className="ml-1.5 text-[11px] text-chalk-600">
+              {teamsThen[pid] ?? p?.team}
+            </span>
           ) : null}
           {/* ON THE ROW, not only in the badge strip at the top. The strip names
               the player in prose, so finding him in a 17-man lineup meant reading

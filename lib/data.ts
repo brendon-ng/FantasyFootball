@@ -89,6 +89,28 @@ export const getOwnerRecords = (): OwnerRecord[] => load("derived/owner-records.
  * at sync time: `data/raw` stays a faithful record of what Sleeper actually
  * returned, and the correction lives in one declarative place.
  */
+/**
+ * NFL team by season, `season -> playerId -> abbreviation`.
+ *
+ * `players.json` holds the CURRENT team, which is what a keeper board or a player
+ * profile wants — they are about the player now. A matchup page is a record of a
+ * game that happened, so it wants the team at the time: Carson Wentz was PHI in
+ * 2019, not MIN.
+ *
+ * Shared across leagues, like `players.json` — which team someone played for is a
+ * fact about the NFL. Missing entries fall back to the current team, which is
+ * right often enough and is what the page did before.
+ */
+export const getPlayerTeams = once(
+  (): Record<string, Record<string, string>> =>
+    existsSync(join(SHARED_DATA, "player-teams.json"))
+      ? (JSON.parse(readFileSync(join(SHARED_DATA, "player-teams.json"), "utf8")) as Record<
+          string,
+          Record<string, string>
+        >)
+      : {},
+);
+
 export const getPlayers = (): Record<string, PlayerMeta> => {
   const all = JSON.parse(readFileSync(join(SHARED_DATA, "players.json"), "utf8")) as Record<
     string,
