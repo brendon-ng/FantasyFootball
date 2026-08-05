@@ -1,6 +1,7 @@
 
 import { DraftPlan } from "@/components/draft-plan";
 import { SeasonPanels } from "@/components/season-panels";
+import { H2HMatrix } from "@/components/h2h-matrix";
 import { HomeKeeperBoard } from "@/components/home-keeper-board";
 import { RecordHighlights } from "@/components/record-highlights";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
@@ -34,6 +35,11 @@ export default async function HomePage() {
   const seasons = getSeasons();
   const owners = getOwnerMap();
   const records = getOwnerRecords();
+  // Alphabetical: a matrix is looked up by name, not read down by rank.
+  const activeOwners = [...owners.values()]
+    .filter((o) => o.active)
+    .map((o) => ({ slug: o.slug, name: o.name, firstName: o.firstName }))
+    .sort((x, y) => x.name.localeCompare(y.name));
   const keepers = getKeepers();
   const players = getPlayers();
   const adp = getAdp();
@@ -210,6 +216,20 @@ export default async function HomePage() {
           }
         />
       </Panel>
+      {/* Same panel as the foot of the history page. The home page is where
+          people land, and "how do I do against him" is a question they arrive
+          with — it should not need two clicks through a profile to answer. */}
+      {activeOwners.length > 1 ? (
+        <Panel>
+          <PanelHeader
+            title="Head to Head"
+            meta="active owners"
+            href="/history/"
+            hrefLabel="League history"
+          />
+          <H2HMatrix owners={activeOwners} records={records} />
+        </Panel>
+      ) : null}
     </div>
   );
 }

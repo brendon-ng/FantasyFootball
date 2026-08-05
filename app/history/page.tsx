@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { AllTimeTable } from "@/components/all-time-table";
 import { FinishBySeason } from "@/components/finish-by-season";
+import { H2HMatrix } from "@/components/h2h-matrix";
 import { Panel, PanelHeader, Stat } from "@/components/ui";
 import {
   creditedNames,
@@ -57,6 +58,11 @@ export default function HistoryPage() {
   const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || "—";
 
   const allSeasons = seasons.map((s) => s.season).sort((a, b) => a - b);
+  // Alphabetical: a matrix is looked up by name, not read down by rank.
+  const activeOwners = [...owners.values()]
+    .filter((o) => o.active)
+    .map((o) => ({ slug: o.slug, name: o.name, firstName: o.firstName }))
+    .sort((x, y) => x.name.localeCompare(y.name));
 
   return (
     <div className="space-y-5 sm:space-y-6">
@@ -172,6 +178,14 @@ export default function HistoryPage() {
           </div>
         </Panel>
       ) : null}
+      <Panel>
+        <PanelHeader
+          title="Head to Head"
+          meta="active owners"
+          legend="Every pairing, read from the row's side. Click any cell for the full series."
+        />
+        <H2HMatrix owners={activeOwners} records={records} />
+      </Panel>
     </div>
   );
 }
