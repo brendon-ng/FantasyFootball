@@ -165,7 +165,7 @@ function RestOfSeason({
   const sides = trade.ownerSlugs.filter((s) => Object.keys(returns[s]?.byPlayer ?? {}).length);
   if (!sides.length) return null;
 
-  const cell = "tabular w-8 shrink-0 text-right";
+  const cell = "tabular w-9 shrink-0 text-right";
   // Padded to the longest side so the Total rows sit on the same line. Comparing
   // two totals that are three rows apart vertically is the thing this table
   // exists to make easy, and ragged columns undo it.
@@ -297,7 +297,13 @@ function Row({
         const won = best?.[i] != null && c.value !== null && Math.abs(c.value - best[i]!) < 0.005;
         return (
           <span key={COLUMNS[i].label} className={`${cell} ${TONE[i]}`}>
-            <span className={won ? "rounded-sm bg-chalk-100/15 px-1 py-px" : ""}>{c.text}</span>
+            {/* EVERY cell carries the padding, not just the highlighted one.
+                With it applied only to the winner, that number sat a quarter-rem
+                left of the rest of its column — a small shift, but a column of
+                right-aligned figures is exactly where it shows. */}
+            <span className={`rounded-sm px-1 py-px ${won ? "bg-chalk-100/15" : ""}`}>
+              {c.text}
+            </span>
           </span>
         );
       })}
