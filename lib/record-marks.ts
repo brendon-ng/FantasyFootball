@@ -12,7 +12,17 @@
  * against them.
  */
 
-/** Cut-offs a score has to beat, in rank order. Capped at the record book depth. */
+/**
+ * How deep a list has to be entered before a card says so.
+ *
+ * FAR SHALLOWER THAN THE RECORD BOOK, which goes twenty deep. A chip is a claim
+ * that something notable happened, and "#18 highest week" is not notable — at
+ * twenty deep roughly one game in seven earns one, which turns the chip into
+ * decoration. Top five is a real result.
+ */
+export const MARK_DEPTH = 5;
+
+/** Cut-offs a score has to beat, in rank order. Only the top `MARK_DEPTH`. */
 export interface RecordThresholds {
   /** Team single-week points, descending. */
   high: number[];
@@ -115,7 +125,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
   if (ch) {
     out.push({
       rank: ch,
-      short: `#${ch} high game`,
+      short: `#${ch} high combined`,
       full: `${ordinal(ch)}-highest combined score of any matchup in league history`,
       tone: "good",
     });
@@ -124,7 +134,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
   if (cl) {
     out.push({
       rank: cl,
-      short: `#${cl} low game`,
+      short: `#${cl} low combined`,
       full: `${ordinal(cl)}-lowest combined score of any matchup in league history`,
       tone: "bad",
     });

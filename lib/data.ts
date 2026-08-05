@@ -14,7 +14,7 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
 import { meetingId } from "./meeting.ts";
-import type { RecordThresholds } from "./record-marks.ts";
+import { MARK_DEPTH, type RecordThresholds } from "./record-marks.ts";
 
 import {
   getLeague,
@@ -871,12 +871,12 @@ export function getRecordFlags(
  * Shipped to the client so a card can mark a record the moment a week is scored,
  * without refetching history — the record arrays are build-time data.
  *
- * Capped at the depth the record book actually shows, so nothing can be marked
- * "#22" against a list that stops at 20.
+ * Capped at `MARK_DEPTH`, not the record book's twenty: a card marks a top-five
+ * result only. That also keeps the shipped arrays tiny.
  */
 export function getRecordThresholds(): RecordThresholds {
   const r = getRecords();
-  const cap = <T,>(xs: T[]) => xs.slice(0, RECORD_BOOK_DEPTH);
+  const cap = <T,>(xs: T[]) => xs.slice(0, MARK_DEPTH);
   return {
     high: cap(r.weeklyHigh).map((s) => s.points),
     low: cap(r.weeklyLow).map((s) => s.points),
