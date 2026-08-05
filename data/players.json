@@ -11,11 +11,89 @@
     "team": "CIN",
     "years_exp": 18
   },
+  "24": {
+    "full_name": "Matt Ryan",
+    "position": "QB",
+    "team": null,
+    "years_exp": 15
+  },
+  "49": {
+    "full_name": "Robbie Gould",
+    "position": "K",
+    "team": null,
+    "years_exp": 18
+  },
+  "58": {
+    "full_name": "Greg Olsen",
+    "position": "TE",
+    "team": null,
+    "years_exp": 14
+  },
   "96": {
     "full_name": "Aaron Rodgers",
     "position": "QB",
     "team": "PIT",
     "years_exp": 21
+  },
+  "110": {
+    "full_name": "Stephen Gostkowski",
+    "position": "K",
+    "team": null,
+    "years_exp": 16
+  },
+  "127": {
+    "full_name": "Matt Bryant",
+    "position": "K",
+    "team": null,
+    "years_exp": 20
+  },
+  "138": {
+    "full_name": "Ben Roethlisberger",
+    "position": "QB",
+    "team": "PIT",
+    "years_exp": 18
+  },
+  "147": {
+    "full_name": "DeSean Jackson",
+    "position": "WR",
+    "team": null,
+    "years_exp": 14
+  },
+  "167": {
+    "full_name": "Tom Brady",
+    "position": "QB",
+    "team": null,
+    "years_exp": 23
+  },
+  "184": {
+    "full_name": "Adrian Peterson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 15
+  },
+  "223": {
+    "full_name": "Larry Fitzgerald",
+    "position": "WR",
+    "team": null,
+    "years_exp": 18
+  },
+  "232": {
+    "full_name": "Frank Gore",
+    "position": "RB",
+    "team": null,
+    "years_exp": 17
+  },
+  "284": {
+    "full_name": "Delanie Walker",
+    "position": "TE",
+    "team": null,
+    "years_exp": 16
+  },
+  "289": {
+    "full_name": "Drew Brees",
+    "position": "QB",
+    "team": null,
+    "years_exp": 20
   },
   "331": {
     "full_name": "Philip Rivers",
@@ -23,17 +101,71 @@
     "team": null,
     "years_exp": 22
   },
+  "344": {
+    "full_name": "Julian Edelman",
+    "position": "WR",
+    "team": null,
+    "years_exp": 13
+  },
+  "367": {
+    "full_name": "Jared Cook",
+    "position": "TE",
+    "team": null,
+    "years_exp": 13
+  },
   "421": {
     "full_name": "Matthew Stafford",
     "position": "QB",
     "team": "LAR",
     "years_exp": 17
   },
+  "536": {
+    "full_name": "Antonio Brown",
+    "position": "WR",
+    "team": null,
+    "years_exp": 12
+  },
+  "538": {
+    "full_name": "Emmanuel Sanders",
+    "position": "WR",
+    "team": null,
+    "years_exp": 12
+  },
+  "616": {
+    "full_name": "Jimmy Graham",
+    "position": "TE",
+    "team": null,
+    "years_exp": 14
+  },
+  "642": {
+    "full_name": "Golden Tate",
+    "position": "WR",
+    "team": null,
+    "years_exp": 12
+  },
   "650": {
     "full_name": "Nick Folk",
     "position": "K",
     "team": "ATL",
     "years_exp": 19
+  },
+  "676": {
+    "full_name": "LeSean McCoy",
+    "position": "RB",
+    "team": null,
+    "years_exp": 13
+  },
+  "695": {
+    "full_name": "Ted Ginn",
+    "position": "WR",
+    "team": null,
+    "years_exp": 15
+  },
+  "788": {
+    "full_name": "Dion Lewis",
+    "position": "RB",
+    "team": null,
+    "years_exp": 11
   },
   "827": {
     "full_name": "Tyrod Taylor",
@@ -47,6 +179,66 @@
     "team": "PHI",
     "years_exp": 15
   },
+  "830": {
+    "full_name": "A.J. Green",
+    "position": "WR",
+    "team": null,
+    "years_exp": 12
+  },
+  "943": {
+    "full_name": "Kyle Rudolph",
+    "position": "TE",
+    "team": null,
+    "years_exp": 12
+  },
+  "947": {
+    "full_name": "Julio Jones",
+    "position": "WR",
+    "team": null,
+    "years_exp": 13
+  },
+  "954": {
+    "full_name": "Cam Newton",
+    "position": "QB",
+    "team": null,
+    "years_exp": 11
+  },
+  "956": {
+    "full_name": "Mark Ingram",
+    "position": "RB",
+    "team": null,
+    "years_exp": 12
+  },
+  "1067": {
+    "full_name": "Marvin Jones",
+    "position": "WR",
+    "team": null,
+    "years_exp": 11
+  },
+  "1071": {
+    "full_name": "Mohamed Sanu",
+    "position": "WR",
+    "team": null,
+    "years_exp": 10
+  },
+  "1110": {
+    "full_name": "T.Y. Hilton",
+    "position": "WR",
+    "team": null,
+    "years_exp": 11
+  },
+  "1144": {
+    "full_name": "Cole Beasley",
+    "position": "WR",
+    "team": null,
+    "years_exp": 11
+  },
+  "1149": {
+    "full_name": "Alshon Jeffery",
+    "position": "WR",
+    "team": null,
+    "years_exp": 10
+  },
   "1166": {
     "full_name": "Kirk Cousins",
     "position": "QB",
@@ -59,8 +251,20 @@
     "team": null,
     "years_exp": 14
   },
+  "1244": {
+    "full_name": "Josh Gordon",
+    "position": "WR",
+    "team": null,
+    "years_exp": 10
+  },
   "1264": {
     "full_name": "Justin Tucker",
+    "position": "K",
+    "team": null,
+    "years_exp": 13
+  },
+  "1266": {
+    "full_name": "Greg Zuerlein",
     "position": "K",
     "team": null,
     "years_exp": 13
@@ -71,11 +275,29 @@
     "team": null,
     "years_exp": 13
   },
+  "1352": {
+    "full_name": "Robert Woods",
+    "position": "WR",
+    "team": null,
+    "years_exp": 12
+  },
   "1373": {
     "full_name": "Geno Smith",
     "position": "QB",
     "team": "NYJ",
     "years_exp": 13
+  },
+  "1386": {
+    "full_name": "Giovani Bernard",
+    "position": "RB",
+    "team": null,
+    "years_exp": 10
+  },
+  "1408": {
+    "full_name": "Le'Veon Bell",
+    "position": "RB",
+    "team": "TB",
+    "years_exp": 9
   },
   "1426": {
     "full_name": "DeAndre Hopkins",
@@ -95,11 +317,29 @@
     "team": "KC",
     "years_exp": 13
   },
+  "1476": {
+    "full_name": "Latavius Murray",
+    "position": "RB",
+    "team": null,
+    "years_exp": 11
+  },
   "1479": {
     "full_name": "Keenan Allen",
     "position": "WR",
     "team": null,
     "years_exp": 13
+  },
+  "1500": {
+    "full_name": "Jordan Reed",
+    "position": "TE",
+    "team": null,
+    "years_exp": 9
+  },
+  "1587": {
+    "full_name": "Vance McDonald",
+    "position": "TE",
+    "team": null,
+    "years_exp": 9
   },
   "1689": {
     "full_name": "Adam Thielen",
@@ -107,11 +347,65 @@
     "team": null,
     "years_exp": 13
   },
+  "1706": {
+    "full_name": "Jack Doyle",
+    "position": "TE",
+    "team": "IND",
+    "years_exp": 9
+  },
+  "1793": {
+    "full_name": "Trey Burton",
+    "position": "TE",
+    "team": null,
+    "years_exp": 8
+  },
+  "1817": {
+    "full_name": "Sammy Watkins",
+    "position": "WR",
+    "team": null,
+    "years_exp": 9
+  },
+  "1825": {
+    "full_name": "Jarvis Landry",
+    "position": "WR",
+    "team": null,
+    "years_exp": 9
+  },
+  "1833": {
+    "full_name": "Damien Williams",
+    "position": "RB",
+    "team": null,
+    "years_exp": 9
+  },
+  "1837": {
+    "full_name": "Jimmy Garoppolo",
+    "position": "QB",
+    "team": null,
+    "years_exp": 12
+  },
+  "1848": {
+    "full_name": "James White",
+    "position": "RB",
+    "team": null,
+    "years_exp": 8
+  },
   "1945": {
     "full_name": "Chris Boswell",
     "position": "K",
     "team": "PIT",
     "years_exp": 12
+  },
+  "1971": {
+    "full_name": "Donte Moncrief",
+    "position": "WR",
+    "team": null,
+    "years_exp": 8
+  },
+  "1992": {
+    "full_name": "Allen Robinson",
+    "position": "WR",
+    "team": null,
+    "years_exp": 11
   },
   "2020": {
     "full_name": "Cairo Santos",
@@ -119,17 +413,41 @@
     "team": "CHI",
     "years_exp": 12
   },
+  "2025": {
+    "full_name": "Albert Wilson",
+    "position": "WR",
+    "team": null,
+    "years_exp": 9
+  },
   "2028": {
     "full_name": "Derek Carr",
     "position": "QB",
     "team": null,
     "years_exp": 11
   },
+  "2078": {
+    "full_name": "Odell Beckham",
+    "position": "WR",
+    "team": "NYG",
+    "years_exp": 12
+  },
+  "2118": {
+    "full_name": "Eric Ebron",
+    "position": "TE",
+    "team": "PIT",
+    "years_exp": 8
+  },
   "2133": {
     "full_name": "Davante Adams",
     "position": "WR",
     "team": "LAR",
     "years_exp": 12
+  },
+  "2168": {
+    "full_name": "Devonta Freeman",
+    "position": "RB",
+    "team": null,
+    "years_exp": 8
   },
   "2197": {
     "full_name": "Brandin Cooks",
@@ -143,6 +461,24 @@
     "team": "SF",
     "years_exp": 12
   },
+  "2238": {
+    "full_name": "John Brown",
+    "position": "WR",
+    "team": null,
+    "years_exp": 9
+  },
+  "2279": {
+    "full_name": "Paul Richardson",
+    "position": "WR",
+    "team": null,
+    "years_exp": 8
+  },
+  "2306": {
+    "full_name": "Jameis Winston",
+    "position": "QB",
+    "team": "NYG",
+    "years_exp": 11
+  },
   "2307": {
     "full_name": "Marcus Mariota",
     "position": "QB",
@@ -154,6 +490,24 @@
     "position": "WR",
     "team": null,
     "years_exp": 10
+  },
+  "2315": {
+    "full_name": "Todd Gurley",
+    "position": "RB",
+    "team": null,
+    "years_exp": 7
+  },
+  "2319": {
+    "full_name": "DeVante Parker",
+    "position": "WR",
+    "team": null,
+    "years_exp": 9
+  },
+  "2320": {
+    "full_name": "Melvin Gordon",
+    "position": "RB",
+    "team": null,
+    "years_exp": 9
   },
   "2342": {
     "full_name": "Devin Smith",
@@ -173,6 +527,30 @@
     "team": null,
     "years_exp": 11
   },
+  "2378": {
+    "full_name": "Tevin Coleman",
+    "position": "RB",
+    "team": null,
+    "years_exp": 8
+  },
+  "2382": {
+    "full_name": "Duke Johnson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 8
+  },
+  "2391": {
+    "full_name": "David Johnson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 8
+  },
+  "2410": {
+    "full_name": "Jamison Crowder",
+    "position": "WR",
+    "team": null,
+    "years_exp": 10
+  },
   "2449": {
     "full_name": "Stefon Diggs",
     "position": "WR",
@@ -185,6 +563,12 @@
     "team": null,
     "years_exp": 11
   },
+  "2583": {
+    "full_name": "Tyrell Williams",
+    "position": "WR",
+    "team": null,
+    "years_exp": 7
+  },
   "2747": {
     "full_name": "Jason Myers",
     "position": "K",
@@ -196,6 +580,24 @@
     "position": "RB",
     "team": null,
     "years_exp": 11
+  },
+  "2822": {
+    "full_name": "Adam Humphries",
+    "position": "WR",
+    "team": null,
+    "years_exp": 8
+  },
+  "3157": {
+    "full_name": "William Fuller",
+    "position": "WR",
+    "team": null,
+    "years_exp": 6
+  },
+  "3161": {
+    "full_name": "Carson Wentz",
+    "position": "QB",
+    "team": "MIN",
+    "years_exp": 10
   },
   "3163": {
     "full_name": "Jared Goff",
@@ -215,10 +617,22 @@
     "team": "BAL",
     "years_exp": 10
   },
+  "3199": {
+    "full_name": "Michael Thomas",
+    "position": "WR",
+    "team": null,
+    "years_exp": 8
+  },
   "3200": {
     "full_name": "Sterling Shepard",
     "position": "WR",
     "team": null,
+    "years_exp": 10
+  },
+  "3202": {
+    "full_name": "Austin Hooper",
+    "position": "TE",
+    "team": "ATL",
     "years_exp": 10
   },
   "3214": {
@@ -226,6 +640,18 @@
     "position": "TE",
     "team": "NE",
     "years_exp": 10
+  },
+  "3225": {
+    "full_name": "Tyler Boyd",
+    "position": "WR",
+    "team": null,
+    "years_exp": 9
+  },
+  "3242": {
+    "full_name": "Kenyan Drake",
+    "position": "RB",
+    "team": null,
+    "years_exp": 8
   },
   "3257": {
     "full_name": "Jacoby Brissett",
@@ -251,8 +677,20 @@
     "team": "DAL",
     "years_exp": 10
   },
+  "3306": {
+    "full_name": "Jordan Howard",
+    "position": "RB",
+    "team": null,
+    "years_exp": 6
+  },
   "3321": {
     "full_name": "Tyreek Hill",
+    "position": "WR",
+    "team": null,
+    "years_exp": 10
+  },
+  "3423": {
+    "full_name": "Robbie Chosen",
     "position": "WR",
     "team": null,
     "years_exp": 10
@@ -263,11 +701,53 @@
     "team": "HOU",
     "years_exp": 10
   },
+  "3503": {
+    "full_name": "Geronimo Allison",
+    "position": "WR",
+    "team": null,
+    "years_exp": 6
+  },
+  "3594": {
+    "full_name": "Peyton Barber",
+    "position": "RB",
+    "team": null,
+    "years_exp": 6
+  },
   "3678": {
     "full_name": "Wil Lutz",
     "position": "K",
     "team": "DEN",
     "years_exp": 10
+  },
+  "3827": {
+    "full_name": "Aldrick Rosas",
+    "position": "K",
+    "team": null,
+    "years_exp": 6
+  },
+  "3868": {
+    "full_name": "Jalen Richard",
+    "position": "RB",
+    "team": "LV",
+    "years_exp": 6
+  },
+  "3969": {
+    "full_name": "Leonard Fournette",
+    "position": "RB",
+    "team": null,
+    "years_exp": 7
+  },
+  "3976": {
+    "full_name": "Mitchell Trubisky",
+    "position": "QB",
+    "team": "TEN",
+    "years_exp": 9
+  },
+  "4017": {
+    "full_name": "Deshaun Watson",
+    "position": "QB",
+    "team": "CLE",
+    "years_exp": 9
   },
   "4018": {
     "full_name": "Joe Mixon",
@@ -299,6 +779,12 @@
     "team": "NO",
     "years_exp": 9
   },
+  "4036": {
+    "full_name": "Corey Davis",
+    "position": "WR",
+    "team": null,
+    "years_exp": 6
+  },
   "4037": {
     "full_name": "Chris Godwin",
     "position": "WR",
@@ -323,11 +809,23 @@
     "team": "KC",
     "years_exp": 9
   },
+  "4055": {
+    "full_name": "O.J. Howard",
+    "position": "TE",
+    "team": null,
+    "years_exp": 6
+  },
   "4066": {
     "full_name": "Evan Engram",
     "position": "TE",
     "team": "DEN",
     "years_exp": 9
+  },
+  "4068": {
+    "full_name": "Mike Williams",
+    "position": "WR",
+    "team": null,
+    "years_exp": 8
   },
   "4082": {
     "full_name": "Curtis Samuel",
@@ -341,6 +839,12 @@
     "team": null,
     "years_exp": 9
   },
+  "4131": {
+    "full_name": "Kenny Golladay",
+    "position": "WR",
+    "team": null,
+    "years_exp": 6
+  },
   "4137": {
     "full_name": "James Conner",
     "position": "RB",
@@ -353,11 +857,29 @@
     "team": null,
     "years_exp": 9
   },
+  "4146": {
+    "full_name": "Dede Westbrook",
+    "position": "WR",
+    "team": null,
+    "years_exp": 5
+  },
   "4147": {
     "full_name": "Samaje Perine",
     "position": "RB",
     "team": "CIN",
     "years_exp": 9
+  },
+  "4152": {
+    "full_name": "Marlon Mack",
+    "position": "RB",
+    "team": null,
+    "years_exp": 7
+  },
+  "4157": {
+    "full_name": "Tarik Cohen",
+    "position": "RB",
+    "team": null,
+    "years_exp": 7
   },
   "4171": {
     "full_name": "Josh Reynolds",
@@ -407,6 +929,12 @@
     "team": null,
     "years_exp": 9
   },
+  "4273": {
+    "full_name": "Chris Carson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 5
+  },
   "4381": {
     "full_name": "Taysom Hill",
     "position": "TE",
@@ -418,6 +946,12 @@
     "position": "WR",
     "team": "ARI",
     "years_exp": 9
+  },
+  "4455": {
+    "full_name": "Matt Breida",
+    "position": "RB",
+    "team": null,
+    "years_exp": 7
   },
   "4663": {
     "full_name": "Austin Ekeler",
@@ -455,6 +989,12 @@
     "team": "SEA",
     "years_exp": 8
   },
+  "4949": {
+    "full_name": "Derrius Guice",
+    "position": "RB",
+    "team": null,
+    "years_exp": 4
+  },
   "4950": {
     "full_name": "Christian Kirk",
     "position": "WR",
@@ -466,6 +1006,18 @@
     "position": "WR",
     "team": null,
     "years_exp": 7
+  },
+  "4958": {
+    "full_name": "Brett Maher",
+    "position": "K",
+    "team": null,
+    "years_exp": 11
+  },
+  "4962": {
+    "full_name": "Sony Michel",
+    "position": "RB",
+    "team": null,
+    "years_exp": 5
   },
   "4981": {
     "full_name": "Calvin Ridley",
@@ -485,10 +1037,22 @@
     "team": "BUF",
     "years_exp": 8
   },
+  "4985": {
+    "full_name": "Rashaad Penny",
+    "position": "RB",
+    "team": null,
+    "years_exp": 6
+  },
   "4988": {
     "full_name": "Nick Chubb",
     "position": "RB",
     "team": null,
+    "years_exp": 8
+  },
+  "4992": {
+    "full_name": "Dante Pettis",
+    "position": "WR",
+    "team": "BUF",
     "years_exp": 8
   },
   "4993": {
@@ -497,11 +1061,29 @@
     "team": "CIN",
     "years_exp": 8
   },
+  "4994": {
+    "full_name": "Kalen Ballage",
+    "position": "RB",
+    "team": null,
+    "years_exp": 4
+  },
+  "4998": {
+    "full_name": "DaeSean Hamilton",
+    "position": "WR",
+    "team": null,
+    "years_exp": 4
+  },
   "5001": {
     "full_name": "Dalton Schultz",
     "position": "TE",
     "team": "HOU",
     "years_exp": 8
+  },
+  "5007": {
+    "full_name": "Keke Coutee",
+    "position": "WR",
+    "team": null,
+    "years_exp": 5
   },
   "5010": {
     "full_name": "Will Dissly",
@@ -515,17 +1097,53 @@
     "team": "BAL",
     "years_exp": 8
   },
+  "5013": {
+    "full_name": "Anthony Miller",
+    "position": "WR",
+    "team": null,
+    "years_exp": 7
+  },
   "5022": {
     "full_name": "Dallas Goedert",
     "position": "TE",
     "team": "PHI",
     "years_exp": 8
   },
+  "5024": {
+    "full_name": "James Washington",
+    "position": "WR",
+    "team": null,
+    "years_exp": 6
+  },
+  "5038": {
+    "full_name": "Michael Gallup",
+    "position": "WR",
+    "team": null,
+    "years_exp": 7
+  },
   "5045": {
     "full_name": "Courtland Sutton",
     "position": "WR",
     "team": "DEN",
     "years_exp": 8
+  },
+  "5046": {
+    "full_name": "Royce Freeman",
+    "position": "RB",
+    "team": null,
+    "years_exp": 8
+  },
+  "5052": {
+    "full_name": "Ronald Jones",
+    "position": "RB",
+    "team": null,
+    "years_exp": 5
+  },
+  "5068": {
+    "full_name": "Kerryon Johnson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 4
   },
   "5086": {
     "full_name": "Marquez Valdes-Scantling",
@@ -545,15 +1163,33 @@
     "team": null,
     "years_exp": 7
   },
+  "5107": {
+    "full_name": "Jaylen Samuels",
+    "position": "RB",
+    "team": null,
+    "years_exp": 4
+  },
   "5119": {
     "full_name": "Jason Sanders",
     "position": "K",
     "team": "NYJ",
     "years_exp": 8
   },
+  "5131": {
+    "full_name": "Justin Jackson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 5
+  },
   "5169": {
     "full_name": "Malik Earl",
     "position": "WR",
+    "team": null,
+    "years_exp": 4
+  },
+  "5170": {
+    "full_name": "Phillip Lindsay",
+    "position": "RB",
     "team": null,
     "years_exp": 4
   },
@@ -583,6 +1219,12 @@
   },
   "5284": {
     "full_name": "Jeff Wilson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 8
+  },
+  "5347": {
+    "full_name": "Nyheim Miller-Hines",
     "position": "RB",
     "team": null,
     "years_exp": 8
@@ -646,6 +1288,12 @@
     "position": "TE",
     "team": "BUF",
     "years_exp": 7
+  },
+  "5916": {
+    "full_name": "Darrell Henderson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 4
   },
   "5927": {
     "full_name": "Terry McLaurin",
@@ -724,6 +1372,18 @@
     "position": "WR",
     "team": "NYG",
     "years_exp": 7
+  },
+  "6151": {
+    "full_name": "Miles Sanders",
+    "position": "RB",
+    "team": null,
+    "years_exp": 7
+  },
+  "6178": {
+    "full_name": "Darwin Thompson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 4
   },
   "6219": {
     "full_name": "Austin Seibert",

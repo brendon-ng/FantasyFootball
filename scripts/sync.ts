@@ -23,7 +23,7 @@
  *   --league=den-ops   only this league
  */
 
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import {
@@ -256,6 +256,12 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
   };
 }
 
+/** The shape `import:espn:lineups` writes. Only the parts sync needs. */
+interface ManualLineups {
+  weeks: Record<string, Record<string, { playerPoints: Record<string, number> }>>;
+  espnOnly?: Record<string, { full_name: string; position: string | null; team: string | null }>;
+}
+
 /**
  * Builds `data/players.json` — a slim index of only the players this league has
  * ever touched.
@@ -271,6 +277,8 @@ async function syncPlayers(leagues: ScriptLeague[]): Promise<void> {
   // is league-agnostic, but each league also records which players it actually
   // references, so a build only generates pages for its own players.
   const byLeague = new Map<string, Set<string>>();
+  /** Metadata for players Sleeper has never had. See `ManualLineups.espnOnly`. */
+  const espnOnly = new Map<string, { full_name: string; position: string | null; team: string | null }>();
   let current = new Set<string>();
   const collect = (v: unknown) => {
     if (Array.isArray(v)) v.forEach((x) => typeof x === "string" && current.add(x));
@@ -308,6 +316,21 @@ async function syncPlayers(leagues: ScriptLeague[]): Promise<void> {
           collect(t.adds);
           collect(t.drops);
         }
+      }
+    }
+
+    // ESPN-era lineups, recovered by `import:espn:lineups`. Their ids are already
+    // normalised to Sleeper's, so they index exactly like a Sleeper roster — the
+    // handful Sleeper has never carried arrive as `espn-` ids and are resolved
+    // from the same file below.
+    const lineupDir = join(dataDir(league.slug), "manual", "lineups");
+    if (existsSync(lineupDir)) {
+      for (const file of readdirSync(lineupDir).filter((f) => f.endsWith(".json"))) {
+        const l = readJson<ManualLineups>(join(lineupDir, file));
+        for (const byOwner of Object.values(l?.weeks ?? {})) {
+          for (const side of Object.values(byOwner)) collect(side.playerPoints);
+        }
+        for (const [id, meta] of Object.entries(l?.espnOnly ?? {})) espnOnly.set(id, meta);
       }
     }
 
@@ -353,7 +376,12 @@ async function syncPlayers(leagues: ScriptLeague[]): Promise<void> {
       // are absent from the player map in some Sleeper responses.
       if (/^[A-Z]{2,4}$/.test(id)) {
         slim[id] = { full_name: `${id} D/ST`, position: "DEF", team: id };
+        continue;
       }
+      // An ESPN-era player Sleeper has never carried. Named from the import so a
+      // 2019 lineup row reads as a person rather than an id.
+      const espn = espnOnly.get(id);
+      if (espn) slim[id] = { ...espn, years_exp: null };
       continue;
     }
     slim[id] = {

@@ -1,4 +1,14 @@
 {
+  "2019-1-brendon-ng-vs-david-collier": [
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "brendon-ng",
+      "playerId": "2391",
+      "stillStands": false,
+      "value": 25.7
+    }
+  ],
   "2019-1-camina-balmores-vs-michaela-frederick": [
     {
       "kind": "weekly-low",
@@ -22,6 +32,14 @@
       "ownerSlug": "michaela-frederick",
       "stillStands": false,
       "value": 11.94
+    },
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "camina-balmores",
+      "playerId": "4017",
+      "stillStands": false,
+      "value": 30.72
     }
   ],
   "2019-1-cassidy-pensa-vs-jake-gibbons": [
@@ -67,6 +85,14 @@
       "ownerSlug": "olivia-nelli",
       "stillStands": false,
       "value": 55.16
+    },
+    {
+      "kind": "player-week",
+      "label": "Best single week by a player in league history",
+      "ownerSlug": "olivia-nelli",
+      "playerId": "4034",
+      "stillStands": false,
+      "value": 42.9
     }
   ],
   "2019-10-camina-balmores-vs-logan-dunn": [
@@ -378,32 +404,6 @@
       "ownerSlug": "olivia-nelli",
       "stillStands": false,
       "value": 210.18
-    }
-  ],
-  "2024-1-brendon-ng-vs-spencer-kim": [
-    {
-      "kind": "player-week",
-      "label": "Best single week by a player in league history",
-      "ownerSlug": "brendon-ng",
-      "playerId": "8408",
-      "stillStands": false,
-      "value": 22.2
-    },
-    {
-      "kind": "player-week",
-      "label": "Best single week by a player in league history",
-      "ownerSlug": "brendon-ng",
-      "playerId": "4039",
-      "stillStands": false,
-      "value": 32
-    },
-    {
-      "kind": "player-week",
-      "label": "Best single week by a player in league history",
-      "ownerSlug": "spencer-kim",
-      "playerId": "4866",
-      "stillStands": false,
-      "value": 33.2
     }
   ],
   "2024-10-jaymie-lew-vs-safvet-besen": [

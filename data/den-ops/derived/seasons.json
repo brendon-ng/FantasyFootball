@@ -291,7 +291,17 @@
       }
     ],
     "regularSeasonWeeks": 13,
-    "rosterPositions": [],
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "D/ST",
+      "K"
+    ],
     "runnerUp": "jake-gibbons",
     "season": 2019,
     "standings": [

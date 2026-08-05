@@ -1425,6 +1425,13 @@ function writeReplay(slug: string, summaries: SeasonSummary[], matchups: Matchup
 
 // --- imported (pre-Sleeper) seasons ------------------------------------------
 
+/** What `import:espn:lineups` writes for one season. */
+interface ManualLineups {
+  season: number;
+  rosterPositions: string[];
+  weeks: Record<string, Record<string, { starters: string[]; playerPoints: Record<string, number> }>>;
+}
+
 interface ManualSeason {
   season: number;
   teams: number;
@@ -1463,9 +1470,10 @@ interface ManualSeason {
  * Weekly matchups from imported seasons, in the same shape as Sleeper's.
  *
  * Once a season's scoreboards exist it is a full participant in head-to-head,
- * the record book and every weekly list — the only thing still missing is
- * lineups, so `starters` and `playerPoints` are empty and player records stay
- * Sleeper-only.
+ * the record book and every weekly list. Lineups now come from ESPN's read API
+ * (`import:espn:lineups`) with ids normalised to Sleeper's, so an imported season
+ * is not a lesser kind of season any more — a week with lineups on file feeds
+ * player records exactly as a Sleeper week does.
  *
  * Callers MUST stop scraping that season's brackets for scores once this returns
  * games for it, or every postseason game is counted twice.
@@ -1480,12 +1488,20 @@ function importedMatchups(): Matchup[] {
     const m = readJson<ManualSeason>(join(dir, file));
     if (!m?.matchups?.length) continue;
 
+    // Absent until a season has been through the lineup importer, and absent per
+    // WEEK within it — the import runs a week at a time, so a half-done season
+    // has to render the done weeks fully and the rest as before.
+    const lineups = readJson<ManualLineups>(
+      join(dir, "lineups", `${m.season}.json`),
+    );
+
     m.matchups.forEach((g, i) => {
+      const forWeek = lineups?.weeks?.[String(g.week)];
       const side = (x: { ownerSlug: string; points: number }): MatchupSide => ({
         ownerSlug: x.ownerSlug,
         points: x.points,
-        starters: [],
-        playerPoints: {},
+        starters: forWeek?.[x.ownerSlug]?.starters ?? [],
+        playerPoints: forWeek?.[x.ownerSlug]?.playerPoints ?? {},
       });
       out.push({
         season: m.season,
@@ -1534,6 +1550,9 @@ function importedSeasons(): SeasonSummary[] {
     if (!m) continue;
 
     const slugOf = new Map(m.standings.map((r) => [r.teamName, r.teamSlug]));
+    // The slot labels the recovered lineups actually used, so the matchup page's
+    // Slot column reads QB/RB/FLEX rather than falling back to "FLEX" for all.
+    const lineups = readJson<ManualLineups>(join(dir, "lineups", `${m.season}.json`));
 
     /** Builds one section's matches, with byes, ids, scores and routing. */
     const section = (
@@ -1661,7 +1680,7 @@ function importedSeasons(): SeasonSummary[] {
       teams: m.teams,
       regularSeasonWeeks: m.regularSeasonWeeks,
       finalizedThroughWeek: m.finalWeek,
-      rosterPositions: [],
+      rosterPositions: lineups?.rosterPositions ?? [],
       standings: standings.sort((a, b) => a.seed - b.seed),
       winnersBracket: winners,
       losersBracket: ladder,

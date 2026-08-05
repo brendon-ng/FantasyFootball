@@ -16,6 +16,7 @@
     "adp": "node scripts/adp.ts",
     "adp:lock": "node scripts/adp.ts --lock",
     "import:espn": "node scripts/import-espn.ts",
+    "import:espn:lineups": "node scripts/import-espn-lineups.ts",
     "build:one": "next build"
   },
   "dependencies": {

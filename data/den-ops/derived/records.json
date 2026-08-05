@@ -989,6 +989,14 @@
       "week": 9
     },
     {
+      "ownerSlug": "olivia-nelli",
+      "playerId": "4034",
+      "points": 42.9,
+      "season": 2019,
+      "started": true,
+      "week": 1
+    },
+    {
       "ownerSlug": "jake-gibbons",
       "playerId": "2133",
       "points": 42.8,
@@ -1077,6 +1085,14 @@
       "week": 8
     },
     {
+      "ownerSlug": "spencer-kim",
+      "playerId": "4663",
+      "points": 39.4,
+      "season": 2019,
+      "started": true,
+      "week": 1
+    },
+    {
       "ownerSlug": "jaymie-lew",
       "playerId": "9756",
       "points": 39.3,
@@ -1091,22 +1107,6 @@
       "season": 2025,
       "started": true,
       "week": 2
-    },
-    {
-      "ownerSlug": "david-collier",
-      "playerId": "4034",
-      "points": 39.1,
-      "season": 2025,
-      "started": true,
-      "week": 7
-    },
-    {
-      "ownerSlug": "jake-gibbons",
-      "playerId": "8112",
-      "points": 38.8,
-      "season": 2025,
-      "started": true,
-      "week": 9
     }
   ],
   "weeklyHigh": [
