@@ -815,6 +815,12 @@
     "team": null,
     "years_exp": 7
   },
+  "2711": {
+    "full_name": "Taylor Heinicke",
+    "position": "QB",
+    "team": null,
+    "years_exp": 10
+  },
   "2747": {
     "full_name": "Jason Myers",
     "position": "K",
@@ -824,6 +830,12 @@
   "2749": {
     "full_name": "Raheem Mostert",
     "position": "RB",
+    "team": null,
+    "years_exp": 11
+  },
+  "2750": {
+    "full_name": "DeAndre Carter",
+    "position": "WR",
     "team": null,
     "years_exp": 11
   },
@@ -1133,6 +1145,12 @@
     "team": null,
     "years_exp": 8
   },
+  "4080": {
+    "full_name": "Zay Jones",
+    "position": "WR",
+    "team": null,
+    "years_exp": 9
+  },
   "4082": {
     "full_name": "Curtis Samuel",
     "position": "WR",
@@ -1234,6 +1252,12 @@
     "position": "K",
     "team": "PHI",
     "years_exp": 9
+  },
+  "4197": {
+    "full_name": "Isaiah McKenzie",
+    "position": "WR",
+    "team": null,
+    "years_exp": 8
   },
   "4199": {
     "full_name": "Aaron Jones",
@@ -1889,6 +1913,12 @@
     "team": "ARI",
     "years_exp": 7
   },
+  "6012": {
+    "full_name": "Travis Homer",
+    "position": "RB",
+    "team": "PIT",
+    "years_exp": 7
+  },
   "6039": {
     "full_name": "Ty Johnson",
     "position": "RB",
@@ -1918,6 +1948,12 @@
     "position": "QB",
     "team": "TB",
     "years_exp": 7
+  },
+  "6126": {
+    "full_name": "Irv Smith",
+    "position": "TE",
+    "team": null,
+    "years_exp": 6
   },
   "6130": {
     "full_name": "Devin Singletary",
@@ -2141,6 +2177,12 @@
     "team": null,
     "years_exp": 5
   },
+  "6847": {
+    "full_name": "Devin Duvernay",
+    "position": "WR",
+    "team": "ARI",
+    "years_exp": 6
+  },
   "6849": {
     "full_name": "Denzel Mims",
     "position": "WR",
@@ -2207,6 +2249,12 @@
     "team": "CHI",
     "years_exp": 6
   },
+  "6920": {
+    "full_name": "Isaiah Hodgins",
+    "position": "WR",
+    "team": "NYG",
+    "years_exp": 6
+  },
   "6931": {
     "full_name": "DeeJay Dallas",
     "position": "RB",
@@ -2230,6 +2278,12 @@
     "position": "RB",
     "team": null,
     "years_exp": 6
+  },
+  "6951": {
+    "full_name": "Eno Benjamin",
+    "position": "RB",
+    "team": null,
+    "years_exp": 4
   },
   "6955": {
     "full_name": "James Robinson",
@@ -2357,6 +2411,12 @@
     "team": null,
     "years_exp": 5
   },
+  "7538": {
+    "full_name": "Zach Wilson",
+    "position": "QB",
+    "team": "NO",
+    "years_exp": 5
+  },
   "7543": {
     "full_name": "Travis Etienne",
     "position": "RB",
@@ -2369,11 +2429,23 @@
     "team": "DET",
     "years_exp": 5
   },
+  "7551": {
+    "full_name": "Deon Jackson",
+    "position": "RB",
+    "team": null,
+    "years_exp": 4
+  },
   "7553": {
     "full_name": "Kyle Pitts",
     "position": "TE",
     "team": "ATL",
     "years_exp": 5
+  },
+  "7554": {
+    "full_name": "Tre' McKitty",
+    "position": "TE",
+    "team": null,
+    "years_exp": 4
   },
   "7561": {
     "full_name": "Elijah Mitchell",
@@ -2513,6 +2585,12 @@
     "team": "CAR",
     "years_exp": 5
   },
+  "7741": {
+    "full_name": "Caleb Huntley",
+    "position": "RB",
+    "team": null,
+    "years_exp": 2
+  },
   "7828": {
     "full_name": "Noah Gray",
     "position": "TE",
@@ -2559,6 +2637,12 @@
     "full_name": "Jalen Tolbert",
     "position": "WR",
     "team": "MIA",
+    "years_exp": 4
+  },
+  "8119": {
+    "full_name": "Jahan Dotson",
+    "position": "WR",
+    "team": "ATL",
     "years_exp": 4
   },
   "8121": {
@@ -2619,6 +2703,12 @@
     "full_name": "Khalil Shakir",
     "position": "WR",
     "team": "BUF",
+    "years_exp": 4
+  },
+  "8135": {
+    "full_name": "Treylon Burks",
+    "position": "WR",
+    "team": "WAS",
     "years_exp": 4
   },
   "8136": {
@@ -2693,6 +2783,12 @@
     "team": "KC",
     "years_exp": 4
   },
+  "8153": {
+    "full_name": "Isaiah Spiller",
+    "position": "RB",
+    "team": null,
+    "years_exp": 3
+  },
   "8154": {
     "full_name": "Brian Robinson",
     "position": "RB",
@@ -2710,6 +2806,18 @@
     "position": "WR",
     "team": "GB",
     "years_exp": 4
+  },
+  "8168": {
+    "full_name": "Skyy Moore",
+    "position": "WR",
+    "team": "GB",
+    "years_exp": 4
+  },
+  "8171": {
+    "full_name": "Kyle Philips",
+    "position": "WR",
+    "team": null,
+    "years_exp": 3
   },
   "8172": {
     "full_name": "Greg Dulcich",
@@ -2741,6 +2849,12 @@
     "team": "DET",
     "years_exp": 4
   },
+  "8211": {
+    "full_name": "Tyrion Davis-Price",
+    "position": "RB",
+    "team": null,
+    "years_exp": 3
+  },
   "8220": {
     "full_name": "Sincere McCormick",
     "position": "RB",
@@ -2763,6 +2877,12 @@
     "full_name": "Julius Chestnut",
     "position": "RB",
     "team": "TEN",
+    "years_exp": 4
+  },
+  "8258": {
+    "full_name": "Cade York",
+    "position": "K",
+    "team": "NYJ",
     "years_exp": 4
   },
   "8259": {

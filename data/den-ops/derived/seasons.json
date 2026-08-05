@@ -2245,7 +2245,17 @@
       }
     ],
     "regularSeasonWeeks": 14,
-    "rosterPositions": [],
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "D/ST",
+      "K"
+    ],
     "runnerUp": "spencer-kim",
     "season": 2022,
     "standings": [

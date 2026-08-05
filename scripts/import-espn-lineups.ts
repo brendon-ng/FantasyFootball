@@ -205,6 +205,14 @@ interface MatchResult {
   via: "espn-id" | "defence" | "name" | "nickname" | "none";
   /** Set when the two databases spell the player differently. */
   renamed?: string;
+  /**
+   * Set when more than one Sleeper player survived every filter.
+   *
+   * The dangerous case, and the one a rename report cannot show: two different
+   * people with the SAME name and position, where the tie is broken arbitrarily
+   * and the names agree, so nothing looks wrong.
+   */
+  ambiguous?: string;
 }
 
 /**
@@ -236,7 +244,17 @@ function matchPlayer(pl: EspnPlayer, idx: Index): MatchResult {
     const team = PRO_TEAM[pl.proTeamId ?? -1];
     const byTeam = team ? pool.filter((c) => c.p.team === team) : [];
     const hit = byTeam[0] ?? pool[0];
-    return { id: hit.id, matched: true, via: "name", renamed: label(pl, hit.p) };
+    const tied = byTeam.length > 1 || (!byTeam.length && pool.length > 1);
+    return {
+      id: hit.id,
+      matched: true,
+      via: "name",
+      renamed: label(pl, hit.p),
+      ambiguous: tied
+        ? `${pl.fullName} (${pos ?? "?"}, ${team ?? "?"}) -> chose ${hit.id} from ` +
+          (byTeam.length > 1 ? byTeam : pool).map((c) => `${c.id}:${c.p.position}/${c.p.team}`).join(", ")
+        : undefined,
+    };
   }
 
   // LAST RESORT: surname plus position, and only when that is UNIQUE and the
@@ -285,6 +303,7 @@ async function main(): Promise<void> {
   const via = { "espn-id": 0, defence: 0, name: 0, nickname: 0, none: 0 };
   /** Every match where the two databases disagree on the name, for eyeballing. */
   const renames = new Set<string>();
+  const ambiguous = new Set<string>();
 
   for (const league of resolveLeagues(onlyLeague ? [`--league=${onlyLeague}`] : [])) {
     const slug = league.slug;
@@ -390,6 +409,7 @@ async function main(): Promise<void> {
               const m = matchPlayer(e.playerPoolEntry.player, idx);
               via[m.via] += 1;
               if (m.renamed) renames.add(`${m.renamed} (${m.via})`);
+              if (m.ambiguous) ambiguous.add(m.ambiguous);
               if (!m.matched) {
                 unmatched.add(e.playerPoolEntry.player.fullName);
                 out.espnOnly[m.id] = {
@@ -463,6 +483,10 @@ async function main(): Promise<void> {
       // PRINTED, NOT BURIED. A wrong name match still sums to the right team
       // score, so the reconciliation check cannot catch it — these are the only
       // rows a human has to look at.
+      if (ambiguous.size) {
+        log.warn(`${slug} ${season}: SAME name, more than one candidate — verify these —`);
+        for (const a of [...ambiguous].sort()) log.warn(`      ${a}`);
+      }
       if (renames.size) {
         log.warn(`${slug} ${season}: matched under a different name, check these —`);
         for (const r of [...renames].sort()) log.warn(`      ${r}`);
