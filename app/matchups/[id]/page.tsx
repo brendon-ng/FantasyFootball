@@ -298,9 +298,11 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
       ) : (
         <Panel>
           <PanelHeader title="Lineups" />
+          {/* Nothing reaches this today: every game in league history has a
+              lineup. It survives for a game recovered from brackets alone, which
+              is still possible for a season whose scoreboards were never found. */}
           <div className="px-4 py-8 text-center text-sm text-chalk-600 sm:px-5">
-            This game predates the league&apos;s move to Sleeper. The archived ESPN pages
-            recorded the score but no lineups, so there is nothing to break down.
+            No lineups on record for this game.
           </div>
         </Panel>
       )}
