@@ -12,9 +12,9 @@ import type { DraftPickRecord, PlayerMeta, Trade, TradeReturn } from "@/lib/type
  * reading a player's timeline, and navigating to `/trades` to find the matching
  * row loses your place in it.
  *
- * A BOTTOM SHEET ON A PHONE, floated rather than flush: it sits where a thumb
- * reaches, with `pb-8` keeping it clear of the edge and the home indicator. It
- * was briefly pinned hard to the bottom, which read as cut off.
+ * A BOTTOM SHEET ON A PHONE, flush to the bottom and the sides, which is the
+ * shape people expect there. The breathing room goes INSIDE, under the tables —
+ * padding the sheet away from the edges instead just made it a floating box.
  *
  * Reuses `TradeCard`, so the trade reads identically here, on the trades page and
  * on an owner page. Three renderings of one thing would drift.
@@ -62,13 +62,13 @@ export function TradeModal({
       aria-modal="true"
       aria-label="Trade detail"
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-end justify-center bg-ink-900/80 p-3 pb-8 backdrop-blur-sm sm:items-center sm:p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-ink-900/80 backdrop-blur-sm sm:items-center sm:p-4"
     >
       <div
         // The backdrop closes; a click INSIDE must not bubble up to it, or
         // selecting text in the dialog would dismiss it.
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[85vh] w-full max-w-[45rem] overflow-y-auto rounded-xl border border-ink-600 bg-ink-800 shadow-2xl"
+        className="max-h-[85vh] w-full max-w-[50rem] overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
       >
         <div className="sticky top-0 flex items-center justify-between border-b border-ink-600 bg-ink-800 px-4 py-3 sm:px-5">
           <div>
@@ -86,14 +86,19 @@ export function TradeModal({
             Close
           </button>
         </div>
-        <TradeCard
-          trade={trade}
-          players={players}
-          ownerNames={ownerNames}
-          outcomes={outcomes}
-          returns={returns}
-          showSeason={false}
-        />
+        {/* Breathing room UNDER the tables, not around the sheet. On a phone the
+            sheet runs to the edges — that is the shape people expect — but the
+            last row of numbers sitting on the screen edge reads as cut off. */}
+        <div className="pb-6 sm:pb-1">
+          <TradeCard
+            trade={trade}
+            players={players}
+            ownerNames={ownerNames}
+            outcomes={outcomes}
+            returns={returns}
+            showSeason={false}
+          />
+        </div>
       </div>
     </div>
   );
