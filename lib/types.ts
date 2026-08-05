@@ -428,9 +428,21 @@ export interface TradeStat {
 
 /** One side's haul in one season. */
 export interface TradeSide {
-  /** Per player, so a lopsided haul is not hidden inside a total. */
+  /** Players received in the trade itself. */
   byPlayer: Record<string, TradeStat>;
+  /**
+   * Players DRAFTED with a pick received in the trade, kept apart so the UI can
+   * offer them as an option rather than forcing them into the comparison.
+   *
+   * Only where the receiver actually used the pick. Three of the twenty-six
+   * settled picks were traded on again, and those returned nothing to the team
+   * that briefly held them.
+   */
+  fromPicks: Record<string, TradeStat>;
+  /** Players only. */
   total: TradeStat;
+  /** Players plus everyone drafted with the picks. */
+  totalWithPicks: TradeStat;
 }
 
 /**

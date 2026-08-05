@@ -358,8 +358,20 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
   const history = getPlayerHistory();
   const blank = (): TradeStat => ({ games: 0, started: 0, startPoints: 0, benchPoints: 0 });
 
+  const sum = (a: TradeStat, b: TradeStat): TradeStat => ({
+    games: a.games + b.games,
+    started: a.started + b.started,
+    startPoints: Number((a.startPoints + b.startPoints).toFixed(2)),
+    benchPoints: Number((a.benchPoints + b.benchPoints).toFixed(2)),
+  });
+
   /** One owner's totals for a set of players over one season, from `fromWeek`. */
-  const tally = (season: number, owner: string, ids: string[], fromWeek: number): TradeSide => {
+  const tally = (
+    season: number,
+    owner: string,
+    ids: string[],
+    fromWeek: number,
+  ): { byPlayer: Record<string, TradeStat>; total: TradeStat } => {
     const byPlayer: Record<string, TradeStat> = Object.fromEntries(ids.map((id) => [id, blank()]));
     for (let week = fromWeek; week <= 25; week++) {
       const side = byWeek.get(`${season}|${week}`)?.get(owner);
@@ -412,9 +424,31 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
     return { byPlayer, total };
   };
 
+  // Which player a traded pick actually became, and for whom. Keyed by the pick
+  // as the league names it: whose pick it originally was.
+  const pickBecame = new Map<string, DraftPickRecord>();
+  for (const p of getDrafts()) {
+    if (p.slotOwnerSlug) pickBecame.set(`${p.season}|${p.round}|${p.slotOwnerSlug}`, p);
+  }
+
   const out: Record<string, TradeReturn> = {};
   for (const trade of getTrades()) {
     const seasons: TradeSeason[] = [];
+
+    // A pick only pays the team that USED it. One traded on again returned
+    // nothing to the side that briefly held it, however good the player was.
+    const pickArrivals = new Map<string, string[]>();
+    if (!trade.vetoed) {
+      for (const leg of trade.legs) {
+        if (leg.kind !== "pick" || !leg.toSlug || !leg.pick) continue;
+        const made = pickBecame.get(
+          `${leg.pick.season}|${leg.pick.round}|${leg.pick.originalSlug}`,
+        );
+        if (!made || made.ownerSlug !== leg.toSlug) continue;
+        const key = `${made.season}|${leg.toSlug}`;
+        pickArrivals.set(key, [...(pickArrivals.get(key) ?? []), made.playerId]);
+      }
+    }
 
     // Who each owner is still holding, narrowing year by year.
     let holding = new Map<string, string[]>(
@@ -428,24 +462,55 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
       ]),
     );
 
+    let viaPick = new Map<string, string[]>(trade.ownerSlugs.map((o) => [o, []]));
+    const lastArrival = Math.max(
+      trade.season,
+      ...[...pickArrivals.keys()].map((k) => Number(k.split("|")[0])),
+    );
+
     let season = trade.season;
     let fromWeek = trade.week;
-    while ([...holding.values()].some((ids) => ids.length)) {
-      const byOwner: Record<string, TradeSide> = {};
-      for (const [owner, ids] of holding) {
-        if (ids.length) byOwner[owner] = tally(season, owner, ids, fromWeek);
+    while (
+      [...holding.values()].some((ids) => ids.length) ||
+      [...viaPick.values()].some((ids) => ids.length) ||
+      season <= lastArrival
+    ) {
+      // A drafted player joins in the season of HIS draft, and from week 1 — the
+      // trade week only bounds the players who changed hands that day.
+      for (const owner of trade.ownerSlugs) {
+        const arriving = pickArrivals.get(`${season}|${owner}`) ?? [];
+        if (arriving.length) {
+          viaPick.set(owner, [...new Set([...(viaPick.get(owner) ?? []), ...arriving])]);
+        }
       }
-      seasons.push({ season, partial: season === trade.season, byOwner });
+
+      const byOwner: Record<string, TradeSide> = {};
+      for (const owner of trade.ownerSlugs) {
+        const ids = holding.get(owner) ?? [];
+        const picked = viaPick.get(owner) ?? [];
+        if (!ids.length && !picked.length) continue;
+        const players = tally(season, owner, ids, fromWeek);
+        const drafted = tally(season, owner, picked, 1);
+        byOwner[owner] = {
+          byPlayer: players.byPlayer,
+          fromPicks: drafted.byPlayer,
+          total: players.total,
+          totalWithPicks: sum(players.total, drafted.total),
+        };
+      }
+      if (Object.keys(byOwner).length) {
+        seasons.push({ season, partial: season === trade.season, byOwner });
+      }
 
       // THE CHAIN CONTINUES ONLY THROUGH A KEEP. Anyone not retained by the same
       // owner for the next season drops out; when nobody is left the trade has
       // finished paying and there is no further section.
-      holding = new Map(
-        [...holding].map(([owner, ids]) => [
-          owner,
-          ids.filter((id) => keptBy.get(`${season + 1}|${owner}`)?.has(id)),
-        ]),
-      );
+      const survives = (owner: string, ids: string[]) =>
+        ids.filter((id) => keptBy.get(`${season + 1}|${owner}`)?.has(id));
+      holding = new Map([...holding].map(([o, ids]) => [o, survives(o, ids)]));
+      // A player drafted with a traded pick carries on exactly like one received
+      // in the trade: keep him and the deal is still paying.
+      viaPick = new Map([...viaPick].map(([o, ids]) => [o, survives(o, ids)]));
       season += 1;
       fromWeek = 1;
       // A guard, not a limit anyone will reach: a contract cannot outlive the
