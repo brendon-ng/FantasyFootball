@@ -1,21 +1,5 @@
 {
-  "espnOnly": {
-    "espn-2574808": {
-      "full_name": "Robby Anderson",
-      "position": "WR",
-      "team": "NYJ"
-    },
-    "espn-3052876": {
-      "full_name": "Will Fuller V",
-      "position": "WR",
-      "team": "HOU"
-    },
-    "espn-3916430": {
-      "full_name": "Nyheim Hines",
-      "position": "RB",
-      "team": "IND"
-    }
-  },
+  "espnOnly": {},
   "rosterPositions": [
     "QB",
     "RB",

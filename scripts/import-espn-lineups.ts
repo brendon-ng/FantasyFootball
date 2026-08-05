@@ -404,6 +404,19 @@ async function main(): Promise<void> {
         );
       }
 
+      // PRUNE, because this file is merged into rather than rewritten. A rerun
+      // that resolves a player better — as switching from name matching to
+      // `espn_id` did — leaves the old `espn-` entry behind, and sync would then
+      // publish a player nothing references. Keep only what a lineup still uses.
+      const referenced = new Set(
+        Object.values(out.weeks).flatMap((byOwner) =>
+          Object.values(byOwner).flatMap((side) => Object.keys(side.playerPoints)),
+        ),
+      );
+      for (const id of Object.keys(out.espnOnly)) {
+        if (!referenced.has(id)) delete out.espnOnly[id];
+      }
+
       writeJson(outPath, out);
       log.info(
         `matched via espn id ${via["espn-id"]}, defence ${via.defence}, ` +
