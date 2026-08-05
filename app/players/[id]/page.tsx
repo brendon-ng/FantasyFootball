@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 
 import { KeepPips, PositionPill } from "@/components/keeper-table";
 import { LiveOwner, PlayerTransactions } from "@/components/player-live";
-import { TradeCard } from "@/components/trade-card";
 import { Panel, PanelHeader, Stat } from "@/components/ui";
 import {
   getAdp,
@@ -174,6 +173,8 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
           <PlayerTransactions
             playerId={id}
             baked={history}
+            trades={Object.fromEntries(trades.map((t) => [t.id, t]))}
+            players={players}
             leagueId={liveLeagueId}
             season={upcoming}
             fromWeek={1}
@@ -201,20 +202,6 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
           </Panel>
         ) : null}
 
-        {/* THE WHOLE DEAL, not just this player's leg. The transaction list above
-            says he was traded and to whom; it cannot say what came back, which is
-            the thing anyone looking at a trade actually wants to know. */}
-        {trades.length ? (
-          <Panel>
-            <PanelHeader
-              title={trades.length === 1 ? "Traded once" : `Traded ${trades.length} times`}
-              meta="full deal"
-            />
-            {trades.map((t) => (
-              <TradeCard key={t.id} trade={t} players={players} ownerNames={ownerNames} />
-            ))}
-          </Panel>
-        ) : null}
       </div>
     </div>
   );

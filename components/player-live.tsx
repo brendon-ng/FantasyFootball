@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { Tip } from "@/components/tooltip";
+import { TradeModal } from "@/components/trade-modal";
 import { useLiveRosters } from "@/lib/sleeper-browser";
-import type { PlayerTransaction } from "@/lib/types";
+import type { PlayerMeta, PlayerTransaction, Trade } from "@/lib/types";
 
 /**
  * Player transaction history, live.
@@ -170,6 +171,8 @@ export function PlayerTransactions({
   fromWeek,
   userIdToSlug,
   ownerNames,
+  trades = {},
+  players = {},
 }: {
   playerId: string;
   baked: PlayerTransaction[];
@@ -178,7 +181,11 @@ export function PlayerTransactions({
   fromWeek: number;
   userIdToSlug: Record<string, string>;
   ownerNames: Record<string, string>;
+  /** Trades this player was in, by id, so a row can open the whole deal. */
+  trades?: Record<string, Trade>;
+  players?: Record<string, PlayerMeta>;
 }) {
+  const [openTrade, setOpenTrade] = useState<Trade | null>(null);
   const { events: pending } = usePendingTransactions({
     playerId,
     leagueId,
@@ -213,6 +220,14 @@ export function PlayerTransactions({
 
   return (
     <div className="divide-y divide-ink-700">
+      {openTrade ? (
+        <TradeModal
+          trade={openTrade}
+          players={players}
+          ownerNames={ownerNames}
+          onClose={() => setOpenTrade(null)}
+        />
+      ) : null}
       {seasons.map((yr) => (
         <div key={yr}>
           <div className="bg-ink-850 px-4 py-1.5">
@@ -233,11 +248,29 @@ export function PlayerTransactions({
                   <div className="min-w-0 flex-1">
                     <div className="text-sm">
                       {h.action === "trade" ? (
-                        <>
-                          <span className="font-medium">Traded</span>{" "}
-                          <span className="text-chalk-600">from</span> {name(h.fromSlug)}{" "}
-                          <span className="text-chalk-600">to</span> {name(h.toSlug)}
-                        </>
+                        h.tradeId && trades[h.tradeId] ? (
+                          /* The whole deal is one click away. A trade row is the
+                             only event where the interesting part — what came
+                             back — is not on the row itself. */
+                          <button
+                            type="button"
+                            onClick={() => setOpenTrade(trades[h.tradeId!])}
+                            className="group text-left transition-colors hover:text-accent"
+                          >
+                            <span className="font-medium">Traded</span>{" "}
+                            <span className="text-chalk-600">from</span> {name(h.fromSlug)}{" "}
+                            <span className="text-chalk-600">to</span> {name(h.toSlug)}
+                            <span className="ml-1.5 whitespace-nowrap text-[11px] text-chalk-600 group-hover:text-accent">
+                              see deal →
+                            </span>
+                          </button>
+                        ) : (
+                          <>
+                            <span className="font-medium">Traded</span>{" "}
+                            <span className="text-chalk-600">from</span> {name(h.fromSlug)}{" "}
+                            <span className="text-chalk-600">to</span> {name(h.toSlug)}
+                          </>
+                        )
                       ) : (
                         <>
                           <span className="font-medium">

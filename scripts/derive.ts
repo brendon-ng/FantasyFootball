@@ -1212,6 +1212,7 @@ function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransac
           push(playerId, {
             ...base,
             action: "trade",
+            tradeId: String(t.transaction_id),
             ownerSlug: d.rosterToOwner.get(toRoster) ?? null,
             fromSlug: fromRoster != null ? (d.rosterToOwner.get(fromRoster) ?? null) : null,
             toSlug: d.rosterToOwner.get(toRoster) ?? null,
@@ -1255,6 +1256,30 @@ function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransac
         });
       }
     }
+  }
+
+  // ESPN DRAFTS. Without these a 2019 first-rounder's history opens with whatever
+  // happened to him next — Saquon Barkley went 1.01 in 2019 and his page started
+  // at a 2020 drop. The picks live in their own file because the draft board needs
+  // slots; a player page needs the same fact as an event.
+  for (const p of importedDrafts()) {
+    if (ignoredPlayers.has(p.playerId)) continue;
+    (hist[p.playerId] ??= []).push({
+      season: p.season,
+      week: 0,
+      preseason: true,
+      type: "draft",
+      action: p.isKeeper ? "keep" : "draft",
+      ownerSlug: p.ownerSlug,
+      fromSlug: null,
+      toSlug: null,
+      faabSpent: null,
+      round: p.round,
+      pickNo: p.pickNo,
+      // Ordered within the draft the same way Sleeper's are, so a player drafted
+      // and traded on the same day still reads in the right order.
+      timestamp: (draftStartOf(p.season) ?? 0) + p.pickNo,
+    });
   }
 
   for (const t of espn) {
@@ -1376,7 +1401,10 @@ function espnEvents(t: ManualTx & { season: number }): Array<[string, PlayerTran
       faabSpent: t.faab || null,
     };
     if (t.kind === "trade") {
-      out.push([i.playerId, { ...base, action: "trade", ownerSlug: i.toSlug, fromSlug: i.fromSlug, toSlug: i.toSlug }]);
+      out.push([
+        i.playerId,
+        { ...base, action: "trade", tradeId: t.id, ownerSlug: i.toSlug, fromSlug: i.fromSlug, toSlug: i.toSlug },
+      ]);
     } else if (i.toSlug) {
       out.push([i.playerId, { ...base, action: "add", ownerSlug: i.toSlug, fromSlug: null, toSlug: null }]);
     } else if (i.fromSlug) {
@@ -1566,6 +1594,12 @@ function buildTrades(seasons: SeasonData[]): Trade[] {
   return out.sort((a, b) => a.timestamp - b.timestamp);
 }
 
+/** When a recovered ESPN draft began, for ordering its picks against other events. */
+function draftStartOf(season: number): number | null {
+  const d = readJson<ManualDraft>(join(DATA_DIR, "manual", "drafts", `${season}.json`));
+  return d?.startTime ?? null;
+}
+
 /** Transactions recovered from ESPN, flattened across seasons. */
 function importedTransactions(): Array<ManualTx & { season: number }> {
   const dir = join(DATA_DIR, "manual", "transactions");
@@ -1611,6 +1645,7 @@ function importedDrafts(): DraftPickRecord[] {
 /** What `import:espn:drafts` writes for one season. */
 interface ManualDraft {
   season: number;
+  startTime: number | null;
   rounds: number;
   teams: number;
   picks: Array<Omit<DraftPickRecord, "season">>;

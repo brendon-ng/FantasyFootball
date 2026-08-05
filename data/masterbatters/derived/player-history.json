@@ -691,6 +691,7 @@
       "season": 2025,
       "timestamp": 1760221253925,
       "toSlug": "aidan-kelleher",
+      "tradeId": "1282386123145904128",
       "type": "trade",
       "week": 6
     },
@@ -1187,6 +1188,7 @@
       "season": 2025,
       "timestamp": 1760221253925,
       "toSlug": "ross-bechtel",
+      "tradeId": "1282386123145904128",
       "type": "trade",
       "week": 6
     }
@@ -1887,6 +1889,7 @@
       "season": 2025,
       "timestamp": 1760334038193,
       "toSlug": "josh-greenebaum",
+      "tradeId": "1282860910121070592",
       "type": "trade",
       "week": 6
     },
@@ -2135,6 +2138,7 @@
       "season": 2025,
       "timestamp": 1759212646603,
       "toSlug": "jake-gibbons",
+      "tradeId": "1278078796292947968",
       "type": "trade",
       "week": 4
     }
@@ -2569,6 +2573,7 @@
       "season": 2025,
       "timestamp": 1760141558336,
       "toSlug": "robbie-goodman",
+      "tradeId": "1282089649631674368",
       "type": "trade",
       "week": 6
     }
@@ -2597,6 +2602,7 @@
       "season": 2025,
       "timestamp": 1759212646603,
       "toSlug": "brendon-ng",
+      "tradeId": "1278078796292947968",
       "type": "trade",
       "week": 4
     }
@@ -3487,6 +3493,7 @@
       "season": 2025,
       "timestamp": 1760221253925,
       "toSlug": "aidan-kelleher",
+      "tradeId": "1282386123145904128",
       "type": "trade",
       "week": 6
     }
@@ -3833,6 +3840,7 @@
       "season": 2025,
       "timestamp": 1760221253925,
       "toSlug": "ross-bechtel",
+      "tradeId": "1282386123145904128",
       "type": "trade",
       "week": 6
     },
@@ -3885,6 +3893,7 @@
       "season": 2025,
       "timestamp": 1760334038193,
       "toSlug": "josh-greenebaum",
+      "tradeId": "1282860910121070592",
       "type": "trade",
       "week": 6
     }
@@ -4121,6 +4130,7 @@
       "season": 2025,
       "timestamp": 1760141526288,
       "toSlug": "aidan-kelleher",
+      "tradeId": "1282092865769459712",
       "type": "trade",
       "week": 6
     }
@@ -4331,6 +4341,7 @@
       "season": 2025,
       "timestamp": 1760141558336,
       "toSlug": "robbie-goodman",
+      "tradeId": "1282089649631674368",
       "type": "trade",
       "week": 6
     },
@@ -5129,6 +5140,7 @@
       "season": 2025,
       "timestamp": 1760141526288,
       "toSlug": "vance-armstrong",
+      "tradeId": "1282092865769459712",
       "type": "trade",
       "week": 6
     }
@@ -6357,6 +6369,7 @@
       "season": 2025,
       "timestamp": 1761631860075,
       "toSlug": "aidan-kelleher",
+      "tradeId": "1288291041694208000",
       "type": "trade",
       "week": 8
     }
@@ -6987,6 +7000,7 @@
       "season": 2025,
       "timestamp": 1760221253925,
       "toSlug": "ross-bechtel",
+      "tradeId": "1282386123145904128",
       "type": "trade",
       "week": 6
     }
@@ -7127,6 +7141,7 @@
       "season": 2025,
       "timestamp": 1760141558336,
       "toSlug": "josh-greenebaum",
+      "tradeId": "1282089649631674368",
       "type": "trade",
       "week": 6
     },
@@ -7139,6 +7154,7 @@
       "season": 2025,
       "timestamp": 1760334038193,
       "toSlug": "brendon-ng",
+      "tradeId": "1282860910121070592",
       "type": "trade",
       "week": 6
     },
@@ -8001,6 +8017,7 @@
       "season": 2025,
       "timestamp": 1760141558336,
       "toSlug": "josh-greenebaum",
+      "tradeId": "1282089649631674368",
       "type": "trade",
       "week": 6
     },
@@ -8507,6 +8524,7 @@
       "season": 2025,
       "timestamp": 1760141526288,
       "toSlug": "aidan-kelleher",
+      "tradeId": "1282092865769459712",
       "type": "trade",
       "week": 6
     }
@@ -8721,6 +8739,7 @@
       "season": 2025,
       "timestamp": 1761631860075,
       "toSlug": "allison-fosbery",
+      "tradeId": "1288291041694208000",
       "type": "trade",
       "week": 8
     }

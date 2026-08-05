@@ -301,6 +301,13 @@ export interface PlayerTransaction {
   action: "add" | "drop" | "draft" | "keep" | "trade";
   /** Acquiring owner for add/draft/keep; the dropping owner for a drop. */
   ownerSlug: string | null;
+  /**
+   * Trades only: the `Trade` this event belongs to.
+   *
+   * Lets a row link to the whole deal. Without it a player page can say he was
+   * traded and to whom, but never what came back — which is the interesting half.
+   */
+  tradeId?: string;
   /** Trades only: who the player came from and went to. */
   fromSlug: string | null;
   toSlug: string | null;
