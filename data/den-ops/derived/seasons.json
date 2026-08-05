@@ -942,7 +942,17 @@
       }
     ],
     "regularSeasonWeeks": 13,
-    "rosterPositions": [],
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "D/ST",
+      "K"
+    ],
     "runnerUp": "jaymie-lew",
     "season": 2020,
     "standings": [

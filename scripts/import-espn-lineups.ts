@@ -82,7 +82,13 @@ interface EspnLeague {
 }
 
 interface LeagueFile {
-  espnLeagueId?: string | number;
+  /**
+   * ESPN league id PER SEASON.
+   *
+   * Not one id: ESPN mints a new league each year the same way Sleeper does, and
+   * this league's 2019 and 2020 ids are unrelated. Mirrors `knownLeagueIds`.
+   */
+  espnLeagueIds?: Record<string, string | number>;
   owners?: Array<{ slug: string; firstName: string; lastName: string; espnNames?: string[] }>;
 }
 
@@ -246,9 +252,9 @@ async function main(): Promise<void> {
   for (const league of resolveLeagues(onlyLeague ? [`--league=${onlyLeague}`] : [])) {
     const slug = league.slug;
     const cfg = readJson<LeagueFile>(join(configDir(slug), "league.json"));
-    const espnId = cfg?.espnLeagueId;
-    if (!espnId) {
-      log.skip(`${slug}: no espnLeagueId in league.json`);
+    const espnIds = cfg?.espnLeagueIds ?? {};
+    if (!Object.keys(espnIds).length) {
+      log.skip(`${slug}: no espnLeagueIds in league.json`);
       continue;
     }
 
@@ -258,7 +264,7 @@ async function main(): Promise<void> {
     // Owner identity comes from ESPN's member records, matched on real names —
     // team names change mid-season and are not a stable key.
     const byName = new Map<string, string>();
-    for (const o of cfg.owners ?? []) {
+    for (const o of cfg?.owners ?? []) {
       byName.set(normalise(`${o.firstName} ${o.lastName}`), o.slug);
       for (const alias of o.espnNames ?? []) byName.set(normalise(alias), o.slug);
     }
@@ -270,6 +276,11 @@ async function main(): Promise<void> {
         );
 
     for (const season of seasons) {
+      const espnId = espnIds[String(season)];
+      if (!espnId) {
+        log.skip(`${slug} ${season}: no ESPN league id configured`);
+        continue;
+      }
       const manual = readJson<{
         finalWeek?: number;
         matchups?: Array<{
