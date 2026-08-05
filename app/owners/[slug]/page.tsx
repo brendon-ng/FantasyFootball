@@ -6,7 +6,7 @@ import { BackLink } from "@/components/back-link";
 import { DraftPicks } from "@/components/draft-picks";
 import { FinishChart } from "@/components/finish-chart";
 import { OwnerContracts } from "@/components/owner-contracts";
-import { TradeCard } from "@/components/trade-card";
+import { TradeList } from "@/components/trade-list";
 import { TrophyCase } from "@/components/trophy-case";
 import { Col, ListHeader, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
 import {
@@ -18,6 +18,7 @@ import {
   getOwnerRecords,
   getOwners,
   getPickOutcomes,
+  getTradeReturns,
   getPlayers,
   getTrades,
   getSeasons,
@@ -45,6 +46,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   // Newest first: a recent deal is the one people are still arguing about.
   const trades = getTrades().filter((t) => t.ownerSlugs.includes(slug)).reverse();
   const outcomes = getPickOutcomes();
+  const returns = getTradeReturns();
   const adp = getAdp();
   const cfg = getConfig();
   const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
@@ -377,15 +379,13 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
           href="/trades/"
           hrefLabel="All trades"
         />
-        {trades.slice(0, 8).map((t) => (
-          <TradeCard
-            key={t.id}
-            trade={t}
-            players={players}
-            ownerNames={ownerNames}
-            outcomes={outcomes}
-          />
-        ))}
+        <TradeList
+                  trades={trades}
+                  players={players}
+                  ownerNames={ownerNames}
+                  outcomes={outcomes}
+                  returns={returns}
+                />
       </Panel>
     ) : null}
     </div>

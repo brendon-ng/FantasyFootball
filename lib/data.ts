@@ -36,6 +36,8 @@ import type {
   PlayerUsage,
   SeasonKeepers,
   Trade,
+  TradeReturn,
+  TradeStat,
   LiveMatchup,
   LiveSeason,
   LiveTeam,
@@ -229,7 +231,13 @@ export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []
  * roster and `starters` the subset that counted, for both providers, so there is
  * nothing to reconcile and no new file to keep in step.
  */
-export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
+/**
+ * True when this player's NFL team was idle that week.
+ *
+ * Shared by every per-game figure on the site, so a bye is discounted the same
+ * way wherever it appears.
+ */
+const byeFilter = once(() => {
   const teams = playerTeamFile();
   /**
    * A BYE IS NOT A GAME HE PLAYED BADLY. His NFL team was idle, so a zero there
@@ -241,7 +249,7 @@ export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
    * with no team on file still count their bye — better than dropping a real
    * week for someone we cannot place.
    */
-  const onBye = (season: number, week: number, playerId: string, points: number): boolean => {
+  return (season: number, week: number, playerId: string, points: number): boolean => {
     // A BYE SCORES ZERO, ALWAYS. So a non-zero week is proof this is not one, and
     // the team on file must be wrong for that week — which happens, because the
     // team is recorded per SEASON and players are traded mid-season. Hockenson
@@ -255,7 +263,10 @@ export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
       teams.seasons[String(season)]?.[playerId];
     return team ? teams.byes[String(season)]?.[team] === week : false;
   };
+});
 
+export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
+  const onBye = byeFilter();
   const acc = new Map<string, PlayerUsage>();
   for (const m of getMatchupHistory()) {
     for (const side of [m.home, m.away]) {
@@ -302,6 +313,84 @@ export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
   }
   return out;
 });
+/**
+ * What each side of a trade got out of it, for the rest of that season.
+ *
+ * The nearest thing to "who won", and deliberately not a verdict: it counts what
+ * the players actually returned, and says nothing about picks, which pay off in a
+ * different season, or about a team that needed a position rather than points.
+ *
+ * BROKEN OUT PER PLAYER as well as totalled: a two-for-two where one player
+ * carried the whole return is a different deal from one where both contributed,
+ * and a total alone hides that.
+ *
+ * COUNTED WHILE GENUINELY ROSTERED, from the trade week on. Matching on the owner
+ * rather than just the week handles both awkward cases for free: a player flipped
+ * on again stops counting for the middle team, and a trade processed before that
+ * week's games still picks the week up.
+ *
+ * Vetoed trades are included — they are in the lists, and their return is
+ * correctly nothing, since nobody ever rostered anyone.
+ */
+export const getTradeReturns = once((): Record<string, Record<string, TradeReturn>> => {
+  const onBye = byeFilter();
+  const byWeek = new Map<string, Map<string, Matchup["home"]>>();
+  for (const m of getMatchupHistory()) {
+    const key = `${m.season}|${m.week}`;
+    const at = byWeek.get(key) ?? new Map<string, Matchup["home"]>();
+    for (const side of [m.home, m.away]) at.set(side.ownerSlug, side);
+    byWeek.set(key, at);
+  }
+
+  const out: Record<string, Record<string, TradeReturn>> = {};
+  for (const trade of getTrades()) {
+    const perOwner: Record<string, TradeReturn> = {};
+    for (const owner of trade.ownerSlugs) {
+      const got = trade.legs
+        .filter((l) => l.kind === "player" && l.toSlug === owner && l.playerId)
+        .map((l) => l.playerId as string);
+      const blank = (): TradeStat => ({ games: 0, started: 0, startPoints: 0, benchPoints: 0 });
+      const byPlayer: Record<string, TradeStat> = Object.fromEntries(
+        got.map((id) => [id, blank()]),
+      );
+      if (got.length && !trade.vetoed) {
+        for (let week = trade.week; week <= 25; week++) {
+          const side = byWeek.get(`${trade.season}|${week}`)?.get(owner);
+          if (!side) continue;
+          const started = new Set(side.starters);
+          for (const playerId of got) {
+            const points = side.playerPoints[playerId];
+            if (points === undefined) continue;
+            if (onBye(trade.season, week, playerId, points)) continue;
+            const one = byPlayer[playerId];
+            one.games += 1;
+            if (started.has(playerId)) {
+              one.started += 1;
+              one.startPoints += points;
+            } else {
+              one.benchPoints += points;
+            }
+          }
+        }
+      }
+      const total = blank();
+      for (const one of Object.values(byPlayer)) {
+        one.startPoints = Number(one.startPoints.toFixed(2));
+        one.benchPoints = Number(one.benchPoints.toFixed(2));
+        total.games += one.games;
+        total.started += one.started;
+        total.startPoints += one.startPoints;
+        total.benchPoints += one.benchPoints;
+      }
+      total.startPoints = Number(total.startPoints.toFixed(2));
+      total.benchPoints = Number(total.benchPoints.toFixed(2));
+      perOwner[owner] = { byPlayer, total };
+    }
+    out[trade.id] = perOwner;
+  }
+  return out;
+});
+
 /** Every completed trade, oldest first. Vetoed and withdrawn ones never reach here. */
 export const getTrades = (): Trade[] => load("derived/trades.json", []);
 

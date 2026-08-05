@@ -396,6 +396,27 @@ export interface PlayerUsage {
   lastWeek: number;
 }
 
+/**
+ * What one side of a trade actually got, for the rest of that season.
+ *
+ * Counts only weeks the receiving owner GENUINELY rostered the player, from the
+ * trade week on — so a player flipped again a fortnight later stops counting, and
+ * a trade processed before that week's games still picks that week up.
+ */
+export interface TradeStat {
+  /** Games rostered, bench included. */
+  games: number;
+  started: number;
+  startPoints: number;
+  benchPoints: number;
+}
+
+export interface TradeReturn {
+  /** Per incoming player, so a lopsided haul is not hidden inside a total. */
+  byPlayer: Record<string, TradeStat>;
+  total: TradeStat;
+}
+
 export interface DraftPickRecord {
   season: number;
   round: number;

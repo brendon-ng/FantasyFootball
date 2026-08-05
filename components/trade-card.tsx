@@ -1,6 +1,14 @@
 import Link from "next/link";
 
-import type { DraftPickRecord, PlayerMeta, Trade, TradeLeg } from "@/lib/types";
+import { fmt } from "@/components/ui";
+import type {
+  DraftPickRecord,
+  PlayerMeta,
+  Trade,
+  TradeLeg,
+  TradeReturn,
+  TradeStat,
+} from "@/lib/types";
 
 /**
  * One trade, grouped by who RECEIVED what.
@@ -18,14 +26,20 @@ export function TradeCard({
   players,
   ownerNames,
   outcomes = {},
+  returns,
   showSeason = true,
+  onOpen,
 }: {
   trade: Trade;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
   /** What each traded pick became, keyed `season:round:originalOwner`. */
   outcomes?: Record<string, DraftPickRecord>;
+  /** What each side got for the rest of that season, by owner slug. */
+  returns?: Record<string, TradeReturn>;
   showSeason?: boolean;
+  /** Set in a list, where the detail lives behind a click rather than inline. */
+  onOpen?: () => void;
 }) {
   const name = (slug: string | null) => (slug && ownerNames[slug]) || "—";
 
@@ -63,6 +77,15 @@ export function TradeCard({
           <span className="rounded border border-me-dim px-1 text-[9px] font-bold uppercase tracking-wide text-me">
             {trade.ownerSlugs.length}-team
           </span>
+        ) : null}
+        {onOpen ? (
+          <button
+            type="button"
+            onClick={onOpen}
+            className="ml-auto shrink-0 text-[11px] text-chalk-500 transition-colors hover:text-accent"
+          >
+            Details <span aria-hidden>→</span>
+          </button>
         ) : null}
       </div>
 
@@ -103,6 +126,183 @@ export function TradeCard({
           </div>
         ))}
       </div>
+
+      {returns ? <RestOfSeason trade={trade} players={players} ownerNames={ownerNames} returns={returns} /> : null}
+    </div>
+  );
+}
+
+/**
+ * How the incoming players actually did, for the rest of that season.
+ *
+ * THE NEAREST THING TO "WHO WON", and deliberately not a verdict. It counts what
+ * the players returned and nothing else: a pick pays off in a different season,
+ * and a team that traded for a position it was short of may have won a deal it
+ * lost on points.
+ *
+ * A TABLE AT THE FOOT rather than a line under each player. Hung off the legs it
+ * doubled the height of every row and buried the deal itself.
+ *
+ * SIDE BY SIDE FOR A TWO-TEAM TRADE, under the columns the players are listed in,
+ * so each side's return sits beneath that side. Three or more parties STACK: a
+ * third column leaves nothing for the names, and a three-way is read one leg at a
+ * time anyway.
+ *
+ * Per player AND totalled: a two-for-two where one player carried the whole
+ * return is a different deal from one where both did, and a total hides that.
+ */
+function RestOfSeason({
+  trade,
+  players,
+  ownerNames,
+  returns,
+}: {
+  trade: Trade;
+  players: Record<string, PlayerMeta>;
+  ownerNames: Record<string, string>;
+  returns: Record<string, TradeReturn>;
+}) {
+  const sides = trade.ownerSlugs.filter((s) => Object.keys(returns[s]?.byPlayer ?? {}).length);
+  if (!sides.length) return null;
+
+  const cell = "tabular w-9 shrink-0 text-right";
+  // Padded to the longest side so the Total rows sit on the same line. Comparing
+  // two totals that are three rows apart vertically is the thing this table
+  // exists to make easy, and ragged columns undo it.
+  const rows = Math.max(...sides.map((s) => Object.keys(returns[s].byPlayer).length));
+
+  /**
+   * The highest figure in each column across the sides, for the TOTALS only.
+   *
+   * Greater wins in every column, bench rate included. It is tempting to invert
+   * that one as a cost, but a high bench rate here means the player was scoring
+   * while he sat — which is the owner's usage, not the trade's return, and this
+   * table is about what the players did. A tie marks both, since neither side
+   * came out ahead.
+   */
+  const totals = sides.map((s) => statCells(returns[s].total));
+  const best = COLUMNS.map((_, i) => {
+    const values = totals.map((t) => t[i].value).filter((v): v is number => v !== null);
+    return values.length < 2 ? null : Math.max(...values);
+  });
+
+  return (
+    <div className="mt-3 border-t border-ink-700 pt-2">
+      <div className="mb-1 flex items-baseline gap-2">
+        <span className="eyebrow text-[10px]">Rest of {trade.season}</span>
+        <span className="text-[10px] text-chalk-600">while still on that roster</span>
+      </div>
+      <div className={sides.length === 2 ? "grid gap-x-6 gap-y-3 sm:grid-cols-2" : "space-y-3"}>
+        {sides.map((slug) => {
+          const r = returns[slug];
+          const ids = Object.keys(r.byPlayer);
+          return (
+            <div key={slug} className="min-w-0 overflow-x-auto">
+              <div className="min-w-max text-[11px]">
+                <div className="mb-0.5 text-[11px] font-semibold text-chalk-300">
+                  {ownerNames[slug] ?? slug}
+                </div>
+                <div className="flex items-center gap-2 border-b border-ink-700 pb-1 text-[9px] font-bold uppercase tracking-wide text-chalk-600">
+                  <span className="min-w-[6rem] flex-1">Player</span>
+                  {COLUMNS.map((c) => (
+                    <span key={c.label} className={cell} title={c.hint}>
+                      {c.label}
+                    </span>
+                  ))}
+                </div>
+                {ids.map((pid) => (
+                  <Row key={pid} label={players[pid]?.full_name ?? pid} stat={r.byPlayer[pid]} cell={cell} />
+                ))}
+                {/* Blank rows so this side ends level with the other. */}
+                {Array.from({ length: rows - ids.length }, (_, i) => (
+                  <div key={`pad-${i}`} className="py-0.5 text-[11px]" aria-hidden>
+                    &nbsp;
+                  </div>
+                ))}
+                <Row label="Total" stat={r.total} cell={cell} best={best} bold />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/** Column order, and which direction counts as better. */
+const COLUMNS: ReadonlyArray<{ label: string; hint: string }> = [
+  { label: "G", hint: "Games rostered, bench included" },
+  { label: "GS", hint: "Games started" },
+  { label: "Pts", hint: "Every point scored on this roster, started or benched" },
+  { label: "Start", hint: "Points scored while started — points that counted" },
+  { label: "/GS", hint: "Points per game started" },
+  { label: "Bn/G", hint: "Points per game benched — what he scored while sitting" },
+  { label: "Pts/G", hint: "Every point scored, per game rostered" },
+];
+
+/** The seven figures for one row, in column order. `null` where there is none. */
+function statCells(stat: TradeStat): Array<{ value: number | null; text: string }> {
+  const benched = stat.games - stat.started;
+  const all = stat.startPoints + stat.benchPoints;
+  const rate = (points: number, n: number) =>
+    n ? { value: points / n, text: fmt.pts1(points / n) } : { value: null, text: "—" };
+  return [
+    { value: stat.games, text: String(stat.games) },
+    { value: stat.started, text: String(stat.started) },
+    { value: all, text: fmt.pts1(all) },
+    { value: stat.startPoints, text: fmt.pts1(stat.startPoints) },
+    rate(stat.startPoints, stat.started),
+    rate(stat.benchPoints, benched),
+    rate(all, stat.games),
+  ];
+}
+
+/** Colour per column, so a row reads the same wherever it appears. */
+const TONE = [
+  "text-chalk-500",
+  "text-chalk-400",
+  "text-chalk-400",
+  "text-chalk-100",
+  "text-accent",
+  "text-loss",
+  "text-chalk-400",
+];
+
+function Row({
+  label,
+  stat,
+  cell,
+  best,
+  bold = false,
+}: {
+  label: string;
+  stat: TradeStat;
+  cell: string;
+  /** Best value per column across sides. Totals rows only. */
+  best?: Array<number | null>;
+  bold?: boolean;
+}) {
+  const cells = statCells(stat);
+  return (
+    <div className={`flex items-center gap-2 py-0.5 ${bold ? "border-t border-ink-700 font-semibold" : ""}`}>
+      <span className={`min-w-[6rem] flex-1 truncate ${bold ? "text-chalk-300" : "text-chalk-400"}`}>
+        {label}
+      </span>
+      {cells.map((c, i) => {
+        // Emphasis is ADDED to the column's colour, never instead of it. A pill
+        // background replaced the tone, so the green start-rate and the red
+        // bench-rate turned plain grey exactly on the row where they matter most
+        // — and it padded the cell out of line with the rows above.
+        const won = best?.[i] != null && c.value !== null && Math.abs(c.value - best[i]!) < 0.005;
+        return (
+          <span
+            key={COLUMNS[i].label}
+            className={`${cell} ${TONE[i]} ${won ? "font-bold brightness-125" : ""}`}
+          >
+            {c.text}
+          </span>
+        );
+      })}
     </div>
   );
 }
@@ -174,13 +374,14 @@ function LegText({
   }
   const meta = players[leg.playerId!];
   return (
-    <Link
-      href={`/players/${leg.playerId}/`}
-      className="transition-colors hover:text-accent"
-    >
-      {meta?.full_name ?? leg.playerId}
-      {meta?.position ? <span className="ml-1 text-[11px] text-chalk-600">{meta.position}</span> : null}
-    </Link>
+    <span className="block">
+      <Link href={`/players/${leg.playerId}/`} className="transition-colors hover:text-accent">
+        {meta?.full_name ?? leg.playerId}
+        {meta?.position ? (
+          <span className="ml-1 text-[11px] text-chalk-600">{meta.position}</span>
+        ) : null}
+      </Link>
+    </span>
   );
 }
 

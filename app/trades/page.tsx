@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 import { BackLink } from "@/components/back-link";
-import { TradeCard } from "@/components/trade-card";
+import { TradeList } from "@/components/trade-list";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
-import { getOwnerMap, getPickOutcomes, getPlayers, getTrades } from "@/lib/data";
+import { getOwnerMap, getPickOutcomes,
+  getTradeReturns, getPlayers, getTrades } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Trades" };
 
@@ -19,6 +20,7 @@ export default function TradesPage() {
   const players = getPlayers();
   const owners = getOwnerMap();
   const outcomes = getPickOutcomes();
+  const returns = getTradeReturns();
   const ownerNames = Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]));
 
   const bySeason = new Map<number, typeof trades>();
@@ -64,16 +66,14 @@ export default function TradesPage() {
                   href={`/history/${season}/`}
                   hrefLabel="Season detail"
                 />
-                {list.map((t) => (
-                  <TradeCard
-                    key={t.id}
-                    trade={t}
-                    players={players}
-                    ownerNames={ownerNames}
-                    outcomes={outcomes}
-                    showSeason={false}
-                  />
-                ))}
+                <TradeList
+                  trades={list}
+                  players={players}
+                  ownerNames={ownerNames}
+                  outcomes={outcomes}
+                  returns={returns}
+                  showSeason={false}
+                />
               </Panel>
             ))}
         </>

@@ -15,6 +15,7 @@ import {
   getSeasons,
   getOwnerMap,
   getPickOutcomes,
+  getTradeReturns,
   getPlayerHistory,
   getPlayerUsage,
   getTrades,
@@ -234,6 +235,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
             trades={Object.fromEntries(trades.map((t) => [t.id, t]))}
             players={players}
             pickOutcomes={getPickOutcomes()}
+            tradeReturns={getTradeReturns()}
             leagueId={liveLeagueId}
             season={upcoming}
             fromWeek={1}

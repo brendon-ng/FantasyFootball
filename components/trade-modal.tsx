@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 import { TradeCard } from "@/components/trade-card";
-import type { DraftPickRecord, PlayerMeta, Trade } from "@/lib/types";
+import type { DraftPickRecord, PlayerMeta, Trade, TradeReturn } from "@/lib/types";
 
 /**
  * The whole deal, over the page that mentioned one leg of it.
@@ -14,18 +14,24 @@ import type { DraftPickRecord, PlayerMeta, Trade } from "@/lib/types";
  *
  * Reuses `TradeCard`, so the trade reads identically here, on the trades page and
  * on an owner page. Three renderings of one thing would drift.
+ *
+ * WIDER THAN A DIALOG USUALLY WANTS TO BE, because the card now carries a return
+ * table per side and the whole point is reading them against each other. At the
+ * old width they stacked and the comparison was a scroll apart.
  */
 export function TradeModal({
   trade,
   players,
   ownerNames,
   outcomes,
+  returns,
   onClose,
 }: {
   trade: Trade;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
   outcomes?: Record<string, DraftPickRecord>;
+  returns?: Record<string, TradeReturn>;
   onClose: () => void;
 }) {
   // Escape closes, and the page behind does not scroll while it is open —
@@ -55,7 +61,7 @@ export function TradeModal({
         // The backdrop closes; a click INSIDE must not bubble up to it, or
         // selecting text in the dialog would dismiss it.
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
+        className="max-h-[85vh] w-full max-w-4xl overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
       >
         <div className="sticky top-0 flex items-center justify-between border-b border-ink-600 bg-ink-800 px-4 py-3 sm:px-5">
           <div>
@@ -78,6 +84,7 @@ export function TradeModal({
           players={players}
           ownerNames={ownerNames}
           outcomes={outcomes}
+          returns={returns}
           showSeason={false}
         />
       </div>
