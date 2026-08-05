@@ -207,6 +207,7 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
       const matchups = await getMatchups(leagueId, week);
       if (matchups?.length) {
         writeIfChanged(mPath, matchups, `${season}/matchups/${wk(week)}.json`);
+        await snapshotTeams(Number(season), week, matchups);
       }
     } else {
       log.skip(`${season}/matchups/${wk(week)}.json`);
@@ -254,6 +255,85 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
     finalized: complete,
     finalizedThroughWeek: through,
   };
+}
+
+/**
+ * Which NFL team each player was on THE WEEK THIS WAS SCORED.
+ *
+ * Sleeper only ever reports a player's CURRENT team, so team-at-the-time can only
+ * be captured as it happens — which is why 2019-25 had to be recovered from ESPN
+ * one athlete at a time, and can only be had at season granularity. From here on
+ * a week is stamped as it finalizes and the record is exact.
+ *
+ * ONLY THE DIFFERENCES ARE STORED. A player's team is stable within a season, so
+ * writing all ~300 every week would be almost entirely repetition; an entry
+ * appears only where the week disagrees with the season baseline that
+ * `import:player-teams` established. In a normal week that is nothing at all.
+ *
+ * A FEW DAYS OF SKEW, unavoidably. A week is committed once Sleeper has scored
+ * it, on the Tuesday, so a player traded that Tuesday is recorded under his new
+ * team for the week just played. Rarer and far smaller than the error it removes.
+ */
+async function snapshotTeams(
+  season: number,
+  week: number,
+  matchups: Array<{ players?: string[] | null; starters?: string[] | null }>,
+): Promise<void> {
+  const all = await cachedPlayerMap();
+  if (!all) return;
+
+  const path = join(SHARED_DATA_DIR, "player-teams.json");
+  const file = readJson<PlayerTeams>(path) ?? { seasons: {}, weekly: {} };
+  const baseline = file.seasons[String(season)] ?? {};
+
+  const ids = new Set<string>();
+  for (const m of matchups) {
+    for (const id of [...(m.players ?? []), ...(m.starters ?? [])]) if (id) ids.add(id);
+  }
+
+  const diffs: Record<string, string> = {};
+  for (const id of ids) {
+    // A defence IS its team, and cannot be traded.
+    if (/^[A-Z]{2,4}$/.test(id)) continue;
+    const team = all[id]?.team;
+    if (team && team !== baseline[id]) diffs[id] = team;
+  }
+
+  const bySeason = (file.weekly[String(season)] ??= {});
+  if (Object.keys(diffs).length) {
+    bySeason[String(week)] = diffs;
+  } else {
+    delete bySeason[String(week)];
+  }
+  writeIfChanged(path, file, `player-teams.json (${season} wk${week}: ${Object.keys(diffs).length} differ)`);
+}
+
+interface PlayerTeams {
+  /** Season baseline, from `import:player-teams`. */
+  seasons: Record<string, Record<string, string>>;
+  /** `season -> week -> playerId -> team`, only where a week disagrees. */
+  weekly: Record<string, Record<string, Record<string, string>>>;
+}
+
+/**
+ * The 5MB Sleeper player map, fetched at most once a day.
+ *
+ * Shared with `syncPlayers`, which needs the same file — two downloads of the
+ * same 5MB in one run would be silly.
+ */
+let playerMapPromise: Promise<Record<string, SleeperPlayer> | null> | null = null;
+function cachedPlayerMap(): Promise<Record<string, SleeperPlayer> | null> {
+  playerMapPromise ??= (async () => {
+    const cachePath = join(CACHE_DIR, "players-nfl.json");
+    let all = readJson<Record<string, SleeperPlayer>>(cachePath);
+    if (!all || fileAgeMs(cachePath) > 24 * 60 * 60 * 1000) {
+      log.info("fetching full player map (~5MB, max once/day)");
+      all = await getAllPlayers("nfl");
+      if (all) writeJson(cachePath, all);
+    }
+    return all;
+  })();
+  return playerMapPromise;
 }
 
 /** The shape `import:espn:lineups` writes. Only the parts sync needs. */
@@ -367,15 +447,7 @@ async function syncPlayers(leagues: ScriptLeague[]): Promise<void> {
   log.info(`${ids.size} distinct players referenced across ${leagues.length} league(s)`);
 
   // Cache the 5MB payload locally so repeated syncs in a day cost one request.
-  const cachePath = join(CACHE_DIR, "players-nfl.json");
-  let all = readJson<Record<string, SleeperPlayer>>(cachePath);
-  if (!all || fileAgeMs(cachePath) > 24 * 60 * 60 * 1000) {
-    log.info("fetching full player map (~5MB, max once/day)");
-    all = await getAllPlayers(leagues[0]?.sport ?? "nfl");
-    if (all) writeJson(cachePath, all);
-  } else {
-    log.skip("using cached player map (<24h old)");
-  }
+  const all = await cachedPlayerMap();
   if (!all) throw new Error("Could not load player map");
 
   const slim: Record<string, Omit<SleeperPlayer, "player_id">> = {};

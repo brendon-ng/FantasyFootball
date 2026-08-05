@@ -90,26 +90,49 @@ export const getOwnerRecords = (): OwnerRecord[] => load("derived/owner-records.
  * returned, and the correction lives in one declarative place.
  */
 /**
- * NFL team by season, `season -> playerId -> abbreviation`.
+ * What team a player was on at a given point, most specific answer first.
  *
- * `players.json` holds the CURRENT team, which is what a keeper board or a player
+ * `players.json` holds the CURRENT team, which is what a keeper board or a
  * profile wants — they are about the player now. A matchup page is a record of a
  * game that happened, so it wants the team at the time: Carson Wentz was PHI in
  * 2019, not MIN.
  *
- * Shared across leagues, like `players.json` — which team someone played for is a
- * fact about the NFL. Missing entries fall back to the current team, which is
- * right often enough and is what the page did before.
+ * THREE LAYERS, narrowing:
+ *
+ * `weekly` is exact, and only `sync` can write it — Sleeper reports a player's
+ * current team and nothing else, so team-at-the-time exists only if it is
+ * captured as the week finalizes. It holds the differences alone, so it is empty
+ * in a week nobody was traded, which is most weeks.
+ *
+ * `seasons` is the baseline recovered from ESPN by `import:player-teams`, one
+ * team per player per year. It cannot see a midseason trade.
+ *
+ * Then the player's current team, which is what every page showed before any of
+ * this existed and is still right for a recent game.
+ *
+ * Shared across leagues, like `players.json` — which team someone played for is
+ * a fact about the NFL.
  */
-export const getPlayerTeams = once(
-  (): Record<string, Record<string, string>> =>
-    existsSync(join(SHARED_DATA, "player-teams.json"))
-      ? (JSON.parse(readFileSync(join(SHARED_DATA, "player-teams.json"), "utf8")) as Record<
-          string,
-          Record<string, string>
-        >)
-      : {},
-);
+interface PlayerTeamFile {
+  seasons: Record<string, Record<string, string>>;
+  weekly: Record<string, Record<string, Record<string, string>>>;
+}
+
+const playerTeamFile = once((): PlayerTeamFile => {
+  const p = join(SHARED_DATA, "player-teams.json");
+  return existsSync(p)
+    ? (JSON.parse(readFileSync(p, "utf8")) as PlayerTeamFile)
+    : { seasons: {}, weekly: {} };
+});
+
+/** Team by player for one week, ready to hand to a lineup. */
+export function getPlayerTeamsAt(season: number, week: number): Record<string, string> {
+  const f = playerTeamFile();
+  return {
+    ...(f.seasons[String(season)] ?? {}),
+    ...(f.weekly[String(season)]?.[String(week)] ?? {}),
+  };
+}
 
 export const getPlayers = (): Record<string, PlayerMeta> => {
   const all = JSON.parse(readFileSync(join(SHARED_DATA, "players.json"), "utf8")) as Record<

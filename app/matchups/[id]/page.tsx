@@ -22,7 +22,7 @@ import {
   getAtTheTime,
   getMeetings,
   getOwnerMap,
-  getPlayerTeams,
+  getPlayerTeamsAt,
   getPlayers,
   getRecordFlags,
   type RecordFlag,
@@ -333,7 +333,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
               slots={season?.rosterPositions ?? []}
               name={name(side.ownerSlug)}
               players={players}
-              teamsThen={getPlayerTeams()[String(game.season)] ?? {}}
+              teamsThen={getPlayerTeamsAt(game.season, game.week ?? 0)}
               won={winner?.ownerSlug === side.ownerSlug}
               playerFlags={flags.filter((f) => f.playerId)}
             />

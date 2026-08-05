@@ -38,7 +38,12 @@ const CORE = "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/se
 /** Polite, and enough: two thousand lookups finish in a couple of minutes. */
 const CONCURRENCY = 8;
 
-type Teams = Record<string, Record<string, string>>;
+interface Teams {
+  /** Season baseline: `season -> playerId -> team`. */
+  seasons: Record<string, Record<string, string>>;
+  /** Week-level exceptions, written by `sync` as each week finalizes. */
+  weekly: Record<string, Record<string, Record<string, string>>>;
+}
 
 interface Matchup {
   season: number;
@@ -68,7 +73,14 @@ async function pool<T>(items: T[], run: (x: T) => Promise<void>): Promise<void> 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const force = args.includes("--force");
-  const out = force ? {} : (readJson<Teams>(join(SHARED_DATA_DIR, "player-teams.json")) ?? {});
+  const existing = readJson<Teams>(join(SHARED_DATA_DIR, "player-teams.json"));
+  const out: Teams = {
+    seasons: force ? {} : (existing?.seasons ?? {}),
+    // Never rebuilt here: only `sync` can know a week's teams, and only at the
+    // time. Dropping them on a re-run would throw away the one thing that cannot
+    // be recovered later.
+    weekly: existing?.weekly ?? {},
+  };
 
   // Every player-season any league has on record, bench included — a bench row
   // shows a team badge too.
@@ -98,7 +110,7 @@ async function main(): Promise<void> {
 
   for (const season of [...wanted.keys()].sort()) {
     const ids = [...wanted.get(season)!];
-    const have = (out[String(season)] ??= {});
+    const have = (out.seasons[String(season)] ??= {});
 
     // A team defence IS a team; its abbreviation is its id and cannot change.
     const people = ids.filter((id) => !/^[A-Z]{2,4}$/.test(id));
