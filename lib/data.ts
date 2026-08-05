@@ -373,6 +373,24 @@ export const getTradeReturns = once((): Record<string, Record<string, TradeRetur
           }
         }
       }
+      // Did this owner give him up again before the season was out? The
+      // transaction log is the only place that distinguishes "dropped" from
+      // "the season ended" — a roster simply stopping is not an exit.
+      const history = getPlayerHistory();
+      for (const playerId of got) {
+        for (const e of history[playerId] ?? []) {
+          if (e.season !== trade.season || e.timestamp <= trade.timestamp) continue;
+          if (e.action === "drop" && e.ownerSlug === owner) {
+            byPlayer[playerId].exit = { kind: "dropped", week: e.week };
+            break;
+          }
+          if (e.action === "trade" && e.fromSlug === owner) {
+            byPlayer[playerId].exit = { kind: "traded", week: e.week };
+            break;
+          }
+        }
+      }
+
       const total = blank();
       for (const one of Object.values(byPlayer)) {
         one.startPoints = Number(one.startPoints.toFixed(2));

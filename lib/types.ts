@@ -409,6 +409,13 @@ export interface TradeStat {
   started: number;
   startPoints: number;
   benchPoints: number;
+  /**
+   * Set when the acquiring owner let the player go again that same season.
+   *
+   * Context the numbers cannot give: a modest return means one thing if he was
+   * held all year and another if he was cut in week 4.
+   */
+  exit?: { kind: "dropped" | "traded"; week: number };
 }
 
 export interface TradeReturn {

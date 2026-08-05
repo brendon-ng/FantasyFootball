@@ -38,6 +38,12 @@
 
   --color-win: #35d07f;
   --color-loss: #ff5c6c;
+  /**
+   * Trade blue. Distinct from the accent (live, winning), the loss red (a drop)
+   * and the identity violet, so a "traded away" marker cannot be read as any of
+   * them. Checked against the panel surface at 4.5:1.
+   */
+  --color-trade: #5aa9f0;
   --color-gold: #f5c451;
   --color-silver: #c8ccd4;
   --color-bronze: #cd8b5b;

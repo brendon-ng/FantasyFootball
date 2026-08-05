@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Tip } from "@/components/tooltip";
 import { fmt } from "@/components/ui";
 import type {
   DraftPickRecord,
@@ -216,7 +217,12 @@ function RestOfSeason({
                   ))}
                 </div>
                 {ids.map((pid) => (
-                  <Row key={pid} label={players[pid]?.full_name ?? pid} stat={r.byPlayer[pid]} cell={cell} />
+                  <Row
+                    key={pid}
+                    label={players[pid]?.full_name ?? pid}
+                    stat={r.byPlayer[pid]}
+                    cell={cell}
+                  />
                 ))}
                 {/* Blank rows so this side ends level with the other. */}
                 {Array.from({ length: rows - ids.length }, (_, i) => (
@@ -290,8 +296,30 @@ function Row({
   const cells = statCells(stat);
   return (
     <div className={`flex items-center gap-1 py-0.5 ${bold ? "border-t border-ink-700" : ""}`}>
-      <span className={`min-w-[4.5rem] flex-1 truncate ${bold ? "text-chalk-300" : "text-chalk-400"}`}>
-        {label}
+      <span
+        className={`flex min-w-[4.5rem] flex-1 items-baseline gap-1 truncate ${
+          bold ? "text-chalk-300" : "text-chalk-400"
+        }`}
+      >
+        <span className="truncate">{label}</span>
+        {/* One glyph, because the name column is narrow and this is context
+            rather than a finding. A modest return reads differently once you know
+            he was cut in week 4. */}
+        {stat.exit ? (
+          // `Tip`, not a `title`: native tooltips take a second to appear and do
+          // nothing at all on touch, and a glyph nobody can decode is worse than
+          // no glyph. This one opens on hover, focus and tap.
+          <Tip
+            text={`${
+              stat.exit.kind === "dropped" ? "Dropped" : "Traded away"
+            } in week ${stat.exit.week}`}
+            className={`shrink-0 text-[9px] ${
+              stat.exit.kind === "dropped" ? "text-loss" : "text-trade"
+            }`}
+          >
+            {stat.exit.kind === "dropped" ? "\u2717" : "\u21c4"}
+          </Tip>
+        ) : null}
       </span>
       {cells.map((c, i) => {
         // The colour stays on the cell and the highlight sits BEHIND THE TEXT
