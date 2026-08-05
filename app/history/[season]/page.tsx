@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Bracket } from "@/components/bracket";
+import { TradeCard } from "@/components/trade-card";
 import { WeeklyLowBadge } from "@/components/weekly-low";
 import {
   Col,
@@ -19,7 +20,10 @@ import {
   getDrafts,
   getMatchupHistory,
   getOwnerMap,
+  getPickOutcomes,
+  getPlayers,
   getSeasons,
+  getTrades,
   getWeeklyLowKeys,
   getWeeklyLows,
   meetingId,
@@ -45,6 +49,8 @@ export default async function SeasonPage({
   if (!summary) notFound();
 
   const owners = getOwnerMap();
+  // Newest first within the season, matching how an owner page lists them.
+  const trades = getTrades().filter((t) => t.season === season).reverse();
   const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || "TBD";
   /**
    * A co-owned team is ONE team here — one row, both owners named. Personal
@@ -387,6 +393,26 @@ export default async function SeasonPage({
           ))}
         </div>
       </Panel>
+      {trades.length ? (
+        <Panel>
+          <PanelHeader
+            title="Trades"
+            meta={`${trades.length} this season`}
+            href="/trades/"
+            hrefLabel="All trades"
+          />
+          {trades.map((t) => (
+            <TradeCard
+              key={t.id}
+              trade={t}
+              players={getPlayers()}
+              ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
+              outcomes={getPickOutcomes()}
+              showSeason={false}
+            />
+          ))}
+        </Panel>
+      ) : null}
     </div>
   );
 }

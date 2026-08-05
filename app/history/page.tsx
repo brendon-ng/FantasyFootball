@@ -9,6 +9,7 @@ import {
   getOwnerMap,
   getOwnerRecords,
   getSeasons,
+  getTrades,
   getWeeklyLows,
   pageTitle,
 } from "@/lib/data";
@@ -27,6 +28,7 @@ export default function HistoryPage() {
   const seasons = getSeasons().filter((s) => s.finalized).sort((a, b) => b.season - a.season);
   const records = getOwnerRecords();
   const owners = getOwnerMap();
+  const tradeCount = getTrades().length;
   // Null when the league has no such rule, so the column disappears entirely.
   const lowsByOwner = features().weeklyLowPunishment
     ? getWeeklyLows().reduce<Record<string, number>>((acc, w) => {
@@ -83,6 +85,19 @@ export default function HistoryPage() {
               </div>
             </Link>
           ))}
+        </div>
+      </Panel>
+
+      <Panel>
+        <PanelHeader
+          title="Trades"
+          meta={`${tradeCount} in league history`}
+          href="/trades/"
+          hrefLabel="All trades"
+        />
+        <div className="px-4 py-3 text-[13px] text-chalk-500 sm:px-5">
+          Every completed trade, by season — players, draft picks and FAAB, with what
+          each traded pick turned out to be.
         </div>
       </Panel>
 
