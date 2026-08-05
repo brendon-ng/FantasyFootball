@@ -311,6 +311,43 @@ export interface PlayerTransaction {
   pickNo?: number;
 }
 
+/**
+ * One side of one trade — a player, a draft pick, or FAAB moving between owners.
+ *
+ * Modelled as legs rather than "team A gave X, team B gave Y" because a trade can
+ * have three or more parties: Den Ops has one with three, where a pick goes from
+ * owner 2 to owner 5 while a player goes from 3 to 2. Two-sided framing cannot
+ * express that without lying about who gave what to whom.
+ */
+export interface TradeLeg {
+  kind: "player" | "pick" | "faab";
+  fromSlug: string | null;
+  toSlug: string | null;
+  /** Set when `kind` is "player". */
+  playerId?: string;
+  /**
+   * Set when `kind` is "pick". `originalSlug` is whose pick it ORIGINALLY is,
+   * which is not the sender — a pick can be traded more than once, and "Reagan's
+   * 2026 4th" stays Reagan's pick however many hands it passes through.
+   */
+  pick?: { season: number; round: number; originalSlug: string | null };
+  /** Set when `kind` is "faab". Dollars. */
+  amount?: number;
+}
+
+export interface Trade {
+  id: string;
+  season: number;
+  week: number;
+  /** Preseason moves are all week 1 on Sleeper; this separates them. */
+  preseason: boolean;
+  timestamp: number;
+  /** Every owner involved, sorted. Three or more for a multi-team trade. */
+  ownerSlugs: string[];
+  legs: TradeLeg[];
+  source: "sleeper" | "espn";
+}
+
 export interface DraftPickRecord {
   season: number;
   round: number;

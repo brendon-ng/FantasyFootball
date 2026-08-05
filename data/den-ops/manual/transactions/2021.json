@@ -1,0 +1,5217 @@
+{
+  "season": 2021,
+  "transactions": [
+    {
+      "faab": 0,
+      "id": "09837fce-ad6a-46ad-a939-0ad57c7ad81d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6984",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "7611",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1631059245161,
+      "week": 1
+    },
+    {
+      "faab": 0,
+      "id": "eae16cb0-91e8-4f51-9122-54a3dbf61d63",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1408",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "7591",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1631217888552,
+      "week": 1
+    },
+    {
+      "faab": 0,
+      "id": "397d7017-13c3-4573-b781-bfd47bb71bee",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1476",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "BUF",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1631240980954,
+      "week": 1
+    },
+    {
+      "faab": 0,
+      "id": "62a33644-b7c3-426c-98d6-b838c5ea6a3f",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1817",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "5248",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1631258478954,
+      "week": 1
+    },
+    {
+      "faab": 0,
+      "id": "7c853350-da68-48bc-9ecd-3adffb0032bf",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "538",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1631463488374,
+      "week": 1
+    },
+    {
+      "faab": 0,
+      "id": "ad072f3a-f165-415e-a6e6-2fcdefdf1365",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "MIA",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "CLE",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1631463600294,
+      "week": 1
+    },
+    {
+      "faab": 0,
+      "id": "2a01c378-7352-45fa-b033-6f9a18c88022",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "7565",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1631634301024,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "0a3c48e2-bde1-4e13-80f6-c220ba4e4556",
+      "items": [
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "2749",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1631677477338,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "c0f79688-8dfa-41cb-83f4-225aeac0d1de",
+      "items": [
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "4985",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1631677484792,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "f067d105-a7d3-4327-b644-fe853fa88ad8",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7561",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "538",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1631690862308,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "6f2bf54b-5cb8-43b2-8c8a-134045037ab0",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "NO",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "MIN",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1631690862308,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "83a2dcd6-e8fd-4b11-bf6a-58876706772b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7567",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "7090",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1631690862308,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "b707aac7-c5ce-4069-b57e-af30e16656e6",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2306",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "4892",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1631690862308,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "32d229c1-c467-4109-bb57-6ee0bf66706b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1833",
+          "toSlug": "spencer-kim"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1631690862308,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "d285af5a-1831-4038-80a5-2242f57d7688",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CLE",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "24",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1631723219912,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "97332fc9-963b-47dd-8427-76ab97d12be2",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "49",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "7062",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1631752756473,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "0df8d4bd-018f-4b17-80f0-2342ac29cf7e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7571",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "49",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1631820600410,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "b2a8d69e-7eb7-4b2e-b3e6-5e73a8bb5a06",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "49",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "503",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1631834369585,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "629ee371-5508-41a6-9c9f-b20b40ef16a3",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "17",
+          "toSlug": "david-collier"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1631841968506,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "9e3be833-ece7-45b9-893e-7df92cc2b177",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "BUF",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "BAL",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1632015202808,
+      "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "6d38ccac-36c7-48d6-bb49-ebf784730c47",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1535",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "2378",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1632295302095,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "a3a4d022-6fd3-45ab-82f2-0f8a422d2e57",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CAR",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "NE",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1632295302095,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "9e0a0a8f-0366-42ca-9e89-17161ef9d825",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "650",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "17",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1632295302095,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "828f6b36-5e08-4a58-b43d-a71841558457",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7066",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "49",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1632295302095,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "7fda3df3-8064-4541-bc3c-f4b28f4c4391",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4319",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "6989",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1632295302095,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "76738296-f1cd-4688-86cb-d3dba52cb5e8",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5870",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "2306",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1632295302095,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "a0dd33a3-6471-4fbe-921d-c5f7dbb5e698",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "956",
+          "toSlug": "logan-dunn"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "logan-dunn"
+      ],
+      "timestamp": 1632311703858,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "78073ed3-29fc-46d5-b097-f06c152c0f5d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7090",
+          "toSlug": "brendon-ng"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1632328919974,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "d4cd13b8-186f-4e95-9cdc-d93d72e0ac8d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2028",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "6768",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1632345285603,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "522b9a00-50cb-4e8c-9303-5dc91d28c778",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5955",
+          "toSlug": "spencer-kim"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1632430487179,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "4dbba7d2-aeeb-4143-9201-1a6ba32ab8e9",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5095",
+          "toSlug": "michaela-frederick"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1632598947064,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "d98abce0-68ff-4301-8a62-fb9b6daaf740",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "538",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "2583",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1632663151434,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "38d58eb0-ee91-4b66-98ec-13dbd11994bc",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "ARI",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "MIA",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1632663186298,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "ab60baa2-dd70-46ac-97c7-6a7235d961bf",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6895",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "2325",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1632671337285,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "216a4181-caa0-4841-8627-fd23eba897b8",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5123",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1632701690992,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "8191e59f-93c6-41b1-b7da-f9c562c9921a",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "5123",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1632813602136,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "0e21a83e-1c96-498f-a16c-7d28844813a2",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4950",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "6984",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1632900395339,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "f7f8455f-1de9-4876-995d-b9f401bea11a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1379",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "5052",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1632900395339,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "bb9977da-859d-4856-9e58-e05ff87abf62",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1166",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "6895",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1632900395339,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "38099619-53d7-46ce-b9fc-d174391431c2",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "TEN",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "GB",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1632900395339,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "926e0659-10e4-4922-9215-9dd2081aa708",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7594",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "4319",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1632900395339,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "be0a993f-8d8a-426f-a932-e495bac88b64",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6149",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "CLE",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1632900395339,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "329bd271-bd17-466e-95c4-57d83d34e473",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CIN",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "CAR",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1632900395339,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "ab3993b8-c145-4bbb-9d16-ba3fdab5eee0",
+      "items": [
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "5870",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1633247406519,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "c6efae71-1f7b-41e8-9b47-2b8bf63b83f9",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4351",
+          "toSlug": "michaela-frederick"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1633247461008,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "241141c0-a8ce-4e5a-9cd6-97fc979b9c4b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7574",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1633290645491,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "78d59155-fdd1-4c28-9354-f7ad7c66776e",
+      "items": [
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "7066",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1633499145700,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "c010c381-1af1-4b26-bd51-ca553f446c43",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4147",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "BUF",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1633509252552,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "18462919-4128-46d5-9315-d7d6d4022b0f",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "NE",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "CIN",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1633509252552,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "9fb0f0d7-31de-4695-a379-7df7132ea66b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4943",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "2028",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1633509252552,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "a4c5cdba-9277-4a89-bd1c-4c4946939432",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "LV",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "TEN",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1633509252552,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "86d3d237-2686-449d-8354-a340878bd330",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2325",
+          "toSlug": "logan-dunn"
+        },
+        {
+          "fromSlug": "logan-dunn",
+          "playerId": "6870",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "logan-dunn"
+      ],
+      "timestamp": 1633509252552,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "20de8e44-008b-452e-b82b-921e62c3a224",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CAR",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "2257",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1633543121199,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "13673365-5391-481b-bea9-37b57ea2760a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3327",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "4950",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1633588600273,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "251083a2-f58b-4d9f-8ed8-f80270c8e935",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "ATL",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "5086",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1633648301566,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "80ba5774-700d-4b3b-8190-af456db26b43",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "7574",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1633670543118,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "0014c781-3735-49bb-b1b5-d81fc2310673",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "BUF",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "3242",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1633670596211,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "3c00d84c-3d9d-4185-b93e-90f84d9846a4",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5001",
+          "toSlug": "michaela-frederick"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1633704786639,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "b7f475dc-4757-4325-943b-c13037ea628b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2028",
+          "toSlug": "olivia-nelli"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1633755513270,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "d4d54383-57c5-4e09-8e94-e11e49f8ecaf",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5906",
+          "toSlug": "cassidy-pensa"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1633847583796,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "9e82b9b8-183e-4be4-b2ad-e74481d1cc5b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "MIN",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "4147",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1633884987134,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "d6ed5736-5fda-44c7-8fd7-a7e045ccb259",
+      "items": [
+        {
+          "fromSlug": "david-collier",
+          "playerId": "4040",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1634069333559,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "8e8e94fb-51b4-489f-9275-f825653a3919",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "DAL",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "NE",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1634110562737,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "7eac928a-32f0-40ac-9f3c-49e949bb222d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5549",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "DEN",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1634110562737,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "e0070e12-aa44-4504-b459-5d6af4e8ef3d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4033",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "1339",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1634110562737,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "b2f32320-447f-4aa3-bd6a-ffe38f93cb04",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "503",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "4666",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1634110562737,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "260a5f9e-bacf-4089-9764-8fa8ea6e0348",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3209",
+          "toSlug": "david-collier"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1634110562737,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "2745c5ca-9264-4868-b064-87d23a88e532",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7606",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "1817",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1634110562737,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "b3001954-1138-4b81-aa26-fd8787a474db",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CIN",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "LV",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1634110562737,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "2c5c3236-da4f-4dfc-8cd3-2b3ccece2c18",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "GB",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "NO",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1634190502580,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "7b70f83b-f120-479f-a683-cf30b19bcef2",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "NE",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "7593",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1634200760911,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "e8363ced-77c8-44f8-ac51-c76a31265b81",
+      "items": [
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "4951",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1634214388573,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "4935d6a4-b497-480b-9c5b-6aa55b1206f9",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1339",
+          "toSlug": "reagan-schmidt"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1634214524837,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "b3832ea7-5bea-49de-b099-2d33878a8c99",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "DEN",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "ARI",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1634214621028,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "e8c78a33-d6d7-4f5e-9332-5d2dc129dda4",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1945",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "2671",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1634214726433,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "6e3fda6b-6a02-4623-8b52-c9bd6ef50a05",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "JAX",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "WAS",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1634229078958,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "1db1b240-25a8-46b0-b659-2b247a0d3698",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4531",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "6943",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1634229105818,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "9b5c1e6e-1d79-41cd-b3d6-3170a81f00af",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7608",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "3327",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1634241820316,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "bf23cd3b-e739-45ea-90c6-95e8e38552e5",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7611",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "ATL",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1634255597160,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "4adaead5-713a-4833-b207-9deab69a7e78",
+      "items": [
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "6794",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "3271",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "4018",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "2320",
+          "toSlug": "spencer-kim"
+        }
+      ],
+      "kind": "trade",
+      "ownerSlugs": [
+        "david-collier",
+        "spencer-kim"
+      ],
+      "timestamp": 1634350327183,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "a67807dd-3dc0-4671-8971-59120e9db98d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3327",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "5038",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1634371148700,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "df3a9135-80e4-4713-8cfe-1c1d22530978",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5870",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "1166",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1634406239553,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "15bf7c9b-83bc-4378-9732-b7b5d35d79bb",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "LV",
+          "toSlug": "jake-gibbons"
+        },
+        {
+          "fromSlug": "jake-gibbons",
+          "playerId": "138",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "timestamp": 1634435860187,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "032651c5-4a4d-4782-9bc7-0fca89a5976b",
+      "items": [
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "1848",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1634447430412,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "2f936e63-3580-47aa-94b9-7fce8c11155f",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1034",
+          "toSlug": "cassidy-pensa"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1634447441787,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "2004f189-f3c8-4d23-9e47-1c207c760596",
+      "items": [
+        {
+          "fromSlug": "david-collier",
+          "playerId": "4943",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1634688115936,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "99c86945-ea30-4692-9828-3931a80c8b41",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7547",
+          "toSlug": "logan-dunn"
+        },
+        {
+          "fromSlug": "logan-dunn",
+          "playerId": "5170",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "logan-dunn"
+      ],
+      "timestamp": 1634716164235,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "3fbec822-1e3b-4051-989f-17fb2cb3fcc0",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6694",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "DAL",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1634716164235,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "225d7ec7-d3c5-4407-98e3-ed277cdbb669",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1166",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "5870",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1634716164235,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "49f2da01-ff73-4998-a04c-1163adbd98a5",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "ARI",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "MIN",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1634716164235,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "e2bdef55-8431-4b40-b154-91de0c5ffdd9",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6989",
+          "toSlug": "logan-dunn"
+        },
+        {
+          "fromSlug": "logan-dunn",
+          "playerId": "7596",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "logan-dunn"
+      ],
+      "timestamp": 1634716164235,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "9f0debbb-7bfd-4847-a059-50d1670052a4",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "17",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "7610",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1634716164235,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "ed83a675-c523-4dfb-be12-5e179d40d2c0",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "24",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "6149",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1634716164235,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "6a1a4dd9-7d44-46cc-8103-dfd5c43c0209",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7609",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "CIN",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1634716164235,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "aea02304-590a-40af-adce-51a2f765e48d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3242",
+          "toSlug": "jake-gibbons"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "timestamp": 1634721735176,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "131c9528-15bb-4ad9-993f-31da5989f851",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4943",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "1386",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1634828541417,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "7eaa739e-8034-449f-b02e-4205685312be",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1099",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "2251",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1634828873297,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "1bedadca-3bab-4019-8495-c2c314778881",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "NO",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "JAX",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1634931846586,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "71b8f4cc-9b68-49ca-b68b-f7d573472153",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "BAL",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "7567",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1635011776937,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "eefd7295-6679-4391-b2fb-66fa91f45eae",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4054",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "7611",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1635046136899,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "401a6caf-dd1c-48cf-9dbe-14c40ec22115",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6768",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "5880",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1635062091110,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "88e800cd-2eed-4f47-8c4e-6d32f9f7788b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4055",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "6768",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1635062214284,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "a2402d15-f45a-4e90-9b85-f39b7c735ed4",
+      "items": [
+        {
+          "fromSlug": "logan-dunn",
+          "playerId": "2325",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "logan-dunn"
+      ],
+      "timestamp": 1635086219480,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "9ad58017-0766-4167-8790-1a66d966d097",
+      "items": [
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "6820",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "3202",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "6819",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "3271",
+          "toSlug": "reagan-schmidt"
+        }
+      ],
+      "kind": "trade",
+      "ownerSlugs": [
+        "david-collier",
+        "reagan-schmidt"
+      ],
+      "timestamp": 1635231901216,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "16bc2789-c17a-456a-8059-5c8dad2d8a62",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "17",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635264370071,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "b6c02dc4-68df-436c-bd7c-04f5f4033b87",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "NE",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635264377112,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "ada60974-01a7-4756-bde3-f0e131c461b1",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CIN",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "BAL",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1635321794503,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "a5758335-de08-49ae-bbf3-9d74f61a980e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5094",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "3202",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1635321794503,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "ff53e1fe-c747-41ea-9654-31184633a73a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4147",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "24",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1635321794503,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "38f9c32d-6263-45c8-b138-c4341cdb470e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1110",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635321794503,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "82d29520-e546-4eb9-93ef-bd68e8fc8feb",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7567",
+          "toSlug": "david-collier"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1635321794503,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "432765e7-7c18-4b6a-91e1-3d50f5e332c4",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5870",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635321794503,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "ef132763-59ed-448e-94be-860ef289d806",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5272",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "5095",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1635342980249,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "99a30358-f056-4a17-b304-0994e8db951c",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4950",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "4351",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1635343046797,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "0196f714-3661-4a6d-9a23-e50faf309905",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CLE",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "ARI",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1635343187376,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "fa3ea199-6095-483d-8ab1-843b569b216d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2460",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "6803",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635351649123,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "be320345-3eeb-452e-b13b-299758a51443",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "17",
+          "toSlug": "jake-gibbons"
+        },
+        {
+          "fromSlug": "jake-gibbons",
+          "playerId": "LV",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "timestamp": 1635447848481,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "21034bba-f6ff-4fa7-8b92-69ba85286a95",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7045",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "7609",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1635533503671,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "79e1e32b-ff59-4b80-9021-774cb2dab1e6",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7600",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "4055",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1635659852834,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "97effacf-0532-44e8-8d50-4e62e054b7bf",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6149",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635694900151,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "b465e2ae-48ae-4225-9530-ab167bab1e4d",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "5870",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635836694349,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "71975c9d-4b0f-4fb5-be3a-d78b0e05c211",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "6149",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635836700073,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "d5f4be61-2a56-426a-896c-9cc42f0bb503",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "2460",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635836704965,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "6ec370f3-e537-4a1a-8cd4-db0da71015a3",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "NE",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "CLE",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1635929014941,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "fb3f2ee6-c9e1-49a4-b304-6f1742ddbc54",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6853",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635929014941,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "aaddcc44-a159-4047-a757-9b12656f6642",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "ARI",
+          "toSlug": "jake-gibbons"
+        },
+        {
+          "fromSlug": "jake-gibbons",
+          "playerId": "2588",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "timestamp": 1635929014941,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "85913b3a-b393-4464-a9cd-c596782bc07c",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6768",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "5094",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1635929014941,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "2eaa2ab3-e600-48da-aee3-1d133b700d85",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5122",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "7045",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1635929014941,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "cc259e6a-0df1-484f-807d-8d52267dd82e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4219",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635929014941,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "2954ab0d-2f7a-49fb-957f-4db9f3a6dfb8",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6870",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1635929014941,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "f77a4906-1bc3-47f1-8909-d926fc8e9cdc",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "184",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "7098",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1635929014941,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "5a06d368-5221-498a-a74b-f440cf68a380",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "DAL",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "7523",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1635952727203,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "25433435-b8c1-4595-956a-2ae6a411abeb",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "KC",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "CIN",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1635957103752,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "b745f867-23e0-4532-801c-37ad1dc2d31b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5094",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "4602",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1636012076629,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "7647bf98-c1e7-4935-b02b-5aefa0f1bfec",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2460",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "4147",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1636012076629,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "dafd0626-086a-4702-8ea7-fb14b9a67d0d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5095",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "2747",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1636069281114,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "e5faaf94-556e-4e37-b428-27a1413fd531",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2257",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "5917",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1636091495553,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "195f545d-35e6-4c73-94fa-549cd8457e75",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6803",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "6853",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1636134039057,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "b1c06fa8-93c6-47f3-8de0-5c33e3f04f68",
+      "items": [
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "1837",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1636257249896,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "2cc91cfa-c3f5-45d5-a0bc-f766a9f467c0",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5870",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "6768",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1636305669751,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "5e45b1e2-28e0-4d95-bc43-7f9f638639a8",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "1110",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1636477938907,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "b9631b05-c965-48d5-a17d-e73f93fa6157",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5038",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "3423",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1636538061059,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "61443b8a-3e31-4531-a498-fdb88c6d6928",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "BAL",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "KC",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1636538061059,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "64f98296-1a2f-4fbc-b634-50e02ffef45e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7596",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "6870",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1636538061059,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "f59c5597-6838-4156-a8b2-6fc23ce97ca9",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CLE",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "2257",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1636538061059,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "b63a6081-38ec-4bb2-89e1-34274b12ad30",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4666",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "2460",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1636538061059,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "e9abe3a7-a7c4-4eaf-93a2-a9156eaa071e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2251",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "4219",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1636538061059,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "df5854a4-b367-4be4-bcd8-208e31c1ecf3",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3161",
+          "toSlug": "jake-gibbons"
+        },
+        {
+          "fromSlug": "jake-gibbons",
+          "playerId": "17",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "timestamp": 1636652674814,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "8d08a520-9887-4cb2-bd25-cf0c5fc1a415",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1110",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1636654363317,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "ce2dba41-c6c0-4c14-b5f9-bfdc02258291",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3423",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "NE",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1636744287351,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "0b025100-d444-4340-aa1f-fd1b86b364ab",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6853",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "7606",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1636825665737,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "08787eb8-81bc-4042-9581-2a3452086d44",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7611",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "7567",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1636877873587,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "f54d7535-a0d1-41a0-973c-70616dac2213",
+      "items": [
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "1352",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1636910157352,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "e6e2d24c-cb3b-4f09-ba90-2de3345b91e2",
+      "items": [
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "3199",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1636910206281,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "083eaf40-d992-446a-93a1-b0890192cc81",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6824",
+          "toSlug": "spencer-kim"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1636910371505,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "1d8696d0-81ef-4d31-8663-b1adcff6f301",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3634",
+          "toSlug": "spencer-kim"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1636910446615,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "09986ec1-f721-484e-9fd5-9d25cb0a91db",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "TEN",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "3423",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1636911510960,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "6ca1592a-b1b7-458d-8237-6e07e63004e4",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5284",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "5870",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1636947938011,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "cae25729-1b1b-4795-9b7d-b92020909f69",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4111",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "CLE",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1637139428859,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "037acbc3-75f7-470f-bea0-7e582dfd0f1a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4454",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "5284",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1637139428859,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "ad1eb25c-9c84-4412-9437-7295a0f9e318",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4741",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "4666",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1637139428859,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "d3acee85-9240-4fa3-ae0c-68b01b44790e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3423",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "1110",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1637155291837,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "1b420891-8705-43fa-a719-8a67857a3dd8",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6768",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "1408",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1637264317470,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "5cf96fe6-b944-42e2-86d8-904b9fbb8071",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4233",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "6083",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1637264330379,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "2964fe92-bc1d-44e8-9c29-ccae5f6df390",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CLE",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "LAR",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1637281113925,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "9649b336-4e49-4db7-828a-09c0e638dffa",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6039",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "4054",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1637283494970,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "4c0fc050-de0e-4e27-aa80-f81fd69c6e5e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5284",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "7608",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1637354192407,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "d0089ade-3941-456c-af70-2b07e21d9eb2",
+      "items": [
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "4273",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1637360446678,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "c608a5ab-9225-4be0-b637-7c4ab0fecaa7",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7606",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "5122",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1637373667531,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "7a3e8636-5a30-4648-9362-c0116afb30c3",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "MIA",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "GB",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1637383501167,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "6b21a701-4e0f-412b-b59b-8370760f12f9",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "2251",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1637515122568,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "2888bdd2-1da1-4c56-9ed1-73abd812b87e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "954",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1637515154885,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "28bd62a5-6d66-4372-835f-6a37086205b3",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "LV",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "DEN",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1637525119550,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "63805641-7314-4a29-8363-76166c76cace",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5917",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "3271",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1637525207964,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "d53e87c6-bd7d-46c6-b908-8dba71e2e382",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "5549",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1637687177702,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "e308d130-821b-4882-8b69-d6b7ab2e1d70",
+      "items": [
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "184",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1637724369448,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "ce8ed6a2-924f-4c38-bd19-3cdaa43288b1",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "59",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "DAL",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1637741335667,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "25d969aa-091d-43de-a836-2d7873f2dab8",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2168",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "5284",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1637741335667,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "e007f841-f6c4-41ee-a3a9-49ddb1f70163",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "NE",
+          "toSlug": "michaela-frederick"
+        },
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "TEN",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1637770320987,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "e5b137fd-23f9-4d6c-99b9-1905de1fc7ff",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "PHI",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "BAL",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1637777217435,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "fec16df1-c0f0-4b24-b412-288a04daf9eb",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CHI",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "MIA",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1637811354636,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "f270c25b-00b6-4115-b70d-aba1727fba55",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3271",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "4943",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1637856532243,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "efa96994-1c22-4af5-a28a-b32168b7c263",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2378",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "1099",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1637856576204,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "59b84811-908d-4ed0-9a15-e1a43db0672a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4892",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "1833",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1637859606044,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "226b9e76-6701-4ed9-8f18-7488bbed03f0",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6984",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "6694",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1637889479239,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "1700dc0b-5414-4efb-8a50-da4d068660bf",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2251",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "3423",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1637905776621,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "b7783892-62bc-4031-b951-1cb400c39cd5",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5284",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1637905904675,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "7cccfdcc-481b-4c5b-b2c6-37234db8a73f",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "MIA",
+          "toSlug": "reagan-schmidt"
+        },
+        {
+          "fromSlug": "reagan-schmidt",
+          "playerId": "3198",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "reagan-schmidt"
+      ],
+      "timestamp": 1637914844883,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "70a9963e-0910-4c05-bf6f-b024c039a246",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4066",
+          "toSlug": "jake-gibbons"
+        },
+        {
+          "fromSlug": "jake-gibbons",
+          "playerId": "830",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jake-gibbons"
+      ],
+      "timestamp": 1638083711559,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "17b76f71-5e5f-4479-b662-eed5ea2366d1",
+      "items": [
+        {
+          "fromSlug": "michaela-frederick",
+          "playerId": "1049",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1638122254098,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "5ec69e87-ea37-4788-96d1-80110361d2bc",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5536",
+          "toSlug": "michaela-frederick"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "michaela-frederick"
+      ],
+      "timestamp": 1638122269623,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "ab2af654-d1ed-48d9-9372-dd24a6eb7208",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "954",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1638259309642,
+      "week": 13
+    },
+    {
+      "faab": 0,
+      "id": "58dec422-cefe-400e-aac8-8cf954c2b61b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5549",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "5284",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1638347622426,
+      "week": 13
+    },
+    {
+      "faab": 0,
+      "id": "c777e3f8-e948-44b0-ac19-500e5b8b92d1",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "LAR",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "4741",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1638347622426,
+      "week": 13
+    },
+    {
+      "faab": 0,
+      "id": "31080bb0-2ee1-4973-9a56-20603c0fc18e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5985",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "6984",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1638347622426,
+      "week": 13
+    },
+    {
+      "faab": 0,
+      "id": "51811b08-f68c-4d6c-aa3d-c6f15a2c48c5",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "BAL",
+          "toSlug": "spencer-kim"
+        },
+        {
+          "fromSlug": "spencer-kim",
+          "playerId": "1379",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "spencer-kim"
+      ],
+      "timestamp": 1638471117893,
+      "week": 13
+    },
+    {
+      "faab": 0,
+      "id": "ff6966de-c1ad-4144-9565-a63a65a6a740",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "MIN",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "CHI",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1638501454192,
+      "week": 13
+    },
+    {
+      "faab": 0,
+      "id": "b53a7fe4-8d41-4fda-a85e-4b6a65e7d9ec",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5209",
+          "toSlug": "olivia-nelli"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1638735743698,
+      "week": 13
+    },
+    {
+      "faab": 0,
+      "id": "9ad0bb97-efe9-4efd-afb2-5ef92af0165a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "184",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "5209",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1638735829483,
+      "week": 13
+    },
+    {
+      "faab": 0,
+      "id": "b547b374-f62c-4e16-9de3-60074416690c",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "4036",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1638865169778,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "eb3b9ab7-724b-40aa-bcd1-ce8513c2ccdc",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6083",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "1067",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1638953719361,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "6cf2db15-607f-450a-91fb-7411988952a7",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "GB",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "7571",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1638953719361,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "53d4f286-6541-47a7-b449-c2aa7e1b8151",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5086",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "59",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1638953719361,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "ffafcbfd-26b5-457c-8500-09fa8d70ed4d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "DEN",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1638953719361,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "659a45ec-d3cd-4add-ad57-a9fa148789a8",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3202",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "4033",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1638953719361,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "9c24d7d9-5cee-49a7-8b47-2b6bfa540667",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4381",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "2251",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1638988780650,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "2d8e5be4-e1b6-4e2a-85c4-14e1fba230e5",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5026",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1639261494632,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "dc244715-0c46-41b6-9a27-27923fb0a962",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5284",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "7596",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1639261538752,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "ee736dad-3181-41d0-ae49-742ad04a9a01",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "59",
+          "toSlug": "cassidy-pensa"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1639331934818,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "a2dbb221-62e8-46e8-8559-df06cb862db4",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "LAC",
+          "toSlug": "jaymie-lew"
+        },
+        {
+          "fromSlug": "jaymie-lew",
+          "playerId": "IND",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jaymie-lew"
+      ],
+      "timestamp": 1639339150503,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "ebded2e0-a637-4fa6-80a9-9f549668f87b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CHI",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "5284",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1639344004948,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "7f0cafe3-fd1d-42ad-90ec-ebc54181457a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "830",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "CHI",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1639358379555,
+      "week": 14
+    },
+    {
+      "faab": 0,
+      "id": "13073e36-46f3-4513-b3c8-d210e6f04c33",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "DEN",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1639504117970,
+      "week": 15
+    },
+    {
+      "faab": 0,
+      "id": "a07cf9a9-8681-4887-aefe-964b090726be",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "5026",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1639504413948,
+      "week": 15
+    },
+    {
+      "faab": 0,
+      "id": "557abbbf-8f13-48db-854f-212592cd8300",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4985",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "7606",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1639556947789,
+      "week": 15
+    },
+    {
+      "faab": 0,
+      "id": "7e5ec0e9-cd4b-418b-90c3-d718b0f722eb",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5185",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1639556947789,
+      "week": 15
+    },
+    {
+      "faab": 0,
+      "id": "06a14c91-2a24-47cc-9f97-0a9fc35ebd16",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "391",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "7042",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1639557779200,
+      "week": 15
+    },
+    {
+      "faab": 0,
+      "id": "0e41edaa-7cfa-48e9-b6c4-15da3c0004c1",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4033",
+          "toSlug": "david-collier"
+        },
+        {
+          "fromSlug": "david-collier",
+          "playerId": "5985",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1639600492837,
+      "week": 15
+    },
+    {
+      "faab": 0,
+      "id": "c3f4cf36-53d9-4bb4-a3fa-afadc5535489",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5046",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "4981",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1639809902091,
+      "week": 15
+    },
+    {
+      "faab": 0,
+      "id": "424bffa5-f90b-432b-8e17-f8b7d2a0900f",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "5185",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640163705471,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "432aaa64-336d-4d33-b933-2c84098c9728",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "7594",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640163725806,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "ae32c8aa-5d5d-42ff-a56f-0b5e3c7e94aa",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "DAL",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "LAR",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1640252619581,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "290ca9d3-40bb-43db-b966-97ef27965e8d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5052",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640252619581,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "b65588ca-e5cc-440b-b5ce-78e0e375ab68",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6943",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "1426",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1640252619581,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "6e16aa61-42b2-4b04-b817-8db8179927f4",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5284",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640252619581,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "69ec7bcd-60dd-4cfc-a676-d67b865fb7f1",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "17",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "4233",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1640252619581,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "cc702cca-4b9e-4813-a050-e5e468884766",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5131",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640252619581,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "26ea29db-9169-4994-ba9f-dec00b119f74",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4195",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "391",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640252619581,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "c54267dd-8ca2-487f-a323-87a6a8008087",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7839",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "503",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1640268617300,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "970d2d75-5c3d-4e43-ac81-4447a210dde3",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6208",
+          "toSlug": "olivia-nelli"
+        },
+        {
+          "fromSlug": "olivia-nelli",
+          "playerId": "928",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "olivia-nelli"
+      ],
+      "timestamp": 1640276797118,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "daa0e630-6836-4ada-87c4-878dcbfd9c17",
+      "items": [
+        {
+          "fromSlug": "david-collier",
+          "playerId": "4037",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "david-collier"
+      ],
+      "timestamp": 1640281032448,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "e1456bc5-7cdd-44dd-aa81-150bafb94e29",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7083",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "4381",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640289274507,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "9221e670-81e3-49e9-af09-7878d105173e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "KC",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "5284",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640289884387,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "7bd4cb74-2690-4d84-bc86-d41f6eb40d1c",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "SEA",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "MIN",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1640331613018,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "51b24072-c19a-4358-aec0-ccd68f8c9448",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "260",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "7083",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640460266095,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "ff7da4c8-4a9e-44d6-8ae6-176fa83197e9",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CIN",
+          "toSlug": "cassidy-pensa"
+        },
+        {
+          "fromSlug": "cassidy-pensa",
+          "playerId": "SEA",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "cassidy-pensa"
+      ],
+      "timestamp": 1640461325314,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "a7104cd9-59f6-4317-9bc5-240a36d6b2ec",
+      "items": [
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "3157",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1640482847206,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "5443e40c-d3a9-40e7-8685-491fdba305d5",
+      "items": [
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "6943",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1640482853686,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "03504df2-d161-4d27-917d-f34032c8e0dd",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "503",
+          "toSlug": "safvet-besen"
+        },
+        {
+          "fromSlug": "safvet-besen",
+          "playerId": "3664",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "safvet-besen"
+      ],
+      "timestamp": 1640532840793,
+      "week": 16
+    },
+    {
+      "faab": 0,
+      "id": "ab49305d-2d17-48a3-83c9-fe9820a7706a",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "830",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640679739738,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "7f229f23-35e5-47ec-b08a-4bf925e7b46f",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "KC",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640679745782,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "540b9b6b-029f-4992-b9cb-4449dfa8edc3",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "260",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640679765296,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "14e664c9-8914-4ba1-9f3a-1e11c1c8a282",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7596",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "5347",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1640767519883,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "8e839a25-6c1e-4bcf-96d5-5deaf18195d8",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1387",
+          "toSlug": "brendon-ng"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1640767519883,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "dbce853c-e41c-428d-8afd-dcd84dafdf36",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4718",
+          "toSlug": "brendon-ng"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1640767519883,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "ae9caaf5-df11-46b0-a7a5-2608f073a1f4",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7610",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640767519883,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "d9f48778-d94b-4443-84f6-cb4db9d07391",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4381",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640768474320,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "a02a57cf-242b-48c5-b716-c5ccf1e75087",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3306",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640768613708,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "055af1fc-d746-4870-9334-34724693645f",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7066",
+          "toSlug": "tyler-jung"
+        },
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "3306",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640801164219,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "e1d755b4-18ac-4e4c-9ab8-b087419b562a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5122",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "6955",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1640805395444,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "dfdd5027-003f-44a3-9edf-6a5ca9987c31",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "7066",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1640970919201,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "f5e1c09e-fe1a-410a-8649-d76240d04349",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7083",
+          "toSlug": "tyler-jung"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1641144405243,
+      "week": 17
+    },
+    {
+      "faab": 0,
+      "id": "f9d1d34e-9680-4545-aa8d-045c8c86c101",
+      "items": [
+        {
+          "fromSlug": "tyler-jung",
+          "playerId": "5052",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "tyler-jung"
+      ],
+      "timestamp": 1641319850996,
+      "week": 18
+    },
+    {
+      "faab": 0,
+      "id": "30c7dfd4-e20e-4d55-a85a-d798f133a4f0",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6955",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "5122",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1641372788606,
+      "week": 18
+    },
+    {
+      "faab": 0,
+      "id": "9517be4e-89e2-4d68-9653-cbe2ca9fe010",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "1426",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "4718",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1641372788606,
+      "week": 18
+    }
+  ]
+}

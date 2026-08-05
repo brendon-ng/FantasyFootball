@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { KeepPips, PositionPill } from "@/components/keeper-table";
 import { LiveOwner, PlayerTransactions } from "@/components/player-live";
+import { TradeCard } from "@/components/trade-card";
 import { Panel, PanelHeader, Stat } from "@/components/ui";
 import {
   getAdp,
@@ -12,6 +13,7 @@ import {
   getSeasons,
   getOwnerMap,
   getPlayerHistory,
+  getTrades,
   getPlayerKeepHistory,
   getPlayers,
 } from "@/lib/data";
@@ -57,6 +59,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   );
   const ownerNames = Object.fromEntries(getOwners().map((o) => [o.slug, o.name]));
   const adp = adpAll.byPlayer.get(id);
+  const trades = getTrades().filter((t) => t.legs.some((l) => l.playerId === id));
   const name = (s: string | null | undefined) => (s && owners.get(s)?.name) || "—";
 
 
@@ -195,6 +198,21 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
               contract length. Corrections go in{" "}
               <code className="text-chalk-500">config/keeper-overrides.json</code>.
             </div>
+          </Panel>
+        ) : null}
+
+        {/* THE WHOLE DEAL, not just this player's leg. The transaction list above
+            says he was traded and to whom; it cannot say what came back, which is
+            the thing anyone looking at a trade actually wants to know. */}
+        {trades.length ? (
+          <Panel>
+            <PanelHeader
+              title={trades.length === 1 ? "Traded once" : `Traded ${trades.length} times`}
+              meta="full deal"
+            />
+            {trades.map((t) => (
+              <TradeCard key={t.id} trade={t} players={players} ownerNames={ownerNames} />
+            ))}
           </Panel>
         ) : null}
       </div>

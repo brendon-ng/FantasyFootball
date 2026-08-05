@@ -12,6 +12,8 @@ import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import type {
+  Trade,
+  TradeLeg,
   BracketMatch,
   CombinedRecord,
   DraftPickRecord,
@@ -1171,6 +1173,11 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
  */
 function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransaction[]> {
   const hist: Record<string, PlayerTransaction[]> = {};
+  // ESPN-era moves, recovered from the player card. Merged into the SAME list as
+  // Sleeper's rather than kept apart: a player page asks "what happened to him",
+  // and which provider recorded it is not part of the answer. Sorted with the
+  // rest at the end, so a career spanning both eras reads as one timeline.
+  const espn = importedTransactions();
   const push = (playerId: string, t: PlayerTransaction) => (hist[playerId] ??= []).push(t);
 
   for (const d of seasons) {
@@ -1247,6 +1254,13 @@ function buildPlayerHistory(seasons: SeasonData[]): Record<string, PlayerTransac
           faabSpent: null,
         });
       }
+    }
+  }
+
+  for (const t of espn) {
+    for (const [playerId, ev] of espnEvents(t)) {
+      if (ignoredPlayers.has(playerId)) continue;
+      (hist[playerId] ??= []).push(ev);
     }
   }
 
@@ -1345,6 +1359,33 @@ function draftOnlySeasons(draftOnly: DraftOnlySeason[]): DraftPickRecord[] {
   );
 }
 
+/** Turns one recovered ESPN transaction into per-player events. */
+function espnEvents(t: ManualTx & { season: number }): Array<[string, PlayerTransaction]> {
+  const type: PlayerTransaction["type"] =
+    t.kind === "trade" ? "trade" : t.kind === "waiver" ? "waiver" : "free_agent";
+  const out: Array<[string, PlayerTransaction]> = [];
+  for (const i of t.items) {
+    const base = {
+      season: t.season,
+      week: t.week,
+      // ESPN stamps a real week on every move, so unlike Sleeper there is nothing
+      // to disambiguate — a preseason move genuinely carries week 0 or 1.
+      preseason: t.week <= 1,
+      type,
+      timestamp: t.timestamp,
+      faabSpent: t.faab || null,
+    };
+    if (t.kind === "trade") {
+      out.push([i.playerId, { ...base, action: "trade", ownerSlug: i.toSlug, fromSlug: i.fromSlug, toSlug: i.toSlug }]);
+    } else if (i.toSlug) {
+      out.push([i.playerId, { ...base, action: "add", ownerSlug: i.toSlug, fromSlug: null, toSlug: null }]);
+    } else if (i.fromSlug) {
+      out.push([i.playerId, { ...base, action: "drop", ownerSlug: i.fromSlug, fromSlug: null, toSlug: null }]);
+    }
+  }
+  return out;
+}
+
 function buildDraftHistory(seasons: SeasonData[]): DraftPickRecord[] {
   return seasons.flatMap((d) => {
     const slotOwner = new Map<number, string | null>();
@@ -1424,6 +1465,129 @@ function writeReplay(slug: string, summaries: SeasonSummary[], matchups: Matchup
 }
 
 // --- imported (pre-Sleeper) seasons ------------------------------------------
+
+/**
+ * Every trade the league has ever made, from both providers.
+ *
+ * ONE RECORD PER TRADE, NOT PER PLAYER. `player-history.json` already emits an
+ * event per player, which is right for a player page and useless for a trade
+ * page: a three-for-two renders as five unrelated lines with nothing tying them
+ * together, and a trade of nothing but picks produces no events at all and
+ * vanishes. Two of Den Ops' seventeen Sleeper trades are picks-only.
+ *
+ * ONLY COMPLETED TRADES. Sleeper marks a vetoed or withdrawn trade `failed` and
+ * ESPN marks it anything other than `EXECUTED`; both are dropped here, so a trade
+ * the league threw out never reaches a page. ESPN's `isPending` is deliberately
+ * NOT used — see the importer, where two "pending" 2021 trades are shown to have
+ * actually happened.
+ */
+function buildTrades(seasons: SeasonData[]): Trade[] {
+  const out: Trade[] = [];
+
+  for (const d of seasons) {
+    const draftStart = d.draft?.start_time ?? 0;
+    for (const [week, txns] of d.transactions) {
+      for (const t of txns) {
+        if (t.type !== "trade" || t.status !== "complete") continue;
+        const ts = t.status_updated || t.created;
+        const legs: TradeLeg[] = [];
+        const involved = new Set<string>();
+        const owner = (rosterId: number | null | undefined) =>
+          rosterId == null ? null : (d.rosterToOwner.get(Number(rosterId)) ?? null);
+
+        for (const [playerId, toRoster] of Object.entries(t.adds ?? {})) {
+          const from = owner((t.drops ?? {})[playerId]);
+          const to = owner(toRoster);
+          if (from) involved.add(from);
+          if (to) involved.add(to);
+          legs.push({ kind: "player", playerId, fromSlug: from, toSlug: to });
+        }
+        for (const p of t.draft_picks ?? []) {
+          const from = owner(p.previous_owner_id);
+          const to = owner(p.owner_id);
+          if (from) involved.add(from);
+          if (to) involved.add(to);
+          legs.push({
+            kind: "pick",
+            fromSlug: from,
+            toSlug: to,
+            // `roster_id` is whose pick it originally is, NOT who is sending it.
+            pick: { season: Number(p.season), round: p.round, originalSlug: owner(p.roster_id) },
+          });
+        }
+        for (const w of t.waiver_budget ?? []) {
+          const from = owner(w.sender);
+          const to = owner(w.receiver);
+          if (from) involved.add(from);
+          if (to) involved.add(to);
+          legs.push({ kind: "faab", fromSlug: from, toSlug: to, amount: w.amount });
+        }
+        // Every consenting roster counts as a party even if it neither sent nor
+        // received in a leg we can see — that is still who agreed to the deal.
+        for (const r of t.roster_ids ?? []) {
+          const o = owner(r);
+          if (o) involved.add(o);
+        }
+        if (!legs.length) continue;
+
+        out.push({
+          id: String(t.transaction_id),
+          season: d.season,
+          week,
+          preseason: draftStart > 0 && ts < draftStart,
+          timestamp: ts,
+          ownerSlugs: [...involved].sort(),
+          legs,
+          source: "sleeper",
+        });
+      }
+    }
+  }
+
+  for (const t of importedTransactions()) {
+    if (t.kind !== "trade") continue;
+    out.push({
+      id: t.id,
+      season: t.season,
+      week: t.week,
+      preseason: false,
+      timestamp: t.timestamp,
+      ownerSlugs: t.ownerSlugs,
+      legs: t.items.map((i) => ({
+        kind: "player" as const,
+        playerId: i.playerId,
+        fromSlug: i.fromSlug,
+        toSlug: i.toSlug,
+      })),
+      source: "espn",
+    });
+  }
+
+  return out.sort((a, b) => a.timestamp - b.timestamp);
+}
+
+/** Transactions recovered from ESPN, flattened across seasons. */
+function importedTransactions(): Array<ManualTx & { season: number }> {
+  const dir = join(DATA_DIR, "manual", "transactions");
+  if (!existsSync(dir)) return [];
+  const out: Array<ManualTx & { season: number }> = [];
+  for (const file of readdirSync(dir).sort()) {
+    if (!/^\d{4}\.json$/.test(file)) continue;
+    const d = readJson<{ season: number; transactions: ManualTx[] }>(join(dir, file));
+    for (const t of d?.transactions ?? []) out.push({ ...t, season: d!.season });
+  }
+  return out;
+}
+
+interface ManualTx {
+  id: string;
+  kind: string;
+  week: number;
+  timestamp: number;
+  faab: number;
+  ownerSlugs: string[];
+  items: Array<{ playerId: string; fromSlug: string | null; toSlug: string | null }>;
+}
 
 /**
  * ESPN drafts recovered by `import:espn:drafts`.
@@ -2021,6 +2185,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
     (a, b) => a.season - b.season || a.pickNo - b.pickNo,
   );
   const weeklyLows = buildWeeklyLows(matchups, summaries);
+  const trades = buildTrades(loaded);
 
   for (const o of owners.values()) o.seasons = [...new Set(o.seasons)].sort();
 
@@ -2039,6 +2204,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   out("keepers.json", keepers);
   out("player-history.json", playerHistory);
   out("drafts.json", drafts);
+  out("trades.json", trades);
   out("weekly-lows.json", weeklyLows);
   writeReplay(league.slug, summaries, matchups);
 

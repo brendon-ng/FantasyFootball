@@ -34,6 +34,7 @@ import type {
   PlayerMeta,
   PlayerTransaction,
   SeasonKeepers,
+  Trade,
   LiveMatchup,
   LiveSeason,
   LiveTeam,
@@ -168,6 +169,8 @@ export const getWeeklyLowKeys = once((): Set<string> => {
 });
 
 export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []);
+/** Every completed trade, oldest first. Vetoed and withdrawn ones never reach here. */
+export const getTrades = (): Trade[] => load("derived/trades.json", []);
 export const getPlayerHistory = (): Record<string, PlayerTransaction[]> =>
   load("derived/player-history.json", {});
 

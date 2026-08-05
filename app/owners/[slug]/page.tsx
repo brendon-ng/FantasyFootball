@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { DraftPicks } from "@/components/draft-picks";
 import { FinishChart } from "@/components/finish-chart";
 import { OwnerContracts } from "@/components/owner-contracts";
+import { TradeCard } from "@/components/trade-card";
 import { TrophyCase } from "@/components/trophy-case";
 import { Col, ListHeader, Panel, PanelHeader, Stat, fmt, placeColor } from "@/components/ui";
 import {
@@ -15,6 +16,7 @@ import {
   getOwnerRecords,
   getOwners,
   getPlayers,
+  getTrades,
   getSeasons,
   getWeeklyLows,
   teamSeasonFor,
@@ -36,6 +38,9 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const record = getOwnerRecords().find((r) => r.ownerSlug === slug);
   const seasons = getSeasons().filter((s) => s.finalized).sort((a, b) => b.season - a.season);
   const players = getPlayers();
+  const ownerNames = Object.fromEntries(getOwners().map((o) => [o.slug, o.name]));
+  // Newest first: a recent deal is the one people are still arguing about.
+  const trades = getTrades().filter((t) => t.ownerSlugs.includes(slug)).reverse();
   const adp = getAdp();
   const cfg = getConfig();
   const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
@@ -362,6 +367,19 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
         )}
         ownerNames={Object.fromEntries(getOwners().map((o) => [o.slug, o.name]))}
       />
+    {trades.length ? (
+      <Panel>
+        <PanelHeader
+          title="Trades"
+          meta={`${trades.length} deal${trades.length === 1 ? "" : "s"}`}
+          href="/trades/"
+          hrefLabel="All trades"
+        />
+        {trades.slice(0, 8).map((t) => (
+          <TradeCard key={t.id} trade={t} players={players} ownerNames={ownerNames} />
+        ))}
+      </Panel>
+    ) : null}
     </div>
   );
 }

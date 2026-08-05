@@ -18,6 +18,7 @@
     "import:espn": "node scripts/import-espn.ts",
     "import:espn:lineups": "node scripts/import-espn-lineups.ts",
     "import:espn:drafts": "node scripts/import-espn-drafts.ts",
+    "import:espn:transactions": "node scripts/import-espn-transactions.ts",
     "build:one": "next build"
   },
   "dependencies": {

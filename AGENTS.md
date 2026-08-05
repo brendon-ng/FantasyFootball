@@ -943,6 +943,53 @@ indistinguishable from a normal one.
 Keeper flags are all false, correctly — ESPN's `keeperCount` was 0 every year, and
 keepers began with the 2024 startup draft on Sleeper.
 
+### Recovering ESPN-era transactions
+
+`npm run import:espn:transactions`. FOUND ON THE PLAYER CARD, not a league view —
+`view=mTransactions2` returns an empty list for these closed leagues, which is why
+this looked unrecoverable at first and was documented as such. The log hangs off
+`kona_playercard`: ask for the players and each carries the transactions it was
+part of; deduping by transaction id reassembles the league's whole log. A bare
+`limit` is rejected ("Limit request must be accompanied by a sort"), so the sort
+in the filter is load-bearing.
+
+1,115 transactions across 2019-23 — adds, drops, waivers and 7 trades.
+
+`status === "EXECUTED"` IS THE ONLY TRUTH TEST. `isPending` is NOT: two 2021
+trades carry `isPending: true` and every player in them demonstrably changed
+hands, checked against the imported lineups for the weeks either side. Treating
+that flag as a veto would have silently deleted two real trades.
+
+ESPN's `ROSTER` type is a standalone DROP (`toTeamId: 0`), not a lineup move, so
+it is kept. `DRAFT` transactions are skipped — `import:espn:drafts` already has
+them in a shape that knows about draft slots.
+
+### Trades are first-class
+
+`derived/trades.json` is ONE RECORD PER TRADE, from both providers.
+`player-history.json` still emits an event per player, which is right for a player
+page and useless for a trade: a three-for-two renders as five unrelated lines, and
+a trade of nothing but picks produces no events at all and vanishes entirely — two
+of Den Ops' seventeen Sleeper trades are picks-only.
+
+MODELLED AS LEGS, not as two sides. Den Ops has a THREE-team trade (2025 week 1,
+one player and six picks) where David sends picks to two different owners while
+receiving a player from a third. No "A gave X for Y" shape can state that without
+lying about who gave what to whom. A leg is a player, a pick, or FAAB.
+
+A pick leg records whose pick it ORIGINALLY is, not who sent it — a pick can be
+traded more than once, and the league calls it "Reagan's 2026 4th" however many
+hands it passes through. Sleeper's `roster_id` on a `draft_picks` entry is that
+original owner; `previous_owner_id` and `owner_id` are the sender and receiver.
+
+ONLY COMPLETED TRADES REACH IT. Sleeper marks a vetoed or withdrawn trade `failed`
+and ESPN anything other than `EXECUTED`; both are dropped, so a deal the league
+threw out never appears.
+
+Surfaced at `/trades` (grouped by season, with totals), on an owner page (their
+last eight), and on a player page (every deal he was in, whole — the transaction
+list above it can say he was traded and to whom, but not what came back).
+
 ### What imported seasons cannot support
 
 2019-23 came from archived ESPN pages. The league is on Sleeper
