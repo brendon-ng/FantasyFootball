@@ -26,8 +26,10 @@ export function TradeCard({
   ownerNames,
   outcomes = {},
   returns,
+  handoffs = {},
   showSeason = true,
   onOpen,
+  onOpenTrade,
 }: {
   trade: Trade;
   players: Record<string, PlayerMeta>;
@@ -36,9 +38,13 @@ export function TradeCard({
   outcomes?: Record<string, DraftPickRecord>;
   /** What each side got for the rest of that season, by owner slug. */
   returns?: TradeReturn;
+  /** `season|round|originalOwner|from` -> the trade that moved that pick on. */
+  handoffs?: Record<string, string>;
   showSeason?: boolean;
   /** Set in a list, where the detail lives behind a click rather than inline. */
   onOpen?: () => void;
+  /** Jump to another trade — the one that moved a pick on, or moved a player. */
+  onOpenTrade?: (tradeId: string) => void;
 }) {
   const name = (slug: string | null) => (slug && ownerNames[slug]) || "—";
 
@@ -115,6 +121,14 @@ export function TradeCard({
                       players={players}
                       ownerNames={ownerNames}
                       outcomes={outcomes}
+                      handoff={
+                        leg.kind === "pick" && leg.pick && leg.toSlug
+                          ? handoffs[
+                              `${leg.pick.season}|${leg.pick.round}|${leg.pick.originalSlug}|${leg.toSlug}`
+                            ]
+                          : undefined
+                      }
+                      onOpenTrade={onOpenTrade}
                     />
                   </li>
                 ))
@@ -126,7 +140,14 @@ export function TradeCard({
         ))}
       </div>
 
-      {returns ? <TradeReturns players={players} ownerNames={ownerNames} returns={returns} /> : null}
+      {returns ? (
+        <TradeReturns
+          players={players}
+          ownerNames={ownerNames}
+          returns={returns}
+          onOpenTrade={onOpenTrade}
+        />
+      ) : null}
     </div>
   );
 }
@@ -156,11 +177,16 @@ function LegText({
   players,
   ownerNames,
   outcomes,
+  handoff,
+  onOpenTrade,
 }: {
   leg: TradeLeg;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
   outcomes: Record<string, DraftPickRecord>;
+  /** The trade this owner sent the pick on in, when they did. */
+  handoff?: string;
+  onOpenTrade?: (tradeId: string) => void;
 }) {
   if (leg.kind === "faab") {
     return <span className="text-accent">${leg.amount} FAAB</span>;
@@ -206,7 +232,20 @@ function LegText({
             {usedBy ? (
               <>
                 {" "}
-                <span className="text-loss">· picked by {usedBy.split(" ")[0]}</span>
+                {/* The obvious next question is "so who did they send it to" —
+                    which is a different trade, one click away. */}
+                {handoff && onOpenTrade ? (
+                  <button
+                    type="button"
+                    onClick={() => onOpenTrade(handoff)}
+                    className="text-loss underline decoration-dotted underline-offset-2 transition-colors hover:text-chalk-100"
+                    title="See the trade that moved this pick on"
+                  >
+                    · picked by {usedBy.split(" ")[0]}
+                  </button>
+                ) : (
+                  <span className="text-loss">· picked by {usedBy.split(" ")[0]}</span>
+                )}
               </>
             ) : null}
             </span>

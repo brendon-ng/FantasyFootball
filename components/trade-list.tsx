@@ -25,6 +25,8 @@ export function TradeList({
   ownerNames,
   outcomes,
   returns,
+  handoffs,
+  allTrades,
   showSeason = true,
 }: {
   trades: Trade[];
@@ -33,9 +35,17 @@ export function TradeList({
   outcomes: Record<string, DraftPickRecord>;
   /** Only handed to the modal — the list itself stays a summary. */
   returns: Record<string, TradeReturn>;
+  handoffs: Record<string, string>;
+  /**
+   * Every trade in the league, so the modal can jump to one this list does not
+   * contain — an owner page shows eight of their own, and the trade that moved a
+   * pick on may be neither.
+   */
+  allTrades: Record<string, Trade>;
   showSeason?: boolean;
 }) {
   const [open, setOpen] = useState<Trade | null>(null);
+  const jump = (tradeId: string) => setOpen(allTrades[tradeId] ?? null);
 
   return (
     <>
@@ -46,6 +56,8 @@ export function TradeList({
           ownerNames={ownerNames}
           outcomes={outcomes}
           returns={returns[open.id]}
+          handoffs={handoffs}
+          onOpenTrade={jump}
           onClose={() => setOpen(null)}
         />
       ) : null}

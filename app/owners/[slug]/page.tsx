@@ -17,6 +17,7 @@ import {
   getOwnerMap,
   getOwnerRecords,
   getOwners,
+  getPickHandoffs,
   getPickOutcomes,
   getTradeReturns,
   getPlayers,
@@ -47,6 +48,9 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const trades = getTrades().filter((t) => t.ownerSlugs.includes(slug)).reverse();
   const outcomes = getPickOutcomes();
   const returns = getTradeReturns();
+  const handoffs = getPickHandoffs();
+  // Every trade, so the modal can open one this page does not list.
+  const allTrades = Object.fromEntries(getTrades().map((t) => [t.id, t]));
   const adp = getAdp();
   const cfg = getConfig();
   const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
@@ -385,6 +389,8 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
                   ownerNames={ownerNames}
                   outcomes={outcomes}
                   returns={returns}
+                  handoffs={handoffs}
+                  allTrades={allTrades}
                 />
       </Panel>
     ) : null}

@@ -402,7 +402,7 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
           break;
         }
         if (e.action === "trade" && e.fromSlug === owner) {
-          byPlayer[playerId].exit = { kind: "traded", week: e.week };
+          byPlayer[playerId].exit = { kind: "traded", week: e.week, tradeId: e.tradeId };
           break;
         }
       }
@@ -519,6 +519,27 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
     }
 
     out[trade.id] = { order: trade.ownerSlugs, seasons };
+  }
+  return out;
+});
+
+/**
+ * Which trade moved a pick on again, keyed `season|round|originalOwner|from`.
+ *
+ * A pick can change hands more than once, and the interesting question on a trade
+ * page is "who did they send it to" — answerable only by finding the LATER trade
+ * where the same pick left the same owner.
+ */
+export const getPickHandoffs = once((): Record<string, string> => {
+  const out: Record<string, string> = {};
+  for (const trade of getTrades()) {
+    for (const leg of trade.legs) {
+      if (leg.kind !== "pick" || !leg.pick || !leg.fromSlug) continue;
+      const key = `${leg.pick.season}|${leg.pick.round}|${leg.pick.originalSlug}|${leg.fromSlug}`;
+      // Trades are oldest first, so the FIRST match is the handoff that followed
+      // the trade being looked at. A later one would be a different owner's.
+      out[key] ??= trade.id;
+    }
   }
   return out;
 });

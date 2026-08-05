@@ -3,8 +3,14 @@ import type { Metadata } from "next";
 import { BackLink } from "@/components/back-link";
 import { TradeList } from "@/components/trade-list";
 import { EmptyState, Panel, PanelHeader, Stat } from "@/components/ui";
-import { getOwnerMap, getPickOutcomes,
-  getTradeReturns, getPlayers, getTrades } from "@/lib/data";
+import {
+  getOwnerMap,
+  getPickHandoffs,
+  getPickOutcomes,
+  getPlayers,
+  getTradeReturns,
+  getTrades,
+} from "@/lib/data";
 
 export const metadata: Metadata = { title: "Trades" };
 
@@ -21,6 +27,9 @@ export default function TradesPage() {
   const owners = getOwnerMap();
   const outcomes = getPickOutcomes();
   const returns = getTradeReturns();
+  const handoffs = getPickHandoffs();
+  // Every trade, so the modal can open one this page does not list.
+  const allTrades = Object.fromEntries(getTrades().map((t) => [t.id, t]));
   const ownerNames = Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]));
 
   const bySeason = new Map<number, typeof trades>();
@@ -72,6 +81,8 @@ export default function TradesPage() {
                   ownerNames={ownerNames}
                   outcomes={outcomes}
                   returns={returns}
+                  handoffs={handoffs}
+                  allTrades={allTrades}
                   showSeason={false}
                 />
               </Panel>

@@ -32,6 +32,8 @@ export function TradeModal({
   ownerNames,
   outcomes,
   returns,
+  handoffs,
+  onOpenTrade,
   onClose,
 }: {
   trade: Trade;
@@ -39,6 +41,8 @@ export function TradeModal({
   ownerNames: Record<string, string>;
   outcomes?: Record<string, DraftPickRecord>;
   returns?: TradeReturn;
+  handoffs?: Record<string, string>;
+  onOpenTrade?: (tradeId: string) => void;
   onClose: () => void;
 }) {
   // Escape closes, and the page behind does not scroll while it is open —
@@ -96,6 +100,8 @@ export function TradeModal({
             ownerNames={ownerNames}
             outcomes={outcomes}
             returns={returns}
+            handoffs={handoffs}
+            onOpenTrade={onOpenTrade}
             showSeason={false}
           />
         </div>

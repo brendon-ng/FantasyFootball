@@ -22,6 +22,7 @@ import {
   getDrafts,
   getMatchupHistory,
   getOwnerMap,
+  getPickHandoffs,
   getPickOutcomes,
   getTradeReturns,
   getPlayers,
@@ -58,6 +59,9 @@ export default async function SeasonPage({
   const ownerNames = Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]));
   const outcomes = getPickOutcomes();
   const returns = getTradeReturns();
+  const handoffs = getPickHandoffs();
+  // Every trade, so the modal can open one this page does not list.
+  const allTrades = Object.fromEntries(getTrades().map((t) => [t.id, t]));
   const name = (slug: string | null | undefined) => (slug && owners.get(slug)?.name) || "TBD";
   /**
    * A co-owned team is ONE team here — one row, both owners named. Personal
@@ -412,6 +416,8 @@ export default async function SeasonPage({
                   ownerNames={ownerNames}
                   outcomes={outcomes}
                   returns={returns}
+                  handoffs={handoffs}
+                  allTrades={allTrades}
                   showSeason={false}
                 />
         </Panel>

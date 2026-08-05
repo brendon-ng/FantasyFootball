@@ -21,10 +21,12 @@ export function TradeReturns({
   players,
   ownerNames,
   returns,
+  onOpenTrade,
 }: {
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
   returns: TradeReturn;
+  onOpenTrade?: (tradeId: string) => void;
 }) {
   /**
    * OFF BY DEFAULT, and that is the important half.
@@ -67,6 +69,7 @@ export function TradeReturns({
           players={players}
           ownerNames={ownerNames}
           withPicks={withPicks}
+          onOpenTrade={onOpenTrade}
           first={i === 0}
         />
       ))}
@@ -88,6 +91,7 @@ function SeasonBlock({
   players,
   ownerNames,
   withPicks,
+  onOpenTrade,
   first,
 }: {
   season: TradeSeason;
@@ -96,6 +100,7 @@ function SeasonBlock({
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
   withPicks: boolean;
+  onOpenTrade?: (tradeId: string) => void;
   first: boolean;
 }) {
   /** The rows a side is showing, which the toggle decides. */
@@ -168,6 +173,7 @@ function SeasonBlock({
                     stat={stat}
                     cell={cell}
                     viaPick={viaPick}
+                    onOpenTrade={onOpenTrade}
                   />
                 ))}
                 {Array.from({ length: rows - entries.length }, (_, i) => (
@@ -230,6 +236,7 @@ function Row({
   cell,
   best,
   viaPick = false,
+  onOpenTrade,
   bold = false,
 }: {
   label: string;
@@ -237,6 +244,7 @@ function Row({
   cell: string;
   /** Drafted with a pick from this trade rather than received in it. */
   viaPick?: boolean;
+  onOpenTrade?: (tradeId: string) => void;
   /** Best value per column across sides. Totals rows only. */
   best?: Array<number | null>;
   bold?: boolean;
@@ -271,7 +279,18 @@ function Row({
             K{stat.kept.round}
           </Tip>
         ) : null}
-        {stat.exit ? (
+        {stat.exit?.kind === "traded" && stat.exit.tradeId && onOpenTrade ? (
+          // A traded-away player leads straight to another deal, so the glyph is
+          // the way into it rather than just a label.
+          <button
+            type="button"
+            onClick={() => onOpenTrade(stat.exit!.tradeId!)}
+            title={`Traded away in week ${stat.exit.week} — see that trade`}
+            className="shrink-0 text-[9px] text-trade transition-colors hover:text-chalk-100"
+          >
+            &#8644;
+          </button>
+        ) : stat.exit ? (
           // `Tip`, not a `title`: native tooltips take a second to appear and do
           // nothing at all on touch, and a glyph nobody can decode is worse than
           // no glyph. This one opens on hover, focus and tap.

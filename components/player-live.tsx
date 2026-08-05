@@ -181,6 +181,7 @@ export function PlayerTransactions({
   players = {},
   pickOutcomes = {},
   tradeReturns = {},
+  handoffs = {},
 }: {
   playerId: string;
   baked: PlayerTransaction[];
@@ -195,6 +196,7 @@ export function PlayerTransactions({
   pickOutcomes?: Record<string, DraftPickRecord>;
   /** tradeId -> ownerSlug -> what that side got for the rest of the season. */
   tradeReturns?: Record<string, TradeReturn>;
+  handoffs?: Record<string, string>;
 }) {
   const [openTrade, setOpenTrade] = useState<Trade | null>(null);
   const { events: pending } = usePendingTransactions({
@@ -242,6 +244,8 @@ export function PlayerTransactions({
           ownerNames={ownerNames}
           outcomes={pickOutcomes}
           returns={tradeReturns[openTrade.id]}
+          handoffs={handoffs}
+          onOpenTrade={(id) => setOpenTrade(trades[id] ?? openTrade)}
           onClose={() => setOpenTrade(null)}
         />
       ) : null}
