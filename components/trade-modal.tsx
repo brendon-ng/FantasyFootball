@@ -12,9 +12,9 @@ import type { DraftPickRecord, PlayerMeta, Trade, TradeReturn } from "@/lib/type
  * reading a player's timeline, and navigating to `/trades` to find the matching
  * row loses your place in it.
  *
- * CENTRED AT EVERY WIDTH. It was a bottom sheet on a phone, which is the right
- * shape for something that fills the screen — this does not, so it sat pinned to
- * the bottom edge with the page showing above it.
+ * A BOTTOM SHEET ON A PHONE, floated rather than flush: it sits where a thumb
+ * reaches, with `pb-8` keeping it clear of the edge and the home indicator. It
+ * was briefly pinned hard to the bottom, which read as cut off.
  *
  * Reuses `TradeCard`, so the trade reads identically here, on the trades page and
  * on an owner page. Three renderings of one thing would drift.
@@ -62,7 +62,7 @@ export function TradeModal({
       aria-modal="true"
       aria-label="Trade detail"
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/80 p-3 backdrop-blur-sm sm:p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-ink-900/80 p-3 pb-8 backdrop-blur-sm sm:items-center sm:p-4"
     >
       <div
         // The backdrop closes; a click INSIDE must not bubble up to it, or
