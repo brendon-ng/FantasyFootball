@@ -67,6 +67,46 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
   const regular = tally(games.filter((g) => g.kind === "regular"));
   const post = tally(games.filter((g) => g.kind !== "regular"));
 
+  /**
+   * The run of wins the series is currently on, and the longest it has ever been.
+   *
+   * `getMeetings` returns newest first, so the current streak walks forward from
+   * the top. A TIE ENDS A STREAK rather than extending it — nobody won, so nobody
+   * can still be winning. Postseason games count: they are meetings between these
+   * two like any other, and a playoff loss very much ends a run.
+   */
+  const winnerOf = (g: (typeof games)[number]) =>
+    g.a.points === g.b.points ? null : g.a.points > g.b.points ? a : b;
+
+  let streakSlug: string | null = null;
+  let streak = 0;
+  for (const g of games) {
+    const w = winnerOf(g);
+    if (!w) break;
+    if (streakSlug === null) streakSlug = w;
+    else if (w !== streakSlug) break;
+    streak += 1;
+  }
+
+  let bestSlug: string | null = null;
+  let best = 0;
+  let runSlug: string | null = null;
+  let run = 0;
+  for (const g of games) {
+    const w = winnerOf(g);
+    if (!w) {
+      runSlug = null;
+      run = 0;
+      continue;
+    }
+    run = w === runSlug ? run + 1 : 1;
+    runSlug = w;
+    if (run > best) {
+      best = run;
+      bestSlug = w;
+    }
+  }
+
   const rec = (x: { w: number; l: number; t: number }) =>
     x.t ? `${x.w}-${x.l}-${x.t}` : `${x.w}-${x.l}`;
   const avg = (total: number, n: number) => (n ? (total / n).toFixed(1) : "—");
@@ -91,7 +131,7 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
         <Stat
           label="All-time series"
           value={rec(overall)}
@@ -103,6 +143,38 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
           tone="accent"
         />
         <Stat label="Matchups" value={overall.n} sub="regular season + postseason" />
+        <Stat
+          label="Current streak"
+          value={
+            streak ? (
+              <span className="text-base sm:text-lg">
+                {owners.get(streakSlug!)?.firstName} <span className="tabular">W{streak}</span>
+              </span>
+            ) : (
+              "—"
+            )
+          }
+          sub={
+            streak
+              ? `since ${games[streak - 1].season} week ${games[streak - 1].week}`
+              : games.length
+                ? "last meeting was a tie"
+                : undefined
+          }
+          tone={streak ? "accent" : undefined}
+        />
+        <Stat
+          label="Longest streak"
+          value={
+            best ? (
+              <span className="text-base sm:text-lg">
+                {owners.get(bestSlug!)?.firstName} <span className="tabular">W{best}</span>
+              </span>
+            ) : (
+              "—"
+            )
+          }
+        />
         <Stat
           label={`${owners.get(a)?.firstName} pts`}
           value={fmt.pts1(overall.pf)}
