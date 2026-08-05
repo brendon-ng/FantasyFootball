@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 import Link from "next/link";
 
 import { TradeReturns } from "@/components/trade-returns";
@@ -19,6 +23,10 @@ import type {
  *
  * A column per party, so a two-team trade reads as the familiar two sides and a
  * three-team trade simply has three columns rather than a different component.
+ *
+ * A CLIENT COMPONENT ONLY FOR THE ANONYMISE TOGGLE, and it costs nothing: the
+ * trade list and the modal are both client components already, so this code was
+ * in the bundle whatever the trade page did with it.
  */
 export function TradeCard({
   trade,
@@ -53,7 +61,14 @@ export function TradeCard({
   /** Jump to another trade — the one that moved a pick on, or moved a player. */
   onOpenTrade?: (tradeId: string) => void;
 }) {
-  const name = (slug: string | null) => (slug && ownerNames[slug]) || "—";
+  /**
+   * FOR SCREENSHOTS. The point of sending a deal round is to argue about who won
+   * it, and that argument is worthless once everyone can see whose it was. Local
+   * state, not the URL: you turn it on, take the picture, and it is done.
+   */
+  const [anon, setAnon] = useState(false);
+  const names = anon ? aliases(trade, ownerNames) : ownerNames;
+  const name = (slug: string | null) => (slug && names[slug]) || "—";
 
   // Every party gets a column even if they only sent — a team that received
   // nothing still took part, and omitting them makes the trade unreadable.
@@ -90,11 +105,28 @@ export function TradeCard({
             {trade.ownerSlugs.length}-team
           </span>
         ) : null}
+        {/* Only where the deal is the subject — a list of nine is not what anyone
+            screenshots, and nine toggles in a column is noise. */}
+        {!onOpen ? (
+          <button
+            type="button"
+            onClick={() => setAnon(!anon)}
+            aria-pressed={anon}
+            title="Hide who is who, so a screenshot can be argued about on its merits"
+            className={`ml-auto shrink-0 rounded border px-1.5 py-0.5 text-[10px] font-medium transition-colors ${
+              anon
+                ? "border-accent-dim bg-accent/10 text-accent"
+                : "border-ink-600 text-chalk-500 hover:border-ink-500 hover:text-chalk-300"
+            }`}
+          >
+            {anon ? "Show names" : "Hide names"}
+          </button>
+        ) : null}
         {!onOpen && showTreeLink ? (
           // Only in the modal, where "Details" has already been used to get here.
           <Link
             href={`/trades/${trade.id}/`}
-            className="ml-auto shrink-0 text-[11px] text-chalk-500 transition-colors hover:text-accent"
+            className="shrink-0 text-[11px] text-chalk-500 transition-colors hover:text-accent"
           >
             Trade tree <span aria-hidden>→</span>
           </Link>
@@ -121,21 +153,31 @@ export function TradeCard({
       >
         {trade.ownerSlugs.map((slug) => (
           <div key={slug} className="min-w-0">
-            <Link
-              href={`/owners/${slug}/`}
-              data-owner={slug}
-              className="block truncate text-sm font-semibold transition-colors hover:text-accent"
-            >
-              {name(slug)}
-            </Link>
+            {/* NOT A LINK WHEN HIDDEN. The href carries the slug and the identity
+                rule matches on it — either one names the team the label is
+                hiding, and a screenshot would show it painted violet. */}
+            {anon ? (
+              <span className="block truncate text-sm font-semibold text-chalk-300">
+                {name(slug)}
+              </span>
+            ) : (
+              <Link
+                href={`/owners/${slug}/`}
+                data-owner={slug}
+                className="block truncate text-sm font-semibold transition-colors hover:text-accent"
+              >
+                {name(slug)}
+              </Link>
+            )}
             <ul className="mt-1 space-y-0.5">
               {received.get(slug)!.length ? (
                 received.get(slug)!.map((leg, i) => (
                   <li key={i} className="text-[13px] leading-snug text-chalk-300">
                     <LegText
                       leg={leg}
+                      anon={anon}
                       players={players}
-                      ownerNames={ownerNames}
+                      ownerNames={names}
                       outcomes={outcomes}
                       handoff={
                         leg.kind === "pick" && leg.pick && leg.toSlug
@@ -159,7 +201,7 @@ export function TradeCard({
       {returns ? (
         <TradeReturns
           players={players}
-          ownerNames={ownerNames}
+          ownerNames={names}
           returns={returns}
           onOpenTrade={onOpenTrade}
         />
@@ -190,6 +232,7 @@ export function TradeCard({
 /** "Ja'Marr Chase", "2026 4th (Reagan's)", "$12 FAAB". */
 function LegText({
   leg,
+  anon,
   players,
   ownerNames,
   outcomes,
@@ -197,6 +240,8 @@ function LegText({
   onOpenTrade,
 }: {
   leg: TradeLeg;
+  /** Names are aliases, so do not shorten them — "Team A" shortens to "Team". */
+  anon: boolean;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
   outcomes: Record<string, DraftPickRecord>;
@@ -204,6 +249,8 @@ function LegText({
   handoff?: string;
   onOpenTrade?: (tradeId: string) => void;
 }) {
+  const short = (n: string) => (anon ? n : n.split(" ")[0]);
+
   if (leg.kind === "faab") {
     return <span className="text-accent">${leg.amount} FAAB</span>;
   }
@@ -226,7 +273,7 @@ function LegText({
     return (
       <span className="block">
         {p.season} {`${p.round}${ordinal(p.round)}`}
-        {from ? <span className="text-chalk-600"> ({from.split(" ")[0]}&apos;s)</span> : null}
+        {from ? <span className="text-chalk-600"> ({short(from)}&apos;s)</span> : null}
         {became ? (
           /* Indented under its pick with a turnstile, so it reads as a note ABOUT
              the line above rather than another thing received. Without either cue
@@ -257,10 +304,10 @@ function LegText({
                     className="text-loss underline decoration-dotted underline-offset-2 transition-colors hover:text-chalk-100"
                     title="See the trade that moved this pick on"
                   >
-                    · picked by {usedBy.split(" ")[0]}
+                    · picked by {short(usedBy)}
                   </button>
                 ) : (
-                  <span className="text-loss">· picked by {usedBy.split(" ")[0]}</span>
+                  <span className="text-loss">· picked by {short(usedBy)}</span>
                 )}
               </>
             ) : null}
@@ -285,3 +332,27 @@ function LegText({
 
 const ordinal = (n: number): string =>
   n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th";
+
+/**
+ * Every owner relabelled, this trade's parties first so they read A, B, C down
+ * the columns.
+ *
+ * EVERY OWNER, not just the parties. A pick names whoever it originally belonged
+ * to and, once the draft has run, whoever actually used it — both can be someone
+ * who was not in the deal. Left out of the map they fall through to the raw slug,
+ * which is a name with a hyphen in it.
+ */
+function aliases(trade: Trade, ownerNames: Record<string, string>): Record<string, string> {
+  const order = [...trade.ownerSlugs, ...Object.keys(ownerNames).sort()];
+  const out: Record<string, string> = {};
+  let i = 0;
+  for (const slug of order) {
+    if (out[slug]) continue;
+    // Past Z it wraps rather than walking into the punctuation after it. No
+    // league is that big, but a label reading "Team [" would be a puzzle.
+    out[slug] =
+      `Team ${String.fromCharCode(65 + (i % 26))}${i >= 26 ? Math.floor(i / 26) + 1 : ""}`;
+    i++;
+  }
+  return out;
+}
