@@ -1241,8 +1241,16 @@ forward the moment the draft is archived, so the same two lines give live → fr
 → live with nothing to schedule and nothing to expire. Verified in all three
 states.
 
-`keeperCycleSeason()` is `max(finished seasons, ARCHIVED DRAFT SEASONS) + 1`. A
-DRAFT ADVANCES THE CYCLE, NOT A FINISHED SEASON — `resolveKeepers` rolls contracts
+`keeperCycleSeason()` is `max(finished seasons, ARCHIVED DRAFT SEASONS) + 1`, and
+it is what every label describing CONTRACTS uses — the home keeper board's title
+and the keepers page heading. THE DRAFT SEASON IS A DIFFERENT NUMBER and they
+diverge for five months a year: from the day the 2026 draft is archived, the
+contracts are priced for 2027 while the 2026 draft is still the one that just
+happened, the live league id is still 2026's, and the projected board (which hides
+itself once `status === "complete"`) is done for the year. Use the cycle for
+contracts, the draft season for anything fetching or naming a draft.
+
+A DRAFT ADVANCES THE CYCLE, NOT A FINISHED SEASON — `resolveKeepers` rolls contracts
 onto the next year the moment a draft completes, so from the day the 2026 draft is
 archived the board quotes 2027, five months before the 2026 season ends. Deriving
 it from finished seasons alone left ADP a year behind for that whole stretch, and

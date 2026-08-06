@@ -10,6 +10,7 @@ import {
   features,
   getAdp,
   getRules,
+  keeperCycleSeason,
   getAllMeetings,
   getConfig,
   getKeepers,
@@ -160,7 +161,10 @@ export default async function HomePage() {
       {features().keepers ? (
         <Panel>
           <PanelHeader
-            title={`Keeper Board · Entering ${currentSeason}`}
+            // The CYCLE, not the NFL season. A completed draft rolls every
+            // contract onto the next year, so from late August these are next
+            // year's costs while `currentSeason` is still this year's football.
+            title={`Keeper Board · Entering ${keeperCycleSeason()}`}
             meta={
               adp.capturedAt
                 ? `top ${MAX_KEEPERS} per team · ADP ${adp.frozen ? "locked" : "live"}`

@@ -12,6 +12,7 @@ import {
   features,
   getAdp,
   getRules,
+  keeperCycleSeason,
   getConfig,
   getKeepers,
   getOwners,
@@ -57,7 +58,17 @@ export default function KeepersPage() {
   const { draftRounds } = getRules();
   const cfg = getConfig();
 
+  /**
+   * TWO DIFFERENT SEASONS, and they diverge for five months of the year.
+   *
+   * `nextSeason` is the DRAFT this page projects — which league to fetch live
+   * from, and what to title the board. `cycle` is the season the CONTRACTS are
+   * priced for, and a completed draft advances that immediately: from the day the
+   * 2026 draft is archived these contracts say what it costs to keep in 2027,
+   * while the 2026 draft is still the one that just happened.
+   */
   const nextSeason = Math.max(...seasons.map((s) => s.season), 0) + 1;
+  const cycle = keeperCycleSeason();
   const leagueId = cfg.knownLeagueIds[String(nextSeason)] ?? null;
 
   const byOwner = new Map<string, KeeperContract[]>();
@@ -80,7 +91,7 @@ export default function KeepersPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Keeper Tracker</h1>
           <p className="mt-1 max-w-2xl text-sm text-chalk-500">
-            Contracts entering the {nextSeason} draft. Keeping a player costs your pick in their
+            Contracts entering the {cycle} draft. Keeping a player costs your pick in their
             round; a contract survives two keeps before the player is revalued to ADP.
           </p>
         </div>
