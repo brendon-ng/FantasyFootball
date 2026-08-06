@@ -44,7 +44,10 @@ export function PlayerUsageTable({
     <div className="overflow-x-auto">
       <div className="max-sm:min-w-max">
         <ListHeader className={SPACING}>
-          <Col className="w-10 shrink-0">Season</Col>
+          {/* "Year", not "Season". The column only has to hold four digits, so it
+              is `w-10` — but "SEASON" at the header's tracking runs wider than
+              that and nothing clips it, so it ran into the owner beside it. */}
+          <Col className="w-10 shrink-0">Year</Col>
           <Col className="min-w-[4.5rem] flex-1">Owner</Col>
           <Col className="w-7 shrink-0 text-right" hint="Games on the roster, bench included">
             G
