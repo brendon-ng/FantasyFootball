@@ -3,9 +3,10 @@ name: Archive finalized data
 # Captures newly finalized weeks into `data/raw/` and commits them.
 #
 # Kept separate from deploy.yml on purpose: deploy is read-only and runs many
-# times a day, whereas this job writes to the repo and only needs to run once a
-# week. `scripts/sync.ts` only ever persists data Sleeper has finalized and is
-# idempotent, so a run with nothing new produces no commit at all.
+# times a day, whereas this job WRITES TO THE REPO. `scripts/sync.ts` only ever
+# persists data Sleeper has finalized and is idempotent, so a run with nothing new
+# produces no commit at all — which is what makes a daily schedule free. Most days
+# of the year this job does nothing but prove there was nothing to do.
 #
 # NOTE: this push does NOT trigger deploy.yml. GitHub deliberately suppresses
 # workflow triggers for pushes made with the default GITHUB_TOKEN, to stop
@@ -17,9 +18,25 @@ name: Archive finalized data
 
 on:
   schedule:
-    # Tuesday 12:00 UTC — after Monday Night Football has been scored and stat
-    # corrections have settled.
-    - cron: "0 12 * * 2"
+    # Midnight Pacific, daily.
+    #
+    # GITHUB CRON IS UTC ONLY — there is no timezone field — so this is 08:00 UTC:
+    # exactly midnight PST, and 01:00 PDT through the summer. 07:00 UTC would be
+    # exact in summer but 23:00 the PREVIOUS DAY in winter, which puts a "daily
+    # midnight" run on the wrong date for half the year. Erring late keeps it on
+    # the right day always.
+    #
+    # DAILY RATHER THAN WEEKLY because the job is idempotent: a run with nothing
+    # newly finalized produces no commit. Weekly meant a week scored on Tuesday
+    # morning could sit unarchived for seven days; now the worst case is one.
+    # There is no risk of catching a week mid-correction either — sync commits
+    # only what Sleeper's `last_scored_leg` says is final, so an early run simply
+    # finds nothing and the next day's picks it up.
+    #
+    # Cost is one ~2-minute job a day. Actions minutes are unlimited on public
+    # repos, and the only external cost is the 5MB player map, fetched at most
+    # once per run — the budget Sleeper's docs ask for.
+    - cron: "0 8 * * *"
   workflow_dispatch:
 
 permissions:

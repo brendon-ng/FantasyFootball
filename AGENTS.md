@@ -545,8 +545,18 @@ free tier.
 | Workflow | Cadence | Does |
 | --- | --- | --- |
 | `deploy.yml` | push + every 15 min in NFL game windows, else 6-hourly | build & publish; bakes in-progress Sleeper data |
-| `archive.yml` | Tuesdays 12:00 UTC | `sync` + `derive`, commits only if something newly finalized |
+| `archive.yml` | daily, 08:00 UTC | `sync` + `derive` + `import:player-teams`, commits only if something newly finalized |
 | `keepalive.yml` | 3rd of each month | commits a timestamp so cron workflows are never auto-disabled |
+
+`archive.yml` is DAILY BECAUSE IT IS IDEMPOTENT — a run with nothing newly
+finalized produces no commit, so most days it only proves there was nothing to
+do. Weekly meant a week scored on Tuesday morning could sit unarchived for seven
+days. 08:00 UTC is midnight PST and 01:00 PDT; GitHub cron has no timezone field,
+and 07:00 UTC would be exact in summer but 23:00 the previous day in winter.
+
+NOTHING RUNS `npm run adp`. It is only in `npm run data`, so live ADP is captured
+by hand — worth remembering before a keeper deadline, since expired contracts are
+revalued against it. `adp:lock` is deliberately manual (bylaws 1.7.2.2.1).
 
 Pushes made with the default `GITHUB_TOKEN` do NOT trigger other workflows —
 GitHub suppresses that to prevent recursion. So `archive.yml` does not trigger a
