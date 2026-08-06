@@ -871,13 +871,43 @@ export interface AdpSnapshot {
  * CORS headers, so a client-side fetch is blocked outright, and the page is
  * 826KB of HTML that no one should download to read one column.
  */
+/**
+ * The season the keeper cycle is currently pricing.
+ *
+ * A DRAFT ADVANCES IT, NOT A FINISHED SEASON. `resolveKeepers` rolls every
+ * contract onto the next year the moment a draft completes, so from the day the
+ * 2026 draft is archived the board is quoting what it costs to keep in 2027 —
+ * five months before the 2026 season ends. Deriving this from finished seasons
+ * alone left it a year behind for that whole stretch.
+ */
+export const keeperCycleSeason = (): number =>
+  Math.max(0, ...getSeasons().map((s) => s.season), ...getDrafts().map((d) => d.season)) + 1;
+
+/**
+ * The market, and whether it is still moving.
+ *
+ * LIVE BY DEFAULT, FROZEN ONLY INSIDE THE LOCK WINDOW. Bylaws 1.7.2.2.1 fix ADP
+ * a week before the keeper deadline, and it must stay fixed until that draft has
+ * run — a market that kept moving would change keeper costs after the deadline
+ * they were decided against.
+ *
+ * NO DATES ARE COMPARED HERE, and that is the point. The frozen file simply does
+ * not exist until the lock is taken, and `keeperCycleSeason()` steps forward the
+ * moment the draft is archived — so the same two lines give live ADP before the
+ * lock, the frozen snapshot through the window, and live ADP again for the next
+ * cycle, with nothing to schedule or expire.
+ *
+ * DISPLAY ONLY. `derive` never reads ADP, so refreshing it daily cannot move a
+ * committed keeper contract; the only thing that changes is the market column
+ * beside it.
+ */
 export function getAdp(): {
   byPlayer: Map<string, AdpEntry>;
   frozen: boolean;
   capturedAt: string | null;
   season: number | null;
 } {
-  const season = Math.max(0, ...getSeasons().map((s) => s.season)) + 1;
+  const season = keeperCycleSeason();
   const frozen = load<AdpSnapshot | null>(`adp/${season}.json`, null);
   const snapshot = frozen ?? load<AdpSnapshot | null>("adp/live.json", null);
 

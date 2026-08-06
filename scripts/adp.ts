@@ -22,6 +22,7 @@
  *                           expired keeper contract.
  *
  *   npm run adp                  refresh live.json (part of `npm run data`)
+ *   npm run adp -- --auto        refresh, and freeze if the bylaw window has opened
  *   npm run adp:lock             freeze this season's snapshot
  *   npm run adp:lock -- --force  re-freeze, overwriting
  *   npm run adp -- --season=2027
@@ -29,7 +30,8 @@
 
 import { join } from "node:path";
 
-import { getAllPlayers, type SleeperPlayer } from "../lib/sleeper.ts";
+import { keeperDeadline } from "../lib/draft-slots.ts";
+import { getAllPlayers, getDraft, getLeague, type SleeperPlayer } from "../lib/sleeper.ts";
 import { CACHE_DIR, fileAgeMs, log, readJson, writeJson } from "./lib/io.ts";
 import { configDir, dataDir, resolveLeagues } from "./lib/league.ts";
 
@@ -39,6 +41,19 @@ const args = new Set(process.argv.slice(2));
 const FORCE = args.has("--force");
 /** Lock mode writes the frozen per-season snapshot; default refreshes live.json. */
 const LOCK = args.has("--lock");
+/**
+ * Unattended mode, for the daily archive job: refresh live.json, and take the
+ * frozen snapshot too if the bylaw window has opened since the last run.
+ */
+const AUTO = args.has("--auto");
+/**
+ * Bylaws 1.7.2.2.1 fix ADP one week before the keeper deadline, and 1.7 puts the
+ * deadline three days before the draft — so the market stops moving ten days out.
+ * Derived from `keeperDeadline` rather than restated, so one bylaw lives in one
+ * place.
+ */
+const LOCK_LEAD_MS = 7 * 24 * 60 * 60 * 1000;
+const lockOpensAt = (draftStart: number) => keeperDeadline(draftStart) - LOCK_LEAD_MS;
 const SEASON =
   [...args].find((a) => a.startsWith("--season="))?.split("=")[1] ??
   String(new Date().getUTCFullYear());
@@ -144,24 +159,24 @@ async function loadPlayerMap(): Promise<Record<string, SleeperPlayer>> {
   return all;
 }
 
-async function captureFor(slug: string): Promise<void> {
-  const outPath = join(dataDir(slug), "adp", LOCK ? `${SEASON}.json` : "live.json");
+async function captureFor(slug: string, lock = LOCK, season = SEASON): Promise<void> {
+  const outPath = join(dataDir(slug), "adp", lock ? `${season}.json` : "live.json");
 
-  if (LOCK) {
+  if (lock) {
     const existing = readJson<{ capturedAt: string }>(outPath);
     if (existing && !FORCE) {
       log.warn(
-        `${SEASON} ADP was already frozen at ${existing.capturedAt}. ` +
+        `${season} ADP was already frozen at ${existing.capturedAt}. ` +
           `Bylaws 1.7.2.2.1 fixes ADP before the keeper deadline — pass --force to overwrite.`,
       );
       return;
     }
   }
 
-  const rules = readJson<{ teams: number }>(join(configDir(slug), "rules", `${SEASON}.json`));
+  const rules = readJson<{ teams: number }>(join(configDir(slug), "rules", `${season}.json`));
   const teams = rules?.teams ?? 10;
 
-  log.step(`Capturing ${SEASON} Sleeper ADP (${LOCK ? "FROZEN snapshot" : "live refresh"})`);
+  log.step(`Capturing ${season} Sleeper ADP (${lock ? "FROZEN snapshot" : "live refresh"})`);
   log.info(`source: ${SOURCE} (PPR · Redraft · 1QB — the page's default state)`);
 
   const res = await fetch(SOURCE, { headers: { "User-Agent": "Mozilla/5.0" } });
@@ -216,13 +231,13 @@ async function captureFor(slug: string): Promise<void> {
   }
 
   writeJson(outPath, {
-    season: Number(SEASON),
+    season: Number(season),
     source: SOURCE,
     scoring: "ppr",
     format: "redraft",
     quarterbacks: 1,
     leagueTeams: teams,
-    frozen: LOCK,
+    frozen: lock,
     // For the frozen file this timestamp is the whole point; for live.json it
     // just tells the UI how stale the number on screen is.
     capturedAt: new Date().toISOString(),
@@ -231,9 +246,9 @@ async function captureFor(slug: string): Promise<void> {
       "`round` converts Sleeper ADP to a keeper cost round for this league's size.",
     entries,
   });
-  log.write(`data/${slug}/adp/${LOCK ? SEASON : "live"}.json (${entries.length} players)`);
+  log.write(`data/${slug}/adp/${lock ? season : "live"}.json (${entries.length} players)`);
 
-  if (!LOCK) return;
+  if (!lock) return;
 
   log.step("Round breakdown");
   for (let round = 1; round <= 17; round++) {
@@ -244,6 +259,60 @@ async function captureFor(slug: string): Promise<void> {
   }
 }
 
+/**
+ * The season the keeper cycle is pricing — the same rule `keeperCycleSeason()`
+ * uses on the read side, from the same committed files.
+ *
+ * A DRAFT ADVANCES IT, not a finished season: contracts roll onto the next year
+ * the moment a draft is archived, months before the season it belongs to ends.
+ */
+function cycleSeason(slug: string): number {
+  const seasons =
+    readJson<Array<{ season: number }>>(join(dataDir(slug), "derived", "seasons.json")) ?? [];
+  const drafts =
+    readJson<Array<{ season: number }>>(join(dataDir(slug), "derived", "drafts.json")) ?? [];
+  return Math.max(0, ...seasons.map((x) => x.season), ...drafts.map((x) => x.season)) + 1;
+}
+
+/**
+ * Whether the bylaw window has opened and nothing has been frozen yet.
+ *
+ * ASKS SLEEPER FOR THE DRAFT DATE, because that is the only place it exists —
+ * nothing is committed until the draft has actually run. Returns false for every
+ * reason it might not apply: no draft scheduled, no date set, already drafted,
+ * already frozen, or simply too early.
+ */
+async function lockIsDue(slug: string, season: number): Promise<boolean> {
+  if (readJson(join(dataDir(slug), "adp", `${season}.json`))) return false;
+
+  const cfg = readJson<{ knownLeagueIds: Record<string, string> }>(
+    join(configDir(slug), "league.json"),
+  );
+  const leagueId = cfg?.knownLeagueIds[String(season)];
+  if (!leagueId) {
+    log.info(`no ${season} league id yet — nothing to freeze against`);
+    return false;
+  }
+
+  const draftId = (await getLeague(leagueId))?.draft_id;
+  const draft = draftId ? await getDraft(draftId) : null;
+  if (!draft?.start_time) {
+    log.info(`${season} draft has no date set — ADP stays live`);
+    return false;
+  }
+  // A draft that has already run freezes nothing: the cycle is about to advance
+  // and the next season's market is the one that matters.
+  if (draft.status === "complete") return false;
+
+  const opens = lockOpensAt(draft.start_time);
+  if (Date.now() < opens) {
+    const days = Math.ceil((opens - Date.now()) / 86_400_000);
+    log.info(`${season} ADP locks in ${days} day${days === 1 ? "" : "s"} — staying live`);
+    return false;
+  }
+  return true;
+}
+
 // Only leagues that use keepers need ADP; it exists to reprice expired contracts.
 for (const league of resolveLeagues(process.argv.slice(2))) {
   if (!league.features?.adp) {
@@ -251,5 +320,22 @@ for (const league of resolveLeagues(process.argv.slice(2))) {
     continue;
   }
   log.step(`■ ${league.name} (${league.slug})`);
-  await captureFor(league.slug);
+
+  if (!AUTO) {
+    await captureFor(league.slug);
+    continue;
+  }
+
+  // Live ALWAYS refreshes, even inside the lock window. The frozen file is what
+  // the site reads there, so keeping live.json current costs nothing and means
+  // the market is already up to date the moment the cycle advances.
+  const season = cycleSeason(league.slug);
+  await captureFor(league.slug, false, String(season));
+  if (await lockIsDue(league.slug, season)) {
+    log.info(`bylaws 1.7.2.2.1 window is open — freezing ${season}`);
+    // A second scrape rather than reusing the first. It happens on exactly one
+    // day per year, and threading the parsed rows through would complicate the
+    // path that runs the other 364.
+    await captureFor(league.slug, true, String(season));
+  }
 }

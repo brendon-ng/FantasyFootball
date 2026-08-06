@@ -8,6 +8,12 @@ name: Archive finalized data
 # produces no commit at all — which is what makes a daily schedule free. Most days
 # of the year this job does nothing but prove there was nothing to do.
 #
+# ADP refreshes on every run, so unlike the league data there is almost always
+# something to commit. That is intended — the market moves daily and the site
+# shows it live outside the locked window — but it does mean the "only commits
+# when something finalized" property now really means "only commits when
+# something changed".
+#
 # NOTE: this push does NOT trigger deploy.yml. GitHub deliberately suppresses
 # workflow triggers for pushes made with the default GITHUB_TOKEN, to stop
 # workflows recursively triggering themselves. The newly archived data therefore
@@ -64,6 +70,24 @@ jobs:
 
       - name: Rebuild derived data
         run: npm run derive
+
+      # AFTER derive, which is what decides the keeper cycle season this prices
+      # against — the cycle advances when a draft is archived, not when a season
+      # ends, and derive is what archives it.
+      #
+      # `--auto` refreshes live.json every day and additionally takes the frozen
+      # snapshot the first run after bylaws 1.7.2.2.1 opens the window (ten days
+      # before the draft: the keeper deadline is three days out, ADP fixes a week
+      # before that). It never overwrites an existing snapshot, so it can only
+      # ever fire once per cycle.
+      #
+      # `continue-on-error` because beatadp is a THIRD PARTY. It being down or
+      # changing its markup must not stop finalized league data being archived —
+      # that data is the thing this job exists for, and a stale ADP column is a
+      # far smaller problem than a week of results going uncommitted.
+      - name: Refresh ADP, freezing it once the bylaw window opens
+        continue-on-error: true
+        run: npm run adp -- --auto
 
       # AFTER derive, which is what tells it which players a season involves — and
       # the only thing that fetches bye weeks. Without it a new season's byes are

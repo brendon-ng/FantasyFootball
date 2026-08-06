@@ -554,9 +554,11 @@ do. Weekly meant a week scored on Tuesday morning could sit unarchived for seven
 days. 08:00 UTC is midnight PST and 01:00 PDT; GitHub cron has no timezone field,
 and 07:00 UTC would be exact in summer but 23:00 the previous day in winter.
 
-NOTHING RUNS `npm run adp`. It is only in `npm run data`, so live ADP is captured
-by hand — worth remembering before a keeper deadline, since expired contracts are
-revalued against it. `adp:lock` is deliberately manual (bylaws 1.7.2.2.1).
+`archive.yml` also runs `npm run adp -- --auto`, so ADP refreshes daily and
+freezes itself on schedule — see the ADP section. That step is
+`continue-on-error`: beatadp is a third party, and it being down must not stop
+finalized league data being archived. It also means the job commits most days
+rather than rarely, since the market moves daily.
 
 Pushes made with the default `GITHUB_TOKEN` do NOT trigger other workflows —
 GitHub suppresses that to prevent recursion. So `archive.yml` does not trigger a
@@ -1213,12 +1215,55 @@ Two files with different authority:
 
 | File | Written by | Authority |
 | --- | --- | --- |
-| `data/adp/live.json` | every `npm run data` | display only |
-| `data/adp/<season>.json` | `npm run adp:lock` | revalues expired contracts |
+| `data/adp/live.json` | `npm run adp`, daily in `archive.yml` | display only |
+| `data/adp/<season>.json` | `adp:lock`, or `adp --auto` when the window opens | the market keeper costs were decided against |
 
 `adp:lock` refuses to overwrite without `--force`, because bylaws 1.7.2.2.1 fixes
 ADP a week before the keeper deadline and a silent re-capture would move keeper
-costs after the fact. `getAdp()` prefers the frozen file and falls back to live.
+costs after the fact.
+
+### Live except inside the lock window
+
+The site shows the CURRENT market, until the bylaws say it must stop moving. That
+window opens ten days before the draft — the keeper deadline is three days out
+(bylaw 1.7) and ADP fixes a week before that — and closes when the draft is
+archived, at which point the board is already pricing the NEXT cycle and wants a
+live market again.
+
+`getAdp()` implements all of that WITHOUT COMPARING A SINGLE DATE:
+
+```ts
+const season = keeperCycleSeason();
+const frozen = load(`adp/${season}.json`, null);
+const snapshot = frozen ?? load("adp/live.json", null);
+```
+
+The frozen file does not exist before the lock, and `keeperCycleSeason()` steps
+forward the moment the draft is archived, so the same two lines give live → frozen
+→ live with nothing to schedule and nothing to expire. Verified in all three
+states.
+
+`keeperCycleSeason()` is `max(finished seasons, ARCHIVED DRAFT SEASONS) + 1`. A
+DRAFT ADVANCES THE CYCLE, NOT A FINISHED SEASON — `resolveKeepers` rolls contracts
+onto the next year the moment a draft completes, so from the day the 2026 draft is
+archived the board quotes 2027, five months before the 2026 season ends. Deriving
+it from finished seasons alone left ADP a year behind for that whole stretch, and
+pinned it to the stale frozen snapshot the entire season.
+
+`npm run adp -- --auto` is the write half, and takes the lock itself: it asks
+Sleeper for the draft date (the only place it exists before a draft runs), and
+freezes on the first daily run at or after the window opens. It never overwrites
+an existing snapshot, so it can fire only once per cycle, and it bails quietly for
+every reason it might not apply — no draft, no date, already drafted, already
+frozen, too early. Cron granularity means the snapshot lands within 24 hours of
+the bylaw moment, always after it and never before.
+
+DERIVE NEVER READS ADP — checked, not assumed. Refreshing it daily therefore
+cannot move a committed keeper contract; the only thing that changes is the market
+column beside one.
+
+`getAdp()` is still the ONE place that decides. Do not add a second date check in
+a page.
 
 Round conversion divides ADP by *this league's* team count, so pick 15 is round 2
 in a 10-team league. Surplus value shown in the UI is `costRound - adpRound`:
