@@ -6,12 +6,14 @@ import { PositionPill } from "@/components/keeper-table";
 import { EmptyState } from "@/components/ui";
 import {
   assignKeeperSlots,
+  costRound,
   buildBoard,
   pickLabel,
   type BoardPick,
   type DraftShape,
 } from "@/lib/draft-slots";
 import { LiveStatus, useLiveDraft, useLiveRosters, useLiveTradedPicks } from "@/lib/sleeper-browser";
+import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
 /**
@@ -37,6 +39,8 @@ export function ProjectedDraftBoard({
   userIdToSlug,
   ownerNames,
   maxKeepers,
+  adp,
+  draftRounds,
 }: {
   leagueId: string | null;
   season: number;
@@ -45,6 +49,9 @@ export function ProjectedDraftBoard({
   userIdToSlug: Record<string, string>;
   ownerNames: Record<string, string>;
   maxKeepers: number;
+  adp: Record<string, AdpEntry>;
+  /** Last round of the draft — the floor an expired contract is revalued to. */
+  draftRounds: number;
 }) {
   const draft = useLiveDraft(leagueId);
   const traded = useLiveTradedPicks(leagueId);
@@ -136,7 +143,9 @@ export function ProjectedDraftBoard({
       .map((id) => byId.get(id))
       .filter((c): c is KeeperContract => Boolean(c))
       .slice(0, maxKeepers)
-      .map((c) => ({ playerId: c.playerId, round: c.round, expired: c.expired }));
+      // Cost, not the stored round: an expired contract is revalued to ADP and
+      // consumes the pick that costs, rather than being left off the board.
+      .map((c) => ({ playerId: c.playerId, round: costRound(c, adp[c.playerId], draftRounds) }));
     for (const a of assignKeeperSlots(picked, owned)) {
       if (a.pick) {
         keeperAt.set(`${a.pick.round}:${a.pick.slot}`, {

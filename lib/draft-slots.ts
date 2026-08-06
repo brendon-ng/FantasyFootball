@@ -125,7 +125,8 @@ export interface SlotAssignment {
  * pay for, which is what the existing round-only allocation already did.
  */
 export function assignKeeperSlots(
-  keepers: Array<{ playerId: string; round: number; expired: boolean }>,
+  /** `round` is the EFFECTIVE cost — run a contract through `costRound()` first. */
+  keepers: Array<{ playerId: string; round: number }>,
   ownedPicks: BoardPick[],
 ): SlotAssignment[] {
   // Latest pick in a round first, so rule 2 falls out of a pop().
@@ -138,14 +139,6 @@ export function assignKeeperSlots(
   return [...keepers]
     .sort((a, b) => a.round - b.round)
     .map((k) => {
-      if (k.expired) {
-        return {
-          playerId: k.playerId,
-          pick: null,
-          bumpedFrom: null,
-          reason: "Contract expired — cost is this year's ADP, not the original round",
-        };
-      }
       for (let r = k.round; r >= 1; r--) {
         const list = byRound.get(r);
         if (list?.length) {
@@ -212,6 +205,37 @@ export function mockDraftDate(now = Date.now()): number {
   d.setDate(d.getDate() + 14);
   d.setHours(19, 0, 0, 0);
   return d.getTime();
+}
+
+/**
+ * What a contract actually costs to keep, this cycle.
+ *
+ * BYLAWS 1.7.2.2: a contract with no keeps left is revalued to ADP
+ * (`resetsToAdpAfterContract`). Nothing did that — `derive` leaves `round` at the
+ * original figure forever and every surface printed the literal word "ADP" in the
+ * cost column, so the number a team would actually pay was nowhere on the site.
+ *
+ * COMPUTED AT READ TIME, NOT STORED. Putting it in `keepers.json` would make a
+ * committed contract move every day the market does, which breaks the empty-diff
+ * property the whole pipeline is built on and would rewrite history in git. The
+ * contract keeps its true original round; what it costs today is derived beside
+ * it, from whichever snapshot `getAdp()` says applies — frozen inside the bylaw
+ * window, live outside it.
+ *
+ * CAPPED AT THE LAST ROUND, and floored there too when the market has not priced
+ * the player at all. ADP is an overall pick number divided by the league size, so
+ * a deep bench player converts to round 21 in a 17-round draft — a cost nobody can
+ * pay. The cheapest a keeper can ever cost is your last pick, so that is what an
+ * off-the-board contract costs. `ValueBadge` still reports the shortfall: paying
+ * R17 for a player the market has at R21 shows as -4, which is the truth.
+ */
+export function costRound(
+  contract: { round: number; expired: boolean },
+  adp: { round: number | null } | undefined,
+  draftRounds: number,
+): number {
+  if (!contract.expired) return contract.round;
+  return Math.min(draftRounds, Math.max(1, adp?.round ?? draftRounds));
 }
 
 /** Keeper deadline: three days before the draft (bylaws 1.7). */

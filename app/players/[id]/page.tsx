@@ -3,12 +3,14 @@ import { notFound } from "next/navigation";
 
 import { KeepPips, PositionPill } from "@/components/keeper-table";
 import { BackLink } from "@/components/back-link";
+import { costRound } from "@/lib/draft-slots";
 import { LiveOwner, PlayerTransactions } from "@/components/player-live";
 import { PlayerUsageTable } from "@/components/player-usage";
 import { Panel, PanelHeader, Stat } from "@/components/ui";
 import {
   features,
   getAdp,
+  getRules,
   getConfig,
   getKeepers,
   getOwners,
@@ -55,6 +57,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   const contract = getKeepers().final.find((c) => c.playerId === id);
   const keeps = getPlayerKeepHistory(id);
   const adpAll = getAdp();
+  const { draftRounds } = getRules();
   const cfg = getConfig();
   // Weeks after this are not yet in the committed data, so anything there has to
   // come from Sleeper directly.
@@ -126,10 +129,14 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
               />
             }
           />
+          {/* THE NUMBER, not the word "ADP". A revalued contract still costs a
+              specific pick; naming the source instead of the figure left the one
+              thing a reader came for off the page. */}
           <Stat
             label="Keeper cost"
-            value={contract.expired ? "ADP" : `R${contract.round}`}
+            value={`R${costRound(contract, adp, draftRounds)}`}
             tone={contract.expired ? "default" : "accent"}
+            sub={contract.expired ? "revalued to ADP" : undefined}
           />
           <Stat
             label="Keeps left"
@@ -153,8 +160,8 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
             value={adp?.sleeper != null ? adp.sleeper.toFixed(1) : "—"}
             sub={
               adp?.round
-                ? `round ${adp.round}${
-                    !contract.expired ? ` · keeping saves ${contract.round - adp.round}` : ""
+                ? `round ${adp.round} · keeping saves ${
+                    costRound(contract, adp, draftRounds) - adp.round
                   }`
                 : "not in top 372"
             }

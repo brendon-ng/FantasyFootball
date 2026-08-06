@@ -9,6 +9,7 @@ import {
   creditedNames,
   features,
   getAdp,
+  getRules,
   getAllMeetings,
   getConfig,
   getKeepers,
@@ -43,6 +44,7 @@ export default async function HomePage() {
   const keepers = getKeepers();
   const players = getPlayers();
   const adp = getAdp();
+  const { draftRounds } = getRules();
   const cfg = getConfig();
 
   const finalized = seasons.filter((s) => s.finalized).sort((a, b) => b.season - a.season);
@@ -179,6 +181,7 @@ export default async function HomePage() {
             <EmptyState>No contracts yet — run npm run data.</EmptyState>
           ) : (
             <HomeKeeperBoard
+              draftRounds={draftRounds}
               contractsByOwner={[...byOwner.entries()].sort(([a], [b]) =>
                 (owners.get(a)?.name ?? a).localeCompare(owners.get(b)?.name ?? b),
               )}

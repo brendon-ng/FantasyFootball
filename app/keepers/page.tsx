@@ -11,6 +11,7 @@ import {
 import {
   features,
   getAdp,
+  getRules,
   getConfig,
   getKeepers,
   getOwners,
@@ -53,6 +54,7 @@ export default function KeepersPage() {
   const players = getPlayers();
   const seasons = getSeasons();
   const adp = getAdp();
+  const { draftRounds } = getRules();
   const cfg = getConfig();
 
   const nextSeason = Math.max(...seasons.map((s) => s.season), 0) + 1;
@@ -108,6 +110,7 @@ export default function KeepersPage() {
         </Panel>
       ) : (
         <KeeperBoard
+          draftRounds={draftRounds}
           contractsByOwner={contractsByOwner}
           ownerNames={ownerNames}
           userIdToSlug={Object.fromEntries(
@@ -130,6 +133,8 @@ export default function KeepersPage() {
           legend="Who owns each pick after trades, with locked-in keepers placed on the pick they will consume. A green cell is a pick already spent on a keeper."
         />
         <ProjectedDraftBoard
+          draftRounds={draftRounds}
+          adp={Object.fromEntries(adp.byPlayer)}
           leagueId={leagueId}
           season={nextSeason}
           contracts={all}

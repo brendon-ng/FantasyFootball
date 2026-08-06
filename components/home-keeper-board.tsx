@@ -26,12 +26,15 @@ export function HomeKeeperBoard({
   adp,
   leagueId,
   maxKeepers,
+  draftRounds,
 }: {
   contractsByOwner: Array<[string, KeeperContract[]]>;
   ownerNames: Record<string, string>;
   userIdToSlug: Record<string, string>;
   players: Record<string, PlayerMeta>;
   adp: Record<string, AdpEntry>;
+  /** Last round of the draft — the floor an expired contract is revalued to. */
+  draftRounds: number;
   leagueId: string | null;
   maxKeepers: number;
 }) {
@@ -80,6 +83,7 @@ export function HomeKeeperBoard({
                 contract={c}
                 player={players[c.playerId]}
                 adp={adp[c.playerId]}
+                draftRounds={draftRounds}
                 selected={selected.has(c.playerId)}
                 liveNote={adjustments.get(c.playerId)}
                 rank={i + 1}

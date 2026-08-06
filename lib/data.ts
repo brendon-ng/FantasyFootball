@@ -10,7 +10,7 @@
  * the site is redeployed on a schedule, so "live" means "as of the last build".
  */
 
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import { meetingId } from "./meeting.ts";
@@ -646,6 +646,31 @@ export interface LeagueConfig {
 }
 export const getConfig = (): LeagueConfig =>
   JSON.parse(readFileSync(join(CONFIG, "league.json"), "utf8"));
+
+/**
+ * The rules the current keeper cycle runs under.
+ *
+ * INHERITS FORWARD, exactly as `rulesFor()` in derive does — a season with no
+ * file of its own carries the last one forward, so a new year is not a manual
+ * chore that breaks the build when forgotten. Kept to the two fields the site
+ * needs; derive owns the full shape and validates it.
+ */
+export const getRules = once((): { draftRounds: number; teams: number } => {
+  const dir = join(CONFIG, "rules");
+  const want = keeperCycleSeason();
+  const years = (existsSync(dir) ? readdirSync(dir) : [])
+    .map((f) => Number(f.replace(".json", "")))
+    .filter((y) => Number.isFinite(y) && y <= want)
+    .sort((a, b) => b - a);
+  for (const y of years) {
+    const file = join(dir, `${y}.json`);
+    if (existsSync(file)) {
+      const r = JSON.parse(readFileSync(file, "utf8")) as { draftRounds?: number; teams?: number };
+      return { draftRounds: r.draftRounds ?? 17, teams: r.teams ?? 10 };
+    }
+  }
+  return { draftRounds: 17, teams: 10 };
+});
 
 /**
  * Feature flags for the league this build serves.

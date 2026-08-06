@@ -279,9 +279,7 @@ draft data.
   4.2 for now, we'll hash this out."
 - **Trade deadline**: bylaws say week 11, Sleeper 2025 said 12. Rules files say
   11. User said ignore for now.
-- **ADP beyond pick 170** converts to a round past 17, which is meaningless as a
-  keeper cost in a 10-team, 17-round draft. Bites in 2027, when the first
-  contracts expire.
+- ~~**ADP beyond pick 170**~~ — SETTLED. It caps at the last round; see below.
 
 ## The weekly low scorer
 
@@ -1264,6 +1262,38 @@ column beside one.
 
 `getAdp()` is still the ONE place that decides. Do not add a second date check in
 a page.
+
+### What an expired contract costs
+
+Bylaws 1.7.2.2 revalue a contract with no keeps left to ADP
+(`resetsToAdpAfterContract`). NOTHING DID THAT — derive left `round` at the
+original figure forever and every surface printed the literal word "ADP" in the
+cost column, so the number a team would actually pay was nowhere on the site. The
+projected board went further and placed those keepers on no pick at all. It went
+unnoticed because there are zero expired contracts today: keepers began in 2024
+with two keeps, so the first ones appear in 2027.
+
+`costRound(contract, adp, draftRounds)` in `lib/draft-slots.ts` is the one rule,
+used by every cost cell, both sorts, and both board allocators.
+
+COMPUTED AT READ TIME, NOT STORED. Writing it into `keepers.json` would make a
+committed contract move every day the market does, which breaks the empty-diff
+property the pipeline depends on and rewrites history in git. The contract keeps
+its true original round; what it costs today is derived beside it from whatever
+`getAdp()` returns — frozen inside the bylaw window, live outside it.
+
+CAPPED AND FLOORED AT THE LAST ROUND. ADP is an overall pick number divided by the
+league size, so a deep bench player converts to round 21 in a 17-round draft, and
+129 of 372 ranked players have no ADP at all. The cheapest a keeper can ever cost
+is your last pick, so that is what an off-the-board contract costs — every expired
+contract stays keepable. `ValueBadge` still tells the truth about it: paying R17
+for a player the market has at R21 shows as -4.
+
+`assignKeeperSlots` now takes an EFFECTIVE round and has no `expired` branch —
+run a contract through `costRound()` before calling it.
+
+Unit-checked across all seven cases (live contract, elite ADP, mid ADP, past the
+draft, round 40, unpriced, and a zero guard) plus board placement.
 
 Round conversion divides ADP by *this league's* team count, so pick 15 is round 2
 in a 10-team league. Surplus value shown in the UI is `costRound - adpRound`:

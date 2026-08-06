@@ -9,7 +9,8 @@ import {
   useLiveRosters,
   useLiveTradedPicks,
 } from "@/lib/sleeper-browser";
-import { assignKeeperSlots, buildBoard, type DraftShape } from "@/lib/draft-slots";
+import { assignKeeperSlots, buildBoard, costRound, type DraftShape } from "@/lib/draft-slots";
+import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
 /**
@@ -69,28 +70,25 @@ interface Assignment {
  * applies the rule properly and is shared with the projected board; a season with
  * no order yet still lands here.
  */
-function allocate(contracts: KeeperContract[], picks: OwnedPick[]): Assignment[] {
+function allocate(
+  contracts: KeeperContract[],
+  picks: OwnedPick[],
+  /** Effective cost, so an expired contract is placed at its ADP round. */
+  cost: (c: KeeperContract) => number,
+): Assignment[] {
   const pool = new Map<number, number>();
   for (const p of picks) pool.set(p.round, (pool.get(p.round) ?? 0) + 1);
 
   return [...contracts]
-    .sort((a, b) => a.round - b.round)
+    .sort((a, b) => cost(a) - cost(b))
     .map((contract) => {
-      if (contract.expired) {
-        return {
-          contract,
-          usedRound: null,
-          bumpedFrom: null,
-          reason: "Contract expired — cost is this year's ADP, not the original round",
-        };
-      }
-      for (let r = contract.round; r >= 1; r--) {
+      for (let r = cost(contract); r >= 1; r--) {
         if ((pool.get(r) ?? 0) > 0) {
           pool.set(r, pool.get(r)! - 1);
           return {
             contract,
             usedRound: r,
-            bumpedFrom: r === contract.round ? null : contract.round,
+            bumpedFrom: r === cost(contract) ? null : cost(contract),
             reason: null,
           };
         }
@@ -99,7 +97,7 @@ function allocate(contracts: KeeperContract[], picks: OwnedPick[]): Assignment[]
         contract,
         usedRound: null,
         bumpedFrom: null,
-        reason: `No pick available in round ${contract.round} or earlier — this keeper cannot be made`,
+        reason: `No pick available in round ${cost(contract)} or earlier — this keeper cannot be made`,
       };
     });
 }
@@ -109,6 +107,7 @@ export function DraftPicks({
   leagueId,
   season,
   draftRounds,
+  adp,
   maxKeepers,
   contracts,
   players,
@@ -119,6 +118,7 @@ export function DraftPicks({
   leagueId: string | null;
   season: number;
   draftRounds: number;
+  adp: Record<string, AdpEntry>;
   maxKeepers: number;
   /** Every contract this owner holds, from the baked data. */
   contracts: KeeperContract[];
@@ -126,6 +126,7 @@ export function DraftPicks({
   userIdToSlug: Record<string, string>;
   ownerNames: Record<string, string>;
 }) {
+  const cost = (c: KeeperContract) => costRound(c, adp[c.playerId], draftRounds);
   const rosters = useLiveRosters(leagueId);
   const traded = useLiveTradedPicks(leagueId);
   const draft = useLiveDraft(leagueId);
@@ -219,7 +220,7 @@ export function DraftPicks({
   // Same rule either way; only the precision differs.
   const assignments: Assignment[] = shape
     ? assignKeeperSlots(
-        selected.map((c) => ({ playerId: c.playerId, round: c.round, expired: c.expired })),
+        selected.map((c) => ({ playerId: c.playerId, round: cost(c) })),
         buildBoard(shape, traded.data ?? []).filter((p) => p.ownerRoster === myRosterId),
       ).map((a) => ({
         contract: selected.find((c) => c.playerId === a.playerId)!,
@@ -228,7 +229,7 @@ export function DraftPicks({
         bumpedFrom: a.bumpedFrom,
         reason: a.reason,
       }))
-    : allocate(selected, owned);
+    : allocate(selected, owned, cost);
 
   const consumedByRound = new Map<number, Assignment[]>();
   for (const a of assignments) {

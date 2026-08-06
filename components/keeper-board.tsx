@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
+import { costRound } from "@/lib/draft-slots";
 import { Tip } from "@/components/tooltip";
 import { Col, ListHeader, Panel, PanelHeader } from "@/components/ui";
 import { useSelectedKeepers } from "@/components/keeper-selection";
@@ -33,6 +34,7 @@ export function KeeperBoard({
   adp,
   leagueId,
   maxKeepers,
+  draftRounds,
 }: {
   contractsByOwner: Array<[string, KeeperContract[]]>;
   ownerNames: Record<string, string>;
@@ -40,6 +42,8 @@ export function KeeperBoard({
   userIdToSlug: Record<string, string>;
   players: Record<string, PlayerMeta>;
   adp: Record<string, AdpEntry>;
+  /** Last round of the draft — the floor an expired contract is revalued to. */
+  draftRounds: number;
   leagueId: string | null;
   maxKeepers: number;
 }) {
@@ -84,7 +88,13 @@ export function KeeperBoard({
           const ordered = [...contracts].sort((a, b) => {
             const sa = Number(selected.has(b.playerId)) - Number(selected.has(a.playerId));
             if (sa !== 0) return sa;
-            return Number(a.expired) - Number(b.expired) || a.round - b.round;
+            // Sorted on what it COSTS, not on the original round — an expired
+            // contract's stored round is a historical fact nobody is shown.
+            return (
+              Number(a.expired) - Number(b.expired) ||
+              costRound(a, adp[a.playerId], draftRounds) -
+                costRound(b, adp[b.playerId], draftRounds)
+            );
           });
 
           return (
@@ -171,14 +181,17 @@ export function KeeperBoard({
                             ●
                           </Tip>
                         ) : null}
-                        <ValueBadge costRound={c.round} adp={adp[c.playerId]} />
+                        <ValueBadge
+                          costRound={costRound(c, adp[c.playerId], draftRounds)}
+                          adp={adp[c.playerId]}
+                        />
                         <KeepPips used={c.keepsUsed} total={c.keepsUsed + c.keepsRemaining} />
                         <span
                           className={`tabular w-9 shrink-0 text-right text-sm font-bold ${
                             c.expired ? "text-loss" : "text-accent"
                           }`}
                         >
-                          {c.expired ? "ADP" : `R${c.round}`}
+                          R{costRound(c, adp[c.playerId], draftRounds)}
                         </span>
                         <span className="w-3 shrink-0 text-[10px] text-chalk-600 transition-transform group-open:rotate-90">
                           ▸

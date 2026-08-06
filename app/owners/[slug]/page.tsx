@@ -12,6 +12,7 @@ import { Col, ListHeader, Panel, PanelHeader, Stat, fmt, placeColor } from "@/co
 import {
   features,
   getAdp,
+  getRules,
   getConfig,
   getKeepers,
   getOwnerMap,
@@ -57,6 +58,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   // Every trade, so the modal can open one this page does not list.
   const allTrades = Object.fromEntries(getTrades().map((t) => [t.id, t]));
   const adp = getAdp();
+  const { draftRounds } = getRules();
   const cfg = getConfig();
   const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
   const upcomingLeagueId = cfg.knownLeagueIds[String(upcoming)] ?? null;
@@ -354,6 +356,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             }
           />
           <OwnerContracts
+            draftRounds={draftRounds}
             ownerSlug={slug}
             contracts={contracts}
             players={players}
@@ -368,6 +371,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
       ) : null}
 
       <DraftPicks
+        adp={Object.fromEntries(adp.byPlayer)}
         ownerSlug={slug}
         leagueId={upcomingLeagueId}
         season={upcoming}

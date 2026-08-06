@@ -14,11 +14,14 @@ export function OwnerContracts({
   userIdToSlug,
   leagueId,
   maxKeepers,
+  draftRounds,
 }: {
   ownerSlug: string;
   contracts: KeeperContract[];
   players: Record<string, PlayerMeta>;
   adp: Record<string, AdpEntry>;
+  /** Last round of the draft — the floor an expired contract is revalued to. */
+  draftRounds: number;
   userIdToSlug: Record<string, string>;
   leagueId: string | null;
   maxKeepers: number;
@@ -49,6 +52,7 @@ export function OwnerContracts({
               contract={c}
               player={players[c.playerId]}
               adp={adp[c.playerId]}
+          draftRounds={draftRounds}
               selected={selected.has(c.playerId)}
               liveNote={adjustments.get(c.playerId)}
             />

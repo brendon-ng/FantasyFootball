@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
+import { costRound } from "@/lib/draft-slots";
 import { Tip } from "@/components/tooltip";
 import { useLiveContracts } from "@/lib/keeper-live";
 import { useLiveRosters } from "@/lib/sleeper-browser";
@@ -85,6 +86,7 @@ export function ContractRow({
   contract,
   player,
   adp,
+  draftRounds,
   selected,
   rank,
   liveNote,
@@ -92,6 +94,7 @@ export function ContractRow({
   contract: KeeperContract;
   player: PlayerMeta | undefined;
   adp: AdpEntry | undefined;
+  draftRounds: number;
   selected: boolean;
   rank?: number;
   /** Set when a pending move changed this contract since the last sync. */
@@ -142,7 +145,7 @@ export function ContractRow({
         </Tip>
       ) : null}
       <span className="hidden sm:block">
-        <ValueBadge costRound={contract.round} adp={adp} compact />
+        <ValueBadge costRound={costRound(contract, adp, draftRounds)} adp={adp} compact />
       </span>
       <KeepPips used={contract.keepsUsed} total={contract.keepsUsed + contract.keepsRemaining} />
       <span
@@ -150,7 +153,7 @@ export function ContractRow({
           contract.expired ? "text-loss" : "text-accent"
         }`}
       >
-        {contract.expired ? "ADP" : `R${contract.round}`}
+        R{costRound(contract, adp, draftRounds)}
       </span>
     </div>
   );

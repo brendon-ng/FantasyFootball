@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { costRound } from "@/lib/draft-slots";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
@@ -99,14 +100,17 @@ export function KeeperRow({
   adp,
   rank,
   eligible,
+  draftRounds,
 }: {
   contract: KeeperContract;
   player: PlayerMeta | undefined;
   adp?: AdpEntry;
   rank?: number;
   eligible: boolean;
+  draftRounds: number;
 }) {
   const total = contract.keepsUsed + contract.keepsRemaining;
+  const cost = costRound(contract, adp, draftRounds);
   return (
     <div
       className={`flex items-center gap-2.5 px-3 py-2 sm:gap-3 sm:px-4 ${
@@ -127,7 +131,7 @@ export function KeeperRow({
         ) : null}
       </Link>
       <span className="hidden sm:block">
-        <ValueBadge costRound={contract.round} adp={adp} compact />
+        <ValueBadge costRound={cost} adp={adp} compact />
       </span>
       <KeepPips used={contract.keepsUsed} total={total} />
       <span
@@ -135,7 +139,10 @@ export function KeeperRow({
           contract.expired ? "text-loss" : "text-accent"
         }`}
       >
-        {contract.expired ? "ADP" : `R${contract.round}`}
+        {/* THE NUMBER, not the word "ADP". A team needs to know which pick it
+            would spend; "ADP" told them where the figure came from and not what
+            it was. The tone still marks a revalued contract as no longer cheap. */}
+        R{cost}
       </span>
     </div>
   );
