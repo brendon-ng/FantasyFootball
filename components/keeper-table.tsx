@@ -130,9 +130,10 @@ export function KeeperRow({
           <span className="ml-1.5 text-[11px] font-normal text-chalk-600">{player.team}</span>
         ) : null}
       </Link>
-      <span className="hidden sm:block">
-        <ValueBadge costRound={cost} adp={adp} compact />
-      </span>
+      {/* Shown at every width, matching /keepers and `ContractRow`. NOTE: this
+          component currently has no callers — kept consistent so it cannot be
+          reintroduced already diverged. */}
+      <ValueBadge costRound={cost} adp={adp} />
       <KeepPips used={contract.keepsUsed} total={total} />
       <span
         className={`tabular w-9 shrink-0 text-right text-sm font-bold ${

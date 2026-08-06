@@ -144,9 +144,13 @@ export function ContractRow({
           ●
         </Tip>
       ) : null}
-      <span className="hidden sm:block">
-        <ValueBadge costRound={costRound(contract, adp, draftRounds)} adp={adp} compact />
-      </span>
+      {/* SHOWN AT EVERY WIDTH, matching /keepers. It was `hidden sm:block` from
+          the day this row was written, with no reason recorded, so an owner page
+          on a phone dropped the two numbers that decide a keeper — the market
+          price and whether the contract beats it. Both layouts that use this row
+          are single-column below `sm`, so the width is the same as the keepers
+          page that has always shown it; the name truncates to make room. */}
+      <ValueBadge costRound={costRound(contract, adp, draftRounds)} adp={adp} />
       <KeepPips used={contract.keepsUsed} total={contract.keepsUsed + contract.keepsRemaining} />
       <span
         className={`tabular w-9 shrink-0 text-right text-sm font-bold ${
