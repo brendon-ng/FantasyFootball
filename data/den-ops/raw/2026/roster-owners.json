@@ -1,0 +1,56 @@
+[
+  {
+    "co_owners": null,
+    "owner_id": "887589851141427200",
+    "roster_id": 1
+  },
+  {
+    "co_owners": null,
+    "owner_id": "1048521200416313344",
+    "roster_id": 2
+  },
+  {
+    "co_owners": null,
+    "owner_id": "999142984568557568",
+    "roster_id": 3
+  },
+  {
+    "co_owners": [
+      "1049401412565774336"
+    ],
+    "owner_id": "1049399449467871232",
+    "roster_id": 4
+  },
+  {
+    "co_owners": [
+      "1049498096055140352"
+    ],
+    "owner_id": "1049492055615266816",
+    "roster_id": 5
+  },
+  {
+    "co_owners": null,
+    "owner_id": "609168288324321280",
+    "roster_id": 6
+  },
+  {
+    "co_owners": null,
+    "owner_id": "1132133697135869952",
+    "roster_id": 7
+  },
+  {
+    "co_owners": null,
+    "owner_id": "868608373288034304",
+    "roster_id": 8
+  },
+  {
+    "co_owners": null,
+    "owner_id": "1133573613518716928",
+    "roster_id": 9
+  },
+  {
+    "co_owners": null,
+    "owner_id": "1133643357365972992",
+    "roster_id": 10
+  }
+]

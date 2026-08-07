@@ -178,6 +178,21 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
 
   if (!complete) {
     log.info("season in progress — league/roster snapshots are fetched at build time, not stored");
+
+    // WHO OWNS WHICH ROSTER is the one part of an in-progress season that does
+    // NOT move, and without it a trade committed mid-season names roster ids
+    // nobody can resolve. A full `rosters.json` would bake in players, points
+    // and records, all of which change weekly; this is a stable projection of
+    // just the ownership, so it produces an empty diff unless a team actually
+    // changes hands.
+    const live = await getRosters(leagueId);
+    if (live) {
+      writeIfChanged(
+        join(dir, "roster-owners.json"),
+        live.map((r) => ({ roster_id: r.roster_id, owner_id: r.owner_id, co_owners: r.co_owners ?? null })),
+        `${season}/roster-owners.json`,
+      );
+    }
   }
 
   // League settings, users, and the final roster snapshot are only permanent
@@ -201,25 +216,46 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
 
   // Per-week matchups and transactions finalize independently of the season, so
   // an in-progress season still contributes permanent history week by week.
-  for (let week = 1; week <= through; week++) {
-    const mPath = join(dir, "matchups", `${wk(week)}.json`);
-    if (!existsSync(mPath) || FORCE) {
-      const matchups = await getMatchups(leagueId, week);
-      if (matchups?.length) {
-        writeIfChanged(mPath, matchups, `${season}/matchups/${wk(week)}.json`);
-        await snapshotTeams(Number(season), week, matchups);
+  //
+  // TRANSACTIONS RUN AHEAD OF SCORING. A completed trade or waiver is final the
+  // moment it processes — it does not wait on anyone playing a game — whereas a
+  // week's SCORES are not final until Sleeper has scored them. So the two are
+  // fetched to different horizons: matchups only through the scored week,
+  // transactions through the week the league is actually on.
+  //
+  // That matters most in the preseason, where `last_scored_leg` is null and every
+  // trade sits in week 1. Gating on scoring meant a pick trade made in August was
+  // invisible until week 1 finalised in mid-September, right through the keeper
+  // deadline and the draft.
+  const leg = Math.max(1, Number(league.settings.leg ?? 0));
+  const txnThrough = complete ? through : Math.max(through, leg);
+
+  for (let week = 1; week <= Math.max(through, txnThrough); week++) {
+    if (week <= through) {
+      const mPath = join(dir, "matchups", `${wk(week)}.json`);
+      if (!existsSync(mPath) || FORCE) {
+        const matchups = await getMatchups(leagueId, week);
+        if (matchups?.length) {
+          writeIfChanged(mPath, matchups, `${season}/matchups/${wk(week)}.json`);
+          await snapshotTeams(Number(season), week, matchups);
+        }
+      } else {
+        log.skip(`${season}/matchups/${wk(week)}.json`);
       }
-    } else {
-      log.skip(`${season}/matchups/${wk(week)}.json`);
     }
 
+    if (week > txnThrough) continue;
     const tPath = join(dir, "transactions", `${wk(week)}.json`);
-    if (!existsSync(tPath) || FORCE) {
+    // A FINISHED season's weeks are immutable, so trust the file. An in-progress
+    // one is still accumulating — and a week first written during the preseason
+    // will gain real transactions once it is played — so always re-fetch. Costs
+    // at most 17 requests a run and `writeIfChanged` keeps the diff empty.
+    if (complete && existsSync(tPath) && !FORCE) {
+      log.skip(`${season}/transactions/${wk(week)}.json`);
+    } else {
       const txns = await getTransactions(leagueId, week);
       // An empty week is still a fact worth recording — it prevents refetching.
       writeIfChanged(tPath, txns ?? [], `${season}/transactions/${wk(week)}.json`);
-    } else {
-      log.skip(`${season}/transactions/${wk(week)}.json`);
     }
   }
 
@@ -235,8 +271,20 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
     if (picks?.length) {
       writeIfChanged(join(dir, "draft-picks.json"), picks, `${season}/draft-picks.json`);
     }
+    if (existsSync(join(dir, "draft-meta.json"))) rmSync(join(dir, "draft-meta.json"));
   } else {
     log.info(`draft ${league.draft_id} is ${draft?.status ?? "missing"} — not finalized`);
+    // JUST THE DATE, for a draft that has not run. It is what separates a
+    // preseason trade from a week-1 one, and `draft.json` does not exist until
+    // the draft completes. Three fields, so a moved draft date is the only thing
+    // that can produce a diff — and that is real history worth recording.
+    if (draft?.start_time) {
+      writeIfChanged(
+        join(dir, "draft-meta.json"),
+        { draft_id: draft.draft_id, start_time: draft.start_time, status: draft.status },
+        `${season}/draft-meta.json`,
+      );
+    }
   }
 
   // Traded picks keep mutating until that season's draft happens, so they are

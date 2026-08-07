@@ -1623,11 +1623,86 @@ function writeReplay(slug: string, summaries: SeasonSummary[], matchups: Matchup
  * NOT used — see the importer, where two "pending" 2021 trades are shown to have
  * actually happened.
  */
-function buildTrades(seasons: SeasonData[]): Trade[] {
-  const out: Trade[] = [];
+/**
+ * The parts of a season a trade actually needs: when the draft was, the
+ * transactions, and who owns which roster.
+ *
+ * A SEPARATE SHAPE so an IN-PROGRESS season can contribute. `loadSeason` needs
+ * `league.json`, which sync withholds until a season is complete, so without
+ * this a trade made today would not reach the site until January.
+ */
+interface TradeSource {
+  season: number;
+  draftStart: number;
+  transactions: Map<number, SleeperTransaction[]>;
+  rosterToOwner: Map<number, string | null>;
+}
 
-  for (const d of seasons) {
-    const draftStart = d.draft?.start_time ?? 0;
+/**
+ * Trade sources for seasons that have transactions committed but are not
+ * finished — everything `loadSeason` skipped.
+ *
+ * Roster ownership comes from `roster-owners.json`, the stable projection sync
+ * writes for exactly this purpose; a full roster snapshot is not committed
+ * mid-season because it moves every week.
+ */
+function loadLiveTradeSources(loaded: SeasonData[]): TradeSource[] {
+  const done = new Set(loaded.map((d) => d.season));
+  const out: TradeSource[] = [];
+  const years = (existsSync(RAW_DIR) ? readdirSync(RAW_DIR) : [])
+    .map(Number)
+    .filter((y) => Number.isFinite(y) && !done.has(y))
+    .sort();
+
+  for (const season of years) {
+    const dir = join(RAW_DIR, String(season));
+    const owners = readJson<Array<{ roster_id: number; owner_id: string | null; co_owners: string[] | null }>>(
+      join(dir, "roster-owners.json"),
+    );
+    if (!owners) continue;
+
+    const transactions = new Map<number, SleeperTransaction[]>();
+    const tdir = join(dir, "transactions");
+    for (const f of existsSync(tdir) ? readdirSync(tdir).sort() : []) {
+      const week = Number(f.replace(".json", ""));
+      if (!Number.isFinite(week)) continue;
+      transactions.set(week, readJson<SleeperTransaction[]>(join(tdir, f)) ?? []);
+    }
+    if (!transactions.size) continue;
+
+    const rosterToOwner = new Map<number, string | null>();
+    for (const r of owners) {
+      rosterToOwner.set(r.roster_id, (r.owner_id && slugByUserId.get(r.owner_id)) || null);
+    }
+    // `draft.json` only exists once the draft has run; `draft-meta.json` carries
+    // the date before then, and the date is what makes a trade "preseason".
+    const draft = readJson<SleeperDraft>(join(dir, "draft.json"));
+    const meta = readJson<{ start_time: number | null }>(join(dir, "draft-meta.json"));
+    out.push({
+      season,
+      draftStart: draft?.start_time ?? meta?.start_time ?? 0,
+      transactions,
+      rosterToOwner,
+    });
+    log.info(`${season}: in-progress trades from ${transactions.size} week file(s)`);
+  }
+  return out;
+}
+
+function buildTrades(seasons: SeasonData[], live: TradeSource[] = []): Trade[] {
+  const out: Trade[] = [];
+  const sources: TradeSource[] = [
+    ...seasons.map((d) => ({
+      season: d.season,
+      draftStart: d.draft?.start_time ?? 0,
+      transactions: d.transactions,
+      rosterToOwner: new Map<number, string | null>(d.rosterToOwner),
+    })),
+    ...live,
+  ];
+
+  for (const d of sources) {
+    const draftStart = d.draftStart;
     for (const [week, txns] of d.transactions) {
       for (const t of txns) {
         if (t.type !== "trade") continue;
@@ -2338,7 +2413,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
     (a, b) => a.season - b.season || a.pickNo - b.pickNo,
   );
   const weeklyLows = buildWeeklyLows(matchups, summaries);
-  const trades = buildTrades(loaded);
+  const trades = buildTrades(loaded, loadLiveTradeSources(loaded));
 
   for (const o of owners.values()) o.seasons = [...new Set(o.seasons)].sort();
 

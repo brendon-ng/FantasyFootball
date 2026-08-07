@@ -1037,5 +1037,60 @@
     "timestamp": 1764054763164,
     "vetoed": false,
     "week": 12
+  },
+  {
+    "id": "1391165793072332800",
+    "legs": [
+      {
+        "fromSlug": "david-collier",
+        "kind": "pick",
+        "pick": {
+          "originalSlug": "david-collier",
+          "round": 10,
+          "season": 2026
+        },
+        "toSlug": "tyler-jung"
+      },
+      {
+        "fromSlug": "david-collier",
+        "kind": "pick",
+        "pick": {
+          "originalSlug": "david-collier",
+          "round": 7,
+          "season": 2026
+        },
+        "toSlug": "tyler-jung"
+      },
+      {
+        "fromSlug": "tyler-jung",
+        "kind": "pick",
+        "pick": {
+          "originalSlug": "tyler-jung",
+          "round": 8,
+          "season": 2026
+        },
+        "toSlug": "david-collier"
+      },
+      {
+        "fromSlug": "tyler-jung",
+        "kind": "pick",
+        "pick": {
+          "originalSlug": "tyler-jung",
+          "round": 9,
+          "season": 2026
+        },
+        "toSlug": "david-collier"
+      }
+    ],
+    "ownerSlugs": [
+      "david-collier",
+      "tyler-jung"
+    ],
+    "preseason": true,
+    "season": 2026,
+    "source": "sleeper",
+    "timestamp": 1786070138297,
+    "vetoed": false,
+    "week": 1
   }
 ]

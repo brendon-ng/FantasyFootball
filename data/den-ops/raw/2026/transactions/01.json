@@ -1,0 +1,109 @@
+[
+  {
+    "adds": null,
+    "consenter_ids": [
+      2,
+      3
+    ],
+    "created": 1786042280981,
+    "creator": "999142984568557568",
+    "draft_picks": [
+      {
+        "league_id": null,
+        "owner_id": 3,
+        "previous_owner_id": 2,
+        "roster_id": 2,
+        "round": 10,
+        "season": "2026"
+      },
+      {
+        "league_id": null,
+        "owner_id": 3,
+        "previous_owner_id": 2,
+        "roster_id": 2,
+        "round": 7,
+        "season": "2026"
+      },
+      {
+        "league_id": null,
+        "owner_id": 2,
+        "previous_owner_id": 3,
+        "roster_id": 3,
+        "round": 8,
+        "season": "2026"
+      },
+      {
+        "league_id": null,
+        "owner_id": 2,
+        "previous_owner_id": 3,
+        "roster_id": 3,
+        "round": 9,
+        "season": "2026"
+      }
+    ],
+    "drops": null,
+    "leg": 1,
+    "metadata": {
+      "poll_id": "1391178044814671872",
+      "veto_msg_id": "1391178044881768448"
+    },
+    "roster_ids": [
+      2,
+      3
+    ],
+    "settings": {
+      "expires_at": 1786085999
+    },
+    "status": "complete",
+    "status_updated": 1786070138297,
+    "transaction_id": "1391165793072332800",
+    "type": "trade",
+    "waiver_budget": []
+  },
+  {
+    "adds": null,
+    "consenter_ids": [
+      1
+    ],
+    "created": 1785751435110,
+    "creator": "887589851141427200",
+    "draft_picks": [],
+    "drops": {
+      "SF": 1
+    },
+    "leg": 1,
+    "metadata": null,
+    "roster_ids": [
+      1
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1785751435110,
+    "transaction_id": "1389945897072214016",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": null,
+    "consenter_ids": [
+      1
+    ],
+    "created": 1785751430810,
+    "creator": "887589851141427200",
+    "draft_picks": [],
+    "drops": {
+      "NE": 1
+    },
+    "leg": 1,
+    "metadata": null,
+    "roster_ids": [
+      1
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1785751430810,
+    "transaction_id": "1389945879036710912",
+    "type": "free_agent",
+    "waiver_budget": []
+  }
+]

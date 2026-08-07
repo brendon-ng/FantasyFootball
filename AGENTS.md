@@ -711,6 +711,27 @@ for every other league's players, with no data on them.
   Sleeper has scored it, a season once its status is `complete`. It is
   idempotent: an unchanged league produces an empty git diff, so any diff you
   see is real new history. Flags: `--force`, `--season=2025`, `--skip-players`.
+
+  TRANSACTIONS RUN AHEAD OF SCORING, and are the one exception. A completed trade
+  or waiver is final the moment it processes — it does not wait on anyone playing
+  a game — so they are fetched through the week the league is ON (`settings.leg`),
+  while matchups stop at the week Sleeper has SCORED. Gating both on scoring meant
+  every preseason trade sat invisible until week 1 finalised in mid-September,
+  straight through the keeper deadline and the draft.
+
+  An in-progress season's week files are re-fetched every run rather than trusted,
+  because a week first written in the preseason gains real transactions once it is
+  played. `writeIfChanged` keeps that diff-free. A COMPLETE season stays
+  write-once.
+
+  Two small companions are committed for an in-progress season, and nothing else:
+  `roster-owners.json` (roster -> owner, so a mid-season trade names someone) and
+  `draft-meta.json` (just the draft date, which is what separates a preseason
+  trade from a week-1 one). Both are stable projections — a full `rosters.json`
+  would bake in players, points and records, all of which move weekly.
+
+  `derive` reads them through `loadLiveTradeSources()`, because `loadSeason`
+  needs `league.json` and sync withholds that until a season is complete.
 - **`npm run derive`** is pure — no network, never touches `data/raw/`. Delete
   `data/derived/` and re-run to rebuild from scratch.
 
