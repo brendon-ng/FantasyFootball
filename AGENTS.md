@@ -401,6 +401,16 @@ track overflows the card rather than letting its truncating cell shrink. The hom
 keeper board needed `min-w-0` on each owner card for exactly this reason — the
 cost column was being clipped while the player name refused to truncate.
 
+THIS HAS NOW BITTEN TWICE, both times on a keeper row, so check it whenever a row
+of columns goes inside a `grid`. The owner profile's contracts had the identical
+symptom: names rendering full-length, the cost column clipped off the right edge,
+and no scrollbar because `Panel` is `overflow-hidden`.
+
+The reason the /keepers page never hit it is worth knowing — its grid items are
+`Panel`s, and a grid item whose computed `overflow` is anything other than
+`visible` gets an automatic minimum size of ZERO. So `overflow-hidden` on the item
+fixes it for free, and a bare `<div>` wrapper does not.
+
 ## Charts
 
 `components/finish-timeline.tsx` uses eight hues from the dataviz skill's dark

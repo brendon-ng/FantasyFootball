@@ -47,12 +47,17 @@ export function OwnerContracts({
       </div>
       <div className="grid gap-px bg-ink-600 sm:grid-cols-2">
         {ordered.map((c) => (
-          <div key={c.playerId} className="bg-ink-800">
+          // `min-w-0`: a GRID ITEM defaults to `min-width: auto`, so without it
+          // the row refuses to shrink below its content — the name never
+          // truncates and the cost column is clipped off the right edge by the
+          // panel's `overflow-hidden`. The keeper page does not hit this because
+          // its rows sit in a plain block container. Same fix as the home board.
+          <div key={c.playerId} className="min-w-0 bg-ink-800">
             <ContractRow
               contract={c}
               player={players[c.playerId]}
               adp={adp[c.playerId]}
-          draftRounds={draftRounds}
+              draftRounds={draftRounds}
               selected={selected.has(c.playerId)}
               liveNote={adjustments.get(c.playerId)}
             />
