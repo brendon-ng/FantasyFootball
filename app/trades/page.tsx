@@ -10,6 +10,7 @@ import {
   getPlayers,
   getTradeReturns,
   getTrades,
+  seasonsWithPages,
 } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Trades" };
@@ -23,6 +24,7 @@ export const metadata: Metadata = { title: "Trades" };
  */
 export default function TradesPage() {
   const trades = getTrades();
+  const pages = seasonsWithPages();
   const players = getPlayers();
   const owners = getOwnerMap();
   const outcomes = getPickOutcomes();
@@ -72,7 +74,10 @@ export default function TradesPage() {
                 <PanelHeader
                   title={`${season}`}
                   meta={`${list.length} trade${list.length === 1 ? "" : "s"}`}
-                  href={`/history/${season}/`}
+                  // No page for a season still being played — see
+                  // `seasonsWithPages`. Trades now arrive while their season is
+                  // in progress, so this link cannot be unconditional.
+                  href={pages.includes(season) ? `/history/${season}/` : undefined}
                   hrefLabel="Season detail"
                 />
                 <TradeList

@@ -22,6 +22,7 @@ import {
   getPlayerHistory,
   getPlayerUsage,
   getTrades,
+  seasonsWithPages,
   getPlayerKeepHistory,
   getPlayers,
 } from "@/lib/data";
@@ -244,6 +245,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
             players={players}
             pickOutcomes={getPickOutcomes()}
             tradeReturns={getTradeReturns()}
+            historySeasons={seasonsWithPages()}
             handoffs={getPickHandoffs()}
             leagueId={liveLeagueId}
             season={upcoming}

@@ -24,6 +24,7 @@ import {
   getPlayers,
   getTradeParties,
   getTrades,
+  seasonsWithPages,
   getSeasons,
   getWeeklyLows,
   teamSeasonFor,
@@ -393,6 +394,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
           hrefLabel="All trades"
         />
         <TradeList
+            historySeasons={seasonsWithPages()}
                   trades={trades}
                   players={players}
                   ownerNames={ownerNames}

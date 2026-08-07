@@ -24,6 +24,7 @@ import {
   getTradeParties,
   getTradeReturns,
   getTrades,
+  seasonsWithPages,
   weeklyCoverage,
 } from "@/lib/data";
 
@@ -373,6 +374,7 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
             hrefLabel="All trades"
           />
           <TradeList
+            historySeasons={seasonsWithPages()}
             trades={trades}
             players={getPlayers()}
             ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}

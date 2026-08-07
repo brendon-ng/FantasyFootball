@@ -36,6 +36,7 @@ export function TradeCard({
   returns,
   handoffs = {},
   showSeason = true,
+  historySeasons,
   showTreeLink = true,
   onOpen,
   onOpenTrade,
@@ -50,6 +51,13 @@ export function TradeCard({
   /** `season|round|originalOwner|from` -> the trade that moved that pick on. */
   handoffs?: Record<string, string>;
   showSeason?: boolean;
+  /**
+   * Seasons that have a `/history/<season>/` page. A season not in the list is
+   * still being played and has no page yet, so its label is plain text rather
+   * than a link into a 404. Absent means "link them all", which is right for
+   * every caller that only ever shows finished seasons.
+   */
+  historySeasons?: number[];
   /**
    * Off on the trade's own page, where the link would point at the page being
    * read. Separate from `showSeason`, which is off there for its own reason —
@@ -87,12 +95,16 @@ export function TradeCard({
     >
       <div className="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[11px] text-chalk-600">
         {showSeason ? (
-          <Link
-            href={`/history/${trade.season}/`}
-            className="font-semibold text-chalk-400 transition-colors hover:text-accent"
-          >
-            {trade.season}
-          </Link>
+          historySeasons && !historySeasons.includes(trade.season) ? (
+            <span className="font-semibold text-chalk-400">{trade.season}</span>
+          ) : (
+            <Link
+              href={`/history/${trade.season}/`}
+              className="font-semibold text-chalk-400 transition-colors hover:text-accent"
+            >
+              {trade.season}
+            </Link>
+          )
         ) : null}
         <span>{trade.preseason ? "Preseason" : `Week ${trade.week}`}</span>
         {trade.vetoed ? (

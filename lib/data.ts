@@ -558,6 +558,20 @@ export const getPickHandoffs = once((): Record<string, string> => {
 export const getTrades = (): Trade[] => load("derived/trades.json", []);
 
 /**
+ * Seasons that have a `/history/<season>/` page.
+ *
+ * MIRRORS THAT PAGE'S `generateStaticParams`, which builds only finalized
+ * seasons — so an in-progress one has no page. Trades now reach the site while
+ * their season is still being played, and every surface that stamps a trade with
+ * its year was linking straight into a 404.
+ *
+ * Passed to the client trade components as data, since they cannot call this.
+ */
+export const seasonsWithPages = once((): number[] =>
+  getSeasons().filter((s) => s.finalized).map((s) => s.season),
+);
+
+/**
  * Everyone credited with each trade, GROUPED BY SIDE and aligned to
  * `Trade.ownerSlugs`.
  *

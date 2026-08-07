@@ -181,6 +181,7 @@ export function PlayerTransactions({
   players = {},
   pickOutcomes = {},
   tradeReturns = {},
+  historySeasons,
   handoffs = {},
 }: {
   playerId: string;
@@ -196,6 +197,8 @@ export function PlayerTransactions({
   pickOutcomes?: Record<string, DraftPickRecord>;
   /** tradeId -> ownerSlug -> what that side got for the rest of the season. */
   tradeReturns?: Record<string, TradeReturn>;
+  /** See `TradeCard` — seasons that have a history page. */
+  historySeasons?: number[];
   handoffs?: Record<string, string>;
 }) {
   const [openTrade, setOpenTrade] = useState<Trade | null>(null);
@@ -243,6 +246,7 @@ export function PlayerTransactions({
           players={players}
           ownerNames={ownerNames}
           outcomes={pickOutcomes}
+          historySeasons={historySeasons}
           returns={tradeReturns[openTrade.id]}
           handoffs={handoffs}
           onOpenTrade={(id) => setOpenTrade(trades[id] ?? openTrade)}

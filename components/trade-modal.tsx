@@ -30,6 +30,7 @@ export function TradeModal({
   trade,
   players,
   ownerNames,
+  historySeasons,
   outcomes,
   returns,
   handoffs,
@@ -39,6 +40,8 @@ export function TradeModal({
   trade: Trade;
   players: Record<string, PlayerMeta>;
   ownerNames: Record<string, string>;
+  /** See `TradeCard` — seasons that have a history page. */
+  historySeasons?: number[];
   outcomes?: Record<string, DraftPickRecord>;
   returns?: TradeReturn;
   handoffs?: Record<string, string>;
@@ -95,6 +98,7 @@ export function TradeModal({
             last row of numbers sitting on the screen edge reads as cut off. */}
         <div className="pb-6 sm:pb-1">
           <TradeCard
+          historySeasons={historySeasons}
             trade={trade}
             players={players}
             ownerNames={ownerNames}

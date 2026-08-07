@@ -28,6 +28,7 @@ export function TradeList({
   handoffs,
   allTrades,
   showSeason = true,
+  historySeasons,
 }: {
   trades: Trade[];
   players: Record<string, PlayerMeta>;
@@ -43,6 +44,8 @@ export function TradeList({
    */
   allTrades: Record<string, Trade>;
   showSeason?: boolean;
+  /** See `TradeCard` — seasons that have a history page. */
+  historySeasons?: number[];
 }) {
   const [open, setOpen] = useState<Trade | null>(null);
   const jump = (tradeId: string) => setOpen(allTrades[tradeId] ?? null);
@@ -63,6 +66,7 @@ export function TradeList({
       ) : null}
       {trades.map((t) => (
         <TradeCard
+          historySeasons={historySeasons}
           key={t.id}
           trade={t}
           players={players}
