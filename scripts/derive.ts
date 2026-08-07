@@ -18,6 +18,7 @@ import type {
   CombinedRecord,
   DraftPickRecord,
   KeeperContract,
+  ContractOrigin,
   LeagueRecords,
   Matchup,
   MatchupSide,
@@ -645,6 +646,41 @@ function frozenAdpRounds(season: number, draftRounds: number): Map<string, numbe
 }
 
 /**
+ * A brand-new contract from a draft pick.
+ *
+ * BYLAW 1.7.2.3: being drafted RESETS a contract outright. Whatever the player
+ * carried before — round, keeps already spent, how many times he has been
+ * revalued — is discarded, and he starts again at the round he was just taken in
+ * with a full set of keeps. So a player drafted R5, kept once, then released and
+ * taken at R7 by someone else is an R7 contract with two keeps, not one.
+ *
+ * Shared by both draft paths so a re-draft cannot mean one thing in a finished
+ * season and another in a draft-only one.
+ */
+export function freshContract(
+  playerId: string,
+  ownerSlug: string | null,
+  round: number,
+  pickNo: number,
+  season: number,
+  maxKeeps: number,
+  origin: ContractOrigin,
+): KeeperContract {
+  return {
+    playerId,
+    ownerSlug,
+    round,
+    keepsUsed: 0,
+    keepsRemaining: maxKeeps,
+    expired: false,
+    origin,
+    startSeason: season,
+    originalDraftRound: round,
+    provenance: [`${season}: drafted R${round} pick ${pickNo} by ${ownerSlug}`],
+  };
+}
+
+/**
  * Bylaw 1.7.2.2.1: a contract whose keeps are exhausted is REVALUED to that
  * offseason's ADP and starts again with a full set of keeps.
  *
@@ -730,18 +766,18 @@ function resolveKeepers(seasons: SeasonData[], draftOnly: DraftOnlySeason[] = []
               `${d.season}: ${p.player_id} flagged is_keeper but has no prior contract — treating as a fresh R${p.round} draft pick`,
             );
           }
-          contracts.set(p.player_id, {
-            playerId: p.player_id,
-            ownerSlug: owner,
-            round: p.round,
-            keepsUsed: 0,
-            keepsRemaining: kr.maxKeepsAtOriginalCost,
-            expired: false,
-            origin: d.season === seasons[0].season ? "startup" : "drafted",
-            startSeason: d.season,
-            originalDraftRound: p.round,
-            provenance: [`${d.season}: drafted R${p.round} pick ${p.pick_no} by ${owner}`],
-          });
+          contracts.set(
+            p.player_id,
+            freshContract(
+              p.player_id,
+              owner,
+              p.round,
+              p.pick_no,
+              d.season,
+              kr.maxKeepsAtOriginalCost,
+              d.season === seasons[0].season ? "startup" : "drafted",
+            ),
+          );
         }
         continue;
       }
@@ -891,18 +927,10 @@ function resolveKeepers(seasons: SeasonData[], draftOnly: DraftOnlySeason[] = []
         );
         kept.push(p.player_id);
       } else {
-        contracts.set(p.player_id, {
-          playerId: p.player_id,
-          ownerSlug: owner,
-          round: p.round,
-          keepsUsed: 0,
-          keepsRemaining: kr.maxKeepsAtOriginalCost,
-          expired: false,
-          origin: "drafted",
-          startSeason: d.season,
-          originalDraftRound: p.round,
-          provenance: [`${d.season}: drafted R${p.round} pick ${p.pick_no} by ${owner}`],
-        });
+        contracts.set(
+          p.player_id,
+          freshContract(p.player_id, owner, p.round, p.pick_no, d.season, kr.maxKeepsAtOriginalCost, "drafted"),
+        );
       }
     }
 

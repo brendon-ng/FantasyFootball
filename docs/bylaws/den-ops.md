@@ -192,7 +192,8 @@ Each player kept will cost the team to lose one draft pick in that offseason's d
    2. If you have multiple picks in the same round as the round of your keeper and are only planning on using one of those picks for your keeper, the keeper is assigned the lower draft slot.
       1. For example, if you have 3.05 and 3.10 and are using a third round keeper on Josh Allen, Josh Allen will be drafted with the 3.10 pick.
    3. Once the keeper deadline has passed, all keepers will manually be assigned a draft slot. **These picks can no longer be traded as they will be frozen and used to select your keeper.** See Appendix A.
-3. Every time a player is drafted (not kept) in an offseason or is picked up, his value and Keeper Contract are reset.
+3. Every time a player is drafted (not kept) in an offseason, or is picked up, his Keeper Contract is **reset**: he is acquired anew at that round value with a full set of 2 keeps, and everything the previous contract carried — its round, any keeps already used, and how many times it had been revalued — is discarded. See 1.7.2.2.1.
+   1. *Example:* Player A is drafted in the 5th round in the 2024 offseason and kept at a 5th round cost in 2025, using one of his two keeps. In the 2026 offseason his owner declines to keep him and he returns to the draft pool. Owner X drafts him in the 7th round of the 2026 draft. Player A is now a 7th round contract with 2 keeps: he may be kept at a 7th round cost in 2027 and 2028, and is revalued on ADP in the 2029 offseason. The keep spent in 2025 does not carry over.
 4. Waiver/Free Agent pickups will be evaluated as follows:
    1. Undrafted Free Agents will be valued at an 11th Round value (first bench spot outside of the starting roster).
    2. Drafted Players/Keepers that are dropped during the season and added through waivers/free agency will be valued at an 11th Round Keeper **or the round they were originally drafted in, whichever is earlier.** This will be on a new three-year contract at the new keeper valuation.
@@ -353,6 +354,14 @@ contracts keep `expired: true` and the UI projects their cost from live ADP via
 NOTHING EXERCISES THIS IN THE COMMITTED DATA. Keepers began in 2024 with 2 keeps,
 so the first revaluation is the 2027 offseason; re-deriving today is byte-identical.
 It is covered by a synthetic test of the full cycle instead.
+
+`freshContract()` is the other half — bylaw 1.7.2.3. Being drafted resets a
+contract OUTRIGHT: round, keeps spent and revaluation history are all discarded,
+and the player starts again at the round he was just taken in with a full set of
+keeps. Shared by both draft paths so a re-draft cannot mean one thing in a
+finished season and another in a draft-only one. The real data exercises this 77
+times over — McCaffrey went R1 (Brendon, 2024) to released to R1 (David, 2025)
+and carries a 2025 contract with 2 keeps and no trace of the 2024 one.
 
 ### Known gaps in the implementation
 
