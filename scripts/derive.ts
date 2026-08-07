@@ -618,6 +618,71 @@ function seasonTimeline(d: SeasonData): SeasonEvent[] {
  * `config/keeper-overrides.json` lets the commissioner correct any contract the
  * replay gets wrong without editing code.
  */
+/**
+ * That offseason's FROZEN ADP, as playerId -> round.
+ *
+ * FROZEN, NEVER LIVE. Bylaw 1.7.2.2.1.1 fixes ADP a week before the keeper
+ * deadline, and a revaluation is a permanent change to a contract — sourcing it
+ * from `live.json` would rewrite committed contract history every day the market
+ * moved, and break the empty-diff property the whole pipeline rests on.
+ *
+ * Returns null when that season has no frozen file, which is the normal state
+ * for a season that has not reached its deadline yet.
+ */
+function frozenAdpRounds(season: number, draftRounds: number): Map<string, number> | null {
+  const snap = readJson<{ entries: Array<{ playerId: string | null; round: number | null }> }>(
+    join(DATA_DIR, "adp", `${season}.json`),
+  );
+  if (!snap) return null;
+  const out = new Map<string, number>();
+  for (const e of snap.entries) {
+    if (!e.playerId || !e.round) continue;
+    // Capped at the last round, matching `costRound()` — a pick later than the
+    // draft is a cost nobody can pay.
+    out.set(e.playerId, Math.min(draftRounds, Math.max(1, e.round)));
+  }
+  return out;
+}
+
+/**
+ * Bylaw 1.7.2.2.1: a contract whose keeps are exhausted is REVALUED to that
+ * offseason's ADP and starts again with a full set of keeps.
+ *
+ * THE REVALUATION YEAR MIRRORS THE DRAFT YEAR. Being kept in it costs the new
+ * round but does NOT consume a keep, exactly as drafting a player costs a pick
+ * without consuming one — so a cycle is three seasons at one price, not two.
+ * That is what "three-year contract" means elsewhere in the bylaws.
+ *
+ * Mutates in place and returns the ids revalued, so the caller knows not to
+ * charge a keep for this season. Exported for the test: the first real
+ * revaluation is not until 2027, so nothing in the committed data exercises it.
+ */
+export function revalueExhausted(
+  contracts: KeeperContract[],
+  season: number,
+  rounds: Map<string, number> | null,
+  maxKeeps: number,
+  floorRound: number,
+): Set<string> {
+  const done = new Set<string>();
+  if (!rounds) return done;
+  for (const c of contracts) {
+    if (c.keepsRemaining > 0) continue;
+    // No ADP for him at all: the market has not priced him, so the cheapest a
+    // keeper can cost applies — the same floor `costRound()` uses.
+    const next = rounds.get(c.playerId) ?? floorRound;
+    c.provenance.push(
+      `${season}: contract exhausted — revalued R${c.round} → R${next} on ${season} ADP, keeps reset to ${maxKeeps}`,
+    );
+    c.round = next;
+    c.keepsUsed = 0;
+    c.keepsRemaining = maxKeeps;
+    c.expired = false;
+    done.add(c.playerId);
+  }
+  return done;
+}
+
 function resolveKeepers(seasons: SeasonData[], draftOnly: DraftOnlySeason[] = []): {
   perSeason: SeasonKeepers[];
   final: KeeperContract[];
@@ -625,10 +690,19 @@ function resolveKeepers(seasons: SeasonData[], draftOnly: DraftOnlySeason[] = []
   /** playerId -> live contract. Survives drops so a re-add can consult it. */
   const contracts = new Map<string, KeeperContract>();
   const perSeason: SeasonKeepers[] = [];
+  /** Last round of the draft, so a revaluation can be capped at a payable pick. */
+  let maxRound = 17;
+
+  const revalue = (season: number, rounds: Map<string, number> | null, maxKeeps: number) =>
+    revalueExhausted([...contracts.values()], season, rounds, maxKeeps, maxRound);
 
   for (const d of seasons) {
     const { keepers: kr } = d.rules;
     const kept: string[] = [];
+    maxRound = d.rules.draftRounds ?? maxRound;
+    // BEFORE the draft is replayed: a revaluation sets the price this season's
+    // keeper selections are made against.
+    const revalued = revalue(d.season, frozenAdpRounds(d.season, maxRound), kr.maxKeepsAtOriginalCost);
 
     // Replay draft picks and transactions in true chronological order. A
     // preseason trade must be applied before the draft that follows it.
@@ -641,9 +715,13 @@ function resolveKeepers(seasons: SeasonData[], draftOnly: DraftOnlySeason[] = []
 
         if (p.is_keeper && existing) {
           existing.ownerSlug = owner;
-          existing.keepsUsed += 1;
+          // The revaluation year buys the player at the new price without
+          // spending a keep — see `revalue()`.
+          if (!revalued.has(p.player_id)) existing.keepsUsed += 1;
           existing.provenance.push(
-            `${d.season}: kept at R${existing.round} by ${owner} (keep ${existing.keepsUsed} of ${kr.maxKeepsAtOriginalCost})`,
+            revalued.has(p.player_id)
+              ? `${d.season}: kept at the revalued R${existing.round} by ${owner} (revaluation year — no keep used)`
+              : `${d.season}: kept at R${existing.round} by ${owner} (keep ${existing.keepsUsed} of ${kr.maxKeepsAtOriginalCost})`,
           );
           kept.push(p.player_id);
         } else {
@@ -794,6 +872,8 @@ function resolveKeepers(seasons: SeasonData[], draftOnly: DraftOnlySeason[] = []
     const kr = d.rules.keepers;
     const kept: string[] = [];
     const drafted = new Set<string>();
+    maxRound = d.rules.draftRounds ?? maxRound;
+    const revalued = revalue(d.season, frozenAdpRounds(d.season, maxRound), kr.maxKeepsAtOriginalCost);
 
     for (const p of [...d.picks].sort((a, b) => a.pick_no - b.pick_no)) {
       if (ignoredPlayers.has(p.player_id)) continue;
@@ -803,9 +883,11 @@ function resolveKeepers(seasons: SeasonData[], draftOnly: DraftOnlySeason[] = []
 
       if (p.is_keeper && existing) {
         existing.ownerSlug = owner;
-        existing.keepsUsed += 1;
+        if (!revalued.has(p.player_id)) existing.keepsUsed += 1;
         existing.provenance.push(
-          `${d.season}: kept at R${existing.round} by ${owner} (keep ${existing.keepsUsed} of ${kr.maxKeepsAtOriginalCost})`,
+          revalued.has(p.player_id)
+            ? `${d.season}: kept at the revalued R${existing.round} by ${owner} (revaluation year — no keep used)`
+            : `${d.season}: kept at R${existing.round} by ${owner} (keep ${existing.keepsUsed} of ${kr.maxKeepsAtOriginalCost})`,
         );
         kept.push(p.player_id);
       } else {

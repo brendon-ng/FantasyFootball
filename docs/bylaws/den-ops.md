@@ -183,8 +183,12 @@ Each player kept will cost the team to lose one draft pick in that offseason's d
    1. If the team does not own a pick in the designated round, or if the team keeps more players with the same round value than it has picks in that round, the cost will be the team's next available pick in an earlier round.
    2. If an earlier pick is not available, the keeper selection may not be made.
 2. A player will be valued at the round they are drafted in.
-   1. Keepers can be retained for up to 2 times at their original draft round cost, after which their draft round value is reset to the current offseason's ADP ("Keeper contract").
-      1. The ADP will be determined by Sleeper ADP one week before the keeper deadline. Round by round ADP will be sent annually to the league one week before the keeper deadline starting in year 4.
+   1. **Keeper contract.** A contract runs for three offseasons at one round value: the offseason the player is ACQUIRED in — drafted, picked up, or revalued — plus up to 2 subsequent offseasons in which he may be kept at that same round.
+      1. Acquiring a player does not consume a keep. Only the 2 offseasons after acquisition do.
+      2. Once both keeps are used, the contract is **revalued**: the player's round value resets to the current offseason's ADP and his 2 keeps are restored. The revaluation offseason is itself an acquisition year — keeping him in it costs the new round value and does **not** consume a keep.
+      3. A contract may be revalued any number of times; the cycle repeats indefinitely.
+      4. A revalued player with no ADP is valued at the last round of the draft.
+      5. The ADP will be determined by Sleeper ADP one week before the keeper deadline. Round by round ADP will be sent annually to the league one week before the keeper deadline starting in year 4.
    2. If you have multiple picks in the same round as the round of your keeper and are only planning on using one of those picks for your keeper, the keeper is assigned the lower draft slot.
       1. For example, if you have 3.05 and 3.10 and are using a third round keeper on Josh Allen, Josh Allen will be drafted with the 3.10 pick.
    3. Once the keeper deadline has passed, all keepers will manually be assigned a draft slot. **These picks can no longer be traded as they will be frozen and used to select your keeper.** See Appendix A.
@@ -199,7 +203,7 @@ Each player kept will cost the team to lose one draft pick in that offseason's d
       1. For example, Brendon has Bucky Irving as a 15th round keeper. In year three of Bucky Irving's contract, Brendon cannot drop Bucky Irving and use FAAB to reclaim him on a new three-year contract at an 11th round keeper value.
 5. When a player is traded in fantasy, the recipient inherits the player's Keeper Contract as it stands with the previous owner. This includes the number of years left at the original draft round.
 6. Examples:
-   1. Dorian Thompson-Robinson is drafted in the 15th round in the 2024 offseason. After a breakout 2024 season, his value rises to a 2nd round pick the following year. He can still be kept at his original 15th round cost for the 2025 and 2026 offseasons. In the 2027 offseason, with an ADP of 14.1, his keeper cost increases to a 2nd round pick.
+   1. Dorian Thompson-Robinson is drafted in the 15th round in the 2024 offseason. After a breakout 2024 season, his value rises to a 2nd round pick the following year. He can still be kept at his original 15th round cost for the 2025 and 2026 offseasons. In the 2027 offseason, with an ADP of 14.1, his contract is revalued: his cost becomes a 2nd round pick and his 2 keeps are restored. Keeping him in 2027 costs a 2nd round pick and does not consume a keep, so he may also be kept at a 2nd round cost in 2028 and 2029, and is revalued again in the 2030 offseason.
    2. In the example above, if DTR is traded during the 2025 season, the recipient inherits his Keeper Contract with one keeper year remaining at the 15th round value. The new team can keep him for the 2026 offseason at the 15th round cost, after which he will be revalued in the 2027 offseason.
 
 ### 1.8 Schedule
@@ -329,6 +333,26 @@ giving a 14-week regular season.
 Bylaws 1.7.2.4.2 is confirmed by the data: of 38 keepers in 2025, 36 match their
 2024 draft round exactly, and both exceptions are drop-and-re-add — Chase Brown
 R12 to R11 and Jakobi Meyers R16 to R11.
+
+### The contract cycle
+
+`revalueExhausted()` in `scripts/derive.ts` implements 1.7.2.2.1. THREE SEASONS AT
+ONE PRICE, not two: the acquisition offseason plus 2 keeps. The revaluation year
+mirrors the draft year — it costs the new round and consumes no keep — which is
+what "three-year contract" means in 1.7.2.4.2.
+
+THE ADP IS THE FROZEN SNAPSHOT, `data/<slug>/adp/<season>.json`, never `live.json`.
+A revaluation permanently rewrites a contract, so sourcing it from the live market
+would rewrite committed history every day the market moved and break the
+empty-diff property the pipeline rests on.
+
+A season with no frozen file yet cannot be revalued deterministically. Those
+contracts keep `expired: true` and the UI projects their cost from live ADP via
+`costRound()` — correct for the window between a draft and the next deadline.
+
+NOTHING EXERCISES THIS IN THE COMMITTED DATA. Keepers began in 2024 with 2 keeps,
+so the first revaluation is the 2027 offseason; re-deriving today is byte-identical.
+It is covered by a synthetic test of the full cycle instead.
 
 ### Known gaps in the implementation
 

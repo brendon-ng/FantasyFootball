@@ -811,6 +811,34 @@ Verified with a fixture 2026 draft: the 2024 and 2025 cycles came out
 byte-identical, a 2026 cycle appeared, 36 contracts expired on their second keep,
 and the 184 rostered players fell to the 168 actually drafted.
 
+### The contract cycle is THREE seasons, not two
+
+Bylaw 1.7.2.2.1: a contract runs for the offseason a player is ACQUIRED in
+(drafted, picked up, or revalued) plus 2 keeps at that same round. Acquisition
+does not consume a keep. When both keeps are spent the contract is REVALUED to
+that offseason's ADP round and the 2 keeps are restored — and the revaluation
+year is itself an acquisition year, so keeping him in it costs the new round and
+consumes no keep. The cycle repeats forever.
+
+So Smith-Njigba, drafted R11 in 2024 and kept in 2025 and 2026, is revalued for
+2027 and is then keepable at that new round in 2027, 2028 and 2029.
+
+`revalueExhausted()` in `scripts/derive.ts` does this, off the FROZEN
+`adp/<season>.json` and never `live.json` — a revaluation permanently rewrites a
+contract, so the live market would rewrite committed history daily. A season with
+no frozen file cannot be revalued deterministically; those keep `expired: true`
+and `costRound()` projects from live ADP, which is right for the window between a
+draft and the next deadline.
+
+NOTHING IN THE COMMITTED DATA EXERCISES IT — keepers began in 2024, so the first
+revaluation is 2027 and re-deriving today is byte-identical. A synthetic test
+covers the whole cycle.
+
+THE ROUND-1 COLLISION IS REAL AND GETS WORSE. Per 1.7.2.1.1-2 a second keeper of
+the same round value moves to an earlier pick, and if none exists "the keeper
+selection may not be made" — so two keepers both pricing in round 1 is impossible,
+and revalued studs cluster there.
+
 Sleeper models no part of this — `is_keeper` is a bare boolean with no round and
 no contract length. `resolveKeepers()` in `scripts/derive.ts` replays every draft
 and transaction to reconstruct cost, keeps used, and lineage per bylaws 1.7.2.
