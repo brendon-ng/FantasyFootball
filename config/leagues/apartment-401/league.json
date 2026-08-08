@@ -1,0 +1,147 @@
+{
+  "slug": "apartment-401",
+  "name": "Apartment 401",
+  "shortName": "Apartment 401",
+  "features": {
+    "keepers": false,
+    "adp": false,
+    "espnImport": true,
+    "weeklyLowPunishment": false
+  },
+  "sport": "nfl",
+  "//sleeper": "ESPN-ONLY. This league has never been on Sleeper, so there is no anchor user and no league ids to discover. `sync` finds no seasons, writes an empty raw/seasons.json, and `derive` builds the whole league from data/apartment-401/manual/, which import:espn:seasons produces.",
+  "anchorUserId": "",
+  "knownLeagueIds": {},
+  "//espn": "ONE league id for every year, unlike Den Ops. ESPN kept this league in place rather than minting a new one each season, so history lives under 86258199 at seasons/<year>. Those seasons are PRIVATE \u2014 importing needs .espn-auth.json.",
+  "espnLeagueIds": {
+    "2021": "86258199",
+    "2022": "86258199",
+    "2023": "86258199",
+    "2024": "86258199",
+    "2025": "86258199"
+  },
+  "//owners": "espnIds are ESPN member SWIDs. Two people hold two accounts each \u2014 Jay (elDiablo13 + dodoBird87) and Mark (Attakid777 + espnfan2914064243) \u2014 and both map to a single slug so neither is double-counted in all-time records. Kate Grillo played 2021-2024 only.",
+  "owners": [
+    {
+      "slug": "brendon-ng",
+      "firstName": "Brendon",
+      "lastName": "Ng",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{BA729EB5-520A-4E40-B29E-B5520A8E407F}"
+      ]
+    },
+    {
+      "slug": "charlie-stoksik",
+      "firstName": "Charlie",
+      "lastName": "Stoksik",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{31CE0255-5163-403A-926D-04E034876BE8}"
+      ],
+      "espnNames": [
+        "Charles Stoksik"
+      ]
+    },
+    {
+      "slug": "diana-gonzalez",
+      "firstName": "Diana",
+      "lastName": "Gonzalez",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{1CC2A246-1963-4295-9C2D-7545A4075182}"
+      ]
+    },
+    {
+      "slug": "eric-wong",
+      "firstName": "Eric",
+      "lastName": "Wong",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{B83C20DC-4C50-4474-BC20-DC4C50F47465}"
+      ]
+    },
+    {
+      "slug": "haley-rao",
+      "firstName": "Haley",
+      "lastName": "Rao",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{56EA2D76-1CBE-486F-AA2D-761CBE686F20}"
+      ]
+    },
+    {
+      "slug": "isaac-edejer",
+      "firstName": "Isaac",
+      "lastName": "Edejer",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{CC1862C6-4B2E-4D57-99CA-4E2E8739F460}"
+      ]
+    },
+    {
+      "slug": "jivan-gubbi",
+      "firstName": "Jivan",
+      "lastName": "Gubbi",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{6572D826-4E73-4458-BD40-B46DD4E576EB}"
+      ],
+      "espnNames": [
+        "Jivan G"
+      ]
+    },
+    {
+      "slug": "kate-grillo",
+      "firstName": "Kate",
+      "lastName": "Grillo",
+      "userId": null,
+      "active": false,
+      "espnIds": [
+        "{7ACDD484-9CA3-44D2-B77C-A75E495F5BE7}"
+      ]
+    },
+    {
+      "slug": "mark-mcgreal",
+      "firstName": "Mark",
+      "lastName": "McGreal",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{544D7727-133A-4ADD-8D77-27133AFADDB1}",
+        "{8FF8C80C-DE9C-411C-90E2-6CB12E6FA8C8}"
+      ]
+    },
+    {
+      "slug": "sam-ellison",
+      "firstName": "Sam",
+      "lastName": "Ellison",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{7204C525-DDA6-4281-8630-6AA00F6B7645}"
+      ]
+    },
+    {
+      "slug": "jay-uppuluri",
+      "firstName": "Jay",
+      "lastName": "Uppuluri",
+      "userId": null,
+      "active": true,
+      "espnIds": [
+        "{06573D44-F4C1-4EA1-973D-44F4C1EEA114}",
+        "{F282769B-F676-4680-BFE9-44F827B58621}"
+      ],
+      "espnNames": [
+        "el diablo13"
+      ]
+    }
+  ]
+}

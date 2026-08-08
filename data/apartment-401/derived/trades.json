@@ -1,0 +1,215 @@
+[
+  {
+    "id": "a57731e5-f3dd-4c2f-897e-3e811765e7b4",
+    "legs": [
+      {
+        "fromSlug": "charlie-stoksik",
+        "kind": "player",
+        "playerId": "4983",
+        "toSlug": "jivan-gubbi"
+      },
+      {
+        "fromSlug": "jivan-gubbi",
+        "kind": "player",
+        "playerId": "5549",
+        "toSlug": "charlie-stoksik"
+      }
+    ],
+    "ownerSlugs": [
+      "charlie-stoksik",
+      "jivan-gubbi"
+    ],
+    "preseason": false,
+    "season": 2021,
+    "source": "espn",
+    "timestamp": 1637365806781,
+    "vetoed": false,
+    "week": 11
+  },
+  {
+    "id": "ce770ab8-784e-4c9b-a291-b1602ad2b321",
+    "legs": [
+      {
+        "fromSlug": "haley-rao",
+        "kind": "player",
+        "playerId": "2449",
+        "toSlug": "charlie-stoksik"
+      },
+      {
+        "fromSlug": "charlie-stoksik",
+        "kind": "player",
+        "playerId": "167",
+        "toSlug": "haley-rao"
+      }
+    ],
+    "ownerSlugs": [
+      "charlie-stoksik",
+      "haley-rao"
+    ],
+    "preseason": false,
+    "season": 2021,
+    "source": "espn",
+    "timestamp": 1637786598825,
+    "vetoed": false,
+    "week": 12
+  },
+  {
+    "id": "780a1a56-5bbb-409f-9637-922d9356f78e",
+    "legs": [
+      {
+        "fromSlug": "eric-wong",
+        "kind": "player",
+        "playerId": "5000",
+        "toSlug": "jay-uppuluri"
+      },
+      {
+        "fromSlug": "jay-uppuluri",
+        "kind": "player",
+        "playerId": "5937",
+        "toSlug": "eric-wong"
+      }
+    ],
+    "ownerSlugs": [
+      "eric-wong",
+      "jay-uppuluri"
+    ],
+    "preseason": false,
+    "season": 2022,
+    "source": "espn",
+    "timestamp": 1663369863688,
+    "vetoed": false,
+    "week": 2
+  },
+  {
+    "id": "4a87def8-9d41-4a7f-8db2-e9d28ce1e51c",
+    "legs": [
+      {
+        "fromSlug": "eric-wong",
+        "kind": "player",
+        "playerId": "6768",
+        "toSlug": "mark-mcgreal"
+      },
+      {
+        "fromSlug": "eric-wong",
+        "kind": "player",
+        "playerId": "2505",
+        "toSlug": "mark-mcgreal"
+      },
+      {
+        "fromSlug": "mark-mcgreal",
+        "kind": "player",
+        "playerId": "6151",
+        "toSlug": "eric-wong"
+      },
+      {
+        "fromSlug": "mark-mcgreal",
+        "kind": "player",
+        "playerId": "1466",
+        "toSlug": "eric-wong"
+      }
+    ],
+    "ownerSlugs": [
+      "eric-wong",
+      "mark-mcgreal"
+    ],
+    "preseason": false,
+    "season": 2022,
+    "source": "espn",
+    "timestamp": 1664416021567,
+    "vetoed": false,
+    "week": 4
+  },
+  {
+    "id": "9cfc719c-c397-4a86-bd59-c2527afb4595",
+    "legs": [
+      {
+        "fromSlug": "jivan-gubbi",
+        "kind": "player",
+        "playerId": "7526",
+        "toSlug": "eric-wong"
+      },
+      {
+        "fromSlug": "eric-wong",
+        "kind": "player",
+        "playerId": "6151",
+        "toSlug": "jivan-gubbi"
+      }
+    ],
+    "ownerSlugs": [
+      "eric-wong",
+      "jivan-gubbi"
+    ],
+    "preseason": false,
+    "season": 2022,
+    "source": "espn",
+    "timestamp": 1665760924824,
+    "vetoed": false,
+    "week": 6
+  },
+  {
+    "id": "8deabec8-8cb8-4704-a2f0-5a0493aa1b31",
+    "legs": [
+      {
+        "fromSlug": "sam-ellison",
+        "kind": "player",
+        "playerId": "7090",
+        "toSlug": "mark-mcgreal"
+      },
+      {
+        "fromSlug": "mark-mcgreal",
+        "kind": "player",
+        "playerId": "9997",
+        "toSlug": "sam-ellison"
+      }
+    ],
+    "ownerSlugs": [
+      "mark-mcgreal",
+      "sam-ellison"
+    ],
+    "preseason": false,
+    "season": 2024,
+    "source": "espn",
+    "timestamp": 1728435421200,
+    "vetoed": false,
+    "week": 6
+  },
+  {
+    "id": "2a91cb0c-7a92-4fb5-aab0-7414ecd13ad2",
+    "legs": [
+      {
+        "fromSlug": "isaac-edejer",
+        "kind": "player",
+        "playerId": "7526",
+        "toSlug": "mark-mcgreal"
+      },
+      {
+        "fromSlug": "isaac-edejer",
+        "kind": "player",
+        "playerId": "5859",
+        "toSlug": "mark-mcgreal"
+      },
+      {
+        "fromSlug": "mark-mcgreal",
+        "kind": "player",
+        "playerId": "5045",
+        "toSlug": "isaac-edejer"
+      },
+      {
+        "fromSlug": "mark-mcgreal",
+        "kind": "player",
+        "playerId": "12481",
+        "toSlug": "isaac-edejer"
+      }
+    ],
+    "ownerSlugs": [
+      "isaac-edejer",
+      "mark-mcgreal"
+    ],
+    "preseason": false,
+    "season": 2025,
+    "source": "espn",
+    "timestamp": 1761030095911,
+    "vetoed": false,
+    "week": 8
+  }
+]

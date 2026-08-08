@@ -9,8 +9,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This repo serves SEVERAL fantasy leagues from one codebase. Every feature is
 written once and benefits all of them; nothing is duplicated per league.
 
-Currently: **den-ops** (Den Ops Super League, keepers, ESPN history 2019-23) and
-**masterbatters** (Masterbatters Fantasy Football, redraft, Sleeper-only, 2025-).
+Currently: **den-ops** (Den Ops Super League, keepers, ESPN history 2019-23),
+**masterbatters** (Masterbatters Fantasy Football, redraft, Sleeper-only, 2025-)
+and **apartment-401** (redraft, ESPN-ONLY, 2021-25).
 
 Static Next.js deployed to GitHub Pages. Pushing to `main` runs
 `.github/workflows/deploy.yml`, which lints, typechecks, builds every league, and
@@ -978,6 +979,51 @@ roster but no game — and the bye week MOVES (14 in 2019-20, 15 from 2021).
 pruned to ids a lineup still references on every run — otherwise a player the
 importer later resolved properly lingers as a phantom and sync publishes a page
 for someone who does not exist. Re-running is byte-identical.
+
+### An ESPN-only league
+
+apartment-401 has never been on Sleeper. That needed NO code change to sync or
+derive: `discoverSeasons` finds nothing, sync writes an empty `raw/seasons.json`,
+and derive builds the whole league from `manual/`. Its config carries
+`anchorUserId: ""` and `knownLeagueIds: {}`.
+
+ONE ESPN LEAGUE ID FOR EVERY YEAR, unlike Den Ops. ESPN kept the league in place
+rather than minting a new one each season, so `espnLeagueIds` repeats 86258199.
+
+THE HISTORY IS PRIVATE. ESPN's visibility is per SEASON: 2026 is public and
+2021-25 return 401. `espnAuth()` reads `espn_s2` and `SWID` from a gitignored
+`.espn-auth.json` and sends them on every ESPN request; a public league never
+notices. Do NOT commit that file — `espn_s2` is a session token for the whole
+ESPN account, not one league.
+
+OWNERS RESOLVE BY ESPN MEMBER ID FIRST, then by name (`ownersByTeam`). Two people
+here hold two accounts each and map to one slug apiece, so neither is
+double-counted; one of those accounts has no real name for the name tier to match.
+
+### Recovering a season from the read API
+
+`npm run import:espn:seasons` rebuilds standings, results and the bracket from
+`mTeam` + `mMatchupScore` + `mSettings` — the same things `import:espn` gets from
+saved MHTML, without the ninety manual saves.
+
+VALIDATED AGAINST THE MHTML IMPORT, not trusted. `--check` rebuilds a league and
+diffs rather than writing. All five Den Ops seasons reconcile: every one of 493
+games matches on week, owners and score, and standings match on record, points
+for and points against. What differs is only `gameId`/`routing` — printed on
+ESPN's consolation ladder page and absent from the API — plus matchup ORDER
+within a week, and the `source` string.
+
+A MATCHUP PERIOD IS NOT ALWAYS A WEEK. `playoffMatchupPeriodLength` can be 2, and
+was for apartment-401 in 2021-22: matchup period 14 covers scoring periods 14 AND
+15, and its scoreboard total is their SUM. `scheduleSettings.matchupPeriods` is
+the authority; taking `matchupPeriodId` as the week puts the final two weeks early
+and hands a two-week score to a one-week lineup. `lineupWeeks` on the manual
+season lists the weeks where a 1:1 reconciliation is possible, and the lineup
+importer skips the rest rather than importing them wrong.
+
+KNOWN CONSEQUENCE, not yet resolved: those 2021-22 playoff games carry a two-week
+total as a single week's score, so they will out-rank every genuine single-week
+score in that league's record book.
 
 ### Recovering ESPN-era drafts
 

@@ -1,0 +1,1263 @@
+{
+  "finalWeek": 17,
+  "games": [
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 210.5,
+          "seed": 4,
+          "teamName": "Higgs n Diggs"
+        },
+        {
+          "points": 252.52,
+          "seed": 1,
+          "teamName": "Chris Browns"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 275.58,
+          "seed": 3,
+          "teamName": "Thielen Deez Nutz"
+        },
+        {
+          "points": 176.74,
+          "seed": 2,
+          "teamName": "Eric's In Paris"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 179.06,
+          "seed": 6,
+          "teamName": "Druken Clamb"
+        },
+        {
+          "points": 179.4,
+          "seed": 5,
+          "teamName": "Team Gonz"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 243.36,
+          "seed": 8,
+          "teamName": "M@ss@ge W@tson"
+        },
+        {
+          "points": 232.54,
+          "seed": 7,
+          "teamName": "Ertz Donut"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 1,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 219.14,
+          "seed": 10,
+          "teamName": "Glizzyekial Elliot"
+        },
+        {
+          "points": 168.38,
+          "seed": 9,
+          "teamName": "El Diablo"
+        }
+      ],
+      "week": 14
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners",
+      "teams": [
+        {
+          "points": 220.54,
+          "seed": 3,
+          "teamName": "Thielen Deez Nutz"
+        },
+        {
+          "points": 279.44,
+          "seed": 1,
+          "teamName": "Chris Browns"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "winners-consolation",
+      "teams": [
+        {
+          "points": 104.46,
+          "seed": 4,
+          "teamName": "Higgs n Diggs"
+        },
+        {
+          "points": 191.46,
+          "seed": 2,
+          "teamName": "Eric's In Paris"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 204.1,
+          "seed": 8,
+          "teamName": "M@ss@ge W@tson"
+        },
+        {
+          "points": 155.78,
+          "seed": 5,
+          "teamName": "Team Gonz"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 210.14,
+          "seed": 10,
+          "teamName": "Glizzyekial Elliot"
+        },
+        {
+          "points": 239.38,
+          "seed": 6,
+          "teamName": "Druken Clamb"
+        }
+      ],
+      "week": 16
+    },
+    {
+      "gameId": null,
+      "round": 2,
+      "routing": null,
+      "section": "consolation",
+      "teams": [
+        {
+          "points": 160.66,
+          "seed": 9,
+          "teamName": "El Diablo"
+        },
+        {
+          "points": 170.28,
+          "seed": 7,
+          "teamName": "Ertz Donut"
+        }
+      ],
+      "week": 16
+    }
+  ],
+  "hasDrafts": false,
+  "hasRosters": true,
+  "hasWeeklyMatchups": true,
+  "imported": true,
+  "lineupWeeks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "matchups": [
+    {
+      "away": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 145.86
+      },
+      "home": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 108.82
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 98.7
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 159.58
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 107.08
+      },
+      "home": {
+        "ownerSlug": "eric-wong",
+        "points": 106.82
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "haley-rao",
+        "points": 111
+      },
+      "home": {
+        "ownerSlug": "kate-grillo",
+        "points": 96.12
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "sam-ellison",
+        "points": 59.6
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 99.82
+      },
+      "kind": "regular",
+      "week": 1
+    },
+    {
+      "away": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 113.18
+      },
+      "home": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 93.98
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 63.46
+      },
+      "home": {
+        "ownerSlug": "haley-rao",
+        "points": 106.7
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 104.36
+      },
+      "home": {
+        "ownerSlug": "sam-ellison",
+        "points": 85.66
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 160.28
+      },
+      "home": {
+        "ownerSlug": "kate-grillo",
+        "points": 164.12
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "eric-wong",
+        "points": 121.38
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 114.92
+      },
+      "kind": "regular",
+      "week": 2
+    },
+    {
+      "away": {
+        "ownerSlug": "sam-ellison",
+        "points": 81.9
+      },
+      "home": {
+        "ownerSlug": "haley-rao",
+        "points": 91.68
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "kate-grillo",
+        "points": 113.62
+      },
+      "home": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 140.32
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 141.9
+      },
+      "home": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 108.94
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 78.5
+      },
+      "home": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 87.5
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "eric-wong",
+        "points": 73.66
+      },
+      "home": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 88.48
+      },
+      "kind": "regular",
+      "week": 3
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 120.16
+      },
+      "home": {
+        "ownerSlug": "kate-grillo",
+        "points": 118.06
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "haley-rao",
+        "points": 144.66
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 135.52
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "sam-ellison",
+        "points": 94.24
+      },
+      "home": {
+        "ownerSlug": "eric-wong",
+        "points": 116.38
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 61.42
+      },
+      "home": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 69.58
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 113.7
+      },
+      "home": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 116.5
+      },
+      "kind": "regular",
+      "week": 4
+    },
+    {
+      "away": {
+        "ownerSlug": "eric-wong",
+        "points": 123.5
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 123.48
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 89.48
+      },
+      "home": {
+        "ownerSlug": "kate-grillo",
+        "points": 119.46
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 135.02
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 86.16
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 92.44
+      },
+      "home": {
+        "ownerSlug": "haley-rao",
+        "points": 146.88
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 139.64
+      },
+      "home": {
+        "ownerSlug": "sam-ellison",
+        "points": 98.88
+      },
+      "kind": "regular",
+      "week": 5
+    },
+    {
+      "away": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 101.68
+      },
+      "home": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 95.42
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "haley-rao",
+        "points": 110.02
+      },
+      "home": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 89.32
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "kate-grillo",
+        "points": 100
+      },
+      "home": {
+        "ownerSlug": "sam-ellison",
+        "points": 77.94
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 94.86
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 77
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 103.8
+      },
+      "home": {
+        "ownerSlug": "eric-wong",
+        "points": 113.68
+      },
+      "kind": "regular",
+      "week": 6
+    },
+    {
+      "away": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 91.72
+      },
+      "home": {
+        "ownerSlug": "haley-rao",
+        "points": 131.62
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 108.44
+      },
+      "home": {
+        "ownerSlug": "kate-grillo",
+        "points": 84.3
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "sam-ellison",
+        "points": 84.46
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 113.28
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 79.52
+      },
+      "home": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 147.84
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "eric-wong",
+        "points": 110.26
+      },
+      "home": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 73
+      },
+      "kind": "regular",
+      "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "kate-grillo",
+        "points": 130.12
+      },
+      "home": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 127.96
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 104.72
+      },
+      "home": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 120.18
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 63.68
+      },
+      "home": {
+        "ownerSlug": "sam-ellison",
+        "points": 100.5
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 88.68
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 162.8
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "haley-rao",
+        "points": 145.74
+      },
+      "home": {
+        "ownerSlug": "eric-wong",
+        "points": 162.24
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 96.6
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 125.6
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "kate-grillo",
+        "points": 94.02
+      },
+      "home": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 119.34
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "eric-wong",
+        "points": 154.9
+      },
+      "home": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 97.08
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "haley-rao",
+        "points": 113.94
+      },
+      "home": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 86.4
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 96.32
+      },
+      "home": {
+        "ownerSlug": "sam-ellison",
+        "points": 124.04
+      },
+      "kind": "regular",
+      "week": 9
+    },
+    {
+      "away": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 122.2
+      },
+      "home": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 71.72
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 106.1
+      },
+      "home": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 116.1
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "sam-ellison",
+        "points": 86.66
+      },
+      "home": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 99.94
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "kate-grillo",
+        "points": 111.2
+      },
+      "home": {
+        "ownerSlug": "haley-rao",
+        "points": 114.34
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 86
+      },
+      "home": {
+        "ownerSlug": "eric-wong",
+        "points": 129.58
+      },
+      "kind": "regular",
+      "week": 10
+    },
+    {
+      "away": {
+        "ownerSlug": "sam-ellison",
+        "points": 93.24
+      },
+      "home": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 98.28
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "haley-rao",
+        "points": 163.86
+      },
+      "home": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 133
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 98.04
+      },
+      "home": {
+        "ownerSlug": "brendon-ng",
+        "points": 141.16
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "kate-grillo",
+        "points": 100.56
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 61.38
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 76.7
+      },
+      "home": {
+        "ownerSlug": "eric-wong",
+        "points": 119.72
+      },
+      "kind": "regular",
+      "week": 11
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 122.12
+      },
+      "home": {
+        "ownerSlug": "haley-rao",
+        "points": 116.9
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 78.52
+      },
+      "home": {
+        "ownerSlug": "kate-grillo",
+        "points": 118.06
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "eric-wong",
+        "points": 104.94
+      },
+      "home": {
+        "ownerSlug": "sam-ellison",
+        "points": 103.34
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 71.2
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 153.46
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 118.96
+      },
+      "home": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 91.26
+      },
+      "kind": "regular",
+      "week": 12
+    },
+    {
+      "away": {
+        "ownerSlug": "eric-wong",
+        "points": 82.86
+      },
+      "home": {
+        "ownerSlug": "kate-grillo",
+        "points": 94.94
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 102.32
+      },
+      "home": {
+        "ownerSlug": "haley-rao",
+        "points": 163.46
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 164.1
+      },
+      "home": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 68.6
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 116.64
+      },
+      "home": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 113.28
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "sam-ellison",
+        "points": 93.36
+      },
+      "home": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 79.14
+      },
+      "kind": "regular",
+      "week": 13
+    },
+    {
+      "away": {
+        "ownerSlug": "kate-grillo",
+        "points": 210.5
+      },
+      "home": {
+        "ownerSlug": "haley-rao",
+        "points": 252.52
+      },
+      "kind": "playoff",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 275.58
+      },
+      "home": {
+        "ownerSlug": "eric-wong",
+        "points": 176.74
+      },
+      "kind": "playoff",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 179.06
+      },
+      "home": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 179.4
+      },
+      "kind": "consolation",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 243.36
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 232.54
+      },
+      "kind": "consolation",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "sam-ellison",
+        "points": 219.14
+      },
+      "home": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 168.38
+      },
+      "kind": "consolation",
+      "week": 14
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 220.54
+      },
+      "home": {
+        "ownerSlug": "haley-rao",
+        "points": 279.44
+      },
+      "kind": "playoff",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "kate-grillo",
+        "points": 104.46
+      },
+      "home": {
+        "ownerSlug": "eric-wong",
+        "points": 191.46
+      },
+      "kind": "consolation",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 204.1
+      },
+      "home": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 155.78
+      },
+      "kind": "consolation",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "sam-ellison",
+        "points": 210.14
+      },
+      "home": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 239.38
+      },
+      "kind": "consolation",
+      "week": 15
+    },
+    {
+      "away": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 160.66
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 170.28
+      },
+      "kind": "consolation",
+      "week": 15
+    }
+  ],
+  "playoffWeekStart": 14,
+  "regularSeasonWeeks": 13,
+  "season": 2022,
+  "source": "ESPN Fantasy (imported from the read API)",
+  "standings": [
+    {
+      "finalPlace": 1,
+      "losses": 2,
+      "ownerSlugs": [
+        "haley-rao"
+      ],
+      "pointsAgainst": 1367.76,
+      "pointsFor": 1660.8,
+      "seed": 1,
+      "teamName": "Chris Browns",
+      "teamSlug": "haley-rao",
+      "ties": 0,
+      "wins": 11
+    },
+    {
+      "finalPlace": 2,
+      "losses": 6,
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "pointsAgainst": 1411.54,
+      "pointsFor": 1491.98,
+      "seed": 3,
+      "teamName": "Thielen Deez Nutz",
+      "teamSlug": "brendon-ng",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 3,
+      "losses": 3,
+      "ownerSlugs": [
+        "eric-wong"
+      ],
+      "pointsAgainst": 1308.8,
+      "pointsFor": 1519.92,
+      "seed": 2,
+      "teamName": "Eric's In Paris",
+      "teamSlug": "eric-wong",
+      "ties": 0,
+      "wins": 10
+    },
+    {
+      "finalPlace": 4,
+      "losses": 6,
+      "ownerSlugs": [
+        "kate-grillo"
+      ],
+      "pointsAgainst": 1392.02,
+      "pointsFor": 1444.58,
+      "seed": 4,
+      "teamName": "Higgs n Diggs",
+      "teamSlug": "kate-grillo",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 5,
+      "losses": 8,
+      "ownerSlugs": [
+        "charlie-stoksik"
+      ],
+      "pointsAgainst": 1452.46,
+      "pointsFor": 1246.06,
+      "seed": 8,
+      "teamName": "M@ss@ge W@tson",
+      "teamSlug": "charlie-stoksik",
+      "ties": 0,
+      "wins": 5
+    },
+    {
+      "finalPlace": 6,
+      "losses": 6,
+      "ownerSlugs": [
+        "diana-gonzalez"
+      ],
+      "pointsAgainst": 1418.76,
+      "pointsFor": 1366.12,
+      "seed": 5,
+      "teamName": "Team Gonz",
+      "teamSlug": "diana-gonzalez",
+      "ties": 0,
+      "wins": 7
+    },
+    {
+      "finalPlace": 7,
+      "losses": 7,
+      "ownerSlugs": [
+        "mark-mcgreal"
+      ],
+      "pointsAgainst": 1437.22,
+      "pointsFor": 1388.2,
+      "seed": 6,
+      "teamName": "Druken Clamb",
+      "teamSlug": "mark-mcgreal",
+      "ties": 0,
+      "wins": 6
+    },
+    {
+      "finalPlace": 8,
+      "losses": 10,
+      "ownerSlugs": [
+        "sam-ellison"
+      ],
+      "pointsAgainst": 1307.46,
+      "pointsFor": 1183.82,
+      "seed": 10,
+      "teamName": "Glizzyekial Elliot",
+      "teamSlug": "sam-ellison",
+      "ties": 0,
+      "wins": 3
+    },
+    {
+      "finalPlace": 9,
+      "losses": 8,
+      "ownerSlugs": [
+        "jivan-gubbi"
+      ],
+      "pointsAgainst": 1448.04,
+      "pointsFor": 1519.08,
+      "seed": 7,
+      "teamName": "Ertz Donut",
+      "teamSlug": "jivan-gubbi",
+      "ties": 0,
+      "wins": 5
+    },
+    {
+      "finalPlace": 10,
+      "losses": 9,
+      "ownerSlugs": [
+        "jay-uppuluri"
+      ],
+      "pointsAgainst": 1519.3,
+      "pointsFor": 1242.8,
+      "seed": 9,
+      "teamName": "El Diablo",
+      "teamSlug": "jay-uppuluri",
+      "ties": 0,
+      "wins": 4
+    }
+  ],
+  "teams": 10
+}

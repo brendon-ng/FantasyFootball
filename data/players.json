@@ -2009,6 +2009,12 @@
     "team": null,
     "years_exp": 4
   },
+  "6185": {
+    "full_name": "Easton Stick",
+    "position": "QB",
+    "team": "IND",
+    "years_exp": 7
+  },
   "6208": {
     "full_name": "Elliott Fry",
     "position": "K",
@@ -2020,6 +2026,12 @@
     "position": "K",
     "team": null,
     "years_exp": 6
+  },
+  "6268": {
+    "full_name": "Matthew Wright",
+    "position": "K",
+    "team": null,
+    "years_exp": 7
   },
   "6290": {
     "full_name": "Scotty Miller",
@@ -3809,6 +3821,12 @@
     "team": "NE",
     "years_exp": 1
   },
+  "12961": {
+    "full_name": "Ryan Fitzgerald",
+    "position": "K",
+    "team": "CAR",
+    "years_exp": 1
+  },
   "ARI": {
     "full_name": "Arizona Cardinals",
     "position": "DEF",
@@ -3999,6 +4017,12 @@
     "full_name": "Washington Commanders",
     "position": "DEF",
     "team": "WAS",
+    "years_exp": null
+  },
+  "espn-4427728": {
+    "full_name": "Bam Knight",
+    "position": "RB",
+    "team": "ARI",
     "years_exp": null
   }
 }

@@ -1,0 +1,2400 @@
+[
+  {
+    "champion": "jivan-gubbi",
+    "extraBrackets": [
+      {
+        "finalLabel": "🥉 3rd Place",
+        "finalPlace": 3,
+        "key": "winners-consolation",
+        "matches": [
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "jay-uppuluri",
+            "matchId": 200,
+            "placesFor": [
+              3,
+              4
+            ],
+            "points": {
+              "brendon-ng": 235.14,
+              "jay-uppuluri": 204.18
+            },
+            "round": 2,
+            "team1": "brendon-ng",
+            "team1From": null,
+            "team2": "jay-uppuluri",
+            "team2From": null,
+            "week": 16,
+            "winner": "brendon-ng"
+          }
+        ],
+        "note": "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+        "title": "Winner's Consolation Ladder"
+      }
+    ],
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "imported": true,
+    "ladderConsolation": true,
+    "lastPlace": "kate-grillo",
+    "leagueId": "espn-2021",
+    "leagueName": "Den Ops Fantasy Football (ESPN)",
+    "losersBracket": [
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "kate-grillo",
+        "matchId": 300,
+        "placesFor": null,
+        "points": {
+          "charlie-stoksik": 221.22,
+          "kate-grillo": 193.46
+        },
+        "round": 1,
+        "team1": "charlie-stoksik",
+        "team1From": null,
+        "team2": "kate-grillo",
+        "team2From": null,
+        "week": 14,
+        "winner": "charlie-stoksik"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "diana-gonzalez",
+        "matchId": 301,
+        "placesFor": null,
+        "points": {
+          "diana-gonzalez": 157,
+          "haley-rao": 260.98
+        },
+        "round": 1,
+        "team1": "diana-gonzalez",
+        "team1From": null,
+        "team2": "haley-rao",
+        "team2From": null,
+        "week": 14,
+        "winner": "haley-rao"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "charlie-stoksik",
+        "matchId": 302,
+        "placesFor": [
+          7,
+          8
+        ],
+        "points": {
+          "charlie-stoksik": 239.76,
+          "haley-rao": 263.48
+        },
+        "round": 2,
+        "team1": "haley-rao",
+        "team1From": {
+          "winnerOf": 301
+        },
+        "team2": "charlie-stoksik",
+        "team2From": {
+          "winnerOf": 300
+        },
+        "week": 16,
+        "winner": "haley-rao"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "kate-grillo",
+        "matchId": 303,
+        "placesFor": [
+          9,
+          10
+        ],
+        "points": {
+          "diana-gonzalez": 237.02,
+          "kate-grillo": 210.3
+        },
+        "round": 2,
+        "team1": "diana-gonzalez",
+        "team1From": null,
+        "team2": "kate-grillo",
+        "team2From": null,
+        "week": 16,
+        "winner": "diana-gonzalez"
+      }
+    ],
+    "regularSeasonWeeks": 13,
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "D/ST",
+      "K"
+    ],
+    "runnerUp": "sam-ellison",
+    "season": 2021,
+    "standings": [
+      {
+        "finalPlace": 2,
+        "losses": 4,
+        "madePlayoffs": true,
+        "ownerSlug": "sam-ellison",
+        "ownerSlugs": [
+          "sam-ellison"
+        ],
+        "pointsAgainst": 1452.86,
+        "pointsFor": 1557.02,
+        "rosterId": 1,
+        "seed": 1,
+        "teamName": "CeeDeez Nutz",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 4,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "jay-uppuluri",
+        "ownerSlugs": [
+          "jay-uppuluri"
+        ],
+        "pointsAgainst": 1399.7,
+        "pointsFor": 1468.9,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "El Diablo",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 1,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "jivan-gubbi",
+        "ownerSlugs": [
+          "jivan-gubbi"
+        ],
+        "pointsAgainst": 1426.66,
+        "pointsFor": 1648.96,
+        "rosterId": 3,
+        "seed": 3,
+        "teamName": "Younghoe On Deez Nutz",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 3,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1424.92,
+        "pointsFor": 1454.72,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "Thielen Deez Nutz",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 8,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "kate-grillo",
+        "ownerSlugs": [
+          "kate-grillo"
+        ],
+        "pointsAgainst": 1417.66,
+        "pointsFor": 1417.4,
+        "rosterId": 5,
+        "seed": 5,
+        "teamName": "Saquon Deez Nutz",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 6,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "charlie-stoksik",
+        "ownerSlugs": [
+          "charlie-stoksik"
+        ],
+        "pointsAgainst": 1502.64,
+        "pointsFor": 1501.48,
+        "rosterId": 6,
+        "seed": 6,
+        "teamName": "Brees Nutz",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 5,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "haley-rao",
+        "ownerSlugs": [
+          "haley-rao"
+        ],
+        "pointsAgainst": 1501.34,
+        "pointsFor": 1416.06,
+        "rosterId": 7,
+        "seed": 7,
+        "teamName": "Chris Browns",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 7,
+        "losses": 11,
+        "madePlayoffs": false,
+        "ownerSlug": "diana-gonzalez",
+        "ownerSlugs": [
+          "diana-gonzalez"
+        ],
+        "pointsAgainst": 1628.4,
+        "pointsFor": 1289.64,
+        "rosterId": 8,
+        "seed": 8,
+        "teamName": "Team Gonz",
+        "ties": 0,
+        "wins": 2
+      }
+    ],
+    "status": "complete",
+    "teams": 8,
+    "thirdPlace": "brendon-ng",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "brendon-ng",
+        "matchId": 100,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 188.42,
+          "sam-ellison": 281.24
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "sam-ellison",
+        "team2From": null,
+        "week": 14,
+        "winner": "sam-ellison"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jay-uppuluri",
+        "matchId": 101,
+        "placesFor": null,
+        "points": {
+          "jay-uppuluri": 218.16,
+          "jivan-gubbi": 226.22
+        },
+        "round": 1,
+        "team1": "jivan-gubbi",
+        "team1From": null,
+        "team2": "jay-uppuluri",
+        "team2From": null,
+        "week": 14,
+        "winner": "jivan-gubbi"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "sam-ellison",
+        "matchId": 102,
+        "placesFor": [
+          1,
+          2
+        ],
+        "points": {
+          "jivan-gubbi": 327.34,
+          "sam-ellison": 218.82
+        },
+        "round": 2,
+        "team1": "jivan-gubbi",
+        "team1From": {
+          "winnerOf": 101
+        },
+        "team2": "sam-ellison",
+        "team2From": {
+          "winnerOf": 100
+        },
+        "week": 16,
+        "winner": "jivan-gubbi"
+      }
+    ]
+  },
+  {
+    "champion": "haley-rao",
+    "extraBrackets": [
+      {
+        "finalLabel": "🥉 3rd Place",
+        "finalPlace": 3,
+        "key": "winners-consolation",
+        "matches": [
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "kate-grillo",
+            "matchId": 200,
+            "placesFor": [
+              3,
+              4
+            ],
+            "points": {
+              "eric-wong": 191.46,
+              "kate-grillo": 104.46
+            },
+            "round": 2,
+            "team1": "kate-grillo",
+            "team1From": null,
+            "team2": "eric-wong",
+            "team2From": null,
+            "week": 16,
+            "winner": "eric-wong"
+          }
+        ],
+        "note": "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+        "title": "Winner's Consolation Ladder"
+      }
+    ],
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "imported": true,
+    "ladderConsolation": true,
+    "lastPlace": "jay-uppuluri",
+    "leagueId": "espn-2022",
+    "leagueName": "Den Ops Fantasy Football (ESPN)",
+    "losersBracket": [
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "mark-mcgreal",
+        "matchId": 300,
+        "placesFor": null,
+        "points": {
+          "diana-gonzalez": 179.4,
+          "mark-mcgreal": 179.06
+        },
+        "round": 1,
+        "team1": "mark-mcgreal",
+        "team1From": null,
+        "team2": "diana-gonzalez",
+        "team2From": null,
+        "week": 14,
+        "winner": "diana-gonzalez"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jivan-gubbi",
+        "matchId": 301,
+        "placesFor": null,
+        "points": {
+          "charlie-stoksik": 243.36,
+          "jivan-gubbi": 232.54
+        },
+        "round": 1,
+        "team1": "charlie-stoksik",
+        "team1From": null,
+        "team2": "jivan-gubbi",
+        "team2From": null,
+        "week": 14,
+        "winner": "charlie-stoksik"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jay-uppuluri",
+        "matchId": 302,
+        "placesFor": null,
+        "points": {
+          "jay-uppuluri": 168.38,
+          "sam-ellison": 219.14
+        },
+        "round": 1,
+        "team1": "sam-ellison",
+        "team1From": null,
+        "team2": "jay-uppuluri",
+        "team2From": null,
+        "week": 14,
+        "winner": "sam-ellison"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "diana-gonzalez",
+        "matchId": 303,
+        "placesFor": [
+          7,
+          8
+        ],
+        "points": {
+          "charlie-stoksik": 204.1,
+          "diana-gonzalez": 155.78
+        },
+        "round": 2,
+        "team1": "charlie-stoksik",
+        "team1From": {
+          "winnerOf": 301
+        },
+        "team2": "diana-gonzalez",
+        "team2From": {
+          "winnerOf": 300
+        },
+        "week": 16,
+        "winner": "charlie-stoksik"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "sam-ellison",
+        "matchId": 304,
+        "placesFor": [
+          9,
+          10
+        ],
+        "points": {
+          "mark-mcgreal": 239.38,
+          "sam-ellison": 210.14
+        },
+        "round": 2,
+        "team1": "sam-ellison",
+        "team1From": {
+          "winnerOf": 302
+        },
+        "team2": "mark-mcgreal",
+        "team2From": null,
+        "week": 16,
+        "winner": "mark-mcgreal"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jay-uppuluri",
+        "matchId": 305,
+        "placesFor": [
+          11,
+          12
+        ],
+        "points": {
+          "jay-uppuluri": 160.66,
+          "jivan-gubbi": 170.28
+        },
+        "round": 2,
+        "team1": "jay-uppuluri",
+        "team1From": null,
+        "team2": "jivan-gubbi",
+        "team2From": null,
+        "week": 16,
+        "winner": "jivan-gubbi"
+      }
+    ],
+    "regularSeasonWeeks": 13,
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "D/ST",
+      "K"
+    ],
+    "runnerUp": "brendon-ng",
+    "season": 2022,
+    "standings": [
+      {
+        "finalPlace": 1,
+        "losses": 2,
+        "madePlayoffs": true,
+        "ownerSlug": "haley-rao",
+        "ownerSlugs": [
+          "haley-rao"
+        ],
+        "pointsAgainst": 1367.76,
+        "pointsFor": 1660.8,
+        "rosterId": 1,
+        "seed": 1,
+        "teamName": "Chris Browns",
+        "ties": 0,
+        "wins": 11
+      },
+      {
+        "finalPlace": 3,
+        "losses": 3,
+        "madePlayoffs": true,
+        "ownerSlug": "eric-wong",
+        "ownerSlugs": [
+          "eric-wong"
+        ],
+        "pointsAgainst": 1308.8,
+        "pointsFor": 1519.92,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "Eric's In Paris",
+        "ties": 0,
+        "wins": 10
+      },
+      {
+        "finalPlace": 2,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1411.54,
+        "pointsFor": 1491.98,
+        "rosterId": 3,
+        "seed": 3,
+        "teamName": "Thielen Deez Nutz",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 4,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "kate-grillo",
+        "ownerSlugs": [
+          "kate-grillo"
+        ],
+        "pointsAgainst": 1392.02,
+        "pointsFor": 1444.58,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "Higgs n Diggs",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 6,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "diana-gonzalez",
+        "ownerSlugs": [
+          "diana-gonzalez"
+        ],
+        "pointsAgainst": 1418.76,
+        "pointsFor": 1366.12,
+        "rosterId": 5,
+        "seed": 5,
+        "teamName": "Team Gonz",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 7,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "mark-mcgreal",
+        "ownerSlugs": [
+          "mark-mcgreal"
+        ],
+        "pointsAgainst": 1437.22,
+        "pointsFor": 1388.2,
+        "rosterId": 6,
+        "seed": 6,
+        "teamName": "Druken Clamb",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 9,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "jivan-gubbi",
+        "ownerSlugs": [
+          "jivan-gubbi"
+        ],
+        "pointsAgainst": 1448.04,
+        "pointsFor": 1519.08,
+        "rosterId": 7,
+        "seed": 7,
+        "teamName": "Ertz Donut",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 5,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "charlie-stoksik",
+        "ownerSlugs": [
+          "charlie-stoksik"
+        ],
+        "pointsAgainst": 1452.46,
+        "pointsFor": 1246.06,
+        "rosterId": 8,
+        "seed": 8,
+        "teamName": "M@ss@ge W@tson",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 10,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "jay-uppuluri",
+        "ownerSlugs": [
+          "jay-uppuluri"
+        ],
+        "pointsAgainst": 1519.3,
+        "pointsFor": 1242.8,
+        "rosterId": 9,
+        "seed": 9,
+        "teamName": "El Diablo",
+        "ties": 0,
+        "wins": 4
+      },
+      {
+        "finalPlace": 8,
+        "losses": 10,
+        "madePlayoffs": false,
+        "ownerSlug": "sam-ellison",
+        "ownerSlugs": [
+          "sam-ellison"
+        ],
+        "pointsAgainst": 1307.46,
+        "pointsFor": 1183.82,
+        "rosterId": 10,
+        "seed": 10,
+        "teamName": "Glizzyekial Elliot",
+        "ties": 0,
+        "wins": 3
+      }
+    ],
+    "status": "complete",
+    "teams": 10,
+    "thirdPlace": "eric-wong",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "kate-grillo",
+        "matchId": 100,
+        "placesFor": null,
+        "points": {
+          "haley-rao": 252.52,
+          "kate-grillo": 210.5
+        },
+        "round": 1,
+        "team1": "kate-grillo",
+        "team1From": null,
+        "team2": "haley-rao",
+        "team2From": null,
+        "week": 14,
+        "winner": "haley-rao"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "eric-wong",
+        "matchId": 101,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 275.58,
+          "eric-wong": 176.74
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "eric-wong",
+        "team2From": null,
+        "week": 14,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "brendon-ng",
+        "matchId": 102,
+        "placesFor": [
+          1,
+          2
+        ],
+        "points": {
+          "brendon-ng": 220.54,
+          "haley-rao": 279.44
+        },
+        "round": 2,
+        "team1": "brendon-ng",
+        "team1From": {
+          "winnerOf": 101
+        },
+        "team2": "haley-rao",
+        "team2From": {
+          "winnerOf": 100
+        },
+        "week": 16,
+        "winner": "haley-rao"
+      }
+    ]
+  },
+  {
+    "champion": "charlie-stoksik",
+    "extraBrackets": [
+      {
+        "finalLabel": "🥉 3rd Place",
+        "finalPlace": 3,
+        "key": "winners-consolation",
+        "matches": [
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "haley-rao",
+            "matchId": 200,
+            "placesFor": null,
+            "points": {
+              "eric-wong": 95.08,
+              "haley-rao": 83.6
+            },
+            "round": 2,
+            "team1": "eric-wong",
+            "team1From": null,
+            "team2": "haley-rao",
+            "team2From": null,
+            "week": 16,
+            "winner": "eric-wong"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "brendon-ng",
+            "matchId": 201,
+            "placesFor": [
+              3,
+              4
+            ],
+            "points": {
+              "brendon-ng": 99.9,
+              "jivan-gubbi": 105.66
+            },
+            "round": 3,
+            "team1": "jivan-gubbi",
+            "team1From": null,
+            "team2": "brendon-ng",
+            "team2From": null,
+            "week": 17,
+            "winner": "jivan-gubbi"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "eric-wong",
+            "matchId": 202,
+            "placesFor": [
+              5,
+              6
+            ],
+            "points": {
+              "eric-wong": 110.6,
+              "haley-rao": 157
+            },
+            "round": 3,
+            "team1": "eric-wong",
+            "team1From": {
+              "winnerOf": 200
+            },
+            "team2": "haley-rao",
+            "team2From": null,
+            "week": 17,
+            "winner": "haley-rao"
+          }
+        ],
+        "note": "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+        "title": "Winner's Consolation Ladder"
+      }
+    ],
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "imported": true,
+    "ladderConsolation": true,
+    "lastPlace": "mark-mcgreal",
+    "leagueId": "espn-2023",
+    "leagueName": "Den Ops Fantasy Football (ESPN)",
+    "losersBracket": [
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "mark-mcgreal",
+        "matchId": 300,
+        "placesFor": null,
+        "points": {
+          "kate-grillo": 139.84,
+          "mark-mcgreal": 80.32
+        },
+        "round": 1,
+        "team1": "kate-grillo",
+        "team1From": null,
+        "team2": "mark-mcgreal",
+        "team2From": null,
+        "week": 15,
+        "winner": "kate-grillo"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "diana-gonzalez",
+        "matchId": 301,
+        "placesFor": null,
+        "points": {
+          "diana-gonzalez": 73.24,
+          "jay-uppuluri": 101.36
+        },
+        "round": 1,
+        "team1": "diana-gonzalez",
+        "team1From": null,
+        "team2": "jay-uppuluri",
+        "team2From": null,
+        "week": 15,
+        "winner": "jay-uppuluri"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jay-uppuluri",
+        "matchId": 302,
+        "placesFor": null,
+        "points": {
+          "jay-uppuluri": 80.56,
+          "kate-grillo": 137.98
+        },
+        "round": 2,
+        "team1": "jay-uppuluri",
+        "team1From": {
+          "winnerOf": 301
+        },
+        "team2": "kate-grillo",
+        "team2From": {
+          "winnerOf": 300
+        },
+        "week": 16,
+        "winner": "kate-grillo"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "mark-mcgreal",
+        "matchId": 303,
+        "placesFor": null,
+        "points": {
+          "diana-gonzalez": 159.8,
+          "mark-mcgreal": 101.6
+        },
+        "round": 2,
+        "team1": "diana-gonzalez",
+        "team1From": null,
+        "team2": "mark-mcgreal",
+        "team2From": null,
+        "week": 16,
+        "winner": "diana-gonzalez"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "kate-grillo",
+        "matchId": 304,
+        "placesFor": [
+          7,
+          8
+        ],
+        "points": {
+          "diana-gonzalez": 125.22,
+          "kate-grillo": 107.14
+        },
+        "round": 3,
+        "team1": "diana-gonzalez",
+        "team1From": {
+          "winnerOf": 303
+        },
+        "team2": "kate-grillo",
+        "team2From": {
+          "winnerOf": 302
+        },
+        "week": 17,
+        "winner": "diana-gonzalez"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "mark-mcgreal",
+        "matchId": 305,
+        "placesFor": [
+          9,
+          10
+        ],
+        "points": {
+          "jay-uppuluri": 114.34,
+          "mark-mcgreal": 113.98
+        },
+        "round": 3,
+        "team1": "jay-uppuluri",
+        "team1From": {
+          "winnerOf": 301
+        },
+        "team2": "mark-mcgreal",
+        "team2From": null,
+        "week": 17,
+        "winner": "jay-uppuluri"
+      }
+    ],
+    "regularSeasonWeeks": 14,
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "D/ST",
+      "K"
+    ],
+    "runnerUp": "sam-ellison",
+    "season": 2023,
+    "standings": [
+      {
+        "finalPlace": 1,
+        "losses": 3,
+        "madePlayoffs": true,
+        "ownerSlug": "charlie-stoksik",
+        "ownerSlugs": [
+          "charlie-stoksik"
+        ],
+        "pointsAgainst": 1261.3,
+        "pointsFor": 1584.98,
+        "rosterId": 1,
+        "seed": 1,
+        "teamName": "M@ss@ge W@tson",
+        "ties": 0,
+        "wins": 11
+      },
+      {
+        "finalPlace": 4,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1498.3,
+        "pointsFor": 1490.18,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "Thielen Deez Nutz",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 2,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "sam-ellison",
+        "ownerSlugs": [
+          "sam-ellison"
+        ],
+        "pointsAgainst": 1401.76,
+        "pointsFor": 1464.64,
+        "rosterId": 3,
+        "seed": 3,
+        "teamName": "Amon-Ra Dog",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 3,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "jivan-gubbi",
+        "ownerSlugs": [
+          "jivan-gubbi"
+        ],
+        "pointsAgainst": 1492.06,
+        "pointsFor": 1456.42,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "Herbie Fully Loaded",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 5,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "haley-rao",
+        "ownerSlugs": [
+          "haley-rao"
+        ],
+        "pointsAgainst": 1616.16,
+        "pointsFor": 1452.46,
+        "rosterId": 5,
+        "seed": 5,
+        "teamName": "Chris Browns",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 6,
+        "losses": 8,
+        "madePlayoffs": true,
+        "ownerSlug": "eric-wong",
+        "ownerSlugs": [
+          "eric-wong"
+        ],
+        "pointsAgainst": 1474.16,
+        "pointsFor": 1579.98,
+        "rosterId": 6,
+        "seed": 6,
+        "teamName": "Eric's In Paris",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 10,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "mark-mcgreal",
+        "ownerSlugs": [
+          "mark-mcgreal"
+        ],
+        "pointsAgainst": 1532.18,
+        "pointsFor": 1500.46,
+        "rosterId": 7,
+        "seed": 7,
+        "teamName": "Bijan's Head-Ache",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 8,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "kate-grillo",
+        "ownerSlugs": [
+          "kate-grillo"
+        ],
+        "pointsAgainst": 1501.94,
+        "pointsFor": 1476.28,
+        "rosterId": 8,
+        "seed": 8,
+        "teamName": "Donkey Kong",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 9,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "jay-uppuluri",
+        "ownerSlugs": [
+          "jay-uppuluri"
+        ],
+        "pointsAgainst": 1553.64,
+        "pointsFor": 1418.2,
+        "rosterId": 9,
+        "seed": 9,
+        "teamName": "El Diablo",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 7,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "diana-gonzalez",
+        "ownerSlugs": [
+          "diana-gonzalez"
+        ],
+        "pointsAgainst": 1475.62,
+        "pointsFor": 1383.52,
+        "rosterId": 10,
+        "seed": 10,
+        "teamName": "Team Gonz",
+        "ties": 0,
+        "wins": 5
+      }
+    ],
+    "status": "complete",
+    "teams": 10,
+    "thirdPlace": "jivan-gubbi",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 100,
+        "placesFor": null,
+        "points": {
+          "charlie-stoksik": 102.7
+        },
+        "round": 1,
+        "team1": "charlie-stoksik",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "charlie-stoksik"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "haley-rao",
+        "matchId": 101,
+        "placesFor": null,
+        "points": {
+          "haley-rao": 117.18,
+          "jivan-gubbi": 121.12
+        },
+        "round": 1,
+        "team1": "haley-rao",
+        "team1From": null,
+        "team2": "jivan-gubbi",
+        "team2From": null,
+        "week": 15,
+        "winner": "jivan-gubbi"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "eric-wong",
+        "matchId": 102,
+        "placesFor": null,
+        "points": {
+          "eric-wong": 103.06,
+          "sam-ellison": 107.96
+        },
+        "round": 1,
+        "team1": "eric-wong",
+        "team1From": null,
+        "team2": "sam-ellison",
+        "team2From": null,
+        "week": 15,
+        "winner": "sam-ellison"
+      },
+      {
+        "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 103,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 37.96
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "brendon-ng"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jivan-gubbi",
+        "matchId": 104,
+        "placesFor": null,
+        "points": {
+          "charlie-stoksik": 118.12,
+          "jivan-gubbi": 88.72
+        },
+        "round": 2,
+        "team1": "jivan-gubbi",
+        "team1From": {
+          "winnerOf": 101
+        },
+        "team2": "charlie-stoksik",
+        "team2From": {
+          "winnerOf": 100
+        },
+        "week": 16,
+        "winner": "charlie-stoksik"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "brendon-ng",
+        "matchId": 105,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 118.02,
+          "sam-ellison": 125.44
+        },
+        "round": 2,
+        "team1": "sam-ellison",
+        "team1From": {
+          "winnerOf": 102
+        },
+        "team2": "brendon-ng",
+        "team2From": {
+          "winnerOf": 103
+        },
+        "week": 16,
+        "winner": "sam-ellison"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "sam-ellison",
+        "matchId": 106,
+        "placesFor": [
+          1,
+          2
+        ],
+        "points": {
+          "charlie-stoksik": 137.98,
+          "sam-ellison": 80.68
+        },
+        "round": 3,
+        "team1": "sam-ellison",
+        "team1From": {
+          "winnerOf": 105
+        },
+        "team2": "charlie-stoksik",
+        "team2From": {
+          "winnerOf": 104
+        },
+        "week": 17,
+        "winner": "charlie-stoksik"
+      }
+    ]
+  },
+  {
+    "champion": "eric-wong",
+    "extraBrackets": [
+      {
+        "finalLabel": "🥉 3rd Place",
+        "finalPlace": 3,
+        "key": "winners-consolation",
+        "matches": [
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "sam-ellison",
+            "matchId": 200,
+            "placesFor": null,
+            "points": {
+              "brendon-ng": 147.3,
+              "sam-ellison": 107.98
+            },
+            "round": 2,
+            "team1": "brendon-ng",
+            "team1From": null,
+            "team2": "sam-ellison",
+            "team2From": null,
+            "week": 16,
+            "winner": "brendon-ng"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "haley-rao",
+            "matchId": 201,
+            "placesFor": [
+              3,
+              4
+            ],
+            "points": {
+              "haley-rao": 112.4,
+              "mark-mcgreal": 115.38
+            },
+            "round": 3,
+            "team1": "mark-mcgreal",
+            "team1From": null,
+            "team2": "haley-rao",
+            "team2From": null,
+            "week": 17,
+            "winner": "mark-mcgreal"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "sam-ellison",
+            "matchId": 202,
+            "placesFor": [
+              5,
+              6
+            ],
+            "points": {
+              "brendon-ng": 189.72,
+              "sam-ellison": 121.08
+            },
+            "round": 3,
+            "team1": "brendon-ng",
+            "team1From": {
+              "winnerOf": 200
+            },
+            "team2": "sam-ellison",
+            "team2From": null,
+            "week": 17,
+            "winner": "brendon-ng"
+          }
+        ],
+        "note": "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+        "title": "Winner's Consolation Ladder"
+      }
+    ],
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "imported": true,
+    "ladderConsolation": true,
+    "lastPlace": "jivan-gubbi",
+    "leagueId": "espn-2024",
+    "leagueName": "Den Ops Fantasy Football (ESPN)",
+    "losersBracket": [
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "kate-grillo",
+        "matchId": 300,
+        "placesFor": null,
+        "points": {
+          "jivan-gubbi": 119.24,
+          "kate-grillo": 117.2
+        },
+        "round": 1,
+        "team1": "kate-grillo",
+        "team1From": null,
+        "team2": "jivan-gubbi",
+        "team2From": null,
+        "week": 15,
+        "winner": "jivan-gubbi"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "charlie-stoksik",
+        "matchId": 301,
+        "placesFor": null,
+        "points": {
+          "charlie-stoksik": 124.72,
+          "jay-uppuluri": 134.06
+        },
+        "round": 1,
+        "team1": "jay-uppuluri",
+        "team1From": null,
+        "team2": "charlie-stoksik",
+        "team2From": null,
+        "week": 15,
+        "winner": "jay-uppuluri"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jivan-gubbi",
+        "matchId": 302,
+        "placesFor": null,
+        "points": {
+          "jay-uppuluri": 134.88,
+          "jivan-gubbi": 101.84
+        },
+        "round": 2,
+        "team1": "jay-uppuluri",
+        "team1From": {
+          "winnerOf": 301
+        },
+        "team2": "jivan-gubbi",
+        "team2From": {
+          "winnerOf": 300
+        },
+        "week": 16,
+        "winner": "jay-uppuluri"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "kate-grillo",
+        "matchId": 303,
+        "placesFor": null,
+        "points": {
+          "charlie-stoksik": 143.48,
+          "kate-grillo": 122.24
+        },
+        "round": 2,
+        "team1": "charlie-stoksik",
+        "team1From": null,
+        "team2": "kate-grillo",
+        "team2From": null,
+        "week": 16,
+        "winner": "charlie-stoksik"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "charlie-stoksik",
+        "matchId": 304,
+        "placesFor": [
+          7,
+          8
+        ],
+        "points": {
+          "charlie-stoksik": 84.4,
+          "jay-uppuluri": 113.9
+        },
+        "round": 3,
+        "team1": "jay-uppuluri",
+        "team1From": {
+          "winnerOf": 302
+        },
+        "team2": "charlie-stoksik",
+        "team2From": {
+          "winnerOf": 303
+        },
+        "week": 17,
+        "winner": "jay-uppuluri"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jivan-gubbi",
+        "matchId": 305,
+        "placesFor": [
+          9,
+          10
+        ],
+        "points": {
+          "jivan-gubbi": 99.56,
+          "kate-grillo": 99.68
+        },
+        "round": 3,
+        "team1": "kate-grillo",
+        "team1From": null,
+        "team2": "jivan-gubbi",
+        "team2From": {
+          "winnerOf": 300
+        },
+        "week": 17,
+        "winner": "kate-grillo"
+      }
+    ],
+    "regularSeasonWeeks": 14,
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "D/ST",
+      "K"
+    ],
+    "runnerUp": "diana-gonzalez",
+    "season": 2024,
+    "standings": [
+      {
+        "finalPlace": 1,
+        "losses": 3,
+        "madePlayoffs": true,
+        "ownerSlug": "eric-wong",
+        "ownerSlugs": [
+          "eric-wong"
+        ],
+        "pointsAgainst": 1693.2,
+        "pointsFor": 1920.12,
+        "rosterId": 1,
+        "seed": 1,
+        "teamName": "Eric's In Paris",
+        "ties": 0,
+        "wins": 11
+      },
+      {
+        "finalPlace": 4,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "haley-rao",
+        "ownerSlugs": [
+          "haley-rao"
+        ],
+        "pointsAgainst": 1591.6,
+        "pointsFor": 1721.38,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "Look at all those Pickens",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 6,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "sam-ellison",
+        "ownerSlugs": [
+          "sam-ellison"
+        ],
+        "pointsAgainst": 1681.1,
+        "pointsFor": 1729.64,
+        "rosterId": 3,
+        "seed": 3,
+        "teamName": "Amon-Ra Dog",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 3,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "mark-mcgreal",
+        "ownerSlugs": [
+          "mark-mcgreal"
+        ],
+        "pointsAgainst": 1806.74,
+        "pointsFor": 1841.9,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "Dobbins Is A Free Elf",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 5,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1673.98,
+        "pointsFor": 1668.48,
+        "rosterId": 5,
+        "seed": 5,
+        "teamName": "Hock Tua",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 2,
+        "losses": 8,
+        "madePlayoffs": true,
+        "ownerSlug": "diana-gonzalez",
+        "ownerSlugs": [
+          "diana-gonzalez"
+        ],
+        "pointsAgainst": 1720.7,
+        "pointsFor": 1853.72,
+        "rosterId": 6,
+        "seed": 6,
+        "teamName": "ABC Always Be Catching",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 10,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "jivan-gubbi",
+        "ownerSlugs": [
+          "jivan-gubbi"
+        ],
+        "pointsAgainst": 1652,
+        "pointsFor": 1669.78,
+        "rosterId": 7,
+        "seed": 7,
+        "teamName": "McConkey Kong",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 9,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "kate-grillo",
+        "ownerSlugs": [
+          "kate-grillo"
+        ],
+        "pointsAgainst": 1731.38,
+        "pointsFor": 1445.94,
+        "rosterId": 8,
+        "seed": 8,
+        "teamName": "No Redeemer Now",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 8,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "charlie-stoksik",
+        "ownerSlugs": [
+          "charlie-stoksik"
+        ],
+        "pointsAgainst": 1700.24,
+        "pointsFor": 1552.7,
+        "rosterId": 9,
+        "seed": 9,
+        "teamName": "Shakir Booty",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 7,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "jay-uppuluri",
+        "ownerSlugs": [
+          "jay-uppuluri"
+        ],
+        "pointsAgainst": 1679.24,
+        "pointsFor": 1526.52,
+        "rosterId": 10,
+        "seed": 10,
+        "teamName": "El Diablo",
+        "ties": 0,
+        "wins": 5
+      }
+    ],
+    "status": "complete",
+    "teams": 10,
+    "thirdPlace": "mark-mcgreal",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 100,
+        "placesFor": null,
+        "points": {
+          "eric-wong": 115.84
+        },
+        "round": 1,
+        "team1": "eric-wong",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "eric-wong"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "brendon-ng",
+        "matchId": 101,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 90.94,
+          "mark-mcgreal": 135.58
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "mark-mcgreal",
+        "team2From": null,
+        "week": 15,
+        "winner": "mark-mcgreal"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "sam-ellison",
+        "matchId": 102,
+        "placesFor": null,
+        "points": {
+          "diana-gonzalez": 145.6,
+          "sam-ellison": 105.94
+        },
+        "round": 1,
+        "team1": "diana-gonzalez",
+        "team1From": null,
+        "team2": "sam-ellison",
+        "team2From": null,
+        "week": 15,
+        "winner": "diana-gonzalez"
+      },
+      {
+        "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 103,
+        "placesFor": null,
+        "points": {
+          "haley-rao": 120.96
+        },
+        "round": 1,
+        "team1": "haley-rao",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "haley-rao"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "mark-mcgreal",
+        "matchId": 104,
+        "placesFor": null,
+        "points": {
+          "eric-wong": 195.12,
+          "mark-mcgreal": 161.56
+        },
+        "round": 2,
+        "team1": "mark-mcgreal",
+        "team1From": {
+          "winnerOf": 101
+        },
+        "team2": "eric-wong",
+        "team2From": {
+          "winnerOf": 100
+        },
+        "week": 16,
+        "winner": "eric-wong"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "haley-rao",
+        "matchId": 105,
+        "placesFor": null,
+        "points": {
+          "diana-gonzalez": 141.98,
+          "haley-rao": 115.1
+        },
+        "round": 2,
+        "team1": "diana-gonzalez",
+        "team1From": {
+          "winnerOf": 102
+        },
+        "team2": "haley-rao",
+        "team2From": {
+          "winnerOf": 103
+        },
+        "week": 16,
+        "winner": "diana-gonzalez"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "diana-gonzalez",
+        "matchId": 106,
+        "placesFor": [
+          1,
+          2
+        ],
+        "points": {
+          "diana-gonzalez": 135.12,
+          "eric-wong": 144.48
+        },
+        "round": 3,
+        "team1": "diana-gonzalez",
+        "team1From": {
+          "winnerOf": 105
+        },
+        "team2": "eric-wong",
+        "team2From": {
+          "winnerOf": 104
+        },
+        "week": 17,
+        "winner": "eric-wong"
+      }
+    ]
+  },
+  {
+    "champion": "mark-mcgreal",
+    "extraBrackets": [
+      {
+        "finalLabel": "🥉 3rd Place",
+        "finalPlace": 3,
+        "key": "winners-consolation",
+        "matches": [
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "jivan-gubbi",
+            "matchId": 200,
+            "placesFor": null,
+            "points": {
+              "brendon-ng": 148.26,
+              "jivan-gubbi": 90.3
+            },
+            "round": 2,
+            "team1": "brendon-ng",
+            "team1From": null,
+            "team2": "jivan-gubbi",
+            "team2From": null,
+            "week": 16,
+            "winner": "brendon-ng"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "sam-ellison",
+            "matchId": 201,
+            "placesFor": [
+              3,
+              4
+            ],
+            "points": {
+              "eric-wong": 134.88,
+              "sam-ellison": 84.82
+            },
+            "round": 3,
+            "team1": "eric-wong",
+            "team1From": null,
+            "team2": "sam-ellison",
+            "team2From": null,
+            "week": 17,
+            "winner": "eric-wong"
+          },
+          {
+            "inverted": false,
+            "isBye": false,
+            "label": null,
+            "loser": "brendon-ng",
+            "matchId": 202,
+            "placesFor": [
+              5,
+              6
+            ],
+            "points": {
+              "brendon-ng": 122.3,
+              "jivan-gubbi": 133.38
+            },
+            "round": 3,
+            "team1": "brendon-ng",
+            "team1From": {
+              "winnerOf": 200
+            },
+            "team2": "jivan-gubbi",
+            "team2From": null,
+            "week": 17,
+            "winner": "jivan-gubbi"
+          }
+        ],
+        "note": "Teams knocked out of the championship bracket, playing for 3rd through 6th.",
+        "title": "Winner's Consolation Ladder"
+      }
+    ],
+    "finalized": true,
+    "finalizedThroughWeek": 17,
+    "imported": true,
+    "ladderConsolation": true,
+    "lastPlace": "diana-gonzalez",
+    "leagueId": "espn-2025",
+    "leagueName": "Den Ops Fantasy Football (ESPN)",
+    "losersBracket": [
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jay-uppuluri",
+        "matchId": 300,
+        "placesFor": null,
+        "points": {
+          "charlie-stoksik": 126.84,
+          "jay-uppuluri": 118.92
+        },
+        "round": 1,
+        "team1": "charlie-stoksik",
+        "team1From": null,
+        "team2": "jay-uppuluri",
+        "team2From": null,
+        "week": 15,
+        "winner": "charlie-stoksik"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "diana-gonzalez",
+        "matchId": 301,
+        "placesFor": null,
+        "points": {
+          "diana-gonzalez": 102.2,
+          "isaac-edejer": 103.38
+        },
+        "round": 1,
+        "team1": "diana-gonzalez",
+        "team1From": null,
+        "team2": "isaac-edejer",
+        "team2From": null,
+        "week": 15,
+        "winner": "isaac-edejer"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "charlie-stoksik",
+        "matchId": 302,
+        "placesFor": null,
+        "points": {
+          "charlie-stoksik": 74.28,
+          "isaac-edejer": 114.4
+        },
+        "round": 2,
+        "team1": "isaac-edejer",
+        "team1From": {
+          "winnerOf": 301
+        },
+        "team2": "charlie-stoksik",
+        "team2From": {
+          "winnerOf": 300
+        },
+        "week": 16,
+        "winner": "isaac-edejer"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "diana-gonzalez",
+        "matchId": 303,
+        "placesFor": null,
+        "points": {
+          "diana-gonzalez": 73.2,
+          "jay-uppuluri": 140.38
+        },
+        "round": 2,
+        "team1": "diana-gonzalez",
+        "team1From": null,
+        "team2": "jay-uppuluri",
+        "team2From": null,
+        "week": 16,
+        "winner": "jay-uppuluri"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "isaac-edejer",
+        "matchId": 304,
+        "placesFor": [
+          7,
+          8
+        ],
+        "points": {
+          "isaac-edejer": 76.64,
+          "jay-uppuluri": 94.56
+        },
+        "round": 3,
+        "team1": "isaac-edejer",
+        "team1From": {
+          "winnerOf": 302
+        },
+        "team2": "jay-uppuluri",
+        "team2From": {
+          "winnerOf": 303
+        },
+        "week": 17,
+        "winner": "jay-uppuluri"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "diana-gonzalez",
+        "matchId": 305,
+        "placesFor": [
+          9,
+          10
+        ],
+        "points": {
+          "charlie-stoksik": 84.7,
+          "diana-gonzalez": 67.7
+        },
+        "round": 3,
+        "team1": "diana-gonzalez",
+        "team1From": null,
+        "team2": "charlie-stoksik",
+        "team2From": {
+          "winnerOf": 300
+        },
+        "week": 17,
+        "winner": "charlie-stoksik"
+      }
+    ],
+    "regularSeasonWeeks": 14,
+    "rosterPositions": [
+      "QB",
+      "RB",
+      "RB",
+      "WR",
+      "WR",
+      "TE",
+      "FLEX",
+      "D/ST",
+      "K"
+    ],
+    "runnerUp": "haley-rao",
+    "season": 2025,
+    "standings": [
+      {
+        "finalPlace": 1,
+        "losses": 2,
+        "madePlayoffs": true,
+        "ownerSlug": "mark-mcgreal",
+        "ownerSlugs": [
+          "mark-mcgreal"
+        ],
+        "pointsAgainst": 1538.26,
+        "pointsFor": 1869.32,
+        "rosterId": 1,
+        "seed": 1,
+        "teamName": "Dobbins Is A Free Elf",
+        "ties": 0,
+        "wins": 12
+      },
+      {
+        "finalPlace": 2,
+        "losses": 5,
+        "madePlayoffs": true,
+        "ownerSlug": "haley-rao",
+        "ownerSlugs": [
+          "haley-rao"
+        ],
+        "pointsAgainst": 1610.66,
+        "pointsFor": 1721.08,
+        "rosterId": 2,
+        "seed": 2,
+        "teamName": "Don't Puka in the Uber",
+        "ties": 0,
+        "wins": 9
+      },
+      {
+        "finalPlace": 4,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "sam-ellison",
+        "ownerSlugs": [
+          "sam-ellison"
+        ],
+        "pointsAgainst": 1541.86,
+        "pointsFor": 1685.98,
+        "rosterId": 3,
+        "seed": 3,
+        "teamName": "Gibbs Free Energy",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 3,
+        "losses": 6,
+        "madePlayoffs": true,
+        "ownerSlug": "eric-wong",
+        "ownerSlugs": [
+          "eric-wong"
+        ],
+        "pointsAgainst": 1577.56,
+        "pointsFor": 1569.92,
+        "rosterId": 4,
+        "seed": 4,
+        "teamName": "Eric's In Paris",
+        "ties": 0,
+        "wins": 8
+      },
+      {
+        "finalPlace": 5,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "jivan-gubbi",
+        "ownerSlugs": [
+          "jivan-gubbi"
+        ],
+        "pointsAgainst": 1582.86,
+        "pointsFor": 1689.34,
+        "rosterId": 5,
+        "seed": 5,
+        "teamName": "McConkey Kong",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 6,
+        "losses": 7,
+        "madePlayoffs": true,
+        "ownerSlug": "brendon-ng",
+        "ownerSlugs": [
+          "brendon-ng"
+        ],
+        "pointsAgainst": 1595.5,
+        "pointsFor": 1681.66,
+        "rosterId": 6,
+        "seed": 6,
+        "teamName": "Strike a Cord Its Prob AYOMANOR",
+        "ties": 0,
+        "wins": 7
+      },
+      {
+        "finalPlace": 7,
+        "losses": 8,
+        "madePlayoffs": false,
+        "ownerSlug": "jay-uppuluri",
+        "ownerSlugs": [
+          "jay-uppuluri"
+        ],
+        "pointsAgainst": 1567.42,
+        "pointsFor": 1498.14,
+        "rosterId": 7,
+        "seed": 7,
+        "teamName": "El Diablo",
+        "ties": 0,
+        "wins": 6
+      },
+      {
+        "finalPlace": 9,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "charlie-stoksik",
+        "ownerSlugs": [
+          "charlie-stoksik"
+        ],
+        "pointsAgainst": 1716.18,
+        "pointsFor": 1630.4,
+        "rosterId": 8,
+        "seed": 8,
+        "teamName": "Racing Rice",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 8,
+        "losses": 9,
+        "madePlayoffs": false,
+        "ownerSlug": "isaac-edejer",
+        "ownerSlugs": [
+          "isaac-edejer"
+        ],
+        "pointsAgainst": 1573.98,
+        "pointsFor": 1263.78,
+        "rosterId": 9,
+        "seed": 9,
+        "teamName": "you got purdy lips boy",
+        "ties": 0,
+        "wins": 5
+      },
+      {
+        "finalPlace": 10,
+        "losses": 11,
+        "madePlayoffs": false,
+        "ownerSlug": "diana-gonzalez",
+        "ownerSlugs": [
+          "diana-gonzalez"
+        ],
+        "pointsAgainst": 1697.6,
+        "pointsFor": 1392.26,
+        "rosterId": 10,
+        "seed": 10,
+        "teamName": "ABC Always Be Catching",
+        "ties": 0,
+        "wins": 3
+      }
+    ],
+    "status": "complete",
+    "teams": 10,
+    "thirdPlace": "eric-wong",
+    "winnersBracket": [
+      {
+        "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 100,
+        "placesFor": null,
+        "points": {
+          "mark-mcgreal": 108.8
+        },
+        "round": 1,
+        "team1": "mark-mcgreal",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "mark-mcgreal"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "jivan-gubbi",
+        "matchId": 101,
+        "placesFor": null,
+        "points": {
+          "eric-wong": 128.4,
+          "jivan-gubbi": 127.32
+        },
+        "round": 1,
+        "team1": "jivan-gubbi",
+        "team1From": null,
+        "team2": "eric-wong",
+        "team2From": null,
+        "week": 15,
+        "winner": "eric-wong"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "brendon-ng",
+        "matchId": 102,
+        "placesFor": null,
+        "points": {
+          "brendon-ng": 94.7,
+          "sam-ellison": 118.26
+        },
+        "round": 1,
+        "team1": "brendon-ng",
+        "team1From": null,
+        "team2": "sam-ellison",
+        "team2From": null,
+        "week": 15,
+        "winner": "sam-ellison"
+      },
+      {
+        "inverted": false,
+        "isBye": true,
+        "label": null,
+        "loser": null,
+        "matchId": 103,
+        "placesFor": null,
+        "points": {
+          "haley-rao": 199.08
+        },
+        "round": 1,
+        "team1": "haley-rao",
+        "team1From": null,
+        "team2": null,
+        "team2From": null,
+        "week": 15,
+        "winner": "haley-rao"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "eric-wong",
+        "matchId": 104,
+        "placesFor": null,
+        "points": {
+          "eric-wong": 137.94,
+          "mark-mcgreal": 146
+        },
+        "round": 2,
+        "team1": "eric-wong",
+        "team1From": {
+          "winnerOf": 101
+        },
+        "team2": "mark-mcgreal",
+        "team2From": {
+          "winnerOf": 100
+        },
+        "week": 16,
+        "winner": "mark-mcgreal"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "sam-ellison",
+        "matchId": 105,
+        "placesFor": null,
+        "points": {
+          "haley-rao": 109.8,
+          "sam-ellison": 91.46
+        },
+        "round": 2,
+        "team1": "sam-ellison",
+        "team1From": {
+          "winnerOf": 102
+        },
+        "team2": "haley-rao",
+        "team2From": {
+          "winnerOf": 103
+        },
+        "week": 16,
+        "winner": "haley-rao"
+      },
+      {
+        "inverted": false,
+        "isBye": false,
+        "label": null,
+        "loser": "haley-rao",
+        "matchId": 106,
+        "placesFor": [
+          1,
+          2
+        ],
+        "points": {
+          "haley-rao": 143.34,
+          "mark-mcgreal": 174.68
+        },
+        "round": 3,
+        "team1": "haley-rao",
+        "team1From": {
+          "winnerOf": 105
+        },
+        "team2": "mark-mcgreal",
+        "team2From": {
+          "winnerOf": 104
+        },
+        "week": 17,
+        "winner": "mark-mcgreal"
+      }
+    ]
+  }
+]

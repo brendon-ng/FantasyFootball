@@ -9,7 +9,7 @@
 
 import { join } from "node:path";
 
-import { CACHE_DIR, readJson } from "./io.ts";
+import { CACHE_DIR, ROOT, log, readJson } from "./io.ts";
 
 export const API = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons";
 export const PRO_TEAM: Record<number, string> = {
@@ -34,7 +34,21 @@ export interface LeagueFile {
    * this league's 2019 and 2020 ids are unrelated. Mirrors `knownLeagueIds`.
    */
   espnLeagueIds?: Record<string, string | number>;
-  owners?: Array<{ slug: string; firstName: string; lastName: string; espnNames?: string[] }>;
+  owners?: Array<{
+    slug: string;
+    firstName: string;
+    lastName: string;
+    espnNames?: string[];
+    /**
+     * ESPN member ids (SWIDs) belonging to this person, braces included.
+     *
+     * PREFERRED OVER THE NAME, because a name is not always there and is not
+     * always unique. One league has a member whose ESPN account carries only a
+     * display name, so the name tier has nothing to match on; another has one
+     * person holding TWO accounts, which map to a single slug here.
+     */
+    espnIds?: string[];
+  }>;
 }
 
 export interface SleeperPlayer {
@@ -204,6 +218,32 @@ export function label(pl: EspnPlayer, sp: SleeperPlayer): string | undefined {
 }
 
 
+/**
+ * Cookies for a PRIVATE league, read from a gitignored `.espn-auth.json`.
+ *
+ * A public league needs none of this and never notices — the header is only sent
+ * when the file exists. ESPN's visibility is PER SEASON, so a league can be
+ * readable this year and 401 for every year before it, which is the case this
+ * exists for.
+ *
+ * NEVER COMMITTED, and deliberately a file rather than an argument: `espn_s2` is
+ * a session token for the whole ESPN account, so it should not end up in a shell
+ * history or a process list.
+ */
+let auth: Record<string, string> | null | undefined;
+
+export function espnAuth(): Record<string, string> {
+  if (auth === undefined) {
+    const file = readJson<{ espn_s2?: string; SWID?: string }>(join(ROOT, ".espn-auth.json"));
+    auth =
+      file?.espn_s2 && file?.SWID
+        ? { Cookie: `espn_s2=${file.espn_s2}; SWID=${file.SWID}` }
+        : null;
+    log.info(auth ? "using .espn-auth.json (private league)" : "no .espn-auth.json — public access only");
+  }
+  return auth ?? {};
+}
+
 /** One view of one ESPN season. */
 export async function fetchEspn<T>(
   leagueId: string | number,
@@ -211,7 +251,13 @@ export async function fetchEspn<T>(
   query: string,
 ): Promise<T> {
   const url = `${API}/${season}/segments/0/leagues/${leagueId}?${query}`;
-  const res = await fetch(url);
+  const res = await fetch(url, { headers: espnAuth() });
+  if (res.status === 401) {
+    throw new Error(
+      `ESPN ${season}: 401 for ${query}. That season is private — add .espn-auth.json ` +
+        `with espn_s2 and SWID cookies from a logged-in browser, or make the season public.`,
+    );
+  }
   if (!res.ok) throw new Error(`ESPN ${season}: HTTP ${res.status} for ${query}`);
   return (await res.json()) as T;
 }
@@ -226,7 +272,7 @@ export async function fetchEspn<T>(
 export async function espnPlayerUniverse(season: number): Promise<Map<number, EspnPlayer>> {
   const res = await fetch(
     `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${season}/players?scoringPeriodId=0&view=players_wl`,
-    { headers: { "x-fantasy-filter": JSON.stringify({ players: { limit: 5000 } }) } },
+    { headers: { ...espnAuth(), "x-fantasy-filter": JSON.stringify({ players: { limit: 5000 } }) } },
   );
   if (!res.ok) throw new Error(`ESPN ${season} players: HTTP ${res.status}`);
   const list = (await res.json()) as EspnPlayer[];
@@ -246,25 +292,52 @@ export function ownerByTeam(
   cfg: LeagueFile | null,
   where: string,
 ): Map<number, string> {
+  return new Map([...ownersByTeam(data, cfg, where)].map(([id, slugs]) => [id, slugs[0]]));
+}
+
+/**
+ * ESPN team id -> EVERY owner slug credited with it, primary first.
+ *
+ * CO-OWNERS ARE FIRST-CLASS on this site, so a shared team has to name all of
+ * them; taking only `primaryOwner` silently drops the other person from every
+ * all-time table. Resolution is by ESPN member id first and by name second —
+ * see `espnIds` for why the id tier has to come first.
+ */
+export function ownersByTeam(
+  data: { teams: Array<{ id: number; primaryOwner?: string; owners?: string[] }>; members?: Array<{ id: string; firstName?: string; lastName?: string }> },
+  cfg: LeagueFile | null,
+  where: string,
+): Map<number, string[]> {
   const byName = new Map<string, string>();
+  const bySwid = new Map<string, string>();
   for (const o of cfg?.owners ?? []) {
     byName.set(normalise(`${o.firstName} ${o.lastName}`), o.slug);
     for (const alias of o.espnNames ?? []) byName.set(normalise(alias), o.slug);
+    for (const id of o.espnIds ?? []) bySwid.set(id.toUpperCase(), o.slug);
   }
   const members = new Map(
     (data.members ?? []).map((m) => [m.id, normalise(`${m.firstName ?? ""} ${m.lastName ?? ""}`)]),
   );
-  const out = new Map<number, string>();
+  const resolve = (swid: string): string | undefined =>
+    bySwid.get(swid.toUpperCase()) ?? byName.get(members.get(swid) ?? "\u0000");
+
+  const out = new Map<number, string[]>();
   for (const t of data.teams) {
-    const key = members.get(t.primaryOwner ?? t.owners?.[0] ?? "");
-    const owner = key ? byName.get(key) : undefined;
-    if (!owner) {
+    // Primary first so the franchise key is stable, then anyone else on the team.
+    const ids = [t.primaryOwner ?? t.owners?.[0] ?? "", ...(t.owners ?? [])];
+    const slugs: string[] = [];
+    for (const id of ids) {
+      const slug = resolve(id);
+      if (slug && !slugs.includes(slug)) slugs.push(slug);
+    }
+    if (!slugs.length) {
+      const key = members.get(t.primaryOwner ?? t.owners?.[0] ?? "");
       throw new Error(
         `${where}: ESPN team ${t.id} has no owner in config (member "${key ?? "?"}"). ` +
-          `Add them to league.json, with espnNames if the label differs.`,
+          `Add them to league.json, with espnNames or espnIds if the label differs.`,
       );
     }
-    out.set(t.id, owner);
+    out.set(t.id, slugs);
   }
   return out;
 }

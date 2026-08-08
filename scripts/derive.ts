@@ -1854,6 +1854,16 @@ interface ManualLineups {
 interface ManualSeason {
   season: number;
   teams: number;
+  /**
+   * Weeks whose game covers exactly one scoring period, so a lineup can be
+   * reconciled against the scoreboard.
+   *
+   * A MATCHUP PERIOD IS NOT ALWAYS A WEEK — ESPN can run multi-week playoff
+   * matchups, and Apartment 401 did in 2021 and 2022, where the final spanned
+   * scoring periods 16 and 17 and posted their combined score. Absent on a
+   * season imported from MHTML, which predates the distinction.
+   */
+  lineupWeeks?: number[];
   playoffWeekStart: number;
   finalWeek: number;
   regularSeasonWeeks: number;

@@ -1,0 +1,160 @@
+[
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Brendon",
+    "name": "Brendon Ng",
+    "seasons": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "slug": "brendon-ng",
+    "userId": null
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Charlie",
+    "name": "Charlie Stoksik",
+    "seasons": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "slug": "charlie-stoksik",
+    "userId": null
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Diana",
+    "name": "Diana Gonzalez",
+    "seasons": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "slug": "diana-gonzalez",
+    "userId": null
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Eric",
+    "name": "Eric Wong",
+    "seasons": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "slug": "eric-wong",
+    "userId": null
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Haley",
+    "name": "Haley Rao",
+    "seasons": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "slug": "haley-rao",
+    "userId": null
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Isaac",
+    "name": "Isaac Edejer",
+    "seasons": [
+      2025
+    ],
+    "slug": "isaac-edejer",
+    "userId": null
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Jivan",
+    "name": "Jivan Gubbi",
+    "seasons": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "slug": "jivan-gubbi",
+    "userId": null
+  },
+  {
+    "active": false,
+    "coOwnedWith": [],
+    "firstName": "Kate",
+    "name": "Kate Grillo",
+    "seasons": [
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "slug": "kate-grillo",
+    "userId": null
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Mark",
+    "name": "Mark McGreal",
+    "seasons": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "slug": "mark-mcgreal",
+    "userId": null
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Sam",
+    "name": "Sam Ellison",
+    "seasons": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "slug": "sam-ellison",
+    "userId": null
+  },
+  {
+    "active": true,
+    "coOwnedWith": [],
+    "firstName": "Jay",
+    "name": "Jay Uppuluri",
+    "seasons": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "slug": "jay-uppuluri",
+    "userId": null
+  }
+]

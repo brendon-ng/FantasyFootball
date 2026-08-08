@@ -1,0 +1,28 @@
+{
+  "season": 2023,
+  "note": "Regular season to 14 weeks and the playoff to 6 teams. 2024 and 2025 inherit this file.",
+  "teams": 10,
+  "regularSeasonWeeks": 14,
+  "playoffWeekStart": 15,
+  "playoffTeams": 6,
+  "playoffRounds": 3,
+  "firstRoundByes": 2,
+  "finalWeek": 17,
+  "seedingTiebreaker": "points-for",
+  "playoffTieGoesTo": "higher-seed",
+  "draftRounds": 16,
+  "faabBudget": 100,
+  "minBid": 0,
+  "tradeDeadlineWeek": 13,
+  "keepers": {
+    "enabled": false,
+    "maxKeepers": 0,
+    "maxKeepsAtOriginalCost": 0,
+    "undraftedFreeAgentRound": 0,
+    "reAcquiredValueRule": "none",
+    "selfReclaimResetsContract": false,
+    "tradeInheritsContract": false
+  },
+  "prizes": null,
+  "lastPlacePunishment": null
+}

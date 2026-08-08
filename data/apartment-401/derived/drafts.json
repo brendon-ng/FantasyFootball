@@ -1,0 +1,7682 @@
+[
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 1,
+    "playerId": "4034",
+    "round": 1,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 2,
+    "playerId": "4029",
+    "round": 1,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 3,
+    "playerId": "4035",
+    "round": 1,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 4,
+    "playerId": "3198",
+    "round": 1,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 5,
+    "playerId": "2133",
+    "round": 1,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 6,
+    "playerId": "3164",
+    "round": 1,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 7,
+    "playerId": "6813",
+    "round": 1,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 8,
+    "playerId": "1466",
+    "round": 1,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 9,
+    "playerId": "4199",
+    "round": 2,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 10,
+    "playerId": "4988",
+    "round": 2,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 11,
+    "playerId": "4866",
+    "round": 2,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 12,
+    "playerId": "4663",
+    "round": 2,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 13,
+    "playerId": "3321",
+    "round": 2,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 14,
+    "playerId": "2449",
+    "round": 2,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 15,
+    "playerId": "6945",
+    "round": 2,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 16,
+    "playerId": "1426",
+    "round": 2,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 17,
+    "playerId": "4981",
+    "round": 3,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 18,
+    "playerId": "7528",
+    "round": 3,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 19,
+    "playerId": "5846",
+    "round": 3,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 20,
+    "playerId": "2505",
+    "round": 3,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 21,
+    "playerId": "4018",
+    "round": 3,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 22,
+    "playerId": "6794",
+    "round": 3,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 23,
+    "playerId": "1992",
+    "round": 3,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 24,
+    "playerId": "1479",
+    "round": 3,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 25,
+    "playerId": "6955",
+    "round": 4,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 26,
+    "playerId": "5892",
+    "round": 4,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 27,
+    "playerId": "5927",
+    "round": 4,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 28,
+    "playerId": "4217",
+    "round": 4,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 29,
+    "playerId": "6820",
+    "round": 4,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 30,
+    "playerId": "4273",
+    "round": 4,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 31,
+    "playerId": "5859",
+    "round": 4,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 32,
+    "playerId": "6151",
+    "round": 4,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 33,
+    "playerId": "1352",
+    "round": 5,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 34,
+    "playerId": "6786",
+    "round": 5,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 35,
+    "playerId": "4046",
+    "round": 5,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 36,
+    "playerId": "4984",
+    "round": 5,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 37,
+    "playerId": "2216",
+    "round": 5,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 38,
+    "playerId": "2309",
+    "round": 5,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 39,
+    "playerId": "5937",
+    "round": 5,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 40,
+    "playerId": "5248",
+    "round": 5,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 41,
+    "playerId": "1689",
+    "round": 6,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 42,
+    "playerId": "2374",
+    "round": 6,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 43,
+    "playerId": "5850",
+    "round": 6,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 44,
+    "playerId": "6790",
+    "round": 6,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 45,
+    "playerId": "4037",
+    "round": 6,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 46,
+    "playerId": "5000",
+    "round": 6,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 47,
+    "playerId": "4039",
+    "round": 6,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 48,
+    "playerId": "7553",
+    "round": 6,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 49,
+    "playerId": "5849",
+    "round": 7,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 50,
+    "playerId": "947",
+    "round": 7,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 51,
+    "playerId": "5012",
+    "round": 7,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 52,
+    "playerId": "4983",
+    "round": 7,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 53,
+    "playerId": "4881",
+    "round": 7,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 54,
+    "playerId": "5844",
+    "round": 7,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 55,
+    "playerId": "5980",
+    "round": 7,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 56,
+    "playerId": "3294",
+    "round": 7,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 57,
+    "playerId": "2431",
+    "round": 8,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 58,
+    "playerId": "4098",
+    "round": 8,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 59,
+    "playerId": "96",
+    "round": 8,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 60,
+    "playerId": "6803",
+    "round": 8,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 61,
+    "playerId": "6801",
+    "round": 8,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 62,
+    "playerId": "4131",
+    "round": 8,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 63,
+    "playerId": "7588",
+    "round": 8,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 64,
+    "playerId": "3423",
+    "round": 8,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 65,
+    "playerId": "4040",
+    "round": 9,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 66,
+    "playerId": "2078",
+    "round": 9,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 67,
+    "playerId": "5890",
+    "round": 9,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 68,
+    "playerId": "5916",
+    "round": 9,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 69,
+    "playerId": "3199",
+    "round": 9,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 70,
+    "playerId": "6886",
+    "round": 9,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 71,
+    "playerId": "6783",
+    "round": 9,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 72,
+    "playerId": "1234",
+    "round": 9,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 73,
+    "playerId": "3225",
+    "round": 10,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 74,
+    "playerId": "2251",
+    "round": 10,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 75,
+    "playerId": "5045",
+    "round": 10,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 76,
+    "playerId": "7564",
+    "round": 10,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 77,
+    "playerId": "167",
+    "round": 10,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 78,
+    "playerId": "2197",
+    "round": 10,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 79,
+    "playerId": "6797",
+    "round": 10,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 80,
+    "playerId": "5038",
+    "round": 10,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 81,
+    "playerId": "6814",
+    "round": 11,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 82,
+    "playerId": "5857",
+    "round": 11,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 83,
+    "playerId": "5872",
+    "round": 11,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 84,
+    "playerId": "1067",
+    "round": 11,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 85,
+    "playerId": "2749",
+    "round": 11,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 86,
+    "playerId": "7525",
+    "round": 11,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 87,
+    "playerId": "3242",
+    "round": 11,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 88,
+    "playerId": "3157",
+    "round": 11,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 89,
+    "playerId": "4962",
+    "round": 12,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 90,
+    "playerId": "4149",
+    "round": 12,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 91,
+    "playerId": "4036",
+    "round": 12,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 92,
+    "playerId": "3969",
+    "round": 12,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 93,
+    "playerId": "1825",
+    "round": 12,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 94,
+    "playerId": "5848",
+    "round": 12,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 95,
+    "playerId": "4951",
+    "round": 12,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 96,
+    "playerId": "7526",
+    "round": 12,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 97,
+    "playerId": "6845",
+    "round": 13,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 98,
+    "playerId": "4082",
+    "round": 13,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 99,
+    "playerId": "4137",
+    "round": 13,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 100,
+    "playerId": "536",
+    "round": 13,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 101,
+    "playerId": "2320",
+    "round": 13,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 102,
+    "playerId": "PIT",
+    "round": 13,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 103,
+    "playerId": "4068",
+    "round": 13,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 104,
+    "playerId": "TB",
+    "round": 13,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 105,
+    "playerId": "5052",
+    "round": 14,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 106,
+    "playerId": "6904",
+    "round": 14,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 107,
+    "playerId": "4227",
+    "round": 14,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 108,
+    "playerId": "BAL",
+    "round": 14,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 109,
+    "playerId": "1264",
+    "round": 14,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 110,
+    "playerId": "6828",
+    "round": 14,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 111,
+    "playerId": "6789",
+    "round": 14,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 112,
+    "playerId": "2747",
+    "round": 14,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 113,
+    "playerId": "SF",
+    "round": 15,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 114,
+    "playerId": "WAS",
+    "round": 15,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 115,
+    "playerId": "LAR",
+    "round": 15,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 116,
+    "playerId": "BUF",
+    "round": 15,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 117,
+    "playerId": "4666",
+    "round": 15,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 118,
+    "playerId": "5347",
+    "round": 15,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 119,
+    "playerId": "IND",
+    "round": 15,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 120,
+    "playerId": "5119",
+    "round": 15,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 121,
+    "playerId": "5170",
+    "round": 16,
+    "season": 2021,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 122,
+    "playerId": "7042",
+    "round": 16,
+    "season": 2021,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 123,
+    "playerId": "5022",
+    "round": 16,
+    "season": 2021,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 124,
+    "playerId": "7607",
+    "round": 16,
+    "season": 2021,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 125,
+    "playerId": "6806",
+    "round": 16,
+    "season": 2021,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 126,
+    "playerId": "1433",
+    "round": 16,
+    "season": 2021,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 127,
+    "playerId": "503",
+    "round": 16,
+    "season": 2021,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 128,
+    "playerId": "6130",
+    "round": 16,
+    "season": 2021,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 1,
+    "playerId": "6813",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 2,
+    "playerId": "4034",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 3,
+    "playerId": "4039",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 4,
+    "playerId": "4663",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 5,
+    "playerId": "6794",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 6,
+    "playerId": "3198",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 7,
+    "playerId": "7528",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 8,
+    "playerId": "4029",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 9,
+    "playerId": "4035",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 10,
+    "playerId": "7564",
+    "round": 1,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 11,
+    "playerId": "2133",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 12,
+    "playerId": "4018",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 13,
+    "playerId": "2449",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 14,
+    "playerId": "5872",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 15,
+    "playerId": "4137",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 16,
+    "playerId": "6790",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 17,
+    "playerId": "6786",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 18,
+    "playerId": "7588",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 19,
+    "playerId": "3321",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 20,
+    "playerId": "3969",
+    "round": 2,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 21,
+    "playerId": "5012",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 22,
+    "playerId": "2216",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 23,
+    "playerId": "4988",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 24,
+    "playerId": "1466",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 25,
+    "playerId": "4199",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 26,
+    "playerId": "5859",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 27,
+    "playerId": "1479",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 28,
+    "playerId": "6801",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 29,
+    "playerId": "4866",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 30,
+    "playerId": "6938",
+    "round": 3,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 31,
+    "playerId": "3164",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 32,
+    "playerId": "4983",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 33,
+    "playerId": "5892",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 34,
+    "playerId": "7543",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 35,
+    "playerId": "7553",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 36,
+    "playerId": "4984",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 37,
+    "playerId": "8155",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 38,
+    "playerId": "6819",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 39,
+    "playerId": "5850",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 40,
+    "playerId": "5927",
+    "round": 4,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 41,
+    "playerId": "5937",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 42,
+    "playerId": "4046",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 43,
+    "playerId": "6797",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 44,
+    "playerId": "5848",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 45,
+    "playerId": "4068",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 46,
+    "playerId": "7547",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 47,
+    "playerId": "5846",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 48,
+    "playerId": "5045",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 49,
+    "playerId": "4037",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 50,
+    "playerId": "6783",
+    "round": 5,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 51,
+    "playerId": "4217",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 52,
+    "playerId": "2505",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 53,
+    "playerId": "4881",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 54,
+    "playerId": "6806",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 55,
+    "playerId": "7561",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 56,
+    "playerId": "6820",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 57,
+    "playerId": "2197",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 58,
+    "playerId": "6943",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 59,
+    "playerId": "5001",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 60,
+    "playerId": "6130",
+    "round": 6,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 61,
+    "playerId": "4950",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 62,
+    "playerId": "7090",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 63,
+    "playerId": "5844",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 64,
+    "playerId": "6151",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 65,
+    "playerId": "7526",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 66,
+    "playerId": "6904",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 67,
+    "playerId": "5022",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 68,
+    "playerId": "3199",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 69,
+    "playerId": "5849",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 70,
+    "playerId": "5955",
+    "round": 7,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 71,
+    "playerId": "1992",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 72,
+    "playerId": "8129",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 73,
+    "playerId": "5890",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 74,
+    "playerId": "96",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 75,
+    "playerId": "1535",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 76,
+    "playerId": "4040",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 77,
+    "playerId": "6945",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 78,
+    "playerId": "7596",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 79,
+    "playerId": "2309",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 80,
+    "playerId": "7571",
+    "round": 8,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 81,
+    "playerId": "1689",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 82,
+    "playerId": "5967",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 83,
+    "playerId": "4098",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 84,
+    "playerId": "167",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 85,
+    "playerId": "1339",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 86,
+    "playerId": "7525",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 87,
+    "playerId": "5185",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 88,
+    "playerId": "7611",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 89,
+    "playerId": "5000",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 90,
+    "playerId": "6770",
+    "round": 9,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 91,
+    "playerId": "5916",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 92,
+    "playerId": "1426",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 93,
+    "playerId": "8112",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 94,
+    "playerId": "6828",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 95,
+    "playerId": "6803",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 96,
+    "playerId": "2374",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 97,
+    "playerId": "1352",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 98,
+    "playerId": "3294",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 99,
+    "playerId": "4985",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 100,
+    "playerId": "6955",
+    "round": 10,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 101,
+    "playerId": "2028",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 102,
+    "playerId": "2320",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 103,
+    "playerId": "7606",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 104,
+    "playerId": "7607",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 105,
+    "playerId": "8144",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 106,
+    "playerId": "7610",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 107,
+    "playerId": "1264",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 108,
+    "playerId": "7600",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 109,
+    "playerId": "5947",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 110,
+    "playerId": "6826",
+    "round": 11,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 111,
+    "playerId": "6886",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 112,
+    "playerId": "5038",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 113,
+    "playerId": "5347",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 114,
+    "playerId": "5086",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 115,
+    "playerId": "3225",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 116,
+    "playerId": "BUF",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 117,
+    "playerId": "8146",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 118,
+    "playerId": "1234",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 119,
+    "playerId": "5110",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 120,
+    "playerId": "421",
+    "round": 12,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 121,
+    "playerId": "4951",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 122,
+    "playerId": "8138",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 123,
+    "playerId": "2749",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 124,
+    "playerId": "7670",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 125,
+    "playerId": "8151",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 126,
+    "playerId": "7839",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 127,
+    "playerId": "GB",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 128,
+    "playerId": "6083",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 129,
+    "playerId": "8135",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 130,
+    "playerId": "BAL",
+    "round": 13,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 131,
+    "playerId": "4227",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 132,
+    "playerId": "TB",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 133,
+    "playerId": "SF",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 134,
+    "playerId": "8168",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 135,
+    "playerId": "NO",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 136,
+    "playerId": "5987",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 137,
+    "playerId": "5095",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 138,
+    "playerId": "5906",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 139,
+    "playerId": "DAL",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 140,
+    "playerId": "1166",
+    "round": 14,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 141,
+    "playerId": "IND",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 142,
+    "playerId": "1433",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 143,
+    "playerId": "650",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 144,
+    "playerId": "7567",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 145,
+    "playerId": "1945",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 146,
+    "playerId": "4993",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 147,
+    "playerId": "3214",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 148,
+    "playerId": "8137",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 149,
+    "playerId": "7591",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 150,
+    "playerId": "4017",
+    "round": 15,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 151,
+    "playerId": "6931",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 152,
+    "playerId": "7042",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 153,
+    "playerId": "5857",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 154,
+    "playerId": "7523",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 155,
+    "playerId": "947",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 156,
+    "playerId": "3664",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 157,
+    "playerId": "LAC",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 158,
+    "playerId": "PIT",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 159,
+    "playerId": "8119",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 160,
+    "playerId": "17",
+    "round": 16,
+    "season": 2022,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 1,
+    "playerId": "6794",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 2,
+    "playerId": "7564",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 3,
+    "playerId": "4663",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 4,
+    "playerId": "4034",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 5,
+    "playerId": "1466",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 6,
+    "playerId": "3321",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 7,
+    "playerId": "3198",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 8,
+    "playerId": "4866",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 9,
+    "playerId": "4039",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 10,
+    "playerId": "5967",
+    "round": 1,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 11,
+    "playerId": "4988",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 12,
+    "playerId": "2449",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 13,
+    "playerId": "9509",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 14,
+    "playerId": "2133",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 15,
+    "playerId": "5850",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 16,
+    "playerId": "6786",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 17,
+    "playerId": "4018",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 18,
+    "playerId": "7547",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 19,
+    "playerId": "5859",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 20,
+    "playerId": "7543",
+    "round": 2,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 21,
+    "playerId": "8146",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 22,
+    "playerId": "7528",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 23,
+    "playerId": "6801",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 24,
+    "playerId": "5846",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 25,
+    "playerId": "4046",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 26,
+    "playerId": "8144",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 27,
+    "playerId": "4199",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 28,
+    "playerId": "7526",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 29,
+    "playerId": "4984",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 30,
+    "playerId": "5872",
+    "round": 3,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 31,
+    "playerId": "7525",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 32,
+    "playerId": "5012",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 33,
+    "playerId": "1479",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 34,
+    "playerId": "6904",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 35,
+    "playerId": "6770",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 36,
+    "playerId": "7611",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 37,
+    "playerId": "4881",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 38,
+    "playerId": "9221",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 39,
+    "playerId": "8129",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 40,
+    "playerId": "4981",
+    "round": 4,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 41,
+    "playerId": "8155",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 42,
+    "playerId": "6797",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 43,
+    "playerId": "5844",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 44,
+    "playerId": "2309",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 45,
+    "playerId": "4137",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 46,
+    "playerId": "5987",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 47,
+    "playerId": "8167",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 48,
+    "playerId": "1426",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 49,
+    "playerId": "8136",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 50,
+    "playerId": "8151",
+    "round": 5,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 51,
+    "playerId": "4983",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 52,
+    "playerId": "6813",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 53,
+    "playerId": "2505",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 54,
+    "playerId": "4035",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 55,
+    "playerId": "4217",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 56,
+    "playerId": "4068",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 57,
+    "playerId": "7553",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 58,
+    "playerId": "7523",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 59,
+    "playerId": "5022",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 60,
+    "playerId": "7591",
+    "round": 6,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 61,
+    "playerId": "5937",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 62,
+    "playerId": "8138",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 63,
+    "playerId": "2216",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 64,
+    "playerId": "9753",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 65,
+    "playerId": "6151",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 66,
+    "playerId": "7588",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 67,
+    "playerId": "5927",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 68,
+    "playerId": "4017",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 69,
+    "playerId": "6938",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 70,
+    "playerId": "4950",
+    "round": 7,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 71,
+    "playerId": "5892",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 72,
+    "playerId": "8112",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 73,
+    "playerId": "4029",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 74,
+    "playerId": "4066",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 75,
+    "playerId": "6783",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 76,
+    "playerId": "6806",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 77,
+    "playerId": "8205",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 78,
+    "playerId": "7608",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 79,
+    "playerId": "6803",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 80,
+    "playerId": "1166",
+    "round": 8,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 81,
+    "playerId": "7600",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 82,
+    "playerId": "SF",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 83,
+    "playerId": "2374",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 84,
+    "playerId": "2197",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 85,
+    "playerId": "4037",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 86,
+    "playerId": "8137",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 87,
+    "playerId": "5947",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 88,
+    "playerId": "6819",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 89,
+    "playerId": "6828",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 90,
+    "playerId": "6826",
+    "round": 9,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 91,
+    "playerId": "5870",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 92,
+    "playerId": "5848",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 93,
+    "playerId": "5045",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 94,
+    "playerId": "6943",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 95,
+    "playerId": "6790",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 96,
+    "playerId": "8119",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 97,
+    "playerId": "9488",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 98,
+    "playerId": "8168",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 99,
+    "playerId": "6945",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 100,
+    "playerId": "4381",
+    "round": 10,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 101,
+    "playerId": "1264",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 102,
+    "playerId": "2078",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 103,
+    "playerId": "96",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 104,
+    "playerId": "6768",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 105,
+    "playerId": "BUF",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 106,
+    "playerId": "3199",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 107,
+    "playerId": "DAL",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 108,
+    "playerId": "2749",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 109,
+    "playerId": "8154",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 110,
+    "playerId": "BAL",
+    "round": 11,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 111,
+    "playerId": "4149",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 112,
+    "playerId": "9756",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 113,
+    "playerId": "PIT",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 114,
+    "playerId": "8135",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 115,
+    "playerId": "7839",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 116,
+    "playerId": "4147",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 117,
+    "playerId": "PHI",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 118,
+    "playerId": "5095",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 119,
+    "playerId": "4985",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 120,
+    "playerId": "4033",
+    "round": 12,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 121,
+    "playerId": "4040",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 122,
+    "playerId": "503",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 123,
+    "playerId": "NO",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 124,
+    "playerId": "7042",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 125,
+    "playerId": "9997",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 126,
+    "playerId": "9754",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 127,
+    "playerId": "4195",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 128,
+    "playerId": "1689",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 129,
+    "playerId": "7561",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 130,
+    "playerId": "5001",
+    "round": 13,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 131,
+    "playerId": "3164",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 132,
+    "playerId": "NYJ",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 133,
+    "playerId": "8132",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 134,
+    "playerId": "5038",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 135,
+    "playerId": "3294",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 136,
+    "playerId": "6130",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 137,
+    "playerId": "7601",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 138,
+    "playerId": "2161",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 139,
+    "playerId": "7090",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 140,
+    "playerId": "MIA",
+    "round": 14,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 141,
+    "playerId": "8228",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 142,
+    "playerId": "1373",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 143,
+    "playerId": "3271",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 144,
+    "playerId": "1339",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 145,
+    "playerId": "7569",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 146,
+    "playerId": "WAS",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 147,
+    "playerId": "4951",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 148,
+    "playerId": "1234",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 149,
+    "playerId": "9229",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 150,
+    "playerId": "2747",
+    "round": 15,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 151,
+    "playerId": "5890",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 152,
+    "playerId": "4227",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 153,
+    "playerId": "2020",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 154,
+    "playerId": "3163",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 155,
+    "playerId": "7606",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 156,
+    "playerId": "1433",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 157,
+    "playerId": "10235",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 158,
+    "playerId": "7596",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 159,
+    "playerId": "7045",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 160,
+    "playerId": "3225",
+    "round": 16,
+    "season": 2023,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 1,
+    "playerId": "4034",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 2,
+    "playerId": "3321",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 3,
+    "playerId": "6786",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 4,
+    "playerId": "9509",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 5,
+    "playerId": "8155",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 6,
+    "playerId": "7564",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 7,
+    "playerId": "7547",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 8,
+    "playerId": "6794",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 9,
+    "playerId": "5859",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 10,
+    "playerId": "4866",
+    "round": 1,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 11,
+    "playerId": "9493",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 12,
+    "playerId": "8150",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 13,
+    "playerId": "6813",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 14,
+    "playerId": "8205",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 15,
+    "playerId": "8146",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 16,
+    "playerId": "9221",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 17,
+    "playerId": "7543",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 18,
+    "playerId": "3198",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 19,
+    "playerId": "8112",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 20,
+    "playerId": "8144",
+    "round": 2,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 21,
+    "playerId": "11628",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 22,
+    "playerId": "4018",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 23,
+    "playerId": "6819",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 24,
+    "playerId": "2133",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 25,
+    "playerId": "7569",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 26,
+    "playerId": "5850",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 27,
+    "playerId": "2216",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 28,
+    "playerId": "8136",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 29,
+    "playerId": "8138",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 30,
+    "playerId": "4035",
+    "round": 3,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 31,
+    "playerId": "4984",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 32,
+    "playerId": "5872",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 33,
+    "playerId": "1466",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 34,
+    "playerId": "8151",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 35,
+    "playerId": "9226",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 36,
+    "playerId": "4039",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 37,
+    "playerId": "11632",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 38,
+    "playerId": "5846",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 39,
+    "playerId": "2449",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 40,
+    "playerId": "7611",
+    "round": 4,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 41,
+    "playerId": "6904",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 42,
+    "playerId": "10859",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 43,
+    "playerId": "4881",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 44,
+    "playerId": "4983",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 45,
+    "playerId": "4046",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 46,
+    "playerId": "4981",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 47,
+    "playerId": "7525",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 48,
+    "playerId": "9502",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 49,
+    "playerId": "10229",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 50,
+    "playerId": "9997",
+    "round": 5,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 51,
+    "playerId": "4137",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 52,
+    "playerId": "2749",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 53,
+    "playerId": "8139",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 54,
+    "playerId": "5012",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 55,
+    "playerId": "8130",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 56,
+    "playerId": "4217",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 57,
+    "playerId": "4066",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 58,
+    "playerId": "4199",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 59,
+    "playerId": "6790",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 60,
+    "playerId": "10236",
+    "round": 6,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 61,
+    "playerId": "7526",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 62,
+    "playerId": "9758",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 63,
+    "playerId": "7553",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 64,
+    "playerId": "8154",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 65,
+    "playerId": "2309",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 66,
+    "playerId": "5892",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 67,
+    "playerId": "6770",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 68,
+    "playerId": "9229",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 69,
+    "playerId": "3294",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 70,
+    "playerId": "6803",
+    "round": 7,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 71,
+    "playerId": "8110",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 72,
+    "playerId": "4033",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 73,
+    "playerId": "6801",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 74,
+    "playerId": "7528",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 75,
+    "playerId": "5849",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 76,
+    "playerId": "8137",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 77,
+    "playerId": "4037",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 78,
+    "playerId": "5937",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 79,
+    "playerId": "7588",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 80,
+    "playerId": "9488",
+    "round": 8,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 81,
+    "playerId": "8183",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 82,
+    "playerId": "5927",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 83,
+    "playerId": "8228",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 84,
+    "playerId": "6804",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 85,
+    "playerId": "5967",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 86,
+    "playerId": "11583",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 87,
+    "playerId": "8167",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 88,
+    "playerId": "5844",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 89,
+    "playerId": "4663",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 90,
+    "playerId": "1479",
+    "round": 9,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 91,
+    "playerId": "9508",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 92,
+    "playerId": "CLE",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 93,
+    "playerId": "11620",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 94,
+    "playerId": "6130",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 95,
+    "playerId": "11631",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 96,
+    "playerId": "3164",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 97,
+    "playerId": "4950",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 98,
+    "playerId": "5045",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 99,
+    "playerId": "SF",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 100,
+    "playerId": "6845",
+    "round": 10,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 101,
+    "playerId": "10222",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 102,
+    "playerId": "11635",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 103,
+    "playerId": "9224",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 104,
+    "playerId": "9756",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 105,
+    "playerId": "11624",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 106,
+    "playerId": "11637",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 107,
+    "playerId": "5947",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 108,
+    "playerId": "4988",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 109,
+    "playerId": "8134",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 110,
+    "playerId": "6806",
+    "round": 11,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 111,
+    "playerId": "5248",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 112,
+    "playerId": "4068",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 113,
+    "playerId": "11586",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 114,
+    "playerId": "NYJ",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 115,
+    "playerId": "11566",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 116,
+    "playerId": "7021",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 117,
+    "playerId": "5848",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 118,
+    "playerId": "7594",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 119,
+    "playerId": "1426",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 120,
+    "playerId": "1264",
+    "round": 12,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 121,
+    "playerId": "DAL",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 122,
+    "playerId": "8143",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 123,
+    "playerId": "BAL",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 124,
+    "playerId": "8132",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 125,
+    "playerId": "6783",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 126,
+    "playerId": "11533",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 127,
+    "playerId": "4227",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 128,
+    "playerId": "96",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 129,
+    "playerId": "5001",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 130,
+    "playerId": "PIT",
+    "round": 13,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 131,
+    "playerId": "6797",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 132,
+    "playerId": "4195",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 133,
+    "playerId": "11589",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 134,
+    "playerId": "4017",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 135,
+    "playerId": "11604",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 136,
+    "playerId": "KC",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 137,
+    "playerId": "2374",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 138,
+    "playerId": "3451",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 139,
+    "playerId": "5022",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 140,
+    "playerId": "9753",
+    "round": 14,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 141,
+    "playerId": "11439",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 142,
+    "playerId": "2020",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 143,
+    "playerId": "7839",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 144,
+    "playerId": "MIA",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 145,
+    "playerId": "10937",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 146,
+    "playerId": "11643",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 147,
+    "playerId": "7090",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 148,
+    "playerId": "1266",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 149,
+    "playerId": "8121",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 150,
+    "playerId": "7600",
+    "round": 15,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 151,
+    "playerId": "8259",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 152,
+    "playerId": "3163",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 153,
+    "playerId": "NO",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 154,
+    "playerId": "6943",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 155,
+    "playerId": "BUF",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 156,
+    "playerId": "7523",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 157,
+    "playerId": "4666",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 158,
+    "playerId": "1166",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 159,
+    "playerId": "8230",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "kate-grillo",
+    "pickNo": 160,
+    "playerId": "1689",
+    "round": 16,
+    "season": 2024,
+    "slotOwnerSlug": "kate-grillo"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 1,
+    "playerId": "9509",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 2,
+    "playerId": "7564",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 3,
+    "playerId": "4866",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 4,
+    "playerId": "6794",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 5,
+    "playerId": "9221",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 6,
+    "playerId": "4034",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 7,
+    "playerId": "6786",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 8,
+    "playerId": "9493",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 9,
+    "playerId": "11632",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 10,
+    "playerId": "9226",
+    "round": 1,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 11,
+    "playerId": "7569",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 12,
+    "playerId": "12527",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 13,
+    "playerId": "7547",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 14,
+    "playerId": "11631",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 15,
+    "playerId": "3198",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 16,
+    "playerId": "5850",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 17,
+    "playerId": "6813",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 18,
+    "playerId": "8112",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 19,
+    "playerId": "5859",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 20,
+    "playerId": "11584",
+    "round": 2,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 21,
+    "playerId": "2133",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 22,
+    "playerId": "11604",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 23,
+    "playerId": "9224",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 24,
+    "playerId": "4984",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 25,
+    "playerId": "11635",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 26,
+    "playerId": "3321",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 27,
+    "playerId": "4881",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 28,
+    "playerId": "8130",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 29,
+    "playerId": "8150",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 30,
+    "playerId": "11566",
+    "round": 3,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 31,
+    "playerId": "5927",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 32,
+    "playerId": "6904",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 33,
+    "playerId": "6801",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 34,
+    "playerId": "8138",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 35,
+    "playerId": "12507",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 36,
+    "playerId": "8146",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 37,
+    "playerId": "4035",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 38,
+    "playerId": "6770",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 39,
+    "playerId": "7594",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 40,
+    "playerId": "11628",
+    "round": 4,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 41,
+    "playerId": "8151",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 42,
+    "playerId": "4137",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 43,
+    "playerId": "9488",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 44,
+    "playerId": "2216",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 45,
+    "playerId": "4046",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 46,
+    "playerId": "4217",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 47,
+    "playerId": "8155",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 48,
+    "playerId": "12529",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 49,
+    "playerId": "11624",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 50,
+    "playerId": "10229",
+    "round": 5,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 51,
+    "playerId": "8205",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 52,
+    "playerId": "5846",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 53,
+    "playerId": "6790",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 54,
+    "playerId": "10859",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 55,
+    "playerId": "5045",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 56,
+    "playerId": "4981",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 57,
+    "playerId": "4983",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 58,
+    "playerId": "5844",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 59,
+    "playerId": "4892",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 60,
+    "playerId": "9997",
+    "round": 6,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 61,
+    "playerId": "6783",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 62,
+    "playerId": "7526",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 63,
+    "playerId": "7525",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 64,
+    "playerId": "11620",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 65,
+    "playerId": "4199",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 66,
+    "playerId": "8137",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 67,
+    "playerId": "5892",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 68,
+    "playerId": "8148",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 69,
+    "playerId": "12489",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 70,
+    "playerId": "5967",
+    "round": 7,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 71,
+    "playerId": "11533",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 72,
+    "playerId": "5947",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 73,
+    "playerId": "12526",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 74,
+    "playerId": "8144",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 75,
+    "playerId": "11655",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 76,
+    "playerId": "4033",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 77,
+    "playerId": "1466",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 78,
+    "playerId": "4039",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 79,
+    "playerId": "8228",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 80,
+    "playerId": "4037",
+    "round": 8,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 81,
+    "playerId": "12533",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 82,
+    "playerId": "6819",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 83,
+    "playerId": "12501",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 84,
+    "playerId": "12504",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 85,
+    "playerId": "2449",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 86,
+    "playerId": "12530",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 87,
+    "playerId": "11638",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 88,
+    "playerId": "11563",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 89,
+    "playerId": "5012",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 90,
+    "playerId": "12518",
+    "round": 9,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 91,
+    "playerId": "4018",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 92,
+    "playerId": "6806",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 93,
+    "playerId": "4066",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 94,
+    "playerId": "5849",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 95,
+    "playerId": "6797",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 96,
+    "playerId": "4663",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 97,
+    "playerId": "7588",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 98,
+    "playerId": "9756",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 99,
+    "playerId": "8183",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 100,
+    "playerId": "7049",
+    "round": 10,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 101,
+    "playerId": "3294",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 102,
+    "playerId": "8134",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 103,
+    "playerId": "7611",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 104,
+    "playerId": "HOU",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 105,
+    "playerId": "7591",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 106,
+    "playerId": "12514",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 107,
+    "playerId": "11637",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 108,
+    "playerId": "5872",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 109,
+    "playerId": "11560",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 110,
+    "playerId": "9484",
+    "round": 11,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 111,
+    "playerId": "10222",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 112,
+    "playerId": "8676",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 113,
+    "playerId": "1479",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 114,
+    "playerId": "7543",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 115,
+    "playerId": "12481",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 116,
+    "playerId": "7090",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 117,
+    "playerId": "9225",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 118,
+    "playerId": "8408",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 119,
+    "playerId": "8136",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 120,
+    "playerId": "12517",
+    "round": 12,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 121,
+    "playerId": "9500",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 122,
+    "playerId": "5022",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 123,
+    "playerId": "9753",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 124,
+    "playerId": "12484",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 125,
+    "playerId": "12512",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 126,
+    "playerId": "9508",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 127,
+    "playerId": "11643",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 128,
+    "playerId": "11564",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 129,
+    "playerId": "11589",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 130,
+    "playerId": "DEN",
+    "round": 13,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 131,
+    "playerId": "9758",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 132,
+    "playerId": "PIT",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 133,
+    "playerId": "6804",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 134,
+    "playerId": "11539",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 135,
+    "playerId": "8110",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 136,
+    "playerId": "3163",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 137,
+    "playerId": "11576",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 138,
+    "playerId": "6650",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 139,
+    "playerId": "MIN",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 140,
+    "playerId": "12457",
+    "round": 14,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 141,
+    "playerId": "NE",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 142,
+    "playerId": "1339",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 143,
+    "playerId": "DET",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 144,
+    "playerId": "10444",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 145,
+    "playerId": "BAL",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 146,
+    "playerId": "8259",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 147,
+    "playerId": "8143",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 148,
+    "playerId": "SEA",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 149,
+    "playerId": "11565",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 150,
+    "playerId": "10236",
+    "round": 15,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "charlie-stoksik",
+    "pickNo": 151,
+    "playerId": "6803",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "charlie-stoksik"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "diana-gonzalez",
+    "pickNo": 152,
+    "playerId": "5119",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "diana-gonzalez"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "haley-rao",
+    "pickNo": 153,
+    "playerId": "7042",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "haley-rao"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "eric-wong",
+    "pickNo": 154,
+    "playerId": "PHI",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "eric-wong"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "mark-mcgreal",
+    "pickNo": 155,
+    "playerId": "IND",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "mark-mcgreal"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "sam-ellison",
+    "pickNo": 156,
+    "playerId": "4195",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "sam-ellison"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "jivan-gubbi",
+    "pickNo": 157,
+    "playerId": "4227",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "jivan-gubbi"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 158,
+    "playerId": "7553",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "isaac-edejer",
+    "pickNo": 159,
+    "playerId": "11792",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "isaac-edejer"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "jay-uppuluri",
+    "pickNo": 160,
+    "playerId": "6083",
+    "round": 16,
+    "season": 2025,
+    "slotOwnerSlug": "jay-uppuluri"
+  }
+]

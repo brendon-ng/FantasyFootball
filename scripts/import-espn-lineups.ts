@@ -133,6 +133,7 @@ async function main(): Promise<void> {
       }
       const manual = readJson<{
         finalWeek?: number;
+        lineupWeeks?: number[];
         matchups?: Array<{
           week: number;
           home: { ownerSlug: string; points: number };
@@ -140,9 +141,17 @@ async function main(): Promise<void> {
         }>;
       }>(join(manualDir, `${season}.json`));
       const last = manual?.finalWeek ?? 17;
+      /**
+       * `lineupWeeks` when the season importer supplied it — the weeks whose game
+       * covers exactly one scoring period. ESPN can run MULTI-WEEK playoff
+       * matchups, and a two-week scoreboard total cannot be reconciled against a
+       * one-week lineup; importing those anyway would credit half a game's points
+       * and trip the invariant below. Falls back to every week for a season
+       * imported before this existed.
+       */
       const weeks = weekArg
         ? weekArg.split(",").map(Number)
-        : Array.from({ length: last }, (_, i) => i + 1);
+        : (manual?.lineupWeeks ?? Array.from({ length: last }, (_, i) => i + 1));
 
       const outPath = join(dir, `${season}.json`);
       const existing = readJson<SeasonLineups>(outPath);

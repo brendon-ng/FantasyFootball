@@ -24,6 +24,7 @@ import { join } from "node:path";
 import { log, readJson, writeJson } from "./lib/io.ts";
 import { configDir, dataDir, resolveLeagues } from "./lib/league.ts";
 import {
+  espnAuth,
   espnPlayerUniverse,
   matchPlayer,
   ownerByTeam,
@@ -112,8 +113,17 @@ async function main(): Promise<void> {
       const res = await fetch(
         `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${season}` +
           `/segments/0/leagues/${espnId}?scoringPeriodId=18&view=kona_playercard&view=mTeam`,
-        { headers: { "x-fantasy-filter": FILTER } },
+        // `espnAuth()` so a PRIVATE league's history is reachable; empty and
+        // harmless for a public one. This endpoint is hand-rolled rather than
+        // going through `fetchEspn` because it needs the filter header.
+        { headers: { ...espnAuth(), "x-fantasy-filter": FILTER } },
       );
+      if (res.status === 401) {
+        throw new Error(
+          `${slug} ${season}: 401 — that season is private. Add .espn-auth.json with ` +
+            `espn_s2 and SWID cookies from a logged-in browser.`,
+        );
+      }
       if (!res.ok) throw new Error(`${slug} ${season}: HTTP ${res.status}`);
       const data = (await res.json()) as CardResponse;
 

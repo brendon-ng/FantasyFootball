@@ -1,0 +1,410 @@
+[
+  {
+    "ownerSlug": "jivan-gubbi",
+    "points": 81.5,
+    "season": 2021,
+    "week": 1
+  },
+  {
+    "ownerSlug": "haley-rao",
+    "points": 103.62,
+    "season": 2021,
+    "week": 2
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 77.04,
+    "season": 2021,
+    "week": 3
+  },
+  {
+    "ownerSlug": "brendon-ng",
+    "points": 87.16,
+    "season": 2021,
+    "week": 4
+  },
+  {
+    "ownerSlug": "kate-grillo",
+    "points": 97.06,
+    "season": 2021,
+    "week": 5
+  },
+  {
+    "ownerSlug": "kate-grillo",
+    "points": 97.7,
+    "season": 2021,
+    "week": 6
+  },
+  {
+    "ownerSlug": "brendon-ng",
+    "points": 95.82,
+    "season": 2021,
+    "week": 7
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 76.86,
+    "season": 2021,
+    "week": 8
+  },
+  {
+    "ownerSlug": "kate-grillo",
+    "points": 69.98,
+    "season": 2021,
+    "week": 9
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 75.86,
+    "season": 2021,
+    "week": 10
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 86.56,
+    "season": 2021,
+    "week": 11
+  },
+  {
+    "ownerSlug": "haley-rao",
+    "points": 77.14,
+    "season": 2021,
+    "week": 12
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 87.5,
+    "season": 2021,
+    "week": 13
+  },
+  {
+    "ownerSlug": "sam-ellison",
+    "points": 59.6,
+    "season": 2022,
+    "week": 1
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 63.46,
+    "season": 2022,
+    "week": 2
+  },
+  {
+    "ownerSlug": "eric-wong",
+    "points": 73.66,
+    "season": 2022,
+    "week": 3
+  },
+  {
+    "ownerSlug": "jay-uppuluri",
+    "points": 61.42,
+    "season": 2022,
+    "week": 4
+  },
+  {
+    "ownerSlug": "brendon-ng",
+    "points": 86.16,
+    "season": 2022,
+    "week": 5
+  },
+  {
+    "ownerSlug": "brendon-ng",
+    "points": 77,
+    "season": 2022,
+    "week": 6
+  },
+  {
+    "ownerSlug": "jay-uppuluri",
+    "points": 73,
+    "season": 2022,
+    "week": 7
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 63.68,
+    "season": 2022,
+    "week": 8
+  },
+  {
+    "ownerSlug": "jay-uppuluri",
+    "points": 86.4,
+    "season": 2022,
+    "week": 9
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 71.72,
+    "season": 2022,
+    "week": 10
+  },
+  {
+    "ownerSlug": "jivan-gubbi",
+    "points": 61.38,
+    "season": 2022,
+    "week": 11
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 71.2,
+    "season": 2022,
+    "week": 12
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 68.6,
+    "season": 2022,
+    "week": 13
+  },
+  {
+    "ownerSlug": "jivan-gubbi",
+    "points": 69.16,
+    "season": 2023,
+    "week": 1
+  },
+  {
+    "ownerSlug": "brendon-ng",
+    "points": 76.58,
+    "season": 2023,
+    "week": 2
+  },
+  {
+    "ownerSlug": "sam-ellison",
+    "points": 81.06,
+    "season": 2023,
+    "week": 3
+  },
+  {
+    "ownerSlug": "mark-mcgreal",
+    "points": 68.92,
+    "season": 2023,
+    "week": 4
+  },
+  {
+    "ownerSlug": "sam-ellison",
+    "points": 63.68,
+    "season": 2023,
+    "week": 5
+  },
+  {
+    "ownerSlug": "jay-uppuluri",
+    "points": 73.5,
+    "season": 2023,
+    "week": 6
+  },
+  {
+    "ownerSlug": "kate-grillo",
+    "points": 78.14,
+    "season": 2023,
+    "week": 7
+  },
+  {
+    "ownerSlug": "jay-uppuluri",
+    "points": 71.88,
+    "season": 2023,
+    "week": 8
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 75.88,
+    "season": 2023,
+    "week": 9
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 79.38,
+    "season": 2023,
+    "week": 10
+  },
+  {
+    "ownerSlug": "jivan-gubbi",
+    "points": 82.5,
+    "season": 2023,
+    "week": 11
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 93.5,
+    "season": 2023,
+    "week": 12
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 75.38,
+    "season": 2023,
+    "week": 13
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 77.54,
+    "season": 2023,
+    "week": 14
+  },
+  {
+    "ownerSlug": "kate-grillo",
+    "points": 88.82,
+    "season": 2024,
+    "week": 1
+  },
+  {
+    "ownerSlug": "jivan-gubbi",
+    "points": 77.2,
+    "season": 2024,
+    "week": 2
+  },
+  {
+    "ownerSlug": "jivan-gubbi",
+    "points": 70.9,
+    "season": 2024,
+    "week": 3
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 82.34,
+    "season": 2024,
+    "week": 4
+  },
+  {
+    "ownerSlug": "kate-grillo",
+    "points": 88.16,
+    "season": 2024,
+    "week": 5
+  },
+  {
+    "ownerSlug": "mark-mcgreal",
+    "points": 87.4,
+    "season": 2024,
+    "week": 6
+  },
+  {
+    "ownerSlug": "kate-grillo",
+    "points": 61.36,
+    "season": 2024,
+    "week": 7
+  },
+  {
+    "ownerSlug": "jay-uppuluri",
+    "points": 91.44,
+    "season": 2024,
+    "week": 8
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 78,
+    "season": 2024,
+    "week": 9
+  },
+  {
+    "ownerSlug": "jivan-gubbi",
+    "points": 91.24,
+    "season": 2024,
+    "week": 10
+  },
+  {
+    "ownerSlug": "charlie-stoksik",
+    "points": 95.3,
+    "season": 2024,
+    "week": 11
+  },
+  {
+    "ownerSlug": "kate-grillo",
+    "points": 70.16,
+    "season": 2024,
+    "week": 12
+  },
+  {
+    "ownerSlug": "haley-rao",
+    "points": 69.14,
+    "season": 2024,
+    "week": 13
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 111.12,
+    "season": 2024,
+    "week": 14
+  },
+  {
+    "ownerSlug": "brendon-ng",
+    "points": 82.82,
+    "season": 2025,
+    "week": 1
+  },
+  {
+    "ownerSlug": "brendon-ng",
+    "points": 78.34,
+    "season": 2025,
+    "week": 2
+  },
+  {
+    "ownerSlug": "jay-uppuluri",
+    "points": 88.44,
+    "season": 2025,
+    "week": 3
+  },
+  {
+    "ownerSlug": "isaac-edejer",
+    "points": 70.96,
+    "season": 2025,
+    "week": 4
+  },
+  {
+    "ownerSlug": "haley-rao",
+    "points": 72.62,
+    "season": 2025,
+    "week": 5
+  },
+  {
+    "ownerSlug": "eric-wong",
+    "points": 93.74,
+    "season": 2025,
+    "week": 6
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 58.74,
+    "season": 2025,
+    "week": 7
+  },
+  {
+    "ownerSlug": "jay-uppuluri",
+    "points": 57.82,
+    "season": 2025,
+    "week": 8
+  },
+  {
+    "ownerSlug": "isaac-edejer",
+    "points": 49.7,
+    "season": 2025,
+    "week": 9
+  },
+  {
+    "ownerSlug": "isaac-edejer",
+    "points": 60.62,
+    "season": 2025,
+    "week": 10
+  },
+  {
+    "ownerSlug": "isaac-edejer",
+    "points": 66.82,
+    "season": 2025,
+    "week": 11
+  },
+  {
+    "ownerSlug": "isaac-edejer",
+    "points": 47.34,
+    "season": 2025,
+    "week": 12
+  },
+  {
+    "ownerSlug": "diana-gonzalez",
+    "points": 85.8,
+    "season": 2025,
+    "week": 13
+  },
+  {
+    "ownerSlug": "isaac-edejer",
+    "points": 68.98,
+    "season": 2025,
+    "week": 14
+  }
+]

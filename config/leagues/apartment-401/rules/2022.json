@@ -1,0 +1,28 @@
+{
+  "season": 2022,
+  "note": "Expanded to ten teams; schedule and playoff shape unchanged from 2021.",
+  "teams": 10,
+  "regularSeasonWeeks": 13,
+  "playoffWeekStart": 14,
+  "playoffTeams": 4,
+  "playoffRounds": 2,
+  "firstRoundByes": 0,
+  "finalWeek": 15,
+  "seedingTiebreaker": "points-for",
+  "playoffTieGoesTo": "higher-seed",
+  "draftRounds": 16,
+  "faabBudget": 100,
+  "minBid": 0,
+  "tradeDeadlineWeek": 12,
+  "keepers": {
+    "enabled": false,
+    "maxKeepers": 0,
+    "maxKeepsAtOriginalCost": 0,
+    "undraftedFreeAgentRound": 0,
+    "reAcquiredValueRule": "none",
+    "selfReclaimResetsContract": false,
+    "tradeInheritsContract": false
+  },
+  "prizes": null,
+  "lastPlacePunishment": null
+}

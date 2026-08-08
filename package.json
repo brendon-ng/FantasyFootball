@@ -20,7 +20,8 @@
     "import:espn:drafts": "node scripts/import-espn-drafts.ts",
     "import:espn:transactions": "node scripts/import-espn-transactions.ts",
     "import:player-teams": "node scripts/import-player-teams.ts",
-    "build:one": "next build"
+    "build:one": "next build",
+    "import:espn:seasons": "node scripts/import-espn-seasons.ts"
   },
   "dependencies": {
     "next": "16.2.12",
