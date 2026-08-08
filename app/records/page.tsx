@@ -10,7 +10,9 @@ import {
 } from "@/components/ui";
 import {
   RECORD_BOOK_DEPTH,
+  RECORD_CHIPS,
   getAllMeetings,
+  matchupChip,
   matchupPageId,
   getMatchupHistory,
   getOwnerMap,
@@ -47,17 +49,15 @@ export default function RecordsPage() {
    * Postseason label for a matchup, so the record book reads the same as the
    * head-to-head page.
    *
-   * Allowlisted rather than passing everything through. The raw ESPN ladder ids
-   * (GmC4) mean nothing without the bracket beside them, and a generic
-   * "consolation" chip adds a column of noise without saying what was at stake.
-   * Only labels a reader can act on survive; the rest render unbadged, and the
-   * matchup page still shows the full detail.
+   * Allowlisted rather than passing everything through: a "Consolation" chip
+   * adds a column of noise without saying what was at stake, and a record set
+   * in one is a record all the same. Only chips a reader can act on survive;
+   * the rest render unbadged, and the matchup page still shows the full detail.
    */
-  const SHOWN_LABELS = new Set(["Championship", "Toilet bowl", "3rd place", "5th place", "playoff"]);
   const kindByMeeting = new Map(
     getAllMeetings().map((m) => {
-      const label = m.kind === "regular" ? null : (m.label ?? m.kind);
-      return [m.id, label && SHOWN_LABELS.has(label) ? label : null] as const;
+      const chip = matchupChip(m.label, m.kind);
+      return [m.id, RECORD_CHIPS.has(chip) ? chip : null] as const;
     }),
   );
   const kindOf = (a: string, b: string | null, season: number, week: number) => {

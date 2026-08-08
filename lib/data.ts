@@ -1029,30 +1029,43 @@ export interface MeetingSide {
  * resolve to the same page.
  */
 /**
- * Names the game a placement decides.
+ * The chip a postseason game wears.
  *
- * "1th place" was a hardcoded "th"; place 1 is also not a placement game at all
- * but the championship, and the bottom place is the last-place game rather than
- * "12th place".
+ * ONLY FIVE EXIST — Championship, 3rd place, Toilet bowl, Playoffs,
+ * Consolation — and every other postseason game is "Consolation". Naming each
+ * rung of a ladder ("5th place", "7th place", "9th place", "11th place") filled
+ * the record book and every head-to-head list with labels nobody reads as
+ * meaningful: finishing 9th is not an achievement anyone is tracking, and
+ * neither is 5th. Only a trophy, a bronze medal and the bottom get a name.
+ *
+ * @param places  `placesFor` — [winner's place, loser's place] — or null for a
+ *                game that settled no particular finish.
+ * @param teams   league size, which is what makes a place "last".
+ * @param winners whether the game sat in the WINNERS bracket. This is the only
+ *                thing separating "Playoffs" from "Consolation" once placements
+ *                are handled: `Matchup.kind` follows the bracket too, but a
+ *                bracket lookup is exact where a kind is a guess.
  */
-function placementLabel(places: readonly number[], teams: number): string {
-  // `placesFor` is [winner's place, loser's place], so the first entry is what
-  // the game is named for.
-  const place = places[0];
-  if (place === 1) return "Championship";
-  // THE toilet bowl is the single game that DECIDES last place. Every other
-  // postseason game among non-playoff teams is a consolation game.
-  //
-  // TESTED ON THE WORSE OF THE TWO PLACES, not on the winner's, because which
-  // side falls to last depends on the format. Sleeper runs an INVERTED losers
-  // bracket where winning drops you, so its winner takes last; an ESPN
-  // consolation ladder is ordinary, so its loser does. Reading only
-  // `places[0]` saw the first case and missed the second, which is why every
-  // ESPN season labelled its last-place game "11th place" instead.
-  if (Math.max(...places) >= teams) return "Toilet bowl";
-  const s = ["th", "st", "nd", "rd"];
-  const v = place % 100;
-  return `${place}${s[(v - 20) % 10] || s[v] || s[0]} place`;
+function placementLabel(
+  places: readonly number[] | null,
+  teams: number,
+  winners: boolean,
+): string {
+  if (!places) return winners ? "Playoffs" : "Consolation";
+  // Read as a SET, never positionally. `placesFor` is [winner's place, loser's
+  // place], and which side takes the worse finish depends on the format:
+  // Sleeper's losers bracket is INVERTED so its winner drops to last, while an
+  // ESPN consolation ladder is ordinary so its loser does. Reading `places[0]`
+  // saw the first case and missed the second — every ESPN season labelled its
+  // last-place game "11th place" instead of "Toilet bowl".
+  const best = Math.min(...places);
+  const worst = Math.max(...places);
+  if (best === 1) return "Championship";
+  // BEFORE the ordinal, because in a small enough league the 3rd-place game is
+  // also the last-place game, and "Toilet bowl" is the truer name for it.
+  if (worst >= teams) return "Toilet bowl";
+  if (best === 3) return "3rd place";
+  return "Consolation";
 }
 
 /**
@@ -1061,6 +1074,10 @@ function placementLabel(places: readonly number[], teams: number): string {
  * Sleeper's weekly matchups carry no placement, so a playoff week is otherwise
  * indistinguishable from any other. Matched on both teams and the week, since a
  * pairing can recur and a season runs several brackets at once.
+ *
+ * Null ONLY when the season has no bracket entry for the game at all; callers
+ * fall back to `Matchup.kind` for those. A game that is found always gets a
+ * chip, so "playoff"/"consolation" never leak to the UI raw.
  */
 function bracketLabel(
   season: number,
@@ -1070,15 +1087,42 @@ function bracketLabel(
 ): string | null {
   const s = getSeasons().find((x) => x.season === season);
   if (!s) return null;
-  for (const matches of [s.winnersBracket, s.losersBracket, ...s.extraBrackets.map((x) => x.matches)]) {
+  const groups: Array<[BracketMatch[], boolean]> = [
+    [s.winnersBracket, true],
+    [s.losersBracket, false],
+    ...s.extraBrackets.map((x) => [x.matches, false] as [BracketMatch[], boolean]),
+  ];
+  for (const [matches, winners] of groups) {
     for (const m of matches) {
       if (m.week !== week || !m.team1 || !m.team2) continue;
       if (![m.team1, m.team2].every((t) => [a, b].includes(t))) continue;
-      return m.placesFor ? placementLabel(m.placesFor, s.teams) : null;
+      return placementLabel(m.placesFor, s.teams, winners);
     }
   }
   return null;
 }
+
+/**
+ * The chip text for a matchup, or "" for a regular-season game.
+ *
+ * THE ONE PLACE that turns a meeting into a chip, so the head-to-head list, the
+ * season page's week-by-week list and the record book cannot drift apart. The
+ * `kind` fallback covers seasons with no bracket data, and normalises the raw
+ * enum — "playoff" reached the UI lowercase and unpluralised.
+ */
+export function matchupChip(label: string | null, kind: Matchup["kind"]): string {
+  if (kind === "regular") return "";
+  if (label) return label;
+  return kind === "playoff" ? "Playoffs" : "Consolation";
+}
+
+/** The chips the record book shows. Consolation games are not records. */
+export const RECORD_CHIPS: ReadonlySet<string> = new Set([
+  "Championship",
+  "Toilet bowl",
+  "3rd place",
+  "Playoffs",
+]);
 
 export { meetingId } from "./meeting.ts";
 
@@ -1185,7 +1229,7 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
             season: s.season,
             week: bm.week,
             kind,
-            label: bm.label ?? (bm.placesFor ? placementLabel(bm.placesFor, s.teams) : null),
+            label: bm.label ?? placementLabel(bm.placesFor, s.teams, kind === "playoff"),
             a: { ownerSlug: t1, points: p1, starters: [], playerPoints: {} },
             b: { ownerSlug: t2, points: p2, starters: [], playerPoints: {} },
             hasLineups: false,

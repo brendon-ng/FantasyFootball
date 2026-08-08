@@ -30,6 +30,7 @@ import {
   getTrades,
   getWeeklyLowKeys,
   getWeeklyLows,
+  matchupChip,
   meetingId,
 } from "@/lib/data";
 import type { BracketMatch, Matchup } from "@/lib/types";
@@ -95,9 +96,8 @@ export default async function SeasonPage({
    * season finish rather than the game that settled it.
    */
   const gameLabel = (m: Matchup): string => {
-    if (m.kind === "regular") return "";
     const id = meetingId(m.season, m.week, m.home.ownerSlug, m.away.ownerSlug);
-    return verboseKind(meetings.get(id)?.label ?? m.kind);
+    return verboseKind(matchupChip(meetings.get(id)?.label ?? null, m.kind));
   };
 
   // Imported ESPN seasons kept no draft data, so the link would 404. The page

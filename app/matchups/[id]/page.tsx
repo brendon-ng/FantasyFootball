@@ -28,6 +28,7 @@ import {
   type RecordFlag,
   getSeasons,
   getWeeklyLowKeys,
+  matchupChip,
   meetingId,
   type Meeting,
   type MeetingSide,
@@ -460,7 +461,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                     </span>
                     {g.kind !== "regular" ? (
                       <span className="mt-0.5 block truncate text-[9px] uppercase tracking-wide text-chalk-500 sm:hidden">
-                        {verboseKind(g.label ?? g.kind)}
+                        {verboseKind(matchupChip(g.label, g.kind))}
                       </span>
                     ) : null}
                   </span>
@@ -482,7 +483,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                   <span className="hidden w-[92px] shrink-0 text-right sm:block">
                     {g.kind !== "regular" ? (
                       <span className="rounded border border-ink-500 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-chalk-500">
-                        {g.label ?? g.kind}
+                        {matchupChip(g.label, g.kind)}
                       </span>
                     ) : null}
                   </span>
