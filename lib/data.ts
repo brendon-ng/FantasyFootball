@@ -1035,11 +1035,21 @@ export interface MeetingSide {
  * but the championship, and the bottom place is the last-place game rather than
  * "12th place".
  */
-function placementLabel(place: number, teams: number): string {
+function placementLabel(places: readonly number[], teams: number): string {
+  // `placesFor` is [winner's place, loser's place], so the first entry is what
+  // the game is named for.
+  const place = places[0];
   if (place === 1) return "Championship";
-  // THE toilet bowl is the single game that decides last place. Every other
+  // THE toilet bowl is the single game that DECIDES last place. Every other
   // postseason game among non-playoff teams is a consolation game.
-  if (place >= teams) return "Toilet bowl";
+  //
+  // TESTED ON THE WORSE OF THE TWO PLACES, not on the winner's, because which
+  // side falls to last depends on the format. Sleeper runs an INVERTED losers
+  // bracket where winning drops you, so its winner takes last; an ESPN
+  // consolation ladder is ordinary, so its loser does. Reading only
+  // `places[0]` saw the first case and missed the second, which is why every
+  // ESPN season labelled its last-place game "11th place" instead.
+  if (Math.max(...places) >= teams) return "Toilet bowl";
   const s = ["th", "st", "nd", "rd"];
   const v = place % 100;
   return `${place}${s[(v - 20) % 10] || s[v] || s[0]} place`;
@@ -1064,7 +1074,7 @@ function bracketLabel(
     for (const m of matches) {
       if (m.week !== week || !m.team1 || !m.team2) continue;
       if (![m.team1, m.team2].every((t) => [a, b].includes(t))) continue;
-      return m.placesFor ? placementLabel(m.placesFor[0], s.teams) : null;
+      return m.placesFor ? placementLabel(m.placesFor, s.teams) : null;
     }
   }
   return null;
@@ -1175,7 +1185,7 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
             season: s.season,
             week: bm.week,
             kind,
-            label: bm.label ?? (bm.placesFor ? placementLabel(bm.placesFor[0], s.teams) : null),
+            label: bm.label ?? (bm.placesFor ? placementLabel(bm.placesFor, s.teams) : null),
             a: { ownerSlug: t1, points: p1, starters: [], playerPoints: {} },
             b: { ownerSlug: t2, points: p2, starters: [], playerPoints: {} },
             hasLineups: false,
