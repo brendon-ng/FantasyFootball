@@ -1203,34 +1203,30 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
    */
   const blowouts: Array<ScoreRecord & { margin: number }> = [];
   const combined: CombinedRecord[] = [];
-  /** Combined totals eligible for the HIGH list — single-week games only. */
-  const combinedHigh: CombinedRecord[] = [];
+  /** A multi-week matchup's combined total, eligible for the LOW list only. */
+  const combinedLowOnly: CombinedRecord[] = [];
+  /**
+   * A TEAM'S TWO-WEEK TOTAL, eligible for the LOW score list only.
+   *
+   * Scoring 104 across a fortnight is a worse fortnight than any single bad
+   * week, so it belongs in the low list; the same total obviously cannot compete
+   * for the HIGH one, where two weeks of scoring is simply two weeks of scoring.
+   */
+  const scoresLowOnly: ScoreRecord[] = [];
 
   /**
    * One entry per GAME, unlike `scores`, which has one per team.
    *
-   * `big` is false for a multi-week matchup: its total is two weeks of scoring
-   * and cannot out-rank a single week's, the same reasoning as `blowouts`. It
-   * stays in the LOW list, where spanning two weeks makes a small number more
-   * remarkable rather than less.
+   * Only ever called for a SINGLE-WEEK game; a multi-week matchup's total goes
+   * to `combinedLowOnly`, since it can only compete in the low direction.
    */
   const addCombined = (
     season: number,
     week: number,
     x: { slug: string; pts: number },
     y: { slug: string; pts: number },
-    big = true,
   ) => {
     const [hi, lo] = x.pts >= y.pts ? [x, y] : [y, x];
-    if (big) combinedHigh.push({
-      season,
-      week,
-      total: round2(x.pts + y.pts),
-      ownerSlug: hi.slug,
-      points: hi.pts,
-      opponentSlug: lo.slug,
-      opponentPoints: lo.pts,
-    });
     combined.push({
       season,
       week,
@@ -1321,13 +1317,43 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
    * itself can be a narrow win but not a blowout; see `blowouts`.
    */
   for (const m of matchups) {
-    addCombined(
-      m.season,
-      m.week,
-      { slug: m.home.ownerSlug, pts: m.home.points },
-      { slug: m.away.ownerSlug, pts: m.away.points },
-      !m.weeks?.length,
-    );
+    if (!m.weeks?.length) {
+      addCombined(
+        m.season,
+        m.week,
+        { slug: m.home.ownerSlug, pts: m.home.points },
+        { slug: m.away.ownerSlug, pts: m.away.points },
+      );
+    } else {
+      // ONE RULE, BOTH SHAPES: a multi-week final competes in every LOW list and
+      // no HIGH one. Two weeks of scoring inflates a big number and makes a small
+      // one harder, so it is comparable in one direction only.
+      const [hi, lo] =
+        m.home.points >= m.away.points ? [m.home, m.away] : [m.away, m.home];
+      combinedLowOnly.push({
+        season: m.season,
+        week: m.week,
+        total: round2(m.home.points + m.away.points),
+        ownerSlug: hi.ownerSlug,
+        points: hi.points,
+        opponentSlug: lo.ownerSlug,
+        opponentPoints: lo.points,
+      });
+      // The two-week TOTAL each team posted, for the low score list.
+      for (const [self, opp] of [
+        [m.home, m.away],
+        [m.away, m.home],
+      ] as const) {
+        scoresLowOnly.push({
+          season: m.season,
+          week: m.week,
+          ownerSlug: self.ownerSlug,
+          points: self.points,
+          opponentSlug: opp.ownerSlug,
+          opponentPoints: opp.points,
+        });
+      }
+    }
     for (const [self, opp] of [
       [m.home, m.away],
       [m.away, m.home],
@@ -1352,12 +1378,12 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
 
   return {
     weeklyHigh: top(scores, (s) => s.points),
-    weeklyLow: top(scores, (s) => s.points, 25, true),
+    weeklyLow: top([...scores, ...scoresLowOnly], (s) => s.points, 25, true),
     playerHigh: top(playerScores, (s) => s.points),
     biggestBlowout: top(blowouts, (s) => s.margin),
     narrowestWin: top(margins, (s) => s.margin, 25, true),
-    highestCombined: top(combinedHigh, (s) => s.total),
-    lowestCombined: top(combined, (s) => s.total, 25, true),
+    highestCombined: top(combined, (s) => s.total),
+    lowestCombined: top([...combined, ...combinedLowOnly], (s) => s.total, 25, true),
   };
 }
 
@@ -2439,8 +2465,12 @@ function recordsAtTheTime(
     const margin = round2(Math.abs(a.points - b.points));
     const winner = a.points === b.points ? null : a.points > b.points ? a : b;
 
-    for (const side of ev.forWeek ? ev.sides : []) {
-      if (!first && side.points > bestScore) {
+    // A team's two-week TOTAL competes only in the LOW direction; a week competes
+    // in both. See the eligibility table in AGENTS.md.
+    const highScoreOk = ev.forWeek;
+    const lowScoreOk = ev.forWeek || Boolean(ev.multiWeek);
+    for (const side of highScoreOk || lowScoreOk ? ev.sides : []) {
+      if (highScoreOk && !first && side.points > bestScore) {
         add(ev.id, {
           kind: "weekly-high",
           label: "Highest score in league history",
@@ -2449,7 +2479,7 @@ function recordsAtTheTime(
           stillStands: false,
         });
       }
-      if (!first && side.points < worstScore) {
+      if (lowScoreOk && !first && side.points < worstScore) {
         add(ev.id, {
           kind: "weekly-low",
           label: "Lowest score in league history",
@@ -2458,14 +2488,13 @@ function recordsAtTheTime(
           stillStands: false,
         });
       }
-      bestScore = Math.max(bestScore, side.points);
-      worstScore = Math.min(worstScore, side.points);
+      if (highScoreOk) bestScore = Math.max(bestScore, side.points);
+      if (lowScoreOk) worstScore = Math.min(worstScore, side.points);
     }
 
     // A MATCHUP'S TOTAL IS A GAME STAT, so one week of a two-week matchup does
-    // not have one — and the two-week total itself can only compete in the LOW
-    // direction, for the same reason a two-week margin can only compete as a
-    // narrow win.
+    // not have one — and neither does the two-week matchup itself: its total is
+    // two weeks of two teams' scoring, which is not the same measurement.
     const total = round2(a.points + b.points);
     if (ev.forGame) {
       if (!first && !ev.multiWeek && total > highestCombined) {

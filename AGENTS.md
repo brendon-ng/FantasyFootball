@@ -383,37 +383,44 @@ ONE GAME, SEVERAL WEEKS, and the two facts are needed in different places.
 
 ### Which records a multi-week matchup can win
 
-TWO QUESTIONS, ASKED IN ORDER, and every list answers both the same way whatever
-league it belongs to.
+TWO QUESTIONS, ASKED IN ORDER, and every list answers both the same way in every
+league.
 
-**1. Is this a WEEK stat or a GAME stat?** A week inside a multi-week matchup is a
-real score but not a real result — nobody won or lost it on its own.
+**1. Is the stat about a WEEK or about a GAME?** A week inside a multi-week
+matchup is a real score but not a real result — nobody won or lost it on its own.
 
-| Stat | Level | Fed by |
-| --- | --- | --- |
-| highest / lowest score, highest player week | WEEK | each week played |
-| blowout, narrowest win, highest / lowest combined | GAME | completed matchups only |
+| Stat | Level |
+| --- | --- |
+| highest / lowest score, best player week | WEEK |
+| highest / lowest scoring matchup, blowout, narrowest win | GAME |
 
-So a two-week total is never a "week's score", and one week of a two-week matchup
-is never a "matchup total", a blowout or a narrow win.
+So one week of a two-week matchup never appears in a GAME list, and a two-week
+total is never a week's score.
 
-**2. For a GAME stat, does spanning two weeks make the feat easier or harder?**
+**2. For a multi-week FINAL, does the extra week inflate the number or make the
+feat harder?** Inflated means ineligible; harder means eligible. Every list falls
+out of that one question:
 
-| Direction | Multi-week eligible | Why |
-| --- | --- | --- |
-| biggest blowout, highest combined | **✗** | two weeks of scoring inflates the number |
-| narrowest win, lowest combined | **✓** | staying that close, or that low, for a fortnight is harder |
+| List | 1-week | Week inside a multi | Multi-week final |
+| --- | --- | --- | --- |
+| highest scores | ✓ | ✓ | ✗ |
+| lowest scores | ✓ | ✓ | **✓** |
+| highest scoring matchups | ✓ | ✗ | ✗ |
+| lowest scoring matchups | ✓ | ✗ | **✓** |
+| biggest blowouts | ✓ | ✗ | ✗ |
+| narrowest wins | ✓ | ✗ | **✓** |
+| best player weeks | ✓ | ✓ | n/a |
 
-apartment-401's 2022 semi-final holds the narrow record at 0.34 across two weeks,
-which is the case the rule exists for.
+EVERY LOW OR NARROW LIST TAKES A MULTI-WEEK FINAL; NO HIGH OR BIG ONE DOES. Two
+weeks of scoring makes a big number cheap and a small number expensive.
 
-`recordsAtTheTime` applies exactly the same two questions. It takes WHOLE matchups
-and emits one WEEK event per week plus, for a multi-week matchup only, one GAME
-event landing in the week it finished — `Event.forWeek` / `forGame` / `multiWeek`
-carry the answers. An ordinary matchup is one event that is both, so nothing is
-counted twice. Handing it pre-flattened matchups silently disables all of this:
-`weeks` is already stripped, every event looks single-week, and a two-week margin
-both wins the narrow badge and poisons the blowout baseline for years after.
+`recordsAtTheTime` answers the same two questions. It takes WHOLE matchups and
+emits one WEEK event per week plus, for a multi-week matchup only, one GAME event
+landing in the week it finished — `Event.forWeek` / `forGame` / `multiWeek` carry
+the answers. An ordinary matchup is a single event that is both, so nothing is
+counted twice. Handing it pre-flattened matchups silently disables all of it:
+`weeklyViews` strips `weeks`, every event then looks single-week, and a two-week
+margin both wins the narrow badge and poisons the blowout baseline for years.
 
 MATCHUP LINKS MUST BE RESOLVED, NOT CONSTRUCTED. A multi-week matchup has ONE page,
 keyed by its FIRST week, so a record set in week 17 of a two-week final belongs to
