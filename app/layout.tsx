@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { IdentityControl, IdentityProvider } from "@/components/identity";
 import { Nav } from "@/components/nav";
 import { StickyParams } from "@/components/sticky-params";
-import { getConfig, getOwners, getSeasons, leagueAvatar } from "@/lib/data";
+import { getConfig, getLeagueRefs, getOwners, getSeasons, leagueAvatar } from "@/lib/data";
 import { BackTrail } from "@/components/back-link";
 import { leaguePickerHref, withBasePath } from "@/lib/base-path";
 import "./globals.css";
@@ -33,7 +33,10 @@ export function generateMetadata(): Metadata {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const cfg = getConfig();
   const avatar = leagueAvatar();
-  const latest = Math.max(...Object.keys(cfg.knownLeagueIds).map(Number));
+  // EVERY season the league has, not just its Sleeper ones. Reading
+  // `knownLeagueIds` alone gave an ESPN-only league an empty list, and
+  // `Math.max()` of nothing is -Infinity — which is what the header printed.
+  const latest = Math.max(...Object.keys(getLeagueRefs()).map(Number));
   const seasonCount = getSeasons().filter((s) => s.finalized).length;
   // Null in dev, where only one league is built and no picker exists.
   const pickerHref = leaguePickerHref();
