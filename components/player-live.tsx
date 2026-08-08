@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { type LeagueRef } from "@/lib/league-ref";
 import { useEffect, useState } from "react";
 
 import { Tip } from "@/components/tooltip";
 import { TradeModal } from "@/components/trade-modal";
-import { useLiveRosters } from "@/lib/sleeper-browser";
+import { liveMoves, useLiveRosters, type LiveMove } from "@/lib/live";
 import type {
   DraftPickRecord,
   PlayerMeta,
@@ -28,16 +29,6 @@ import type {
  * not yet archived, explained on hover, and disappears once the sync catches up.
  */
 
-interface RawTxn {
-  type: string;
-  status: string;
-  status_updated: number;
-  created: number;
-  leg: number;
-  adds: Record<string, number> | null;
-  drops: Record<string, number> | null;
-}
-
 const PROBE_WEEKS = 4;
 
 const TYPE_LABEL: Record<string, string> = {
@@ -59,41 +50,27 @@ const ACTION_RAIL: Record<string, string> = {
 /** Fetches the not-yet-archived weeks and shapes them like baked history. */
 function usePendingTransactions({
   playerId,
-  leagueId,
+  leagueRef,
   season,
   fromWeek,
   userIdToSlug,
 }: {
   playerId: string;
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   season: number;
   fromWeek: number;
   userIdToSlug: Record<string, string>;
 }): { events: PlayerTransaction[]; holder: string | null; ready: boolean } {
-  const rosters = useLiveRosters(leagueId);
-  const [txns, setTxns] = useState<RawTxn[] | null>(null);
+  const rosters = useLiveRosters(leagueRef);
+  const [txns, setTxns] = useState<LiveMove[] | null>(null);
 
   useEffect(() => {
-    if (!leagueId) return;
+    if (!leagueRef) return;
     let cancelled = false;
     (async () => {
       try {
-        const pages = await Promise.all(
-          Array.from({ length: PROBE_WEEKS }, (_, i) => fromWeek + i).map((w) =>
-            fetch(`https://api.sleeper.app/v1/league/${leagueId}/transactions/${w}`)
-              .then((r) => (r.ok ? r.json() : []))
-              .catch(() => []),
-          ),
-        );
-        if (!cancelled) {
-          setTxns(
-            (pages.flat() as RawTxn[]).filter(
-              (t) =>
-                t?.status === "complete" &&
-                (t.adds?.[playerId] != null || t.drops?.[playerId] != null),
-            ),
-          );
-        }
+        const moves = await liveMoves(leagueRef, playerId, fromWeek, PROBE_WEEKS);
+        if (!cancelled) setTxns(moves);
       } catch {
         if (!cancelled) setTxns([]);
       }
@@ -101,7 +78,7 @@ function usePendingTransactions({
     return () => {
       cancelled = true;
     };
-  }, [leagueId, fromWeek, playerId]);
+  }, [leagueRef, fromWeek, playerId]);
 
   const rosterToSlug = new Map<number, string>();
   for (const r of rosters.data ?? []) {
@@ -117,12 +94,12 @@ function usePendingTransactions({
       : null;
 
   const events: PlayerTransaction[] = (txns ?? []).map((t) => {
-    const to = t.adds?.[playerId];
-    const from = t.drops?.[playerId];
+    const to = t.toRosterId;
+    const from = t.fromRosterId;
     const isTrade = to != null && from != null;
     return {
       season,
-      week: t.leg,
+      week: t.week,
       preseason: true,
       type: (t.type as PlayerTransaction["type"]) ?? "free_agent",
       action: isTrade ? "trade" : to != null ? "add" : "drop",
@@ -130,7 +107,7 @@ function usePendingTransactions({
       fromSlug: isTrade ? (rosterToSlug.get(from!) ?? null) : null,
       toSlug: isTrade ? (rosterToSlug.get(to!) ?? null) : null,
       faabSpent: null,
-      timestamp: t.status_updated || t.created,
+      timestamp: t.ts,
     };
   });
 
@@ -140,18 +117,18 @@ function usePendingTransactions({
 /** The owner shown on the page — live roster first, committed data as fallback. */
 export function LiveOwner({
   playerId,
-  leagueId,
+  leagueRef,
   userIdToSlug,
   ownerNames,
   bakedOwnerSlug,
 }: {
   playerId: string;
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   userIdToSlug: Record<string, string>;
   ownerNames: Record<string, string>;
   bakedOwnerSlug: string | null;
 }) {
-  const rosters = useLiveRosters(leagueId);
+  const rosters = useLiveRosters(leagueRef);
   const ready = rosters.status === "ready";
   const holding = (rosters.data ?? []).find((r) => r.players.includes(playerId));
   const live = holding?.ownerId ? (userIdToSlug[holding.ownerId] ?? null) : null;
@@ -172,7 +149,7 @@ export function LiveOwner({
 export function PlayerTransactions({
   playerId,
   baked,
-  leagueId,
+  leagueRef,
   season,
   fromWeek,
   userIdToSlug,
@@ -186,7 +163,7 @@ export function PlayerTransactions({
 }: {
   playerId: string;
   baked: PlayerTransaction[];
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   season: number;
   fromWeek: number;
   userIdToSlug: Record<string, string>;
@@ -204,7 +181,7 @@ export function PlayerTransactions({
   const [openTrade, setOpenTrade] = useState<Trade | null>(null);
   const { events: pending } = usePendingTransactions({
     playerId,
-    leagueId,
+    leagueRef,
     season,
     fromWeek,
     userIdToSlug,

@@ -1,11 +1,16 @@
 name: Archive finalized data
 
-# Captures newly finalized weeks into `data/raw/` and commits them.
+# Captures newly finalized weeks into `data/` and commits them.
+#
+# COVERS EVERY LEAGUE ON EITHER SERVICE. `npm run sync` walks all of
+# `config/leagues/*` and runs a Sleeper pass and an ESPN pass over each, so
+# adding an ESPN league needs no change here — Sleeper seasons land in
+# `raw/<season>/` and ESPN seasons in `manual/<season>.json`.
 #
 # Kept separate from deploy.yml on purpose: deploy is read-only and runs many
 # times a day, whereas this job WRITES TO THE REPO. `scripts/sync.ts` only ever
-# persists data Sleeper has finalized and is idempotent, so a run with nothing new
-# produces no commit at all — which is what makes a daily schedule free. Most days
+# persists data the service has finalized and is idempotent, so a run with
+# nothing new produces no commit at all — which is what makes a daily schedule free. Most days
 # of the year this job does nothing but prove there was nothing to do.
 #
 # ADP refreshes on every run, so unlike the league data there is almost always
@@ -65,7 +70,7 @@ jobs:
 
       - run: npm ci
 
-      - name: Sync finalized data from Sleeper
+      - name: Sync finalized data from Sleeper and ESPN
         run: npm run sync
 
       - name: Rebuild derived data
@@ -99,7 +104,9 @@ jobs:
       - name: Commit if anything finalized
         run: |
           # data/ AND public/: `derive` rewrites public/mock/<slug>.json every run
-          # and `sync` refreshes public/avatars/. Both are tracked, and staging
+          # and `sync` refreshes public/avatars/ and public/espn-players.json —
+          # the ESPN-to-Sleeper player id map the live layer fetches in the
+          # browser. All are tracked, and staging
           # only data/ meant those were produced in CI and silently thrown away —
           # the mock replay file drifted to whatever season was last committed by
           # hand, and a changed league avatar would never have landed.

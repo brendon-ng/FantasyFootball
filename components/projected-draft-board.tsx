@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { type LeagueRef } from "@/lib/league-ref";
 
 import { PositionPill } from "@/components/keeper-table";
 import { EmptyState } from "@/components/ui";
@@ -12,7 +13,7 @@ import {
   type BoardPick,
   type DraftShape,
 } from "@/lib/draft-slots";
-import { LiveStatus, useLiveDraft, useLiveRosters, useLiveTradedPicks } from "@/lib/sleeper-browser";
+import { LiveStatus, useLiveDraft, useLiveRosters, useLiveTradedPicks } from "@/lib/live";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
@@ -32,7 +33,7 @@ import type { KeeperContract, PlayerMeta } from "@/lib/types";
  */
 
 export function ProjectedDraftBoard({
-  leagueId,
+  leagueRef,
   season,
   contracts,
   players,
@@ -42,7 +43,7 @@ export function ProjectedDraftBoard({
   adp,
   draftRounds,
 }: {
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   season: number;
   contracts: KeeperContract[];
   players: Record<string, PlayerMeta>;
@@ -53,9 +54,9 @@ export function ProjectedDraftBoard({
   /** Last round of the draft — the floor an expired contract is revalued to. */
   draftRounds: number;
 }) {
-  const draft = useLiveDraft(leagueId);
-  const traded = useLiveTradedPicks(leagueId);
-  const rosters = useLiveRosters(leagueId);
+  const draft = useLiveDraft(leagueRef);
+  const traded = useLiveTradedPicks(leagueRef);
+  const rosters = useLiveRosters(leagueRef);
 
   const loading =
     draft.status === "loading" || traded.status === "loading" || rosters.status === "loading";

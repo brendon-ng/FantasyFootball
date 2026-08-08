@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { type LeagueRef } from "@/lib/league-ref";
 
 import {
   Col,
@@ -15,7 +16,7 @@ import {
 import { meetingId } from "@/lib/meeting";
 import { isCurrentSeason, resolvePhase } from "@/lib/phase";
 import { matchupMarks, type RecordMark, type RecordThresholds } from "@/lib/record-marks";
-import { useLiveDraft, useLiveSeason } from "@/lib/sleeper-browser";
+import { useLiveDraft, useLiveSeason } from "@/lib/live";
 import type { LiveSeason, OwnerRecord, SeasonSummary } from "@/lib/types";
 
 /**
@@ -42,7 +43,7 @@ export interface HomeOwner {
 
 export function SeasonPanels({
   initial,
-  leagueIdBySeason,
+  refBySeason,
   ownerNames,
   userIdToSlug,
   lastSeason,
@@ -56,7 +57,7 @@ export function SeasonPanels({
   children,
 }: {
   initial: LiveSeason | null;
-  leagueIdBySeason: Record<string, string>;
+  refBySeason: Record<string, LeagueRef>;
   ownerNames: Record<string, string>;
   /** Sleeper user id -> slug. Needed to credit co-owners on a live roster. */
   userIdToSlug: Record<string, string>;
@@ -84,8 +85,8 @@ export function SeasonPanels({
    */
   children?: React.ReactNode;
 }) {
-  const live = useLiveSeason(leagueIdBySeason, initial, userIdToSlug);
-  const draft = useLiveDraft(leagueIdBySeason[String(live?.season ?? fallbackSeason)] ?? null);
+  const live = useLiveSeason(refBySeason, initial, userIdToSlug);
+  const draft = useLiveDraft(refBySeason[String(live?.season ?? fallbackSeason)] ?? null);
   const phase = resolvePhase({ live, draft: draft.data });
 
   // Keyed on the PHASE, not on seasonType. Sleeper still reports "pre" between

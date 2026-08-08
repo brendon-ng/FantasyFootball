@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { type LeagueRef } from "@/lib/league-ref";
 
 import {
   ContractRow,
@@ -24,7 +25,7 @@ export function HomeKeeperBoard({
   userIdToSlug,
   players,
   adp,
-  leagueId,
+  leagueRef,
   maxKeepers,
   draftRounds,
 }: {
@@ -35,12 +36,12 @@ export function HomeKeeperBoard({
   adp: Record<string, AdpEntry>;
   /** Last round of the draft — the floor an expired contract is revalued to. */
   draftRounds: number;
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   maxKeepers: number;
 }) {
   const allBaked = contractsByOwner.flatMap(([, cs]) => cs);
   const { byOwner, contracts: live, adjustments, ready } = useSelectedKeepers(
-    leagueId,
+    leagueRef,
     userIdToSlug,
     allBaked,
   );

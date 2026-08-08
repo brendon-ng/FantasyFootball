@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { type LeagueRef } from "@/lib/league-ref";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
 import { costRound } from "@/lib/draft-slots";
 import { Tip } from "@/components/tooltip";
 import { Col, ListHeader, Panel, PanelHeader } from "@/components/ui";
 import { useSelectedKeepers } from "@/components/keeper-selection";
-import { LiveStatus } from "@/lib/sleeper-browser";
+import { LiveStatus } from "@/lib/live";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
@@ -32,7 +33,7 @@ export function KeeperBoard({
   userIdToSlug,
   players,
   adp,
-  leagueId,
+  leagueRef,
   maxKeepers,
   draftRounds,
 }: {
@@ -44,7 +45,7 @@ export function KeeperBoard({
   adp: Record<string, AdpEntry>;
   /** Last round of the draft — the floor an expired contract is revalued to. */
   draftRounds: number;
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   maxKeepers: number;
 }) {
   const allBaked = contractsByOwner.flatMap(([, cs]) => cs);
@@ -53,7 +54,7 @@ export function KeeperBoard({
     contracts: liveContracts,
     adjustments,
     ready,
-  } = useSelectedKeepers(leagueId, userIdToSlug, allBaked);
+  } = useSelectedKeepers(leagueRef, userIdToSlug, allBaked);
 
   // Regroup from the adjusted set: a player dropped in the preseason should
   // leave the board, and a pickup should appear, before week 1 finalises.

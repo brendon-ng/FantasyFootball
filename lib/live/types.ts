@@ -1,0 +1,144 @@
+/**
+ * The contract every live provider implements.
+ *
+ * A provider turns one service's API into the shapes the site already renders.
+ * Nothing above this file knows whether a season is on Sleeper or ESPN — the
+ * hooks pick a provider from the ref and the components see identical data
+ * either way. That is what makes adding a third service a new file here rather
+ * than a change everywhere.
+ *
+ * Dependency-free: this ships to the browser.
+ */
+
+import type { LiveSeason, SeasonType } from "../types.ts";
+
+export type LiveState<T> =
+  | { status: "loading"; data: null; error: null }
+  | { status: "ready"; data: T; error: null }
+  | { status: "error"; data: null; error: string };
+
+export interface LiveRoster {
+  rosterId: number;
+  ownerId: string | null;
+  coOwners: string[];
+  /** player_ids the team has currently locked in as keepers. Empty until they choose. */
+  keepers: string[];
+  players: string[];
+  wins: number;
+  losses: number;
+  ties: number;
+  pointsFor: number;
+  waiverBudgetUsed: number;
+}
+
+export interface LiveTradedPick {
+  season: string;
+  round: number;
+  /** Roster the pick originally belonged to. */
+  rosterId: number;
+  currentOwnerRosterId: number;
+}
+
+export interface LiveDraft {
+  draftId: string;
+  status: string;
+  type: string;
+  rounds: number;
+  teams: number;
+  reversalRound: number;
+  /** Slot -> roster. Meaningless until `orderSet`; see lib/draft-slots.ts. */
+  slotToRoster: Record<number, number>;
+  /** True once the order has actually been drawn — or stood in for. */
+  orderSet: boolean;
+  /** True when `?mockDraftOrder=true` supplied the order. Surface it. */
+  mocked: boolean;
+  startTime: number | null;
+}
+
+/** A draft as the provider reports it, before any mock flags are applied. */
+export type RawDraft = Omit<LiveDraft, "mocked">;
+
+/** Where the football calendar currently stands, per the provider's own clock. */
+export interface ProviderState {
+  season: number;
+  week: number;
+  displayWeek: number;
+  seasonType: SeasonType;
+}
+
+/**
+ * What a provider needs from the BAKED page in order to name people.
+ *
+ * The browser has no access to `config/leagues/*`, and the build already did
+ * the roster -> owner resolution including co-owners, so it is lifted from the
+ * server-rendered value rather than duplicated over the wire.
+ */
+export interface SeasonContext {
+  /** roster/team id -> owner slug, from the baked LiveSeason. */
+  slugByRoster: Map<number, string>;
+  /** provider user id -> owner slug. Only co-owners need it. */
+  userIdToSlug: Record<string, string>;
+}
+
+/**
+ * One move of one player, normalised across providers.
+ *
+ * Deliberately narrower than either service's transaction record: this only
+ * exists to fill the gap between the last archive and now for a single player,
+ * so it carries who got him, who lost him and when — not the other side of a
+ * trade, which the committed history already has.
+ */
+export interface LiveMove {
+  /** Provider-neutral: "waiver" | "free_agent" | "trade" | "commissioner". */
+  type: string;
+  week: number;
+  ts: number;
+  /** roster/team that RECEIVED the player, or null on a pure drop. */
+  toRosterId: number | null;
+  /** roster/team that GAVE HIM UP, or null on a pure add. */
+  fromRosterId: number | null;
+}
+
+export interface LiveProvider {
+  /** Shown to the reader, e.g. "live from ESPN". */
+  readonly name: string;
+  /** The current season and week. Null when the service cannot be reached. */
+  state(): Promise<ProviderState | null>;
+  rosters(id: string, season: number): Promise<LiveRoster[]>;
+  tradedPicks(id: string, season: number): Promise<LiveTradedPick[]>;
+  draft(id: string, season: number): Promise<RawDraft | null>;
+  season(
+    id: string,
+    st: ProviderState,
+    ctx: SeasonContext,
+  ): Promise<LiveSeason | null>;
+  /** Moves involving one player, from `fromWeek` onward. */
+  moves(
+    id: string,
+    season: number,
+    playerId: string,
+    fromWeek: number,
+    weeks: number,
+  ): Promise<LiveMove[]>;
+  /** EVERY completed move from `fromWeek` onward, for the keeper adjuster. */
+  leagueMoves(id: string, season: number, fromWeek: number, weeks: number): Promise<LeagueMove[]>;
+}
+
+/**
+ * A whole transaction, keyed by player.
+ *
+ * Sleeper's native shape, because it is the one the keeper adjuster wants: it
+ * replays moves in order and needs to see both sides of a trade at once, which
+ * a per-player `LiveMove` cannot express.
+ */
+export interface LeagueMove {
+  type: string;
+  week: number;
+  ts: number;
+  /** playerId -> roster that RECEIVED him. */
+  adds: Record<string, number>;
+  /** playerId -> roster that GAVE HIM UP. */
+  drops: Record<string, number>;
+}
+
+export const round2 = (n: number): number => Number(n.toFixed(2));

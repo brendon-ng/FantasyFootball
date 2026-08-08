@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { type LeagueRef } from "@/lib/league-ref";
 
 import { Panel, PanelHeader } from "@/components/ui";
 import {
@@ -8,7 +9,7 @@ import {
   useLiveDraft,
   useLiveRosters,
   useLiveTradedPicks,
-} from "@/lib/sleeper-browser";
+} from "@/lib/live";
 import { assignKeeperSlots, buildBoard, costRound, type DraftShape } from "@/lib/draft-slots";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
@@ -104,7 +105,7 @@ function allocate(
 
 export function DraftPicks({
   ownerSlug,
-  leagueId,
+  leagueRef,
   season,
   draftRounds,
   adp,
@@ -115,7 +116,7 @@ export function DraftPicks({
   ownerNames,
 }: {
   ownerSlug: string;
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   season: number;
   draftRounds: number;
   adp: Record<string, AdpEntry>;
@@ -127,9 +128,9 @@ export function DraftPicks({
   ownerNames: Record<string, string>;
 }) {
   const cost = (c: KeeperContract) => costRound(c, adp[c.playerId], draftRounds);
-  const rosters = useLiveRosters(leagueId);
-  const traded = useLiveTradedPicks(leagueId);
-  const draft = useLiveDraft(leagueId);
+  const rosters = useLiveRosters(leagueRef);
+  const traded = useLiveTradedPicks(leagueRef);
+  const draft = useLiveDraft(leagueRef);
   const loading = rosters.status === "loading" || traded.status === "loading";
   const failed = rosters.status === "error" || traded.status === "error";
 

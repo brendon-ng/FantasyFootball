@@ -9,18 +9,19 @@ import {
   creditedNames,
   features,
   getAdp,
-  getRules,
-  keeperCycleSeason,
   getAllMeetings,
-  getConfig,
   getKeepers,
+  getLeagueRefs,
   getLiveSeason,
   getOwnerMap,
   getOwnerRecords,
   getPlayers,
-  getRecordThresholds,
   getRecords,
+  getRecordThresholds,
+  getRules,
   getSeasons,
+  getUserIdToSlug,
+  keeperCycleSeason,
   meetingId,
 } from "@/lib/data";
 
@@ -46,7 +47,6 @@ export default async function HomePage() {
   const players = getPlayers();
   const adp = getAdp();
   const { draftRounds } = getRules();
-  const cfg = getConfig();
 
   const finalized = seasons.filter((s) => s.finalized).sort((a, b) => b.season - a.season);
   const lastSeason = finalized[0];
@@ -94,11 +94,9 @@ export default async function HomePage() {
     <div className="space-y-5 sm:space-y-6">
       <SeasonPanels
         initial={live}
-        leagueIdBySeason={cfg.knownLeagueIds}
+        refBySeason={getLeagueRefs()}
         ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
-        userIdToSlug={Object.fromEntries(
-          [...owners.values()].filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-        )}
+        userIdToSlug={getUserIdToSlug()}
         lastSeason={lastSeason ?? null}
         leaders={leaders}
         thresholds={thresholds}
@@ -147,11 +145,9 @@ export default async function HomePage() {
       >
       {/* Renders nothing until Sleeper has both a draft date and an order. */}
       <DraftPlan
-        leagueId={cfg.knownLeagueIds[String(currentSeason)] ?? null}
+        leagueRef={getLeagueRefs()[String(currentSeason)] ?? null}
         season={currentSeason}
-        userIdToSlug={Object.fromEntries(
-          [...owners.values()].filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-        )}
+        userIdToSlug={getUserIdToSlug()}
         ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
         keepers={features().keepers}
       />
@@ -190,12 +186,10 @@ export default async function HomePage() {
                 (owners.get(a)?.name ?? a).localeCompare(owners.get(b)?.name ?? b),
               )}
               ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
-              userIdToSlug={Object.fromEntries(
-                [...owners.values()].filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-              )}
+              userIdToSlug={getUserIdToSlug()}
               players={players}
               adp={Object.fromEntries(adp.byPlayer)}
-              leagueId={cfg.knownLeagueIds[String(currentSeason)] ?? null}
+              leagueRef={getLeagueRefs()[String(currentSeason)] ?? null}
               maxKeepers={MAX_KEEPERS}
             />
           )}

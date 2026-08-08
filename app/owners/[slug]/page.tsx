@@ -12,21 +12,22 @@ import { Col, ListHeader, Panel, PanelHeader, Stat, fmt, placeColor } from "@/co
 import {
   features,
   getAdp,
-  getRules,
-  getConfig,
   getKeepers,
+  getLeagueRefs,
   getOwnerMap,
   getOwnerRecords,
   getOwners,
   getPickHandoffs,
   getPickOutcomes,
-  getTradeReturns,
   getPlayers,
-  getTradeParties,
-  getTrades,
-  seasonsWithPages,
+  getRules,
   getSeasons,
+  getTradeParties,
+  getTradeReturns,
+  getTrades,
+  getUserIdToSlug,
   getWeeklyLows,
+  seasonsWithPages,
   teamSeasonFor,
   weeklyCoverage,
 } from "@/lib/data";
@@ -60,9 +61,8 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const allTrades = Object.fromEntries(getTrades().map((t) => [t.id, t]));
   const adp = getAdp();
   const { draftRounds } = getRules();
-  const cfg = getConfig();
   const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
-  const upcomingLeagueId = cfg.knownLeagueIds[String(upcoming)] ?? null;
+  const upcomingLeagueRef = getLeagueRefs()[String(upcoming)] ?? null;
   const contracts = getKeepers().final.filter((c) => c.ownerSlug === slug);
   // Counted from every season on record, so it is a career tally.
   const myLows = getWeeklyLows().filter((w) => w.ownerSlug === slug);
@@ -362,10 +362,8 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
             contracts={contracts}
             players={players}
             adp={Object.fromEntries(adp.byPlayer)}
-            userIdToSlug={Object.fromEntries(
-              getOwners().filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-            )}
-            leagueId={upcomingLeagueId}
+            userIdToSlug={getUserIdToSlug()}
+            leagueRef={upcomingLeagueRef}
             maxKeepers={4}
           />
         </Panel>
@@ -374,15 +372,13 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
       <DraftPicks
         adp={Object.fromEntries(adp.byPlayer)}
         ownerSlug={slug}
-        leagueId={upcomingLeagueId}
+        leagueRef={upcomingLeagueRef}
         season={upcoming}
         draftRounds={17}
         maxKeepers={4}
         contracts={contracts}
         players={players}
-        userIdToSlug={Object.fromEntries(
-          getOwners().filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-        )}
+        userIdToSlug={getUserIdToSlug()}
         ownerNames={Object.fromEntries(getOwners().map((o) => [o.slug, o.name]))}
       />
     {trades.length ? (

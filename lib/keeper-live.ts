@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { refKey, type LeagueRef } from "@/lib/league-ref";
+import { leagueMoves, type LeagueMove } from "@/lib/live";
 
 import type { KeeperContract } from "@/lib/types";
 
@@ -24,21 +26,11 @@ export interface LiveAdjustment {
   note: string;
 }
 
-interface RawTxn {
-  type: string;
-  status: string;
-  status_updated: number;
-  created: number;
-  leg: number;
-  adds: Record<string, number> | null;
-  drops: Record<string, number> | null;
-}
-
 /** Weeks to probe. Preseason moves all land on leg 1; a few more covers early season. */
 const PROBE_WEEKS = 4;
 
 export function useLiveContracts({
-  leagueId,
+  leagueRef,
   fromWeek,
   contracts,
   rosterToOwner,
@@ -47,7 +39,7 @@ export function useLiveContracts({
   undraftedFreeAgentRound = 11,
   maxKeeps = 2,
 }: {
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   /** First week not yet baked into the derived data. */
   fromWeek: number;
   contracts: KeeperContract[];
@@ -59,23 +51,18 @@ export function useLiveContracts({
   undraftedFreeAgentRound?: number;
   maxKeeps?: number;
 }): { contracts: KeeperContract[]; adjustments: LiveAdjustment[]; ready: boolean } {
-  const [txns, setTxns] = useState<RawTxn[] | null>(null);
+  const [txns, setTxns] = useState<LeagueMove[] | null>(null);
+  // `refKey` stands in for `leagueRef`, a fresh object on every render.
+  const key = refKey(leagueRef);
 
   useEffect(() => {
-    if (!leagueId) return;
+    if (!leagueRef) return;
     let cancelled = false;
 
     (async () => {
       try {
-        const weeks = Array.from({ length: PROBE_WEEKS }, (_, i) => fromWeek + i);
-        const pages = await Promise.all(
-          weeks.map((w) =>
-            fetch(`https://api.sleeper.app/v1/league/${leagueId}/transactions/${w}`)
-              .then((r) => (r.ok ? r.json() : []))
-              .catch(() => []),
-          ),
-        );
-        if (!cancelled) setTxns((pages.flat() as RawTxn[]).filter((t) => t?.status === "complete"));
+        const moves = await leagueMoves(leagueRef, fromWeek, PROBE_WEEKS);
+        if (!cancelled) setTxns(moves);
       } catch {
         // Fail soft: the baked contracts are still shown, just unadjusted.
         if (!cancelled) setTxns([]);
@@ -85,19 +72,20 @@ export function useLiveContracts({
     return () => {
       cancelled = true;
     };
-  }, [leagueId, fromWeek]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, fromWeek]);
 
-  if (!leagueId) return { contracts, adjustments: [], ready: true };
+  if (!leagueRef) return { contracts, adjustments: [], ready: true };
   if (!txns || !rostersReady) return { contracts, adjustments: [], ready: false };
 
   const byId = new Map(contracts.map((c) => [c.playerId, { ...c }]));
   const adjustments: LiveAdjustment[] = [];
   const note = (playerId: string, text: string) => adjustments.push({ playerId, note: text });
 
-  for (const t of [...txns].sort((a, b) => (a.status_updated || a.created) - (b.status_updated || b.created))) {
+  for (const t of [...txns].sort((a, b) => a.ts - b.ts)) {
     // Drops first, except in a trade where the drop side is the sending team.
     if (t.type !== "trade") {
-      for (const playerId of Object.keys(t.drops ?? {})) {
+      for (const playerId of Object.keys(t.drops)) {
         const c = byId.get(playerId);
         if (!c) continue;
         c.ownerSlug = null;
@@ -105,7 +93,7 @@ export function useLiveContracts({
       }
     }
 
-    for (const [playerId, rosterId] of Object.entries(t.adds ?? {})) {
+    for (const [playerId, rosterId] of Object.entries(t.adds)) {
       const owner = rosterToOwner.get(rosterId) ?? null;
       const prior = byId.get(playerId);
 

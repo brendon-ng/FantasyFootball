@@ -1391,6 +1391,12 @@
     "team": null,
     "years_exp": 6
   },
+  "4863": {
+    "full_name": "Josh Rosen",
+    "position": "QB",
+    "team": null,
+    "years_exp": 5
+  },
   "4866": {
     "full_name": "Saquon Barkley",
     "position": "RB",
@@ -2433,6 +2439,12 @@
     "full_name": "Najee Harris",
     "position": "RB",
     "team": null,
+    "years_exp": 5
+  },
+  "7537": {
+    "full_name": "Jaret Patterson",
+    "position": "RB",
+    "team": "LAC",
     "years_exp": 5
   },
   "7538": {

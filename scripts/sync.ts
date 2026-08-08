@@ -1,16 +1,24 @@
 /**
- * Pulls finalized league data from Sleeper into `data/<league>/raw/`, then
- * rebuilds the shared player index. Run with `npm run sync`.
+ * Pulls finalized league data into `data/<league>/`, then rebuilds the shared
+ * player index. Run with `npm run sync`.
  *
  * Operates on EVERY configured league by default; `--league=<slug>` scopes it.
  *
+ * TWO SERVICES, ONE ENTRY POINT. Sleeper seasons land in `raw/<season>/` as
+ * faithful API dumps; ESPN seasons land in `manual/<season>.json` already
+ * digested, because ESPN serves a whole season in one response where Sleeper
+ * serves a dozen resources. A league can have both — Den Ops does — so both
+ * passes run and each is a no-op when the league has no ids for it. Adding an
+ * ESPN league is a config entry, not a code change.
+ *
  * Two invariants govern this script:
  *
- * 1. IT ONLY WRITES FINALIZED DATA. A week is finalized once Sleeper has scored
- *    it (`settings.last_scored_leg`); a season is finalized once the league's
- *    status is "complete". In-progress data is deliberately never persisted —
- *    the site fetches that at build time instead. This is what makes the
- *    committed JSON trustworthy as a historical record.
+ * 1. IT ONLY WRITES FINALIZED DATA. A week is finalized once the service has
+ *    scored it (`settings.last_scored_leg` on Sleeper,
+ *    `status.latestScoringPeriod` on ESPN); a season is finalized once its
+ *    status says so. In-progress data is deliberately never persisted — the
+ *    site fetches that in the browser instead. This is what makes the committed
+ *    JSON trustworthy as a historical record.
  *
  * 2. IT IS IDEMPOTENT. Existing files are left alone unless their content would
  *    actually change. Re-running on an unchanged league produces an empty git
@@ -43,6 +51,7 @@ import {
   type SleeperLeague,
   type SleeperPlayer,
 } from "../lib/sleeper.ts";
+import { syncEspnSeasons } from "./lib/espn-seasons.ts";
 import { CACHE_DIR, ROOT, SHARED_DATA_DIR, fileAgeMs, log, readJson, wk, writeJson } from "./lib/io.ts";
 import { allLeagues, configDir, dataDir, resolveLeagues, type ScriptLeague } from "./lib/league.ts";
 
@@ -533,6 +542,33 @@ async function syncPlayers(leagues: ScriptLeague[]): Promise<void> {
   }
 
   writeIfChanged(join(SHARED_DATA_DIR, "players.json"), slim, `players.json (${Object.keys(slim).length})`);
+  writeEspnPlayerIds(all);
+}
+
+/**
+ * `public/espn-players.json` — ESPN player id -> Sleeper player id.
+ *
+ * The BROWSER needs this, which is why it is a public asset rather than another
+ * file under `data/`. Everything on this site is keyed on Sleeper ids and the
+ * ESPN live provider is handed ESPN ids, so without it a live ESPN roster
+ * cannot be matched to a single player page.
+ *
+ * Sleeper publishes `espn_id` on roughly half its map and that cross-reference
+ * is the whole file — no name matching here. The importers do fuzzy matching
+ * because they must resolve a historical lineup exactly; the live layer can
+ * afford to miss a player, and a wrong match would put the wrong owner on a
+ * player page, which is worse than none.
+ */
+function writeEspnPlayerIds(all: Record<string, SleeperPlayer>): void {
+  const map: Record<string, string> = {};
+  for (const [id, p] of Object.entries(all)) {
+    if (p.espn_id) map[String(p.espn_id)] = id;
+  }
+  writeIfChanged(
+    join(ROOT, "public", "espn-players.json"),
+    map,
+    `public/espn-players.json (${Object.keys(map).length})`,
+  );
 }
 
 /**
@@ -594,12 +630,34 @@ async function syncLeagueAvatar(league: ScriptLeague, avatar: string | null): Pr
   log.write(`avatars/${league.slug}.${ext} (${Math.round(bytes.length / 1024)}KB)`);
 }
 
+/**
+ * One league, whichever service its seasons live on.
+ *
+ * A league is not a provider — a SEASON is. Den Ops has ESPN seasons and
+ * Sleeper ones, so both passes run and each does nothing when the league has no
+ * ids for it. That is what makes an ESPN league a config entry rather than a
+ * code path: `espnLeagueIds` is all it takes.
+ */
 async function syncLeague(league: ScriptLeague): Promise<void> {
   config = league;
   RAW_DIR = join(dataDir(league.slug), "raw");
   LEAGUE_CONFIG_DIR = configDir(league.slug);
 
   log.step(`■ ${league.name} (${league.slug})`);
+
+  // ESPN first: it is the whole history for an ESPN-only league, so a failure
+  // here should stop the run before anything else is written.
+  if (league.features?.espnImport) {
+    const n = await syncEspnSeasons(league, { onlySeason: ONLY_SEASON });
+    log.info(n ? `ESPN: ${n} season file(s) updated` : "ESPN: no changes");
+  }
+
+  if (!Object.keys(config.knownLeagueIds ?? {}).length) {
+    // Nothing on Sleeper to discover, and no season index to write — an
+    // ESPN-only league derives entirely from `manual/`.
+    return;
+  }
+
   const state = await getState(config.sport);
   if (!state) throw new Error("Could not read NFL state");
   log.info(

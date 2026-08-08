@@ -12,6 +12,14 @@ export interface Owner {
   name: string;
   firstName: string;
   userId: string | null;
+  /**
+   * ESPN member ids (SWIDs), braces included, for owners with an ESPN season.
+   *
+   * Carried through to the client because the live layer resolves a team's
+   * owners by provider id, and on ESPN that id is a SWID rather than a Sleeper
+   * user id. One person can hold two ESPN accounts, hence a list.
+   */
+  espnIds?: string[];
   /** False once someone has left the league; kept for history. */
   active: boolean;
   /** Seasons this owner fielded a team, ascending. */

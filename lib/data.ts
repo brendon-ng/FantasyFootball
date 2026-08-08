@@ -13,16 +13,13 @@
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
+import { refsBySeason, type LeagueRef, type Provider } from "./league-ref.ts";
+import { espnProvider } from "./live/espn.ts";
+import { sleeperProvider } from "./live/sleeper.ts";
+import type { LiveProvider } from "./live/types.ts";
 import { meetingId } from "./meeting.ts";
 import { MARK_DEPTH, type RecordThresholds } from "./record-marks.ts";
 
-import {
-  getLeague,
-  getLeagueUsers,
-  getMatchups,
-  getRosters,
-  getState,
-} from "./sleeper.ts";
 import type {
   BracketMatch,
   DraftPickRecord,
@@ -40,9 +37,7 @@ import type {
   TradeSeason,
   TradeSide,
   TradeStat,
-  LiveMatchup,
   LiveSeason,
-  LiveTeam,
   SeasonSummary,
   WeeklyLow,
 } from "./types.ts";
@@ -657,6 +652,8 @@ export interface LeagueConfig {
   shortName: string;
   features: LeagueFeatures;
   knownLeagueIds: Record<string, string>;
+  /** Per-season ESPN league ids. See lib/league-ref. */
+  espnLeagueIds?: Record<string, string>;
 }
 export const getConfig = (): LeagueConfig =>
   JSON.parse(readFileSync(join(CONFIG, "league.json"), "utf8"));
@@ -760,6 +757,48 @@ export const getOwnerMap = once(
   (): Map<string, Owner> => new Map(getOwners().map((o) => [o.slug, o])),
 );
 
+/**
+ * Provider user id -> owner slug, for the live layer.
+ *
+ * COVERS BOTH VOCABULARIES. Sleeper names a person with a numeric user id and
+ * ESPN with a SWID, and a league can have seasons on each, so one map holds
+ * both — the ids cannot collide, and a lookup does not need to know which
+ * service it is talking to.
+ *
+ * Built here rather than at each call site: six pages were assembling their own
+ * copy from `o.userId` alone, which meant adding ESPN would have been six edits
+ * and the seventh page would have been missed.
+ */
+export const getUserIdToSlug = once((): Record<string, string> => {
+  const out: Record<string, string> = {};
+  for (const o of getOwners()) {
+    if (o.userId) out[o.userId] = o.slug;
+    // Upper-cased because ESPN is inconsistent about SWID casing between the
+    // member list and a team's `owners` array.
+    for (const id of o.espnIds ?? []) out[id.toUpperCase()] = o.slug;
+  }
+  return out;
+});
+
+/**
+ * season -> where that season's live data comes from.
+ *
+ * The one place that decides Sleeper vs ESPN for a league. See lib/league-ref.
+ */
+export const getLeagueRefs = once((): Record<string, LeagueRef> => refsBySeason(getConfig()));
+
+/**
+ * The same providers the browser uses.
+ *
+ * Build-time and client-side live data went through two separate Sleeper
+ * clients that had to be kept in step by hand; they are now one implementation
+ * called from two places, which is why `getLiveSeason` below is thin.
+ */
+const LIVE_PROVIDERS: Record<Provider, LiveProvider> = {
+  sleeper: sleeperProvider,
+  espn: espnProvider,
+};
+
 // ---------------------------------------------------------------------------
 // Live (in-progress) season
 // ---------------------------------------------------------------------------
@@ -779,93 +818,28 @@ export async function getLiveSeason(): Promise<LiveSeason | null> {
   });
 
   try {
-    const cfg = getConfig();
-    const state = await getState();
-    if (!state) return null;
+    const refs = getLeagueRefs();
+    const userIdToSlug = getUserIdToSlug();
+    // No baked page exists yet, so the providers resolve owners the other way,
+    // through `userIdToSlug`. See `primaryOf` in each of them.
+    const ctx = { slugByRoster: new Map<number, string>(), userIdToSlug };
 
-    const season = Number(state.season);
-    const leagueId = cfg.knownLeagueIds[String(season)];
-    if (!leagueId) return null;
+    for (const name of new Set(Object.values(refs).map((r) => r.provider))) {
+      const provider = LIVE_PROVIDERS[name];
+      const state = await provider.state();
+      if (!state) continue;
+      const ref = refs[String(state.season)];
+      if (!ref || ref.provider !== name) continue;
 
-    // If this season is already finalized in committed data, there is nothing live.
-    if (getSeasons().some((s) => s.season === season && s.finalized)) return null;
+      // If this season is already finalized in committed data, nothing is live.
+      if (getSeasons().some((s) => s.season === state.season && s.finalized)) return null;
 
-    const [league, users, rosters] = await Promise.all([
-      getLeague(leagueId),
-      getLeagueUsers(leagueId),
-      getRosters(leagueId),
-    ]);
-    if (!league || !rosters) return empty(season);
-
-    const ownerBySlug = new Map(
-      getOwners().flatMap((o) => [[o.userId, o.slug] as const]),
-    );
-    // Co-owners resolve through config, which derive.ts already collapsed, so
-    // fall back to matching on the roster's own owner_id.
-    const teamNameByUser = new Map(
-      (users ?? []).map((u) => [u.user_id, u.metadata?.team_name ?? u.display_name]),
-    );
-
-    const slugsOf = (r: { owner_id: string | null; co_owners: string[] | null }): string[] => {
-      const out: string[] = [];
-      for (const id of [r.owner_id, ...(r.co_owners ?? [])]) {
-        const slug = id ? ownerBySlug.get(id) : undefined;
-        if (slug && !out.includes(slug)) out.push(slug);
-      }
-      return out;
-    };
-
-    const teams: LiveTeam[] = rosters.map((r) => ({
-      ownerSlug: (r.owner_id && ownerBySlug.get(r.owner_id)) || `roster-${r.roster_id}`,
-      ownerSlugs: slugsOf(r),
-      rosterId: r.roster_id,
-      teamName: r.owner_id ? (teamNameByUser.get(r.owner_id) ?? null) : null,
-      wins: r.settings.wins,
-      losses: r.settings.losses,
-      ties: r.settings.ties,
-      pointsFor: Number(
-        ((r.settings.fpts ?? 0) + (r.settings.fpts_decimal ?? 0) / 100).toFixed(2),
-      ),
-      pointsAgainst: Number(
-        ((r.settings.fpts_against ?? 0) + (r.settings.fpts_against_decimal ?? 0) / 100).toFixed(2),
-      ),
-      waiverBudgetUsed: r.settings.waiver_budget_used ?? 0,
-      players: r.players ?? [],
-      starters: r.starters ?? [],
-    }));
-
-    // Pre-draft and pre-week-1 states have no meaningful matchups.
-    const week = Math.max(1, state.display_week || state.week || 1);
-    let matchups: LiveMatchup[] = [];
-    if (state.season_type === "regular" || state.season_type === "post") {
-      const raw = (await getMatchups(leagueId, week)) ?? [];
-      const byId = new Map<number, typeof raw>();
-      for (const m of raw) {
-        if (m.matchup_id == null) continue;
-        byId.set(m.matchup_id, [...(byId.get(m.matchup_id) ?? []), m]);
-      }
-      const slugOf = (rid: number) =>
-        teams.find((t) => t.rosterId === rid)?.ownerSlug ?? `roster-${rid}`;
-      matchups = [...byId.entries()]
-        .filter(([, pair]) => pair.length === 2)
-        .map(([matchupId, [x, y]]) => ({
-          matchupId,
-          a: { ownerSlug: slugOf(x.roster_id), points: Number((x.points ?? 0).toFixed(2)) },
-          b: { ownerSlug: slugOf(y.roster_id), points: Number((y.points ?? 0).toFixed(2)) },
-        }));
+      const live = await provider.season(ref.id, state, ctx);
+      // The league exists this year but the service had nothing to say — a
+      // placeholder, not a null, so the page knows the season has begun.
+      return live ?? empty(state.season);
     }
-
-    return {
-      season,
-      week,
-      displayWeek: state.display_week,
-      seasonType: state.season_type,
-      status: league.status,
-      teams,
-      matchups,
-      unavailable: false,
-      lastScoredLeg: league.settings?.last_scored_leg ?? null,
-    };
+    return null;
   } catch {
     // Swallow deliberately — see docstring.
     return null;

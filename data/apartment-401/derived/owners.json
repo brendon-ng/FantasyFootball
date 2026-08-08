@@ -2,6 +2,9 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{BA729EB5-520A-4E40-B29E-B5520A8E407F}"
+    ],
     "firstName": "Brendon",
     "name": "Brendon Ng",
     "seasons": [
@@ -17,6 +20,9 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{31CE0255-5163-403A-926D-04E034876BE8}"
+    ],
     "firstName": "Charlie",
     "name": "Charlie Stoksik",
     "seasons": [
@@ -32,6 +38,9 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{1CC2A246-1963-4295-9C2D-7545A4075182}"
+    ],
     "firstName": "Diana",
     "name": "Diana Gonzalez",
     "seasons": [
@@ -47,6 +56,9 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{B83C20DC-4C50-4474-BC20-DC4C50F47465}"
+    ],
     "firstName": "Eric",
     "name": "Eric Wong",
     "seasons": [
@@ -61,6 +73,9 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{56EA2D76-1CBE-486F-AA2D-761CBE686F20}"
+    ],
     "firstName": "Haley",
     "name": "Haley Rao",
     "seasons": [
@@ -76,6 +91,9 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{CC1862C6-4B2E-4D57-99CA-4E2E8739F460}"
+    ],
     "firstName": "Isaac",
     "name": "Isaac Edejer",
     "seasons": [
@@ -87,6 +105,9 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{6572D826-4E73-4458-BD40-B46DD4E576EB}"
+    ],
     "firstName": "Jivan",
     "name": "Jivan Gubbi",
     "seasons": [
@@ -102,6 +123,9 @@
   {
     "active": false,
     "coOwnedWith": [],
+    "espnIds": [
+      "{7ACDD484-9CA3-44D2-B77C-A75E495F5BE7}"
+    ],
     "firstName": "Kate",
     "name": "Kate Grillo",
     "seasons": [
@@ -116,6 +140,10 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{544D7727-133A-4ADD-8D77-27133AFADDB1}",
+      "{8FF8C80C-DE9C-411C-90E2-6CB12E6FA8C8}"
+    ],
     "firstName": "Mark",
     "name": "Mark McGreal",
     "seasons": [
@@ -130,6 +158,9 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{7204C525-DDA6-4281-8630-6AA00F6B7645}"
+    ],
     "firstName": "Sam",
     "name": "Sam Ellison",
     "seasons": [
@@ -145,6 +176,10 @@
   {
     "active": true,
     "coOwnedWith": [],
+    "espnIds": [
+      "{06573D44-F4C1-4EA1-973D-44F4C1EEA114}",
+      "{F282769B-F676-4680-BFE9-44F827B58621}"
+    ],
     "firstName": "Jay",
     "name": "Jay Uppuluri",
     "seasons": [

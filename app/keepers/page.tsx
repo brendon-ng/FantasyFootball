@@ -11,13 +11,14 @@ import {
 import {
   features,
   getAdp,
-  getRules,
-  keeperCycleSeason,
-  getConfig,
   getKeepers,
+  getLeagueRefs,
   getOwners,
   getPlayers,
+  getRules,
   getSeasons,
+  getUserIdToSlug,
+  keeperCycleSeason,
   pageTitle,
 } from "@/lib/data";
 import type { KeeperContract } from "@/lib/types";
@@ -56,7 +57,6 @@ export default function KeepersPage() {
   const seasons = getSeasons();
   const adp = getAdp();
   const { draftRounds } = getRules();
-  const cfg = getConfig();
 
   /**
    * TWO DIFFERENT SEASONS, and they diverge for five months of the year.
@@ -69,7 +69,7 @@ export default function KeepersPage() {
    */
   const nextSeason = Math.max(...seasons.map((s) => s.season), 0) + 1;
   const cycle = keeperCycleSeason();
-  const leagueId = cfg.knownLeagueIds[String(nextSeason)] ?? null;
+  const leagueRef = getLeagueRefs()[String(nextSeason)] ?? null;
 
   const byOwner = new Map<string, KeeperContract[]>();
   for (const c of keepers.final) {
@@ -124,12 +124,10 @@ export default function KeepersPage() {
           draftRounds={draftRounds}
           contractsByOwner={contractsByOwner}
           ownerNames={ownerNames}
-          userIdToSlug={Object.fromEntries(
-            owners.filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-          )}
+          userIdToSlug={getUserIdToSlug()}
           players={players}
           adp={Object.fromEntries(adp.byPlayer)}
-          leagueId={leagueId}
+          leagueRef={leagueRef}
           maxKeepers={MAX_KEEPERS}
         />
       )}
@@ -146,13 +144,11 @@ export default function KeepersPage() {
         <ProjectedDraftBoard
           draftRounds={draftRounds}
           adp={Object.fromEntries(adp.byPlayer)}
-          leagueId={leagueId}
+          leagueRef={leagueRef}
           season={nextSeason}
           contracts={all}
           players={players}
-          userIdToSlug={Object.fromEntries(
-            owners.filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-          )}
+          userIdToSlug={getUserIdToSlug()}
           ownerNames={ownerNames}
           maxKeepers={MAX_KEEPERS}
         />

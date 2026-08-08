@@ -1,7 +1,8 @@
 "use client";
 
 import { ContractRow, orderBySelection, useSelectedKeepers } from "@/components/keeper-selection";
-import { LiveStatus } from "@/lib/sleeper-browser";
+import { type LeagueRef } from "@/lib/league-ref";
+import { LiveStatus } from "@/lib/live";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
@@ -12,7 +13,7 @@ export function OwnerContracts({
   players,
   adp,
   userIdToSlug,
-  leagueId,
+  leagueRef,
   maxKeepers,
   draftRounds,
 }: {
@@ -23,11 +24,11 @@ export function OwnerContracts({
   /** Last round of the draft — the floor an expired contract is revalued to. */
   draftRounds: number;
   userIdToSlug: Record<string, string>;
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   maxKeepers: number;
 }) {
   const { byOwner, contracts: live, adjustments, ready } = useSelectedKeepers(
-    leagueId,
+    leagueRef,
     userIdToSlug,
     contracts,
   );

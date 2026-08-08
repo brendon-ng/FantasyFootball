@@ -60,6 +60,8 @@ interface OwnerConfig {
   lastName: string;
   active: boolean;
   espnNames?: string[];
+  /** ESPN member ids (SWIDs). See `Owner.espnIds`. */
+  espnIds?: string[];
 }
 interface LeagueConfig {
   leagueName: string;
@@ -191,6 +193,9 @@ function loadOwners(): void {
       name: `${o.firstName} ${o.lastName}`,
       firstName: o.firstName,
       userId: o.userId,
+      // Only when there are any, so a Sleeper-only league's owners.json is
+      // byte-identical to what it was before ESPN live data existed.
+      ...(o.espnIds?.length ? { espnIds: o.espnIds } : {}),
       active: o.active,
       seasons: [],
       coOwnedWith: [],

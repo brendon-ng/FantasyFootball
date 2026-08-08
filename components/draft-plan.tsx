@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { type LeagueRef } from "@/lib/league-ref";
 import { useSyncExternalStore } from "react";
 
 import { Panel, PanelHeader } from "@/components/ui";
 import { keeperDeadline } from "@/lib/draft-slots";
-import { useLiveDraft, useLiveRosters } from "@/lib/sleeper-browser";
+import { useLiveDraft, useLiveRosters } from "@/lib/live";
 
 /**
  * When the draft is, when keepers are due, and the order.
@@ -59,21 +60,21 @@ function until(ts: number, now: number): string {
 }
 
 export function DraftPlan({
-  leagueId,
+  leagueRef,
   season,
   userIdToSlug,
   ownerNames,
   keepers,
 }: {
-  leagueId: string | null;
+  leagueRef: LeagueRef | null;
   season: number;
   userIdToSlug: Record<string, string>;
   ownerNames: Record<string, string>;
   /** False for a redraft league, which has no deadline to show. */
   keepers: boolean;
 }) {
-  const draft = useLiveDraft(leagueId);
-  const rosters = useLiveRosters(leagueId);
+  const draft = useLiveDraft(leagueRef);
+  const rosters = useLiveRosters(leagueRef);
   const minute = useSyncExternalStore(subscribeToNothing, nowToTheMinute, noClockOnServer);
   const now = minute === 0 ? null : minute * 60_000;
   const d = draft.data;

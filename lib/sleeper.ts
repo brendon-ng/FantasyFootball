@@ -207,6 +207,13 @@ export interface SleeperPlayer {
   status?: string | null;
   years_exp?: number | null;
   search_rank?: number | null;
+  /**
+   * Sleeper's own cross-reference to ESPN, present on roughly half the map.
+   *
+   * The exact join between the two services' player ids. `sync` publishes it as
+   * `public/espn-players.json` for the live ESPN provider.
+   */
+  espn_id?: number | string | null;
 }
 
 // ---------------------------------------------------------------------------

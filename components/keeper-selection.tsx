@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { type LeagueRef } from "@/lib/league-ref";
 
 import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
 import { costRound } from "@/lib/draft-slots";
 import { Tip } from "@/components/tooltip";
 import { useLiveContracts } from "@/lib/keeper-live";
-import { useLiveRosters } from "@/lib/sleeper-browser";
+import { useLiveRosters } from "@/lib/live";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
@@ -18,7 +19,7 @@ import type { KeeperContract, PlayerMeta } from "@/lib/types";
  * beside it are build-time data and never move.
  */
 export function useSelectedKeepers(
-  leagueId: string | null,
+  leagueRef: LeagueRef | null,
   userIdToSlug: Record<string, string>,
   /** Baked contracts to reconcile against live rosters and pending moves. */
   contracts: KeeperContract[] = [],
@@ -31,7 +32,7 @@ export function useSelectedKeepers(
   adjustments: Map<string, string>;
   ready: boolean;
 } {
-  const live = useLiveRosters(leagueId);
+  const live = useLiveRosters(leagueRef);
 
   const byOwner = new Map<string, Set<string>>();
   const rosterToOwner = new Map<number, string>();
@@ -45,7 +46,7 @@ export function useSelectedKeepers(
   }
 
   const adjusted = useLiveContracts({
-    leagueId,
+    leagueRef,
     fromWeek,
     contracts,
     rosterToOwner,

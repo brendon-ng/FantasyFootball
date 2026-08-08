@@ -10,21 +10,22 @@ import { Panel, PanelHeader, Stat } from "@/components/ui";
 import {
   features,
   getAdp,
-  getRules,
-  getConfig,
   getKeepers,
-  getOwners,
-  getSeasons,
+  getLeagueRefs,
   getOwnerMap,
+  getOwners,
   getPickHandoffs,
   getPickOutcomes,
-  getTradeReturns,
   getPlayerHistory,
-  getPlayerUsage,
-  getTrades,
-  seasonsWithPages,
   getPlayerKeepHistory,
   getPlayers,
+  getPlayerUsage,
+  getRules,
+  getSeasons,
+  getTradeReturns,
+  getTrades,
+  getUserIdToSlug,
+  seasonsWithPages,
 } from "@/lib/data";
 
 export const dynamicParams = false;
@@ -59,14 +60,11 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
   const keeps = getPlayerKeepHistory(id);
   const adpAll = getAdp();
   const { draftRounds } = getRules();
-  const cfg = getConfig();
   // Weeks after this are not yet in the committed data, so anything there has to
   // come from Sleeper directly.
   const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
-  const liveLeagueId = cfg.knownLeagueIds[String(upcoming)] ?? null;
-  const userIdToSlug = Object.fromEntries(
-    getOwners().filter((o) => o.userId).map((o) => [o.userId as string, o.slug]),
-  );
+  const liveLeagueRef = getLeagueRefs()[String(upcoming)] ?? null;
+  const userIdToSlug = getUserIdToSlug();
   const ownerNames = Object.fromEntries(getOwners().map((o) => [o.slug, o.name]));
   const adp = adpAll.byPlayer.get(id);
   const trades = getTrades().filter((t) => t.legs.some((l) => l.playerId === id));
@@ -123,7 +121,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
             value={
               <LiveOwner
                 playerId={id}
-                leagueId={liveLeagueId}
+                leagueRef={liveLeagueRef}
                 userIdToSlug={userIdToSlug}
                 ownerNames={ownerNames}
                 bakedOwnerSlug={contract.ownerSlug}
@@ -247,7 +245,7 @@ export default async function PlayerPage({ params }: { params: Promise<{ id: str
             tradeReturns={getTradeReturns()}
             historySeasons={seasonsWithPages()}
             handoffs={getPickHandoffs()}
-            leagueId={liveLeagueId}
+            leagueRef={liveLeagueRef}
             season={upcoming}
             fromWeek={1}
             userIdToSlug={userIdToSlug}
