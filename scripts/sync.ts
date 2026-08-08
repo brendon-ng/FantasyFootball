@@ -648,8 +648,18 @@ async function syncLeague(league: ScriptLeague): Promise<void> {
   // ESPN first: it is the whole history for an ESPN-only league, so a failure
   // here should stop the run before anything else is written.
   if (league.features?.espnImport) {
-    const n = await syncEspnSeasons(league, { onlySeason: ONLY_SEASON });
-    log.info(n ? `ESPN: ${n} season file(s) updated` : "ESPN: no changes");
+    // ESPN IS A THIRD PARTY AND SLEEPER DATA MUST NOT DEPEND ON IT. `sync` runs
+    // leagues in slug order, so an ESPN-only league sorting first could take a
+    // 500 and kill the run before Den Ops or Masterbatters reached Sleeper —
+    // a whole night of finalized results uncommitted because someone else's
+    // API was down. Same reasoning as `continue-on-error` on the ADP step.
+    try {
+      const n = await syncEspnSeasons(league, { onlySeason: ONLY_SEASON });
+      log.info(n ? `ESPN: ${n} season file(s) updated` : "ESPN: no changes");
+    } catch (err) {
+      espnFailures.push(`${league.slug}: ${(err as Error).message.split("\n")[0]}`);
+      log.warn(`ESPN pass failed for ${league.slug} — continuing. ${(err as Error).message.split("\n")[0]}`);
+    }
   }
 
   if (!Object.keys(config.knownLeagueIds ?? {}).length) {
@@ -691,6 +701,9 @@ async function syncLeague(league: ScriptLeague): Promise<void> {
 
 }
 
+/** ESPN passes that failed, reported together at the end so none is buried. */
+const espnFailures: string[] = [];
+
 for (const league of resolveLeagues(process.argv.slice(2))) {
   await syncLeague(league);
 }
@@ -701,4 +714,13 @@ for (const league of resolveLeagues(process.argv.slice(2))) {
 // delete league y's names.
 if (!SKIP_PLAYERS) await syncPlayers(allLeagues());
 
-log.step("Done");
+// NON-ZERO ON A FAILED ESPN PASS, after everything else has been written. The
+// Sleeper data is safely committed either way, but a silent skip every night
+// is how a league quietly stops being archived, so the workflow must go red.
+if (espnFailures.length) {
+  log.step("Done, with failures");
+  for (const f of espnFailures) log.warn(f);
+  process.exitCode = 1;
+} else {
+  log.step("Done");
+}

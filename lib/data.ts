@@ -13,7 +13,7 @@
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
-import { refsBySeason, type LeagueRef, type Provider } from "./league-ref.ts";
+import { candidateProviders, refsBySeason, type LeagueRef, type Provider } from "./league-ref.ts";
 import { espnProvider } from "./live/espn.ts";
 import { sleeperProvider } from "./live/sleeper.ts";
 import type { LiveProvider } from "./live/types.ts";
@@ -824,20 +824,27 @@ export async function getLiveSeason(): Promise<LiveSeason | null> {
     // through `userIdToSlug`. See `primaryOf` in each of them.
     const ctx = { slugByRoster: new Map<number, string>(), userIdToSlug };
 
-    for (const name of new Set(Object.values(refs).map((r) => r.provider))) {
-      const provider = LIVE_PROVIDERS[name];
-      const state = await provider.state();
-      if (!state) continue;
-      const ref = refs[String(state.season)];
-      if (!ref || ref.provider !== name) continue;
+    // Only the services that could own the season being played, and each in its
+    // own try — a third party being unreachable must not stop the league's real
+    // provider being asked. See `candidateProviders`.
+    for (const name of candidateProviders(refs)) {
+      try {
+        const provider = LIVE_PROVIDERS[name];
+        const state = await provider.state();
+        if (!state) continue;
+        const ref = refs[String(state.season)];
+        if (!ref || ref.provider !== name) continue;
 
-      // If this season is already finalized in committed data, nothing is live.
-      if (getSeasons().some((s) => s.season === state.season && s.finalized)) return null;
+        // If this season is already finalized in committed data, nothing is live.
+        if (getSeasons().some((s) => s.season === state.season && s.finalized)) return null;
 
-      const live = await provider.season(ref.id, state, ctx);
-      // The league exists this year but the service had nothing to say — a
-      // placeholder, not a null, so the page knows the season has begun.
-      return live ?? empty(state.season);
+        const live = await provider.season(ref.id, state, ctx);
+        // The league exists this year but the service had nothing to say — a
+        // placeholder, not a null, so the page knows the season has begun.
+        return live ?? empty(state.season);
+      } catch {
+        // Try the next one.
+      }
     }
     return null;
   } catch {

@@ -181,7 +181,7 @@ export function ProjectedDraftBoard({
             {totalKept === 1 ? "" : "s"} placed
           </span>
         </span>
-        <LiveStatus status={draft.status} />
+        <LiveStatus status={draft.status} provider={leagueRef?.provider} />
       </div>
 
       <div className="overflow-x-auto">

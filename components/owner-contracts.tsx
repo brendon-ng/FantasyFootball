@@ -44,7 +44,7 @@ export function OwnerContracts({
             ? `${selected.size} of ${maxKeepers} keepers selected · ${ordered.length} rostered`
             : "Loading from Sleeper"}
         </span>
-        <LiveStatus status={ready ? "ready" : "loading"} />
+        <LiveStatus status={ready ? "ready" : "loading"} provider={leagueRef?.provider} />
       </div>
       <div className="grid gap-px bg-ink-600 sm:grid-cols-2">
         {ordered.map((c) => (

@@ -214,12 +214,17 @@ function LadderGrid({
   seedOf,
   hrefFor,
   isCurrent,
+  finalLabel,
+  finalPlace,
 }: {
   matches: BracketMatch[];
   nameOf: (s: string | null | undefined) => string;
   seedOf: (s: string | null) => number | null;
   hrefFor?: (match: BracketMatch) => string | null;
   isCurrent?: (match: BracketMatch) => boolean;
+  /** e.g. "🚽 Toilet Bowl · Last Place". The rung that decides `finalPlace`. */
+  finalLabel: string;
+  finalPlace: number;
 }) {
   const rounds = [...new Set(matches.map((m) => m.round))].sort((a, b) => a - b);
   const weekLabel = (round: number) => {
@@ -227,8 +232,21 @@ function LadderGrid({
     if (!m?.week) return "—";
     return m.weekEnd && m.weekEnd !== m.week ? `Weeks ${m.week}–${m.weekEnd}` : `Week ${m.week}`;
   };
+  /**
+   * The rung that decides the finish this bracket is named for.
+   *
+   * A ladder rung reads "11th / 12th place", which is accurate but buries the
+   * one game anybody looks for. The tree layout has always marqueed its
+   * decider; taking the early return skipped that entirely, so five Den Ops
+   * seasons lost "🚽 Toilet Bowl · Last Place" from the bracket altogether.
+   */
+  const decider = matches.find((m) => !m.isBye && m.placesFor?.includes(finalPlace)) ?? null;
   const placeLabel = (m: BracketMatch) =>
-    m.placesFor ? `${ordinal(m.placesFor[0])} / ${ordinal(m.placesFor[1])} place` : undefined;
+    m === decider
+      ? finalLabel
+      : m.placesFor
+        ? `${ordinal(m.placesFor[0])} / ${ordinal(m.placesFor[1])} place`
+        : undefined;
 
   return (
     <div className="no-scrollbar -mx-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
@@ -313,6 +331,8 @@ export function Bracket({
         seedOf={seedOf}
         hrefFor={hrefFor}
         isCurrent={isCurrent}
+        finalLabel={finalLabel}
+        finalPlace={finalPlace}
       />
     );
   }

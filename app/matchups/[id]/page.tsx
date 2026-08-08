@@ -134,6 +134,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   const flags = game.weeks?.length ? [] : flagsFor(game.week ?? 0);
   // Marks this game set when it was played, whether or not they still stand.
   const madeHistory = getAtTheTime()[game.id] ?? [];
+  const chip = matchupChip(game.label, game.kind);
 
   /**
    * The bracket this matchup belongs to, so a postseason game can be seen in
@@ -151,17 +152,34 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   const bracket =
     game.kind === "regular" || !season
       ? null
-      : ([
-          ["Playoff bracket", season.winnersBracket, 1] as const,
-          ...season.extraBrackets.map(
-            (b) => [b.title, b.matches, b.finalPlace] as const,
-          ),
-          [
-            season.ladderConsolation ? "Consolation ladder" : "Consolation bracket",
-            season.losersBracket,
-            season.teams,
-          ] as const,
-        ].find(([, matches]) => matches.some(isThisMatch)) ?? null);
+      : // Carries `ladder` and the real `finalLabel` so this renders IDENTICALLY
+        // to the season page. Omitting them made the same bracket appear as a
+        // ladder there and a tree here, with "7th place" against
+        // "7th / 8th place" and "Placement" against "🚽 Toilet Bowl" — 73 pages
+        // contradicting the season page they link to.
+        ([
+          {
+            title: "Playoff bracket",
+            matches: season.winnersBracket,
+            finalPlace: 1,
+            finalLabel: "🏆 Championship",
+            ladder: false,
+          },
+          ...season.extraBrackets.map((b) => ({
+            title: b.title,
+            matches: b.matches,
+            finalPlace: b.finalPlace,
+            finalLabel: b.finalLabel,
+            ladder: b.ladder,
+          })),
+          {
+            title: season.ladderConsolation ? "Consolation ladder" : "Consolation bracket",
+            matches: season.losersBracket,
+            finalPlace: season.teams,
+            finalLabel: "🚽 Toilet Bowl · Last Place",
+            ladder: season.ladderConsolation,
+          },
+        ].find((b) => b.matches.some(isThisMatch)) ?? null);
 
   const existingMeetings = new Set(getAllMeetings().map((m) => m.id));
   const bracketHref = (m: BracketMatch) => {
@@ -183,8 +201,13 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
           {game.season} · Week {game.week ?? "—"}
         </h1>
         <p className="mt-1 text-sm text-chalk-500">
+          {/* The bracket label is appended only when it SAYS SOMETHING MORE than
+              the bracket itself. `matchupChip` now names every postseason game,
+              including the ordinary ones it used to leave null, so printing both
+              unconditionally read "Consolation · Consolation" on 97 pages. A
+              championship still reads "Playoffs · Championship". */}
           {KIND_LABEL[game.kind]}
-          {game.label ? ` · ${game.label}` : ""}
+          {chip && chip !== KIND_LABEL[game.kind] ? ` · ${chip}` : ""}
           {" · "}
           <Link href={`/history/${game.season}/`} className="hover:text-accent">
             {game.season} season
@@ -404,7 +427,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
       {bracket ? (
         <Panel>
           <PanelHeader
-            title={bracket[0]}
+            title={bracket.title}
             meta={`${game.season} postseason`}
             legend="This matchup is highlighted. Open any other to see its lineups."
             href={`/history/${game.season}/`}
@@ -412,9 +435,10 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
           />
           <div className="p-4 sm:p-5">
             <Bracket
-              matches={bracket[1]}
-              finalLabel={bracket[2] === 1 ? "🏆 Championship" : "Placement"}
-              finalPlace={bracket[2]}
+              matches={bracket.matches}
+              ladder={bracket.ladder}
+              finalLabel={bracket.finalLabel}
+              finalPlace={bracket.finalPlace}
               nameOf={name}
               seedOf={(slug) =>
                 slug ? (season?.standings.find((r) => r.ownerSlug === slug)?.seed ?? null) : null

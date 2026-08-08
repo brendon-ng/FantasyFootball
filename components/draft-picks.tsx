@@ -278,7 +278,10 @@ export function DraftPicks({
               Mock order
             </span>
           ) : null}
-          <LiveStatus status={loading ? "loading" : failed ? "error" : "ready"} />
+          <LiveStatus
+            status={loading ? "loading" : failed ? "error" : "ready"}
+            provider={leagueRef?.provider}
+          />
         </span>
       </div>
 

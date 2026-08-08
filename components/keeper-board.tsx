@@ -75,7 +75,7 @@ export function KeeperBoard({
             ? `${totalSelected} keeper${totalSelected === 1 ? "" : "s"} locked in across the league`
             : "Contract values are final; selections load from Sleeper."}
         </p>
-        <LiveStatus status={live.status} />
+        <LiveStatus status={live.status} provider={leagueRef?.provider} />
       </div>
 
       <div className="grid gap-5 lg:grid-cols-2">

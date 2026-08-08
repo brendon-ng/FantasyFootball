@@ -14,6 +14,8 @@
  */
 
 import { orderIsSet } from "../draft-slots.ts";
+
+import { fetchRetry } from "./retry.ts";
 import type { LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "../types.ts";
 
 import {
@@ -29,8 +31,8 @@ import {
 const BASE = "https://api.sleeper.app/v1";
 
 const json = async <T,>(url: string, fallback: T): Promise<T> => {
-  const res = await fetch(url);
-  return res.ok ? ((await res.json()) as T) : fallback;
+  const res = await fetchRetry(url);
+  return res?.ok ? ((await res.json()) as T) : fallback;
 };
 
 interface RawRoster {
@@ -94,8 +96,8 @@ export const sleeperProvider: LiveProvider = {
   },
 
   async rosters(id) {
-    const res = await fetch(`${BASE}/league/${id}/rosters`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await fetchRetry(`${BASE}/league/${id}/rosters`);
+    if (!res?.ok) throw new Error(`HTTP ${res?.status ?? "unreachable"}`);
     const raw = ((await res.json()) as RawRoster[] | null) ?? [];
     return raw.map((r) => ({
       rosterId: r.roster_id,
@@ -117,8 +119,8 @@ export const sleeperProvider: LiveProvider = {
    * rounds 1..N per roster with these applied on top.
    */
   async tradedPicks(id) {
-    const res = await fetch(`${BASE}/league/${id}/traded_picks`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await fetchRetry(`${BASE}/league/${id}/traded_picks`);
+    if (!res?.ok) throw new Error(`HTTP ${res?.status ?? "unreachable"}`);
     const raw =
       ((await res.json()) as Array<{
         season: string;
@@ -143,14 +145,14 @@ export const sleeperProvider: LiveProvider = {
    * — the 2024 league carries two — and omits `slot_to_roster_id` entirely.
    */
   async draft(id) {
-    const leagueRes = await fetch(`${BASE}/league/${id}`);
-    if (!leagueRes.ok) throw new Error(`HTTP ${leagueRes.status}`);
+    const leagueRes = await fetchRetry(`${BASE}/league/${id}`);
+    if (!leagueRes?.ok) throw new Error(`HTTP ${leagueRes?.status ?? "unreachable"}`);
     const league = (await leagueRes.json()) as { draft_id?: string | null } | null;
     const draftId = league?.draft_id;
     if (!draftId) return null;
 
-    const res = await fetch(`${BASE}/draft/${draftId}`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await fetchRetry(`${BASE}/draft/${draftId}`);
+    if (!res?.ok) throw new Error(`HTTP ${res?.status ?? "unreachable"}`);
     const raw = (await res.json()) as {
       draft_id: string;
       status: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { type LeagueRef } from "@/lib/league-ref";
+import { refKey, type LeagueRef } from "@/lib/league-ref";
 import { useEffect, useState } from "react";
 
 import { Tip } from "@/components/tooltip";
@@ -78,7 +78,9 @@ function usePendingTransactions({
     return () => {
       cancelled = true;
     };
-  }, [leagueRef, fromWeek, playerId]);
+    // `refKey` stands in for `leagueRef`, which a caller may build inline.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refKey(leagueRef), fromWeek, playerId]);
 
   const rosterToSlug = new Map<number, string>();
   for (const r of rosters.data ?? []) {

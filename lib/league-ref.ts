@@ -69,6 +69,29 @@ export const sameRef = (a: LeagueRef | null, b: LeagueRef | null): boolean =>
 export const refKey = (ref: LeagueRef | null): string =>
   ref ? `${ref.provider}:${ref.id}:${ref.season}` : "";
 
+/**
+ * The providers that could plausibly own the season being played.
+ *
+ * ONLY THE LAST TWO SEASONS COUNT. Den Ops lists ESPN ids for 2019-2023 as
+ * provenance for its imported history, and asking ESPN's clock about them
+ * meant every Den Ops page load paid a round-trip to a service that could
+ * never answer — 713ms before Sleeper was even asked. Two seasons rather than
+ * one so a league mid-migration, with last year on one service and this year
+ * on the other, still finds itself in either direction.
+ */
+export function candidateProviders(refs: Record<string, LeagueRef>): Provider[] {
+  const seasons = Object.keys(refs).map(Number).filter(Number.isFinite);
+  if (!seasons.length) return [];
+  const newest = Math.max(...seasons);
+  return [
+    ...new Set(
+      Object.values(refs)
+        .filter((r) => r.season >= newest - 1)
+        .map((r) => r.provider),
+    ),
+  ];
+}
+
 /** Where a provider's name shows up in the UI, e.g. "live from Sleeper". */
 export const PROVIDER_NAME: Record<Provider, string> = {
   sleeper: "Sleeper",

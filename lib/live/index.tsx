@@ -21,7 +21,7 @@ import {
   mockDraftDate,
   mockDraftOrder,
 } from "@/lib/draft-slots";
-import { PROVIDER_NAME, refKey, type LeagueRef } from "@/lib/league-ref";
+import { PROVIDER_NAME, candidateProviders, refKey, type LeagueRef } from "@/lib/league-ref";
 import { applyPhaseMock, type Replay } from "@/lib/phase-mock";
 import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
 import type { LiveSeason } from "@/lib/types";
@@ -47,6 +47,7 @@ const PROVIDERS: Record<LeagueRef["provider"], LiveProvider> = {
 
 const providerFor = (ref: LeagueRef | null): LiveProvider | null =>
   ref ? PROVIDERS[ref.provider] : null;
+
 
 /**
  * Shared plumbing for the one-shot hooks.
@@ -199,11 +200,9 @@ export function useLiveSeason(
    * only Sleeper in a year the league has moved to ESPN finds nothing.
    */
   const seasonKeys = Object.keys(refBySeason).sort().join(",");
-  const providers = useMemo(
-    () => [...new Set(Object.values(refBySeason).map((r) => r.provider))],
+  const providers = useMemo(() => candidateProviders(refBySeason),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [seasonKeys],
-  );
+    [seasonKeys]);
 
   useEffect(() => {
     let cancelled = false;
@@ -215,16 +214,26 @@ export function useLiveSeason(
         );
 
         for (const name of providers) {
+          if (cancelled) return;
           const provider = PROVIDERS[name];
-          const st = await provider.state();
-          if (!st) continue;
-          const ref = refBySeason[String(st.season)];
-          if (!ref || ref.provider !== name) continue;
+          // PER PROVIDER, not around the loop. A rejected fetch — an ad
+          // blocker, a DNS sinkhole, a captive portal — used to escape to the
+          // outer catch and abandon the remaining providers, so an unreachable
+          // ESPN left a Sleeper league with no live data at all.
+          try {
+            const st = await provider.state();
+            if (!st) continue;
+            const ref = refBySeason[String(st.season)];
+            if (!ref || ref.provider !== name) continue;
 
-          const next = await provider.season(ref.id, st, { slugByRoster, userIdToSlug });
-          if (cancelled || !next) continue;
-          setLive(applyPhaseMock(next, mockPhase(), replay, mockWeek()));
-          return;
+            const next = await provider.season(ref.id, st, { slugByRoster, userIdToSlug });
+            if (cancelled) return;
+            if (!next) continue;
+            setLive(applyPhaseMock(next, mockPhase(), replay, mockWeek()));
+            return;
+          } catch {
+            // Try the next one.
+          }
         }
       } catch {
         // Fails soft: `initial` stays on screen. An outage should not blank the

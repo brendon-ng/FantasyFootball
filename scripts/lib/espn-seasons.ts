@@ -7,7 +7,7 @@
  * from it. The CLI is now a thin wrapper over `syncEspnSeasons`.
  */
 
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, renameSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { fetchEspn, ownersByTeam, type LeagueFile } from "./espn.ts";
@@ -37,9 +37,24 @@ interface EspnTeam {
   primaryOwner?: string;
   record?: { overall?: { wins: number; losses: number; ties: number; pointsFor: number; pointsAgainst: number } };
 }
+/**
+ * The `source` this script stamps on what it writes.
+ *
+ * Load-bearing, not decoration: it is how a re-run tells a season it produced
+ * from one imported by `import-espn.ts` off archived MHTML, which carries
+ * routing the read API does not serve and must never be overwritten.
+ */
+export const API_SOURCE = "ESPN Fantasy (imported from the read API)";
+
 interface EspnSeason {
   teams: EspnTeam[];
   schedule?: EspnGame[];
+  /** ESPN's own scoring progress. `latestScoringPeriod` is the finalized marker. */
+  status?: {
+    latestScoringPeriod?: number;
+    finalScoringPeriod?: number;
+    currentMatchupPeriod?: number;
+  };
   members?: Array<{ id: string; firstName?: string; lastName?: string }>;
   settings: {
     size: number;
@@ -234,7 +249,7 @@ export function buildSeason(season: number, data: EspnSeason, cfg: LeagueFile | 
     playoffWeekStart: regularSeasonWeeks + 1,
     regularSeasonWeeks,
     season,
-    source: "ESPN Fantasy (imported from the read API)",
+    source: API_SOURCE,
     standings,
     teams: data.settings.size,
   };
@@ -291,8 +306,48 @@ export async function syncEspnSeasons(
       continue;
     }
 
-    const built = buildSeason(season, data, cfg, `${league.slug} ${season}`);
     const path = join(dir, `${season}.json`);
+    const committed = opts.check ? null : readJson<{ source?: string }>(path);
+
+    /**
+     * NEVER OVERWRITE A BETTER IMPORT.
+     *
+     * Den Ops' 2019-2023 came from `import-espn.ts`, which reads MHTML pages
+     * saved while the league was live. Those pages carry `gameId` and `routing`
+     * — the consolation ladder's explicit wiring — and the read API does not
+     * serve either. Rebuilding those seasons from the API is a STRICT LOSS: it
+     * nulls 45 game ids and 30 routing strings, and because record attribution
+     * depends on matchup order within a week, it also silently moves the
+     * "made history" badges to different games.
+     *
+     * Left to itself the nightly job would do exactly that, unreviewed, on its
+     * first run. So a season already imported from somewhere else is never
+     * touched — this script only ever owns seasons it produced.
+     */
+    if (committed?.source && committed.source !== API_SOURCE) {
+      log.skip(`${season} — imported from a better source (${committed.source})`);
+      continue;
+    }
+
+    /**
+     * ONLY FINALIZED SEASONS, which is `sync`'s first invariant.
+     *
+     * `latestScoringPeriod` is ESPN's own marker for the last week it has
+     * scored, and the season is done once it reaches `finalScoringPeriod`.
+     * Checking "has any game scored" instead — which is what this did — would
+     * commit a season in week 1 with sixty-odd unplayed 0-0 matchups, hand the
+     * record book a 0.00 low score, and rewrite the file every night as scores
+     * came in. An in-progress season is served live in the browser instead,
+     * exactly as an in-progress Sleeper season is.
+     */
+    const latest = data.status?.latestScoringPeriod ?? 0;
+    const final = data.status?.finalScoringPeriod ?? 0;
+    if (!final || latest < final) {
+      log.skip(`${season} — in progress (scored through ${latest} of ${final || "?"})`);
+      continue;
+    }
+
+    const built = buildSeason(season, data, cfg, `${league.slug} ${season}`);
     const next = `${JSON.stringify(stable(built), null, 2)}\n`;
 
     if (opts.check) {
@@ -321,7 +376,13 @@ export async function syncEspnSeasons(
       if (have === next) continue;
     }
 
-    writeFileSync(path, next);
+    // WRITE THEN RENAME. A ~1MB write killed halfway — a cancelled CI job —
+    // leaves truncated JSON, and `readJson` has no try/catch, so every later
+    // run would throw on the unchanged-file check before writing anything and
+    // the nightly job would stay wedged until someone noticed by hand.
+    const tmp = `${path}.tmp`;
+    writeFileSync(tmp, next);
+    renameSync(tmp, path);
     written++;
     const post = built.matchups.filter((m) => m.kind !== "regular").length;
     log.write(

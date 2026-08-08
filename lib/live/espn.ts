@@ -32,6 +32,7 @@ import {
   type RawDraft,
   type SeasonContext,
 } from "./types.ts";
+import { fetchRetry } from "./retry.ts";
 
 const API = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl";
 
@@ -39,10 +40,10 @@ const leagueUrl = (id: string, season: number, views: string[]) =>
   `${API}/seasons/${season}/segments/0/leagues/${id}?${views.map((v) => `view=${v}`).join("&")}`;
 
 async function get<T>(url: string): Promise<T | null> {
-  const res = await fetch(url);
+  const res = await fetchRetry(url);
   // 401 is the normal answer for a season the owner has not made public. Not an
   // error worth surfacing — the live layer just has nothing to add.
-  if (!res.ok) return null;
+  if (!res?.ok) return null;
   return (await res.json()) as T;
 }
 
@@ -260,10 +261,10 @@ export const espnProvider: LiveProvider = {
     const espnId = Object.keys(ids).find((k) => ids[k] === playerId);
     if (!espnId) return [];
 
-    const res = await fetch(leagueUrl(id, season, ["kona_playercard"]), {
+    const res = await fetchRetry(leagueUrl(id, season, ["kona_playercard"]), {
       headers: { "x-fantasy-filter": JSON.stringify({ players: { filterIds: { value: [Number(espnId)] } } }) },
     });
-    if (!res.ok) return [];
+    if (!res?.ok) return [];
     const card = (await res.json()) as {
       players?: Array<{ transactions?: EspnTx[] }>;
     };
@@ -304,12 +305,12 @@ export const espnProvider: LiveProvider = {
    */
   async leagueMoves(id, season, fromWeek) {
     const [res, ids] = await Promise.all([
-      fetch(leagueUrl(id, season, ["kona_playercard"]), {
+      fetchRetry(leagueUrl(id, season, ["kona_playercard"]), {
         headers: { "x-fantasy-filter": JSON.stringify({ players: { limit: 2000, offset: 0 } }) },
       }),
       espnPlayerIds(),
     ]);
-    if (!res.ok) return [];
+    if (!res?.ok) return [];
     const card = (await res.json()) as { players?: Array<{ transactions?: EspnTx[] }> };
 
     // A trade appears on every player in it; the id collapses the repeats.

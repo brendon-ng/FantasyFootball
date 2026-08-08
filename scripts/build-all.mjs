@@ -57,8 +57,31 @@ for (const league of leagues) {
       if (!f.startsWith(`${league.slug}.`)) rmSync(join(path, f));
     }
   }
+
+  // Same reasoning, for a whole-file asset rather than a per-league one. The
+  // ESPN player-id map is 132KB and only the LIVE ESPN provider reads it.
+  //
+  // Keyed on whether an ESPN season could still be the one being played, not on
+  // whether the league has ever been on ESPN — Den Ops' ESPN years are 2019-23
+  // and frozen, so it never fetches the map either. Mirrors `candidateProviders`
+  // in lib/live, which decides the same question for the same reason.
+  const espnSeasons = Object.keys(league.espnLeagueIds ?? {}).map(Number);
+  const newest = Math.max(
+    ...espnSeasons,
+    ...Object.keys(league.knownLeagueIds ?? {}).map(Number),
+    0,
+  );
+  if (!espnSeasons.some((y) => y >= newest - 1)) {
+    const map = join(STAGE, league.slug, "espn-players.json");
+    if (existsSync(map)) rmSync(map);
+  }
 }
 
+// CLEARED FIRST. `cpSync` merges rather than replaces, so a file that a build
+// stops emitting would survive from the previous run — which is exactly how a
+// pruned asset kept showing up locally while CI, starting from a clean
+// checkout, would never have had it.
+rmSync(join(ROOT, "out"), { recursive: true, force: true });
 mkdirSync(join(ROOT, "out"), { recursive: true });
 for (const league of leagues) {
   cpSync(join(STAGE, league.slug), join(ROOT, "out", league.slug), { recursive: true });
