@@ -296,6 +296,7 @@ export default async function SeasonPage({
           <div className="p-4 sm:p-5">
             <Bracket
               matches={b.matches}
+              ladder={b.ladder}
               finalLabel={b.finalLabel}
               finalPlace={b.finalPlace}
               nameOf={name}
@@ -328,6 +329,8 @@ export default async function SeasonPage({
           </p>
           <Bracket
             matches={summary.losersBracket}
+            // ESPN's is a ladder; Sleeper's toilet bowl is a real bracket.
+            ladder={summary.ladderConsolation}
             finalLabel="🚽 Toilet Bowl · Last Place"
             finalPlace={summary.teams}
             nameOf={name}

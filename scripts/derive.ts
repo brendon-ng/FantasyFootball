@@ -1949,6 +1949,8 @@ interface ManualSeason {
     section: "winners" | "winners-consolation" | "consolation";
     round: number;
     week: number | null;
+    /** Last week, when the rung spanned more than one. */
+    weekEnd?: number;
     gameId: string | null;
     routing: string | null;
     teams: Array<{ seed: number; teamName: string; points: number }>;
@@ -2082,6 +2084,7 @@ function importedSeasons(): SeasonSummary[] {
     const section = (
       key: ManualSeason["games"][number]["section"],
       idBase: number,
+      isLadder = false,
     ): BracketMatch[] => {
       const games = m.games.filter((g) => g.section === key);
 
@@ -2105,6 +2108,7 @@ function importedSeasons(): SeasonSummary[] {
           round: g.round,
           matchId: ladderId ?? idBase + i,
           week: g.week,
+          ...(g.weekEnd ? { weekEnd: g.weekEnd } : {}),
           team1: slugOf.get(a.teamName) ?? null,
           team2: bye ? null : (slugOf.get(b!.teamName) ?? null),
           // A bye "advances" its team, which is what lets the next round link
@@ -2138,6 +2142,17 @@ function importedSeasons(): SeasonSummary[] {
         }
       }
 
+      /**
+       * A LADDER HAS NO FEEDERS, so none are inferred for one.
+       *
+       * In a bracket a team in round 2 got there by winning; in a ladder BOTH
+       * teams continue — the winner climbs a rung and the loser drops one. So
+       * "no feeder in an earlier round" is the normal case, not a bye, and
+       * inferring winner-feeders wires half the games into a tree that does not
+       * exist while the renderer invents a phantom bye for every loser.
+       */
+      if (isLadder) return matches.sort((a, b) => a.round - b.round || a.matchId - b.matchId);
+
       // Inferred routing for sections ESPN doesn't label: a team appearing in a
       // later round must have won an earlier match in this same section.
       for (const match of matches) {
@@ -2159,22 +2174,34 @@ function importedSeasons(): SeasonSummary[] {
     };
 
     const winners = section("winners", 100);
-    const winnersConsolation = section("winners-consolation", 200);
-    const ladder = section("consolation", 300);
+    // Both ESPN consolation sections are LADDERS, not brackets.
+    const winnersConsolation = section("winners-consolation", 200, true);
+    const ladder = section("consolation", 300, true);
 
     // Placement games, matching how the importer cross-validates placement.
     const finalRound = (arr: BracketMatch[]) => Math.max(0, ...arr.map((x) => x.round));
     for (const g of winners.filter((x) => x.round === finalRound(winners) && !x.isBye)) {
       g.placesFor = [1, 2];
     }
-    const wcFinal = winnersConsolation
-      .filter((x) => x.round === finalRound(winnersConsolation))
-      .sort((x, y) => (x.matchId ?? 0) - (y.matchId ?? 0));
-    wcFinal.forEach((g, i) => (g.placesFor = [3 + 2 * i, 4 + 2 * i]));
-    const ladderFinal = ladder
-      .filter((x) => x.round === finalRound(ladder))
-      .sort((x, y) => x.matchId - y.matchId);
-    ladderFinal.forEach((g, i) => (g.placesFor = [7 + 2 * i, 8 + 2 * i]));
+    /**
+     * A LADDER'S FINAL RUNG DECIDES THE PLACES ITS OWN TEAMS FINISHED IN, which
+     * is a lookup, not arithmetic. The old `7 + 2 * i` assumed a twelve-team
+     * league with a six-team playoff and produced "11th place" in a ten-team
+     * one — apartment-401 plays a four-team playoff, so its consolation ladder
+     * covers 5th through 10th, not 7th through 12th.
+     */
+    const placeOf = new Map(m.standings.map((r) => [r.teamSlug, r.finalPlace]));
+    const labelFinalRung = (arr: BracketMatch[]) => {
+      for (const g of arr.filter((x) => x.round === finalRound(arr) && !x.isBye)) {
+        const places = [g.team1, g.team2]
+          .map((t) => (t ? placeOf.get(t) : undefined))
+          .filter((x): x is number => typeof x === "number")
+          .sort((a, b) => a - b);
+        if (places.length === 2) g.placesFor = [places[0], places[1]];
+      }
+    };
+    labelFinalRung(winnersConsolation);
+    labelFinalRung(ladder);
 
     const standings: StandingsRow[] = m.standings.map((r) => ({
       ownerSlug: r.teamSlug,
@@ -2210,6 +2237,7 @@ function importedSeasons(): SeasonSummary[] {
       losersBracket: ladder,
       extraBrackets: [
         {
+          ladder: true,
           key: "winners-consolation",
           title: "Winner's Consolation Ladder",
           note: "Teams knocked out of the championship bracket, playing for 3rd through 6th.",

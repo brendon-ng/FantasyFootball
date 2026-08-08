@@ -199,6 +199,78 @@ function ByeCard({ name, seed }: { name: string; seed: number | null }) {
   );
 }
 
+/**
+ * A consolation ladder: one column per round, games stacked in their own rung
+ * order, no connectors.
+ *
+ * Rows are NOT aligned across columns on purpose — a ladder's round-2 game has
+ * no single round-1 parent to sit beside, so centring it against one would imply
+ * a lineage that is not there. Each column simply lists what was played that
+ * round, which is what ESPN shows and what the rungs actually mean.
+ */
+function LadderGrid({
+  matches,
+  nameOf,
+  seedOf,
+  hrefFor,
+  isCurrent,
+}: {
+  matches: BracketMatch[];
+  nameOf: (s: string | null | undefined) => string;
+  seedOf: (s: string | null) => number | null;
+  hrefFor?: (match: BracketMatch) => string | null;
+  isCurrent?: (match: BracketMatch) => boolean;
+}) {
+  const rounds = [...new Set(matches.map((m) => m.round))].sort((a, b) => a - b);
+  const weekLabel = (round: number) => {
+    const m = matches.find((x) => x.round === round);
+    if (!m?.week) return "—";
+    return m.weekEnd && m.weekEnd !== m.week ? `Weeks ${m.week}–${m.weekEnd}` : `Week ${m.week}`;
+  };
+  const placeLabel = (m: BracketMatch) =>
+    m.placesFor ? `${ordinal(m.placesFor[0])} / ${ordinal(m.placesFor[1])} place` : undefined;
+
+  return (
+    <div className="no-scrollbar -mx-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
+      <div
+        className="grid min-w-max items-start gap-x-6 gap-y-3"
+        style={{ gridTemplateColumns: `repeat(${rounds.length}, ${COL_W}px)` }}
+      >
+        {rounds.map((round, i) => (
+          <div key={`h${round}`} className="text-center" style={{ gridColumn: i + 1, gridRow: 1 }}>
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-chalk-300">
+              {i === rounds.length - 1 ? "Final rung" : `Round ${round}`}
+            </div>
+            <div className="text-[10px] text-chalk-600">{weekLabel(round)}</div>
+          </div>
+        ))}
+
+        {rounds.map((round, i) => (
+          <div key={`c${round}`} className="space-y-3" style={{ gridColumn: i + 1, gridRow: 2 }}>
+            {matches
+              .filter((m) => m.round === round)
+              .sort((a, b) => a.matchId - b.matchId)
+              .map((m) => (
+                <MatchCard
+                  key={m.matchId}
+                  match={m}
+                  heading={placeLabel(m)}
+                  nameOf={nameOf}
+                  seedOf={seedOf}
+                  // A ladder has no feeders, so a side with no team is genuinely
+                  // unknown rather than "winner of M4".
+                  hasFeeders={false}
+                  href={hrefFor?.(m) ?? null}
+                  current={isCurrent?.(m)}
+                />
+              ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Bracket({
   matches,
   finalLabel,
@@ -207,6 +279,7 @@ export function Bracket({
   seedOf,
   hrefFor,
   isCurrent,
+  ladder,
 }: {
   matches: BracketMatch[];
   /** e.g. "🏆 Championship" or "💩 King (Last Place)". */
@@ -219,8 +292,30 @@ export function Bracket({
   hrefFor?: (match: BracketMatch) => string | null;
   /** Marks the match currently being viewed, when shown in context. */
   isCurrent?: (match: BracketMatch) => boolean;
+  /**
+   * A LADDER, NOT A BRACKET — render it as a grid.
+   *
+   * ESPN's consolation sections are ladders: both teams continue, the winner up
+   * a rung and the loser down. There is no tree to draw, so the tree layout
+   * scatters the games vertically and the bye inference invents a phantom bye
+   * for every team that dropped. A ladder is columns of independent games, which
+   * is how ESPN itself renders it.
+   */
+  ladder?: boolean;
 }) {
   if (!matches.length) return null;
+
+  if (ladder) {
+    return (
+      <LadderGrid
+        matches={matches}
+        nameOf={nameOf}
+        seedOf={seedOf}
+        hrefFor={hrefFor}
+        isCurrent={isCurrent}
+      />
+    );
+  }
 
   const byId = new Map(matches.map((m) => [m.matchId, m]));
 
@@ -325,7 +420,14 @@ export function Bracket({
             <div className="text-[11px] font-semibold uppercase tracking-wider text-chalk-300">
               {i === rounds.length - 1 ? "Finals" : `Round ${round}`}
             </div>
-            <div className="text-[10px] text-chalk-600">Week {weekOf(round) ?? "—"}</div>
+            <div className="text-[10px] text-chalk-600">
+              {(() => {
+                const m = matches.find((x) => x.round === round);
+                return m?.weekEnd && m.weekEnd !== m.week
+                  ? `Weeks ${m.week}–${m.weekEnd}`
+                  : `Week ${weekOf(round) ?? "—"}`;
+              })()}
+            </div>
           </div>
         ))}
 

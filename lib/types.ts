@@ -45,6 +45,8 @@ export interface StandingsRow {
 }
 
 export interface BracketMatch {
+  /** Last week, when the round spanned more than one. Absent for a single week. */
+  weekEnd?: number;
   round: number;
   matchId: number;
   /** Playoff week this round was played. */
@@ -108,6 +110,8 @@ export interface SeasonSummary {
    * and the main ladder deciding 7th-12th.
    */
   extraBrackets: Array<{
+    /** True for an ESPN consolation ladder, which renders as a grid. */
+    ladder?: boolean;
     key: string;
     title: string;
     note: string;

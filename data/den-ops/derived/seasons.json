@@ -6,6 +6,7 @@
         "finalLabel": "🥉 3rd Place",
         "finalPlace": 3,
         "key": "winners-consolation",
+        "ladder": true,
         "matches": [
           {
             "inverted": false,
@@ -64,9 +65,7 @@
             },
             "round": 3,
             "team1": "cassidy-pensa",
-            "team1From": {
-              "winnerOf": 200
-            },
+            "team1From": null,
             "team2": "brendon-ng",
             "team2From": null,
             "week": 16,
@@ -657,6 +656,7 @@
         "finalLabel": "🥉 3rd Place",
         "finalPlace": 3,
         "key": "winners-consolation",
+        "ladder": true,
         "matches": [
           {
             "inverted": false,
@@ -717,9 +717,7 @@
             "team1": "brendon-ng",
             "team1From": null,
             "team2": "olivia-nelli",
-            "team2From": {
-              "winnerOf": 200
-            },
+            "team2From": null,
             "week": 16,
             "winner": "brendon-ng"
           }
@@ -1308,6 +1306,7 @@
         "finalLabel": "🥉 3rd Place",
         "finalPlace": 3,
         "key": "winners-consolation",
+        "ladder": true,
         "matches": [
           {
             "inverted": false,
@@ -1366,9 +1365,7 @@
             },
             "round": 3,
             "team1": "jake-gibbons",
-            "team1From": {
-              "winnerOf": 200
-            },
+            "team1From": null,
             "team2": "david-collier",
             "team2From": null,
             "week": 17,
@@ -1960,6 +1957,7 @@
         "finalLabel": "🥉 3rd Place",
         "finalPlace": 3,
         "key": "winners-consolation",
+        "ladder": true,
         "matches": [
           {
             "inverted": false,
@@ -2020,9 +2018,7 @@
             "team1": "safvet-besen",
             "team1From": null,
             "team2": "reagan-schmidt",
-            "team2From": {
-              "winnerOf": 200
-            },
+            "team2From": null,
             "week": 17,
             "winner": "reagan-schmidt"
           }
@@ -2612,6 +2608,7 @@
         "finalLabel": "🥉 3rd Place",
         "finalPlace": 3,
         "key": "winners-consolation",
+        "ladder": true,
         "matches": [
           {
             "inverted": false,
@@ -2672,9 +2669,7 @@
             "team1": "david-collier",
             "team1From": null,
             "team2": "olivia-nelli",
-            "team2From": {
-              "winnerOf": 200
-            },
+            "team2From": null,
             "week": 17,
             "winner": "david-collier"
           }

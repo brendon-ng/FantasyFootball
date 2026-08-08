@@ -209,6 +209,11 @@ function buildSeason(season: number, data: EspnSeason, cfg: LeagueFile | null, w
       round: roundOf(g.matchupPeriodId),
       routing: null,
       section: sec.section,
+      // The LAST week of the rung, when it spans more than one. ESPN's own
+      // header reads "ROUND 1 | NFL WEEK 14-NFL WEEK 15" for exactly this.
+      ...(spanOf(g.matchupPeriodId).length > 1
+        ? { weekEnd: spanOf(g.matchupPeriodId).at(-1) }
+        : {}),
       // AWAY FIRST, which is the order ESPN's own scoreboard shows and therefore
       // the order the MHTML import captured. `matchups` keeps home/away as named
       // fields, so only this positional list has to care.

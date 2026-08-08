@@ -1222,8 +1222,28 @@ the last two loses both the structure and the placements.
 
 ESPN's consolation is a LADDER, not Sleeper's anti-tournament: winning moves you
 UP a rung, and the loser of the bottom rung in the final week finishes last. So
-`inverted` is false for imported brackets. `ladderConsolation` picks the right
-copy; do not unify the two formats.
+`inverted` is false for imported brackets. Do not unify the two formats.
+
+A LADDER IS NOT A TREE, AND IS NOT RENDERED AS ONE. Both teams continue — the
+winner climbs a rung, the loser drops one — so there are no feeders and no byes.
+`section()` returns early for a ladder rather than inferring winner-feeders, and
+`Bracket` takes a `ladder` prop that switches it to a plain grid: one column per
+round, games stacked in rung order, no connectors.
+
+Getting this wrong is not subtle. The tree layout has no parent to centre a
+round-2 game against, so the games scatter down the column, and the bye inference
+conjures a phantom bye for every team that DROPPED a rung — which is half of them.
+
+PLACEMENTS COME FROM THE STANDINGS, not from arithmetic. The old `7 + 2 * i`
+assumed twelve teams and a six-team playoff; apartment-401 plays four, so its
+ladder covers 5th-10th and the old rule printed "11th place" in a ten-team league.
+`labelFinalRung()` looks each team's real `finalPlace` up instead. Den Ops is
+unchanged by that — twelve teams and six playoff spots is what the constant
+encoded — which is the check that the new rule agrees where the old one was right.
+
+A RUNG CAN SPAN TWO WEEKS. `BracketMatch.weekEnd` carries the end of the span so
+the header reads "Weeks 14-15" rather than naming only the first, which is what
+ESPN's own "ROUND 1 | NFL WEEK 14-NFL WEEK 15" says.
 
 Three parsing traps, all of which produced plausible-looking wrong output:
 

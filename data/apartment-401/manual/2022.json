@@ -18,7 +18,8 @@
           "teamName": "Chris Browns"
         }
       ],
-      "week": 14
+      "week": 14,
+      "weekEnd": 15
     },
     {
       "gameId": null,
@@ -37,7 +38,8 @@
           "teamName": "Eric's In Paris"
         }
       ],
-      "week": 14
+      "week": 14,
+      "weekEnd": 15
     },
     {
       "gameId": null,
@@ -56,7 +58,8 @@
           "teamName": "Team Gonz"
         }
       ],
-      "week": 14
+      "week": 14,
+      "weekEnd": 15
     },
     {
       "gameId": null,
@@ -75,7 +78,8 @@
           "teamName": "Ertz Donut"
         }
       ],
-      "week": 14
+      "week": 14,
+      "weekEnd": 15
     },
     {
       "gameId": null,
@@ -94,7 +98,8 @@
           "teamName": "El Diablo"
         }
       ],
-      "week": 14
+      "week": 14,
+      "weekEnd": 15
     },
     {
       "gameId": null,
@@ -113,7 +118,8 @@
           "teamName": "Chris Browns"
         }
       ],
-      "week": 16
+      "week": 16,
+      "weekEnd": 17
     },
     {
       "gameId": null,
@@ -132,7 +138,8 @@
           "teamName": "Eric's In Paris"
         }
       ],
-      "week": 16
+      "week": 16,
+      "weekEnd": 17
     },
     {
       "gameId": null,
@@ -151,7 +158,8 @@
           "teamName": "Team Gonz"
         }
       ],
-      "week": 16
+      "week": 16,
+      "weekEnd": 17
     },
     {
       "gameId": null,
@@ -170,7 +178,8 @@
           "teamName": "Druken Clamb"
         }
       ],
-      "week": 16
+      "week": 16,
+      "weekEnd": 17
     },
     {
       "gameId": null,
@@ -189,7 +198,8 @@
           "teamName": "Ertz Donut"
         }
       ],
-      "week": 16
+      "week": 16,
+      "weekEnd": 17
     }
   ],
   "hasDrafts": false,
