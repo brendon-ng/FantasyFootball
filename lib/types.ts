@@ -525,6 +525,16 @@ export interface PlayerMeta {
   position: string | null;
   team: string | null;
   years_exp?: number | null;
+  /**
+   * ISO date of birth, e.g. "2002-01-30".
+   *
+   * THE DATE, NOT THE AGE, even though Sleeper publishes both. An age is a
+   * snapshot: committed to `players.json` it would be wrong within a year and
+   * would rewrite several hundred lines every birthday, which breaks the
+   * empty-diff property `sync` depends on. A birth date never changes, and
+   * `playerAge()` derives the age at read time.
+   */
+  birth_date?: string | null;
 }
 
 // ---------------------------------------------------------------------------

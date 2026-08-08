@@ -206,6 +206,8 @@ export interface SleeperPlayer {
   team?: string | null;
   status?: string | null;
   years_exp?: number | null;
+  /** ISO date, e.g. "2002-01-30". Present for ~11k of Sleeper's 12k players. */
+  birth_date?: string | null;
   search_rank?: number | null;
   /**
    * Sleeper's own cross-reference to ESPN, present on roughly half the map.

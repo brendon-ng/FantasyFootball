@@ -187,6 +187,70 @@ export const getPlayers = (): Record<string, PlayerMeta> => {
   );
 };
 /**
+ * ESPN's written season outlook per player, keyed by Sleeper id.
+ *
+ * SHARED ACROSS LEAGUES like `players.json` — what ESPN thinks of a player is a
+ * fact about the NFL. Optional: written by `npm run import:espn:outlooks`, which
+ * is run by hand once a year, so a checkout that has never run it simply has no
+ * outlooks rather than a broken build.
+ *
+ * `capturedAt` matters more than it looks. Outlooks are written in the preseason
+ * and never revised, so by November one is describing a season that has already
+ * happened. Anything rendering them should say when they were written.
+ */
+export const getOutlooks = once(
+  (): { season: number | null; capturedAt: string | null; outlooks: Record<string, string> } => {
+    const p = join(SHARED_DATA, "espn-outlooks.json");
+    if (!existsSync(p)) return { season: null, capturedAt: null, outlooks: {} };
+    return JSON.parse(readFileSync(p, "utf8")) as {
+      season: number;
+      capturedAt: string;
+      outlooks: Record<string, string>;
+    };
+  },
+);
+
+export interface Projection {
+  gp: number | null;
+  pts_ppr: number | null;
+  pts_half_ppr: number | null;
+  pts_std: number | null;
+  rec: number | null;
+  rec_yd: number | null;
+  rec_td: number | null;
+  rush_att: number | null;
+  rush_yd: number | null;
+  rush_td: number | null;
+  pass_yd: number | null;
+  pass_td: number | null;
+  pass_int: number | null;
+}
+
+/**
+ * Sleeper's season projections, keyed by Sleeper id.
+ *
+ * SHARED like `players.json` and written by `npm run import:sleeper:projections`.
+ * Optional — an undocumented endpoint feeds it, so a checkout that has never run
+ * the importer, or a week when Sleeper drops the route, gets an empty map rather
+ * than a failed build.
+ *
+ * A SEASON TOTAL IS NOT A DEN OPS TOTAL. `gp` is 18: these project the full NFL
+ * season, while this league scores a 14-week regular season. Per-game is the
+ * comparable number and is what the UI should lead with.
+ */
+export const getProjections = once(
+  (): { season: number | null; capturedAt: string | null; players: Record<string, Projection> } => {
+    const p = join(SHARED_DATA, "projections.json");
+    if (!existsSync(p)) return { season: null, capturedAt: null, players: {} };
+    return JSON.parse(readFileSync(p, "utf8")) as {
+      season: number;
+      capturedAt: string;
+      players: Record<string, Projection>;
+    };
+  },
+);
+
+/**
  * Which seasons have week-by-week scores, as a phrase for UI copy.
  *
  * Derived, never hardcoded. Coverage used to be "2024 onward"; recovering the

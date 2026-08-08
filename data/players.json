@@ -1,4031 +1,4703 @@
 {
   "17": {
+    "birth_date": "1984-08-10",
     "full_name": "Matt Prater",
     "position": "K",
     "team": null,
     "years_exp": 20
   },
   "19": {
+    "birth_date": "1985-01-16",
     "full_name": "Joe Flacco",
     "position": "QB",
     "team": "CIN",
     "years_exp": 18
   },
   "23": {
+    "birth_date": "1982-05-06",
     "full_name": "Jason Witten",
     "position": "TE",
     "team": null,
     "years_exp": 19
   },
   "24": {
+    "birth_date": "1985-05-17",
     "full_name": "Matt Ryan",
     "position": "QB",
     "team": null,
     "years_exp": 15
   },
   "49": {
+    "birth_date": "1982-12-06",
     "full_name": "Robbie Gould",
     "position": "K",
     "team": null,
     "years_exp": 18
   },
   "58": {
+    "birth_date": "1985-03-11",
     "full_name": "Greg Olsen",
     "position": "TE",
     "team": null,
     "years_exp": 14
   },
   "59": {
+    "birth_date": "1984-09-03",
     "full_name": "Mason Crosby",
     "position": "K",
     "team": null,
     "years_exp": 17
   },
   "96": {
+    "birth_date": "1983-12-02",
     "full_name": "Aaron Rodgers",
     "position": "QB",
     "team": "PIT",
     "years_exp": 21
   },
   "110": {
+    "birth_date": "1984-01-28",
     "full_name": "Stephen Gostkowski",
     "position": "K",
     "team": null,
     "years_exp": 16
   },
   "120": {
+    "birth_date": "1972-12-28",
     "full_name": "Adam Vinatieri",
     "position": "K",
     "team": null,
     "years_exp": 26
   },
   "127": {
+    "birth_date": "1975-05-29",
     "full_name": "Matt Bryant",
     "position": "K",
     "team": null,
     "years_exp": 20
   },
   "138": {
+    "birth_date": "1982-03-02",
     "full_name": "Ben Roethlisberger",
     "position": "QB",
     "team": "PIT",
     "years_exp": 18
   },
   "147": {
+    "birth_date": "1986-12-01",
     "full_name": "DeSean Jackson",
     "position": "WR",
     "team": null,
     "years_exp": 14
   },
   "167": {
+    "birth_date": "1977-08-03",
     "full_name": "Tom Brady",
     "position": "QB",
     "team": null,
     "years_exp": 23
   },
   "184": {
+    "birth_date": "1985-03-21",
     "full_name": "Adrian Peterson",
     "position": "RB",
     "team": null,
     "years_exp": 15
   },
   "200": {
+    "birth_date": "1984-01-31",
     "full_name": "Vernon Davis",
     "position": "TE",
     "team": null,
     "years_exp": 16
   },
   "223": {
+    "birth_date": "1983-08-31",
     "full_name": "Larry Fitzgerald",
     "position": "WR",
     "team": null,
     "years_exp": 18
   },
   "232": {
+    "birth_date": "1983-05-14",
     "full_name": "Frank Gore",
     "position": "RB",
     "team": null,
     "years_exp": 17
   },
   "260": {
+    "birth_date": "1986-05-15",
     "full_name": "Josh Johnson",
     "position": "QB",
     "team": "CIN",
     "years_exp": 18
   },
   "268": {
+    "birth_date": "1984-05-07",
     "full_name": "Alex Smith",
     "position": "QB",
     "team": null,
     "years_exp": 17
   },
   "284": {
+    "birth_date": "1984-08-12",
     "full_name": "Delanie Walker",
     "position": "TE",
     "team": null,
     "years_exp": 16
   },
   "289": {
+    "birth_date": "1979-01-15",
     "full_name": "Drew Brees",
     "position": "QB",
     "team": null,
     "years_exp": 20
   },
   "331": {
+    "birth_date": "1981-12-08",
     "full_name": "Philip Rivers",
     "position": "QB",
     "team": null,
     "years_exp": 22
   },
   "333": {
+    "birth_date": "1982-11-24",
     "full_name": "Ryan Fitzpatrick",
     "position": "QB",
     "team": null,
     "years_exp": 17
   },
   "344": {
+    "birth_date": "1986-05-22",
     "full_name": "Julian Edelman",
     "position": "WR",
     "team": null,
     "years_exp": 13
   },
   "345": {
+    "birth_date": "1985-10-13",
     "full_name": "Brian Hoyer",
     "position": "QB",
     "team": null,
     "years_exp": 15
   },
   "367": {
+    "birth_date": "1987-04-07",
     "full_name": "Jared Cook",
     "position": "TE",
     "team": null,
     "years_exp": 13
   },
   "391": {
+    "birth_date": "1986-09-19",
     "full_name": "Ryan Succop",
     "position": "K",
     "team": null,
     "years_exp": 14
   },
   "421": {
+    "birth_date": "1988-02-07",
     "full_name": "Matthew Stafford",
     "position": "QB",
     "team": "LAR",
     "years_exp": 17
   },
   "491": {
+    "birth_date": "1985-11-02",
     "full_name": "Danny Amendola",
     "position": "WR",
     "team": null,
     "years_exp": 14
   },
   "503": {
+    "birth_date": "1987-04-09",
     "full_name": "Graham Gano",
     "position": "K",
     "team": null,
     "years_exp": 17
   },
   "515": {
+    "birth_date": "1989-05-14",
     "full_name": "Rob Gronkowski",
     "position": "TE",
     "team": null,
     "years_exp": 12
   },
   "536": {
+    "birth_date": "1988-07-10",
     "full_name": "Antonio Brown",
     "position": "WR",
     "team": null,
     "years_exp": 12
   },
   "538": {
+    "birth_date": "1987-03-17",
     "full_name": "Emmanuel Sanders",
     "position": "WR",
     "team": null,
     "years_exp": 12
   },
   "560": {
+    "birth_date": "1987-12-25",
     "full_name": "Demaryius Thomas",
     "position": "WR",
     "team": null,
     "years_exp": 12
   },
   "616": {
+    "birth_date": "1986-11-24",
     "full_name": "Jimmy Graham",
     "position": "TE",
     "team": null,
     "years_exp": 14
   },
   "642": {
+    "birth_date": "1988-08-02",
     "full_name": "Golden Tate",
     "position": "WR",
     "team": null,
     "years_exp": 12
   },
   "650": {
+    "birth_date": "1984-11-05",
     "full_name": "Nick Folk",
     "position": "K",
     "team": "ATL",
     "years_exp": 19
   },
   "676": {
+    "birth_date": "1988-07-12",
     "full_name": "LeSean McCoy",
     "position": "RB",
     "team": null,
     "years_exp": 13
   },
   "695": {
+    "birth_date": "1985-04-12",
     "full_name": "Ted Ginn",
     "position": "WR",
     "team": null,
     "years_exp": 15
   },
   "788": {
+    "birth_date": "1990-09-27",
     "full_name": "Dion Lewis",
     "position": "RB",
     "team": null,
     "years_exp": 11
   },
   "827": {
+    "birth_date": "1989-08-03",
     "full_name": "Tyrod Taylor",
     "position": "QB",
     "team": "GB",
     "years_exp": 15
   },
   "829": {
+    "birth_date": "1987-10-29",
     "full_name": "Andy Dalton",
     "position": "QB",
     "team": "PHI",
     "years_exp": 15
   },
   "830": {
+    "birth_date": "1988-07-31",
     "full_name": "A.J. Green",
     "position": "WR",
     "team": null,
     "years_exp": 12
   },
   "899": {
+    "birth_date": "1988-01-26",
     "full_name": "Dan Bailey",
     "position": "K",
     "team": null,
     "years_exp": 11
   },
   "928": {
+    "birth_date": "1990-08-22",
     "full_name": "Randall Cobb",
     "position": "WR",
     "team": null,
     "years_exp": 13
   },
   "943": {
+    "birth_date": "1989-11-09",
     "full_name": "Kyle Rudolph",
     "position": "TE",
     "team": null,
     "years_exp": 12
   },
   "947": {
+    "birth_date": "1989-02-08",
     "full_name": "Julio Jones",
     "position": "WR",
     "team": null,
     "years_exp": 13
   },
   "954": {
+    "birth_date": "1989-05-11",
     "full_name": "Cam Newton",
     "position": "QB",
     "team": null,
     "years_exp": 11
   },
   "956": {
+    "birth_date": "1989-12-21",
     "full_name": "Mark Ingram",
     "position": "RB",
     "team": null,
     "years_exp": 12
   },
   "1029": {
+    "birth_date": "1989-01-20",
     "full_name": "Nick Foles",
     "position": "QB",
     "team": null,
     "years_exp": 11
   },
   "1034": {
+    "birth_date": "1990-01-26",
     "full_name": "Brandon Bolden",
     "position": "RB",
     "team": null,
     "years_exp": 12
   },
   "1049": {
+    "birth_date": "1988-07-27",
     "full_name": "Ryan Tannehill",
     "position": "QB",
     "team": null,
     "years_exp": 12
   },
   "1067": {
+    "birth_date": "1990-03-12",
     "full_name": "Marvin Jones",
     "position": "WR",
     "team": null,
     "years_exp": 11
   },
   "1071": {
+    "birth_date": "1989-08-22",
     "full_name": "Mohamed Sanu",
     "position": "WR",
     "team": null,
     "years_exp": 10
   },
   "1099": {
+    "birth_date": "1989-12-16",
     "full_name": "Randy Bullock",
     "position": "K",
     "team": null,
     "years_exp": 12
   },
   "1110": {
+    "birth_date": "1989-11-14",
     "full_name": "T.Y. Hilton",
     "position": "WR",
     "team": null,
     "years_exp": 11
   },
   "1111": {
+    "birth_date": "1989-09-12",
     "full_name": "Andrew Luck",
     "position": "QB",
     "team": null,
     "years_exp": 10
   },
   "1144": {
+    "birth_date": "1989-04-26",
     "full_name": "Cole Beasley",
     "position": "WR",
     "team": null,
     "years_exp": 11
   },
   "1149": {
+    "birth_date": "1990-02-14",
     "full_name": "Alshon Jeffery",
     "position": "WR",
     "team": null,
     "years_exp": 10
   },
   "1166": {
+    "birth_date": "1988-08-19",
     "full_name": "Kirk Cousins",
     "position": "QB",
     "team": "LV",
     "years_exp": 14
   },
   "1234": {
+    "birth_date": "1988-11-29",
     "full_name": "Russell Wilson",
     "position": "QB",
     "team": null,
     "years_exp": 14
   },
   "1244": {
+    "birth_date": "1991-04-13",
     "full_name": "Josh Gordon",
     "position": "WR",
     "team": null,
     "years_exp": 10
   },
   "1264": {
+    "birth_date": "1989-11-21",
     "full_name": "Justin Tucker",
     "position": "K",
     "team": null,
     "years_exp": 13
   },
   "1266": {
+    "birth_date": "1987-12-27",
     "full_name": "Greg Zuerlein",
     "position": "K",
     "team": null,
     "years_exp": 13
   },
   "1339": {
+    "birth_date": "1990-11-10",
     "full_name": "Zach Ertz",
     "position": "TE",
     "team": null,
     "years_exp": 13
   },
   "1348": {
+    "birth_date": "1990-10-01",
     "full_name": "Dustin Hopkins",
     "position": "K",
     "team": null,
     "years_exp": 12
   },
   "1352": {
+    "birth_date": "1992-04-10",
     "full_name": "Robert Woods",
     "position": "WR",
     "team": null,
     "years_exp": 12
   },
   "1373": {
+    "birth_date": "1990-10-10",
     "full_name": "Geno Smith",
     "position": "QB",
     "team": "NYJ",
     "years_exp": 13
   },
   "1379": {
+    "birth_date": "1991-04-23",
     "full_name": "Kyle Juszczyk",
     "position": "FB",
     "team": "SF",
     "years_exp": 13
   },
   "1386": {
+    "birth_date": "1991-11-22",
     "full_name": "Giovani Bernard",
     "position": "RB",
     "team": null,
     "years_exp": 10
   },
   "1387": {
+    "birth_date": "1990-07-02",
     "full_name": "Rex Burkhead",
     "position": "RB",
     "team": null,
     "years_exp": 10
   },
   "1408": {
+    "birth_date": "1992-02-18",
     "full_name": "Le'Veon Bell",
     "position": "RB",
     "team": null,
     "years_exp": 9
   },
   "1425": {
+    "birth_date": "1990-01-11",
     "full_name": "Ryan Griffin",
     "position": "TE",
     "team": null,
     "years_exp": 10
   },
   "1426": {
+    "birth_date": "1992-06-06",
     "full_name": "DeAndre Hopkins",
     "position": "WR",
     "team": null,
     "years_exp": 13
   },
   "1433": {
+    "birth_date": "1991-07-25",
     "full_name": "Brandon McManus",
     "position": "K",
     "team": null,
     "years_exp": 13
   },
   "1466": {
+    "birth_date": "1989-10-05",
     "full_name": "Travis Kelce",
     "position": "TE",
     "team": "KC",
     "years_exp": 13
   },
   "1476": {
+    "birth_date": "1990-01-18",
     "full_name": "Latavius Murray",
     "position": "RB",
     "team": null,
     "years_exp": 11
   },
   "1479": {
+    "birth_date": "1992-04-27",
     "full_name": "Keenan Allen",
     "position": "WR",
     "team": "IND",
     "years_exp": 13
   },
   "1500": {
+    "birth_date": "1990-07-03",
     "full_name": "Jordan Reed",
     "position": "TE",
     "team": null,
     "years_exp": 9
   },
   "1502": {
+    "birth_date": "1990-10-20",
     "full_name": "Chris Thompson",
     "position": "RB",
     "team": null,
     "years_exp": 9
   },
   "1535": {
+    "birth_date": "1991-03-17",
     "full_name": "Cordarrelle Patterson",
     "position": "RB",
     "team": null,
     "years_exp": 12
   },
   "1555": {
+    "birth_date": "1992-04-22",
     "full_name": "Kenny Stills",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "1587": {
+    "birth_date": "1990-06-13",
     "full_name": "Vance McDonald",
     "position": "TE",
     "team": null,
     "years_exp": 9
   },
   "1592": {
+    "birth_date": "1986-04-22",
     "full_name": "Darren Fells",
     "position": "TE",
     "team": "TB",
     "years_exp": 9
   },
   "1689": {
+    "birth_date": "1990-08-22",
     "full_name": "Adam Thielen",
     "position": "WR",
     "team": null,
     "years_exp": 13
   },
   "1706": {
+    "birth_date": "1990-05-05",
     "full_name": "Jack Doyle",
     "position": "TE",
     "team": "IND",
     "years_exp": 9
   },
   "1793": {
+    "birth_date": "1991-10-29",
     "full_name": "Trey Burton",
     "position": "TE",
     "team": null,
     "years_exp": 8
   },
   "1817": {
+    "birth_date": "1993-06-14",
     "full_name": "Sammy Watkins",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "1825": {
+    "birth_date": "1992-11-28",
     "full_name": "Jarvis Landry",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "1833": {
+    "birth_date": "1992-04-03",
     "full_name": "Damien Williams",
     "position": "RB",
     "team": null,
     "years_exp": 9
   },
   "1837": {
+    "birth_date": "1991-11-02",
     "full_name": "Jimmy Garoppolo",
     "position": "QB",
     "team": null,
     "years_exp": 12
   },
   "1848": {
+    "birth_date": "1992-02-03",
     "full_name": "James White",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "1945": {
+    "birth_date": "1991-03-16",
     "full_name": "Chris Boswell",
     "position": "K",
     "team": "PIT",
     "years_exp": 12
   },
   "1971": {
+    "birth_date": "1993-08-06",
     "full_name": "Donte Moncrief",
     "position": "WR",
     "team": null,
     "years_exp": 8
   },
   "1992": {
+    "birth_date": "1993-08-24",
     "full_name": "Allen Robinson",
     "position": "WR",
     "team": null,
     "years_exp": 11
   },
   "2020": {
+    "birth_date": "1991-11-12",
     "full_name": "Cairo Santos",
     "position": "K",
     "team": "CHI",
     "years_exp": 12
   },
   "2025": {
+    "birth_date": "1992-07-12",
     "full_name": "Albert Wilson",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "2028": {
+    "birth_date": "1991-03-28",
     "full_name": "Derek Carr",
     "position": "QB",
     "team": null,
     "years_exp": 11
   },
   "2078": {
+    "birth_date": "1992-11-05",
     "full_name": "Odell Beckham",
     "position": "WR",
     "team": "NYG",
     "years_exp": 12
   },
   "2118": {
+    "birth_date": "1993-04-10",
     "full_name": "Eric Ebron",
     "position": "TE",
     "team": "PIT",
     "years_exp": 8
   },
   "2133": {
+    "birth_date": "1992-12-24",
     "full_name": "Davante Adams",
     "position": "WR",
     "team": "LAR",
     "years_exp": 12
   },
   "2146": {
+    "birth_date": "1992-01-22",
     "full_name": "Richard Rodgers",
     "position": "TE",
     "team": null,
     "years_exp": 9
   },
   "2152": {
+    "birth_date": "1992-11-10",
     "full_name": "Teddy Bridgewater",
     "position": "QB",
     "team": null,
     "years_exp": 12
   },
   "2161": {
+    "birth_date": "1992-05-03",
     "full_name": "Jerick McKinnon",
     "position": "RB",
     "team": null,
     "years_exp": 10
   },
   "2168": {
+    "birth_date": "1992-03-15",
     "full_name": "Devonta Freeman",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "2197": {
+    "birth_date": "1993-09-25",
     "full_name": "Brandin Cooks",
     "position": "WR",
     "team": null,
     "years_exp": 12
   },
   "2214": {
+    "birth_date": "1991-07-03",
     "full_name": "Cameron Brate",
     "position": "TE",
     "team": null,
     "years_exp": 9
   },
   "2216": {
+    "birth_date": "1993-08-21",
     "full_name": "Mike Evans",
     "position": "WR",
     "team": "SF",
     "years_exp": 12
   },
   "2238": {
+    "birth_date": "1990-04-03",
     "full_name": "John Brown",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "2251": {
+    "birth_date": "1991-07-01",
     "full_name": "Logan Thomas",
     "position": "TE",
     "team": null,
     "years_exp": 10
   },
   "2257": {
+    "birth_date": "1990-09-20",
     "full_name": "Carlos Hyde",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "2279": {
+    "birth_date": "1992-04-13",
     "full_name": "Paul Richardson",
     "position": "WR",
     "team": null,
     "years_exp": 8
   },
   "2306": {
+    "birth_date": "1994-01-06",
     "full_name": "Jameis Winston",
     "position": "QB",
     "team": "NYG",
     "years_exp": 11
   },
   "2307": {
+    "birth_date": "1993-10-30",
     "full_name": "Marcus Mariota",
     "position": "QB",
     "team": "WAS",
     "years_exp": 11
   },
   "2309": {
+    "birth_date": "1994-06-17",
     "full_name": "Amari Cooper",
     "position": "WR",
     "team": null,
     "years_exp": 10
   },
   "2315": {
+    "birth_date": "1994-08-03",
     "full_name": "Todd Gurley",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "2319": {
+    "birth_date": "1993-01-20",
     "full_name": "DeVante Parker",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "2320": {
+    "birth_date": "1993-04-13",
     "full_name": "Melvin Gordon",
     "position": "RB",
     "team": null,
     "years_exp": 9
   },
   "2325": {
+    "birth_date": "1993-05-24",
     "full_name": "Nelson Agholor",
     "position": "WR",
     "team": null,
     "years_exp": 10
   },
   "2331": {
+    "birth_date": "1993-09-10",
     "full_name": "Breshad Perriman",
     "position": "WR",
     "team": null,
     "years_exp": 8
   },
   "2334": {
+    "birth_date": "1993-01-05",
     "full_name": "Phillip Dorsett",
     "position": "WR",
     "team": "LV",
     "years_exp": 11
   },
   "2342": {
+    "birth_date": "1992-03-03",
     "full_name": "Devin Smith",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "2359": {
+    "birth_date": "1993-06-13",
     "full_name": "Ameer Abdullah",
     "position": "RB",
     "team": "JAX",
     "years_exp": 11
   },
   "2374": {
+    "birth_date": "1992-09-28",
     "full_name": "Tyler Lockett",
     "position": "WR",
     "team": null,
     "years_exp": 11
   },
   "2378": {
+    "birth_date": "1993-04-16",
     "full_name": "Tevin Coleman",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "2381": {
+    "birth_date": "1992-10-25",
     "full_name": "Chris Conley",
     "position": "WR",
     "team": null,
     "years_exp": 10
   },
   "2382": {
+    "birth_date": "1993-09-23",
     "full_name": "Duke Johnson",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "2391": {
+    "birth_date": "1991-12-16",
     "full_name": "David Johnson",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "2410": {
+    "birth_date": "1993-06-17",
     "full_name": "Jamison Crowder",
     "position": "WR",
     "team": null,
     "years_exp": 10
   },
   "2431": {
+    "birth_date": "1993-02-19",
     "full_name": "Mike Davis",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "2449": {
+    "birth_date": "1993-11-29",
     "full_name": "Stefon Diggs",
     "position": "WR",
     "team": "WAS",
     "years_exp": 11
   },
   "2460": {
+    "birth_date": "1993-01-14",
     "full_name": "C.J. Uzomah",
     "position": "TE",
     "team": null,
     "years_exp": 10
   },
   "2505": {
+    "birth_date": "1992-09-13",
     "full_name": "Darren Waller",
     "position": "TE",
     "team": "CAR",
     "years_exp": 11
   },
   "2583": {
+    "birth_date": "1992-02-12",
     "full_name": "Tyrell Williams",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "2588": {
+    "birth_date": "1993-05-15",
     "full_name": "Malcolm Brown",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "2671": {
+    "birth_date": "1990-11-19",
     "full_name": "Josh Lambo",
     "position": "K",
     "team": null,
     "years_exp": 7
   },
   "2711": {
+    "birth_date": "1993-03-15",
     "full_name": "Taylor Heinicke",
     "position": "QB",
     "team": null,
     "years_exp": 10
   },
   "2747": {
+    "birth_date": "1991-05-12",
     "full_name": "Jason Myers",
     "position": "K",
     "team": "SEA",
     "years_exp": 11
   },
   "2749": {
+    "birth_date": "1992-04-09",
     "full_name": "Raheem Mostert",
     "position": "RB",
     "team": null,
     "years_exp": 11
   },
   "2750": {
+    "birth_date": "1993-04-10",
     "full_name": "DeAndre Carter",
     "position": "WR",
     "team": null,
     "years_exp": 11
   },
   "2822": {
+    "birth_date": "1993-06-24",
     "full_name": "Adam Humphries",
     "position": "WR",
     "team": null,
     "years_exp": 8
   },
   "3157": {
+    "birth_date": "1994-04-16",
     "full_name": "William Fuller",
     "position": "WR",
     "team": null,
     "years_exp": 6
   },
   "3161": {
+    "birth_date": "1992-12-30",
     "full_name": "Carson Wentz",
     "position": "QB",
     "team": "MIN",
     "years_exp": 10
   },
   "3163": {
+    "birth_date": "1994-10-14",
     "full_name": "Jared Goff",
     "position": "QB",
     "team": "DET",
     "years_exp": 10
   },
   "3164": {
+    "birth_date": "1995-07-22",
     "full_name": "Ezekiel Elliott",
     "position": "RB",
     "team": null,
     "years_exp": 9
   },
   "3198": {
+    "birth_date": "1994-01-04",
     "full_name": "Derrick Henry",
     "position": "RB",
     "team": "BAL",
     "years_exp": 10
   },
   "3199": {
+    "birth_date": "1993-03-03",
     "full_name": "Michael Thomas",
     "position": "WR",
     "team": null,
     "years_exp": 8
   },
   "3200": {
+    "birth_date": "1993-02-10",
     "full_name": "Sterling Shepard",
     "position": "WR",
     "team": "HOU",
     "years_exp": 10
   },
   "3202": {
+    "birth_date": "1994-10-29",
     "full_name": "Austin Hooper",
     "position": "TE",
     "team": "ATL",
     "years_exp": 10
   },
   "3209": {
+    "birth_date": "1992-05-27",
     "full_name": "Devontae Booker",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "3214": {
+    "birth_date": "1994-12-07",
     "full_name": "Hunter Henry",
     "position": "TE",
     "team": "NE",
     "years_exp": 10
   },
   "3225": {
+    "birth_date": "1994-11-15",
     "full_name": "Tyler Boyd",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "3242": {
+    "birth_date": "1994-01-26",
     "full_name": "Kenyan Drake",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "3257": {
+    "birth_date": "1992-12-11",
     "full_name": "Jacoby Brissett",
     "position": "QB",
     "team": "ARI",
     "years_exp": 10
   },
   "3271": {
+    "birth_date": "1993-01-01",
     "full_name": "Tyler Higbee",
     "position": "TE",
     "team": "LAR",
     "years_exp": 10
   },
   "3286": {
+    "birth_date": "1994-09-21",
     "full_name": "Demarcus Robinson",
     "position": "WR",
     "team": "SF",
     "years_exp": 10
   },
   "3294": {
+    "birth_date": "1993-07-29",
     "full_name": "Dak Prescott",
     "position": "QB",
     "team": "DAL",
     "years_exp": 10
   },
   "3300": {
+    "birth_date": "1993-02-22",
     "full_name": "DeAndre Washington",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "3306": {
+    "birth_date": "1994-11-02",
     "full_name": "Jordan Howard",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "3312": {
+    "birth_date": "1994-02-02",
     "full_name": "Jonathan Williams",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "3321": {
+    "birth_date": "1994-03-01",
     "full_name": "Tyreek Hill",
     "position": "WR",
     "team": null,
     "years_exp": 10
   },
   "3327": {
+    "birth_date": "1994-08-26",
     "full_name": "Alex Collins",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "3362": {
+    "birth_date": "1993-04-23",
     "full_name": "Jeff Driskel",
     "position": "QB",
     "team": null,
     "years_exp": 10
   },
   "3423": {
+    "birth_date": "1993-05-09",
     "full_name": "Robbie Chosen",
     "position": "WR",
     "team": null,
     "years_exp": 10
   },
   "3433": {
+    "birth_date": "1992-11-06",
     "full_name": "Alex Erickson",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "3451": {
+    "birth_date": "1994-01-29",
     "full_name": "Ka'imi Fairbairn",
     "position": "K",
     "team": "HOU",
     "years_exp": 10
   },
   "3503": {
+    "birth_date": "1994-01-18",
     "full_name": "Geronimo Allison",
     "position": "WR",
     "team": null,
     "years_exp": 6
   },
   "3594": {
+    "birth_date": "1994-06-27",
     "full_name": "Peyton Barber",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "3634": {
+    "birth_date": "1994-08-08",
     "full_name": "Kalif Raymond",
     "position": "WR",
     "team": "CHI",
     "years_exp": 10
   },
   "3664": {
+    "birth_date": "1993-08-15",
     "full_name": "J.D. McKissic",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "3678": {
+    "birth_date": "1994-07-07",
     "full_name": "Wil Lutz",
     "position": "K",
     "team": "DEN",
     "years_exp": 10
   },
   "3827": {
+    "birth_date": "1994-12-30",
     "full_name": "Aldrick Rosas",
     "position": "K",
     "team": null,
     "years_exp": 6
   },
   "3868": {
+    "birth_date": "1993-10-15",
     "full_name": "Jalen Richard",
     "position": "RB",
     "team": "LV",
     "years_exp": 6
   },
   "3969": {
+    "birth_date": "1995-01-18",
     "full_name": "Leonard Fournette",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "3976": {
+    "birth_date": "1994-08-20",
     "full_name": "Mitchell Trubisky",
     "position": "QB",
     "team": "TEN",
     "years_exp": 9
   },
   "4017": {
+    "birth_date": "1995-09-14",
     "full_name": "Deshaun Watson",
     "position": "QB",
     "team": "CLE",
     "years_exp": 9
   },
   "4018": {
+    "birth_date": "1996-07-24",
     "full_name": "Joe Mixon",
     "position": "RB",
     "team": null,
     "years_exp": 9
   },
   "4029": {
+    "birth_date": "1995-08-10",
     "full_name": "Dalvin Cook",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "4033": {
+    "birth_date": "1996-07-10",
     "full_name": "David Njoku",
     "position": "TE",
     "team": "LAC",
     "years_exp": 9
   },
   "4034": {
+    "birth_date": "1996-06-07",
     "full_name": "Christian McCaffrey",
     "position": "RB",
     "team": "SF",
     "years_exp": 9
   },
   "4035": {
+    "birth_date": "1995-07-25",
     "full_name": "Alvin Kamara",
     "position": "RB",
     "team": "NO",
     "years_exp": 9
   },
   "4036": {
+    "birth_date": "1995-01-11",
     "full_name": "Corey Davis",
     "position": "WR",
     "team": null,
     "years_exp": 6
   },
   "4037": {
+    "birth_date": "1996-02-27",
     "full_name": "Chris Godwin",
     "position": "WR",
     "team": "TB",
     "years_exp": 9
   },
   "4038": {
+    "birth_date": "1995-11-27",
     "full_name": "John Ross",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "4039": {
+    "birth_date": "1993-06-15",
     "full_name": "Cooper Kupp",
     "position": "WR",
     "team": "SEA",
     "years_exp": 9
   },
   "4040": {
+    "birth_date": "1996-11-22",
     "full_name": "JuJu Smith-Schuster",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "4046": {
+    "birth_date": "1995-09-17",
     "full_name": "Patrick Mahomes",
     "position": "QB",
     "team": "KC",
     "years_exp": 9
   },
   "4054": {
+    "birth_date": "1993-09-19",
     "full_name": "Mo Alie-Cox",
     "position": "TE",
     "team": "IND",
     "years_exp": 9
   },
   "4055": {
+    "birth_date": "1994-11-19",
     "full_name": "O.J. Howard",
     "position": "TE",
     "team": null,
     "years_exp": 6
   },
   "4066": {
+    "birth_date": "1994-09-02",
     "full_name": "Evan Engram",
     "position": "TE",
     "team": "DEN",
     "years_exp": 9
   },
   "4068": {
+    "birth_date": "1994-10-04",
     "full_name": "Mike Williams",
     "position": "WR",
     "team": null,
     "years_exp": 8
   },
   "4080": {
+    "birth_date": "1995-03-30",
     "full_name": "Zay Jones",
     "position": "WR",
     "team": "HOU",
     "years_exp": 9
   },
   "4082": {
+    "birth_date": "1996-08-11",
     "full_name": "Curtis Samuel",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "4089": {
+    "birth_date": "1994-06-25",
     "full_name": "Gerald Everett",
     "position": "TE",
     "team": null,
     "years_exp": 8
   },
   "4098": {
+    "birth_date": "1995-08-06",
     "full_name": "Kareem Hunt",
     "position": "RB",
     "team": null,
     "years_exp": 9
   },
   "4111": {
+    "birth_date": "1996-04-24",
     "full_name": "D'Onta Foreman",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "4131": {
+    "birth_date": "1993-11-03",
     "full_name": "Kenny Golladay",
     "position": "WR",
     "team": null,
     "years_exp": 6
   },
   "4137": {
+    "birth_date": "1995-05-05",
     "full_name": "James Conner",
     "position": "RB",
     "team": "ARI",
     "years_exp": 9
   },
   "4144": {
+    "birth_date": "1995-08-22",
     "full_name": "Jonnu Smith",
     "position": "TE",
     "team": null,
     "years_exp": 9
   },
   "4146": {
+    "birth_date": "1993-11-21",
     "full_name": "Dede Westbrook",
     "position": "WR",
     "team": null,
     "years_exp": 5
   },
   "4147": {
+    "birth_date": "1995-09-16",
     "full_name": "Samaje Perine",
     "position": "RB",
     "team": "CIN",
     "years_exp": 9
   },
   "4149": {
+    "birth_date": "1995-04-03",
     "full_name": "Jamaal Williams",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "4150": {
+    "birth_date": "1994-10-01",
     "full_name": "Wayne Gallman",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "4152": {
+    "birth_date": "1996-03-07",
     "full_name": "Marlon Mack",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "4157": {
+    "birth_date": "1995-07-26",
     "full_name": "Tarik Cohen",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "4171": {
+    "birth_date": "1995-02-16",
     "full_name": "Josh Reynolds",
     "position": "WR",
     "team": null,
     "years_exp": 9
   },
   "4177": {
+    "birth_date": "1993-09-16",
     "full_name": "Mack Hollins",
     "position": "WR",
     "team": "NE",
     "years_exp": 9
   },
   "4179": {
+    "birth_date": "1995-01-26",
     "full_name": "Joshua Dobbs",
     "position": "QB",
     "team": "DET",
     "years_exp": 9
   },
   "4187": {
+    "birth_date": "1995-11-09",
     "full_name": "Brian Hill",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "4195": {
+    "birth_date": "1995-01-21",
     "full_name": "Jake Elliott",
     "position": "K",
     "team": "PHI",
     "years_exp": 9
   },
   "4197": {
+    "birth_date": "1995-04-09",
     "full_name": "Isaiah McKenzie",
     "position": "WR",
     "team": null,
     "years_exp": 8
   },
   "4199": {
+    "birth_date": "1994-12-02",
     "full_name": "Aaron Jones",
     "position": "RB",
     "team": "MIN",
     "years_exp": 9
   },
   "4217": {
+    "birth_date": "1993-10-09",
     "full_name": "George Kittle",
     "position": "TE",
     "team": "SF",
     "years_exp": 9
   },
   "4219": {
+    "birth_date": "1995-12-26",
     "full_name": "Jeremy McNichols",
     "position": "RB",
     "team": "WAS",
     "years_exp": 9
   },
   "4227": {
+    "birth_date": "1995-07-14",
     "full_name": "Harrison Butker",
     "position": "K",
     "team": "KC",
     "years_exp": 9
   },
   "4233": {
+    "birth_date": "1995-05-07",
     "full_name": "Zane Gonzalez",
     "position": "K",
     "team": null,
     "years_exp": 9
   },
   "4234": {
+    "birth_date": "1996-01-06",
     "full_name": "Noah Brown",
     "position": "WR",
     "team": "LV",
     "years_exp": 9
   },
   "4273": {
+    "birth_date": "1994-09-16",
     "full_name": "Chris Carson",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "4319": {
+    "birth_date": "1994-12-18",
     "full_name": "Zach Pascal",
     "position": "WR",
     "team": null,
     "years_exp": 8
   },
   "4351": {
+    "birth_date": "1993-11-23",
     "full_name": "Tim Patrick",
     "position": "WR",
     "team": "NYJ",
     "years_exp": 9
   },
   "4381": {
+    "birth_date": "1990-08-23",
     "full_name": "Taysom Hill",
     "position": "TE",
     "team": null,
     "years_exp": 9
   },
   "4421": {
+    "birth_date": "1993-11-18",
     "full_name": "Jacob Hollister",
     "position": "TE",
     "team": null,
     "years_exp": 7
   },
   "4454": {
+    "birth_date": "1995-08-04",
     "full_name": "Kendrick Bourne",
     "position": "WR",
     "team": "ARI",
     "years_exp": 9
   },
   "4455": {
+    "birth_date": "1995-02-28",
     "full_name": "Matt Breida",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "4531": {
+    "birth_date": "1995-03-15",
     "full_name": "Ricky Seals-Jones",
     "position": "TE",
     "team": null,
     "years_exp": 6
   },
   "4602": {
+    "birth_date": "1994-04-30",
     "full_name": "Robert Tonyan",
     "position": "TE",
     "team": "PIT",
     "years_exp": 9
   },
   "4622": {
+    "birth_date": "1993-04-20",
     "full_name": "Keelan Cole",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "4663": {
+    "birth_date": "1995-05-17",
     "full_name": "Austin Ekeler",
     "position": "RB",
     "team": null,
     "years_exp": 9
   },
   "4666": {
+    "birth_date": "1994-08-03",
     "full_name": "Younghoe Koo",
     "position": "K",
     "team": null,
     "years_exp": 9
   },
   "4718": {
+    "birth_date": "1994-05-04",
     "full_name": "Dare Ogunbowale",
     "position": "RB",
     "team": "LV",
     "years_exp": 9
   },
   "4741": {
+    "birth_date": "1995-03-15",
     "full_name": "Dan Arnold",
     "position": "TE",
     "team": null,
     "years_exp": 6
   },
   "4863": {
+    "birth_date": "1997-02-10",
     "full_name": "Josh Rosen",
     "position": "QB",
     "team": null,
     "years_exp": 5
   },
   "4866": {
+    "birth_date": "1997-02-09",
     "full_name": "Saquon Barkley",
     "position": "RB",
     "team": "PHI",
     "years_exp": 8
   },
   "4881": {
+    "birth_date": "1997-01-07",
     "full_name": "Lamar Jackson",
     "position": "QB",
     "team": "BAL",
     "years_exp": 8
   },
   "4892": {
+    "birth_date": "1995-04-14",
     "full_name": "Baker Mayfield",
     "position": "QB",
     "team": "TB",
     "years_exp": 8
   },
   "4943": {
+    "birth_date": "1997-06-05",
     "full_name": "Sam Darnold",
     "position": "QB",
     "team": "SEA",
     "years_exp": 8
   },
   "4949": {
+    "birth_date": "1997-06-21",
     "full_name": "Derrius Guice",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "4950": {
+    "birth_date": "1996-11-18",
     "full_name": "Christian Kirk",
     "position": "WR",
     "team": "SF",
     "years_exp": 8
   },
   "4951": {
+    "birth_date": "1996-09-23",
     "full_name": "DJ Chark",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "4958": {
+    "birth_date": "1989-11-21",
     "full_name": "Brett Maher",
     "position": "K",
     "team": null,
     "years_exp": 11
   },
   "4962": {
+    "birth_date": "1995-02-17",
     "full_name": "Sony Michel",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "4973": {
+    "birth_date": "1993-08-24",
     "full_name": "Hayden Hurst",
     "position": "TE",
     "team": null,
     "years_exp": 7
   },
   "4981": {
+    "birth_date": "1994-12-20",
     "full_name": "Calvin Ridley",
     "position": "WR",
     "team": "TEN",
     "years_exp": 8
   },
   "4983": {
+    "birth_date": "1997-04-14",
     "full_name": "DJ Moore",
     "position": "WR",
     "team": "BUF",
     "years_exp": 8
   },
   "4984": {
+    "birth_date": "1996-05-21",
     "full_name": "Josh Allen",
     "position": "QB",
     "team": "BUF",
     "years_exp": 8
   },
   "4985": {
+    "birth_date": "1996-02-02",
     "full_name": "Rashaad Penny",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "4988": {
+    "birth_date": "1995-12-27",
     "full_name": "Nick Chubb",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "4992": {
+    "birth_date": "1995-10-23",
     "full_name": "Dante Pettis",
     "position": "WR",
     "team": "BUF",
     "years_exp": 8
   },
   "4993": {
+    "birth_date": "1995-10-03",
     "full_name": "Mike Gesicki",
     "position": "TE",
     "team": "CIN",
     "years_exp": 8
   },
   "4994": {
+    "birth_date": "1995-12-22",
     "full_name": "Kalen Ballage",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "4997": {
+    "birth_date": "1997-03-29",
     "full_name": "Mark Walton",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "4998": {
+    "birth_date": "1995-03-10",
     "full_name": "DaeSean Hamilton",
     "position": "WR",
     "team": null,
     "years_exp": 4
   },
   "5000": {
+    "birth_date": "1996-04-13",
     "full_name": "Chase Edmonds",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "5001": {
+    "birth_date": "1996-07-11",
     "full_name": "Dalton Schultz",
     "position": "TE",
     "team": "HOU",
     "years_exp": 8
   },
   "5004": {
+    "birth_date": "1995-09-11",
     "full_name": "Ito Smith",
     "position": "RB",
     "team": "DAL",
     "years_exp": 4
   },
   "5007": {
+    "birth_date": "1997-01-14",
     "full_name": "Keke Coutee",
     "position": "WR",
     "team": null,
     "years_exp": 5
   },
   "5009": {
+    "birth_date": "1996-02-23",
     "full_name": "Chris Herndon",
     "position": "TE",
     "team": null,
     "years_exp": 4
   },
   "5010": {
+    "birth_date": "1996-07-08",
     "full_name": "Will Dissly",
     "position": "TE",
     "team": null,
     "years_exp": 8
   },
   "5012": {
+    "birth_date": "1995-09-06",
     "full_name": "Mark Andrews",
     "position": "TE",
     "team": "BAL",
     "years_exp": 8
   },
   "5013": {
+    "birth_date": "1994-10-09",
     "full_name": "Anthony Miller",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "5022": {
+    "birth_date": "1995-01-03",
     "full_name": "Dallas Goedert",
     "position": "TE",
     "team": "PHI",
     "years_exp": 8
   },
   "5024": {
+    "birth_date": "1996-04-02",
     "full_name": "James Washington",
     "position": "WR",
     "team": null,
     "years_exp": 6
   },
   "5026": {
+    "birth_date": "1996-01-07",
     "full_name": "Tre'Quan Smith",
     "position": "WR",
     "team": null,
     "years_exp": 6
   },
   "5038": {
+    "birth_date": "1996-03-04",
     "full_name": "Michael Gallup",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "5045": {
+    "birth_date": "1995-10-10",
     "full_name": "Courtland Sutton",
     "position": "WR",
     "team": "DEN",
     "years_exp": 8
   },
   "5046": {
+    "birth_date": "1996-02-24",
     "full_name": "Royce Freeman",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "5052": {
+    "birth_date": "1997-08-03",
     "full_name": "Ronald Jones",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "5068": {
+    "birth_date": "1997-06-30",
     "full_name": "Kerryon Johnson",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "5086": {
+    "birth_date": "1994-10-10",
     "full_name": "Marquez Valdes-Scantling",
     "position": "WR",
     "team": "DAL",
     "years_exp": 8
   },
   "5094": {
+    "birth_date": "1995-12-21",
     "full_name": "Ryan Izzo",
     "position": "TE",
     "team": null,
     "years_exp": 4
   },
   "5095": {
+    "birth_date": "1995-01-23",
     "full_name": "Daniel Carlson",
     "position": "K",
     "team": null,
     "years_exp": 8
   },
   "5096": {
+    "birth_date": "1996-10-15",
     "full_name": "Ray-Ray McCloud",
     "position": "WR",
     "team": "CHI",
     "years_exp": 8
   },
   "5100": {
+    "birth_date": "1994-07-18",
     "full_name": "Jordan Wilkins",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "5107": {
+    "birth_date": "1996-07-20",
     "full_name": "Jaylen Samuels",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "5110": {
+    "birth_date": "1996-01-22",
     "full_name": "Russell Gage",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "5119": {
+    "birth_date": "1995-11-16",
     "full_name": "Jason Sanders",
     "position": "K",
     "team": "NYJ",
     "years_exp": 8
   },
   "5122": {
+    "birth_date": "1995-04-27",
     "full_name": "Boston Scott",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "5123": {
+    "birth_date": "1994-07-23",
     "full_name": "Trenton Cannon",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "5130": {
+    "birth_date": "1997-02-03",
     "full_name": "Auden Tate",
     "position": "WR",
     "team": null,
     "years_exp": 5
   },
   "5131": {
+    "birth_date": "1996-04-22",
     "full_name": "Justin Jackson",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "5169": {
+    "birth_date": "1996-03-08",
     "full_name": "Malik Earl",
     "position": "WR",
     "team": null,
     "years_exp": 4
   },
   "5170": {
+    "birth_date": "1994-07-24",
     "full_name": "Phillip Lindsay",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "5185": {
+    "birth_date": "1995-12-11",
     "full_name": "Allen Lazard",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "5189": {
+    "birth_date": "1995-09-13",
     "full_name": "Eddy Pineiro",
     "position": "K",
     "team": "SF",
     "years_exp": 8
   },
   "5209": {
+    "birth_date": "1995-06-30",
     "full_name": "Mike Boone",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "5230": {
+    "birth_date": "1995-07-28",
     "full_name": "Michael Badgley",
     "position": "K",
     "team": null,
     "years_exp": 7
   },
   "5248": {
+    "birth_date": "1995-04-13",
     "full_name": "Gus Edwards",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "5272": {
+    "birth_date": "1994-08-04",
     "full_name": "Greg Joseph",
     "position": "K",
     "team": null,
     "years_exp": 7
   },
   "5284": {
+    "birth_date": "1995-11-16",
     "full_name": "Jeff Wilson",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "5347": {
+    "birth_date": "1996-11-12",
     "full_name": "Nyheim Miller-Hines",
     "position": "RB",
     "team": null,
     "years_exp": 8
   },
   "5536": {
+    "birth_date": "1995-02-26",
     "full_name": "Dontrell Hilliard",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "5549": {
+    "birth_date": "1995-04-15",
     "full_name": "Darrel Williams",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "5844": {
+    "birth_date": "1997-07-03",
     "full_name": "T.J. Hockenson",
     "position": "TE",
     "team": "MIN",
     "years_exp": 7
   },
   "5846": {
+    "birth_date": "1997-12-14",
     "full_name": "DK Metcalf",
     "position": "WR",
     "team": "PIT",
     "years_exp": 7
   },
   "5848": {
+    "birth_date": "1997-06-04",
     "full_name": "Marquise Brown",
     "position": "WR",
     "team": "PHI",
     "years_exp": 7
   },
   "5849": {
+    "birth_date": "1997-08-07",
     "full_name": "Kyler Murray",
     "position": "QB",
     "team": "MIN",
     "years_exp": 7
   },
   "5850": {
+    "birth_date": "1998-02-11",
     "full_name": "Josh Jacobs",
     "position": "RB",
     "team": "GB",
     "years_exp": 7
   },
   "5854": {
+    "birth_date": "1996-11-10",
     "full_name": "Drew Lock",
     "position": "QB",
     "team": "SEA",
     "years_exp": 7
   },
   "5857": {
+    "birth_date": "1997-11-20",
     "full_name": "Noah Fant",
     "position": "TE",
     "team": "NO",
     "years_exp": 7
   },
   "5859": {
+    "birth_date": "1997-06-30",
     "full_name": "A.J. Brown",
     "position": "WR",
     "team": "NE",
     "years_exp": 7
   },
   "5870": {
+    "birth_date": "1997-05-27",
     "full_name": "Daniel Jones",
     "position": "QB",
     "team": "IND",
     "years_exp": 7
   },
   "5872": {
+    "birth_date": "1996-01-15",
     "full_name": "Deebo Samuel",
     "position": "WR",
     "team": "SF",
     "years_exp": 7
   },
   "5878": {
+    "birth_date": "1997-12-17",
     "full_name": "N'Keal Harry",
     "position": "TE",
     "team": null,
     "years_exp": 5
   },
   "5880": {
+    "birth_date": "1997-07-16",
     "full_name": "Parris Campbell",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "5890": {
+    "birth_date": "1997-02-11",
     "full_name": "Damien Harris",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "5892": {
+    "birth_date": "1997-06-07",
     "full_name": "David Montgomery",
     "position": "RB",
     "team": "HOU",
     "years_exp": 7
   },
   "5906": {
+    "birth_date": "1996-11-14",
     "full_name": "Dawson Knox",
     "position": "TE",
     "team": "BUF",
     "years_exp": 7
   },
   "5916": {
+    "birth_date": "1997-08-19",
     "full_name": "Darrell Henderson",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "5917": {
+    "birth_date": "1998-03-12",
     "full_name": "Mecole Hardman",
     "position": "WR",
     "team": "BUF",
     "years_exp": 7
   },
   "5927": {
+    "birth_date": "1995-09-15",
     "full_name": "Terry McLaurin",
     "position": "WR",
     "team": "WAS",
     "years_exp": 7
   },
   "5937": {
+    "birth_date": "1996-07-05",
     "full_name": "Diontae Johnson",
     "position": "WR",
     "team": null,
     "years_exp": 6
   },
   "5947": {
+    "birth_date": "1996-11-09",
     "full_name": "Jakobi Meyers",
     "position": "WR",
     "team": "JAX",
     "years_exp": 7
   },
   "5955": {
+    "birth_date": "1995-12-21",
     "full_name": "Hunter Renfrow",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "5967": {
+    "birth_date": "1997-04-30",
     "full_name": "Tony Pollard",
     "position": "RB",
     "team": "TEN",
     "years_exp": 7
   },
   "5970": {
+    "birth_date": "1998-05-29",
     "full_name": "Greg Dortch",
     "position": "WR",
     "team": "DET",
     "years_exp": 7
   },
   "5980": {
+    "birth_date": "1997-02-15",
     "full_name": "Myles Gaskin",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "5985": {
+    "birth_date": "1997-05-06",
     "full_name": "Foster Moreau",
     "position": "TE",
     "team": "HOU",
     "years_exp": 7
   },
   "5987": {
+    "birth_date": "1998-06-19",
     "full_name": "Alexander Mattison",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "5995": {
+    "birth_date": "1997-11-14",
     "full_name": "Justice Hill",
     "position": "RB",
     "team": "BAL",
     "years_exp": 7
   },
   "6007": {
+    "birth_date": "1996-10-30",
     "full_name": "Ryquell Armstead",
     "position": "RB",
     "team": null,
     "years_exp": 3
   },
   "6011": {
+    "birth_date": "1996-05-16",
     "full_name": "Gardner Minshew",
     "position": "QB",
     "team": "ARI",
     "years_exp": 7
   },
   "6012": {
+    "birth_date": "1998-08-07",
     "full_name": "Travis Homer",
     "position": "RB",
     "team": "PIT",
     "years_exp": 7
   },
   "6039": {
+    "birth_date": "1997-09-17",
     "full_name": "Ty Johnson",
     "position": "RB",
     "team": "BUF",
     "years_exp": 7
   },
   "6059": {
+    "birth_date": "1995-09-13",
     "full_name": "Travis Fulgham",
     "position": "WR",
     "team": null,
     "years_exp": 4
   },
   "6068": {
+    "birth_date": "1996-10-02",
     "full_name": "Devine Ozigbo",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "6083": {
+    "birth_date": "1994-03-15",
     "full_name": "Matt Gay",
     "position": "K",
     "team": "LV",
     "years_exp": 7
   },
   "6111": {
+    "birth_date": "1996-04-11",
     "full_name": "Jake Browning",
     "position": "QB",
     "team": "TB",
     "years_exp": 7
   },
   "6126": {
+    "birth_date": "1998-08-09",
     "full_name": "Irv Smith",
     "position": "TE",
     "team": null,
     "years_exp": 6
   },
   "6130": {
+    "birth_date": "1997-09-03",
     "full_name": "Devin Singletary",
     "position": "RB",
     "team": "NYG",
     "years_exp": 7
   },
   "6146": {
+    "birth_date": "1997-04-24",
     "full_name": "Kaden Smith",
     "position": "TE",
     "team": null,
     "years_exp": 4
   },
   "6148": {
+    "birth_date": "1997-03-27",
     "full_name": "Preston Williams",
     "position": "WR",
     "team": null,
     "years_exp": 4
   },
   "6149": {
+    "birth_date": "1997-01-12",
     "full_name": "Darius Slayton",
     "position": "WR",
     "team": "NYG",
     "years_exp": 7
   },
   "6151": {
+    "birth_date": "1997-05-01",
     "full_name": "Miles Sanders",
     "position": "RB",
     "team": null,
     "years_exp": 7
   },
   "6156": {
+    "birth_date": "1998-02-27",
     "full_name": "Benny Snell",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "6178": {
+    "birth_date": "1997-02-12",
     "full_name": "Darwin Thompson",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "6185": {
+    "birth_date": "1995-09-15",
     "full_name": "Easton Stick",
     "position": "QB",
     "team": "IND",
     "years_exp": 7
   },
   "6208": {
+    "birth_date": "1994-12-12",
     "full_name": "Elliott Fry",
     "position": "K",
     "team": null,
     "years_exp": 4
   },
   "6219": {
+    "birth_date": "1996-11-15",
     "full_name": "Austin Seibert",
     "position": "K",
     "team": null,
     "years_exp": 6
   },
   "6268": {
+    "birth_date": "1996-03-22",
     "full_name": "Matthew Wright",
     "position": "K",
     "team": null,
     "years_exp": 7
   },
   "6290": {
+    "birth_date": "1997-07-31",
     "full_name": "Scotty Miller",
     "position": "WR",
     "team": "CHI",
     "years_exp": 7
   },
   "6311": {
+    "birth_date": "1995-08-17",
     "full_name": "Patrick Laird",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "6528": {
+    "birth_date": "1996-04-10",
     "full_name": "Joey Slye",
     "position": "K",
     "team": "TEN",
     "years_exp": 7
   },
   "6650": {
+    "birth_date": "1996-04-09",
     "full_name": "Chase McLaughlin",
     "position": "K",
     "team": "TB",
     "years_exp": 7
   },
   "6694": {
+    "birth_date": "1996-02-27",
     "full_name": "D'Ernest Johnson",
     "position": "RB",
     "team": "TEN",
     "years_exp": 7
   },
   "6744": {
+    "birth_date": "1995-07-12",
     "full_name": "Greg Ward",
     "position": "WR",
     "team": null,
     "years_exp": 7
   },
   "6768": {
+    "birth_date": "1998-03-02",
     "full_name": "Tua Tagovailoa",
     "position": "QB",
     "team": "ATL",
     "years_exp": 6
   },
   "6770": {
+    "birth_date": "1996-12-10",
     "full_name": "Joe Burrow",
     "position": "QB",
     "team": "CIN",
     "years_exp": 6
   },
   "6783": {
+    "birth_date": "1999-04-24",
     "full_name": "Jerry Jeudy",
     "position": "WR",
     "team": "CLE",
     "years_exp": 6
   },
   "6786": {
+    "birth_date": "1999-04-08",
     "full_name": "CeeDee Lamb",
     "position": "WR",
     "team": "DAL",
     "years_exp": 6
   },
   "6789": {
+    "birth_date": "1999-01-24",
     "full_name": "Henry Ruggs",
     "position": "WR",
     "team": null,
     "years_exp": 2
   },
   "6790": {
+    "birth_date": "1999-01-14",
     "full_name": "D'Andre Swift",
     "position": "RB",
     "team": "CHI",
     "years_exp": 6
   },
   "6794": {
+    "birth_date": "1999-06-16",
     "full_name": "Justin Jefferson",
     "position": "WR",
     "team": "MIN",
     "years_exp": 6
   },
   "6797": {
+    "birth_date": "1998-03-10",
     "full_name": "Justin Herbert",
     "position": "QB",
     "team": "LAC",
     "years_exp": 6
   },
   "6798": {
+    "birth_date": "1999-01-02",
     "full_name": "Jalen Reagor",
     "position": "WR",
     "team": "MIA",
     "years_exp": 6
   },
   "6801": {
+    "birth_date": "1999-01-18",
     "full_name": "Tee Higgins",
     "position": "WR",
     "team": "CIN",
     "years_exp": 6
   },
   "6803": {
+    "birth_date": "1998-03-17",
     "full_name": "Brandon Aiyuk",
     "position": "WR",
     "team": "SF",
     "years_exp": 6
   },
   "6804": {
+    "birth_date": "1998-11-02",
     "full_name": "Jordan Love",
     "position": "QB",
     "team": "GB",
     "years_exp": 6
   },
   "6805": {
+    "birth_date": "1999-07-08",
     "full_name": "KJ Hamler",
     "position": "WR",
     "team": null,
     "years_exp": 5
   },
   "6806": {
+    "birth_date": "1998-12-17",
     "full_name": "J.K. Dobbins",
     "position": "RB",
     "team": "DEN",
     "years_exp": 6
   },
   "6813": {
+    "birth_date": "1999-01-19",
     "full_name": "Jonathan Taylor",
     "position": "RB",
     "team": "IND",
     "years_exp": 6
   },
   "6814": {
+    "birth_date": "1998-10-05",
     "full_name": "Laviska Shenault",
     "position": "WR",
     "team": null,
     "years_exp": 5
   },
   "6819": {
+    "birth_date": "1997-10-05",
     "full_name": "Michael Pittman",
     "position": "WR",
     "team": "PIT",
     "years_exp": 6
   },
   "6820": {
+    "birth_date": "1999-04-11",
     "full_name": "Clyde Edwards-Helaire",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "6824": {
+    "birth_date": "1999-02-19",
     "full_name": "Donovan Peoples-Jones",
     "position": "WR",
     "team": null,
     "years_exp": 5
   },
   "6826": {
+    "birth_date": "1999-03-10",
     "full_name": "Cole Kmet",
     "position": "TE",
     "team": "CHI",
     "years_exp": 6
   },
   "6828": {
+    "birth_date": "1998-05-02",
     "full_name": "AJ Dillon",
     "position": "RB",
     "team": "CAR",
     "years_exp": 6
   },
   "6845": {
+    "birth_date": "1997-12-15",
     "full_name": "Zack Moss",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "6847": {
+    "birth_date": "1997-09-12",
     "full_name": "Devin Duvernay",
     "position": "WR",
     "team": "ARI",
     "years_exp": 6
   },
   "6849": {
+    "birth_date": "1997-10-10",
     "full_name": "Denzel Mims",
     "position": "WR",
     "team": "DAL",
     "years_exp": 6
   },
   "6853": {
+    "birth_date": "1996-07-26",
     "full_name": "Van Jefferson",
     "position": "WR",
     "team": "WAS",
     "years_exp": 6
   },
   "6865": {
+    "birth_date": "1999-01-08",
     "full_name": "Colby Parkinson",
     "position": "TE",
     "team": "LAR",
     "years_exp": 6
   },
   "6870": {
+    "birth_date": "1998-11-13",
     "full_name": "Bryan Edwards",
     "position": "WR",
     "team": null,
     "years_exp": 3
   },
   "6878": {
+    "birth_date": "1999-03-04",
     "full_name": "Anthony McFarland",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "6885": {
+    "birth_date": "1997-05-04",
     "full_name": "Ke'Shawn Vaughn",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "6886": {
+    "birth_date": "1998-07-07",
     "full_name": "Chase Claypool",
     "position": "WR",
     "team": null,
     "years_exp": 4
   },
   "6895": {
+    "birth_date": "1998-04-01",
     "full_name": "Quintez Cephus",
     "position": "WR",
     "team": null,
     "years_exp": 6
   },
   "6904": {
+    "birth_date": "1998-08-07",
     "full_name": "Jalen Hurts",
     "position": "QB",
     "team": "PHI",
     "years_exp": 6
   },
   "6908": {
+    "birth_date": "1998-01-30",
     "full_name": "La'Mical Perine",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "6918": {
+    "birth_date": "1998-12-30",
     "full_name": "Salvon Ahmed",
     "position": "RB",
     "team": "CHI",
     "years_exp": 6
   },
   "6920": {
+    "birth_date": "1998-10-21",
     "full_name": "Isaiah Hodgins",
     "position": "WR",
     "team": "NYG",
     "years_exp": 6
   },
   "6931": {
+    "birth_date": "1998-09-16",
     "full_name": "DeeJay Dallas",
     "position": "RB",
     "team": "JAX",
     "years_exp": 6
   },
   "6938": {
+    "birth_date": "1999-06-22",
     "full_name": "Cam Akers",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "6943": {
+    "birth_date": "1999-04-01",
     "full_name": "Gabe Davis",
     "position": "WR",
     "team": null,
     "years_exp": 6
   },
   "6945": {
+    "birth_date": "1998-06-23",
     "full_name": "Antonio Gibson",
     "position": "RB",
     "team": null,
     "years_exp": 6
   },
   "6951": {
+    "birth_date": "1999-04-13",
     "full_name": "Eno Benjamin",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "6955": {
+    "birth_date": "1998-08-09",
     "full_name": "James Robinson",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "6960": {
+    "birth_date": "1998-08-25",
     "full_name": "Tyler Johnson",
     "position": "WR",
     "team": "DAL",
     "years_exp": 6
   },
   "6963": {
+    "birth_date": "1998-04-29",
     "full_name": "Patrick Taylor",
     "position": "RB",
     "team": "SF",
     "years_exp": 6
   },
   "6984": {
+    "birth_date": "1997-11-24",
     "full_name": "Tony Jones",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "6989": {
+    "birth_date": "1998-03-27",
     "full_name": "Marquez Callaway",
     "position": "WR",
     "team": null,
     "years_exp": 5
   },
   "6996": {
+    "birth_date": "1996-09-12",
     "full_name": "JaMycal Hasty",
     "position": "RB",
     "team": "NE",
     "years_exp": 6
   },
   "7002": {
+    "birth_date": "1996-09-13",
     "full_name": "Juwan Johnson",
     "position": "TE",
     "team": "NO",
     "years_exp": 6
   },
   "7021": {
+    "birth_date": "1998-06-14",
     "full_name": "Rico Dowdle",
     "position": "RB",
     "team": "PIT",
     "years_exp": 6
   },
   "7042": {
+    "birth_date": "1997-02-14",
     "full_name": "Tyler Bass",
     "position": "K",
     "team": "BUF",
     "years_exp": 6
   },
   "7045": {
+    "birth_date": "1997-11-20",
     "full_name": "Joshua Kelley",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "7049": {
+    "birth_date": "1997-07-10",
     "full_name": "Jauan Jennings",
     "position": "WR",
     "team": "MIN",
     "years_exp": 6
   },
   "7062": {
+    "birth_date": "1997-01-29",
     "full_name": "Rodrigo Blankenship",
     "position": "K",
     "team": null,
     "years_exp": 3
   },
   "7066": {
+    "birth_date": "1997-06-10",
     "full_name": "K.J. Osborn",
     "position": "WR",
     "team": "TEN",
     "years_exp": 6
   },
   "7083": {
+    "birth_date": "1998-02-03",
     "full_name": "Tyler Huntley",
     "position": "QB",
     "team": "BAL",
     "years_exp": 6
   },
   "7090": {
+    "birth_date": "1997-10-29",
     "full_name": "Darnell Mooney",
     "position": "WR",
     "team": "NYG",
     "years_exp": 6
   },
   "7098": {
+    "birth_date": "1996-09-04",
     "full_name": "Ty'Son Williams",
     "position": "RB",
     "team": null,
     "years_exp": 3
   },
   "7496": {
+    "birth_date": "1997-03-21",
     "full_name": "Nick Westbrook-Ikhine",
     "position": "WR",
     "team": "IND",
     "years_exp": 6
   },
   "7523": {
+    "birth_date": "1999-10-06",
     "full_name": "Trevor Lawrence",
     "position": "QB",
     "team": "JAX",
     "years_exp": 5
   },
   "7525": {
+    "birth_date": "1998-11-14",
     "full_name": "DeVonta Smith",
     "position": "WR",
     "team": "PHI",
     "years_exp": 5
   },
   "7526": {
+    "birth_date": "1998-11-25",
     "full_name": "Jaylen Waddle",
     "position": "WR",
     "team": "DEN",
     "years_exp": 5
   },
   "7528": {
+    "birth_date": "1998-03-09",
     "full_name": "Najee Harris",
     "position": "RB",
     "team": "NYG",
     "years_exp": 5
   },
   "7537": {
+    "birth_date": "1999-12-23",
     "full_name": "Jaret Patterson",
     "position": "RB",
     "team": "LAC",
     "years_exp": 5
   },
   "7538": {
+    "birth_date": "1999-08-03",
     "full_name": "Zach Wilson",
     "position": "QB",
     "team": "NO",
     "years_exp": 5
   },
   "7543": {
+    "birth_date": "1999-01-26",
     "full_name": "Travis Etienne",
     "position": "RB",
     "team": "NO",
     "years_exp": 5
   },
   "7547": {
+    "birth_date": "1999-10-24",
     "full_name": "Amon-Ra St. Brown",
     "position": "WR",
     "team": "DET",
     "years_exp": 5
   },
   "7551": {
+    "birth_date": "1999-02-18",
     "full_name": "Deon Jackson",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "7553": {
+    "birth_date": "2000-10-06",
     "full_name": "Kyle Pitts",
     "position": "TE",
     "team": "ATL",
     "years_exp": 5
   },
   "7554": {
+    "birth_date": "1999-01-12",
     "full_name": "Tre' McKitty",
     "position": "TE",
     "team": "WAS",
     "years_exp": 5
   },
   "7561": {
+    "birth_date": "1998-05-02",
     "full_name": "Elijah Mitchell",
     "position": "RB",
     "team": null,
     "years_exp": 5
   },
   "7562": {
+    "birth_date": "1999-10-07",
     "full_name": "Tutu Atwell",
     "position": "WR",
     "team": "MIA",
     "years_exp": 5
   },
   "7564": {
+    "birth_date": "2000-03-01",
     "full_name": "Ja'Marr Chase",
     "position": "WR",
     "team": "CIN",
     "years_exp": 5
   },
   "7565": {
+    "birth_date": "2000-06-09",
     "full_name": "Terrace Marshall",
     "position": "WR",
     "team": "MIA",
     "years_exp": 5
   },
   "7567": {
+    "birth_date": "1999-03-14",
     "full_name": "Kenny Gainwell",
     "position": "RB",
     "team": "TB",
     "years_exp": 5
   },
   "7568": {
+    "birth_date": "2000-07-16",
     "full_name": "Brevin Jordan",
     "position": "TE",
     "team": "HOU",
     "years_exp": 5
   },
   "7569": {
+    "birth_date": "1999-03-19",
     "full_name": "Nico Collins",
     "position": "WR",
     "team": "HOU",
     "years_exp": 5
   },
   "7571": {
+    "birth_date": "1999-11-29",
     "full_name": "Rashod Bateman",
     "position": "WR",
     "team": "BAL",
     "years_exp": 5
   },
   "7574": {
+    "birth_date": "1999-02-13",
     "full_name": "Larry Rountree",
     "position": "RB",
     "team": null,
     "years_exp": 2
   },
   "7588": {
+    "birth_date": "2000-04-25",
     "full_name": "Javonte Williams",
     "position": "RB",
     "team": "DAL",
     "years_exp": 5
   },
   "7591": {
+    "birth_date": "1999-03-05",
     "full_name": "Justin Fields",
     "position": "QB",
     "team": "KC",
     "years_exp": 5
   },
   "7593": {
+    "birth_date": "1999-01-30",
     "full_name": "Trey Sermon",
     "position": "RB",
     "team": "ATL",
     "years_exp": 5
   },
   "7594": {
+    "birth_date": "1999-06-11",
     "full_name": "Chuba Hubbard",
     "position": "RB",
     "team": "CAR",
     "years_exp": 5
   },
   "7596": {
+    "birth_date": "2000-03-27",
     "full_name": "Elijah Moore",
     "position": "WR",
     "team": "PHI",
     "years_exp": 5
   },
   "7600": {
+    "birth_date": "1998-10-25",
     "full_name": "Pat Freiermuth",
     "position": "TE",
     "team": "PIT",
     "years_exp": 5
   },
   "7601": {
+    "birth_date": "2000-06-09",
     "full_name": "Rondale Moore",
     "position": "WR",
     "team": null,
     "years_exp": 5
   },
   "7606": {
+    "birth_date": "1999-01-27",
     "full_name": "Kadarius Toney",
     "position": "WR",
     "team": null,
     "years_exp": 3
   },
   "7607": {
+    "birth_date": "1999-05-07",
     "full_name": "Michael Carter",
     "position": "RB",
     "team": "TEN",
     "years_exp": 5
   },
   "7608": {
+    "birth_date": "1998-04-21",
     "full_name": "Khalil Herbert",
     "position": "RB",
     "team": "SF",
     "years_exp": 5
   },
   "7609": {
+    "birth_date": "1998-07-16",
     "full_name": "Demetric Felton",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "7610": {
+    "birth_date": "2000-05-09",
     "full_name": "Trey Lance",
     "position": "QB",
     "team": "LAC",
     "years_exp": 5
   },
   "7611": {
+    "birth_date": "1998-02-23",
     "full_name": "Rhamondre Stevenson",
     "position": "RB",
     "team": "NE",
     "years_exp": 5
   },
   "7670": {
+    "birth_date": "1999-09-22",
     "full_name": "Joshua Palmer",
     "position": "WR",
     "team": "BUF",
     "years_exp": 5
   },
   "7694": {
+    "birth_date": "2000-06-02",
     "full_name": "Tommy Tremble",
     "position": "TE",
     "team": "CAR",
     "years_exp": 5
   },
   "7741": {
+    "birth_date": "1998-09-15",
     "full_name": "Caleb Huntley",
     "position": "RB",
     "team": null,
     "years_exp": 2
   },
   "7828": {
+    "birth_date": "1999-04-30",
     "full_name": "Noah Gray",
     "position": "TE",
     "team": "KC",
     "years_exp": 5
   },
   "7839": {
+    "birth_date": "1999-07-21",
     "full_name": "Evan McPherson",
     "position": "K",
     "team": "CIN",
     "years_exp": 5
   },
   "7891": {
+    "birth_date": "1998-11-27",
     "full_name": "Brock Wright",
     "position": "TE",
     "team": "DET",
     "years_exp": 5
   },
   "7922": {
+    "birth_date": "1999-09-07",
     "full_name": "Riley Patterson",
     "position": "K",
     "team": "MIA",
     "years_exp": 5
   },
   "8110": {
+    "birth_date": "1999-01-18",
     "full_name": "Jake Ferguson",
     "position": "TE",
     "team": "DAL",
     "years_exp": 4
   },
   "8111": {
+    "birth_date": "1999-04-15",
     "full_name": "Cade Otton",
     "position": "TE",
     "team": "TB",
     "years_exp": 4
   },
   "8112": {
+    "birth_date": "2001-07-24",
     "full_name": "Drake London",
     "position": "WR",
     "team": "ATL",
     "years_exp": 4
   },
   "8117": {
+    "birth_date": "1999-02-27",
     "full_name": "Jalen Tolbert",
     "position": "WR",
     "team": "MIA",
     "years_exp": 4
   },
   "8119": {
+    "birth_date": "2000-03-22",
     "full_name": "Jahan Dotson",
     "position": "WR",
     "team": "ATL",
     "years_exp": 4
   },
   "8121": {
+    "birth_date": "2000-04-13",
     "full_name": "Romeo Doubs",
     "position": "WR",
     "team": "NE",
     "years_exp": 4
   },
   "8122": {
+    "birth_date": "2001-04-11",
     "full_name": "Zonovan Knight",
     "position": "RB",
     "team": "ARI",
     "years_exp": 4
   },
   "8123": {
+    "birth_date": "1999-11-26",
     "full_name": "Hassan Haskins",
     "position": "RB",
     "team": "NE",
     "years_exp": 4
   },
   "8125": {
+    "birth_date": "1999-03-24",
     "full_name": "Calvin Austin",
     "position": "WR",
     "team": "NYG",
     "years_exp": 4
   },
   "8126": {
+    "birth_date": "2001-01-05",
     "full_name": "Wan'Dale Robinson",
     "position": "WR",
     "team": "TEN",
     "years_exp": 4
   },
   "8129": {
+    "birth_date": "2000-02-19",
     "full_name": "Dameon Pierce",
     "position": "RB",
     "team": "PHI",
     "years_exp": 4
   },
   "8130": {
+    "birth_date": "1999-11-22",
     "full_name": "Trey McBride",
     "position": "TE",
     "team": "ARI",
     "years_exp": 4
   },
   "8131": {
+    "birth_date": "2000-04-18",
     "full_name": "Isaiah Likely",
     "position": "TE",
     "team": "NYG",
     "years_exp": 4
   },
   "8132": {
+    "birth_date": "2000-04-15",
     "full_name": "Tyler Allgeier",
     "position": "RB",
     "team": "ARI",
     "years_exp": 4
   },
   "8134": {
+    "birth_date": "2000-02-03",
     "full_name": "Khalil Shakir",
     "position": "WR",
     "team": "BUF",
     "years_exp": 4
   },
   "8135": {
+    "birth_date": "2000-03-23",
     "full_name": "Treylon Burks",
     "position": "WR",
     "team": "WAS",
     "years_exp": 4
   },
   "8136": {
+    "birth_date": "1999-01-12",
     "full_name": "Rachaad White",
     "position": "RB",
     "team": "WAS",
     "years_exp": 4
   },
   "8137": {
+    "birth_date": "2001-03-04",
     "full_name": "George Pickens",
     "position": "WR",
     "team": "DAL",
     "years_exp": 4
   },
   "8138": {
+    "birth_date": "1999-09-25",
     "full_name": "James Cook",
     "position": "RB",
     "team": "BUF",
     "years_exp": 4
   },
   "8139": {
+    "birth_date": "1999-09-18",
     "full_name": "Zamir White",
     "position": "RB",
     "team": "SF",
     "years_exp": 4
   },
   "8142": {
+    "birth_date": "2000-05-02",
     "full_name": "Alec Pierce",
     "position": "WR",
     "team": "IND",
     "years_exp": 4
   },
   "8143": {
+    "birth_date": "1999-09-12",
     "full_name": "Jerome Ford",
     "position": "RB",
     "team": "WAS",
     "years_exp": 4
   },
   "8144": {
+    "birth_date": "2000-06-27",
     "full_name": "Chris Olave",
     "position": "WR",
     "team": "NO",
     "years_exp": 4
   },
   "8146": {
+    "birth_date": "2000-07-22",
     "full_name": "Garrett Wilson",
     "position": "WR",
     "team": "NYJ",
     "years_exp": 4
   },
   "8147": {
+    "birth_date": "2000-07-18",
     "full_name": "John Metchie",
     "position": "WR",
     "team": "CAR",
     "years_exp": 4
   },
   "8148": {
+    "birth_date": "2001-03-26",
     "full_name": "Jameson Williams",
     "position": "WR",
     "team": "DET",
     "years_exp": 4
   },
   "8150": {
+    "birth_date": "2000-08-26",
     "full_name": "Kyren Williams",
     "position": "RB",
     "team": "LAR",
     "years_exp": 4
   },
   "8151": {
+    "birth_date": "2000-10-20",
     "full_name": "Kenneth Walker",
     "position": "RB",
     "team": "KC",
     "years_exp": 4
   },
   "8153": {
+    "birth_date": "2001-08-09",
     "full_name": "Isaiah Spiller",
     "position": "RB",
     "team": null,
     "years_exp": 3
   },
   "8154": {
+    "birth_date": "1999-03-22",
     "full_name": "Brian Robinson",
     "position": "RB",
     "team": "ATL",
     "years_exp": 4
   },
   "8155": {
+    "birth_date": "2001-05-31",
     "full_name": "Breece Hall",
     "position": "RB",
     "team": "NYJ",
     "years_exp": 4
   },
   "8160": {
+    "birth_date": "1998-06-06",
     "full_name": "Kenny Pickett",
     "position": "QB",
     "team": "CAR",
     "years_exp": 4
   },
   "8162": {
+    "birth_date": "2000-09-16",
     "full_name": "Sam Howell",
     "position": "QB",
     "team": "DAL",
     "years_exp": 4
   },
   "8167": {
+    "birth_date": "1999-05-12",
     "full_name": "Christian Watson",
     "position": "WR",
     "team": "GB",
     "years_exp": 4
   },
   "8168": {
+    "birth_date": "2000-09-10",
     "full_name": "Skyy Moore",
     "position": "WR",
     "team": "GB",
     "years_exp": 4
   },
   "8171": {
+    "birth_date": "1999-06-17",
     "full_name": "Kyle Philips",
     "position": "WR",
     "team": null,
     "years_exp": 3
   },
   "8172": {
+    "birth_date": "2000-03-26",
     "full_name": "Greg Dulcich",
     "position": "TE",
     "team": "MIA",
     "years_exp": 4
   },
   "8180": {
+    "birth_date": "1999-03-02",
     "full_name": "Jalen Nailor",
     "position": "WR",
     "team": "LV",
     "years_exp": 4
   },
   "8183": {
+    "birth_date": "1999-12-27",
     "full_name": "Brock Purdy",
     "position": "QB",
     "team": "SF",
     "years_exp": 4
   },
   "8188": {
+    "birth_date": "2000-08-07",
     "full_name": "Tyquan Thornton",
     "position": "WR",
     "team": "KC",
     "years_exp": 4
   },
   "8205": {
+    "birth_date": "1999-03-02",
     "full_name": "Isiah Pacheco",
     "position": "RB",
     "team": "DET",
     "years_exp": 4
   },
   "8210": {
+    "birth_date": "1999-09-08",
     "full_name": "Chig Okonkwo",
     "position": "TE",
     "team": "WAS",
     "years_exp": 4
   },
   "8211": {
+    "birth_date": "2000-10-23",
     "full_name": "Tyrion Davis-Price",
     "position": "RB",
     "team": null,
     "years_exp": 3
   },
   "8220": {
+    "birth_date": "2000-09-10",
     "full_name": "Sincere McCormick",
     "position": "RB",
     "team": "SF",
     "years_exp": 4
   },
   "8221": {
+    "birth_date": "1999-10-26",
     "full_name": "Keaontay Ingram",
     "position": "RB",
     "team": null,
     "years_exp": 4
   },
   "8228": {
+    "birth_date": "1998-11-01",
     "full_name": "Jaylen Warren",
     "position": "RB",
     "team": "PIT",
     "years_exp": 4
   },
   "8230": {
+    "birth_date": "1998-05-12",
     "full_name": "Ty Chandler",
     "position": "RB",
     "team": "NO",
     "years_exp": 4
   },
   "8254": {
+    "birth_date": "2000-10-26",
     "full_name": "Julius Chestnut",
     "position": "RB",
     "team": "TEN",
     "years_exp": 4
   },
   "8258": {
+    "birth_date": "2001-01-27",
     "full_name": "Cade York",
     "position": "K",
     "team": "NYJ",
     "years_exp": 4
   },
   "8259": {
+    "birth_date": "2000-05-06",
     "full_name": "Cameron Dicker",
     "position": "K",
     "team": "LAC",
     "years_exp": 4
   },
   "8408": {
+    "birth_date": "1999-05-24",
     "full_name": "Jordan Mason",
     "position": "RB",
     "team": "MIN",
     "years_exp": 4
   },
   "8676": {
+    "birth_date": "1998-08-31",
     "full_name": "Rashid Shaheed",
     "position": "WR",
     "team": "SEA",
     "years_exp": 4
   },
   "8698": {
+    "birth_date": "1999-07-08",
     "full_name": "Jake Tonges",
     "position": "TE",
     "team": "SF",
     "years_exp": 4
   },
   "8800": {
+    "birth_date": "1998-11-26",
     "full_name": "Malik Davis",
     "position": "RB",
     "team": "DAL",
     "years_exp": 4
   },
   "8917": {
+    "birth_date": "1996-08-02",
     "full_name": "KaVontae Turpin",
     "position": "WR",
     "team": "DAL",
     "years_exp": 4
   },
   "9220": {
+    "birth_date": "2000-10-26",
     "full_name": "Evan Hull",
     "position": "RB",
     "team": "ARI",
     "years_exp": 3
   },
   "9221": {
+    "birth_date": "2002-03-20",
     "full_name": "Jahmyr Gibbs",
     "position": "RB",
     "team": "DET",
     "years_exp": 3
   },
   "9222": {
+    "birth_date": "2001-05-30",
     "full_name": "Zach Evans",
     "position": "RB",
     "team": null,
     "years_exp": 2
   },
   "9224": {
+    "birth_date": "2000-03-21",
     "full_name": "Chase Brown",
     "position": "RB",
     "team": "CIN",
     "years_exp": 3
   },
   "9225": {
+    "birth_date": "2002-08-30",
     "full_name": "Tank Bigsby",
     "position": "RB",
     "team": "PHI",
     "years_exp": 3
   },
   "9226": {
+    "birth_date": "2001-10-13",
     "full_name": "De'Von Achane",
     "position": "RB",
     "team": "MIA",
     "years_exp": 3
   },
   "9228": {
+    "birth_date": "2001-07-25",
     "full_name": "Bryce Young",
     "position": "QB",
     "team": "CAR",
     "years_exp": 3
   },
   "9229": {
+    "birth_date": "2002-05-22",
     "full_name": "Anthony Richardson",
     "position": "QB",
     "team": "IND",
     "years_exp": 3
   },
   "9230": {
+    "birth_date": "2000-04-27",
     "full_name": "Tanner McKee",
     "position": "QB",
     "team": "PHI",
     "years_exp": 3
   },
   "9480": {
+    "birth_date": "2000-12-27",
     "full_name": "Brenton Strange",
     "position": "TE",
     "team": "JAX",
     "years_exp": 3
   },
   "9481": {
+    "birth_date": "2000-09-02",
     "full_name": "Luke Musgrave",
     "position": "TE",
     "team": "GB",
     "years_exp": 3
   },
   "9482": {
+    "birth_date": "2001-07-06",
     "full_name": "Michael Mayer",
     "position": "TE",
     "team": "LV",
     "years_exp": 3
   },
   "9484": {
+    "birth_date": "2000-11-03",
     "full_name": "Tucker Kraft",
     "position": "TE",
     "team": "GB",
     "years_exp": 3
   },
   "9486": {
+    "birth_date": "2001-06-16",
     "full_name": "Dontayvion Wicks",
     "position": "WR",
     "team": "PHI",
     "years_exp": 3
   },
   "9487": {
+    "birth_date": "2002-03-21",
     "full_name": "Parker Washington",
     "position": "WR",
     "team": "JAX",
     "years_exp": 3
   },
   "9488": {
+    "birth_date": "2002-02-14",
     "full_name": "Jaxon Smith-Njigba",
     "position": "WR",
     "team": "SEA",
     "years_exp": 3
   },
   "9493": {
+    "birth_date": "2001-05-29",
     "full_name": "Puka Nacua",
     "position": "WR",
     "team": "LAR",
     "years_exp": 3
   },
   "9494": {
+    "birth_date": "2002-03-19",
     "full_name": "Marvin Mims",
     "position": "WR",
     "team": "DEN",
     "years_exp": 3
   },
   "9500": {
+    "birth_date": "2001-08-12",
     "full_name": "Josh Downs",
     "position": "WR",
     "team": "IND",
     "years_exp": 3
   },
   "9501": {
+    "birth_date": "2000-12-08",
     "full_name": "DeMario Douglas",
     "position": "WR",
     "team": "NE",
     "years_exp": 3
   },
   "9502": {
+    "birth_date": "1999-10-29",
     "full_name": "Tank Dell",
     "position": "WR",
     "team": "HOU",
     "years_exp": 3
   },
   "9504": {
+    "birth_date": "2002-05-07",
     "full_name": "Kayshon Boutte",
     "position": "WR",
     "team": "NE",
     "years_exp": 3
   },
   "9506": {
+    "birth_date": "2001-10-25",
     "full_name": "Sean Tucker",
     "position": "RB",
     "team": "TB",
     "years_exp": 3
   },
   "9508": {
+    "birth_date": "2001-06-15",
     "full_name": "Tyjae Spears",
     "position": "RB",
     "team": "TEN",
     "years_exp": 3
   },
   "9509": {
+    "birth_date": "2002-01-30",
     "full_name": "Bijan Robinson",
     "position": "RB",
     "team": "ATL",
     "years_exp": 3
   },
   "9511": {
+    "birth_date": "2002-01-17",
     "full_name": "Keaton Mitchell",
     "position": "RB",
     "team": "LAC",
     "years_exp": 3
   },
   "9753": {
+    "birth_date": "2001-01-08",
     "full_name": "Zach Charbonnet",
     "position": "RB",
     "team": "SEA",
     "years_exp": 3
   },
   "9754": {
+    "birth_date": "2001-09-06",
     "full_name": "Quentin Johnston",
     "position": "WR",
     "team": "LAC",
     "years_exp": 3
   },
   "9756": {
+    "birth_date": "2002-01-27",
     "full_name": "Jordan Addison",
     "position": "WR",
     "team": "MIN",
     "years_exp": 3
   },
   "9757": {
+    "birth_date": "2002-06-11",
     "full_name": "Kendre Miller",
     "position": "RB",
     "team": "NO",
     "years_exp": 3
   },
   "9758": {
+    "birth_date": "2001-10-03",
     "full_name": "C.J. Stroud",
     "position": "QB",
     "team": "HOU",
     "years_exp": 3
   },
   "9997": {
+    "birth_date": "2000-09-11",
     "full_name": "Zay Flowers",
     "position": "WR",
     "team": "BAL",
     "years_exp": 3
   },
   "9999": {
+    "birth_date": "1999-06-27",
     "full_name": "Will Levis",
     "position": "QB",
     "team": "TEN",
     "years_exp": 3
   },
   "10213": {
+    "birth_date": "2001-03-08",
     "full_name": "Tre Tucker",
     "position": "WR",
     "team": "LV",
     "years_exp": 3
   },
   "10219": {
+    "birth_date": "1999-09-26",
     "full_name": "Chris Rodriguez",
     "position": "RB",
     "team": "JAX",
     "years_exp": 3
   },
   "10222": {
+    "birth_date": "2000-04-28",
     "full_name": "Jayden Reed",
     "position": "WR",
     "team": "GB",
     "years_exp": 3
   },
   "10225": {
+    "birth_date": "2001-04-20",
     "full_name": "Jonathan Mingo",
     "position": "WR",
     "team": "DAL",
     "years_exp": 3
   },
   "10226": {
+    "birth_date": "1999-10-15",
     "full_name": "Andrei Iosivas",
     "position": "WR",
     "team": "CIN",
     "years_exp": 3
   },
   "10229": {
+    "birth_date": "2000-04-22",
     "full_name": "Rashee Rice",
     "position": "WR",
     "team": "KC",
     "years_exp": 3
   },
   "10232": {
+    "birth_date": "2000-02-23",
     "full_name": "Michael Wilson",
     "position": "WR",
     "team": "ARI",
     "years_exp": 3
   },
   "10235": {
+    "birth_date": "2001-01-31",
     "full_name": "Roschon Johnson",
     "position": "RB",
     "team": "CHI",
     "years_exp": 3
   },
   "10236": {
+    "birth_date": "1999-10-18",
     "full_name": "Dalton Kincaid",
     "position": "TE",
     "team": "BUF",
     "years_exp": 3
   },
   "10444": {
+    "birth_date": "2000-04-19",
     "full_name": "Cedric Tillman",
     "position": "WR",
     "team": "CLE",
     "years_exp": 3
   },
   "10859": {
+    "birth_date": "2001-01-12",
     "full_name": "Sam LaPorta",
     "position": "TE",
     "team": "DET",
     "years_exp": 3
   },
   "10862": {
+    "birth_date": "1999-11-14",
     "full_name": "Dorian Thompson-Robinson",
     "position": "QB",
     "team": null,
     "years_exp": 2
   },
   "10867": {
+    "birth_date": "1998-08-04",
     "full_name": "Jake Bobo",
     "position": "WR",
     "team": "SEA",
     "years_exp": 3
   },
   "10937": {
+    "birth_date": "1999-11-23",
     "full_name": "Jake Moody",
     "position": "K",
     "team": null,
     "years_exp": 3
   },
   "11008": {
+    "birth_date": "1998-06-16",
     "full_name": "Anders Carlson",
     "position": "K",
     "team": null,
     "years_exp": 2
   },
   "11058": {
+    "birth_date": "1998-11-05",
     "full_name": "Blake Grupe",
     "position": "K",
     "team": "IND",
     "years_exp": 3
   },
   "11199": {
+    "birth_date": "1999-01-20",
     "full_name": "Emari Demercado",
     "position": "RB",
     "team": "KC",
     "years_exp": 3
   },
   "11299": {
+    "birth_date": "1999-07-17",
     "full_name": "Zavier Scott",
     "position": "RB",
     "team": "MIN",
     "years_exp": 3
   },
   "11435": {
+    "birth_date": "1999-05-08",
     "full_name": "Emanuel Wilson",
     "position": "RB",
     "team": "SEA",
     "years_exp": 3
   },
   "11439": {
+    "birth_date": "2000-09-13",
     "full_name": "Jaleel McLaughlin",
     "position": "RB",
     "team": "DEN",
     "years_exp": 3
   },
   "11533": {
+    "birth_date": "1995-03-14",
     "full_name": "Brandon Aubrey",
     "position": "K",
     "team": "DAL",
     "years_exp": 3
   },
   "11539": {
+    "birth_date": "1999-03-03",
     "full_name": "Jake Bates",
     "position": "K",
     "team": "DET",
     "years_exp": 3
   },
   "11559": {
+    "birth_date": "2000-05-08",
     "full_name": "Michael Penix",
     "position": "QB",
     "team": "ATL",
     "years_exp": 2
   },
   "11560": {
+    "birth_date": "2001-11-18",
     "full_name": "Caleb Williams",
     "position": "QB",
     "team": "CHI",
     "years_exp": 2
   },
   "11562": {
+    "birth_date": "2000-09-28",
     "full_name": "Spencer Rattler",
     "position": "QB",
     "team": "NO",
     "years_exp": 2
   },
   "11563": {
+    "birth_date": "2000-02-25",
     "full_name": "Bo Nix",
     "position": "QB",
     "team": "DEN",
     "years_exp": 2
   },
   "11564": {
+    "birth_date": "2002-08-30",
     "full_name": "Drake Maye",
     "position": "QB",
     "team": "NE",
     "years_exp": 2
   },
   "11565": {
+    "birth_date": "2003-01-20",
     "full_name": "J.J. McCarthy",
     "position": "QB",
     "team": "MIN",
     "years_exp": 2
   },
   "11566": {
+    "birth_date": "2000-12-18",
     "full_name": "Jayden Daniels",
     "position": "QB",
     "team": "WAS",
     "years_exp": 2
   },
   "11575": {
+    "birth_date": "1999-11-11",
     "full_name": "Ray Davis",
     "position": "RB",
     "team": "BUF",
     "years_exp": 2
   },
   "11576": {
+    "birth_date": "2004-01-20",
     "full_name": "Braelon Allen",
     "position": "RB",
     "team": "NYJ",
     "years_exp": 2
   },
   "11579": {
+    "birth_date": "2003-09-06",
     "full_name": "Audric Estime",
     "position": "RB",
     "team": "NO",
     "years_exp": 2
   },
   "11582": {
+    "birth_date": "2002-10-21",
     "full_name": "Carson Steele",
     "position": "RB",
     "team": "PHI",
     "years_exp": 2
   },
   "11583": {
+    "birth_date": "2003-07-21",
     "full_name": "Jonathon Brooks",
     "position": "RB",
     "team": "CAR",
     "years_exp": 2
   },
   "11584": {
+    "birth_date": "2002-08-19",
     "full_name": "Bucky Irving",
     "position": "RB",
     "team": "TB",
     "years_exp": 2
   },
   "11586": {
+    "birth_date": "2000-11-25",
     "full_name": "Blake Corum",
     "position": "RB",
     "team": "LAR",
     "years_exp": 2
   },
   "11589": {
+    "birth_date": "2002-07-23",
     "full_name": "Trey Benson",
     "position": "RB",
     "team": "ARI",
     "years_exp": 2
   },
   "11596": {
+    "birth_date": "2002-06-14",
     "full_name": "Ben Sinnott",
     "position": "TE",
     "team": "WAS",
     "years_exp": 2
   },
   "11597": {
+    "birth_date": "2001-02-26",
     "full_name": "Theo Johnson",
     "position": "TE",
     "team": "NYG",
     "years_exp": 2
   },
   "11603": {
+    "birth_date": "2002-05-03",
     "full_name": "AJ Barner",
     "position": "TE",
     "team": "SEA",
     "years_exp": 2
   },
   "11604": {
+    "birth_date": "2002-12-13",
     "full_name": "Brock Bowers",
     "position": "TE",
     "team": "LV",
     "years_exp": 2
   },
   "11610": {
+    "birth_date": "2001-01-04",
     "full_name": "Malik Washington",
     "position": "WR",
     "team": "MIA",
     "years_exp": 2
   },
   "11618": {
+    "birth_date": "2001-12-07",
     "full_name": "Jalen McMillan",
     "position": "WR",
     "team": "TB",
     "years_exp": 2
   },
   "11620": {
+    "birth_date": "2002-06-03",
     "full_name": "Rome Odunze",
     "position": "WR",
     "team": "CHI",
     "years_exp": 2
   },
   "11624": {
+    "birth_date": "2003-04-27",
     "full_name": "Xavier Worthy",
     "position": "WR",
     "team": "KC",
     "years_exp": 2
   },
   "11625": {
+    "birth_date": "2002-10-08",
     "full_name": "Adonai Mitchell",
     "position": "WR",
     "team": "NYJ",
     "years_exp": 2
   },
   "11626": {
+    "birth_date": "2001-01-29",
     "full_name": "Xavier Legette",
     "position": "WR",
     "team": "CAR",
     "years_exp": 2
   },
   "11627": {
+    "birth_date": "2003-02-06",
     "full_name": "Troy Franklin",
     "position": "WR",
     "team": "DEN",
     "years_exp": 2
   },
   "11628": {
+    "birth_date": "2002-08-11",
     "full_name": "Marvin Harrison",
     "position": "WR",
     "team": "ARI",
     "years_exp": 2
   },
   "11631": {
+    "birth_date": "2002-10-08",
     "full_name": "Brian Thomas",
     "position": "WR",
     "team": "JAX",
     "years_exp": 2
   },
   "11632": {
+    "birth_date": "2003-07-28",
     "full_name": "Malik Nabers",
     "position": "WR",
     "team": "NYG",
     "years_exp": 2
   },
   "11635": {
+    "birth_date": "2001-11-11",
     "full_name": "Ladd McConkey",
     "position": "WR",
     "team": "LAC",
     "years_exp": 2
   },
   "11637": {
+    "birth_date": "2003-05-17",
     "full_name": "Keon Coleman",
     "position": "WR",
     "team": "BUF",
     "years_exp": 2
   },
   "11638": {
+    "birth_date": "2000-09-09",
     "full_name": "Ricky Pearsall",
     "position": "WR",
     "team": "SF",
     "years_exp": 2
   },
   "11643": {
+    "birth_date": "2003-04-01",
     "full_name": "Jaylen Wright",
     "position": "RB",
     "team": "MIA",
     "years_exp": 2
   },
   "11646": {
+    "birth_date": "2001-10-30",
     "full_name": "Jalen Coker",
     "position": "WR",
     "team": "CAR",
     "years_exp": 2
   },
   "11647": {
+    "birth_date": "2001-08-28",
     "full_name": "Kimani Vidal",
     "position": "RB",
     "team": "LAC",
     "years_exp": 2
   },
   "11650": {
+    "birth_date": "2001-04-02",
     "full_name": "Luke McCaffrey",
     "position": "WR",
     "team": "WAS",
     "years_exp": 2
   },
   "11651": {
+    "birth_date": "2000-06-28",
     "full_name": "Isaac Guerendo",
     "position": "RB",
     "team": "SF",
     "years_exp": 2
   },
   "11655": {
+    "birth_date": "1999-11-23",
     "full_name": "Tyrone Tracy",
     "position": "RB",
     "team": "NYG",
     "years_exp": 2
   },
   "11748": {
+    "birth_date": "2001-01-10",
     "full_name": "Bub Means",
     "position": "WR",
     "team": "NO",
     "years_exp": 2
   },
   "11783": {
+    "birth_date": "1999-10-27",
     "full_name": "Ryan Flournoy",
     "position": "WR",
     "team": "DAL",
     "years_exp": 2
   },
   "11786": {
+    "birth_date": "2003-08-17",
     "full_name": "Cam Little",
     "position": "K",
     "team": "JAX",
     "years_exp": 2
   },
   "11789": {
+    "birth_date": "2002-03-07",
     "full_name": "Joshua Karty",
     "position": "K",
     "team": null,
     "years_exp": 2
   },
   "11792": {
+    "birth_date": "2001-01-09",
     "full_name": "Will Reichard",
     "position": "K",
     "team": "MIN",
     "years_exp": 2
   },
   "11834": {
+    "birth_date": "1997-12-12",
     "full_name": "Devaughn Vele",
     "position": "WR",
     "team": "NO",
     "years_exp": 2
   },
   "11949": {
+    "birth_date": "1999-09-28",
     "full_name": "Brayden Narveson",
     "position": "K",
     "team": null,
     "years_exp": 1
   },
   "12185": {
+    "birth_date": "1999-05-19",
     "full_name": "Spencer Shrader",
     "position": "K",
     "team": "IND",
     "years_exp": 2
   },
   "12457": {
+    "birth_date": "2004-01-08",
     "full_name": "Jaydon Blue",
     "position": "RB",
     "team": "DAL",
     "years_exp": 1
   },
   "12469": {
+    "birth_date": "2004-09-14",
     "full_name": "Dylan Sampson",
     "position": "RB",
     "team": "CLE",
     "years_exp": 1
   },
   "12472": {
+    "birth_date": "2002-06-08",
     "full_name": "Raheim Sanders",
     "position": "RB",
     "team": "CLE",
     "years_exp": 1
   },
   "12474": {
+    "birth_date": "2000-12-29",
     "full_name": "Woody Marks",
     "position": "RB",
     "team": "HOU",
     "years_exp": 1
   },
   "12476": {
+    "birth_date": "2003-08-12",
     "full_name": "Devin Neal",
     "position": "RB",
     "team": "NO",
     "years_exp": 1
   },
   "12481": {
+    "birth_date": "2002-02-05",
     "full_name": "Cam Skattebo",
     "position": "RB",
     "team": "NYG",
     "years_exp": 1
   },
   "12483": {
+    "birth_date": "2002-12-18",
     "full_name": "Jack Bech",
     "position": "WR",
     "team": "LV",
     "years_exp": 1
   },
   "12484": {
+    "birth_date": "2002-12-15",
     "full_name": "Jayden Higgins",
     "position": "WR",
     "team": "HOU",
     "years_exp": 1
   },
   "12485": {
+    "birth_date": "2002-05-18",
     "full_name": "Tez Johnson",
     "position": "WR",
     "team": "TB",
     "years_exp": 1
   },
   "12489": {
+    "birth_date": "2001-02-04",
     "full_name": "RJ Harvey",
     "position": "RB",
     "team": "DEN",
     "years_exp": 1
   },
   "12490": {
+    "birth_date": "2003-02-14",
     "full_name": "Bhayshul Tuten",
     "position": "RB",
     "team": "JAX",
     "years_exp": 1
   },
   "12493": {
+    "birth_date": "2003-06-25",
     "full_name": "Oronde Gadsden",
     "position": "TE",
     "team": "LAC",
     "years_exp": 1
   },
   "12495": {
+    "birth_date": "2004-01-15",
     "full_name": "Ollie Gordon",
     "position": "RB",
     "team": "MIA",
     "years_exp": 1
   },
   "12497": {
+    "birth_date": "2002-11-29",
     "full_name": "Tory Horton",
     "position": "WR",
     "team": "SEA",
     "years_exp": 1
   },
   "12498": {
+    "birth_date": "2004-05-08",
     "full_name": "Mason Taylor",
     "position": "TE",
     "team": "NYJ",
     "years_exp": 1
   },
   "12499": {
+    "birth_date": "2003-06-03",
     "full_name": "Elic Ayomanor",
     "position": "WR",
     "team": "TEN",
     "years_exp": 1
   },
   "12501": {
+    "birth_date": "2003-08-01",
     "full_name": "Matthew Golden",
     "position": "WR",
     "team": "GB",
     "years_exp": 1
   },
   "12504": {
+    "birth_date": "2003-08-14",
     "full_name": "Kaleb Johnson",
     "position": "RB",
     "team": "PIT",
     "years_exp": 1
   },
   "12506": {
+    "birth_date": "2004-07-20",
     "full_name": "Harold Fannin",
     "position": "TE",
     "team": "CLE",
     "years_exp": 1
   },
   "12507": {
+    "birth_date": "2003-03-16",
     "full_name": "Omarion Hampton",
     "position": "RB",
     "team": "LAC",
     "years_exp": 1
   },
   "12508": {
+    "birth_date": "2003-05-13",
     "full_name": "Jaxson Dart",
     "position": "QB",
     "team": "NYG",
     "years_exp": 1
   },
   "12509": {
+    "birth_date": "2002-02-28",
     "full_name": "Tre' Harris",
     "position": "WR",
     "team": "LAC",
     "years_exp": 1
   },
   "12512": {
+    "birth_date": "2003-10-29",
     "full_name": "Quinshon Judkins",
     "position": "RB",
     "team": "CLE",
     "years_exp": 1
   },
   "12514": {
+    "birth_date": "2002-10-14",
     "full_name": "Emeka Egbuka",
     "position": "WR",
     "team": "TB",
     "years_exp": 1
   },
   "12517": {
+    "birth_date": "2004-04-09",
     "full_name": "Colston Loveland",
     "position": "TE",
     "team": "CHI",
     "years_exp": 1
   },
   "12518": {
+    "birth_date": "2002-05-24",
     "full_name": "Tyler Warren",
     "position": "TE",
     "team": "IND",
     "years_exp": 1
   },
   "12519": {
+    "birth_date": "2003-12-12",
     "full_name": "Luther Burden",
     "position": "WR",
     "team": "CHI",
     "years_exp": 1
   },
   "12526": {
+    "birth_date": "2003-04-05",
     "full_name": "Tetairoa McMillan",
     "position": "WR",
     "team": "CAR",
     "years_exp": 1
   },
   "12527": {
+    "birth_date": "2003-12-02",
     "full_name": "Ashton Jeanty",
     "position": "RB",
     "team": "LV",
     "years_exp": 1
   },
   "12529": {
+    "birth_date": "2002-10-22",
     "full_name": "TreVeyon Henderson",
     "position": "RB",
     "team": "NE",
     "years_exp": 1
   },
   "12530": {
+    "birth_date": "2003-05-18",
     "full_name": "Travis Hunter",
     "position": "WR",
     "team": "JAX",
     "years_exp": 1
   },
   "12533": {
+    "birth_date": "2001-04-12",
     "full_name": "Jacory Croskey-Merritt",
     "position": "RB",
     "team": "WAS",
     "years_exp": 1
   },
   "12534": {
+    "birth_date": "2002-06-06",
     "full_name": "Kyle Monangai",
     "position": "RB",
     "team": "CHI",
     "years_exp": 1
   },
   "12535": {
+    "birth_date": "2002-02-20",
     "full_name": "Isaac TeSlaa",
     "position": "WR",
     "team": "DET",
     "years_exp": 1
   },
   "12540": {
+    "birth_date": "2001-12-14",
     "full_name": "Chimere Dike",
     "position": "WR",
     "team": "TEN",
     "years_exp": 1
   },
   "12541": {
+    "birth_date": "2002-11-30",
     "full_name": "Dont'e Thornton",
     "position": "WR",
     "team": "LV",
     "years_exp": 1
   },
   "12545": {
+    "birth_date": "1999-09-28",
     "full_name": "Tyler Shough",
     "position": "QB",
     "team": "NO",
     "years_exp": 1
   },
   "12547": {
+    "birth_date": "2002-11-13",
     "full_name": "Kyle Williams",
     "position": "WR",
     "team": "NE",
     "years_exp": 1
   },
   "12711": {
+    "birth_date": "2001-08-04",
     "full_name": "Tyler Loop",
     "position": "K",
     "team": "BAL",
     "years_exp": 1
   },
   "12713": {
+    "birth_date": "2003-01-02",
     "full_name": "Andy Borregales",
     "position": "K",
     "team": "NE",
     "years_exp": 1
   },
   "12961": {
+    "birth_date": "2000-08-13",
     "full_name": "Ryan Fitzgerald",
     "position": "K",
     "team": "CAR",
     "years_exp": 1
   },
   "ARI": {
+    "birth_date": null,
     "full_name": "Arizona Cardinals",
     "position": "DEF",
     "team": "ARI",
     "years_exp": null
   },
   "ATL": {
+    "birth_date": null,
     "full_name": "Atlanta Falcons",
     "position": "DEF",
     "team": "ATL",
     "years_exp": null
   },
   "BAL": {
+    "birth_date": null,
     "full_name": "Baltimore Ravens",
     "position": "DEF",
     "team": "BAL",
     "years_exp": null
   },
   "BUF": {
+    "birth_date": null,
     "full_name": "Buffalo Bills",
     "position": "DEF",
     "team": "BUF",
     "years_exp": null
   },
   "CAR": {
+    "birth_date": null,
     "full_name": "Carolina Panthers",
     "position": "DEF",
     "team": "CAR",
     "years_exp": null
   },
   "CHI": {
+    "birth_date": null,
     "full_name": "Chicago Bears",
     "position": "DEF",
     "team": "CHI",
     "years_exp": null
   },
   "CIN": {
+    "birth_date": null,
     "full_name": "Cincinnati Bengals",
     "position": "DEF",
     "team": "CIN",
     "years_exp": null
   },
   "CLE": {
+    "birth_date": null,
     "full_name": "Cleveland Browns",
     "position": "DEF",
     "team": "CLE",
     "years_exp": null
   },
   "DAL": {
+    "birth_date": null,
     "full_name": "Dallas Cowboys",
     "position": "DEF",
     "team": "DAL",
     "years_exp": null
   },
   "DEN": {
+    "birth_date": null,
     "full_name": "Denver Broncos",
     "position": "DEF",
     "team": "DEN",
     "years_exp": null
   },
   "DET": {
+    "birth_date": null,
     "full_name": "Detroit Lions",
     "position": "DEF",
     "team": "DET",
     "years_exp": null
   },
   "GB": {
+    "birth_date": null,
     "full_name": "Green Bay Packers",
     "position": "DEF",
     "team": "GB",
     "years_exp": null
   },
   "HOU": {
+    "birth_date": null,
     "full_name": "Houston Texans",
     "position": "DEF",
     "team": "HOU",
     "years_exp": null
   },
   "IND": {
+    "birth_date": null,
     "full_name": "Indianapolis Colts",
     "position": "DEF",
     "team": "IND",
     "years_exp": null
   },
   "JAX": {
+    "birth_date": null,
     "full_name": "Jacksonville Jaguars",
     "position": "DEF",
     "team": "JAX",
     "years_exp": null
   },
   "KC": {
+    "birth_date": null,
     "full_name": "Kansas City Chiefs",
     "position": "DEF",
     "team": "KC",
     "years_exp": null
   },
   "LAC": {
+    "birth_date": null,
     "full_name": "Los Angeles Chargers",
     "position": "DEF",
     "team": "LAC",
     "years_exp": null
   },
   "LAR": {
+    "birth_date": null,
     "full_name": "Los Angeles Rams",
     "position": "DEF",
     "team": "LAR",
     "years_exp": null
   },
   "LV": {
+    "birth_date": null,
     "full_name": "Las Vegas Raiders",
     "position": "DEF",
     "team": "LV",
     "years_exp": null
   },
   "MIA": {
+    "birth_date": null,
     "full_name": "Miami Dolphins",
     "position": "DEF",
     "team": "MIA",
     "years_exp": null
   },
   "MIN": {
+    "birth_date": null,
     "full_name": "Minnesota Vikings",
     "position": "DEF",
     "team": "MIN",
     "years_exp": null
   },
   "NE": {
+    "birth_date": null,
     "full_name": "New England Patriots",
     "position": "DEF",
     "team": "NE",
     "years_exp": null
   },
   "NO": {
+    "birth_date": null,
     "full_name": "New Orleans Saints",
     "position": "DEF",
     "team": "NO",
     "years_exp": null
   },
   "NYG": {
+    "birth_date": null,
     "full_name": "New York Giants",
     "position": "DEF",
     "team": "NYG",
     "years_exp": null
   },
   "NYJ": {
+    "birth_date": null,
     "full_name": "New York Jets",
     "position": "DEF",
     "team": "NYJ",
     "years_exp": null
   },
   "PHI": {
+    "birth_date": null,
     "full_name": "Philadelphia Eagles",
     "position": "DEF",
     "team": "PHI",
     "years_exp": null
   },
   "PIT": {
+    "birth_date": null,
     "full_name": "Pittsburgh Steelers",
     "position": "DEF",
     "team": "PIT",
     "years_exp": null
   },
   "SEA": {
+    "birth_date": null,
     "full_name": "Seattle Seahawks",
     "position": "DEF",
     "team": "SEA",
     "years_exp": null
   },
   "SF": {
+    "birth_date": null,
     "full_name": "San Francisco 49ers",
     "position": "DEF",
     "team": "SF",
     "years_exp": null
   },
   "TB": {
+    "birth_date": null,
     "full_name": "Tampa Bay Buccaneers",
     "position": "DEF",
     "team": "TB",
     "years_exp": null
   },
   "TEN": {
+    "birth_date": null,
     "full_name": "Tennessee Titans",
     "position": "DEF",
     "team": "TEN",
     "years_exp": null
   },
   "WAS": {
+    "birth_date": null,
     "full_name": "Washington Commanders",
     "position": "DEF",
     "team": "WAS",

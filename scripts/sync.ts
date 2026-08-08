@@ -538,6 +538,7 @@ async function syncPlayers(leagues: ScriptLeague[]): Promise<void> {
       position: p.position ?? null,
       team: p.team ?? null,
       years_exp: p.years_exp ?? null,
+      birth_date: p.birth_date ?? null,
     };
   }
 
