@@ -962,6 +962,35 @@ export function getAdp(): {
   };
 }
 
+/**
+ * `season:week:slugA-slugB` -> the matchup page that covers it.
+ *
+ * A MULTI-WEEK MATCHUP HAS ONE PAGE, keyed by its FIRST week. So a record set in
+ * week 17 of a two-week final belongs to the week-16 page, and building the id
+ * straight from the record's own week links to a page that was never generated —
+ * which is exactly what four rows on the record book were doing.
+ */
+export const getMatchupPageIds = once((): Map<string, string> => {
+  const out = new Map<string, string>();
+  for (const m of getMatchupHistory()) {
+    const id = meetingId(m.season, m.week, m.home.ownerSlug, m.away.ownerSlug);
+    const key = (week: number) =>
+      `${m.season}:${week}:${[m.home.ownerSlug, m.away.ownerSlug].sort().join("-")}`;
+    out.set(key(m.week), id);
+    for (const w of m.weeks ?? []) out.set(key(w.week), id);
+  }
+  return out;
+});
+
+/** The matchup page covering this week for these two owners, if one exists. */
+export const matchupPageId = (
+  season: number,
+  week: number,
+  a: string,
+  b: string | null | undefined,
+): string | null =>
+  b ? (getMatchupPageIds().get(`${season}:${week}:${[a, b].sort().join("-")}`) ?? null) : null;
+
 /** One matchup between two owners, from either data era. */
 export interface Meeting {
   /** Stable URL key: "<season>-<week>-<slugA>-vs-<slugB>", slugs sorted. */

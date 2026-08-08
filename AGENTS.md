@@ -381,20 +381,44 @@ ONE GAME, SEVERAL WEEKS, and the two facts are needed in different places.
 | head-to-head series, W-L, standings, the matchup's own page | ONE matchup, combined score, one winner |
 | the matchup page's lineups | one pair per week, each with its own marks |
 
-The record book is not one rule but three, because a week inside a multi-week
-matchup is a real SCORE but not a real GAME — nobody won or lost it on its own:
+### Which records a multi-week matchup can win
 
-| List | The combined matchup | Each week inside it |
+TWO QUESTIONS, ASKED IN ORDER, and every list answers both the same way whatever
+league it belongs to.
+
+**1. Is this a WEEK stat or a GAME stat?** A week inside a multi-week matchup is a
+real score but not a real result — nobody won or lost it on its own.
+
+| Stat | Level | Fed by |
 | --- | --- | --- |
-| high/low score, player week, high/low combined | ✗ | **✓** |
-| biggest blowout | ✗ | ✗ |
-| narrowest win | **✓** | ✗ |
+| highest / lowest score, highest player week | WEEK | each week played |
+| blowout, narrowest win, highest / lowest combined | GAME | completed matchups only |
 
-BLOWOUT AND NARROW ARE NOT SYMMETRIC, and that is deliberate. 108 points over a
-fortnight is not the achievement 108 points in an afternoon is, so a two-week
-margin cannot win the blowout list. Surviving a fortnight by 0.34 is MORE
-remarkable than doing it in one week, so it stays eligible for the narrow list —
-apartment-401's 2022 semi-final holds that record at 0.34.
+So a two-week total is never a "week's score", and one week of a two-week matchup
+is never a "matchup total", a blowout or a narrow win.
+
+**2. For a GAME stat, does spanning two weeks make the feat easier or harder?**
+
+| Direction | Multi-week eligible | Why |
+| --- | --- | --- |
+| biggest blowout, highest combined | **✗** | two weeks of scoring inflates the number |
+| narrowest win, lowest combined | **✓** | staying that close, or that low, for a fortnight is harder |
+
+apartment-401's 2022 semi-final holds the narrow record at 0.34 across two weeks,
+which is the case the rule exists for.
+
+`recordsAtTheTime` applies exactly the same two questions. It takes WHOLE matchups
+and emits one WEEK event per week plus, for a multi-week matchup only, one GAME
+event landing in the week it finished — `Event.forWeek` / `forGame` / `multiWeek`
+carry the answers. An ordinary matchup is one event that is both, so nothing is
+counted twice. Handing it pre-flattened matchups silently disables all of this:
+`weeks` is already stripped, every event looks single-week, and a two-week margin
+both wins the narrow badge and poisons the blowout baseline for years after.
+
+MATCHUP LINKS MUST BE RESOLVED, NOT CONSTRUCTED. A multi-week matchup has ONE page,
+keyed by its FIRST week, so a record set in week 17 of a two-week final belongs to
+the week-16 page. `matchupPageId()` does the lookup; building the id from the
+record's own week produced four dead links on the record book.
 
 `Matchup.weeks` carries the per-week split and is ABSENT on an ordinary matchup,
 so nothing changes for the 99% case. `weeklyViews()` flattens a matchup into one

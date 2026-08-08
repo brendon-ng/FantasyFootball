@@ -381,15 +381,6 @@
       "week": 2
     },
     {
-      "opponentPoints": 139.04,
-      "opponentSlug": "sam-ellison",
-      "ownerSlug": "jivan-gubbi",
-      "points": 151.3,
-      "season": 2021,
-      "total": 290.34,
-      "week": 16
-    },
-    {
       "opponentPoints": 111,
       "opponentSlug": "haley-rao",
       "ownerSlug": "kate-grillo",
@@ -426,15 +417,6 @@
       "week": 16
     },
     {
-      "opponentPoints": 97.6,
-      "opponentSlug": "brendon-ng",
-      "ownerSlug": "haley-rao",
-      "points": 184.28,
-      "season": 2022,
-      "total": 281.88,
-      "week": 17
-    },
-    {
       "opponentPoints": 135.52,
       "opponentSlug": "jivan-gubbi",
       "ownerSlug": "haley-rao",
@@ -451,27 +433,27 @@
       "season": 2024,
       "total": 280.16,
       "week": 14
+    },
+    {
+      "opponentPoints": 135.12,
+      "opponentSlug": "diana-gonzalez",
+      "ownerSlug": "eric-wong",
+      "points": 144.48,
+      "season": 2024,
+      "total": 279.6,
+      "week": 17
+    },
+    {
+      "opponentPoints": 125.32,
+      "opponentSlug": "diana-gonzalez",
+      "ownerSlug": "mark-mcgreal",
+      "points": 153.98,
+      "season": 2024,
+      "total": 279.3,
+      "week": 1
     }
   ],
   "lowestCombined": [
-    {
-      "opponentPoints": 23.6,
-      "opponentSlug": "kate-grillo",
-      "ownerSlug": "eric-wong",
-      "points": 79,
-      "season": 2022,
-      "total": 102.6,
-      "week": 17
-    },
-    {
-      "opponentPoints": 55.7,
-      "opponentSlug": "jivan-gubbi",
-      "ownerSlug": "jay-uppuluri",
-      "points": 60.66,
-      "season": 2022,
-      "total": 116.36,
-      "week": 17
-    },
     {
       "opponentPoints": 61.42,
       "opponentSlug": "jay-uppuluri",
@@ -581,15 +563,6 @@
       "week": 10
     },
     {
-      "opponentPoints": 62.68,
-      "opponentSlug": "diana-gonzalez",
-      "ownerSlug": "haley-rao",
-      "points": 100.86,
-      "season": 2021,
-      "total": 163.54,
-      "week": 15
-    },
-    {
       "opponentPoints": 63.68,
       "opponentSlug": "charlie-stoksik",
       "ownerSlug": "sam-ellison",
@@ -653,15 +626,6 @@
       "week": 2
     },
     {
-      "opponentPoints": 84.18,
-      "opponentSlug": "diana-gonzalez",
-      "ownerSlug": "mark-mcgreal",
-      "points": 86.3,
-      "season": 2022,
-      "total": 170.48,
-      "week": 14
-    },
-    {
       "opponentPoints": 72.62,
       "opponentSlug": "haley-rao",
       "ownerSlug": "eric-wong",
@@ -678,6 +642,42 @@
       "season": 2025,
       "total": 170.84,
       "week": 14
+    },
+    {
+      "opponentPoints": 76.64,
+      "opponentSlug": "isaac-edejer",
+      "ownerSlug": "jay-uppuluri",
+      "points": 94.56,
+      "season": 2025,
+      "total": 171.2,
+      "week": 17
+    },
+    {
+      "opponentPoints": 77,
+      "opponentSlug": "brendon-ng",
+      "ownerSlug": "jivan-gubbi",
+      "points": 94.86,
+      "season": 2022,
+      "total": 171.86,
+      "week": 6
+    },
+    {
+      "opponentPoints": 77.54,
+      "opponentSlug": "charlie-stoksik",
+      "ownerSlug": "haley-rao",
+      "points": 94.74,
+      "season": 2023,
+      "total": 172.28,
+      "week": 14
+    },
+    {
+      "opponentPoints": 79.14,
+      "opponentSlug": "mark-mcgreal",
+      "ownerSlug": "sam-ellison",
+      "points": 93.36,
+      "season": 2022,
+      "total": 172.5,
+      "week": 13
     }
   ],
   "narrowestWin": [

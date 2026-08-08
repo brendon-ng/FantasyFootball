@@ -11,11 +11,11 @@ import {
 import {
   RECORD_BOOK_DEPTH,
   getAllMeetings,
+  matchupPageId,
   getMatchupHistory,
   getOwnerMap,
   getPlayers,
   getRecords,
-  meetingId,
   pageTitle,
   weeklyCoverage,
 } from "@/lib/data";
@@ -36,8 +36,12 @@ export default function RecordsPage() {
    * the fragment targets the anchor that page puts on every meeting.
    */
   const coverage = weeklyCoverage();
-  const meetingHref = (a: string, b: string | null, season: number, week: number) =>
-    b ? `/matchups/${meetingId(season, week, a, b)}/` : null;
+  const meetingHref = (a: string, b: string | null, season: number, week: number) => {
+    // Resolved, not constructed: a week inside a multi-week matchup is served by
+    // that matchup's FIRST-week page. See `matchupPageId`.
+    const id = matchupPageId(season, week, a, b);
+    return id ? `/matchups/${id}/` : null;
+  };
 
   /**
    * Postseason label for a matchup, so the record book reads the same as the
@@ -56,12 +60,20 @@ export default function RecordsPage() {
       return [m.id, label && SHOWN_LABELS.has(label) ? label : null] as const;
     }),
   );
-  const kindOf = (a: string, b: string | null, season: number, week: number) =>
-    b ? (kindByMeeting.get(meetingId(season, week, a, b)) ?? null) : null;
+  const kindOf = (a: string, b: string | null, season: number, week: number) => {
+    const id = matchupPageId(season, week, a, b);
+    return id ? (kindByMeeting.get(id) ?? null) : null;
+  };
 
   // Player records store no opponent, so recover it from the matchup that week.
   const opponentOf = new Map<string, string>();
   for (const m of getMatchupHistory()) {
+    // Each week of a multi-week matchup too, or a player record set in its
+    // second week has no opponent to name.
+    for (const w of m.weeks ?? []) {
+      opponentOf.set(`${m.season}:${w.week}:${w.home.ownerSlug}`, w.away.ownerSlug);
+      opponentOf.set(`${m.season}:${w.week}:${w.away.ownerSlug}`, w.home.ownerSlug);
+    }
     opponentOf.set(`${m.season}:${m.week}:${m.home.ownerSlug}`, m.away.ownerSlug);
     opponentOf.set(`${m.season}:${m.week}:${m.away.ownerSlug}`, m.home.ownerSlug);
   }

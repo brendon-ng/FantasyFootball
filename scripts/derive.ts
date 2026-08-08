@@ -1203,15 +1203,34 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
    */
   const blowouts: Array<ScoreRecord & { margin: number }> = [];
   const combined: CombinedRecord[] = [];
+  /** Combined totals eligible for the HIGH list — single-week games only. */
+  const combinedHigh: CombinedRecord[] = [];
 
-  /** One entry per GAME, unlike `scores`, which has one per team. */
+  /**
+   * One entry per GAME, unlike `scores`, which has one per team.
+   *
+   * `big` is false for a multi-week matchup: its total is two weeks of scoring
+   * and cannot out-rank a single week's, the same reasoning as `blowouts`. It
+   * stays in the LOW list, where spanning two weeks makes a small number more
+   * remarkable rather than less.
+   */
   const addCombined = (
     season: number,
     week: number,
     x: { slug: string; pts: number },
     y: { slug: string; pts: number },
+    big = true,
   ) => {
     const [hi, lo] = x.pts >= y.pts ? [x, y] : [y, x];
+    if (big) combinedHigh.push({
+      season,
+      week,
+      total: round2(x.pts + y.pts),
+      ownerSlug: hi.slug,
+      points: hi.pts,
+      opponentSlug: lo.slug,
+      opponentPoints: lo.pts,
+    });
     combined.push({
       season,
       week,
@@ -1261,12 +1280,6 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
   // SCORES ARE PER WEEK. A two-week total is not a week's score, and one week of
   // a two-week matchup is — see `weeklyViews`.
   for (const m of matchups.flatMap(weeklyViews)) {
-    addCombined(
-      m.season,
-      m.week,
-      { slug: m.home.ownerSlug, pts: m.home.points },
-      { slug: m.away.ownerSlug, pts: m.away.points },
-    );
     for (const [self, opp] of [
       [m.home, m.away],
       [m.away, m.home],
@@ -1308,6 +1321,13 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
    * itself can be a narrow win but not a blowout; see `blowouts`.
    */
   for (const m of matchups) {
+    addCombined(
+      m.season,
+      m.week,
+      { slug: m.home.ownerSlug, pts: m.home.points },
+      { slug: m.away.ownerSlug, pts: m.away.points },
+      !m.weeks?.length,
+    );
     for (const [self, opp] of [
       [m.home, m.away],
       [m.away, m.home],
@@ -1336,7 +1356,7 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
     playerHigh: top(playerScores, (s) => s.points),
     biggestBlowout: top(blowouts, (s) => s.margin),
     narrowestWin: top(margins, (s) => s.margin, 25, true),
-    highestCombined: top(combined, (s) => s.total),
+    highestCombined: top(combinedHigh, (s) => s.total),
     lowestCombined: top(combined, (s) => s.total, 25, true),
   };
 }
@@ -2305,8 +2325,18 @@ function recordsAtTheTime(
     sides: Array<{ slug: string; points: number }>;
     /** Only Sleeper games carry lineups. */
     players: Array<{ slug: string; playerId: string; points: number }>;
-    /** False for a week inside a multi-week matchup: real scores, not a game. */
-    margins?: boolean;
+    /**
+     * WHICH BASELINES THIS EVENT MOVES.
+     *
+     * A week feeds the score and player lists; a completed game feeds the margin
+     * and combined ones. A single-week matchup is both at once. A week inside a
+     * multi-week matchup is only a week — nobody won or lost it — and the
+     * matchup itself is only a game, arriving when it finished.
+     */
+    forWeek: boolean;
+    forGame: boolean;
+    /** A two-week game: eligible for the NARROW and LOW lists, not the big ones. */
+    multiWeek?: boolean;
   }
 
   const events: Event[] = [];
@@ -2324,6 +2354,10 @@ function recordsAtTheTime(
         const p2 = m.points[m.team2];
         if (p1 == null || p2 == null) continue;
         events.push({
+          // A bracket-only season has no multi-week matchups to distinguish, so
+          // each of these is a single completed game: a week and a result both.
+          forWeek: true,
+          forGame: true,
           season: s.season,
           week: m.week ?? 0,
           id: key(s.season, m.week, m.team1, m.team2),
@@ -2337,28 +2371,51 @@ function recordsAtTheTime(
     }
   }
 
+  const starters = (side: Matchup["home"]) =>
+    side.starters.map((pid) => ({
+      slug: side.ownerSlug,
+      playerId: pid,
+      points: side.playerPoints[pid] ?? 0,
+    }));
+
   for (const m of matchups) {
-    const starters = (side: Matchup["home"]) =>
-      side.starters.map((pid) => ({
-        slug: side.ownerSlug,
-        playerId: pid,
-        points: side.playerPoints[pid] ?? 0,
-      }));
-    events.push({
-      season: m.season,
-      week: m.week,
-      id: key(m.season, m.week, m.home.ownerSlug, m.away.ownerSlug),
-      sides: [
-        { slug: m.home.ownerSlug, points: m.home.points },
-        { slug: m.away.ownerSlug, points: m.away.points },
-      ],
-      players: [...starters(m.home), ...starters(m.away)],
-      // A WEEK INSIDE A MULTI-WEEK MATCHUP IS NOT A GAME. Its scores are real
-      // and rank normally, but nobody won or lost it, so it can be neither a
-      // blowout nor a narrow win. `weeklyViews` strips `weeks` on the copies it
-      // makes, so a matchup still carrying one is the whole game.
-      margins: !m.weeks?.length,
-    });
+    const id = key(m.season, m.week, m.home.ownerSlug, m.away.ownerSlug);
+    const multi = Boolean(m.weeks?.length);
+
+    // One WEEK event per week played. For an ordinary matchup that is also the
+    // game, so it carries both roles and nothing is counted twice.
+    for (const w of m.weeks ?? [{ week: m.week, home: m.home, away: m.away }]) {
+      events.push({
+        season: m.season,
+        week: w.week,
+        id,
+        sides: [
+          { slug: w.home.ownerSlug, points: w.home.points },
+          { slug: w.away.ownerSlug, points: w.away.points },
+        ],
+        players: [...starters(w.home), ...starters(w.away)],
+        forWeek: true,
+        forGame: !multi,
+      });
+    }
+
+    // A multi-week matchup's GAME event lands in the week it FINISHED, which is
+    // when the result became a fact worth ranking.
+    if (multi) {
+      events.push({
+        season: m.season,
+        week: m.weeks!.at(-1)!.week,
+        id,
+        sides: [
+          { slug: m.home.ownerSlug, points: m.home.points },
+          { slug: m.away.ownerSlug, points: m.away.points },
+        ],
+        players: [],
+        forWeek: false,
+        forGame: true,
+        multiWeek: true,
+      });
+    }
   }
 
   events.sort((a, b) => a.season - b.season || a.week - b.week);
@@ -2382,7 +2439,7 @@ function recordsAtTheTime(
     const margin = round2(Math.abs(a.points - b.points));
     const winner = a.points === b.points ? null : a.points > b.points ? a : b;
 
-    for (const side of ev.sides) {
+    for (const side of ev.forWeek ? ev.sides : []) {
       if (!first && side.points > bestScore) {
         add(ev.id, {
           kind: "weekly-high",
@@ -2405,32 +2462,38 @@ function recordsAtTheTime(
       worstScore = Math.min(worstScore, side.points);
     }
 
+    // A MATCHUP'S TOTAL IS A GAME STAT, so one week of a two-week matchup does
+    // not have one — and the two-week total itself can only compete in the LOW
+    // direction, for the same reason a two-week margin can only compete as a
+    // narrow win.
     const total = round2(a.points + b.points);
-    if (!first && total > highestCombined) {
-      add(ev.id, {
-        kind: "combined-high",
-        label: "Highest scoring matchup in league history",
-        value: total,
-        ownerSlug: (a.points >= b.points ? a : b).slug,
-        opponentSlug: (a.points >= b.points ? b : a).slug,
-        stillStands: false,
-      });
+    if (ev.forGame) {
+      if (!first && !ev.multiWeek && total > highestCombined) {
+        add(ev.id, {
+          kind: "combined-high",
+          label: "Highest scoring matchup in league history",
+          value: total,
+          ownerSlug: (a.points >= b.points ? a : b).slug,
+          opponentSlug: (a.points >= b.points ? b : a).slug,
+          stillStands: false,
+        });
+      }
+      if (!first && total < lowestCombined) {
+        add(ev.id, {
+          kind: "combined-low",
+          label: "Lowest scoring matchup in league history",
+          value: total,
+          ownerSlug: (a.points >= b.points ? a : b).slug,
+          opponentSlug: (a.points >= b.points ? b : a).slug,
+          stillStands: false,
+        });
+      }
+      if (!ev.multiWeek) highestCombined = Math.max(highestCombined, total);
+      lowestCombined = Math.min(lowestCombined, total);
     }
-    if (!first && total < lowestCombined) {
-      add(ev.id, {
-        kind: "combined-low",
-        label: "Lowest scoring matchup in league history",
-        value: total,
-        ownerSlug: (a.points >= b.points ? a : b).slug,
-        opponentSlug: (a.points >= b.points ? b : a).slug,
-        stillStands: false,
-      });
-    }
-    highestCombined = Math.max(highestCombined, total);
-    lowestCombined = Math.min(lowestCombined, total);
 
-    if (winner && ev.margins !== false) {
-      if (!first && margin > widestMargin) {
+    if (winner && ev.forGame) {
+      if (!first && !ev.multiWeek && margin > widestMargin) {
         add(ev.id, {
           kind: "blowout",
           label: "Biggest margin in league history",
@@ -2450,11 +2513,11 @@ function recordsAtTheTime(
           stillStands: false,
         });
       }
-      widestMargin = Math.max(widestMargin, margin);
+      if (!ev.multiWeek) widestMargin = Math.max(widestMargin, margin);
       tightestMargin = Math.min(tightestMargin, margin);
     }
 
-    for (const p of ev.players) {
+    for (const p of ev.forWeek ? ev.players : []) {
       // Not gated on `first`: the player baseline starts empty in 2024 anyway,
       // so the earliest lineup genuinely establishes rather than beats.
       if (bestPlayer > -Infinity && p.points > bestPlayer) {
@@ -2546,7 +2609,8 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   const keepers = league.features?.keepers
     ? resolveKeepers(loaded, draftOnly)
     : { perSeason: [], final: [] };
-  const atTheTime = recordsAtTheTime(summaries, byWeek);
+  // WHOLE matchups: it splits them into week and game events itself.
+  const atTheTime = recordsAtTheTime(summaries, matchups);
   const playerHistory = buildPlayerHistory(loaded);
   const drafts = [
     ...buildDraftHistory(loaded),
