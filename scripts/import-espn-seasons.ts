@@ -36,6 +36,8 @@ const ONLY = [...args].find((a) => a.startsWith("--season="))?.split("=")[1];
 interface EspnSide {
   teamId: number;
   totalPoints?: number;
+  /** scoringPeriodId -> that week's points. Present on multi-week matchups. */
+  pointsByScoringPeriod?: Record<string, number>;
 }
 interface EspnGame {
   matchupPeriodId: number;
@@ -135,15 +137,21 @@ function buildSeason(season: number, data: EspnSeason, cfg: LeagueFile | null, w
     ...schedule.flatMap((g) => spanOf(g.matchupPeriodId)),
   );
   /**
-   * The weeks a lineup can be reconciled against, which is every week whose game
-   * covers exactly one scoring period. A two-week matchup has no single-week
-   * score to check a lineup against, so those weeks are left out rather than
-   * imported wrong.
+   * The per-week split of a multi-week matchup, from `pointsByScoringPeriod`.
+   *
+   * ONE GAME, SEVERAL WEEKS. The combined total decides the game; the weekly
+   * scores are what the record book must see, or a two-week sum out-ranks every
+   * real single-week score. Undefined for an ordinary one-week matchup.
    */
-  const lineupWeeks = [...new Set(schedule.map((g) => g.matchupPeriodId))]
-    .filter((mp) => spanOf(mp).length === 1)
-    .map(weekOf)
-    .sort((a, b) => a - b);
+  const splitOf = (g: EspnGame, h: EspnSide, a: EspnSide) => {
+    const span = spanOf(g.matchupPeriodId);
+    if (span.length < 2) return undefined;
+    return span.map((wk) => ({
+      week: wk,
+      home: { ownerSlug: owner.get(h.teamId)!, points: round2(h.pointsByScoringPeriod?.[String(wk)] ?? 0) },
+      away: { ownerSlug: owner.get(a.teamId)!, points: round2(a.pointsByScoringPeriod?.[String(wk)] ?? 0) },
+    }));
+  };
 
   const standings = data.teams
     .map((t) => {
@@ -218,11 +226,13 @@ function buildSeason(season: number, data: EspnSeason, cfg: LeagueFile | null, w
     // committed results.
     if (sides.length !== 2) continue;
     const [h, a] = sides;
+    const split = splitOf(g, h, a);
     matchups.push({
       away: { ownerSlug: owner.get(a.teamId)!, points: round2(a.totalPoints ?? 0) },
       home: { ownerSlug: owner.get(h.teamId)!, points: round2(h.totalPoints ?? 0) },
       kind: sec.kind,
-      week: g.matchupPeriodId,
+      week: weekOf(g.matchupPeriodId),
+      ...(split ? { weeks: split } : {}),
     });
   }
 
@@ -233,7 +243,6 @@ function buildSeason(season: number, data: EspnSeason, cfg: LeagueFile | null, w
     hasRosters: true,
     hasWeeklyMatchups: true,
     imported: true,
-    lineupWeeks,
     matchups,
     playoffWeekStart: regularSeasonWeeks + 1,
     regularSeasonWeeks,

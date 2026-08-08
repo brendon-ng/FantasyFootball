@@ -65,6 +65,10 @@ interface EspnLeague {
   schedule: Array<{ matchupPeriodId?: number; home?: EspnSide; away?: EspnSide }>;
   teams: Array<{ id: number; primaryOwner?: string; owners?: string[] }>;
   members?: Array<{ id: string; firstName?: string; lastName?: string }>;
+  settings?: {
+    /** matchupPeriodId -> the scoring periods it covers. Usually 1:1. */
+    scheduleSettings?: { matchupPeriods?: Record<string, number[]> };
+  };
 }
 
 /** What one team did in one week. */
@@ -133,25 +137,21 @@ async function main(): Promise<void> {
       }
       const manual = readJson<{
         finalWeek?: number;
-        lineupWeeks?: number[];
         matchups?: Array<{
           week: number;
           home: { ownerSlug: string; points: number };
           away: { ownerSlug: string; points: number };
+          weeks?: Array<{
+            week: number;
+            home: { ownerSlug: string; points: number };
+            away: { ownerSlug: string; points: number };
+          }>;
         }>;
       }>(join(manualDir, `${season}.json`));
       const last = manual?.finalWeek ?? 17;
-      /**
-       * `lineupWeeks` when the season importer supplied it — the weeks whose game
-       * covers exactly one scoring period. ESPN can run MULTI-WEEK playoff
-       * matchups, and a two-week scoreboard total cannot be reconciled against a
-       * one-week lineup; importing those anyway would credit half a game's points
-       * and trip the invariant below. Falls back to every week for a season
-       * imported before this existed.
-       */
       const weeks = weekArg
         ? weekArg.split(",").map(Number)
-        : (manual?.lineupWeeks ?? Array.from({ length: last }, (_, i) => i + 1));
+        : Array.from({ length: last }, (_, i) => i + 1);
 
       const outPath = join(dir, `${season}.json`);
       const existing = readJson<SeasonLineups>(outPath);
@@ -164,9 +164,14 @@ async function main(): Promise<void> {
 
       // The score each team actually posted, from the already-verified scoreboard
       // import. Every recovered lineup is checked against it below.
+      // PER WEEK, not per matchup. A multi-week playoff matchup posts a combined
+      // total, and checking a one-week lineup against it would be short by a
+      // whole week — so the per-week split is what a lineup is verified against.
       const expected = new Map<string, number>();
       for (const g of manual?.matchups ?? []) {
-        for (const side of [g.home, g.away]) expected.set(`${g.week}:${side.ownerSlug}`, side.points);
+        for (const w of g.weeks ?? [{ week: g.week, home: g.home, away: g.away }]) {
+          for (const side of [w.home, w.away]) expected.set(`${w.week}:${side.ownerSlug}`, side.points);
+        }
       }
 
       const unmatched = new Set<string>();
@@ -178,7 +183,19 @@ async function main(): Promise<void> {
         );
         const owners = ownerByTeam(data, cfg, `${slug} ${season}`);
 
-        const games = data.schedule.filter((g) => g.matchupPeriodId === week);
+        /**
+         * The game covering THIS SCORING PERIOD, which is not the game whose
+         * `matchupPeriodId` equals it.
+         *
+         * A multi-week playoff matchup covers two scoring periods, so period 15
+         * belongs to matchup period 14 — while matchup period 15 is the NEXT
+         * round, weeks 16-17, with no roster filled in yet. Matching on the id
+         * therefore picked the wrong game and every lineup came back as zero.
+         */
+        const periods = data.settings?.scheduleSettings?.matchupPeriods ?? {};
+        const covers = (mp?: number) =>
+          mp === undefined ? [] : (periods[String(mp)] ?? [mp]);
+        const games = data.schedule.filter((g) => covers(g.matchupPeriodId).includes(week));
         if (!games.length) {
           log.skip(`${slug} ${season} week ${week}: no matchups`);
           continue;

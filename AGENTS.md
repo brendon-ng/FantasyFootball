@@ -372,6 +372,34 @@ Two shapes, both `sm:hidden` so nothing is double-labelled once the column retur
 The record book also filters to labels worth showing (`SHOWN_LABELS`), so only a
 handful of rows carry one — 4 of ~60 in Den Ops. Most keep the full meta line.
 
+## A matchup can span more than one week
+
+ONE GAME, SEVERAL WEEKS, and the two facts are needed in different places.
+
+| Surface | Sees |
+| --- | --- |
+| head-to-head series, W-L, standings, the matchup's own page | ONE matchup, combined score, one winner |
+| record book — every list that ranks a score or a margin | one entry PER WEEK |
+| the matchup page's lineups | one pair per week, each with its own marks |
+
+`Matchup.weeks` carries the per-week split and is ABSENT on an ordinary matchup,
+so nothing changes for the 99% case. `weeklyViews()` in derive flattens a matchup
+into one entry per week, and `buildLeagueRecords`, `recordsAtTheTime` and
+`buildWeeklyLows` all run on that flattened view.
+
+WHY THE SPLIT MATTERS: left whole, a two-week total out-ranks every genuine
+single-week score ever posted — the highest score in league history would be a
+game that took a fortnight. Apartment 401's 2021 final was 327.34 to 218.82 across
+two weeks; the record book correctly sees 151.30/139.04 and 176.04/79.78.
+
+Record MARKS are per week for the same reason, and the matchup page renders them
+beside the week they belong to rather than beside the combined scoreline.
+
+The lineup importer selects the game COVERING a scoring period, not the one whose
+`matchupPeriodId` equals it — period 15 belongs to matchup period 14, while
+matchup period 15 is the next round with no roster filled in. Matching on the id
+returned zeroes for every team, which its reconciliation caught.
+
 ## Wide tables on mobile
 
 Anything with more than a few fixed-width columns needs
@@ -1017,13 +1045,8 @@ A MATCHUP PERIOD IS NOT ALWAYS A WEEK. `playoffMatchupPeriodLength` can be 2, an
 was for apartment-401 in 2021-22: matchup period 14 covers scoring periods 14 AND
 15, and its scoreboard total is their SUM. `scheduleSettings.matchupPeriods` is
 the authority; taking `matchupPeriodId` as the week puts the final two weeks early
-and hands a two-week score to a one-week lineup. `lineupWeeks` on the manual
-season lists the weeks where a 1:1 reconciliation is possible, and the lineup
-importer skips the rest rather than importing them wrong.
-
-KNOWN CONSEQUENCE, not yet resolved: those 2021-22 playoff games carry a two-week
-total as a single week's score, so they will out-rank every genuine single-week
-score in that league's record book.
+and hands a two-week score to a one-week lineup. Sleeper can do this too,
+including for the championship only, so this is not an ESPN quirk.
 
 ### Recovering ESPN-era drafts
 

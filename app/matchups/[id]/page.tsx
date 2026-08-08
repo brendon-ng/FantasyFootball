@@ -119,7 +119,18 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   const pairHref = `/h2h/${[game.a.ownerSlug, game.b.ownerSlug].sort().join("-vs-")}/`;
 
   // Any record-book list this game appears in.
-  const flags = getRecordFlags(game.season, game.week, [game.a.ownerSlug, game.b.ownerSlug]);
+  const slugs = [game.a.ownerSlug, game.b.ownerSlug];
+  /**
+   * RECORD MARKS BELONG TO A WEEK, not to a matchup. The record book ranks weeks,
+   * so a two-week playoff matchup has a set of marks per week — and showing week
+   * one's beside a combined two-week scoreline would attach them to a number they
+   * were never about. A single-week matchup keeps them at the top as before.
+   */
+  const legs = game.weeks?.length
+    ? game.weeks
+    : [{ week: game.week ?? 0, a: game.a, b: game.b }];
+  const flagsFor = (week: number) => getRecordFlags(game.season, week, slugs);
+  const flags = game.weeks?.length ? [] : flagsFor(game.week ?? 0);
   // Marks this game set when it was played, whether or not they still stand.
   const madeHistory = getAtTheTime()[game.id] ?? [];
 
@@ -325,20 +336,58 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
       </div>
 
       {game.hasLineups ? (
-        <div className="grid gap-5 lg:grid-cols-2">
-          {[game.a, game.b].map((side) => (
-            <Lineup
-              key={side.ownerSlug}
-              side={side}
-              slots={season?.rosterPositions ?? []}
-              name={name(side.ownerSlug)}
-              players={players}
-              teamsThen={getPlayerTeamsAt(game.season, game.week ?? 0)}
-              won={winner?.ownerSlug === side.ownerSlug}
-              playerFlags={flags.filter((f) => f.playerId)}
-            />
-          ))}
-        </div>
+        /* A MULTI-WEEK MATCHUP GETS A LINEUP PAIR PER WEEK. The game is one
+           playoff round, decided on the combined score, but each week had its
+           own lineup and its own result — collapsing them would hide which week
+           was actually won and by whom. An ordinary matchup renders exactly as
+           before, as a single unlabelled pair. */
+        legs.map((leg) => {
+          const legFlags = game.weeks?.length ? flagsFor(leg.week) : flags;
+          return (
+            <div key={leg.week} className="space-y-2">
+              {game.weeks?.length ? (
+                <div className="flex flex-wrap items-baseline gap-2">
+                  <h2 className="eyebrow">Week {leg.week}</h2>
+                  <span className="tabular text-xs text-chalk-600">
+                    {fmt.pts(leg.a.points)} – {fmt.pts(leg.b.points)}
+                  </span>
+                  {legFlags.map((f, i) => (
+                    <span
+                      key={i}
+                      title={`${f.full}${f.ownerSlug ? ` — ${name(f.ownerSlug)}` : ""}`}
+                      className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
+                        f.tone === "bad"
+                          ? "border-loss/40 bg-loss/10 text-loss"
+                          : "border-gold/40 bg-gold/10 text-gold"
+                      }`}
+                    >
+                      {f.short}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+              <div className="grid gap-5 lg:grid-cols-2">
+                {[leg.a, leg.b].map((side) => (
+                  <Lineup
+                    key={side.ownerSlug}
+                    side={side}
+                    slots={season?.rosterPositions ?? []}
+                    name={name(side.ownerSlug)}
+                    players={players}
+                    teamsThen={getPlayerTeamsAt(game.season, leg.week)}
+                    /* Per WEEK, not the winner of the whole matchup — the team
+                       that lost the round can still have won a week. */
+                    won={
+                      leg.a.points !== leg.b.points &&
+                      side.points === Math.max(leg.a.points, leg.b.points)
+                    }
+                    playerFlags={legFlags.filter((f) => f.playerId)}
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })
       ) : (
         <Panel>
           <PanelHeader title="Lineups" />

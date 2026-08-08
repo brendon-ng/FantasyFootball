@@ -112,62 +112,56 @@
   ],
   "2021-14-brendon-ng-vs-sam-ellison": [
     {
-      "kind": "weekly-high",
-      "label": "Highest score in league history",
-      "ownerSlug": "sam-ellison",
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "brendon-ng",
       "stillStands": false,
-      "value": 281.24
-    },
-    {
-      "kind": "combined-high",
-      "label": "Highest scoring matchup in league history",
-      "opponentSlug": "brendon-ng",
-      "ownerSlug": "sam-ellison",
-      "stillStands": false,
-      "value": 469.66
+      "value": 65.34
     },
     {
       "kind": "blowout",
       "label": "Biggest margin in league history",
       "opponentSlug": "brendon-ng",
       "ownerSlug": "sam-ellison",
-      "stillStands": false,
-      "value": 92.82
+      "stillStands": true,
+      "value": 99.66
     }
   ],
-  "2021-14-diana-gonzalez-vs-haley-rao": [
+  "2021-15-charlie-stoksik-vs-kate-grillo": [
     {
-      "kind": "blowout",
-      "label": "Biggest margin in league history",
+      "kind": "narrowest",
+      "label": "Narrowest win in league history",
+      "opponentSlug": "kate-grillo",
+      "ownerSlug": "charlie-stoksik",
+      "stillStands": false,
+      "value": 2.58
+    }
+  ],
+  "2021-15-diana-gonzalez-vs-haley-rao": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "diana-gonzalez",
+      "stillStands": false,
+      "value": 62.68
+    },
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
       "opponentSlug": "diana-gonzalez",
       "ownerSlug": "haley-rao",
       "stillStands": false,
-      "value": 103.98
+      "value": 163.54
     }
   ],
-  "2021-15-jivan-gubbi-vs-sam-ellison": [
+  "2021-16-brendon-ng-vs-jay-uppuluri": [
     {
-      "kind": "weekly-high",
-      "label": "Highest score in league history",
-      "ownerSlug": "jivan-gubbi",
-      "stillStands": true,
-      "value": 327.34
-    },
-    {
-      "kind": "combined-high",
-      "label": "Highest scoring matchup in league history",
-      "opponentSlug": "sam-ellison",
-      "ownerSlug": "jivan-gubbi",
-      "stillStands": true,
-      "value": 546.16
-    },
-    {
-      "kind": "blowout",
-      "label": "Biggest margin in league history",
-      "opponentSlug": "sam-ellison",
-      "ownerSlug": "jivan-gubbi",
-      "stillStands": true,
-      "value": 108.52
+      "kind": "narrowest",
+      "label": "Narrowest win in league history",
+      "opponentSlug": "jay-uppuluri",
+      "ownerSlug": "brendon-ng",
+      "stillStands": false,
+      "value": 0.6
     }
   ],
   "2021-2-brendon-ng-vs-kate-grillo": [
@@ -283,7 +277,7 @@
       "kind": "weekly-high",
       "label": "Highest score in league history",
       "ownerSlug": "jivan-gubbi",
-      "stillStands": false,
+      "stillStands": true,
       "value": 210.18
     },
     {
@@ -394,13 +388,39 @@
       "value": 0.26
     }
   ],
+  "2022-14-brendon-ng-vs-eric-wong": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "eric-wong",
+      "stillStands": false,
+      "value": 56.56
+    }
+  ],
+  "2022-17-eric-wong-vs-kate-grillo": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "kate-grillo",
+      "stillStands": true,
+      "value": 23.6
+    },
+    {
+      "kind": "combined-low",
+      "label": "Lowest scoring matchup in league history",
+      "opponentSlug": "kate-grillo",
+      "ownerSlug": "eric-wong",
+      "stillStands": true,
+      "value": 102.6
+    }
+  ],
   "2022-4-charlie-stoksik-vs-jay-uppuluri": [
     {
       "kind": "combined-low",
       "label": "Lowest scoring matchup in league history",
       "opponentSlug": "jay-uppuluri",
       "ownerSlug": "charlie-stoksik",
-      "stillStands": true,
+      "stillStands": false,
       "value": 131
     }
   ],
@@ -434,40 +454,14 @@
       "value": 55.4
     }
   ],
-  "2025-12-haley-rao-vs-isaac-edejer": [
+  "2024-16-eric-wong-vs-mark-mcgreal": [
     {
-      "kind": "weekly-low",
-      "label": "Lowest score in league history",
-      "ownerSlug": "isaac-edejer",
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "mark-mcgreal",
+      "ownerSlug": "eric-wong",
       "stillStands": true,
-      "value": 47.34
-    }
-  ],
-  "2025-7-diana-gonzalez-vs-isaac-edejer": [
-    {
-      "kind": "weekly-low",
-      "label": "Lowest score in league history",
-      "ownerSlug": "diana-gonzalez",
-      "stillStands": false,
-      "value": 58.74
-    }
-  ],
-  "2025-8-diana-gonzalez-vs-jay-uppuluri": [
-    {
-      "kind": "weekly-low",
-      "label": "Lowest score in league history",
-      "ownerSlug": "jay-uppuluri",
-      "stillStands": false,
-      "value": 57.82
-    }
-  ],
-  "2025-9-isaac-edejer-vs-jivan-gubbi": [
-    {
-      "kind": "weekly-low",
-      "label": "Lowest score in league history",
-      "ownerSlug": "isaac-edejer",
-      "stillStands": false,
-      "value": 49.7
+      "value": 356.68
     }
   ]
 }

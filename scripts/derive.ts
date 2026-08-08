@@ -1157,6 +1157,36 @@ function buildOwnerRecords(
  *
  * Player records stay Sleeper-only by necessity: ESPN kept no lineups.
  */
+/**
+ * A matchup as one entry per WEEK.
+ *
+ * THE RECORD BOOK COUNTS WEEKS. A two-week playoff matchup posts a combined
+ * total, and left whole it would out-rank every genuine single-week score ever
+ * posted — the highest score in league history would be a game that took a
+ * fortnight. Split, each week competes on the same terms as every other, which
+ * is what the lists measure. Everything else — the head-to-head series, the
+ * win-loss record, the matchup's own page — keeps the matchup whole, because
+ * the league played one playoff round, not two.
+ *
+ * An ordinary one-week matchup passes through untouched.
+ */
+function weeklyViews(m: Matchup): Matchup[] {
+  if (!m.weeks?.length) return [m];
+  return m.weeks.map((w) => ({
+    ...m,
+    week: w.week,
+    home: w.home,
+    away: w.away,
+    weeks: undefined,
+    winner:
+      w.home.points > w.away.points
+        ? w.home.ownerSlug
+        : w.away.points > w.home.points
+          ? w.away.ownerSlug
+          : null,
+  }));
+}
+
 function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): LeagueRecords {
   const scores: ScoreRecord[] = [];
   const playerScores: PlayerScoreRecord[] = [];
@@ -1854,16 +1884,6 @@ interface ManualLineups {
 interface ManualSeason {
   season: number;
   teams: number;
-  /**
-   * Weeks whose game covers exactly one scoring period, so a lineup can be
-   * reconciled against the scoreboard.
-   *
-   * A MATCHUP PERIOD IS NOT ALWAYS A WEEK — ESPN can run multi-week playoff
-   * matchups, and Apartment 401 did in 2021 and 2022, where the final spanned
-   * scoring periods 16 and 17 and posted their combined score. Absent on a
-   * season imported from MHTML, which predates the distinction.
-   */
-  lineupWeeks?: number[];
   playoffWeekStart: number;
   finalWeek: number;
   regularSeasonWeeks: number;
@@ -1892,6 +1912,15 @@ interface ManualSeason {
     kind: "regular" | "playoff" | "consolation";
     home: { ownerSlug: string; points: number };
     away: { ownerSlug: string; points: number };
+    /**
+     * Per-week split, present only when the matchup spans more than one week.
+     * ESPN's `playoffMatchupPeriodLength`; Sleeper can do the same.
+     */
+    weeks?: Array<{
+      week: number;
+      home: { ownerSlug: string; points: number };
+      away: { ownerSlug: string; points: number };
+    }>;
   }>;
 }
 
@@ -1925,26 +1954,43 @@ function importedMatchups(): Matchup[] {
     );
 
     m.matchups.forEach((g, i) => {
-      const forWeek = lineups?.weeks?.[String(g.week)];
-      const side = (x: { ownerSlug: string; points: number }): MatchupSide => ({
-        ownerSlug: x.ownerSlug,
-        points: x.points,
-        starters: forWeek?.[x.ownerSlug]?.starters ?? [],
-        playerPoints: forWeek?.[x.ownerSlug]?.playerPoints ?? {},
-      });
+      const sideIn =
+        (week: number) =>
+        (x: { ownerSlug: string; points: number }): MatchupSide => {
+          const forWeek = lineups?.weeks?.[String(week)];
+          return {
+            ownerSlug: x.ownerSlug,
+            points: x.points,
+            starters: forWeek?.[x.ownerSlug]?.starters ?? [],
+            playerPoints: forWeek?.[x.ownerSlug]?.playerPoints ?? {},
+          };
+        };
+      // TOTALS ON THE MATCHUP, LINEUPS PER WEEK. The combined points decide the
+      // game, but a multi-week matchup has a different lineup each week, so the
+      // real detail lives in `weeks` and the top-level side carries the totals.
+      const single = sideIn(g.week);
       out.push({
         season: m.season,
         week: g.week,
         kind: g.kind,
         matchupId: i + 1,
-        home: side(g.home),
-        away: side(g.away),
+        home: single(g.home),
+        away: single(g.away),
         winner:
           g.home.points > g.away.points
             ? g.home.ownerSlug
             : g.away.points > g.home.points
               ? g.away.ownerSlug
               : null,
+        ...(g.weeks?.length
+          ? {
+              weeks: g.weeks.map((w) => ({
+                week: w.week,
+                home: sideIn(w.week)(w.home),
+                away: sideIn(w.week)(w.away),
+              })),
+            }
+          : {}),
       });
     });
   }
@@ -2404,7 +2450,9 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
     ...loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0)),
   ];
   const ownerRecords = buildOwnerRecords(summaries, matchups);
-  const records = buildLeagueRecords(matchups, summaries);
+  // Per WEEK for every list that ranks a score — see `weeklyViews`.
+  const byWeek = matchups.flatMap(weeklyViews);
+  const records = buildLeagueRecords(byWeek, summaries);
   // A redraft league has no contracts to reconstruct. Gated on the feature flag
   // rather than on the per-season rules so the whole subsystem is off in one place.
   // Loaded before the keeper pass: a completed draft advances every contract to
@@ -2413,7 +2461,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   const keepers = league.features?.keepers
     ? resolveKeepers(loaded, draftOnly)
     : { perSeason: [], final: [] };
-  const atTheTime = recordsAtTheTime(summaries, matchups);
+  const atTheTime = recordsAtTheTime(summaries, byWeek);
   const playerHistory = buildPlayerHistory(loaded);
   const drafts = [
     ...buildDraftHistory(loaded),
@@ -2422,7 +2470,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   ].sort(
     (a, b) => a.season - b.season || a.pickNo - b.pickNo,
   );
-  const weeklyLows = buildWeeklyLows(matchups, summaries);
+  const weeklyLows = buildWeeklyLows(byWeek, summaries);
   const trades = buildTrades(loaded, loadLiveTradeSources(loaded));
 
   for (const o of owners.values()) o.seasons = [...new Set(o.seasons)].sort();

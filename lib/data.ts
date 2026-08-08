@@ -975,6 +975,14 @@ export interface Meeting {
   b: MeetingSide;
   /** Sleeper matchups carry lineups; imported ESPN games carry only scores. */
   hasLineups: boolean;
+  /**
+   * Per-week detail when the matchup spanned more than one week.
+   *
+   * ONE MEETING, SEVERAL WEEKS. The series counts it once and `a`/`b` carry the
+   * totals that decided it; this is what lets the page show each week's lineup
+   * rather than pretending the whole thing was played in an afternoon.
+   */
+  weeks?: Array<{ week: number; a: MeetingSide; b: MeetingSide }>;
 }
 
 export interface MeetingSide {
@@ -1090,6 +1098,20 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
         a: { ownerSlug: x.ownerSlug, points: x.points, starters: x.starters, playerPoints: x.playerPoints },
         b: { ownerSlug: y.ownerSlug, points: y.points, starters: y.starters, playerPoints: y.playerPoints },
         hasLineups: true,
+        // Oriented the same way round as `a`/`b`, which flip depending on which
+        // owner the series is being read from.
+        ...(m.weeks?.length
+          ? {
+              weeks: m.weeks.map((w) => {
+                const [wa, wb] = w.home.ownerSlug === x.ownerSlug ? [w.home, w.away] : [w.away, w.home];
+                return {
+                  week: w.week,
+                  a: { ownerSlug: wa.ownerSlug, points: wa.points, starters: wa.starters, playerPoints: wa.playerPoints },
+                  b: { ownerSlug: wb.ownerSlug, points: wb.points, starters: wb.starters, playerPoints: wb.playerPoints },
+                };
+              }),
+            }
+          : {}),
       });
       break;
     }

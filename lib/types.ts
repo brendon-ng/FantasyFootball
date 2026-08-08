@@ -135,13 +135,35 @@ export interface MatchupSide {
 
 export interface Matchup {
   season: number;
+  /** First week of the matchup. Equal to the only week unless `weeks` is set. */
   week: number;
   /** "regular" | "playoff" | "consolation" */
   kind: "regular" | "playoff" | "consolation";
   matchupId: number;
+  /** Totals across every week of the matchup. */
   home: MatchupSide;
   away: MatchupSide;
   winner: string | null;
+  /**
+   * Per-week detail, present ONLY when a matchup spans more than one week.
+   *
+   * A MULTI-WEEK MATCHUP IS ONE GAME AND SEVERAL WEEKS, and the two facts are
+   * needed in different places. It is one game for the head-to-head series, the
+   * win-loss record and its own page — the league played a single playoff round.
+   * It is several weeks for the record book, where a two-week total would
+   * out-rank every genuine single-week score ever posted.
+   *
+   * ESPN sets this with `playoffMatchupPeriodLength`; Sleeper can do the same,
+   * including for the championship only.
+   */
+  weeks?: MatchupWeek[];
+}
+
+/** One week inside a multi-week matchup. */
+export interface MatchupWeek {
+  week: number;
+  home: MatchupSide;
+  away: MatchupSide;
 }
 
 /**

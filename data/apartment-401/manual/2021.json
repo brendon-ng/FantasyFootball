@@ -158,21 +158,6 @@
   "hasRosters": true,
   "hasWeeklyMatchups": true,
   "imported": true,
-  "lineupWeeks": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13
-  ],
   "matchups": [
     {
       "away": {
@@ -808,7 +793,31 @@
         "points": 281.24
       },
       "kind": "playoff",
-      "week": 14
+      "week": 14,
+      "weeks": [
+        {
+          "away": {
+            "ownerSlug": "brendon-ng",
+            "points": 65.34
+          },
+          "home": {
+            "ownerSlug": "sam-ellison",
+            "points": 165
+          },
+          "week": 14
+        },
+        {
+          "away": {
+            "ownerSlug": "brendon-ng",
+            "points": 123.08
+          },
+          "home": {
+            "ownerSlug": "sam-ellison",
+            "points": 116.24
+          },
+          "week": 15
+        }
+      ]
     },
     {
       "away": {
@@ -820,7 +829,31 @@
         "points": 218.16
       },
       "kind": "playoff",
-      "week": 14
+      "week": 14,
+      "weeks": [
+        {
+          "away": {
+            "ownerSlug": "jivan-gubbi",
+            "points": 138.08
+          },
+          "home": {
+            "ownerSlug": "jay-uppuluri",
+            "points": 116.5
+          },
+          "week": 14
+        },
+        {
+          "away": {
+            "ownerSlug": "jivan-gubbi",
+            "points": 88.14
+          },
+          "home": {
+            "ownerSlug": "jay-uppuluri",
+            "points": 101.66
+          },
+          "week": 15
+        }
+      ]
     },
     {
       "away": {
@@ -832,7 +865,31 @@
         "points": 193.46
       },
       "kind": "consolation",
-      "week": 14
+      "week": 14,
+      "weeks": [
+        {
+          "away": {
+            "ownerSlug": "charlie-stoksik",
+            "points": 112.62
+          },
+          "home": {
+            "ownerSlug": "kate-grillo",
+            "points": 87.44
+          },
+          "week": 14
+        },
+        {
+          "away": {
+            "ownerSlug": "charlie-stoksik",
+            "points": 108.6
+          },
+          "home": {
+            "ownerSlug": "kate-grillo",
+            "points": 106.02
+          },
+          "week": 15
+        }
+      ]
     },
     {
       "away": {
@@ -844,7 +901,31 @@
         "points": 260.98
       },
       "kind": "consolation",
-      "week": 14
+      "week": 14,
+      "weeks": [
+        {
+          "away": {
+            "ownerSlug": "diana-gonzalez",
+            "points": 94.32
+          },
+          "home": {
+            "ownerSlug": "haley-rao",
+            "points": 160.12
+          },
+          "week": 14
+        },
+        {
+          "away": {
+            "ownerSlug": "diana-gonzalez",
+            "points": 62.68
+          },
+          "home": {
+            "ownerSlug": "haley-rao",
+            "points": 100.86
+          },
+          "week": 15
+        }
+      ]
     },
     {
       "away": {
@@ -856,7 +937,31 @@
         "points": 218.82
       },
       "kind": "playoff",
-      "week": 15
+      "week": 16,
+      "weeks": [
+        {
+          "away": {
+            "ownerSlug": "jivan-gubbi",
+            "points": 151.3
+          },
+          "home": {
+            "ownerSlug": "sam-ellison",
+            "points": 139.04
+          },
+          "week": 16
+        },
+        {
+          "away": {
+            "ownerSlug": "jivan-gubbi",
+            "points": 176.04
+          },
+          "home": {
+            "ownerSlug": "sam-ellison",
+            "points": 79.78
+          },
+          "week": 17
+        }
+      ]
     },
     {
       "away": {
@@ -868,7 +973,31 @@
         "points": 204.18
       },
       "kind": "consolation",
-      "week": 15
+      "week": 16,
+      "weeks": [
+        {
+          "away": {
+            "ownerSlug": "brendon-ng",
+            "points": 92.8
+          },
+          "home": {
+            "ownerSlug": "jay-uppuluri",
+            "points": 92.2
+          },
+          "week": 16
+        },
+        {
+          "away": {
+            "ownerSlug": "brendon-ng",
+            "points": 142.34
+          },
+          "home": {
+            "ownerSlug": "jay-uppuluri",
+            "points": 111.98
+          },
+          "week": 17
+        }
+      ]
     },
     {
       "away": {
@@ -880,7 +1009,31 @@
         "points": 239.76
       },
       "kind": "consolation",
-      "week": 15
+      "week": 16,
+      "weeks": [
+        {
+          "away": {
+            "ownerSlug": "haley-rao",
+            "points": 135.08
+          },
+          "home": {
+            "ownerSlug": "charlie-stoksik",
+            "points": 104.06
+          },
+          "week": 16
+        },
+        {
+          "away": {
+            "ownerSlug": "haley-rao",
+            "points": 128.4
+          },
+          "home": {
+            "ownerSlug": "charlie-stoksik",
+            "points": 135.7
+          },
+          "week": 17
+        }
+      ]
     },
     {
       "away": {
@@ -892,7 +1045,31 @@
         "points": 210.3
       },
       "kind": "consolation",
-      "week": 15
+      "week": 16,
+      "weeks": [
+        {
+          "away": {
+            "ownerSlug": "diana-gonzalez",
+            "points": 114.9
+          },
+          "home": {
+            "ownerSlug": "kate-grillo",
+            "points": 123.58
+          },
+          "week": 16
+        },
+        {
+          "away": {
+            "ownerSlug": "diana-gonzalez",
+            "points": 122.12
+          },
+          "home": {
+            "ownerSlug": "kate-grillo",
+            "points": 86.72
+          },
+          "week": 17
+        }
+      ]
     }
   ],
   "playoffWeekStart": 14,
