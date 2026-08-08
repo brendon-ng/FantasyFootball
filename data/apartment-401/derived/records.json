@@ -1,15 +1,6 @@
 {
   "biggestBlowout": [
     {
-      "margin": 99.66,
-      "opponentPoints": 65.34,
-      "opponentSlug": "brendon-ng",
-      "ownerSlug": "sam-ellison",
-      "points": 165,
-      "season": 2021,
-      "week": 14
-    },
-    {
       "margin": 96.5,
       "opponentPoints": 70.96,
       "opponentSlug": "isaac-edejer",
@@ -17,15 +8,6 @@
       "points": 167.46,
       "season": 2025,
       "week": 4
-    },
-    {
-      "margin": 96.26,
-      "opponentPoints": 79.78,
-      "opponentSlug": "sam-ellison",
-      "ownerSlug": "jivan-gubbi",
-      "points": 176.04,
-      "season": 2021,
-      "week": 17
     },
     {
       "margin": 95.5,
@@ -62,15 +44,6 @@
       "points": 158.34,
       "season": 2023,
       "week": 4
-    },
-    {
-      "margin": 86.68,
-      "opponentPoints": 97.6,
-      "opponentSlug": "brendon-ng",
-      "ownerSlug": "haley-rao",
-      "points": 184.28,
-      "season": 2022,
-      "week": 17
     },
     {
       "margin": 84.1,
@@ -136,15 +109,6 @@
       "week": 2
     },
     {
-      "margin": 76.82,
-      "opponentPoints": 56.56,
-      "opponentSlug": "eric-wong",
-      "ownerSlug": "brendon-ng",
-      "points": 133.38,
-      "season": 2022,
-      "week": 14
-    },
-    {
       "margin": 74.12,
       "opponentPoints": 88.68,
       "opponentSlug": "jay-uppuluri",
@@ -170,15 +134,6 @@
       "points": 128.82,
       "season": 2025,
       "week": 7
-    },
-    {
-      "margin": 68.98,
-      "opponentPoints": 66.7,
-      "opponentSlug": "kate-grillo",
-      "ownerSlug": "haley-rao",
-      "points": 135.68,
-      "season": 2022,
-      "week": 14
     },
     {
       "margin": 68.64,
@@ -224,6 +179,51 @@
       "points": 140.38,
       "season": 2025,
       "week": 16
+    },
+    {
+      "margin": 66.9,
+      "opponentPoints": 49.7,
+      "opponentSlug": "isaac-edejer",
+      "ownerSlug": "jivan-gubbi",
+      "points": 116.6,
+      "season": 2025,
+      "week": 9
+    },
+    {
+      "margin": 66.22,
+      "opponentPoints": 47.34,
+      "opponentSlug": "isaac-edejer",
+      "ownerSlug": "haley-rao",
+      "points": 113.56,
+      "season": 2025,
+      "week": 12
+    },
+    {
+      "margin": 66.08,
+      "opponentPoints": 79.62,
+      "opponentSlug": "kate-grillo",
+      "ownerSlug": "sam-ellison",
+      "points": 145.7,
+      "season": 2023,
+      "week": 10
+    },
+    {
+      "margin": 65.4,
+      "opponentPoints": 111,
+      "opponentSlug": "haley-rao",
+      "ownerSlug": "kate-grillo",
+      "points": 176.4,
+      "season": 2023,
+      "week": 13
+    },
+    {
+      "margin": 64.5,
+      "opponentPoints": 78.2,
+      "opponentSlug": "jivan-gubbi",
+      "ownerSlug": "mark-mcgreal",
+      "points": 142.7,
+      "season": 2023,
+      "week": 2
     }
   ],
   "highestCombined": [
@@ -718,6 +718,15 @@
       "week": 6
     },
     {
+      "margin": 0.34,
+      "opponentPoints": 179.06,
+      "opponentSlug": "mark-mcgreal",
+      "ownerSlug": "diana-gonzalez",
+      "points": 179.4,
+      "season": 2022,
+      "week": 14
+    },
+    {
       "margin": 0.36,
       "opponentPoints": 113.98,
       "opponentSlug": "mark-mcgreal",
@@ -725,15 +734,6 @@
       "points": 114.34,
       "season": 2023,
       "week": 17
-    },
-    {
-      "margin": 0.6,
-      "opponentPoints": 92.2,
-      "opponentSlug": "jay-uppuluri",
-      "ownerSlug": "brendon-ng",
-      "points": 92.8,
-      "season": 2021,
-      "week": 16
     },
     {
       "margin": 0.88,
@@ -845,15 +845,6 @@
     },
     {
       "margin": 2.12,
-      "opponentPoints": 84.18,
-      "opponentSlug": "diana-gonzalez",
-      "ownerSlug": "mark-mcgreal",
-      "points": 86.3,
-      "season": 2022,
-      "week": 14
-    },
-    {
-      "margin": 2.12,
       "opponentPoints": 142.3,
       "opponentSlug": "eric-wong",
       "ownerSlug": "mark-mcgreal",
@@ -898,13 +889,22 @@
       "week": 9
     },
     {
-      "margin": 2.46,
-      "opponentPoints": 92.76,
-      "opponentSlug": "mark-mcgreal",
+      "margin": 2.68,
+      "opponentPoints": 93.62,
+      "opponentSlug": "brendon-ng",
       "ownerSlug": "diana-gonzalez",
-      "points": 95.22,
-      "season": 2022,
-      "week": 15
+      "points": 96.3,
+      "season": 2021,
+      "week": 13
+    },
+    {
+      "margin": 2.7,
+      "opponentPoints": 115.12,
+      "opponentSlug": "mark-mcgreal",
+      "ownerSlug": "jay-uppuluri",
+      "points": 117.82,
+      "season": 2023,
+      "week": 10
     }
   ],
   "playerHigh": [

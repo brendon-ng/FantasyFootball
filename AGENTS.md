@@ -379,13 +379,35 @@ ONE GAME, SEVERAL WEEKS, and the two facts are needed in different places.
 | Surface | Sees |
 | --- | --- |
 | head-to-head series, W-L, standings, the matchup's own page | ONE matchup, combined score, one winner |
-| record book — every list that ranks a score or a margin | one entry PER WEEK |
 | the matchup page's lineups | one pair per week, each with its own marks |
 
+The record book is not one rule but three, because a week inside a multi-week
+matchup is a real SCORE but not a real GAME — nobody won or lost it on its own:
+
+| List | The combined matchup | Each week inside it |
+| --- | --- | --- |
+| high/low score, player week, high/low combined | ✗ | **✓** |
+| biggest blowout | ✗ | ✗ |
+| narrowest win | **✓** | ✗ |
+
+BLOWOUT AND NARROW ARE NOT SYMMETRIC, and that is deliberate. 108 points over a
+fortnight is not the achievement 108 points in an afternoon is, so a two-week
+margin cannot win the blowout list. Surviving a fortnight by 0.34 is MORE
+remarkable than doing it in one week, so it stays eligible for the narrow list —
+apartment-401's 2022 semi-final holds that record at 0.34.
+
 `Matchup.weeks` carries the per-week split and is ABSENT on an ordinary matchup,
-so nothing changes for the 99% case. `weeklyViews()` in derive flattens a matchup
-into one entry per week, and `buildLeagueRecords`, `recordsAtTheTime` and
-`buildWeeklyLows` all run on that flattened view.
+so nothing changes for the 99% case. `weeklyViews()` flattens a matchup into one
+entry per week; `buildLeagueRecords` takes WHOLE matchups and splits them itself,
+because scores and margins want different views of the same game. Margins are
+collected from whole games only and never from a week inside one, and `blowouts`
+is the narrower list the blowout ranking draws from.
+
+`recordsAtTheTime` carries the same rule through an `Event.margins` flag. One gap
+there: a multi-week matchup cannot earn a narrow mark AT THE TIME, because that
+pass walks weeks in order and the combined game is not one of them. The record
+book itself is correct; only the "set a record when played" badge is affected, and
+those are #1-only and rare.
 
 WHY THE SPLIT MATTERS: left whole, a two-week total out-ranks every genuine
 single-week score ever posted — the highest score in league history would be a

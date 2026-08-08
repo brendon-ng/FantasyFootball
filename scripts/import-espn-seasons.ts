@@ -244,6 +244,7 @@ function buildSeason(season: number, data: EspnSeason, cfg: LeagueFile | null, w
     hasWeeklyMatchups: true,
     imported: true,
     matchups,
+    playoffTeams: data.settings.scheduleSettings?.playoffTeamCount ?? 6,
     playoffWeekStart: regularSeasonWeeks + 1,
     regularSeasonWeeks,
     season,

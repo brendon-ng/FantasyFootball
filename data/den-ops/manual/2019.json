@@ -209,12 +209,12 @@
         {
           "points": 86.72,
           "seed": 10,
-          "teamName": "💸📈 Reaganomics"
+          "teamName": "\ud83d\udcb8\ud83d\udcc8 Reaganomics"
         },
         {
           "points": 98.1,
           "seed": 9,
-          "teamName": "Skim 🥛"
+          "teamName": "Skim \ud83e\udd5b"
         }
       ],
       "week": 14
@@ -247,7 +247,7 @@
         {
           "points": 76.1,
           "seed": 9,
-          "teamName": "Skim 🥛"
+          "teamName": "Skim \ud83e\udd5b"
         },
         {
           "points": 121.64,
@@ -290,7 +290,7 @@
         {
           "points": 133.4,
           "seed": 10,
-          "teamName": "💸📈 Reaganomics"
+          "teamName": "\ud83d\udcb8\ud83d\udcc8 Reaganomics"
         }
       ],
       "week": 15
@@ -323,12 +323,12 @@
         {
           "points": 136.14,
           "seed": 10,
-          "teamName": "💸📈 Reaganomics"
+          "teamName": "\ud83d\udcb8\ud83d\udcc8 Reaganomics"
         },
         {
           "points": 102.8,
           "seed": 9,
-          "teamName": "Skim 🥛"
+          "teamName": "Skim \ud83e\udd5b"
         }
       ],
       "week": 16
@@ -1499,6 +1499,7 @@
       "week": 16
     }
   ],
+  "playoffTeams": 6,
   "playoffWeekStart": 14,
   "regularSeasonWeeks": 13,
   "season": 2019,
@@ -1625,7 +1626,7 @@
       "pointsAgainst": 1489.7,
       "pointsFor": 1409.1,
       "seed": 10,
-      "teamName": "💸📈 Reaganomics",
+      "teamName": "\ud83d\udcb8\ud83d\udcc8 Reaganomics",
       "teamSlug": "reagan-schmidt",
       "ties": 0,
       "wins": 5
@@ -1639,7 +1640,7 @@
       "pointsAgainst": 1553.26,
       "pointsFor": 1440.7,
       "seed": 9,
-      "teamName": "Skim 🥛",
+      "teamName": "Skim \ud83e\udd5b",
       "teamSlug": "spencer-kim",
       "ties": 0,
       "wins": 5

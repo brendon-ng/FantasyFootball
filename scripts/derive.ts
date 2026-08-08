@@ -1191,6 +1191,17 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
   const scores: ScoreRecord[] = [];
   const playerScores: PlayerScoreRecord[] = [];
   const margins: Array<ScoreRecord & { margin: number }> = [];
+  /**
+   * Margins eligible for the BLOWOUT list, which is not the same set.
+   *
+   * A two-week matchup wins by a two-week margin, and 108 points over a
+   * fortnight is not the achievement 108 points in an afternoon is — ranking
+   * them together would hand the blowout list to whichever league happened to
+   * play multi-week playoffs. A NARROW two-week win is the opposite: surviving
+   * fourteen days by half a point is more remarkable than doing it in one, so
+   * those stay eligible and `margins` keeps them.
+   */
+  const blowouts: Array<ScoreRecord & { margin: number }> = [];
   const combined: CombinedRecord[] = [];
 
   /** One entry per GAME, unlike `scores`, which has one per team. */
@@ -1236,7 +1247,10 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
           };
           scores.push(base);
           if (self.pts > opp.pts) {
-            margins.push({ ...base, margin: round2(self.pts - opp.pts) });
+            // A bracket-only season has no multi-week matchups to distinguish.
+            const entry = { ...base, margin: round2(self.pts - opp.pts) };
+            margins.push(entry);
+            blowouts.push(entry);
           }
         }
         addCombined(s.season, m.week ?? 0, { slug: m.team1, pts: p1 }, { slug: m.team2, pts: p2 });
@@ -1244,7 +1258,9 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
     }
   }
 
-  for (const m of matchups) {
+  // SCORES ARE PER WEEK. A two-week total is not a week's score, and one week of
+  // a two-week matchup is — see `weeklyViews`.
+  for (const m of matchups.flatMap(weeklyViews)) {
     addCombined(
       m.season,
       m.week,
@@ -1264,9 +1280,6 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
         opponentPoints: opp.points,
       };
       scores.push(base);
-      if (m.winner === self.ownerSlug) {
-        margins.push({ ...base, margin: round2(self.points - opp.points) });
-      }
       // STARTED PLAYERS ONLY. A monster week on the bench scored the team
       // nothing, so ranking it alongside points that actually counted would make
       // the list measure roster luck rather than results. Every surface that
@@ -1287,6 +1300,33 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
     }
   }
 
+  /**
+   * MARGINS ARE PER GAME, and a week inside a multi-week matchup is not a game.
+   *
+   * Nobody won or lost week one of a two-week final — the round was decided on
+   * the pair — so neither week can be a blowout or a narrow win. The matchup
+   * itself can be a narrow win but not a blowout; see `blowouts`.
+   */
+  for (const m of matchups) {
+    for (const [self, opp] of [
+      [m.home, m.away],
+      [m.away, m.home],
+    ] as const) {
+      if (m.winner !== self.ownerSlug) continue;
+      const entry = {
+        season: m.season,
+        week: m.week,
+        ownerSlug: self.ownerSlug,
+        points: self.points,
+        opponentSlug: opp.ownerSlug,
+        opponentPoints: opp.points,
+        margin: round2(self.points - opp.points),
+      };
+      margins.push(entry);
+      if (!m.weeks?.length) blowouts.push(entry);
+    }
+  }
+
   const top = <T>(arr: T[], by: (x: T) => number, n = 25, asc = false) =>
     arr.slice().sort((a, b) => (asc ? by(a) - by(b) : by(b) - by(a))).slice(0, n);
 
@@ -1294,7 +1334,7 @@ function buildLeagueRecords(matchups: Matchup[], summaries: SeasonSummary[]): Le
     weeklyHigh: top(scores, (s) => s.points),
     weeklyLow: top(scores, (s) => s.points, 25, true),
     playerHigh: top(playerScores, (s) => s.points),
-    biggestBlowout: top(margins, (s) => s.margin),
+    biggestBlowout: top(blowouts, (s) => s.margin),
     narrowestWin: top(margins, (s) => s.margin, 25, true),
     highestCombined: top(combined, (s) => s.total),
     lowestCombined: top(combined, (s) => s.total, 25, true),
@@ -1885,6 +1925,15 @@ interface ManualSeason {
   season: number;
   teams: number;
   playoffWeekStart: number;
+  /**
+   * How many teams made the playoffs that year.
+   *
+   * NOT A CONSTANT ACROSS LEAGUES OR SEASONS. apartment-401 ran a 4-team playoff
+   * in 2021-22 and 6 from 2023. Absent on a season imported from MHTML, which
+   * predates the field — every one of those is Den Ops, and ESPN reports 6 for
+   * all five, which is what the fallback uses.
+   */
+  playoffTeams?: number;
   finalWeek: number;
   regularSeasonWeeks: number;
   standings: Array<{
@@ -2139,7 +2188,7 @@ function importedSeasons(): SeasonSummary[] {
       pointsFor: r.pointsFor,
       pointsAgainst: r.pointsAgainst,
       finalPlace: r.finalPlace,
-      madePlayoffs: (r.seed ?? 99) <= 6,
+      madePlayoffs: (r.seed ?? 99) <= (m.playoffTeams ?? 6),
     }));
 
     const at = (place: number) => standings.find((r) => r.finalPlace === place)?.ownerSlug ?? null;
@@ -2228,6 +2277,8 @@ function recordsAtTheTime(
     sides: Array<{ slug: string; points: number }>;
     /** Only Sleeper games carry lineups. */
     players: Array<{ slug: string; playerId: string; points: number }>;
+    /** False for a week inside a multi-week matchup: real scores, not a game. */
+    margins?: boolean;
   }
 
   const events: Event[] = [];
@@ -2274,6 +2325,11 @@ function recordsAtTheTime(
         { slug: m.away.ownerSlug, points: m.away.points },
       ],
       players: [...starters(m.home), ...starters(m.away)],
+      // A WEEK INSIDE A MULTI-WEEK MATCHUP IS NOT A GAME. Its scores are real
+      // and rank normally, but nobody won or lost it, so it can be neither a
+      // blowout nor a narrow win. `weeklyViews` strips `weeks` on the copies it
+      // makes, so a matchup still carrying one is the whole game.
+      margins: !m.weeks?.length,
     });
   }
 
@@ -2345,7 +2401,7 @@ function recordsAtTheTime(
     highestCombined = Math.max(highestCombined, total);
     lowestCombined = Math.min(lowestCombined, total);
 
-    if (winner) {
+    if (winner && ev.margins !== false) {
       if (!first && margin > widestMargin) {
         add(ev.id, {
           kind: "blowout",
@@ -2450,9 +2506,10 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
     ...loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0)),
   ];
   const ownerRecords = buildOwnerRecords(summaries, matchups);
-  // Per WEEK for every list that ranks a score — see `weeklyViews`.
   const byWeek = matchups.flatMap(weeklyViews);
-  const records = buildLeagueRecords(byWeek, summaries);
+  // Whole matchups: the builder splits them itself, because scores and margins
+  // want different views of the same game.
+  const records = buildLeagueRecords(matchups, summaries);
   // A redraft league has no contracts to reconstruct. Gated on the feature flag
   // rather than on the per-season rules so the whole subsystem is off in one place.
   // Loaded before the keeper pass: a completed draft advances every contract to

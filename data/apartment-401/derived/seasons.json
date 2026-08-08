@@ -211,7 +211,7 @@
       {
         "finalPlace": 8,
         "losses": 6,
-        "madePlayoffs": true,
+        "madePlayoffs": false,
         "ownerSlug": "kate-grillo",
         "ownerSlugs": [
           "kate-grillo"
@@ -227,7 +227,7 @@
       {
         "finalPlace": 6,
         "losses": 7,
-        "madePlayoffs": true,
+        "madePlayoffs": false,
         "ownerSlug": "charlie-stoksik",
         "ownerSlugs": [
           "charlie-stoksik"
@@ -598,7 +598,7 @@
       {
         "finalPlace": 6,
         "losses": 6,
-        "madePlayoffs": true,
+        "madePlayoffs": false,
         "ownerSlug": "diana-gonzalez",
         "ownerSlugs": [
           "diana-gonzalez"
@@ -614,7 +614,7 @@
       {
         "finalPlace": 7,
         "losses": 7,
-        "madePlayoffs": true,
+        "madePlayoffs": false,
         "ownerSlug": "mark-mcgreal",
         "ownerSlugs": [
           "mark-mcgreal"

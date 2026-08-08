@@ -1072,6 +1072,7 @@
       ]
     }
   ],
+  "playoffTeams": 4,
   "playoffWeekStart": 14,
   "regularSeasonWeeks": 13,
   "season": 2021,
