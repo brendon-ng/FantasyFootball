@@ -620,7 +620,7 @@
   "2152": {
     "full_name": "Teddy Bridgewater",
     "position": "QB",
-    "team": "DET",
+    "team": null,
     "years_exp": 12
   },
   "2161": {
@@ -1634,8 +1634,8 @@
   "5096": {
     "full_name": "Ray-Ray McCloud",
     "position": "WR",
-    "team": null,
-    "years_exp": 7
+    "team": "CHI",
+    "years_exp": 8
   },
   "5100": {
     "full_name": "Jordan Wilkins",
@@ -2552,7 +2552,7 @@
   "7593": {
     "full_name": "Trey Sermon",
     "position": "RB",
-    "team": null,
+    "team": "ATL",
     "years_exp": 5
   },
   "7594": {
