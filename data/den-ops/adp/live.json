@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-08-12T09:05:57.668Z",
+  "capturedAt": "2026-08-13T09:05:54.225Z",
   "entries": [
     {
       "consensus": 1.9,
@@ -22,7 +22,7 @@
       "team": "ATL"
     },
     {
-      "consensus": 3,
+      "consensus": 3.1,
       "name": "Ja'Marr Chase",
       "playerId": "7564",
       "position": "WR",
@@ -32,7 +32,7 @@
       "team": "CIN"
     },
     {
-      "consensus": 3.6,
+      "consensus": 3.7,
       "name": "Puka Nacua",
       "playerId": "9493",
       "position": "WR",
@@ -52,7 +52,7 @@
       "team": "SEA"
     },
     {
-      "consensus": 6.5,
+      "consensus": 6.7,
       "name": "Christian McCaffrey",
       "playerId": "4034",
       "position": "RB",
@@ -72,7 +72,7 @@
       "team": "DET"
     },
     {
-      "consensus": 8.7,
+      "consensus": 8.8,
       "name": "Jonathan Taylor",
       "playerId": "6813",
       "position": "RB",
@@ -102,7 +102,7 @@
       "team": "MIN"
     },
     {
-      "consensus": 13.4,
+      "consensus": 13.6,
       "name": "Drake London",
       "playerId": "8112",
       "position": "WR",
@@ -122,7 +122,7 @@
       "team": "MIA"
     },
     {
-      "consensus": 14.6,
+      "consensus": 14.5,
       "name": "James Cook",
       "playerId": "8138",
       "position": "RB",
@@ -132,7 +132,7 @@
       "team": "BUF"
     },
     {
-      "consensus": 15.7,
+      "consensus": 15.9,
       "name": "Ashton Jeanty",
       "playerId": "12527",
       "position": "RB",
@@ -162,7 +162,7 @@
       "team": "CIN"
     },
     {
-      "consensus": 20.1,
+      "consensus": 20.2,
       "name": "Rashee Rice",
       "playerId": "10229",
       "position": "WR",
@@ -172,7 +172,7 @@
       "team": "KC"
     },
     {
-      "consensus": 20.2,
+      "consensus": 20.5,
       "name": "Omarion Hampton",
       "playerId": "12507",
       "position": "RB",
@@ -192,7 +192,7 @@
       "team": "NE"
     },
     {
-      "consensus": 20.8,
+      "consensus": 20.9,
       "name": "Saquon Barkley",
       "playerId": "4866",
       "position": "RB",
@@ -202,7 +202,7 @@
       "team": "PHI"
     },
     {
-      "consensus": 21.6,
+      "consensus": 21.7,
       "name": "Brock Bowers",
       "playerId": "11604",
       "position": "TE",
@@ -212,7 +212,7 @@
       "team": "LV"
     },
     {
-      "consensus": 22.2,
+      "consensus": 22.3,
       "name": "Nico Collins",
       "playerId": "7569",
       "position": "WR",
@@ -222,7 +222,7 @@
       "team": "HOU"
     },
     {
-      "consensus": 24,
+      "consensus": 24.1,
       "name": "George Pickens",
       "playerId": "8137",
       "position": "WR",
@@ -232,7 +232,7 @@
       "team": "DAL"
     },
     {
-      "consensus": 25.1,
+      "consensus": 25,
       "name": "Kenneth Walker III",
       "playerId": "8151",
       "position": "RB",
@@ -252,7 +252,7 @@
       "team": "NO"
     },
     {
-      "consensus": 27.3,
+      "consensus": 27.6,
       "name": "Derrick Henry",
       "playerId": "3198",
       "position": "RB",
@@ -262,27 +262,27 @@
       "team": "BAL"
     },
     {
-      "consensus": 28.7,
-      "name": "Jeremiyah Love",
-      "playerId": "13287",
-      "position": "RB",
-      "rank": 27,
-      "round": 2,
-      "sleeper": 19.7,
-      "team": "ARI"
-    },
-    {
-      "consensus": 29.2,
+      "consensus": 29.4,
       "name": "Malik Nabers",
       "playerId": "11632",
       "position": "WR",
-      "rank": 28,
+      "rank": 27,
       "round": 3,
       "sleeper": 25.2,
       "team": "NYG"
     },
     {
-      "consensus": 30,
+      "consensus": 29.7,
+      "name": "Jeremiyah Love",
+      "playerId": "13287",
+      "position": "RB",
+      "rank": 28,
+      "round": 2,
+      "sleeper": 19.7,
+      "team": "ARI"
+    },
+    {
+      "consensus": 30.1,
       "name": "Josh Allen",
       "playerId": "4984",
       "position": "QB",
@@ -322,7 +322,7 @@
       "team": "NYJ"
     },
     {
-      "consensus": 34.5,
+      "consensus": 34.6,
       "name": "Tetairoa McMillan",
       "playerId": "12526",
       "position": "WR",
@@ -342,7 +342,7 @@
       "team": "PHI"
     },
     {
-      "consensus": 35.5,
+      "consensus": 35.8,
       "name": "Zay Flowers",
       "playerId": "9997",
       "position": "WR",
@@ -362,7 +362,7 @@
       "team": "DAL"
     },
     {
-      "consensus": 47.7,
+      "consensus": 47.8,
       "name": "Kyren Williams",
       "playerId": "8150",
       "position": "RB",
@@ -372,7 +372,7 @@
       "team": "LAR"
     },
     {
-      "consensus": 49.3,
+      "consensus": 49.4,
       "name": "Tee Higgins",
       "playerId": "6801",
       "position": "WR",
@@ -382,7 +382,7 @@
       "team": "CIN"
     },
     {
-      "consensus": 51.3,
+      "consensus": 51.4,
       "name": "Ladd McConkey",
       "playerId": "11635",
       "position": "WR",
@@ -402,7 +402,7 @@
       "team": "TB"
     },
     {
-      "consensus": 52.3,
+      "consensus": 52.6,
       "name": "Colston Loveland",
       "playerId": "12517",
       "position": "TE",
@@ -412,7 +412,7 @@
       "team": "CHI"
     },
     {
-      "consensus": 52.9,
+      "consensus": 53,
       "name": "Lamar Jackson",
       "playerId": "4881",
       "position": "QB",
@@ -422,7 +422,7 @@
       "team": "BAL"
     },
     {
-      "consensus": 54.2,
+      "consensus": 54.3,
       "name": "Travis Etienne Jr.",
       "playerId": "7543",
       "position": "RB",
@@ -432,7 +432,7 @@
       "team": "NO"
     },
     {
-      "consensus": 54.2,
+      "consensus": 54.3,
       "name": "Jaylen Waddle",
       "playerId": "7526",
       "position": "WR",
@@ -442,7 +442,7 @@
       "team": "DEN"
     },
     {
-      "consensus": 55.6,
+      "consensus": 55.5,
       "name": "Bucky Irving",
       "playerId": "11584",
       "position": "RB",
@@ -452,7 +452,7 @@
       "team": "TB"
     },
     {
-      "consensus": 57,
+      "consensus": 57.3,
       "name": "Luther Burden III",
       "playerId": "12519",
       "position": "WR",
@@ -462,7 +462,7 @@
       "team": "CHI"
     },
     {
-      "consensus": 57.3,
+      "consensus": 57.5,
       "name": "Davante Adams",
       "playerId": "2133",
       "position": "WR",
@@ -472,7 +472,7 @@
       "team": "LAR"
     },
     {
-      "consensus": 58.1,
+      "consensus": 58.3,
       "name": "Cam Skattebo",
       "playerId": "12481",
       "position": "RB",
@@ -482,27 +482,27 @@
       "team": "NYG"
     },
     {
-      "consensus": 59.4,
-      "name": "Drake Maye",
-      "playerId": "11564",
-      "position": "QB",
-      "rank": 49,
-      "round": 6,
-      "sleeper": 51.2,
-      "team": "NE"
-    },
-    {
-      "consensus": 59.4,
+      "consensus": 59.5,
       "name": "Terry McLaurin",
       "playerId": "5927",
       "position": "WR",
-      "rank": 50,
+      "rank": 49,
       "round": 6,
       "sleeper": 56.6,
       "team": "WSH"
     },
     {
-      "consensus": 62.1,
+      "consensus": 59.9,
+      "name": "Drake Maye",
+      "playerId": "11564",
+      "position": "QB",
+      "rank": 50,
+      "round": 6,
+      "sleeper": 51.2,
+      "team": "NE"
+    },
+    {
+      "consensus": 61.9,
       "name": "Tyler Warren",
       "playerId": "12518",
       "position": "TE",
@@ -512,7 +512,7 @@
       "team": "IND"
     },
     {
-      "consensus": 62.1,
+      "consensus": 62.6,
       "name": "Jameson Williams",
       "playerId": "8148",
       "position": "WR",
@@ -532,7 +532,7 @@
       "team": "CLE"
     },
     {
-      "consensus": 65.1,
+      "consensus": 65,
       "name": "Carnell Tate",
       "playerId": "13279",
       "position": "WR",
@@ -542,7 +542,7 @@
       "team": "TEN"
     },
     {
-      "consensus": 66,
+      "consensus": 66.4,
       "name": "DJ Moore",
       "playerId": "4983",
       "position": "WR",
@@ -562,7 +562,7 @@
       "team": "WSH"
     },
     {
-      "consensus": 67.4,
+      "consensus": 67.6,
       "name": "TreVeyon Henderson",
       "playerId": "12529",
       "position": "RB",
@@ -572,7 +572,7 @@
       "team": "NE"
     },
     {
-      "consensus": 69.1,
+      "consensus": 69,
       "name": "Rome Odunze",
       "playerId": "11620",
       "position": "WR",
@@ -582,7 +582,7 @@
       "team": "CHI"
     },
     {
-      "consensus": 70,
+      "consensus": 70.3,
       "name": "Joe Burrow",
       "playerId": "6770",
       "position": "QB",
@@ -602,7 +602,7 @@
       "team": "HOU"
     },
     {
-      "consensus": 71.7,
+      "consensus": 71.4,
       "name": "Jalen Hurts",
       "playerId": "6904",
       "position": "QB",
@@ -612,7 +612,7 @@
       "team": "PHI"
     },
     {
-      "consensus": 72.7,
+      "consensus": 72.8,
       "name": "Jadarian Price",
       "playerId": "13286",
       "position": "RB",
@@ -622,7 +622,7 @@
       "team": "SEA"
     },
     {
-      "consensus": 73.1,
+      "consensus": 73.2,
       "name": "D'Andre Swift",
       "playerId": "6790",
       "position": "RB",
@@ -632,27 +632,27 @@
       "team": "CHI"
     },
     {
-      "consensus": 74.5,
-      "name": "Mike Evans",
-      "playerId": "2216",
-      "position": "WR",
-      "rank": 64,
-      "round": 6,
-      "sleeper": 57.8,
-      "team": "SF"
-    },
-    {
-      "consensus": 75.2,
+      "consensus": 74.3,
       "name": "Jordyn Tyson",
       "playerId": "13281",
       "position": "WR",
-      "rank": 65,
+      "rank": 64,
       "round": 7,
       "sleeper": 63.3,
       "team": "NO"
     },
     {
-      "consensus": 79.7,
+      "consensus": 75,
+      "name": "Mike Evans",
+      "playerId": "2216",
+      "position": "WR",
+      "rank": 65,
+      "round": 6,
+      "sleeper": 57.8,
+      "team": "SF"
+    },
+    {
+      "consensus": 79.9,
       "name": "Christian Watson",
       "playerId": "8167",
       "position": "WR",
@@ -663,26 +663,26 @@
     },
     {
       "consensus": 81,
-      "name": "Harold Fannin Jr.",
-      "playerId": "12506",
-      "position": "TE",
-      "rank": 67,
-      "round": 7,
-      "sleeper": 62.6,
-      "team": "CLE"
-    },
-    {
-      "consensus": 81.1,
       "name": "Bhayshul Tuten",
       "playerId": "12490",
       "position": "RB",
-      "rank": 68,
+      "rank": 67,
       "round": null,
       "sleeper": null,
       "team": "JAX"
     },
     {
-      "consensus": 82.6,
+      "consensus": 81.4,
+      "name": "Harold Fannin Jr.",
+      "playerId": "12506",
+      "position": "TE",
+      "rank": 68,
+      "round": 7,
+      "sleeper": 62.6,
+      "team": "CLE"
+    },
+    {
+      "consensus": 82.5,
       "name": "Marvin Harrison Jr.",
       "playerId": "11628",
       "position": "WR",
@@ -692,7 +692,7 @@
       "team": "ARI"
     },
     {
-      "consensus": 84.5,
+      "consensus": 85.2,
       "name": "DK Metcalf",
       "playerId": "5846",
       "position": "WR",
@@ -702,7 +702,7 @@
       "team": "PIT"
     },
     {
-      "consensus": 85.7,
+      "consensus": 85.4,
       "name": "Parker Washington",
       "playerId": "9487",
       "position": "WR",
@@ -712,7 +712,7 @@
       "team": "JAX"
     },
     {
-      "consensus": 86,
+      "consensus": 86.3,
       "name": "Kyle Pitts Sr.",
       "playerId": "7553",
       "position": "TE",
@@ -722,7 +722,7 @@
       "team": "ATL"
     },
     {
-      "consensus": 86.9,
+      "consensus": 87.4,
       "name": "Courtland Sutton",
       "playerId": "5045",
       "position": "WR",
@@ -732,7 +732,7 @@
       "team": "DEN"
     },
     {
-      "consensus": 88.2,
+      "consensus": 88.4,
       "name": "Brian Thomas Jr.",
       "playerId": "11631",
       "position": "WR",
@@ -742,7 +742,7 @@
       "team": "JAX"
     },
     {
-      "consensus": 88.4,
+      "consensus": 88.6,
       "name": "Tony Pollard",
       "playerId": "5967",
       "position": "RB",
@@ -752,7 +752,7 @@
       "team": "TEN"
     },
     {
-      "consensus": 88.8,
+      "consensus": 89,
       "name": "Sam LaPorta",
       "playerId": "10859",
       "position": "TE",
@@ -762,7 +762,7 @@
       "team": "DET"
     },
     {
-      "consensus": 91.8,
+      "consensus": 91.9,
       "name": "Caleb Williams",
       "playerId": "11560",
       "position": "QB",
@@ -772,7 +772,7 @@
       "team": "CHI"
     },
     {
-      "consensus": 92,
+      "consensus": 93.4,
       "name": "Alec Pierce",
       "playerId": "8142",
       "position": "WR",
@@ -782,77 +782,77 @@
       "team": "IND"
     },
     {
-      "consensus": 94.4,
-      "name": "Jaylen Warren",
-      "playerId": "8228",
-      "position": "RB",
-      "rank": 79,
-      "round": 8,
-      "sleeper": 74.8,
-      "team": "PIT"
-    },
-    {
-      "consensus": 94.4,
-      "name": "Jaxson Dart",
-      "playerId": "12508",
-      "position": "QB",
-      "rank": 80,
-      "round": 9,
-      "sleeper": 80.6,
-      "team": "NYG"
-    },
-    {
-      "consensus": 94.5,
-      "name": "Tucker Kraft",
-      "playerId": "9484",
-      "position": "TE",
-      "rank": 81,
-      "round": 7,
-      "sleeper": 67.3,
-      "team": "GB"
-    },
-    {
-      "consensus": 94.9,
+      "consensus": 94.7,
       "name": "Justin Herbert",
       "playerId": "6797",
       "position": "QB",
-      "rank": 82,
+      "rank": 79,
       "round": 9,
       "sleeper": 83.7,
       "team": "LAC"
     },
     {
-      "consensus": 95.1,
-      "name": "Michael Pittman Jr.",
-      "playerId": "6819",
-      "position": "WR",
-      "rank": 83,
-      "round": 11,
-      "sleeper": 102.9,
+      "consensus": 94.8,
+      "name": "Tucker Kraft",
+      "playerId": "9484",
+      "position": "TE",
+      "rank": 80,
+      "round": 7,
+      "sleeper": 67.3,
+      "team": "GB"
+    },
+    {
+      "consensus": 94.8,
+      "name": "Jaylen Warren",
+      "playerId": "8228",
+      "position": "RB",
+      "rank": 81,
+      "round": 8,
+      "sleeper": 74.8,
       "team": "PIT"
     },
     {
-      "consensus": 95.4,
-      "name": "Michael Wilson",
-      "playerId": "10232",
-      "position": "WR",
-      "rank": 84,
+      "consensus": 95,
+      "name": "Jaxson Dart",
+      "playerId": "12508",
+      "position": "QB",
+      "rank": 82,
       "round": 9,
-      "sleeper": 80.2,
-      "team": "ARI"
+      "sleeper": 80.6,
+      "team": "NYG"
     },
     {
-      "consensus": 95.6,
+      "consensus": 95.1,
       "name": "Makai Lemon",
       "playerId": "13294",
       "position": "WR",
-      "rank": 85,
+      "rank": 83,
       "round": 9,
       "sleeper": 88.7,
       "team": "PHI"
     },
     {
-      "consensus": 96.4,
+      "consensus": 95.4,
+      "name": "Michael Pittman Jr.",
+      "playerId": "6819",
+      "position": "WR",
+      "rank": 84,
+      "round": 11,
+      "sleeper": 102.9,
+      "team": "PIT"
+    },
+    {
+      "consensus": 95.9,
+      "name": "Michael Wilson",
+      "playerId": "10232",
+      "position": "WR",
+      "rank": 85,
+      "round": 9,
+      "sleeper": 80.2,
+      "team": "ARI"
+    },
+    {
+      "consensus": 96.5,
       "name": "Dak Prescott",
       "playerId": "3294",
       "position": "QB",
@@ -862,7 +862,7 @@
       "team": "DAL"
     },
     {
-      "consensus": 96.7,
+      "consensus": 96.6,
       "name": "Trevor Lawrence",
       "playerId": "7523",
       "position": "QB",
@@ -872,7 +872,7 @@
       "team": "JAX"
     },
     {
-      "consensus": 99.7,
+      "consensus": 99.9,
       "name": "Chuba Hubbard",
       "playerId": "7594",
       "position": "RB",
@@ -882,7 +882,7 @@
       "team": "CAR"
     },
     {
-      "consensus": 100,
+      "consensus": 100.1,
       "name": "Rhamondre Stevenson",
       "playerId": "7611",
       "position": "RB",
@@ -892,7 +892,7 @@
       "team": "NE"
     },
     {
-      "consensus": 104.4,
+      "consensus": 104.3,
       "name": "Rico Dowdle",
       "playerId": "7021",
       "position": "RB",
@@ -902,7 +902,7 @@
       "team": "PIT"
     },
     {
-      "consensus": 104.8,
+      "consensus": 105.6,
       "name": "Jakobi Meyers",
       "playerId": "5947",
       "position": "WR",
@@ -912,7 +912,7 @@
       "team": "JAX"
     },
     {
-      "consensus": 105.4,
+      "consensus": 105.7,
       "name": "Wan'Dale Robinson",
       "playerId": "8126",
       "position": "WR",
@@ -922,7 +922,7 @@
       "team": "TEN"
     },
     {
-      "consensus": 107,
+      "consensus": 107.5,
       "name": "Brock Purdy",
       "playerId": "8183",
       "position": "QB",
@@ -932,7 +932,7 @@
       "team": "SF"
     },
     {
-      "consensus": 108,
+      "consensus": 107.8,
       "name": "Josh Downs",
       "playerId": "9500",
       "position": "WR",
@@ -942,7 +942,7 @@
       "team": "IND"
     },
     {
-      "consensus": 109.7,
+      "consensus": 110.1,
       "name": "RJ Harvey",
       "playerId": "12489",
       "position": "RB",
@@ -952,7 +952,7 @@
       "team": "DEN"
     },
     {
-      "consensus": 111.4,
+      "consensus": 111.2,
       "name": "Patrick Mahomes",
       "playerId": "4046",
       "position": "QB",
@@ -962,7 +962,7 @@
       "team": "KC"
     },
     {
-      "consensus": 111.9,
+      "consensus": 112.1,
       "name": "J.K. Dobbins",
       "playerId": "6806",
       "position": "RB",
@@ -972,7 +972,7 @@
       "team": "DEN"
     },
     {
-      "consensus": 112.8,
+      "consensus": 113.2,
       "name": "Jordan Addison",
       "playerId": "9756",
       "position": "WR",
@@ -982,7 +982,7 @@
       "team": "MIN"
     },
     {
-      "consensus": 113.6,
+      "consensus": 113.3,
       "name": "Bo Nix",
       "playerId": "11563",
       "position": "QB",
@@ -992,7 +992,7 @@
       "team": "DEN"
     },
     {
-      "consensus": 113.8,
+      "consensus": 114.1,
       "name": "Matthew Stafford",
       "playerId": "421",
       "position": "QB",
@@ -1002,27 +1002,27 @@
       "team": "LAR"
     },
     {
-      "consensus": 114.8,
-      "name": "George Kittle",
-      "playerId": "4217",
-      "position": "TE",
-      "rank": 101,
-      "round": 10,
-      "sleeper": 97.4,
-      "team": "SF"
-    },
-    {
       "consensus": 115.3,
       "name": "Kenneth Gainwell",
       "playerId": "7567",
       "position": "RB",
-      "rank": 102,
+      "rank": 101,
       "round": 11,
       "sleeper": 106.9,
       "team": "TB"
     },
     {
-      "consensus": 116.6,
+      "consensus": 115.4,
+      "name": "George Kittle",
+      "playerId": "4217",
+      "position": "TE",
+      "rank": 102,
+      "round": 10,
+      "sleeper": 97.4,
+      "team": "SF"
+    },
+    {
+      "consensus": 117,
       "name": "Travis Kelce",
       "playerId": "1466",
       "position": "TE",
@@ -1032,7 +1032,7 @@
       "team": "KC"
     },
     {
-      "consensus": 116.9,
+      "consensus": 117.3,
       "name": "Chris Godwin",
       "playerId": "4037",
       "position": "WR",
@@ -1042,7 +1042,7 @@
       "team": "TB"
     },
     {
-      "consensus": 118.1,
+      "consensus": 118.2,
       "name": "Kyle Monangai",
       "playerId": "12534",
       "position": "RB",
@@ -1052,7 +1052,7 @@
       "team": "CHI"
     },
     {
-      "consensus": 120.3,
+      "consensus": 120.6,
       "name": "Aaron Jones Sr.",
       "playerId": "4199",
       "position": "RB",
@@ -1062,7 +1062,7 @@
       "team": "MIN"
     },
     {
-      "consensus": 122.5,
+      "consensus": 123.2,
       "name": "Jake Ferguson",
       "playerId": "8110",
       "position": "TE",
@@ -1072,7 +1072,7 @@
       "team": "DAL"
     },
     {
-      "consensus": 124.6,
+      "consensus": 124.9,
       "name": "Dalton Kincaid",
       "playerId": "10236",
       "position": "TE",
@@ -1082,27 +1082,27 @@
       "team": "BUF"
     },
     {
-      "consensus": 124.8,
-      "name": "Quentin Johnston",
-      "playerId": "9754",
-      "position": "WR",
-      "rank": 109,
-      "round": 11,
-      "sleeper": 102.6,
-      "team": "LAC"
-    },
-    {
-      "consensus": 125.3,
+      "consensus": 125.2,
       "name": "Dallas Goedert",
       "playerId": "5022",
       "position": "TE",
-      "rank": 110,
+      "rank": 109,
       "round": 11,
       "sleeper": 109.1,
       "team": "PHI"
     },
     {
       "consensus": 125.5,
+      "name": "Quentin Johnston",
+      "playerId": "9754",
+      "position": "WR",
+      "rank": 110,
+      "round": 11,
+      "sleeper": 102.6,
+      "team": "LAC"
+    },
+    {
+      "consensus": 125.8,
       "name": "Blake Corum",
       "playerId": "11586",
       "position": "RB",
@@ -1112,27 +1112,27 @@
       "team": "LAR"
     },
     {
-      "consensus": 127.1,
+      "consensus": 127.4,
+      "name": "Rachaad White",
+      "playerId": "8136",
+      "position": "RB",
+      "rank": 112,
+      "round": 13,
+      "sleeper": 127.2,
+      "team": "WSH"
+    },
+    {
+      "consensus": 127.4,
       "name": "Jayden Reed",
       "playerId": "10222",
       "position": "WR",
-      "rank": 112,
+      "rank": 113,
       "round": 12,
       "sleeper": 116,
       "team": "GB"
     },
     {
       "consensus": 127.7,
-      "name": "Rachaad White",
-      "playerId": "8136",
-      "position": "RB",
-      "rank": 113,
-      "round": 13,
-      "sleeper": 127.2,
-      "team": "WSH"
-    },
-    {
-      "consensus": 128.2,
       "name": "Matthew Golden",
       "playerId": "12501",
       "position": "WR",
@@ -1142,7 +1142,7 @@
       "team": "GB"
     },
     {
-      "consensus": 129.9,
+      "consensus": 130.6,
       "name": "Mark Andrews",
       "playerId": "5012",
       "position": "TE",
@@ -1152,7 +1152,7 @@
       "team": "BAL"
     },
     {
-      "consensus": 131.6,
+      "consensus": 131.2,
       "name": "Jonathon Brooks",
       "playerId": "11583",
       "position": "RB",
@@ -1162,27 +1162,27 @@
       "team": "CAR"
     },
     {
-      "consensus": 133.6,
-      "name": "Jacory Croskey-Merritt",
-      "playerId": "12533",
-      "position": "RB",
-      "rank": 117,
-      "round": 12,
-      "sleeper": 114.9,
-      "team": "WSH"
-    },
-    {
-      "consensus": 133.9,
+      "consensus": 133.3,
       "name": "Isaiah Likely",
       "playerId": "8131",
       "position": "TE",
-      "rank": 118,
+      "rank": 117,
       "round": 12,
       "sleeper": 117.3,
       "team": "NYG"
     },
     {
-      "consensus": 136.7,
+      "consensus": 133.5,
+      "name": "Jacory Croskey-Merritt",
+      "playerId": "12533",
+      "position": "RB",
+      "rank": 118,
+      "round": 12,
+      "sleeper": 114.9,
+      "team": "WSH"
+    },
+    {
+      "consensus": 137.1,
       "name": "Khalil Shakir",
       "playerId": "8134",
       "position": "WR",
@@ -1192,7 +1192,7 @@
       "team": "BUF"
     },
     {
-      "consensus": 137.4,
+      "consensus": 137.6,
       "name": "K.C. Concepcion",
       "playerId": "13298",
       "position": "WR",
@@ -1202,37 +1202,37 @@
       "team": "CLE"
     },
     {
-      "consensus": 138.5,
-      "name": "Jared Goff",
-      "playerId": "3163",
-      "position": "QB",
-      "rank": 121,
-      "round": 13,
-      "sleeper": 122,
-      "team": "DET"
-    },
-    {
-      "consensus": 139.4,
-      "name": "Xavier Worthy",
-      "playerId": "11624",
-      "position": "WR",
-      "rank": 122,
-      "round": 14,
-      "sleeper": 134.9,
-      "team": "KC"
-    },
-    {
-      "consensus": 139.9,
+      "consensus": 138,
       "name": "Stefon Diggs",
       "playerId": "2449",
       "position": "WR",
-      "rank": 123,
+      "rank": 121,
       "round": 13,
       "sleeper": 125.9,
       "team": null
     },
     {
-      "consensus": 140.8,
+      "consensus": 138.7,
+      "name": "Jared Goff",
+      "playerId": "3163",
+      "position": "QB",
+      "rank": 122,
+      "round": 13,
+      "sleeper": 122,
+      "team": "DET"
+    },
+    {
+      "consensus": 140.2,
+      "name": "Xavier Worthy",
+      "playerId": "11624",
+      "position": "WR",
+      "rank": 123,
+      "round": 14,
+      "sleeper": 134.9,
+      "team": "KC"
+    },
+    {
+      "consensus": 140.9,
       "name": "Romeo Doubs",
       "playerId": "8121",
       "position": "WR",
@@ -1242,7 +1242,7 @@
       "team": "NE"
     },
     {
-      "consensus": 143.6,
+      "consensus": 143.3,
       "name": "Jordan Mason",
       "playerId": "8408",
       "position": "RB",
@@ -1252,7 +1252,7 @@
       "team": "MIN"
     },
     {
-      "consensus": 144,
+      "consensus": 144.4,
       "name": "Jayden Higgins",
       "playerId": "12484",
       "position": "WR",
@@ -1262,7 +1262,7 @@
       "team": "HOU"
     },
     {
-      "consensus": 145.7,
+      "consensus": 145.9,
       "name": "Hunter Henry",
       "playerId": "3214",
       "position": "TE",
@@ -1272,7 +1272,7 @@
       "team": "NE"
     },
     {
-      "consensus": 146.1,
+      "consensus": 146.4,
       "name": "Kyler Murray",
       "playerId": "5849",
       "position": "QB",
@@ -1283,46 +1283,46 @@
     },
     {
       "consensus": 147.4,
-      "name": "Zach Charbonnet",
-      "playerId": "9753",
-      "position": "RB",
-      "rank": 129,
-      "round": 13,
-      "sleeper": 125.8,
-      "team": "SEA"
-    },
-    {
-      "consensus": 147.6,
       "name": "Jalen Coker",
       "playerId": "11646",
       "position": "WR",
-      "rank": 130,
+      "rank": 129,
       "round": 14,
       "sleeper": 136.3,
       "team": "CAR"
     },
     {
-      "consensus": 149.7,
-      "name": "Woody Marks",
-      "playerId": "12474",
+      "consensus": 147.6,
+      "name": "Zach Charbonnet",
+      "playerId": "9753",
       "position": "RB",
-      "rank": 131,
-      "round": 15,
-      "sleeper": 141.2,
-      "team": "HOU"
+      "rank": 130,
+      "round": 13,
+      "sleeper": 125.8,
+      "team": "SEA"
     },
     {
-      "consensus": 150,
+      "consensus": 149.8,
       "name": "Tyler Shough",
       "playerId": "12545",
       "position": "QB",
-      "rank": 132,
+      "rank": 131,
       "round": 15,
       "sleeper": 144.4,
       "team": "NO"
     },
     {
-      "consensus": 150.7,
+      "consensus": 149.8,
+      "name": "Woody Marks",
+      "playerId": "12474",
+      "position": "RB",
+      "rank": 132,
+      "round": 15,
+      "sleeper": 141.2,
+      "team": "HOU"
+    },
+    {
+      "consensus": 151.9,
       "name": "Deebo Samuel",
       "playerId": "5872",
       "position": "WR",
@@ -1332,37 +1332,37 @@
       "team": null
     },
     {
-      "consensus": 152.8,
-      "name": "Travis Hunter",
-      "playerId": "12530",
-      "position": "WR",
-      "rank": 134,
-      "round": 17,
-      "sleeper": 160.2,
-      "team": "JAX"
-    },
-    {
-      "consensus": 154.4,
-      "name": "Baker Mayfield",
-      "playerId": "4892",
-      "position": "QB",
-      "rank": 135,
-      "round": 15,
-      "sleeper": 140.9,
-      "team": "TB"
-    },
-    {
-      "consensus": 154.5,
+      "consensus": 153.8,
       "name": "Denzel Boston",
       "playerId": "13346",
       "position": "WR",
-      "rank": 136,
+      "rank": 134,
       "round": 15,
       "sleeper": 147.5,
       "team": "CLE"
     },
     {
-      "consensus": 155.9,
+      "consensus": 153.9,
+      "name": "Travis Hunter",
+      "playerId": "12530",
+      "position": "WR",
+      "rank": 135,
+      "round": 17,
+      "sleeper": 160.2,
+      "team": "JAX"
+    },
+    {
+      "consensus": 154.2,
+      "name": "Baker Mayfield",
+      "playerId": "4892",
+      "position": "QB",
+      "rank": 136,
+      "round": 15,
+      "sleeper": 140.9,
+      "team": "TB"
+    },
+    {
+      "consensus": 155.1,
       "name": "Jonah Coleman",
       "playerId": "13345",
       "position": "RB",
@@ -1372,7 +1372,7 @@
       "team": "DEN"
     },
     {
-      "consensus": 157.3,
+      "consensus": 157,
       "name": "Malik Willis",
       "playerId": "8161",
       "position": "QB",
@@ -1382,7 +1382,7 @@
       "team": "MIA"
     },
     {
-      "consensus": 157.5,
+      "consensus": 157.4,
       "name": "Omar Cooper Jr.",
       "playerId": "13276",
       "position": "WR",
@@ -1392,7 +1392,7 @@
       "team": "NYJ"
     },
     {
-      "consensus": 159.5,
+      "consensus": 159.8,
       "name": "Chris Rodriguez Jr.",
       "playerId": "10219",
       "position": "RB",
@@ -1412,7 +1412,7 @@
       "team": "MIN"
     },
     {
-      "consensus": 162.8,
+      "consensus": 162.9,
       "name": "Tyler Allgeier",
       "playerId": "8132",
       "position": "RB",
@@ -1422,7 +1422,7 @@
       "team": "ARI"
     },
     {
-      "consensus": 163.5,
+      "consensus": 163.4,
       "name": "Brian Robinson Jr.",
       "playerId": "8154",
       "position": "RB",
@@ -1432,7 +1432,7 @@
       "team": "ATL"
     },
     {
-      "consensus": 163.9,
+      "consensus": 164.3,
       "name": "Tyrone Tracy Jr.",
       "playerId": "11655",
       "position": "RB",
@@ -1442,47 +1442,47 @@
       "team": "NYG"
     },
     {
-      "consensus": 164.4,
-      "name": "Alvin Kamara",
-      "playerId": "4035",
-      "position": "RB",
-      "rank": 145,
-      "round": 16,
-      "sleeper": 157.7,
-      "team": "NO"
-    },
-    {
       "consensus": 164.7,
       "name": "Rashid Shaheed",
       "playerId": "8676",
       "position": "WR",
-      "rank": 146,
+      "rank": 145,
       "round": 16,
       "sleeper": 152.2,
       "team": "SEA"
     },
     {
-      "consensus": 167,
-      "name": "Juwan Johnson",
-      "playerId": "7002",
-      "position": "TE",
-      "rank": 147,
-      "round": 14,
-      "sleeper": 135.3,
+      "consensus": 165.4,
+      "name": "Alvin Kamara",
+      "playerId": "4035",
+      "position": "RB",
+      "rank": 146,
+      "round": 16,
+      "sleeper": 157.7,
       "team": "NO"
     },
     {
-      "consensus": 167,
+      "consensus": 166.6,
       "name": "Kenyon Sadiq",
       "playerId": "13330",
       "position": "TE",
-      "rank": 148,
+      "rank": 147,
       "round": 12,
       "sleeper": 118.2,
       "team": "NYJ"
     },
     {
-      "consensus": 170.6,
+      "consensus": 166.9,
+      "name": "Juwan Johnson",
+      "playerId": "7002",
+      "position": "TE",
+      "rank": 148,
+      "round": 14,
+      "sleeper": 135.3,
+      "team": "NO"
+    },
+    {
+      "consensus": 170.7,
       "name": "Isiah Pacheco",
       "playerId": "8205",
       "position": "RB",
@@ -1492,7 +1492,7 @@
       "team": "DET"
     },
     {
-      "consensus": 171.4,
+      "consensus": 171.6,
       "name": "Jerry Jeudy",
       "playerId": "6783",
       "position": "WR",
@@ -1502,7 +1502,7 @@
       "team": "CLE"
     },
     {
-      "consensus": 171.9,
+      "consensus": 172,
       "name": "Emmett Johnson",
       "playerId": "13337",
       "position": "RB",
@@ -1512,27 +1512,27 @@
       "team": "KC"
     },
     {
-      "consensus": 175.5,
-      "name": "Jauan Jennings",
-      "playerId": "7049",
-      "position": "WR",
-      "rank": 152,
-      "round": 15,
-      "sleeper": 146.3,
-      "team": "MIN"
-    },
-    {
       "consensus": 175.9,
       "name": "Jordan Love",
       "playerId": "6804",
       "position": "QB",
-      "rank": 153,
+      "rank": 152,
       "round": 13,
       "sleeper": 124.8,
       "team": "GB"
     },
     {
-      "consensus": 176.1,
+      "consensus": 176.6,
+      "name": "Jalen McMillan",
+      "playerId": "11618",
+      "position": "WR",
+      "rank": 153,
+      "round": 17,
+      "sleeper": 163.7,
+      "team": "TB"
+    },
+    {
+      "consensus": 176.7,
       "name": "Tyjae Spears",
       "playerId": "9508",
       "position": "RB",
@@ -1542,17 +1542,17 @@
       "team": "TEN"
     },
     {
-      "consensus": 176.4,
-      "name": "Jalen McMillan",
-      "playerId": "11618",
+      "consensus": 176.8,
+      "name": "Jauan Jennings",
+      "playerId": "7049",
       "position": "WR",
       "rank": 155,
-      "round": 17,
-      "sleeper": 163.7,
-      "team": "TB"
+      "round": 15,
+      "sleeper": 146.3,
+      "team": "MIN"
     },
     {
-      "consensus": 177.3,
+      "consensus": 177.2,
       "name": "Dylan Sampson",
       "playerId": "12469",
       "position": "RB",
@@ -1562,7 +1562,7 @@
       "team": "CLE"
     },
     {
-      "consensus": 179.5,
+      "consensus": 178.8,
       "name": "Daniel Jones",
       "playerId": "5870",
       "position": "QB",
@@ -1572,27 +1572,27 @@
       "team": "IND"
     },
     {
-      "consensus": 183.3,
+      "consensus": 179.5,
+      "name": "De'Zhaun Stribling",
+      "playerId": "13417",
+      "position": "WR",
+      "rank": 158,
+      "round": null,
+      "sleeper": null,
+      "team": null
+    },
+    {
+      "consensus": 183.5,
       "name": "Adonai Mitchell",
       "playerId": "11625",
       "position": "WR",
-      "rank": 158,
+      "rank": 159,
       "round": 18,
       "sleeper": 177.9,
       "team": "NYJ"
     },
     {
-      "consensus": 184.8,
-      "name": "Keaton Mitchell",
-      "playerId": "9511",
-      "position": "RB",
-      "rank": 159,
-      "round": 17,
-      "sleeper": 164.9,
-      "team": "LAC"
-    },
-    {
-      "consensus": 184.9,
+      "consensus": 184.1,
       "name": "Tank Bigsby",
       "playerId": "9225",
       "position": "RB",
@@ -1602,17 +1602,17 @@
       "team": "PHI"
     },
     {
-      "consensus": 185,
-      "name": "De'Zhaun Stribling",
-      "playerId": "13417",
-      "position": "WR",
+      "consensus": 184.8,
+      "name": "Keaton Mitchell",
+      "playerId": "9511",
+      "position": "RB",
       "rank": 161,
-      "round": null,
-      "sleeper": null,
-      "team": null
+      "round": 17,
+      "sleeper": 164.9,
+      "team": "LAC"
     },
     {
-      "consensus": 185.2,
+      "consensus": 186.1,
       "name": "Brenton Strange",
       "playerId": "9480",
       "position": "TE",
@@ -1622,47 +1622,47 @@
       "team": "JAX"
     },
     {
-      "consensus": 190.7,
-      "name": "Antonio Williams",
-      "playerId": "7203",
-      "position": "RB",
-      "rank": 163,
-      "round": 17,
-      "sleeper": 168.1,
-      "team": "WSH"
-    },
-    {
-      "consensus": 192.2,
+      "consensus": 191.3,
       "name": "Mike Washington Jr.",
       "playerId": "13305",
       "position": "RB",
-      "rank": 164,
+      "rank": 163,
       "round": 18,
       "sleeper": 179.1,
       "team": "LV"
     },
     {
-      "consensus": 195.6,
-      "name": "Braelon Allen",
-      "playerId": "11576",
+      "consensus": 191.5,
+      "name": "Antonio Williams",
+      "playerId": "7203",
       "position": "RB",
-      "rank": 165,
-      "round": 18,
-      "sleeper": 174.1,
-      "team": "NYJ"
+      "rank": 164,
+      "round": 17,
+      "sleeper": 168.1,
+      "team": "WSH"
     },
     {
-      "consensus": 195.8,
+      "consensus": 194.5,
       "name": "Jalen Nailor",
       "playerId": "8180",
       "position": "WR",
-      "rank": 166,
+      "rank": 165,
       "round": 17,
       "sleeper": 166.5,
       "team": "LV"
     },
     {
-      "consensus": 196,
+      "consensus": 195.8,
+      "name": "Braelon Allen",
+      "playerId": "11576",
+      "position": "RB",
+      "rank": 166,
+      "round": 18,
+      "sleeper": 174.1,
+      "team": "NYJ"
+    },
+    {
+      "consensus": 196.5,
       "name": "Tre Tucker",
       "playerId": "10213",
       "position": "WR",
@@ -1672,7 +1672,7 @@
       "team": "LV"
     },
     {
-      "consensus": 197.4,
+      "consensus": 197.2,
       "name": "Nicholas Singleton",
       "playerId": "13288",
       "position": "RB",
@@ -1682,7 +1682,7 @@
       "team": "TEN"
     },
     {
-      "consensus": 198.4,
+      "consensus": 198.9,
       "name": "C.J. Stroud",
       "playerId": "9758",
       "position": "QB",
@@ -1692,7 +1692,7 @@
       "team": "HOU"
     },
     {
-      "consensus": 201.3,
+      "consensus": 202,
       "name": "Cameron Ward",
       "playerId": "12522",
       "position": "QB",
@@ -1703,76 +1703,76 @@
     },
     {
       "consensus": 203.1,
-      "name": "Kaytron Allen",
-      "playerId": "13405",
-      "position": "RB",
-      "rank": 171,
-      "round": 19,
-      "sleeper": 181.2,
-      "team": "WSH"
-    },
-    {
-      "consensus": 203.4,
       "name": "Terrance Ferguson",
       "playerId": "12487",
       "position": "TE",
-      "rank": 172,
+      "rank": 171,
       "round": 16,
       "sleeper": 158.7,
       "team": "LAR"
     },
     {
-      "consensus": 206.2,
+      "consensus": 204.7,
+      "name": "Kaytron Allen",
+      "playerId": "13405",
+      "position": "RB",
+      "rank": 172,
+      "round": 19,
+      "sleeper": 181.2,
+      "team": "WSH"
+    },
+    {
+      "consensus": 204.7,
+      "name": "Ray Davis",
+      "playerId": "11575",
+      "position": "RB",
+      "rank": 173,
+      "round": 21,
+      "sleeper": 208.6,
+      "team": "BUF"
+    },
+    {
+      "consensus": 206,
       "name": "Chig Okonkwo",
       "playerId": "8210",
       "position": "TE",
-      "rank": 173,
+      "rank": 174,
       "round": 15,
       "sleeper": 146.2,
       "team": "WSH"
     },
     {
       "consensus": 206.3,
-      "name": "Ray Davis",
-      "playerId": "11575",
-      "position": "RB",
-      "rank": 174,
-      "round": 21,
-      "sleeper": 208.6,
-      "team": "BUF"
-    },
-    {
-      "consensus": 206.5,
-      "name": "James Conner",
-      "playerId": "4137",
-      "position": "RB",
-      "rank": 175,
-      "round": 16,
-      "sleeper": 152.2,
-      "team": "ARI"
-    },
-    {
-      "consensus": 206.8,
-      "name": "Dalton Schultz",
-      "playerId": "5001",
-      "position": "TE",
-      "rank": 176,
-      "round": 14,
-      "sleeper": 137,
-      "team": "HOU"
-    },
-    {
-      "consensus": 207.7,
       "name": "Zachariah Branch",
       "playerId": "13320",
       "position": "WR",
-      "rank": 177,
+      "rank": 175,
       "round": 19,
       "sleeper": 180.4,
       "team": "ATL"
     },
     {
-      "consensus": 209.1,
+      "consensus": 207.1,
+      "name": "James Conner",
+      "playerId": "4137",
+      "position": "RB",
+      "rank": 176,
+      "round": 16,
+      "sleeper": 152.2,
+      "team": "ARI"
+    },
+    {
+      "consensus": 207.6,
+      "name": "Dalton Schultz",
+      "playerId": "5001",
+      "position": "TE",
+      "rank": 177,
+      "round": 14,
+      "sleeper": 137,
+      "team": "HOU"
+    },
+    {
+      "consensus": 209.5,
       "name": "Sam Darnold",
       "playerId": "4943",
       "position": "QB",
@@ -1782,57 +1782,57 @@
       "team": "SEA"
     },
     {
-      "consensus": 210.2,
-      "name": "Calvin Ridley",
-      "playerId": "4981",
-      "position": "WR",
-      "rank": 179,
-      "round": 23,
-      "sleeper": 227.7,
-      "team": "TEN"
-    },
-    {
-      "consensus": 211.8,
+      "consensus": 210.6,
       "name": "Fernando Mendoza",
       "playerId": "13269",
       "position": "QB",
-      "rank": 180,
+      "rank": 179,
       "round": 17,
       "sleeper": 169.5,
       "team": "LV"
     },
     {
-      "consensus": 211.9,
-      "name": "Tyreek Hill",
-      "playerId": "3321",
+      "consensus": 211.1,
+      "name": "Calvin Ridley",
+      "playerId": "4981",
       "position": "WR",
-      "rank": 181,
-      "round": 18,
-      "sleeper": 174,
-      "team": null
+      "rank": 180,
+      "round": 23,
+      "sleeper": 227.7,
+      "team": "TEN"
     },
     {
-      "consensus": 213.9,
-      "name": "Oronde Gadsden II",
-      "playerId": "12493",
-      "position": "TE",
-      "rank": 182,
-      "round": 10,
-      "sleeper": 94.7,
-      "team": "LAC"
-    },
-    {
-      "consensus": 214.2,
+      "consensus": 211.4,
       "name": "Ja'Kobi Lane",
       "playerId": "13293",
       "position": "WR",
-      "rank": 183,
+      "rank": 181,
       "round": 17,
       "sleeper": 166.6,
       "team": "BAL"
     },
     {
-      "consensus": 218.5,
+      "consensus": 214.8,
+      "name": "Tyreek Hill",
+      "playerId": "3321",
+      "position": "WR",
+      "rank": 182,
+      "round": 18,
+      "sleeper": 174,
+      "team": null
+    },
+    {
+      "consensus": 215,
+      "name": "Oronde Gadsden II",
+      "playerId": "12493",
+      "position": "TE",
+      "rank": 183,
+      "round": 10,
+      "sleeper": 94.7,
+      "team": "LAC"
+    },
+    {
+      "consensus": 217.8,
       "name": "Tank Dell",
       "playerId": "9502",
       "position": "WR",
@@ -1842,7 +1842,7 @@
       "team": "HOU"
     },
     {
-      "consensus": 219.6,
+      "consensus": 220.8,
       "name": "Elic Ayomanor",
       "playerId": "12499",
       "position": "WR",
@@ -1852,7 +1852,7 @@
       "team": "TEN"
     },
     {
-      "consensus": 223.7,
+      "consensus": 222.9,
       "name": "Eli Stowers",
       "playerId": "13349",
       "position": "TE",
@@ -1862,7 +1862,7 @@
       "team": "PHI"
     },
     {
-      "consensus": 224,
+      "consensus": 223.3,
       "name": "Tre Harris",
       "playerId": "12509",
       "position": "WR",
@@ -1872,7 +1872,7 @@
       "team": "LAC"
     },
     {
-      "consensus": 224.7,
+      "consensus": 224.3,
       "name": "Trey Benson",
       "playerId": "11589",
       "position": "RB",
@@ -1882,47 +1882,47 @@
       "team": "ARI"
     },
     {
-      "consensus": 226.4,
-      "name": "Rashod Bateman",
-      "playerId": "7571",
-      "position": "WR",
-      "rank": 189,
-      "round": 24,
-      "sleeper": 232.7,
-      "team": "BAL"
-    },
-    {
-      "consensus": 226.4,
+      "consensus": 226.1,
       "name": "AJ Barner",
       "playerId": "11603",
       "position": "TE",
-      "rank": 190,
+      "rank": 189,
       "round": 16,
       "sleeper": 150.1,
       "team": "SEA"
     },
     {
-      "consensus": 227.3,
-      "name": "Bryce Young",
-      "playerId": "9228",
-      "position": "QB",
-      "rank": 191,
-      "round": 20,
-      "sleeper": 194.2,
-      "team": "CAR"
+      "consensus": 226.2,
+      "name": "Rashod Bateman",
+      "playerId": "7571",
+      "position": "WR",
+      "rank": 190,
+      "round": 24,
+      "sleeper": 232.7,
+      "team": "BAL"
     },
     {
-      "consensus": 227.7,
+      "consensus": 227.3,
       "name": "Germie Bernard",
       "playerId": "13274",
       "position": "WR",
-      "rank": 192,
+      "rank": 191,
       "round": 23,
       "sleeper": 220.8,
       "team": "PIT"
     },
     {
-      "consensus": 229.6,
+      "consensus": 228.5,
+      "name": "Bryce Young",
+      "playerId": "9228",
+      "position": "QB",
+      "rank": 192,
+      "round": 20,
+      "sleeper": 194.2,
+      "team": "CAR"
+    },
+    {
+      "consensus": 230.3,
       "name": "Chimere Dike",
       "playerId": "12540",
       "position": "WR",
@@ -1932,7 +1932,7 @@
       "team": "TEN"
     },
     {
-      "consensus": 234.6,
+      "consensus": 234.3,
       "name": "Kimani Vidal",
       "playerId": "11647",
       "position": "RB",
@@ -1942,37 +1942,37 @@
       "team": "LAC"
     },
     {
-      "consensus": 234.9,
-      "name": "Kayshon Boutte",
-      "playerId": "9504",
-      "position": "WR",
-      "rank": 195,
-      "round": 18,
-      "sleeper": 178.7,
-      "team": "NE"
-    },
-    {
-      "consensus": 235.1,
+      "consensus": 234.7,
       "name": "Ryan Flournoy",
       "playerId": "11783",
       "position": "WR",
-      "rank": 196,
+      "rank": 195,
       "round": 23,
       "sleeper": 227.6,
       "team": "DAL"
     },
     {
-      "consensus": 236.4,
+      "consensus": 235.1,
       "name": "Demond Claiborne",
       "playerId": "13347",
       "position": "RB",
-      "rank": 197,
+      "rank": 196,
       "round": 22,
       "sleeper": 218.3,
       "team": "MIN"
     },
     {
-      "consensus": 237,
+      "consensus": 235.5,
+      "name": "Kayshon Boutte",
+      "playerId": "9504",
+      "position": "WR",
+      "rank": 197,
+      "round": 18,
+      "sleeper": 178.7,
+      "team": "NE"
+    },
+    {
+      "consensus": 238.1,
       "name": "Jaylin Noel",
       "playerId": "12536",
       "position": "WR",
@@ -1982,7 +1982,7 @@
       "team": "HOU"
     },
     {
-      "consensus": 238.9,
+      "consensus": 238.7,
       "name": "Isaac TeSlaa",
       "playerId": "12535",
       "position": "WR",
@@ -1993,36 +1993,36 @@
     },
     {
       "consensus": 239,
-      "name": "Darnell Mooney",
-      "playerId": "7090",
-      "position": "WR",
-      "rank": 200,
-      "round": 23,
-      "sleeper": 221.1,
-      "team": "NYG"
-    },
-    {
-      "consensus": 239.7,
-      "name": "Chris Bell",
-      "playerId": "13311",
-      "position": "WR",
-      "rank": 201,
-      "round": 24,
-      "sleeper": 231.4,
-      "team": "MIA"
-    },
-    {
-      "consensus": 240.6,
       "name": "Ted Hurst",
       "playerId": "13317",
       "position": "WR",
-      "rank": 202,
+      "rank": 200,
       "round": 23,
       "sleeper": 223.5,
       "team": "TB"
     },
     {
-      "consensus": 242.9,
+      "consensus": 239.2,
+      "name": "Darnell Mooney",
+      "playerId": "7090",
+      "position": "WR",
+      "rank": 201,
+      "round": 23,
+      "sleeper": 221.1,
+      "team": "NYG"
+    },
+    {
+      "consensus": 240,
+      "name": "Chris Bell",
+      "playerId": "13311",
+      "position": "WR",
+      "rank": 202,
+      "round": 24,
+      "sleeper": 231.4,
+      "team": "MIA"
+    },
+    {
+      "consensus": 243.1,
       "name": "Devin Neal",
       "playerId": "12476",
       "position": "RB",
@@ -2042,7 +2042,7 @@
       "team": "BAL"
     },
     {
-      "consensus": 245.2,
+      "consensus": 245.4,
       "name": "Kyle Williams",
       "playerId": "12547",
       "position": "WR",
@@ -2052,7 +2052,7 @@
       "team": "NE"
     },
     {
-      "consensus": 246.4,
+      "consensus": 246.7,
       "name": "Gunnar Helm",
       "playerId": "12502",
       "position": "TE",
@@ -2062,27 +2062,27 @@
       "team": "TEN"
     },
     {
-      "consensus": 248.1,
-      "name": "Malachi Fields",
-      "playerId": "13285",
-      "position": "WR",
-      "rank": 207,
-      "round": 25,
-      "sleeper": 242.4,
-      "team": "NYG"
-    },
-    {
-      "consensus": 248.6,
+      "consensus": 248.5,
       "name": "Najee Harris",
       "playerId": "7528",
       "position": "RB",
-      "rank": 208,
+      "rank": 207,
       "round": 22,
       "sleeper": 212.3,
       "team": null
     },
     {
-      "consensus": 249,
+      "consensus": 248.8,
+      "name": "Malachi Fields",
+      "playerId": "13285",
+      "position": "WR",
+      "rank": 208,
+      "round": 25,
+      "sleeper": 242.4,
+      "team": "NYG"
+    },
+    {
+      "consensus": 248.9,
       "name": "Sean Tucker",
       "playerId": "9506",
       "position": "RB",
@@ -2102,7 +2102,7 @@
       "team": "DAL"
     },
     {
-      "consensus": 249.9,
+      "consensus": 250.2,
       "name": "Keenan Allen",
       "playerId": "1479",
       "position": "WR",
@@ -2112,17 +2112,17 @@
       "team": null
     },
     {
-      "consensus": 254.3,
-      "name": "Brandon Aiyuk",
-      "playerId": "6803",
+      "consensus": 253.7,
+      "name": "Cyrus Allen",
+      "playerId": "13413",
       "position": "WR",
       "rank": 212,
-      "round": 20,
-      "sleeper": 190.2,
-      "team": "SF"
+      "round": null,
+      "sleeper": null,
+      "team": null
     },
     {
-      "consensus": 257.2,
+      "consensus": 255.2,
       "name": "Joe Mixon",
       "playerId": "4018",
       "position": "RB",
@@ -2132,21 +2132,31 @@
       "team": null
     },
     {
-      "consensus": 257.4,
+      "consensus": 255.7,
+      "name": "Brandon Aiyuk",
+      "playerId": "6803",
+      "position": "WR",
+      "rank": 214,
+      "round": 20,
+      "sleeper": 190.2,
+      "team": "SF"
+    },
+    {
+      "consensus": 258,
       "name": "Jaylen Wright",
       "playerId": "11643",
       "position": "RB",
-      "rank": 214,
+      "rank": 215,
       "round": 22,
       "sleeper": 215.1,
       "team": "MIA"
     },
     {
-      "consensus": 258.1,
+      "consensus": 258.5,
       "name": "Justice Hill",
       "playerId": "5995",
       "position": "RB",
-      "rank": 215,
+      "rank": 216,
       "round": null,
       "sleeper": null,
       "team": "BAL"
@@ -2156,33 +2166,23 @@
       "name": "Cade Otton",
       "playerId": "8111",
       "position": "TE",
-      "rank": 216,
+      "rank": 217,
       "round": 17,
       "sleeper": 162.7,
       "team": "TB"
     },
     {
-      "consensus": 261,
+      "consensus": 260.9,
       "name": "Jacoby Brissett",
       "playerId": "3257",
       "position": "QB",
-      "rank": 217,
+      "rank": 218,
       "round": 21,
       "sleeper": 200.9,
       "team": "ARI"
     },
     {
-      "consensus": 261.4,
-      "name": "Cyrus Allen",
-      "playerId": "13413",
-      "position": "WR",
-      "rank": 218,
-      "round": null,
-      "sleeper": null,
-      "team": null
-    },
-    {
-      "consensus": 262.6,
+      "consensus": 263.4,
       "name": "Cooper Kupp",
       "playerId": "4039",
       "position": "WR",
@@ -2192,27 +2192,27 @@
       "team": "SEA"
     },
     {
-      "consensus": 264.2,
-      "name": "Jack Bech",
-      "playerId": "12483",
-      "position": "WR",
-      "rank": 220,
-      "round": 24,
-      "sleeper": 238.2,
-      "team": "LV"
-    },
-    {
-      "consensus": 264.6,
+      "consensus": 263.6,
       "name": "Malik Washington",
       "playerId": "11610",
       "position": "WR",
-      "rank": 221,
+      "rank": 220,
       "round": null,
       "sleeper": null,
       "team": "MIA"
     },
     {
-      "consensus": 265.7,
+      "consensus": 264,
+      "name": "Jack Bech",
+      "playerId": "12483",
+      "position": "WR",
+      "rank": 221,
+      "round": 24,
+      "sleeper": 238.2,
+      "team": "LV"
+    },
+    {
+      "consensus": 265.8,
       "name": "Emanuel Wilson",
       "playerId": "11435",
       "position": "RB",
@@ -2222,47 +2222,47 @@
       "team": "SEA"
     },
     {
-      "consensus": 268.3,
-      "name": "Pat Bryant",
-      "playerId": "12492",
+      "consensus": 267,
+      "name": "Caleb Douglas",
+      "playerId": "13296",
       "position": "WR",
       "rank": 223,
-      "round": 23,
-      "sleeper": 222.5,
-      "team": "DEN"
-    },
-    {
-      "consensus": 268.6,
-      "name": "Jordan James",
-      "playerId": "12467",
-      "position": "RB",
-      "rank": 224,
       "round": null,
       "sleeper": null,
-      "team": "SF"
+      "team": "MIA"
     },
     {
-      "consensus": 268.7,
+      "consensus": 267.1,
       "name": "Kaelon Black",
       "playerId": "13414",
       "position": "RB",
-      "rank": 225,
+      "rank": 224,
       "round": null,
       "sleeper": null,
       "team": null
     },
     {
-      "consensus": 268.9,
-      "name": "Mack Hollins",
-      "playerId": "4177",
+      "consensus": 267.6,
+      "name": "Pat Bryant",
+      "playerId": "12492",
       "position": "WR",
+      "rank": 225,
+      "round": 23,
+      "sleeper": 222.5,
+      "team": "DEN"
+    },
+    {
+      "consensus": 268.2,
+      "name": "Jordan James",
+      "playerId": "12467",
+      "position": "RB",
       "rank": 226,
       "round": null,
       "sleeper": null,
-      "team": "NE"
+      "team": "SF"
     },
     {
-      "consensus": 270.2,
+      "consensus": 270.4,
       "name": "Jarquez Hunter",
       "playerId": "11569",
       "position": "RB",
@@ -2273,16 +2273,16 @@
     },
     {
       "consensus": 271.3,
-      "name": "Keon Coleman",
-      "playerId": "11637",
-      "position": "WR",
+      "name": "Jaydon Blue",
+      "playerId": "12457",
+      "position": "RB",
       "rank": 228,
       "round": 24,
-      "sleeper": 234.8,
-      "team": "BUF"
+      "sleeper": 236.6,
+      "team": "DAL"
     },
     {
-      "consensus": 271.4,
+      "consensus": 272.1,
       "name": "Audric Estime",
       "playerId": "11579",
       "position": "RB",
@@ -2292,34 +2292,34 @@
       "team": "NO"
     },
     {
-      "consensus": 271.4,
-      "name": "Caleb Douglas",
-      "playerId": "13296",
-      "position": "WR",
-      "rank": 230,
-      "round": null,
-      "sleeper": null,
-      "team": "MIA"
-    },
-    {
-      "consensus": 271.7,
-      "name": "Jaydon Blue",
-      "playerId": "12457",
-      "position": "RB",
-      "rank": 231,
-      "round": 24,
-      "sleeper": 236.6,
-      "team": "DAL"
-    },
-    {
-      "consensus": 272.5,
+      "consensus": 272.1,
       "name": "Pat Freiermuth",
       "playerId": "7600",
       "position": "TE",
-      "rank": 232,
+      "rank": 230,
       "round": null,
       "sleeper": null,
       "team": "PIT"
+    },
+    {
+      "consensus": 272.2,
+      "name": "Keon Coleman",
+      "playerId": "11637",
+      "position": "WR",
+      "rank": 231,
+      "round": 24,
+      "sleeper": 234.8,
+      "team": "BUF"
+    },
+    {
+      "consensus": 274.3,
+      "name": "Mack Hollins",
+      "playerId": "4177",
+      "position": "WR",
+      "rank": 232,
+      "round": null,
+      "sleeper": null,
+      "team": "NE"
     },
     {
       "consensus": 278.6,
@@ -2333,16 +2333,16 @@
     },
     {
       "consensus": 281.9,
-      "name": "Xavier Legette",
-      "playerId": "11626",
+      "name": "Dontayvion Wicks",
+      "playerId": "9486",
       "position": "WR",
       "rank": 234,
       "round": null,
       "sleeper": null,
-      "team": "CAR"
+      "team": "PHI"
     },
     {
-      "consensus": 282.3,
+      "consensus": 283.1,
       "name": "Max Klare",
       "playerId": "13278",
       "position": "TE",
@@ -2352,27 +2352,27 @@
       "team": "LAR"
     },
     {
-      "consensus": 282.9,
-      "name": "Dontayvion Wicks",
-      "playerId": "9486",
-      "position": "WR",
+      "consensus": 283.5,
+      "name": "Greg Dulcich",
+      "playerId": "8172",
+      "position": "TE",
       "rank": 236,
       "round": null,
       "sleeper": null,
-      "team": "PHI"
+      "team": "MIA"
     },
     {
-      "consensus": 285.3,
-      "name": "Tory Horton",
-      "playerId": "12497",
+      "consensus": 284,
+      "name": "Xavier Legette",
+      "playerId": "11626",
       "position": "WR",
       "rank": 237,
-      "round": 23,
-      "sleeper": 228.7,
-      "team": "SEA"
+      "round": null,
+      "sleeper": null,
+      "team": "CAR"
     },
     {
-      "consensus": 285.7,
+      "consensus": 284.1,
       "name": "Skyler Bell",
       "playerId": "13402",
       "position": "WR",
@@ -2382,17 +2382,17 @@
       "team": "BUF"
     },
     {
-      "consensus": 286.5,
-      "name": "Greg Dulcich",
-      "playerId": "8172",
-      "position": "TE",
+      "consensus": 285.8,
+      "name": "Tory Horton",
+      "playerId": "12497",
+      "position": "WR",
       "rank": 239,
-      "round": null,
-      "sleeper": null,
-      "team": "MIA"
+      "round": 23,
+      "sleeper": 228.7,
+      "team": "SEA"
     },
     {
-      "consensus": 287,
+      "consensus": 285.9,
       "name": "Ollie Gordon II",
       "playerId": "12495",
       "position": "RB",
@@ -2402,57 +2402,57 @@
       "team": "MIA"
     },
     {
-      "consensus": 287.4,
-      "name": "Isaiah Bond",
-      "playerId": "12503",
-      "position": "WR",
-      "rank": 241,
-      "round": null,
-      "sleeper": null,
-      "team": "CLE"
-    },
-    {
-      "consensus": 289.6,
-      "name": "Ty Simpson",
-      "playerId": "13275",
-      "position": "QB",
-      "rank": 242,
-      "round": 25,
-      "sleeper": 241.8,
-      "team": "LAR"
-    },
-    {
-      "consensus": 289.6,
-      "name": "Jaleel McLaughlin",
-      "playerId": "11439",
-      "position": "RB",
-      "rank": 243,
-      "round": null,
-      "sleeper": null,
-      "team": "DEN"
-    },
-    {
-      "consensus": 289.7,
+      "consensus": 286.8,
       "name": "MarShawn Lloyd",
       "playerId": "11581",
       "position": "RB",
-      "rank": 244,
+      "rank": 241,
       "round": null,
       "sleeper": null,
       "team": "GB"
     },
     {
-      "consensus": 290.3,
+      "consensus": 288.3,
+      "name": "Isaiah Bond",
+      "playerId": "12503",
+      "position": "WR",
+      "rank": 242,
+      "round": null,
+      "sleeper": null,
+      "team": "CLE"
+    },
+    {
+      "consensus": 289.3,
+      "name": "Ty Simpson",
+      "playerId": "13275",
+      "position": "QB",
+      "rank": 243,
+      "round": 25,
+      "sleeper": 241.8,
+      "team": "LAR"
+    },
+    {
+      "consensus": 290.9,
       "name": "Jerome Ford",
       "playerId": "8143",
       "position": "RB",
-      "rank": 245,
+      "rank": 244,
       "round": null,
       "sleeper": null,
       "team": "WSH"
     },
     {
-      "consensus": 292.9,
+      "consensus": 291,
+      "name": "Jaleel McLaughlin",
+      "playerId": "11439",
+      "position": "RB",
+      "rank": 245,
+      "round": null,
+      "sleeper": null,
+      "team": "DEN"
+    },
+    {
+      "consensus": 291.8,
       "name": "Adam Randall",
       "playerId": "13302",
       "position": "RB",
@@ -2462,37 +2462,37 @@
       "team": "BAL"
     },
     {
-      "consensus": 294.5,
-      "name": "Marvin Mims Jr.",
-      "playerId": "9494",
-      "position": "WR",
-      "rank": 247,
-      "round": 22,
-      "sleeper": 219.5,
-      "team": "DEN"
-    },
-    {
-      "consensus": 295.3,
-      "name": "Konata Mumpfield",
-      "playerId": "12718",
-      "position": "WR",
-      "rank": 248,
-      "round": null,
-      "sleeper": null,
-      "team": "LAR"
-    },
-    {
-      "consensus": 296.4,
+      "consensus": 294.1,
       "name": "Seth McGowan",
       "playerId": "13424",
       "position": "RB",
-      "rank": 249,
+      "rank": 247,
       "round": null,
       "sleeper": null,
       "team": null
     },
     {
-      "consensus": 297.9,
+      "consensus": 294.9,
+      "name": "Marvin Mims Jr.",
+      "playerId": "9494",
+      "position": "WR",
+      "rank": 248,
+      "round": 22,
+      "sleeper": 219.5,
+      "team": "DEN"
+    },
+    {
+      "consensus": 297.5,
+      "name": "Konata Mumpfield",
+      "playerId": "12718",
+      "position": "WR",
+      "rank": 249,
+      "round": null,
+      "sleeper": null,
+      "team": "LAR"
+    },
+    {
+      "consensus": 298.2,
       "name": "Jake Tonges",
       "playerId": "8698",
       "position": "TE",
@@ -2502,7 +2502,7 @@
       "team": "SF"
     },
     {
-      "consensus": 300.2,
+      "consensus": 300.7,
       "name": "Isaiah Davis",
       "playerId": "11571",
       "position": "RB",
@@ -2512,7 +2512,7 @@
       "team": "NYJ"
     },
     {
-      "consensus": 300.5,
+      "consensus": 301.1,
       "name": "Colby Parkinson",
       "playerId": "6865",
       "position": "TE",
@@ -2522,7 +2522,7 @@
       "team": "LAR"
     },
     {
-      "consensus": 300.9,
+      "consensus": 301.3,
       "name": "George Holani",
       "playerId": "12048",
       "position": "RB",
@@ -2532,137 +2532,137 @@
       "team": null
     },
     {
-      "consensus": 302.8,
+      "consensus": 302.9,
+      "name": "Oscar Delp",
+      "playerId": "13319",
+      "position": "TE",
+      "rank": 254,
+      "round": null,
+      "sleeper": null,
+      "team": "NO"
+    },
+    {
+      "consensus": 303.1,
       "name": "Ty Johnson",
       "playerId": "6039",
       "position": "RB",
-      "rank": 254,
+      "rank": 255,
       "round": null,
       "sleeper": null,
       "team": "BUF"
     },
     {
-      "consensus": 303.1,
+      "consensus": 303.9,
       "name": "Brenen Thompson",
       "playerId": "13380",
       "position": "WR",
-      "rank": 255,
+      "rank": 256,
       "round": null,
       "sleeper": null,
       "team": "LAC"
     },
     {
-      "consensus": 303.5,
+      "consensus": 304,
       "name": "Tez Johnson",
       "playerId": "12485",
       "position": "WR",
-      "rank": 256,
+      "rank": 257,
       "round": null,
       "sleeper": null,
       "team": "TB"
     },
     {
-      "consensus": 304.7,
-      "name": "Kendre Miller",
-      "playerId": "9757",
-      "position": "RB",
-      "rank": 257,
-      "round": 23,
-      "sleeper": 224.8,
-      "team": "NO"
+      "consensus": 304.4,
+      "name": "Geno Smith",
+      "playerId": "1373",
+      "position": "QB",
+      "rank": 258,
+      "round": null,
+      "sleeper": null,
+      "team": "NYJ"
     },
     {
-      "consensus": 304.8,
+      "consensus": 305.3,
       "name": "Kaleb Johnson",
       "playerId": "12504",
       "position": "RB",
-      "rank": 258,
+      "rank": 259,
       "round": 22,
       "sleeper": 217.5,
       "team": "PIT"
     },
     {
-      "consensus": 304.8,
-      "name": "Oscar Delp",
-      "playerId": "13319",
-      "position": "TE",
-      "rank": 259,
-      "round": null,
-      "sleeper": null,
-      "team": "NO"
-    },
-    {
-      "consensus": 305,
-      "name": "Cedric Tillman",
-      "playerId": "10444",
-      "position": "WR",
+      "consensus": 305.7,
+      "name": "LeQuint Allen Jr.",
+      "playerId": "12544",
+      "position": "RB",
       "rank": 260,
       "round": null,
       "sleeper": null,
-      "team": "CLE"
+      "team": "JAX"
     },
     {
-      "consensus": 305.9,
-      "name": "Geno Smith",
-      "playerId": "1373",
-      "position": "QB",
+      "consensus": 305.8,
+      "name": "Kendre Miller",
+      "playerId": "9757",
+      "position": "RB",
       "rank": 261,
+      "round": 23,
+      "sleeper": 224.8,
+      "team": "NO"
+    },
+    {
+      "consensus": 306.1,
+      "name": "Cedric Tillman",
+      "playerId": "10444",
+      "position": "WR",
+      "rank": 262,
       "round": null,
       "sleeper": null,
-      "team": "NYJ"
+      "team": "CLE"
     },
     {
       "consensus": 306.4,
       "name": "Aaron Rodgers",
       "playerId": "96",
       "position": "QB",
-      "rank": 262,
+      "rank": 263,
       "round": null,
       "sleeper": null,
       "team": "PIT"
     },
     {
-      "consensus": 307,
-      "name": "LeQuint Allen Jr.",
-      "playerId": "12544",
+      "consensus": 307.8,
+      "name": "Phil Mafah",
+      "playerId": "12738",
       "position": "RB",
-      "rank": 263,
+      "rank": 264,
       "round": null,
       "sleeper": null,
-      "team": "JAX"
+      "team": "DAL"
     },
     {
-      "consensus": 307.3,
+      "consensus": 308.3,
       "name": "Samaje Perine",
       "playerId": "4147",
       "position": "RB",
-      "rank": 264,
+      "rank": 265,
       "round": null,
       "sleeper": null,
       "team": "CIN"
     },
     {
-      "consensus": 308.7,
+      "consensus": 308.4,
       "name": "Tua Tagovailoa",
       "playerId": "6768",
       "position": "QB",
-      "rank": 265,
+      "rank": 266,
       "round": 24,
       "sleeper": 236.5,
       "team": "ATL"
     },
     {
-      "consensus": 309.2,
-      "name": "Luke McCaffrey",
-      "playerId": "11650",
-      "position": "WR",
-      "rank": 266,
-      "round": null,
-      "sleeper": null,
-      "team": "WSH"
-    },
-    {
-      "consensus": 310.7,
+      "consensus": 308.8,
       "name": "Eli Heidenreich",
       "playerId": "13423",
       "position": "RB",
@@ -2672,87 +2672,87 @@
       "team": null
     },
     {
-      "consensus": 310.8,
+      "consensus": 309.6,
+      "name": "Luke McCaffrey",
+      "playerId": "11650",
+      "position": "WR",
+      "rank": 268,
+      "round": null,
+      "sleeper": null,
+      "team": "WSH"
+    },
+    {
+      "consensus": 311.2,
       "name": "Chris Brooks",
       "playerId": "11370",
       "position": "RB",
-      "rank": 268,
+      "rank": 269,
       "round": null,
       "sleeper": null,
       "team": "GB"
     },
     {
-      "consensus": 311.3,
-      "name": "Phil Mafah",
-      "playerId": "12738",
-      "position": "RB",
-      "rank": 269,
-      "round": null,
-      "sleeper": null,
-      "team": "DAL"
-    },
-    {
-      "consensus": 311.7,
-      "name": "Calvin Austin III",
-      "playerId": "8125",
-      "position": "WR",
-      "rank": 270,
-      "round": null,
-      "sleeper": null,
-      "team": "NYG"
-    },
-    {
-      "consensus": 311.9,
-      "name": "Jalen Royals",
-      "playerId": "12505",
-      "position": "WR",
-      "rank": 271,
-      "round": null,
-      "sleeper": null,
-      "team": "KC"
-    },
-    {
-      "consensus": 312.9,
+      "consensus": 312.5,
       "name": "Brashard Smith",
       "playerId": "12455",
       "position": "RB",
-      "rank": 272,
+      "rank": 270,
       "round": 23,
       "sleeper": 226.3,
       "team": "KC"
     },
     {
-      "consensus": 314.1,
+      "consensus": 312.6,
       "name": "Jalen Tolbert",
       "playerId": "8117",
       "position": "WR",
-      "rank": 273,
+      "rank": 271,
       "round": null,
       "sleeper": null,
       "team": "MIA"
     },
     {
-      "consensus": 314.2,
-      "name": "Raheim Sanders",
-      "playerId": "12472",
-      "position": "RB",
-      "rank": 274,
+      "consensus": 312.9,
+      "name": "Jalen Royals",
+      "playerId": "12505",
+      "position": "WR",
+      "rank": 272,
       "round": null,
       "sleeper": null,
-      "team": "CLE"
+      "team": "KC"
     },
     {
-      "consensus": 315,
+      "consensus": 313.9,
       "name": "DJ Giddens",
       "playerId": "12471",
       "position": "RB",
-      "rank": 275,
+      "rank": 273,
       "round": null,
       "sleeper": null,
       "team": "IND"
     },
     {
-      "consensus": 315.3,
+      "consensus": 314,
+      "name": "Calvin Austin III",
+      "playerId": "8125",
+      "position": "WR",
+      "rank": 274,
+      "round": null,
+      "sleeper": null,
+      "team": "NYG"
+    },
+    {
+      "consensus": 316,
+      "name": "Shedeur Sanders",
+      "playerId": "12524",
+      "position": "QB",
+      "rank": 275,
+      "round": 23,
+      "sleeper": 225.8,
+      "team": "CLE"
+    },
+    {
+      "consensus": 317.7,
       "name": "Kareem Hunt",
       "playerId": "4098",
       "position": "RB",
@@ -2762,17 +2762,17 @@
       "team": null
     },
     {
-      "consensus": 315.9,
-      "name": "Shedeur Sanders",
-      "playerId": "12524",
-      "position": "QB",
+      "consensus": 318.1,
+      "name": "Raheim Sanders",
+      "playerId": "12472",
+      "position": "RB",
       "rank": 277,
-      "round": 23,
-      "sleeper": 225.8,
+      "round": null,
+      "sleeper": null,
       "team": "CLE"
     },
     {
-      "consensus": 318.9,
+      "consensus": 318.6,
       "name": "Michael Penix Jr.",
       "playerId": "11559",
       "position": "QB",
@@ -2782,37 +2782,37 @@
       "team": "ATL"
     },
     {
-      "consensus": 319.5,
-      "name": "Mason Taylor",
-      "playerId": "12498",
-      "position": "TE",
-      "rank": 279,
-      "round": 23,
-      "sleeper": 224.3,
-      "team": "NYJ"
-    },
-    {
-      "consensus": 320.5,
-      "name": "Emari Demercado",
-      "playerId": "11199",
-      "position": "RB",
-      "rank": 280,
-      "round": null,
-      "sleeper": null,
-      "team": "KC"
-    },
-    {
-      "consensus": 320.6,
+      "consensus": 319.7,
       "name": "Bryce Lance",
       "playerId": "13420",
       "position": "WR",
-      "rank": 281,
+      "rank": 279,
       "round": null,
       "sleeper": null,
       "team": null
     },
     {
-      "consensus": 320.9,
+      "consensus": 320.1,
+      "name": "Mason Taylor",
+      "playerId": "12498",
+      "position": "TE",
+      "rank": 280,
+      "round": 23,
+      "sleeper": 224.3,
+      "team": "NYJ"
+    },
+    {
+      "consensus": 320.6,
+      "name": "Emari Demercado",
+      "playerId": "11199",
+      "position": "RB",
+      "rank": 281,
+      "round": null,
+      "sleeper": null,
+      "team": "KC"
+    },
+    {
+      "consensus": 321.7,
       "name": "John Metchie III",
       "playerId": "8147",
       "position": "WR",
@@ -2822,27 +2822,27 @@
       "team": "CAR"
     },
     {
-      "consensus": 323.6,
-      "name": "J'Mari Taylor",
-      "playerId": "13348",
-      "position": "RB",
-      "rank": 283,
-      "round": null,
-      "sleeper": null,
-      "team": "JAX"
-    },
-    {
-      "consensus": 324.1,
+      "consensus": 323.5,
       "name": "Carson Beck",
       "playerId": "13272",
       "position": "QB",
-      "rank": 284,
+      "rank": 283,
       "round": null,
       "sleeper": null,
       "team": "ARI"
     },
     {
-      "consensus": 324.6,
+      "consensus": 324.7,
+      "name": "J'Mari Taylor",
+      "playerId": "13348",
+      "position": "RB",
+      "rank": 284,
+      "round": null,
+      "sleeper": null,
+      "team": "JAX"
+    },
+    {
+      "consensus": 325.3,
       "name": "Theo Johnson",
       "playerId": "11597",
       "position": "TE",
@@ -2852,57 +2852,57 @@
       "team": "NYG"
     },
     {
-      "consensus": 324.8,
-      "name": "Michael Carter",
-      "playerId": "7607",
-      "position": "RB",
-      "rank": 286,
-      "round": null,
-      "sleeper": null,
-      "team": "TEN"
-    },
-    {
-      "consensus": 326.5,
+      "consensus": 328.9,
       "name": "Kevin Coleman Jr.",
       "playerId": "13338",
       "position": "WR",
-      "rank": 287,
+      "rank": 286,
       "round": null,
       "sleeper": null,
       "team": "MIA"
     },
     {
-      "consensus": 327.1,
-      "name": "Nick Chubb",
-      "playerId": "4988",
-      "position": "RB",
-      "rank": 288,
-      "round": null,
-      "sleeper": null,
-      "team": null
-    },
-    {
-      "consensus": 327.7,
+      "consensus": 329.2,
       "name": "Darius Slayton",
       "playerId": "6149",
       "position": "WR",
-      "rank": 289,
+      "rank": 287,
       "round": null,
       "sleeper": null,
       "team": "NYG"
     },
     {
-      "consensus": 329,
-      "name": "Devontez Walker",
-      "playerId": "11629",
+      "consensus": 329.6,
+      "name": "Michael Carter",
+      "playerId": "7607",
+      "position": "RB",
+      "rank": 288,
+      "round": null,
+      "sleeper": null,
+      "team": "TEN"
+    },
+    {
+      "consensus": 330,
+      "name": "Tyquan Thornton",
+      "playerId": "8188",
       "position": "WR",
+      "rank": 289,
+      "round": null,
+      "sleeper": null,
+      "team": "KC"
+    },
+    {
+      "consensus": 330.3,
+      "name": "Nick Chubb",
+      "playerId": "4988",
+      "position": "RB",
       "rank": 290,
       "round": null,
       "sleeper": null,
-      "team": "BAL"
+      "team": null
     },
     {
-      "consensus": 329.4,
+      "consensus": 330.3,
       "name": "Malik Davis",
       "playerId": "8800",
       "position": "RB",
@@ -2912,37 +2912,37 @@
       "team": "DAL"
     },
     {
-      "consensus": 329.5,
-      "name": "Tyquan Thornton",
-      "playerId": "8188",
-      "position": "WR",
-      "rank": 292,
-      "round": null,
-      "sleeper": null,
-      "team": "KC"
-    },
-    {
-      "consensus": 330.6,
+      "consensus": 330.4,
       "name": "J.J. McCarthy",
       "playerId": "11565",
       "position": "QB",
-      "rank": 293,
+      "rank": 292,
       "round": 23,
       "sleeper": 224.2,
       "team": "MIN"
     },
     {
-      "consensus": 333.8,
+      "consensus": 331.1,
       "name": "Eli Raridon",
       "playerId": "13421",
       "position": "TE",
-      "rank": 294,
+      "rank": 293,
       "round": null,
       "sleeper": null,
       "team": null
     },
     {
-      "consensus": 333.9,
+      "consensus": 334.3,
+      "name": "Evan Engram",
+      "playerId": "4066",
+      "position": "TE",
+      "rank": 294,
+      "round": null,
+      "sleeper": null,
+      "team": "DEN"
+    },
+    {
+      "consensus": 334.6,
       "name": "Andrei Iosivas",
       "playerId": "10226",
       "position": "WR",
@@ -2952,9 +2952,9 @@
       "team": "CIN"
     },
     {
-      "consensus": 335.4,
-      "name": "Evan Engram",
-      "playerId": "4066",
+      "consensus": 337.6,
+      "name": "Justin Joly",
+      "playerId": "13400",
       "position": "TE",
       "rank": 296,
       "round": null,
@@ -2962,27 +2962,27 @@
       "team": "DEN"
     },
     {
-      "consensus": 337.8,
-      "name": "Justin Joly",
-      "playerId": "13400",
-      "position": "TE",
-      "rank": 297,
-      "round": null,
-      "sleeper": null,
-      "team": "DEN"
-    },
-    {
-      "consensus": 340.1,
+      "consensus": 338.9,
       "name": "Deshaun Watson",
       "playerId": "4017",
       "position": "QB",
-      "rank": 298,
+      "rank": 297,
       "round": null,
       "sleeper": null,
       "team": "CLE"
     },
     {
-      "consensus": 341.5,
+      "consensus": 340.5,
+      "name": "Devontez Walker",
+      "playerId": "11629",
+      "position": "WR",
+      "rank": 298,
+      "round": null,
+      "sleeper": null,
+      "team": "BAL"
+    },
+    {
+      "consensus": 341.9,
       "name": "Mike Gesicki",
       "playerId": "4993",
       "position": "TE",
@@ -2992,97 +2992,97 @@
       "team": "CIN"
     },
     {
-      "consensus": 342.4,
-      "name": "Devin Singletary",
-      "playerId": "6130",
-      "position": "RB",
-      "rank": 300,
-      "round": null,
-      "sleeper": null,
-      "team": "NYG"
-    },
-    {
-      "consensus": 344,
+      "consensus": 343,
       "name": "Chris Brazzell II",
       "playerId": "13353",
       "position": "WR",
-      "rank": 301,
+      "rank": 300,
       "round": 40,
       "sleeper": 400,
       "team": "CAR"
     },
     {
-      "consensus": 344.5,
-      "name": "Jahan Dotson",
-      "playerId": "8119",
-      "position": "WR",
-      "rank": 302,
-      "round": null,
-      "sleeper": null,
-      "team": "ATL"
-    },
-    {
-      "consensus": 344.8,
+      "consensus": 344.1,
       "name": "C.J. Daniels",
       "playerId": "13270",
       "position": "WR",
-      "rank": 303,
+      "rank": 301,
       "round": null,
       "sleeper": null,
       "team": "LAR"
     },
     {
-      "consensus": 347.9,
-      "name": "Daniel Bellinger",
-      "playerId": "8225",
-      "position": "TE",
-      "rank": 304,
+      "consensus": 344.1,
+      "name": "Devin Singletary",
+      "playerId": "6130",
+      "position": "RB",
+      "rank": 302,
       "round": null,
       "sleeper": null,
-      "team": "TEN"
+      "team": "NYG"
+    },
+    {
+      "consensus": 344.2,
+      "name": "Jahan Dotson",
+      "playerId": "8119",
+      "position": "WR",
+      "rank": 303,
+      "round": null,
+      "sleeper": null,
+      "team": "ATL"
     },
     {
       "consensus": 348.2,
-      "name": "Ben Sinnott",
-      "playerId": "11596",
-      "position": "TE",
-      "rank": 305,
-      "round": null,
-      "sleeper": null,
-      "team": "WSH"
-    },
-    {
-      "consensus": 350.3,
-      "name": "Luke Musgrave",
-      "playerId": "9481",
-      "position": "TE",
-      "rank": 306,
-      "round": null,
-      "sleeper": null,
-      "team": "GB"
-    },
-    {
-      "consensus": 350.7,
       "name": "Tahj Brooks",
       "playerId": "12543",
       "position": "RB",
-      "rank": 307,
+      "rank": 304,
       "round": null,
       "sleeper": null,
       "team": "CIN"
     },
     {
-      "consensus": 352.1,
-      "name": "Savion Williams",
-      "playerId": "12482",
-      "position": "WR",
-      "rank": 308,
+      "consensus": 349.5,
+      "name": "Luke Musgrave",
+      "playerId": "9481",
+      "position": "TE",
+      "rank": 305,
       "round": null,
       "sleeper": null,
       "team": "GB"
     },
     {
-      "consensus": 356.1,
+      "consensus": 349.8,
+      "name": "Ben Sinnott",
+      "playerId": "11596",
+      "position": "TE",
+      "rank": 306,
+      "round": null,
+      "sleeper": null,
+      "team": "WSH"
+    },
+    {
+      "consensus": 353.8,
+      "name": "Savion Williams",
+      "playerId": "12482",
+      "position": "WR",
+      "rank": 307,
+      "round": null,
+      "sleeper": null,
+      "team": "GB"
+    },
+    {
+      "consensus": 354.2,
+      "name": "Treylon Burks",
+      "playerId": "8135",
+      "position": "WR",
+      "rank": 308,
+      "round": null,
+      "sleeper": null,
+      "team": "WSH"
+    },
+    {
+      "consensus": 355.8,
       "name": "Trevor Etienne",
       "playerId": "12531",
       "position": "RB",
@@ -3092,67 +3092,67 @@
       "team": "CAR"
     },
     {
-      "consensus": 357.2,
-      "name": "Treylon Burks",
-      "playerId": "8135",
-      "position": "WR",
-      "rank": 310,
-      "round": null,
-      "sleeper": null,
-      "team": "WSH"
-    },
-    {
-      "consensus": 358.6,
+      "consensus": 358.1,
       "name": "Will Shipley",
       "playerId": "11577",
       "position": "RB",
-      "rank": 311,
+      "rank": 310,
       "round": null,
       "sleeper": null,
       "team": "PHI"
     },
     {
-      "consensus": 360.6,
+      "consensus": 360.1,
       "name": "Kirk Cousins",
       "playerId": "1166",
       "position": "QB",
+      "rank": 311,
+      "round": null,
+      "sleeper": null,
+      "team": "LV"
+    },
+    {
+      "consensus": 363.6,
+      "name": "Michael Mayer",
+      "playerId": "9482",
+      "position": "TE",
       "rank": 312,
       "round": null,
       "sleeper": null,
       "team": "LV"
     },
     {
-      "consensus": 364.6,
-      "name": "Michael Mayer",
-      "playerId": "9482",
-      "position": "TE",
-      "rank": 313,
-      "round": null,
-      "sleeper": null,
-      "team": "LV"
-    },
-    {
-      "consensus": 366.2,
+      "consensus": 368.5,
       "name": "KaVontae Turpin",
       "playerId": "8917",
       "position": "WR",
-      "rank": 314,
+      "rank": 313,
       "round": null,
       "sleeper": null,
       "team": "DAL"
     },
     {
-      "consensus": 368.1,
+      "consensus": 368.6,
       "name": "Isaac Guerendo",
       "playerId": "11651",
       "position": "RB",
-      "rank": 315,
+      "rank": 314,
       "round": null,
       "sleeper": null,
       "team": "SF"
     },
     {
-      "consensus": 368.6,
+      "consensus": 369.6,
+      "name": "Bam Knight",
+      "playerId": "8122",
+      "position": "RB",
+      "rank": 315,
+      "round": null,
+      "sleeper": null,
+      "team": "ARI"
+    },
+    {
+      "consensus": 369.7,
       "name": "Darnell Washington",
       "playerId": "9479",
       "position": "TE",
@@ -3162,7 +3162,7 @@
       "team": "PIT"
     },
     {
-      "consensus": 369.2,
+      "consensus": 370.3,
       "name": "Jawhar Jordan",
       "playerId": "11588",
       "position": "RB",
@@ -3172,27 +3172,27 @@
       "team": "HOU"
     },
     {
-      "consensus": 370.9,
-      "name": "Bam Knight",
-      "playerId": "8122",
-      "position": "RB",
-      "rank": 318,
-      "round": null,
-      "sleeper": null,
-      "team": "ARI"
-    },
-    {
       "consensus": 377,
       "name": "Dyami Brown",
       "playerId": "7587",
       "position": "WR",
-      "rank": 319,
+      "rank": 318,
       "round": null,
       "sleeper": null,
       "team": "WSH"
     },
     {
-      "consensus": 378.8,
+      "consensus": 379.9,
+      "name": "Ja'Tavion Sanders",
+      "playerId": "11600",
+      "position": "TE",
+      "rank": 319,
+      "round": null,
+      "sleeper": null,
+      "team": "CAR"
+    },
+    {
+      "consensus": 380.7,
       "name": "Jaylin Lane",
       "playerId": "12641",
       "position": "WR",
@@ -3202,81 +3202,71 @@
       "team": "WSH"
     },
     {
-      "consensus": 381.5,
-      "name": "Ja'Tavion Sanders",
-      "playerId": "11600",
-      "position": "TE",
-      "rank": 321,
-      "round": null,
-      "sleeper": null,
-      "team": "CAR"
-    },
-    {
-      "consensus": 385.3,
+      "consensus": 385.1,
       "name": "Elijah Arroyo",
       "playerId": "12521",
       "position": "TE",
-      "rank": 322,
+      "rank": 321,
       "round": null,
       "sleeper": null,
       "team": "SEA"
     },
     {
-      "consensus": 386.3,
+      "consensus": 388.1,
       "name": "Dawson Knox",
       "playerId": "5906",
       "position": "TE",
-      "rank": 323,
+      "rank": 322,
       "round": null,
       "sleeper": null,
       "team": "BUF"
     },
     {
-      "consensus": 388.8,
+      "consensus": 390.9,
       "name": "Tyler Higbee",
       "playerId": "3271",
       "position": "TE",
-      "rank": 324,
+      "rank": 323,
       "round": null,
       "sleeper": null,
       "team": "LAR"
     },
     {
-      "consensus": 395,
+      "consensus": 394.4,
       "name": "Mac Jones",
       "playerId": "7527",
       "position": "QB",
-      "rank": 325,
+      "rank": 324,
       "round": null,
       "sleeper": null,
       "team": "SF"
     },
     {
-      "consensus": 395.9,
+      "consensus": 395.4,
       "name": "Cole Kmet",
       "playerId": "6826",
       "position": "TE",
-      "rank": 326,
+      "rank": 325,
       "round": null,
       "sleeper": null,
       "team": "CHI"
     },
     {
-      "consensus": 397,
+      "consensus": 397.3,
       "name": "Noah Gray",
       "playerId": "7828",
       "position": "TE",
-      "rank": 327,
+      "rank": 326,
       "round": null,
       "sleeper": null,
       "team": "KC"
     },
     {
-      "consensus": 398.1,
+      "consensus": 397.7,
       "name": "Justin Fields",
       "playerId": "7591",
       "position": "QB",
-      "rank": 328,
+      "rank": 327,
       "round": null,
       "sleeper": null,
       "team": "KC"
@@ -3286,17 +3276,17 @@
       "name": "Tyler Badie",
       "playerId": "8208",
       "position": "RB",
-      "rank": 329,
+      "rank": 328,
       "round": null,
       "sleeper": null,
       "team": "DEN"
     },
     {
-      "consensus": 399.6,
+      "consensus": 399.4,
       "name": "Joe Flacco",
       "playerId": "19",
       "position": "QB",
-      "rank": 330,
+      "rank": 329,
       "round": null,
       "sleeper": null,
       "team": "CIN"
@@ -3306,13 +3296,23 @@
       "name": "Ricky Pearsall",
       "playerId": "11638",
       "position": "WR",
-      "rank": 331,
+      "rank": 330,
       "round": 40,
       "sleeper": 400,
       "team": "SF"
     },
     {
-      "consensus": 403,
+      "consensus": 405.7,
+      "name": "Noah Fant",
+      "playerId": "5857",
+      "position": "TE",
+      "rank": 331,
+      "round": null,
+      "sleeper": null,
+      "team": "NO"
+    },
+    {
+      "consensus": 406.1,
       "name": "Tommy Tremble",
       "playerId": "7694",
       "position": "TE",
@@ -3322,41 +3322,31 @@
       "team": "CAR"
     },
     {
-      "consensus": 404.3,
-      "name": "Noah Fant",
-      "playerId": "5857",
-      "position": "TE",
-      "rank": 333,
-      "round": null,
-      "sleeper": null,
-      "team": "NO"
-    },
-    {
-      "consensus": 406.5,
-      "name": "Austin Hooper",
-      "playerId": "3202",
-      "position": "TE",
-      "rank": 334,
-      "round": null,
-      "sleeper": null,
-      "team": "ATL"
-    },
-    {
-      "consensus": 411.1,
+      "consensus": 411,
       "name": "Anthony Richardson Sr.",
       "playerId": "9229",
       "position": "QB",
-      "rank": 335,
+      "rank": 333,
       "round": null,
       "sleeper": null,
       "team": "IND"
+    },
+    {
+      "consensus": 416.7,
+      "name": "Marcus Mariota",
+      "playerId": "2307",
+      "position": "QB",
+      "rank": 334,
+      "round": null,
+      "sleeper": null,
+      "team": "WSH"
     },
     {
       "consensus": 432,
       "name": "Kene Nwangwu",
       "playerId": "7720",
       "position": "RB",
-      "rank": 336,
+      "rank": 335,
       "round": null,
       "sleeper": null,
       "team": "NYJ"
@@ -3366,7 +3356,7 @@
       "name": "Dylan Laube",
       "playerId": "11574",
       "position": "RB",
-      "rank": 337,
+      "rank": 336,
       "round": null,
       "sleeper": null,
       "team": "LV"
@@ -3376,13 +3366,23 @@
       "name": "Rasheen Ali",
       "playerId": "11570",
       "position": "RB",
-      "rank": 338,
+      "rank": 337,
       "round": null,
       "sleeper": null,
       "team": "BAL"
     },
     {
-      "consensus": 455.2,
+      "consensus": 456,
+      "name": "Jacob Saylors",
+      "playerId": "11237",
+      "position": "RB",
+      "rank": 338,
+      "round": null,
+      "sleeper": null,
+      "team": "DET"
+    },
+    {
+      "consensus": 456.5,
       "name": "Troy Franklin",
       "playerId": "11627",
       "position": "WR",
@@ -3392,21 +3392,11 @@
       "team": "DEN"
     },
     {
-      "consensus": 456,
-      "name": "Jacob Saylors",
-      "playerId": "11237",
-      "position": "RB",
-      "rank": 340,
-      "round": null,
-      "sleeper": null,
-      "team": "DET"
-    },
-    {
       "consensus": 457,
       "name": "DeeJay Dallas",
       "playerId": "6931",
       "position": "RB",
-      "rank": 341,
+      "rank": 340,
       "round": null,
       "sleeper": null,
       "team": "JAX"
@@ -3416,10 +3406,20 @@
       "name": "Josh Williams",
       "playerId": "12787",
       "position": "RB",
-      "rank": 342,
+      "rank": 341,
       "round": null,
       "sleeper": null,
       "team": "TB"
+    },
+    {
+      "consensus": 472,
+      "name": "Austin Hooper",
+      "playerId": "3202",
+      "position": "TE",
+      "rank": 342,
+      "round": null,
+      "sleeper": null,
+      "team": "ATL"
     },
     {
       "consensus": 473,
@@ -3482,21 +3482,11 @@
       "team": "NE"
     },
     {
-      "consensus": 484,
-      "name": "Marcus Mariota",
-      "playerId": "2307",
-      "position": "QB",
-      "rank": 349,
-      "round": null,
-      "sleeper": null,
-      "team": "WSH"
-    },
-    {
       "consensus": 485,
       "name": "Tyson Bagent",
       "playerId": "11256",
       "position": "QB",
-      "rank": 350,
+      "rank": 349,
       "round": null,
       "sleeper": null,
       "team": "CHI"
@@ -3506,7 +3496,7 @@
       "name": "Sam Howell",
       "playerId": "8162",
       "position": "QB",
-      "rank": 351,
+      "rank": 350,
       "round": null,
       "sleeper": null,
       "team": "DAL"
@@ -3516,33 +3506,43 @@
       "name": "Christian Kirk",
       "playerId": "4950",
       "position": "WR",
-      "rank": 352,
+      "rank": 351,
       "round": 25,
       "sleeper": 241.7,
       "team": "SF"
     },
     {
-      "consensus": 495.9,
+      "consensus": 496.3,
       "name": "Devaughn Vele",
       "playerId": "11834",
       "position": "WR",
-      "rank": 353,
+      "rank": 352,
       "round": 24,
       "sleeper": 239.8,
       "team": "NO"
     },
     {
-      "consensus": 631.9,
+      "consensus": 633.3,
       "name": "Hollywood Brown",
       "playerId": "5848",
       "position": "WR",
-      "rank": 354,
+      "rank": 353,
       "round": null,
       "sleeper": null,
       "team": "PHI"
     },
     {
-      "consensus": 643.7,
+      "consensus": 645.8,
+      "name": "Ashton Dulin",
+      "playerId": "6427",
+      "position": "WR",
+      "rank": 354,
+      "round": null,
+      "sleeper": null,
+      "team": "IND"
+    },
+    {
+      "consensus": 646.9,
       "name": "Kendrick Bourne",
       "playerId": "4454",
       "position": "WR",
@@ -3552,7 +3552,7 @@
       "team": "ARI"
     },
     {
-      "consensus": 647.1,
+      "consensus": 648.2,
       "name": "DeMario Douglas",
       "playerId": "9501",
       "position": "WR",
@@ -3562,101 +3562,91 @@
       "team": "NE"
     },
     {
-      "consensus": 647.5,
-      "name": "Ashton Dulin",
-      "playerId": "6427",
-      "position": "WR",
-      "rank": 357,
-      "round": null,
-      "sleeper": null,
-      "team": "IND"
-    },
-    {
-      "consensus": 649.3,
+      "consensus": 652.3,
       "name": "Kalif Raymond",
       "playerId": "3634",
       "position": "WR",
-      "rank": 358,
+      "rank": 357,
       "round": null,
       "sleeper": null,
       "team": "CHI"
     },
     {
-      "consensus": 652.3,
+      "consensus": 653.8,
       "name": "Joshua Palmer",
       "playerId": "7670",
       "position": "WR",
-      "rank": 359,
+      "rank": 358,
       "round": null,
       "sleeper": null,
       "team": "BUF"
     },
     {
-      "consensus": 653.1,
+      "consensus": 656,
       "name": "Nick Westbrook-Ikhine",
       "playerId": "7496",
       "position": "WR",
-      "rank": 360,
+      "rank": 359,
       "round": null,
       "sleeper": null,
       "team": "IND"
     },
     {
-      "consensus": 656.5,
+      "consensus": 656.8,
       "name": "Tutu Atwell",
       "playerId": "7562",
       "position": "WR",
-      "rank": 361,
+      "rank": 360,
       "round": null,
       "sleeper": null,
       "team": "MIA"
     },
     {
-      "consensus": 671.9,
+      "consensus": 669.6,
       "name": "Erick All Jr.",
       "playerId": "11592",
       "position": "TE",
-      "rank": 362,
+      "rank": 361,
       "round": null,
       "sleeper": null,
       "team": "CIN"
     },
     {
-      "consensus": 678,
-      "name": "Jordan Whittington",
-      "playerId": "11623",
-      "position": "WR",
-      "rank": 363,
-      "round": null,
-      "sleeper": null,
-      "team": "LAR"
-    },
-    {
-      "consensus": 678.4,
+      "consensus": 678.3,
       "name": "Olamide Zaccheaus",
       "playerId": "6271",
       "position": "WR",
-      "rank": 364,
+      "rank": 362,
       "round": null,
       "sleeper": null,
       "team": "ATL"
     },
     {
-      "consensus": 681.4,
+      "consensus": 681.1,
+      "name": "Charlie Kolar",
+      "playerId": "8127",
+      "position": "TE",
+      "rank": 363,
+      "round": null,
+      "sleeper": null,
+      "team": "LAC"
+    },
+    {
+      "consensus": 681.6,
       "name": "Dont'e Thornton Jr.",
       "playerId": "12541",
       "position": "WR",
-      "rank": 365,
+      "rank": 364,
       "round": null,
       "sleeper": null,
       "team": "LV"
     },
     {
-      "consensus": 683,
+      "consensus": 685.6,
       "name": "Xavier Hutchinson",
       "playerId": "10218",
       "position": "WR",
-      "rank": 366,
+      "rank": 365,
       "round": null,
       "sleeper": null,
       "team": "HOU"
@@ -3666,10 +3656,20 @@
       "name": "Mitchell Evans",
       "playerId": "12473",
       "position": "TE",
-      "rank": 367,
+      "rank": 366,
       "round": null,
       "sleeper": null,
       "team": "CAR"
+    },
+    {
+      "consensus": 1014,
+      "name": "Jordan Whittington",
+      "playerId": "11623",
+      "position": "WR",
+      "rank": 367,
+      "round": null,
+      "sleeper": null,
+      "team": "LAR"
     },
     {
       "consensus": 1022,
@@ -3692,21 +3692,11 @@
       "team": "MIN"
     },
     {
-      "consensus": 1030,
-      "name": "Charlie Kolar",
-      "playerId": "8127",
-      "position": "TE",
-      "rank": 370,
-      "round": null,
-      "sleeper": null,
-      "team": "LAC"
-    },
-    {
       "consensus": 1037,
       "name": "Cade Stover",
       "playerId": "11599",
       "position": "TE",
-      "rank": 371,
+      "rank": 370,
       "round": null,
       "sleeper": null,
       "team": "HOU"
@@ -3716,7 +3706,7 @@
       "name": "John Bates",
       "playerId": "7716",
       "position": "TE",
-      "rank": 372,
+      "rank": 371,
       "round": null,
       "sleeper": null,
       "team": "WSH"

@@ -1,5 +1,48 @@
 [
   {
+    "adds": {
+      "2747": 4,
+      "3451": 1,
+      "11539": 3,
+      "HOU": 4,
+      "KC": 3,
+      "MIN": 1
+    },
+    "consenter_ids": [
+      1,
+      3,
+      4
+    ],
+    "created": 1786503142656,
+    "creator": "999142984568557568",
+    "draft_picks": [],
+    "drops": {
+      "2747": 1,
+      "3451": 3,
+      "11539": 4,
+      "HOU": 3,
+      "KC": 1,
+      "MIN": 4
+    },
+    "leg": 1,
+    "metadata": {
+      "notes": "Your trade was processed successfully!",
+      "poll_id": "1393099400472977409",
+      "veto_msg_id": "1393099400556863488"
+    },
+    "roster_ids": [
+      1,
+      3,
+      4
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1786601695995,
+    "transaction_id": "1393098787043442688",
+    "type": "trade",
+    "waiver_budget": []
+  },
+  {
     "adds": null,
     "consenter_ids": [
       2,

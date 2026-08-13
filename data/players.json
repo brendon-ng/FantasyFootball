@@ -800,7 +800,7 @@
   "2505": {
     "full_name": "Darren Waller",
     "position": "TE",
-    "team": null,
+    "team": "CAR",
     "years_exp": 11
   },
   "2583": {
@@ -2348,7 +2348,7 @@
   "6996": {
     "full_name": "JaMycal Hasty",
     "position": "RB",
-    "team": null,
+    "team": "NE",
     "years_exp": 6
   },
   "7002": {
@@ -2486,7 +2486,7 @@
   "7561": {
     "full_name": "Elijah Mitchell",
     "position": "RB",
-    "team": "PHI",
+    "team": null,
     "years_exp": 5
   },
   "7562": {
@@ -2702,7 +2702,7 @@
   "8123": {
     "full_name": "Hassan Haskins",
     "position": "RB",
-    "team": null,
+    "team": "NE",
     "years_exp": 4
   },
   "8125": {
@@ -2774,7 +2774,7 @@
   "8139": {
     "full_name": "Zamir White",
     "position": "RB",
-    "team": null,
+    "team": "SF",
     "years_exp": 4
   },
   "8142": {
