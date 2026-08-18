@@ -91,33 +91,88 @@ const num = (s: string): number | null => {
 };
 
 /**
+ * Which column holds what, read from the table's own header.
+ *
+ * BY LABEL, NOT BY INDEX, and that is the whole point of this function. The
+ * columns were once `rank | name+team | consensus | Sleeper | …` and this parser
+ * hardcoded those positions. beatadp then inserted a position badge and a tags
+ * column, which shifted name from 1 to 2 and Sleeper from 3 to 5 — so every row
+ * read the badge cell as the player's name, found no name, and skipped. The
+ * scrape returned zero rows on the morning of the keeper lock.
+ *
+ * Header labels carry a long and a short form concatenated ("SleeperSleeper",
+ * "ConsensusCons"), so these match on a prefix rather than equality.
+ *
+ * CLASS NAMES ARE NOT USABLE AS ANCHORS either — they are CSS-module hashes
+ * (`AdpBoard-module__T-4u9G__adp`) and change on every one of their deploys. The
+ * stable part is the suffix after the last `__`.
+ */
+interface Columns {
+  rank: number;
+  player: number;
+  consensus: number;
+  sleeper: number;
+}
+
+function findColumns(html: string): Columns {
+  const headerRow = [...html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].find((m) =>
+    /<th[\s>]/.test(m[1]),
+  );
+  const labels = [...(headerRow?.[1] ?? "").matchAll(/<th[^>]*>([\s\S]*?)<\/th>/g)].map((m) =>
+    text(m[1]).toLowerCase(),
+  );
+  const at = (re: RegExp) => labels.findIndex((l) => re.test(l));
+
+  const cols = {
+    rank: at(/^#|^rank/),
+    player: at(/^player|^name/),
+    consensus: at(/^consensus/),
+    sleeper: at(/^sleeper/),
+  };
+  const missing = Object.entries(cols).filter(([, i]) => i < 0).map(([k]) => k);
+  if (missing.length) {
+    throw new Error(
+      `Could not find the ${missing.join(", ")} column${missing.length > 1 ? "s" : ""} in ` +
+        `beatadp's header. Saw: ${JSON.stringify(labels)}. Check findColumns().`,
+    );
+  }
+  return cols;
+}
+
+/**
  * Parses the ADP table.
  *
- * Row shape is: rank | name+team | consensus | Sleeper | ESPN | Yahoo |
- * Underdog | FantasyPros. Name and team share one cell.
+ * `sleeper` is the column that matters: `round` is derived from it and nothing
+ * else, so it is what keeper costs are ultimately decided against. `consensus`
+ * is captured alongside for display only.
  */
 function parseTable(html: string): AdpRow[] {
+  const cols = findColumns(html);
   const rows: AdpRow[] = [];
   for (const [, tr] of html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)) {
     const cells = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((m) => m[1]);
-    if (cells.length < 4) continue;
+    if (cells.length <= cols.sleeper) continue;
 
-    const rank = num(text(cells[0]));
+    const rank = num(text(cells[cols.rank]));
     if (rank === null) continue;
 
-    // The team is the trailing <span> inside the name cell.
-    const nameCell = cells[1];
-    const teamMatch = nameCell.match(/<span[^>]*>([A-Z]{2,4})<\/span>/);
-    const team = teamMatch?.[1] ?? null;
-    const name = text(nameCell.replace(/<span[\s\S]*?<\/span>/g, ""));
+    // The identity cell is a headshot, the name in a button, and the team in a
+    // trailing span. Take the button's text rather than stripping the cell — the
+    // team abbreviation would otherwise end up glued to the name.
+    const cell = cells[cols.player];
+    const team = cell.match(/__team[^"]*"[^>]*>([A-Z]{2,4})</)?.[1] ?? null;
+    const nameHtml = cell.match(/<button[^>]*>([\s\S]*?)<\/button>/)?.[1];
+    const name = text(
+      nameHtml ?? cell.replace(/<span[^>]*__team[^>]*>[\s\S]*?<\/span>/g, ""),
+    );
     if (!name) continue;
 
     rows.push({
       rank,
       name,
       team,
-      consensus: num(text(cells[2])),
-      sleeper: num(text(cells[3])),
+      consensus: num(text(cells[cols.consensus])),
+      sleeper: num(text(cells[cols.sleeper])),
     });
   }
   return rows;

@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-08-18T02:23:28.408Z",
+  "capturedAt": "2026-08-18T02:23:50.962Z",
   "entries": [
     {
       "consensus": 1.8,
@@ -3983,7 +3983,7 @@
     }
   ],
   "format": "redraft",
-  "frozen": false,
+  "frozen": true,
   "leagueTeams": 10,
   "note": "Sleeper publishes no ADP via API; this is scraped from beatadp.com's server-rendered Sleeper column. `round` converts Sleeper ADP to a keeper cost round for this league's size.",
   "quarterbacks": 1,
