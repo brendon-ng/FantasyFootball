@@ -122,6 +122,11 @@ export function DraftPicks({
   adp: Record<string, AdpEntry>;
   maxKeepers: number;
   /** Every contract this owner holds, from the baked data. */
+  /**
+   * EVERY owned contract in the league. A keeper locked in on Sleeper is matched
+   * against this by player id, so a player acquired by trade since the last
+   * archive would otherwise be missing and silently consume no pick.
+   */
   contracts: KeeperContract[];
   players: Record<string, PlayerMeta>;
   userIdToSlug: Record<string, string>;

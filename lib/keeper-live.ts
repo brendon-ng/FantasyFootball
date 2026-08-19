@@ -9,12 +9,17 @@ import type { KeeperContract } from "@/lib/types";
 /**
  * Applies not-yet-finalized transactions to the baked keeper contracts.
  *
- * `sync.ts` only persists a week once Sleeper has scored it, so nothing that
- * happens in the preseason reaches `data/raw` until week 1 finalizes — which is
- * after the keeper deadline and after the draft. Drops and trades genuinely
- * happen in that window, and bylaws 1.7.2.4 reprices a dropped-and-re-added
- * player, so a stale board would be wrong at the exact moment it is being used
- * to make decisions.
+ * WHAT THIS IS STILL FOR, now that transactions archive ahead of scoring.
+ * `sync` fetches them through `settings.leg` rather than the last scored week,
+ * so a preseason trade is committed by the next daily `archive.yml` run — hours,
+ * not the month it used to be. This closes the remaining gap: the window between
+ * a move processing and that run, plus the wait for the next scheduled deploy,
+ * which together can still be a day. Bylaws 1.7.2.4 reprice a dropped-and-
+ * re-added player, so a board that is a day stale is wrong exactly when it is
+ * being used to decide keepers.
+ *
+ * MATCHUPS still wait for scoring; only transactions run ahead. Anything here
+ * that reads a week's POINTS would still be held to the old horizon.
  *
  * THE RULES HERE MIRROR `resolveKeepers()` IN scripts/derive.ts. If one changes,
  * change both — the derived value and the live adjustment must agree or a

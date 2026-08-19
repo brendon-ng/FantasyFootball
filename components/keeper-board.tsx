@@ -177,7 +177,7 @@ export function KeeperBoard({
                         {adjustments.has(c.playerId) ? (
                           <Tip
                             className="shrink-0 text-[10px] leading-none text-gold"
-                            text={`${adjustments.get(c.playerId)}. Straight from Sleeper — this week has not been scored yet, so it is not in the committed data.`}
+                            text={`${adjustments.get(c.playerId)}. Straight from the live league — not archived yet. Transactions are committed daily, ahead of scoring, so this normally solidifies within a day and reaches the site on the next scheduled build.`}
                           >
                             ●
                           </Tip>

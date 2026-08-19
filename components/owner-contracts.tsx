@@ -18,6 +18,13 @@ export function OwnerContracts({
   draftRounds,
 }: {
   ownerSlug: string;
+  /**
+   * EVERY owned contract in the league, not just this owner's.
+   *
+   * The live layer reassigns ownership, so it has to see a player before it can
+   * move him here — a trade received since the last archive is filed under the
+   * SENDING owner until then. Narrowed to `ownerSlug` after the hook, below.
+   */
   contracts: KeeperContract[];
   players: Record<string, PlayerMeta>;
   adp: Record<string, AdpEntry>;

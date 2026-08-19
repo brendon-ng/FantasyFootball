@@ -64,6 +64,18 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
   const upcoming = Math.max(...getSeasons().map((x) => x.season), 0) + 1;
   const upcomingLeagueRef = getLeagueRefs()[String(upcoming)] ?? null;
   const contracts = getKeepers().final.filter((c) => c.ownerSlug === slug);
+  /**
+   * EVERY owned contract, for the components that reconcile against live rosters.
+   *
+   * Filtering to this owner FIRST hides incoming trades: a player acquired since
+   * the last archive still has the SENDING owner on his committed contract, so
+   * pre-filtering drops him before `useLiveContracts` can reassign him and he can
+   * never appear. Outgoing moves worked, which is what made it look like a
+   * rounding error rather than a hole — the profile was simply short by however
+   * many players the owner had received. `/keepers` was right all along because
+   * it hands the live layer the whole league.
+   */
+  const leagueContracts = getKeepers().final.filter((c) => c.ownerSlug);
   // Counted from every season on record, so it is a career tally.
   const myLows = getWeeklyLows().filter((w) => w.ownerSlug === slug);
   const weeklyLows = myLows.length;
@@ -359,7 +371,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
           <OwnerContracts
             draftRounds={draftRounds}
             ownerSlug={slug}
-            contracts={contracts}
+            contracts={leagueContracts}
             players={players}
             adp={Object.fromEntries(adp.byPlayer)}
             userIdToSlug={getUserIdToSlug()}
@@ -376,7 +388,7 @@ export default async function OwnerPage({ params }: { params: Promise<{ slug: st
         season={upcoming}
         draftRounds={17}
         maxKeepers={4}
-        contracts={contracts}
+        contracts={leagueContracts}
         players={players}
         userIdToSlug={getUserIdToSlug()}
         ownerNames={Object.fromEntries(getOwners().map((o) => [o.slug, o.name]))}
