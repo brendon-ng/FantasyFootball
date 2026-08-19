@@ -301,7 +301,7 @@ export function PlayerTransactions({
                       {isPending(h) ? (
                         <Tip
                           className="text-gold"
-                          text="Straight from the live league — not archived yet. Transactions are committed daily, ahead of scoring, so this normally solidifies within a day and reaches the site on the next scheduled build."
+                          text="Straight from the live league. Keeper contracts are rebuilt when the draft is archived, so a preseason move stays marked until then even though the transaction itself is committed within a day. The mark clears on its own once the two agree."
                         >
                           ●
                         </Tip>

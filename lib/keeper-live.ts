@@ -21,6 +21,21 @@ import type { KeeperContract } from "@/lib/types";
  * MATCHUPS still wait for scoring; only transactions run ahead. Anything here
  * that reads a week's POINTS would still be held to the old horizon.
  *
+ * AN ADJUSTMENT MARKS A DIFFERENCE, NOT AN EVENT, and that distinction is what
+ * makes the gold dot clear on its own. `fromWeek` is 1, so Sleeper keeps
+ * returning a preseason trade for as long as the league exists — noting it
+ * whenever it is SEEN meant the dot would still be there months after derive had
+ * baked the move in. Every branch below therefore compares against the committed
+ * contract and stays silent when they already agree, which also means this needs
+ * no knowledge of when sync or derive last ran.
+ *
+ * WHY A PRESEASON MOVE STAYS MARKED FOR WEEKS. `resolveKeepers` only walks
+ * FINISHED seasons and seasons with an ARCHIVED DRAFT, so an in-progress
+ * pre-draft season contributes nothing to a contract however promptly its
+ * transactions are archived — `raw/<season>/transactions` fills up daily while
+ * `keepers.json` does not move. The dot is telling the truth for that whole
+ * window; it clears when the draft is archived and the cycle turns.
+ *
  * THE RULES HERE MIRROR `resolveKeepers()` IN scripts/derive.ts. If one changes,
  * change both — the derived value and the live adjustment must agree or a
  * contract will flicker as a week finalizes.
@@ -93,8 +108,11 @@ export function useLiveContracts({
       for (const playerId of Object.keys(t.drops)) {
         const c = byId.get(playerId);
         if (!c) continue;
-        c.ownerSlug = null;
-        note(playerId, "dropped since the last sync");
+        // Only a CHANGE is worth marking. See the note on state vs events below.
+        if (c.ownerSlug !== null) {
+          c.ownerSlug = null;
+          note(playerId, "dropped since the last sync");
+        }
       }
     }
 
@@ -103,7 +121,7 @@ export function useLiveContracts({
       const prior = byId.get(playerId);
 
       if (t.type === "trade" || t.type === "commissioner") {
-        if (prior) {
+        if (prior && prior.ownerSlug !== owner) {
           prior.ownerSlug = owner;
           note(playerId, t.type === "trade" ? "traded since the last sync" : "moved by the commissioner");
         }
@@ -141,9 +159,16 @@ export function useLiveContracts({
             `re-acquired since the last sync — min(R${undraftedFreeAgentRound}, R${base}) = R${newRound}, contract reset`,
           ],
         });
-        if (newRound !== prior.round) {
+        // Unchanged means derive has already replayed this pickup, so there is
+        // nothing pending to mark.
+        const changed =
+          prior.ownerSlug !== owner ||
+          prior.round !== newRound ||
+          prior.keepsUsed !== 0 ||
+          prior.origin !== "reacquired";
+        if (changed && newRound !== prior.round) {
           note(playerId, `re-acquired — cost is now R${newRound}, was R${prior.round}`);
-        } else {
+        } else if (changed) {
           note(playerId, "re-acquired — contract reset");
         }
       }
