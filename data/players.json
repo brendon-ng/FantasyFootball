@@ -470,7 +470,7 @@
   "1479": {
     "full_name": "Keenan Allen",
     "position": "WR",
-    "team": null,
+    "team": "IND",
     "years_exp": 13
   },
   "1500": {
@@ -2438,7 +2438,7 @@
   "7528": {
     "full_name": "Najee Harris",
     "position": "RB",
-    "team": null,
+    "team": "NYG",
     "years_exp": 5
   },
   "7537": {
@@ -2480,8 +2480,8 @@
   "7554": {
     "full_name": "Tre' McKitty",
     "position": "TE",
-    "team": null,
-    "years_exp": 4
+    "team": "WAS",
+    "years_exp": 5
   },
   "7561": {
     "full_name": "Elijah Mitchell",
@@ -2594,7 +2594,7 @@
   "7608": {
     "full_name": "Khalil Herbert",
     "position": "RB",
-    "team": "SF",
+    "team": null,
     "years_exp": 5
   },
   "7609": {
@@ -3266,7 +3266,7 @@
   "10937": {
     "full_name": "Jake Moody",
     "position": "K",
-    "team": "WAS",
+    "team": null,
     "years_exp": 3
   },
   "11008": {
