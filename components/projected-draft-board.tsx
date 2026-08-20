@@ -4,17 +4,17 @@ import Link from "next/link";
 import { PROVIDER_NAME, type LeagueRef } from "@/lib/league-ref";
 
 import { PositionPill } from "@/components/keeper-table";
-import { adpIsConsensusOnly, adpSortKey, adpTitle, adpValue } from "@/lib/adp-format";
+import { adpIsConsensusOnly, adpTitle, adpValue } from "@/lib/adp-format";
 import { EmptyState } from "@/components/ui";
 import {
   costRound,
   buildBoard,
-  overallPick,
   pickInRound,
   pickLabel,
   type BoardPick,
   type DraftShape,
 } from "@/lib/draft-slots";
+import { projectDraft } from "@/lib/adp-projection";
 import { placeKeepers } from "@/lib/keeper-placement";
 import { LiveStatus, useLiveDraft, useLiveRosters, useLiveTradedPicks } from "@/lib/live";
 import type { AdpEntry } from "@/lib/data";
@@ -227,40 +227,12 @@ export function ProjectedDraftBoard({
     .sort((a, b) => a - b);
   const totalKept = keeperAt.size;
 
-  /**
-   * Who ADP says is still on the board at each unspent pick.
-   *
-   * THE KEEPERS COME OFF THE BOARD IMMEDIATELY, but the picks they cost are
-   * spread across all 17 rounds. That asymmetry is the whole reason a keeper
-   * league's early rounds feel thin: at pick 1 the pool is already missing every
-   * kept player, and it only catches up as their pick slots go by. So a keeper
-   * cell consumes NO player from the pool — it was never in it — while every
-   * live pick takes the next name.
-   *
-   * Strict ADP order, deliberately. Modelling reaches and positional runs would
-   * be guessing; this states the market's own ordering and lets you see the
-   * dilution rather than hiding it behind a simulation.
-   */
-  const projected = new Map<string, AdpEntry>();
-  if (fillEmptyPicks) {
-    const kept = new Set([...keeperAt.values()].map((k) => k.playerId));
-    // Same ordering as the available-pool list, and for the same reason: the
-    // board should hand out players in the order the market actually takes them,
-    // which is the ADP figure rather than beatadp's consensus rank.
-    const pool = Object.values(adp)
-      .filter((e) => e.playerId && !kept.has(e.playerId))
-      .sort((a, b) => adpSortKey(a) - adpSortKey(b) || a.rank - b.rank);
-    let next = 0;
-    const inOrder = [...board].sort(
-      (a, b) => overallPick(a.round, a.slot, shape) - overallPick(b.round, b.slot, shape),
-    );
-    for (const p of inOrder) {
-      const key = `${p.round}:${p.slot}`;
-      if (keeperAt.has(key)) continue;
-      const pick = pool[next++];
-      if (pick) projected.set(key, pick);
-    }
-  }
+  // Shared with the player modal, which needs the same walk in reverse — see
+  // lib/adp-projection.ts. Two implementations would let the modal name one pick
+  // while the cell at that pick shows someone else.
+  const projected = fillEmptyPicks
+    ? projectDraft({ board, shape, placedByPick: placement.byPick, adp }).byPick
+    : new Map<string, AdpEntry>();
 
   return (
     <div>

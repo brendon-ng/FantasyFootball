@@ -8,6 +8,7 @@ import { ProjectedDraftBoard } from "@/components/projected-draft-board";
 import { ScenarioEditor, type EditorTeam } from "@/components/scenario-editor";
 import { EmptyState, Panel, PanelHeader } from "@/components/ui";
 import { buildBoard, type DraftShape } from "@/lib/draft-slots";
+import { projectDraft, type ProjectedPick } from "@/lib/adp-projection";
 import { placeKeepers } from "@/lib/keeper-placement";
 import { useScenario } from "@/lib/scenario";
 import { useLiveDraft, useLiveRosters, useLiveTradedPicks } from "@/lib/live";
@@ -122,6 +123,16 @@ export function ScenarioLab({
   // exists — without it there is no board and no honest count, and the list just
   // renders flat rather than inventing one.
   let livePicksByRound: number[] | null = null;
+  /**
+   * Where each undrafted player is projected to go, for the modal.
+   *
+   * NOT gated on the fill-in toggle: that switch is about what the grid draws,
+   * whereas "which pick would he cost me" is a fact the modal should answer
+   * either way.
+   */
+  let projectedPicks: Map<string, ProjectedPick> | null = null;
+  /** Kept players only: where the draft would take them if released. */
+  let releasedPicks: Map<string, ProjectedPick> | null = null;
   const d = draft.data;
   if (d && d.status !== "complete" && (d.orderSet || api.scenario.order)) {
     const shape: DraftShape = {
@@ -131,15 +142,25 @@ export function ScenarioLab({
       slotToRoster: api.scenario.order ?? d.slotToRoster,
       reversalRound: d.reversalRound,
     };
-    livePicksByRound = placeKeepers({
-      board: buildBoard(shape, traded.data ?? []),
+    const board = buildBoard(shape, traded.data ?? []);
+    const placement = placeKeepers({
+      board,
       rounds: shape.rounds,
       selectedByRoster,
       contracts,
       adp,
       draftRounds,
       maxKeepers,
-    }).livePicksByRound;
+    });
+    livePicksByRound = placement.livePicksByRound;
+    const projection = projectDraft({
+      board,
+      shape,
+      placedByPick: placement.byPick,
+      adp,
+    });
+    projectedPicks = projection.byPlayer;
+    releasedPicks = projection.ifReleased;
   }
 
   const starredSet = new Set(api.scenario.starred);
@@ -154,6 +175,9 @@ export function ScenarioLab({
         maxKeepers={maxKeepers}
         api={api}
         providerName={providerName}
+        projectedPicks={projectedPicks}
+        releasedPicks={releasedPicks}
+        onOpenPlayer={setOpenPlayer}
       />
 
       <Panel>
@@ -230,6 +254,10 @@ export function ScenarioLab({
           outlook={outlooks[openPlayer] ?? null}
           outlookCapturedAt={outlookCapturedAt}
           projections={projections}
+          projectedPick={projectedPicks?.get(openPlayer) ?? null}
+          releasedPick={releasedPicks?.get(openPlayer) ?? null}
+          hasBoard={projectedPicks !== null}
+          teams={draft.data?.teams ?? 10}
           starred={starredSet}
           onToggleStar={api.toggleStar}
           onOpenPlayer={setOpenPlayer}

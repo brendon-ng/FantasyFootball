@@ -8,6 +8,7 @@ import { PlayerUsageTable } from "@/components/player-usage";
 import { adpIsConsensusOnly, adpSortKey, adpTitle, adpValue, playerAge } from "@/lib/adp-format";
 import { costRound } from "@/lib/draft-slots";
 import { NFL_GAMES, perGame, statLine } from "@/lib/projection-format";
+import type { ProjectedPick } from "@/lib/adp-projection";
 import type { AdpEntry, Projection } from "@/lib/data";
 import type { KeeperContract, PlayerMeta, PlayerUsage } from "@/lib/types";
 
@@ -47,6 +48,10 @@ export function PlayerModal({
   outlook,
   outlookCapturedAt,
   projections,
+  projectedPick,
+  releasedPick,
+  hasBoard,
+  teams,
   starred,
   onToggleStar,
   onOpenPlayer,
@@ -68,6 +73,21 @@ export function PlayerModal({
   outlookCapturedAt: string | null;
   /** Whole map, not one entry — the depth chart prices teammates too. */
   projections: Record<string, Projection>;
+  /**
+   * Where he comes off the board: his ADP slot, or for a kept player the pick
+   * his keeper consumes.
+   */
+  projectedPick: ProjectedPick | null;
+  /**
+   * Kept players only: where the draft would take him if released.
+   *
+   * The baseline a keeper's value has to be measured against — he occupies the
+   * pick he costs, so comparing him to that says nothing.
+   */
+  releasedPick: ProjectedPick | null;
+  /** False before an order is drawn, when there is no board to project onto. */
+  hasBoard: boolean;
+  teams: number;
   starred: Set<string>;
   onToggleStar: (playerId: string) => void;
   /**
@@ -105,6 +125,15 @@ export function PlayerModal({
   const proj = projections[playerId];
   const ppg = perGame(proj);
   const line = statLine(proj);
+  const cost = contract ? costRound(contract, entry, draftRounds) : null;
+  // costRound - theirRound, the same direction the rest of the site uses:
+  // POSITIVE means you pay a later pick than they would cost, i.e. a bargain.
+  // A kept player occupies the very pick he costs, so he is measured against
+  // where the draft WOULD take him instead; everyone else against their own
+  // projected slot.
+  const against = projectedPick?.kept ? releasedPick : projectedPick;
+  const vsProjected = cost != null && against ? cost - against.round : null;
+  const vsMarket = cost != null && entry?.round != null ? cost - entry.round : null;
 
   /**
    * Everyone on the same NFL team, from the ADP list.
@@ -169,7 +198,7 @@ export function PlayerModal({
         </div>
 
         <div className="space-y-4 p-4 sm:p-5">
-          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 lg:grid-cols-4">
             <Tile
               label="Proj PPG"
               value={ppg != null ? ppg.toFixed(1) : "—"}
@@ -195,7 +224,45 @@ export function PlayerModal({
               value={contract ? String(contract.keepsRemaining) : "—"}
               sub={contract?.keepsRemaining === 1 ? "Final keep year" : undefined}
             />
+            <Tile
+              label="Proj pick"
+              value={projectedPick ? projectedPick.label : "—"}
+              sub={
+                projectedPick?.kept
+                  ? `Kept — his keeper consumes this pick, ${ordinal(projectedPick.overall)} overall`
+                  : projectedPick
+                    ? `${ordinal(projectedPick.overall)} overall of ${teams * 17}, if every pick goes in ADP order`
+                    : hasBoard
+                      ? "Not in the ADP pool"
+                      : "Needs a draft order; randomise one in the editor"
+              }
+            />
           </div>
+
+          {vsProjected !== null || vsMarket !== null ? (
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2">
+              <span className="text-[9px] uppercase tracking-wide text-chalk-600">
+                Keeper value
+              </span>
+              {/* TWO BASELINES, and they disagree on purpose. The market round is
+                  what he costs in a normal draft; the projected pick is what he
+                  costs in THIS one, after keepers have thinned the board. The
+                  second is the one you are actually choosing against. */}
+              {vsProjected !== null ? (
+                <Delta
+                  value={vsProjected}
+                  label={
+                    projectedPick?.kept
+                      ? `vs ${against!.label} (R${against!.round}) — where he would go if you let him go`
+                      : `vs projected pick ${against!.label} (R${against!.round})`
+                  }
+                />
+              ) : null}
+              {vsMarket !== null ? (
+                <Delta value={vsMarket} label={`vs market R${entry!.round}`} />
+              ) : null}
+            </div>
+          ) : null}
 
           {line.length ? (
             <div>
@@ -401,6 +468,28 @@ export function PlayerModal({
     </div>
   );
 }
+
+/** A signed round delta. Positive is a bargain; see the sign note above. */
+function Delta({ value, label }: { value: number; label: string }) {
+  return (
+    <span className="flex items-baseline gap-1.5 text-[11px]">
+      <span
+        className={`tabular font-semibold ${
+          value > 0 ? "text-accent" : value < 0 ? "text-loss" : "text-chalk-400"
+        }`}
+      >
+        {value > 0 ? `+${value}` : value}
+      </span>
+      <span className="text-chalk-600">{label}</span>
+    </span>
+  );
+}
+
+const ordinal = (n: number): string => {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] ?? s[v] ?? s[0]);
+};
 
 function SectionHeading({ title, note }: { title: string; note: string }) {
   return (

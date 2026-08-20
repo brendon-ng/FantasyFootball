@@ -3,6 +3,7 @@
 import { Fragment, useMemo, useState } from "react";
 
 import { PositionPill } from "@/components/keeper-table";
+import { SortHeader, compareSort, type SortState } from "@/components/sortable-header";
 import { adpIsConsensusOnly, adpSortKey, adpTitle, adpValue } from "@/lib/adp-format";
 import { costRound } from "@/lib/draft-slots";
 import { NFL_GAMES } from "@/lib/projection-format";
@@ -75,7 +76,7 @@ export function AvailablePool({
    * draft actually happens in, which is what makes the round breaks meaningful.
    * Every other sort is a lens on the same pool.
    */
-  const [sort, setSort] = useState<{ key: SortKey; dir: Dir }>({ key: "adp", dir: "asc" });
+  const [sort, setSort] = useState<SortState<SortKey>>({ key: "adp", dir: "asc" });
 
   const contractBy = useMemo(
     () => new Map(contracts.map((c) => [c.playerId, c])),
@@ -160,19 +161,8 @@ export function AvailablePool({
    * present ones reverse.
    */
   rows.sort((a, b) => {
-    const va = sortValue(a);
-    const vb = sortValue(b);
-    const na = va == null || va === "" || va === 0;
-    const nb = vb == null || vb === "" || vb === 0;
-    if (na && nb) return adpSortKey(a) - adpSortKey(b);
-    if (na) return 1;
-    if (nb) return -1;
-    const cmp =
-      typeof va === "string" || typeof vb === "string"
-        ? String(va).localeCompare(String(vb))
-        : (va as number) - (vb as number);
     // Ties fall back to market order, so the list never reshuffles arbitrarily.
-    return (sort.dir === "asc" ? cmp : -cmp) || adpSortKey(a) - adpSortKey(b);
+    return compareSort(sortValue(a), sortValue(b), sort.dir) || adpSortKey(a) - adpSortKey(b);
   });
 
   /**
@@ -278,21 +268,21 @@ export function AvailablePool({
         <span className="w-6 shrink-0 text-right" title="Position in this list, after filtering and sorting">
           #
         </span>
-        <H k="adp" w="w-12" t="Average draft position as a decimal pick number. Sleeper's where it exists, consensus (°) otherwise." s={sort} on={setSort}>ADP</H>
-        <H k="round" w="w-7" t="Round that ADP converts to for this league" s={sort} on={setSort}>Rd</H>
-        <H k="pos" w="w-8" align="left" t="Position" s={sort} on={setSort}>Pos</H>
-        <H k="name" w="min-w-[9rem] flex-1" align="left" t="Player name" s={sort} on={setSort}>Player</H>
-        <H k="pts" w="w-12" t="Projected PPR points for the full NFL regular season" s={sort} on={setSort}>PTS</H>
-        <H k="ppg" w="w-11" t={`Projected PPR points per game — season total over ${NFL_GAMES} games`} s={sort} on={setSort}>PPG</H>
-        <H k="rush_att" w="w-10" t="Projected rushing attempts" s={sort} on={setSort}>Att</H>
-        <H k="rush_yd" w="w-12" t="Projected rushing yards" s={sort} on={setSort}>Ru Yd</H>
-        <H k="rush_td" w="w-9" t="Projected rushing touchdowns" s={sort} on={setSort}>Ru TD</H>
-        <H k="rec" w="w-10" t="Projected receptions" s={sort} on={setSort}>Rec</H>
-        <H k="rec_yd" w="w-12" t="Projected receiving yards" s={sort} on={setSort}>Re Yd</H>
-        <H k="rec_td" w="w-9" t="Projected receiving touchdowns" s={sort} on={setSort}>Re TD</H>
-        <H k="pass_yd" w="w-12" t="Projected passing yards" s={sort} on={setSort}>Pa Yd</H>
-        <H k="pass_td" w="w-9" t="Projected passing touchdowns" s={sort} on={setSort}>Pa TD</H>
-        <H k="pass_int" w="w-9" t="Projected interceptions thrown" s={sort} on={setSort}>Int</H>
+        <SortHeader k="adp" first="asc" w="w-12" t="Average draft position as a decimal pick number. Sleeper's where it exists, consensus (°) otherwise." state={sort} onSort={setSort}>ADP</SortHeader>
+        <SortHeader k="round" first="asc" w="w-7" t="Round that ADP converts to for this league" state={sort} onSort={setSort}>Rd</SortHeader>
+        <SortHeader k="pos" first="asc" w="w-8" align="left" t="Position" state={sort} onSort={setSort}>Pos</SortHeader>
+        <SortHeader k="name" first="asc" w="min-w-[9rem] flex-1" align="left" t="Player name" state={sort} onSort={setSort}>Player</SortHeader>
+        <SortHeader k="pts" first="desc" w="w-12" t="Projected PPR points for the full NFL regular season" state={sort} onSort={setSort}>PTS</SortHeader>
+        <SortHeader k="ppg" first="desc" w="w-11" t={`Projected PPR points per game — season total over ${NFL_GAMES} games`} state={sort} onSort={setSort}>PPG</SortHeader>
+        <SortHeader k="rush_att" first="desc" w="w-10" t="Projected rushing attempts" state={sort} onSort={setSort}>Att</SortHeader>
+        <SortHeader k="rush_yd" first="desc" w="w-12" t="Projected rushing yards" state={sort} onSort={setSort}>Ru Yd</SortHeader>
+        <SortHeader k="rush_td" first="desc" w="w-9" t="Projected rushing touchdowns" state={sort} onSort={setSort}>Ru TD</SortHeader>
+        <SortHeader k="rec" first="desc" w="w-10" t="Projected receptions" state={sort} onSort={setSort}>Rec</SortHeader>
+        <SortHeader k="rec_yd" first="desc" w="w-12" t="Projected receiving yards" state={sort} onSort={setSort}>Re Yd</SortHeader>
+        <SortHeader k="rec_td" first="desc" w="w-9" t="Projected receiving touchdowns" state={sort} onSort={setSort}>Re TD</SortHeader>
+        <SortHeader k="pass_yd" first="desc" w="w-12" t="Projected passing yards" state={sort} onSort={setSort}>Pa Yd</SortHeader>
+        <SortHeader k="pass_td" first="desc" w="w-9" t="Projected passing touchdowns" state={sort} onSort={setSort}>Pa TD</SortHeader>
+        <SortHeader k="pass_int" first="desc" w="w-9" t="Projected interceptions thrown" state={sort} onSort={setSort}>Int</SortHeader>
       </div>
 
       <ul className="max-h-[32rem] overflow-y-auto">
@@ -417,52 +407,7 @@ export type SortKey =
   | "rush_att" | "rush_yd" | "rush_td"
   | "rec" | "rec_yd" | "rec_td"
   | "pass_yd" | "pass_td" | "pass_int";
-type Dir = "asc" | "desc";
 
-/**
- * Which way a column should go on its FIRST click.
- *
- * Descending for anything where more is better, ascending for ADP and name.
- * Making every column start ascending means the first click on "PTS" shows you
- * the worst players in the league, and you always click twice.
- */
-const FIRST_DIR: Record<SortKey, Dir> = {
-  adp: "asc", round: "asc", pos: "asc", name: "asc",
-  pts: "desc", ppg: "desc",
-  rush_att: "desc", rush_yd: "desc", rush_td: "desc",
-  rec: "desc", rec_yd: "desc", rec_td: "desc",
-  pass_yd: "desc", pass_td: "desc", pass_int: "desc",
-};
-
-/** A sortable column heading. Twelve of them inline was unreadable. */
-function H({
-  k, w, t, s, on, align = "right", children,
-}: {
-  k: SortKey;
-  w: string;
-  t: string;
-  s: { key: SortKey; dir: Dir };
-  on: (next: { key: SortKey; dir: Dir }) => void;
-  align?: "left" | "right";
-  children: React.ReactNode;
-}) {
-  const active = s.key === k;
-  return (
-    <button
-      type="button"
-      onClick={() =>
-        on({ key: k, dir: active ? (s.dir === "asc" ? "desc" : "asc") : FIRST_DIR[k] })
-      }
-      title={`${t} — click to sort`}
-      className={`${w} shrink-0 uppercase tracking-wide transition-colors ${
-        align === "right" ? "text-right" : "text-left"
-      } ${active ? "text-accent" : "hover:text-chalk-300"}`}
-    >
-      {children}
-      {active ? <span className="ml-0.5">{s.dir === "asc" ? "\u25b2" : "\u25bc"}</span> : null}
-    </button>
-  );
-}
 
 /** A projected stat, blank when the position does not produce it. */
 function Num({ w, v, d = 0 }: { w: string; v?: number | null; d?: number }) {

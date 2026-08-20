@@ -4,7 +4,9 @@ import { useMemo, useState } from "react";
 
 import { PositionPill } from "@/components/keeper-table";
 import { adpIsConsensusOnly, adpTitle, adpValue } from "@/lib/adp-format";
+import { SortHeader, compareSort, type SortState } from "@/components/sortable-header";
 import { costRound } from "@/lib/draft-slots";
+import type { ProjectedPick } from "@/lib/adp-projection";
 import { randomOrder, type ScenarioApi } from "@/lib/scenario";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
@@ -42,6 +44,9 @@ export function ScenarioEditor({
   maxKeepers,
   api,
   providerName,
+  projectedPicks,
+  releasedPicks,
+  onOpenPlayer,
 }: {
   teams: EditorTeam[];
   players: Record<string, PlayerMeta>;
@@ -51,6 +56,11 @@ export function ScenarioEditor({
   api: ScenarioApi;
   /** The live service backing this season — "Sleeper" or "ESPN". */
   providerName: string;
+  /** Where the draft would take each player. Null before an order exists. */
+  projectedPicks: Map<string, ProjectedPick> | null;
+  /** Kept players only: where the draft would take them if released. */
+  releasedPicks: Map<string, ProjectedPick> | null;
+  onOpenPlayer: (playerId: string) => void;
 }) {
   const { scenario, setKeepers, clearRoster, setOrder, reset, seed } = api;
   const [open, setOpen] = useState<number | null>(null);
@@ -167,6 +177,9 @@ export function ScenarioEditor({
                       selected={sel}
                       players={players}
                       adp={adp}
+                      projectedPicks={projectedPicks}
+                      releasedPicks={releasedPicks}
+                      onOpenPlayer={onOpenPlayer}
                       draftRounds={draftRounds}
                       atCap={sel.length >= maxKeepers}
                       onToggle={(id) => toggle(t, id)}
@@ -182,18 +195,30 @@ export function ScenarioEditor({
   );
 }
 
+type ContractSort =
+  | "player" | "pos" | "adp" | "proj" | "cost" | "vsProj" | "vsMkt" | "keeps";
+
 /**
- * A contract list sorted by what it costs, cheapest pick last.
+ * One team's contracts, as the thing you actually choose from.
  *
- * Sorted by COST ROUND rather than player quality, because the decision is
- * always "is he worth this pick" — putting the expensive obligations at the top
- * puts the real choices where the eye lands.
+ * TWO DELTAS, AND THEY DISAGREE ON PURPOSE. `vs mkt` is what he costs against a
+ * normal draft; `vs proj` is what he costs against THIS one, after keepers have
+ * stripped the board. The second is the one the decision turns on — a player the
+ * market takes in round 15 may not last past round 14 here, and paying R11 is a
+ * different trade against each.
+ *
+ * Sorted by cost round by default, cheapest pick last: the decision is always
+ * "is he worth this pick", so the expensive obligations belong where the eye
+ * lands first.
  */
 function ContractList({
   contracts,
   selected,
   players,
   adp,
+  projectedPicks,
+  releasedPicks,
+  onOpenPlayer,
   draftRounds,
   atCap,
   onToggle,
@@ -202,107 +227,210 @@ function ContractList({
   selected: string[];
   players: Record<string, PlayerMeta>;
   adp: Record<string, AdpEntry>;
+  /** Where the draft would take each player — see lib/adp-projection.ts. */
+  projectedPicks: Map<string, ProjectedPick> | null;
+  /** Kept players only: where he would go if you let him go. */
+  releasedPicks: Map<string, ProjectedPick> | null;
+  onOpenPlayer: (playerId: string) => void;
   draftRounds: number;
   atCap: boolean;
   onToggle: (playerId: string) => void;
 }) {
-  const rows = [...contracts].sort(
-    (a, b) =>
-      costRound(a, adp[a.playerId], draftRounds) - costRound(b, adp[b.playerId], draftRounds),
-  );
+  const [sort, setSort] = useState<SortState<ContractSort>>({ key: "cost", dir: "asc" });
+
+  const row = (c: KeeperContract) => {
+    const entry = adp[c.playerId];
+    const cost = costRound(c, entry, draftRounds);
+    const pick = projectedPicks?.get(c.playerId) ?? null;
+    // THE BASELINE FOR A KEPT PLAYER IS THE COUNTERFACTUAL. He occupies the pick
+    // he costs, so comparing against that says nothing; what you want to know is
+    // the pick you would have had to spend to get him in the draft instead.
+    const against = pick?.kept ? (releasedPicks?.get(c.playerId) ?? null) : pick;
+    const market = entry?.round ?? null;
+    // costRound - theirRound. POSITIVE means you pay a later pick than they
+    // would cost, i.e. a bargain. Rounds count up as value counts down.
+    return {
+      c,
+      entry,
+      cost,
+      pick,
+      market,
+      meta: players[c.playerId],
+      against,
+      vsProj: against ? cost - against.round : null,
+      vsMkt: market != null ? cost - market : null,
+    };
+  };
+
+  const value = (r: ReturnType<typeof row>): number | string | null => {
+    switch (sort.key) {
+      case "player": return (r.meta?.full_name ?? r.c.playerId).toLowerCase();
+      case "pos": return r.meta?.position ?? "";
+      case "adp": return r.entry?.sleeper ?? r.entry?.consensus ?? null;
+      case "proj": return r.pick?.overall ?? null;
+      case "cost": return r.cost;
+      case "vsProj": return r.vsProj;
+      case "vsMkt": return r.vsMkt;
+      case "keeps": return r.c.keepsRemaining;
+    }
+  };
+
+  const rows = contracts.map(row).sort((a, b) => {
+    // Ties fall back to cost so the list never reshuffles between renders.
+    return compareSort(value(a), value(b), sort.dir) || a.cost - b.cost;
+  });
+
 
   return (
     <>
-      <div className="flex items-center gap-2 border-b border-ink-700 px-1.5 pb-1 text-[9px] uppercase tracking-wide text-chalk-600">
+      <div className="flex items-center gap-2 border-b border-ink-700 px-1.5 pb-1 text-[9px] text-chalk-600">
         <span className="w-3 shrink-0" />
-        <span className="flex-1">Player</span>
-        <span
-          className="w-14 shrink-0 text-right"
-          title="Average draft position as a decimal pick number. Sleeper's where it exists, consensus (marked °) otherwise."
+        <SortHeader state={sort} onSort={setSort} k="pos" first="asc" w="w-8" t="Position" align="left">Pos</SortHeader>
+        <SortHeader state={sort} onSort={setSort} k="player" first="asc" w="min-w-0 flex-1" t="Player name" align="left">Player</SortHeader>
+        <SortHeader state={sort} onSort={setSort} k="keeps" first="asc" w="w-7" t="Keeps left on the contract">Kp</SortHeader>
+        <SortHeader state={sort} onSort={setSort}
+          k="adp"
+          first="asc"
+          w="w-14"
+          t="Average draft position as a decimal pick number. Sleeper's where it exists, consensus (marked °) otherwise."
         >
           ADP
-        </span>
-        <span className="w-7 shrink-0 text-right" title="The pick keeping him costs you">
-          Cost
-        </span>
-        <span className="w-8 shrink-0 text-right" title="Cost round minus market round — positive is a bargain">
-          +/−
-        </span>
+        </SortHeader>
+        <SortHeader state={sort} onSort={setSort}
+          k="proj"
+          first="asc"
+          w="w-12"
+          t="Where the draft would take him given these keeper selections, if every pick went in ADP order"
+        >
+          Proj
+        </SortHeader>
+        <SortHeader state={sort} onSort={setSort} k="cost" first="asc" w="w-7" t="The pick keeping him costs you">Cost</SortHeader>
+        <SortHeader state={sort} onSort={setSort}
+          k="vsProj"
+          first="desc"
+          w="w-9"
+          t="Cost round minus his projected round in THIS draft — positive is a bargain"
+        >
+          vs prj
+        </SortHeader>
+        <SortHeader state={sort} onSort={setSort}
+          k="vsMkt"
+          first="desc"
+          w="w-9"
+          t="Cost round minus his market round by ADP — positive is a bargain"
+        >
+          vs mkt
+        </SortHeader>
       </div>
       <ul className="max-h-80 space-y-0.5 overflow-y-auto pt-0.5">
-        {rows.map((c) => {
-        const on = selected.includes(c.playerId);
-        const entry = adp[c.playerId];
-        const cost = costRound(c, adp[c.playerId], draftRounds);
-        const market = entry?.round ?? null;
-        const meta = players[c.playerId];
-        // costRound - adpRound: positive means the pick is later than the market
-        // asks, i.e. a bargain. Mind the direction — rounds count up as value
-        // counts down.
-        const surplus = market != null ? cost - market : null;
-        return (
-          <li key={c.playerId}>
-            <label
-              className={`flex cursor-pointer items-center gap-2 rounded px-1.5 py-1 text-[11px] transition-colors ${
-                on ? "bg-accent/10" : "hover:bg-ink-800"
-              } ${!on && atCap ? "opacity-40" : ""}`}
-            >
-              <input
-                type="checkbox"
-                checked={on}
-                onChange={() => onToggle(c.playerId)}
-                className="h-3 w-3 shrink-0 accent-[#00e5a0]"
-              />
-              <PositionPill position={meta?.position ?? null} />
-              <span className="min-w-0 flex-1 truncate text-chalk-200">
-                {meta?.full_name ?? c.playerId}
-              </span>
-              {c.keepsRemaining === 1 ? (
-                <span
-                  className="shrink-0 text-[9px] font-bold uppercase tracking-wide text-gold"
-                  title="Final keep year — this contract is revalued to ADP next offseason."
-                >
-                  last
+        {rows.map(({ c, entry, cost, pick, against, market, meta, vsProj, vsMkt }) => {
+          const on = selected.includes(c.playerId);
+          return (
+            <li key={c.playerId}>
+              <label
+                className={`flex cursor-pointer items-center gap-2 rounded px-1.5 py-1 text-[11px] transition-colors ${
+                  on ? "bg-accent/10" : "hover:bg-ink-800"
+                } ${!on && atCap ? "opacity-40" : ""}`}
+              >
+                <input
+                  type="checkbox"
+                  checked={on}
+                  onChange={() => onToggle(c.playerId)}
+                  className="h-3 w-3 shrink-0 accent-[#00e5a0]"
+                />
+                <span className="w-8 shrink-0">
+                  <PositionPill position={meta?.position ?? null} />
                 </span>
-              ) : null}
-              {/* THE DECIMAL ADP, not the list rank. "15.4" is an average draft
-                  position — it says he goes late in round 2 of a ten-team draft,
-                  which a rank of "#15" does not. Sleeper's own number where there
-                  is one, consensus otherwise; the two are not interchangeable, so
-                  a consensus-only figure is marked with a degree sign. */}
-              <span
-                className="tabular w-14 shrink-0 text-right text-chalk-400"
-                title={adpTitle(entry)}
-              >
-                {adpValue(entry) ?? "—"}
-                {adpIsConsensusOnly(entry) ? <span className="text-chalk-600">°</span> : null}
-              </span>
-              <span
-                className="tabular w-7 shrink-0 text-right font-medium text-chalk-300"
-                title={`Keeping him costs your round ${cost} pick`}
-              >
-                R{cost}
-              </span>
-              <span
-                className={`tabular w-8 shrink-0 text-right ${
-                  surplus == null
-                    ? "text-chalk-600"
-                    : surplus > 0
-                      ? "text-accent"
-                      : surplus < 0
-                        ? "text-loss"
-                        : "text-chalk-600"
-                }`}
-                title={market != null ? `Market has him in round ${market}` : "No ADP"}
-              >
-                {surplus == null ? "—" : surplus > 0 ? `+${surplus}` : surplus}
-              </span>
+                <span className="flex min-w-0 flex-1 items-baseline gap-1.5">
+                  {/* INSIDE A <label>, so a bare click would toggle the checkbox
+                      as well as open the modal. preventDefault stops the label
+                      activating its control; stopPropagation stops the row
+                      handler. Both are needed — either alone still toggles. */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onOpenPlayer(c.playerId);
+                    }}
+                    className="min-w-0 truncate text-left text-chalk-200 transition-colors hover:text-accent"
+                    title="Contract, market, projection and his team's depth chart"
+                  >
+                    {meta?.full_name ?? c.playerId}
+                  </button>
+                  {c.keepsRemaining === 1 ? (
+                    <span
+                      className="shrink-0 text-[9px] font-bold uppercase tracking-wide text-gold"
+                      title="Final keep year — this contract is revalued to ADP next offseason."
+                    >
+                      last
+                    </span>
+                  ) : null}
+                </span>
+                <span className="tabular w-7 shrink-0 text-right text-chalk-500">
+                  {c.keepsRemaining}
+                </span>
+                {/* THE DECIMAL ADP, not the list rank. "15.4" says he goes late in
+                    round 2 of a ten-team draft, which "#15" does not. */}
+                <span
+                  className="tabular w-14 shrink-0 text-right text-chalk-400"
+                  title={adpTitle(entry)}
+                >
+                  {adpValue(entry) ?? "—"}
+                  {adpIsConsensusOnly(entry) ? <span className="text-chalk-600">°</span> : null}
+                </span>
+                <span
+                  className={`tabular w-12 shrink-0 text-right ${
+                    pick?.kept ? "text-accent/80" : "text-chalk-400"
+                  }`}
+                  title={
+                    pick
+                      ? `${pick.kept ? "Kept — consumes" : "Projected to go at"} ${pick.label}, ${pick.overall} overall`
+                      : projectedPicks
+                        ? "Not in the ADP pool"
+                        : "Needs a draft order — randomise one above"
+                  }
+                >
+                  {pick ? pick.label : "—"}
+                </span>
+                <span
+                  className="tabular w-7 shrink-0 text-right font-medium text-chalk-300"
+                  title={`Keeping him costs your round ${cost} pick`}
+                >
+                  R{cost}
+                </span>
+                <Delta
+                  v={vsProj}
+                  w="w-9"
+                  t={
+                    against
+                      ? pick?.kept
+                        ? `vs R${against.round} — where the draft would take him (${against.label}) if you let him go`
+                        : `vs projected R${against.round}`
+                      : "No projected pick"
+                  }
+                />
+                <Delta v={vsMkt} w="w-9" t={market != null ? `vs market R${market}` : "No ADP"} />
               </label>
             </li>
           );
         })}
       </ul>
     </>
+  );
+}
+
+/** A signed round delta: positive is a bargain. */
+function Delta({ v, w, t }: { v: number | null; w: string; t: string }) {
+  return (
+    <span
+      className={`tabular ${w} shrink-0 text-right ${
+        v == null ? "text-chalk-600" : v > 0 ? "text-accent" : v < 0 ? "text-loss" : "text-chalk-600"
+      }`}
+      title={t}
+    >
+      {v == null ? "—" : v > 0 ? `+${v}` : v}
+    </span>
   );
 }
 
