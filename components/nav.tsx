@@ -15,7 +15,11 @@ import type { LeagueFeatures } from "@/lib/data";
  * Identity lives in a single circular badge at the end — one control, always
  * visible, in every state.
  */
-const LINKS: Array<{ href: string; label: string; needs?: keyof LeagueFeatures }> = [
+const LINKS: Array<{
+  href: string;
+  label: string;
+  needs?: keyof LeagueFeatures;
+}> = [
   { href: "/", label: "League" },
   { href: "/keepers/", label: "Keepers", needs: "keepers" },
   { href: "/history/", label: "History" },
@@ -50,7 +54,14 @@ export function Nav({
   return (
     <header className="sticky top-0 z-50 border-b border-ink-600 bg-ink-900/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="group flex shrink-0 items-center gap-2.5">
+        {/* Named for a screen reader in both states — below `sm` the wordmark is
+            hidden where there is an avatar, which would otherwise leave the home
+            link with no accessible name at all. */}
+        <Link
+          href="/"
+          aria-label={wordmark}
+          className="group flex shrink-0 items-center gap-2.5"
+        >
           {avatarSrc ? (
             // Plain <img>, not next/image: this is a static export and the file is
             // a build artifact of known size, so the loader would add nothing.
@@ -63,7 +74,16 @@ export function Nav({
               className="h-[26px] w-[26px] shrink-0 rounded-md object-cover"
             />
           ) : null}
-          <span className="text-base font-bold tracking-tight text-chalk-100 transition-colors group-hover:text-accent sm:text-lg">
+          {/* THE AVATAR IS THE WORDMARK ON A PHONE. "MASTERBATTERS" is most of
+              the bar at that width and the tabs scroll off behind it, and the
+              icon already says which league this is — it is the favicon and the
+              tile in the league picker. A league with no avatar keeps its name,
+              since nothing else would identify it. */}
+          <span
+            className={`text-base font-bold tracking-tight text-chalk-100 transition-colors group-hover:text-accent sm:text-lg ${
+              avatarSrc ? "hidden sm:inline" : ""
+            }`}
+          >
             {wordmark}
           </span>
           <span className="hidden text-[11px] font-medium tracking-wide text-chalk-600 sm:inline">
@@ -75,7 +95,8 @@ export function Nav({
           {links.map((l) => {
             // `trailingSlash: true` means every route ends in "/", so an exact
             // match is correct for "/" and a prefix match for the rest.
-            const active = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
+            const active =
+              l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
             return (
               <Link
                 key={l.href}
@@ -99,7 +120,9 @@ export function Nav({
             <Link
               href={`/owners/${mySlug}/`}
               data-me-ignore=""
-              aria-current={pathname.startsWith(`/owners/${mySlug}/`) ? "page" : undefined}
+              aria-current={
+                pathname.startsWith(`/owners/${mySlug}/`) ? "page" : undefined
+              }
               className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors sm:px-3 ${
                 pathname.startsWith(`/owners/${mySlug}/`)
                   ? "bg-ink-700 text-me"
