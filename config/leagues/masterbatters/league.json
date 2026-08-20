@@ -50,9 +50,15 @@
     "double-count that team-season. Intended \u2014 these are personal records.",
     "",
     "Vance Armstrong played 2025 and is not in the 2026 league, so `active` is",
-    "false: he stays in all history but off current-season views.",
+    "false: they stay in all history but off current-season views.",
     "",
-    "Roster 5 is unclaimed in 2026 and has no owner in Sleeper yet."
+    "Joe Gibbons joined for 2026, taking the spot Vance left. Listed here with no",
+    "seasons behind them, which `loadOwners` handles — every configured owner is",
+    "seeded whether or not they have played, so they can claim themselves in the",
+    "identity picker before their first game.",
+    "",
+    "Note they are a DIFFERENT PERSON from Jake Gibbons; the shared surname is why",
+    "both slugs carry a first name."
   ],
   "owners": [
     {
@@ -144,6 +150,13 @@
       "userId": "1266656315036405760",
       "firstName": "Allison",
       "lastName": "Fosbery",
+      "active": true
+    },
+    {
+      "slug": "joe-gibbons",
+      "userId": "1118648108470116352",
+      "firstName": "Joe",
+      "lastName": "Gibbons",
       "active": true
     }
   ]
