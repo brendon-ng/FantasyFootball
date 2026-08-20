@@ -1118,7 +1118,7 @@
   "4040": {
     "full_name": "JuJu Smith-Schuster",
     "position": "WR",
-    "team": "NYG",
+    "team": null,
     "years_exp": 9
   },
   "4046": {
@@ -2066,7 +2066,7 @@
   "6694": {
     "full_name": "D'Ernest Johnson",
     "position": "RB",
-    "team": null,
+    "team": "TEN",
     "years_exp": 7
   },
   "6744": {
