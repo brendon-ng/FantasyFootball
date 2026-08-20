@@ -13,11 +13,13 @@
 import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
+import { withBasePath } from "./base-path.ts";
 import { candidateProviders, refsBySeason, type LeagueRef, type Provider } from "./league-ref.ts";
 import { espnProvider } from "./live/espn.ts";
 import { sleeperProvider } from "./live/sleeper.ts";
 import type { LiveProvider } from "./live/types.ts";
 import { meetingId } from "./meeting.ts";
+import type { DerivedLow, SeasonLows, TeamMap } from "./punishments.ts";
 import { MARK_DEPTH, type RecordThresholds } from "./record-marks.ts";
 
 import type {
@@ -213,6 +215,83 @@ export const getWeeklyLows = (): WeeklyLow[] => load("derived/weekly-lows.json",
 export const getWeeklyLowKeys = once((): Set<string> => {
   if (!features().weeklyLowPunishment) return new Set();
   return new Set(getWeeklyLows().map((w) => `${w.season}:${w.week}:${w.ownerSlug}`));
+});
+
+/**
+ * The weekly lows the punishment tracker renders, with the game attached.
+ *
+ * The tracker runs in the browser off a Google Sheet, but WHO LOST is derived
+ * here from Sleeper's scores and handed to it — the sheet's own loser column is
+ * only a fallback for a week that has not been archived yet. Shipping the score
+ * and a resolved matchup id alongside is what lets the ledger link a punishment
+ * to the game that earned it.
+ *
+ * `matchupPageId` rather than a constructed id: a multi-week matchup has one
+ * page, keyed by its first week. Regular-season weeks are single today, but
+ * building the id by hand is exactly what produced four dead links on the record
+ * book.
+ */
+export const getPunishmentLows = once((): SeasonLows[] => {
+  if (!features().weeklyLowPunishment) return [];
+
+  const opponent = new Map<string, string>();
+  for (const m of getMatchupHistory()) {
+    opponent.set(`${m.season}:${m.week}:${m.home.ownerSlug}`, m.away.ownerSlug);
+    opponent.set(`${m.season}:${m.week}:${m.away.ownerSlug}`, m.home.ownerSlug);
+  }
+  const weeks = new Map(getSeasons().map((s) => [s.season, s.regularSeasonWeeks]));
+
+  const bySeason = new Map<number, SeasonLows>();
+  for (const w of getWeeklyLows()) {
+    const entry = bySeason.get(w.season) ?? {
+      season: w.season,
+      regularSeasonWeeks: weeks.get(w.season) ?? 0,
+      lows: [] as DerivedLow[],
+    };
+    entry.lows.push({
+      season: w.season,
+      week: w.week,
+      ownerSlug: w.ownerSlug,
+      points: w.points,
+      matchupId: matchupPageId(
+        w.season,
+        w.week,
+        w.ownerSlug,
+        opponent.get(`${w.season}:${w.week}:${w.ownerSlug}`),
+      ),
+    });
+    bySeason.set(w.season, entry);
+  }
+  return [...bySeason.values()].sort((a, b) => b.season - a.season);
+});
+
+/**
+ * Everyone credited with each team-season, for the punishment tracker.
+ *
+ * A weekly low is keyed to the PRIMARY owner, so a co-owned team would otherwise
+ * be reported as one of its two people — naming Robbie for a week Robbie and
+ * Thomas lost together. This resolves the primary slug back to the whole team.
+ *
+ * MIRRORS `creditedNames`, which does the same job for a headline: full name
+ * when someone plays alone, first names when a team is shared, because two full
+ * names do not fit a table cell. It cannot be reused directly — that returns one
+ * joined string, and each person here needs their own link and `data-owner`.
+ */
+export const getPunishmentTeams = once((): TeamMap => {
+  if (!features().weeklyLowPunishment) return {};
+  const owners = getOwnerMap();
+  const out: TeamMap = {};
+  for (const s of getSeasons()) {
+    for (const r of s.standings) {
+      const slugs = r.ownerSlugs?.length ? r.ownerSlugs : [r.ownerSlug];
+      out[`${s.season}:${r.ownerSlug}`] = slugs.map((slug) => ({
+        slug,
+        label:
+          (slugs.length === 1 ? owners.get(slug)?.name : owners.get(slug)?.firstName) ?? slug,
+      }));
+    }
+  }
+  return out;
 });
 
 export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []);
@@ -654,9 +733,39 @@ export interface LeagueConfig {
   knownLeagueIds: Record<string, string>;
   /** Per-season ESPN league ids. See lib/league-ref. */
   espnLeagueIds?: Record<string, string>;
+  /** Apps Script `/exec` URL fronting this league's Google Sheet. See below. */
+  appsScriptEndpoint?: string;
 }
 export const getConfig = (): LeagueConfig =>
   JSON.parse(readFileSync(join(CONFIG, "league.json"), "utf8"));
+
+/**
+ * Where the punishment tracker reads from, and whether that is real.
+ *
+ * ONE ENDPOINT, MANY FUNCTIONS. The Apps Script web app is a dispatcher: one
+ * `/exec` URL for the whole sheet, with `func` naming the call and `league`
+ * naming whose data to read. So the config holds the bare script URL and every
+ * caller appends its own query — a second reader later is a new `func`, not a
+ * new deployment and not a new config key.
+ *
+ * ONE CODE PATH FOR MOCK AND REAL. The bundled sample is served from
+ * `public/mock/` in exactly the shape the endpoint returns, so pointing the
+ * tracker at the real sheet is a one-line config change and no component learns
+ * which it got. Badged either way — a mocked surface renders identically to a
+ * real one, which is the whole reason `<MockBadge />` exists.
+ *
+ * The URL is public by construction: a static site has to ship it in its
+ * JavaScript. Fine for reads. When the write endpoints land they will need their
+ * own shared secret, because anyone reading the page source can POST to it.
+ */
+export function punishmentsSource(): { src: string; isMock: boolean } {
+  const endpoint = getConfig().appsScriptEndpoint?.trim();
+  if (!endpoint) return { src: withBasePath(`/mock/${LEAGUE}.punishments.json`), isMock: true };
+  // No `season`: the tracker's season switcher works off the whole feed, so one
+  // fetch serves every year rather than a round trip per tab.
+  const query = `func=getWeeklyPunishments&league=${encodeURIComponent(LEAGUE)}`;
+  return { src: `${endpoint}${endpoint.includes("?") ? "&" : "?"}${query}`, isMock: false };
+}
 
 /**
  * The rules the current keeper cycle runs under.

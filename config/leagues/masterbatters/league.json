@@ -15,6 +15,20 @@
     "weeklyLowPunishment": true
   },
   "sport": "nfl",
+  "//appsScript": [
+    "One Apps Script web app fronts this league's Google Sheet, dispatching on a",
+    "`func` query parameter — the punishment tracker calls",
+    "`?func=getWeeklyPunishments&league=masterbatters`. Paste the bare `/exec`",
+    "URL here, with no query string; each caller appends its own.",
+    "",
+    "Leave it empty and the tracker serves",
+    "`public/mock/masterbatters.punishments.json` instead, through the same code",
+    "path and badged as sample data.",
+    "",
+    "Public by construction: a static site ships this URL in its JavaScript. Fine",
+    "for reads; the write endpoints will need a shared secret of their own."
+  ],
+  "appsScriptEndpoint": "https://script.google.com/macros/s/AKfycbz5JeSYyXcvcrXV8-i7XwZya3y78TWWIyFy36LPeYPibjZz-r-AngP54oAyRdpLK3fk/exec",
   "//discovery": [
     "Sleeper creates a NEW league_id every season and links it backward via",
     "`previous_league_id`. There is no forward pointer, so the sync script finds",

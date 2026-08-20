@@ -32,6 +32,8 @@ export interface LeagueConfig {
   features: LeagueFeatures;
   anchorUserId: string;
   knownLeagueIds: Record<string, string>;
+  /** Apps Script `/exec` URL fronting this league's sheet; empty means mock. */
+  appsScriptEndpoint?: string;
   owners: Array<{
     slug?: string;
     userId: string | null;

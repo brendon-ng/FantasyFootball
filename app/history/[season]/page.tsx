@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { BackLink } from "@/components/back-link";
 
 import { Bracket } from "@/components/bracket";
+import { SeasonPunishments } from "@/components/season-punishments";
 import { TradeList } from "@/components/trade-list";
 import { WeeklyLowBadge } from "@/components/weekly-low";
 import {
@@ -26,12 +27,15 @@ import {
   getPickOutcomes,
   getTradeReturns,
   getPlayers,
+  getPunishmentLows,
+  getPunishmentTeams,
   getSeasons,
   getTrades,
   getWeeklyLowKeys,
   getWeeklyLows,
   matchupChip,
   meetingId,
+  punishmentsSource,
 } from "@/lib/data";
 import type { BracketMatch, Matchup } from "@/lib/types";
 
@@ -272,6 +276,20 @@ export default async function SeasonPage({
           </ol>
         </Panel>
       </div>
+
+      {/* Directly under the standings: the weekly low is a regular-season fact,
+          and the table above is where a reader just saw the 🚽 count that this
+          panel itemises. Renders nothing for a season the sheet has no record
+          of, which is every season before 2025. */}
+      {features().weeklyLowPunishment ? (
+        <SeasonPunishments
+          season={season}
+          lows={getPunishmentLows().find((s) => s.season === season)?.lows ?? []}
+          teams={getPunishmentTeams()}
+          names={ownerNames}
+          {...punishmentsSource()}
+        />
+      ) : null}
 
       <Panel>
         <PanelHeader

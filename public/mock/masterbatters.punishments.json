@@ -1,0 +1,90 @@
+{
+  "//": [
+    "SAMPLE DATA. Served whenever `appsScriptEndpoint` is empty in league.json,",
+    "through the SAME code path as the real Apps Script feed — so wiring the real",
+    "endpoint is a one-line config change and nothing else moves. The real call is",
+    "`<endpoint>?func=getWeeklyPunishments&league=masterbatters`, which returns",
+    "every season; this file mirrors that whole-feed shape.",
+    "",
+    "2025 is real: the losers and weeks match derived/weekly-lows.json exactly, and",
+    "the assignments are transcribed from the spreadsheet. A few suggestion texts",
+    "were truncated in the screenshot and are completed plausibly here.",
+    "",
+    "2026 is invented, and exists to exercise the PRESEASON state — suggestions in,",
+    "voting under way, nothing selected and nothing assigned. That is the state the",
+    "league is actually in today, so it is the one most worth being able to see.",
+    "",
+    "Named `<slug>.punishments.json` so build-all.mjs prunes it from the other",
+    "leagues' output, the same way it prunes avatars and mock replays."
+  ],
+  "league": "masterbatters",
+  "updatedAt": "2026-08-20T00:00:00Z",
+  "seasons": [
+    {
+      "season": 2026,
+      "poolSize": 14,
+      "suggestions": [
+        { "id": 1, "text": "Play a game in jeans", "suggestedBy": "ross-bechtel", "votes": 4, "vetoed": false, "selected": false },
+        { "id": 2, "text": "Bat left-handed for a whole game", "suggestedBy": "kate-olson", "votes": 6, "vetoed": false, "selected": false },
+        { "id": 3, "text": "Wear a full catcher's kit in the outfield", "suggestedBy": "aidan-kelleher", "votes": 2, "vetoed": false, "selected": false },
+        { "id": 4, "text": "Buy the first round for the whole team", "suggestedBy": "jake-gibbons", "votes": 7, "vetoed": false, "selected": false },
+        { "id": 5, "text": "Walk-up song chosen by the team you lost to", "suggestedBy": "srishti-dhawan", "votes": 8, "vetoed": false, "selected": false },
+        { "id": 6, "text": "Announce your own at-bat out loud", "suggestedBy": "brendon-ng", "votes": 3, "vetoed": false, "selected": false },
+        { "id": 7, "text": "Shave something", "suggestedBy": "robbie-goodman", "votes": 1, "vetoed": true, "selected": false },
+        { "id": 8, "text": "Order the bartender's choice, no questions", "suggestedBy": "kaitlin-zarbis", "votes": 5, "vetoed": false, "selected": false },
+        { "id": 9, "text": "Coach first base in a costume", "suggestedBy": null, "votes": 2, "vetoed": false, "selected": false }
+      ],
+      "assignments": []
+    },
+    {
+      "season": 2025,
+      "poolSize": 14,
+      "suggestions": [
+        { "id": 1, "text": "Play a game in jeans", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 2, "text": "Play a game in full uniform", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 3, "text": "Wear a funny hat to a whole game", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 4, "text": "Grunt every time you swing or throw", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 5, "text": "Embarrassing walk up song for a game", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 6, "text": "Have to slide/dive into the final base", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 7, "text": "Run to the bar after the game", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 8, "text": "Team does your eye black", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 9, "text": "After you hit it you have to yell DING", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 10, "text": "Team picks your batting stance for a game", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 11, "text": "Eat a hot dog/drink a beer every inning", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 12, "text": "Play a game with a wig on", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 13, "text": "Must wear eyeblack in a game", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 14, "text": "Play a game in flip flops/rain boots", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 15, "text": "Must finish a drink between at bats", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 16, "text": "Solo karaoke performance at Silver Lake", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 17, "text": "Order milk on the rocks at the bar", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 18, "text": "Robbie and Thomas have to take a shot together", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 19, "text": "Take shot from a shotski at Westwood by yourself", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 20, "text": "Pick up a pigeon", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 21, "text": "Tahoe cold plunge", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 22, "text": "DM your worst player for that week", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 23, "text": "Take a selfie with the bartender while doing a shot of the teams choice", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
+        { "id": 24, "text": "Play one softball game in clown makeup", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 25, "text": "Watch the next game after us while heckling", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 26, "text": "Must write a poem about loss and read it out", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 27, "text": "In tahoe - has to exclaim \"BOY THAT'S COLD\"", "suggestedBy": null, "votes": 1, "vetoed": false, "selected": false },
+        { "id": 28, "text": "Robbie and Thomas have to take a shot off a ski", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true }
+      ],
+      "assignments": [
+        { "week": 1, "loser": "kaitlin-zarbis", "punishmentId": 21, "completed": "2025-09-12" },
+        { "week": 2, "loser": "kate-olson", "punishmentId": 14, "completed": "2025-09-29" },
+        { "week": 3, "loser": "aidan-kelleher", "punishmentId": 17, "completed": "2025-10-27" },
+        { "week": 4, "loser": "brendon-ng", "punishmentId": 12, "completed": "2025-10-06" },
+        { "week": 5, "loser": "josh-greenebaum", "punishmentId": 5, "completed": "2025-10-20" },
+        { "week": 6, "loser": "srishti-dhawan", "punishmentId": 1, "completed": "2025-10-27" },
+        { "week": 7, "loser": "ross-bechtel", "punishmentId": 28, "completed": "2025-11-03" },
+        { "week": 8, "loser": "ross-bechtel", "punishmentId": 4, "completed": "2025-11-03" },
+        { "week": 9, "loser": "jake-gibbons", "punishmentId": 11, "completed": "2025-11-10" },
+        { "week": 10, "loser": "robbie-goodman", "punishmentId": 9, "completed": "2025-11-10" },
+        { "week": 11, "loser": "josh-greenebaum", "punishmentId": 10, "completed": null },
+        { "week": 12, "loser": "robbie-goodman", "punishmentId": 2, "completed": null },
+        { "week": 13, "loser": "ross-bechtel", "punishmentId": 23, "completed": null },
+        { "week": 14, "loser": "srishti-dhawan", "punishmentId": 19, "completed": null }
+      ]
+    }
+  ]
+}

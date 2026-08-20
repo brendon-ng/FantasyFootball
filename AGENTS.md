@@ -310,6 +310,163 @@ The all-time record lists deliberately say "Highest score" / "Lowest score", nev
 "weekly high/low" — the two read identically otherwise, and a record badge then
 looks like a punishment marker.
 
+## The punishment tracker
+
+What the weekly low scorer actually OWES lives in a Google Sheet the league edits
+— suggestions, votes, vetoes, which punishment each week drew, whether it has
+been served. An Apps Script web app publishes it as JSON and the browser fetches
+it. `/punishments/` is the full record; `/history/<season>/` carries the ledger
+for its own season.
+
+CLIENT-SIDE, NOT BAKED, unlike every other slow-moving thing here. This is the
+one surface the league will WRITE to — submit a suggestion, cast a vote, log a
+completion — and someone who just voted has to see their vote. A baked copy would
+be up to six hours stale, the whole deploy interval. It fails soft, with the
+caveat that there is no baked layer underneath, so an outage leaves the page
+saying what happened rather than merely un-annotated.
+
+THE SHEET IS NOT THE SOURCE OF TRUTH FOR WHO LOST. `weekly-lows.json` already
+knows, from Sleeper, with the score attached — checked against the 2025 sheet, all
+14 weeks agree including the co-owned team, which the sheet writes as "Robbie &
+Thomas" and the site keys to its primary owner. So `buildLedger` PREFERS the
+derived answer and falls back to the sheet only for a week Sleeper has not scored
+yet, which is exactly the window a punishment gets assigned in. On a disagreement
+the derived answer wins and the row carries a gold ⚠ — a mismatch is a
+data-entry slip, and rendering it silently would make the site restate the
+mistake with a straight face.
+
+THE "WHO" COLUMNS ARE OWNER SLUGS. A first name is not a key: two Joshes break
+it, a co-owned team is one team and two people, and a rename breaks the join. A
+slug is also the URL and the value `[data-owner]` matches, so a ledger row links
+to a profile and lights up for whoever is browsing, free.
+
+ONE ENDPOINT, MANY FUNCTIONS. The Apps Script web app is a dispatcher — one
+`/exec` URL for the whole sheet, `func` naming the call and `league` naming whose
+data to read. `appsScriptEndpoint` in `league.json` therefore holds the BARE URL
+with no query string, and each caller appends its own: the tracker asks for
+`?func=getWeeklyPunishments&league=<slug>`. A second reader later is a new `func`,
+not a new deployment and not a new config key. It omits the optional `season`
+because the season switcher works off the whole feed — one fetch, every year,
+rather than a round trip per tab.
+
+`punishmentsSource()` builds that URL, or returns
+`public/mock/<slug>.punishments.json` when the endpoint is empty — the SAME code
+path and the same shape, so connecting the real sheet is a one-line config change
+and no component learns which it got. Badged `SAMPLE DATA` either way, for the
+reason `<MockBadge />` exists: sample data renders identically to real data, and
+"the punishments are logged" is exactly what gets screenshotted and believed.
+
+Sheet tabs are named `<league> weekly <season>` — "masterbatters weekly 2025" —
+so one spreadsheet can hold several leagues and several years, and the script
+discovers seasons by matching tab names rather than being told.
+
+### The Apps Script API
+
+WIRED AND VERIFIED against the live endpoint, not just the docs — every branch
+below was called with `curl` before it was trusted.
+
+```
+GET <appsScriptEndpoint>?func=getWeeklyPunishments&league=<slug>[&season=<year>]
+```
+
+`func` and `league` are required; `season` narrows to one tab and is OMITTED by
+this site, because the tracker's season switcher works off the whole feed.
+
+| Called with | Answers |
+| --- | --- |
+| a league with no tabs | `ok: true`, `seasons: []` — a league that has not started is not an error |
+| `season=` a tab that does not exist | `ok: false` |
+| a missing or unknown `func`, or no `league` | `ok: false` |
+
+EVERY RESPONSE IS HTTP 200, including a rejection — Apps Script cannot set a
+status code. So `res.ok` proves nothing and `usePunishments` checks the body's
+`ok` field. Skipping that parses the error object into an empty feed, and a
+misspelt league renders as a league with no punishments.
+
+`access-control-allow-origin: *` on both the 302 and the response it redirects
+to, so a browser fetch from Pages works. The `/exec` URL 302s to
+`script.googleusercontent.com`; `fetch` follows it.
+
+A WEEK NUMBER ALONE IS NOT DATA. The sheet pre-numbers a row per week of the
+year, so a finished season ships blank rows for the playoff weeks the punishment
+does not cover — 2025 returns three, weeks 15-17, with every other field null.
+`parseFeed` drops a row where the loser, the punishment and the date are all
+empty, or the ledger would show "Not drawn yet" against weeks nobody can lose.
+
+THE POOL IS NOT ALWAYS ONE PER WEEK. 2025 selected 17 for a 14-week regular
+season, so three were never drawn. Nothing assumes `poolSize` equals the week
+count; the remaining pool is computed by subtracting what was drawn.
+
+Verified end to end against the live feed: 14 ledger rows, all 14 losers from
+Sleeper with ZERO disagreements against the sheet, 10 served and 4 owed, 3 left
+in the pool, 1 vetoed suggestion hidden, and every assignment resolving to a
+suggestion.
+
+`PunishmentLedger` is the ONE renderer for a ledger row, shared by both surfaces
+— same rule as lineups living only on `/matchups/[id]`.
+
+ONE LINE PER ROW, five columns: week, loser, punishment, score, done. Fourteen
+rows is a table, and a table spending two lines a row reads as a feed of events
+rather than a season at a glance. The punishment text runs to a full sentence, so
+its cell truncates with a native `title`; the SCORE column is `hidden` below `sm`,
+because who owes what survives losing it and the punishment text does not. No 🚽
+on a row — every row is a weekly low by construction, so marking each one says
+nothing and costs width.
+
+Both this and the ballot name their column widths in a `COL`/`BALLOT` object,
+because these lists are flex rows rather than `<table>`s and a `ListHeader` cell
+has to repeat the width class of the row cell beneath it. One definition each, or
+the header drifts off its column the first time one is tweaked.
+
+A CO-OWNED TEAM IS NAMED IN FULL, on the ledger and on the tally — "Robbie &
+Thomas", not the primary owner the low happens to be keyed to. `weekly-lows.json`
+records a low against the PRIMARY owner because a team has one franchise key, so
+rendering that slug straight blames half a team for a week both of them lost.
+`getPunishmentTeams()` resolves it, keyed `${season}:${primarySlug}` because
+co-ownership changes year to year, and mirroring `creditedNames` — full name when
+someone plays alone, first names when the team is shared, since two full names do
+not fit the cell. Each name is its own link with its own `data-owner`: the team is
+one thing but the people are two, and identity highlighting has to pick one out.
+
+WHICH SEASON LIVES IN THE QUERY STRING, via `useUrlState` — not `useState`, and
+not `useSearchParams` (which would need a Suspense boundary under `output:
+export`). A season page's "Full tracker" link is `/punishments/?season=2025` and
+has to land on 2025 rather than whatever is newest, which only works if the
+selection is addressable. The newest season is the fallback, so it clears the
+param and an untouched page has a clean URL.
+
+PUNISHMENT IDS ARE INVISIBLE. They are the sheet's join key and mean nothing to a
+reader. The one place an id survives is the tooltip on an assignment pointing at a
+suggestion that does not exist — the row says "Unknown punishment" and the number
+is there for whoever has to go and fix the sheet.
+
+A VETOED SUGGESTION IS NOT SHOWN AT ALL, not even struck through. It was removed
+from contention, so listing it invites a reader to weigh something that cannot be
+drawn, and pins a rejected idea to a permanent public page. Filtered once where
+the feed is read, so no panel below has to remember. The LEDGER is unaffected: it
+renders what was actually assigned.
+
+The page ADAPTS TO WHERE THE YEAR IS, the way the home page does. A season with
+no assignments is a season not yet played, so the ballot leads and there is no
+ledger; once weeks start being lost the ledger leads and the ballot collapses.
+Nothing configures that — it falls out of the feed.
+
+Ledger rows come from the UNION of weeks either source knows, never `1..14`. An
+unplayed season would otherwise render fourteen blanks and a season in progress
+would advertise weeks nobody has lost yet.
+
+Everything is gated on `features.weeklyLowPunishment`, including the nav link. The
+route is still generated in every league's build — static export makes them all —
+and says the league does not play this game, matching `/keepers` in a redraft
+league.
+
+Still to come: the write endpoints (a suggestion form, voting, and a spin-the-
+wheel draw that picks from the remaining pool and logs the result). Two things to
+know before building them. Apps Script CANNOT answer a CORS preflight, so a POST
+must stay a simple request — `Content-Type: text/plain;charset=utf-8` with JSON in
+the body. And the endpoint URL is public by construction, since a static site
+ships it in its JavaScript, so writes need a shared secret that reads do not.
+
 ## Default all-time ordering
 
 `byAllTimeRank()` in `lib/ranking.ts` is the one definition: titles, wins, average

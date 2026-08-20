@@ -20,6 +20,7 @@ const LINKS: Array<{ href: string; label: string; needs?: keyof LeagueFeatures }
   { href: "/keepers/", label: "Keepers", needs: "keepers" },
   { href: "/history/", label: "History" },
   { href: "/records/", label: "Records" },
+  { href: "/punishments/", label: "Punishments", needs: "weeklyLowPunishment" },
 ];
 
 export interface NavOwner {
