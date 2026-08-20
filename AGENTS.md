@@ -790,6 +790,26 @@ Do not wrap everything. A list whose fixed columns total well under the ~21.5rem
 phone gives fits fine, and a needless min-width introduces scrolling that was not
 there. Measure before adding: sum the `w-*` classes in the `ListHeader`.
 
+### A text field under 16px zooms iOS
+
+Safari zooms the whole page when an `input`, `textarea` or `select` is focused and
+computes to LESS THAN 16px, so the field is readable. It scales everything, so a
+dialog that fits perfectly is suddenly wider than the screen with its close button
+off the right edge — which looks like a broken layout and is not one. The
+suggestion modal hit this the hard way: it focuses its textarea on open, so at
+`text-sm` the zoom fired before anyone had typed.
+
+USE `text-base sm:text-sm` ON ANY TEXT-ENTRY FIELD. The other common fix is
+`maximum-scale=1` on the viewport meta, which works by disabling pinch-zoom for
+the entire site — do not. Checkboxes and radios are exempt; only fields you type
+into trigger it.
+
+The same modal is capped in `dvh` rather than `vh`, because `vh` on a phone is the
+viewport WITHOUT browser chrome — a sheet capped in `vh` is taller than the space
+it has and its last control hides under the address bar. Its bottom padding is
+`max(1rem, env(safe-area-inset-bottom))`, since a bottom sheet runs to the edge
+where the home indicator sits.
+
 Separately, a CSS GRID ITEM defaults to `min-width: auto`, so a row wider than its
 track overflows the card rather than letting its truncating cell shrink. The home
 keeper board needed `min-w-0` on each owner card for exactly this reason — the

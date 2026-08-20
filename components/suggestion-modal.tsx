@@ -105,7 +105,10 @@ export function SuggestionModal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-[32rem] rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
+        // `dvh`, not `vh`: on a phone `vh` is the viewport WITHOUT the browser
+        // chrome, so a sheet capped in `vh` is taller than the space it has and
+        // its last control sits under the address bar.
+        className="max-h-[85dvh] w-full max-w-[32rem] overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
       >
         <div className="flex items-center justify-between border-b border-ink-600 px-4 py-3 sm:px-5">
           <div>
@@ -122,7 +125,11 @@ export function SuggestionModal({
           </button>
         </div>
 
-        <div className="space-y-3 px-4 py-4 sm:px-5">
+        {/* The sheet runs to the bottom edge of a phone, where the home
+            indicator sits over anything flush against it — so the submit button
+            gets clearance on a device that has one, and nothing extra on a
+            device that does not. */}
+        <div className="space-y-3 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:px-5 sm:pb-4">
           <div>
             <textarea
               ref={field}
@@ -139,7 +146,22 @@ export function SuggestionModal({
               rows={3}
               maxLength={MAX}
               placeholder="Play a game in flip flops"
-              className="w-full resize-none rounded-lg border border-ink-500 bg-ink-850 px-3 py-2.5 text-sm text-chalk-100 outline-none transition-colors placeholder:text-chalk-600 focus:border-accent-dim"
+              /*
+               * 16px ON A PHONE, AND THAT IS NOT A STYLE CHOICE. iOS Safari zooms
+               * the page whenever a focused input, textarea or select computes to
+               * UNDER 16px, to make it readable — and this field is focused the
+               * moment the dialog opens, so at `text-sm` the zoom fired instantly
+               * and scaled the whole modal past the right edge of the screen. The
+               * dialog was never mis-sized; the viewport was.
+               *
+               * Fixed here rather than with `maximum-scale=1` on the viewport
+               * meta, which is the other common answer and disables pinch-zoom
+               * for the entire site.
+               *
+               * `sm:text-sm` puts it back at desktop, where nothing zooms and
+               * 16px in a dialog reads as oversized next to the page around it.
+               */
+              className="w-full resize-none rounded-lg border border-ink-500 bg-ink-850 px-3 py-2.5 text-base text-chalk-100 outline-none transition-colors placeholder:text-chalk-600 focus:border-accent-dim sm:text-sm"
             />
             <div className="mt-1 flex items-baseline justify-between gap-3 text-[11px]">
               <span className="text-chalk-600">
