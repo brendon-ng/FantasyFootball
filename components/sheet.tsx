@@ -1,6 +1,55 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+
+/**
+ * How much of the screen the on-screen keyboard is covering.
+ *
+ * A `position: fixed` element is placed against the LAYOUT viewport, and iOS
+ * does not shrink that when the keyboard opens — it only shrinks the VISUAL
+ * viewport and scrolls the focused field into view. So a bottom sheet pinned
+ * with `items-end` sits underneath the keyboard, which is exactly what a sheet
+ * containing a text field does the moment it autofocuses.
+ *
+ * `visualViewport` is the only thing that reports this on iOS.
+ * `interactive-widget=resizes-content` on the viewport meta does the same job
+ * declaratively but is Chromium-only, and `dvh` accounts for browser chrome
+ * rather than the keyboard.
+ *
+ * `offsetTop` is in the sum because iOS scrolls the visual viewport within the
+ * layout viewport to reveal the field; without it the inset is overstated by
+ * however far it scrolled.
+ */
+function useKeyboardInset(): number {
+  const [inset, setInset] = useState(0);
+
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const update = () =>
+      setInset(
+        Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop)),
+      );
+    // Deferred rather than called here: the keyboard is not up yet on the frame
+    // a dialog mounts, and setting state during an effect is a cascading render.
+    const first = requestAnimationFrame(update);
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+    return () => {
+      cancelAnimationFrame(first);
+      vv.removeEventListener("resize", update);
+      vv.removeEventListener("scroll", update);
+    };
+  }, []);
+
+  return inset;
+}
 
 /**
  * The one bottom sheet.
@@ -43,6 +92,7 @@ export function Sheet({
   children: (api: { close: (after?: () => void) => void }) => ReactNode;
 }) {
   const [leaving, setLeaving] = useState(false);
+  const keyboard = useKeyboardInset();
   // Held in a ref rather than state: it is read once, by an animation callback,
   // and nothing renders differently for it.
   const pending = useRef<(() => void) | null>(null);
@@ -103,10 +153,22 @@ export function Sheet({
       aria-label={label}
       data-leaving={leaving ? "" : undefined}
       onClick={onClose ? () => close() : undefined}
+      // Padding rather than a height or a transform: `items-end` then lands the
+      // panel on the padding edge, which is the top of the keyboard, and the
+      // centred desktop case keeps working untouched because the inset is 0.
+      style={keyboard ? { paddingBottom: keyboard } : undefined}
       className={`sheet-backdrop fixed inset-0 flex items-end justify-center bg-ink-900/80 backdrop-blur-sm sm:items-center ${zClassName} ${backdropClassName}`}
     >
       <div
         onClick={(e) => e.stopPropagation()}
+        // The panel's own `max-h` is a share of the WHOLE screen, which is more
+        // room than there is once the keyboard has taken half of it. Inline so
+        // it beats the class, and only while the keyboard is up.
+        style={
+          keyboard
+            ? { maxHeight: `calc(100dvh - ${keyboard}px - 1rem)` }
+            : undefined
+        }
         // Only this element's own animation counts. A child's — the skeleton
         // sweep, say — would otherwise close the dialog out from under it.
         onAnimationEnd={(e) => {

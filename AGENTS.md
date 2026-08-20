@@ -877,6 +877,23 @@ Reduced motion needs no special case: the blanket rule in globals.css clamps
 every duration to almost nothing, so both animations finish instantly and
 `animationend` still fires.
 
+A FIXED ELEMENT SITS BEHIND THE KEYBOARD ON iOS. `position: fixed` is placed
+against the LAYOUT viewport, and iOS does not shrink that when the keyboard
+opens — it shrinks the VISUAL viewport and scrolls the field into view. So
+`items-end` pins a bottom sheet to the bottom of the screen, underneath the
+keyboard, which is what a sheet with an autofocused field does immediately.
+
+`useKeyboardInset()` reads `visualViewport` and pads the backdrop by whatever is
+occluded, so `items-end` lands the panel on top of the keyboard instead. It also
+caps the panel's height against the space that is left, since `max-h-[85dvh]` is
+a share of the whole screen and the keyboard has taken half of it.
+
+`visualViewport` is the only thing that reports this on iOS —
+`interactive-widget=resizes-content` does the same job declaratively but is
+Chromium-only, and `dvh` accounts for browser chrome rather than the keyboard.
+`offsetTop` belongs in the sum because iOS scrolls the visual viewport to reveal
+the field, and leaving it out overstates the inset by however far it scrolled.
+
 ### A text field under 16px zooms iOS
 
 Safari zooms the whole page when an `input`, `textarea` or `select` is focused and
