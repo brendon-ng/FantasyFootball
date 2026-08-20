@@ -384,8 +384,13 @@ export function PunishmentTracker({
               phase={phase}
               // VOTING NEEDS AN IDENTITY, unlike suggesting: one ballot per
               // person needs a key, and localStorage is where the site keeps it.
-              // Someone browsing anonymously gets the picker rather than a
-              // refusal, since picking a team is the thing they need to do.
+              //
+              // Someone browsing anonymously gets the picker AND THEN THE BALLOT
+              // — the button said "Cast your votes", so stopping at a team picker
+              // would be a bait and switch and would need a second tap nobody
+              // would know to make. Picking "just browsing" instead resumes
+              // nothing, which is the right answer to declining to say who you
+              // are.
               onAct={
                 !endpoint
                   ? null
@@ -393,7 +398,7 @@ export function PunishmentTracker({
                     ? () => setComposing(true)
                     : me
                       ? () => setVoting(true)
-                      : openPicker
+                      : () => openPicker(() => setVoting(true))
               }
               acted={phase === "voting" && iVoted}
               // Suggestions stay open during voting, as a quieter second action.
@@ -426,6 +431,7 @@ export function PunishmentTracker({
           voter={me}
           suggestions={suggestions}
           current={ballots.mine?.punishmentIds ?? []}
+          ready={ballots.ready}
           onSaved={onSaved}
           onClose={() => setVoting(false)}
         />

@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useMemo,
+  useRef,
   useState,
   useSyncExternalStore,
 } from "react";
@@ -70,7 +71,15 @@ interface IdentityContext {
   /** False until localStorage has been read; nothing should render on a guess. */
   ready: boolean;
   setIdentity: (next: Identity) => void;
-  openPicker: () => void;
+  /**
+   * Open the team picker, optionally resuming something afterwards.
+   *
+   * `onPicked` runs ONLY if they choose a team — the whole point of the callback
+   * is that the caller needed an identity, and "just browsing" is a refusal to
+   * give one. Without it a control that opens the picker leaves people stranded:
+   * the button said "Cast your votes", showed a team picker, and then stopped.
+   */
+  openPicker: (onPicked?: () => void) => void;
 }
 
 const Ctx = createContext<IdentityContext>({
@@ -162,7 +171,33 @@ export function IdentityProvider({
     window.dispatchEvent(new Event(IDENTITY_EVENT));
   }, []);
 
-  const openPicker = useCallback(() => setPicking(true), []);
+  // A ref, not state: it is read once by a callback and changes nothing on screen.
+  const resume = useRef<(() => void) | null>(null);
+  const openPicker = useCallback((onPicked?: () => void) => {
+    resume.current = onPicked ?? null;
+    setPicking(true);
+  }, []);
+
+  /**
+   * Records the choice, then resumes whatever asked for it.
+   *
+   * The pending callback is cleared either way, so declining once cannot fire it
+   * later when the picker is opened again from the nav for its own sake.
+   */
+  const chooseIdentity = useCallback(
+    (next: Identity) => {
+      const after = resume.current;
+      resume.current = null;
+      setIdentity(next);
+      if (next.kind === "owner") after?.();
+    },
+    [setIdentity],
+  );
+
+  const dismissPicker = useCallback(() => {
+    resume.current = null;
+    setPicking(false);
+  }, []);
 
   const value = useMemo(
     () => ({ identity, ready, setIdentity, openPicker }),
@@ -214,8 +249,8 @@ a[href$="/owners/${mySlug}/"]:not([data-me-exempt]):not([data-me-ignore]),
         <IdentityPicker
           owners={owners}
           current={identity}
-          onChoose={setIdentity}
-          onDismiss={picking ? () => setPicking(false) : null}
+          onChoose={chooseIdentity}
+          onDismiss={picking ? dismissPicker : null}
         />
       ) : null}
     </Ctx.Provider>
@@ -327,7 +362,7 @@ export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
   return (
     <button
       type="button"
-      onClick={openPicker}
+      onClick={() => openPicker()}
       title={
         me
           ? `You are ${me.name} — click to change`
@@ -389,7 +424,7 @@ export function IdentityControl({ owners }: { owners: NavOwner[] }) {
   return (
     <button
       type="button"
-      onClick={openPicker}
+      onClick={() => openPicker()}
       className="text-[11px] text-chalk-600 transition-colors hover:text-me"
     >
       Viewing as <span className="text-me">{label}</span> · change

@@ -618,8 +618,22 @@ when four boxes are ticked quickly. A save replaces the whole ballot, so there i
 no add/remove protocol to get out of step.
 
 VOTING REQUIRES AN IDENTITY, unlike suggesting, because one ballot per person
-needs a key. Someone browsing anonymously gets the identity picker rather than a
-refusal — picking a team is the thing they need to do.
+needs a key. Someone browsing anonymously gets the identity picker AND THEN THE
+BALLOT: the button said "Cast your votes", so stopping at a team picker is a
+bait and switch that needs a second tap nobody would know to make. `openPicker`
+takes an optional callback for exactly this, fired only when a TEAM is chosen —
+"I'm just browsing" is a refusal to identify, so it resumes nothing. The pending
+callback is cleared on dismissal too, so declining once cannot fire it later when
+the picker is opened from the nav for its own sake.
+
+THE MODAL MIRRORS THE SERVER UNTIL THE FIRST TOGGLE, rather than seeding state
+from a prop. That flow opens the dialog and the ballot fetch at the same moment,
+so `current` is briefly empty even for someone who voted last week on another
+device — and a seeded copy would freeze that empty value and a save would wipe
+their picks. Holding edits as null until they touch something means the
+checkboxes simply fill in when the fetch lands, with no effect to sync and
+nothing to clobber. Save is disabled until then: you cannot replace a ballot you
+have not been shown.
 
 TURNOUT IS COUNTED AGAINST ACTIVE OWNERS. Someone who left the league cannot
 vote, so counting them would put full turnout permanently out of reach.

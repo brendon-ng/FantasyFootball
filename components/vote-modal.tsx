@@ -31,6 +31,7 @@ export function VoteModal({
   voter,
   suggestions,
   current,
+  ready,
   onSaved,
   onClose,
 }: {
@@ -41,23 +42,40 @@ export function VoteModal({
   suggestions: PunishmentSuggestion[];
   /** What the server already has for this voter. */
   current: number[];
+  /**
+   * The server's ballot has arrived.
+   *
+   * WITHOUT THIS A SAVE CAN WIPE A BALLOT. Someone who picks their team from
+   * this button starts the ballot fetch at the moment the dialog opens, so
+   * `current` is briefly empty even for a person who voted last week on another
+   * device — and saving then would replace their picks with nothing.
+   */
+  ready: boolean;
   onSaved: (ballot: Ballot, votes: Record<number, number>) => void;
   onClose: () => void;
 }) {
-  const [picked, setPicked] = useState<Set<number>>(() => new Set(current));
+  /**
+   * Null until the first toggle, so the checkboxes MIRROR THE SERVER up to that
+   * point and simply fill in when the fetch lands. Seeding state from a prop
+   * would freeze whatever `current` happened to be on the first render, and
+   * syncing it afterwards would need an effect that could clobber a real edit.
+   */
+  const [edits, setEdits] = useState<Set<number> | null>(null);
+  const picked = edits ?? new Set(current);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const ballot = [...suggestions].sort((a, b) => a.id - b.id);
 
   const toggle = (id: number) =>
-    setPicked((prev) => {
-      const next = new Set(prev);
+    setEdits((prev) => {
+      const next = new Set(prev ?? current);
       if (!next.delete(id)) next.add(id);
       return next;
     });
 
   const save = async (close: (after?: () => void) => void) => {
+    if (!ready) return;
     setBusy(true);
     setError(null);
     try {
@@ -89,9 +107,11 @@ export function VoteModal({
             <div>
               <div className="eyebrow text-[10px]">{season} ballot</div>
               <div className="text-sm font-semibold">
-                {picked.size
-                  ? `${picked.size} selected`
-                  : "Pick as many as you like"}
+                {!ready
+                  ? "Loading your ballot…"
+                  : picked.size
+                    ? `${picked.size} selected`
+                    : "Pick as many as you like"}
               </div>
             </div>
             <button
@@ -112,13 +132,14 @@ export function VoteModal({
                   {/* The whole row is the target. A 14px checkbox is a poor one
                       on a phone, and there is nothing else in the row to hit. */}
                   <label
-                    className={`flex cursor-pointer items-start gap-3 px-4 py-2.5 transition-colors sm:px-5 ${
-                      on ? "bg-accent/[0.07]" : "hover:bg-ink-700/40"
-                    }`}
+                    className={`flex items-start gap-3 px-4 py-2.5 transition-colors sm:px-5 ${
+                      ready ? "cursor-pointer" : "cursor-progress opacity-60"
+                    } ${on ? "bg-accent/[0.07]" : ready ? "hover:bg-ink-700/40" : ""}`}
                   >
                     <input
                       type="checkbox"
                       checked={on}
+                      disabled={!ready}
                       onChange={() => toggle(s.id)}
                       className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--color-accent)]"
                     />
@@ -142,7 +163,7 @@ export function VoteModal({
             <button
               type="button"
               onClick={() => void save(close)}
-              disabled={busy}
+              disabled={busy || !ready}
               className="w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
             >
               {busy ? "Saving…" : "Save ballot"}
