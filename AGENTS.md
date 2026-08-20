@@ -491,6 +491,10 @@ a real disabled `<button>` and is here before it works, because its absence is
 the layout question: where the call to action sits changes how the page reads,
 and wiring the modal in later should not move anything.
 
+Suggestions stay open DURING voting, as a quieter secondary button. The cost is
+that somebody who voted on Monday never saw Tuesday's arrival; the league took
+that trade knowingly, and a ballot can be reopened until voting closes.
+
 `poolSize` IS NULLABLE, and null is rendered rather than guessed around. The only
 thing available to guess from is the size of the Selected table, and that fills
 itself from the top of the ballot — so before voting closes it counts ideas
@@ -575,6 +579,54 @@ Everything is gated on `features.weeklyLowPunishment`, including the nav link. T
 route is still generated in every league's build — static export makes them all —
 and says the league does not play this game, matching `/keepers` in a redraft
 league.
+
+### Voting
+
+APPROVAL VOTING: back as many as you like, edit until voting closes. One ballot
+per person, keyed by owner slug in a fourth table on the season tab (`Q:S`,
+after Suggestions, Selected and Assignments) — so "one ballot each" is a primary
+key rather than a rule anything has to enforce, and a second device just loads
+the same row.
+
+BALLOTS ARE SECRET. `getBallots` returns `voters` — who has voted, no picks —
+plus the picks of the ONE voter asked for. Worth being clear-eyed: with no auth
+this is secrecy from readers, not from anyone who opens devtools and asks for
+someone else's slug. The league weighed that and chose it, on the grounds that
+the attack is "annoy twelve friends and get caught".
+
+`updatedAt` SEPARATES "voted for nothing" FROM "has not voted". An empty ballot
+is a legal thing to cast and both have no ids; only a real save stamps a time.
+`hasVoted()` is that check, and it decides whether the button says Cast or Edit.
+
+THE VOTES COLUMN IS A SHEET FORMULA over the ballots, so it is live for everyone
+the moment anyone votes — including a ballot typed straight into the sheet. That
+is why `getWeeklyPunishments` never had to learn ballots exist. `castBallot` also
+returns every suggestion's new count, which the page lays over the feed it
+already has rather than refetching; the numbers are the server's recomputation
+over every ballot, not this browser's arithmetic on the one it just sent, which
+would be stale the moment somebody else had voted.
+
+NO COUNTS INSIDE THE VOTE MODAL, and it is ordered BY ID rather than by score
+for the same reason — sorting by popularity leaks the ranking as effectively as
+printing it, and reading either while deciding is the bandwagon pressure a secret
+ballot exists to avoid. Counts stay on the page behind it, where they are a
+result rather than a prompt.
+
+ONE SAVE, NOT AUTOSAVE PER TICK. Each write is an Apps Script round trip of about
+a second, so a self-saving checkbox would feel broken and would race with itself
+when four boxes are ticked quickly. A save replaces the whole ballot, so there is
+no add/remove protocol to get out of step.
+
+VOTING REQUIRES AN IDENTITY, unlike suggesting, because one ballot per person
+needs a key. Someone browsing anonymously gets the identity picker rather than a
+refusal — picking a team is the thing they need to do.
+
+TURNOUT IS COUNTED AGAINST ACTIVE OWNERS. Someone who left the league cannot
+vote, so counting them would put full turnout permanently out of reach.
+
+The viewer's own picks are ticked on the page's ballot list. Their own ballot on
+their own screen is not what secrecy covers, and without it nothing on the page
+says what "Edit your votes" would open.
 
 ### Writing back
 

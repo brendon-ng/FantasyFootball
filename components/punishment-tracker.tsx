@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 
 import { PunishmentLedger, TeamNames } from "@/components/punishment-ledger";
 import { SuggestionModal } from "@/components/suggestion-modal";
+import { VoteModal } from "@/components/vote-modal";
 import { Tip } from "@/components/tooltip";
 import {
   Col,
@@ -14,14 +15,17 @@ import {
   Skeleton,
   Stat,
 } from "@/components/ui";
-import { usePunishments } from "@/lib/punishments-live";
+import { useIdentity } from "@/components/identity";
+import { useBallots, usePunishments } from "@/lib/punishments-live";
 import { useUrlState } from "@/lib/url-state";
 import {
   buildLedger,
   ledgerTotals,
   poolRemaining,
   tallyByOwner,
+  hasVoted,
   PUNISHMENT_PHASES,
+  type Ballot,
   type LedgerRow,
   type PunishmentPhase,
   type SeasonLows,
@@ -45,6 +49,7 @@ export function PunishmentTracker({
   seasons,
   teams,
   names,
+  activeOwners,
   src,
   endpoint,
   league,
@@ -55,6 +60,8 @@ export function PunishmentTracker({
   /** Season-scoped team rosters, so a co-owned team is named in full. */
   teams: TeamMap;
   names: Record<string, string>;
+  /** Turnout denominator — the people who could vote, not everyone on record. */
+  activeOwners: number;
   src: string;
   /** Bare `/exec` URL for writes; null when reading the bundled sample. */
   endpoint: string | null;
@@ -63,6 +70,19 @@ export function PunishmentTracker({
 }) {
   const { status, feed, error, insertSuggestion } = usePunishments(src);
   const [composing, setComposing] = useState(false);
+  const [voting, setVoting] = useState(false);
+  /**
+   * Counts from the last save, laid over the feed's.
+   *
+   * The feed was fetched before the vote and will not be refetched; the save
+   * came back with the server's recomputation over every ballot, so it is both
+   * newer and more correct than anything derivable here.
+   */
+  const [freshVotes, setFreshVotes] = useState<Record<number, number> | null>(
+    null,
+  );
+  const { identity, ready: identityReady, openPicker } = useIdentity();
+  const me = identityReady && identity.kind === "owner" ? identity.slug : null;
 
   // Every season either source knows about, newest first. Taking the union means
   // a season the sheet has but the site has not played yet (this one, right now)
@@ -130,7 +150,26 @@ export function PunishmentTracker({
   // listing it — even greyed out — invites the reader to weigh something that
   // cannot be drawn, and puts a rejected idea on a permanent public page.
   // Filtered once, here, so no panel below has to remember.
-  const suggestions = (feedSeason?.suggestions ?? []).filter((s) => !s.vetoed);
+  const suggestions = (feedSeason?.suggestions ?? [])
+    .filter((s) => !s.vetoed)
+    .map((s) =>
+      freshVotes && s.id in freshVotes ? { ...s, votes: freshVotes[s.id] } : s,
+    );
+
+  const ballots = useBallots({
+    endpoint,
+    league,
+    season: active,
+    voter: me,
+    enabled: phase === "voting",
+  });
+  const myPicks = new Set(ballots.mine?.punishmentIds ?? []);
+  const iVoted = hasVoted(ballots.mine);
+
+  const onSaved = (ballot: Ballot, votes: Record<number, number>) => {
+    ballots.applySaved(ballot);
+    setFreshVotes(votes);
+  };
 
   /**
    * The ledger as far as the BUILD knows it, for the wait.
@@ -143,7 +182,8 @@ export function PunishmentTracker({
    * phase clamp uses, so the layout does not rearrange when the feed lands.
    */
   const pendingRows = useMemo(
-    () => buildLedger(null, seasons.find((s) => s.season === active)?.lows ?? []),
+    () =>
+      buildLedger(null, seasons.find((s) => s.season === active)?.lows ?? []),
     [seasons, active],
   );
 
@@ -161,7 +201,9 @@ export function PunishmentTracker({
         </div>
         <div className="flex items-center gap-2">
           {isMock ? <SampleBadge /> : null}
-          {overridden && status === "ready" ? <PhaseBadge phase={phase} /> : null}
+          {overridden && status === "ready" ? (
+            <PhaseBadge phase={phase} />
+          ) : null}
           {years.length > 1 ? (
             <div className="flex items-center gap-1">
               {years.map((y) => (
@@ -340,17 +382,34 @@ export function PunishmentTracker({
           {phase !== "live" ? (
             <PhaseCallout
               phase={phase}
-              // Suggesting is wired up; voting is not yet, so its button stays
-              // disabled rather than opening a modal that cannot save.
+              // VOTING NEEDS AN IDENTITY, unlike suggesting: one ballot per
+              // person needs a key, and localStorage is where the site keeps it.
+              // Someone browsing anonymously gets the picker rather than a
+              // refusal, since picking a team is the thing they need to do.
               onAct={
-                endpoint && phase === "suggesting"
-                  ? () => setComposing(true)
+                !endpoint
+                  ? null
+                  : phase === "suggesting"
+                    ? () => setComposing(true)
+                    : me
+                      ? () => setVoting(true)
+                      : openPicker
+              }
+              acted={phase === "voting" && iVoted}
+              // Suggestions stay open during voting, as a quieter second action.
+              onSuggest={
+                endpoint && phase === "voting" ? () => setComposing(true) : null
+              }
+              turnout={
+                phase === "voting" && ballots.ready
+                  ? { voted: ballots.voters.length, of: activeOwners }
                   : null
               }
             />
           ) : null}
 
           <Ballot
+            myPicks={myPicks}
             suggestions={suggestions}
             names={names}
             poolSize={feedSeason.poolSize}
@@ -358,6 +417,19 @@ export function PunishmentTracker({
           />
         </>
       )}
+
+      {voting && endpoint && active && me ? (
+        <VoteModal
+          endpoint={endpoint}
+          league={league}
+          season={active}
+          voter={me}
+          suggestions={suggestions}
+          current={ballots.mine?.punishmentIds ?? []}
+          onSaved={onSaved}
+          onClose={() => setVoting(false)}
+        />
+      ) : null}
 
       {composing && endpoint && active ? (
         <SuggestionModal
@@ -414,7 +486,10 @@ function TrackerSkeleton({
           </div>
           <ul className="divide-y divide-ink-700">
             {[0, 1, 2, 3, 4, 5].map((i) => (
-              <li key={i} className="flex items-center gap-3 px-4 py-2.5 sm:px-5">
+              <li
+                key={i}
+                className="flex items-center gap-3 px-4 py-2.5 sm:px-5"
+              >
                 <Skeleton
                   className={`h-3.5 ${["w-1/2", "w-3/4", "w-2/3", "w-5/6"][i % 4]}`}
                 />
@@ -465,7 +540,10 @@ function TrackerSkeleton({
           <PanelHeader title="Who owes what" />
           <ul className="divide-y divide-ink-700">
             {[0, 1, 2].map((i) => (
-              <li key={i} className="flex items-center gap-3 px-4 py-2.5 sm:px-5">
+              <li
+                key={i}
+                className="flex items-center gap-3 px-4 py-2.5 sm:px-5"
+              >
                 <Skeleton className="h-3.5 w-32" />
                 <span className="flex-1" />
                 <Skeleton className="h-3.5 w-6" />
@@ -534,6 +612,7 @@ function Ballot({
   names,
   poolSize,
   phase,
+  myPicks,
 }: {
   suggestions: Array<{
     id: number;
@@ -545,6 +624,13 @@ function Ballot({
   names: Record<string, string>;
   poolSize: number | null;
   phase: PunishmentPhase;
+  /**
+   * The viewer's own approvals.
+   *
+   * Their own ballot on their own screen, which secrecy does not cover — and
+   * without it the list gives no clue what "Edit your votes" would open.
+   */
+  myPicks: Set<number>;
 }) {
   const showVotes = phase !== "suggesting";
   const showStatus = phase === "live";
@@ -576,10 +662,18 @@ function Ballot({
             className="flex items-start gap-3 px-4 py-1.5 sm:items-center sm:px-5"
           >
             <span
-              className={`text-sm text-chalk-300 sm:truncate ${BALLOT.text}`}
+              className={`text-sm sm:truncate ${BALLOT.text}`}
               title={s.text}
             >
-              {s.text}
+              {myPicks.has(s.id) ? (
+                <span
+                  aria-label="You voted for this"
+                  className="mr-1.5 font-bold text-accent"
+                >
+                  ✓
+                </span>
+              ) : null}
+              <span className="text-chalk-300">{s.text}</span>
             </span>
             <span className={`truncate text-xs text-chalk-500 ${BALLOT.by}`}>
               {s.suggestedBy ? (
@@ -653,13 +747,19 @@ function Ballot({
  * explanation; there is no dead click.
  */
 const ACTIONS: Partial<
-  Record<PunishmentPhase, { headline: string; label: string }>
+  Record<PunishmentPhase, { headline: string; label: string; done?: string }>
 > = {
   suggesting: {
     headline: "Suggestions are open",
     label: "Suggest a punishment",
   },
-  voting: { headline: "Voting is open", label: "Cast your votes" },
+  voting: {
+    headline: "Voting is open",
+    label: "Cast your votes",
+    // The button is the same control either way — it opens the same pre-filled
+    // ballot — but "Cast" reads as something still owed once you have voted.
+    done: "Edit your votes",
+  },
 };
 
 /** On the button's `title`, for the phase whose write endpoint does not exist. */
@@ -685,29 +785,57 @@ const NOT_WIRED = "Not wired up yet — send it to the commissioner for now.";
 function PhaseCallout({
   phase,
   onAct,
+  acted = false,
+  onSuggest = null,
+  turnout = null,
 }: {
   phase: PunishmentPhase;
   onAct: (() => void) | null;
+  /** This viewer has already done the thing; the button edits rather than casts. */
+  acted?: boolean;
+  /** The quieter second action — suggesting stays open during voting. */
+  onSuggest?: (() => void) | null;
+  turnout?: { voted: number; of: number } | null;
 }) {
   const action = ACTIONS[phase];
   if (!action) return null;
   return (
     <Panel className="border-accent-dim/70 bg-accent/[0.06]">
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 px-4 py-3.5 sm:px-5">
-        <div className="text-sm font-bold text-chalk-100">
-          {action.headline}
+        <div>
+          <div className="text-sm font-bold text-chalk-100">
+            {action.headline}
+          </div>
+          {turnout ? (
+            // Counted against ACTIVE owners: someone who left the league cannot
+            // vote, so including them would make full turnout unreachable.
+            <div className="mt-0.5 text-xs text-chalk-500 tabular">
+              {turnout.voted} of {turnout.of} have voted
+            </div>
+          ) : null}
         </div>
-        <button
-          type="button"
-          onClick={onAct ?? undefined}
-          disabled={!onAct}
-          title={onAct ? undefined : NOT_WIRED}
-          className={`shrink-0 rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity ${
-            onAct ? "hover:opacity-90" : "cursor-not-allowed opacity-60"
-          }`}
-        >
-          {action.label}
-        </button>
+        <div className="flex flex-wrap items-center gap-3">
+          {onSuggest ? (
+            <button
+              type="button"
+              onClick={onSuggest}
+              className="shrink-0 rounded-lg border border-ink-500 px-3 py-2 text-xs font-medium text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent"
+            >
+              Suggest another
+            </button>
+          ) : null}
+          <button
+            type="button"
+            onClick={onAct ?? undefined}
+            disabled={!onAct}
+            title={onAct ? undefined : NOT_WIRED}
+            className={`shrink-0 rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity ${
+              onAct ? "hover:opacity-90" : "cursor-not-allowed opacity-60"
+            }`}
+          >
+            {(acted && action.done) || action.label}
+          </button>
+        </div>
       </div>
     </Panel>
   );

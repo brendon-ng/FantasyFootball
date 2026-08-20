@@ -87,6 +87,31 @@ export interface PunishmentFeed {
   seasons: PunishmentSeason[];
 }
 
+/**
+ * One person's approval ballot.
+ *
+ * BALLOTS ARE SECRET, so the feed never carries anyone else's. `getBallots`
+ * returns the list of who has voted — turnout, which reveals no choices — plus
+ * the picks of the one voter asked for.
+ *
+ * `updatedAt` IS WHAT SEPARATES "voted for nothing" FROM "has not voted", since
+ * an empty ballot is a legal thing to cast and both have no ids. Only a real
+ * save stamps a time.
+ */
+export interface Ballot {
+  voter: string;
+  punishmentIds: number[];
+  updatedAt: string | null;
+}
+
+export interface BallotState {
+  /** Everyone who has cast a ballot. Slugs only — no picks. */
+  voters: string[];
+  /** The viewer's own ballot, or null if they are not identified. */
+  mine: Ballot | null;
+}
+
+
 /** A weekly low as the site derives it, with the game it happened in. */
 export interface DerivedLow {
   season: number;
@@ -212,6 +237,32 @@ export function parseSuggestion(raw: unknown): PunishmentSuggestion | null {
     votes: asNumber(r.votes) ?? 0,
     vetoed: asBool(r.vetoed),
     selected: asBool(r.selected),
+  };
+}
+
+export const hasVoted = (b: Ballot | null): boolean => Boolean(b?.updatedAt);
+
+export function parseBallot(raw: unknown): Ballot | null {
+  const r = obj(raw);
+  const voter = asText(r.voter)?.toLowerCase();
+  if (!voter) return null;
+  const ids = asRows(r.punishmentIds)
+    .map(asNumber)
+    .filter((n): n is number => n != null);
+  return {
+    voter,
+    punishmentIds: [...new Set(ids)].sort((a, b) => a - b),
+    updatedAt: asText(r.updatedAt),
+  };
+}
+
+export function parseBallotState(raw: unknown): BallotState {
+  const top = obj(raw);
+  return {
+    voters: asRows(top.voters)
+      .map((v) => asText(v)?.toLowerCase())
+      .filter((v): v is string => Boolean(v)),
+    mine: parseBallot(top.ballot),
   };
 }
 

@@ -5,6 +5,7 @@ import {
   getOwnerMap,
   getPunishmentLows,
   getPunishmentTeams,
+  getOwners,
   pageTitle,
   punishmentsSource,
 } from "@/lib/data";
@@ -27,17 +28,22 @@ export default function PunishmentsPage() {
   if (!features().weeklyLowPunishment) {
     return (
       <Panel>
-        <EmptyState>This league does not punish its weekly low scorer.</EmptyState>
+        <EmptyState>
+          This league does not punish its weekly low scorer.
+        </EmptyState>
       </Panel>
     );
   }
 
-  const names = Object.fromEntries([...getOwnerMap().values()].map((o) => [o.slug, o.name]));
+  const names = Object.fromEntries(
+    [...getOwnerMap().values()].map((o) => [o.slug, o.name]),
+  );
   return (
     <PunishmentTracker
       seasons={getPunishmentLows()}
       teams={getPunishmentTeams()}
       names={names}
+      activeOwners={getOwners().filter((o) => o.active).length}
       {...punishmentsSource()}
     />
   );
