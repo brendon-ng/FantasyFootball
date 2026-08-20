@@ -38,7 +38,18 @@ export function useUrlState<T extends string>(
    */
   const search = useSyncExternalStore(subscribe, read, onServer);
   const raw = new URLSearchParams(search).get(key);
-  const value = (allowed as readonly string[]).includes(raw ?? "") ? (raw as T) : fallback;
+  /**
+   * AN ABSENT PARAM IS THE FALLBACK, always — `raw` is checked for null before
+   * the allow-list rather than being coerced to `""` first.
+   *
+   * Coercing conflated "not in the URL" with "in the URL as an empty string". It
+   * only mattered once `""` was itself an allowed value, which is how the
+   * punishment tracker spells "no phase forced": the empty test then PASSED and
+   * this returned `raw` — i.e. `null`, from a function typed to return `T`. The
+   * caller trusted the type, indexed a lookup table with it, and threw. Every
+   * other caller was unaffected, since none of their allow-lists contain `""`.
+   */
+  const value = raw != null && (allowed as readonly string[]).includes(raw) ? (raw as T) : fallback;
 
   const set = useCallback(
     (next: T) => {
