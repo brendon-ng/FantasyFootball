@@ -446,10 +446,126 @@ drawn, and pins a rejected idea to a permanent public page. Filtered once where
 the feed is read, so no panel below has to remember. The LEDGER is unaffected: it
 renders what was actually assigned.
 
-The page ADAPTS TO WHERE THE YEAR IS, the way the home page does. A season with
-no assignments is a season not yet played, so the ballot leads and there is no
-ledger; once weeks start being lost the ledger leads and the ballot collapses.
-Nothing configures that — it falls out of the feed.
+### Three phases, and why this one is STORED
+
+A season is `suggesting`, then `voting`, then `live`, and each is a different
+page: the ballot is the whole thing until the pool is set, and the ledger takes
+over afterwards.
+
+THE PHASE IS A CELL IN THE SHEET — the one place this parts company with
+`resolvePhase()` in lib/phase, which derives the league's phase from Sleeper and
+stores nothing. That works there because Sleeper publishes facts that IMPLY the
+phase. Here one transition has no such fact: the moment voting opens every count
+is still zero, and nothing distinguishes it from suggestions still being open.
+Closing suggestions is a decision somebody makes, not an event anything records.
+
+ONE CLAMP, IN ONE DIRECTION: a season with a week lost and a punishment assigned
+is `live` whatever the cell says. The phase column arrived with 2025 reading
+"suggesting", which taken literally hides a finished season's fourteen weeks
+behind a suggestion form. Nothing infers voting from suggesting, or live from
+votes alone — those are judgement calls the sheet is entitled to make. A served
+punishment is not one.
+
+`derivePhase()` is a FALLBACK for a blank or misspelt cell, never the rule, and
+`selected` alone does not mean live — the Selected table fills itself from the top
+of the ballot, so 2026 spent its first day holding one unvoted idea that was
+already "selected". A pool is only really set once somebody voted it in or a week
+has been lost, so that is what it asks for.
+
+| Phase | Page | Ballot columns | Ballot order |
+| --- | --- | --- | --- |
+| `suggesting` | callout + ballot | punishment, by | newest first |
+| `voting` | callout + ballot | + votes | most votes first |
+| `live` | stat tiles, ledger, pool, tally, ballot collapsed | + status | most votes first |
+
+NO STAT TILES BEFORE THE SEASON STARTS. A suggestion count and a running vote
+total are both already legible from the ballot underneath, one row per
+suggestion, and a row of tiles restating them pushes the one thing there is to do
+below the fold. The live phase keeps its four, because they summarise fourteen
+rows rather than nine.
+
+`PhaseCallout` is a full-width accent banner above the ballot — a headline and a
+button, no body copy. It started as a chip beside the title and read as one more
+badge; it is the point of the page while the pool is being decided. The button is
+a real disabled `<button>` and is here before it works, because its absence is
+the layout question: where the call to action sits changes how the page reads,
+and wiring the modal in later should not move anything.
+
+`poolSize` IS NULLABLE, and null is rendered rather than guessed around. The only
+thing available to guess from is the size of the Selected table, and that fills
+itself from the top of the ballot — so before voting closes it counts ideas
+rather than stating a target, and 2026 opened with one suggestion and duly
+claimed a pool size of one. The client only falls back to counting selected rows
+once the phase is `live`. The Apps Script does the same count on its own side,
+which the site cannot see through, so a blank pool-size cell still arrives as a
+wrong number: fill the cell.
+
+A COLUMN THAT CANNOT MEAN ANYTHING YET IS WORSE THAN AN ABSENT ONE. A votes
+column of zeros reads as "nobody likes these"; an empty status column reads as
+"nothing made the pool". Newest-first while suggestions are open so a submission
+lands where the person who just made it is looking.
+
+THE PHASE DECIDES THE PAGE, not the row count. Everything but the ballot would
+otherwise be a panel explaining that it is empty.
+
+Both action buttons are DISABLED until the write endpoints exist, with a tooltip
+saying so. They are here rather than added later because their absence is the
+layout question — where a call to action sits changes how the page reads — and a
+page that quietly offers no way to take part is worse than one that says why.
+
+`?phase=voting` forces a layout, badged, for looking at a phase the league is not
+in. It changes the LAYOUT ONLY; the numbers underneath stay whatever the sheet
+says. Same argument as `?mockPhase=`, and badged for the same reason.
+
+### Loading is chrome plus skeletons, never a spinner
+
+The feed arrives from a third party over the network, so both surfaces spend a
+moment without it. Neither shows a message: the page frame, the title, the season
+switcher and the panel headers are all real from the first paint, and only the
+cells that genuinely depend on the sheet shimmer.
+
+HALF THE LEDGER IS ALREADY KNOWN. The week, who lost it and by how much come out
+of the build — only the punishment and whether it has been served are pending —
+so `PunishmentLedger` takes a `loading` flag and draws the real columns beside
+shimmering ones. Same renderer, so the rows cannot land in different places once
+the feed arrives.
+
+THE SKELETON'S SHAPE IS INFERRED FROM DERIVED DATA, not guessed: a season with
+weeks on the board is live and gets the ledger layout, one with none has not been
+played and gets the callout-and-ballot layout. That is the same rule as the phase
+clamp, so the panels are already where the feed will want them.
+
+`getPunishmentLows()` therefore SEEDS EVERY SEASON IN `knownLeagueIds` with an
+empty `lows` array. Built from weekly lows alone it omits the season being
+played, and the page would open on last year, draw a full ledger skeleton and
+then rearrange into this year's ballot — the exact jump a skeleton exists to
+prevent.
+
+`.skeleton` in globals.css is a SWEEP, not a pulse: a block fading in and out
+reads as disabled, a highlight travelling across reads as work in progress.
+(`.live-dot` is the other one, and a different job.) The sweep is an `::after`
+transform so it animates on the compositor rather than repainting twenty rows a
+frame, and it is hidden outright under `prefers-reduced-motion` — the blanket
+rule there clamps animations to nothing, which would freeze it mid-sweep as a
+bright stripe.
+
+The season page's panel reserves its space the same way, because it sits in the
+middle of a long page and appearing late shoved the brackets down under the
+reader. One case still moves: a season with weeks lost that the sheet has no
+record of gets drawn and then withdrawn. That is every season before the league
+started tracking, which for the only league that does is none.
+
+### The punishment text wraps on a phone
+
+One line per row on a desktop — fourteen rows is a table, and two lines a row
+reads as a feed of events rather than a season at a glance. Below `sm` the
+punishment cell WRAPS instead of truncating, on the ledger and the ballot alike:
+the text is a full sentence and there is no width to spare, so one line showed
+"Take a selfie with the bar…" and the row named a punishment nobody could read.
+Wrapping costs height, which a phone has, rather than meaning, which it does not.
+
+Columns then align to the TOP (`items-start sm:items-center`), because centring
+them against a three-line cell floats the week number into the middle of nowhere.
 
 Ledger rows come from the UNION of weeks either source knows, never `1..14`. An
 unplayed season would otherwise render fourteen blanks and a season in progress
@@ -460,12 +576,51 @@ route is still generated in every league's build — static export makes them al
 and says the league does not play this game, matching `/keepers` in a redraft
 league.
 
-Still to come: the write endpoints (a suggestion form, voting, and a spin-the-
-wheel draw that picks from the remaining pool and logs the result). Two things to
-know before building them. Apps Script CANNOT answer a CORS preflight, so a POST
-must stay a simple request — `Content-Type: text/plain;charset=utf-8` with JSON in
-the body. And the endpoint URL is public by construction, since a static site
-ships it in its JavaScript, so writes need a shared secret that reads do not.
+### Writing back
+
+`addSuggestion` is the first write, POSTed to the same `/exec` URL with `func` in
+the body. Voting and the spin-the-wheel draw are still to come; `PhaseCallout`
+takes `onAct = null` for a phase whose endpoint does not exist yet and disables
+its button rather than opening a modal that cannot save.
+
+`Content-Type: text/plain;charset=utf-8` IS LOAD-BEARING, and the JSON goes in the
+body under it. Apps Script cannot answer a CORS preflight, so only a "simple
+request" ever reaches it — send the obvious `application/json` and the browser
+fires an OPTIONS, gets nothing usable, and the POST never happens. Only the header
+is a lie.
+
+THE SERVER SAYS NO, not the form. Duplicate text, the wrong phase, an over-long
+entry — the sheet rejects all of it with a message written to be read, and the
+modal shows that message verbatim. Re-implementing the rules client-side would
+mean two sets to keep in step, and the client's set can be skipped anyway. The
+phase check especially belongs there: hiding the button is not the same as
+refusing the write, and a suggestion added mid-voting changes the ballot under
+people who already voted.
+
+THE ID COMES BACK FROM THE SERVER. Two people submitting at once must not compute
+the same next row; the script takes a lock and assigns it.
+
+The response echoes the created row in the feed's own shape, and it is merged
+into the loaded feed rather than triggering a refetch — everything needed is
+already in hand, and a second Apps Script round trip is another second of
+spinner. `parseSuggestion` is shared by both paths so a just-added row and the
+same row on the next load are indistinguishable. One exception, invisible today:
+the sheet's Selected table auto-fills, so a row comes back `selected: false` and
+reads `selected: true` on the next fetch. Nothing renders `selected` before the
+live phase, and it self-corrects on reload.
+
+WHO IT IS FROM COMES FROM `useIdentity()`, the slug already in localStorage from
+the first visit — nobody types their own name into a league of thirteen people
+who know each other. The line under the field names who it will be credited to,
+so the auto-fill is visible rather than a surprise, and a checkbox opts out.
+Someone who never picked a team posts anonymously and is told so, rather than
+being sent to the identity picker first: an unanswered prompt from months ago
+should not stand between a person and a one-line idea. The checkbox then has
+nothing to opt out of and is not rendered.
+
+NO SHARED SECRET, by decision. The endpoint URL is public by construction — a
+static site ships it in its JavaScript — so a token would be a speed bump against
+bots rather than security, and the league chose not to bother for now.
 
 ## Default all-time ordering
 

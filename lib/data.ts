@@ -242,6 +242,26 @@ export const getPunishmentLows = once((): SeasonLows[] => {
   const weeks = new Map(getSeasons().map((s) => [s.season, s.regularSeasonWeeks]));
 
   const bySeason = new Map<number, SeasonLows>();
+  /**
+   * SEEDED WITH EVERY SEASON THE LEAGUE HAS EXISTED FOR, before the lows are
+   * added, so the current one is present with no weeks yet.
+   *
+   * The tracker's season switcher and its loading skeleton both read this list,
+   * and both are drawn before the sheet answers. Derived from weekly lows alone
+   * it would omit the season being played — the page would open on last year,
+   * draw a full ledger skeleton for it, and then rearrange into this year's
+   * ballot the moment the feed landed, which is the exact jump a skeleton exists
+   * to avoid.
+   */
+  for (const year of Object.keys(getConfig().knownLeagueIds ?? {})) {
+    const season = Number(year);
+    if (!Number.isFinite(season)) continue;
+    bySeason.set(season, {
+      season,
+      regularSeasonWeeks: weeks.get(season) ?? 0,
+      lows: [],
+    });
+  }
   for (const w of getWeeklyLows()) {
     const entry = bySeason.get(w.season) ?? {
       season: w.season,
@@ -758,13 +778,32 @@ export const getConfig = (): LeagueConfig =>
  * JavaScript. Fine for reads. When the write endpoints land they will need their
  * own shared secret, because anyone reading the page source can POST to it.
  */
-export function punishmentsSource(): { src: string; isMock: boolean } {
+export function punishmentsSource(): {
+  /** Fully-formed GET URL, or the bundled sample. */
+  src: string;
+  /** The bare `/exec` URL for writes. Null when there is nothing to write to. */
+  endpoint: string | null;
+  league: string;
+  isMock: boolean;
+} {
   const endpoint = getConfig().appsScriptEndpoint?.trim();
-  if (!endpoint) return { src: withBasePath(`/mock/${LEAGUE}.punishments.json`), isMock: true };
+  if (!endpoint) {
+    return {
+      src: withBasePath(`/mock/${LEAGUE}.punishments.json`),
+      endpoint: null,
+      league: LEAGUE,
+      isMock: true,
+    };
+  }
   // No `season`: the tracker's season switcher works off the whole feed, so one
   // fetch serves every year rather than a round trip per tab.
   const query = `func=getWeeklyPunishments&league=${encodeURIComponent(LEAGUE)}`;
-  return { src: `${endpoint}${endpoint.includes("?") ? "&" : "?"}${query}`, isMock: false };
+  return {
+    src: `${endpoint}${endpoint.includes("?") ? "&" : "?"}${query}`,
+    endpoint,
+    league: LEAGUE,
+    isMock: false,
+  };
 }
 
 /**

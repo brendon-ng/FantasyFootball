@@ -111,6 +111,21 @@ export function Stat({
   );
 }
 
+/**
+ * A block standing in for content still being fetched.
+ *
+ * Sized by the caller, because a skeleton is only worth having if it is the shape
+ * of the thing it replaces — a row of identical grey bars is a spinner with extra
+ * steps, and one that is the wrong size makes the layout jump when the real
+ * content lands.
+ *
+ * `aria-hidden`: a screen reader should hear the region's own busy state, not a
+ * dozen empty boxes.
+ */
+export function Skeleton({ className = "h-4 w-full" }: { className?: string }) {
+  return <span aria-hidden className={`skeleton block ${className}`} />;
+}
+
 export function EmptyState({ children }: { children: ReactNode }) {
   return (
     <div className="px-4 py-10 text-center text-sm text-chalk-600 sm:px-5">{children}</div>

@@ -1,8 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { parseFeed, type PunishmentFeed } from "./punishments.ts";
+import {
+  parseFeed,
+  parseSuggestion,
+  type PunishmentFeed,
+  type PunishmentSuggestion,
+} from "./punishments.ts";
 
 /**
  * Fetches the punishment feed in the browser.
@@ -25,8 +30,78 @@ export type FeedState =
   | { status: "ready"; feed: PunishmentFeed; error: null }
   | { status: "error"; feed: null; error: string };
 
-export function usePunishments(src: string): FeedState {
+/**
+ * Splices a just-created suggestion into the feed already on screen.
+ *
+ * MERGED LOCALLY RATHER THAN REFETCHED. The endpoint echoes the row it wrote, so
+ * everything needed to render it is already in hand, and a second round trip to
+ * Apps Script is another second of staring at a spinner having already waited
+ * one. Parsed through the same `parseSuggestion` as the feed, so a row added a
+ * moment ago and the same row on the next load are indistinguishable.
+ */
+const withSuggestion = (
+  feed: PunishmentFeed,
+  season: number,
+  created: PunishmentSuggestion,
+): PunishmentFeed => ({
+  ...feed,
+  seasons: feed.seasons.map((s) =>
+    s.season === season
+      ? { ...s, suggestions: [...s.suggestions.filter((x) => x.id !== created.id), created] }
+      : s,
+  ),
+});
+
+/**
+ * Adds a suggestion, and returns the row the sheet created.
+ *
+ * THE CONTENT TYPE IS LOAD-BEARING. `text/plain` keeps this a CORS "simple
+ * request", which is the only kind that reaches an Apps Script web app from
+ * another origin: Apps Script cannot answer a preflight, so sending the obvious
+ * `application/json` means the browser fires an OPTIONS, gets nothing usable
+ * back, and the POST never happens. The body is JSON either way — only the
+ * header is a lie, and it is the lie that makes it work.
+ *
+ * THE ID COMES BACK FROM THE SERVER, never from here. Two people submitting at
+ * the same moment must not compute the same next row.
+ *
+ * Errors arrive as `ok: false` with HTTP 200, same as the read side, and the
+ * message is written to be shown to a person — so it is thrown verbatim rather
+ * than replaced with something of our own.
+ */
+export async function addSuggestion(
+  endpoint: string,
+  body: { league: string; season: number; text: string; suggestedBy?: string | null },
+): Promise<PunishmentSuggestion> {
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ func: "addSuggestion", ...body }),
+  });
+  if (!res.ok) throw new Error(`The sheet rejected the request (${res.status}).`);
+
+  const payload: unknown = await res.json();
+  const data = typeof payload === "object" && payload !== null ? (payload as Record<string, unknown>) : {};
+  if (data.ok === false) throw new Error(String(data.error ?? "The sheet rejected the request."));
+
+  const created = parseSuggestion(data.suggestion);
+  if (!created) throw new Error("The sheet saved it but did not say what it saved.");
+  return created;
+}
+
+export function usePunishments(src: string): FeedState & {
+  /** Show a row this browser just created, without waiting for a refetch. */
+  insertSuggestion: (season: number, created: PunishmentSuggestion) => void;
+} {
   const [state, setState] = useState<FeedState>({ status: "loading", feed: null, error: null });
+
+  const insertSuggestion = useCallback((season: number, created: PunishmentSuggestion) => {
+    setState((prev) =>
+      prev.status === "ready"
+        ? { ...prev, feed: withSuggestion(prev.feed, season, created) }
+        : prev,
+    );
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -64,5 +139,5 @@ export function usePunishments(src: string): FeedState {
     };
   }, [src]);
 
-  return state;
+  return { ...state, insertSuggestion };
 }

@@ -100,12 +100,52 @@ body {
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
+/*
+ * Loading placeholder, for a surface fetched in the browser.
+ *
+ * A SWEEP RATHER THAN A PULSE. The whole point of a skeleton is to say "this row
+ * is coming", and a block fading in and out reads as disabled — a highlight
+ * travelling across the panel reads as work in progress. `pulse-dot` above is a
+ * different job: one small dot saying a score is live.
+ *
+ * The sweep is an ::after rather than a moving background-position, because a
+ * transform animates on the compositor and a background does not — twenty rows
+ * of these would otherwise repaint on every frame.
+ *
+ * The blanket reduced-motion rule below clamps every animation to nothing, which
+ * would freeze the highlight mid-sweep as a bright stripe. So it is hidden
+ * outright there and the bare block remains, which still says "content pending".
+ */
+@keyframes skeleton-sweep {
+  100% { transform: translateX(100%); }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.3rem;
+  background-color: var(--color-ink-700);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.055),
+    transparent
+  );
+  animation: skeleton-sweep 1.6s ease-in-out infinite;
+}
+
 /* Horizontal scrollers on mobile shouldn't show a chrome scrollbar. */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .live-dot { animation: none; }
+  .skeleton::after { display: none; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;

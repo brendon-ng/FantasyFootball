@@ -45,10 +45,38 @@ export interface PunishmentAssignment {
   completed: string | null;
 }
 
+/**
+ * Where a season is in the punishment cycle.
+ *
+ * STORED IN THE SHEET, NOT DERIVED — the one place this deliberately parts
+ * company with `resolvePhase()` in lib/phase, which reads the league's phase off
+ * Sleeper and stores nothing.
+ *
+ * That works there because Sleeper publishes facts that IMPLY the phase: a draft
+ * date exists, points are on the board. Here one of the two transitions has no
+ * such fact. The moment voting opens, every count is still zero and nothing
+ * distinguishes it from suggestions still being open — closing suggestions is a
+ * decision somebody makes, not an event anything records. The sheet is already
+ * the league's control surface, so a cell costs nothing.
+ */
+export type PunishmentPhase = "suggesting" | "voting" | "live";
+
+export const PUNISHMENT_PHASES = ["suggesting", "voting", "live"] as const;
+
 export interface PunishmentSeason {
   season: number;
-  /** How many punishments the league selects — one per regular-season week. */
-  poolSize: number;
+  phase: PunishmentPhase;
+  /**
+   * How many punishments the league will select. NULL when nobody has said.
+   *
+   * Null rather than a guess, because the only thing available to guess from is
+   * the size of the Selected table, and that fills itself from the top of the
+   * ballot — so before voting closes it reports however many suggestions exist,
+   * which is a count of ideas rather than a target. 2026 opened with one
+   * suggestion and duly claimed a pool size of one. A tile reading "—" is
+   * honest; a tile reading "1" is wrong and looks deliberate.
+   */
+  poolSize: number | null;
   suggestions: PunishmentSuggestion[];
   assignments: PunishmentAssignment[];
 }
@@ -162,6 +190,64 @@ const obj = (v: unknown): Record<string, unknown> =>
   v && typeof v === "object" ? (v as Record<string, unknown>) : {};
 
 /**
+ * One suggestion, from wherever it came.
+ *
+ * SHARED BY THE READ AND THE WRITE. `addSuggestion` echoes back the row it
+ * created in the same shape the feed uses, so parsing it through this rather
+ * than trusting it is what guarantees a just-added row renders identically to
+ * one that arrived on the next refresh.
+ *
+ * Null for a row with no id or no text — that is an empty spreadsheet row, of
+ * which every sheet has hundreds below the last real one.
+ */
+export function parseSuggestion(raw: unknown): PunishmentSuggestion | null {
+  const r = obj(raw);
+  const id = asNumber(r.id);
+  const text = asText(r.text);
+  if (id == null || !text) return null;
+  return {
+    id,
+    text,
+    suggestedBy: asText(r.suggestedBy)?.toLowerCase() ?? null,
+    votes: asNumber(r.votes) ?? 0,
+    vetoed: asBool(r.vetoed),
+    selected: asBool(r.selected),
+  };
+}
+
+/** The sheet's own word for the phase, if it said anything recognisable. */
+const readPhase = (v: unknown): PunishmentPhase | null => {
+  const s = asText(v)?.toLowerCase().replace(/\s+/g, "");
+  return (PUNISHMENT_PHASES as readonly string[]).includes(s ?? "")
+    ? (s as PunishmentPhase)
+    : null;
+};
+
+/**
+ * The phase implied by the data, for when the sheet does not say.
+ *
+ * A FALLBACK, NOT THE RULE. It cannot see the suggesting -> voting transition,
+ * which is exactly why the phase is stored — before the first vote is cast an
+ * open ballot and a closed one look identical.
+ *
+ * `selected` ALONE DOES NOT MEAN LIVE. The Selected table fills itself from the
+ * top of the ballot, so with one suggestion and no votes cast that one is
+ * already "selected" — 2026 looked live on its first day, holding a single
+ * unvoted idea. A pool is only really set once somebody voted it in or a week
+ * has been lost, so this asks for one of those.
+ */
+export function derivePhase(season: {
+  suggestions: PunishmentSuggestion[];
+  assignments: PunishmentAssignment[];
+}): PunishmentPhase {
+  const voted = season.suggestions.some((s) => s.votes > 0);
+  if (season.assignments.some((a) => a.losers.length || a.punishmentId != null))
+    return "live";
+  if (voted && season.suggestions.some((s) => s.selected)) return "live";
+  return voted ? "voting" : "suggesting";
+}
+
+/**
  * Turns whatever the endpoint returned into a feed, discarding anything
  * unusable rather than throwing.
  *
@@ -179,18 +265,8 @@ export function parseFeed(raw: unknown): PunishmentFeed {
 
     const suggestions: PunishmentSuggestion[] = [];
     for (const x of asRows(row.suggestions)) {
-      const r = obj(x);
-      const id = asNumber(r.id);
-      const text = asText(r.text);
-      if (id == null || !text) continue;
-      suggestions.push({
-        id,
-        text,
-        suggestedBy: asText(r.suggestedBy)?.toLowerCase() ?? null,
-        votes: asNumber(r.votes) ?? 0,
-        vetoed: asBool(r.vetoed),
-        selected: asBool(r.selected),
-      });
+      const parsed = parseSuggestion(x);
+      if (parsed) suggestions.push(parsed);
     }
 
     const assignments: PunishmentAssignment[] = [];
@@ -209,11 +285,41 @@ export function parseFeed(raw: unknown): PunishmentFeed {
       assignments.push({ week, losers, punishmentId, completed });
     }
 
-    seasons.push({
-      season,
-      poolSize: asNumber(row.poolSize) ?? suggestions.filter((s) => s.selected).length,
+    const ordered = {
       suggestions: suggestions.sort((a, b) => a.id - b.id),
       assignments: assignments.sort((a, b) => a.week - b.week),
+    };
+    /**
+     * A SEASON WITH A LEDGER IS LIVE, whatever the cell says.
+     *
+     * The sheet wins on the phase everywhere else — that is the whole reason it
+     * is stored. But once a week has been lost and a punishment assigned, the
+     * pool is manifestly set, and no cell can put the season back to collecting
+     * suggestions. This is not hypothetical: the phase column arrived with 2025
+     * reading "suggesting", which taken literally hides a finished season's
+     * fourteen weeks behind a suggestion form.
+     *
+     * Only this direction is clamped. Nothing infers voting from suggesting, or
+     * live from votes alone — those are judgement calls the sheet is entitled to
+     * make. A served punishment is not a judgement call.
+     */
+    const played = ordered.assignments.some(
+      (a) => a.losers.length || a.punishmentId != null,
+    );
+    const phase = played
+      ? "live"
+      : (readPhase(row.phase) ?? derivePhase(ordered));
+    seasons.push({
+      season,
+      phase,
+      // Counting the Selected table is only a fair reading of "pool size" once
+      // the pool is actually set. Before that it counts suggestions.
+      poolSize:
+        asNumber(row.poolSize) ??
+        (phase === "live"
+          ? ordered.suggestions.filter((s) => s.selected).length || null
+          : null),
+      ...ordered,
     });
   }
 
@@ -256,18 +362,23 @@ const sameSet = (a: string[], b: string[]) =>
  * NOT one row per regular-season week: an unplayed season would render fourteen
  * blanks, and a season in progress would advertise weeks nobody has lost yet.
  */
-export function buildLedger(season: PunishmentSeason | null, lows: DerivedLow[]): LedgerRow[] {
+export function buildLedger(
+  season: PunishmentSeason | null,
+  lows: DerivedLow[],
+): LedgerRow[] {
   const byId = new Map((season?.suggestions ?? []).map((s) => [s.id, s]));
-  const assignments = new Map((season?.assignments ?? []).map((a) => [a.week, a]));
+  const assignments = new Map(
+    (season?.assignments ?? []).map((a) => [a.week, a]),
+  );
 
   const derivedByWeek = new Map<number, DerivedLow[]>();
   for (const l of lows) {
     derivedByWeek.set(l.week, [...(derivedByWeek.get(l.week) ?? []), l]);
   }
 
-  const weeks = [...new Set([...derivedByWeek.keys(), ...assignments.keys()])].sort(
-    (a, b) => a - b,
-  );
+  const weeks = [
+    ...new Set([...derivedByWeek.keys(), ...assignments.keys()]),
+  ].sort((a, b) => a - b);
 
   return weeks.map((week) => {
     const derived = derivedByWeek.get(week) ?? [];
@@ -277,7 +388,10 @@ export function buildLedger(season: PunishmentSeason | null, lows: DerivedLow[])
 
     const useDerived = derivedLosers.length > 0;
     const losers = useDerived ? derivedLosers : sheetLosers;
-    const disagrees = useDerived && sheetLosers.length > 0 && !sameSet(derivedLosers, sheetLosers);
+    const disagrees =
+      useDerived &&
+      sheetLosers.length > 0 &&
+      !sameSet(derivedLosers, sheetLosers);
 
     return {
       // Carried on the row so a renderer can resolve co-owners without also
@@ -291,7 +405,8 @@ export function buildLedger(season: PunishmentSeason | null, lows: DerivedLow[])
       // A tie has two teams on the same score, so either one states it.
       points: derived.length ? derived[0].points : null,
       matchupId: derived.length === 1 ? derived[0].matchupId : null,
-      punishment: a?.punishmentId != null ? (byId.get(a.punishmentId) ?? null) : null,
+      punishment:
+        a?.punishmentId != null ? (byId.get(a.punishmentId) ?? null) : null,
       punishmentId: a?.punishmentId ?? null,
       completed: a?.completed ?? null,
     };
@@ -308,7 +423,12 @@ export interface LedgerTotals {
 export const ledgerTotals = (rows: LedgerRow[]): LedgerTotals => {
   const assigned = rows.filter((r) => r.punishmentId != null).length;
   const completed = rows.filter((r) => r.completed).length;
-  return { weeks: rows.length, assigned, completed, outstanding: assigned - completed };
+  return {
+    weeks: rows.length,
+    assigned,
+    completed,
+    outstanding: assigned - completed,
+  };
 };
 
 /**
@@ -322,10 +442,17 @@ export const ledgerTotals = (rows: LedgerRow[]): LedgerTotals => {
  * contention, so it should never also be selected, and if the sheet ever says
  * both then it is not something anyone can draw.
  */
-export function poolRemaining(season: PunishmentSeason | null, rows: LedgerRow[]) {
+export function poolRemaining(
+  season: PunishmentSeason | null,
+  rows: LedgerRow[],
+) {
   if (!season) return [];
-  const drawn = new Set(rows.map((r) => r.punishmentId).filter((id): id is number => id != null));
-  return season.suggestions.filter((s) => s.selected && !s.vetoed && !drawn.has(s.id));
+  const drawn = new Set(
+    rows.map((r) => r.punishmentId).filter((id): id is number => id != null),
+  );
+  return season.suggestions.filter(
+    (s) => s.selected && !s.vetoed && !drawn.has(s.id),
+  );
 }
 
 export interface OwnerTally {
@@ -340,7 +467,12 @@ export function tallyByOwner(rows: LedgerRow[]): OwnerTally[] {
   const out = new Map<string, OwnerTally>();
   for (const r of rows) {
     for (const slug of r.losers) {
-      const t = out.get(slug) ?? { slug, lost: 0, completed: 0, outstanding: 0 };
+      const t = out.get(slug) ?? {
+        slug,
+        lost: 0,
+        completed: 0,
+        outstanding: 0,
+      };
       t.lost += 1;
       if (r.punishmentId != null) {
         if (r.completed) t.completed += 1;
@@ -350,11 +482,27 @@ export function tallyByOwner(rows: LedgerRow[]): OwnerTally[] {
     }
   }
   return [...out.values()].sort(
-    (a, b) => b.outstanding - a.outstanding || b.lost - a.lost || a.slug.localeCompare(b.slug),
+    (a, b) =>
+      b.outstanding - a.outstanding ||
+      b.lost - a.lost ||
+      a.slug.localeCompare(b.slug),
   );
 }
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 /**
  * "2025-09-12" -> "Sep 12".

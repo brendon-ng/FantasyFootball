@@ -33,15 +33,12 @@ export default function PunishmentsPage() {
   }
 
   const names = Object.fromEntries([...getOwnerMap().values()].map((o) => [o.slug, o.name]));
-  const { src, isMock } = punishmentsSource();
-
   return (
     <PunishmentTracker
       seasons={getPunishmentLows()}
       teams={getPunishmentTeams()}
       names={names}
-      src={src}
-      isMock={isMock}
+      {...punishmentsSource()}
     />
   );
 }

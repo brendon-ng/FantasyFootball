@@ -1,8 +1,13 @@
 import Link from "next/link";
 
 import { Tip } from "@/components/tooltip";
-import { Col, ListHeader } from "@/components/ui";
-import { formatCompleted, teamFor, type LedgerRow, type TeamMap } from "@/lib/punishments";
+import { Col, ListHeader, Skeleton } from "@/components/ui";
+import {
+  formatCompleted,
+  teamFor,
+  type LedgerRow,
+  type TeamMap,
+} from "@/lib/punishments";
 
 /**
  * The people on a team, each their own link.
@@ -55,8 +60,16 @@ export function TeamNames({
  * the same thing drifting apart — which is why lineups live only on the matchup
  * page. Same rule here.
  *
- * ONE LINE PER ROW. Fourteen rows is a table, and a table that spends two lines
- * a row reads as a feed of events rather than a season at a glance.
+ * ONE LINE PER ROW ON A DESKTOP. Fourteen rows is a table, and a table that
+ * spends two lines a row reads as a feed of events rather than a season at a
+ * glance.
+ *
+ * ON A PHONE THE PUNISHMENT WRAPS INSTEAD OF TRUNCATING. The text runs to a full
+ * sentence and there is no width to spare, so a single line showed "Take a selfie
+ * with the bar…" — the row would name a punishment nobody could read. Wrapping
+ * costs height, which a phone has, rather than meaning, which it does not. The
+ * columns align to the TOP once a cell can be several lines tall; centring them
+ * against a three-line cell floats the week number into the middle of nowhere.
  *
  * The column widths live in `COL` because a `ListHeader` cell has to repeat the
  * width class of the row cell beneath it — these lists are flex rows, not
@@ -80,12 +93,23 @@ export function PunishmentLedger({
   rows,
   teams,
   names,
+  loading = false,
 }: {
   rows: LedgerRow[];
   /** Season-scoped team rosters, so a co-owned team is named in full. */
   teams: TeamMap;
   /** Owner slug -> display name. */
   names: Record<string, string>;
+  /**
+   * The sheet has not answered yet.
+   *
+   * HALF THIS TABLE IS ALREADY KNOWN at that point — the week, who lost it and
+   * by how little all come from the build, and only the punishment and whether
+   * it has been served are pending. So the same renderer draws the real columns
+   * and shimmers the two it is waiting on, rather than the page showing a
+   * spinner and then redrawing the rows it could have shown all along.
+   */
+  loading?: boolean;
 }) {
   return (
     <>
@@ -93,7 +117,10 @@ export function PunishmentLedger({
         <Col className={COL.week}>Wk</Col>
         <Col className={COL.owner}>Loser</Col>
         <Col className={COL.punishment}>Punishment</Col>
-        <Col className={COL.score} hint="Their score that week — the lowest in the league">
+        <Col
+          className={COL.score}
+          hint="Their score that week — the lowest in the league"
+        >
           Score
         </Col>
         <Col className={COL.status}>Done</Col>
@@ -101,21 +128,40 @@ export function PunishmentLedger({
 
       <ol className="divide-y divide-ink-700">
         {rows.map((row) => (
-          <li key={row.week} className="flex items-center gap-3 px-4 py-1.5 sm:px-5">
-            <span className={`tabular text-[11px] font-bold text-chalk-600 ${COL.week}`}>
+          <li
+            key={row.week}
+            className="flex items-start gap-3 px-4 py-1.5 sm:items-center sm:px-5"
+          >
+            <span
+              className={`tabular text-[11px] font-bold text-chalk-600 ${COL.week}`}
+            >
               {row.week}
             </span>
 
             <span className={`truncate text-sm ${COL.owner}`}>
-              <TeamNames season={row.season} slugs={row.losers} teams={teams} names={names} />
+              <TeamNames
+                season={row.season}
+                slugs={row.losers}
+                teams={teams}
+                names={names}
+              />
               {row.disagrees ? <Disagreement row={row} names={names} /> : null}
             </span>
 
             <span className={COL.punishment}>
-              {row.punishment ? (
+              {loading ? (
+                // Widths vary per row so the column reads as sentences of
+                // different lengths rather than a stack of identical bars.
+                <Skeleton
+                  className={`h-3.5 ${["w-3/5", "w-4/5", "w-2/3", "w-11/12"][row.week % 4]}`}
+                />
+              ) : row.punishment ? (
                 // Native title, not a Tip: a tooltip trigger on every row would
                 // underline the whole column on hover and read as interactive.
-                <span className="block truncate text-sm text-chalk-300" title={row.punishment.text}>
+                <span
+                  className="block text-sm text-chalk-300 sm:truncate"
+                  title={row.punishment.text}
+                >
                   {row.punishment.text}
                 </span>
               ) : row.punishmentId != null ? (
@@ -149,7 +195,11 @@ export function PunishmentLedger({
             </span>
 
             <span className={COL.status}>
-              <Status row={row} />
+              {loading ? (
+                <Skeleton className="ml-auto h-3 w-10" />
+              ) : (
+                <Status row={row} />
+              )}
             </span>
           </li>
         ))}
@@ -165,8 +215,15 @@ export function PunishmentLedger({
  * this marks a row that needs correcting in the sheet rather than changing what
  * the site says.
  */
-function Disagreement({ row, names }: { row: LedgerRow; names: Record<string, string> }) {
-  const label = (slugs: string[]) => slugs.map((s) => names[s] ?? s).join(" & ");
+function Disagreement({
+  row,
+  names,
+}: {
+  row: LedgerRow;
+  names: Record<string, string>;
+}) {
+  const label = (slugs: string[]) =>
+    slugs.map((s) => names[s] ?? s).join(" & ");
   return (
     <Tip
       text={`The sheet has ${label(row.sheetLosers)} for this week, but the scores say ${label(

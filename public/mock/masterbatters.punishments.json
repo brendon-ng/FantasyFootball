@@ -10,9 +10,9 @@
     "the assignments are transcribed from the spreadsheet. A few suggestion texts",
     "were truncated in the screenshot and are completed plausibly here.",
     "",
-    "2026 is invented, and exists to exercise the PRESEASON state — suggestions in,",
-    "voting under way, nothing selected and nothing assigned. That is the state the",
-    "league is actually in today, so it is the one most worth being able to see.",
+    "2026 is invented, and exists to exercise the VOTING phase — suggestions in,",
+    "votes being cast, nothing selected and nothing assigned. Use ?phase=suggesting",
+    "to see the third layout against the same data.",
     "",
     "Named `<slug>.punishments.json` so build-all.mjs prunes it from the other",
     "leagues' output, the same way it prunes avatars and mock replays."
@@ -22,6 +22,7 @@
   "seasons": [
     {
       "season": 2026,
+      "phase": "voting",
       "poolSize": 14,
       "suggestions": [
         { "id": 1, "text": "Play a game in jeans", "suggestedBy": "ross-bechtel", "votes": 4, "vetoed": false, "selected": false },
@@ -38,6 +39,7 @@
     },
     {
       "season": 2025,
+      "phase": "live",
       "poolSize": 14,
       "suggestions": [
         { "id": 1, "text": "Play a game in jeans", "suggestedBy": null, "votes": 5, "vetoed": false, "selected": true },
