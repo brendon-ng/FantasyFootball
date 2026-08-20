@@ -790,6 +790,41 @@ Do not wrap everything. A list whose fixed columns total well under the ~21.5rem
 phone gives fits fine, and a needless min-width introduces scrolling that was not
 there. Measure before adding: sum the `w-*` classes in the `ListHeader`.
 
+### Every dialog is one `Sheet`
+
+`components/sheet.tsx` owns the backdrop, the panel, the escape key, the scroll
+lock, the backdrop click, the `stopPropagation` that stops selecting text from
+dismissing, and the open/close animation. The trade modal, the suggestion modal
+and the identity picker all render through it. Three copies of four behaviours
+was three chances for one to be missing, and the identity picker was already
+missing the scroll lock.
+
+A SHEET SLIDES UP FROM THE BOTTOM ON A PHONE, and a centred dialog does not.
+Below `sm` the panel is flush to the bottom edge, so travelling up from it is
+where it appears to come from; centred on a desktop there is no edge to come
+from and a full-height slide reads as a flick, so it fades and settles.
+
+THE EXIT IS WHY IT IS A COMPONENT AND NOT A CSS CLASS. A dialog unmounts the
+moment it closes, so there is nothing left to transition. `Sheet` keeps it on
+screen for one animation and uses `animationend` to know when to let go — with a
+450ms backstop, because `animationend` never arrives in a throttled background
+tab and a dialog stuck open because a decoration failed is far worse than one
+that closes without sliding.
+
+EVERYTHING THAT DISMISSES GOES THROUGH `close()`, which is why children get it
+from a render prop. `close(after)` runs `after` INSTEAD of `onClose`, which is
+how an action that also dismisses animates out before it takes effect — picking
+an owner, or a suggestion that submitted successfully. Calling `onClose`
+directly unmounts mid-slide.
+
+A NULL `onClose` MEANS THE DIALOG MUST BE ANSWERED — no escape, no backdrop
+click. The first-visit identity prompt is the only one. `close(after)` still
+works there, because choosing is how you answer it.
+
+Reduced motion needs no special case: the blanket rule in globals.css clamps
+every duration to almost nothing, so both animations finish instantly and
+`animationend` still fires.
+
 ### A text field under 16px zooms iOS
 
 Safari zooms the whole page when an `input`, `textarea` or `select` is focused and

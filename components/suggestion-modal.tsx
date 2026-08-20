@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { useIdentity } from "@/components/identity";
+import { Sheet } from "@/components/sheet";
 import { addSuggestion } from "@/lib/punishments-live";
 import type { PunishmentSuggestion } from "@/lib/punishments";
 
@@ -57,24 +58,15 @@ export function SuggestionModal({
   const [error, setError] = useState<string | null>(null);
   const field = useRef<HTMLTextAreaElement>(null);
 
+  // Escape and the scroll lock belong to `Sheet`; this is only the focus.
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", onKey);
     field.current?.focus();
-    return () => {
-      document.body.style.overflow = previous;
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [onClose]);
+  }, []);
 
   const trimmed = text.trim();
   const canSubmit = trimmed.length > 0 && trimmed.length <= MAX && !busy;
 
-  const submit = async () => {
+  const submit = async (close: (after?: () => void) => void) => {
     if (!canSubmit) return;
     setBusy(true);
     setError(null);
@@ -85,8 +77,12 @@ export function SuggestionModal({
         text: trimmed,
         suggestedBy: anon ? null : me,
       });
-      onAdded(created);
-      onClose();
+      close(() => {
+        // Applied after the slide-down, so the new row does not appear behind a
+        // sheet that is still on screen.
+        onAdded(created);
+        onClose();
+      });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong.");
       setBusy(false);
@@ -96,115 +92,112 @@ export function SuggestionModal({
   const credited = anon || !me ? "Anonymous" : (names[me] ?? me);
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label="Suggest a punishment"
-      onClick={onClose}
-      className="fixed inset-0 z-50 flex items-end justify-center bg-ink-900/80 backdrop-blur-sm sm:items-center sm:p-4"
+    <Sheet
+      label="Suggest a punishment"
+      onClose={onClose}
+      // `dvh`, not `vh`: on a phone `vh` is the viewport WITHOUT the browser
+      // chrome, so a sheet capped in `vh` is taller than the space it has and
+      // its last control sits under the address bar.
+      panelClassName="max-h-[85dvh] max-w-[32rem] overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
     >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        // `dvh`, not `vh`: on a phone `vh` is the viewport WITHOUT the browser
-        // chrome, so a sheet capped in `vh` is taller than the space it has and
-        // its last control sits under the address bar.
-        className="max-h-[85dvh] w-full max-w-[32rem] overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
-      >
-        <div className="flex items-center justify-between border-b border-ink-600 px-4 py-3 sm:px-5">
-          <div>
-            <div className="eyebrow text-[10px]">{season} suggestions</div>
-            <div className="text-sm font-semibold">Suggest a punishment</div>
+      {({ close }) => (
+        <>
+          <div className="flex items-center justify-between border-b border-ink-600 px-4 py-3 sm:px-5">
+            <div>
+              <div className="eyebrow text-[10px]">{season} suggestions</div>
+              <div className="text-sm font-semibold">Suggest a punishment</div>
+            </div>
+            <button
+              type="button"
+              onClick={() => close()}
+              aria-label="Close"
+              className="rounded-md border border-ink-500 px-2 py-1 text-xs text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent"
+            >
+              Close
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close"
-            className="rounded-md border border-ink-500 px-2 py-1 text-xs text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent"
-          >
-            Close
-          </button>
-        </div>
 
-        {/* The sheet runs to the bottom edge of a phone, where the home
+          {/* The sheet runs to the bottom edge of a phone, where the home
             indicator sits over anything flush against it — so the submit button
             gets clearance on a device that has one, and nothing extra on a
             device that does not. */}
-        <div className="space-y-3 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:px-5 sm:pb-4">
-          <div>
-            <textarea
-              ref={field}
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              onKeyDown={(e) => {
-                // Enter submits; Shift+Enter is a newline. One sentence is the
-                // expected input, so the common case should not need the mouse.
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  void submit();
-                }
-              }}
-              rows={3}
-              maxLength={MAX}
-              placeholder="Play a game in flip flops"
-              /*
-               * 16px ON A PHONE, AND THAT IS NOT A STYLE CHOICE. iOS Safari zooms
-               * the page whenever a focused input, textarea or select computes to
-               * UNDER 16px, to make it readable — and this field is focused the
-               * moment the dialog opens, so at `text-sm` the zoom fired instantly
-               * and scaled the whole modal past the right edge of the screen. The
-               * dialog was never mis-sized; the viewport was.
-               *
-               * Fixed here rather than with `maximum-scale=1` on the viewport
-               * meta, which is the other common answer and disables pinch-zoom
-               * for the entire site.
-               *
-               * `sm:text-sm` puts it back at desktop, where nothing zooms and
-               * 16px in a dialog reads as oversized next to the page around it.
-               */
-              className="w-full resize-none rounded-lg border border-ink-500 bg-ink-850 px-3 py-2.5 text-base text-chalk-100 outline-none transition-colors placeholder:text-chalk-600 focus:border-accent-dim sm:text-sm"
-            />
-            <div className="mt-1 flex items-baseline justify-between gap-3 text-[11px]">
-              <span className="text-chalk-600">
-                From <span className="text-chalk-400">{credited}</span>
-              </span>
-              {/* Only once it is close enough to matter — a counter from the
-                  first keystroke reads as a limit being enforced on you. */}
-              {trimmed.length > MAX - 40 ? (
-                <span className="tabular shrink-0 text-chalk-600">
-                  {trimmed.length}/{MAX}
-                </span>
-              ) : null}
-            </div>
-          </div>
-
-          {me ? (
-            <label className="flex cursor-pointer items-center gap-2 text-xs text-chalk-400">
-              <input
-                type="checkbox"
-                checked={anon}
-                onChange={(e) => setAnon(e.target.checked)}
-                className="h-3.5 w-3.5 accent-[var(--color-accent)]"
+          <div className="space-y-3 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:px-5 sm:pb-4">
+            <div>
+              <textarea
+                ref={field}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                onKeyDown={(e) => {
+                  // Enter submits; Shift+Enter is a newline. One sentence is the
+                  // expected input, so the common case should not need the mouse.
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    void submit(close);
+                  }
+                }}
+                rows={3}
+                maxLength={MAX}
+                placeholder="Play a game in flip flops"
+                /*
+                 * 16px ON A PHONE, AND THAT IS NOT A STYLE CHOICE. iOS Safari zooms
+                 * the page whenever a focused input, textarea or select computes to
+                 * UNDER 16px, to make it readable — and this field is focused the
+                 * moment the dialog opens, so at `text-sm` the zoom fired instantly
+                 * and scaled the whole modal past the right edge of the screen. The
+                 * dialog was never mis-sized; the viewport was.
+                 *
+                 * Fixed here rather than with `maximum-scale=1` on the viewport
+                 * meta, which is the other common answer and disables pinch-zoom
+                 * for the entire site.
+                 *
+                 * `sm:text-sm` puts it back at desktop, where nothing zooms and
+                 * 16px in a dialog reads as oversized next to the page around it.
+                 */
+                className="w-full resize-none rounded-lg border border-ink-500 bg-ink-850 px-3 py-2.5 text-base text-chalk-100 outline-none transition-colors placeholder:text-chalk-600 focus:border-accent-dim sm:text-sm"
               />
-              Submit anonymously
-            </label>
-          ) : null}
-
-          {error ? (
-            <div className="rounded-lg border border-loss/40 bg-loss/10 px-3 py-2 text-xs leading-relaxed text-loss">
-              {error}
+              <div className="mt-1 flex items-baseline justify-between gap-3 text-[11px]">
+                <span className="text-chalk-600">
+                  From <span className="text-chalk-400">{credited}</span>
+                </span>
+                {/* Only once it is close enough to matter — a counter from the
+                  first keystroke reads as a limit being enforced on you. */}
+                {trimmed.length > MAX - 40 ? (
+                  <span className="tabular shrink-0 text-chalk-600">
+                    {trimmed.length}/{MAX}
+                  </span>
+                ) : null}
+              </div>
             </div>
-          ) : null}
 
-          <button
-            type="button"
-            onClick={() => void submit()}
-            disabled={!canSubmit}
-            className="w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            {busy ? "Adding…" : "Add suggestion"}
-          </button>
-        </div>
-      </div>
-    </div>
+            {me ? (
+              <label className="flex cursor-pointer items-center gap-2 text-xs text-chalk-400">
+                <input
+                  type="checkbox"
+                  checked={anon}
+                  onChange={(e) => setAnon(e.target.checked)}
+                  className="h-3.5 w-3.5 accent-[var(--color-accent)]"
+                />
+                Submit anonymously
+              </label>
+            ) : null}
+
+            {error ? (
+              <div className="rounded-lg border border-loss/40 bg-loss/10 px-3 py-2 text-xs leading-relaxed text-loss">
+                {error}
+              </div>
+            ) : null}
+
+            <button
+              type="button"
+              onClick={() => void submit(close)}
+              disabled={!canSubmit}
+              className="w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {busy ? "Adding…" : "Add suggestion"}
+            </button>
+          </div>
+        </>
+      )}
+    </Sheet>
   );
 }

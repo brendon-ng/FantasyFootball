@@ -139,6 +139,47 @@ body {
   animation: skeleton-sweep 1.6s ease-in-out infinite;
 }
 
+/*
+ * Bottom sheets and dialogs, entering and leaving.
+ *
+ * THE EXIT IS THE WHOLE REASON THIS IS CSS AND NOT A TRANSITION. A dialog
+ * unmounts the moment it closes, so there is nothing left to transition — the
+ * `Sheet` component holds it on screen for one animation and uses `animationend`
+ * to know when to let go. Which is why the leaving rules set `forwards`: the
+ * element must stay where the animation put it until React removes it.
+ *
+ * A SHEET SLIDES, A DIALOG DOES NOT. Below `sm` the panel is flush to the bottom
+ * edge and travelling up from it is where it appears to come from. Centred on a
+ * desktop it has no edge to come from, so sliding the full height of the screen
+ * reads as a flick; it fades and settles instead.
+ *
+ * The curve is the flat-out-then-ease one used for sheets on iOS. A symmetric
+ * ease makes a large panel feel like it is being dragged.
+ *
+ * Reduced motion needs nothing here: the blanket rule below clamps every
+ * duration to almost zero, so both animations complete instantly and
+ * `animationend` still fires, which closes the dialog exactly as it should.
+ */
+@keyframes sheet-in { from { transform: translateY(100%); } }
+@keyframes sheet-out { to { transform: translateY(100%); } }
+@keyframes overlay-in { from { opacity: 0; } }
+@keyframes overlay-out { to { opacity: 0; } }
+@keyframes dialog-in { from { opacity: 0; transform: translateY(0.5rem) scale(0.985); } }
+@keyframes dialog-out { to { opacity: 0; transform: translateY(0.5rem) scale(0.985); } }
+
+.sheet-backdrop { animation: overlay-in 200ms ease-out; }
+.sheet-backdrop[data-leaving] { animation: overlay-out 180ms ease-in forwards; }
+
+.sheet-panel { animation: sheet-in 260ms cubic-bezier(0.32, 0.72, 0, 1); }
+.sheet-panel[data-leaving] {
+  animation: sheet-out 200ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+@media (min-width: 40rem) {
+  .sheet-panel { animation: dialog-in 180ms ease-out; }
+  .sheet-panel[data-leaving] { animation: dialog-out 150ms ease-in forwards; }
+}
+
 /* Horizontal scrollers on mobile shouldn't show a chrome scrollbar. */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }

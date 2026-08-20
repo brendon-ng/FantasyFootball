@@ -4,13 +4,13 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
   useSyncExternalStore,
 } from "react";
 
 import type { NavOwner } from "@/components/nav";
+import { Sheet } from "@/components/sheet";
 
 /**
  * "Who are you?" — remembered in localStorage, used to emphasise your own team
@@ -63,9 +63,7 @@ const STORAGE_KEY = `ff:${process.env.NEXT_PUBLIC_LEAGUE ?? "den-ops"}:identity`
 const ME_COLOR = "#a78bfa";
 
 export type Identity =
-  | { kind: "unset" }
-  | { kind: "neutral" }
-  | { kind: "owner"; slug: string };
+  { kind: "unset" } | { kind: "neutral" } | { kind: "owner"; slug: string };
 
 interface IdentityContext {
   identity: Identity;
@@ -131,7 +129,10 @@ export function IdentityProvider({
   children: React.ReactNode;
 }) {
   const [picking, setPicking] = useState(false);
-  const validSlugs = useMemo(() => new Set(owners.map((o) => o.slug)), [owners]);
+  const validSlugs = useMemo(
+    () => new Set(owners.map((o) => o.slug)),
+    [owners],
+  );
 
   const raw = useSyncExternalStore(subscribe, getRaw, getServerRaw);
   const identity = useMemo(() => parse(raw, validSlugs), [raw, validSlugs]);
@@ -149,7 +150,11 @@ export function IdentityProvider({
     setPicking(false);
     try {
       if (next.kind === "unset") window.localStorage.removeItem(STORAGE_KEY);
-      else window.localStorage.setItem(STORAGE_KEY, next.kind === "neutral" ? "neutral" : next.slug);
+      else
+        window.localStorage.setItem(
+          STORAGE_KEY,
+          next.kind === "neutral" ? "neutral" : next.slug,
+        );
     } catch {
       // Non-fatal, but then there is nothing to notify about either.
     }
@@ -229,68 +234,66 @@ function IdentityPicker({
   /** Null on the first-visit prompt, which must be answered rather than escaped. */
   onDismiss: (() => void) | null;
 }) {
-  useEffect(() => {
-    if (!onDismiss) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onDismiss();
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [onDismiss]);
-
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label="Who are you?"
-      className="fixed inset-0 z-[100] flex items-end justify-center bg-ink-900/80 p-4 backdrop-blur-sm sm:items-center"
-      onClick={onDismiss ?? undefined}
+    <Sheet
+      label="Who are you?"
+      // Null on the first-visit prompt: no escape, no backdrop click, because it
+      // has to be answered. `close` still works — choosing is how you answer.
+      onClose={onDismiss}
+      zClassName="z-[100]"
+      backdropClassName="p-4"
+      panelClassName="max-h-[85dvh] max-w-md overflow-y-auto rounded-2xl border border-ink-500 bg-ink-850 shadow-2xl"
     >
-      <div
-        className="max-h-[85vh] w-full max-w-md overflow-y-auto rounded-2xl border border-ink-500 bg-ink-850 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="border-b border-ink-600 px-5 py-4">
-          <h2 className="text-lg font-bold tracking-tight">Who are you?</h2>
-          <p className="mt-1 text-[13px] leading-relaxed text-chalk-500">
-            Pick your team and we&apos;ll highlight you everywhere on the site. Saved in this
-            browser only — change it any time from the nav.
-          </p>
-        </div>
+      {({ close }) => (
+        <>
+          <div className="border-b border-ink-600 px-5 py-4">
+            <h2 className="text-lg font-bold tracking-tight">Who are you?</h2>
+            <p className="mt-1 text-[13px] leading-relaxed text-chalk-500">
+              Pick your team and we&apos;ll highlight you everywhere on the
+              site. Saved in this browser only — change it any time from the
+              nav.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-2 gap-px bg-ink-600">
-          {owners.map((o) => {
-            const active = current.kind === "owner" && current.slug === o.slug;
-            return (
-              <button
-                key={o.slug}
-                type="button"
-                onClick={() => onChoose({ kind: "owner", slug: o.slug })}
-                className={`px-3 py-2.5 text-left text-sm transition-colors ${
-                  active
-                    ? "bg-me/10 font-semibold text-me"
-                    : "bg-ink-850 text-chalk-300 hover:bg-ink-700/70 hover:text-chalk-100"
-                }`}
-              >
-                {o.name}
-              </button>
-            );
-          })}
-        </div>
+          <div className="grid grid-cols-2 gap-px bg-ink-600">
+            {owners.map((o) => {
+              const active =
+                current.kind === "owner" && current.slug === o.slug;
+              return (
+                <button
+                  key={o.slug}
+                  type="button"
+                  onClick={() =>
+                    close(() => onChoose({ kind: "owner", slug: o.slug }))
+                  }
+                  className={`px-3 py-2.5 text-left text-sm transition-colors ${
+                    active
+                      ? "bg-me/10 font-semibold text-me"
+                      : "bg-ink-850 text-chalk-300 hover:bg-ink-700/70 hover:text-chalk-100"
+                  }`}
+                >
+                  {o.name}
+                </button>
+              );
+            })}
+          </div>
 
-        <div className="border-t border-ink-600 p-3">
-          <button
-            type="button"
-            onClick={() => onChoose({ kind: "neutral" })}
-            className={`w-full rounded-lg border px-3 py-2.5 text-sm transition-colors ${
-              current.kind === "neutral"
-                ? "border-me-dim bg-me/10 text-me"
-                : "border-ink-500 text-chalk-400 hover:border-ink-400 hover:text-chalk-200"
-            }`}
-          >
-            I&apos;m just browsing
-          </button>
-        </div>
-      </div>
-    </div>
+          <div className="border-t border-ink-600 p-3">
+            <button
+              type="button"
+              onClick={() => close(() => onChoose({ kind: "neutral" }))}
+              className={`w-full rounded-lg border px-3 py-2.5 text-sm transition-colors ${
+                current.kind === "neutral"
+                  ? "border-me-dim bg-me/10 text-me"
+                  : "border-ink-500 text-chalk-400 hover:border-ink-400 hover:text-chalk-200"
+              }`}
+            >
+              I&apos;m just browsing
+            </button>
+          </div>
+        </>
+      )}
+    </Sheet>
   );
 }
 
@@ -305,14 +308,18 @@ export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
   const { identity, ready, openPicker } = useIdentity();
   if (!ready) return null;
 
-  const me = identity.kind === "owner" ? owners.find((o) => o.slug === identity.slug) : null;
+  const me =
+    identity.kind === "owner"
+      ? owners.find((o) => o.slug === identity.slug)
+      : null;
 
   // First and last word, so "Reagan Schmidt" reads RS rather than RE.
   const initials = me
     ? (() => {
         const parts = me.name.trim().split(/\s+/);
         return (
-          (parts[0]?.[0] ?? "") + (parts.length > 1 ? (parts.at(-1)?.[0] ?? "") : "")
+          (parts[0]?.[0] ?? "") +
+          (parts.length > 1 ? (parts.at(-1)?.[0] ?? "") : "")
         ).toUpperCase();
       })()
     : null;
@@ -328,7 +335,9 @@ export function IdentityBadge({ owners }: { owners: NavOwner[] }) {
             ? "Browsing anonymously — click to pick your team"
             : "Tell us which team is yours"
       }
-      aria-label={me ? `Viewing as ${me.name}. Change.` : "Choose which team is yours"}
+      aria-label={
+        me ? `Viewing as ${me.name}. Change.` : "Choose which team is yours"
+      }
       data-me-ignore=""
       // A solid fill, not a tint. At 15% opacity over a near-black surface the
       // circle was effectively invisible and the initials read as loose text
