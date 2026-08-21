@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { PunishmentLedger, TeamNames } from "@/components/punishment-ledger";
+import { CompleteModal } from "@/components/complete-modal";
 import { DrawModal } from "@/components/draw-modal";
 import { SuggestionModal } from "@/components/suggestion-modal";
 import { VoteModal } from "@/components/vote-modal";
@@ -65,6 +66,7 @@ export function PunishmentTracker({
   leagueRefs,
   userIdToSlug,
   drawTitle,
+  commissioner,
   src,
   endpoint,
   league,
@@ -82,16 +84,33 @@ export function PunishmentTracker({
   userIdToSlug: Record<string, string>;
   /** Tab title while the wheel is open, composed with the league's name. */
   drawTitle: string;
+  /**
+   * Owner slug allowed to log completions, or null for none.
+   *
+   * ONLY THE COMPLETION IS RESTRICTED. Anyone can read the ledger and anyone
+   * can spin a wheel — the draw is random and the sheet refuses a second one —
+   * but ticking a punishment off is a claim that something happened in the real
+   * world, and one person should be making it.
+   */
+  commissioner: string | null;
   src: string;
   /** Bare `/exec` URL for writes; null when reading the bundled sample. */
   endpoint: string | null;
   league: string;
   isMock: boolean;
 }) {
-  const { status, feed, error, insertSuggestion, recordDraw } =
-    usePunishments(src);
+  const {
+    status,
+    feed,
+    error,
+    insertSuggestion,
+    recordDraw,
+    recordCompletion,
+  } = usePunishments(src);
   const [composing, setComposing] = useState(false);
   const [voting, setVoting] = useState(false);
+  /** The ledger row whose completion date is being edited. */
+  const [completing, setCompleting] = useState<LedgerRow | null>(null);
   /**
    * Counts from the last save, laid over the feed's.
    *
@@ -388,7 +407,7 @@ export function PunishmentTracker({
             <Panel>
               <PanelHeader
                 title={`${active} Ledger`}
-                meta={`${totals.completed} of ${totals.assigned} served`}
+                meta={`${totals.completed} of ${totals.assigned} completed`}
                 legend="The score links to the game it happened in."
               />
               <PunishmentLedger
@@ -396,6 +415,13 @@ export function PunishmentTracker({
                 teams={teams}
                 names={names}
                 onDraw={endpoint ? openDraw : undefined}
+                onComplete={
+                  // A PERSON, not a team: a co-owner does not inherit this, so
+                  // the slug is compared raw rather than through `primaryOwner`.
+                  endpoint && me && me === commissioner
+                    ? setCompleting
+                    : undefined
+                }
               />
             </Panel>
           ) : (
@@ -447,7 +473,7 @@ export function PunishmentTracker({
                   <Col className="w-12 shrink-0 text-right">Done</Col>
                   <Col
                     className="w-12 shrink-0 text-right"
-                    hint="Assigned but not yet served"
+                    hint="Assigned but not yet completed"
                   >
                     Owed
                   </Col>
@@ -537,6 +563,21 @@ export function PunishmentTracker({
           />
         </>
       )}
+
+      {completing && endpoint && active ? (
+        <CompleteModal
+          endpoint={endpoint}
+          league={league}
+          season={active}
+          row={completing}
+          teams={teams}
+          names={names}
+          onSaved={(completed) =>
+            recordCompletion(active, completing.week, completed)
+          }
+          onClose={() => setCompleting(null)}
+        />
+      ) : null}
 
       {drawOpen && endpoint && active ? (
         <DrawModal

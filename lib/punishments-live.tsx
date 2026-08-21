@@ -34,6 +34,26 @@ export type FeedState =
   | { status: "ready"; feed: PunishmentFeed; error: null }
   | { status: "error"; feed: null; error: string };
 
+/** Stamps or clears a week's completion date in the feed already on screen. */
+const withCompletion = (
+  feed: PunishmentFeed,
+  season: number,
+  week: number,
+  completed: string | null,
+): PunishmentFeed => ({
+  ...feed,
+  seasons: feed.seasons.map((s) =>
+    s.season === season
+      ? {
+          ...s,
+          assignments: s.assignments.map((a) =>
+            a.week === week ? { ...a, completed } : a,
+          ),
+        }
+      : s,
+  ),
+});
+
 /**
  * Records a just-drawn punishment against its week.
  *
@@ -235,6 +255,12 @@ export function usePunishments(src: string): FeedState & {
     losers: string[],
     punishmentId: number,
   ) => void;
+  /** Show a completion this browser just logged, likewise. */
+  recordCompletion: (
+    season: number,
+    week: number,
+    completed: string | null,
+  ) => void;
 } {
   const [state, setState] = useState<FeedState>({
     status: "loading",
@@ -266,6 +292,20 @@ export function usePunishments(src: string): FeedState & {
                 losers,
                 punishmentId,
               ),
+            }
+          : prev,
+      );
+    },
+    [],
+  );
+
+  const recordCompletion = useCallback(
+    (season: number, week: number, completed: string | null) => {
+      setState((prev) =>
+        prev.status === "ready"
+          ? {
+              ...prev,
+              feed: withCompletion(prev.feed, season, week, completed),
             }
           : prev,
       );
@@ -315,7 +355,7 @@ export function usePunishments(src: string): FeedState & {
     };
   }, [src]);
 
-  return { ...state, insertSuggestion, recordDraw };
+  return { ...state, insertSuggestion, recordDraw, recordCompletion };
 }
 
 /**
@@ -354,6 +394,30 @@ export async function drawPunishment(
       ? data.remaining.map(Number).filter(Number.isFinite)
       : [],
   };
+}
+
+/**
+ * Logs when a punishment was served, or clears it back to owed.
+ *
+ * `completed` is an ISO date or null — null is a real value here, not a missing
+ * one, because a date typed into the wrong row has to be removable.
+ */
+export async function completePunishment(
+  endpoint: string,
+  body: {
+    league: string;
+    season: number;
+    week: number;
+    completed: string | null;
+  },
+): Promise<string | null> {
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ func: "completePunishment", ...body }),
+  });
+  const data = await readJson(res);
+  return typeof data.completed === "string" ? data.completed : null;
 }
 
 /**

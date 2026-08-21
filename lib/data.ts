@@ -14,7 +14,12 @@ import { readFileSync, existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 import { withBasePath } from "./base-path.ts";
-import { candidateProviders, refsBySeason, type LeagueRef, type Provider } from "./league-ref.ts";
+import {
+  candidateProviders,
+  refsBySeason,
+  type LeagueRef,
+  type Provider,
+} from "./league-ref.ts";
 import { espnProvider } from "./live/espn.ts";
 import { sleeperProvider } from "./live/sleeper.ts";
 import type { LiveProvider } from "./live/types.ts";
@@ -69,7 +74,9 @@ const fileCache = new Map<string, unknown>();
 function load<T>(relPath: string, fallback: T): T {
   if (fileCache.has(relPath)) return fileCache.get(relPath) as T;
   const p = join(DATA, relPath);
-  const value = existsSync(p) ? (JSON.parse(readFileSync(p, "utf8")) as T) : fallback;
+  const value = existsSync(p)
+    ? (JSON.parse(readFileSync(p, "utf8")) as T)
+    : fallback;
   fileCache.set(relPath, value);
   return value;
 }
@@ -81,9 +88,12 @@ function once<T>(fn: () => T): () => T {
 }
 
 export const getOwners = (): Owner[] => load("derived/owners.json", []);
-export const getSeasons = (): SeasonSummary[] => load("derived/seasons.json", []);
-export const getMatchupHistory = (): Matchup[] => load("derived/matchups.json", []);
-export const getOwnerRecords = (): OwnerRecord[] => load("derived/owner-records.json", []);
+export const getSeasons = (): SeasonSummary[] =>
+  load("derived/seasons.json", []);
+export const getMatchupHistory = (): Matchup[] =>
+  load("derived/matchups.json", []);
+export const getOwnerRecords = (): OwnerRecord[] =>
+  load("derived/owner-records.json", []);
 /**
  * Slim player index, minus anyone the overrides ignore.
  *
@@ -130,7 +140,10 @@ const playerTeamFile = once((): PlayerTeamFile => {
 });
 
 /** Team by player for one week, ready to hand to a lineup. */
-export function getPlayerTeamsAt(season: number, week: number): Record<string, string> {
+export function getPlayerTeamsAt(
+  season: number,
+  week: number,
+): Record<string, string> {
   const f = playerTeamFile();
   return {
     ...(f.seasons[String(season)] ?? {}),
@@ -139,26 +152,34 @@ export function getPlayerTeamsAt(season: number, week: number): Record<string, s
 }
 
 export const getPlayers = (): Record<string, PlayerMeta> => {
-  const all = JSON.parse(readFileSync(join(SHARED_DATA, "players.json"), "utf8")) as Record<
-    string,
-    PlayerMeta
-  >;
+  const all = JSON.parse(
+    readFileSync(join(SHARED_DATA, "players.json"), "utf8"),
+  ) as Record<string, PlayerMeta>;
   // `data/players.json` is the union across leagues, so it must be narrowed to
   // the players THIS league references — otherwise every league would generate a
   // player page for the others' players, with no data on it.
   const mine = load<string[] | null>("raw/player-ids.json", null);
-  const scoped = mine ? Object.fromEntries(mine.filter((id) => all[id]).map((id) => [id, all[id]])) : all;
+  const scoped = mine
+    ? Object.fromEntries(
+        mine.filter((id) => all[id]).map((id) => [id, all[id]]),
+      )
+    : all;
   // Optional: only a keeper league needs corrections, and a league with nothing
   // to correct should not have to carry an empty file.
   const overridesPath = join(CONFIG, "keeper-overrides.json");
   const ignored = new Set(
     existsSync(overridesPath)
-      ? ((JSON.parse(readFileSync(overridesPath, "utf8")) as { ignorePlayerIds?: string[] })
-          .ignorePlayerIds ?? [])
+      ? ((
+          JSON.parse(readFileSync(overridesPath, "utf8")) as {
+            ignorePlayerIds?: string[];
+          }
+        ).ignorePlayerIds ?? [])
       : [],
   );
   if (!ignored.size) return scoped;
-  return Object.fromEntries(Object.entries(scoped).filter(([id]) => !ignored.has(id)));
+  return Object.fromEntries(
+    Object.entries(scoped).filter(([id]) => !ignored.has(id)),
+  );
 };
 /**
  * Which seasons have week-by-week scores, as a phrase for UI copy.
@@ -168,20 +189,27 @@ export const getPlayers = (): Record<string, PlayerMeta> => {
  * that describes coverage should read it from here so the next recovered season
  * updates the copy for free.
  */
-export const weeklyCoverage = once((): {
-  seasons: number[];
-  /** e.g. "2019 and 2024-2025", or "no seasons". */
-  label: string;
-  /** Seasons on record with postseason scores only. */
-  missing: number[];
-  missingLabel: string;
-} => {
-  const withWeekly = new Set(getMatchupHistory().map((m) => m.season));
-  const all = getSeasons().map((s) => s.season);
-  const seasons = all.filter((y) => withWeekly.has(y)).sort((a, b) => a - b);
-  const missing = all.filter((y) => !withWeekly.has(y)).sort((a, b) => a - b);
-  return { seasons, label: rangeLabel(seasons), missing, missingLabel: rangeLabel(missing) };
-});
+export const weeklyCoverage = once(
+  (): {
+    seasons: number[];
+    /** e.g. "2019 and 2024-2025", or "no seasons". */
+    label: string;
+    /** Seasons on record with postseason scores only. */
+    missing: number[];
+    missingLabel: string;
+  } => {
+    const withWeekly = new Set(getMatchupHistory().map((m) => m.season));
+    const all = getSeasons().map((s) => s.season);
+    const seasons = all.filter((y) => withWeekly.has(y)).sort((a, b) => a - b);
+    const missing = all.filter((y) => !withWeekly.has(y)).sort((a, b) => a - b);
+    return {
+      seasons,
+      label: rangeLabel(seasons),
+      missing,
+      missingLabel: rangeLabel(missing),
+    };
+  },
+);
 
 /** [2019,2024,2025] -> "2019 and 2024-2025". Collapses runs so copy stays short. */
 function rangeLabel(years: number[]): string {
@@ -203,7 +231,8 @@ function rangeLabel(years: number[]): string {
     : `${runs.slice(0, -1).join(", ")} and ${runs[runs.length - 1]}`;
 }
 
-export const getWeeklyLows = (): WeeklyLow[] => load("derived/weekly-lows.json", []);
+export const getWeeklyLows = (): WeeklyLow[] =>
+  load("derived/weekly-lows.json", []);
 
 /**
  * Lookup for "was this team the low scorer that week", keyed `season:week:slug`.
@@ -214,7 +243,9 @@ export const getWeeklyLows = (): WeeklyLow[] => load("derived/weekly-lows.json",
  */
 export const getWeeklyLowKeys = once((): Set<string> => {
   if (!features().weeklyLowPunishment) return new Set();
-  return new Set(getWeeklyLows().map((w) => `${w.season}:${w.week}:${w.ownerSlug}`));
+  return new Set(
+    getWeeklyLows().map((w) => `${w.season}:${w.week}:${w.ownerSlug}`),
+  );
 });
 
 /**
@@ -239,7 +270,9 @@ export const getPunishmentLows = once((): SeasonLows[] => {
     opponent.set(`${m.season}:${m.week}:${m.home.ownerSlug}`, m.away.ownerSlug);
     opponent.set(`${m.season}:${m.week}:${m.away.ownerSlug}`, m.home.ownerSlug);
   }
-  const weeks = new Map(getSeasons().map((s) => [s.season, s.regularSeasonWeeks]));
+  const weeks = new Map(
+    getSeasons().map((s) => [s.season, s.regularSeasonWeeks]),
+  );
 
   const bySeason = new Map<number, SeasonLows>();
   /**
@@ -307,14 +340,17 @@ export const getPunishmentTeams = once((): TeamMap => {
       out[`${s.season}:${r.ownerSlug}`] = slugs.map((slug) => ({
         slug,
         label:
-          (slugs.length === 1 ? owners.get(slug)?.name : owners.get(slug)?.firstName) ?? slug,
+          (slugs.length === 1
+            ? owners.get(slug)?.name
+            : owners.get(slug)?.firstName) ?? slug,
       }));
     }
   }
   return out;
 });
 
-export const getDrafts = (): DraftPickRecord[] => load("derived/drafts.json", []);
+export const getDrafts = (): DraftPickRecord[] =>
+  load("derived/drafts.json", []);
 
 /**
  * Per player, what each owner got out of them each season.
@@ -345,7 +381,12 @@ const byeFilter = once(() => {
    * with no team on file still count their bye — better than dropping a real
    * week for someone we cannot place.
    */
-  return (season: number, week: number, playerId: string, points: number): boolean => {
+  return (
+    season: number,
+    week: number,
+    playerId: string,
+    points: number,
+  ): boolean => {
     // A BYE SCORES ZERO, ALWAYS. So a non-zero week is proof this is not one, and
     // the team on file must be wrong for that week — which happens, because the
     // team is recorded per SEASON and players are traded mid-season. Hockenson
@@ -368,8 +409,12 @@ const byeFilter = once(() => {
  * figure does. Duplicating the rule would be the only alternative, and two copies
  * of "a bye is not a game he played badly" is exactly how they drift.
  */
-export const onBye = (season: number, week: number, playerId: string, points: number): boolean =>
-  byeFilter()(season, week, playerId, points);
+export const onBye = (
+  season: number,
+  week: number,
+  playerId: string,
+  points: number,
+): boolean => byeFilter()(season, week, playerId, points);
 
 export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
   const onBye = byeFilter();
@@ -380,17 +425,15 @@ export const getPlayerUsage = once((): Record<string, PlayerUsage[]> => {
       for (const [playerId, points] of Object.entries(side.playerPoints)) {
         if (onBye(m.season, m.week, playerId, points)) continue;
         const key = `${playerId}|${m.season}|${side.ownerSlug}`;
-        const row =
-          acc.get(key) ??
-          {
-            season: m.season,
-            ownerSlug: side.ownerSlug,
-            rostered: 0,
-            started: 0,
-            startPoints: 0,
-            benchPoints: 0,
-            lastWeek: 0,
-          };
+        const row = acc.get(key) ?? {
+          season: m.season,
+          ownerSlug: side.ownerSlug,
+          rostered: 0,
+          started: 0,
+          startPoints: 0,
+          benchPoints: 0,
+          lastWeek: 0,
+        };
         row.rostered += 1;
         row.lastWeek = Math.max(row.lastWeek, m.week);
         if (started.has(playerId)) {
@@ -460,7 +503,12 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
   }
 
   const history = getPlayerHistory();
-  const blank = (): TradeStat => ({ games: 0, started: 0, startPoints: 0, benchPoints: 0 });
+  const blank = (): TradeStat => ({
+    games: 0,
+    started: 0,
+    startPoints: 0,
+    benchPoints: 0,
+  });
 
   const sum = (a: TradeStat, b: TradeStat): TradeStat => ({
     games: a.games + b.games,
@@ -476,7 +524,9 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
     ids: string[],
     fromWeek: number,
   ): { byPlayer: Record<string, TradeStat>; total: TradeStat } => {
-    const byPlayer: Record<string, TradeStat> = Object.fromEntries(ids.map((id) => [id, blank()]));
+    const byPlayer: Record<string, TradeStat> = Object.fromEntries(
+      ids.map((id) => [id, blank()]),
+    );
     for (let week = fromWeek; week <= 25; week++) {
       const side = byWeek.get(`${season}|${week}`)?.get(owner);
       if (!side) continue;
@@ -506,7 +556,11 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
           break;
         }
         if (e.action === "trade" && e.fromSlug === owner) {
-          byPlayer[playerId].exit = { kind: "traded", week: e.week, tradeId: e.tradeId };
+          byPlayer[playerId].exit = {
+            kind: "traded",
+            week: e.week,
+            tradeId: e.tradeId,
+          };
           break;
         }
       }
@@ -532,7 +586,8 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
   // as the league names it: whose pick it originally was.
   const pickBecame = new Map<string, DraftPickRecord>();
   for (const p of getDrafts()) {
-    if (p.slotOwnerSlug) pickBecame.set(`${p.season}|${p.round}|${p.slotOwnerSlug}`, p);
+    if (p.slotOwnerSlug)
+      pickBecame.set(`${p.season}|${p.round}|${p.slotOwnerSlug}`, p);
   }
 
   const out: Record<string, TradeReturn> = {};
@@ -550,7 +605,10 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
         );
         if (!made || made.ownerSlug !== leg.toSlug) continue;
         const key = `${made.season}|${leg.toSlug}`;
-        pickArrivals.set(key, [...(pickArrivals.get(key) ?? []), made.playerId]);
+        pickArrivals.set(key, [
+          ...(pickArrivals.get(key) ?? []),
+          made.playerId,
+        ]);
       }
     }
 
@@ -561,12 +619,16 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
         trade.vetoed
           ? []
           : trade.legs
-              .filter((l) => l.kind === "player" && l.toSlug === owner && l.playerId)
+              .filter(
+                (l) => l.kind === "player" && l.toSlug === owner && l.playerId,
+              )
               .map((l) => l.playerId as string),
       ]),
     );
 
-    let viaPick = new Map<string, string[]>(trade.ownerSlugs.map((o) => [o, []]));
+    let viaPick = new Map<string, string[]>(
+      trade.ownerSlugs.map((o) => [o, []]),
+    );
     const lastArrival = Math.max(
       trade.season,
       ...[...pickArrivals.keys()].map((k) => Number(k.split("|")[0])),
@@ -584,7 +646,9 @@ export const getTradeReturns = once((): Record<string, TradeReturn> => {
       for (const owner of trade.ownerSlugs) {
         const arriving = pickArrivals.get(`${season}|${owner}`) ?? [];
         if (arriving.length) {
-          viaPick.set(owner, [...new Set([...(viaPick.get(owner) ?? []), ...arriving])]);
+          viaPick.set(owner, [
+            ...new Set([...(viaPick.get(owner) ?? []), ...arriving]),
+          ]);
         }
       }
 
@@ -662,7 +726,9 @@ export const getTrades = (): Trade[] => load("derived/trades.json", []);
  * Passed to the client trade components as data, since they cannot call this.
  */
 export const seasonsWithPages = once((): number[] =>
-  getSeasons().filter((s) => s.finalized).map((s) => s.season),
+  getSeasons()
+    .filter((s) => s.finalized)
+    .map((s) => s.season),
 );
 
 /**
@@ -689,7 +755,8 @@ export const seasonsWithPages = once((): number[] =>
 export const getTradeParties = once((): Record<string, string[][]> => {
   const team = new Map<string, string[]>();
   for (const s of getSeasons()) {
-    for (const row of s.standings) team.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
+    for (const row of s.standings)
+      team.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
   }
   return Object.fromEntries(
     getTrades().map((t) => [
@@ -710,26 +777,31 @@ export const getTradeParties = once((): Record<string, string[][]> => {
  * moves: "Reagan's 2026 4th" is the same pick whoever is holding it, and
  * `slotOwnerSlug` on a draft pick is that same original owner.
  */
-export const getPickOutcomes = once(
-  (): Record<string, DraftPickRecord> =>
-    Object.fromEntries(
-      getDrafts()
-        .filter((p) => p.slotOwnerSlug)
-        .map((p) => [`${p.season}:${p.round}:${p.slotOwnerSlug}`, p]),
-    ),
+export const getPickOutcomes = once((): Record<string, DraftPickRecord> =>
+  Object.fromEntries(
+    getDrafts()
+      .filter((p) => p.slotOwnerSlug)
+      .map((p) => [`${p.season}:${p.round}:${p.slotOwnerSlug}`, p]),
+  ),
 );
 export const getPlayerHistory = (): Record<string, PlayerTransaction[]> =>
   load("derived/player-history.json", {});
 
 export const getRecords = (): LeagueRecords =>
   load("derived/records.json", {
-    weeklyHigh: [], weeklyLow: [], playerHigh: [],
-    biggestBlowout: [], narrowestWin: [],
-    highestCombined: [], lowestCombined: [],
+    weeklyHigh: [],
+    weeklyLow: [],
+    playerHigh: [],
+    biggestBlowout: [],
+    narrowestWin: [],
+    highestCombined: [],
+    lowestCombined: [],
   });
 
-export const getKeepers = (): { perSeason: SeasonKeepers[]; final: KeeperContract[] } =>
-  load("derived/keepers.json", { perSeason: [], final: [] });
+export const getKeepers = (): {
+  perSeason: SeasonKeepers[];
+  final: KeeperContract[];
+} => load("derived/keepers.json", { perSeason: [], final: [] });
 
 export interface LeagueFeatures {
   /** Keeper contracts, the keeper tracker, keeper history. */
@@ -753,6 +825,8 @@ export interface LeagueConfig {
   knownLeagueIds: Record<string, string>;
   /** Per-season ESPN league ids. See lib/league-ref. */
   espnLeagueIds?: Record<string, string>;
+  /** Owner slug allowed to log completions; absent means nobody can. */
+  commissioner?: string;
   /** Apps Script `/exec` URL fronting this league's Google Sheet. See below. */
   appsScriptEndpoint?: string;
 }
@@ -824,7 +898,10 @@ export const getRules = once((): { draftRounds: number; teams: number } => {
   for (const y of years) {
     const file = join(dir, `${y}.json`);
     if (existsSync(file)) {
-      const r = JSON.parse(readFileSync(file, "utf8")) as { draftRounds?: number; teams?: number };
+      const r = JSON.parse(readFileSync(file, "utf8")) as {
+        draftRounds?: number;
+        teams?: number;
+      };
       return { draftRounds: r.draftRounds ?? 17, teams: r.teams ?? 10 };
     }
   }
@@ -850,7 +927,9 @@ export const getRules = once((): { draftRounds: number; teams: number } => {
  */
 export function leagueAvatar(): string | null {
   for (const ext of ["png", "jpg", "gif"]) {
-    if (existsSync(join(process.cwd(), "public", "avatars", `${LEAGUE}.${ext}`))) {
+    if (
+      existsSync(join(process.cwd(), "public", "avatars", `${LEAGUE}.${ext}`))
+    ) {
       return `/avatars/${LEAGUE}.${ext}`;
     }
   }
@@ -860,7 +939,8 @@ export function leagueAvatar(): string | null {
 export const features = (): LeagueFeatures => getConfig().features;
 
 /** `"Records"` -> `"Records · Den Ops"`, so no page hardcodes a league name. */
-export const pageTitle = (name: string): string => `${name} · ${getConfig().shortName}`;
+export const pageTitle = (name: string): string =>
+  `${name} · ${getConfig().shortName}`;
 
 /**
  * Everyone credited with a team-season, for a placement tile or headline.
@@ -881,11 +961,12 @@ export const pageTitle = (name: string): string => `${name} · ${getConfig().sho
  * with Olivia and those years vanished from her season-by-season table while
  * still appearing in her finish chart, which reads the credit list.
  */
-export function teamSeasonFor<T extends { ownerSlug: string; ownerSlugs: string[] }>(
-  standings: T[],
-  slug: string,
-): T | undefined {
-  return standings.find((r) => (r.ownerSlugs?.length ? r.ownerSlugs : [r.ownerSlug]).includes(slug));
+export function teamSeasonFor<
+  T extends { ownerSlug: string; ownerSlugs: string[] },
+>(standings: T[], slug: string): T | undefined {
+  return standings.find((r) =>
+    (r.ownerSlugs?.length ? r.ownerSlugs : [r.ownerSlug]).includes(slug),
+  );
 }
 
 export function creditedNames(
@@ -933,7 +1014,9 @@ export const getUserIdToSlug = once((): Record<string, string> => {
  *
  * The one place that decides Sleeper vs ESPN for a league. See lib/league-ref.
  */
-export const getLeagueRefs = once((): Record<string, LeagueRef> => refsBySeason(getConfig()));
+export const getLeagueRefs = once((): Record<string, LeagueRef> =>
+  refsBySeason(getConfig()),
+);
 
 /**
  * The same providers the browser uses.
@@ -961,8 +1044,15 @@ export type { LiveMatchup, LiveSeason, LiveTeam } from "./types.ts";
  */
 export async function getLiveSeason(): Promise<LiveSeason | null> {
   const empty = (season: number): LiveSeason => ({
-    season, week: 0, displayWeek: 0, seasonType: "off",
-    status: "unknown", teams: [], matchups: [], unavailable: true, lastScoredLeg: null,
+    season,
+    week: 0,
+    displayWeek: 0,
+    seasonType: "off",
+    status: "unknown",
+    teams: [],
+    matchups: [],
+    unavailable: true,
+    lastScoredLeg: null,
   });
 
   try {
@@ -984,7 +1074,8 @@ export async function getLiveSeason(): Promise<LiveSeason | null> {
         if (!ref || ref.provider !== name) continue;
 
         // If this season is already finalized in committed data, nothing is live.
-        if (getSeasons().some((s) => s.season === state.season && s.finalized)) return null;
+        if (getSeasons().some((s) => s.season === state.season && s.finalized))
+          return null;
 
         const live = await provider.season(ref.id, state, ctx);
         // The league exists this year but the service had nothing to say — a
@@ -1049,7 +1140,11 @@ export interface AdpSnapshot {
  * alone left it a year behind for that whole stretch.
  */
 export const keeperCycleSeason = (): number =>
-  Math.max(0, ...getSeasons().map((s) => s.season), ...getDrafts().map((d) => d.season)) + 1;
+  Math.max(
+    0,
+    ...getSeasons().map((s) => s.season),
+    ...getDrafts().map((d) => d.season),
+  ) + 1;
 
 /**
  * The market, and whether it is still moving.
@@ -1118,7 +1213,11 @@ export const matchupPageId = (
   a: string,
   b: string | null | undefined,
 ): string | null =>
-  b ? (getMatchupPageIds().get(`${season}:${week}:${[a, b].sort().join("-")}`) ?? null) : null;
+  b
+    ? (getMatchupPageIds().get(
+        `${season}:${week}:${[a, b].sort().join("-")}`,
+      ) ?? null)
+    : null;
 
 /** One matchup between two owners, from either data era. */
 export interface Meeting {
@@ -1219,7 +1318,9 @@ function bracketLabel(
   const groups: Array<[BracketMatch[], boolean]> = [
     [s.winnersBracket, true],
     [s.losersBracket, false],
-    ...s.extraBrackets.map((x) => [x.matches, false] as [BracketMatch[], boolean]),
+    ...s.extraBrackets.map(
+      (x) => [x.matches, false] as [BracketMatch[], boolean],
+    ),
   ];
   for (const [matches, winners] of groups) {
     for (const m of matches) {
@@ -1239,7 +1340,10 @@ function bracketLabel(
  * `kind` fallback covers seasons with no bracket data, and normalises the raw
  * enum — "playoff" reached the UI lowercase and unpluralised.
  */
-export function matchupChip(label: string | null, kind: Matchup["kind"]): string {
+export function matchupChip(
+  label: string | null,
+  kind: Matchup["kind"],
+): string {
   if (kind === "regular") return "";
   if (label) return label;
   return kind === "playoff" ? "Playoffs" : "Consolation";
@@ -1290,7 +1394,8 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
   // season:primarySlug -> everyone credited on that team
   const teamOwners = new Map<string, string[]>();
   for (const s of seasons) {
-    for (const row of s.standings) teamOwners.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
+    for (const row of s.standings)
+      teamOwners.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
   }
   const owns = (season: number, primary: string, who: string) =>
     (teamOwners.get(`${season}:${primary}`) ?? [primary]).includes(who);
@@ -1300,26 +1405,53 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
       [m.home, m.away],
       [m.away, m.home],
     ] as const) {
-      if (!owns(m.season, x.ownerSlug, slugA) || !owns(m.season, y.ownerSlug, slugB)) continue;
+      if (
+        !owns(m.season, x.ownerSlug, slugA) ||
+        !owns(m.season, y.ownerSlug, slugB)
+      )
+        continue;
       out.push({
         id: meetingId(m.season, m.week, x.ownerSlug, y.ownerSlug),
         season: m.season,
         week: m.week,
         kind: m.kind,
         label: bracketLabel(m.season, m.week, x.ownerSlug, y.ownerSlug),
-        a: { ownerSlug: x.ownerSlug, points: x.points, starters: x.starters, playerPoints: x.playerPoints },
-        b: { ownerSlug: y.ownerSlug, points: y.points, starters: y.starters, playerPoints: y.playerPoints },
+        a: {
+          ownerSlug: x.ownerSlug,
+          points: x.points,
+          starters: x.starters,
+          playerPoints: x.playerPoints,
+        },
+        b: {
+          ownerSlug: y.ownerSlug,
+          points: y.points,
+          starters: y.starters,
+          playerPoints: y.playerPoints,
+        },
         hasLineups: true,
         // Oriented the same way round as `a`/`b`, which flip depending on which
         // owner the series is being read from.
         ...(m.weeks?.length
           ? {
               weeks: m.weeks.map((w) => {
-                const [wa, wb] = w.home.ownerSlug === x.ownerSlug ? [w.home, w.away] : [w.away, w.home];
+                const [wa, wb] =
+                  w.home.ownerSlug === x.ownerSlug
+                    ? [w.home, w.away]
+                    : [w.away, w.home];
                 return {
                   week: w.week,
-                  a: { ownerSlug: wa.ownerSlug, points: wa.points, starters: wa.starters, playerPoints: wa.playerPoints },
-                  b: { ownerSlug: wb.ownerSlug, points: wb.points, starters: wb.starters, playerPoints: wb.playerPoints },
+                  a: {
+                    ownerSlug: wa.ownerSlug,
+                    points: wa.points,
+                    starters: wa.starters,
+                    playerPoints: wa.playerPoints,
+                  },
+                  b: {
+                    ownerSlug: wb.ownerSlug,
+                    points: wb.points,
+                    starters: wb.starters,
+                    playerPoints: wb.playerPoints,
+                  },
                 };
               }),
             }
@@ -1340,7 +1472,9 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
     const brackets: Array<[BracketMatch[], Meeting["kind"]]> = [
       [s.winnersBracket, "playoff"],
       [s.losersBracket, "consolation"],
-      ...s.extraBrackets.map((b) => [b.matches, "consolation"] as [BracketMatch[], Meeting["kind"]]),
+      ...s.extraBrackets.map(
+        (b) => [b.matches, "consolation"] as [BracketMatch[], Meeting["kind"]],
+      ),
     ];
     for (const [matches, kind] of brackets) {
       for (const bm of matches) {
@@ -1349,7 +1483,8 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
           [bm.team1, bm.team2],
           [bm.team2, bm.team1],
         ] as const) {
-          if (!owns(s.season, t1, slugA) || !owns(s.season, t2, slugB)) continue;
+          if (!owns(s.season, t1, slugA) || !owns(s.season, t2, slugB))
+            continue;
           const p1 = bm.points[t1];
           const p2 = bm.points[t2];
           if (p1 == null || p2 == null) continue;
@@ -1358,7 +1493,9 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
             season: s.season,
             week: bm.week,
             kind,
-            label: bm.label ?? placementLabel(bm.placesFor, s.teams, kind === "playoff"),
+            label:
+              bm.label ??
+              placementLabel(bm.placesFor, s.teams, kind === "playoff"),
             a: { ownerSlug: t1, points: p1, starters: [], playerPoints: {} },
             b: { ownerSlug: t2, points: p2, starters: [], playerPoints: {} },
             hasLineups: false,
@@ -1369,7 +1506,9 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
     }
   }
 
-  return uniqueById(out).sort((x, y) => y.season - x.season || (y.week ?? 0) - (x.week ?? 0));
+  return uniqueById(out).sort(
+    (x, y) => y.season - x.season || (y.week ?? 0) - (x.week ?? 0),
+  );
 }
 
 /** One instance of a player being retained, taken from that season's draft. */
@@ -1400,7 +1539,9 @@ export function getKeepHistory(): KeepEvent[] {
       pickNo: p.pickNo,
       playerId: p.playerId,
     }))
-    .sort((a, b) => b.season - a.season || a.round - b.round || a.pickNo - b.pickNo);
+    .sort(
+      (a, b) => b.season - a.season || a.round - b.round || a.pickNo - b.pickNo,
+    );
 }
 
 /** Keep events for one player, oldest first. */
@@ -1607,7 +1748,9 @@ export function getRecordFlags(
   });
 
   // Only ranks the record book actually shows.
-  return out.filter((f) => f.rank <= RECORD_BOOK_DEPTH).sort((a, b) => a.rank - b.rank);
+  return out
+    .filter((f) => f.rank <= RECORD_BOOK_DEPTH)
+    .sort((a, b) => a.rank - b.rank);
 }
 
 /**
@@ -1621,7 +1764,7 @@ export function getRecordFlags(
  */
 export function getRecordThresholds(): RecordThresholds {
   const r = getRecords();
-  const cap = <T,>(xs: T[]) => xs.slice(0, MARK_DEPTH);
+  const cap = <T>(xs: T[]) => xs.slice(0, MARK_DEPTH);
   return {
     high: cap(r.weeklyHigh).map((s) => s.points),
     low: cap(r.weeklyLow).map((s) => s.points),

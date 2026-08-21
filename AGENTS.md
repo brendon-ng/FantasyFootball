@@ -739,6 +739,27 @@ React may re-render, which would re-scatter the pieces and restart their fall
 halfway down. A hash of the piece index looks the same and makes a screenshot
 reproducible, which is the same reason the mock draft order is seeded.
 
+### Logging a completion
+
+THE STATUS CELL IS THE CONTROL. Clicking `OWED` opens the date dialog, and
+clicking a date already there reopens it to amend or clear. Logging a completion
+is an edit to exactly the thing that cell shows, so a separate button beside it
+would be a second way to say one thing.
+
+DEFAULTS TO TODAY, computed from LOCAL date parts. `toISOString().slice(0, 10)`
+is the UTC date, which for anyone west of Greenwich is tomorrow for most of the
+evening — a punishment logged after dinner would be dated a day late.
+
+CLEARING IS A FIRST-CLASS ACTION, which is why `completePunishment` takes
+`completed: null` as an instruction rather than treating absence as "leave it
+alone". A date entered against the wrong week has to be removable without
+opening the spreadsheet. Omitting the key is an error; sending null wipes the
+cell. The endpoint distinguishes them, and it was checked.
+
+The season page does NOT get this — the status stays plain text there, because
+that surface has no dialog. Same asymmetry as the draw, which links across to
+`/punishments/` instead.
+
 ### Writing back
 
 `addSuggestion` is the first write, POSTed to the same `/exec` URL with `func` in

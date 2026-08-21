@@ -2,6 +2,7 @@ import { PunishmentTracker } from "@/components/punishment-tracker";
 import { EmptyState, Panel } from "@/components/ui";
 import {
   features,
+  getConfig,
   getOwnerMap,
   getPunishmentLows,
   getPunishmentTeams,
@@ -49,6 +50,7 @@ export default function PunishmentsPage() {
       leagueRefs={getLeagueRefs()}
       userIdToSlug={getUserIdToSlug()}
       drawTitle={pageTitle("Wheel of Punishments")}
+      commissioner={getConfig().commissioner ?? null}
       {...punishmentsSource()}
     />
   );

@@ -84,7 +84,7 @@ export function SeasonPunishments({
   return (
     <Shell
       season={season}
-      meta={`${totals.completed} of ${totals.assigned} served`}
+      meta={`${totals.completed} of ${totals.assigned} completed`}
       isMock={isMock}
     >
       <PunishmentLedger rows={rows} teams={teams} names={names} />

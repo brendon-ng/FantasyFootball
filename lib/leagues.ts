@@ -32,6 +32,8 @@ export interface LeagueConfig {
   features: LeagueFeatures;
   anchorUserId: string;
   knownLeagueIds: Record<string, string>;
+  /** Owner slug allowed to log punishment completions. */
+  commissioner?: string;
   /** Apps Script `/exec` URL fronting this league's sheet; empty means mock. */
   appsScriptEndpoint?: string;
   owners: Array<{
@@ -66,7 +68,9 @@ export function getLeague(slug: string): LeagueConfig {
   if (!existsSync(path)) throw new Error(`No league config at ${path}`);
   const cfg = JSON.parse(readFileSync(path, "utf8")) as LeagueConfig;
   if (cfg.slug !== slug) {
-    throw new Error(`config/leagues/${slug}/league.json declares slug "${cfg.slug}" — they must match`);
+    throw new Error(
+      `config/leagues/${slug}/league.json declares slug "${cfg.slug}" — they must match`,
+    );
   }
   return cfg;
 }

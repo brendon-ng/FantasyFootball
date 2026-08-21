@@ -94,6 +94,7 @@ export function PunishmentLedger({
   teams,
   names,
   onDraw,
+  onComplete,
   loading = false,
 }: {
   rows: LedgerRow[];
@@ -109,6 +110,14 @@ export function PunishmentLedger({
    * that does own it.
    */
   onDraw?: (row: LedgerRow) => void;
+  /**
+   * Log or amend when a punishment was served.
+   *
+   * Same shape as `onDraw`: present on the tracker, which owns the dialog.
+   * Absent elsewhere, where the status stays plain text rather than pretending
+   * to be a control that leads nowhere.
+   */
+  onComplete?: (row: LedgerRow) => void;
   /**
    * The sheet has not answered yet.
    *
@@ -237,6 +246,22 @@ export function PunishmentLedger({
             <span className={COL.status}>
               {loading ? (
                 <Skeleton className="ml-auto h-3 w-10" />
+              ) : onComplete && row.punishmentId != null ? (
+                // THE STATUS IS THE CONTROL. Logging a completion is an edit to
+                // exactly the thing this cell already shows, so a separate
+                // button beside it would be a second way to say one thing.
+                <button
+                  type="button"
+                  onClick={() => onComplete(row)}
+                  title={
+                    row.completed
+                      ? "Change or clear this date"
+                      : "Log when this was completed"
+                  }
+                  className="rounded transition-opacity hover:opacity-70"
+                >
+                  <Status row={row} />
+                </button>
               ) : (
                 <Status row={row} />
               )}

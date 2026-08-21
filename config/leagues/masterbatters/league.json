@@ -28,6 +28,16 @@
     "Public by construction: a static site ships this URL in its JavaScript. Fine",
     "for reads; the write endpoints will need a shared secret of their own."
   ],
+  "//commissioner": [
+    "Who may record that a punishment has been completed. Everyone can see the",
+    "ledger and anyone can spin a wheel, but marking somebody's punishment done",
+    "is a claim about the real world that one person should be making.",
+    "",
+    "A slug rather than a flag, and config rather than a hardcoded name, because",
+    "this repo serves several leagues and the commissioner differs per league.",
+    "A person, not a team: a co-owner does not inherit it."
+  ],
+  "commissioner": "brendon-ng",
   "appsScriptEndpoint": "https://script.google.com/macros/s/AKfycbz5JeSYyXcvcrXV8-i7XwZya3y78TWWIyFy36LPeYPibjZz-r-AngP54oAyRdpLK3fk/exec",
   "//discovery": [
     "Sleeper creates a NEW league_id every season and links it backward via",
