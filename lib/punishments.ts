@@ -111,7 +111,6 @@ export interface BallotState {
   mine: Ballot | null;
 }
 
-
 /** A weekly low as the site derives it, with the game it happened in. */
 export interface DerivedLow {
   season: number;
@@ -151,10 +150,39 @@ export interface TeamLabel {
 export type TeamMap = Record<string, TeamLabel[]>;
 
 /**
+ * The primary owner of whatever team this person was on that season.
+ *
+ * The map is keyed by PRIMARY owner, because that is how a team-season is keyed
+ * everywhere — but a slug can arrive naming the co-owner instead, from a
+ * hand-typed URL or a hand-edited sheet cell. Looked up rather than assumed, and
+ * returns the slug unchanged when it names nobody on a team.
+ */
+export function primaryOwner(
+  teams: TeamMap,
+  season: number,
+  slug: string,
+): string {
+  if (teams[`${season}:${slug}`]) return slug;
+  const prefix = `${season}:`;
+  for (const [key, people] of Object.entries(teams)) {
+    if (key.startsWith(prefix) && people.some((p) => p.slug === slug)) {
+      return key.slice(prefix.length);
+    }
+  }
+  return slug;
+}
+
+/**
  * Who to name for a team, falling back to the person themselves.
  *
- * The fallback matters: a loser slug can come from the SHEET for a week that has
- * not been archived, and it will not be in any standings row yet.
+ * NAMING A CO-OWNER NAMES THE WHOLE TEAM. `thomas-moore` is not a key in the
+ * map — Robbie is the primary — so a slug arriving that way used to render one
+ * person for a team of two, on a screen whose entire job is saying who owes
+ * something. Resolved to the primary first, so it does not matter which half of
+ * a shared team a URL or a sheet cell happens to name.
+ *
+ * The final fallback still matters: a loser slug can come from the SHEET for a
+ * week that has not been archived, and will not be in any standings row yet.
  */
 export function teamFor(
   teams: TeamMap,
@@ -162,7 +190,8 @@ export function teamFor(
   season: number,
   slug: string,
 ): TeamLabel[] {
-  return teams[`${season}:${slug}`] ?? [{ slug, label: names[slug] ?? slug }];
+  const key = primaryOwner(teams, season, slug);
+  return teams[`${season}:${key}`] ?? [{ slug, label: names[slug] ?? slug }];
 }
 
 // ---------------------------------------------------------------------------
