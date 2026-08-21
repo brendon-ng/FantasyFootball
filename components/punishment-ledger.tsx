@@ -141,7 +141,7 @@ export function PunishmentLedger({
         >
           Score
         </Col>
-        <Col className={COL.status}>Done</Col>
+        <Col className={COL.status}>Status</Col>
       </ListHeader>
 
       <ol className="divide-y divide-ink-700">
@@ -254,9 +254,9 @@ export function PunishmentLedger({
                   type="button"
                   onClick={() => onComplete(row)}
                   title={
-                    row.completed
+                    row.completed || row.planned
                       ? "Change or clear this date"
-                      : "Log when this was completed"
+                      : "Plan a date, or log when it was completed"
                   }
                   className="rounded transition-opacity hover:opacity-70"
                 >
@@ -301,11 +301,27 @@ function Disagreement({
   );
 }
 
+/**
+ * Three states, which is why the column says Status rather than Done: a planned
+ * date IS a date, but it is still owed, so a tick beside it would claim
+ * something that has not happened. Green and ticked for done, amber and
+ * unticked for planned, the plain word for nothing arranged.
+ */
 function Status({ row }: { row: LedgerRow }) {
   if (row.completed) {
     return (
       <span className="tabular whitespace-nowrap text-[11px] font-semibold text-win">
         ✓ {formatCompleted(row.completed)}
+      </span>
+    );
+  }
+  if (row.planned) {
+    return (
+      <span
+        title={`Planned for ${formatCompleted(row.planned)} — not done yet`}
+        className="tabular whitespace-nowrap text-[11px] font-semibold text-gold"
+      >
+        {formatCompleted(row.planned)}
       </span>
     );
   }

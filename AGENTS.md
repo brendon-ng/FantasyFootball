@@ -739,6 +739,29 @@ React may re-render, which would re-scatter the pieces and restart their fall
 halfway down. A hash of the piece index looks the same and makes a screenshot
 reproducible, which is the same reason the mock draft order is seeded.
 
+### A planned date is a completed date a thousand years out
+
+The sheet has ONE date cell per week, and the league wanted "we intend to do
+this on the 11th" recorded separately from "it happened on the 11th" without
+adding a column or changing the API. So a plan is stored with 1000 added to its
+year — 2026-11-11 planned is written `3026-11-11` — and confirming it subtracts
+the thousand back off. Detected by the year, threshold 3000, because a fantasy
+season is a 20xx number and never will not be.
+
+THE COST IS REAL AND DELIBERATE. Anyone reading the spreadsheet sees dates in
+the 3020s, and `getWeeklyPunishments` serves that raw value to any future
+consumer, which will read it as a date unless it knows the rule. So it is
+encoded and decoded in ONE place: the feed keeps whatever the sheet holds, and
+`buildLedger` splits it into `completed` and `planned`. Nothing else looks at
+the raw cell.
+
+A PLANNED WEEK IS STILL OWED. Only `completed` counts as done, so the stat
+tiles, the tally and the outstanding count are unaffected by a plan — checked.
+The status column therefore says Status rather than Done and has three states:
+green and ticked for done, amber and UNTICKED for planned, the plain word for
+nothing arranged. A tick beside a planned date would claim something that has
+not happened.
+
 ### Logging a completion
 
 THE STATUS CELL IS THE CONTROL. Clicking `OWED` opens the date dialog, and

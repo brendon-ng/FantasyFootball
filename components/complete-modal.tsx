@@ -7,6 +7,7 @@ import { TeamNames } from "@/components/punishment-ledger";
 import { completePunishment } from "@/lib/punishments-live";
 import {
   formatCompleted,
+  toPlanned,
   type LedgerRow,
   type TeamMap,
 } from "@/lib/punishments";
@@ -25,7 +26,7 @@ const today = (): string => {
 };
 
 /**
- * Log the day a punishment was served.
+ * Plan a punishment, or log the day it happened.
  *
  * DEFAULTS TO TODAY, because that is when a punishment is nearly always logged
  * — somebody does the thing and somebody else marks it off. The field is a
@@ -35,6 +36,11 @@ const today = (): string => {
  * CLEARING IS A FIRST-CLASS ACTION, not an omission. A date typed against the
  * wrong week has to be removable, and "mark it owed again" is the only way to
  * do that without editing the sheet by hand.
+ *
+ * PLAN AND COMPLETE SHARE ONE FIELD, because they are the same question asked
+ * at two moments and the answer is usually the same date — a plan confirmed on
+ * the day is one tap. They differ only in which button is pressed, and the
+ * sheet stores a plan a thousand years out; see the note in lib/punishments.
  */
 export function CompleteModal({
   endpoint,
@@ -55,7 +61,11 @@ export function CompleteModal({
   onSaved: (completed: string | null) => void;
   onClose: () => void;
 }) {
-  const [date, setDate] = useState(() => row.completed ?? today());
+  // Seeded from whichever is set: confirming a plan usually means confirming
+  // the day that was planned.
+  const [date, setDate] = useState(
+    () => row.completed ?? row.planned ?? today(),
+  );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -123,7 +133,7 @@ export function CompleteModal({
             ) : null}
 
             <label className="block">
-              <span className="eyebrow text-[10px]">Completed on</span>
+              <span className="eyebrow text-[10px]">Date</span>
               <input
                 type="date"
                 value={date}
@@ -140,25 +150,36 @@ export function CompleteModal({
               </div>
             ) : null}
 
-            <button
-              type="button"
-              onClick={() => void save(date, close)}
-              disabled={busy || !date}
-              className="w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {busy ? "Saving…" : "Mark as completed"}
-            </button>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => void save(toPlanned(date), close)}
+                disabled={busy || !date}
+                className="flex-1 rounded-lg border border-ink-500 px-4 py-2.5 text-sm font-medium text-chalk-300 transition-colors hover:border-gold/60 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Plan for this date
+              </button>
+              <button
+                type="button"
+                onClick={() => void save(date, close)}
+                disabled={busy || !date}
+                className="flex-1 rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {busy ? "Saving…" : "Mark as completed"}
+              </button>
+            </div>
 
             {/* Only where there is something to undo. Offering it on a row that
                 was never completed is a control that cannot do anything. */}
-            {row.completed ? (
+            {row.completed || row.planned ? (
               <button
                 type="button"
                 onClick={() => void save(null, close)}
                 disabled={busy}
                 className="w-full text-center text-xs text-chalk-500 underline-offset-2 transition-colors hover:text-loss hover:underline disabled:opacity-40"
               >
-                Clear {formatCompleted(row.completed)} and mark it owed again
+                Clear {formatCompleted(row.completed ?? row.planned)} and mark
+                it owed again
               </button>
             ) : null}
           </div>

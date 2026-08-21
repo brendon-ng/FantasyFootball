@@ -33,6 +33,46 @@ export interface PunishmentSuggestion {
   selected: boolean;
 }
 
+/**
+ * A PLANNED DATE IS A COMPLETED DATE A THOUSAND YEARS OUT.
+ *
+ * The sheet has one date cell per week, and the league wanted "we intend to do
+ * this on the 11th" recorded separately from "it happened on the 11th" without
+ * adding a column or changing the API. So a plan is stored with 1000 added to
+ * its year — 2026-11-11 planned is written 3026-11-11 — and confirming it
+ * subtracts the thousand back off.
+ *
+ * THE COST IS REAL. Anyone reading the spreadsheet sees dates in the 3020s, and
+ * `getWeeklyPunishments` serves that raw value to any future consumer, which
+ * will read it as a date unless it knows this rule. So it is encoded and
+ * decoded ONLY here: the feed keeps whatever the sheet holds, `buildLedger`
+ * splits it, and nothing else ever looks.
+ *
+ * Detected by the year rather than a marker, and 3000 is the threshold because
+ * a fantasy season is a 20xx number and never will not be.
+ */
+const PLANNED_OFFSET = 1000;
+const PLANNED_FROM_YEAR = 3000;
+const ISO_DATE = /^(\d{4})(-\d{2}-\d{2})/;
+
+const shiftYear = (iso: string, by: number): string => {
+  const m = ISO_DATE.exec(iso);
+  return m ? `${Number(m[1]) + by}${m[2]}` : iso;
+};
+
+/** True when this cell holds an intention rather than a record. */
+export const isPlanned = (iso: string | null): boolean => {
+  const m = iso ? ISO_DATE.exec(iso) : null;
+  return m ? Number(m[1]) >= PLANNED_FROM_YEAR : false;
+};
+
+/** The real date behind a planned one. */
+export const fromPlanned = (iso: string): string =>
+  shiftYear(iso, -PLANNED_OFFSET);
+
+/** How a planned date is written to the sheet. */
+export const toPlanned = (iso: string): string => shiftYear(iso, PLANNED_OFFSET);
+
 export interface PunishmentAssignment {
   week: number;
   /**
@@ -41,7 +81,10 @@ export interface PunishmentAssignment {
    */
   losers: string[];
   punishmentId: number | null;
-  /** ISO date, or null while it is still owed. */
+  /**
+   * Whatever the sheet's date cell holds, UNDECODED — a real completion, or a
+   * plan carrying its thousand-year offset. `buildLedger` separates the two.
+   */
   completed: string | null;
 }
 
@@ -430,7 +473,10 @@ export interface LedgerRow {
   punishment: PunishmentSuggestion | null;
   /** Kept even when the punishment is unknown, so a bad id is visible. */
   punishmentId: number | null;
+  /** A real completion. Null while it is only planned, or still owed. */
   completed: string | null;
+  /** When they intend to do it. Null once it is done, or if nothing is set. */
+  planned: string | null;
 }
 
 const sameSet = (a: string[], b: string[]) =>
@@ -488,7 +534,10 @@ export function buildLedger(
       punishment:
         a?.punishmentId != null ? (byId.get(a.punishmentId) ?? null) : null,
       punishmentId: a?.punishmentId ?? null,
-      completed: a?.completed ?? null,
+      // One cell, two meanings, split here and nowhere else.
+      completed: isPlanned(a?.completed ?? null) ? null : (a?.completed ?? null),
+      planned:
+        a?.completed && isPlanned(a.completed) ? fromPlanned(a.completed) : null,
     };
   });
 }
