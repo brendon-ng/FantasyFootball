@@ -50,9 +50,23 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-ink-900 text-chalk-100">
+      {/*
+       * `min-h-svh`, NOT `h-full` on <html> with `min-h-full` here.
+       *
+       * A PERCENTAGE HEIGHT ON THE ROOT RESOLVES AGAINST THE LARGE VIEWPORT on
+       * iOS — the one with the browser toolbars collapsed — so `height: 100%`
+       * made the document permanently taller than the screen while the address
+       * bar was showing, and the surplus was dead scroll below the footer.
+       *
+       * `svh` is the SMALL viewport: the visible area with the toolbars out, the
+       * smallest it ever gets. As a floor that means the page can never be
+       * taller than what is on screen, so there is nothing to scroll into. `dvh`
+       * would track the toolbars instead, but it changes value mid-scroll and
+       * would shuffle the footer while you read.
+       */}
+      <body className="flex min-h-svh flex-col bg-ink-900 text-chalk-100">
         <StickyParams />
         <IdentityProvider owners={navOwners}>
         <Nav
