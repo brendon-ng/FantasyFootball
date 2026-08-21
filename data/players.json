@@ -1298,7 +1298,7 @@
   "4233": {
     "full_name": "Zane Gonzalez",
     "position": "K",
-    "team": "MIA",
+    "team": null,
     "years_exp": 9
   },
   "4234": {
@@ -2594,7 +2594,7 @@
   "7608": {
     "full_name": "Khalil Herbert",
     "position": "RB",
-    "team": null,
+    "team": "SF",
     "years_exp": 5
   },
   "7609": {
