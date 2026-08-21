@@ -74,12 +74,16 @@ interface IdentityContext {
   /**
    * Open the team picker, optionally resuming something afterwards.
    *
-   * `onPicked` runs ONLY if they choose a team — the whole point of the callback
-   * is that the caller needed an identity, and "just browsing" is a refusal to
-   * give one. Without it a control that opens the picker leaves people stranded:
-   * the button said "Cast your votes", showed a team picker, and then stopped.
+   * `onAnswered` runs for EITHER answer and is told which — callers need
+   * different things. Voting cannot proceed without a team, so it checks; the
+   * draw only wants to know whether to warn you that this is not your wheel,
+   * and "just browsing" is a perfectly good answer to that.
+   *
+   * It does not fire on DISMISSAL, which is not an answer. Without any callback
+   * a control that opens the picker strands people: the button said "Cast your
+   * votes", showed a team picker, and then stopped.
    */
-  openPicker: (onPicked?: () => void) => void;
+  openPicker: (onAnswered?: (chosen: Identity) => void) => void;
 }
 
 const Ctx = createContext<IdentityContext>({
@@ -172,9 +176,9 @@ export function IdentityProvider({
   }, []);
 
   // A ref, not state: it is read once by a callback and changes nothing on screen.
-  const resume = useRef<(() => void) | null>(null);
-  const openPicker = useCallback((onPicked?: () => void) => {
-    resume.current = onPicked ?? null;
+  const resume = useRef<((chosen: Identity) => void) | null>(null);
+  const openPicker = useCallback((onAnswered?: (chosen: Identity) => void) => {
+    resume.current = onAnswered ?? null;
     setPicking(true);
   }, []);
 
@@ -189,7 +193,7 @@ export function IdentityProvider({
       const after = resume.current;
       resume.current = null;
       setIdentity(next);
-      if (next.kind === "owner") after?.();
+      after?.(next);
     },
     [setIdentity],
   );

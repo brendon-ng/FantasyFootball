@@ -2,13 +2,18 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { useIdentity } from "@/components/identity";
 import { Sheet } from "@/components/sheet";
 import { TeamNames } from "@/components/punishment-ledger";
 import { Wheel } from "@/components/wheel";
 import { useWeekScore } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
 import { drawPunishment } from "@/lib/punishments-live";
-import type { PunishmentSuggestion, TeamMap } from "@/lib/punishments";
+import {
+  primaryOwner,
+  type PunishmentSuggestion,
+  type TeamMap,
+} from "@/lib/punishments";
 
 /** The dataviz palette again, so the confetti is the wheel's own colours. */
 const HUES = [
@@ -142,6 +147,28 @@ export function DrawModal({
   const [revealed, setRevealed] = useState<PunishmentSuggestion | null>(null);
   const [fallback, setFallback] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  /** Who the viewer is, when that is somebody other than the loser. */
+  const [confirm, setConfirm] = useState<string | null>(null);
+
+  const { identity, ready: identityReady, openPicker } = useIdentity();
+
+  /**
+   * IS THIS THE PERSON WHOSE WHEEL THIS IS?
+   *
+   * COMPARED AS TEAMS, NOT PEOPLE. Thomas spinning a wheel keyed to Robbie is
+   * not a mistake — it is one team with two people on it — so both sides go
+   * through `primaryOwner` first. Season-scoped, because they share a team in
+   * one year and not the next.
+   *
+   * Null when there is nothing to object to: no stored identity, somebody who
+   * has chosen not to say, or a match.
+   */
+  const mismatch = (who: typeof identity): string | null => {
+    if (who.kind !== "owner" || !losers.length) return null;
+    const mine = primaryOwner(teams, season, who.slug);
+    const theirs = primaryOwner(teams, season, losers[0]);
+    return mine === theirs ? null : (names[who.slug] ?? who.slug);
+  };
 
   /**
    * THE WHEEL STARTS BEFORE THE SERVER ANSWERS.
@@ -155,8 +182,37 @@ export function DrawModal({
    * draws and the second came back "already drawn", painting an error over a
    * result that had in fact succeeded.
    */
+  /**
+   * The identity check in front of the spin.
+   *
+   * A WARNING, NEVER A BLOCK. Someone else genuinely may be running the draw —
+   * the loser is not always at a keyboard — so this only catches a mis-click.
+   * Anyone who has not said who they are is asked first, since the answer is
+   * what makes the check possible; declining is a fine answer and simply spins,
+   * because there is then nothing to compare.
+   */
+  const requestSpin = () => {
+    if (spinning || !slices.length) return;
+    if (
+      !identityReady ||
+      identity.kind === "unset" ||
+      identity.kind === "neutral"
+    ) {
+      openPicker((chosen) => {
+        const other = mismatch(chosen);
+        if (other) setConfirm(other);
+        else void spin();
+      });
+      return;
+    }
+    const other = mismatch(identity);
+    if (other) setConfirm(other);
+    else void spin();
+  };
+
   const spin = async () => {
     if (spinning || !slices.length) return;
+    setConfirm(null);
     setError(null);
     // Both before the await: from here the feed may move and must be ignored.
     setLocked(slices);
@@ -194,12 +250,62 @@ export function DrawModal({
       label="Draw a punishment"
       // Not dismissible mid-spin: the result is already saved, so leaving now
       // would hide something that has happened.
-      onClose={spinning && !result ? null : onClose}
+      onClose={(spinning && !result) || confirm ? null : onClose}
       panelClassName="max-h-[92dvh] max-w-[46rem] overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
     >
       {({ close }) => (
         <>
           {result && !wasDrawn ? <Confetti /> : null}
+
+          {/* LAYERED, NOT INLINE. Swapped in where the button was, the warning
+              is two lines taller than the control it replaced, so the panel
+              resized and the wheel jumped up the screen the moment it appeared.
+              A dialog of its own leaves everything underneath exactly where it
+              was. Above this one in the stack, and the outer sheet stops
+              answering Escape while it is up, or one key would dismiss both. */}
+          {confirm ? (
+            <Sheet
+              label="This is not your draw"
+              onClose={() => setConfirm(null)}
+              zClassName="z-[60]"
+              panelClassName="max-w-[24rem] rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
+            >
+              {({ close: closeConfirm }) => (
+                <div className="space-y-4 px-5 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pb-5">
+                  <p className="text-sm leading-relaxed text-chalk-300">
+                    You are browsing as{" "}
+                    <strong className="text-gold">{confirm}</strong>, but this
+                    draw is for{" "}
+                    <strong className="text-chalk-100">
+                      <TeamNames
+                        season={season}
+                        slugs={losers}
+                        teams={teams}
+                        names={names}
+                      />
+                    </strong>
+                    .
+                  </p>
+                  <div className="flex justify-end gap-2">
+                    <button
+                      type="button"
+                      onClick={() => closeConfirm()}
+                      className="rounded-lg border border-ink-500 px-4 py-2 text-sm font-medium text-chalk-400 transition-colors hover:border-ink-400 hover:text-chalk-200"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => closeConfirm(() => void spin())}
+                      className="rounded-lg bg-accent px-4 py-2 text-sm font-bold text-ink-900 transition-opacity hover:opacity-90"
+                    >
+                      Spin anyway
+                    </button>
+                  </div>
+                </div>
+              )}
+            </Sheet>
+          ) : null}
 
           <div className="flex items-center justify-between border-b border-ink-600 px-4 py-3 sm:px-5">
             <div className="text-sm font-semibold">Wheel of Punishments</div>
@@ -323,7 +429,7 @@ export function DrawModal({
                   ) : (
                     <button
                       type="button"
-                      onClick={() => void spin()}
+                      onClick={requestSpin}
                       disabled={spinning}
                       className="rounded-full bg-accent px-8 py-3 text-base font-bold text-ink-900 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
                     >

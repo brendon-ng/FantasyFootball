@@ -509,7 +509,11 @@ export function PunishmentTracker({
                     ? () => setComposing(true)
                     : me
                       ? () => setVoting(true)
-                      : () => openPicker(() => setVoting(true))
+                      : () =>
+                          openPicker((chosen) => {
+                            // Voting needs a key, so only a team resumes it.
+                            if (chosen.kind === "owner") setVoting(true);
+                          })
               }
               acted={phase === "voting" && iVoted}
               // Suggestions stay open during voting, as a quieter second action.
