@@ -61,8 +61,32 @@ const HUES = [
 ];
 
 /** How fast the wheel turns while it waits. The landing is matched to it. */
-const FREE_MS_PER_TURN = 900;
+const FREE_MS_PER_TURN = 650;
 const FREE_DEG_PER_MS = 360 / FREE_MS_PER_TURN;
+
+/**
+ * The shape of the run-down.
+ *
+ * ONLY TWO THINGS ABOUT THIS CURVE MATTER. Its slope where it ENDS is zero, so
+ * the wheel comes to rest rather than stopping dead. Its slope where it BEGINS
+ * is `OPENING_SLOPE`, which is what the duration is derived from below and what
+ * keeps the handoff from the free spin seamless.
+ *
+ * A CUBIC EASE-OUT, arrived at by trying longer tails and preferring this. A
+ * fatter tail keeps the wheel visibly creeping later — five times as much
+ * travel left at 90% of the run-down — but in practice that reads as the wheel
+ * struggling to stop rather than coming to rest, and it costs seconds. Constant
+ * deceleration (quadratic) is the other end and stops too briskly.
+ *
+ * `cubic-bezier(1/3, 1, 2/3, 1)` IS `1 - (1 - x)^3` exactly, not an
+ * approximation: those control points make x(t) = t, so the easing is precisely
+ * that polynomial and its opening slope is exactly 3. That is what lets the
+ * duration below be derived rather than tuned.
+ */
+const OPENING_SLOPE = 3;
+const EASE = "cubic-bezier(0.333, 1, 0.667, 1)";
+/** Turns to travel beyond whatever is needed to reach the slice. */
+const EXTRA_TURNS = 3;
 
 const SIZE = 320;
 const C = SIZE / 2;
@@ -177,8 +201,9 @@ export function Wheel({
        * won.
        */
       const offset = landOn * step + step * (0.15 + Math.random() * 0.7);
-      // At least two more turns from wherever the free spin happens to be.
-      const settle = (((-(from + offset) % 360) + 360) % 360) + 720;
+      // At least EXTRA_TURNS more from wherever the free spin happens to be.
+      const settle =
+        (((-(from + offset) % 360) + 360) % 360) + 360 * EXTRA_TURNS;
 
       /**
        * THE DECELERATION STARTS AT EXACTLY THE FREE SPIN'S SPEED.
@@ -188,17 +213,19 @@ export function Wheel({
        * handoff read as a lurch — the wheel visibly grabbed and hauled itself
        * to the answer, which looks rigged.
        *
-       * Instead the curve is a quadratic ease-out — cubic-bezier(1/3, 2/3, 2/3,
-       * 1) is that exactly — whose initial slope is 2, so its opening speed is
-       * `2 * distance / duration`. Setting `duration = 2 * distance / v0` makes
-       * that identically `v0`, and the wheel simply keeps going and runs down.
+       * The curve opens at `OPENING_SLOPE`, so its opening speed is
+       * `OPENING_SLOPE * distance / duration`. Setting `duration =
+       * OPENING_SLOPE * distance / v0` makes that identically `v0`, and the
+       * wheel simply keeps going and runs down — whatever curve is used.
+       * Drawing the stop out further is therefore a matter of picking a
+       * steeper-opening curve, and cannot reintroduce the lurch.
        *
-       * The duration therefore VARIES with how far it has to travel, which is
-       * the price of a seamless handoff and is invisible: a spin that has to
-       * cross more of the wheel takes longer, exactly as a real one would.
+       * The duration VARIES with how far it has to travel, which is the price
+       * of a seamless handoff and is invisible: a spin that crosses more of the
+       * wheel takes longer, exactly as a real one would.
        */
-      const duration = Math.round((2 * settle) / FREE_DEG_PER_MS);
-      el.style.transition = `transform ${duration}ms cubic-bezier(0.333, 0.667, 0.667, 1)`;
+      const duration = Math.round((OPENING_SLOPE * settle) / FREE_DEG_PER_MS);
+      el.style.transition = `transform ${duration}ms ${EASE}`;
       el.style.transform = `rotate(${from + settle}deg)`;
     }
   }, [spinning, landOn, settledAt, step]);
