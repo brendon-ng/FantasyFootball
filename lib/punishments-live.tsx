@@ -35,6 +35,34 @@ export type FeedState =
   | { status: "error"; feed: null; error: string };
 
 /**
+ * Records a just-drawn punishment against its week.
+ *
+ * Same reasoning as `withSuggestion`: the server has told us exactly what it
+ * wrote, so a refetch would only confirm what is already in hand. Upserts,
+ * because the week may have had no assignment row at all before the draw.
+ */
+const withAssignment = (
+  feed: PunishmentFeed,
+  season: number,
+  week: number,
+  losers: string[],
+  punishmentId: number,
+): PunishmentFeed => ({
+  ...feed,
+  seasons: feed.seasons.map((s) =>
+    s.season === season
+      ? {
+          ...s,
+          assignments: [
+            ...s.assignments.filter((a) => a.week !== week),
+            { week, losers, punishmentId, completed: null },
+          ].sort((a, b) => a.week - b.week),
+        }
+      : s,
+  ),
+});
+
+/**
  * Splices a just-created suggestion into the feed already on screen.
  *
  * MERGED LOCALLY RATHER THAN REFETCHED. The endpoint echoes the row it wrote, so
@@ -100,11 +128,27 @@ export async function addSuggestion(
   return created;
 }
 
-/** Shared body handling: Apps Script answers 200 even when it means no. */
+/**
+ * Shared body handling: Apps Script answers 200 even when it means no.
+ *
+ * AND SOMETIMES IT ANSWERS WITH HTML. An uncaught exception in the script is
+ * served as Google's own error page, still under a 200, so `res.json()` throws
+ * a parse error and the modal would show the reader "Unexpected token '<'".
+ * Caught here and named for what it is, because it means the script broke
+ * rather than the request being wrong.
+ */
 async function readJson(res: Response): Promise<Record<string, unknown>> {
   if (!res.ok)
     throw new Error(`The sheet rejected the request (${res.status}).`);
-  const payload: unknown = await res.json();
+  const body = await res.text();
+  let payload: unknown;
+  try {
+    payload = JSON.parse(body);
+  } catch {
+    throw new Error(
+      "The sheet returned an error page instead of data — the script threw.",
+    );
+  }
   const data =
     typeof payload === "object" && payload !== null
       ? (payload as Record<string, unknown>)
@@ -184,6 +228,13 @@ export async function castBallot(
 export function usePunishments(src: string): FeedState & {
   /** Show a row this browser just created, without waiting for a refetch. */
   insertSuggestion: (season: number, created: PunishmentSuggestion) => void;
+  /** Show a punishment this browser just drew, likewise. */
+  recordDraw: (
+    season: number,
+    week: number,
+    losers: string[],
+    punishmentId: number,
+  ) => void;
 } {
   const [state, setState] = useState<FeedState>({
     status: "loading",
@@ -196,6 +247,26 @@ export function usePunishments(src: string): FeedState & {
       setState((prev) =>
         prev.status === "ready"
           ? { ...prev, feed: withSuggestion(prev.feed, season, created) }
+          : prev,
+      );
+    },
+    [],
+  );
+
+  const recordDraw = useCallback(
+    (season: number, week: number, losers: string[], punishmentId: number) => {
+      setState((prev) =>
+        prev.status === "ready"
+          ? {
+              ...prev,
+              feed: withAssignment(
+                prev.feed,
+                season,
+                week,
+                losers,
+                punishmentId,
+              ),
+            }
           : prev,
       );
     },
@@ -244,7 +315,45 @@ export function usePunishments(src: string): FeedState & {
     };
   }, [src]);
 
-  return { ...state, insertSuggestion };
+  return { ...state, insertSuggestion, recordDraw };
+}
+
+/**
+ * Draws a punishment for a week, and returns what was drawn.
+ *
+ * THE SERVER PICKS, not the browser, and it picks inside the same lock that
+ * writes the row. So the wheel is a REVEAL of something already committed:
+ * spinning, disliking the result and closing the tab does not undo it, and two
+ * people drawing at the same moment cannot be handed the same punishment.
+ * Re-rolling by reloading is refused server-side too — a week that already has
+ * a punishment is an error, not an overwrite.
+ *
+ * IT IS ALSO WHY THE WRITE RUNS BEFORE THE ANIMATION rather than after. If the
+ * sheet says no, the wheel never spins and the reason is shown; the alternative
+ * is watching a result land and then being told it was not saved.
+ */
+export async function drawPunishment(
+  endpoint: string,
+  body: { league: string; season: number; week: number; loser: string },
+): Promise<{ punishmentId: number; text: string | null; remaining: number[] }> {
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ func: "drawPunishment", ...body }),
+  });
+  const data = await readJson(res);
+
+  const punishmentId = Number(data.punishmentId);
+  if (!Number.isFinite(punishmentId)) {
+    throw new Error("The sheet drew something but did not say what.");
+  }
+  return {
+    punishmentId,
+    text: typeof data.text === "string" ? data.text : null,
+    remaining: Array.isArray(data.remaining)
+      ? data.remaining.map(Number).filter(Number.isFinite)
+      : [],
+  };
 }
 
 /**

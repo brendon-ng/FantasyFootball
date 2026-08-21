@@ -21,7 +21,12 @@ import {
   mockDraftDate,
   mockDraftOrder,
 } from "@/lib/draft-slots";
-import { PROVIDER_NAME, candidateProviders, refKey, type LeagueRef } from "@/lib/league-ref";
+import {
+  PROVIDER_NAME,
+  candidateProviders,
+  refKey,
+  type LeagueRef,
+} from "@/lib/league-ref";
 import { applyPhaseMock, type Replay } from "@/lib/phase-mock";
 import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
 import type { LiveSeason } from "@/lib/types";
@@ -38,7 +43,96 @@ import type {
   LiveTradedPick,
 } from "./types.ts";
 
-export type { LeagueMove, LiveDraft, LiveMove, LiveRoster, LiveState, LiveTradedPick } from "./types.ts";
+export type {
+  LeagueMove,
+  LiveDraft,
+  LiveMove,
+  LiveRoster,
+  LiveState,
+  LiveTradedPick,
+} from "./types.ts";
+
+/** One team's week, with whoever they played. */
+export interface WeekScore {
+  points: number;
+  opponentSlug: string | null;
+  opponentPoints: number | null;
+}
+
+/**
+ * What an owner scored in one specific week, and against whom.
+ *
+ * LIVE, BECAUSE THE DERIVED ANSWER IS NOT THERE YET. `weekly-lows.json` only
+ * knows a week once it has been archived, and a punishment is drawn in the days
+ * before that happens — so the score the draw screen most wants is precisely the
+ * one the build does not have.
+ *
+ * Two fetches, because the scoreboard is in roster ids and the caller asked
+ * about a person: the roster list resolves owner to roster, and co-owners count,
+ * since a co-owned team is one roster with two people on it.
+ *
+ * Fails soft to null. The draw works without a score; it is context, not a
+ * prerequisite.
+ */
+export function useWeekScore(
+  ref: LeagueRef | null,
+  week: number | null,
+  slug: string | null,
+  userIdToSlug: Record<string, string>,
+): WeekScore | null {
+  const [score, setScore] = useState<WeekScore | null>(null);
+  const key =
+    ref && week != null && slug ? `${refKey(ref)}:${week}:${slug}` : null;
+
+  useEffect(() => {
+    const provider = providerFor(ref);
+    if (!key || !ref || !provider || week == null || !slug) return;
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const [rosters, games] = await Promise.all([
+          provider.rosters(ref.id, ref.season),
+          provider.weekGames(ref.id, ref.season, week),
+        ]);
+        const slugsOf = (r: (typeof rosters)[number]) =>
+          [r.ownerId, ...r.coOwners]
+            .map((u) => (u ? userIdToSlug[u] : null))
+            .filter(Boolean);
+        const mine = rosters.find((r) => slugsOf(r).includes(slug));
+        if (!mine) return;
+
+        const game = games.find((g) =>
+          g.sides.some((x) => x.rosterId === mine.rosterId),
+        );
+        const side = game?.sides.find((x) => x.rosterId === mine.rosterId);
+        if (!side) return;
+
+        const other =
+          game?.sides.find((x) => x.rosterId !== mine.rosterId) ?? null;
+        const theirs = other
+          ? (rosters.find((r) => r.rosterId === other.rosterId) ?? null)
+          : null;
+
+        if (!cancelled) {
+          setScore({
+            points: side.points,
+            opponentSlug: theirs ? (slugsOf(theirs)[0] ?? null) : null,
+            opponentPoints: other?.points ?? null,
+          });
+        }
+      } catch {
+        // Context only — the page is fine without it.
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [key, ref, week, slug, userIdToSlug]);
+
+  return score;
+}
 
 const PROVIDERS: Record<LeagueRef["provider"], LiveProvider> = {
   sleeper: sleeperProvider,
@@ -47,7 +141,6 @@ const PROVIDERS: Record<LeagueRef["provider"], LiveProvider> = {
 
 const providerFor = (ref: LeagueRef | null): LiveProvider | null =>
   ref ? PROVIDERS[ref.provider] : null;
-
 
 /**
  * Shared plumbing for the one-shot hooks.
@@ -81,7 +174,8 @@ function useProviderData<T>(
         const data = await load(provider, ref);
         if (!cancelled) setState({ status: "ready", data, error: null });
       } catch (err) {
-        if (!cancelled) setState({ status: "error", data: null, error: String(err) });
+        if (!cancelled)
+          setState({ status: "error", data: null, error: String(err) });
       }
     })();
 
@@ -98,12 +192,18 @@ function useProviderData<T>(
 
 /** Live rosters for a league. */
 export function useLiveRosters(ref: LeagueRef | null): LiveState<LiveRoster[]> {
-  return useProviderData<LiveRoster[]>(ref, [], (p, r) => p.rosters(r.id, r.season));
+  return useProviderData<LiveRoster[]>(ref, [], (p, r) =>
+    p.rosters(r.id, r.season),
+  );
 }
 
 /** Picks that have changed hands, for the upcoming draft. */
-export function useLiveTradedPicks(ref: LeagueRef | null): LiveState<LiveTradedPick[]> {
-  return useProviderData<LiveTradedPick[]>(ref, [], (p, r) => p.tradedPicks(r.id, r.season));
+export function useLiveTradedPicks(
+  ref: LeagueRef | null,
+): LiveState<LiveTradedPick[]> {
+  return useProviderData<LiveTradedPick[]>(ref, [], (p, r) =>
+    p.tradedPicks(r.id, r.season),
+  );
 }
 
 /**
@@ -113,7 +213,9 @@ export function useLiveTradedPicks(ref: LeagueRef | null): LiveState<LiveTradedP
  * after the keeper deadline, and picks are traded up to the last minute. It gets
  * committed to `data/<slug>/derived/drafts.json` once the draft completes.
  */
-export function useLiveDraft(ref: LeagueRef | null): LiveState<LiveDraft | null> {
+export function useLiveDraft(
+  ref: LeagueRef | null,
+): LiveState<LiveDraft | null> {
   return useProviderData<LiveDraft | null>(ref, null, async (p, r) => {
     const raw = await p.draft(r.id, r.season);
     if (!raw) return null;
@@ -181,7 +283,9 @@ export function useLiveSeason(
   useEffect(() => {
     if (!mockPhase()) return;
     let cancelled = false;
-    fetch(withBasePath(`/mock/${process.env.NEXT_PUBLIC_LEAGUE ?? "den-ops"}.json`))
+    fetch(
+      withBasePath(`/mock/${process.env.NEXT_PUBLIC_LEAGUE ?? "den-ops"}.json`),
+    )
       .then((r) => (r.ok ? r.json() : null))
       .then((r) => {
         if (!cancelled) setReplay(r as Replay | null);
@@ -200,9 +304,11 @@ export function useLiveSeason(
    * only Sleeper in a year the league has moved to ESPN finds nothing.
    */
   const seasonKeys = Object.keys(refBySeason).sort().join(",");
-  const providers = useMemo(() => candidateProviders(refBySeason),
+  const providers = useMemo(
+    () => candidateProviders(refBySeason),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [seasonKeys]);
+    [seasonKeys],
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -226,7 +332,10 @@ export function useLiveSeason(
             const ref = refBySeason[String(st.season)];
             if (!ref || ref.provider !== name) continue;
 
-            const next = await provider.season(ref.id, st, { slugByRoster, userIdToSlug });
+            const next = await provider.season(ref.id, st, {
+              slugByRoster,
+              userIdToSlug,
+            });
             if (cancelled) return;
             if (!next) continue;
             setLive(applyPhaseMock(next, mockPhase(), replay, mockWeek()));

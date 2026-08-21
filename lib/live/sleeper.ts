@@ -188,6 +188,19 @@ export const sleeperProvider: LiveProvider = {
    * the next few weeks and discards everything not about this player. Failed
    * claims are dropped: a lost waiver is an attempt, not an event.
    */
+  async weekGames(id, _season, week) {
+    const raw = await json<RawMatchup[]>(`${BASE}/league/${id}/matchups/${week}`, []);
+    const byId = new Map<number, Array<{ rosterId: number; points: number }>>();
+    for (const m of raw ?? []) {
+      if (m.matchup_id == null) continue;
+      byId.set(m.matchup_id, [
+        ...(byId.get(m.matchup_id) ?? []),
+        { rosterId: m.roster_id, points: round2(m.points ?? 0) },
+      ]);
+    }
+    return [...byId.entries()].map(([matchupId, sides]) => ({ matchupId, sides }));
+  },
+
   async moves(id, _season, playerId, fromWeek, weeks) {
     const pages = await Promise.all(
       Array.from({ length: weeks }, (_, i) => fromWeek + i).map((w) =>

@@ -5,7 +5,9 @@ import {
   getOwnerMap,
   getPunishmentLows,
   getPunishmentTeams,
+  getLeagueRefs,
   getOwners,
+  getUserIdToSlug,
   pageTitle,
   punishmentsSource,
 } from "@/lib/data";
@@ -44,6 +46,9 @@ export default function PunishmentsPage() {
       teams={getPunishmentTeams()}
       names={names}
       activeOwners={getOwners().filter((o) => o.active).length}
+      leagueRefs={getLeagueRefs()}
+      userIdToSlug={getUserIdToSlug()}
+      drawTitle={pageTitle("Wheel of Punishments")}
       {...punishmentsSource()}
     />
   );

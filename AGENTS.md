@@ -642,6 +642,103 @@ The viewer's own picks are ticked on the page's ballot list. Their own ballot on
 their own screen is not what secrecy covers, and without it nothing on the page
 says what "Edit your votes" would open.
 
+### The draw
+
+`?draw=1&week=5&loser=<slug>` on `/punishments/` opens the wheel. ADDRESSED BY
+URL so it can be reached before any navigation to it exists, and so a
+half-finished draw survives a reload. The flag is separate from the week on
+purpose — otherwise a stray `week` left in the address bar reopens the dialog.
+
+THE WEEK IS VALIDATED AGAINST THE LEDGER, never taken on trust: a week nobody
+lost, or one already drawn for, simply does not open. The LOSER falls back to
+the URL only where the site has not derived one yet, which is exactly when a
+draw happens — the days after a week, before it is archived — and is the same
+rule the ledger uses.
+
+AN ALREADY-DRAWN WEEK OPENS AS A VIEW, not a refusal — the wheel renders resting
+on what was drawn, with no animation and no confetti, since it is a record
+rather than an event. Restricting the URL's week to UNDRAWN weeks was a bug with
+a confusing symptom: the dialog closed the instant a draw landed, because the
+week stopped matching the allow-list and `useUrlState` fell back to empty. No
+stop, no reveal, no confetti.
+
+THE SLICES ARE FROZEN WHEN THE DIALOG OPENS. `pool` comes from the feed, and the
+feed changes the moment a draw is recorded — a live list drops a slice out from
+under a spinning wheel and leaves the landing index pointing at something else.
+
+THE SCORELINE IS FETCHED LIVE, from `useWeekScore`. A draw happens in the days
+after a week and before the archive run, so the DERIVED score is missing exactly
+when this screen wants it; the derived one still wins where it exists, being the
+same number for no request. It needs two calls — the scoreboard is in roster ids
+and the caller asked about a person — and co-owners are matched too, since a
+co-owned team is one roster with two people on it. `weekGames` exists on the
+provider because `season()` only ever reads the week the league is currently on.
+Verified against 2025 week 14: 74.96 vs 144.44, and the 74.96 agrees with
+`weekly-lows.json` to the cent.
+
+THE SHEET CHECKS THE NAME TOO. If a week's row already has a Loser but no
+punishment, `drawPunishment` rejects a request whose `loser` disagrees with it.
+That is the backstop for the URL being authoritative here: a typo in `loser=`
+can no longer quietly assign somebody else's punishment, as long as the sheet
+already knows who lost. NOT re-checked client-side — same rule as everywhere
+else on this page, the server says no and its message is shown verbatim.
+
+THE SERVER DRAWS, AND THE WHEEL ONLY REVEALS IT. `drawPunishment` picks
+uniformly from the remaining pool inside the same lock that writes the row, and
+the browser spins to an answer that is already committed. That is what makes a
+draw final: spinning, disliking the result and closing the tab changes nothing,
+reloading to try again is refused by the sheet rather than by a component, and
+two people drawing at once cannot be handed the same punishment.
+
+THE WRITE THEREFORE RUNS BEFORE THE ANIMATION, not after. A rejected write means
+the wheel never spins and the sheet's own message is shown, instead of a result
+landing and then being taken away.
+
+THE WHEEL SPINS BEFORE THE SERVER ANSWERS, in two phases. FREE starts on the
+press — a linear infinite rotation covering the round trip, so there is no
+second of a motionless wheel wondering whether the tap registered. LANDING
+begins when the draw comes back and decelerates onto the committed slice.
+Spinning only after the response, which is what this did first, left a dead
+pause and — because `spinning` was set late — let a double tap fire two draws,
+the second returning "already drawn" and painting an error over a result that
+had succeeded.
+
+THE HANDOFF READS THE LIVE MATRIX. Swapping the infinite animation for a
+transform snaps the wheel back to zero and eases from there, which looks like a
+glitch; reading the computed rotation, pinning it, flushing layout and only then
+setting the target continues the deceleration from exactly where the spin was.
+The landing angle is `-(i * step + step / 2)` normalised into one turn plus two
+more — checked to land the slice centre exactly under the pointer for every
+pool size and every starting angle.
+
+It is a TRANSITION rather than a keyframe because the target is only known at
+spin time, and `transitionend` is the cue to reveal. REDUCED MOTION SKIPS THE
+FREE SPIN outright: the blanket rule clamps every duration to almost nothing,
+which would leave an infinite animation restarting each frame as a strobe. There
+the wheel waits, snaps to the answer, and the reveal still fires.
+
+The slices are the remaining pool, in the dataviz palette's validated order —
+with the last hue nudged along when the pool size is one more than a multiple of
+eight, or the ring would close with two identical slices touching.
+
+LABELS RUN ALONG THE RADIUS, rim to hub: anchored at the rim with
+`text-anchor="start"` and rotated to `mid + 90`, which aims the reading
+direction at the middle. Every label therefore begins in the same place however
+long it is.
+
+THE ROOM IS THE RADIUS, NOT THE WEDGE — about 120px from rim to hub whether the
+pool holds four or seventeen — so that is what sets the character budget, and
+only the font size follows the slice count, because a narrow wedge bounds the
+line HEIGHT rather than the length. Measured, not guessed: the first attempt
+allowed 48 characters inside a quarter wedge and ran the text clean across the
+wheel and out the far side. Checked at 4, 8, 14 and 17 slices — the worst case
+stops at r=30 against a hub of 26.
+
+CONFETTI IS SEEDED, NOT RANDOM. `Math.random()` during render is impure and
+React may re-render, which would re-scatter the pieces and restart their fall
+halfway down. A hash of the piece index looks the same and makes a screenshot
+reproducible, which is the same reason the mock draft order is seeded.
+
 ### Writing back
 
 `addSuggestion` is the first write, POSTed to the same `/exec` URL with `func` in

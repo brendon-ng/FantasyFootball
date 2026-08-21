@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { PunishmentLedger, TeamNames } from "@/components/punishment-ledger";
+import { DrawModal } from "@/components/draw-modal";
 import { SuggestionModal } from "@/components/suggestion-modal";
 import { VoteModal } from "@/components/vote-modal";
 import { Tip } from "@/components/tooltip";
@@ -17,6 +18,7 @@ import {
 } from "@/components/ui";
 import { useIdentity } from "@/components/identity";
 import { useBallots, usePunishments } from "@/lib/punishments-live";
+import type { LeagueRef } from "@/lib/league-ref";
 import { useUrlState } from "@/lib/url-state";
 import {
   buildLedger,
@@ -24,6 +26,7 @@ import {
   poolRemaining,
   tallyByOwner,
   hasVoted,
+  primaryOwner,
   PUNISHMENT_PHASES,
   type Ballot,
   type LedgerRow,
@@ -31,6 +34,15 @@ import {
   type SeasonLows,
   type TeamMap,
 } from "@/lib/punishments";
+
+/** `?draw=1` opens the wheel; anything else, including absent, does not. */
+const DRAW_FLAG = ["", "1"] as const;
+
+/** Any plausible week. Whether it is a real one is the feed's business. */
+const WEEK_OPTIONS = [
+  "",
+  ...Array.from({ length: 25 }, (_, i) => String(i + 1)),
+];
 
 /** The phases plus "unset", which is what an absent `?phase=` resolves to. */
 const PHASE_OPTIONS = [...PUNISHMENT_PHASES, ""] as const;
@@ -50,6 +62,9 @@ export function PunishmentTracker({
   teams,
   names,
   activeOwners,
+  leagueRefs,
+  userIdToSlug,
+  drawTitle,
   src,
   endpoint,
   league,
@@ -62,13 +77,19 @@ export function PunishmentTracker({
   names: Record<string, string>;
   /** Turnout denominator — the people who could vote, not everyone on record. */
   activeOwners: number;
+  /** Per-season provider refs, for the draw screen's live scoreline. */
+  leagueRefs: Record<string, LeagueRef>;
+  userIdToSlug: Record<string, string>;
+  /** Tab title while the wheel is open, composed with the league's name. */
+  drawTitle: string;
   src: string;
   /** Bare `/exec` URL for writes; null when reading the bundled sample. */
   endpoint: string | null;
   league: string;
   isMock: boolean;
 }) {
-  const { status, feed, error, insertSuggestion } = usePunishments(src);
+  const { status, feed, error, insertSuggestion, recordDraw } =
+    usePunishments(src);
   const [composing, setComposing] = useState(false);
   const [voting, setVoting] = useState(false);
   /**
@@ -169,6 +190,91 @@ export function PunishmentTracker({
   const onSaved = (ballot: Ballot, votes: Record<number, number>) => {
     ballots.applySaved(ballot);
     setFreshVotes(votes);
+  };
+
+  /**
+   * THE DRAW IS ADDRESSED BY URL — `?draw=1&week=5&loser=<slug>`.
+   *
+   * Which means it can be linked to before any navigation exists for it, and a
+   * half-finished draw survives a reload. The flag is separate from the week so
+   * the modal is explicitly opened rather than appearing because a stray `week`
+   * lingered in the address bar.
+   *
+   * AN ALREADY-DRAWN WEEK IS A VIEW, NOT A REFUSAL — the wheel opens resting on
+   * the punishment that was drawn. Restricting the week list to UNDRAWN weeks
+   * closed the dialog the instant a draw landed, because the week stopped
+   * matching and `useUrlState` fell back to empty: no stop, no reveal, no
+   * confetti.
+   */
+  /**
+   * VALIDATED AS A WEEK NUMBER, NOT AGAINST THE LEDGER.
+   *
+   * The dialog has to open the instant the URL is followed, and the ledger
+   * needs the feed — a list built from it is empty on the first render, so the
+   * week fell back to nothing and the dialog waited a second before appearing.
+   * Whether the week is real, and whether it can be drawn for, is checked once
+   * the feed lands and reported inside the dialog.
+   */
+  const ownerSlugs = useMemo(() => ["", ...Object.keys(names)], [names]);
+  const [drawFlag, setDrawFlag] = useUrlState("draw", DRAW_FLAG, "");
+  const [drawWeek, setDrawWeek] = useUrlState("week", WEEK_OPTIONS, "");
+  const [drawLoser, setDrawLoser] = useUrlState("loser", ownerSlugs, "");
+
+  const drawRow = rows.find((r) => String(r.week) === drawWeek) ?? null;
+  /**
+   * THE URL NAMES THE LOSER, and the ledger is only the fallback.
+   *
+   * The other way round everywhere else on this page — a derived low beats the
+   * sheet — but a draw is opened deliberately, for a week that has usually just
+   * finished and not been archived, by somebody who knows who lost. Deferring
+   * to a stale or absent derived value would name the wrong person on the one
+   * screen that is entirely about naming a person. It is also the name the live
+   * scoreline is looked up by, so both agree by construction.
+   */
+  const drawLosers = drawLoser
+    ? // Normalised to the primary owner, because that is the key a team-season
+      // has everywhere else — the sheet, the derived lows, the ledger. Recording
+      // a co-owner's slug would write a loser the ledger could not resolve back
+      // to the team.
+      [primaryOwner(teams, active ?? 0, drawLoser)]
+    : (drawRow?.losers ?? []);
+  /**
+   * OPENS ON THE FLAG ALONE, so following a link puts the dialog on screen at
+   * once and the waiting happens inside it. Gating on the phase or on the week
+   * existing meant a second of the punishments page before the wheel appeared,
+   * which reads as a mis-click.
+   */
+  const drawOpen = drawFlag === "1" && Boolean(endpoint);
+  const drawUnavailable =
+    status !== "ready"
+      ? null
+      : phase !== "live"
+        ? `Draws open once the ${active} pool is set.`
+        : !drawWeek
+          ? "No week to draw for."
+          : !drawRow
+            ? `Nothing recorded for week ${drawWeek} yet.`
+            : null;
+
+  const closeDraw = () => {
+    setDrawFlag("");
+    setDrawWeek("");
+    setDrawLoser("");
+  };
+
+  /**
+   * Open the wheel from a ledger row, by writing the address it lives at.
+   *
+   * Sets the params rather than navigating, because this page already has the
+   * dialog: a `<Link>` to the same route pushes state without firing
+   * `popstate`, which is what `useUrlState` listens for, so the address bar
+   * would change and nothing would open. A row on the SEASON page has no
+   * dialog to open and links across instead — see `PunishmentLedger`.
+   */
+  const openDraw = (row: LedgerRow) => {
+    setDrawWeek(String(row.week));
+    setDrawLoser(row.losers[0] ?? "");
+    setDrawFlag("1");
   };
 
   /**
@@ -285,7 +391,12 @@ export function PunishmentTracker({
                 meta={`${totals.completed} of ${totals.assigned} served`}
                 legend="The score links to the game it happened in."
               />
-              <PunishmentLedger rows={rows} teams={teams} names={names} />
+              <PunishmentLedger
+                rows={rows}
+                teams={teams}
+                names={names}
+                onDraw={endpoint ? openDraw : undefined}
+              />
             </Panel>
           ) : (
             <Panel>
@@ -422,6 +533,29 @@ export function PunishmentTracker({
           />
         </>
       )}
+
+      {drawOpen && endpoint && active ? (
+        <DrawModal
+          endpoint={endpoint}
+          league={league}
+          season={active}
+          week={Number(drawWeek) || 0}
+          losers={drawLosers}
+          pool={pool}
+          teams={teams}
+          names={names}
+          leagueRef={leagueRefs[String(active)] ?? null}
+          userIdToSlug={userIdToSlug}
+          documentTitle={drawTitle}
+          loading={status !== "ready"}
+          unavailable={drawUnavailable}
+          alreadyDrawn={drawRow?.punishment ?? null}
+          onDrawn={(punishmentId) =>
+            recordDraw(active, Number(drawWeek), drawLosers, punishmentId)
+          }
+          onClose={closeDraw}
+        />
+      ) : null}
 
       {voting && endpoint && active && me ? (
         <VoteModal

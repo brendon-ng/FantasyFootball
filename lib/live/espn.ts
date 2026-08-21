@@ -206,6 +206,15 @@ export const espnProvider: LiveProvider = {
    * moves means every team holds its own picks — which is what ESPN's own draft
    * board shows for a league that trades picks in-draft only.
    */
+  /**
+   * Not implemented. The only surface that asks for this is the punishment
+   * draw, and the one league with punishments has never been on ESPN — a
+   * half-built path nobody can exercise is worse than an honest empty.
+   */
+  async weekGames() {
+    return [];
+  },
+
   async tradedPicks() {
     return [];
   },

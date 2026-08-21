@@ -99,6 +99,18 @@ export interface LiveMove {
   fromRosterId: number | null;
 }
 
+/**
+ * One game from a single week's scoreboard, in roster ids.
+ *
+ * Deliberately NOT resolved to owners here: the caller already has the roster
+ * list and the id map, and a provider that had to know about owner slugs would
+ * need the league config threaded into it.
+ */
+export interface LiveWeekGame {
+  matchupId: number;
+  sides: Array<{ rosterId: number; points: number }>;
+}
+
 export interface LiveProvider {
   /** Shown to the reader, e.g. "live from ESPN". */
   readonly name: string;
@@ -120,6 +132,14 @@ export interface LiveProvider {
     fromWeek: number,
     weeks: number,
   ): Promise<LiveMove[]>;
+  /**
+   * One specific week's scoreboard.
+   *
+   * `season()` only ever reads the week the league is CURRENTLY on, which is no
+   * use for a week that has just finished and not yet been archived — which is
+   * exactly the window a punishment gets drawn in.
+   */
+  weekGames(id: string, season: number, week: number): Promise<LiveWeekGame[]>;
   /** EVERY completed move from `fromWeek` onward, for the keeper adjuster. */
   leagueMoves(id: string, season: number, fromWeek: number, weeks: number): Promise<LeagueMove[]>;
 }

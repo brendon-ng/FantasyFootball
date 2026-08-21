@@ -93,6 +93,7 @@ export function PunishmentLedger({
   rows,
   teams,
   names,
+  onDraw,
   loading = false,
 }: {
   rows: LedgerRow[];
@@ -100,6 +101,14 @@ export function PunishmentLedger({
   teams: TeamMap;
   /** Owner slug -> display name. */
   names: Record<string, string>;
+  /**
+   * Open the draw for an undrawn week.
+   *
+   * Present on the tracker, which owns the dialog and only has to set the query
+   * string. Absent everywhere else, where the cell becomes a link to the page
+   * that does own it.
+   */
+  onDraw?: (row: LedgerRow) => void;
   /**
    * The sheet has not answered yet.
    *
@@ -174,8 +183,39 @@ export function PunishmentLedger({
                 >
                   Unknown punishment
                 </Tip>
-              ) : (
+              ) : !row.losers.length ? (
+                // Nothing to draw for — the API needs somebody to draw against.
                 <span className="text-sm text-chalk-600">Not drawn yet</span>
+              ) : onDraw ? (
+                // A FLEX BOX, NOT A BARE INLINE-BLOCK. Sitting on the cell's
+                // text baseline, the button was lifted by the line-height's
+                // descender space and rode a couple of pixels high against the
+                // rest of the row. A flex container is exactly the control's
+                // height, so the row's own `items-center` can do its job.
+                <span className="flex">
+                  <button
+                    type="button"
+                    onClick={() => onDraw(row)}
+                    className="whitespace-nowrap rounded border border-accent-dim/60 bg-accent/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent transition-colors hover:bg-accent/20"
+                  >
+                    Spin the wheel
+                  </button>
+                </span>
+              ) : (
+                // NO CALLBACK MEANS THIS IS NOT THE TRACKER — the season page,
+                // where opening the dialog means going to the page that has it.
+                // A real navigation, so the params are read on load: a `<Link>`
+                // pushes state without firing `popstate`, which `useUrlState`
+                // listens for, so linking to the SAME page would change the
+                // address bar and open nothing.
+                <span className="flex">
+                  <Link
+                    href={`/punishments/?season=${row.season}&draw=1&week=${row.week}&loser=${row.losers[0]}`}
+                    className="whitespace-nowrap rounded border border-accent-dim/60 bg-accent/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent transition-colors hover:bg-accent/20"
+                  >
+                    Spin the wheel
+                  </Link>
+                </span>
               )}
             </span>
 
