@@ -1058,6 +1058,14 @@ off the right edge — which looks like a broken layout and is not one. The
 suggestion modal hit this the hard way: it focuses its textarea on open, so at
 `text-sm` the zoom fired before anyone had typed.
 
+A DATE INPUT ALSO OVERFLOWS ITS CONTAINER. `input[type="date"]` carries an
+intrinsic minimum width — the UA's idea of how wide a formatted date needs to be
+— and `min-width: auto` means `w-full` cannot shrink it below that. On a phone
+it pushed past the dialog and made the whole thing scroll sideways. Needs BOTH
+`min-w-0` and `appearance-none`: the first lets it shrink, the second drops the
+native chrome that sets the floor. The picker still opens on tap, because it is
+still a date input.
+
 USE `text-base sm:text-sm` ON ANY TEXT-ENTRY FIELD. The other common fix is
 `maximum-scale=1` on the viewport meta, which works by disabling pinch-zoom for
 the entire site — do not. Checkboxes and radios are exempt; only fields you type

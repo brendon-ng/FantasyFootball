@@ -132,15 +132,26 @@ export function CompleteModal({
               </p>
             ) : null}
 
-            <label className="block">
+            <label className="block min-w-0">
               <span className="eyebrow text-[10px]">Date</span>
               <input
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                // 16px on a phone: iOS zooms the whole page when a focused
-                // field computes below that. See the note in AGENTS.
-                className="mt-1.5 w-full rounded-lg border border-ink-500 bg-ink-850 px-3 py-2.5 text-base text-chalk-100 outline-none transition-colors focus:border-accent-dim sm:text-sm"
+                /*
+                 * `min-w-0` AND `appearance-none` ARE BOTH LOAD-BEARING ON iOS.
+                 * A date input carries an intrinsic minimum width — the UA's
+                 * idea of how wide a formatted date needs to be — and
+                 * `min-width: auto` means `w-full` cannot shrink it below that.
+                 * On a phone it overflowed the panel and made the whole dialog
+                 * scroll sideways. Stripping the native appearance drops the
+                 * built-in chrome that sets that floor; the picker still opens
+                 * on tap, because it is still a date input.
+                 *
+                 * 16px too: iOS zooms the page when a focused field computes
+                 * below that. See the note in AGENTS.
+                 */
+                className="mt-1.5 block w-full min-w-0 max-w-full appearance-none rounded-lg border border-ink-500 bg-ink-850 px-3 py-2.5 text-base text-chalk-100 outline-none transition-colors focus:border-accent-dim sm:text-sm"
               />
             </label>
 
