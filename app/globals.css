@@ -181,6 +181,17 @@ body {
 }
 
 /*
+ * A centred panel fades at EVERY width, phone included — it is not rising from
+ * an edge, so sliding it up the screen would read as a form arriving rather
+ * than an image opening. Two classes deep so it outranks both rules above,
+ * including the one inside the media query.
+ */
+.sheet-panel.sheet-centered { animation: dialog-in 180ms ease-out; }
+.sheet-panel.sheet-centered[data-leaving] {
+  animation: dialog-out 150ms ease-in forwards;
+}
+
+/*
  * The wheel's free spin, while the draw is still in flight.
  *
  * Linear and seamless, because it is handed off mid-rotation to a decelerating

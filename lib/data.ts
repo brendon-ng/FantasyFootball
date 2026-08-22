@@ -343,6 +343,7 @@ export const getPunishmentTeams = once((): TeamMap => {
           (slugs.length === 1
             ? owners.get(slug)?.name
             : owners.get(slug)?.firstName) ?? slug,
+        first: owners.get(slug)?.firstName ?? slug,
       }));
     }
   }
@@ -825,6 +826,10 @@ export interface LeagueConfig {
   knownLeagueIds: Record<string, string>;
   /** Per-season ESPN league ids. See lib/league-ref. */
   espnLeagueIds?: Record<string, string>;
+  /** Cloudinary cloud, for punishment media. Public by construction. */
+  cloudinaryCloudName?: string;
+  /** Unsigned upload preset; empty means the feature is not configured. */
+  cloudinaryUploadPreset?: string;
   /** Owner slug allowed to log completions; absent means nobody can. */
   commissioner?: string;
   /** Apps Script `/exec` URL fronting this league's Google Sheet. See below. */

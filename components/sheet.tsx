@@ -78,6 +78,7 @@ function useKeyboardInset(): number {
 export function Sheet({
   label,
   onClose,
+  align = "bottom",
   zClassName = "z-50",
   backdropClassName = "sm:p-4",
   panelClassName = "",
@@ -86,6 +87,15 @@ export function Sheet({
   label: string;
   /** Null when the dialog cannot be dismissed without answering it. */
   onClose: (() => void) | null;
+  /**
+   * Where the panel sits on a phone.
+   *
+   * A sheet rises from the bottom edge because that is where a form belongs on
+   * a phone — thumb-reachable, and it comes from somewhere. A PHOTO does not:
+   * it wants the middle of the screen at every width, with the page dimmed
+   * around it, and rising from below would read as a form rather than an image.
+   */
+  align?: "bottom" | "center";
   zClassName?: string;
   backdropClassName?: string;
   panelClassName?: string;
@@ -157,7 +167,9 @@ export function Sheet({
       // panel on the padding edge, which is the top of the keyboard, and the
       // centred desktop case keeps working untouched because the inset is 0.
       style={keyboard ? { paddingBottom: keyboard } : undefined}
-      className={`sheet-backdrop fixed inset-0 flex items-end justify-center bg-ink-900/80 backdrop-blur-sm sm:items-center ${zClassName} ${backdropClassName}`}
+      className={`sheet-backdrop fixed inset-0 flex justify-center bg-ink-900/80 backdrop-blur-sm ${
+        align === "center" ? "items-center" : "items-end sm:items-center"
+      } ${zClassName} ${backdropClassName}`}
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -175,7 +187,9 @@ export function Sheet({
           if (leaving && e.target === e.currentTarget) finish();
         }}
         data-leaving={leaving ? "" : undefined}
-        className={`sheet-panel w-full ${panelClassName}`}
+        className={`sheet-panel w-full ${
+          align === "center" ? "sheet-centered" : ""
+        } ${panelClassName}`}
       >
         {children({ close })}
       </div>

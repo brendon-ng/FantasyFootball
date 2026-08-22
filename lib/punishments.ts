@@ -71,7 +71,8 @@ export const fromPlanned = (iso: string): string =>
   shiftYear(iso, -PLANNED_OFFSET);
 
 /** How a planned date is written to the sheet. */
-export const toPlanned = (iso: string): string => shiftYear(iso, PLANNED_OFFSET);
+export const toPlanned = (iso: string): string =>
+  shiftYear(iso, PLANNED_OFFSET);
 
 export interface PunishmentAssignment {
   week: number;
@@ -174,10 +175,19 @@ export interface SeasonLows {
   lows: DerivedLow[];
 }
 
-/** One person on a team, already labelled for the width it will render at. */
+/**
+ * One person on a team, in both the forms a row might have space for.
+ *
+ * BOTH, RATHER THAN ONE CHOSEN UP FRONT, because the choice is a matter of
+ * width and only the component knows how much it has. The ledger shows first
+ * names on a phone and full names once there is room.
+ */
 export interface TeamLabel {
   slug: string;
+  /** Full name when playing alone, first name when the team is shared. */
   label: string;
+  /** Always just the first name. */
+  first: string;
 }
 
 /**
@@ -234,7 +244,13 @@ export function teamFor(
   slug: string,
 ): TeamLabel[] {
   const key = primaryOwner(teams, season, slug);
-  return teams[`${season}:${key}`] ?? [{ slug, label: names[slug] ?? slug }];
+  const known = teams[`${season}:${key}`];
+  if (known) return known;
+  // Not in any standings row — a loser slug straight off the sheet for a week
+  // that has not been archived. Split rather than looked up, since there is
+  // nothing to look it up in.
+  const label = names[slug] ?? slug;
+  return [{ slug, label, first: label.split(" ")[0] }];
 }
 
 // ---------------------------------------------------------------------------
@@ -535,9 +551,13 @@ export function buildLedger(
         a?.punishmentId != null ? (byId.get(a.punishmentId) ?? null) : null,
       punishmentId: a?.punishmentId ?? null,
       // One cell, two meanings, split here and nowhere else.
-      completed: isPlanned(a?.completed ?? null) ? null : (a?.completed ?? null),
+      completed: isPlanned(a?.completed ?? null)
+        ? null
+        : (a?.completed ?? null),
       planned:
-        a?.completed && isPlanned(a.completed) ? fromPlanned(a.completed) : null,
+        a?.completed && isPlanned(a.completed)
+          ? fromPlanned(a.completed)
+          : null,
     };
   });
 }

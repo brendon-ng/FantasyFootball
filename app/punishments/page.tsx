@@ -51,6 +51,8 @@ export default function PunishmentsPage() {
       userIdToSlug={getUserIdToSlug()}
       drawTitle={pageTitle("Wheel of Punishments")}
       commissioner={getConfig().commissioner ?? null}
+      cloudinaryCloud={getConfig().cloudinaryCloudName ?? null}
+      cloudinaryPreset={getConfig().cloudinaryUploadPreset ?? null}
       {...punishmentsSource()}
     />
   );

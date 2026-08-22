@@ -4,6 +4,11 @@ import { useMemo, useState } from "react";
 
 import { PunishmentLedger, TeamNames } from "@/components/punishment-ledger";
 import { CompleteModal } from "@/components/complete-modal";
+import {
+  PunishmentMedia,
+  WeekMediaSheet,
+  useSeasonMedia,
+} from "@/components/punishment-media";
 import { DrawModal } from "@/components/draw-modal";
 import { SuggestionModal } from "@/components/suggestion-modal";
 import { VoteModal } from "@/components/vote-modal";
@@ -67,6 +72,8 @@ export function PunishmentTracker({
   userIdToSlug,
   drawTitle,
   commissioner,
+  cloudinaryCloud,
+  cloudinaryPreset,
   src,
   endpoint,
   league,
@@ -93,6 +100,14 @@ export function PunishmentTracker({
    * world, and one person should be making it.
    */
   commissioner: string | null;
+  /**
+   * Cloudinary, for punishment photos and video.
+   *
+   * Either being absent means the feature is not configured and the panel is
+   * not rendered — the same switch as an empty `appsScriptEndpoint`.
+   */
+  cloudinaryCloud: string | null;
+  cloudinaryPreset: string | null;
   src: string;
   /** Bare `/exec` URL for writes; null when reading the bundled sample. */
   endpoint: string | null;
@@ -111,6 +126,8 @@ export function PunishmentTracker({
   const [voting, setVoting] = useState(false);
   /** The ledger row whose completion date is being edited. */
   const [completing, setCompleting] = useState<LedgerRow | null>(null);
+  /** The ledger row whose photos are open. */
+  const [mediaRow, setMediaRow] = useState<LedgerRow | null>(null);
   /**
    * Counts from the last save, laid over the feed's.
    *
@@ -203,6 +220,10 @@ export function PunishmentTracker({
     voter: me,
     enabled: phase === "voting",
   });
+  // ONE FETCH, SHARED. The ledger wants a count per row and the panel wants
+  // everything grouped; both come off the same list.
+  const media = useSeasonMedia(cloudinaryCloud, league, active);
+
   const myPicks = new Set(ballots.mine?.punishmentIds ?? []);
   const iVoted = hasVoted(ballots.mine);
 
@@ -422,6 +443,10 @@ export function PunishmentTracker({
                     ? setCompleting
                     : undefined
                 }
+                onMedia={
+                  cloudinaryCloud && cloudinaryPreset ? setMediaRow : undefined
+                }
+                media={media.previewFor}
               />
             </Panel>
           ) : (
@@ -516,6 +541,18 @@ export function PunishmentTracker({
             </div>
           ) : null}
 
+          {/* Only once there is something to photograph. */}
+          {phase === "live" && cloudinaryCloud && cloudinaryPreset && active ? (
+            <PunishmentMedia
+              cloud={cloudinaryCloud}
+              items={media.items}
+              season={active}
+              rows={rows}
+              teams={teams}
+              names={names}
+            />
+          ) : null}
+
           {phase !== "live" ? (
             <PhaseCallout
               phase={phase}
@@ -563,6 +600,21 @@ export function PunishmentTracker({
           />
         </>
       )}
+
+      {mediaRow && cloudinaryCloud && cloudinaryPreset && active ? (
+        <WeekMediaSheet
+          cloud={cloudinaryCloud}
+          preset={cloudinaryPreset}
+          league={league}
+          season={active}
+          row={mediaRow}
+          items={(media.items ?? []).filter((m) => m.week === mediaRow.week)}
+          teams={teams}
+          names={names}
+          onAdded={media.add}
+          onClose={() => setMediaRow(null)}
+        />
+      ) : null}
 
       {completing && endpoint && active ? (
         <CompleteModal

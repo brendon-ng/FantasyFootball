@@ -44,7 +44,11 @@ export function TeamNames({
             data-owner={p.slug}
             className="font-medium transition-colors hover:text-accent"
           >
-            {p.label}
+            {/* FIRST NAME ONLY ON A PHONE. "Josh Greene…" truncated tells you
+                less than "Josh" complete, and the width it frees is what lets
+                the media control sit on the row at all. */}
+            <span className="sm:hidden">{p.first}</span>
+            <span className="hidden sm:inline">{p.label}</span>
           </Link>
         </span>
       ))}
@@ -81,13 +85,48 @@ export function TeamNames({
  */
 const COL = {
   week: "w-7 shrink-0",
-  owner: "w-24 shrink-0 sm:w-40",
+  owner: "w-16 shrink-0 sm:w-40",
   punishment: "min-w-0 flex-1",
+  /**
+   * ITS OWN COLUMN, which it could not afford before.
+   *
+   * A sixth fixed column once left the punishment 48px on a phone. Showing
+   * first names instead of full ones, and tightening the gaps, gave back 48px
+   * between them — so the control gets a real column and a real heading, and
+   * the punishment still has more room than it started with.
+   */
+  media: "w-6 shrink-0 text-center sm:w-8",
   // Supporting detail, and the first thing to go when a phone runs out of room:
   // who owes what survives without it, and the punishment text does not.
   score: "hidden w-16 shrink-0 text-right sm:block",
-  status: "w-[4.25rem] shrink-0 text-right",
+  /**
+   * NARROWER ON A PHONE, because the widest thing it ever holds is "✓ Nov 10"
+   * at about 50px — the rest was slack sitting between this column and the one
+   * before it, reading as a gap rather than as breathing room. Still wide
+   * enough that nothing wraps, which matters: the contents are `whitespace-
+   * nowrap`, so too narrow would overflow rather than reflow.
+   */
+  status: "w-[3.6rem] shrink-0 text-right sm:w-[4.25rem]",
 };
+
+/**
+ * THE WHOLE ROW OPENS THE MEDIA, not just the chip.
+ *
+ * ONE GUARD RATHER THAN FIVE `stopPropagation`s. A row already contains an
+ * owner link, a score link, and a button for the draw or the completion date,
+ * and every one of them has to keep working — walking up from whatever was
+ * clicked catches all of them, and catches the next one somebody adds without
+ * anyone having to remember this rule.
+ *
+ * A DRAG THAT SELECTED TEXT IS NOT A CLICK. The punishment runs to a full
+ * sentence and people highlight it; opening a dialog on top of the selection
+ * they just made reads as the page misfiring.
+ */
+function openMedia(e: React.MouseEvent, open: () => void) {
+  if ((e.target as HTMLElement).closest("a,button")) return;
+  if (window.getSelection()?.toString()) return;
+  open();
+}
 
 export function PunishmentLedger({
   rows,
@@ -95,6 +134,8 @@ export function PunishmentLedger({
   names,
   onDraw,
   onComplete,
+  onMedia,
+  media,
   loading = false,
 }: {
   rows: LedgerRow[];
@@ -119,6 +160,24 @@ export function PunishmentLedger({
    */
   onComplete?: (row: LedgerRow) => void;
   /**
+   * Open this week's photos and videos.
+   *
+   * The control sits INSIDE the punishment cell rather than in a column of its
+   * own: a sixth fixed column left the punishment 48px on a phone, where the
+   * chip inline costs nothing and reads as belonging to the thing it documents.
+   */
+  onMedia?: (row: LedgerRow) => void;
+  /**
+   * What is already posted for a week: a count, and a thumbnail of the first.
+   *
+   * THE PREVIEW IS THE INDICATOR. Fourteen identical outlined icons down a
+   * column read as chrome and shout louder than the punishments they sit
+   * beside. A row that HAS photos shows one, which says both that there is
+   * something there and what it is; a row that has none shows a bare `+`,
+   * which is almost invisible until you are looking for it.
+   */
+  media?: (week: number) => { count: number; thumb: string | null };
+  /**
    * The sheet has not answered yet.
    *
    * HALF THIS TABLE IS ALREADY KNOWN at that point — the week, who lost it and
@@ -129,12 +188,23 @@ export function PunishmentLedger({
    */
   loading?: boolean;
 }) {
+  // A week with nothing drawn has nothing to document, so it stays inert —
+  // the same test the chip already used, now shared with the row.
+  const openable = (row: LedgerRow) =>
+    Boolean(onMedia) && !loading && row.punishmentId != null;
+
   return (
     <>
-      <ListHeader>
+      {/* THE HEADER REPEATS THE ROW'S SPACING, not just its widths: these are
+          flex rows rather than a `<table>`, so a gap changed in one place and
+          not the other walks every heading off its column. */}
+      <ListHeader className="gap-1 px-4 sm:gap-3 sm:px-5">
         <Col className={COL.week}>Wk</Col>
         <Col className={COL.owner}>Loser</Col>
         <Col className={COL.punishment}>Punishment</Col>
+        <Col className={COL.media} hint="Photos and video">
+          <span aria-hidden>📷</span>
+        </Col>
         <Col
           className={COL.score}
           hint="Their score that week — the lowest in the league"
@@ -148,7 +218,16 @@ export function PunishmentLedger({
         {rows.map((row) => (
           <li
             key={row.week}
-            className="flex items-start gap-3 px-4 py-1.5 sm:items-center sm:px-5"
+            onClick={
+              openable(row)
+                ? (e) => openMedia(e, () => onMedia!(row))
+                : undefined
+            }
+            className={`flex items-start gap-1 px-4 py-1.5 sm:items-center sm:gap-3 sm:px-5 ${
+              openable(row)
+                ? "cursor-pointer transition-colors hover:bg-ink-700/40"
+                : ""
+            }`}
           >
             <span
               className={`tabular text-[11px] font-bold text-chalk-600 ${COL.week}`}
@@ -156,7 +235,11 @@ export function PunishmentLedger({
               {row.week}
             </span>
 
-            <span className={`truncate text-sm ${COL.owner}`}>
+            {/* WRAPS ON A PHONE rather than truncating. "Robbie & Thomas" cut
+                to "Robbie & Th…" in a 64px column says less than the same name
+                over two lines, and the row is already top-aligned there for the
+                punishment, so a taller cell costs nothing. */}
+            <span className={`text-sm sm:truncate ${COL.owner}`}>
               <TeamNames
                 season={row.season}
                 slugs={row.losers}
@@ -226,6 +309,15 @@ export function PunishmentLedger({
                   </Link>
                 </span>
               )}
+            </span>
+
+            <span className={`flex justify-center ${COL.media}`}>
+              {openable(row) ? (
+                <MediaChip
+                  found={media?.(row.week) ?? { count: 0, thumb: null }}
+                  onOpen={() => onMedia!(row)}
+                />
+              ) : null}
             </span>
 
             <span className={`tabular text-xs text-chalk-500 ${COL.score}`}>
@@ -332,5 +424,62 @@ function Status({ row }: { row: LedgerRow }) {
     <span className="whitespace-nowrap text-[11px] font-bold uppercase tracking-wide text-loss">
       Owed
     </span>
+  );
+}
+
+/**
+ * What a week has, and the way in to add more.
+ *
+ * NEGATIVE MARGIN AROUND A SMALL GLYPH. The `+` is deliberately tiny so a
+ * column of them disappears, but a tiny tap target on a phone does not — the
+ * padding gives it a 28px hit area while the mark itself stays quiet.
+ *
+ * STILL A REAL BUTTON even though the whole row now opens the same dialog. The
+ * row's handler is a mouse convenience with no place in the tab order; this is
+ * what a keyboard reaches and what a screen reader announces, so it cannot
+ * become a decorative span.
+ */
+function MediaChip({
+  found,
+  onOpen,
+}: {
+  found: { count: number; thumb: string | null };
+  onOpen: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      title={
+        found.count
+          ? `${found.count} photo${found.count === 1 ? "" : "s"} or video`
+          : "Add photos or video"
+      }
+      className="group -m-1.5 flex shrink-0 items-center gap-1 p-1.5"
+    >
+      {found.thumb ? (
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={found.thumb}
+            alt=""
+            loading="lazy"
+            className="h-5 w-5 rounded object-cover ring-1 ring-ink-500 transition-shadow group-hover:ring-accent-dim"
+          />
+          {found.count > 1 ? (
+            <span className="tabular text-[10px] font-semibold text-chalk-500 transition-colors group-hover:text-accent">
+              {found.count}
+            </span>
+          ) : null}
+        </>
+      ) : (
+        <span
+          aria-hidden
+          className="text-sm leading-none text-chalk-600 transition-colors group-hover:text-accent"
+        >
+          +
+        </span>
+      )}
+    </button>
   );
 }

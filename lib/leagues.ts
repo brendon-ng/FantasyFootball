@@ -32,6 +32,8 @@ export interface LeagueConfig {
   features: LeagueFeatures;
   anchorUserId: string;
   knownLeagueIds: Record<string, string>;
+  cloudinaryCloudName?: string;
+  cloudinaryUploadPreset?: string;
   /** Owner slug allowed to log punishment completions. */
   commissioner?: string;
   /** Apps Script `/exec` URL fronting this league's sheet; empty means mock. */

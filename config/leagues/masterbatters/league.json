@@ -28,6 +28,21 @@
     "Public by construction: a static site ships this URL in its JavaScript. Fine",
     "for reads; the write endpoints will need a shared secret of their own."
   ],
+  "//cloudinary": [
+    "Photos and videos of punishments live in Cloudinary, not in the sheet and",
+    "not in this repo. The browser uploads straight there with an UNSIGNED",
+    "preset, so no server and no size ceiling — see the media note in AGENTS.",
+    "",
+    "Both values are public by construction: a static site ships them in its",
+    "JavaScript. The preset is what bounds the damage — it pins the folder and",
+    "the allowed formats, so somebody who finds it cannot use the account as",
+    "general file hosting.",
+    "",
+    "An empty preset means the feature is not configured, and the upload control",
+    "is not rendered — the same pattern as an empty appsScriptEndpoint."
+  ],
+  "cloudinaryCloudName": "yczyb6et",
+  "cloudinaryUploadPreset": "punishments",
   "//commissioner": [
     "Who may record that a punishment has been completed. Everyone can see the",
     "ledger and anyone can spin a wheel, but marking somebody's punishment done",

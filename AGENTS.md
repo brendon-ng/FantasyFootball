@@ -829,6 +829,92 @@ NO SHARED SECRET, by decision. The endpoint URL is public by construction — a
 static site ships it in its JavaScript — so a token would be a speed bump against
 bots rather than security, and the league chose not to bother for now.
 
+### Photos and video of a punishment
+
+`lib/cloudinary.ts` and `components/punishment-media.tsx`. THE MEDIA TOUCHES
+NEITHER THE SHEET NOR APPS SCRIPT: the browser uploads straight to Cloudinary
+with an UNSIGNED preset and reads back through Cloudinary's public list
+endpoint, so there is no server in the path either way and nothing new for the
+Apps Script dispatcher to learn.
+
+WHICH WEEK A FILE BELONGS TO RIDES ON THE ASSET, in Cloudinary's `context`,
+rather than in an index somewhere else. One tag per league-season, everything
+else in the context:
+
+```
+tags     masterbatters-2025
+context  week=3|by=ross-bechtel
+```
+
+So ONE request per season returns every asset already carrying its own week and
+uploader, and there is no index to keep in step — two people uploading at once
+cannot conflict, because neither writes to anything shared. Verified against the
+real cloud rather than assumed: an unsigned upload accepts both `tags` and
+`context`, and the list endpoint gives `context.custom` back.
+
+TWO REQUESTS PER SEASON, since images and videos are separate delivery types and
+therefore separate lists. A 404 from either is EMPTY, NOT AN ERROR — that is what
+Cloudinary returns for a tag no asset of that type carries, which is the normal
+state for video in a league that has only posted photos.
+
+THE LIST IS CDN-CACHED FOR 60 SECONDS, so a file uploaded a moment ago is
+genuinely not there yet. The caller merges its own upload into the loaded list
+rather than refetching, the same thing the suggestion and draw flows do for the
+same reason: a refetch would show the uploader their own photo vanishing.
+Everyone else waits up to a minute.
+
+THE WHOLE ROW OPENS THE DIALOG, not just the chip, and ONE GUARD does it rather
+than five `stopPropagation` calls — walking up from the click target with
+`closest("a,button")` covers the owner links, the score link and the draw and
+completion buttons at once, and covers the next control somebody adds without
+their having to know the rule exists. A drag that selected text is not a click:
+the punishment runs to a full sentence and people highlight it, so opening a
+dialog on top of a fresh selection reads as the page misfiring. The chip stays a
+real `<button>` because the row handler has no place in the tab order.
+
+THE DIALOG RESTATES THE WHOLE ROW — week, who lost it, what they owe, and the
+score linking through to the game. It is opened from one line of a fourteen-row
+table and then covers it, so without that the grid of photos is unlabelled the
+moment its row is out of sight.
+
+THE PREVIEW IS THE INDICATOR. Fourteen identical outlined camera icons down a
+column read as chrome and shout louder than the punishments beside them. A row
+that HAS media shows a 20px thumbnail of the first one, which says both that
+there is something there and what it is; a row with none shows a bare `+`, which
+is almost invisible until you are looking for it.
+
+Gated on `cloudinaryCloudName` and `cloudinaryUploadPreset` being present rather
+than on a `features` flag, matching `appsScriptEndpoint` — a league without them
+simply gets no media UI. It is on `/punishments/` only, in the `live` phase; the
+season page's ledger has no chips and no panel, the same asymmetry as the draw
+and the completion dialog.
+
+#### What this does not do, and will not tell you
+
+- **A broken cloud name looks exactly like an empty gallery.** `useSeasonMedia`
+  swallows its error, so a typo in config renders "Nobody has posted anything
+  yet" for ever. Same class as the Apps Script `ok:false` trap.
+- **Cloudinary can turn the list endpoint off.** `/image/list/<tag>.json` depends
+  on the "Resource list" setting. It is on today — that is how it was verified —
+  but if it is ever flipped, uploads keep working and the gallery goes blank with
+  no error anywhere.
+- **No upload progress.** `fetch` with `FormData` reports none, so a 60MB video
+  shows "Uploading 1 of 1…" and then nothing for minutes — the worst case for the
+  exact thing people most want to post. `XMLHttpRequest` has progress events if
+  this becomes worth fixing.
+- **No size or type check before upload.** `accept` is a picker hint, not a
+  limit. An oversized file fails with Cloudinary's own message shown verbatim,
+  but only after the whole thing has uploaded.
+- **Video is the cost risk.** The free tier is credit-based and every thumbnail
+  and poster frame is a transformation; photos will not trouble it and a league
+  posting phone video will.
+- **It is all public and enumerable.** Cloud name plus tag lists every asset, and
+  both ship in the JavaScript. The preset is unsigned, so anyone reading the
+  bundle can upload to it, and `by=` is self-asserted like every identity here.
+  Same call as the endpoint being public: the attack is "annoy twelve friends".
+- **No delete and no moderation.** Removing something means the Cloudinary
+  console.
+
 ## Default all-time ordering
 
 `byAllTimeRank()` in `lib/ranking.ts` is the one definition: titles, wins, average
