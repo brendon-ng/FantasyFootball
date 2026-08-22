@@ -105,7 +105,8 @@ week was won by the team that scored it.
 
 **Pages:** `/` (league at a glance, adapts to offseason), `/keepers`,
 `/keepers/history`, `/history`, `/history/[season]`, `/records`,
-`/owners/[slug]`, `/players/[id]`, `/h2h/[pair]`, `/matchups/[id]`.
+`/owners/[slug]`, `/players/[id]`, `/h2h/[pair]`, `/matchups/[id]`,
+`/punishments`, and `/lab` — which is NOT in the nav; see the Scenario Lab.
 
 `/matchups/[id]` is the single home for lineups — the head-to-head page lists a
 series and links into it. Never render a per-player breakdown in both; two
@@ -1101,6 +1102,112 @@ see the only thing there is to see. `useUploader` is the shared half — the
 sequencing, the partial-failure rule and the hidden input — while each surface
 puts its own button where it belongs.
 
+## The Scenario Lab
+
+`/lab` is a what-if draft board: set every team's keepers and the draft order by
+hand and watch the projected board redraw. It exists because the keeper deadline
+lands three days before the draft and the ORDER IS DRAWN AFTER IT (bylaw 1.7), so
+every keeper decision is made without knowing your slot — and the only way to
+reason about that is to try orders.
+
+NOT IN THE NAV, and that is deliberate rather than unfinished. Every tab up there
+describes what the league has done; this describes what it has not done yet.
+Reaching it means typing the path. Do not add it to `LINKS` in `components/nav.tsx`.
+
+SEPARATE FROM `/keepers` FOR THE SAME REASON. That page has to stay trustworthy —
+it is the one people check before the deadline — so it never gets an editable
+control next to a number someone is about to act on. `/lab` is where everything is
+invented, and it says so: any board built from a scenario carries a red SCENARIO
+badge, in loss-red because violet is identity and gold already means "mocked
+phase".
+
+A SCENARIO IS AN OVERRIDE, NOT A MOCK. Every other stand-in here
+(`?mockPhase=...`) only fills in a value the provider has not published, so it
+goes quiet on its own. A scenario deliberately CONTRADICTS live data — that is the
+point — so it can never go quiet, and every surface reading it has to say so. It
+lives in `localStorage` under `ff:<league>:scenario`, scoped per league because
+roster ids do not correspond across them.
+
+A ROSTER YOU HAVE NOT EDITED FOLLOWS THE LIVE PROVIDER. Change one team, leave
+nine real, and the change on the board is attributable to the thing you changed.
+A roster absent from `scenario.keepers` defers; one present with an empty array is
+an explicit "keeps nobody", and collapsing those two would make that unsayable.
+
+### The draft projection, and its two readings of one pick
+
+`lib/adp-projection.ts` walks the board once and answers three things: who is at
+each pick, where each player comes off the board, and — for kept players only —
+where the draft would take them IF RELEASED.
+
+THE KEEPERS COME OFF THE BOARD IMMEDIATELY, but the picks they cost are spread
+across all 17 rounds. That asymmetry is the whole reason a keeper league's early
+rounds feel thin: at pick 1 the pool is already missing every kept player, and it
+only catches up as their pick slots go by. A keeper cell therefore consumes NO
+player from the pool, while every live pick takes the next name in ADP order.
+
+Measured against Den Ops, a first-round pick returns roughly what pick 22 returns
+in an undiluted draft, and by round 7 the board is at replacement level.
+
+TWO READINGS OF "PROJECTED PICK", both wanted, and they answer different
+questions. A kept player LEAVES the board at the pick his keeper consumes — the
+cell the grid paints green. But his VALUE is measured against where the draft
+would take him instead: Smith-Njigba kept at 11.06 would go 1.06, so an R11
+contract is worth ten rounds. Showing the counterfactual in the pick column reads
+as nonsense beside a name already ticked; dropping it throws away the only number
+that says whether the contract is good. So the column shows the cell and the
+delta uses the counterfactual.
+
+Releasing someone frees his cell AND returns him to the pool, and both are
+modelled — counting only the pool would place him a pick early for every keeper
+ahead of him. One ripple is not modelled: freeing a cell can let a team-mate slide
+under the same-round bump rule. Rare, and smaller than the number itself.
+
+BOTH DIRECTIONS COME FROM ONE WALK. A modal naming a pick the grid fills with
+somebody else is worse than either number alone.
+
+`lib/keeper-placement.ts` is the shared half: which cell each keeper actually
+consumes, after the same-round bump rule. The board, the pool list's round breaks
+and the projection all read it, so they cannot disagree about what is spent.
+
+### The lab's data layers, and who refreshes them
+
+Three sources feed it beyond the league's own data. All are OPTIONAL — each
+accessor returns empty when its file is absent, so a checkout that has never run
+the importers builds fine and simply shows fewer columns.
+
+| File | Written by | Cadence |
+| --- | --- | --- |
+| `data/espn-outlooks.json` | `npm run import:espn:outlooks` | ONCE A YEAR, by hand |
+| `data/projections.json` | `npm run import:sleeper:projections` | by hand; cheap enough to automate |
+| `birth_date` in `data/players.json` | `npm run sync` | every sync, automatically |
+
+NEITHER IMPORTER IS IN `archive.yml`, and the outlook one should not be: the
+payload is 38MB because `limit` is ignored on that endpoint, outlooks are written
+in the preseason and then left alone, and a daily job would refresh the timestamp
+on text that is going stale. `capturedAt` is rendered so the UI can admit its age.
+
+THE PROJECTIONS ENDPOINT IS UNDOCUMENTED. `docs.sleeper.com` lists no projections
+resource; `/projections/nfl/<season>` is what the app itself calls. Treated like
+the ADP scrape — a layer that must never be load-bearing for a build.
+
+Two traps in that data, both of which produced plausible wrong numbers first:
+
+- **`gp` IS 18 FOR EVERY PLAYER**, third-string backups included. It is the number
+  of WEEKS in the season, not a forecast of appearances, so dividing by it both
+  understates every per-game figure and implies a per-player projection that does
+  not exist. `NFL_GAMES` in `lib/projection-format.ts` is the one definition, and
+  it is 17.
+- **`birth_date`, NOT `age`,** even though Sleeper publishes both. An age committed
+  to `players.json` is wrong within a year and would rewrite hundreds of lines
+  every birthday, breaking the empty-diff property. `playerAge()` derives it at
+  read time, and only ever runs in a browser, so "today" is genuinely today.
+
+ADP DECIMALS, NOT LIST RANKS, wherever a figure is shown: "15.4" says a player
+goes late in round 2 of a ten-team draft and "#15" does not. Sleeper's own number
+where there is one, consensus (marked °) for the ~130 players without — and
+`adpSortKey` applies the SAME fallback the display does, because a table sorted on
+an invisible key reads as a bug however defensible the key is.
+
 ## Default all-time ordering
 
 `byAllTimeRank()` in `lib/ranking.ts` is the one definition: titles, wins, average
@@ -1526,10 +1633,17 @@ GitHub suppresses that to prevent recursion. So `archive.yml` does not trigger a
 deploy; its data ships on the next scheduled build, at most six hours later.
 `keepalive.yml` relies on the same suppression to avoid causing rebuilds.
 
-Manual work is twice a year: `npm run adp:lock` before the keeper deadline, and
-adding `config/leagues/<slug>/rules/<year>.json` for each league each new season
-(`derive` throws without it). Season discovery finds the new league IDs on its
-own.
+Manual work, all of it once a season:
+
+- `npm run adp:lock` before the keeper deadline (`adp --auto` usually beats you to
+  it — see the lock window).
+- `config/leagues/<slug>/rules/<year>.json` for each league each new season;
+  `derive` throws without one, and season discovery finds the new league IDs on
+  its own.
+- `npm run import:espn:outlooks` once the preseason outlooks are written, and
+  `npm run import:sleeper:projections` whenever the lab's numbers should catch up.
+  Neither is automated; see the Scenario Lab for why the outlook one should stay
+  that way.
 
 ## Two constraints govern almost every change here
 
@@ -1644,7 +1758,9 @@ data/<slug>/raw/player-ids.json          which players THIS league references
 data/<slug>/derived/*.json               computed output
 data/<slug>/manual/                      hand-entered pre-Sleeper seasons
 data/<slug>/adp/                         captured ADP
-data/players.json                        SHARED slim player index (~44KB)
+data/players.json                        SHARED slim player index
+data/espn-outlooks.json                  SHARED; ESPN's written season outlooks
+data/projections.json                    SHARED; Sleeper season projections
 docs/bylaws/<slug>.md                    that league's bylaws
 ```
 

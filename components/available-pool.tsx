@@ -13,8 +13,6 @@ import type { KeeperContract, PlayerMeta } from "@/lib/types";
 /**
  * Everyone the draft can still take, in market order.
  *
- * EXPERIMENTAL, strategy-lab branch only.
- *
  * The board answers "what does each pick get"; this answers "who is left", which
  * is the other half of the same question and the one you actually scan when
  * deciding whether to pass on a keeper. It reacts to the scenario, so ticking a

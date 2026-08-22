@@ -5,8 +5,8 @@ import { useCallback, useSyncExternalStore } from "react";
 /**
  * A hypothetical draft: who kept whom, and what order the board runs in.
  *
- * EXPERIMENTAL — this module exists on the strategy-lab branch only and is not
- * meant to reach main. It is a planning tool, not a view of the league.
+ * A PLANNING TOOL, NOT A VIEW OF THE LEAGUE. Nothing here is sent anywhere; a
+ * scenario lives in one browser until it is reset.
  *
  * THIS IS AN OVERRIDE, NOT A MOCK, and the distinction matters. Every existing
  * mock in this codebase (`lib/sticky-params.ts`, `?mockPhase=...`) only ever

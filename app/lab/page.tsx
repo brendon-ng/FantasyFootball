@@ -25,7 +25,10 @@ const MAX_KEEPERS = 4;
 /**
  * Scenario Lab — a what-if draft board.
  *
- * EXPERIMENTAL. Lives on the strategy-lab branch and is not intended for main.
+ * NOT LINKED FROM THE NAV. Every tab up there describes what the league has
+ * done; this describes what it has not done yet, and mixing a scratchpad into
+ * that list invites a scenario being read as a record. Reaching it means typing
+ * the path.
  *
  * DELIBERATELY SEPARATE FROM /keepers. That page answers "what is happening",
  * and it has to stay trustworthy — it is the one people check before the

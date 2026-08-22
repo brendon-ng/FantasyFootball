@@ -19,8 +19,6 @@ import type { KeeperContract, PlayerMeta, PlayerUsage } from "@/lib/types";
 /**
  * Wires the scenario store to the editor and the board.
  *
- * EXPERIMENTAL, strategy-lab branch only.
- *
  * Client-side because all three inputs are: the rosters come from the live
  * provider in the browser, and the scenario itself lives in localStorage. There is
  * no server to

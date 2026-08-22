@@ -15,8 +15,6 @@ import type { KeeperContract, PlayerMeta, PlayerUsage } from "@/lib/types";
 /**
  * A player, and the NFL team he has to beat out.
  *
- * EXPERIMENTAL, strategy-lab branch only.
- *
  * A MODAL RATHER THAN A LINK AWAY, for the same reason `TradeModal` is one: the
  * question is asked WHILE scanning the pool or the board, and navigating to
  * `/players/<id>` loses the scenario you were reading. The full profile is one

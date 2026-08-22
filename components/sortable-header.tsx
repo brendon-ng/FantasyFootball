@@ -5,9 +5,9 @@ import type { ReactNode } from "react";
 /**
  * A clickable column heading.
  *
- * EXPERIMENTAL, strategy-lab branch only. Shared by the available-pool table and
- * the keeper-selection list, which want identical behaviour — a second copy
- * would be a second answer to "which way does the first click go".
+ * Shared by the available-pool table and the keeper-selection list, which want
+ * identical behaviour — a second copy would be a second answer to "which way
+ * does the first click go".
  */
 
 export type Dir = "asc" | "desc";

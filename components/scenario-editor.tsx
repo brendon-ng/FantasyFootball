@@ -14,8 +14,6 @@ import type { KeeperContract, PlayerMeta } from "@/lib/types";
 /**
  * The what-if controls: who each team keeps, and what order the board runs in.
  *
- * EXPERIMENTAL, strategy-lab branch only.
- *
  * Every team is editable, not just yours. The interesting questions are all about
  * other people's choices — whether Cassidy passes on a marginal first-rounder,
  * whether Jaymie values his quarterback correctly — because those decide what
