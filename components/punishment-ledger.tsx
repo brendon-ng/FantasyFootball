@@ -26,11 +26,22 @@ export function TeamNames({
   slugs,
   teams,
   names,
+  full = false,
 }: {
   season: number;
   slugs: string[];
   teams: TeamMap;
   names: Record<string, string>;
+  /**
+   * Keep the full name at every width.
+   *
+   * THE ABBREVIATION IS A COLUMN'S PROBLEM, NOT A PHONE'S. Dropping to a first
+   * name buys width, which the ledger's 64px cell badly needs and a panel
+   * running the width of the card does not — there it just loses a surname for
+   * nothing. So the default stays put for the caller that needs it and anywhere
+   * with room opts out.
+   */
+  full?: boolean;
 }) {
   if (!slugs.length) return <span className="text-chalk-600">—</span>;
   const people = slugs.flatMap((slug) => teamFor(teams, names, season, slug));
@@ -47,8 +58,14 @@ export function TeamNames({
             {/* FIRST NAME ONLY ON A PHONE. "Josh Greene…" truncated tells you
                 less than "Josh" complete, and the width it frees is what lets
                 the media control sit on the row at all. */}
-            <span className="sm:hidden">{p.first}</span>
-            <span className="hidden sm:inline">{p.label}</span>
+            {full ? (
+              p.label
+            ) : (
+              <>
+                <span className="sm:hidden">{p.first}</span>
+                <span className="hidden sm:inline">{p.label}</span>
+              </>
+            )}
           </Link>
         </span>
       ))}

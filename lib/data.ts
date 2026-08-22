@@ -26,6 +26,11 @@ import type { LiveProvider } from "./live/types.ts";
 import { meetingId } from "./meeting.ts";
 import type { DerivedLow, SeasonLows, TeamMap } from "./punishments.ts";
 import { MARK_DEPTH, type RecordThresholds } from "./record-marks.ts";
+import {
+  resolveSeasonPunishment,
+  type SeasonPunishment,
+  type SeasonPunishmentEntry,
+} from "./season-punishment.ts";
 
 import type {
   BracketMatch,
@@ -331,7 +336,11 @@ export const getPunishmentLows = once((): SeasonLows[] => {
  * joined string, and each person here needs their own link and `data-owner`.
  */
 export const getPunishmentTeams = once((): TeamMap => {
-  if (!features().weeklyLowPunishment) return {};
+  // Both punishment features name a co-owned team in full, so the gate is the
+  // union rather than the weekly flag alone — a league with only the yearly
+  // punishment would otherwise get an empty map and name half a team.
+  const f = features();
+  if (!f.weeklyLowPunishment && !f.seasonPunishment) return {};
   const owners = getOwnerMap();
   const out: TeamMap = {};
   for (const s of getSeasons()) {
@@ -349,6 +358,44 @@ export const getPunishmentTeams = once((): TeamMap => {
   }
   return out;
 });
+
+/**
+ * The last-place punishment for every season that had one.
+ *
+ * READ FROM CONFIG, JOINED TO DERIVED DATA. The text and the completion date are
+ * hand-written and committed; who owes it is never written down, because
+ * `SeasonSummary.lastPlace` already knows — see lib/season-punishment.
+ *
+ * OPTIONAL FILE, like `keeper-overrides.json`: a league that does not play this
+ * game should not have to carry an empty one, and a season with no entry is a
+ * season that had no punishment rather than a gap in the data.
+ */
+export const getSeasonPunishments = once((): Map<number, SeasonPunishment> => {
+  const out = new Map<number, SeasonPunishment>();
+  if (!features().seasonPunishment) return out;
+
+  const path = join(CONFIG, "season-punishments.json");
+  const entries = existsSync(path)
+    ? (JSON.parse(readFileSync(path, "utf8")) as Record<
+        string,
+        SeasonPunishmentEntry
+      >)
+    : {};
+
+  for (const s of getSeasons()) {
+    const resolved = resolveSeasonPunishment(
+      s.season,
+      entries[String(s.season)],
+      s.lastPlace,
+    );
+    if (resolved) out.set(s.season, resolved);
+  }
+  return out;
+});
+
+/** One season's, or null when that season had none. */
+export const getSeasonPunishment = (season: number): SeasonPunishment | null =>
+  getSeasonPunishments().get(season) ?? null;
 
 export const getDrafts = (): DraftPickRecord[] =>
   load("derived/drafts.json", []);
@@ -817,6 +864,15 @@ export interface LeagueFeatures {
    * either way, and derive records it for every league.
    */
   weeklyLowPunishment: boolean;
+  /**
+   * Whoever finishes last for the whole season does a punishment, and the
+   * league keeps a record of it.
+   *
+   * INDEPENDENT OF `weeklyLowPunishment`, and the commoner of the two. A league
+   * with only this gets NO punishments tab — one record a year does not fill a
+   * page — so it surfaces on the season and history pages instead.
+   */
+  seasonPunishment: boolean;
 }
 export interface LeagueConfig {
   slug: string;

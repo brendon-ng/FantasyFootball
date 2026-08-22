@@ -12,7 +12,8 @@
     "keepers": true,
     "adp": true,
     "espnImport": true,
-    "weeklyLowPunishment": false
+    "weeklyLowPunishment": false,
+    "seasonPunishment": true
   },
   "sport": "nfl",
   "//discovery": [
@@ -23,6 +24,20 @@
     "That also disambiguates from other leagues the anchor user plays in."
   ],
   "anchorUserId": "887589851141427200",
+  "//cloudinary": [
+    "Photos and videos of the last-place punishment. Same cloud as every other",
+    "league here; what separates them is the TAG (<slug>-<season>), which is how",
+    "the site finds anything. The FOLDER is invisible to the site and exists only",
+    "so the Cloudinary console is navigable.",
+    "",
+    "ONE PRESET FOR EVERY LEAGUE. Which folder an upload lands in is sent per",
+    "request as asset_folder=<slug>/punishments, which only works while the",
+    "preset leaves its own Asset folder BLANK — a value set there overrides the",
+    "request, silently and with a 200. Verified: one preset, both leagues, each",
+    "landing in its own folder."
+  ],
+  "cloudinaryCloudName": "yczyb6et",
+  "cloudinaryUploadPreset": "punishments",
   "knownLeagueIds": {
     "2024": "1048054415074205696",
     "2025": "1180273312919666688",

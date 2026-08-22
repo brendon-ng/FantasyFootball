@@ -22,6 +22,15 @@ export interface LeagueFeatures {
   espnImport: boolean;
   /** The lowest-scoring team of each regular-season week does a punishment. */
   weeklyLowPunishment: boolean;
+  /**
+   * Whoever finishes last for the whole season does a punishment.
+   *
+   * INDEPENDENT OF `weeklyLowPunishment`. Most leagues here run the yearly one
+   * and not the weekly one, and a league with only this gets NO punishments tab
+   * — one record a year does not fill a page, so it lives on the season and
+   * history pages instead.
+   */
+  seasonPunishment: boolean;
 }
 
 export interface LeagueConfig {

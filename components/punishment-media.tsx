@@ -2,14 +2,19 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { TouchEvent } from "react";
 
 import { useIdentity } from "@/components/identity";
 import { TeamNames } from "@/components/punishment-ledger";
 import { Sheet } from "@/components/sheet";
 import { EmptyState, Panel, PanelHeader, Skeleton } from "@/components/ui";
+import { shrinkImage } from "@/lib/image-shrink";
 import {
+  downloadUrl,
   listMedia,
   mediaUrl,
+  IMAGE_LIMIT,
+  VIDEO_LIMIT,
   posterUrl,
   seasonTag,
   THUMB,
@@ -17,6 +22,9 @@ import {
   type MediaItem,
 } from "@/lib/cloudinary";
 import type { LedgerRow, TeamMap } from "@/lib/punishments";
+import type { SeasonPunishment } from "@/lib/season-punishment";
+
+const mb = (bytes: number) => `${Math.round(bytes / 1024 / 1024)}MB`;
 
 /**
  * Photos and videos of punishments actually being carried out.
@@ -35,6 +43,8 @@ export function useSeasonMedia(
   season: number | null,
 ): {
   items: MediaItem[] | null;
+  /** Just the season punishment's, for the panel that renders it. */
+  seasonItems: MediaItem[];
   /** A count and a thumbnail for one week, for the ledger's row control. */
   previewFor: (week: number) => { count: number; thumb: string | null };
   add: (created: MediaItem[]) => void;
@@ -73,7 +83,11 @@ export function useSeasonMedia(
    */
   const previewFor = useCallback(
     (week: number) => {
-      const mine = (items ?? []).filter((m) => m.week === week);
+      // SCOPE FIRST, then week. Without it a season punishment's photos would
+      // count towards whatever week their null matched.
+      const mine = (items ?? []).filter(
+        (m) => m.scope === "week" && m.week === week,
+      );
       const first = mine[0];
       return {
         count: mine.length,
@@ -87,26 +101,163 @@ export function useSeasonMedia(
     [items, cloud],
   );
 
-  return { items, previewFor, add };
+  const seasonItems = (items ?? []).filter((m) => m.scope === "season");
+
+  return { items, seasonItems, previewFor, add };
+}
+
+/**
+ * The upload half, shared by the week dialog and the season panel.
+ *
+ * A HOOK RATHER THAN A COMPONENT, because the two surfaces put the button in
+ * very different places — full width at the foot of a sheet, inline beside a
+ * grid — and only the wiring is common. What is common is worth sharing: the
+ * sequencing, the partial-failure rule and the hidden input are each easy to
+ * get subtly wrong twice.
+ */
+export function useUploader({
+  cloud,
+  preset,
+  league,
+  season,
+  week,
+  onAdded,
+}: {
+  cloud: string;
+  preset: string;
+  league: string;
+  season: number;
+  /** A week number, or null for the season's own punishment. */
+  week: number | null;
+  onAdded: (created: MediaItem[]) => void;
+}) {
+  const [busy, setBusy] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const picker = useRef<HTMLInputElement>(null);
+
+  const { identity, ready } = useIdentity();
+  const me = ready && identity.kind === "owner" ? identity.slug : null;
+
+  /**
+   * ONE FILE AT A TIME, not all at once. A phone on a bad connection sending
+   * four videos in parallel finishes them all slowly and shows nothing in the
+   * meantime; sequentially it can report progress, and whatever already
+   * succeeded survives a later failure.
+   *
+   * AN OVERSIZED PHOTO IS SHRUNK, AN OVERSIZED VIDEO IS REFUSED. That asymmetry
+   * is not a shortcut: a browser can re-encode a still on a canvas in a moment,
+   * and has no honest way to re-encode video — the options are a real-time
+   * `MediaRecorder` pass that takes as long as the clip and loses the audio, or
+   * ffmpeg.wasm, which is a 25MB download that falls over on a phone.
+   *
+   * A REFUSAL DOES NOT ABANDON THE BATCH. One clip being too long should not
+   * cost somebody the three photos they picked alongside it, so the file is
+   * skipped and named at the end.
+   */
+  const send = async (files: FileList) => {
+    setError(null);
+    const done: MediaItem[] = [];
+    const skipped: string[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      let file = files[i];
+      const step = `${i + 1} of ${files.length}`;
+
+      if (file.type.startsWith("video/")) {
+        if (file.size > VIDEO_LIMIT) {
+          skipped.push(`${file.name} (${mb(file.size)})`);
+          continue;
+        }
+      } else if (file.size > IMAGE_LIMIT) {
+        // Said out loud: on a phone this is a couple of seconds of nothing, and
+        // silence there reads as the button having failed.
+        setBusy(`Resizing ${step}…`);
+        try {
+          file = await shrinkImage(file);
+        } catch {
+          // Undecodable, or no canvas. Send the original and let Cloudinary
+          // have the last word rather than refusing on its behalf.
+        }
+      }
+
+      setBusy(`Uploading ${step}…`);
+      try {
+        done.push(
+          await uploadMedia({
+            cloud,
+            preset,
+            file,
+            league,
+            season,
+            week,
+            by: me,
+          }),
+        );
+      } catch (e) {
+        setBusy(null);
+        if (done.length) onAdded(done);
+        setError(e instanceof Error ? e.message : "Upload failed.");
+        return;
+      }
+    }
+
+    setBusy(null);
+    onAdded(done);
+    if (skipped.length) {
+      setError(
+        `Too big to upload — video is capped at ${mb(VIDEO_LIMIT)}: ${skipped.join(", ")}. Trim it, or export at a lower quality.`,
+      );
+    }
+  };
+
+  const input = (
+    <input
+      ref={picker}
+      type="file"
+      accept="image/*,video/*"
+      multiple
+      hidden
+      onChange={(e) => {
+        if (e.target.files?.length) void send(e.target.files);
+      }}
+    />
+  );
+
+  return {
+    busy,
+    error,
+    me,
+    input,
+    open: () => picker.current?.click(),
+  };
 }
 
 /** Square thumbnails, so the grid stays a grid whatever shape the photos are. */
-function MediaGrid({
+export function MediaGrid({
   cloud,
   items,
   onOpen,
 }: {
   cloud: string;
   items: MediaItem[];
-  onOpen: (item: MediaItem) => void;
+  /**
+   * BY INDEX, NOT BY ITEM, because opening one is opening a POSITION IN THIS
+   * GRID — the viewer pages through the group you clicked in, and an item alone
+   * does not say which group that was.
+   */
+  onOpen: (index: number) => void;
 }) {
   return (
-    <ul className="grid grid-cols-3 gap-1.5 sm:grid-cols-5">
-      {items.map((item) => (
+    // MORE COLUMNS, NOT BIGGER SQUARES, as the card widens. A grid of five
+    // across a desktop panel makes each thumbnail far larger than a thumbnail
+    // needs to be, and a season's worth then runs down the page — the full-size
+    // view is one click away and is what a big image is for.
+    <ul className="grid grid-cols-3 gap-1.5 sm:grid-cols-6 lg:grid-cols-8">
+      {items.map((item, i) => (
         <li key={item.publicId}>
           <button
             type="button"
-            onClick={() => onOpen(item)}
+            onClick={() => onOpen(i)}
             className="group relative block aspect-square w-full overflow-hidden rounded-md border border-ink-600"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -165,47 +316,15 @@ export function WeekMediaSheet({
   onAdded: (created: MediaItem[]) => void;
   onClose: () => void;
 }) {
-  const [busy, setBusy] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [viewing, setViewing] = useState<MediaItem | null>(null);
-  const picker = useRef<HTMLInputElement>(null);
-
-  const { identity, ready } = useIdentity();
-  const me = ready && identity.kind === "owner" ? identity.slug : null;
-
-  /**
-   * ONE FILE AT A TIME, not all at once. A phone on a bad connection sending
-   * four videos in parallel finishes them all slowly and shows nothing in the
-   * meantime; sequentially it can report progress, and whatever already
-   * succeeded survives a later failure.
-   */
-  const send = async (files: FileList) => {
-    setError(null);
-    const done: MediaItem[] = [];
-    for (let i = 0; i < files.length; i++) {
-      setBusy(`Uploading ${i + 1} of ${files.length}…`);
-      try {
-        done.push(
-          await uploadMedia({
-            cloud,
-            preset,
-            file: files[i],
-            league,
-            season,
-            week: row.week,
-            by: me,
-          }),
-        );
-      } catch (e) {
-        setBusy(null);
-        if (done.length) onAdded(done);
-        setError(e instanceof Error ? e.message : "Upload failed.");
-        return;
-      }
-    }
-    setBusy(null);
-    onAdded(done);
-  };
+  const [viewing, setViewing] = useState<Viewing | null>(null);
+  const { busy, error, me, input, open } = useUploader({
+    cloud,
+    preset,
+    league,
+    season,
+    week: row.week,
+    onAdded,
+  });
 
   return (
     <Sheet
@@ -271,23 +390,18 @@ export function WeekMediaSheet({
 
           <div className="space-y-4 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:px-5 sm:pb-5">
             {items.length ? (
-              <MediaGrid cloud={cloud} items={items} onOpen={setViewing} />
+              <MediaGrid
+                cloud={cloud}
+                items={items}
+                onOpen={(index) => setViewing({ items, index })}
+              />
             ) : (
               <p className="py-6 text-center text-sm text-chalk-600">
                 Nothing posted for this week yet.
               </p>
             )}
 
-            <input
-              ref={picker}
-              type="file"
-              accept="image/*,video/*"
-              multiple
-              hidden
-              onChange={(e) => {
-                if (e.target.files?.length) void send(e.target.files);
-              }}
-            />
+            {input}
 
             {error ? (
               <div className="rounded-lg border border-loss/40 bg-loss/10 px-3 py-2 text-xs leading-relaxed text-loss">
@@ -297,7 +411,7 @@ export function WeekMediaSheet({
 
             <button
               type="button"
-              onClick={() => picker.current?.click()}
+              onClick={open}
               disabled={Boolean(busy)}
               className="w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
             >
@@ -312,7 +426,8 @@ export function WeekMediaSheet({
           {viewing ? (
             <Lightbox
               cloud={cloud}
-              item={viewing}
+              viewing={viewing}
+              onIndex={(index) => setViewing((v) => v && { ...v, index })}
               onClose={() => setViewing(null)}
             />
           ) : null}
@@ -325,15 +440,26 @@ export function WeekMediaSheet({
 /**
  * Everything from the season, in one place.
  *
- * VIEW ONLY — uploading happens from a ledger row, where the week is not a
- * question anyone has to answer. Grouped newest week first, matching the order
- * the ledger reads in.
+ * THE LAST-PLACE PUNISHMENT IS ONE OF THE GROUPS, not a week. Its photos carry
+ * no week number — that is what `kind=season` means — so grouping purely by
+ * week dropped them into the week-0 "Unfiled" bucket, which is reserved for an
+ * asset whose context went missing. It leads the list, being the year's
+ * punishment rather than one week of it, and "Unfiled" goes back to meaning
+ * something genuinely broken.
+ *
+ * Every group is built the same way and rendered by one loop — a label, who
+ * owed it, what they owed, and the grid — so the season group cannot drift away
+ * from the weekly ones.
+ *
+ * VIEW ONLY — uploading happens from a ledger row, or from the last-place panel,
+ * where in both cases the week is not a question anyone has to answer.
  */
 export function PunishmentMedia({
   cloud,
   items,
   season,
   rows,
+  seasonPunishment,
   teams,
   names,
 }: {
@@ -341,17 +467,53 @@ export function PunishmentMedia({
   items: MediaItem[] | null;
   season: number;
   rows: LedgerRow[];
+  /** The year's last-place punishment, for labelling its own group. */
+  seasonPunishment?: SeasonPunishment | null;
   teams: TeamMap;
   names: Record<string, string>;
 }) {
-  const [viewing, setViewing] = useState<MediaItem | null>(null);
+  const [viewing, setViewing] = useState<Viewing | null>(null);
 
   const byWeek = new Map<number, MediaItem[]>();
   for (const item of items ?? []) {
+    if (item.scope === "season") continue;
     const week = item.week ?? 0;
     byWeek.set(week, [...(byWeek.get(week) ?? []), item]);
   }
-  const weeks = [...byWeek.keys()].sort((a, b) => b - a);
+  const seasonMedia = (items ?? []).filter((m) => m.scope === "season");
+
+  /**
+   * ONE SHAPE FOR EVERY GROUP, the season punishment included. It leads,
+   * because it is the year's punishment rather than one week of it; the weeks
+   * then run newest first, matching the order the ledger reads in.
+   */
+  const groups: Array<{
+    key: string;
+    label: string;
+    slugs: string[];
+    text: string | undefined;
+    items: MediaItem[];
+  }> = [];
+
+  if (seasonMedia.length) {
+    groups.push({
+      key: "season",
+      label: "Last place",
+      slugs: seasonPunishment?.loser ? [seasonPunishment.loser] : [],
+      text: seasonPunishment?.punishment,
+      items: seasonMedia,
+    });
+  }
+  for (const week of [...byWeek.keys()].sort((a, b) => b - a)) {
+    const row = rows.find((r) => r.week === week);
+    groups.push({
+      key: `week-${week}`,
+      label: week ? `Week ${week}` : "Unfiled",
+      slugs: row?.losers ?? [],
+      text: row?.punishment?.text,
+      items: byWeek.get(week)!,
+    });
+  }
 
   return (
     <>
@@ -363,45 +525,46 @@ export function PunishmentMedia({
         />
 
         {items == null ? (
-          <div className="grid grid-cols-3 gap-1.5 px-4 py-3 sm:grid-cols-5 sm:px-5">
+          <div className="grid grid-cols-3 gap-1.5 px-4 py-3 sm:grid-cols-6 sm:px-5 lg:grid-cols-8">
             {[0, 1, 2, 3, 4].map((i) => (
               <Skeleton key={i} className="aspect-square" />
             ))}
           </div>
-        ) : !items.length ? (
+        ) : !groups.length ? (
           <EmptyState>Nobody has posted anything yet.</EmptyState>
         ) : (
           <div className="divide-y divide-ink-700">
-            {weeks.map((week) => (
-              <div key={week} className="px-4 py-3 sm:px-5">
-                {/* WEEK, WHO, AND WHAT — the punishment belongs here as much
+            {groups.map((g) => (
+              <div key={g.key} className="px-4 py-3 sm:px-5">
+                {/* WHEN, WHO, AND WHAT — the punishment belongs here as much
                     as the name does: a grid of photos of somebody in a wig
                     means nothing without the line that says it was a wig. The
                     punishment truncates first, being the only part that can run
                     to a sentence. */}
                 <div className="mb-2 flex min-w-0 items-baseline gap-2">
-                  <span className="eyebrow shrink-0 text-[10px]">
-                    {week ? `Week ${week}` : "Unfiled"}
-                  </span>
+                  <span className="eyebrow shrink-0 text-[10px]">{g.label}</span>
                   <span className="shrink-0 text-xs font-medium text-chalk-400">
                     <TeamNames
                       season={season}
-                      slugs={rows.find((r) => r.week === week)?.losers ?? []}
+                      slugs={g.slugs}
                       teams={teams}
                       names={names}
                     />
                   </span>
                   <span
                     className="min-w-0 flex-1 truncate text-xs text-chalk-600"
-                    title={rows.find((r) => r.week === week)?.punishment?.text}
+                    title={g.text}
                   >
-                    {rows.find((r) => r.week === week)?.punishment?.text}
+                    {g.text}
                   </span>
                 </div>
+                {/* THE GROUP IS THE SET. Opening a photo under "Week 3" pages
+                    through week 3, not through the season — the grid you
+                    clicked in is what says which set you are looking at. */}
                 <MediaGrid
                   cloud={cloud}
-                  items={byWeek.get(week)!}
-                  onOpen={setViewing}
+                  items={g.items}
+                  onOpen={(index) => setViewing({ items: g.items, index })}
                 />
               </div>
             ))}
@@ -412,7 +575,8 @@ export function PunishmentMedia({
       {viewing ? (
         <Lightbox
           cloud={cloud}
-          item={viewing}
+          viewing={viewing}
+          onIndex={(index) => setViewing((v) => v && { ...v, index })}
           onClose={() => setViewing(null)}
         />
       ) : null}
@@ -421,25 +585,160 @@ export function PunishmentMedia({
 }
 
 /**
- * One item, as big as the screen allows.
+ * Saves one item to the device.
+ *
+ * TWO ROUTES, AND THE SHARE SHEET IS THE POINT. A plain download on iOS lands in
+ * Files, not Photos, which is not what anyone means by saving a picture — the
+ * native share sheet has "Save Image", and that is what puts it in the camera
+ * roll. So the file is fetched (Cloudinary sends `access-control-allow-origin:
+ * *` on delivery, checked) and handed to `navigator.share`, falling back to a
+ * download only where sharing files is not supported.
+ *
+ * A CANCELLED SHARE IS NOT A FALLBACK. `navigator.share` rejects with AbortError
+ * when the sheet is dismissed, and starting a download at that point would hand
+ * someone the file they just declined. The fallback is chosen BEFORE the share
+ * is attempted, never after it fails.
+ */
+async function saveMedia(cloud: string, item: MediaItem) {
+  const name = `${item.publicId}.${item.format}`;
+
+  let file: File | null = null;
+  try {
+    const res = await fetch(mediaUrl(cloud, item));
+    if (res.ok) {
+      const blob = await res.blob();
+      file = new File([blob], name, { type: blob.type });
+    }
+  } catch {
+    // Offline, or CORS withdrawn. The download link below needs neither.
+  }
+
+  if (file && navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file] });
+    } catch {
+      // Dismissed. Deliberately nothing: see above.
+    }
+    return;
+  }
+
+  const a = document.createElement("a");
+  a.href = downloadUrl(cloud, item, name);
+  a.download = name;
+  a.rel = "noopener";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+/** What the viewer is paging through, and where in it. */
+export interface Viewing {
+  items: MediaItem[];
+  index: number;
+}
+
+/**
+ * One item at a time, as big as the screen allows, with the rest a swipe away.
+ *
+ * IT PAGES THROUGH THE GROUP YOU OPENED, not the whole season. Clicking a photo
+ * under "Week 3" and then swiping into last place's would be a non-sequitur —
+ * the surrounding grid is what says which set you are in, so that is the set.
+ *
+ * THREE WAYS THROUGH, because the same dialog is used on a phone and a desktop:
+ * a horizontal swipe, the arrow keys, and a pair of buttons. The buttons are
+ * always rendered rather than shown on hover — hover does not exist on the
+ * device where this is most used, and a control that appears only on desktop is
+ * a control most people never find.
+ *
+ * A SWIPE THAT STARTS ON A VIDEO IS LEFT ALONE. `<video controls>` puts a
+ * scrubber under the finger, and stealing that gesture would make a video
+ * impossible to seek. The photo case is unaffected, and a video can still be
+ * paged with the buttons or the keys.
+ *
+ * CLAMPED, NOT WRAPPED. Running off the end back to the start hides how long
+ * the set is; here the counter and a disabled button both say so.
  *
  * CENTRED AT EVERY WIDTH, phone included. A photo is not a form: it wants the
  * middle of a dimmed screen, not to rise from the bottom edge the way the
  * dialogs here normally do.
- *
- * The close control is a bare glyph over the corner of the media rather than a
- * bordered button in a header strip. There is no header — the image IS the
- * dialog — and a boxed control floating on a photo reads as part of the photo.
  */
-function Lightbox({
+export function Lightbox({
   cloud,
-  item,
+  viewing,
+  onIndex,
   onClose,
 }: {
   cloud: string;
-  item: MediaItem;
+  viewing: Viewing;
+  onIndex: (index: number) => void;
   onClose: () => void;
 }) {
+  const { items, index } = viewing;
+  const item = items[index];
+  const count = items.length;
+
+  const go = useCallback(
+    (delta: number) => {
+      const next = index + delta;
+      if (next >= 0 && next < count) onIndex(next);
+    },
+    [index, count, onIndex],
+  );
+
+  // The arrow keys. Escape is the Sheet's own, so it is deliberately not here.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") go(-1);
+      else if (e.key === "ArrowRight") go(1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [go]);
+
+  const touch = useRef<{ x: number; y: number } | null>(null);
+  const onTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLElement).closest("video")) return;
+    const t = e.touches[0];
+    touch.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+    const start = touch.current;
+    touch.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    // MOSTLY HORIZONTAL, AND FAR ENOUGH. Without the second test a vertical
+    // scroll that drifts sideways pages the gallery; without the first, a tap
+    // with a shaky finger does.
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(t.clientY - start.y))
+      return;
+    go(dx < 0 ? 1 : -1);
+  };
+
+  if (!item) return null;
+
+  const media =
+    item.type === "video" ? (
+      <video
+        // KEYED BY ASSET so paging swaps the source cleanly. Without it React
+        // reuses the element and the previous video keeps playing under the
+        // next one's poster.
+        key={item.publicId}
+        src={mediaUrl(cloud, item)}
+        poster={posterUrl(cloud, item, "w_1000,c_limit")}
+        controls
+        playsInline
+        className="max-h-full max-w-full rounded-lg bg-black"
+      />
+    ) : (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={mediaUrl(cloud, item, "w_1600,c_limit,f_auto,q_auto")}
+        alt=""
+        className="max-h-full max-w-full rounded-lg object-contain"
+      />
+    );
+
   return (
     <Sheet
       label="Punishment media"
@@ -447,39 +746,98 @@ function Lightbox({
       align="center"
       zClassName="z-[60]"
       backdropClassName="p-3 sm:p-6"
-      panelClassName="relative max-w-[52rem] overflow-hidden rounded-xl bg-ink-900 shadow-2xl"
+      // NO BACKGROUND AND NO BORDER: the panel is a layout column, not a
+      // surface. The only thing that should look like a thing here is the
+      // media, which is why the chrome sits above and below it on the dimmed
+      // backdrop rather than on top of the photo.
+      panelClassName="flex max-h-[92dvh] w-full max-w-[52rem] flex-col"
     >
       {({ close }) => (
-        <>
-          <button
-            type="button"
-            onClick={() => close()}
-            aria-label="Close"
-            // Its own scrim, because a glyph alone disappears against a bright
-            // photo and a dark one alike.
-            className="absolute right-2 top-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-ink-900/50 text-lg leading-none text-chalk-300 backdrop-blur-sm transition-colors hover:bg-ink-900/80 hover:text-chalk-100"
-          >
-            <span aria-hidden>×</span>
-          </button>
+        <div
+          className="flex min-h-0 flex-1 flex-col"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          <div className="mb-2 flex shrink-0 items-center justify-between">
+            <button
+              type="button"
+              onClick={() => void saveMedia(cloud, item)}
+              className="rounded-full bg-ink-800/80 px-3 py-1.5 text-xs font-semibold text-chalk-300 transition-colors hover:bg-ink-700 hover:text-chalk-100"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={() => close()}
+              aria-label="Close"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-ink-800/80 text-lg leading-none text-chalk-300 transition-colors hover:bg-ink-700 hover:text-chalk-100"
+            >
+              <span aria-hidden>×</span>
+            </button>
+          </div>
 
-          {item.type === "video" ? (
-            <video
-              src={mediaUrl(cloud, item)}
-              poster={posterUrl(cloud, item, "w_1000,c_limit")}
-              controls
-              playsInline
-              className="max-h-[85dvh] w-full bg-black"
-            />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={mediaUrl(cloud, item, "w_1600,c_limit,f_auto,q_auto")}
-              alt=""
-              className="max-h-[85dvh] w-full bg-black object-contain"
-            />
-          )}
-        </>
+          {/* CLICKING THE GAP STILL DISMISSES. The column is wider than a
+              portrait photo, so without this the dead space either side of one
+              would swallow the click that everywhere else on the site closes a
+              dialog. Only a hit on the wrapper ITSELF counts — a click that
+              lands on the photo is not a click outside it. */}
+          <div
+            onClick={(e) => {
+              if (e.target === e.currentTarget) close();
+            }}
+            className="flex min-h-0 flex-1 items-center justify-center"
+          >
+            {media}
+          </div>
+
+          {count > 1 ? (
+            <div className="mt-2 flex shrink-0 items-center justify-center gap-5">
+              <PageButton
+                side="left"
+                disabled={index === 0}
+                onClick={() => go(-1)}
+              />
+              <span className="tabular text-xs font-semibold text-chalk-400">
+                {index + 1} / {count}
+              </span>
+              <PageButton
+                side="right"
+                disabled={index === count - 1}
+                onClick={() => go(1)}
+              />
+            </div>
+          ) : null}
+        </div>
       )}
     </Sheet>
+  );
+}
+
+/**
+ * A pager control, in the bar under the media rather than over it.
+ *
+ * DIMMED WHEN IT CANNOT GO, NOT HIDDEN. Removing it at the ends would shuffle
+ * the counter sideways on the first and last item, which reads as the bar
+ * twitching every time you reach an edge.
+ */
+function PageButton({
+  side,
+  disabled,
+  onClick,
+}: {
+  side: "left" | "right";
+  disabled: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={side === "left" ? "Previous" : "Next"}
+      className="flex h-8 w-8 items-center justify-center rounded-full bg-ink-800/80 text-lg leading-none text-chalk-300 transition-colors hover:bg-ink-700 hover:text-chalk-100 disabled:pointer-events-none disabled:opacity-30"
+    >
+      <span aria-hidden>{side === "left" ? "‹" : "›"}</span>
+    </button>
   );
 }

@@ -322,6 +322,8 @@ against the other.
 | 1.7.2.2.1 ADP | `scripts/adp.ts`; frozen by `npm run adp:lock` |
 | 1.8.2 Playoffs, seeding | `summariseSeason()`; seeding is wins then points for |
 | 1.8.4 Toilet bowl | `buildBracket()` — Sleeper's losers bracket is INVERTED, see AGENTS.md |
+| 1.9.3 Last place punishment | `config/leagues/den-ops/season-punishments.json`; who owes it is derived, never written |
+| 1.9.4 Enforcement | NOT modelled, by decision — the site records the punishment, it does not adjudicate the penalty |
 | Per-season rule values | `config/rules/<year>.json`, one file per season so history is immutable |
 
 ### Verified against real data
@@ -381,7 +383,9 @@ becomes resolvable, and picks should display as "7.10" instead of "7th Rd".
    `trade_deadline: 12`, and 2024 had none at all. `config/rules/*` says 11.
 3. **ADP beyond pick 170** converts to a round past 17, which cannot be a keeper
    cost in a 10-team, 17-round draft. First bites in 2027.
-4. **1.9.3** — the 2025 last-place punishment is still blank.
+4. **1.9.3** — the 2025 last-place punishment is still blank, so 2025 has no
+   entry in `season-punishments.json` and renders nothing. The 2024 one is
+   recorded and shows as owed; nobody has logged a completion date for it.
 
 ### League history predates these bylaws
 

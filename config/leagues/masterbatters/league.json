@@ -12,7 +12,8 @@
     "keepers": false,
     "adp": false,
     "espnImport": false,
-    "weeklyLowPunishment": true
+    "weeklyLowPunishment": true,
+    "seasonPunishment": true
   },
   "sport": "nfl",
   "//appsScript": [

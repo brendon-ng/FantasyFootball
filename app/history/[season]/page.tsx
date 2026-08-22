@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { BackLink } from "@/components/back-link";
 
 import { Bracket } from "@/components/bracket";
+import { SeasonPunishmentPanel } from "@/components/season-punishment";
 import { SeasonPunishments } from "@/components/season-punishments";
 import { TradeList } from "@/components/trade-list";
 import { WeeklyLowBadge } from "@/components/weekly-low";
@@ -28,7 +29,9 @@ import {
   getTradeReturns,
   getPlayers,
   getPunishmentLows,
+  getConfig,
   getPunishmentTeams,
+  getSeasonPunishment,
   getSeasons,
   getTrades,
   getWeeklyLowKeys,
@@ -62,6 +65,7 @@ export default async function SeasonPage({
   const trades = getTrades().filter((t) => t.season === season).reverse();
   const players = getPlayers();
   const ownerNames = Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]));
+  const seasonPunishment = getSeasonPunishment(season);
   const outcomes = getPickOutcomes();
   const returns = getTradeReturns();
   const handoffs = getPickHandoffs();
@@ -276,6 +280,21 @@ export default async function SeasonPage({
           </ol>
         </Panel>
       </div>
+
+      {/* THE YEARLY PUNISHMENT COMES FIRST, above the weekly ledger. It is one
+          record against fourteen rows, and it is the consequence of the final
+          standings a reader has just looked at. Renders nothing for a season
+          with no entry in season-punishments.json, which is most of them. */}
+      {seasonPunishment ? (
+        <SeasonPunishmentPanel
+          league={getConfig().slug}
+          punishment={seasonPunishment}
+          teams={getPunishmentTeams()}
+          names={ownerNames}
+          cloud={getConfig().cloudinaryCloudName ?? null}
+          preset={getConfig().cloudinaryUploadPreset ?? null}
+        />
+      ) : null}
 
       {/* Directly under the standings: the weekly low is a regular-season fact,
           and the table above is where a reader just saw the 🚽 count that this

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { PunishmentLedger, TeamNames } from "@/components/punishment-ledger";
+import { SeasonPunishmentPanel } from "@/components/season-punishment";
 import { CompleteModal } from "@/components/complete-modal";
 import {
   PunishmentMedia,
@@ -24,6 +25,7 @@ import {
 } from "@/components/ui";
 import { useIdentity } from "@/components/identity";
 import { useBallots, usePunishments } from "@/lib/punishments-live";
+import type { SeasonPunishment } from "@/lib/season-punishment";
 import type { LeagueRef } from "@/lib/league-ref";
 import { useUrlState } from "@/lib/url-state";
 import {
@@ -72,6 +74,7 @@ export function PunishmentTracker({
   userIdToSlug,
   drawTitle,
   commissioner,
+  seasonPunishments,
   cloudinaryCloud,
   cloudinaryPreset,
   src,
@@ -100,6 +103,20 @@ export function PunishmentTracker({
    * world, and one person should be making it.
    */
   commissioner: string | null;
+  /**
+   * The last-place punishment per season, from config.
+   *
+   * NOT FROM THE FEED. It is committed rather than fetched — see
+   * lib/season-punishment — so it needs no skeleton and survives the sheet
+   * being down, which is why it is rendered outside the loading split rather
+   * than inside the branch that waits on it.
+   *
+   * It still follows the SEASON SWITCHER, so an untouched page showing the
+   * newest season shows nothing until a year with an entry is selected. That is
+   * the same rule the ledger below it obeys, and the reason this is keyed by
+   * season rather than pinned to the latest one that has a record.
+   */
+  seasonPunishments: Record<number, SeasonPunishment>;
   /**
    * Cloudinary, for punishment photos and video.
    *
@@ -372,6 +389,27 @@ export function PunishmentTracker({
         </div>
       </div>
 
+      {/* ABOVE THE LEDGER, AND OUTSIDE THE FEED'S LOADING SPLIT. One record a
+          year against fourteen rows, and the bigger punishment of the two, so
+          it leads. It comes from config rather than the sheet — see
+          lib/season-punishment — so it has nothing to wait for and no skeleton
+          to draw, and it is still here when the sheet is down and everything
+          below this is an error panel.
+
+          Not gated on `phase` either: the yearly punishment has a lifecycle of
+          its own and can be decided, owed or done while the weekly pool is
+          still being voted on. */}
+      {active && seasonPunishments[active] ? (
+        <SeasonPunishmentPanel
+          league={league}
+          punishment={seasonPunishments[active]}
+          teams={teams}
+          names={names}
+          cloud={cloudinaryCloud}
+          preset={cloudinaryPreset}
+        />
+      ) : null}
+
       {status === "loading" ? (
         <TrackerSkeleton rows={pendingRows} teams={teams} names={names} />
       ) : status === "error" ? (
@@ -387,43 +425,6 @@ export function PunishmentTracker({
         </Panel>
       ) : (
         <>
-          {/* THE PHASE DECIDES THE PAGE, not the row count. Before the pool is
-              set there is no ledger, no remaining pool and nothing to tally —
-              the ballot IS the page, and everything else would be a panel
-              explaining that it is empty.
-
-              NO TILES BEFORE THE SEASON STARTS. A suggestion count and a running
-              vote total are both already legible from the ballot underneath, one
-              row per suggestion, and a row of tiles restating them pushes the one
-              thing there is to do below the fold. The live phase keeps them
-              because they summarise fourteen rows, not nine. */}
-          {phase === "live" ? (
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <Stat
-                label="Assigned"
-                value={
-                  feedSeason.poolSize
-                    ? `${totals.assigned}/${feedSeason.poolSize}`
-                    : totals.assigned
-                }
-                sub={`${totals.weeks} weeks lost`}
-              />
-              <Stat label="Completed" value={totals.completed} tone="accent" />
-              <Stat
-                label="Outstanding"
-                value={totals.outstanding}
-                sub={totals.outstanding ? "still owed" : "all square"}
-              />
-              <Stat
-                label="Pool left"
-                value={pool.length}
-                sub={
-                  feedSeason.poolSize ? `of ${feedSeason.poolSize}` : undefined
-                }
-              />
-            </div>
-          ) : null}
-
           {phase !== "live" ? null : rows.length ? (
             <Panel>
               <PanelHeader
@@ -457,6 +458,46 @@ export function PunishmentTracker({
               </EmptyState>
             </Panel>
           )}
+
+          {/* THE TILES SIT UNDER THE LEDGER, not above it.
+
+              They SUMMARISE the fourteen rows above, so they read as a total
+              rather than as a preamble — and putting them first pushed the
+              ledger, which is the thing people come here for, below the fold on
+              a phone. Under it they also lead into the pool and the tally, which
+              are the same kind of season-wide accounting.
+
+              NOT BEFORE THE SEASON STARTS. A suggestion count and a running vote
+              total are both already legible from the ballot, one row per
+              suggestion, so a row of tiles restating them is noise. The live
+              phase keeps all four because they summarise fourteen rows, not
+              nine. */}
+          {phase === "live" ? (
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <Stat
+                label="Assigned"
+                value={
+                  feedSeason.poolSize
+                    ? `${totals.assigned}/${feedSeason.poolSize}`
+                    : totals.assigned
+                }
+                sub={`${totals.weeks} weeks lost`}
+              />
+              <Stat label="Completed" value={totals.completed} tone="accent" />
+              <Stat
+                label="Outstanding"
+                value={totals.outstanding}
+                sub={totals.outstanding ? "still owed" : "all square"}
+              />
+              <Stat
+                label="Pool left"
+                value={pool.length}
+                sub={
+                  feedSeason.poolSize ? `of ${feedSeason.poolSize}` : undefined
+                }
+              />
+            </div>
+          ) : null}
 
           {phase === "live" ? (
             <div className="grid gap-5 lg:grid-cols-2">
@@ -545,6 +586,7 @@ export function PunishmentTracker({
           {phase === "live" && cloudinaryCloud && cloudinaryPreset && active ? (
             <PunishmentMedia
               cloud={cloudinaryCloud}
+              seasonPunishment={active ? seasonPunishments[active] : null}
               items={media.items}
               season={active}
               rows={rows}
@@ -740,6 +782,14 @@ function TrackerSkeleton({
 
   return (
     <div className="space-y-5 sm:space-y-6" aria-busy="true">
+      <Panel>
+        <PanelHeader
+          title={`${rows[0].season} Ledger`}
+          legend="The score links to the game it happened in."
+        />
+        <PunishmentLedger rows={rows} teams={teams} names={names} loading />
+      </Panel>
+
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {["Assigned", "Completed", "Outstanding", "Pool left"].map((label) => (
           <div
@@ -751,14 +801,6 @@ function TrackerSkeleton({
           </div>
         ))}
       </div>
-
-      <Panel>
-        <PanelHeader
-          title={`${rows[0].season} Ledger`}
-          legend="The score links to the game it happened in."
-        />
-        <PunishmentLedger rows={rows} teams={teams} names={names} loading />
-      </Panel>
 
       <div className="grid gap-5 lg:grid-cols-2">
         <Panel>

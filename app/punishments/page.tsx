@@ -6,6 +6,7 @@ import {
   getOwnerMap,
   getPunishmentLows,
   getPunishmentTeams,
+  getSeasonPunishments,
   getLeagueRefs,
   getOwners,
   getUserIdToSlug,
@@ -51,6 +52,7 @@ export default function PunishmentsPage() {
       userIdToSlug={getUserIdToSlug()}
       drawTitle={pageTitle("Wheel of Punishments")}
       commissioner={getConfig().commissioner ?? null}
+      seasonPunishments={Object.fromEntries(getSeasonPunishments())}
       cloudinaryCloud={getConfig().cloudinaryCloudName ?? null}
       cloudinaryPreset={getConfig().cloudinaryUploadPreset ?? null}
       {...punishmentsSource()}

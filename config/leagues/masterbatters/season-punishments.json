@@ -1,0 +1,25 @@
+{
+  "//": [
+    "The last-place punishment, one entry per season, keyed by season.",
+    "",
+    "A SEASON WITH NO ENTRY HAD NO PUNISHMENT, and renders nothing anywhere —",
+    "that is the normal state for most years, not a gap to be filled in.",
+    "",
+    "WHO OWES IT IS NEVER WRITTEN HERE. The site already derives last place from",
+    "the toilet bowl or the consolation ladder; naming them again would be a",
+    "second source to disagree with the first.",
+    "",
+    "  punishment  required; the entry is ignored without it",
+    "  completed   ISO YYYY-MM-DD, or true for done on a date nobody recorded.",
+    "              Absent means it has not been done yet",
+    "  notes       optional, and RENDERED — it is for something a reader wants",
+    "              (where it happened, how it went), never a bylaw reference or",
+    "              anything else internal. The bylaws are linked from the site;",
+    "              citing them in the panel just makes it read like paperwork."
+  ],
+
+  "2025": {
+    "punishment": "NFL combine events, chugging a beer before each one.",
+    "completed": true
+  }
+}

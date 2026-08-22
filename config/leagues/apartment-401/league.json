@@ -6,7 +6,8 @@
     "keepers": false,
     "adp": false,
     "espnImport": true,
-    "weeklyLowPunishment": false
+    "weeklyLowPunishment": false,
+    "seasonPunishment": false
   },
   "sport": "nfl",
   "//sleeper": "ESPN-ONLY. This league has never been on Sleeper, so there is no anchor user and no league ids to discover. `sync` finds no seasons, writes an empty raw/seasons.json, and `derive` builds the whole league from data/apartment-401/manual/, which import:espn:seasons produces.",

@@ -63,6 +63,7 @@ that is ever wanted, have `build-all.mjs` emit a shared cross-league JSON first.
 | `espnImport` | `npm run import:espn` skips it |
 | `keepers` (home) | no keeper-deadline card on the draft panel — a redraft league has no deadline |
 | `weeklyLowPunishment` | no weekly-low markers anywhere — no chip on a matchup, no glyph in a season's week list, no column or tally on an owner page |
+| `seasonPunishment` | no last-place punishment panel on a season page, no punishment line in the Trophy Case, `getSeasonPunishments()` returns empty |
 
 `slug` is load-bearing — it is the URL segment AND the data directory. It must
 never change once published.
@@ -883,11 +884,69 @@ that HAS media shows a 20px thumbnail of the first one, which says both that
 there is something there and what it is; a row with none shows a bare `+`, which
 is almost invisible until you are looking for it.
 
+ONE UNSIGNED PRESET FOR EVERY LEAGUE, and each upload names its own folder:
+`asset_folder=<slug>/punishments`, derived from the slug, so adding a league
+needs nothing done in the Cloudinary console.
+
+THAT ONLY WORKS BECAUSE THE PRESET LEAVES ITS OWN ASSET FOLDER BLANK. A value
+configured on an unsigned preset OVERRIDES the request — that is what unsigned
+presets are for — and it does so SILENTLY, with a 200 and the wrong folder. If
+media starts piling up in one league's folder, that field has been filled in.
+
+NOT `folder`, which is the thing to reach for and is wrong here. This cloud is in
+dynamic folder mode, where the Media Library groups by `asset_folder` and
+`folder` merely prefixes the PUBLIC_ID — it produced `den-ops/punishments/n8ta…`
+still filed under masterbatters. Both were tested against the real cloud.
+
+THE FOLDER IS INVISIBLE TO THE SITE regardless. Everything is found by TAG, so a
+misfiled asset still appears on the right page; the folder is for whoever is
+browsing the Media Library and nothing else.
+
+Verified end to end for the season scope: one preset, two uploads, each landing
+in its own league folder, `kind=season` surviving the round trip and both found
+by a single tag lookup across folders.
+
 Gated on `cloudinaryCloudName` and `cloudinaryUploadPreset` being present rather
 than on a `features` flag, matching `appsScriptEndpoint` — a league without them
 simply gets no media UI. It is on `/punishments/` only, in the `live` phase; the
 season page's ledger has no chips and no panel, the same asymmetry as the draw
 and the completion dialog.
+
+#### Size limits: 10MB an image, 100MB a video
+
+THE IMAGE FIGURE IS MEASURED. A 13,236,188-byte upload came back "File size too
+large. Got 13236188. Maximum is 10485760." The video figure is the plan's.
+
+Both are a PRE-FLIGHT COURTESY, never the enforcement — Cloudinary decides, and
+its rejection names the true maximum and is shown verbatim, so a stale constant
+costs nothing but a wasted attempt.
+
+AN OVERSIZED PHOTO IS RE-ENCODED IN THE BROWSER (`lib/image-shrink.ts`), and
+ONLY an oversized one: this is a rescue for the 48-megapixel case, not a policy
+of touching every upload. It caps the longest edge at 2560px first — the
+full-size view only ever asks Cloudinary for `w_1600`, so anything beyond that is
+stored and never served — and only then starts shaving quality, because halving
+the pixels quarters the data and looks fine while quality 0.3 looks like a fax.
+It aims at 80% of the ceiling, since `toBlob` cannot be asked for an exact size
+and landing one byte over would waste the whole effort. After six passes it gives
+up and sends the ORIGINAL, so the server has the last word rather than the page
+grinding indefinitely.
+
+Two traps in that code, both already paid for: the canvas is filled WHITE first,
+because JPEG has no alpha and an unfilled canvas composites transparency to
+black; and decoding goes through `createImageBitmap(file, { imageOrientation:
+"from-image" })` so a portrait photo does not come out on its side.
+
+AN OVERSIZED VIDEO IS REFUSED, NOT COMPRESSED, and that asymmetry is not
+laziness. A browser re-encodes a still on a canvas in a moment and has no honest
+way to re-encode video: the choices are a real-time `MediaRecorder` pass that
+takes as long as the clip and drops the audio, or ffmpeg.wasm, a 25MB download
+that falls over on a phone. Refusing costs a sentence; the alternative was
+uploading 140MB over a phone connection to be told no.
+
+A REFUSAL DOES NOT ABANDON THE BATCH. One clip being too long must not cost
+somebody the three photos they picked alongside it, so it is skipped and named at
+the end.
 
 #### What this does not do, and will not tell you
 
@@ -902,9 +961,7 @@ and the completion dialog.
   shows "Uploading 1 of 1…" and then nothing for minutes — the worst case for the
   exact thing people most want to post. `XMLHttpRequest` has progress events if
   this becomes worth fixing.
-- **No size or type check before upload.** `accept` is a picker hint, not a
-  limit. An oversized file fails with Cloudinary's own message shown verbatim,
-  but only after the whole thing has uploaded.
+- **An oversized photo is shrunk; an oversized video is refused.** See below.
 - **Video is the cost risk.** The free tier is credit-based and every thumbnail
   and poster frame is a transformation; photos will not trouble it and a league
   posting phone video will.
@@ -914,6 +971,114 @@ and the completion dialog.
   Same call as the endpoint being public: the attack is "annoy twelve friends".
 - **No delete and no moderation.** Removing something means the Cloudinary
   console.
+- **Capture date is not available, and cannot be** — PARKED, and tested rather
+  than assumed. An unsigned upload REJECTS `exif` and `image_metadata` outright
+  ("Only upload_preset, callback, public_id, folder, asset_folder, tags,
+  context, metadata, … are allowed"), and the public list returns only
+  `asset_folder, asset_id, context, created_at, format, height, public_id, type,
+  version, width`. Reading it back later needs the Admin API, which needs
+  signing, which needs a server. So media sorts by UPLOAD time.
+
+  The way in, if it is ever wanted, is `context` — which IS allowed: parse
+  `DateTimeOriginal` in the browser before uploading and send `at=<iso>` beside
+  `week` and `by`. Photos only, though: video keeps its creation time in an
+  `mvhd` atom, and iPhones shoot HEIC, which Safari usually but not always
+  converts with EXIF intact. Worth little in practice, since a batch from one
+  person already uploads in picker order — it only helps when several people
+  post separately about the same punishment.
+
+## The last-place punishment
+
+Whoever finishes bottom for the whole season does a punishment, and the league
+keeps a record of it. `features.seasonPunishment`, **independent of
+`weeklyLowPunishment`** and the commoner of the two — every league here runs it,
+only Masterbatters runs the weekly one.
+
+A LEAGUE WITH ONLY THIS GETS NO PUNISHMENTS TAB. One record a year does not fill
+a page, so it surfaces on the season page and in the Trophy Case instead, and
+`SeasonPunishmentPanel` is therefore SELF-CONTAINED rather than a teaser linking
+somewhere better. The tracker mounts the same component above its weekly ledger
+for the one league that has both — OUTSIDE the feed's loading split, since it is
+committed rather than fetched and so has nothing to wait for and survives the
+sheet being down. It still follows the season switcher, so the tracker opening on
+the newest season shows nothing there until a year with an entry is picked.
+
+A MEMORIES LOG, NOT A PROCESS. No ballot, no wheel, no deadline tracking. Den
+Ops bylaw 1.9.4 does attach a real penalty — fail to comply before the draft and
+you lose your 3rd round pick, three times in ten years and you are out — but the
+league does not want the site adjudicating that, and 1.9.4.1 has a discretionary
+exception, so a blank date cell is not proof of anything.
+
+### It lives in config, not in the sheet
+
+`config/leagues/<slug>/season-punishments.json`, keyed by season, optional file.
+This is the one place the punishment surfaces part company with the Apps Script
+backend, and the reason is the write pattern: the weekly tracker earns its round
+trip because the league writes to it constantly and somebody who just voted has
+to see their vote. This changes TWICE A YEAR — someone sets the text, someone
+logs a date. Committing it means no loading state, no third-party outage, no
+skeleton on three leagues' history pages, and a record in git history beside
+every other slow-moving league fact.
+
+```json
+{ "2024": { "punishment": "Record yourself performing the NFL Combine.",
+            "completed": "2026-04-12",
+            "notes": "Bylaw 1.9.3." } }
+```
+
+WHO OWES IT IS NEVER WRITTEN DOWN. `SeasonSummary.lastPlace` already carries it,
+derived from Sleeper's inverted losers bracket or ESPN's consolation ladder, and
+verified across every season the site holds. A name in config would be a second
+source to disagree with the first — the same rule that makes the weekly ledger
+prefer the derived loser over the sheet's.
+
+### Four states, and none of them assume the time of year
+
+A punishment can be decided before anyone knows who will owe it, and written
+down years later beside the photos. Every surface handles all four rather than
+assuming where in the season it is.
+
+| State | Test | Renders |
+| --- | --- | --- |
+| `none` | no entry, or a blank one | NOTHING, anywhere. The normal state for most years |
+| `pending` | decided, season has no last place yet | the punishment, and "whoever finishes last in N" |
+| `owed` | decided, loser known, no date | who owes it |
+| `done` | there is a completion date | who did it, and when |
+
+`done` WINS OVER EVERYTHING: a date says it happened, so a season whose last
+place somehow never resolved still reads as done rather than claiming to wait on
+a result nobody needs. All eight branches of `resolveSeasonPunishment` are
+checked, including a blank string and an explicit null for `completed`, both of
+which mean not done rather than done-with-no-date.
+
+A `none` season renders nothing AT ALL rather than an empty panel — most seasons
+had no punishment, and a panel per year saying so is the thing this was written
+to avoid. Same rule as `SeasonPunishments` for the weekly ledger.
+
+### The date carries its year
+
+`formatPunishmentDate`, not the ledger's `formatCompleted`. A weekly punishment
+is served inside the season that earned it, so the year is implied by the table
+it sits in; this one is routinely served in the NEXT calendar year — the 2025
+punishment done in spring 2026 — and "Apr 12" under a panel headed 2025 names
+the wrong year.
+
+### Its media is inline, and shares the weekly plumbing
+
+Same Cloudinary cloud and the same season tag, marked `kind=season` in the
+context instead of `week=N`. So ONE pair of requests still covers a whole year
+however many kinds of punishment a league runs, and the ABSENCE of `kind` means
+weekly — which is what every asset uploaded before this existed carries, so
+nothing had to be migrated. Not a sentinel week number: week 0 already means
+"context missing", and overloading it would make a genuine mis-upload
+indistinguishable from the yearly punishment.
+
+INLINE RATHER THAN BEHIND A DIALOG, unlike the ledger's. Fourteen rows cannot
+each carry a grid and a row has to say which punishment the photos belong to;
+here the panel IS the punishment, so a click to reach them would be a click to
+see the only thing there is to see. `useUploader` is the shared half — the
+sequencing, the partial-failure rule and the hidden input — while each surface
+puts its own button where it belongs.
 
 ## Default all-time ordering
 
