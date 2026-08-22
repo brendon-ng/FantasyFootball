@@ -232,6 +232,157 @@ export function useUploader({
   };
 }
 
+/** One square thumbnail. Shared, so a grid tile and a row tile cannot drift. */
+function MediaTile({
+  cloud,
+  item,
+  onOpen,
+  className = "",
+}: {
+  cloud: string;
+  item: MediaItem;
+  onOpen: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className={`group relative block aspect-square overflow-hidden rounded-md border border-ink-600 ${className}`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={
+          item.type === "video"
+            ? posterUrl(cloud, item, THUMB)
+            : mediaUrl(cloud, item, THUMB)
+        }
+        alt=""
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform group-hover:scale-105"
+      />
+      {item.type === "video" ? (
+        <span
+          aria-label="Video"
+          className="absolute bottom-1 right-1 rounded bg-ink-900/80 px-1 text-[10px] text-chalk-100"
+        >
+          ▶
+        </span>
+      ) : null}
+    </button>
+  );
+}
+
+/**
+ * A SINGLE ROW, with the remainder behind a `+N`.
+ *
+ * A season's photos under one heading ran down the page and buried everything
+ * below it — and a panel summarising a week should be the height of a summary.
+ * So a fixed number of tiles sit on one line and the rest are one tap away.
+ *
+ * FIXED-SIZE TILES AND A FIXED COUNT, deliberately, rather than a responsive
+ * column count. The `+N` has to state a real number, and a count that changed with
+ * the breakpoint could only be computed by measuring — which means a resize
+ * observer, a hydration mismatch, and a number that flickers on rotate. Five
+ * cells fit a 360px phone with room to spare, and a desktop simply has empty space
+ * to the right, which reads as deliberate.
+ */
+export function MediaRow({
+  cloud,
+  items,
+  onOpen,
+  onMore,
+}: {
+  cloud: string;
+  items: MediaItem[];
+  onOpen: (index: number) => void;
+  onMore: () => void;
+}) {
+  const CELLS = 5;
+  const overflowing = items.length > CELLS;
+  // One cell is spent on the chip, so an overflowing row shows one fewer.
+  const shown = overflowing ? items.slice(0, CELLS - 1) : items;
+  const more = items.length - shown.length;
+
+  return (
+    <div className="flex gap-1.5">
+      {shown.map((item, i) => (
+        <MediaTile
+          key={item.publicId}
+          cloud={cloud}
+          item={item}
+          onOpen={() => onOpen(i)}
+          className="h-14 w-14 shrink-0 sm:h-16 sm:w-16"
+        />
+      ))}
+      {more > 0 ? (
+        <button
+          type="button"
+          onClick={onMore}
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md border border-ink-600 bg-ink-850 text-sm font-semibold text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent sm:h-16 sm:w-16"
+        >
+          +{more}
+        </button>
+      ) : null}
+    </div>
+  );
+}
+
+/**
+ * Everything in one group, when the row could not hold it.
+ *
+ * A PLAIN SCROLLING GRID, with no upload control and no per-item chrome: this
+ * exists only because a `+N` was tapped, so the one thing it owes the reader is
+ * all of them at once. Opening one from here still pages through the WHOLE
+ * group, not just the overflow — the row and this sheet are two views of one
+ * set, and the viewer should not be able to tell which was clicked.
+ */
+export function AllMediaSheet({
+  cloud,
+  title,
+  items,
+  onOpen,
+  onClose,
+}: {
+  cloud: string;
+  title: string;
+  items: MediaItem[];
+  onOpen: (index: number) => void;
+  onClose: () => void;
+}) {
+  return (
+    <Sheet
+      label={title}
+      onClose={onClose}
+      panelClassName="flex max-h-[85dvh] w-full max-w-[40rem] flex-col overflow-hidden rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
+    >
+      {({ close }) => (
+        <>
+          <div className="flex shrink-0 items-center justify-between gap-3 border-b border-ink-600 px-4 py-3 sm:px-5">
+            <div className="min-w-0">
+              <div className="truncate text-sm font-semibold">{title}</div>
+              <div className="text-[11px] text-chalk-600">
+                {items.length} photos and videos
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => close()}
+              aria-label="Close"
+              className="shrink-0 rounded-md border border-ink-500 px-2 py-1 text-xs text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent"
+            >
+              Close
+            </button>
+          </div>
+          <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-5">
+            <MediaGrid cloud={cloud} items={items} onOpen={onOpen} />
+          </div>
+        </>
+      )}
+    </Sheet>
+  );
+}
+
 /** Square thumbnails, so the grid stays a grid whatever shape the photos are. */
 export function MediaGrid({
   cloud,
@@ -255,31 +406,12 @@ export function MediaGrid({
     <ul className="grid grid-cols-3 gap-1.5 sm:grid-cols-6 lg:grid-cols-8">
       {items.map((item, i) => (
         <li key={item.publicId}>
-          <button
-            type="button"
-            onClick={() => onOpen(i)}
-            className="group relative block aspect-square w-full overflow-hidden rounded-md border border-ink-600"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={
-                item.type === "video"
-                  ? posterUrl(cloud, item, THUMB)
-                  : mediaUrl(cloud, item, THUMB)
-              }
-              alt=""
-              loading="lazy"
-              className="h-full w-full object-cover transition-transform group-hover:scale-105"
-            />
-            {item.type === "video" ? (
-              <span
-                aria-label="Video"
-                className="absolute bottom-1 right-1 rounded bg-ink-900/80 px-1 text-[10px] text-chalk-100"
-              >
-                ▶
-              </span>
-            ) : null}
-          </button>
+          <MediaTile
+            cloud={cloud}
+            item={item}
+            onOpen={() => onOpen(i)}
+            className="w-full"
+          />
         </li>
       ))}
     </ul>
@@ -473,6 +605,10 @@ export function PunishmentMedia({
   names: Record<string, string>;
 }) {
   const [viewing, setViewing] = useState<Viewing | null>(null);
+  const [overflow, setOverflow] = useState<{
+    title: string;
+    items: MediaItem[];
+  } | null>(null);
 
   const byWeek = new Map<number, MediaItem[]>();
   for (const item of items ?? []) {
@@ -559,18 +695,36 @@ export function PunishmentMedia({
                   </span>
                 </div>
                 {/* THE GROUP IS THE SET. Opening a photo under "Week 3" pages
-                    through week 3, not through the season — the grid you
-                    clicked in is what says which set you are looking at. */}
-                <MediaGrid
+                    through week 3, not through the season — the row you
+                    clicked in is what says which set you are looking at, and
+                    that stays true whether it was opened from the row or from
+                    the overflow sheet. */}
+                <MediaRow
                   cloud={cloud}
                   items={g.items}
                   onOpen={(index) => setViewing({ items: g.items, index })}
+                  onMore={() =>
+                    setOverflow({
+                      title: [g.label, g.text].filter(Boolean).join(" · "),
+                      items: g.items,
+                    })
+                  }
                 />
               </div>
             ))}
           </div>
         )}
       </Panel>
+
+      {overflow ? (
+        <AllMediaSheet
+          cloud={cloud}
+          title={overflow.title}
+          items={overflow.items}
+          onOpen={(index) => setViewing({ items: overflow.items, index })}
+          onClose={() => setOverflow(null)}
+        />
+      ) : null}
 
       {viewing ? (
         <Lightbox
@@ -750,7 +904,13 @@ export function Lightbox({
       // surface. The only thing that should look like a thing here is the
       // media, which is why the chrome sits above and below it on the dimmed
       // backdrop rather than on top of the photo.
-      panelClassName="flex max-h-[92dvh] w-full max-w-[52rem] flex-col"
+      // A DEFINITE HEIGHT, NOT A MAXIMUM. `max-height` does not give the panel
+      // a definite height, so the media's own `max-h-full` resolved against
+      // nothing and a tall video grew the column past the screen — taking the
+      // close, save and pager rows off the top and bottom with it, which is
+      // exactly the report. A fixed height makes `flex-1 min-h-0` bound the
+      // media and pins the controls where they can always be reached.
+      panelClassName="flex h-[92dvh] w-full max-w-[52rem] flex-col"
     >
       {({ close }) => (
         <div

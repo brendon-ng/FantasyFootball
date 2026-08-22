@@ -3,8 +3,9 @@
 import { useState } from "react";
 
 import {
+  AllMediaSheet,
   Lightbox,
-  MediaGrid,
+  MediaRow,
   useSeasonMedia,
   useUploader,
   type Viewing,
@@ -155,6 +156,7 @@ function SeasonMedia({
   season: number;
 }) {
   const [viewing, setViewing] = useState<Viewing | null>(null);
+  const [overflow, setOverflow] = useState(false);
   const { items, seasonItems, add } = useSeasonMedia(cloud, league, season);
   const { busy, error, me, input, open } = useUploader({
     cloud,
@@ -170,10 +172,11 @@ function SeasonMedia({
   return (
     <div className="space-y-2 border-t border-ink-700 pt-3">
       {seasonItems.length ? (
-        <MediaGrid
+        <MediaRow
           cloud={cloud}
           items={seasonItems}
           onOpen={(index) => setViewing({ items: seasonItems, index })}
+          onMore={() => setOverflow(true)}
         />
       ) : null}
 
@@ -204,6 +207,16 @@ function SeasonMedia({
           {busy ?? (me ? "Add media" : "Add media (anonymous)")}
         </button>
       </div>
+
+      {overflow ? (
+        <AllMediaSheet
+          cloud={cloud}
+          title={`${season} last place punishment`}
+          items={seasonItems}
+          onOpen={(index) => setViewing({ items: seasonItems, index })}
+          onClose={() => setOverflow(false)}
+        />
+      ) : null}
 
       {viewing ? (
         <Lightbox

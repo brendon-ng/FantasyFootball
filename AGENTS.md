@@ -873,6 +873,27 @@ the punishment runs to a full sentence and people highlight it, so opening a
 dialog on top of a fresh selection reads as the page misfiring. The chip stays a
 real `<button>` because the row handler has no place in the tab order.
 
+ONE ROW OF THUMBNAILS, WITH THE REST BEHIND A `+N`, on the season panel and on
+each group of the Media panel. A season's photos under one heading ran down the
+page and buried everything below it. The count is FIXED at five cells rather than
+responsive, because `+N` has to state a real number and a breakpoint-dependent
+count could only be computed by measuring — a resize observer, a hydration
+mismatch, and a number that changes on rotate. Opening a photo from the row or
+from the overflow sheet pages through the WHOLE group either way; they are two
+views of one set.
+
+THE VIEWER NEVER CROPS, and thumbnails always do. `c_limit` only ever scales
+down, and `object-contain` letterboxes; `THUMB` is `c_fill` with `object-cover`
+because a thumbnail is a pointer to a photo rather than the photo. Keep that
+line where it is.
+
+THE VIEWER'S PANEL HAS A DEFINITE HEIGHT, `h-[92dvh]`, NOT A MAXIMUM. This was a
+real bug on a phone: `max-height` does not make a height definite, so the media's
+own `max-h-full` resolved against nothing, a tall video grew the column past the
+screen, and the save, close and pager rows went off both ends where they could
+not be reached. A definite height makes `flex-1 min-h-0` genuinely bound the
+media.
+
 THE DIALOG RESTATES THE WHOLE ROW — week, who lost it, what they owe, and the
 score linking through to the game. It is opened from one line of a fourteen-row
 table and then covers it, so without that the grid of photos is unlabelled the

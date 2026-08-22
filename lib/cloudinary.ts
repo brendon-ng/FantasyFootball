@@ -126,7 +126,14 @@ export const downloadUrl = (
     filename ? `fl_attachment:${encodeURIComponent(filename)}` : "fl_attachment",
   );
 
-/** Thumbnails are square so the grid stays a grid whatever shape the photos are. */
+/**
+ * Thumbnails are square so the grid stays a grid whatever shape the photos are.
+ *
+ * CROPPING IS FINE HERE AND ONLY HERE. A thumbnail is a pointer to a photo, not
+ * the photo, so filling the square is worth losing the edges for — it is the
+ * VIEWER that must never crop, and it does not: it asks for `c_limit`, which
+ * only ever scales down, and renders with `object-contain`. Keep that line.
+ */
 export const THUMB = "w_400,h_400,c_fill,f_auto,q_auto";
 
 const toItem = (raw: unknown, type: MediaType): MediaItem | null => {
