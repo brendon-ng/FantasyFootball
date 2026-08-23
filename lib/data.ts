@@ -211,19 +211,23 @@ export const getOutlooks = once(
 );
 
 export interface Projection {
-  gp: number | null;
-  pts_ppr: number | null;
-  pts_half_ppr: number | null;
-  pts_std: number | null;
-  rec: number | null;
-  rec_yd: number | null;
-  rec_td: number | null;
-  rush_att: number | null;
-  rush_yd: number | null;
-  rush_td: number | null;
-  pass_yd: number | null;
-  pass_td: number | null;
-  pass_int: number | null;
+  /** Sleeper's draft-board RK — its own ordering, not one derived here. */
+  rank: number | null;
+  /** Sleeper's PPR ADP, the figure `rank` orders by. */
+  adp_ppr: number | null;
+  gp?: number | null;
+  pts_ppr?: number | null;
+  pts_half_ppr?: number | null;
+  pts_std?: number | null;
+  rec?: number | null;
+  rec_yd?: number | null;
+  rec_td?: number | null;
+  rush_att?: number | null;
+  rush_yd?: number | null;
+  rush_td?: number | null;
+  pass_yd?: number | null;
+  pass_td?: number | null;
+  pass_int?: number | null;
 }
 
 /**
@@ -1289,6 +1293,27 @@ export const keeperCycleSeason = (): number =>
  * committed keeper contract; the only thing that changes is the market column
  * beside it.
  */
+/**
+ * The CURRENT market, ignoring the bylaw lock.
+ *
+ * `getAdp()` deliberately switches to the frozen snapshot inside the lock window,
+ * because keeper COSTS have to be decided against a market that stops moving —
+ * bylaws 1.7.2.2.1. The Scenario Lab is asking a different question: what would
+ * happen if the draft ran now. Freezing that would leave it quoting a market
+ * several days stale while the board it is projecting moves underneath it.
+ *
+ * SO THIS IS FOR PLANNING SURFACES ONLY. Anything that prices a contract — the
+ * keeper board, an owner page, `costRound` for an expired contract — must keep
+ * using `getAdp()`, or the number a team is held to would change after the
+ * deadline it was set for.
+ */
+export const getLiveAdp = once((): { byPlayer: Map<string, AdpEntry>; capturedAt: string | null } => {
+  const snapshot = load<AdpSnapshot | null>("adp/live.json", null);
+  const byPlayer = new Map<string, AdpEntry>();
+  for (const e of snapshot?.entries ?? []) if (e.playerId) byPlayer.set(e.playerId, e);
+  return { byPlayer, capturedAt: snapshot?.capturedAt ?? null };
+});
+
 export function getAdp(): {
   byPlayer: Map<string, AdpEntry>;
   frozen: boolean;

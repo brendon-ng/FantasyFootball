@@ -2,9 +2,9 @@ import { ScenarioLab } from "@/components/scenario-lab";
 import { EmptyState, Panel } from "@/components/ui";
 import {
   features,
-  getAdp,
   getLeagueRefs,
   getKeepers,
+  getLiveAdp,
   getOutlooks,
   getOwners,
   getPlayers,
@@ -50,7 +50,14 @@ export default function LabPage() {
 
   const owners = getOwners();
   const seasons = getSeasons();
-  const adp = getAdp();
+  /**
+   * LIVE, not the frozen snapshot `/keepers` uses.
+   *
+   * The lock exists so keeper costs stop moving before the deadline; this page is
+   * asking what the draft looks like right now, and a market fixed days ago would
+   * disagree with the board it is drawing. See `getLiveAdp`.
+   */
+  const adp = getLiveAdp();
   const { draftRounds } = getRules();
 
   // The DRAFT season, not the contract cycle — this page is fetching and drawing

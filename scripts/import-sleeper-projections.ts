@@ -16,10 +16,16 @@
  * a nice-to-have layer that must never be load-bearing for a build, so
  * `getProjections()` returns an empty map when the file is absent.
  *
- * ONE REQUEST PER POSITION. `position[]` is repeatable but the response is
- * ordered per call, and asking for all four at once returns a single ranking
- * dominated by quarterbacks. Four calls is ~2.9MB total, which is cheap next to
- * the 38MB the outlook importer has to pull.
+ * ONE REQUEST FOR EVERY POSITION AT ONCE, and that is load-bearing rather than a
+ * saving. `rank` is the INDEX IN SLEEPER'S OWN RESPONSE, which is the RK column
+ * its draft board shows — asking position by position throws the cross-position
+ * ordering away, and re-sorting by ADP afterwards cannot recover it because ADP
+ * ties are broken by something Sleeper does not publish. Drake London and
+ * Omarion Hampton both sit at 15.1; the board puts London 15th and only the
+ * response order says so.
+ *
+ * KICKERS AND DEFENCES ARE INCLUDED for the same reason: leaving them out would
+ * shift every rank below the first one drafted.
  *
  * ALL THREE SCORING FORMATS ARE STORED, not just this league's. `pts_ppr` is what
  * Den Ops uses today, but baking that choice into the data file would mean a
@@ -39,23 +45,30 @@ import { join } from "node:path";
 import { SHARED_DATA_DIR, log, writeJson } from "./lib/io.ts";
 
 const OUT = join(SHARED_DATA_DIR, "projections.json");
-const POSITIONS = ["QB", "RB", "WR", "TE"] as const;
+const POSITIONS = ["QB", "RB", "WR", "TE", "K", "DEF"] as const;
 
 /** Kept per player. Everything else in the payload is detail nobody reads. */
 export interface Projection {
-  gp: number | null;
-  pts_ppr: number | null;
-  pts_half_ppr: number | null;
-  pts_std: number | null;
-  rec: number | null;
-  rec_yd: number | null;
-  rec_td: number | null;
-  rush_att: number | null;
-  rush_yd: number | null;
-  rush_td: number | null;
-  pass_yd: number | null;
-  pass_td: number | null;
-  pass_int: number | null;
+  /**
+   * Sleeper's draft-board RK — its own ordering, not one we derive. See the note
+   * on the single request above.
+   */
+  rank: number | null;
+  /** Sleeper's PPR ADP, the figure `rank` orders by. */
+  adp_ppr: number | null;
+  gp?: number | null;
+  pts_ppr?: number | null;
+  pts_half_ppr?: number | null;
+  pts_std?: number | null;
+  rec?: number | null;
+  rec_yd?: number | null;
+  rec_td?: number | null;
+  rush_att?: number | null;
+  rush_yd?: number | null;
+  rush_td?: number | null;
+  pass_yd?: number | null;
+  pass_td?: number | null;
+  pass_int?: number | null;
 }
 
 export interface ProjectionFile {
@@ -81,43 +94,60 @@ interface Row {
 const num = (v: number | undefined): number | null =>
   typeof v === "number" && Number.isFinite(v) ? v : null;
 
+const compact = (p: Projection): Projection =>
+  Object.fromEntries(Object.entries(p).filter(([, v]) => v != null)) as Projection;
+
 const players: Record<string, Projection> = {};
-let rows = 0;
 
-for (const pos of POSITIONS) {
-  const url =
-    `https://api.sleeper.app/projections/nfl/${season}` +
-    `?season_type=regular&position[]=${pos}&order_by=pts_ppr`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
-  const data = (await res.json()) as Row[];
-  rows += data.length;
+const url =
+  `https://api.sleeper.app/projections/nfl/${season}?season_type=regular&order_by=adp_ppr` +
+  POSITIONS.map((p) => `&position%5B%5D=${p}`).join("");
+log.info(`Fetching ${season} projections, all positions in one ranked request`);
 
-  let kept = 0;
-  for (const r of data) {
-    const s = r.stats ?? {};
-    // A row with no projected points is a body on a roster, not a projection.
-    // Keeping them would triple the file to say nothing.
-    if (!s.pts_ppr) continue;
-    players[r.player_id] = {
-      gp: num(s.gp),
-      pts_ppr: num(s.pts_ppr),
-      pts_half_ppr: num(s.pts_half_ppr),
-      pts_std: num(s.pts_std),
-      rec: num(s.rec),
-      rec_yd: num(s.rec_yd),
-      rec_td: num(s.rec_td),
-      rush_att: num(s.rush_att),
-      rush_yd: num(s.rush_yd),
-      rush_td: num(s.rush_td),
-      pass_yd: num(s.pass_yd),
-      pass_td: num(s.pass_td),
-      pass_int: num(s.pass_int),
-    };
-    kept++;
-  }
-  log.info(`${pos}: ${data.length} rows, ${kept} with projected points`);
+const res = await fetch(url);
+if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+const data = (await res.json()) as Row[];
+log.info(`${data.length} rows`);
+
+/**
+ * The rank is the row's place among players Sleeper actually prices.
+ *
+ * 999 is its "no ADP" sentinel, and those rows are interleaved through the
+ * response — counting them would leave gaps wherever one landed.
+ */
+const priced = data.filter((r) => r.stats?.adp_ppr != null && (r.stats.adp_ppr as number) < 999);
+const rankOf = new Map(priced.map((r, i) => [r.player_id, i + 1]));
+
+let ranked = 0;
+for (const r of data) {
+  const s = r.stats ?? {};
+  const rank = rankOf.get(r.player_id) ?? null;
+  // A row with neither projected points nor a price is a body on a roster, not a
+  // projection. Keeping them would triple the file to say nothing.
+  if (!s.pts_ppr && rank === null) continue;
+  if (rank !== null) ranked++;
+  // Null fields are DROPPED rather than written. Most rows are a rank and
+  // nothing else — kickers, defences, anyone priced but not projected — and
+  // spelling out thirteen nulls apiece tripled the file to say nothing.
+  players[r.player_id] = compact({
+    rank,
+    adp_ppr: num(s.adp_ppr) != null && (s.adp_ppr as number) < 999 ? num(s.adp_ppr) : null,
+    gp: num(s.gp),
+    pts_ppr: num(s.pts_ppr),
+    pts_half_ppr: num(s.pts_half_ppr),
+    pts_std: num(s.pts_std),
+    rec: num(s.rec),
+    rec_yd: num(s.rec_yd),
+    rec_td: num(s.rec_td),
+    rush_att: num(s.rush_att),
+    rush_yd: num(s.rush_yd),
+    rush_td: num(s.rush_td),
+    pass_yd: num(s.pass_yd),
+    pass_td: num(s.pass_td),
+    pass_int: num(s.pass_int),
+  });
 }
+log.info(`${Object.keys(players).length} kept, ${ranked} of them with a draft rank`);
 
 writeJson(OUT, {
   season,
@@ -127,5 +157,5 @@ writeJson(OUT, {
 } satisfies ProjectionFile);
 
 log.write(
-  `projections.json — ${Object.keys(players).length} players for ${season} (from ${rows} rows)`,
+  `projections.json — ${Object.keys(players).length} players for ${season} (from ${data.length} rows)`,
 );

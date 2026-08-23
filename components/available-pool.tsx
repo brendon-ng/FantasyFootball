@@ -98,6 +98,7 @@ export function AvailablePool({
     const id = e.playerId as string;
     const pr = projections[id];
     switch (sort.key) {
+      case "rk": return projections[e.playerId as string]?.rank ?? null;
       case "adp": return adpSortKey(e);
       case "round": return e.round;
       case "pos": return e.position ?? "";
@@ -266,6 +267,16 @@ export function AvailablePool({
         <span className="w-6 shrink-0 text-right" title="Position in this list, after filtering and sorting">
           #
         </span>
+        <SortHeader
+          k="rk"
+          first="asc"
+          w="w-8"
+          t="Sleeper's own draft-board rank — the RK column on its board, taken from its ranking rather than derived here"
+          state={sort}
+          onSort={setSort}
+        >
+          RK
+        </SortHeader>
         <SortHeader k="adp" first="asc" w="w-12" t="Average draft position as a decimal pick number. Sleeper's where it exists, consensus (°) otherwise." state={sort} onSort={setSort}>ADP</SortHeader>
         <SortHeader k="round" first="asc" w="w-7" t="Round that ADP converts to for this league" state={sort} onSort={setSort}>Rd</SortHeader>
         <SortHeader k="pos" first="asc" w="w-8" align="left" t="Position" state={sort} onSort={setSort}>Pos</SortHeader>
@@ -327,6 +338,16 @@ export function AvailablePool({
                   RB2, RB3 — which is the ordering you actually reason in. The
                   unfiltered market position is the ADP beside it. */}
               <span className="tabular w-6 shrink-0 text-right text-chalk-600">{i + 1}</span>
+              <span
+                className="tabular w-8 shrink-0 text-right text-chalk-500"
+                title={
+                  projections[id]?.rank != null
+                    ? `Sleeper's board has him ${projections[id].rank} overall`
+                    : "Sleeper does not price him, so its board gives him no rank"
+                }
+              >
+                {projections[id]?.rank ?? "—"}
+              </span>
               <span
                 className="tabular w-12 shrink-0 text-right text-chalk-300"
                 title={adpTitle(e)}
@@ -401,7 +422,7 @@ export function AvailablePool({
 }
 
 export type SortKey =
-  | "adp" | "round" | "pos" | "name" | "pts" | "ppg"
+  | "rk" | "adp" | "round" | "pos" | "name" | "pts" | "ppg"
   | "rush_att" | "rush_yd" | "rush_td"
   | "rec" | "rec_yd" | "rec_td"
   | "pass_yd" | "pass_td" | "pass_int";

@@ -1133,6 +1133,13 @@ nine real, and the change on the board is attributable to the thing you changed.
 A roster absent from `scenario.keepers` defers; one present with an empty array is
 an explicit "keeps nobody", and collapsing those two would make that unsayable.
 
+THE LAB READS LIVE ADP, `/keepers` READS THE LOCK. `getAdp()` switches to the
+frozen snapshot inside the bylaw window so keeper COSTS stop moving before the
+deadline; `getLiveAdp()` ignores it, because this page is asking what the draft
+looks like right now and a market fixed days ago would disagree with the board it
+is drawing. Anything that PRICES a contract must keep using `getAdp()` — otherwise
+a number a team is held to would change after the deadline it was set for.
+
 ### The draft projection, and its two readings of one pick
 
 `lib/adp-projection.ts` walks the board once and answers three things: who is at
@@ -1178,7 +1185,7 @@ the importers builds fine and simply shows fewer columns.
 | File | Written by | Cadence |
 | --- | --- | --- |
 | `data/espn-outlooks.json` | `npm run import:espn:outlooks` | ONCE A YEAR, by hand |
-| `data/projections.json` | `npm run import:sleeper:projections` | by hand; cheap enough to automate |
+| `data/projections.json` | `npm run import:sleeper:projections` | by hand; cheap enough to automate. Carries Sleeper's draft RK as well as the stat line |
 | `birth_date` in `data/players.json` | `npm run sync` | every sync, automatically |
 
 NEITHER IMPORTER IS IN `archive.yml`, and the outlook one should not be: the
@@ -1189,6 +1196,22 @@ on text that is going stale. `capturedAt` is rendered so the UI can admit its ag
 THE PROJECTIONS ENDPOINT IS UNDOCUMENTED. `docs.sleeper.com` lists no projections
 resource; `/projections/nfl/<season>` is what the app itself calls. Treated like
 the ADP scrape — a layer that must never be load-bearing for a build.
+
+`rank` IS SLEEPER'S OWN RK COLUMN, NOT A DERIVED ONE, and the import is shaped
+around keeping it that way. It comes from the INDEX IN THE RESPONSE to a single
+request for every position at once, ordered by `adp_ppr`. Asking position by
+position throws the cross-position ordering away, and re-sorting by ADP afterwards
+cannot recover it: ADP ties break on something Sleeper does not publish. Drake
+London and Omarion Hampton both sit at 15.1 and the board puts London 15th — only
+the response order says so. Kickers and defences are fetched for the same reason;
+omitting them would shift every rank below the first one drafted. Verified against
+a screenshot of the live board: all eleven visible rows reproduce exactly.
+
+DO NOT REACH FOR `search_rank` — it looks like the same thing and is not. It is
+coarse and full of ties (Justin Jefferson and Ashton Jeanty share 12), and it is
+format-blind, rating quarterbacks far above where a 1QB market drafts them. It is
+also the only ranking on the documented player payload, which is what makes the
+mistake tempting.
 
 Two traps in that data, both of which produced plausible wrong numbers first:
 
@@ -2385,8 +2408,9 @@ relative imports there carry explicit `.ts` extensions and `tsconfig.json` sets
 
 ### ADP
 
-Sleeper publishes no ADP — verified, not assumed: the REST player object exposes
-only `search_rank` (positional; Bijan Robinson and Josh Allen are both `1`), and
+Sleeper publishes no ADP on its DOCUMENTED API — the REST player object exposes
+only `search_rank`, a coarse tie-heavy ordering rather than a price (see the
+Scenario Lab). Its undocumented projections endpoint does carry `adp_ppr`, and
 the GraphQL schema at `sleeper.com/graphql` has 238 root fields with zero ADP
 types. So it is scraped from beatadp.com's server-rendered Sleeper column, whose
 default state is already PPR / Redraft / 1QB.
