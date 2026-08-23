@@ -1144,5 +1144,46 @@
     "timestamp": 1786601695995,
     "vetoed": false,
     "week": 1
+  },
+  {
+    "id": "1397014125854363648",
+    "legs": [
+      {
+        "fromSlug": "brendon-ng",
+        "kind": "player",
+        "playerId": "12512",
+        "toSlug": "jake-gibbons"
+      },
+      {
+        "fromSlug": "brendon-ng",
+        "kind": "pick",
+        "pick": {
+          "originalSlug": "jake-gibbons",
+          "round": 17,
+          "season": 2026
+        },
+        "toSlug": "jake-gibbons"
+      },
+      {
+        "fromSlug": "jake-gibbons",
+        "kind": "pick",
+        "pick": {
+          "originalSlug": "jake-gibbons",
+          "round": 4,
+          "season": 2026
+        },
+        "toSlug": "brendon-ng"
+      }
+    ],
+    "ownerSlugs": [
+      "brendon-ng",
+      "jake-gibbons"
+    ],
+    "preseason": true,
+    "season": 2026,
+    "source": "sleeper",
+    "timestamp": 1787447737142,
+    "vetoed": false,
+    "week": 1
   }
 ]
