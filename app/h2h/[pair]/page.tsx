@@ -16,7 +16,7 @@ import {
   verboseKind,
 } from "@/components/ui";
 import {
-  getMeetings,
+  getMeetingsToDate,
   getOwnerMap,
   getOwners,
   getPickHandoffs,
@@ -61,7 +61,9 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
 
   // Both eras. Sleeper weeks plus playoff games recovered from imported ESPN
   // seasons — reading only the weekly matchups under-reports the series.
-  const games = getMeetings(a, b);
+  // INCLUDES THE SEASON BEING PLAYED. `getMeetings` is derived data, so on its
+  // own this page would ignore a game these two played three weeks ago.
+  const games = await getMeetingsToDate(a, b);
 
   const tally = (subset: typeof games) => {
     let w = 0, l = 0, t = 0, pf = 0, pa = 0;

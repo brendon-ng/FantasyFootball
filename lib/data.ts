@@ -1199,6 +1199,13 @@ export interface ScheduledGame {
   b: string;
   /** `meetingId`, so it matches the matchup page's route and every link to it. */
   id: string;
+  /**
+   * The score, once the week is FULLY SCORED. Null while the game is unplayed or
+   * still in progress — a partial score is not a result, and a head-to-head
+   * record built from one would move on a Sunday afternoon.
+   */
+  aPoints: number | null;
+  bPoints: number | null;
 }
 
 /**
@@ -1229,6 +1236,8 @@ export function getLiveSchedule(): Promise<ScheduledGame[]> {
 
       const slugOf = new Map(live.teams.map((t) => [t.rosterId, t.ownerSlug]));
       const byWeek = await provider.seasonGames(ref.id, live.season, seasonWeekCount());
+      // The same finalization signal the archive uses. See `LiveSeason.lastScoredLeg`.
+      const scoredThrough = live.lastScoredLeg ?? 0;
 
       const out: ScheduledGame[] = [];
       for (const [week, games] of Object.entries(byWeek)) {
@@ -1239,7 +1248,17 @@ export function getLiveSchedule(): Promise<ScheduledGame[]> {
           // A side whose roster is not in the standings cannot be named, and an
           // unnamed side has no id — skip rather than emit `roster-3`.
           if (!a || !b) continue;
-          out.push({ season: live.season, week: Number(week), a, b, id: meetingId(live.season, Number(week), a, b) });
+          const wk = Number(week);
+          const done = wk <= scoredThrough;
+          out.push({
+            season: live.season,
+            week: wk,
+            a,
+            b,
+            id: meetingId(live.season, wk, a, b),
+            aPoints: done ? x.points : null,
+            bPoints: done ? y.points : null,
+          });
         }
       }
       return out;
@@ -1249,6 +1268,67 @@ export function getLiveSchedule(): Promise<ScheduledGame[]> {
     }
   })();
   return schedulePromise;
+}
+
+/**
+ * Games of the season being played that are FINISHED, as `Meeting`s.
+ *
+ * So a head-to-head record counts what has happened rather than what has been
+ * archived. `getMeetings()` reads derived data, which only covers finalized
+ * SEASONS — meaning two teams could play in week 3 and the rivalry page would
+ * still say they had met fifteen times until the following January.
+ *
+ * Shaped as `Meeting` so it concatenates straight onto `getMeetings()`, and
+ * NEWEST FIRST to match it — `seriesStreak` walks that order and would report the
+ * wrong end of the season otherwise.
+ *
+ * Lineups are absent (`hasLineups: false`): the scoreboard has the totals, and
+ * per-player detail for an unarchived week is not published anywhere this reads.
+ */
+export async function getLiveMeetings(): Promise<Meeting[]> {
+  const played = (await getLiveSchedule()).filter(
+    (g) => g.aPoints != null && g.bPoints != null,
+  );
+  const side = (slug: string, points: number): MeetingSide => ({
+    ownerSlug: slug,
+    points,
+    starters: [],
+    playerPoints: {},
+  });
+  return played
+    .sort((x, y) => y.week - x.week)
+    .map((g) => ({
+      id: g.id,
+      season: g.season,
+      week: g.week,
+      // Regular season until the league's own regular season ends; the postseason
+      // shape is not known until seeding is, and nothing here needs it sooner.
+      kind: "regular" as const,
+      label: null,
+      a: side(g.a, g.aPoints as number),
+      b: side(g.b, g.bPoints as number),
+      hasLineups: false,
+    }));
+}
+
+/**
+ * Every meeting between two owners, INCLUDING the season being played.
+ *
+ * The one entry point for a rivalry, so no surface can quietly disagree about
+ * whether this year counts. Ordering is newest first throughout.
+ */
+export async function getMeetingsToDate(a: string, b: string): Promise<Meeting[]> {
+  const live = (await getLiveMeetings()).filter(
+    (m) =>
+      (m.a.ownerSlug === a && m.b.ownerSlug === b) ||
+      (m.a.ownerSlug === b && m.b.ownerSlug === a),
+  );
+  // Oriented so `a` is always the caller's first argument, which is what every
+  // tally and record string downstream assumes.
+  const oriented = live.map((m) =>
+    m.a.ownerSlug === a ? m : { ...m, a: m.b, b: m.a },
+  );
+  return [...oriented, ...getMeetings(a, b)];
 }
 
 /** Memoised across the build — several pages ask, and it is a network call. */

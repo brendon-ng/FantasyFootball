@@ -30,7 +30,7 @@ import type { BracketMatch } from "@/lib/types";
 import {
   getAllMeetings,
   getAtTheTime,
-  getMeetings,
+  getMeetingsToDate,
   getOwnerMap,
   getPlayerTeamsAt,
   getPlayers,
@@ -106,7 +106,9 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
 
   // Series context: every other meeting between these two, so this game can be
   // placed in the rivalry rather than shown in isolation.
-  const series = getMeetings(game.a.ownerSlug, game.b.ownerSlug);
+  // To date, not just archived — see `getMeetingsToDate`. A game already played
+  // this season belongs in the all-time record beside the ones from 2019.
+  const series = await getMeetingsToDate(game.a.ownerSlug, game.b.ownerSlug);
   const before = series.filter(
     (g) => g.season < game.season || (g.season === game.season && (g.week ?? 0) < (game.week ?? 0)),
   );
@@ -631,7 +633,15 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
   const name = (slug: string) => owners.get(slug)?.name ?? slug;
   const firstName = (slug: string) => owners.get(slug)?.firstName ?? name(slug);
 
-  const series = getMeetings(fixture.a, fixture.b);
+  /**
+   * EVERY MEETING BEFORE THIS ONE, including earlier weeks of the season being
+   * played — a rivalry that met in week 3 should say so in week 7 rather than
+   * waiting for January. This fixture itself is excluded even once it has a
+   * score: the tiles describe what both teams bring INTO it.
+   */
+  const series = (await getMeetingsToDate(fixture.a, fixture.b)).filter(
+    (m) => m.id !== fixture.id,
+  );
   const tally = seriesTally(series);
   const streak = seriesStreak(series);
   // PRESENT tense: nobody has walked into this game yet, so the run is live.
