@@ -21,6 +21,7 @@
 
 import type { LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "../types.ts";
 import { withBasePath } from "../base-path.ts";
+import { ESPN_POS, PRO_TEAM } from "../espn-maps.ts";
 
 import {
   round2,
@@ -28,6 +29,7 @@ import {
   type LiveMove,
   type LiveProvider,
   type LiveRoster,
+  type LiveRosterPlayer,
   type LiveWeekGame,
   type ProviderState,
   type RawDraft,
@@ -70,7 +72,14 @@ interface EspnTeam {
 interface EspnEntry {
   lineupSlotId: number;
   playerId?: number;
-  playerPoolEntry?: { player?: { id?: number } };
+  playerPoolEntry?: {
+    player?: {
+      id?: number;
+      fullName?: string;
+      defaultPositionId?: number;
+      proTeamId?: number;
+    };
+  };
 }
 
 interface EspnGameSide {
@@ -217,6 +226,25 @@ export const espnProvider: LiveProvider = {
       return pid == null ? null : (ids[String(pid)] ?? null);
     };
 
+    /**
+     * The same entry, ready to display — and NOT dropped when the id does not
+     * translate. Only about a quarter of a freshly drafted roster has a Sleeper
+     * id, so `players` above is a quarter of the team; ESPN puts the name, the
+     * position and the pro team on the entry itself, which is all a roster list
+     * needs.
+     */
+    const toDisplay = (e: EspnEntry): LiveRosterPlayer | null => {
+      const pl = e.playerPoolEntry?.player;
+      const pid = e.playerId ?? pl?.id;
+      if (pid == null) return null;
+      return {
+        id: ids[String(pid)] ?? `espn-${pid}`,
+        name: pl?.fullName ?? null,
+        position: ESPN_POS[pl?.defaultPositionId ?? -1] ?? null,
+        team: PRO_TEAM[pl?.proTeamId ?? -1] ?? null,
+      };
+    };
+
     return league.teams.map((t) => {
       const entries = t.roster?.entries ?? [];
       const rec = t.record?.overall;
@@ -228,6 +256,7 @@ export const espnProvider: LiveProvider = {
         // redraft. An empty list reads as "nobody has chosen yet", which is true.
         keepers: [],
         players: entries.map(toSleeper).filter((p): p is string => p !== null),
+        detail: entries.map(toDisplay).filter((p): p is LiveRosterPlayer => p !== null),
         wins: rec?.wins ?? 0,
         losses: rec?.losses ?? 0,
         ties: rec?.ties ?? 0,

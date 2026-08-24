@@ -9,7 +9,8 @@ import type { RecordThresholds } from "@/lib/record-marks";
 import { useLiveDraft, useLiveSeason, useSeasonGames } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
 import { PHASE_LABEL, resolvePhase } from "@/lib/phase";
-import type { LiveSeason, LiveTeam } from "@/lib/types";
+import { LiveRosters } from "@/components/live-rosters";
+import type { LiveSeason, LiveTeam, PlayerMeta } from "@/lib/types";
 
 /**
  * The season detail page for the season being PLAYED.
@@ -63,6 +64,8 @@ export interface LiveSeasonDetailProps {
   h2h: Record<string, Record<string, H2HRecord>>;
   /** Newest season with derived data, so matchup pages exist at or below it. */
   archivedThrough: number;
+  /** The baked player index, for naming and linking live rosters. */
+  players: Record<string, PlayerMeta>;
   /** Rendered between the standings grid and the matchup list. */
   children?: ReactNode;
   /** Rendered last, below the matchup list — where Trades sits on a finished season. */
@@ -110,6 +113,7 @@ export function LiveSeasonDetail({
   thresholds,
   h2h,
   archivedThrough,
+  players,
   children,
   footer,
 }: LiveSeasonDetailProps) {
@@ -332,6 +336,13 @@ export function LiveSeasonDetail({
           <EmptyState>The schedule appears once the draft has run.</EmptyState>
         )}
       </Panel>
+
+      <LiveRosters
+        leagueRef={refBySeason[String(season)] ?? null}
+        live={live}
+        ownerNames={ownerNames}
+        players={players}
+      />
 
       {footer}
     </>

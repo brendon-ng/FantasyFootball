@@ -10,15 +10,16 @@
 import { join } from "node:path";
 
 import { CACHE_DIR, ROOT, log, readJson } from "./io.ts";
+// Shared with the browser provider — see lib/espn-maps.ts. Re-exported so the
+// importers keep importing them from here.
+import { ESPN_POS, PRO_TEAM } from "../../lib/espn-maps.ts";
+// The browser needs the same name normaliser for live ESPN rosters; two of them
+// would mean the build and the client disagreeing about who a player is.
+import { normalise } from "../../lib/player-match.ts";
+
+export { ESPN_POS, PRO_TEAM, normalise };
 
 export const API = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons";
-export const PRO_TEAM: Record<number, string> = {
-  1: "ATL", 2: "BUF", 3: "CHI", 4: "CIN", 5: "CLE", 6: "DAL", 7: "DEN", 8: "DET",
-  9: "GB", 10: "TEN", 11: "IND", 12: "KC", 13: "LV", 14: "LAR", 15: "MIA", 16: "MIN",
-  17: "NE", 18: "NO", 19: "NYG", 20: "NYJ", 21: "PHI", 22: "ARI", 23: "PIT",
-  24: "LAC", 25: "SF", 26: "SEA", 27: "TB", 28: "WAS", 29: "CAR", 30: "JAX",
-  33: "BAL", 34: "HOU",
-};
 export interface EspnPlayer {
   id: number;
   fullName: string;
@@ -62,9 +63,6 @@ export interface SleeperPlayer {
   search_full_name?: string;
 }
 
-export const ESPN_POS: Record<number, string> = {
-  1: "QB", 2: "RB", 3: "WR", 4: "TE", 5: "K", 16: "DEF",
-};
 
 /**
  * A name reduced to what two databases can agree on.
@@ -73,13 +71,6 @@ export const ESPN_POS: Record<number, string> = {
  * it is a lookup rather than a fuzzy comparison. Suffixes go because the two
  * disagree constantly — "DJ Chark Jr." against "D.J. Chark" is one player.
  */
-export const normalise = (name: string): string =>
-  name
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/\b(jr|sr|ii|iii|iv|v)\b/g, "")
-    .replace(/[^a-z0-9]/g, "");
 
 export interface Index {
   /** ESPN player id -> Sleeper id. The exact join; everything else is a guess. */

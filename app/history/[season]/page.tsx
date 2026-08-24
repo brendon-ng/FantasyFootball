@@ -606,6 +606,7 @@ async function InProgressSeasonPage({ season }: { season: number }) {
         thresholds={getRecordThresholds()}
         h2h={h2h}
         archivedThrough={last?.season ?? 0}
+        players={getPlayers()}
         footer={
           trades.length ? (
             <Panel>

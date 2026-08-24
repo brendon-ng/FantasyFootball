@@ -126,6 +126,9 @@ export const sleeperProvider: LiveProvider = {
       coOwners: r.co_owners ?? [],
       keepers: r.keepers ?? [],
       players: r.players ?? [],
+      // Ids only: every Sleeper roster id IS a Sleeper id, so the baked player
+      // index resolves them and there is nothing for the provider to add.
+      detail: (r.players ?? []).map((id) => ({ id, name: null, position: null, team: null })),
       wins: r.settings.wins,
       losses: r.settings.losses,
       ties: r.settings.ties,

@@ -17,6 +17,31 @@ export type LiveState<T> =
   | { status: "ready"; data: T; error: null }
   | { status: "error"; data: null; error: string };
 
+/**
+ * One player on a live roster, ready to display.
+ *
+ * SEPARATE FROM `LiveRoster.players`, which is Sleeper ids and exists for the
+ * keeper machinery. This carries what it takes to SHOW a roster, and it has to,
+ * because on ESPN the two are not interchangeable: only about a quarter of a
+ * freshly drafted ESPN roster resolves to a Sleeper id — `espn_id` coverage thins
+ * badly for players who arrived recently — so a list built from ids alone drops
+ * three quarters of every team without saying so. ESPN publishes the name right
+ * there on the roster entry, so that is what gets rendered.
+ */
+export interface LiveRosterPlayer {
+  /**
+   * The Sleeper id where one is known, else `espn-<id>`. Prefixed rather than
+   * bare so it stays unique as a React key and cannot be mistaken for a Sleeper
+   * id that would silently match no player page.
+   */
+  id: string;
+  /** The provider's own name. Null on Sleeper, where the baked index has it. */
+  name: string | null;
+  position: string | null;
+  /** NFL team abbreviation. */
+  team: string | null;
+}
+
 export interface LiveRoster {
   rosterId: number;
   ownerId: string | null;
@@ -24,6 +49,8 @@ export interface LiveRoster {
   /** player_ids the team has currently locked in as keepers. Empty until they choose. */
   keepers: string[];
   players: string[];
+  /** The same roster, ready to display. See `LiveRosterPlayer`. */
+  detail: LiveRosterPlayer[];
   wins: number;
   losses: number;
   ties: number;

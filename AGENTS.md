@@ -242,6 +242,11 @@ DO NOT USE "ROSTERS HAVE PLAYERS" AS THE DRAFTED TEST. A keeper league carries
 players through the offseason: den-ops sits at 19 on a roster with `status:
 pre_draft` and no draft run.
 
+`LiveMatchup.matchupId` IS THE GAME, NOT THE PERIOD. ESPN's `matchupPeriodId` is
+shared by every game in a week, so mapping it straight through keyed all five
+strip cards `1` and React collapsed them. `schedule[].id` is the per-game id and
+is unique across the season. Sleeper's `matchup_id` is already per game.
+
 ### When a game is settled enough to state facts about it
 
 Record badges, and the accent that marks a winner, are claims about a FINISHED
@@ -271,11 +276,6 @@ Fetched ONLY inside a live, unscored week, so nobody downloads it otherwise, and
 NEVER under a phase mock: the mocks replay a finished season, so the real clock
 says every one of their weeks ended months ago and `weekLive` would settle on the
 spot. Fails soft to "no opinion".
-
-`LiveMatchup.matchupId` IS THE GAME, NOT THE PERIOD. ESPN's `matchupPeriodId` is
-shared by every game in a week, so mapping it straight through keyed all five
-strip cards `1` and React collapsed them. `schedule[].id` is the per-game id and
-is unique across the season. Sleeper's `matchup_id` is already per game.
 
 ### The season detail page for the season being PLAYED
 
@@ -340,6 +340,57 @@ fits half a two-column grid. Every rule that matters lives in the card — when 
 score may be shown, when a lead may be called a win, when a chip is allowed,
 whether a matchup page exists to link to — and a second copy would have drifted
 on the first of those to change.
+
+### Live rosters, and why they are not built from player ids
+
+The season being played has no committed rosters: sync withholds them until the
+season is OVER. So `/history/<season>/` reads them live.
+
+`LiveRoster.players` IS NOT ENOUGH TO RENDER A ROSTER ON ESPN. It is Sleeper ids,
+which is what the keeper machinery needs, and only 44 of apartment-401's 160
+freshly drafted players resolve to one — `espn_id` coverage thins badly for
+players who arrived recently, so a list built from ids drops three quarters of
+every team and says nothing about it.
+
+`LiveRoster.detail` is the display half: ESPN puts `fullName`,
+`defaultPositionId` and `proTeamId` on the roster entry itself, so all 160 render
+with a name, a position and a pro team. Sleeper fills ids only, because every
+Sleeper id IS a Sleeper id and the baked index resolves them.
+
+The baked index still WINS FOR THE NAME — that is what the rest of the site
+shows, "James Cook" rather than ESPN's "James Cook III" — but the PROVIDER wins
+for the NFL team, the other way round, because `PlayerMeta.team` is recorded per
+season and goes stale the moment somebody is traded.
+
+LINKING NEEDS A SECOND RESOLUTION STEP, and skipping it is why James Cook and
+Amon-Ra St. Brown were unclickable: Sleeper simply publishes no `espn_id` for
+them, so the provider's id stays `espn-…`, no player page matches it and the row
+fell through to plain text. `matchLivePlayer()` in `lib/player-match.ts` adds two
+tiers on top of the id — a defence resolves off its NFL abbreviation, which is
+Sleeper's own key for one, and everything else by normalised name narrowed by
+position. That takes apartment-401 from 44 of 160 linked to 148.
+
+IT REFUSES TO GUESS. A name still matching more than one player after the
+position filter returns null and renders plain, because a wrong link silently
+sends a reader to a different person's career. Zero ambiguous cases across all
+160. It deliberately omits the importers' surname-plus-initial tier: there the
+cost of a miss is a historical import that will not reconcile, here it is one
+unlinked name.
+
+The 12 that remain are 2026 rookies the site has never referenced — Makai Lemon,
+Jeremiyah Love — so no page exists for them and plain text is the correct answer.
+
+`normalise` is SHARED with `scripts/lib/espn.ts`, which re-exports it. Two
+normalisers would mean the build and the browser disagreeing about who a player
+is.
+
+`lib/espn-maps.ts` holds `PRO_TEAM` and `ESPN_POS`, moved out of
+`scripts/lib/espn.ts` and re-exported from it. That module reaches for
+`node:path`, so the live layer could not import it, and a second copy of a
+32-entry lookup is a second thing to fix when a franchise moves.
+
+The page is reachable from the home panel only; `/history/` still lists finished
+seasons alone, since that page is a record of what the league has completed.
 
 ### A LIVE MATCHUP HAS NO PAGE TO LINK TO
 
