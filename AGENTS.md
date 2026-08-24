@@ -188,6 +188,26 @@ PREVIEW VS LIVE KEYS ON POINTS ON THE BOARD, not the day of the week. Thursday
 kickoffs move, December has Saturday games, and a clock rule would be wrong
 several weeks a season.
 
+`lastScoredLeg` MEANS "FULLY SCORED", AND ONLY SLEEPER HANDS IT OVER. Sleeper's
+`last_scored_leg` is exactly that. ESPN has no such field, and its lookalike
+`status.latestScoringPeriod` is a cursor over periods that merely EXIST — it
+reads 1 all preseason before a snap is played, and 19 for a season whose final
+period was 17. The provider took it at face value AND derived `week` from it, so
+`lastScoredLeg >= week` was true for an ESPN league in every state: apartment-401
+sat permanently in `weekComplete`, drew a week-1 matchup strip in August, and
+hung "#1 Low" record badges on five 0-0 games.
+
+`lastFinishedLeg()` in `lib/live/espn.ts` derives it from `winner` instead, which
+ESPN leaves `UNDECIDED` until a matchup period closes. A period counts only when
+every game in it is decided, and only two-sided games count — a playoff bye has
+one team and can never carry a winner, which would otherwise freeze the season
+there. Nothing else ESPN publishes says whether a down has been played, so
+`seasonType` keys on points existing rather than on any calendar field.
+
+A PROVIDER THAT REPORTS THIS EARLY MAKES EVERY CONSUMER WRONG AT ONCE. It is the
+finalization signal for the phase, for record marks and for what is safe to
+archive; there is no second check downstream.
+
 `scheduled` IS THE NORMAL STATE FOR WEEKS, not a brief edge case. Bylaw 1.7 draws
 the order AFTER the keeper deadline (Appendix A: an early order lets teams trade
 keeper picks into better non-keeper slots), so every year runs through a window
@@ -198,6 +218,41 @@ panel could not appear until the deadline it exists to warn about had passed, an
 drawn the order section is hidden outright, header included — it is the expected
 state for most of that window, so saying "not drawn yet" every time is noise
 around the two dates that do need acting on.
+
+### When a game is settled enough to state facts about it
+
+Record badges, and the accent that marks a winner, are claims about a FINISHED
+game. `useMatchupSettled()` in `lib/live/index.tsx` decides, and it takes the
+EARLIEST of three tiers — each can only ever be late, never early, so any one
+saying "settled" is enough:
+
+| Tier | Source | Lands |
+| --- | --- | --- |
+| per matchup | `LiveMatchup.final`, from ESPN's `winner` | Tuesday |
+| per week | `lastScoredLeg >= week` | Tuesday |
+| NFL slate | every game in the week `completed` | Monday night |
+
+`LiveMatchup.final` UNDEFINED MEANS "THE PROVIDER CANNOT SAY", not "unfinished" —
+Sleeper publishes no per-matchup marker. And a `false` is never a veto: ESPN
+reports `final: false` all Monday night, so treating its answer as authoritative
+would throw away the immediacy the slate tier exists for.
+
+`lib/live/nfl-week.ts` is that third tier — ESPN's PUBLIC scoreboard, used for
+BOTH providers, because the NFL's clock has nothing to do with which platform a
+league runs on. Unauthenticated and `access-control-allow-origin: *`. THE COST OF
+BEING EARLY IS STAT CORRECTIONS: a total can still shift a fraction on Tuesday,
+so a badge can flip for a day. Worth it for a badge, never for deciding what to
+archive — `sync` keeps waiting on the platform.
+
+Fetched ONLY inside a live, unscored week, so nobody downloads it otherwise, and
+NEVER under a phase mock: the mocks replay a finished season, so the real clock
+says every one of their weeks ended months ago and `weekLive` would settle on the
+spot. Fails soft to "no opinion".
+
+`LiveMatchup.matchupId` IS THE GAME, NOT THE PERIOD. ESPN's `matchupPeriodId` is
+shared by every game in a week, so mapping it straight through keyed all five
+strip cards `1` and React collapsed them. `schedule[].id` is the per-game id and
+is unique across the season. Sleeper's `matchup_id` is already per game.
 
 ### Previewing a phase
 

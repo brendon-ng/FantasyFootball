@@ -573,6 +573,14 @@ export interface LiveMatchup {
   matchupId: number;
   a: { ownerSlug: string; points: number };
   b: { ownerSlug: string; points: number };
+  /**
+   * This ONE game is settled, whatever the rest of the week is doing.
+   *
+   * UNDEFINED MEANS "THE PROVIDER CANNOT SAY", not "unfinished" — Sleeper
+   * publishes no per-matchup marker, so callers fall back to the week-level
+   * `lastScoredLeg`. Only ESPN sets it, from its own `winner` field.
+   */
+  final?: boolean;
 }
 
 export interface LiveSeason {
@@ -586,10 +594,16 @@ export interface LiveSeason {
   /** True when Sleeper could not be reached; the UI degrades rather than erroring. */
   unavailable: boolean;
   /**
-   * Last week Sleeper has fully scored. Null before any week finalizes.
+   * Last week the provider has FULLY SCORED. Null before any week finalizes.
    *
    * The finalization signal throughout — safer than comparing against the
    * current NFL week, which advances before stat corrections settle.
+   *
+   * "Fully scored" is the whole contract, and it is not what either platform
+   * hands over directly. Sleeper's `last_scored_leg` means it; ESPN has no such
+   * field and its nearest lookalike counts periods that merely exist, so the
+   * provider derives this from decided games instead. A provider that reports a
+   * week here before it is settled makes every consumer wrong at once.
    */
   lastScoredLeg: number | null;
 }

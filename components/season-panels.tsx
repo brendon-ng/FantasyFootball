@@ -16,7 +16,7 @@ import {
 import { meetingId } from "@/lib/meeting";
 import { isCurrentSeason, resolvePhase } from "@/lib/phase";
 import { matchupMarks, type RecordMark, type RecordThresholds } from "@/lib/record-marks";
-import { useLiveDraft, useLiveSeason } from "@/lib/live";
+import { useLiveDraft, useLiveSeason, useMatchupSettled } from "@/lib/live";
 import type { LiveSeason, OwnerRecord, SeasonSummary } from "@/lib/types";
 
 /**
@@ -321,12 +321,19 @@ function MatchupStrip({
   thresholds: RecordThresholds;
   h2h: Record<string, Record<string, H2HRecord>>;
 }) {
+  /**
+   * MARKS AND RESULTS ONLY ONCE A GAME IS SETTLED. A record is a fact about a
+   * finished game; a partial score cannot have set one, and half a lineup
+   * sitting on 40 points is not the lowest week in league history, it is Sunday
+   * lunchtime. Per MATCHUP rather than per week, so a game that is over does not
+   * wait on one that is not.
+   *
+   * Called before the early return below — it is a hook.
+   */
+  const settled = useMatchupSettled(live);
+
   if (!live?.matchups.length) return null;
   const started = live.matchups.some((m) => m.a.points > 0 || m.b.points > 0);
-  // MARKS ONLY ONCE THE WEEK IS SCORED. A record is a fact about a finished game;
-  // a partial score cannot have set one, and half a lineup sitting on 40 points
-  // is not the lowest week in league history, it is Sunday lunchtime.
-  const scored = (live.lastScoredLeg ?? 0) >= live.week;
   const name = (slug: string) => ownerNames[slug] ?? slug;
   const first = (slug: string) => name(slug).split(" ")[0];
   const recordOf = (slug: string) => live.teams.find((t) => t.ownerSlug === slug);
@@ -363,7 +370,8 @@ function MatchupStrip({
   return (
     <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:px-0">
       {live.matchups.map((m) => {
-        const marks = scored ? matchupMarks(m.a.points, m.b.points, thresholds) : [];
+        const done = settled(m);
+        const marks = done ? matchupMarks(m.a.points, m.b.points, thresholds) : [];
         return (
         <Link
           key={m.matchupId}
@@ -378,7 +386,7 @@ function MatchupStrip({
             // green number at 2pm on Sunday asserts an outcome that has not
             // happened, and half these leads will not survive the late games.
             const leading = started && side.points > other.points;
-            const won = scored && side.points > other.points;
+            const won = done && side.points > other.points;
             const rec = recordOf(side.ownerSlug);
             return (
               <div key={side.ownerSlug} className="flex items-baseline gap-1.5">

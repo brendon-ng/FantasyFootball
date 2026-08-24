@@ -98,9 +98,13 @@ interface EspnLeague {
   };
   teams?: EspnTeam[];
   schedule?: Array<{
+    /** Unique across the SEASON, unlike `matchupPeriodId`. */
+    id?: number;
     matchupPeriodId: number;
     home?: EspnGameSide;
     away?: EspnGameSide;
+    /** "HOME" | "AWAY" | "TIE" | "UNDECIDED" — the only honest finality marker. */
+    winner?: string;
   }>;
 }
 
@@ -138,6 +142,40 @@ const ESPN_MOVE: Record<string, string> = {
 /** Which scoring periods a matchup period covers — usually one, two in playoffs. */
 const spanOf = (league: EspnLeague, mp: number): number[] =>
   league.settings?.scheduleSettings?.matchupPeriods?.[String(mp)] ?? [mp];
+
+/** A game ESPN has called. Anything else is still in progress or unplayed. */
+const isDecided = (winner: string | undefined): boolean =>
+  winner != null && winner !== "UNDECIDED";
+
+/**
+ * The last scoring period this league has actually FINISHED, or null.
+ *
+ * NOT `status.latestScoringPeriod`, which this used to be and which does not
+ * mean that at all — it is ESPN's cursor over periods that merely EXIST. It
+ * reads 1 all preseason, before a snap has been played, and 19 for a season
+ * whose final period was 17. Since `week` was derived from the same number,
+ * `lastScoredLeg >= week` was true for an ESPN league in EVERY state, which
+ * stamped "week complete" on an unplayed week and hung record badges on 0-0
+ * matchups.
+ *
+ * `winner` is the honest signal: ESPN leaves it UNDECIDED until the matchup
+ * period closes. A period counts as finished only when every game in it is
+ * decided, and only two-sided games are considered — a playoff bye has one team
+ * and can never carry a winner, so counting it would freeze the season there.
+ */
+function lastFinishedLeg(league: EspnLeague): number | null {
+  const byPeriod = new Map<number, boolean>();
+  for (const g of league.schedule ?? []) {
+    if (g.home?.teamId == null || g.away?.teamId == null) continue;
+    byPeriod.set(g.matchupPeriodId, (byPeriod.get(g.matchupPeriodId) ?? true) && isDecided(g.winner));
+  }
+  let last: number | null = null;
+  for (const [mp, decided] of byPeriod) {
+    if (!decided) continue;
+    for (const leg of spanOf(league, mp)) last = Math.max(last ?? 0, leg);
+  }
+  return last;
+}
 
 export const espnProvider: LiveProvider = {
   name: "ESPN",
@@ -362,18 +400,37 @@ export const espnProvider: LiveProvider = {
     const regularWeeks = league.settings?.scheduleSettings?.matchupPeriodCount ?? 14;
     const latest = league.status?.latestScoringPeriod ?? 0;
     const currentMp = league.status?.currentMatchupPeriod ?? 1;
+    const finalLeg = league.status?.finalScoringPeriod ?? 0;
+    const scoredLeg = lastFinishedLeg(league);
 
     /**
-     * The real season type, which the global endpoint could not know.
+     * Has a down been played in this league's season yet?
      *
-     * `latestScoringPeriod` is 0 until a week has actually been scored, and it
-     * is the only signal that separates "the calendar says week 1" from "week 1
-     * has been played" — ESPN reports `currentScoringPeriod: 1` all summer.
+     * NEITHER ENDPOINT SAYS SO DIRECTLY, which is the trap here: ESPN reports
+     * `currentScoringPeriod: 1`, `latestScoringPeriod: 1` and `active: true` all
+     * summer, so every calendar-shaped signal claims week 1 is underway in
+     * August. Points cannot lie — the schedule is all zeroes until kickoff.
      */
-    const seasonType: SeasonType =
-      latest === 0 ? "off" : currentMp > regularWeeks ? "post" : "regular";
+    const played =
+      scoredLeg !== null ||
+      (league.schedule ?? []).some(
+        (g) => (g.home?.totalPoints ?? 0) > 0 || (g.away?.totalPoints ?? 0) > 0,
+      );
 
-    const week = seasonType === "off" ? st.week : Math.max(1, latest || st.week);
+    /** The real season type, which the global endpoint could not know. */
+    const seasonType: SeasonType = !played
+      ? "off"
+      : currentMp > regularWeeks
+        ? "post"
+        : "regular";
+
+    // Clamped: `latestScoringPeriod` runs PAST the end of the season (19 for a
+    // 17-period year), which would leave a finished league pointing at a week
+    // that never existed.
+    const week =
+      seasonType === "off"
+        ? st.week
+        : Math.min(Math.max(1, latest || st.week), finalLeg || Number.MAX_SAFE_INTEGER);
 
     /** See the Sleeper provider: browser has `slugByRoster`, the build does not. */
     const primaryOf = (t: EspnTeam): string | undefined =>
@@ -431,9 +488,14 @@ export const espnProvider: LiveProvider = {
             points: round2(s.pointsByScoringPeriod?.[String(week)] ?? s.totalPoints ?? 0),
           });
           return {
-            matchupId: g.matchupPeriodId,
+            // THE GAME'S id, NOT THE PERIOD'S. Every game in a week shares a
+            // `matchupPeriodId`, so using it gave all five the same id — five
+            // React children keyed `1`, which the reconciler is entitled to
+            // collapse or reorder. `id` is unique across the season.
+            matchupId: g.id ?? g.matchupPeriodId,
             a: side(g.home as EspnGameSide),
             b: side(g.away as EspnGameSide),
+            final: isDecided(g.winner),
           };
         });
     }
@@ -443,15 +505,16 @@ export const espnProvider: LiveProvider = {
       week,
       displayWeek: week,
       seasonType,
-      status: league.status?.finalScoringPeriod && latest >= league.status.finalScoringPeriod
-        ? "complete"
-        : latest > 0
-          ? "in_season"
-          : "pre_draft",
+      status:
+        finalLeg && (scoredLeg ?? 0) >= finalLeg
+          ? "complete"
+          : played
+            ? "in_season"
+            : "pre_draft",
       teams,
       matchups,
       unavailable: false,
-      lastScoredLeg: latest || null,
+      lastScoredLeg: scoredLeg,
     };
   },
 };

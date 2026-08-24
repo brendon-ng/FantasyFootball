@@ -29,9 +29,10 @@ import {
 } from "@/lib/league-ref";
 import { applyPhaseMock, type Replay } from "@/lib/phase-mock";
 import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
-import type { LiveSeason } from "@/lib/types";
+import type { LiveMatchup, LiveSeason } from "@/lib/types";
 
 import { espnProvider } from "./espn.ts";
+import { fetchNflWeek } from "./nfl-week.ts";
 import { sleeperProvider } from "./sleeper.ts";
 import type {
   LeagueMove,
@@ -415,4 +416,79 @@ export function LiveStatus({
       live from {name}
     </span>
   );
+}
+
+/**
+ * Is a given matchup settled enough to state facts about its score?
+ *
+ * TWO TIERS, WHICHEVER LANDS FIRST. The platform's own answer arrives on
+ * Tuesday with stat corrections applied; the NFL's scoreboard says the same
+ * thing on Monday night, as soon as the last whistle goes. Neither can be true
+ * before the games are played, so taking either is safe and taking the earlier
+ * one is what a reader expects.
+ *
+ * The per-matchup tier is finer than both and is preferred when a provider
+ * offers it — see `LiveMatchup.final`.
+ *
+ * Returns a PREDICATE rather than a flag because the answer is per matchup,
+ * even though one of its three inputs is not.
+ */
+export function useMatchupSettled(
+  live: LiveSeason | null,
+): (m: LiveMatchup) => boolean {
+  const inSeason = live?.seasonType === "regular" || live?.seasonType === "post";
+  const week = live?.week ?? 0;
+  const season = live?.season ?? 0;
+  // `week > 0` guards the no-data case, where both sides are 0 and a bare `>=`
+  // would call an unknown week settled.
+  const scored = week > 0 && (live?.lastScoredLeg ?? 0) >= week;
+
+  /**
+   * The answer, STAMPED WITH THE WEEK IT IS ABOUT.
+   *
+   * Carrying last week's `true` into this one would put badges on an unplayed
+   * game — the exact failure this guards against — and clearing it in the effect
+   * is a cascading render. Storing the key alongside makes a stale value
+   * unreadable rather than relying on a reset arriving in time.
+   */
+  const [slate, setSlate] = useState<{ key: string; final: boolean } | null>(null);
+  const key = `${season}:${week}`;
+
+  /**
+   * Only asked in the window where it can change the answer: before kickoff
+   * there is nothing to settle, and once the platform has scored the week its
+   * own marker is already sufficient. So a reader outside a live week never
+   * downloads the scoreboard at all.
+   *
+   * NEVER UNDER A PHASE MOCK. The mocks replay a FINISHED season, so the real
+   * NFL clock says every one of their weeks ended months ago — consulting it
+   * would settle a mocked `weekLive` on the spot and make the one phase that
+   * exists to show games in progress impossible to look at.
+   */
+  const ask = Boolean(inSeason && week > 0 && !scored && !mockPhase());
+
+  useEffect(() => {
+    if (!ask) return;
+    let cancelled = false;
+    fetchNflWeek(season, week)
+      .then((w) => {
+        if (!cancelled && w) setSlate({ key, final: w.final });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [ask, key, season, week]);
+
+  const slateFinal = slate?.key === key && slate.final;
+
+  /**
+   * ANY TIER SAYING "SETTLED" WINS, and a `false` from one is never a veto.
+   *
+   * ESPN reports `final: false` all Monday night — its `winner` does not land
+   * until the matchup period closes the next morning — so treating its answer
+   * as authoritative would throw away the very immediacy the scoreboard was
+   * added for. Each tier can only ever be late, never early.
+   */
+  return (m: LiveMatchup) => m.final === true || scored || slateFinal;
 }
