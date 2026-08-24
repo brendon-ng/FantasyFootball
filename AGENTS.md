@@ -219,6 +219,29 @@ drawn the order section is hidden outright, header included — it is the expect
 state for most of that window, so saying "not drawn yet" every time is noise
 around the two dates that do need acting on.
 
+### The pairings appear at the DRAFT, not at kickoff
+
+`drafted` is already the phase where the home page stops looking backwards, and
+it lasts weeks — the draft runs in August and week 1 is in September. So both
+providers publish the week-1 pairings from the draft onward, and the matchup
+strip renders them as a PREVIEW: no scores, no winner accent, no record badges,
+because `started` and `useMatchupSettled()` are both false with nothing on the
+board. Gating them on `seasonType` instead left the strip empty for exactly the
+stretch people are looking at it.
+
+Each provider names the moment its own way — ESPN `draftDetail.drafted`, Sleeper
+`status: in_season`, which it sets the instant a draft completes.
+
+WEEK 1 IS NOT `st.week` IN THE PRESEASON. Sleeper's clock counts PRESEASON weeks
+in August (`display_week: 2` on the 23rd), so passing it through fetched week 2's
+pairings and badged the page "WEEK 2" before week 1 had been played. Between the
+draft and kickoff the league's next game is week 1, always. ESPN needs no such
+correction — its `currentScoringPeriod` is already 1.
+
+DO NOT USE "ROSTERS HAVE PLAYERS" AS THE DRAFTED TEST. A keeper league carries
+players through the offseason: den-ops sits at 19 on a roster with `status:
+pre_draft` and no draft run.
+
 ### When a game is settled enough to state facts about it
 
 Record badges, and the accent that marks a winner, are claims about a FINISHED

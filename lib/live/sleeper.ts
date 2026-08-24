@@ -299,9 +299,29 @@ export const sleeperProvider: LiveProvider = {
       starters: r.starters ?? [],
     }));
 
+    /**
+     * The draft has run, so the season has begun even if the NFL disagrees.
+     *
+     * Sleeper flips `status` to `in_season` the moment a draft completes, months
+     * before kickoff. That is the boundary the site already uses — `drafted` is a
+     * phase, and the home page stops looking backwards there — so it is also when
+     * the week-1 pairings become worth showing.
+     */
+    const drafted = league.status === "in_season" || league.status === "complete";
+    const inSeason = st.seasonType === "regular" || st.seasonType === "post";
+
+    /**
+     * Which week to show. NOT `st.week` in the preseason: Sleeper's clock is
+     * counting PRESEASON weeks then — `display_week` reads 2 in late August —
+     * so taking it would fetch week 2's pairings and badge the page "WEEK 2"
+     * before week 1 has been played. Between the draft and kickoff the league's
+     * next game is week 1, always.
+     */
+    const week = inSeason ? st.week : 1;
+
     let matchups: LiveMatchup[] = [];
-    if (st.seasonType === "regular" || st.seasonType === "post") {
-      const raw = await json<RawMatchup[]>(`${BASE}/league/${id}/matchups/${st.week}`, []);
+    if (inSeason || drafted) {
+      const raw = await json<RawMatchup[]>(`${BASE}/league/${id}/matchups/${week}`, []);
       const byId = new Map<number, RawMatchup[]>();
       for (const m of raw ?? []) {
         if (m.matchup_id == null) continue;
@@ -320,8 +340,8 @@ export const sleeperProvider: LiveProvider = {
 
     return {
       season: st.season,
-      week: st.week,
-      displayWeek: st.displayWeek,
+      week,
+      displayWeek: inSeason ? st.displayWeek : week,
       seasonType: st.seasonType,
       status: league.status ?? "unknown",
       teams,

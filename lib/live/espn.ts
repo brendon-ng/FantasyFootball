@@ -471,8 +471,18 @@ export const espnProvider: LiveProvider = {
     const slugOf = (teamId: number) =>
       teams.find((t) => t.rosterId === teamId)?.ownerSlug ?? `roster-${teamId}`;
 
+    /**
+     * The draft has run, so the season has begun even if the NFL disagrees.
+     *
+     * Mirrors Sleeper's `status: in_season`: the pairings are worth showing from
+     * the draft onwards, which is where the site's `drafted` phase already puts
+     * the boundary. Without this the strip stays empty from the draft until
+     * Thursday of week 1, which is exactly the stretch people are looking at it.
+     */
+    const drafted = league.draftDetail?.drafted === true;
+
     let matchups: LiveMatchup[] = [];
-    if (seasonType === "regular" || seasonType === "post") {
+    if (seasonType === "regular" || seasonType === "post" || drafted) {
       matchups = (league.schedule ?? [])
         // The games covering THIS week. A playoff matchup period spans two
         // scoring periods, so matching on `matchupPeriodId` alone would show
