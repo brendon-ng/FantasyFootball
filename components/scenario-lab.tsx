@@ -11,6 +11,7 @@ import { buildBoard, type DraftShape } from "@/lib/draft-slots";
 import { projectDraft, type ProjectedPick } from "@/lib/adp-projection";
 import { placeKeepers } from "@/lib/keeper-placement";
 import { useScenario } from "@/lib/scenario";
+import { useIdentity } from "@/components/identity";
 import { useLiveDraft, useLiveRosters, useLiveTradedPicks } from "@/lib/live";
 import { PROVIDER_NAME, type LeagueRef } from "@/lib/league-ref";
 import type { AdpEntry, Projection } from "@/lib/data";
@@ -65,6 +66,17 @@ export function ScenarioLab({
   const providerName = PROVIDER_NAME[leagueRef?.provider ?? "sleeper"];
   const [openPlayer, setOpenPlayer] = useState<string | null>(null);
   const rosters = useLiveRosters(leagueRef);
+
+  /**
+   * Which roster the person looking at this owns, if they have said who they are.
+   *
+   * A CO-OWNER IS ON THE TEAM TOO. Matching only `ownerId` would leave half of a
+   * shared team unable to see their own picks — den-ops has several — so every
+   * id on the roster is checked. Null for a visitor who is browsing anonymously,
+   * and nothing is highlighted, which is the right answer rather than a guess.
+   */
+  const { identity, ready } = useIdentity();
+  const me = ready && identity.kind === "owner" ? identity.slug : null;
   // The pool list needs the same per-round keeper counts the board computes, so
   // it can show where the round breaks fall. Same hooks, same shared placement —
   // an approximation here would quietly disagree with the grid above it.
@@ -227,6 +239,16 @@ export function ScenarioLab({
       <AvailablePool
         adp={adp}
         keptBy={keptBy}
+        myRoster={
+          me
+            ? ((rosters.data ?? []).find((r) =>
+                [r.ownerId, ...r.coOwners].some(
+                  (id) => id && userIdToSlug[id] === me,
+                ),
+              )?.rosterId ?? null)
+            : null
+        }
+        projectedPicks={projectedPicks}
         livePicksByRound={livePicksByRound}
         starred={starredSet}
         onToggleStar={api.toggleStar}

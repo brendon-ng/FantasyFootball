@@ -1423,6 +1423,22 @@ live order; the button exists to materialise it as something editable. A MOCKED
 order can be seeded too and the button says so — a mock copied into a scenario
 cannot go quiet the way `?mockDraftOrder` does, so the label stops pretending.
 
+THE POOL MARKS THE VIEWER'S OWN PICKS, in identity violet. The question this
+page exists to answer is "who is likely to be there when I am on the clock", and
+without it that meant counting rows against the round headings by hand. It reads
+the SAME `projectedPicks` walk the board does, so a marked row and the board
+cannot disagree about whose pick it is.
+
+A `kept` PROJECTION IS NOT A PICK. That cell is the one a keeper CONSUMES rather
+than a selection anyone gets to make, so marking it would promise a choice that
+does not exist. The border sits on EVERY row and is merely transparent when the
+pick is not yours — added only to the marked ones it would shift them two pixels
+out of line and the column would read as broken.
+
+THE ROSTER IS MATCHED ON CO-OWNERS TOO, not just `ownerId`: den-ops has two
+shared teams, and matching the primary alone would leave Maddy and Katie unable
+to see their own picks. Nothing is marked for someone browsing anonymously.
+
 THE LAB READS LIVE ADP, `/keepers` READS THE LOCK. `getAdp()` switches to the
 frozen snapshot inside the bylaw window so keeper COSTS stop moving before the
 deadline; `getLiveAdp()` ignores it, because this page is asking what the draft

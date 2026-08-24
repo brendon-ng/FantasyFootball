@@ -5,6 +5,7 @@ import { Fragment, useMemo, useState } from "react";
 import { PositionPill } from "@/components/keeper-table";
 import { SortHeader, compareSort, type SortState } from "@/components/sortable-header";
 import { adpIsConsensusOnly, adpSortKey, adpTitle, adpValue } from "@/lib/adp-format";
+import type { ProjectedPick } from "@/lib/adp-projection";
 import { costRound } from "@/lib/draft-slots";
 import { NFL_GAMES } from "@/lib/projection-format";
 import type { AdpEntry, Projection } from "@/lib/data";
@@ -33,6 +34,8 @@ type PosFilter = (typeof POSITIONS)[number];
 export function AvailablePool({
   adp,
   keptBy,
+  myRoster,
+  projectedPicks,
   livePicksByRound,
   starred,
   onToggleStar,
@@ -47,6 +50,21 @@ export function AvailablePool({
   adp: Record<string, AdpEntry>;
   /** playerId -> owner slug keeping him in this scenario. */
   keptBy: Map<string, string>;
+  /**
+   * The viewer's own roster, or null if they have not said who they are.
+   *
+   * WHAT THIS PAGE IS ACTUALLY FOR is "who is likely to be there when I am on
+   * the clock", and answering it meant counting rows against the round headings
+   * by hand. Marking the picks that are yours turns that into a glance.
+   */
+  myRoster: number | null;
+  /**
+   * Where the draft would take each player, from the same walk the board uses,
+   * so a highlighted row and the board cannot disagree about whose pick it is.
+   * Null before an order exists — then nothing is marked, because nothing is
+   * known.
+   */
+  projectedPicks: Map<string, ProjectedPick> | null;
   /**
    * Live picks per round, indexed 1..rounds — from the same placement the board
    * uses. Null when no order exists yet, in which case the list renders flat
@@ -302,6 +320,19 @@ export function AvailablePool({
           const head = roundStartsAt.get(i);
           const isStar = starred.has(id);
           const heldBy = keptBy.get(id);
+          /*
+           * A LIVE PICK OF MINE, which is narrower than "a pick of mine": a
+           * `kept` projection is the cell a keeper CONSUMES, not a selection
+           * anyone gets to make, so marking it would promise a choice that does
+           * not exist.
+           */
+          const pick = projectedPicks?.get(id);
+          const mine =
+            myRoster != null &&
+            !heldBy &&
+            pick != null &&
+            !pick.kept &&
+            pick.ownerRoster === myRoster;
           return (
             <Fragment key={id}>
             {head ? (
@@ -319,9 +350,19 @@ export function AvailablePool({
               </li>
             ) : null}
             <li
-              className={`flex items-center gap-2 px-3 py-1 text-[11px] hover:bg-ink-800/50 ${
-                heldBy ? "opacity-50" : ""
-              }`}
+              title={mine ? `Projected to be your pick at ${pick!.label}` : undefined}
+              /*
+               * THE BORDER IS ON EVERY ROW, transparent unless it is yours. Put
+               * only on the marked ones it would shift them two pixels out of
+               * line with the rest, and the column would read as broken.
+               *
+               * Violet because that is what identity means everywhere here. The
+               * accent green is already spoken for by live state, winners and
+               * keeper surplus, and would be read as one of those.
+               */
+              className={`flex items-center gap-2 border-l-2 px-3 py-1 text-[11px] hover:bg-ink-800/50 ${
+                mine ? "border-me bg-me/[0.07]" : "border-transparent"
+              } ${heldBy ? "opacity-50" : ""}`}
             >
               <button
                 type="button"
