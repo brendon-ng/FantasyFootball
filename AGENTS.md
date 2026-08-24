@@ -1912,7 +1912,7 @@ free tier.
 | Workflow | Cadence | Does |
 | --- | --- | --- |
 | `deploy.yml` | push + every 15 min in NFL game windows, else 6-hourly | build & publish; bakes in-progress Sleeper data |
-| `archive.yml` | daily, 08:00 UTC | `sync` + `derive` + `import:player-teams`, commits only if something newly finalized |
+| `archive.yml` | daily, 08:00 UTC | `sync` + the current ESPN season + `derive` + `import:player-teams`, commits only if something newly finalized |
 | `keepalive.yml` | 3rd of each month | commits a timestamp so cron workflows are never auto-disabled |
 
 `archive.yml` is DAILY BECAUSE IT IS IDEMPOTENT — a run with nothing newly
@@ -1920,6 +1920,36 @@ finalized produces no commit, so most days it only proves there was nothing to
 do. Weekly meant a week scored on Tuesday morning could sit unarchived for seven
 days. 08:00 UTC is midnight PST and 01:00 PDT; GitHub cron has no timezone field,
 and 07:00 UTC would be exact in summer but 23:00 the previous day in winter.
+
+`archive.yml` ALSO IMPORTS THE CURRENT ESPN SEASON, which `sync` cannot: an
+ESPN-only league has no Sleeper anchor, so `discoverSeasons` finds nothing and
+that league's data only ever moved when somebody ran an importer by hand.
+apartment-401 duly sat frozen from the moment it was recovered — a pick trade and
+a whole draft landed on ESPN and reached the site only because someone noticed.
+
+`transactions` and `drafts` ONLY. The draft matters as much as the transactions,
+because a traded PICK is never in the transaction log — ESPN publishes it on the
+pick itself, where `owningTeamIds` and `teamId` disagree. `seasons` and `lineups`
+deliberately stay manual: neither has a completion guard, so `seasons` would write
+a half-played year into `manual/` for derive to treat as finalized, and `lineups`
+enforces that started points equal the scoreboard, which cannot hold until the
+scoreboard is final.
+
+ONLY THE SEASON BEING PLAYED, chosen by comparing the NFL year against each
+league's `espnLeagueIds`. Everything earlier is committed and immutable, so
+re-fetching it nightly buys nothing — and it is also what makes this work with no
+credentials in CI, since ESPN's visibility is per SEASON and it is the current one
+that is public. Asking for a league's private history would 401 every run and
+bury the real failures. den-ops is skipped entirely by that rule: its newest ESPN
+id is 2023, so its ESPN era is over and there is nothing current to fetch.
+
+ONE PROCESS PER LEAGUE PER JOB, which is what makes a failure LOCAL. A thrown
+invariant, an OOM or an unhandled rejection in one league cannot reach another,
+and the leagues that worked still write their data and still get committed. The
+step is `continue-on-error` so the commit happens regardless, and a step at the
+very END re-fails the run — because a league that has quietly stopped importing
+is exactly the failure mode this repo keeps getting bitten by, and a green tick
+over it would be worse than the outage.
 
 `archive.yml` also runs `npm run adp -- --auto`, so ADP refreshes daily and
 freezes itself on schedule — see the ADP section. That step is

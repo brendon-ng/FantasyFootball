@@ -73,6 +73,72 @@ jobs:
       - name: Sync finalized data from Sleeper and ESPN
         run: npm run sync
 
+      # ESPN HAS NO EQUIVALENT OF `sync`. An ESPN-only league has no Sleeper
+      # anchor, so the step above is a no-op for it and its data only ever moved
+      # when somebody ran an importer by hand — which meant apartment-401 sat
+      # frozen from the moment it was recovered. These two are the ones that keep
+      # a live season current: adds, drops and trades, and the draft (which is
+      # also the ONLY place a traded PICK is visible, since ESPN publishes those
+      # on the pick itself and never in the transaction log).
+      #
+      # `seasons` and `lineups` deliberately stay manual. Neither has a
+      # completion guard: `seasons` would write a half-played year into
+      # `manual/`, which derive would then treat as a real finalized season and
+      # collide with the live season page, and `lineups` enforces that started
+      # points equal the scoreboard, which cannot hold until the scoreboard is
+      # final. Run them once the season is over.
+      #
+      # ONLY THE CURRENT SEASON. Everything earlier is already committed and
+      # immutable, so re-fetching it nightly buys nothing — and it is also what
+      # keeps this working with no credentials: ESPN visibility is per SEASON,
+      # and it is the season being PLAYED that is public. Asking for a league's
+      # private history would 401 on every run and drown the real failures.
+      #
+      # ONE PROCESS PER LEAGUE PER JOB, which is what makes a failure local. A
+      # thrown invariant, an OOM or an unhandled rejection in one league cannot
+      # reach another, and the ones that worked still write their data. The step
+      # then exits non-zero, and a step at the very end re-fails the run — so the
+      # good data is committed AND the failure is impossible to miss.
+      - name: Recover the current ESPN season, one league at a time
+        id: espn
+        continue-on-error: true
+        run: |
+          node -e '
+            const fs = require("node:fs");
+            const now = new Date();
+            // An NFL season is named for the calendar year it STARTS in, so
+            // January and February still belong to the year before.
+            const season = now.getUTCMonth() <= 1 ? now.getUTCFullYear() - 1 : now.getUTCFullYear();
+            for (const slug of fs.readdirSync("config/leagues").sort()) {
+              const path = `config/leagues/${slug}/league.json`;
+              if (!fs.existsSync(path)) continue;
+              const cfg = JSON.parse(fs.readFileSync(path, "utf8"));
+              if (!cfg.features?.espnImport) continue;
+              if (!(cfg.espnLeagueIds ?? {})[String(season)]) continue;
+              console.log(`${slug} ${season}`);
+            }
+          ' > /tmp/espn-jobs
+
+          if [ ! -s /tmp/espn-jobs ]; then
+            echo "No league has an ESPN id for the current season — nothing to do."
+            exit 0
+          fi
+
+          failed=""
+          while read -r slug season; do
+            for job in transactions drafts; do
+              echo "::group::$slug $season — $job"
+              npm run "import:espn:$job" -- --league="$slug" --season="$season" \
+                || failed="$failed $slug/$job"
+              echo "::endgroup::"
+            done
+          done < /tmp/espn-jobs
+
+          if [ -n "$failed" ]; then
+            echo "::warning::ESPN import failed for:$failed"
+            exit 1
+          fi
+
       - name: Rebuild derived data
         run: npm run derive
 
@@ -121,3 +187,13 @@ jobs:
 
           Automated by .github/workflows/archive.yml"
           git push
+
+      # LAST, so the leagues that DID work are already committed and pushed. A
+      # step that failed under `continue-on-error` leaves the run green, and a
+      # league that has quietly stopped importing is exactly the failure this
+      # repo keeps getting bitten by — so the run is failed here instead.
+      - name: Fail the run if any ESPN import failed
+        if: steps.espn.outcome == 'failure'
+        run: |
+          echo "One or more ESPN imports failed — see the step above."
+          exit 1
