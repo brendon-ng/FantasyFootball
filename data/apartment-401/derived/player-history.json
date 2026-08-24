@@ -610,6 +610,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 120,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900120,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "503": [
@@ -2171,6 +2185,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 76,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900076,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "1476": [
@@ -3085,6 +3113,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 42,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900042,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "2161": [
@@ -3288,6 +3330,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756083600044,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 67,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900067,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -3810,6 +3866,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 108,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900108,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "2505": [
@@ -4103,6 +4173,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 139,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900139,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "2749": [
@@ -4530,6 +4614,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756083600015,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 11,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900011,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -5289,6 +5387,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 13
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 125,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900125,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "3321": [
@@ -5575,6 +5687,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 135,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900135,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "3664": [
@@ -6139,6 +6265,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 4,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900004,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4035": [
@@ -6208,6 +6348,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756083600037,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 131,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900131,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -6308,6 +6462,20 @@
       "round": 8,
       "season": 2025,
       "timestamp": 1756083600080,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 126,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900126,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -6431,6 +6599,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 144,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900144,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4040": [
@@ -6568,6 +6750,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756083600045,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 132,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900132,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -7851,6 +8047,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 96,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900096,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4217": [
@@ -7935,6 +8145,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 89,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900089,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4219": [
@@ -8733,6 +8957,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 13,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900013,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4881": [
@@ -8802,6 +9040,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756083600027,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 59,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900059,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -9434,6 +9686,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 50,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900050,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4984": [
@@ -9503,6 +9769,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756083600024,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 34,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900034,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -10023,6 +10303,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 116,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900116,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5022": [
@@ -10164,6 +10458,20 @@
       "round": 13,
       "season": 2025,
       "timestamp": 1756083600122,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 99,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900099,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -10344,6 +10652,20 @@
       "tradeId": "2a91cb0c-7a92-4fb5-aab0-7414ecd13ad2",
       "type": "trade",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 73,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900073,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5052": [
@@ -10792,6 +11114,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 136,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900136,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5209": [
@@ -11465,6 +11801,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 13
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 122,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900122,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5846": [
@@ -11534,6 +11884,20 @@
       "round": 6,
       "season": 2025,
       "timestamp": 1756083600052,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 72,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900072,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -11821,6 +12185,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 30,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900030,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5857": [
@@ -11948,6 +12326,20 @@
       "tradeId": "2a91cb0c-7a92-4fb5-aab0-7414ecd13ad2",
       "type": "trade",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 22,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900022,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5870": [
@@ -12132,6 +12524,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 105,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900105,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5880": [
@@ -12307,6 +12713,20 @@
       "round": 7,
       "season": 2025,
       "timestamp": 1756083600067,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 57,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900057,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -12538,6 +12958,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 56,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900056,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5937": [
@@ -12727,6 +13161,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 101,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900101,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5955": [
@@ -12882,6 +13330,20 @@
       "round": 7,
       "season": 2025,
       "timestamp": 1756083600070,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 87,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900087,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -14102,6 +14564,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 68,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900068,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6783": [
@@ -14294,6 +14770,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 14,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900014,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6789": [
@@ -14394,6 +14884,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 53,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900053,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6794": [
@@ -14463,6 +14967,20 @@
       "round": 1,
       "season": 2025,
       "timestamp": 1756083600004,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 17,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900017,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -14550,6 +15068,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 119,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900119,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6801": [
@@ -14619,6 +15151,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756083600033,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 47,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900047,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -14988,6 +15534,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 93,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900093,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6813": [
@@ -15057,6 +15617,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756083600017,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 5,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900005,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -15155,6 +15729,20 @@
       "round": 9,
       "season": 2025,
       "timestamp": 1756083600082,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 82,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900082,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -15711,6 +16299,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756083600032,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 65,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900065,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -16326,6 +16928,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 81,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900081,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7042": [
@@ -16825,6 +17441,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 77,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900077,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7525": [
@@ -16906,6 +17536,20 @@
       "round": 7,
       "season": 2025,
       "timestamp": 1756083600063,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 39,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900039,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -17031,6 +17675,20 @@
       "tradeId": "2a91cb0c-7a92-4fb5-aab0-7414ecd13ad2",
       "type": "trade",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 46,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900046,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7528": [
@@ -17161,6 +17819,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 32,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900032,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7547": [
@@ -17228,6 +17900,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756083600013,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 9,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900009,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -17389,6 +18075,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 52,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900052,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7561": [
@@ -17625,6 +18325,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 3,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900003,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7567": [
@@ -17713,6 +18427,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 88,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900088,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7568": [
@@ -17804,6 +18532,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756083600011,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 27,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900027,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -17964,6 +18706,20 @@
       "round": 10,
       "season": 2025,
       "timestamp": 1756083600097,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 25,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900025,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -18340,6 +19096,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756083600039,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 64,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900064,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -19015,6 +19785,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 55,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900055,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7670": [
@@ -19269,6 +20053,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 14
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 151,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900151,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7922": [
@@ -19382,6 +20180,20 @@
       "round": 14,
       "season": 2025,
       "timestamp": 1756083600135,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 103,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900103,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -19526,6 +20338,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756083600018,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 20,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900020,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -19685,6 +20511,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 141,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900141,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8122": [
@@ -19799,6 +20639,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 104,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900104,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8129": [
@@ -19883,6 +20737,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 24,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900024,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8131": [
@@ -19945,6 +20813,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 123,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900123,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8132": [
@@ -20083,6 +20965,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 146,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900146,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8134": [
@@ -20110,6 +21006,20 @@
       "round": 11,
       "season": 2025,
       "timestamp": 1756083600102,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 154,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900154,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -20232,6 +21142,20 @@
       "round": 12,
       "season": 2025,
       "timestamp": 1756083600119,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 102,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900102,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -20377,6 +21301,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 28,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900028,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8138": [
@@ -20444,6 +21382,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756083600034,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 12,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900012,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -20525,6 +21477,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 94,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900094,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8143": [
@@ -20661,6 +21627,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 29,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900029,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8146": [
@@ -20767,6 +21747,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 38,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900038,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8148": [
@@ -20792,6 +21786,20 @@
       "round": 7,
       "season": 2025,
       "timestamp": 1756083600068,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 62,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900062,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -20834,6 +21842,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756083600029,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 33,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900033,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -20892,6 +21914,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756083600041,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 19,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900019,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -20985,6 +22021,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 138,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900138,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8155": [
@@ -21052,6 +22102,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756083600047,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 23,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900023,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -21135,6 +22199,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 78,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900078,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8168": [
@@ -21305,6 +22383,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 58,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900058,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8205": [
@@ -21382,6 +22474,20 @@
       "round": 6,
       "season": 2025,
       "timestamp": 1756083600051,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 142,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900142,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -21476,6 +22582,20 @@
       "round": 8,
       "season": 2025,
       "timestamp": 1756083600079,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 84,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900084,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -21645,6 +22765,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 133,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900133,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8408": [
@@ -21721,6 +22855,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 118,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900118,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8676": [
@@ -21805,6 +22953,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 2,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900002,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9222": [
@@ -21858,6 +23020,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756083600023,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 15,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900015,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -21985,6 +23161,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 153,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900153,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9226": [
@@ -22024,6 +23214,20 @@
       "round": 1,
       "season": 2025,
       "timestamp": 1756083600010,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 7,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900007,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -22267,6 +23471,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 74,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900074,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9486": [
@@ -22293,6 +23511,22 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    }
+  ],
+  "9487": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 75,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900075,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9488": [
@@ -22337,6 +23571,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 8,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900008,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9493": [
@@ -22376,6 +23624,20 @@
       "round": 1,
       "season": 2025,
       "timestamp": 1756083600008,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 6,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900006,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -22443,6 +23705,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 128,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900128,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9501": [
@@ -22506,6 +23782,20 @@
       "round": 5,
       "season": 2024,
       "timestamp": 1724893200048,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 149,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900149,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -22699,6 +23989,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 127,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900127,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9509": [
@@ -22740,6 +24044,20 @@
       "round": 1,
       "season": 2025,
       "timestamp": 1756083600001,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 1,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900001,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -22847,6 +24165,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 129,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900129,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9754": [
@@ -22923,6 +24255,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 111,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900111,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9756": [
@@ -23003,6 +24349,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 13
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 95,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900095,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9757": [
@@ -23176,6 +24536,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 41,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900041,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9999": [
@@ -23296,6 +24670,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 98,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900098,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "10229": [
@@ -23374,6 +24762,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 21,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900021,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "10232": [
@@ -23412,6 +24814,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 83,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900083,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "10235": [
@@ -23566,6 +24982,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 140,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900140,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "10444": [
@@ -23696,6 +25126,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 90,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900090,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "10937": [
@@ -24078,6 +25522,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 109,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900109,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11539": [
@@ -24158,6 +25616,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 115,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900115,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11563": [
@@ -24210,6 +25682,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 91,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900091,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11564": [
@@ -24223,6 +25709,20 @@
       "round": 13,
       "season": 2025,
       "timestamp": 1756083600128,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 66,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900066,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -24284,6 +25784,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 61,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900061,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11575": [
@@ -24334,6 +25848,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 157,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900157,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11576": [
@@ -24490,6 +26018,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 86,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900086,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11584": [
@@ -24515,6 +26057,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756083600020,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 40,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900040,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -24558,6 +26114,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 106,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900106,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11589": [
@@ -24680,6 +26250,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 26,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787526900026,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11618": [
@@ -24748,6 +26332,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 44,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900044,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11624": [
@@ -24799,6 +26397,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756083600049,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 97,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900097,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -24860,6 +26472,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 71,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900071,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11631": [
@@ -24887,6 +26513,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756083600014,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 85,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787526900085,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -24932,6 +26572,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 31,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900031,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11635": [
@@ -24959,6 +26613,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756083600025,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 43,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900043,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -25312,6 +26980,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 145,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900145,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11786": [
@@ -25326,6 +27008,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 137,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900137,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11792": [
@@ -25378,6 +27074,22 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    }
+  ],
+  "12015": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 147,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900147,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12185": [
@@ -25472,6 +27184,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 110,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900110,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12476": [
@@ -25515,6 +27241,20 @@
       "tradeId": "2a91cb0c-7a92-4fb5-aab0-7414ecd13ad2",
       "type": "trade",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 36,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900036,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12484": [
@@ -25559,6 +27299,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 107,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787526900107,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12490": [
@@ -25585,6 +27339,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 49,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900049,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12493": [
@@ -25729,6 +27497,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 14
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 80,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900080,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12504": [
@@ -25795,6 +27577,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 13
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 79,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787526900079,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12507": [
@@ -25808,6 +27604,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756083600035,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 16,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900016,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -25825,6 +27635,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 69,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900069,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12512": [
@@ -25865,6 +27689,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 35,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900035,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12514": [
@@ -25878,6 +27716,20 @@
       "round": 11,
       "season": 2025,
       "timestamp": 1756083600106,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 45,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900045,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -25921,6 +27773,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 48,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787526900048,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12518": [
@@ -25934,6 +27800,36 @@
       "round": 9,
       "season": 2025,
       "timestamp": 1756083600090,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 60,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900060,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "12519": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 63,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900063,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -25953,6 +27849,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 37,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787526900037,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12527": [
@@ -25969,6 +27879,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 10,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787526900010,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12529": [
@@ -25982,6 +27906,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756083600048,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 51,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900051,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -26029,6 +27967,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 92,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900092,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12534": [
@@ -26043,6 +27995,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 100,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787526900100,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12711": [
@@ -26057,6 +28023,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 158,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900158,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12713": [
@@ -26109,6 +28089,150 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    }
+  ],
+  "13279": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 70,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787526900070,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13286": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 54,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787526900054,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13287": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 18,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787526900018,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13294": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 112,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900112,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13298": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 124,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900124,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13305": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 150,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900150,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13346": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 148,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900148,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13417": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 134,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787526900134,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13545": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 160,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900160,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "ARI": [
@@ -26677,6 +28801,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "pickNo": 143,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787526900143,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "BUF": [
@@ -28065,6 +30203,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "pickNo": 114,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900114,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "DET": [
@@ -28249,6 +30401,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "pickNo": 156,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900156,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "GB": [
@@ -28725,6 +30891,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "pickNo": 113,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900113,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "IND": [
@@ -29267,6 +31447,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "pickNo": 159,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900159,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "LAC": [
@@ -29511,6 +31705,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 152,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900152,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "LAR": [
@@ -29815,6 +32023,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "pickNo": 117,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787526900117,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "LV": [
@@ -31425,6 +33647,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "pickNo": 155,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787526900155,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "PIT": [
@@ -31641,6 +33877,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "pickNo": 130,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900130,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "SEA": [
@@ -31870,6 +34120,20 @@
       "round": 15,
       "season": 2025,
       "timestamp": 1756083600148,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "pickNo": 121,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787526900121,
       "toSlug": null,
       "type": "draft",
       "week": 0

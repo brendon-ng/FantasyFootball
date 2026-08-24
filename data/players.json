@@ -4185,6 +4185,13 @@
     "team": null,
     "years_exp": 1
   },
+  "12015": {
+    "birth_date": "2002-03-27",
+    "full_name": "Harrison Mevis",
+    "position": "K",
+    "team": "LAR",
+    "years_exp": 2
+  },
   "12185": {
     "birth_date": "1999-05-19",
     "full_name": "Spencer Shrader",
@@ -4478,6 +4485,69 @@
     "position": "K",
     "team": "CAR",
     "years_exp": 1
+  },
+  "13279": {
+    "birth_date": "2005-01-19",
+    "full_name": "Carnell Tate",
+    "position": "WR",
+    "team": "TEN",
+    "years_exp": 0
+  },
+  "13286": {
+    "birth_date": "2003-10-09",
+    "full_name": "Jadarian Price",
+    "position": "RB",
+    "team": "SEA",
+    "years_exp": 0
+  },
+  "13287": {
+    "birth_date": "2005-05-31",
+    "full_name": "Jeremiyah Love",
+    "position": "RB",
+    "team": "ARI",
+    "years_exp": 0
+  },
+  "13294": {
+    "birth_date": "2004-06-02",
+    "full_name": "Makai Lemon",
+    "position": "WR",
+    "team": "PHI",
+    "years_exp": 0
+  },
+  "13298": {
+    "birth_date": "2004-09-23",
+    "full_name": "KC Concepcion",
+    "position": "WR",
+    "team": "CLE",
+    "years_exp": 0
+  },
+  "13305": {
+    "birth_date": "2003-07-03",
+    "full_name": "Mike Washington",
+    "position": "RB",
+    "team": "LV",
+    "years_exp": 0
+  },
+  "13346": {
+    "birth_date": "2003-12-06",
+    "full_name": "Denzel Boston",
+    "position": "WR",
+    "team": "CLE",
+    "years_exp": 0
+  },
+  "13417": {
+    "birth_date": "2002-12-18",
+    "full_name": "De'Zhaun Stribling",
+    "position": "WR",
+    "team": "SF",
+    "years_exp": 0
+  },
+  "13545": {
+    "birth_date": "2003-06-12",
+    "full_name": "Trey Smack",
+    "position": "K",
+    "team": "GB",
+    "years_exp": 0
   },
   "ARI": {
     "birth_date": null,

@@ -360,14 +360,18 @@ export function LiveSeasonDetail({
         )}
       </Panel>
 
+      {/* TRADES ABOVE ROSTERS. A trade is news — it happened, it is dated, and it
+          explains why a roster looks the way it does. The rosters are the current
+          state those moves produced, and they are much the longer panel, so
+          burying the short, eventful one underneath them reads backwards. */}
+      {footer}
+
       <LiveRosters
         leagueRef={refBySeason[String(season)] ?? null}
         live={live}
         ownerNames={ownerNames}
         players={players}
       />
-
-      {footer}
     </>
   );
 }

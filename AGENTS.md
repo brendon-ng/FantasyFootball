@@ -2374,10 +2374,17 @@ Three things ESPN models differently, all translated at import time:
   size defaults to 50 and needs `x-fantasy-filter` to lift. Without it the name
   tiers are blind and any player Sleeper has no `espn_id` for is unresolvable.
 
-NO PICK WAS EVER TRADED IN THE ESPN ERA — zero across all five seasons, all 960
-picks. That is a real finding rather than a modelling artefact: pick trading was
-ENABLED in 2020 and 2023, and a wrong snake model would have shown roughly half of
-every even round as traded rather than none.
+NO PICK WAS TRADED IN 2019-23 — zero across those five seasons, all 960 picks.
+That is a real finding rather than a modelling artefact: pick trading was ENABLED
+in 2020 and 2023, and a wrong snake model would have shown roughly half of every
+even round as traded rather than none.
+
+2026 IS THE FIRST WITH ANY, and it is a whole-slot swap: Jay and Mark exchanged
+draft positions 5 and 10, so all 32 of their picks read as traded. Worth
+double-checking rather than trusting, because "every pick between the same two
+owners" is exactly what a stale `pickOrder` would also look like — ESPN confirms
+it on the pick itself, where `owningTeamIds` names the slot's owner and `teamId`
+the team that used it, and the two disagree for precisely those 32.
 
 Two invariants throw: the pick count must equal rounds x teams, and a missing
 `pickOrder` is fatal rather than assumed, since without it a traded pick is
