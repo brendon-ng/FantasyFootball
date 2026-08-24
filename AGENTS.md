@@ -277,6 +277,80 @@ shared by every game in a week, so mapping it straight through keyed all five
 strip cards `1` and React collapsed them. `schedule[].id` is the per-game id and
 is unique across the season. Sleeper's `matchup_id` is already per game.
 
+### The season detail page for the season being PLAYED
+
+`/history/<season>/` serves two different pages off one route. A finalized season
+renders from derived JSON as it always has; the season in progress renders
+`<LiveSeasonDetail>`, built entirely from the live layer, because derive only
+builds finalized seasons and there is nothing archived to read.
+
+`inProgressSeason()` is a league REF the derived data has not finalized — known
+at BUILD time with no network, which it must be, since `generateStaticParams`
+decides which HTML files exist and a static export cannot mint one later.
+
+THIS FIXED A LINK THAT WENT TO THE WRONG YEAR. The home panel is headed "2026
+Standings" and its "Season detail" link pointed at `/history/2025/`, because the
+only season page that existed was the last finalized one.
+
+Three things it deliberately does not render:
+
+- **Brackets.** There is no postseason field until the regular season ends and
+  seeding is decided. An empty shell reads as a bracket nobody filled in rather
+  than one that does not exist.
+- **Final standings**, which cannot be known. THIS WEEK'S FIXTURES TAKE THAT
+  SLOT — the same cards the home page draws, from one renderer.
+- **Links into lineups.** See below.
+
+NO SEED, AND NO SCORES, BEFORE A GAME IS PLAYED. Every team is 0-0 on 0.0 points
+in the preseason, so a rank column would be input order wearing the costume of a
+ranking. Same rule as the home strip hiding a row of 0.00s.
+
+`playoffTeams` and `regularSeasonWeeks` COME FROM THE LAST FINISHED SEASON.
+Neither provider publishes them in a shape worth trusting, and both are settings
+that change about never — apartment-401 went from 4 playoff spots to 6 in 2023
+and has held there. A league with no finished season passes nulls and the cut
+line is simply not drawn.
+
+`seasonGames()` on the provider is the week-by-week board. NOT `weekGames` IN A
+LOOP: ESPN serves the whole season's schedule in one league payload, with every
+game's `pointsByScoringPeriod`, so asking week by week would download the league
+seventeen times; Sleeper has no bulk form and genuinely needs one request each
+(17 in parallel, about a second). Only the provider knows which. Checked against
+the derived archive — all 17 weeks of apartment-401's 2025 reproduce exactly.
+
+IT FETCHES THE WHOLE SEASON, NOT THE WEEKS PLAYED. Both platforms publish the
+full fixture list from the moment the league exists, so capping the request at
+the current week showed a single week in August and headed it "Every Matchup".
+A week with no scores renders as pairings — next week's opponent is worth
+knowing, and hiding it buys nothing. Playoff weeks are simply absent until the
+field is seeded: ESPN's 2026 schedule runs to matchup period 14 and stops.
+
+TRADES ARE REAL DERIVED DATA HERE, unlike everything else on the page. Sync
+fetches transactions through the week the league is ON rather than the week it
+has SCORED — a completed trade is final the moment it processes — and derive
+builds them for an unfinalized season through `loadLiveTradeSources()`. So the
+panel is the same component reading the same JSON as on a finished season, and
+den-ops already has three 2026 trades committed. Do not reach for the live layer
+for these.
+
+`MatchupCards` IS ONE RENDERER FOR TWO SURFACES — the home strip and this
+page's panel. They differ only in the box: `layout="strip"` is the horizontally
+scrolling row, `layout="list"` is a stack of rows, which is the only thing that
+fits half a two-column grid. Every rule that matters lives in the card — when a
+score may be shown, when a lead may be called a win, when a chip is allowed,
+whether a matchup page exists to link to — and a second copy would have drifted
+on the first of those to change.
+
+### A LIVE MATCHUP HAS NO PAGE TO LINK TO
+
+`/matchups/<id>/` is generated from DERIVED data, so no game in the season being
+played has a page until it is archived — zero exist for 2026. The home strip
+linked every card to one anyway, which was a 404 per card, and the in-progress
+season's matchup list would have been the same. Both now link only when
+`live.season <= archivedThrough`, which is false all season, returns to true on
+its own once the season is archived, and is ALREADY true under `?mockPhase=`,
+which replays a finished season.
+
 ### Previewing a phase
 
 `?mockPhase=weekLive` (any name above). `?mockDraftOrder` and `?mockDraft` still

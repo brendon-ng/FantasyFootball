@@ -42,6 +42,7 @@ import type {
   LiveRoster,
   LiveState,
   LiveTradedPick,
+  LiveWeekGame,
 } from "./types.ts";
 
 export type {
@@ -491,4 +492,41 @@ export function useMatchupSettled(
    * added for. Each tier can only ever be late, never early.
    */
   return (m: LiveMatchup) => m.final === true || scored || slateFinal;
+}
+
+/**
+ * Every week's scoreboard so far, keyed by week.
+ *
+ * For the season being PLAYED, where none of this is archived yet: derive only
+ * builds finalized seasons, so a live season has no `matchups.json` behind it
+ * and the week-by-week board can only come from the provider.
+ *
+ * Fails soft to `{}` — the panel above it renders its own empty state, which is
+ * also the honest answer in the week before kickoff.
+ */
+export function useSeasonGames(
+  ref: LeagueRef | null,
+  throughWeek: number,
+): Record<number, LiveWeekGame[]> {
+  const [games, setGames] = useState<Record<number, LiveWeekGame[]>>({});
+  const key = `${refKey(ref)}:${throughWeek}`;
+
+  useEffect(() => {
+    const provider = providerFor(ref);
+    if (!ref || !provider || throughWeek < 1) return;
+    let cancelled = false;
+    provider
+      .seasonGames(ref.id, ref.season, throughWeek)
+      .then((g) => {
+        if (!cancelled) setGames(g);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+    // `key` stands in for `ref`, a fresh object each render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
+
+  return games;
 }

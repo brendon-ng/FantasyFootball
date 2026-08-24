@@ -23,6 +23,7 @@ import {
   type LiveProvider,
   type LiveRoster,
   type LiveTradedPick,
+  type LiveWeekGame,
   type ProviderState,
   type RawDraft,
   type SeasonContext,
@@ -74,6 +75,26 @@ interface RawTxn {
   leg: number;
   adds: Record<string, number> | null;
   drops: Record<string, number> | null;
+}
+
+/**
+ * One week's scoreboard, pairing rosters by `matchup_id`.
+ *
+ * Standalone rather than a method so `seasonGames` can fan it out without
+ * reaching through `this`, which is not reliably the provider once the object
+ * is passed around as a `LiveProvider`.
+ */
+async function sleeperWeekGames(id: string, week: number): Promise<LiveWeekGame[]> {
+  const raw = await json<RawMatchup[]>(`${BASE}/league/${id}/matchups/${week}`, []);
+  const byId = new Map<number, Array<{ rosterId: number; points: number }>>();
+  for (const m of raw ?? []) {
+    if (m.matchup_id == null) continue;
+    byId.set(m.matchup_id, [
+      ...(byId.get(m.matchup_id) ?? []),
+      { rosterId: m.roster_id, points: round2(m.points ?? 0) },
+    ]);
+  }
+  return [...byId.entries()].map(([matchupId, sides]) => ({ matchupId, sides }));
 }
 
 export const sleeperProvider: LiveProvider = {
@@ -181,6 +202,27 @@ export const sleeperProvider: LiveProvider = {
     } satisfies RawDraft;
   },
 
+  async weekGames(id, _season, week) {
+    return sleeperWeekGames(id, week);
+  },
+
+  /**
+   * ONE REQUEST PER WEEK, in parallel — Sleeper publishes no bulk scoreboard.
+   * A week that fails is dropped rather than failing the set, so one bad
+   * response costs that week's row and not the whole list.
+   */
+  async seasonGames(id, _season, throughWeek): Promise<Record<number, LiveWeekGame[]>> {
+    const weeks = Array.from({ length: Math.max(0, throughWeek) }, (_, i) => i + 1);
+    const pages = await Promise.all(
+      weeks.map((w) => sleeperWeekGames(id, w).catch(() => [] as LiveWeekGame[])),
+    );
+    const out: Record<number, LiveWeekGame[]> = {};
+    weeks.forEach((w, i) => {
+      if (pages[i].length) out[w] = pages[i];
+    });
+    return out;
+  },
+
   /**
    * Moves involving one player, from `fromWeek` onward.
    *
@@ -188,19 +230,6 @@ export const sleeperProvider: LiveProvider = {
    * the next few weeks and discards everything not about this player. Failed
    * claims are dropped: a lost waiver is an attempt, not an event.
    */
-  async weekGames(id, _season, week) {
-    const raw = await json<RawMatchup[]>(`${BASE}/league/${id}/matchups/${week}`, []);
-    const byId = new Map<number, Array<{ rosterId: number; points: number }>>();
-    for (const m of raw ?? []) {
-      if (m.matchup_id == null) continue;
-      byId.set(m.matchup_id, [
-        ...(byId.get(m.matchup_id) ?? []),
-        { rosterId: m.roster_id, points: round2(m.points ?? 0) },
-      ]);
-    }
-    return [...byId.entries()].map(([matchupId, sides]) => ({ matchupId, sides }));
-  },
-
   async moves(id, _season, playerId, fromWeek, weeks) {
     const pages = await Promise.all(
       Array.from({ length: weeks }, (_, i) => fromWeek + i).map((w) =>

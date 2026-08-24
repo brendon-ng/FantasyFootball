@@ -28,6 +28,7 @@ import {
   type LiveMove,
   type LiveProvider,
   type LiveRoster,
+  type LiveWeekGame,
   type ProviderState,
   type RawDraft,
   type SeasonContext,
@@ -251,6 +252,38 @@ export const espnProvider: LiveProvider = {
    */
   async weekGames() {
     return [];
+  },
+
+  /**
+   * ONE REQUEST FOR THE WHOLE SEASON. ESPN's schedule carries every game's
+   * `pointsByScoringPeriod`, so the week-by-week board is already in the payload
+   * `season()` reads — there is nothing per-week to fetch.
+   */
+  async seasonGames(id, season, throughWeek): Promise<Record<number, LiveWeekGame[]>> {
+    const league = await get<EspnLeague>(
+      leagueUrl(id, season, ["mMatchupScore", "mSettings"]),
+    );
+    if (!league) return {};
+
+    const out: Record<number, LiveWeekGame[]> = {};
+    for (const g of league.schedule ?? []) {
+      if (g.home?.teamId == null || g.away?.teamId == null) continue;
+      // A playoff matchup period covers two scoring periods, and each is its own
+      // week on the board — the same split `season()` makes.
+      for (const week of spanOf(league, g.matchupPeriodId)) {
+        if (week < 1 || week > throughWeek) continue;
+        const pts = (s: EspnGameSide) =>
+          round2(s.pointsByScoringPeriod?.[String(week)] ?? 0);
+        (out[week] ??= []).push({
+          matchupId: g.id ?? g.matchupPeriodId,
+          sides: [
+            { rosterId: g.home.teamId, points: pts(g.home) },
+            { rosterId: g.away.teamId, points: pts(g.away) },
+          ],
+        });
+      }
+    }
+    return out;
   },
 
   async tradedPicks() {

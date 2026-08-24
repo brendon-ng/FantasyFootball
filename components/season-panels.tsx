@@ -13,10 +13,10 @@ import {
   fmt,
   placeColor,
 } from "@/components/ui";
-import { meetingId } from "@/lib/meeting";
+import { MatchupCards, type H2HRecord } from "@/components/matchup-cards";
 import { isCurrentSeason, resolvePhase } from "@/lib/phase";
-import { matchupMarks, type RecordMark, type RecordThresholds } from "@/lib/record-marks";
-import { useLiveDraft, useLiveSeason, useMatchupSettled } from "@/lib/live";
+import type { RecordThresholds } from "@/lib/record-marks";
+import { useLiveDraft, useLiveSeason } from "@/lib/live";
 import type { LiveSeason, OwnerRecord, SeasonSummary } from "@/lib/types";
 
 /**
@@ -35,6 +35,8 @@ import type { LiveSeason, OwnerRecord, SeasonSummary } from "@/lib/types";
  * be one flexible layout — "last season's final table" and "this week's live
  * scores" answer different questions and share nothing but a slot.
  */
+
+export type { H2HRecord };
 
 export interface HomeOwner {
   slug: string;
@@ -136,7 +138,13 @@ export function SeasonPanels({
           top strip is for whatever the league is currently about. */}
       <>
         {inSeason ? (
-          <MatchupStrip live={live} ownerNames={ownerNames} thresholds={thresholds} h2h={h2h} />
+          <MatchupCards
+              live={live}
+              ownerNames={ownerNames}
+              thresholds={thresholds}
+              h2h={h2h}
+              archivedThrough={lastSeason?.season ?? 0}
+            />
         ) : (
           lastSeasonTiles
         )}
@@ -149,7 +157,17 @@ export function SeasonPanels({
               inSeason ? `${currentSeason} Standings` : `${lastSeason?.season ?? ""} Final Standings`
             }
             meta={inSeason ? (phase === "drafted" ? "season not started" : "live") : "final"}
-            href={lastSeason ? `/history/${lastSeason.season}/` : undefined}
+            /* THE SEASON THIS PANEL IS ABOUT, which is not always the last
+               finalized one. Headed "2026 Standings" while linking to
+               /history/2025/ sent a reader from a live table to last year's
+               archive. The in-progress season has its own page. */
+            href={
+              inSeason
+                ? `/history/${currentSeason}/`
+                : lastSeason
+                  ? `/history/${lastSeason.season}/`
+                  : undefined
+            }
             hrefLabel="Season detail"
           />
           {inSeason && live ? (
@@ -274,190 +292,6 @@ export function SeasonPanels({
   );
 }
 
-export interface H2HRecord {
-  wins: number;
-  losses: number;
-  ties: number;
-}
-
-/**
- * The week's matchups, one card per game, filling the row.
- *
- * Each card is the two teams with their season record, and beneath them the
- * all-time head-to-head — the thing that makes a fixture interesting before
- * anyone has scored.
- *
- * ONE STRUCTURE FOR EVERY WEEK PHASE. Preview, live and complete differ only in
- * what the score slot holds, never in how a card is built, so a card does not
- * move or resize as Sunday progresses.
- *
- THE CARD WIDTH IS AN INLINE STYLE, and that is not laziness. Four attempts to
- * express it in CSS did not reach the element — a grid template with a dynamic
- * column count (browsers reject `var()` as a `repeat()` count and drop the whole
- * declaration), and then `sm:flex-1`, which is present in the served stylesheet
- * and still did not apply. `flex: 1 0 10rem` inline cannot lose a cascade fight,
- * cannot be purged and cannot be served stale, and it needs no breakpoint:
- *
- *   desktop — free space splits evenly across equal bases, so the cards fill the
- *             row and stay the same width, five for a ten-team league or six for
- *             a twelve
- *   phone   — `flex-shrink: 0` holds each at 10rem, the row overflows, and the
- *             container scrolls it
- *
- * Stacking is what this avoids: five cards down a phone screen would push the
- * standings out of sight entirely.
- *
- * Scores appear only once someone has scored. A row of 0.00s before kickoff reads
- * as "everyone scored nothing" rather than "not started".
- */
-function MatchupStrip({
-  live,
-  ownerNames,
-  thresholds,
-  h2h,
-}: {
-  live: LiveSeason | null;
-  ownerNames: Record<string, string>;
-  thresholds: RecordThresholds;
-  h2h: Record<string, Record<string, H2HRecord>>;
-}) {
-  /**
-   * MARKS AND RESULTS ONLY ONCE A GAME IS SETTLED. A record is a fact about a
-   * finished game; a partial score cannot have set one, and half a lineup
-   * sitting on 40 points is not the lowest week in league history, it is Sunday
-   * lunchtime. Per MATCHUP rather than per week, so a game that is over does not
-   * wait on one that is not.
-   *
-   * Called before the early return below — it is a hook.
-   */
-  const settled = useMatchupSettled(live);
-
-  if (!live?.matchups.length) return null;
-  const started = live.matchups.some((m) => m.a.points > 0 || m.b.points > 0);
-  const name = (slug: string) => ownerNames[slug] ?? slug;
-  const first = (slug: string) => name(slug).split(" ")[0];
-  const recordOf = (slug: string) => live.teams.find((t) => t.ownerSlug === slug);
-
-  /**
-   * Every owner of the team, first names joined — "Jaymie & Katie".
-   *
-   * A co-owned team is one team with two people on it, and naming only the
-   * primary makes the card disagree with the standings, which have credited both
-   * since the ESPN import. First names because five of these share a row.
-   */
-  const credited = (slug: string): string => {
-    const slugs = recordOf(slug)?.ownerSlugs;
-    return (slugs?.length ? slugs : [slug]).map(first).join(" & ");
-  };
-
-  /**
-   * "All time: Jake leads 5-4".
-   *
-   * PREFIXED, because a bare "Jake leads 5-4" under two names and two records
-   * reads as this season. It is the whole series, going back to 2019.
-   */
-  const series = (a: string, b: string): string => {
-    const r = h2h[a]?.[b];
-    const total = r ? r.wins + r.losses + r.ties : 0;
-    if (!r || !total) return "All time: first meeting";
-    const score = r.ties ? `${r.wins}-${r.losses}-${r.ties}` : `${r.wins}-${r.losses}`;
-    if (r.wins === r.losses) return `All time: even at ${score}`;
-    const leader = r.wins > r.losses ? a : b;
-    const flipped = r.ties ? `${r.losses}-${r.wins}-${r.ties}` : `${r.losses}-${r.wins}`;
-    return `All time: ${first(leader)} leads ${r.wins > r.losses ? score : flipped}`;
-  };
-
-  return (
-    <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-1 sm:mx-0 sm:px-0">
-      {live.matchups.map((m) => {
-        const done = settled(m);
-        const marks = done ? matchupMarks(m.a.points, m.b.points, thresholds) : [];
-        return (
-        <Link
-          key={m.matchupId}
-          href={`/matchups/${meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug)}/`}
-          className="min-w-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5 transition-colors hover:border-accent-dim"
-          style={{ flex: "1 0 10rem" }}
-        >
-          {[m.a, m.b].map((side, i) => {
-            const other = i === 0 ? m.b : m.a;
-            // LEADING IS NOT WINNING. Bold marks who is ahead; the accent is
-            // reserved for a result, so it waits until the week is scored — a
-            // green number at 2pm on Sunday asserts an outcome that has not
-            // happened, and half these leads will not survive the late games.
-            const leading = started && side.points > other.points;
-            const won = done && side.points > other.points;
-            const rec = recordOf(side.ownerSlug);
-            return (
-              <div key={side.ownerSlug} className="flex items-baseline gap-1.5">
-                <span
-                  data-owner={side.ownerSlug}
-                  className={`min-w-0 truncate text-sm ${
-                    leading ? "font-semibold text-chalk-100" : "text-chalk-400"
-                  }`}
-                >
-                  {credited(side.ownerSlug)}
-                </span>
-                {rec ? (
-                  <span className="tabular shrink-0 text-[10px] text-chalk-600">
-                    {fmt.record(rec.wins, rec.losses, rec.ties)}
-                  </span>
-                ) : null}
-                {started ? (
-                  <span className="ml-auto flex shrink-0 items-center gap-1">
-                    <span
-                      className={`tabular text-sm ${
-                        won
-                          ? "font-semibold text-accent"
-                          : leading
-                            ? "font-semibold text-chalk-200"
-                            : "text-chalk-500"
-                      }`}
-                    >
-                      {fmt.pts1(side.points)}
-                    </span>
-                  </span>
-                ) : null}
-              </div>
-            );
-          })}
-          <div className="mt-1 truncate text-[10px] text-chalk-600">
-            {series(m.a.ownerSlug, m.b.ownerSlug)}
-          </div>
-          {/* Only a game that actually made a record book gets chips, which is
-              what keeps them worth reading — most weeks no card has one. */}
-          {marks.length ? (
-            <div className="mt-1.5 flex flex-wrap gap-1">
-              {marks.map((mark) => (
-                <RecordChip key={`${mark.short}-${mark.side ?? "game"}`} mark={mark} />
-              ))}
-            </div>
-          ) : null}
-        </Link>
-        );
-      })}
-    </div>
-  );
-}
-
-/**
- * A record this game entered. Tone carries the direction — green for a peak, red
- * for a floor — and the title spells the rank out, since "#3 low" is terse.
- */
-function RecordChip({ mark }: { mark: RecordMark }) {
-  return (
-    <span
-      title={mark.full}
-      className={`rounded border px-1 py-px text-[9px] font-bold uppercase tracking-wide ${
-        mark.tone === "good"
-          ? "border-accent-dim/60 bg-accent/10 text-accent"
-          : "border-loss/50 bg-loss/10 text-loss"
-      }`}
-    >
-      {mark.short}
-    </span>
-  );
-}
 
 function StandingsLive({
   live,

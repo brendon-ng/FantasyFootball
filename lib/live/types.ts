@@ -140,6 +140,21 @@ export interface LiveProvider {
    * exactly the window a punishment gets drawn in.
    */
   weekGames(id: string, season: number, week: number): Promise<LiveWeekGame[]>;
+  /**
+   * Every week's scoreboard up to and including `throughWeek`, keyed by week.
+   *
+   * NOT `weekGames` IN A LOOP, which is why it is its own method. ESPN serves the
+   * whole season's schedule in one league payload, so asking week by week would
+   * download the entire league seventeen times; Sleeper has no bulk form and
+   * genuinely does need one request each. Only the provider knows which it is.
+   *
+   * A season with nothing played yet is `{}`, not an error.
+   */
+  seasonGames(
+    id: string,
+    season: number,
+    throughWeek: number,
+  ): Promise<Record<number, LiveWeekGame[]>>;
   /** EVERY completed move from `fromWeek` onward, for the keeper adjuster. */
   leagueMoves(id: string, season: number, fromWeek: number, weeks: number): Promise<LeagueMove[]>;
 }

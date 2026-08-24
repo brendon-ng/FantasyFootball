@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BackLink } from "@/components/back-link";
+import { LiveSeasonDetail } from "@/components/live-season-detail";
 
 import { Bracket } from "@/components/bracket";
 import { SeasonPunishmentPanel } from "@/components/season-punishment";
@@ -24,6 +25,8 @@ import {
   getDrafts,
   getMatchupHistory,
   getOwnerMap,
+  getOwnerRecords,
+  getRecordThresholds,
   getPickHandoffs,
   getPickOutcomes,
   getTradeReturns,
@@ -32,8 +35,11 @@ import {
   getConfig,
   getPunishmentTeams,
   getSeasonPunishment,
+  getLeagueRefs,
+  getLiveSeason,
   getSeasons,
   getTrades,
+  getUserIdToSlug,
   getWeeklyLowKeys,
   getWeeklyLows,
   matchupChip,
@@ -42,12 +48,34 @@ import {
 } from "@/lib/data";
 import type { BracketMatch, Matchup } from "@/lib/types";
 
+/**
+ * The season being played, or null outside one.
+ *
+ * A LEAGUE REF THE DERIVED DATA HAS NOT FINALIZED. Refs are keyed by season and
+ * come from config plus discovery, so this is known at BUILD time with no
+ * network — which it has to be, since `generateStaticParams` decides which HTML
+ * files exist and a static export cannot mint a page later.
+ */
+function inProgressSeason(): number | null {
+  const finalized = new Set(getSeasons().filter((s) => s.finalized).map((s) => s.season));
+  const live = Object.keys(getLeagueRefs())
+    .map(Number)
+    .filter((s) => Number.isFinite(s) && !finalized.has(s));
+  return live.length ? Math.max(...live) : null;
+}
+
 // Static export: every season page is generated at build time.
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return getSeasons()
+  const seasons = getSeasons()
     .filter((s) => s.finalized)
-    .map((s) => ({ season: String(s.season) }));
+    .map((s) => String(s.season));
+  const live = inProgressSeason();
+  // The season in progress gets a page too, so the home page's "Season detail"
+  // link has somewhere current to point. Without it that link went to LAST
+  // season while the panel above it was headed with THIS one.
+  if (live != null) seasons.push(String(live));
+  return seasons.map((season) => ({ season }));
 }
 
 export default async function SeasonPage({
@@ -57,12 +85,18 @@ export default async function SeasonPage({
 }) {
   const { season: seasonParam } = await params;
   const season = Number(seasonParam);
-  const summary = getSeasons().find((s) => s.season === season);
-  if (!summary) notFound();
+  const summary = getSeasons().find((s) => s.season === season && s.finalized);
+  // The season being played has no derived summary — nothing about it is
+  // archived yet — so it gets its own page built from the live layer.
+  if (!summary) {
+    if (season === inProgressSeason()) return <InProgressSeasonPage season={season} />;
+    notFound();
+  }
 
   const owners = getOwnerMap();
   // Newest first within the season, matching how an owner page lists them.
   const trades = getTrades().filter((t) => t.season === season).reverse();
+
   const players = getPlayers();
   const ownerNames = Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]));
   const seasonPunishment = getSeasonPunishment(season);
@@ -462,6 +496,159 @@ export default async function SeasonPage({
                 />
         </Panel>
       ) : null}
+    </div>
+  );
+}
+
+/**
+ * The season being played.
+ *
+ * A SERVER SHELL AROUND A CLIENT BODY. Everything on this page moves — records,
+ * points, seeding — so it all comes from the live layer in the browser; what the
+ * server contributes is the things that do not move: who the owners are, how many
+ * teams make the playoffs, and the punishment panels, which are per-season and
+ * already fetch their own feed.
+ */
+async function InProgressSeasonPage({ season }: { season: number }) {
+  const owners = getOwnerMap();
+  const ownerNames = Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]));
+  const seasonPunishment = getSeasonPunishment(season);
+
+  /**
+   * League shape from the most recent FINISHED season.
+   *
+   * Neither provider publishes the playoff-team count and the regular-season
+   * length in a form this page can rely on, and both are settings that change
+   * about never. A league with no finished season yet passes nulls and the cut
+   * line simply is not drawn — better than guessing where it falls.
+   */
+  const last = getSeasons()
+    .filter((s) => s.finalized)
+    .sort((a, b) => b.season - a.season)[0];
+  const playoffTeams = last ? last.standings.filter((r) => r.madePlayoffs).length : null;
+
+  const hasDraft = getDrafts().some((p) => p.season === season);
+  const draftHref = hasDraft ? `/history/${season}/draft/` : null;
+
+  /**
+   * How many weeks the season runs to, from the last finished one — its highest
+   * matchup week, which is the regular season plus however many playoff rounds
+   * the league plays. 17 is the NFL's own ceiling and the fallback for a league
+   * with nothing finished yet.
+   */
+  const seasonWeeks = last
+    ? Math.max(
+        ...getMatchupHistory()
+          .filter((m) => m.season === last.season)
+          .map((m) => m.week),
+        last.regularSeasonWeeks,
+      )
+    : 17;
+
+  /**
+   * TRADES ARE ALREADY COMMITTED FOR A SEASON IN PROGRESS, unlike everything else
+   * on this page. Sync fetches transactions through the week the league is ON
+   * rather than the week it has SCORED — a completed trade is final the moment it
+   * processes — and derive builds them through `loadLiveTradeSources()`. So this
+   * is ordinary derived data and reads exactly as it does on a finished season.
+   */
+  const trades = getTrades().filter((t) => t.season === season).reverse();
+  /**
+   * ACTIVE OWNERS ONLY, as on the home page. Which pairs play this week is
+   * decided in the browser, so the whole matrix has to ship — but a departed
+   * owner cannot be in this week's fixtures, and dropping them cuts it by about
+   * a third.
+   */
+  const h2h = Object.fromEntries(
+    getOwnerRecords()
+      .filter((r) => owners.get(r.ownerSlug)?.active)
+      .map((r) => [
+        r.ownerSlug,
+        Object.fromEntries(
+          Object.entries(r.vs)
+            .filter(([opp]) => owners.get(opp)?.active)
+            .map(([opp, v]) => [opp, { wins: v.wins, losses: v.losses, ties: v.ties }]),
+        ),
+      ]),
+  );
+
+  return (
+    <div className="space-y-5 sm:space-y-6">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <BackLink fallback={{ href: "/history/", label: "History" }} />
+          <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">{season} Season</h1>
+          {draftHref ? (
+            <Link
+              href={draftHref}
+              className="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-ink-500 px-3 py-1.5 text-xs font-medium text-chalk-400 transition-colors hover:border-accent hover:text-accent"
+            >
+              View draft results
+            </Link>
+          ) : null}
+        </div>
+        {/* WHERE THE CHAMPION SITS ON A FINISHED SEASON. Naming one here — even
+            as "TBD" — would put a trophy against a season nobody has won. */}
+        <span className="rounded-full border border-accent-dim px-2.5 py-1 text-[11px] font-semibold tracking-wide text-accent">
+          IN PROGRESS
+        </span>
+      </div>
+
+      <LiveSeasonDetail
+        season={season}
+        refBySeason={getLeagueRefs()}
+        initial={await getLiveSeason()}
+        userIdToSlug={getUserIdToSlug()}
+        ownerNames={ownerNames}
+        playoffTeams={playoffTeams}
+        regularSeasonWeeks={last?.regularSeasonWeeks ?? null}
+        seasonWeeks={seasonWeeks}
+        thresholds={getRecordThresholds()}
+        h2h={h2h}
+        archivedThrough={last?.season ?? 0}
+        footer={
+          trades.length ? (
+            <Panel>
+              <PanelHeader
+                title="Trades"
+                meta={`${trades.length} this season`}
+                href="/trades/"
+                hrefLabel="All trades"
+              />
+              <TradeList
+                trades={trades}
+                players={getPlayers()}
+                ownerNames={ownerNames}
+                outcomes={getPickOutcomes()}
+                returns={getTradeReturns()}
+                handoffs={getPickHandoffs()}
+                allTrades={Object.fromEntries(getTrades().map((t) => [t.id, t]))}
+                showSeason={false}
+              />
+            </Panel>
+          ) : null
+        }
+      >
+        {seasonPunishment ? (
+          <SeasonPunishmentPanel
+            league={getConfig().slug}
+            punishment={seasonPunishment}
+            teams={getPunishmentTeams()}
+            names={ownerNames}
+            cloud={getConfig().cloudinaryCloudName ?? null}
+            preset={getConfig().cloudinaryUploadPreset ?? null}
+          />
+        ) : null}
+        {features().weeklyLowPunishment ? (
+          <SeasonPunishments
+            season={season}
+            lows={getPunishmentLows().find((s) => s.season === season)?.lows ?? []}
+            teams={getPunishmentTeams()}
+            names={ownerNames}
+            {...punishmentsSource()}
+          />
+        ) : null}
+      </LiveSeasonDetail>
     </div>
   );
 }
