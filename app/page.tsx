@@ -12,6 +12,7 @@ import {
   getAllMeetings,
   getKeepers,
   getLeagueRefs,
+  getLiveSchedule,
   getLiveSeason,
   getOwnerMap,
   getOwnerRecords,
@@ -106,6 +107,7 @@ export default async function HomePage() {
         // ACTIVE OWNERS ONLY. Which pairs play is decided client-side, so the
         // whole matrix has to ship — but a departed owner cannot appear in this
         // week's fixtures, and dropping them cuts it by about a third.
+        upcomingIds={(await getLiveSchedule()).map((g) => g.id)}
         h2h={Object.fromEntries(
           records
             .filter((r) => owners.get(r.ownerSlug)?.active)

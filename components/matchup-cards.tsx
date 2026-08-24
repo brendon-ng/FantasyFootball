@@ -34,6 +34,15 @@ export interface MatchupCardsProps {
   /** Newest season with derived data, so matchup pages exist at or below it. */
   archivedThrough: number;
   /**
+   * Ids of the in-progress season's fixtures that the BUILD generated a page for.
+   *
+   * Handed down rather than inferred so the links cannot outrun the pages: both
+   * come from `getLiveSchedule()`, so if a build could not reach the provider
+   * there are no upcoming pages AND no links to them. Inferring "it is this
+   * season, so a page exists" would 404 exactly then.
+   */
+  upcomingIds?: string[];
+  /**
    * `strip` is the home page's horizontally scrolling row; `list` is a stack of
    * rows for a panel, which is the only thing that fits half a two-column grid.
    */
@@ -46,8 +55,10 @@ export function MatchupCards({
   thresholds,
   h2h,
   archivedThrough,
+  upcomingIds,
   layout = "strip",
 }: MatchupCardsProps) {
+  const upcoming = new Set(upcomingIds ?? []);
   /**
    * MARKS AND RESULTS ONLY ONCE A GAME IS SETTLED. A record is a fact about a
    * finished game; a partial score cannot have set one, and half a lineup
@@ -110,16 +121,15 @@ export function MatchupCards({
         /**
          * A CARD IS ONLY A LINK IF ITS MATCHUP PAGE EXISTS.
          *
-         * `/matchups/<id>/` is generated from DERIVED data, and derive only builds
-         * finalized seasons — so the season being PLAYED has no matchup pages at
-         * all and every one of these cards was a 404. The link returns on its own
-         * once the season is archived, and it already works under `?mockPhase=`,
-         * which replays a finished season.
+         * Two ways it can: the season is archived, so derive built a page for the
+         * finished game; or the build generated a PREVIEW page for the fixture.
+         * Anything else — a provider that was unreachable at build time, a
+         * playoff week added to the schedule since — renders as plain text rather
+         * than a link to a page nobody generated.
          */
+        const id = meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug);
         const href =
-          live.season <= archivedThrough
-            ? `/matchups/${meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug)}/`
-            : null;
+          live.season <= archivedThrough || upcoming.has(id) ? `/matchups/${id}/` : null;
         const card = strip
           ? `min-w-0 rounded-lg border border-ink-600 bg-ink-850 px-3 py-2.5${
               href ? " transition-colors hover:border-accent-dim" : ""

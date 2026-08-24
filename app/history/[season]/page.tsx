@@ -36,6 +36,7 @@ import {
   getPunishmentTeams,
   getSeasonPunishment,
   getLeagueRefs,
+  getLiveSchedule,
   getLiveSeason,
   getSeasons,
   getTrades,
@@ -606,6 +607,7 @@ async function InProgressSeasonPage({ season }: { season: number }) {
         thresholds={getRecordThresholds()}
         h2h={h2h}
         archivedThrough={last?.season ?? 0}
+        upcomingIds={(await getLiveSchedule()).map((g) => g.id)}
         players={getPlayers()}
         footer={
           trades.length ? (

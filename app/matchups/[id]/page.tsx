@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { MatchupPreview } from "@/components/matchup-preview";
+
 import { BackLink } from "@/components/back-link";
 
 import { Bracket } from "@/components/bracket";
@@ -33,6 +35,12 @@ import {
   type Meeting,
   type MeetingSide,
   weeklyCoverage,
+  getLeagueRefs,
+  getLiveSchedule,
+  getLiveSeason,
+  getUserIdToSlug,
+  seasonWeekCount,
+  type ScheduledGame,
 } from "@/lib/data";
 
 export const dynamicParams = false;
@@ -48,8 +56,13 @@ export const dynamicParams = false;
  * score, the round it decided, and the series context are all still real. A
  * missing page would leave dead links from the record book.
  */
-export function generateStaticParams() {
-  return getAllMeetings().map((m) => ({ id: m.id }));
+export async function generateStaticParams() {
+  const played = getAllMeetings().map((m) => m.id);
+  // Fixtures the season has not reached yet get a page too — see
+  // `getLiveSchedule`. No overlap with the above: derive only builds finalized
+  // seasons and this is the one being played.
+  const upcoming = (await getLiveSchedule()).map((g) => g.id);
+  return [...new Set([...played, ...upcoming])].map((id) => ({ id }));
 }
 
 const KIND_LABEL: Record<Meeting["kind"], string> = {
@@ -63,7 +76,14 @@ const KIND_LABEL: Record<Meeting["kind"], string> = {
 export default async function MatchupPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const game = getAllMeetings().find((m) => m.id === id);
-  if (!game) notFound();
+  // Not played yet: a preview rather than a report. Everything below this line
+  // describes a finished game — a winner, a margin, lineups — and none of it
+  // exists for a fixture.
+  if (!game) {
+    const fixture = (await getLiveSchedule()).find((g) => g.id === id);
+    if (fixture) return <UpcomingMatchupPage fixture={fixture} />;
+    notFound();
+  }
 
   const coverage = weeklyCoverage();
   const owners = getOwnerMap();
@@ -684,5 +704,136 @@ function Lineup({
         </details>
       ) : null}
     </Panel>
+  );
+}
+
+/**
+ * A fixture the season has not reached yet.
+ *
+ * SHARES THE ROUTE WITH THE REPORT ABOVE, deliberately: it is the same game, and
+ * a link written before kickoff should still resolve after it. The page simply
+ * changes state when the result exists — this version disappears the moment the
+ * season is archived and `getAllMeetings()` starts answering for the id.
+ *
+ * The server half is what does not move: who is playing, and every previous
+ * meeting between them. Form and records come from the live layer, since a
+ * season in progress has nothing archived to read.
+ */
+async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
+  const owners = getOwnerMap();
+  const name = (slug: string) => owners.get(slug)?.name ?? slug;
+  const firstName = (slug: string) => owners.get(slug)?.firstName ?? name(slug);
+
+  const series = getMeetings(fixture.a, fixture.b);
+  let w = 0, l = 0, t = 0;
+  for (const g of series) {
+    if (g.a.points === g.b.points) t++;
+    else if (g.a.points > g.b.points) w++;
+    else l++;
+  }
+  /** "Jake leads 5-4", from A's point of view — the same phrasing the strip uses. */
+  const seriesLine =
+    !series.length
+      ? "First meeting"
+      : w === l
+        ? `All square at ${w}-${l}${t ? `-${t}` : ""}`
+        : `${firstName(w > l ? fixture.a : fixture.b)} leads ${Math.max(w, l)}-${Math.min(w, l)}${
+            t ? `-${t}` : ""
+          }`;
+
+  const pairHref = `/h2h/${[fixture.a, fixture.b].sort().join("-vs-")}/`;
+
+  return (
+    <div className="space-y-5 sm:space-y-6">
+      <div>
+        <BackLink
+          fallback={{ href: `/history/${fixture.season}/`, label: `${fixture.season} Season` }}
+        />
+        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            {fixture.season} · Week {fixture.week}
+          </h1>
+          {/* Says what the page IS, because it looks like a matchup page and a
+              reader arriving from a link needs to know there is no result here. */}
+          <span className="rounded-full border border-accent-dim px-2.5 py-1 text-[11px] font-semibold tracking-wide text-accent">
+            PREVIEW
+          </span>
+        </div>
+        <p className="mt-1 text-sm text-chalk-500">
+          {seriesLine} ·{" "}
+          <Link href={pairHref} className="hover:text-accent">
+            head to head
+          </Link>
+          {" · "}
+          <Link href={`/history/${fixture.season}/`} className="hover:text-accent">
+            {fixture.season} season
+          </Link>
+        </p>
+      </div>
+
+      <MatchupPreview
+        refBySeason={getLeagueRefs()}
+        initial={await getLiveSeason()}
+        userIdToSlug={getUserIdToSlug()}
+        season={fixture.season}
+        week={fixture.week}
+        a={fixture.a}
+        b={fixture.b}
+        ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
+        seasonWeeks={seasonWeekCount()}
+      />
+
+      {series.length ? (
+        <Panel>
+          <PanelHeader
+            title="Previous meetings"
+            meta={`${series.length} played`}
+            href={pairHref}
+            hrefLabel="Full head-to-head"
+          />
+          <div className="divide-y divide-ink-700">
+            {series.slice(0, 8).map((g) => {
+              const winner =
+                g.a.points === g.b.points ? null : g.a.points > g.b.points ? g.a : g.b;
+              return (
+                <Link
+                  key={g.id}
+                  href={`/matchups/${g.id}/`}
+                  className="flex items-baseline gap-3 px-4 py-2.5 transition-colors hover:bg-ink-700/40 sm:px-5"
+                >
+                  <span className="tabular w-24 shrink-0 text-[11px] text-chalk-600">
+                    {g.season} · Wk {g.week ?? "—"}
+                  </span>
+                  <span className="min-w-0 flex-1 truncate text-sm">
+                    {winner ? (
+                      <>
+                        <span data-owner={winner.ownerSlug} className="font-semibold text-chalk-200">
+                          {name(winner.ownerSlug)}
+                        </span>
+                        <span className="text-chalk-600"> beat </span>
+                        <span
+                          data-owner={
+                            winner === g.a ? g.b.ownerSlug : g.a.ownerSlug
+                          }
+                          className="text-chalk-500"
+                        >
+                          {name(winner === g.a ? g.b.ownerSlug : g.a.ownerSlug)}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-chalk-400">Tied</span>
+                    )}
+                  </span>
+                  <span className="tabular shrink-0 text-sm text-chalk-400">
+                    {fmt.pts1(Math.max(g.a.points, g.b.points))} –{" "}
+                    {fmt.pts1(Math.min(g.a.points, g.b.points))}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </Panel>
+      ) : null}
+    </div>
   );
 }

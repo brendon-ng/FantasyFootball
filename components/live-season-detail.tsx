@@ -7,6 +7,7 @@ import { MatchupCards, type H2HRecord } from "@/components/matchup-cards";
 import { EmptyState, Panel, PanelHeader, fmt } from "@/components/ui";
 import type { RecordThresholds } from "@/lib/record-marks";
 import { useLiveDraft, useLiveSeason, useSeasonGames } from "@/lib/live";
+import { meetingId } from "@/lib/meeting";
 import type { LeagueRef } from "@/lib/league-ref";
 import { PHASE_LABEL, resolvePhase } from "@/lib/phase";
 import { LiveRosters } from "@/components/live-rosters";
@@ -64,6 +65,8 @@ export interface LiveSeasonDetailProps {
   h2h: Record<string, Record<string, H2HRecord>>;
   /** Newest season with derived data, so matchup pages exist at or below it. */
   archivedThrough: number;
+  /** Fixture ids the build generated a preview page for. See `MatchupCards`. */
+  upcomingIds: string[];
   /** The baked player index, for naming and linking live rosters. */
   players: Record<string, PlayerMeta>;
   /** Rendered between the standings grid and the matchup list. */
@@ -113,6 +116,7 @@ export function LiveSeasonDetail({
   thresholds,
   h2h,
   archivedThrough,
+  upcomingIds,
   players,
   children,
   footer,
@@ -140,6 +144,7 @@ export function LiveSeasonDetail({
   const games = useSeasonGames(refBySeason[String(season)] ?? null, seasonWeeks);
   /** Only for marking and opening the week being played. */
   const currentWeek = live?.week ?? 0;
+  const upcoming = new Set(upcomingIds);
   const slugOf = (rosterId: number) =>
     live?.teams.find((t) => t.rosterId === rosterId)?.ownerSlug ?? `roster-${rosterId}`;
   const weeks = Object.keys(games)
@@ -246,6 +251,7 @@ export function LiveSeasonDetail({
               thresholds={thresholds}
               h2h={h2h}
               archivedThrough={archivedThrough}
+              upcomingIds={upcomingIds}
               layout="list"
             />
           ) : (
@@ -296,8 +302,16 @@ export function LiveSeasonDetail({
                     {wk.map((g) => {
                       const [a, b] = g.sides;
                       if (!a || !b) return null;
-                      return (
-                        <div key={g.matchupId} className="bg-ink-850 px-4 py-2.5">
+                      // Same rule as the cards: link only where the build made a
+                      // page. A finished season is not rendered by this component,
+                      // so the preview pages are the only ones in play.
+                      const id = meetingId(season, week, slugOf(a.rosterId), slugOf(b.rosterId));
+                      const linked = upcoming.has(id);
+                      const cls = `block bg-ink-850 px-4 py-2.5${
+                        linked ? " transition-colors hover:bg-ink-700/50" : ""
+                      }`;
+                      const rows = (
+                        <>
                           {[a, b].map((side) => {
                             const other = side === a ? b : a;
                             return (
@@ -324,6 +338,15 @@ export function LiveSeasonDetail({
                               </div>
                             );
                           })}
+                        </>
+                      );
+                      return linked ? (
+                        <Link key={g.matchupId} href={`/matchups/${id}/`} className={cls}>
+                          {rows}
+                        </Link>
+                      ) : (
+                        <div key={g.matchupId} className={cls}>
+                          {rows}
                         </div>
                       );
                     })}

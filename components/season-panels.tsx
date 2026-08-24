@@ -56,6 +56,7 @@ export function SeasonPanels({
   fallbackSeason,
   lastSeasonTiles,
   h2h,
+  upcomingIds,
   children,
 }: {
   initial: LiveSeason | null;
@@ -78,6 +79,8 @@ export function SeasonPanels({
   lastSeasonTiles?: React.ReactNode;
   /** All-time head-to-head, owner -> opponent -> record. */
   h2h: Record<string, Record<string, H2HRecord>>;
+  /** Fixture ids the build generated a preview page for. See `MatchupCards`. */
+  upcomingIds?: string[];
   /**
    * Rendered between the header and the panels.
    *
@@ -144,6 +147,7 @@ export function SeasonPanels({
               thresholds={thresholds}
               h2h={h2h}
               archivedThrough={lastSeason?.season ?? 0}
+              upcomingIds={upcomingIds}
             />
         ) : (
           lastSeasonTiles

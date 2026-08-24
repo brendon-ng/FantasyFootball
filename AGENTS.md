@@ -392,15 +392,40 @@ is.
 The page is reachable from the home panel only; `/history/` still lists finished
 seasons alone, since that page is a record of what the league has completed.
 
-### A LIVE MATCHUP HAS NO PAGE TO LINK TO
+### A matchup that has not been played gets a page too
 
-`/matchups/<id>/` is generated from DERIVED data, so no game in the season being
-played has a page until it is archived — zero exist for 2026. The home strip
-linked every card to one anyway, which was a 404 per card, and the in-progress
-season's matchup list would have been the same. Both now link only when
-`live.season <= archivedThrough`, which is false all season, returns to true on
-its own once the season is archived, and is ALREADY true under `?mockPhase=`,
-which replays a finished season.
+`/matchups/<id>/` serves two states off one route, the same trick
+`/history/<season>/` uses. A finished game renders the report it always did; a
+fixture the season has not reached renders a PREVIEW. Same id either way, so a
+link written before kickoff still resolves after it, and the preview disappears
+on its own once the season is archived and `getAllMeetings()` answers for the id.
+
+WHAT A PREVIEW CAN HONESTLY SAY is the design constraint. There is no winner, no
+margin and no lineup, so it shows form instead: both records, points per game,
+the last five results as W/L chips, a week-by-week table of the season so far,
+and every previous meeting. NO PROJECTED SCORES, though both providers publish
+one — everything else on this site is a fact that happened, and a number that is
+wrong every other week would be the only thing here allowed to be.
+
+It doubles as the LIVE page: a week in progress is the same layout with points
+on it, appearing on the same rule the home strip uses.
+
+`getLiveSchedule()` in lib/data.ts is what makes the pages exist — the fixture
+list for the season being played, fetched at BUILD time, since derive only builds
+finalized seasons and nothing commits a schedule.
+
+THE PAGE SET THEREFORE DEPENDS ON A NETWORK CALL, the only thing here that does.
+A provider unreachable during a build simply emits no preview pages that time and
+they return on the next one. Nothing links to a missing page, because THE SAME
+LIST IS HANDED TO THE COMPONENTS THAT DRAW THE LINKS — `upcomingIds` on
+`MatchupCards` and the season page's matchup list. Inferring "it is this season,
+so a page exists" would 404 exactly when the build had failed to fetch, and would
+also miss a playoff week added to the schedule since. The residual cost is a
+shared URL 404ing until the next build.
+
+Only a league whose DRAFT HAS RUN has fixtures: Sleeper returns no matchup
+entries before it, so apartment-401 gets 70 preview pages and the two Sleeper
+leagues get none until they draft.
 
 ### Previewing a phase
 

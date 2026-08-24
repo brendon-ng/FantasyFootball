@@ -1171,7 +1171,94 @@ export type { LiveMatchup, LiveSeason, LiveTeam } from "./types.ts";
  * Never throws: a Sleeper outage during a scheduled rebuild should ship a site
  * with history intact and the live panel hidden, not fail the deploy.
  */
-export async function getLiveSeason(): Promise<LiveSeason | null> {
+/**
+ * How many weeks the season runs to — the regular season plus however many
+ * playoff rounds the league plays, taken from the last FINISHED season.
+ *
+ * 17 is the NFL's own ceiling and the fallback for a league with nothing
+ * finished yet. One definition, because the season page, the schedule below and
+ * the matchup pages must all agree about how long a year is.
+ */
+export const seasonWeekCount = once((): number => {
+  const last = getSeasons()
+    .filter((s) => s.finalized)
+    .sort((a, b) => b.season - a.season)[0];
+  if (!last) return 17;
+  const weeks = getMatchupHistory()
+    .filter((m) => m.season === last.season)
+    .map((m) => m.week);
+  return Math.max(last.regularSeasonWeeks, ...weeks, 0) || 17;
+});
+
+/** One fixture in the season being played, whether or not it has been played. */
+export interface ScheduledGame {
+  season: number;
+  week: number;
+  /** Owner slugs, in the order the provider listed them. */
+  a: string;
+  b: string;
+  /** `meetingId`, so it matches the matchup page's route and every link to it. */
+  id: string;
+}
+
+/**
+ * The in-progress season's WHOLE fixture list, fetched at build time.
+ *
+ * This is what lets a game that has not been played have a page: derive only
+ * builds finalized seasons, so without it `/matchups/<id>/` exists for history
+ * and nothing else, and every link to this week's games is a 404.
+ *
+ * THE PAGE SET THEREFORE DEPENDS ON A NETWORK CALL, which is worth being
+ * clear-eyed about — it is the only thing here that does. If a provider is
+ * unreachable during a build, the upcoming matchup pages are simply not emitted
+ * that time round and reappear on the next one. Nothing links to a missing page,
+ * because the same list is handed to the components that draw the links; the
+ * cost is a shared URL 404ing until the next build rather than a broken site.
+ *
+ * Memoised, since several pages ask for it in one build.
+ */
+let schedulePromise: Promise<ScheduledGame[]> | null = null;
+export function getLiveSchedule(): Promise<ScheduledGame[]> {
+  schedulePromise ??= (async () => {
+    try {
+      const live = await getLiveSeason();
+      if (!live || live.unavailable || !live.teams.length) return [];
+      const ref = getLeagueRefs()[String(live.season)];
+      const provider = ref ? LIVE_PROVIDERS[ref.provider] : null;
+      if (!ref || !provider) return [];
+
+      const slugOf = new Map(live.teams.map((t) => [t.rosterId, t.ownerSlug]));
+      const byWeek = await provider.seasonGames(ref.id, live.season, seasonWeekCount());
+
+      const out: ScheduledGame[] = [];
+      for (const [week, games] of Object.entries(byWeek)) {
+        for (const g of games) {
+          const [x, y] = g.sides;
+          const a = x && slugOf.get(x.rosterId);
+          const b = y && slugOf.get(y.rosterId);
+          // A side whose roster is not in the standings cannot be named, and an
+          // unnamed side has no id — skip rather than emit `roster-3`.
+          if (!a || !b) continue;
+          out.push({ season: live.season, week: Number(week), a, b, id: meetingId(live.season, Number(week), a, b) });
+        }
+      }
+      return out;
+    } catch {
+      // Same rule as `getLiveSeason`: a third party being down must not fail a build.
+      return [];
+    }
+  })();
+  return schedulePromise;
+}
+
+/** Memoised across the build — several pages ask, and it is a network call. */
+let livePromise: Promise<LiveSeason | null> | null = null;
+export function getLiveSeason(): Promise<LiveSeason | null> {
+  livePromise ??= loadLiveSeason();
+  return livePromise;
+}
+
+async function loadLiveSeason(): Promise<LiveSeason | null> {
   const empty = (season: number): LiveSeason => ({
     season,
     week: 0,
