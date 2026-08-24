@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { BackLink } from "@/components/back-link";
 import { TradeList } from "@/components/trade-list";
+import { seriesRecord } from "@/lib/series";
 
 import {
   Col,
@@ -142,6 +143,7 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
   const rec = (x: { w: number; l: number; t: number }) =>
     x.t ? `${x.w}-${x.l}-${x.t}` : `${x.w}-${x.l}`;
   const avg = (total: number, n: number) => (n ? (total / n).toFixed(1) : "—");
+  const record = seriesRecord(games, a, b, name);
 
   return (
     <div className="space-y-5 sm:space-y-6">
@@ -164,12 +166,11 @@ export default async function H2HPage({ params }: { params: Promise<{ pair: stri
       <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
         <Stat
           label="All-time series"
-          value={rec(overall)}
-          sub={
-            overall.w === overall.l
-              ? "Dead even"
-              : `${owners.get(overall.w > overall.l ? a : b)?.firstName} leads`
-          }
+            /* LEADER FIRST AND NAMED. `rec(overall)` is from A's point of view,
+               which is whoever the URL happens to list first — so the headline
+               number read "3-6" for the player who is winning. See `seriesRecord`. */
+            value={record.value}
+            sub={record.sub}
           tone="accent"
         />
         <Stat label="Matchups" value={overall.n} sub="regular season + postseason" />

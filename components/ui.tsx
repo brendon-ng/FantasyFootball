@@ -87,16 +87,23 @@ export function Stat({
   value,
   sub,
   tone = "default",
+  href,
 }: {
   label: string;
   value: ReactNode;
   sub?: ReactNode;
   tone?: "default" | "accent" | "gold";
+  /** Makes the WHOLE tile a link. A number that points somewhere should be
+   *  clickable across its own box, not just on the digits. */
+  href?: string;
 }) {
   const toneClass =
     tone === "accent" ? "text-accent" : tone === "gold" ? "text-gold" : "text-chalk-100";
-  return (
-    <div className="rounded-lg border border-ink-600 bg-ink-850 px-3 py-3">
+  const cls = `block rounded-lg border border-ink-600 bg-ink-850 px-3 py-3${
+    href ? " transition-colors hover:border-accent-dim" : ""
+  }`;
+  const body = (
+    <>
       <div className="eyebrow mb-1.5 text-[10px]">{label}</div>
       <div
         // A gold or accent tile already encodes something; identity must not
@@ -107,7 +114,14 @@ export function Stat({
         {value}
       </div>
       {sub ? <div className="mt-1 text-[11px] text-chalk-600">{sub}</div> : null}
-    </div>
+    </>
+  );
+  return href ? (
+    <Link href={href} className={cls}>
+      {body}
+    </Link>
+  ) : (
+    <div className={cls}>{body}</div>
   );
 }
 

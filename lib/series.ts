@@ -56,6 +56,31 @@ export function seriesStreak(games: Meeting[]): SeriesStreak {
 }
 
 /**
+ * The longest run by either owner anywhere in the series.
+ *
+ * Direction does not matter — a run is the same length read from either end — so
+ * this works on `getMeetings`' newest-first order without reversing it. A TIE
+ * BREAKS A RUN, the same rule `seriesStreak` uses for the current one.
+ */
+export function longestStreak(games: Meeting[]): SeriesStreak {
+  let best: SeriesStreak = { slug: null, run: 0 };
+  let slug: string | null = null;
+  let run = 0;
+  for (const g of games) {
+    if (g.a.points === g.b.points) {
+      slug = null;
+      run = 0;
+      continue;
+    }
+    const winner = g.a.points > g.b.points ? g.a.ownerSlug : g.b.ownerSlug;
+    run = winner === slug ? run + 1 : 1;
+    slug = winner;
+    if (run > best.run) best = { slug: winner, run };
+  }
+  return best;
+}
+
+/**
  * "Jake leads 5-4", "All square at 3-3", "First meeting".
  *
  * ONE PHRASING, because this shows up on the home strip, the preview header and
@@ -94,4 +119,36 @@ export function streakLine(
   return tense === "past"
     ? `${who} had won ${streak.run} straight`
     : `${who} has won ${streak.run} straight`;
+}
+
+/**
+ * A head-to-head record written LEADER FIRST, and who leads.
+ *
+ * "6-3, Eric Wong leads" rather than "3-6, Brendon Ng perspective". A bare pair
+ * of numbers has to be anchored to somebody, and anchoring it to whoever the URL
+ * happened to name first makes the reader work out which of them is winning —
+ * on a page where that is the single thing being asked. Putting the bigger number
+ * first and naming the leader says it outright, and reads the same from either
+ * side of the fixture.
+ *
+ * Ties keep their third number, still leader first: "6-3-1".
+ */
+export function seriesRecord(
+  games: Meeting[],
+  a: string,
+  b: string,
+  nameOf: (slug: string) => string,
+): { value: string; sub: string | undefined; leader: string | null } {
+  const { wins, losses, ties, played } = seriesTally(games);
+  if (!played) return { value: "First meeting", sub: undefined, leader: null };
+  const suffix = ties ? `-${ties}` : "";
+  if (wins === losses) {
+    return { value: `${wins}-${losses}${suffix}`, sub: "Dead even", leader: null };
+  }
+  const leader = wins > losses ? a : b;
+  return {
+    value: `${Math.max(wins, losses)}-${Math.min(wins, losses)}${suffix}`,
+    sub: `${nameOf(leader)} leads`,
+    leader,
+  };
 }

@@ -3,7 +3,14 @@ import { notFound } from "next/navigation";
 
 import { MatchupPreview } from "@/components/matchup-preview";
 import { SeriesPanel } from "@/components/series-panel";
-import { seriesLine, seriesStreak, seriesTally, streakLine } from "@/lib/series";
+import {
+  longestStreak,
+  seriesLine,
+  seriesRecord,
+  seriesStreak,
+  seriesTally,
+  streakLine,
+} from "@/lib/series";
 
 import { BackLink } from "@/components/back-link";
 
@@ -100,11 +107,9 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   // Series context: every other meeting between these two, so this game can be
   // placed in the rivalry rather than shown in isolation.
   const series = getMeetings(game.a.ownerSlug, game.b.ownerSlug);
-  const overall = seriesTally(series);
   const before = series.filter(
     (g) => g.season < game.season || (g.season === game.season && (g.week ?? 0) < (game.week ?? 0)),
   );
-  const prior = seriesTally(before);
 
   /**
    * The run one of them was on WALKING INTO this game.
@@ -121,6 +126,10 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   // Past tense: this describes what somebody carried INTO a game that has since
   // been played. The preview says the same thing in the present.
   const priorStreak = streakLine(seriesStreak(before), firstName, "past");
+  // Leader first and named, so a bare "3-6" never leaves the reader working out
+  // which of the two names above it the numbers belong to.
+  const priorRecord = seriesRecord(before, game.a.ownerSlug, game.b.ownerSlug, name);
+  const overallRecord = seriesRecord(series, game.a.ownerSlug, game.b.ownerSlug, name);
   const pairHref = `/h2h/${[game.a.ownerSlug, game.b.ownerSlug].sort().join("-vs-")}/`;
 
   // Any record-book list this game appears in.
@@ -343,15 +352,17 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
         <Stat label="Combined" value={fmt.pts1(game.a.points + game.b.points)} />
         <Stat
           label="Series before this"
-            value={prior.played === 0 ? "First meeting" : `${prior.wins}-${prior.losses}`}
-            sub={
-              priorStreak ?? (prior.played ? `${name(game.a.ownerSlug)} perspective` : undefined)
-            }
+            value={priorRecord.value}
+            sub={priorStreak ?? priorRecord.sub}
         />
         <Stat
           label="Series all-time"
-          value={`${overall.wins}-${overall.losses}${overall.ties ? `-${overall.ties}` : ""}`}
-          sub={`${series.length} meetings`}
+            value={overallRecord.value}
+            sub={
+              overallRecord.sub
+                ? `${overallRecord.sub} · ${series.length} meetings`
+                : `${series.length} meetings`
+            }
         />
       </div>
 
@@ -624,8 +635,21 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
   const tally = seriesTally(series);
   const streak = seriesStreak(series);
   // PRESENT tense: nobody has walked into this game yet, so the run is live.
-  const streakText = streakLine(streak, firstName, "present");
+  const longest = longestStreak(series);
+  /**
+   * THE LONGEST RUN IN THE RIVALRY, not a restatement of the current one.
+   * "Brendon won the last one" is already what the value above says; the record
+   * to beat is the thing a reader does not know. Suppressed when the current run
+   * IS the record, where naming it twice reads as a mistake.
+   */
+  const longestText =
+    longest.slug && longest.run
+      ? longest.slug === streak.slug && longest.run === streak.run
+        ? "Longest of the series"
+        : `Longest ${firstName(longest.slug)} W${longest.run}`
+      : undefined;
   const headline = seriesLine(series, fixture.a, fixture.b, firstName);
+  const record = seriesRecord(series, fixture.a, fixture.b, name);
   const last = series[0];
 
   const pairHref = `/h2h/${[fixture.a, fixture.b].sort().join("-vs-")}/`;
@@ -663,15 +687,11 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
           same two numbers as "Series before this"; here they are the headline,
           because there is no score to lead with. */}
       <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-        <Stat
-          label="Head to head"
-          value={tally.played === 0 ? "First meeting" : `${tally.wins}-${tally.losses}`}
-          sub={tally.played ? `${name(fixture.a)} perspective` : undefined}
-        />
+        <Stat label="Head to head" value={record.value} sub={record.sub} />
         <Stat
           label="Streak"
-          value={streak.run ? `${firstName(streak.slug!)} ×${streak.run}` : "\u2014"}
-          sub={streakText ?? (tally.played ? "Last one was a tie" : undefined)}
+          value={streak.run ? `${firstName(streak.slug!)} W${streak.run}` : "\u2014"}
+          sub={longestText ?? (tally.played ? "Last one was a tie" : undefined)}
           tone={streak.run >= 3 ? "accent" : "default"}
         />
         <Stat
@@ -684,6 +704,7 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
               : "\u2014"
           }
           sub={last ? `${last.season}${last.week ? ` wk${last.week}` : ""}` : undefined}
+          href={last ? `/matchups/${last.id}/` : undefined}
         />
       </div>
 

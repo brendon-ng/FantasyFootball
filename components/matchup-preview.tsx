@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { EmptyState, Panel, PanelHeader, fmt } from "@/components/ui";
+import { Panel, fmt } from "@/components/ui";
 import { useLiveSeason, useSeasonGames } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
 import type { LiveSeason, LiveTeam } from "@/lib/types";
@@ -170,7 +170,7 @@ export function MatchupPreview({
                 </div>
                 {/* LAST FIVE, NEWEST LAST, so the row reads left to right the way
                     the season ran. Letters rather than scores: this is shape at a
-                    glance, and the week-by-week detail is in the table below. */}
+                    glance, and the week-by-week detail is one tap away below. */}
                 {f.length ? (
                   <div className="mt-3 flex items-center gap-1">
                     {f.slice(-5).map((x) => (
@@ -190,76 +190,78 @@ export function MatchupPreview({
                     ))}
                   </div>
                 ) : null}
+
+                {/* COLLAPSED BY DEFAULT. Two of these open at once is most of a
+                    screen, and the cards exist to be compared at a glance — the
+                    record, the average and the five chips already say the shape.
+                    This is for when that prompts a question. */}
+                {f.length ? (
+                  <details className="group mt-3 border-t border-ink-700 pt-2.5">
+                    <summary className="flex cursor-pointer list-none items-center justify-between text-[11px] uppercase tracking-wide text-chalk-600 transition-colors hover:text-chalk-400">
+                      <span>
+                        Season so far · {f.length} game{f.length === 1 ? "" : "s"}
+                      </span>
+                      <span aria-hidden className="transition-transform group-open:rotate-90">
+                        ▸
+                      </span>
+                    </summary>
+                    <ol className="mt-2 space-y-1">
+                      {f.map((x) => (
+                        <li
+                          key={x.week}
+                          className="flex items-baseline gap-2 text-[13px] tabular"
+                        >
+                          <span className="w-8 shrink-0 text-chalk-600">Wk{x.week}</span>
+                          <span
+                            className={`w-4 shrink-0 font-bold ${
+                              x.result === "W"
+                                ? "text-accent"
+                                : x.result === "L"
+                                  ? "text-loss"
+                                  : "text-chalk-500"
+                            }`}
+                          >
+                            {x.result}
+                          </span>
+                          <span className="shrink-0 text-chalk-300">
+                            {fmt.pts1(x.points)}
+                            <span className="text-chalk-600"> – {fmt.pts1(x.against)}</span>
+                          </span>
+                          {/* THE OTHER TEAM IN THIS FIXTURE IS WORTH MARKING: a
+                              row against them is not just form, it is the last
+                              time these two met, and it is the most relevant
+                              line in the drawer. */}
+                          {x.opponent ? (
+                            <span
+                              className={`min-w-0 truncate text-[11px] ${
+                                x.opponent === (slug === a ? b : a)
+                                  ? "font-semibold text-me"
+                                  : "text-chalk-600"
+                              }`}
+                            >
+                              {x.opponent === (slug === a ? b : a) ? "vs " : ""}
+                              {name(x.opponent).split(" ")[0]}
+                            </span>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ol>
+                  </details>
+                ) : null}
               </div>
             </Panel>
           );
         })}
       </div>
 
-      <Panel>
-        <PanelHeader
-          title="This season"
-          meta={played ? `through week ${week - 1}` : undefined}
-        />
-        {played ? (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm max-sm:min-w-max">
-              <thead>
-                <tr className="border-b border-ink-600">
-                  <th className="eyebrow px-3 py-2 text-left">Wk</th>
-                  {[a, b].map((slug) => (
-                    <th key={slug} className="eyebrow px-3 py-2 text-right">
-                      {label(slug)}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {Array.from({ length: week - 1 }, (_, i) => i + 1).map((wk) => {
-                  const rowA = formA.find((x) => x.week === wk);
-                  const rowB = formB.find((x) => x.week === wk);
-                  if (!rowA && !rowB) return null;
-                  return (
-                    <tr key={wk} className="border-b border-ink-700 last:border-0">
-                      <td className="tabular px-3 py-2 text-chalk-500">{wk}</td>
-                      {[rowA, rowB].map((r, i) => (
-                        <td key={i} className="px-3 py-2 text-right">
-                          {r ? (
-                            <span
-                              className={
-                                r.result === "W"
-                                  ? "text-accent"
-                                  : r.result === "L"
-                                    ? "text-chalk-500"
-                                    : "text-chalk-400"
-                              }
-                            >
-                              <span className="tabular font-medium">{fmt.pts1(r.points)}</span>
-                              <span className="tabular text-chalk-600">
-                                {" "}
-                                – {fmt.pts1(r.against)}
-                              </span>
-                              {r.opponent ? (
-                                <span className="ml-1.5 text-[11px] text-chalk-600">
-                                  {name(r.opponent).split(" ")[0]}
-                                </span>
-                              ) : null}
-                            </span>
-                          ) : (
-                            <span className="text-chalk-600">—</span>
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <EmptyState>Neither team has played yet — this is week {week}.</EmptyState>
-        )}
-      </Panel>
+      {/* The whole reason the drawer can be absent. Said once, under both cards,
+          rather than as an empty panel per team. */}
+      {played ? null : (
+        <p className="text-[13px] text-chalk-600">
+          Neither team has played yet — this is week {week}.
+        </p>
+      )}
+
     </>
   );
 }
