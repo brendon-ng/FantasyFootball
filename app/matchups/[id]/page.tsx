@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { MatchupPreview } from "@/components/matchup-preview";
+import { SeriesPanel } from "@/components/series-panel";
+import { seriesLine, seriesStreak, seriesTally, streakLine } from "@/lib/series";
 
 import { BackLink } from "@/components/back-link";
 
@@ -16,7 +18,6 @@ import {
   PanelHeader,
   Stat,
   fmt,
-  verboseKind,
 } from "@/components/ui";
 import type { BracketMatch } from "@/lib/types";
 import {
@@ -99,20 +100,11 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
   // Series context: every other meeting between these two, so this game can be
   // placed in the rivalry rather than shown in isolation.
   const series = getMeetings(game.a.ownerSlug, game.b.ownerSlug);
-  const tally = (subset: Meeting[]) => {
-    let w = 0, l = 0, t = 0;
-    for (const g of subset) {
-      if (g.a.points === g.b.points) t++;
-      else if (g.a.points > g.b.points) w++;
-      else l++;
-    }
-    return { w, l, t };
-  };
-  const overall = tally(series);
+  const overall = seriesTally(series);
   const before = series.filter(
     (g) => g.season < game.season || (g.season === game.season && (g.week ?? 0) < (game.week ?? 0)),
   );
-  const prior = tally(before);
+  const prior = seriesTally(before);
 
   /**
    * The run one of them was on WALKING INTO this game.
@@ -126,17 +118,9 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
    * reads as context for the record rather than a competing number.
    */
   const firstName = (slug: string) => owners.get(slug)?.firstName ?? name(slug);
-  const winnerOf = (g: (typeof series)[number]) =>
-    g.a.points === g.b.points ? null : g.a.points > g.b.points ? g.a.ownerSlug : g.b.ownerSlug;
-  let runSlug: string | null = null;
-  let run = 0;
-  for (const g of before) {
-    const w = winnerOf(g);
-    if (!w) break;
-    if (runSlug === null) runSlug = w;
-    else if (w !== runSlug) break;
-    run += 1;
-  }
+  // Past tense: this describes what somebody carried INTO a game that has since
+  // been played. The preview says the same thing in the present.
+  const priorStreak = streakLine(seriesStreak(before), firstName, "past");
   const pairHref = `/h2h/${[game.a.ownerSlug, game.b.ownerSlug].sort().join("-vs-")}/`;
 
   // Any record-book list this game appears in.
@@ -359,22 +343,14 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
         <Stat label="Combined" value={fmt.pts1(game.a.points + game.b.points)} />
         <Stat
           label="Series before this"
-          value={prior.w + prior.l + prior.t === 0 ? "First meeting" : `${prior.w}-${prior.l}`}
-          sub={
-            // "won 1 straight" is not a streak, it is the previous game. A run
-            // only reads as a run from two.
-            run >= 2
-              ? `${firstName(runSlug!)} had won ${run} straight`
-              : run === 1
-                ? `${firstName(runSlug!)} won the last one`
-                : prior.w + prior.l + prior.t
-                  ? `${name(game.a.ownerSlug)} perspective`
-                  : undefined
-          }
+            value={prior.played === 0 ? "First meeting" : `${prior.wins}-${prior.losses}`}
+            sub={
+              priorStreak ?? (prior.played ? `${name(game.a.ownerSlug)} perspective` : undefined)
+            }
         />
         <Stat
           label="Series all-time"
-          value={`${overall.w}-${overall.l}${overall.t ? `-${overall.t}` : ""}`}
+          value={`${overall.wins}-${overall.losses}${overall.ties ? `-${overall.ties}` : ""}`}
           sub={`${series.length} meetings`}
         />
       </div>
@@ -470,92 +446,12 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
         </Panel>
       ) : null}
 
-      <Panel>
-        <PanelHeader
-          title="The Series"
-          meta={`${series.length} meeting${series.length === 1 ? "" : "s"}`}
-          href={pairHref}
-          hrefLabel="Head to head"
-        />
-        <div className="divide-y divide-ink-700">
-          {series.map((g) => {
-              const gw = g.a.points === g.b.points ? null : g.a.points > g.b.points ? g.a : g.b;
-              // THIS game is in the list rather than cut from it, so the series
-              // reads as a sequence with a "you are here" instead of a run of
-              // games with a hole where the one you are looking at should be.
-              const here = g.id === game.id;
-              return (
-                <Link
-                  key={g.id}
-                  href={`/matchups/${g.id}/`}
-                  aria-current={here ? "page" : undefined}
-                  className={`flex items-center gap-3 px-4 py-2.5 transition-colors sm:px-5 ${
-                    here
-                      ? "border-l-2 border-l-accent bg-accent/[0.07]"
-                      : "hover:bg-ink-700/40"
-                  }`}
-                >
-                  {/* Below sm the postseason chip column is hidden, so the label
-                      rides under the date instead. sm:hidden keeps it from
-                      double-labelling once that column reappears. */}
-                  <span className="w-20 shrink-0 text-[11px] text-chalk-600">
-                    <span className="tabular">
-                      {g.season}
-                      {g.week ? ` wk${g.week}` : ""}
-                    </span>
-                    {g.kind !== "regular" ? (
-                      <span className="mt-0.5 block truncate text-[9px] uppercase tracking-wide text-chalk-500 sm:hidden">
-                        {verboseKind(matchupChip(g.label, g.kind))}
-                      </span>
-                    ) : null}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    {[g.a, g.b].map((s) => (
-                      <div
-                        key={s.ownerSlug}
-                        className={`truncate text-sm ${
-                          gw?.ownerSlug === s.ownerSlug
-                            ? "font-semibold text-chalk-100"
-                            : "text-chalk-500"
-                        }`}
-                      >
-                        <span data-owner={s.ownerSlug}>{name(s.ownerSlug)}</span>
-                      </div>
-                    ))}
-                  </div>
-                  {/* Badge left of the numbers, in a slot that is always there. */}
-                  <span className="hidden w-[92px] shrink-0 text-right sm:block">
-                    {g.kind !== "regular" ? (
-                      <span className="rounded border border-ink-500 px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-chalk-500">
-                        {matchupChip(g.label, g.kind)}
-                      </span>
-                    ) : null}
-                  </span>
-                  <div className="w-20 shrink-0 text-right">
-                    {[g.a, g.b].map((s) => (
-                      <div
-                        key={s.ownerSlug}
-                        className={`tabular text-sm ${
-                          gw?.ownerSlug === s.ownerSlug
-                            ? "font-semibold text-chalk-100"
-                            : "text-chalk-500"
-                        }`}
-                      >
-                        {fmt.pts(s.points)}
-                      </div>
-                    ))}
-                  </div>
-                  <span
-                    aria-hidden
-                    className={`shrink-0 text-[10px] ${here ? "text-accent" : "text-chalk-600"}`}
-                  >
-                    {here ? "\u25cf" : "\u2192"}
-                  </span>
-                </Link>
-              );
-            })}
-        </div>
-      </Panel>
+      <SeriesPanel
+        series={series}
+        currentId={game.id}
+        nameOf={name}
+        pairHref={pairHref}
+      />
     </div>
   );
 }
@@ -725,21 +621,12 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
   const firstName = (slug: string) => owners.get(slug)?.firstName ?? name(slug);
 
   const series = getMeetings(fixture.a, fixture.b);
-  let w = 0, l = 0, t = 0;
-  for (const g of series) {
-    if (g.a.points === g.b.points) t++;
-    else if (g.a.points > g.b.points) w++;
-    else l++;
-  }
-  /** "Jake leads 5-4", from A's point of view — the same phrasing the strip uses. */
-  const seriesLine =
-    !series.length
-      ? "First meeting"
-      : w === l
-        ? `All square at ${w}-${l}${t ? `-${t}` : ""}`
-        : `${firstName(w > l ? fixture.a : fixture.b)} leads ${Math.max(w, l)}-${Math.min(w, l)}${
-            t ? `-${t}` : ""
-          }`;
+  const tally = seriesTally(series);
+  const streak = seriesStreak(series);
+  // PRESENT tense: nobody has walked into this game yet, so the run is live.
+  const streakText = streakLine(streak, firstName, "present");
+  const headline = seriesLine(series, fixture.a, fixture.b, firstName);
+  const last = series[0];
 
   const pairHref = `/h2h/${[fixture.a, fixture.b].sort().join("-vs-")}/`;
 
@@ -760,7 +647,7 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
           </span>
         </div>
         <p className="mt-1 text-sm text-chalk-500">
-          {seriesLine} ·{" "}
+          {headline} ·{" "}
           <Link href={pairHref} className="hover:text-accent">
             head to head
           </Link>
@@ -769,6 +656,35 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
             {fixture.season} season
           </Link>
         </p>
+      </div>
+
+      {/* THE STATE OF THE RIVALRY AT KICKOFF, which is the one thing a preview
+          can say as confidently as a report can. The finished page carries the
+          same two numbers as "Series before this"; here they are the headline,
+          because there is no score to lead with. */}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+        <Stat
+          label="Head to head"
+          value={tally.played === 0 ? "First meeting" : `${tally.wins}-${tally.losses}`}
+          sub={tally.played ? `${name(fixture.a)} perspective` : undefined}
+        />
+        <Stat
+          label="Streak"
+          value={streak.run ? `${firstName(streak.slug!)} ×${streak.run}` : "\u2014"}
+          sub={streakText ?? (tally.played ? "Last one was a tie" : undefined)}
+          tone={streak.run >= 3 ? "accent" : "default"}
+        />
+        <Stat
+          label="Last meeting"
+          value={
+            last
+              ? `${fmt.pts1(Math.max(last.a.points, last.b.points))} \u2013 ${fmt.pts1(
+                  Math.min(last.a.points, last.b.points),
+                )}`
+              : "\u2014"
+          }
+          sub={last ? `${last.season}${last.week ? ` wk${last.week}` : ""}` : undefined}
+        />
       </div>
 
       <MatchupPreview
@@ -783,57 +699,7 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
         seasonWeeks={seasonWeekCount()}
       />
 
-      {series.length ? (
-        <Panel>
-          <PanelHeader
-            title="Previous meetings"
-            meta={`${series.length} played`}
-            href={pairHref}
-            hrefLabel="Full head-to-head"
-          />
-          <div className="divide-y divide-ink-700">
-            {series.slice(0, 8).map((g) => {
-              const winner =
-                g.a.points === g.b.points ? null : g.a.points > g.b.points ? g.a : g.b;
-              return (
-                <Link
-                  key={g.id}
-                  href={`/matchups/${g.id}/`}
-                  className="flex items-baseline gap-3 px-4 py-2.5 transition-colors hover:bg-ink-700/40 sm:px-5"
-                >
-                  <span className="tabular w-24 shrink-0 text-[11px] text-chalk-600">
-                    {g.season} · Wk {g.week ?? "—"}
-                  </span>
-                  <span className="min-w-0 flex-1 truncate text-sm">
-                    {winner ? (
-                      <>
-                        <span data-owner={winner.ownerSlug} className="font-semibold text-chalk-200">
-                          {name(winner.ownerSlug)}
-                        </span>
-                        <span className="text-chalk-600"> beat </span>
-                        <span
-                          data-owner={
-                            winner === g.a ? g.b.ownerSlug : g.a.ownerSlug
-                          }
-                          className="text-chalk-500"
-                        >
-                          {name(winner === g.a ? g.b.ownerSlug : g.a.ownerSlug)}
-                        </span>
-                      </>
-                    ) : (
-                      <span className="text-chalk-400">Tied</span>
-                    )}
-                  </span>
-                  <span className="tabular shrink-0 text-sm text-chalk-400">
-                    {fmt.pts1(Math.max(g.a.points, g.b.points))} –{" "}
-                    {fmt.pts1(Math.min(g.a.points, g.b.points))}
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </Panel>
-      ) : null}
+      <SeriesPanel series={series} nameOf={name} pairHref={pairHref} />
     </div>
   );
 }

@@ -410,6 +410,20 @@ wrong every other week would be the only thing here allowed to be.
 It doubles as the LIVE page: a week in progress is the same layout with points
 on it, appearing on the same rule the home strip uses.
 
+`SeriesPanel` IS ONE RENDERER FOR BOTH STATES, and `lib/series.ts` is the one set
+of numbers behind them. A finished game asks "the series BEFORE this" and a
+fixture asks "the series going INTO it" — the same question at different moments,
+and two implementations of it would eventually disagree about a tie. The current
+game stays IN the list with a "you are here" marker rather than being cut from
+it, so the sequence has no hole; a fixture has no row yet and simply passes no
+`currentId`.
+
+The preview leads with those numbers because it has no score to lead with: head
+to head, the live streak, and the last meeting. `streakLine` carries the tense —
+past on a finished game ("had won 3 straight"), present on a fixture ("has won 3
+straight") — and A RUN ONLY READS AS A RUN FROM TWO, so one win says "won the
+last one" instead.
+
 `getLiveSchedule()` in lib/data.ts is what makes the pages exist — the fixture
 list for the season being played, fetched at BUILD time, since derive only builds
 finalized seasons and nothing commits a schedule.
