@@ -48,6 +48,7 @@ export function SeasonPanels({
   refBySeason,
   ownerNames,
   userIdToSlug,
+  teamByPlayer,
   lastSeason,
   leaders,
   thresholds,
@@ -64,6 +65,8 @@ export function SeasonPanels({
   ownerNames: Record<string, string>;
   /** Sleeper user id -> slug. Needed to credit co-owners on a live roster. */
   userIdToSlug: Record<string, string>;
+  /** Sleeper player id -> NFL team; see `useLiveSeason`. */
+  teamByPlayer?: Record<string, string>;
   lastSeason: SeasonSummary | null;
   leaders: OwnerRecord[];
   thresholds: RecordThresholds;
@@ -90,7 +93,7 @@ export function SeasonPanels({
    */
   children?: React.ReactNode;
 }) {
-  const live = useLiveSeason(refBySeason, initial, userIdToSlug);
+  const live = useLiveSeason(refBySeason, initial, userIdToSlug, teamByPlayer);
   const draft = useLiveDraft(refBySeason[String(live?.season ?? fallbackSeason)] ?? null);
   const phase = resolvePhase({ live, draft: draft.data });
 

@@ -32,7 +32,7 @@ import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
 import type { LiveMatchup, LiveSeason } from "@/lib/types";
 
 import { espnProvider } from "./espn.ts";
-import { fetchNflWeek } from "./nfl-week.ts";
+import { fetchNflWeek, teamsSettled, type NflWeekState } from "./nfl-schedule.ts";
 import { sleeperProvider } from "./sleeper.ts";
 import type {
   LeagueMove,
@@ -277,6 +277,12 @@ export function useLiveSeason(
   initial: LiveSeason | null,
   /** Provider user id -> owner slug. Only co-owners need it; see `creditedSlugs`. */
   userIdToSlug: Record<string, string> = {},
+  /**
+   * Sleeper player id -> NFL team, from the baked index. Lets the Sleeper
+   * provider report which teams a side started, which is what settles a matchup
+   * on Sunday night rather than Tuesday. ESPN does not need it.
+   */
+  teamByPlayer?: Record<string, string>,
 ): LiveSeason | null {
   const [live, setLive] = useState<LiveSeason | null>(initial);
   const [replay, setReplay] = useState<Replay | null>(null);
@@ -337,6 +343,7 @@ export function useLiveSeason(
             const next = await provider.season(ref.id, st, {
               slugByRoster,
               userIdToSlug,
+              teamByPlayer,
             });
             if (cancelled) return;
             if (!next) continue;
@@ -355,6 +362,10 @@ export function useLiveSeason(
     return () => {
       cancelled = true;
     };
+  // `teamByPlayer` is a fresh object literal each render but its CONTENTS come
+  // from the build, so it never actually changes; listing it would refetch the
+  // whole live season on every render.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [providers, refBySeason, initial, replay, userIdToSlug]);
 
   return live;
@@ -422,17 +433,26 @@ export function LiveStatus({
 /**
  * Is a given matchup settled enough to state facts about its score?
  *
- * TWO TIERS, WHICHEVER LANDS FIRST. The platform's own answer arrives on
- * Tuesday with stat corrections applied; the NFL's scoreboard says the same
- * thing on Monday night, as soon as the last whistle goes. Neither can be true
- * before the games are played, so taking either is safe and taking the earlier
- * one is what a reader expects.
+ * FOUR TIERS, WHICHEVER LANDS FIRST. Each can only ever be late, never early, so
+ * taking the earliest is safe and taking the latest is needlessly coy:
  *
- * The per-matchup tier is finer than both and is preferred when a provider
- * offers it — see `LiveMatchup.final`.
+ *   this matchup's starters have all finished playing   Sunday night
+ *   every NFL game in the week is over                  Monday night
+ *   the platform has called this matchup                Tuesday
+ *   the platform has scored the whole week              Tuesday
  *
- * Returns a PREDICATE rather than a flag because the answer is per matchup,
- * even though one of its three inputs is not.
+ * THE FIRST TIER IS THE POINT OF THIS. Most matchups have nobody in the Monday
+ * night game, so their result is known on Sunday evening — a day and a half
+ * before `last_scored_leg` moves. See `lib/live/nfl-schedule.ts`.
+ *
+ * AN INCOMPLETE STARTER LIST IS NEVER SETTLED. `startedTeams` is short whenever a
+ * starter could not be resolved to an NFL team, and a short list is
+ * indistinguishable from one whose missing player is mid-game — so tier one only
+ * fires when BOTH sides reported teams, and otherwise falls through to the
+ * slower tiers rather than guessing.
+ *
+ * Returns a PREDICATE rather than a flag, because the answer is per matchup even
+ * though two of its inputs are not.
  */
 export function useMatchupSettled(
   live: LiveSeason | null,
@@ -445,21 +465,21 @@ export function useMatchupSettled(
   const scored = week > 0 && (live?.lastScoredLeg ?? 0) >= week;
 
   /**
-   * The answer, STAMPED WITH THE WEEK IT IS ABOUT.
+   * The week's games, STAMPED WITH THE WEEK THEY ARE ABOUT.
    *
-   * Carrying last week's `true` into this one would put badges on an unplayed
+   * Carrying last week's answer into this one would put chips on an unplayed
    * game — the exact failure this guards against — and clearing it in the effect
    * is a cascading render. Storing the key alongside makes a stale value
    * unreadable rather than relying on a reset arriving in time.
    */
-  const [slate, setSlate] = useState<{ key: string; final: boolean } | null>(null);
+  const [slate, setSlate] = useState<{ key: string; wk: NflWeekState } | null>(null);
   const key = `${season}:${week}`;
 
   /**
    * Only asked in the window where it can change the answer: before kickoff
    * there is nothing to settle, and once the platform has scored the week its
    * own marker is already sufficient. So a reader outside a live week never
-   * downloads the scoreboard at all.
+   * downloads the schedule at all.
    *
    * NEVER UNDER A PHASE MOCK. The mocks replay a FINISHED season, so the real
    * NFL clock says every one of their weeks ended months ago — consulting it
@@ -472,8 +492,8 @@ export function useMatchupSettled(
     if (!ask) return;
     let cancelled = false;
     fetchNflWeek(season, week)
-      .then((w) => {
-        if (!cancelled && w) setSlate({ key, final: w.final });
+      .then((wk) => {
+        if (!cancelled && wk) setSlate({ key, wk });
       })
       .catch(() => {});
     return () => {
@@ -481,17 +501,18 @@ export function useMatchupSettled(
     };
   }, [ask, key, season, week]);
 
-  const slateFinal = slate?.key === key && slate.final;
+  const wk = slate?.key === key ? slate.wk : null;
 
-  /**
-   * ANY TIER SAYING "SETTLED" WINS, and a `false` from one is never a veto.
-   *
-   * ESPN reports `final: false` all Monday night — its `winner` does not land
-   * until the matchup period closes the next morning — so treating its answer
-   * as authoritative would throw away the very immediacy the scoreboard was
-   * added for. Each tier can only ever be late, never early.
-   */
-  return (m: LiveMatchup) => m.final === true || scored || slateFinal;
+  return (m: LiveMatchup) => {
+    if (m.final === true || scored) return true;
+    if (!wk) return false;
+    if (wk.final) return true;
+    // Both sides, or neither: a matchup is only over when nobody on it is still
+    // playing, and one side's silence says nothing about the other's.
+    const a = teamsSettled(wk, m.a.startedTeams);
+    const b = teamsSettled(wk, m.b.startedTeams);
+    return a === true && b === true;
+  };
 }
 
 /**

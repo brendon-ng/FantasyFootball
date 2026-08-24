@@ -1331,6 +1331,26 @@ export async function getMeetingsToDate(a: string, b: string): Promise<Meeting[]
   return [...oriented, ...getMeetings(a, b)];
 }
 
+/**
+ * Sleeper player id -> current NFL team, narrowed to this league.
+ *
+ * Shipped to the browser so the Sleeper provider can say which NFL teams a side
+ * has STARTED, which is what lets a matchup settle on Sunday night rather than
+ * Tuesday — see `useMatchupSettled`. ESPN needs none of this; it puts the pro
+ * team on the roster entry itself.
+ *
+ * About 5KB a league. Players with no team (free agents, the retired) are left
+ * out rather than sent as null: an absent id and a null team mean the same thing
+ * to the caller, which is "cannot resolve this one".
+ */
+export const getPlayerTeams = once((): Record<string, string> => {
+  const out: Record<string, string> = {};
+  for (const [id, meta] of Object.entries(getPlayers())) {
+    if (meta.team) out[id] = meta.team;
+  }
+  return out;
+});
+
 /** Memoised across the build — several pages ask, and it is a network call. */
 let livePromise: Promise<LiveSeason | null> | null = null;
 export function getLiveSeason(): Promise<LiveSeason | null> {
@@ -1356,7 +1376,11 @@ async function loadLiveSeason(): Promise<LiveSeason | null> {
     const userIdToSlug = getUserIdToSlug();
     // No baked page exists yet, so the providers resolve owners the other way,
     // through `userIdToSlug`. See `primaryOf` in each of them.
-    const ctx = { slugByRoster: new Map<number, string>(), userIdToSlug };
+    const ctx = {
+      slugByRoster: new Map<number, string>(),
+      userIdToSlug,
+      teamByPlayer: getPlayerTeams(),
+    };
 
     // Only the services that could own the season being played, and each in its
     // own try — a third party being unreachable must not stop the league's real

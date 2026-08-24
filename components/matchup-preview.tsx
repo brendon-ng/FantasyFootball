@@ -31,6 +31,8 @@ export interface MatchupPreviewProps {
   refBySeason: Record<string, LeagueRef>;
   initial: LiveSeason | null;
   userIdToSlug: Record<string, string>;
+  /** Sleeper player id -> NFL team; see `useLiveSeason`. */
+  teamByPlayer?: Record<string, string>;
   season: number;
   week: number;
   /** Owner slugs, as the fixture lists them. */
@@ -54,6 +56,7 @@ export function MatchupPreview({
   refBySeason,
   initial,
   userIdToSlug,
+  teamByPlayer,
   season,
   week,
   a,
@@ -61,7 +64,7 @@ export function MatchupPreview({
   ownerNames,
   seasonWeeks,
 }: MatchupPreviewProps) {
-  const live = useLiveSeason(refBySeason, initial, userIdToSlug);
+  const live = useLiveSeason(refBySeason, initial, userIdToSlug, teamByPlayer);
   const games = useSeasonGames(refBySeason[String(season)] ?? null, seasonWeeks);
 
   const name = (slug: string) => ownerNames[slug] ?? slug;

@@ -569,10 +569,27 @@ export interface LiveTeam {
   starters: string[];
 }
 
+/** One side of a live matchup. */
+export interface LiveMatchupSide {
+  ownerSlug: string;
+  points: number;
+  /**
+   * NFL teams this side has STARTED, so a caller can ask whether their games are
+   * over — which settles a matchup hours before the platform does.
+   *
+   * UNDEFINED MEANS "COULD NOT WORK IT OUT", not "nobody". Benched players are
+   * excluded: a bench score changes nothing, so waiting on one would hold a
+   * decided matchup open. A starter whose team cannot be resolved leaves the
+   * list short, which is why an INCOMPLETE list must never be read as settled —
+   * see `useMatchupSettled`.
+   */
+  startedTeams?: string[];
+}
+
 export interface LiveMatchup {
   matchupId: number;
-  a: { ownerSlug: string; points: number };
-  b: { ownerSlug: string; points: number };
+  a: LiveMatchupSide;
+  b: LiveMatchupSide;
   /**
    * This ONE game is settled, whatever the rest of the week is doing.
    *

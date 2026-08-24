@@ -42,6 +42,8 @@ export interface LiveSeasonDetailProps {
   refBySeason: Record<string, LeagueRef>;
   initial: LiveSeason | null;
   userIdToSlug: Record<string, string>;
+  /** Sleeper player id -> NFL team; see `useLiveSeason`. */
+  teamByPlayer?: Record<string, string>;
   ownerNames: Record<string, string>;
   /**
    * How many teams make the playoffs, and how long the regular season is.
@@ -109,6 +111,7 @@ export function LiveSeasonDetail({
   refBySeason,
   initial,
   userIdToSlug,
+  teamByPlayer,
   ownerNames,
   playoffTeams,
   regularSeasonWeeks,
@@ -121,7 +124,7 @@ export function LiveSeasonDetail({
   children,
   footer,
 }: LiveSeasonDetailProps) {
-  const live = useLiveSeason(refBySeason, initial, userIdToSlug);
+  const live = useLiveSeason(refBySeason, initial, userIdToSlug, teamByPlayer);
   const draft = useLiveDraft(refBySeason[String(season)] ?? null);
   const phase = resolvePhase({ live, draft: draft.data });
 

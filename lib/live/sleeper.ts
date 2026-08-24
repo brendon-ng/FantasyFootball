@@ -65,6 +65,8 @@ interface RawMatchup {
   matchup_id: number | null;
   roster_id: number;
   points: number | null;
+  /** Player ids in lineup order; "0" is an empty slot. */
+  starters?: string[] | null;
 }
 
 interface RawTxn {
@@ -354,6 +356,32 @@ export const sleeperProvider: LiveProvider = {
     let matchups: LiveMatchup[] = [];
     if (inSeason || drafted) {
       const raw = await json<RawMatchup[]>(`${BASE}/league/${id}/matchups/${week}`, []);
+      /**
+       * NFL teams a side has started. Sleeper names starters by id and says
+       * nothing about who they play for, so this needs the baked player index —
+       * absent, the side reports none and the caller falls back to a later tier.
+       *
+       * ALL OR NOTHING. One unresolved starter and this reports UNDEFINED rather
+       * than a short list, because a short list is indistinguishable from a
+       * complete one and would settle the matchup while that player was still
+       * mid-game. The index goes stale for anyone who changes team, so this is
+       * not hypothetical: resolving a 2025 lineup against today's index finds
+       * five of nine.
+       *
+       * "0" IS AN EMPTY SLOT, not a player, and a bye is a real team with no
+       * game — `teamsSettled` handles that end.
+       */
+      const teamsOf = (starters: string[] | null | undefined): string[] | undefined => {
+        if (!ctx.teamByPlayer) return undefined;
+        const out = new Set<string>();
+        for (const pid of starters ?? []) {
+          if (!pid || pid === "0") continue;
+          const team = ctx.teamByPlayer[pid];
+          if (!team) return undefined;
+          out.add(team);
+        }
+        return out.size ? [...out] : undefined;
+      };
       const byId = new Map<number, RawMatchup[]>();
       for (const m of raw ?? []) {
         if (m.matchup_id == null) continue;
@@ -365,8 +393,16 @@ export const sleeperProvider: LiveProvider = {
         .filter(([, pair]) => pair.length === 2)
         .map(([matchupId, [x, y]]) => ({
           matchupId,
-          a: { ownerSlug: slugOf(x.roster_id), points: round2(x.points ?? 0) },
-          b: { ownerSlug: slugOf(y.roster_id), points: round2(y.points ?? 0) },
+          a: {
+            ownerSlug: slugOf(x.roster_id),
+            points: round2(x.points ?? 0),
+            startedTeams: teamsOf(x.starters),
+          },
+          b: {
+            ownerSlug: slugOf(y.roster_id),
+            points: round2(y.points ?? 0),
+            startedTeams: teamsOf(y.starters),
+          },
         }));
     }
 

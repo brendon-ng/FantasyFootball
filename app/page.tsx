@@ -16,6 +16,7 @@ import {
   getLiveSeason,
   getOwnerMap,
   getOwnerRecords,
+  getPlayerTeams,
   getPlayers,
   getRecords,
   getRecordThresholds,
@@ -98,6 +99,7 @@ export default async function HomePage() {
         refBySeason={getLeagueRefs()}
         ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
         userIdToSlug={getUserIdToSlug()}
+        teamByPlayer={getPlayerTeams()}
         lastSeason={lastSeason ?? null}
         leaders={leaders}
         thresholds={thresholds}

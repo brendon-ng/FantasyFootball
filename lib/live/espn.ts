@@ -86,6 +86,36 @@ interface EspnGameSide {
   teamId: number;
   totalPoints?: number;
   pointsByScoringPeriod?: Record<string, number>;
+  /**
+   * The lineup as it stands this week — what `mBoxscore` adds over
+   * `mMatchupScore`, for about 10KB gzipped. It is the only way to know which
+   * players are STARTED, and therefore which NFL games a matchup is waiting on.
+   */
+  rosterForCurrentScoringPeriod?: { entries?: EspnEntry[] } | null;
+}
+
+/** Bench and injured reserve. Their points do not count, so nor do their games. */
+const BENCH_SLOTS = new Set([20, 21]);
+
+/**
+ * NFL teams a side has started, for `LiveMatchupSide.startedTeams`.
+ *
+ * ALL OR NOTHING, like the Sleeper side: one starter whose pro team cannot be
+ * read makes this UNDEFINED rather than a short list, since a short list is
+ * indistinguishable from a complete one and would settle the matchup while that
+ * player was still mid-game.
+ */
+function startedTeams(side: EspnGameSide | undefined): string[] | undefined {
+  const entries = side?.rosterForCurrentScoringPeriod?.entries;
+  if (!entries?.length) return undefined;
+  const teams = new Set<string>();
+  for (const e of entries) {
+    if (BENCH_SLOTS.has(e.lineupSlotId)) continue;
+    const abbr = PRO_TEAM[e.playerPoolEntry?.player?.proTeamId ?? -1];
+    if (!abbr) return undefined;
+    teams.add(abbr);
+  }
+  return teams.size ? [...teams] : undefined;
 }
 
 interface EspnLeague {
@@ -455,7 +485,7 @@ export const espnProvider: LiveProvider = {
 
   async season(id, st: ProviderState, ctx: SeasonContext): Promise<LiveSeason | null> {
     const league = await get<EspnLeague>(
-      leagueUrl(id, st.season, ["mTeam", "mSettings", "mMatchupScore"]),
+      leagueUrl(id, st.season, ["mTeam", "mSettings", "mMatchupScore", "mBoxscore"]),
     );
     if (!league?.teams?.length) return null;
 
@@ -554,6 +584,7 @@ export const espnProvider: LiveProvider = {
         .map((g) => {
           const side = (s: EspnGameSide) => ({
             ownerSlug: slugOf(s.teamId),
+            startedTeams: startedTeams(s),
             // The WEEK's points, not the matchup's running total: a two-week
             // playoff game would otherwise show week 16 and 17 added together
             // while week 17 is still being played.

@@ -30,6 +30,7 @@ import {
   getPickHandoffs,
   getPickOutcomes,
   getTradeReturns,
+  getPlayerTeams,
   getPlayers,
   getPunishmentLows,
   getConfig,
@@ -600,6 +601,7 @@ async function InProgressSeasonPage({ season }: { season: number }) {
         refBySeason={getLeagueRefs()}
         initial={await getLiveSeason()}
         userIdToSlug={getUserIdToSlug()}
+        teamByPlayer={getPlayerTeams()}
         ownerNames={ownerNames}
         playoffTeams={playoffTeams}
         regularSeasonWeeks={last?.regularSeasonWeeks ?? null}

@@ -46,6 +46,7 @@ import {
   getLeagueRefs,
   getLiveSchedule,
   getLiveSeason,
+  getPlayerTeams,
   getUserIdToSlug,
   seasonWeekCount,
   type ScheduledGame,
@@ -722,6 +723,7 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
         refBySeason={getLeagueRefs()}
         initial={await getLiveSeason()}
         userIdToSlug={getUserIdToSlug()}
+        teamByPlayer={getPlayerTeams()}
         season={fixture.season}
         week={fixture.week}
         a={fixture.a}

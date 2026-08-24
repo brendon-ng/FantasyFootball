@@ -249,28 +249,62 @@ is unique across the season. Sleeper's `matchup_id` is already per game.
 
 ### When a game is settled enough to state facts about it
 
-Record badges, and the accent that marks a winner, are claims about a FINISHED
+Record chips, and the accent that marks a winner, are claims about a FINISHED
 game. `useMatchupSettled()` in `lib/live/index.tsx` decides, and it takes the
-EARLIEST of three tiers — each can only ever be late, never early, so any one
+EARLIEST of four tiers — each can only ever be late, never early, so any one
 saying "settled" is enough:
 
 | Tier | Source | Lands |
 | --- | --- | --- |
-| per matchup | `LiveMatchup.final`, from ESPN's `winner` | Tuesday |
-| per week | `lastScoredLeg >= week` | Tuesday |
-| NFL slate | every game in the week `completed` | Monday night |
+| this matchup's starters have all finished playing | `LiveMatchupSide.startedTeams` + the NFL schedule | Sunday night |
+| every NFL game in the week is over | the same schedule | Monday night |
+| the platform has called this matchup | `LiveMatchup.final`, from ESPN's `winner` | Tuesday |
+| the platform has scored the whole week | `lastScoredLeg >= week` | Tuesday |
 
-`LiveMatchup.final` UNDEFINED MEANS "THE PROVIDER CANNOT SAY", not "unfinished" —
-Sleeper publishes no per-matchup marker. And a `false` is never a veto: ESPN
-reports `final: false` all Monday night, so treating its answer as authoritative
-would throw away the immediacy the slate tier exists for.
+THE FIRST TIER IS THE POINT. Most matchups have nobody in the Monday night game,
+so the result is known on Sunday evening — a day and a half before
+`last_scored_leg` moves.
 
-`lib/live/nfl-week.ts` is that third tier — ESPN's PUBLIC scoreboard, used for
-BOTH providers, because the NFL's clock has nothing to do with which platform a
-league runs on. Unauthenticated and `access-control-allow-origin: *`. THE COST OF
-BEING EARLY IS STAT CORRECTIONS: a total can still shift a fraction on Tuesday,
-so a badge can flip for a day. Worth it for a badge, never for deciding what to
-archive — `sync` keeps waiting on the platform.
+`lib/live/nfl-schedule.ts` is the clock, and it is SLEEPER'S SCHEDULE used for
+BOTH providers, because the NFL's calendar has nothing to do with which platform
+a league runs on:
+
+```
+GET https://api.sleeper.app/schedule/nfl/regular/<season>
+{"status":"complete","date":"2025-09-07","home":"ATL","week":1,"game_id":"…","away":"TB"}
+```
+
+Undocumented but stable, `access-control-allow-origin: *`, and ONE REQUEST FOR
+THE WHOLE SEASON at ~27KB — it replaced ESPN's public scoreboard, which was 137KB
+PER WEEK. Statuses seen: `pre_game`, `complete`, `canceled`. A CANCELLED GAME
+COUNTS AS OVER; nobody in it will score again, and waiting on it would hold a
+matchup open for the rest of the year.
+
+A TEAM ABSENT FROM THE WEEK IS ON A BYE, which is not the same as pending — week
+6 of 2025 lists 30 teams, not 32.
+
+`startedTeams` IS ALL OR NOTHING. One starter whose NFL team cannot be resolved
+and the side reports UNDEFINED rather than a short list, because a short list is
+indistinguishable from a complete one and would settle the matchup while that
+player was mid-game. This is not hypothetical: resolving a 2025 lineup against
+today's player index finds five of nine, because the index carries CURRENT teams
+and people move. Both sides must report, or the tier does not fire.
+
+Where the teams come from differs by provider, and only one of them is free:
+
+- **ESPN** puts `proTeamId` on the roster entry, so `season()` asks for
+  `mBoxscore` alongside `mMatchupScore` — about 10KB gzipped on top of 70KB.
+  `mBoxscore` ALONE IS NOT ENOUGH: it drops `winner` and `pointsByScoringPeriod`,
+  which the phase and the per-week scores depend on. Bench and IR are slots 20
+  and 21; their points do not count, so nor do their games.
+- **Sleeper** names starters by id and says nothing about who they play for, so
+  it needs `SeasonContext.teamByPlayer` — the baked index, about 5KB a league,
+  threaded from the page through `useLiveSeason`. Without it the side reports
+  nothing and the later tiers do the work. `"0"` is an empty lineup slot.
+
+THE COST OF BEING EARLY IS STAT CORRECTIONS. A total can still shift a fraction
+on Tuesday, so a chip can flip for a day. Worth it for a chip, never for deciding
+what to archive — `sync` keeps waiting on the platform.
 
 Fetched ONLY inside a live, unscored week, so nobody downloads it otherwise, and
 NEVER under a phase mock: the mocks replay a finished season, so the real clock

@@ -105,6 +105,15 @@ export interface SeasonContext {
   slugByRoster: Map<number, string>;
   /** provider user id -> owner slug. Only co-owners need it. */
   userIdToSlug: Record<string, string>;
+  /**
+   * Sleeper player id -> NFL team, from the baked player index.
+   *
+   * ONLY SLEEPER NEEDS IT. Its matchup payload names starters by id and says
+   * nothing about who they play for, whereas ESPN puts `proTeamId` on the roster
+   * entry. Absent is fine — the side simply reports no started teams and the
+   * caller falls back to a later tier of finality.
+   */
+  teamByPlayer?: Record<string, string>;
 }
 
 /**
