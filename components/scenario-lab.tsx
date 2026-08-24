@@ -173,6 +173,10 @@ export function ScenarioLab({
         maxKeepers={maxKeepers}
         api={api}
         providerName={providerName}
+        // `orderSet`, never the bare slot map — see the prop's own note.
+        liveOrder={
+          d?.orderSet ? { slotToRoster: d.slotToRoster, mocked: d.mocked } : null
+        }
         projectedPicks={projectedPicks}
         releasedPicks={releasedPicks}
         onOpenPlayer={setOpenPlayer}

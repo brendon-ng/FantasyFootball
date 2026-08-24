@@ -1409,6 +1409,20 @@ nine real, and the change on the board is attributable to the thing you changed.
 A roster absent from `scenario.keepers` defers; one present with an empty array is
 an explicit "keeps nobody", and collapsing those two would make that unsayable.
 
+THE ORDER CAN BE SEEDED FROM THE PROVIDER, once it has actually been drawn: a
+button copies the real `slot_to_roster_id` into `scenario.order` so a slot can be
+changed from it, rather than making you rebuild ten rows by hand to alter one.
+It is GATED ON `orderSet`, never on the slot map merely existing — Sleeper ships
+that as an identity placeholder from the moment a draft exists, so seeding from
+it would fill the editor with roster-creation sequence wearing the costume of a
+draw. Hidden entirely before then, because that is the normal state for the weeks
+bylaw 1.7 leaves the order undrawn, and the empty state already explains itself.
+
+IT IS FOR EDITING, NOT VIEWING. With no scenario the board ALREADY follows the
+live order; the button exists to materialise it as something editable. A MOCKED
+order can be seeded too and the button says so — a mock copied into a scenario
+cannot go quiet the way `?mockDraftOrder` does, so the label stops pretending.
+
 THE LAB READS LIVE ADP, `/keepers` READS THE LOCK. `getAdp()` switches to the
 frozen snapshot inside the bylaw window so keeper COSTS stop moving before the
 deadline; `getLiveAdp()` ignores it, because this page is asking what the draft

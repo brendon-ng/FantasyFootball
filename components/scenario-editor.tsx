@@ -42,6 +42,7 @@ export function ScenarioEditor({
   maxKeepers,
   api,
   providerName,
+  liveOrder,
   projectedPicks,
   releasedPicks,
   onOpenPlayer,
@@ -54,6 +55,16 @@ export function ScenarioEditor({
   api: ScenarioApi;
   /** The live service backing this season — "Sleeper" or "ESPN". */
   providerName: string;
+  /**
+   * The REAL order, once it has been drawn, so a scenario can start from it.
+   *
+   * Null until then, and that gate is `orderSet` rather than the mere presence
+   * of a slot map — Sleeper ships `slot_to_roster_id` as an identity
+   * placeholder from the moment a draft exists, so copying that in would fill
+   * the editor with a confident-looking order that is really roster-creation
+   * sequence. See lib/draft-slots.
+   */
+  liveOrder: { slotToRoster: Record<number, number>; mocked: boolean } | null;
   /** Where the draft would take each player. Null before an order exists. */
   projectedPicks: Map<string, ProjectedPick> | null;
   /** Kept players only: where the draft would take them if released. */
@@ -83,6 +94,7 @@ export function ScenarioEditor({
   return (
     <div className="space-y-4">
       <OrderEditor
+        liveOrder={liveOrder}
         order={scenario.order}
         rosterIds={rosterIds}
         nameOf={nameOf}
@@ -435,12 +447,14 @@ function Delta({ v, w, t }: { v: number | null; w: string; t: string }) {
 /** Draft order: one row per slot, each a team picker. */
 function OrderEditor({
   order,
+  liveOrder,
   rosterIds,
   nameOf,
   onChange,
   providerName,
 }: {
   order: Record<number, number> | null;
+  liveOrder: { slotToRoster: Record<number, number>; mocked: boolean } | null;
   rosterIds: number[];
   nameOf: Record<number, string>;
   onChange: (next: Record<number, number> | null) => void;
@@ -464,6 +478,29 @@ function OrderEditor({
           Draft order
         </h3>
         <div className="flex gap-1.5">
+          {/* ONLY ONCE THE ORDER IS REAL. There is nothing to copy before it is
+              drawn, and a permanently disabled button through the weeks that
+              bylaw 1.7 leaves the order undrawn is noise — the empty state
+              below already explains why there is no order.
+
+              WHAT IT IS FOR is editing, not viewing: with no scenario the board
+              ALREADY follows the live order, so this exists to materialise that
+              order as something you can then change one slot of. */}
+          {liveOrder ? (
+            <Btn
+              onClick={() => onChange({ ...liveOrder.slotToRoster })}
+              title={
+                liveOrder.mocked
+                  ? `Copy in the MOCKED order currently standing in for ${providerName}'s, so you can edit it. It will stay in the scenario after the mock flag is gone.`
+                  : `Copy in ${providerName}'s real order, so you can edit it.`
+              }
+            >
+              {/* Named for where it came from, and marked when it is a stand-in:
+                  a mocked order copied into a scenario cannot go quiet the way
+                  the mock itself does, so the label has to admit it. */}
+              {liveOrder.mocked ? `Use mock order` : `Use ${providerName}'s`}
+            </Btn>
+          ) : null}
           <Btn onClick={() => onChange(randomOrder(rosterIds))} title="Draw a random order.">
             Randomise
           </Btn>
@@ -478,8 +515,17 @@ function OrderEditor({
 
       {order === null ? (
         <p className="px-3 py-3 text-[11px] text-chalk-600">
-          Following {providerName}. Bylaw 1.7 draws the order after the keeper deadline, so this is
-          empty until then — randomise to see where your slot could land.
+          {liveOrder ? (
+            <>
+              Following {providerName}&rsquo;s real order — the board above is already
+              using it. Copy it in to change a slot, or randomise for a different draw.
+            </>
+          ) : (
+            <>
+              Following {providerName}. Bylaw 1.7 draws the order after the keeper deadline, so
+              this is empty until then — randomise to see where your slot could land.
+            </>
+          )}
         </p>
       ) : (
         <>
