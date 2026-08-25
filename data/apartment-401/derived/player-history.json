@@ -24614,6 +24614,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1787641312553,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 1
     }
   ],
   "10219": [

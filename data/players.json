@@ -1900,7 +1900,7 @@
     "birth_date": "1995-01-23",
     "full_name": "Daniel Carlson",
     "position": "K",
-    "team": null,
+    "team": "NO",
     "years_exp": 8
   },
   "5096": {
@@ -3237,7 +3237,7 @@
     "birth_date": "1999-09-18",
     "full_name": "Zamir White",
     "position": "RB",
-    "team": "SF",
+    "team": "NO",
     "years_exp": 4
   },
   "8142": {
@@ -3636,7 +3636,7 @@
     "birth_date": "2002-05-07",
     "full_name": "Kayshon Boutte",
     "position": "WR",
-    "team": "NE",
+    "team": "HOU",
     "years_exp": 3
   },
   "9506": {
