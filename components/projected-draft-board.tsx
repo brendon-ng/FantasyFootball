@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
 import { PROVIDER_NAME, type LeagueRef } from "@/lib/league-ref";
 
@@ -16,7 +17,13 @@ import {
 } from "@/lib/draft-slots";
 import { projectDraft } from "@/lib/adp-projection";
 import { placeKeepers } from "@/lib/keeper-placement";
-import { LiveStatus, useLiveDraft, useLiveRosters, useLiveTradedPicks } from "@/lib/live";
+import {
+  LiveStatus,
+  useLiveDraft,
+  useLiveDraftPicks,
+  useLiveRosters,
+  useLiveTradedPicks,
+} from "@/lib/live";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
 
@@ -120,6 +127,39 @@ export function ProjectedDraftBoard({
   const providerName = PROVIDER_NAME[leagueRef?.provider ?? "sleeper"];
   const draft = useLiveDraft(leagueRef);
   const traded = useLiveTradedPicks(leagueRef);
+
+  /**
+   * Picks the draft has actually made, refreshed while it runs.
+   *
+   * The board and the lab each fetch this for themselves, the same way they each
+   * fetch the draft and the rosters — the alternative is threading it through
+   * every caller of a component that is deliberately self-contained.
+   */
+  const picks = useLiveDraftPicks(
+    leagueRef,
+    draft.data?.draftId ?? null,
+    // `paused` polls too: a commissioner pausing for ten minutes must not leave
+    // the board frozen until somebody reloads.
+    draft.data?.status === "drafting" || draft.data?.status === "paused",
+  );
+  const taken = useMemo(() => {
+    const m = new Map<string, { playerId: string; rosterId: number }>();
+    for (const p of picks.data ?? []) {
+      m.set(`${p.round}:${p.slot}`, {
+        playerId: p.playerId,
+        rosterId: p.rosterId,
+      });
+    }
+    return m;
+  }, [picks.data]);
+  /** Which of those were real selections rather than keeper slots. */
+  const draftedIds = useMemo(
+    () =>
+      new Set(
+        (picks.data ?? []).filter((p) => !p.isKeeper).map((p) => p.playerId),
+      ),
+    [picks.data],
+  );
   const rosters = useLiveRosters(leagueRef);
 
   const loading =
@@ -216,16 +256,35 @@ export function ProjectedDraftBoard({
     adp,
     draftRounds,
     maxKeepers,
+    taken,
   });
-  const keeperAt = new Map<string, { playerId: string; ownerSlug: string | null }>();
+  /*
+   * A CELL THAT IS SPENT, and whether it was spent by a keeper or by an actual
+   * pick. Both come through `placement.byPick` because both mean the same thing
+   * to the projection — the cell is gone and the player is off the board — but
+   * they must not LOOK the same: calling somebody the league just drafted a
+   * "keeper" is simply a false statement about the league.
+   */
+  const keeperAt = new Map<
+    string,
+    { playerId: string; ownerSlug: string | null; drafted: boolean }
+  >();
   for (const [key, v] of placement.byPick) {
-    keeperAt.set(key, { playerId: v.playerId, ownerSlug: rosterToSlug.get(v.rosterId) ?? null });
+    keeperAt.set(key, {
+      playerId: v.playerId,
+      ownerSlug: rosterToSlug.get(v.rosterId) ?? null,
+      drafted: draftedIds.has(v.playerId),
+    });
   }
 
   const slots = Object.keys(shape.slotToRoster)
     .map(Number)
     .sort((a, b) => a - b);
-  const totalKept = keeperAt.size;
+  // Keepers only. A drafted player occupies a cell but is not a contract, and
+  // counting them would inflate the one number on this header that has a bylaw
+  // behind it.
+  const totalKept = [...keeperAt.values()].filter((v) => !v.drafted).length;
+  const totalDrafted = keeperAt.size - totalKept;
 
   // Shared with the player modal, which needs the same walk in reverse — see
   // lib/adp-projection.ts. Two implementations would let the modal name one pick
@@ -264,6 +323,7 @@ export function ProjectedDraftBoard({
           <span>
             {shape.rounds} rounds · {shape.teams} teams · {totalKept} keeper
             {totalKept === 1 ? "" : "s"} placed
+            {totalDrafted ? ` · ${totalDrafted} picked` : ""}
           </span>
         </span>
         <LiveStatus status={draft.status} provider={leagueRef?.provider} />
@@ -347,7 +407,10 @@ function Row({
   rosterToSlug: Map<number, string>;
   ownerNames: Record<string, string>;
   players: Record<string, PlayerMeta>;
-  keeperAt: Map<string, { playerId: string; ownerSlug: string | null }>;
+  keeperAt: Map<
+    string,
+    { playerId: string; ownerSlug: string | null; drafted: boolean }
+  >;
   adp: Record<string, AdpEntry>;
   projected: Map<string, AdpEntry>;
   starred?: Set<string>;
@@ -400,9 +463,14 @@ function Row({
           <div
             key={slot}
             className={`min-w-0 rounded border px-1.5 py-1.5 ${
-              kept
-                ? "border-accent/40 bg-accent/10"
-                : "border-ink-600 bg-ink-850"
+              kept?.drafted
+                ? // OFF THE BOARD FOR REAL. Deliberately not the accent, which
+                  // means "kept" everywhere on this grid — a solid, quieter fill
+                  // reads as a cell that is simply spent.
+                  "border-ink-500 bg-ink-700"
+                : kept
+                  ? "border-accent/40 bg-accent/10"
+                  : "border-ink-600 bg-ink-850"
             } ${
               // A ring rather than a recolour: the border already carries "kept"
               // and the text already carries position. Gold is free on this

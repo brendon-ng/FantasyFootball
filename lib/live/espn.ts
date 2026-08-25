@@ -221,6 +221,17 @@ export const espnProvider: LiveProvider = {
   name: "ESPN",
 
   /**
+   * NOT IMPLEMENTED, and not a gap. The only surface that polls this is the
+   * Scenario Lab, which is gated on `features.keepers` — no ESPN league here
+   * uses keepers, so nothing would ever call it. An empty list reads to every
+   * consumer as "no picks yet", which leaves the board projecting exactly as it
+   * did before.
+   */
+  async draftPicks() {
+    return [];
+  },
+
+  /**
    * ESPN's answer to Sleeper's `/state/nfl`.
    *
    * `seasonType` is only PROVISIONAL here: this endpoint knows the calendar but

@@ -1423,6 +1423,43 @@ live order; the button exists to materialise it as something editable. A MOCKED
 order can be seeded too and the button says so — a mock copied into a scenario
 cannot go quiet the way `?mockDraftOrder` does, so the label stops pretending.
 
+### The board follows a draft as it happens
+
+`useLiveDraftPicks` is THE ONLY POLLING HOOK on this site. Everything else is
+fetched once, because it changes on the scale of a deploy; a draft changes every
+thirty seconds and the whole point of watching the board during one is that it
+keeps up. Fifteen seconds, one small request, well inside Sleeper's ~1000/minute.
+
+IT STOPS WHEN THE DRAFT DOES, gated on `status` being `drafting` or `paused` —
+paused included, or a commissioner's ten-minute break freezes the board until
+somebody reloads. Otherwise it is a single fetch like every other hook here; a
+finished draft's picks never change, and a timer left running would be a request
+every fifteen seconds for the rest of the year. A FAILED POLL KEEPS THE LAST GOOD
+DATA rather than blanking the board mid-draft.
+
+A MADE PICK AND A KEEPER MEAN THE SAME THING TO THE PROJECTION — the cell is
+gone and the player is off the board — so both ride `placement.byPick` through
+`placeKeepers({ taken })` rather than becoming a second notion of "spent" that
+every consumer has to remember. Reality wins: a cell in `taken` is spent whatever
+the scenario says.
+
+SLEEPER WRITES KEEPER SELECTIONS INTO THE DRAFT AS REAL PICKS BEFORE IT STARTS —
+den-ops' 2026 draft carried 40 the day before, on 40 distinct cells. So without a
+guard every keeper is placed TWICE during a live draft, once from the feed and
+once from `placeKeepers`, the second silently eating a cell that is still live.
+`already` is that guard, and it is unit-checked: the same two keepers arriving
+from the feed place once, in the same cells, and the live count is unchanged.
+
+THEY MUST NOT LOOK THE SAME, though. A drafted cell is a solid quiet fill, never
+the accent, which means "kept" everywhere on that grid — calling somebody the
+league just drafted a keeper is a false statement about the league. The header
+counts them separately for the same reason.
+
+DRAFTED PLAYERS LEAVE THE POOL OUTRIGHT, with no toggle to bring them back.
+A keeper selection is a hypothesis this page exists to play with; a made pick is
+a fact, and "available" has to mean available at the one moment the list is most
+useful.
+
 THE POOL MARKS THE VIEWER'S OWN PICKS, in identity violet. The question this
 page exists to answer is "who is likely to be there when I am on the clock", and
 without it that meant counting rows against the round headings by hand. It reads

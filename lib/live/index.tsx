@@ -37,6 +37,7 @@ import { sleeperProvider } from "./sleeper.ts";
 import type {
   LeagueMove,
   LiveDraft,
+  LiveDraftPick,
   LiveMove,
   LiveProvider,
   LiveRoster,
@@ -48,6 +49,7 @@ import type {
 export type {
   LeagueMove,
   LiveDraft,
+  LiveDraftPick,
   LiveMove,
   LiveRoster,
   LiveState,
@@ -189,6 +191,67 @@ function useProviderData<T>(
   }, [key]);
 
   if (!ref) return { status: "ready", data: empty, error: null };
+  return state;
+}
+
+/**
+ * Picks made in a draft, refreshed while it is running.
+ *
+ * THE ONLY POLLING HOOK HERE. Everything else on this site is fetched once,
+ * because it changes on the scale of a deploy; a draft changes every thirty
+ * seconds and the whole value of watching the board during one is that it keeps
+ * up. Fifteen seconds is well inside Sleeper's limits — one small request per
+ * viewer per interval, against a documented ceiling of about 1000 a minute.
+ *
+ * IT STOPS WHEN THE DRAFT DOES. `live` is false before a draft starts and once
+ * it completes, and then this behaves like every other hook here: one fetch, no
+ * timer. A finished draft's picks never change, and a poll left running would
+ * be a request every fifteen seconds for the rest of the year.
+ *
+ * A FAILED POLL KEEPS THE LAST GOOD DATA rather than blanking the board. A
+ * dropped request mid-draft is exactly when the page is being stared at, and
+ * showing nothing would be worse than showing the state from fifteen seconds
+ * ago — which is what the next poll will correct anyway.
+ */
+export function useLiveDraftPicks(
+  ref: LeagueRef | null,
+  draftId: string | null,
+  live: boolean,
+): LiveState<LiveDraftPick[]> {
+  const [state, setState] = useState<LiveState<LiveDraftPick[]>>({
+    status: "loading",
+    data: null,
+    error: null,
+  });
+  const key = refKey(ref);
+
+  useEffect(() => {
+    const provider = providerFor(ref);
+    if (!ref || !provider || !draftId) return;
+    let cancelled = false;
+
+    const tick = async () => {
+      try {
+        const data = await provider.draftPicks(draftId);
+        if (!cancelled) setState({ status: "ready", data, error: null });
+      } catch {
+        // Deliberately keeps whatever is already on screen; see above.
+      }
+    };
+
+    void tick();
+    if (!live) return () => { cancelled = true; };
+
+    const timer = setInterval(() => void tick(), 15_000);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+    // `key` stands in for `ref`, which is a fresh object every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, draftId, live]);
+
+  if (!ref || !draftId) return { status: "ready", data: [], error: null };
   return state;
 }
 

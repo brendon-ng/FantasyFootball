@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { AvailablePool } from "@/components/available-pool";
 import { PlayerModal } from "@/components/player-modal";
@@ -12,7 +12,12 @@ import { projectDraft, type ProjectedPick } from "@/lib/adp-projection";
 import { placeKeepers } from "@/lib/keeper-placement";
 import { useScenario } from "@/lib/scenario";
 import { useIdentity } from "@/components/identity";
-import { useLiveDraft, useLiveRosters, useLiveTradedPicks } from "@/lib/live";
+import {
+  useLiveDraft,
+  useLiveDraftPicks,
+  useLiveRosters,
+  useLiveTradedPicks,
+} from "@/lib/live";
 import { PROVIDER_NAME, type LeagueRef } from "@/lib/league-ref";
 import type { AdpEntry, Projection } from "@/lib/data";
 import type { KeeperContract, PlayerMeta, PlayerUsage } from "@/lib/types";
@@ -82,6 +87,33 @@ export function ScenarioLab({
   // an approximation here would quietly disagree with the grid above it.
   const draft = useLiveDraft(leagueRef);
   const traded = useLiveTradedPicks(leagueRef);
+
+  /**
+   * Picks the draft has actually made, refreshed while it runs.
+   *
+   * `status === "drafting"` is Sleeper's own word for in-progress, and it is
+   * what turns polling on; before and after, this is one fetch like everything
+   * else. The feed already carries the league's keeper selections as real picks,
+   * so it is the whole truth about which cells are spent.
+   */
+  const picks = useLiveDraftPicks(
+    leagueRef,
+    draft.data?.draftId ?? null,
+    // `paused` polls too: a commissioner pausing for ten minutes must not leave
+    // the board frozen until somebody reloads.
+    draft.data?.status === "drafting" || draft.data?.status === "paused",
+  );
+  const taken = useMemo(() => {
+    const m = new Map<string, { playerId: string; rosterId: number }>();
+    for (const p of picks.data ?? []) {
+      m.set(`${p.round}:${p.slot}`, {
+        playerId: p.playerId,
+        rosterId: p.rosterId,
+      });
+    }
+    return m;
+  }, [picks.data]);
+
 
   if (rosters.status === "loading") {
     return <EmptyState>Loading rosters from {providerName}…</EmptyState>;
@@ -161,6 +193,7 @@ export function ScenarioLab({
       adp,
       draftRounds,
       maxKeepers,
+      taken,
     });
     livePicksByRound = placement.livePicksByRound;
     const projection = projectDraft({
@@ -239,6 +272,11 @@ export function ScenarioLab({
       <AvailablePool
         adp={adp}
         keptBy={keptBy}
+        drafted={
+          new Set(
+            (picks.data ?? []).filter((p) => !p.isKeeper).map((p) => p.playerId),
+          )
+        }
         myRoster={
           me
             ? ((rosters.data ?? []).find((r) =>

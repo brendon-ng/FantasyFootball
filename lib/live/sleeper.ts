@@ -170,6 +170,29 @@ export const sleeperProvider: LiveProvider = {
    * `/league/:id/drafts`, which returns abandoned drafts alongside the real one
    * — the 2024 league carries two — and omits `slot_to_roster_id` entirely.
    */
+  async draftPicks(draftId) {
+    const res = await fetchRetry(`${BASE}/draft/${draftId}/picks`);
+    if (!res?.ok) throw new Error(`HTTP ${res?.status ?? "unreachable"}`);
+    const raw = (await res.json()) as Array<{
+      pick_no: number;
+      round: number;
+      draft_slot: number;
+      roster_id: number | null;
+      player_id: string | null;
+      is_keeper: boolean | null;
+    }> | null;
+    return (raw ?? [])
+      .filter((p) => p.player_id)
+      .map((p) => ({
+        pickNo: p.pick_no,
+        round: p.round,
+        slot: p.draft_slot,
+        rosterId: p.roster_id ?? 0,
+        playerId: String(p.player_id),
+        isKeeper: Boolean(p.is_keeper),
+      }));
+  },
+
   async draft(id) {
     const leagueRes = await fetchRetry(`${BASE}/league/${id}`);
     if (!leagueRes?.ok) throw new Error(`HTTP ${leagueRes?.status ?? "unreachable"}`);

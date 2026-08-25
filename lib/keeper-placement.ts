@@ -32,6 +32,7 @@ export function placeKeepers({
   adp,
   draftRounds,
   maxKeepers,
+  taken,
 }: {
   board: BoardPick[];
   rounds: number;
@@ -41,13 +42,34 @@ export function placeKeepers({
   adp: Record<string, AdpEntry>;
   draftRounds: number;
   maxKeepers: number;
+  /**
+   * Cells already spent for real — picks the draft has actually made, keyed
+   * "round:slot". Absent everywhere except during a live draft.
+   *
+   * REALITY WINS OVER THE PROJECTION. A cell in here is gone whatever the
+   * scenario says, and the player in it is off the board — which is the same
+   * thing a keeper placement means, so it rides the same map rather than
+   * becoming a second notion of "spent" for every consumer to remember.
+   */
+  taken?: Map<string, { playerId: string; rosterId: number }>;
 }): Placement {
   const byId = new Map(contracts.map((c) => [c.playerId, c]));
-  const byPick = new Map<string, { playerId: string; rosterId: number }>();
+  const byPick = new Map(taken ?? []);
+  /*
+   * A PLAYER ALREADY PICKED IS NOT ALSO PLACED. Sleeper writes keeper
+   * selections into the draft as real picks BEFORE it starts — 40 of them in
+   * den-ops' 2026 draft — so without this every keeper would be placed twice
+   * during a live draft: once from the feed, once from here, the second
+   * silently eating a cell that is still live.
+   */
+  const already = new Set([...byPick.values()].map((v) => v.playerId));
 
   for (const [rosterId, playerIds] of selectedByRoster) {
-    const owned = board.filter((p) => p.ownerRoster === rosterId);
+    const owned = board.filter(
+      (p) => p.ownerRoster === rosterId && !byPick.has(`${p.round}:${p.slot}`),
+    );
     const picked = playerIds
+      .filter((id) => !already.has(id))
       .map((id) => byId.get(id))
       .filter((c): c is KeeperContract => Boolean(c))
       .slice(0, maxKeepers)

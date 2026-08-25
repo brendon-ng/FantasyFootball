@@ -58,6 +58,26 @@ export interface LiveRoster {
   waiverBudgetUsed: number;
 }
 
+/**
+ * A pick that has actually been made, during or after the draft.
+ *
+ * KEEPERS ARE IN HERE TOO, flagged. Sleeper writes a league's keeper selections
+ * into the draft as real picks before it starts — den-ops' 2026 draft carried 40
+ * of them the day before — so this feed is the whole truth about which cells are
+ * spent and which players are gone, not just the live selections.
+ */
+export interface LiveDraftPick {
+  /** 1-based across the whole draft. */
+  pickNo: number;
+  round: number;
+  /** Board column, matching `slotToRoster`. */
+  slot: number;
+  /** The roster that made it, which for a traded pick is not the slot's owner. */
+  rosterId: number;
+  playerId: string;
+  isKeeper: boolean;
+}
+
 export interface LiveTradedPick {
   season: string;
   round: number;
@@ -155,6 +175,15 @@ export interface LiveProvider {
   rosters(id: string, season: number): Promise<LiveRoster[]>;
   tradedPicks(id: string, season: number): Promise<LiveTradedPick[]>;
   draft(id: string, season: number): Promise<RawDraft | null>;
+  /**
+   * Picks made so far.
+   *
+   * TAKES THE DRAFT ID, not the league id, unlike everything else here — this is
+   * the one call that gets POLLED during a draft, and resolving the league to
+   * its draft on every poll would double the traffic to learn something the
+   * caller already knows from `draft()`.
+   */
+  draftPicks(draftId: string): Promise<LiveDraftPick[]>;
   season(
     id: string,
     st: ProviderState,

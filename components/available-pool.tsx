@@ -35,6 +35,7 @@ export function AvailablePool({
   adp,
   keptBy,
   myRoster,
+  drafted,
   projectedPicks,
   livePicksByRound,
   starred,
@@ -58,6 +59,15 @@ export function AvailablePool({
    * by hand. Marking the picks that are yours turns that into a glance.
    */
   myRoster: number | null;
+  /**
+   * Players the draft has actually taken, while it is running.
+   *
+   * GONE, NOT DIMMED, and with no toggle to bring them back — unlike a keeper
+   * selection, which is a hypothesis this page exists to play with, a made pick
+   * is a fact. "Available" has to mean available or the list is worthless at the
+   * one moment it is most useful.
+   */
+  drafted: Set<string>;
   /**
    * Where the draft would take each player, from the same walk the board uses,
    * so a highlighted row and the board cannot disagree about whose pick it is.
@@ -110,7 +120,9 @@ export function AvailablePool({
         .sort((a, b) => adpSortKey(a) - adpSortKey(b) || a.rank - b.rank),
     [adp],
   );
-  const undraftedCount = all.filter((e) => !keptBy.has(e.playerId as string)).length;
+  const undraftedCount = all.filter(
+    (e) => !keptBy.has(e.playerId as string) && !drafted.has(e.playerId as string),
+  ).length;
 
   const sortValue = (e: AdpEntry): number | string | null => {
     const id = e.playerId as string;
@@ -161,6 +173,7 @@ export function AvailablePool({
   const includeKept = showKept || needle !== "" || starsOnly;
   const rows = all.filter((e) => {
     const id = e.playerId as string;
+    if (drafted.has(id)) return false;
     if (keptBy.has(id) && !includeKept) return false;
     return (
       (pos === "ALL" || e.position === pos) &&
