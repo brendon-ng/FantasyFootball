@@ -41,7 +41,7 @@ export function OwnerContracts({
   );
   const selected = byOwner.get(ownerSlug) ?? new Set<string>();
   const mine = live.filter((c) => c.ownerSlug === ownerSlug);
-  const ordered = orderBySelection(mine, selected);
+  const ordered = orderBySelection(mine, selected, adp, draftRounds);
 
   return (
     <>

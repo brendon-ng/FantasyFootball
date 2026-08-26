@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { type LeagueRef } from "@/lib/league-ref";
 
-import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
+import { KeepPips, PositionPill, Revalued, ValueBadge } from "@/components/keeper-table";
 import { costRound } from "@/lib/draft-slots";
 import { Tip } from "@/components/tooltip";
 import { Col, ListHeader, Panel, PanelHeader } from "@/components/ui";
@@ -89,12 +89,14 @@ export function KeeperBoard({
           const ordered = [...contracts].sort((a, b) => {
             const sa = Number(selected.has(b.playerId)) - Number(selected.has(a.playerId));
             if (sa !== 0) return sa;
-            // Sorted on what it COSTS, not on the original round — an expired
-            // contract's stored round is a historical fact nobody is shown.
+            // PURELY WHAT IT COSTS. An expired contract used to be shunted to
+            // the bottom, which made the board stop being a price list exactly
+            // when it mattered: a revalued player is often the most expensive
+            // thing a team owns, and burying him under cheap live contracts hid
+            // that. The stored round is a historical fact nobody is shown.
             return (
-              Number(a.expired) - Number(b.expired) ||
               costRound(a, adp[a.playerId], draftRounds) -
-                costRound(b, adp[b.playerId], draftRounds)
+              costRound(b, adp[b.playerId], draftRounds)
             );
           });
 
@@ -141,7 +143,7 @@ export function KeeperBoard({
                         className={`flex cursor-pointer list-none items-center gap-2.5 px-3 py-2 transition-colors sm:gap-3 sm:px-4 ${
                           isSelected
                             ? "bg-accent/[0.07] hover:bg-accent/[0.11]"
-                            : `hover:bg-ink-700/40 ${c.expired ? "opacity-50" : ""}`
+                            : "hover:bg-ink-700/40"
                         }`}
                       >
                         {/* A left rail marks a live selection without changing
@@ -182,6 +184,12 @@ export function KeeperBoard({
                             ●
                           </Tip>
                         ) : null}
+                        {/* A MARK, NOT A DIMMING. These rows used to be greyed
+                            out and sorted last, which read as "ignore me" for
+                            what is often a team's priciest contract. The row now
+                            sits in cost order like any other and says what it
+                            is. */}
+                        {c.expired ? <Revalued /> : null}
                         <ValueBadge
                           costRound={costRound(c, adp[c.playerId], draftRounds)}
                           adp={adp[c.playerId]}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Tip } from "@/components/tooltip";
 import { costRound } from "@/lib/draft-slots";
 import type { AdpEntry } from "@/lib/data";
 import type { KeeperContract, PlayerMeta } from "@/lib/types";
@@ -57,6 +58,32 @@ export function KeepPips({ used, total }: { used: number; total: number }) {
  * Note the direction: draft rounds count UP as value goes DOWN, so surplus is
  * cost minus ADP, not the other way round.
  */
+/**
+ * Marks a contract that has run out of keeps and been repriced to ADP.
+ *
+ * A MARK, NOT A DIMMING, AND NOT A BANISHMENT. These rows used to render at
+ * half opacity and sort to the bottom of a team's list, which read as "spent,
+ * ignore" — but a revalued contract is frequently the most EXPENSIVE thing a
+ * team owns, since it is the players good enough to keep twice who reach this.
+ * Burying them under cheap live contracts hid the one number a team most needs
+ * before the deadline. So the row sits in cost order like any other and carries
+ * this instead.
+ *
+ * Loss-red matches the cost figure beside it, which is already red for exactly
+ * this reason — one state, said once in two places, rather than two signals to
+ * reconcile.
+ */
+export function Revalued() {
+  return (
+    <Tip
+      className="shrink-0 text-[10px] leading-none text-loss"
+      text="Both keeps used, so this contract expired and is repriced to this offseason's ADP round. Keeping him again costs that new round and starts a fresh contract."
+    >
+      <span aria-label="Revalued to ADP">&#8635;</span>
+    </Tip>
+  );
+}
+
 export function ValueBadge({
   costRound,
   adp,

@@ -11,6 +11,7 @@ import {
 import {
   features,
   getAdp,
+  getDrafts,
   getKeepers,
   getLeagueRefs,
   getOwners,
@@ -70,6 +71,17 @@ export default function KeepersPage() {
   const nextSeason = Math.max(...seasons.map((s) => s.season), 0) + 1;
   const cycle = keeperCycleSeason();
   const leagueRef = getLeagueRefs()[String(nextSeason)] ?? null;
+  /**
+   * The real board exists, so the projected one has nothing left to say.
+   *
+   * KNOWN AT BUILD TIME, which is the point: the board itself can only discover
+   * this in the browser, from the live draft status, so the panel around it was
+   * still headed "Projected 2026 Draft Board · live from Sleeper" over a body
+   * saying the draft was done — and would have stayed that way for the five
+   * months until `nextSeason` advances. `drafts.json` is the same signal a beat
+   * later and needs no network at all.
+   */
+  const drafted = getDrafts().some((d) => d.season === nextSeason);
 
   const byOwner = new Map<string, KeeperContract[]>();
   for (const c of keepers.final) {
@@ -134,7 +146,20 @@ export default function KeepersPage() {
 
       {/* Entirely live: the order is drawn after the keeper deadline, picks trade
           until the last minute, and selections change hourly. Once the draft runs,
-          `derive` commits the real board and /history/<season>/draft/ takes over. */}
+          `derive` commits the real board and /history/<season>/draft/ takes over —
+          so this becomes one line pointing at it rather than a panel explaining
+          that it has nothing to project. */}
+      {drafted ? (
+        <p className="px-1 text-xs text-chalk-600">
+          The {nextSeason} draft is done.{" "}
+          <Link
+            href={`/history/${nextSeason}/draft/`}
+            className="text-chalk-400 transition-colors hover:text-accent"
+          >
+            See the board as it happened →
+          </Link>
+        </p>
+      ) : (
       <Panel>
         <PanelHeader
           title={`Projected ${nextSeason} Draft Board`}
@@ -153,6 +178,7 @@ export default function KeepersPage() {
           maxKeepers={MAX_KEEPERS}
         />
       </Panel>
+      )}
     </div>
   );
 }

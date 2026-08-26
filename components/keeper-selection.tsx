@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { type LeagueRef } from "@/lib/league-ref";
 
-import { KeepPips, PositionPill, ValueBadge } from "@/components/keeper-table";
+import { KeepPips, PositionPill, Revalued, ValueBadge } from "@/components/keeper-table";
 import { costRound } from "@/lib/draft-slots";
 import { Tip } from "@/components/tooltip";
 import { useLiveContracts } from "@/lib/keeper-live";
@@ -73,9 +73,20 @@ export function useSelectedKeepers(
 export function orderBySelection(
   contracts: KeeperContract[],
   selected: Set<string>,
+  /**
+   * Needed to price an EXPIRED contract, whose stored round is history — it
+   * costs this offseason's ADP round instead. Without them an expired R1 that
+   * revalued to R3 still sorts as an R1, which is the one case this order exists
+   * to get right.
+   */
+  adp?: Record<string, AdpEntry>,
+  draftRounds?: number,
 ): KeeperContract[] {
-  const byCost = (a: KeeperContract, b: KeeperContract) =>
-    Number(a.expired) - Number(b.expired) || a.round - b.round;
+  const cost = (c: KeeperContract) =>
+    adp && draftRounds ? costRound(c, adp[c.playerId], draftRounds) : c.round;
+  // NO EXPIRED TERM. They used to sort last and render greyed, which buried a
+  // team's most expensive contracts under its cheapest.
+  const byCost = (a: KeeperContract, b: KeeperContract) => cost(a) - cost(b);
   return [
     ...contracts.filter((c) => selected.has(c.playerId)).sort(byCost),
     ...contracts.filter((c) => !selected.has(c.playerId)).sort(byCost),
@@ -104,7 +115,7 @@ export function ContractRow({
   return (
     <div
       className={`flex items-center gap-2.5 px-3 py-2 ${
-        selected ? "bg-accent/[0.07]" : contract.expired ? "opacity-50" : ""
+        selected ? "bg-accent/[0.07]" : ""
       }`}
     >
       {/* A rail marks a selection without reflowing the columns. */}
@@ -151,6 +162,7 @@ export function ContractRow({
           price and whether the contract beats it. Both layouts that use this row
           are single-column below `sm`, so the width is the same as the keepers
           page that has always shown it; the name truncates to make room. */}
+      {contract.expired ? <Revalued /> : null}
       <ValueBadge costRound={costRound(contract, adp, draftRounds)} adp={adp} />
       <KeepPips used={contract.keepsUsed} total={contract.keepsUsed + contract.keepsRemaining} />
       <span

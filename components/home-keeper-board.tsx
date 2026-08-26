@@ -57,8 +57,18 @@ export function HomeKeeperBoard({
     <div className="grid gap-px bg-ink-600 sm:grid-cols-2 xl:grid-cols-3">
       {contractsByOwner.map(([slug]) => {
         const selected = byOwner.get(slug) ?? new Set<string>();
-        const eligible = (liveByOwner.get(slug) ?? []).filter((c) => !c.expired);
-        const shown = orderBySelection(eligible, selected).slice(0, maxKeepers);
+        /*
+         * EXPIRED CONTRACTS ARE STILL ELIGIBLE, and used to be filtered out
+         * here. A contract with no keeps left is repriced to ADP, not
+         * cancelled — every one of them stays keepable — so dropping them both
+         * hid them from the board and undercounted the "N eligible" beside it.
+         * That was invisible until the 2026 draft expired the first 23.
+         */
+        const eligible = liveByOwner.get(slug) ?? [];
+        const shown = orderBySelection(eligible, selected, adp, draftRounds).slice(
+          0,
+          maxKeepers,
+        );
 
         return (
           // min-w-0: a grid item defaults to min-width:auto, so without it the
