@@ -12998,5 +12998,1705 @@
     "round": 17,
     "season": 2025,
     "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": true,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 1,
+    "playerId": "7547",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 2,
+    "playerId": "6786",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": true,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 3,
+    "playerId": "7564",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": true,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 4,
+    "playerId": "4866",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 5,
+    "playerId": "12527",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 6,
+    "playerId": "6794",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 7,
+    "playerId": "8112",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 8,
+    "playerId": "5859",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": true,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 9,
+    "playerId": "9509",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": true,
+    "ownerSlug": "david-collier",
+    "pickNo": 10,
+    "playerId": "4034",
+    "round": 1,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 11,
+    "playerId": "8151",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": true,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 12,
+    "playerId": "9226",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 13,
+    "playerId": "3198",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 14,
+    "playerId": "13287",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 15,
+    "playerId": "8155",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 16,
+    "playerId": "12526",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": true,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 17,
+    "playerId": "8138",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": true,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 18,
+    "playerId": "9493",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": true,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 19,
+    "playerId": "6813",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": true,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 20,
+    "playerId": "9221",
+    "round": 2,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 21,
+    "playerId": "8150",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 22,
+    "playerId": "8146",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": true,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 23,
+    "playerId": "4984",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 24,
+    "playerId": "5850",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": true,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 25,
+    "playerId": "12507",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 26,
+    "playerId": "7543",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 27,
+    "playerId": "5892",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 28,
+    "playerId": "4881",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 29,
+    "playerId": "10859",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 30,
+    "playerId": "12481",
+    "round": 3,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 31,
+    "playerId": "2133",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 32,
+    "playerId": "6904",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 33,
+    "playerId": "12490",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 34,
+    "playerId": "6770",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": true,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 35,
+    "playerId": "8137",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 36,
+    "playerId": "4983",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 37,
+    "playerId": "6790",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 38,
+    "playerId": "12529",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": true,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 39,
+    "playerId": "7569",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 40,
+    "playerId": "12519",
+    "round": 4,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 41,
+    "playerId": "5927",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 42,
+    "playerId": "11620",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 43,
+    "playerId": "13286",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 44,
+    "playerId": "2216",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": true,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 45,
+    "playerId": "8130",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": true,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 46,
+    "playerId": "11632",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 47,
+    "playerId": "13279",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 48,
+    "playerId": "5045",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 49,
+    "playerId": "8167",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": true,
+    "ownerSlug": "david-collier",
+    "pickNo": 50,
+    "playerId": "7525",
+    "round": 5,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 51,
+    "playerId": "11628",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 52,
+    "playerId": "8228",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 53,
+    "playerId": "12489",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 54,
+    "playerId": "7611",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": true,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 55,
+    "playerId": "12514",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 56,
+    "playerId": "10232",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 57,
+    "playerId": "3294",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 58,
+    "playerId": "5846",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 59,
+    "playerId": "11566",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 60,
+    "playerId": "5967",
+    "round": 6,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 61,
+    "playerId": "7021",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 62,
+    "playerId": "7553",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": true,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 63,
+    "playerId": "11604",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": true,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 64,
+    "playerId": "8144",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 65,
+    "playerId": "12534",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 66,
+    "playerId": "12508",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": true,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 67,
+    "playerId": "6801",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": true,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 68,
+    "playerId": "9997",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 69,
+    "playerId": "12506",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": true,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 70,
+    "playerId": "7526",
+    "round": 7,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": true,
+    "ownerSlug": "david-collier",
+    "pickNo": 71,
+    "playerId": "12518",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": true,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 72,
+    "playerId": "11635",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 73,
+    "playerId": "13294",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 74,
+    "playerId": "4217",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 75,
+    "playerId": "4037",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 76,
+    "playerId": "6806",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 77,
+    "playerId": "8110",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 78,
+    "playerId": "6819",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": true,
+    "ownerSlug": "david-collier",
+    "pickNo": 79,
+    "playerId": "10229",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 80,
+    "playerId": "11586",
+    "round": 8,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": true,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 81,
+    "playerId": "12517",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 82,
+    "playerId": "11583",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 83,
+    "playerId": "13281",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 84,
+    "playerId": "11533",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 85,
+    "playerId": "9500",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 86,
+    "playerId": "12533",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 87,
+    "playerId": "9756",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 88,
+    "playerId": "LAR",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 89,
+    "playerId": "SEA",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 90,
+    "playerId": "8142",
+    "round": 9,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 91,
+    "playerId": "7567",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 92,
+    "playerId": "13298",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": true,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 93,
+    "playerId": "9484",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": true,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 94,
+    "playerId": "7588",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 95,
+    "playerId": "5947",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 96,
+    "playerId": "HOU",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 97,
+    "playerId": "1466",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 98,
+    "playerId": "8408",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 99,
+    "playerId": "2449",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 100,
+    "playerId": "5872",
+    "round": 10,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": true,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 101,
+    "playerId": "11560",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": true,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 102,
+    "playerId": "9224",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 103,
+    "playerId": "10236",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 104,
+    "playerId": "7523",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": true,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 105,
+    "playerId": "9488",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 106,
+    "playerId": "9753",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": true,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 107,
+    "playerId": "9487",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 108,
+    "playerId": "10222",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 109,
+    "playerId": "6797",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 110,
+    "playerId": "8183",
+    "round": 11,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 111,
+    "playerId": "13417",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": true,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 112,
+    "playerId": "11631",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 113,
+    "playerId": "8131",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 114,
+    "playerId": "8126",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 115,
+    "playerId": "4046",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 116,
+    "playerId": "11563",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 117,
+    "playerId": "4199",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 118,
+    "playerId": "DEN",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 119,
+    "playerId": "8136",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 120,
+    "playerId": "3214",
+    "round": 12,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 121,
+    "playerId": "4227",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 122,
+    "playerId": "10219",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 123,
+    "playerId": "421",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": true,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 124,
+    "playerId": "8148",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": true,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 125,
+    "playerId": "11564",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 126,
+    "playerId": "12493",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 127,
+    "playerId": "8121",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 128,
+    "playerId": "3163",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 129,
+    "playerId": "8259",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 130,
+    "playerId": "13345",
+    "round": 13,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 131,
+    "playerId": "13330",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 132,
+    "playerId": "8134",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": true,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 133,
+    "playerId": "12512",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 134,
+    "playerId": "3451",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 135,
+    "playerId": "12469",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 136,
+    "playerId": "8132",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 137,
+    "playerId": "9754",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 138,
+    "playerId": "13293",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 139,
+    "playerId": "5012",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 140,
+    "playerId": "PHI",
+    "round": 14,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 141,
+    "playerId": "12501",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 142,
+    "playerId": "11646",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 143,
+    "playerId": "12015",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 144,
+    "playerId": "11655",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 145,
+    "playerId": "13413",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 146,
+    "playerId": "2747",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 147,
+    "playerId": "BAL",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": true,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 148,
+    "playerId": "7594",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 149,
+    "playerId": "12474",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 150,
+    "playerId": "12545",
+    "round": 15,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 151,
+    "playerId": "13337",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 152,
+    "playerId": "8676",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 153,
+    "playerId": "11624",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": true,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 154,
+    "playerId": "5022",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": true,
+    "ownerSlug": "brendon-ng",
+    "pickNo": 155,
+    "playerId": "11584",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 156,
+    "playerId": "11786",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 157,
+    "playerId": "4035",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 158,
+    "playerId": "9508",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 159,
+    "playerId": "13305",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 160,
+    "playerId": "4892",
+    "round": 16,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 1,
+    "isKeeper": false,
+    "ownerSlug": "reagan-schmidt",
+    "pickNo": 161,
+    "playerId": "8154",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "reagan-schmidt"
+  },
+  {
+    "draftSlot": 2,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 162,
+    "playerId": "LAC",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "tyler-jung"
+  },
+  {
+    "draftSlot": 3,
+    "isKeeper": false,
+    "ownerSlug": "jaymie-lew",
+    "pickNo": 163,
+    "playerId": "9225",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "jaymie-lew"
+  },
+  {
+    "draftSlot": 4,
+    "isKeeper": false,
+    "ownerSlug": "spencer-kim",
+    "pickNo": 164,
+    "playerId": "JAX",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "spencer-kim"
+  },
+  {
+    "draftSlot": 5,
+    "isKeeper": false,
+    "ownerSlug": "safvet-besen",
+    "pickNo": 165,
+    "playerId": "13288",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "safvet-besen"
+  },
+  {
+    "draftSlot": 6,
+    "isKeeper": false,
+    "ownerSlug": "tyler-jung",
+    "pickNo": 166,
+    "playerId": "11581",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "brendon-ng"
+  },
+  {
+    "draftSlot": 7,
+    "isKeeper": false,
+    "ownerSlug": "cassidy-pensa",
+    "pickNo": 167,
+    "playerId": "6804",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "cassidy-pensa"
+  },
+  {
+    "draftSlot": 8,
+    "isKeeper": false,
+    "ownerSlug": "jake-gibbons",
+    "pickNo": 168,
+    "playerId": "13346",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "jake-gibbons"
+  },
+  {
+    "draftSlot": 9,
+    "isKeeper": false,
+    "ownerSlug": "lauren-gross",
+    "pickNo": 169,
+    "playerId": "12530",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "lauren-gross"
+  },
+  {
+    "draftSlot": 10,
+    "isKeeper": false,
+    "ownerSlug": "david-collier",
+    "pickNo": 170,
+    "playerId": "9511",
+    "round": 17,
+    "season": 2026,
+    "slotOwnerSlug": "david-collier"
   }
 ]

@@ -1522,7 +1522,7 @@
     "birth_date": "1996-01-06",
     "full_name": "Noah Brown",
     "position": "WR",
-    "team": "LV",
+    "team": null,
     "years_exp": 9
   },
   "4273": {
@@ -3440,7 +3440,7 @@
     "birth_date": "2001-01-27",
     "full_name": "Cade York",
     "position": "K",
-    "team": "NYJ",
+    "team": null,
     "years_exp": 4
   },
   "8259": {
@@ -3940,6 +3940,13 @@
     "team": "NO",
     "years_exp": 2
   },
+  "11581": {
+    "birth_date": "2001-01-05",
+    "full_name": "MarShawn Lloyd",
+    "position": "RB",
+    "team": "GB",
+    "years_exp": 2
+  },
   "11582": {
     "birth_date": "2002-10-21",
     "full_name": "Carson Steele",
@@ -3972,7 +3979,7 @@
     "birth_date": "2002-07-23",
     "full_name": "Trey Benson",
     "position": "RB",
-    "team": "ARI",
+    "team": null,
     "years_exp": 2
   },
   "11596": {
@@ -4493,6 +4500,13 @@
     "team": "TEN",
     "years_exp": 0
   },
+  "13281": {
+    "birth_date": "2004-08-12",
+    "full_name": "Jordyn Tyson",
+    "position": "WR",
+    "team": "NO",
+    "years_exp": 0
+  },
   "13286": {
     "birth_date": "2003-10-09",
     "full_name": "Jadarian Price",
@@ -4505,6 +4519,20 @@
     "full_name": "Jeremiyah Love",
     "position": "RB",
     "team": "ARI",
+    "years_exp": 0
+  },
+  "13288": {
+    "birth_date": "2004-01-06",
+    "full_name": "Nicholas Singleton",
+    "position": "RB",
+    "team": "TEN",
+    "years_exp": 0
+  },
+  "13293": {
+    "birth_date": "2004-05-05",
+    "full_name": "Ja'Kobi Lane",
+    "position": "WR",
+    "team": "BAL",
     "years_exp": 0
   },
   "13294": {
@@ -4528,11 +4556,39 @@
     "team": "LV",
     "years_exp": 0
   },
+  "13330": {
+    "birth_date": "2005-03-04",
+    "full_name": "Kenyon Sadiq",
+    "position": "TE",
+    "team": "NYJ",
+    "years_exp": 0
+  },
+  "13337": {
+    "birth_date": "2003-10-10",
+    "full_name": "Emmett Johnson",
+    "position": "RB",
+    "team": "KC",
+    "years_exp": 0
+  },
+  "13345": {
+    "birth_date": "2003-08-20",
+    "full_name": "Jonah Coleman",
+    "position": "RB",
+    "team": "DEN",
+    "years_exp": 0
+  },
   "13346": {
     "birth_date": "2003-12-06",
     "full_name": "Denzel Boston",
     "position": "WR",
     "team": "CLE",
+    "years_exp": 0
+  },
+  "13413": {
+    "birth_date": "2003-02-11",
+    "full_name": "Cyrus Allen",
+    "position": "WR",
+    "team": "KC",
     "years_exp": 0
   },
   "13417": {

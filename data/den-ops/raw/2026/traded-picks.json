@@ -1,0 +1,65 @@
+[
+  {
+    "owner_id": 4,
+    "previous_owner_id": 1,
+    "roster_id": 1,
+    "round": 15,
+    "season": "2026"
+  },
+  {
+    "owner_id": 3,
+    "previous_owner_id": 1,
+    "roster_id": 1,
+    "round": 17,
+    "season": "2026"
+  },
+  {
+    "owner_id": 3,
+    "previous_owner_id": 2,
+    "roster_id": 2,
+    "round": 7,
+    "season": "2026"
+  },
+  {
+    "owner_id": 3,
+    "previous_owner_id": 2,
+    "roster_id": 2,
+    "round": 10,
+    "season": "2026"
+  },
+  {
+    "owner_id": 1,
+    "previous_owner_id": 3,
+    "roster_id": 3,
+    "round": 7,
+    "season": "2026"
+  },
+  {
+    "owner_id": 2,
+    "previous_owner_id": 3,
+    "roster_id": 3,
+    "round": 8,
+    "season": "2026"
+  },
+  {
+    "owner_id": 2,
+    "previous_owner_id": 3,
+    "roster_id": 3,
+    "round": 9,
+    "season": "2026"
+  },
+  {
+    "owner_id": 1,
+    "previous_owner_id": 4,
+    "roster_id": 4,
+    "round": 4,
+    "season": "2026"
+  },
+  {
+    "owner_id": 4,
+    "previous_owner_id": 1,
+    "roster_id": 4,
+    "round": 17,
+    "season": "2026"
+  }
+]
