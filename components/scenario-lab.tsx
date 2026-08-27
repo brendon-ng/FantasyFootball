@@ -43,6 +43,7 @@ export function ScenarioLab({
   adp,
   draftRounds,
   maxKeepers,
+  keepers,
   userIdToSlug,
   ownerNames,
   usage,
@@ -58,6 +59,14 @@ export function ScenarioLab({
   adp: Record<string, AdpEntry>;
   draftRounds: number;
   maxKeepers: number;
+  /**
+   * Whether this league plays keepers at all.
+   *
+   * PRESENTATIONAL ONLY. With it off `contracts` is already empty, so every
+   * calculation below produces the same answer either way — this just stops the
+   * page offering a keeper editor to a league with nothing to keep.
+   */
+  keepers: boolean;
   userIdToSlug: Record<string, string>;
   ownerNames: Record<string, string>;
   usage: Record<string, PlayerUsage[]>;
@@ -218,6 +227,7 @@ export function ScenarioLab({
         maxKeepers={maxKeepers}
         api={api}
         providerName={providerName}
+        keepers={keepers}
         // `orderSet`, never the bare slot map — see the prop's own note.
         liveOrder={
           d?.orderSet ? { slotToRoster: d.slotToRoster, mocked: d.mocked } : null
@@ -231,7 +241,11 @@ export function ScenarioLab({
         <PanelHeader
           title={`Projected ${season} Draft Board`}
           meta={api.active ? "scenario" : `live from ${providerName}`}
-          legend="Keepers occupy the pick they cost — a green cell is a pick already spent, and the number beside it is cost round minus market round, so positive is a bargain. Anything you have not edited follows the live data."
+          legend={
+            keepers
+              ? "Keepers occupy the pick they cost — a green cell is a pick already spent, and the number beside it is cost round minus market round, so positive is a bargain. Anything you have not edited follows the live data."
+              : "Who owns each pick after trades, and who the market says is available there. Anything you have not edited follows the live data."
+          }
         />
 
         {/* Off by choice, not by default: the fill-ins are the most useful thing

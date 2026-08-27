@@ -10,7 +10,7 @@
   "shortName": "Masterbatters",
   "features": {
     "keepers": false,
-    "adp": false,
+    "adp": true,
     "espnImport": false,
     "weeklyLowPunishment": true,
     "seasonPunishment": true

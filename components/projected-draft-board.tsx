@@ -321,8 +321,12 @@ export function ProjectedDraftBoard({
             </span>
           ) : null}
           <span>
-            {shape.rounds} rounds · {shape.teams} teams · {totalKept} keeper
-            {totalKept === 1 ? "" : "s"} placed
+            {shape.rounds} rounds · {shape.teams} teams
+            {/* A redraft league has none, and "0 keepers placed" is a fact about
+                a game it does not play. */}
+            {totalKept
+              ? ` · ${totalKept} keeper${totalKept === 1 ? "" : "s"} placed`
+              : ""}
             {totalDrafted ? ` · ${totalDrafted} picked` : ""}
           </span>
         </span>

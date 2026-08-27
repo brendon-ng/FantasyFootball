@@ -1386,6 +1386,23 @@ lands three days before the draft and the ORDER IS DRAWN AFTER IT (bylaw 1.7), s
 every keeper decision is made without knowing your slot — and the only way to
 reason about that is to try orders.
 
+EVERY LEAGUE GETS IT, KEEPER OR NOT. It used to be gated on `features.keepers`,
+which was too broad: the draft order, the projected board and the available pool
+are just as useful to a redraft league — arguably more so, since a redraft team
+has nothing but the draft. Only the keeper HALF is gated now, and with the flag
+off `getKeepers()` is empty anyway, so every calculation underneath produces the
+same answer without branching. A redraft league simply gets the order editor,
+and loses nothing by losing "Reset all" with the keeper panel: the order is the
+whole scenario there, and the order editor's own Clear already does that job.
+
+THAT MADE `features.adp` MATTER FOR A REDRAFT LEAGUE, which it never had before.
+The pool is built from ADP, so a league that never captures any gets an empty
+one — the most useful part of the page missing. The flag is consulted in exactly
+ONE place (`scripts/adp.ts`, deciding whether to capture) and nothing in the UI
+reads it, so turning it on is purely additive. Masterbatters now does; the round
+conversion divides by each league's OWN team count, so the same market reads
+differently at 10 teams and at 12.
+
 NOT IN THE NAV, and that is deliberate rather than unfinished. Every tab up there
 describes what the league has done; this describes what it has not done yet.
 Reaching it means typing the path. Do not add it to `LINKS` in `components/nav.tsx`.

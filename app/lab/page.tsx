@@ -1,5 +1,5 @@
 import { ScenarioLab } from "@/components/scenario-lab";
-import { EmptyState, Panel } from "@/components/ui";
+
 import {
   features,
   getLeagueRefs,
@@ -35,19 +35,13 @@ const MAX_KEEPERS = 4;
  * deadline. This one answers "what if", and everything on it is invented. Mixing
  * the two would put an editable control next to a number people rely on.
  *
- * Gated on the keepers feature like every other keeper surface, so a redraft
- * league gets the same explanation it gets everywhere else rather than an empty
- * editor.
+ * NOT GATED ON KEEPERS. It was, and that was too broad: the draft order, the
+ * board and the available pool are just as useful to a redraft league — arguably
+ * more so, since a redraft team has nothing but the draft. Only the keeper half
+ * is gated, and with `features.keepers` off the contracts list is empty anyway,
+ * so the machinery below degrades on its own rather than needing branches.
  */
 export default function LabPage() {
-  if (!features().keepers) {
-    return (
-      <Panel>
-        <EmptyState>This league does not use keepers, so there is no board to plan.</EmptyState>
-      </Panel>
-    );
-  }
-
   const owners = getOwners();
   const seasons = getSeasons();
   /**
@@ -66,7 +60,10 @@ export default function LabPage() {
   const nextSeason = Math.max(...seasons.map((s) => s.season), 0) + 1;
   const leagueRef = getLeagueRefs()[String(nextSeason)] ?? null;
 
-  const contracts = getKeepers().final.filter((c) => c.ownerSlug);
+  // Empty for a redraft league — `resolveKeepers()` never runs there — which is
+  // what makes the rest of this page work unchanged.
+  const keepers = features().keepers;
+  const contracts = keepers ? getKeepers().final.filter((c) => c.ownerSlug) : [];
 
   /**
    * Season-by-season usage for the modal, NARROWED to players it can open.
@@ -126,9 +123,9 @@ export default function LabPage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Scenario Lab</h1>
         <p className="mt-1 max-w-2xl text-sm text-chalk-500">
-          Set every team&rsquo;s keepers and the draft order by hand, and watch the {nextSeason}{" "}
-          board redraw. Nothing here is real and nothing is sent anywhere — it lives in this
-          browser until you reset it.
+          Set {keepers ? <>every team&rsquo;s keepers and </> : null}the draft order by hand, and
+          watch the {nextSeason} board redraw. Nothing here is real and nothing is sent anywhere —
+          it lives in this browser until you reset it.
         </p>
       </div>
 
@@ -140,6 +137,7 @@ export default function LabPage() {
         adp={Object.fromEntries(adp.byPlayer)}
         draftRounds={draftRounds}
         maxKeepers={MAX_KEEPERS}
+        keepers={keepers}
         userIdToSlug={getUserIdToSlug()}
         ownerNames={Object.fromEntries(owners.map((o) => [o.slug, o.name]))}
         usage={usage}

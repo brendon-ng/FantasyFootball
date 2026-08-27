@@ -42,6 +42,7 @@ export function ScenarioEditor({
   maxKeepers,
   api,
   providerName,
+  keepers,
   liveOrder,
   projectedPicks,
   releasedPicks,
@@ -55,6 +56,16 @@ export function ScenarioEditor({
   api: ScenarioApi;
   /** The live service backing this season — "Sleeper" or "ESPN". */
   providerName: string;
+  /**
+   * Whether to offer the keeper half at all.
+   *
+   * A REDRAFT LEAGUE GETS THE ORDER EDITOR AND NOTHING ELSE. It has no contracts,
+   * so the panel would be a list of teams with nothing under each — and the
+   * order is the whole scenario there, which is why losing "Reset all" with it
+   * costs nothing: the order editor's own Clear does exactly the same job when
+   * the order is all a scenario holds.
+   */
+  keepers: boolean;
   /**
    * The REAL order, once it has been drawn, so a scenario can start from it.
    *
@@ -102,105 +113,107 @@ export function ScenarioEditor({
         providerName={providerName}
       />
 
-      <div className="rounded-lg border border-ink-600 bg-ink-850">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-ink-600 px-3 py-2">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-chalk-300">
-            Keeper selections
-          </h3>
-          <div className="flex gap-1.5">
-            <Btn
-              onClick={() =>
-                seed(Object.fromEntries(teams.map((t) => [t.rosterId, t.live])))
-              }
-              title={`Copy every team's current ${providerName} selections in, so you can edit from there.`}
-            >
-              Seed from {providerName}
-            </Btn>
-            <Btn onClick={reset} title={`Drop the whole scenario and follow ${providerName} again.`}>
-              Reset all
-            </Btn>
+      {keepers ? (
+        <div className="rounded-lg border border-ink-600 bg-ink-850">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-ink-600 px-3 py-2">
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-chalk-300">
+              Keeper selections
+            </h3>
+            <div className="flex gap-1.5">
+              <Btn
+                onClick={() =>
+                  seed(Object.fromEntries(teams.map((t) => [t.rosterId, t.live])))
+                }
+                title={`Copy every team's current ${providerName} selections in, so you can edit from there.`}
+              >
+                Seed from {providerName}
+              </Btn>
+              <Btn onClick={reset} title={`Drop the whole scenario and follow ${providerName} again.`}>
+                Reset all
+              </Btn>
+            </div>
+          </div>
+
+          <div className="divide-y divide-ink-700">
+            {teams.map((t) => {
+              const sel = selectionFor(t);
+              const over = isOverridden(t);
+              const expanded = open === t.rosterId;
+              return (
+                <div key={t.rosterId}>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(expanded ? null : t.rosterId)}
+                    className="flex w-full items-center gap-2 px-3 py-2 text-left transition-colors hover:bg-ink-800"
+                  >
+                    <span
+                      className="min-w-0 flex-1 truncate text-sm font-medium text-chalk-100"
+                      data-owner={t.slug ?? undefined}
+                    >
+                      {t.name}
+                    </span>
+                    {over ? (
+                      <span className="shrink-0 rounded border border-loss/60 bg-loss/15 px-1 text-[9px] font-bold uppercase tracking-wide text-loss">
+                        edited
+                      </span>
+                    ) : (
+                      <span className="shrink-0 text-[10px] text-chalk-600">follows {providerName}</span>
+                    )}
+                    <span className="tabular shrink-0 text-[11px] text-chalk-500">
+                      {sel.length}/{maxKeepers}
+                    </span>
+                    <span className="shrink-0 text-[10px] text-chalk-600">
+                      {expanded ? "▾" : "▸"}
+                    </span>
+                  </button>
+
+                  {sel.length > 0 && !expanded ? (
+                    <div className="flex flex-wrap gap-1 px-3 pb-2">
+                      {sel.map((id) => (
+                        <span
+                          key={id}
+                          className="rounded border border-accent/40 bg-accent/10 px-1.5 py-0.5 text-[10px] text-chalk-300"
+                        >
+                          {players[id]?.full_name ?? id}
+                          <span className="ml-1 text-chalk-600">
+                            R{roundFor(t.contracts, id, adp, draftRounds)}
+                          </span>
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  {expanded ? (
+                    <div className="px-3 pb-3">
+                      {over ? (
+                        <button
+                          type="button"
+                          onClick={() => clearRoster(t.rosterId)}
+                          className="mb-2 text-[10px] text-chalk-500 underline underline-offset-2 hover:text-accent"
+                        >
+                          revert this team to {providerName}
+                        </button>
+                      ) : null}
+                      <ContractList
+                        contracts={t.contracts}
+                        selected={sel}
+                        players={players}
+                        adp={adp}
+                        projectedPicks={projectedPicks}
+                        releasedPicks={releasedPicks}
+                        onOpenPlayer={onOpenPlayer}
+                        draftRounds={draftRounds}
+                        atCap={sel.length >= maxKeepers}
+                        onToggle={(id) => toggle(t, id)}
+                      />
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
           </div>
         </div>
-
-        <div className="divide-y divide-ink-700">
-          {teams.map((t) => {
-            const sel = selectionFor(t);
-            const over = isOverridden(t);
-            const expanded = open === t.rosterId;
-            return (
-              <div key={t.rosterId}>
-                <button
-                  type="button"
-                  onClick={() => setOpen(expanded ? null : t.rosterId)}
-                  className="flex w-full items-center gap-2 px-3 py-2 text-left transition-colors hover:bg-ink-800"
-                >
-                  <span
-                    className="min-w-0 flex-1 truncate text-sm font-medium text-chalk-100"
-                    data-owner={t.slug ?? undefined}
-                  >
-                    {t.name}
-                  </span>
-                  {over ? (
-                    <span className="shrink-0 rounded border border-loss/60 bg-loss/15 px-1 text-[9px] font-bold uppercase tracking-wide text-loss">
-                      edited
-                    </span>
-                  ) : (
-                    <span className="shrink-0 text-[10px] text-chalk-600">follows {providerName}</span>
-                  )}
-                  <span className="tabular shrink-0 text-[11px] text-chalk-500">
-                    {sel.length}/{maxKeepers}
-                  </span>
-                  <span className="shrink-0 text-[10px] text-chalk-600">
-                    {expanded ? "▾" : "▸"}
-                  </span>
-                </button>
-
-                {sel.length > 0 && !expanded ? (
-                  <div className="flex flex-wrap gap-1 px-3 pb-2">
-                    {sel.map((id) => (
-                      <span
-                        key={id}
-                        className="rounded border border-accent/40 bg-accent/10 px-1.5 py-0.5 text-[10px] text-chalk-300"
-                      >
-                        {players[id]?.full_name ?? id}
-                        <span className="ml-1 text-chalk-600">
-                          R{roundFor(t.contracts, id, adp, draftRounds)}
-                        </span>
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
-
-                {expanded ? (
-                  <div className="px-3 pb-3">
-                    {over ? (
-                      <button
-                        type="button"
-                        onClick={() => clearRoster(t.rosterId)}
-                        className="mb-2 text-[10px] text-chalk-500 underline underline-offset-2 hover:text-accent"
-                      >
-                        revert this team to {providerName}
-                      </button>
-                    ) : null}
-                    <ContractList
-                      contracts={t.contracts}
-                      selected={sel}
-                      players={players}
-                      adp={adp}
-                      projectedPicks={projectedPicks}
-                      releasedPicks={releasedPicks}
-                      onOpenPlayer={onOpenPlayer}
-                      draftRounds={draftRounds}
-                      atCap={sel.length >= maxKeepers}
-                      onToggle={(id) => toggle(t, id)}
-                    />
-                  </div>
-                ) : null}
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      ) : null}
     </div>
   );
 }
