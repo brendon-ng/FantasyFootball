@@ -1,9 +1,12 @@
+import Link from "next/link";
+
 import { ScenarioLab } from "@/components/scenario-lab";
 
 import {
   features,
-  getLeagueRefs,
+  getDrafts,
   getKeepers,
+  getLeagueRefs,
   getLiveAdp,
   getOutlooks,
   getOwners,
@@ -63,6 +66,24 @@ export default function LabPage() {
   // Empty for a redraft league — `resolveKeepers()` never runs there — which is
   // what makes the rest of this page work unchanged.
   const keepers = features().keepers;
+  /**
+   * The draft this page plans is already in the books.
+   *
+   * `nextSeason` is `max(finished seasons) + 1`, which does NOT advance when a
+   * draft is archived — only when the SEASON ends — so for the five months
+   * between the two this page would otherwise render a full what-if editor over
+   * a draft that has already happened, and a board that refuses to draw because
+   * the provider says `complete`.
+   *
+   * There is nothing to move it on to, either: planning the next one needs a
+   * league id, rounds and a slot map, and the provider has no such league until
+   * it is created. So it says so rather than inventing a shape to draw.
+   *
+   * Build-time, from the committed picks — the board inside could only discover
+   * this in the browser, and by then the editor is already on screen.
+   */
+  const drafted = getDrafts().some((d) => d.season === nextSeason);
+
   const contracts = keepers ? getKeepers().final.filter((c) => c.ownerSlug) : [];
 
   /**
@@ -116,6 +137,29 @@ export default function LabPage() {
         .map((sl) => ownerMap.get(sl)?.firstName ?? sl)
         .join(" & ");
     }
+  }
+
+  if (drafted) {
+    return (
+      <div className="space-y-5 sm:space-y-6">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Scenario Lab</h1>
+          <p className="mt-1 max-w-2xl text-sm text-chalk-500">
+            The {nextSeason} draft is done, so there is nothing left to plan against it.{" "}
+            <Link
+              href={`/history/${nextSeason}/draft/`}
+              className="text-chalk-400 transition-colors hover:text-accent"
+            >
+              See the board as it happened →
+            </Link>
+          </p>
+          <p className="mt-3 max-w-2xl text-xs text-chalk-600">
+            This page comes back when next season&rsquo;s league exists — it needs a real
+            draft to know the rounds, the teams and the slots.
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (

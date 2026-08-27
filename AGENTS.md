@@ -1386,6 +1386,19 @@ lands three days before the draft and the ORDER IS DRAWN AFTER IT (bylaw 1.7), s
 every keeper decision is made without knowing your slot — and the only way to
 reason about that is to try orders.
 
+IT STANDS DOWN ONCE ITS OWN DRAFT IS ARCHIVED. `nextSeason` is `max(finished
+seasons) + 1`, which advances when a SEASON ends and not when a draft is run — so
+for the five months between the two, this page would otherwise put a full what-if
+editor over a draft that has already happened, above a board refusing to draw
+because the provider says `complete`. There is nowhere to move it on to either:
+planning the next draft needs a league id, rounds and a slot map, and no such
+league exists until the provider creates one. So it says so and links to the real
+board. Decided at BUILD time from the committed picks, because the board inside it
+could only find out in the browser, by which point the editor is already up.
+
+A side effect worth knowing: den-ops' lab page went from 642KB to 16KB, having
+been shipping a 389-player pool nobody could draft from.
+
 EVERY LEAGUE GETS IT, KEEPER OR NOT. It used to be gated on `features.keepers`,
 which was too broad: the draft order, the projected board and the available pool
 are just as useful to a redraft league — arguably more so, since a redraft team
