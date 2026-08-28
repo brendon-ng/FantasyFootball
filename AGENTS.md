@@ -754,6 +754,7 @@ has been lost, so that is what it asks for.
 | --- | --- | --- | --- |
 | `suggesting` | callout + ballot | punishment, by | newest first |
 | `voting` | callout + ballot | + votes | most votes first |
+| `last-place-voting` | callout, last-place ballot, weekly pool, weekly ballot | + status | most votes first |
 | `live` | stat tiles, ledger, pool, tally, ballot collapsed | + status | most votes first |
 
 NO STAT TILES BEFORE THE SEASON STARTS. A suggestion count and a running vote
@@ -1327,6 +1328,13 @@ endpoint and two lines of copy differ. A second component would have drifted on
 the first rule to change, and there are four: no counts inside, ordered by id,
 save disabled until the server's ballot has arrived, and the browsing visitor
 taken through the picker and then straight into the ballot.
+
+THE WEEKLY RESULT IS ON SHOW BY THEN, and that is the point rather than a
+leak: the weekly vote is decided, so the ballot's status column says who made the
+pool and the pool panel itself appears a phase earlier than it used to. Together
+they explain why the last-place ballot holds the suggestions it does — one panel
+is exactly the complement of the other. The TALLY keeps its `live` gate, since
+nobody has lost a week and "who owes what" has nothing to count.
 
 TURNOUT ONLY WHILE IT IS OPEN. No votes column anywhere, which is also why the
 list is ordered by id — sorting by popularity leaks the ranking as effectively as

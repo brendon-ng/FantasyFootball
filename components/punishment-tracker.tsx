@@ -546,13 +546,39 @@ export function PunishmentTracker({
             </div>
           ) : null}
 
-          {phase === "live" ? (
-            <div className="grid gap-5 lg:grid-cols-2">
+          {/* THE POOL IS WORTH SEEING AS SOON AS IT IS SET, which is a phase
+              earlier than it was shown. In `last-place-voting` nothing has been
+              drawn yet, so this is the whole weekly pool — and it is the natural
+              companion to the last-place ballot beside it, which holds exactly
+              the suggestions this panel does not.
+
+              The tally keeps its `live` gate: nobody has lost a week yet, so
+              "who owes what" has nothing to count. */}
+          {phase === "live" || phase === "last-place-voting" ? (
+            <div
+              className={
+                phase === "live" ? "grid gap-5 lg:grid-cols-2" : "grid gap-5"
+              }
+            >
               <Panel>
                 <PanelHeader
-                  title="Still in the pool"
-                  meta={pool.length ? `${pool.length} left` : "empty"}
-                  legend="What a loser can still draw."
+                  // "Still in the pool" and "left" both imply some have gone.
+                  // Before the season none have, so it is simply the pool.
+                  title={
+                    phase === "live" ? "Still in the pool" : "The weekly pool"
+                  }
+                  meta={
+                    phase === "live"
+                      ? pool.length
+                        ? `${pool.length} left`
+                        : "empty"
+                      : `${pool.length} punishment${pool.length === 1 ? "" : "s"}`
+                  }
+                  legend={
+                    phase === "live"
+                      ? "What a loser can still draw."
+                      : "What a weekly loser will draw from. The last-place ballot holds everything this does not."
+                  }
                 />
                 {pool.length ? (
                   <ul className="divide-y divide-ink-700">
@@ -570,62 +596,64 @@ export function PunishmentTracker({
                 )}
               </Panel>
 
-              <Panel>
-                <PanelHeader
-                  title="Who owes what"
-                  meta={`${tally.length} owners`}
-                />
-                <ListHeader>
-                  <Col className="flex-1">Owner</Col>
-                  <Col
-                    className="w-12 shrink-0 text-right"
-                    hint="Weeks finishing lowest"
-                  >
-                    Lost
-                  </Col>
-                  <Col className="w-12 shrink-0 text-right">Done</Col>
-                  <Col
-                    className="w-12 shrink-0 text-right"
-                    hint="Assigned but not yet completed"
-                  >
-                    Owed
-                  </Col>
-                </ListHeader>
-                <ul className="divide-y divide-ink-700">
-                  {tally.map((t) => (
-                    <li
-                      key={t.slug}
-                      className="flex items-center gap-3 px-4 py-2.5 sm:px-5"
+              {phase === "live" ? (
+                <Panel>
+                  <PanelHeader
+                    title="Who owes what"
+                    meta={`${tally.length} owners`}
+                  />
+                  <ListHeader>
+                    <Col className="flex-1">Owner</Col>
+                    <Col
+                      className="w-12 shrink-0 text-right"
+                      hint="Weeks finishing lowest"
                     >
-                      {/* A co-owned team is one row and both names — the tally
-                          counts weeks a TEAM lost, and both of them owe it. */}
-                      <span className="min-w-0 flex-1 truncate text-sm">
-                        <TeamNames
-                          season={active ?? 0}
-                          slugs={[t.slug]}
-                          teams={teams}
-                          names={names}
-                        />
-                      </span>
-                      <span className="tabular w-12 shrink-0 text-right text-sm text-chalk-300">
-                        {t.lost}
-                      </span>
-                      <span className="tabular w-12 shrink-0 text-right text-sm text-chalk-500">
-                        {t.completed || "—"}
-                      </span>
-                      <span
-                        className={`tabular w-12 shrink-0 text-right text-sm ${
-                          t.outstanding
-                            ? "font-semibold text-loss"
-                            : "text-chalk-600"
-                        }`}
+                      Lost
+                    </Col>
+                    <Col className="w-12 shrink-0 text-right">Done</Col>
+                    <Col
+                      className="w-12 shrink-0 text-right"
+                      hint="Assigned but not yet completed"
+                    >
+                      Owed
+                    </Col>
+                  </ListHeader>
+                  <ul className="divide-y divide-ink-700">
+                    {tally.map((t) => (
+                      <li
+                        key={t.slug}
+                        className="flex items-center gap-3 px-4 py-2.5 sm:px-5"
                       >
-                        {t.outstanding || "—"}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </Panel>
+                        {/* A co-owned team is one row and both names — the tally
+                            counts weeks a TEAM lost, and both of them owe it. */}
+                        <span className="min-w-0 flex-1 truncate text-sm">
+                          <TeamNames
+                            season={active ?? 0}
+                            slugs={[t.slug]}
+                            teams={teams}
+                            names={names}
+                          />
+                        </span>
+                        <span className="tabular w-12 shrink-0 text-right text-sm text-chalk-300">
+                          {t.lost}
+                        </span>
+                        <span className="tabular w-12 shrink-0 text-right text-sm text-chalk-500">
+                          {t.completed || "—"}
+                        </span>
+                        <span
+                          className={`tabular w-12 shrink-0 text-right text-sm ${
+                            t.outstanding
+                              ? "font-semibold text-loss"
+                              : "text-chalk-600"
+                          }`}
+                        >
+                          {t.outstanding || "—"}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </Panel>
+              ) : null}
             </div>
           ) : null}
 
@@ -1133,7 +1161,13 @@ function Ballot({
   myPicks: Set<number>;
 }) {
   const showVotes = phase !== "suggesting";
-  const showStatus = phase === "live";
+  /*
+   * THE WEEKLY VOTE IS OVER BY `last-place-voting`, so the pool is settled and
+   * the status column can say who made it. Showing it only in `live` withheld a
+   * decided result for no reason — and it is the column that explains why the
+   * last-place ballot holds the suggestions it does.
+   */
+  const showStatus = phase === "live" || phase === "last-place-voting";
   const title = phase === "suggesting" ? "Suggestions" : "The ballot";
   const meta = BALLOT_META[phase](suggestions.length, poolSize);
 
