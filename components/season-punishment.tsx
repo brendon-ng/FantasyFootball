@@ -49,6 +49,7 @@ export function SeasonPunishmentPanel({
   names,
   cloud,
   preset,
+  onSpin,
 }: {
   league: string;
   punishment: SeasonPunishment;
@@ -58,6 +59,11 @@ export function SeasonPunishmentPanel({
   /** Both null when the league has no Cloudinary configured — then no media. */
   cloud: string | null;
   preset: string | null;
+  /**
+   * Opens the wheel for a tied vote. Absent unless there is something to spin
+   * for AND somebody to spin it — the season has to have produced a last place.
+   */
+  onSpin?: () => void;
 }) {
   const { season, state, loser } = punishment;
   const done = formatPunishmentDate(punishment.completed);
@@ -71,6 +77,10 @@ export function SeasonPunishmentPanel({
             <span className="whitespace-nowrap font-semibold text-win">
               {/* No date is a legal way to be done — see the entry type. */}
               {done ? `✓ ${done}` : "✓ Done"}
+            </span>
+          ) : state === "shortlist" ? (
+            <span className="whitespace-nowrap font-semibold text-gold">
+              {punishment.shortlist.length}-way tie
             </span>
           ) : state === "owed" ? (
             <span className="whitespace-nowrap font-semibold text-loss">
@@ -90,6 +100,52 @@ export function SeasonPunishmentPanel({
             there is no column to keep aligned. Written as inline prose rather
             than flex cells so it WRAPS on a phone the way a sentence does,
             instead of a short name column squeezing the text beside it. */}
+        {/* TIED AND UNSPUN: every one of them is still possible, so they are
+            listed rather than summarised. Two to five, by the league's own
+            expectation, so a list costs almost nothing and picking one to show
+            would be a lie. */}
+        {state === "shortlist" ? (
+          <>
+            <p className="text-sm leading-relaxed text-chalk-300">
+              The vote tied. Whoever finishes last spins for one of these:
+            </p>
+            <ul className="space-y-1">
+              {punishment.shortlist.map((t) => (
+                <li key={t} className="flex gap-2 text-sm text-chalk-300">
+                  <span aria-hidden className="shrink-0 text-chalk-600">
+                    ·
+                  </span>
+                  <span className="min-w-0 flex-1">{t}</span>
+                </li>
+              ))}
+            </ul>
+            {loser ? (
+              <div className="flex items-baseline gap-2 pt-1">
+                <span aria-hidden className="shrink-0">
+                  🚽
+                </span>
+                <span className="text-sm font-semibold">
+                  <TeamNames
+                    season={season}
+                    slugs={[loser]}
+                    teams={teams}
+                    names={names}
+                    full
+                  />
+                </span>
+                {onSpin ? (
+                  <button
+                    type="button"
+                    onClick={onSpin}
+                    className="ml-auto shrink-0 rounded border border-accent-dim/60 bg-accent/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent transition-colors hover:bg-accent/20"
+                  >
+                    Spin the wheel
+                  </button>
+                ) : null}
+              </div>
+            ) : null}
+          </>
+        ) : (
         <p className="text-sm leading-relaxed">
           <span aria-hidden className="mr-1.5">
             🚽
@@ -115,6 +171,16 @@ export function SeasonPunishmentPanel({
           ) : null}
           <span className="text-chalk-300">{punishment.punishment}</span>
         </p>
+        )}
+
+        {/* WHAT IT COULD HAVE BEEN. Smaller and quieter than the punishment
+            itself — the spin already happened and these are trivia, but they are
+            the trivia that makes the result feel earned. */}
+        {state !== "shortlist" && punishment.shortlist.length ? (
+          <p className="text-[11px] leading-relaxed text-chalk-600">
+            Also in the wheel: {punishment.shortlist.join(" · ")}
+          </p>
+        ) : null}
 
         {punishment.notes ? (
           <p className="text-xs leading-relaxed text-chalk-600">
@@ -122,7 +188,7 @@ export function SeasonPunishmentPanel({
           </p>
         ) : null}
 
-        {cloud && preset && state !== "pending" ? (
+        {cloud && preset && state !== "pending" && state !== "shortlist" ? (
           <SeasonMedia
             cloud={cloud}
             preset={preset}

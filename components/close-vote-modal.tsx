@@ -3,10 +3,7 @@
 import { useState } from "react";
 
 import { Sheet } from "@/components/sheet";
-import {
-  decideSeasonVote,
-  SeasonVoteTie,
-} from "@/lib/punishments-live";
+import { decideSeasonVote } from "@/lib/punishments-live";
 import type { PunishmentSuggestion } from "@/lib/punishments";
 
 /**
@@ -22,9 +19,10 @@ import type { PunishmentSuggestion } from "@/lib/punishments";
  * the first screen entitled to show them, and it shows them as the thing being
  * confirmed rather than as a leaderboard.
  *
- * A TIE IS NOT BROKEN QUIETLY. The server refuses and names the tied ids; this
- * then asks which, because picking one on the league's behalf is exactly the
- * judgement a script should not be making.
+ * A TIE IS A RESULT, NOT A PROBLEM TO SOLVE HERE. It closes with several
+ * finalists and no winner, and the league settles it on a wheel at the end of
+ * the season — so this dialog reports the tie rather than asking anyone to break
+ * it. Nothing further is needed from the commissioner.
  */
 export function CloseVoteModal({
   endpoint,
@@ -43,24 +41,16 @@ export function CloseVoteModal({
 }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [tied, setTied] = useState<number[] | null>(null);
   const [counts, setCounts] = useState<Record<string, number> | null>(null);
 
   const textOf = (id: number) =>
     candidates.find((c) => c.id === id)?.text ?? `#${id}`;
 
-  const decide = async (
-    close: (after?: () => void) => void,
-    punishmentId?: number,
-  ) => {
+  const decide = async (close: (after?: () => void) => void) => {
     setBusy(true);
     setError(null);
     try {
-      const res = await decideSeasonVote(endpoint, {
-        league,
-        season,
-        ...(punishmentId != null ? { punishmentId } : {}),
-      });
+      const res = await decideSeasonVote(endpoint, { league, season });
       setCounts(res.counts);
       // A FULL RELOAD, not a local merge. Deciding moves the sheet's phase to
       // `live`, which changes the whole page — the ledger appears, the ballot
@@ -68,12 +58,7 @@ export function CloseVoteModal({
       // guessing at what the feed now says.
       close(() => window.location.reload());
     } catch (e) {
-      if (e instanceof SeasonVoteTie) {
-        setTied(e.tied);
-        setError(null);
-      } else {
-        setError(e instanceof Error ? e.message : "Something went wrong.");
-      }
+      setError(e instanceof Error ? e.message : "Something went wrong.");
       setBusy(false);
     }
   };
@@ -86,31 +71,13 @@ export function CloseVoteModal({
     >
       {({ close }) => (
         <div className="px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:px-5 sm:pb-5">
-          <h2 className="text-sm font-semibold">
-            {tied ? "It is a tie" : "Close the vote?"}
-          </h2>
+          <h2 className="text-sm font-semibold">Close the vote?</h2>
           <p className="mt-1 text-xs leading-relaxed text-chalk-500">
-            {tied
-              ? "These are level at the top. Pick which one it is — the vote cannot settle this on its own."
-              : `${turnout.voted} of ${turnout.of} have voted. The winner is recorded and cannot be changed from here afterwards.`}
+            {turnout.voted} of {turnout.of} have voted. The winner is recorded and
+            cannot be changed from here afterwards — and if the top is tied, those
+            punishments go to a wheel for last place to spin at the end of the
+            season.
           </p>
-
-          {tied ? (
-            <ul className="mt-3 space-y-1.5">
-              {tied.map((id) => (
-                <li key={id}>
-                  <button
-                    type="button"
-                    disabled={busy}
-                    onClick={() => void decide(close, id)}
-                    className="w-full rounded-lg border border-ink-600 bg-ink-850 px-3 py-2 text-left text-sm text-chalk-300 transition-colors hover:border-accent-dim hover:text-accent disabled:opacity-40"
-                  >
-                    {textOf(id)}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : null}
 
           {counts ? (
             <ul className="mt-3 space-y-1 text-xs text-chalk-500">
@@ -136,16 +103,14 @@ export function CloseVoteModal({
             </div>
           ) : null}
 
-          {!tied ? (
-            <button
-              type="button"
-              disabled={busy}
-              onClick={() => void decide(close)}
-              className="mt-4 w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {busy ? "Counting…" : "Close and record"}
-            </button>
-          ) : null}
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => void decide(close)}
+            className="mt-4 w-full rounded-lg bg-accent px-4 py-2.5 text-sm font-bold text-ink-900 transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {busy ? "Counting…" : "Close and record"}
+          </button>
         </div>
       )}
     </Sheet>

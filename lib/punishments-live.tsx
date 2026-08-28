@@ -430,45 +430,61 @@ export async function castSeasonVote(
 }
 
 /**
- * Closes the vote and records the winner.
+ * Closes the vote and records the result.
  *
  * THE SERVER COUNTS, not the browser — the page would be asserting a result from
  * a tally it fetched seconds ago, and two people closing at once could disagree.
- * Same reasoning as the draw.
+ * Same rule as the draw.
  *
- * A TIE IS REFUSED RATHER THAN BROKEN, and comes back as `tied` so the caller can
- * pick. That is what makes the wheel usable here: the server still decides, once
- * an id is supplied.
+ * A TIE IS A RESULT, NOT AN ERROR. It comes back with `winnerId: null` and every
+ * tied id in `finalists`, because the league resolves those on a wheel at the end
+ * of the season rather than by somebody picking. `decideSeasonVote` used to
+ * refuse a tie outright; it no longer does.
  */
-export class SeasonVoteTie extends Error {
-  constructor(readonly tied: number[], message: string) {
-    super(message);
-    this.name = "SeasonVoteTie";
-  }
-}
-
 export async function decideSeasonVote(
   endpoint: string,
   body: { league: string; season: number; punishmentId?: number },
-): Promise<{ winnerId: number; text: string; counts: Record<string, number> }> {
+): Promise<{
+  winnerId: number | null;
+  finalists: number[];
+  texts: Record<string, string>;
+  counts: Record<string, number>;
+}> {
   const res = await fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify({ func: "decideSeasonVote", ...body }),
   });
-  const raw: unknown = await res.json().catch(() => null);
-  const d = (raw ?? {}) as Record<string, unknown>;
-  if (d.ok !== true) {
-    const tied = Array.isArray(d.tied) ? (d.tied as number[]) : null;
-    const message =
-      typeof d.error === "string" ? d.error : "Could not close the vote.";
-    if (tied?.length) throw new SeasonVoteTie(tied, message);
-    throw new Error(message);
-  }
+  const d = await readJson(res);
+  return {
+    winnerId: d.winnerId == null ? null : Number(d.winnerId),
+    finalists: Array.isArray(d.finalists) ? (d.finalists as number[]) : [],
+    texts: (d.texts ?? {}) as Record<string, string>,
+    counts: (d.counts ?? {}) as Record<string, number>,
+  };
+}
+
+/**
+ * Spins the wheel for a tied vote.
+ *
+ * THE SERVER DRAWS AND THE WHEEL ONLY REVEALS IT, exactly as the weekly draw
+ * does. The pick is made uniformly inside the same lock that writes it, so
+ * spinning, disliking the answer and closing the tab changes nothing, and a
+ * second attempt is refused by the sheet rather than by a component.
+ */
+export async function spinSeasonPunishment(
+  endpoint: string,
+  body: { league: string; season: number },
+): Promise<{ winnerId: number; text: string }> {
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ func: "spinSeasonPunishment", ...body }),
+  });
+  const d = await readJson(res);
   return {
     winnerId: Number(d.winnerId),
     text: typeof d.text === "string" ? d.text : "",
-    counts: (d.counts ?? {}) as Record<string, number>,
   };
 }
 

@@ -1341,6 +1341,21 @@ list is ordered by id — sorting by popularity leaks the ranking as effectively
 printing it. The counts appear exactly once, in the confirm dialog when the
 commissioner closes the vote, which is the first screen entitled to show them.
 
+A TIE GOES TO A WHEEL, AND IS NOT AN ERROR. `decideSeasonVote` writes every id
+that shared the top count to `Z3` and leaves `Z1` empty; the panel then lists all
+of them as possibilities for the rest of the season, and once the toilet bowl has
+produced a last place it offers `spinSeasonPunishment`. THE SERVER DRAWS
+UNIFORMLY INSIDE THE LOCK THAT WRITES THE RESULT, so the wheel only reveals a
+committed answer — the same rule as the weekly draw, and the reason a spin is
+final. `Z3` SURVIVES THE SPIN, which is what lets the panel show what it could
+have been in smaller type afterwards.
+
+That adds a fifth state, `shortlist`, ahead of the other four:
+`resolveSeasonPunishment` returns it when there is no winner but two or more
+finalists, and it deliberately does not fall through to `pending`, which would
+have to invent a single punishment to display. All eight branches are checked,
+including one finalist (renders nothing) and an outright win (no also-rans).
+
 THE SERVER COUNTS AND THE SERVER DECIDES. `decideSeasonVote` tallies inside the
 lock that writes the winner, so the browser never asserts a result from numbers
 it fetched seconds ago and two people closing at once cannot disagree — the same

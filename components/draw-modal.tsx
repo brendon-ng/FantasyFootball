@@ -461,7 +461,7 @@ const scatter = (i: number, salt: number) => {
 };
 
 /** Forty pieces, each with its own drift, spin, delay and duration. */
-function Confetti() {
+export function Confetti() {
   const pieces = useMemo(
     () =>
       Array.from({ length: 40 }, (_, i) => ({

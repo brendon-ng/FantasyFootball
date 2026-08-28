@@ -126,8 +126,22 @@ export const PUNISHMENT_PHASES = [
  * steering the vote they describe.
  */
 export interface SeasonVote {
-  /** The winning suggestion, once someone has closed the vote. */
+  /**
+   * The winning suggestion — null while a TIE is still unspun.
+   *
+   * A tie is a legitimate outcome rather than an error: the tied punishments go
+   * into a wheel that last place spins at the end of the season, so the vote can
+   * close with several finalists and no winner for months.
+   */
   winnerId: number | null;
+  /**
+   * Everyone who shared the top count. One id for an outright win, two to five
+   * for a tie, empty before the vote is closed.
+   *
+   * KEPT AFTER THE SPIN. `winnerId` says which one it landed on; this still lists
+   * the others, which is what lets the panel show what it could have been.
+   */
+  finalists: number[];
   /** ISO date the punishment was served. */
   completed: string | null;
   /** Slugs only. */
@@ -506,6 +520,9 @@ export function parseFeed(raw: unknown): PunishmentFeed {
       phase,
       seasonVote: {
         winnerId: asNumber(sv.winnerId),
+        finalists: asRows(sv.finalists)
+          .map(asNumber)
+          .filter((n): n is number => n != null),
         completed: asText(sv.completed),
         voters: asRows(sv.voters)
           .map((v) => asText(v)?.toLowerCase())

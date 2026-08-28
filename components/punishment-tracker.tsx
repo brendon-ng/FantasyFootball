@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { PunishmentLedger, TeamNames } from "@/components/punishment-ledger";
 import { SeasonPunishmentPanel } from "@/components/season-punishment";
 import { CloseVoteModal } from "@/components/close-vote-modal";
+import { SeasonSpinModal } from "@/components/season-spin-modal";
 import { CompleteModal } from "@/components/complete-modal";
 import {
   PunishmentMedia,
@@ -40,6 +41,7 @@ import {
   primaryOwner,
   PUNISHMENT_PHASES,
   tallyByOwner,
+  teamFor,
   type Ballot,
   type LedgerRow,
   type PunishmentPhase,
@@ -161,6 +163,7 @@ export function PunishmentTracker({
   /** Local echo of the viewer's season ballot, so the ticks update on save. */
   const [myLastPlace, setMyLastPlace] = useState<number[] | null>(null);
   const [closing, setClosing] = useState(false);
+  const [spinning, setSpinning] = useState(false);
   /**
    * Counts from the last save, laid over the feed's.
    *
@@ -253,15 +256,19 @@ export function PunishmentTracker({
    * feed through the same `resolveSeasonPunishment` and lands in the same four
    * states. Nothing downstream can tell which source it came from.
    */
+  const textOfSuggestion = (id: number) =>
+    suggestions.find((x) => x.id === id)?.text ?? "";
+  const sv = feedSeason?.seasonVote;
   const votedPunishment =
-    active && feedSeason?.seasonVote.winnerId != null
+    active && sv && (sv.winnerId != null || sv.finalists.length > 1)
       ? resolveSeasonPunishment(
           active,
           {
-            punishment:
-              suggestions.find((x) => x.id === feedSeason.seasonVote.winnerId)
-                ?.text ?? "",
-            completed: feedSeason.seasonVote.completed,
+            // Empty while a tie is unspun, which is what puts the resolver into
+            // its `shortlist` state rather than inventing a winner.
+            punishment: sv.winnerId != null ? textOfSuggestion(sv.winnerId) : "",
+            shortlist: sv.finalists.map(textOfSuggestion),
+            completed: sv.completed,
           },
           lastPlaceBySeason[active] ?? null,
         )
@@ -454,6 +461,13 @@ export function PunishmentTracker({
           names={names}
           cloud={cloudinaryCloud}
           preset={cloudinaryPreset}
+          onSpin={
+            // ANYONE MAY SPIN, like the weekly draw — the server picks and the
+            // sheet refuses a second attempt, so there is nothing to protect.
+            endpoint && shownPunishment?.state === "shortlist"
+              ? () => setSpinning(true)
+              : undefined
+          }
         />
       ) : null}
 
@@ -850,6 +864,26 @@ export function PunishmentTracker({
           ready={ballots.ready}
           onSaved={(ballot) => setMyLastPlace(ballot.punishmentIds)}
           onClose={() => setSeasonVoting(false)}
+        />
+      ) : null}
+
+      {spinning && endpoint && active && sv ? (
+        <SeasonSpinModal
+          endpoint={endpoint}
+          league={league}
+          season={active}
+          finalists={sv.finalists.map((id) => ({
+            id,
+            text: textOfSuggestion(id),
+          }))}
+          loserName={
+            // The team in full, so a co-owned one is not reduced to its primary
+            // owner on the screen that names who owes the punishment.
+            teamFor(teams, names, active, shownPunishment?.loser ?? "")
+              .map((x) => x.label)
+              .join(" & ") || "Last place"
+          }
+          onClose={() => setSpinning(false)}
         />
       ) : null}
 

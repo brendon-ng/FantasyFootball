@@ -36,6 +36,15 @@ export interface SeasonPunishmentEntry {
   completed?: string | boolean | null;
   /** Anything worth remembering that the sentence above does not say. */
   notes?: string;
+  /**
+   * Every punishment that tied for first, when the league votes.
+   *
+   * A TIE IS NOT BROKEN BY WHOEVER CLOSES THE VOTE. The tied punishments go into
+   * a wheel that last place spins at the end of the season, so a vote can close
+   * with several finalists and no winner for months. Sheet-only: a configured
+   * punishment has nobody to tie with.
+   */
+  shortlist?: string[];
 }
 
 /**
@@ -53,7 +62,12 @@ export interface SeasonPunishmentEntry {
  * | `owed` | decided, somebody owes it, not done |
  * | `done` | there is a completion date |
  */
-export type SeasonPunishmentState = "pending" | "owed" | "done";
+export type SeasonPunishmentState =
+  /** Tied, and nothing spun yet — several of these could still be it. */
+  | "shortlist"
+  | "pending"
+  | "owed"
+  | "done";
 
 export interface SeasonPunishment {
   season: number;
@@ -61,6 +75,14 @@ export interface SeasonPunishment {
   punishment: string;
   completed: string | null;
   notes: string | null;
+  /**
+   * The other punishments that were in the wheel.
+   *
+   * While `shortlist` is the STATE it is all of them, because none has been
+   * drawn. Afterwards it is the ones that lost, so the panel can show what it
+   * could have been — which is the whole reason the finalists survive the spin.
+   */
+  shortlist: string[];
   /**
    * Primary owner slug of the team that finished last, or null while the season
    * is unfinished. Null is the `pending` state and is expected, not a gap.
@@ -81,7 +103,11 @@ export function resolveSeasonPunishment(
   lastPlace: string | null,
 ): SeasonPunishment | null {
   const text = entry?.punishment?.trim();
-  if (!text) return null;
+  const finalists = (entry?.shortlist ?? [])
+    .map((x) => x.trim())
+    .filter(Boolean);
+  // Nothing decided and nothing tied is simply a season with no punishment.
+  if (!text && finalists.length < 2) return null;
 
   /**
    * `completed` ANSWERS TWO QUESTIONS AT ONCE — whether it happened, and when.
@@ -93,10 +119,30 @@ export function resolveSeasonPunishment(
   const completed = typeof raw === "string" && raw.trim() ? raw.trim() : null;
   const isDone = raw === true || completed != null;
 
+  if (!text) {
+    /*
+     * TIED AND UNSPUN. There is no punishment to name yet — only a set of them —
+     * so this deliberately does not fall through to `pending`, which would have
+     * to invent a single one to display.
+     */
+    return {
+      season,
+      state: "shortlist",
+      punishment: "",
+      shortlist: finalists,
+      completed,
+      notes: entry?.notes?.trim() || null,
+      loser: lastPlace,
+    };
+  }
+
   return {
     season,
     state: isDone ? "done" : lastPlace ? "owed" : "pending",
     punishment: text,
+    // The ones it could have been. Empty for a configured punishment and for an
+    // outright win, both of which had nothing to beat.
+    shortlist: finalists.filter((x) => x !== text),
     completed,
     notes: entry?.notes?.trim() || null,
     loser: lastPlace,
