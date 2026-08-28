@@ -270,7 +270,15 @@ export function PunishmentTracker({
             shortlist: sv.finalists.map(textOfSuggestion),
             completed: sv.completed,
           },
-          lastPlaceBySeason[active] ?? null,
+          // ------------------------------------------------------------
+          // TEMPORARY DEMO HACK — REVERT THIS. Forces a last place for
+          // masterbatters 2026 so the wheel can be reached before the season
+          // has actually finished. The real gate is that `lastPlace` is derived
+          // from the toilet bowl and is null until then.
+          //
+          //   restore: lastPlaceBySeason[active] ?? null,
+          // ------------------------------------------------------------
+          (active === 2026 ? "ross-bechtel" : lastPlaceBySeason[active]) ?? null,
         )
       : null;
   const shownPunishment =
