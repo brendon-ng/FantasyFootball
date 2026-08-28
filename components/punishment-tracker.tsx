@@ -269,12 +269,20 @@ export function PunishmentTracker({
   const shownPunishment =
     (active ? seasonPunishments[active] : null) ?? votedPunishment;
 
+  const seasonVoters = feedSeason?.seasonVote.voters ?? [];
+
   const ballots = useBallots({
     endpoint,
     league,
     season: active,
     voter: me,
-    enabled: phase === "voting",
+    /*
+     * BOTH VOTING PHASES, not just the weekly one. This is what the season
+     * ballot's own state arrives on — `seasonPick` rides the same response — so
+     * gating it on `voting` alone left `ready` permanently false in
+     * `last-place-voting` and the modal sat on "Loading your ballot…" for ever.
+     */
+    enabled: phase === "voting" || phase === "last-place-voting",
   });
   // ONE FETCH, SHARED. The ledger wants a count per row and the panel wants
   // everything grouped; both come off the same list.
@@ -681,16 +689,24 @@ export function PunishmentTracker({
                 endpoint && phase !== "suggesting" ? () => setComposing(true) : null
               }
               turnout={
-                !ballots.ready
-                  ? null
-                  : phase === "last-place-voting"
-                    ? {
-                        voted: (feedSeason?.seasonVote.voters ?? []).length,
-                        of: activeOwners,
-                      }
-                    : phase === "voting"
-                      ? { voted: ballots.voters.length, of: activeOwners }
-                      : null
+                phase === "last-place-voting"
+                  ? {
+                      /*
+                       * FROM THE FEED, so it does not wait on the ballot fetch —
+                       * and counting the viewer in the moment they save, because
+                       * the feed will not know until it is refetched and seeing
+                       * your own vote not register reads as a failure.
+                       */
+                      voted:
+                        seasonVoters.length +
+                        (myLastPlace && me && !seasonVoters.includes(me)
+                          ? 1
+                          : 0),
+                      of: activeOwners,
+                    }
+                  : phase === "voting" && ballots.ready
+                    ? { voted: ballots.voters.length, of: activeOwners }
+                    : null
               }
             />
           ) : null}
