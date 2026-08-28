@@ -30,15 +30,16 @@ import type { LeagueRef } from "@/lib/league-ref";
 import { useUrlState } from "@/lib/url-state";
 import {
   buildLedger,
+  hasVoted,
   ledgerTotals,
   poolRemaining,
-  tallyByOwner,
-  hasVoted,
   primaryOwner,
   PUNISHMENT_PHASES,
+  tallyByOwner,
   type Ballot,
   type LedgerRow,
   type PunishmentPhase,
+  type PunishmentSuggestion,
   type SeasonLows,
   type TeamMap,
 } from "@/lib/punishments";
@@ -608,7 +609,11 @@ export function PunishmentTracker({
               // nothing, which is the right answer to declining to say who you
               // are.
               onAct={
-                !endpoint
+                // NULL DISABLES THE BUTTON, which is right until `castSeasonVote`
+                // exists: the control is here because its absence is the layout
+                // question, and opening the WEEKLY ballot from a last-place
+                // callout would be worse than not opening anything.
+                !endpoint || phase === "last-place-voting"
                   ? null
                   : phase === "suggesting"
                     ? () => setComposing(true)
@@ -621,15 +626,29 @@ export function PunishmentTracker({
                           })
               }
               acted={phase === "voting" && iVoted}
-              // Suggestions stay open during voting, as a quieter second action.
+              // Suggestions stay open through both votes, as a quieter second
+              // action — a late idea is a candidate for the last-place ballot the
+              // moment it is added, since that ballot is defined as whatever the
+              // weekly pool did not take.
               onSuggest={
-                endpoint && phase === "voting" ? () => setComposing(true) : null
+                endpoint && phase !== "suggesting" ? () => setComposing(true) : null
               }
               turnout={
                 phase === "voting" && ballots.ready
                   ? { voted: ballots.voters.length, of: activeOwners }
                   : null
               }
+            />
+          ) : null}
+
+          {/* THE LEFTOVERS ARE THE POINT, not a consolation bracket. What loses
+              a weekly vote usually loses it for being too much for one week,
+              which is exactly what a whole season deserves. So the candidates
+              are precisely the suggestions the weekly pool did not take. */}
+          {phase === "last-place-voting" ? (
+            <LastPlaceBallot
+              candidates={suggestions.filter((x) => !x.selected)}
+              names={names}
             />
           ) : null}
 
@@ -873,6 +892,65 @@ const BALLOT = {
  * The cut line is only mentioned when the sheet has said where it is — "top null
  * make the pool" being the alternative.
  */
+/**
+ * The candidates for the season-long punishment.
+ *
+ * NO VOTES COLUMN, unlike the weekly ballot at the same stage. The league chose
+ * turnout-only for this one, and a column that cannot mean anything yet is worse
+ * than an absent one — so the list is ordered by id, which is also the order the
+ * vote modal uses, rather than leaking the ranking through the sort.
+ *
+ * The viewer's own picks are ticked. Their ballot on their own screen is not what
+ * secrecy covers, and without it nothing on the page says what the button opens.
+ */
+function LastPlaceBallot({
+  candidates,
+  names,
+}: {
+  candidates: PunishmentSuggestion[];
+  names: Record<string, string>;
+}) {
+  return (
+    <Panel>
+      <PanelHeader
+        title="Last Place Punishment"
+        meta={`${candidates.length} on the ballot`}
+        legend="Whoever finishes bottom does one of these. They are the suggestions the weekly pool did not take — usually the ones too much for a single week."
+      />
+      {candidates.length ? (
+        <ul className="divide-y divide-ink-700">
+          {candidates
+            .slice()
+            .sort((a, b) => a.id - b.id)
+            .map((c) => (
+              <li
+                key={c.id}
+                className="flex items-baseline gap-3 px-4 py-1.5 sm:px-5"
+              >
+                <span className="min-w-0 flex-1 text-sm text-chalk-300">
+                  {c.text}
+                </span>
+                {c.suggestedBy ? (
+                  <span
+                    data-owner={c.suggestedBy}
+                    className="hidden w-28 shrink-0 truncate text-right text-[11px] text-chalk-600 sm:block"
+                  >
+                    {names[c.suggestedBy] ?? c.suggestedBy}
+                  </span>
+                ) : null}
+              </li>
+            ))}
+        </ul>
+      ) : (
+        <EmptyState>
+          Every suggestion made the weekly pool, so there is nothing left to vote
+          on. Put another one forward.
+        </EmptyState>
+      )}
+    </Panel>
+  );
+}
+
 const BALLOT_META: Record<
   PunishmentPhase,
   (n: number, pool: number | null) => string
@@ -882,6 +960,10 @@ const BALLOT_META: Record<
     pool
       ? `${n} on the ballot · top ${pool} make the pool`
       : `${n} on the ballot`,
+  // The weekly pool is already set by now, so this reads like `live` — the
+  // weekly ballot below is a record of what was decided, not a live vote.
+  "last-place-voting": (n, pool) =>
+    pool ? `${n} suggestions · top ${pool} made the pool` : `${n} suggestions`,
   live: (n, pool) =>
     pool ? `${n} suggestions · top ${pool} made the pool` : `${n} suggestions`,
 };
@@ -1037,6 +1119,11 @@ const ACTIONS: Partial<
     label: "Cast your votes",
     // The button is the same control either way — it opens the same pre-filled
     // ballot — but "Cast" reads as something still owed once you have voted.
+    done: "Edit your votes",
+  },
+  "last-place-voting": {
+    headline: "Last-place voting is open",
+    label: "Cast your votes",
     done: "Edit your votes",
   },
 };

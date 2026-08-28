@@ -103,9 +103,19 @@ export interface PunishmentAssignment {
  * decision somebody makes, not an event anything records. The sheet is already
  * the league's control surface, so a cell costs nothing.
  */
-export type PunishmentPhase = "suggesting" | "voting" | "live";
+export type PunishmentPhase =
+  | "suggesting"
+  | "voting"
+  | "last-place-voting"
+  | "live";
 
-export const PUNISHMENT_PHASES = ["suggesting", "voting", "live"] as const;
+/** In the order a season moves through them. */
+export const PUNISHMENT_PHASES = [
+  "suggesting",
+  "voting",
+  "last-place-voting",
+  "live",
+] as const;
 
 export interface PunishmentSeason {
   season: number;
@@ -355,11 +365,19 @@ export function parseBallotState(raw: unknown): BallotState {
 }
 
 /** The sheet's own word for the phase, if it said anything recognisable. */
+/**
+ * The phase cell, read forgivingly.
+ *
+ * A HUMAN TYPES THIS. Spaces, hyphens and underscores are all stripped before
+ * matching, so "last place voting", "Last-Place-Voting" and "last_place_voting"
+ * are one value — the alternative is a misspelt cell silently falling through to
+ * `derivePhase()`, which for a league with its pool set answers `live` and hides
+ * the very ballot the cell was changed to open.
+ */
 const readPhase = (v: unknown): PunishmentPhase | null => {
-  const s = asText(v)?.toLowerCase().replace(/\s+/g, "");
-  return (PUNISHMENT_PHASES as readonly string[]).includes(s ?? "")
-    ? (s as PunishmentPhase)
-    : null;
+  const s = asText(v)?.toLowerCase().replace(/[\s_-]+/g, "");
+  const hit = PUNISHMENT_PHASES.find((p) => p.replace(/-/g, "") === s);
+  return hit ?? null;
 };
 
 /**
