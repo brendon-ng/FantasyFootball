@@ -546,6 +546,108 @@ export function PunishmentTracker({
             </div>
           ) : null}
 
+
+          {/* Only once there is something to photograph. */}
+          {phase === "live" && cloudinaryCloud && cloudinaryPreset && active ? (
+            <PunishmentMedia
+              cloud={cloudinaryCloud}
+              seasonPunishment={shownPunishment}
+              items={media.items}
+              season={active}
+              rows={rows}
+              teams={teams}
+              names={names}
+            />
+          ) : null}
+
+          {phase !== "live" ? (
+            <PhaseCallout
+              phase={phase}
+              // VOTING NEEDS AN IDENTITY, unlike suggesting: one ballot per
+              // person needs a key, and localStorage is where the site keeps it.
+              //
+              // Someone browsing anonymously gets the picker AND THEN THE BALLOT
+              // — the button said "Cast your votes", so stopping at a team picker
+              // would be a bait and switch and would need a second tap nobody
+              // would know to make. Picking "just browsing" instead resumes
+              // nothing, which is the right answer to declining to say who you
+              // are.
+              onAct={
+                !endpoint
+                  ? null
+                  : phase === "suggesting"
+                    ? () => setComposing(true)
+                    : (() => {
+                        // BOTH VOTES NEED AN IDENTITY, and both resume straight
+                        // into the ballot for somebody who picks a team — the
+                        // button said "Cast your votes", so stopping at a picker
+                        // would need a second tap nobody would know to make.
+                        const open =
+                          phase === "last-place-voting"
+                            ? () => setSeasonVoting(true)
+                            : () => setVoting(true);
+                        return me
+                          ? open
+                          : () =>
+                              openPicker((chosen) => {
+                                if (chosen.kind === "owner") open();
+                              });
+                      })()
+              }
+              acted={
+                phase === "last-place-voting"
+                  ? Boolean(myLastPlace ?? ballots.seasonPick)
+                  : phase === "voting" && iVoted
+              }
+              // Suggestions stay open through both votes, as a quieter second
+              // action — a late idea is a candidate for the last-place ballot the
+              // moment it is added, since that ballot is defined as whatever the
+              // weekly pool did not take.
+              onSuggest={
+                endpoint && phase !== "suggesting" ? () => setComposing(true) : null
+              }
+              turnout={
+                phase === "last-place-voting"
+                  ? {
+                      /*
+                       * FROM THE FEED, so it does not wait on the ballot fetch —
+                       * and counting the viewer in the moment they save, because
+                       * the feed will not know until it is refetched and seeing
+                       * your own vote not register reads as a failure.
+                       */
+                      voted:
+                        seasonVoters.length +
+                        (myLastPlace && me && !seasonVoters.includes(me)
+                          ? 1
+                          : 0),
+                      of: activeOwners,
+                    }
+                  : phase === "voting" && ballots.ready
+                    ? { voted: ballots.voters.length, of: activeOwners }
+                    : null
+              }
+            />
+          ) : null}
+
+          {/* THE LEFTOVERS ARE THE POINT, not a consolation bracket. What loses
+              a weekly vote usually loses it for being too much for one week,
+              which is exactly what a whole season deserves. So the candidates
+              are precisely the suggestions the weekly pool did not take. */}
+          {phase === "last-place-voting" ? (
+            <LastPlaceBallot
+              candidates={suggestions.filter((x) => !x.selected)}
+              names={names}
+              mine={myLastPlace ?? ballots.seasonPick}
+              onClose={
+                // COMMISSIONER ONLY, like logging a completion: declaring a
+                // winner is a claim the whole league is held to.
+                endpoint && me && me === commissioner
+                  ? () => setClosing(true)
+                  : undefined
+              }
+            />
+          ) : null}
+
           {/* THE POOL IS WORTH SEEING AS SOON AS IT IS SET, which is a phase
               earlier than it was shown. In `last-place-voting` nothing has been
               drawn yet, so this is the whole weekly pool — and it is the natural
@@ -655,107 +757,6 @@ export function PunishmentTracker({
                 </Panel>
               ) : null}
             </div>
-          ) : null}
-
-          {/* Only once there is something to photograph. */}
-          {phase === "live" && cloudinaryCloud && cloudinaryPreset && active ? (
-            <PunishmentMedia
-              cloud={cloudinaryCloud}
-              seasonPunishment={shownPunishment}
-              items={media.items}
-              season={active}
-              rows={rows}
-              teams={teams}
-              names={names}
-            />
-          ) : null}
-
-          {phase !== "live" ? (
-            <PhaseCallout
-              phase={phase}
-              // VOTING NEEDS AN IDENTITY, unlike suggesting: one ballot per
-              // person needs a key, and localStorage is where the site keeps it.
-              //
-              // Someone browsing anonymously gets the picker AND THEN THE BALLOT
-              // — the button said "Cast your votes", so stopping at a team picker
-              // would be a bait and switch and would need a second tap nobody
-              // would know to make. Picking "just browsing" instead resumes
-              // nothing, which is the right answer to declining to say who you
-              // are.
-              onAct={
-                !endpoint
-                  ? null
-                  : phase === "suggesting"
-                    ? () => setComposing(true)
-                    : (() => {
-                        // BOTH VOTES NEED AN IDENTITY, and both resume straight
-                        // into the ballot for somebody who picks a team — the
-                        // button said "Cast your votes", so stopping at a picker
-                        // would need a second tap nobody would know to make.
-                        const open =
-                          phase === "last-place-voting"
-                            ? () => setSeasonVoting(true)
-                            : () => setVoting(true);
-                        return me
-                          ? open
-                          : () =>
-                              openPicker((chosen) => {
-                                if (chosen.kind === "owner") open();
-                              });
-                      })()
-              }
-              acted={
-                phase === "last-place-voting"
-                  ? Boolean(myLastPlace ?? ballots.seasonPick)
-                  : phase === "voting" && iVoted
-              }
-              // Suggestions stay open through both votes, as a quieter second
-              // action — a late idea is a candidate for the last-place ballot the
-              // moment it is added, since that ballot is defined as whatever the
-              // weekly pool did not take.
-              onSuggest={
-                endpoint && phase !== "suggesting" ? () => setComposing(true) : null
-              }
-              turnout={
-                phase === "last-place-voting"
-                  ? {
-                      /*
-                       * FROM THE FEED, so it does not wait on the ballot fetch —
-                       * and counting the viewer in the moment they save, because
-                       * the feed will not know until it is refetched and seeing
-                       * your own vote not register reads as a failure.
-                       */
-                      voted:
-                        seasonVoters.length +
-                        (myLastPlace && me && !seasonVoters.includes(me)
-                          ? 1
-                          : 0),
-                      of: activeOwners,
-                    }
-                  : phase === "voting" && ballots.ready
-                    ? { voted: ballots.voters.length, of: activeOwners }
-                    : null
-              }
-            />
-          ) : null}
-
-          {/* THE LEFTOVERS ARE THE POINT, not a consolation bracket. What loses
-              a weekly vote usually loses it for being too much for one week,
-              which is exactly what a whole season deserves. So the candidates
-              are precisely the suggestions the weekly pool did not take. */}
-          {phase === "last-place-voting" ? (
-            <LastPlaceBallot
-              candidates={suggestions.filter((x) => !x.selected)}
-              names={names}
-              mine={myLastPlace ?? ballots.seasonPick}
-              onClose={
-                // COMMISSIONER ONLY, like logging a completion: declaring a
-                // winner is a claim the whole league is held to.
-                endpoint && me && me === commissioner
-                  ? () => setClosing(true)
-                  : undefined
-              }
-            />
           ) : null}
 
           <Ballot
