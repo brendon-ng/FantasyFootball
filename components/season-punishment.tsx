@@ -80,7 +80,7 @@ export function SeasonPunishmentPanel({
             </span>
           ) : state === "shortlist" ? (
             <span className="whitespace-nowrap font-semibold text-gold">
-              {punishment.shortlist.length}-way tie
+              Wheel of Punishments ({punishment.shortlist.length}-way tie)
             </span>
           ) : state === "owed" ? (
             <span className="whitespace-nowrap font-semibold text-loss">
@@ -107,7 +107,7 @@ export function SeasonPunishmentPanel({
         {state === "shortlist" ? (
           <>
             <p className="text-sm leading-relaxed text-chalk-300">
-              The vote tied. Whoever finishes last spins for one of these:
+              Spin the wheel for one of:
             </p>
             <ul className="space-y-1">
               {punishment.shortlist.map((t) => (
