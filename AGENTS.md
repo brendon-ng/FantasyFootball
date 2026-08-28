@@ -2209,6 +2209,20 @@ Each league also records `raw/player-ids.json`, and `getPlayers()` narrows the
 shared map to it. Without that narrowing every league generates a player page
 for every other league's players, with no data on them.
 
+THAT NARROWING IS WHY A FRESH DRAFT RENDERS BARE IDS UNTIL SYNC RUNS. The list is
+built from the league's COMMITTED data, so a player the league has never rostered
+— every rookie, mostly — is absent from it the moment he is drafted, and
+`players[id]` misses. Both the draft board and the lab fall back to the id, so
+the page fills with five-digit numbers where names should be. Masterbatters'
+2026 draft did this with 15 of 168: Jeremiyah Love, Makai Lemon, Carnell Tate and
+friends.
+
+It is a TIMING gap, not a data one — the shared `players.json` already had all
+fifteen. The next `sync` commits the picks, rebuilds the narrowed list and the
+names appear, which is at most a day on the archive cron. Nothing to fix in code;
+worth recognising on sight every August rather than going looking for a player
+map bug.
+
 `npm run data` = `sync` then `derive`.
 
 - **`npm run sync`** hits Sleeper and writes only *finalized* data — a week once
