@@ -12113,6 +12113,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 13
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1787897776494,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "5850": [
@@ -23799,6 +23811,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1787897588433,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "9504": [
@@ -24625,6 +24649,18 @@
       "timestamp": 1787641312553,
       "toSlug": null,
       "type": "waiver",
+      "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1787897611908,
+      "toSlug": null,
+      "type": "free_agent",
       "week": 1
     }
   ],
@@ -25978,6 +26014,20 @@
       "week": 12
     }
   ],
+  "11581": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1787897588433,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    }
+  ],
   "11582": [
     {
       "action": "add",
@@ -26852,6 +26902,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1787897611908,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "11647": [
@@ -28213,6 +28275,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1787897776494,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "13417": [
