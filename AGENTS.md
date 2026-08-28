@@ -1399,7 +1399,7 @@ assuming where in the season it is.
 | State | Test | Renders |
 | --- | --- | --- |
 | `none` | no entry, or a blank one | NOTHING, anywhere. The normal state for most years |
-| `pending` | decided, season has no last place yet | the punishment, and "whoever finishes last in N" |
+| `pending` | decided, season has no last place yet | the punishment alone — nobody is named until there is somebody to name |
 | `owed` | decided, loser known, no date | who owes it |
 | `done` | there is a completion date | who did it, and when |
 

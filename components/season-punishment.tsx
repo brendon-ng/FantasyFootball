@@ -38,7 +38,7 @@ import type { TeamMap } from "@/lib/punishments";
  * | State | Header says | Body says |
  * | --- | --- | --- |
  * | `none` | — | nothing is rendered at all |
- * | `pending` | "still to be decided" | the punishment, and that last place is open |
+ * | `pending` | "last place still open" | the punishment alone, unattributed |
  * | `owed` | "not done yet" | who owes it |
  * | `done` | the date, ticked | who did it |
  */
@@ -94,25 +94,25 @@ export function SeasonPunishmentPanel({
           <span aria-hidden className="mr-1.5">
             🚽
           </span>
-          <span className="font-semibold">
-            {loser ? (
-              <TeamNames
-                season={season}
-                slugs={[loser]}
-                teams={teams}
-                names={names}
-                full
-              />
-            ) : (
-              // NOT AN ERROR AND NOT A BLANK. The punishment is set before the
-              // season resolves, which is the point of setting it — everyone
-              // plays knowing what last place costs.
-              <span className="text-chalk-500">
-                Whoever finishes last in {season}
+          {/* NOBODY IS NAMED UNTIL THERE IS SOMEBODY TO NAME. A panel headed
+              "Last Place Punishment", above a header already reading "last
+              place still open", does not also need a sentence explaining that
+              last place is open — it just leaves the name out, and the
+              separator with it. */}
+          {loser ? (
+            <>
+              <span className="font-semibold">
+                <TeamNames
+                  season={season}
+                  slugs={[loser]}
+                  teams={teams}
+                  names={names}
+                  full
+                />
               </span>
-            )}
-          </span>
-          <span className="text-chalk-600"> · </span>
+              <span className="text-chalk-600"> · </span>
+            </>
+          ) : null}
           <span className="text-chalk-300">{punishment.punishment}</span>
         </p>
 
