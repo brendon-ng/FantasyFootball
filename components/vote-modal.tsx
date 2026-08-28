@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { Sheet } from "@/components/sheet";
-import { castBallot } from "@/lib/punishments-live";
+import { castBallot, castSeasonVote } from "@/lib/punishments-live";
 import type { Ballot, PunishmentSuggestion } from "@/lib/punishments";
 
 /**
@@ -34,6 +34,7 @@ export function VoteModal({
   ready,
   onSaved,
   onClose,
+  kind = "weekly",
 }: {
   endpoint: string;
   league: string;
@@ -52,6 +53,16 @@ export function VoteModal({
    */
   ready: boolean;
   onSaved: (ballot: Ballot, votes: Record<number, number>) => void;
+  /**
+   * Which vote this is.
+   *
+   * ONE MODAL FOR BOTH, because they are the same act — approval voting over a
+   * list of suggestions, one ballot per person, editable until it closes. Only
+   * the endpoint and two lines of copy differ, and a second component would have
+   * drifted on the first rule to change: no counts inside, ordered by id, and
+   * save disabled until the server's ballot has arrived.
+   */
+  kind?: "weekly" | "last-place";
   onClose: () => void;
 }) {
   /**
@@ -79,11 +90,22 @@ export function VoteModal({
     setBusy(true);
     setError(null);
     try {
+      const punishmentIds = [...picked].sort((a, b) => a - b);
+      if (kind === "last-place") {
+        await castSeasonVote(endpoint, { league, season, voter, punishmentIds });
+        // No counts come back from this one — the season vote shows turnout
+        // only while it is open — so the page is handed the ballot alone.
+        close(() => {
+          onSaved({ voter, punishmentIds, updatedAt: null }, {});
+          onClose();
+        });
+        return;
+      }
       const { ballot: saved, votes } = await castBallot(endpoint, {
         league,
         season,
         voter,
-        punishmentIds: [...picked].sort((a, b) => a - b),
+        punishmentIds,
       });
       close(() => {
         onSaved(saved, votes);
@@ -97,7 +119,9 @@ export function VoteModal({
 
   return (
     <Sheet
-      label="Cast your votes"
+      label={
+        kind === "last-place" ? "Vote for the last-place punishment" : "Cast your votes"
+      }
       onClose={onClose}
       panelClassName="max-h-[85dvh] max-w-[32rem] overflow-y-auto rounded-t-xl border border-ink-600 bg-ink-800 shadow-2xl sm:rounded-xl"
     >
@@ -105,7 +129,9 @@ export function VoteModal({
         <>
           <div className="sticky top-0 z-10 flex items-center justify-between border-b border-ink-600 bg-ink-800 px-4 py-3 sm:px-5">
             <div>
-              <div className="eyebrow text-[10px]">{season} ballot</div>
+              <div className="eyebrow text-[10px]">
+                {kind === "last-place" ? "Last place" : `${season} ballot`}
+              </div>
               <div className="text-sm font-semibold">
                 {!ready
                   ? "Loading your ballot…"

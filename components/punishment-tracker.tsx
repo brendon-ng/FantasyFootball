@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 
 import { PunishmentLedger, TeamNames } from "@/components/punishment-ledger";
 import { SeasonPunishmentPanel } from "@/components/season-punishment";
+import { CloseVoteModal } from "@/components/close-vote-modal";
 import { CompleteModal } from "@/components/complete-modal";
 import {
   PunishmentMedia,
@@ -25,7 +26,10 @@ import {
 } from "@/components/ui";
 import { useIdentity } from "@/components/identity";
 import { useBallots, usePunishments } from "@/lib/punishments-live";
-import type { SeasonPunishment } from "@/lib/season-punishment";
+import {
+  resolveSeasonPunishment,
+  type SeasonPunishment,
+} from "@/lib/season-punishment";
 import type { LeagueRef } from "@/lib/league-ref";
 import { useUrlState } from "@/lib/url-state";
 import {
@@ -76,6 +80,7 @@ export function PunishmentTracker({
   drawTitle,
   commissioner,
   seasonPunishments,
+  lastPlaceBySeason,
   cloudinaryCloud,
   cloudinaryPreset,
   src,
@@ -119,6 +124,12 @@ export function PunishmentTracker({
    */
   seasonPunishments: Record<number, SeasonPunishment>;
   /**
+   * Who finished last, per season, so a punishment voted in the SHEET resolves
+   * the same way a configured one does. Derived from the toilet bowl at build
+   * time — never written down, here or anywhere.
+   */
+  lastPlaceBySeason: Record<number, string | null>;
+  /**
    * Cloudinary, for punishment photos and video.
    *
    * Either being absent means the feature is not configured and the panel is
@@ -146,6 +157,10 @@ export function PunishmentTracker({
   const [completing, setCompleting] = useState<LedgerRow | null>(null);
   /** The ledger row whose photos are open. */
   const [mediaRow, setMediaRow] = useState<LedgerRow | null>(null);
+  const [seasonVoting, setSeasonVoting] = useState(false);
+  /** Local echo of the viewer's season ballot, so the ticks update on save. */
+  const [myLastPlace, setMyLastPlace] = useState<number[] | null>(null);
+  const [closing, setClosing] = useState(false);
   /**
    * Counts from the last save, laid over the feed's.
    *
@@ -230,6 +245,29 @@ export function PunishmentTracker({
     .map((s) =>
       freshVotes && s.id in freshVotes ? { ...s, votes: freshVotes[s.id] } : s,
     );
+
+  /*
+   * CONFIG WINS, THE SHEET FILLS IN. A league with no Apps Script — den-ops,
+   * apartment-401 — keeps its committed history exactly as before; a league that
+   * VOTES has no config entry, so the winner it just elected is resolved from the
+   * feed through the same `resolveSeasonPunishment` and lands in the same four
+   * states. Nothing downstream can tell which source it came from.
+   */
+  const votedPunishment =
+    active && feedSeason?.seasonVote.winnerId != null
+      ? resolveSeasonPunishment(
+          active,
+          {
+            punishment:
+              suggestions.find((x) => x.id === feedSeason.seasonVote.winnerId)
+                ?.text ?? "",
+            completed: feedSeason.seasonVote.completed,
+          },
+          lastPlaceBySeason[active] ?? null,
+        )
+      : null;
+  const shownPunishment =
+    (active ? seasonPunishments[active] : null) ?? votedPunishment;
 
   const ballots = useBallots({
     endpoint,
@@ -400,10 +438,10 @@ export function PunishmentTracker({
           Not gated on `phase` either: the yearly punishment has a lifecycle of
           its own and can be decided, owed or done while the weekly pool is
           still being voted on. */}
-      {active && seasonPunishments[active] ? (
+      {active && shownPunishment ? (
         <SeasonPunishmentPanel
           league={league}
-          punishment={seasonPunishments[active]}
+          punishment={shownPunishment}
           teams={teams}
           names={names}
           cloud={cloudinaryCloud}
@@ -587,7 +625,7 @@ export function PunishmentTracker({
           {phase === "live" && cloudinaryCloud && cloudinaryPreset && active ? (
             <PunishmentMedia
               cloud={cloudinaryCloud}
-              seasonPunishment={active ? seasonPunishments[active] : null}
+              seasonPunishment={shownPunishment}
               items={media.items}
               season={active}
               rows={rows}
@@ -609,23 +647,32 @@ export function PunishmentTracker({
               // nothing, which is the right answer to declining to say who you
               // are.
               onAct={
-                // NULL DISABLES THE BUTTON, which is right until `castSeasonVote`
-                // exists: the control is here because its absence is the layout
-                // question, and opening the WEEKLY ballot from a last-place
-                // callout would be worse than not opening anything.
-                !endpoint || phase === "last-place-voting"
+                !endpoint
                   ? null
                   : phase === "suggesting"
                     ? () => setComposing(true)
-                    : me
-                      ? () => setVoting(true)
-                      : () =>
-                          openPicker((chosen) => {
-                            // Voting needs a key, so only a team resumes it.
-                            if (chosen.kind === "owner") setVoting(true);
-                          })
+                    : (() => {
+                        // BOTH VOTES NEED AN IDENTITY, and both resume straight
+                        // into the ballot for somebody who picks a team — the
+                        // button said "Cast your votes", so stopping at a picker
+                        // would need a second tap nobody would know to make.
+                        const open =
+                          phase === "last-place-voting"
+                            ? () => setSeasonVoting(true)
+                            : () => setVoting(true);
+                        return me
+                          ? open
+                          : () =>
+                              openPicker((chosen) => {
+                                if (chosen.kind === "owner") open();
+                              });
+                      })()
               }
-              acted={phase === "voting" && iVoted}
+              acted={
+                phase === "last-place-voting"
+                  ? Boolean(myLastPlace ?? ballots.seasonPick)
+                  : phase === "voting" && iVoted
+              }
               // Suggestions stay open through both votes, as a quieter second
               // action — a late idea is a candidate for the last-place ballot the
               // moment it is added, since that ballot is defined as whatever the
@@ -634,9 +681,16 @@ export function PunishmentTracker({
                 endpoint && phase !== "suggesting" ? () => setComposing(true) : null
               }
               turnout={
-                phase === "voting" && ballots.ready
-                  ? { voted: ballots.voters.length, of: activeOwners }
-                  : null
+                !ballots.ready
+                  ? null
+                  : phase === "last-place-voting"
+                    ? {
+                        voted: (feedSeason?.seasonVote.voters ?? []).length,
+                        of: activeOwners,
+                      }
+                    : phase === "voting"
+                      ? { voted: ballots.voters.length, of: activeOwners }
+                      : null
               }
             />
           ) : null}
@@ -649,6 +703,14 @@ export function PunishmentTracker({
             <LastPlaceBallot
               candidates={suggestions.filter((x) => !x.selected)}
               names={names}
+              mine={myLastPlace ?? ballots.seasonPick}
+              onClose={
+                // COMMISSIONER ONLY, like logging a completion: declaring a
+                // winner is a claim the whole league is held to.
+                endpoint && me && me === commissioner
+                  ? () => setClosing(true)
+                  : undefined
+              }
             />
           ) : null}
 
@@ -726,6 +788,37 @@ export function PunishmentTracker({
           ready={ballots.ready}
           onSaved={onSaved}
           onClose={() => setVoting(false)}
+        />
+      ) : null}
+
+      {seasonVoting && endpoint && active && me ? (
+        <VoteModal
+          kind="last-place"
+          endpoint={endpoint}
+          league={league}
+          season={active}
+          voter={me}
+          // The candidates, not the whole list — the same filter the panel uses,
+          // and the server refuses anything outside it anyway.
+          suggestions={suggestions.filter((x) => !x.selected)}
+          current={myLastPlace ?? ballots.seasonPick ?? []}
+          ready={ballots.ready}
+          onSaved={(ballot) => setMyLastPlace(ballot.punishmentIds)}
+          onClose={() => setSeasonVoting(false)}
+        />
+      ) : null}
+
+      {closing && endpoint && active ? (
+        <CloseVoteModal
+          endpoint={endpoint}
+          league={league}
+          season={active}
+          candidates={suggestions.filter((x) => !x.selected)}
+          turnout={{
+            voted: (feedSeason?.seasonVote.voters ?? []).length,
+            of: activeOwners,
+          }}
+          onClose={() => setClosing(false)}
         />
       ) : null}
 
@@ -906,15 +999,34 @@ const BALLOT = {
 function LastPlaceBallot({
   candidates,
   names,
+  mine,
+  onClose,
 }: {
   candidates: PunishmentSuggestion[];
   names: Record<string, string>;
+  /** The viewer's own picks, ticked. Null when they have not voted. */
+  mine: number[] | null;
+  /** Commissioner only. Absent for everyone else. */
+  onClose?: () => void;
 }) {
+  const picked = new Set(mine ?? []);
   return (
     <Panel>
       <PanelHeader
         title="Last Place Punishment"
-        meta={`${candidates.length} on the ballot`}
+        meta={
+          onClose ? (
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded border border-ink-500 px-2 py-0.5 text-[10px] font-semibold text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent"
+            >
+              Close voting
+            </button>
+          ) : (
+            `${candidates.length} on the ballot`
+          )
+        }
         legend="Whoever finishes bottom does one of these. They are the suggestions the weekly pool did not take — usually the ones too much for a single week."
       />
       {candidates.length ? (
@@ -927,6 +1039,17 @@ function LastPlaceBallot({
                 key={c.id}
                 className="flex items-baseline gap-3 px-4 py-1.5 sm:px-5"
               >
+                {/* The viewer's own picks are ticked. Their ballot on their
+                    own screen is not what secrecy covers, and without this
+                    nothing says what the button would open. */}
+                <span
+                  aria-hidden
+                  className={`w-3 shrink-0 text-[11px] ${
+                    picked.has(c.id) ? "text-accent" : "text-transparent"
+                  }`}
+                >
+                  ✓
+                </span>
                 <span className="min-w-0 flex-1 text-sm text-chalk-300">
                   {c.text}
                 </span>

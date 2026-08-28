@@ -117,6 +117,23 @@ export const PUNISHMENT_PHASES = [
   "live",
 ] as const;
 
+/**
+ * The vote for the season-long punishment, from the sheet.
+ *
+ * NO COUNTS WHILE IT IS OPEN — the league chose turnout only, so this carries
+ * who has voted and never what for. The counts arrive once, in the response to
+ * `decideSeasonVote`, which is the first moment they can be shown without
+ * steering the vote they describe.
+ */
+export interface SeasonVote {
+  /** The winning suggestion, once someone has closed the vote. */
+  winnerId: number | null;
+  /** ISO date the punishment was served. */
+  completed: string | null;
+  /** Slugs only. */
+  voters: string[];
+}
+
 export interface PunishmentSeason {
   season: number;
   phase: PunishmentPhase;
@@ -133,6 +150,8 @@ export interface PunishmentSeason {
   poolSize: number | null;
   suggestions: PunishmentSuggestion[];
   assignments: PunishmentAssignment[];
+  /** Absent on a sheet that predates the feature; treated as "no vote yet". */
+  seasonVote: SeasonVote;
 }
 
 export interface PunishmentFeed {
@@ -163,6 +182,15 @@ export interface BallotState {
   voters: string[];
   /** The viewer's own ballot, or null if they are not identified. */
   mine: Ballot | null;
+  /**
+   * The viewer's own last-place picks.
+   *
+   * NULL AND [] ARE DIFFERENT, and the difference is the whole point: an empty
+   * array is a ballot cast for nothing, null is no ballot at all. Verified
+   * against the live endpoint, which returns `[]` after an empty save and
+   * `null` before any save.
+   */
+  seasonPick: number[] | null;
 }
 
 /** A weekly low as the site derives it, with the game it happened in. */
@@ -356,11 +384,17 @@ export function parseBallot(raw: unknown): Ballot | null {
 
 export function parseBallotState(raw: unknown): BallotState {
   const top = obj(raw);
+  const pick = top.seasonPick;
   return {
     voters: asRows(top.voters)
       .map((v) => asText(v)?.toLowerCase())
       .filter((v): v is string => Boolean(v)),
     mine: parseBallot(top.ballot),
+    // Only an actual array counts. A missing key on an older sheet must read as
+    // "has not voted", not as "voted for nothing".
+    seasonPick: Array.isArray(pick)
+      ? pick.map(asNumber).filter((n): n is number => n != null)
+      : null,
   };
 }
 
@@ -466,9 +500,17 @@ export function parseFeed(raw: unknown): PunishmentFeed {
     const phase = played
       ? "live"
       : (readPhase(row.phase) ?? derivePhase(ordered));
+    const sv = obj(row.seasonVote);
     seasons.push({
       season,
       phase,
+      seasonVote: {
+        winnerId: asNumber(sv.winnerId),
+        completed: asText(sv.completed),
+        voters: asRows(sv.voters)
+          .map((v) => asText(v)?.toLowerCase())
+          .filter((v): v is string => Boolean(v)),
+      },
       // Counting the Selected table is only a fair reading of "pool size" once
       // the pool is actually set. Before that it counts suggestions.
       poolSize:

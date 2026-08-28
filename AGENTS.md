@@ -1307,6 +1307,58 @@ you lose your 3rd round pick, three times in ten years and you are out — but t
 league does not want the site adjudicating that, and 1.9.4.1 has a discretionary
 exception, so a blank date cell is not proof of anything.
 
+### Voting for it
+
+`last-place-voting` is a fourth phase on the weekly tracker, between `voting` and
+`live`, switched by hand in the sheet. That IS the opt-in — a league that never
+selects it never sees any of this, which is why there is no feature flag and no
+inference.
+
+THE CANDIDATES ARE THE SUGGESTIONS THE WEEKLY POOL DID NOT TAKE, and that is a
+filter rather than a consolation bracket: an idea usually loses a weekly vote for
+being too much for ONE week, which is exactly what a season-long punishment
+wants. It also forces the sequencing — this phase can only follow `voting`,
+because the candidate list is defined by what `selected` left behind. Enforced
+server-side as well as in the UI; a stale page gets "ID 7 is not a valid
+last-place candidate."
+
+APPROVAL, LIKE THE WEEKLY VOTE, and the SAME MODAL renders both — only the
+endpoint and two lines of copy differ. A second component would have drifted on
+the first rule to change, and there are four: no counts inside, ordered by id,
+save disabled until the server's ballot has arrived, and the browsing visitor
+taken through the picker and then straight into the ballot.
+
+TURNOUT ONLY WHILE IT IS OPEN. No votes column anywhere, which is also why the
+list is ordered by id — sorting by popularity leaks the ranking as effectively as
+printing it. The counts appear exactly once, in the confirm dialog when the
+commissioner closes the vote, which is the first screen entitled to show them.
+
+THE SERVER COUNTS AND THE SERVER DECIDES. `decideSeasonVote` tallies inside the
+lock that writes the winner, so the browser never asserts a result from numbers
+it fetched seconds ago and two people closing at once cannot disagree — the same
+rule as the draw. A TIE IS REFUSED rather than broken: it comes back `ok: false`
+with `tied`, and the dialog asks which. Deciding also flips the phase to `live`,
+so the page reloads rather than trying to reconstruct a wholly different layout
+from one response.
+
+IT REFUSES TO OVERWRITE. A recorded winner can only be undone by clearing `Z1` in
+the sheet, which is the same deliberate-act rule the draw uses for a week.
+
+Verified end to end against the live endpoint before any of it was wired: a
+`selected` id, a vetoed id and a nonexistent id all refused; an overwrite
+replacing rather than merging; an empty ballot legal and still stamping
+`updatedAt`, with `seasonPick` returning `[]` where a voter who has not voted
+returns `null`; a forced tie refused with both ids and `Z1` untouched; the
+auto-winner counted correctly across three ballots; and a second decide refused.
+
+### Where a voted punishment lives
+
+CONFIG WINS, THE SHEET FILLS IN. A league with no Apps Script keeps its committed
+history untouched; a league that votes has no config entry, so the winner is
+resolved from the feed through the SAME `resolveSeasonPunishment` and lands in
+the same four states. Nothing downstream can tell which source it came from — the
+panel, the media and the completion date all behave identically.
+
 ### It lives in config, not in the sheet
 
 `config/leagues/<slug>/season-punishments.json`, keyed by season, optional file.

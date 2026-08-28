@@ -402,6 +402,89 @@ export async function drawPunishment(
  * `completed` is an ISO date or null — null is a real value here, not a missing
  * one, because a date typed into the wrong row has to be removable.
  */
+/**
+ * One person's approval ballot for the season-long punishment.
+ *
+ * The server refuses anything the weekly pool already took, so a stale page
+ * cannot vote for a suggestion that is no longer a candidate — the same rule as
+ * the suggestion modal, where hiding a control is not the same as refusing the
+ * write. Verified against the live endpoint, which answers "ID 7 is not a valid
+ * last-place candidate."
+ */
+export async function castSeasonVote(
+  endpoint: string,
+  body: {
+    league: string;
+    season: number;
+    voter: string;
+    punishmentIds: number[];
+  },
+): Promise<number[]> {
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ func: "castSeasonVote", ...body }),
+  });
+  await readJson(res);
+  return body.punishmentIds;
+}
+
+/**
+ * Closes the vote and records the winner.
+ *
+ * THE SERVER COUNTS, not the browser — the page would be asserting a result from
+ * a tally it fetched seconds ago, and two people closing at once could disagree.
+ * Same reasoning as the draw.
+ *
+ * A TIE IS REFUSED RATHER THAN BROKEN, and comes back as `tied` so the caller can
+ * pick. That is what makes the wheel usable here: the server still decides, once
+ * an id is supplied.
+ */
+export class SeasonVoteTie extends Error {
+  constructor(readonly tied: number[], message: string) {
+    super(message);
+    this.name = "SeasonVoteTie";
+  }
+}
+
+export async function decideSeasonVote(
+  endpoint: string,
+  body: { league: string; season: number; punishmentId?: number },
+): Promise<{ winnerId: number; text: string; counts: Record<string, number> }> {
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ func: "decideSeasonVote", ...body }),
+  });
+  const raw: unknown = await res.json().catch(() => null);
+  const d = (raw ?? {}) as Record<string, unknown>;
+  if (d.ok !== true) {
+    const tied = Array.isArray(d.tied) ? (d.tied as number[]) : null;
+    const message =
+      typeof d.error === "string" ? d.error : "Could not close the vote.";
+    if (tied?.length) throw new SeasonVoteTie(tied, message);
+    throw new Error(message);
+  }
+  return {
+    winnerId: Number(d.winnerId),
+    text: typeof d.text === "string" ? d.text : "",
+    counts: (d.counts ?? {}) as Record<string, number>,
+  };
+}
+
+/** Logs — or with `completed: null`, clears — when the season punishment was served. */
+export async function completeSeasonPunishment(
+  endpoint: string,
+  body: { league: string; season: number; completed: string | null },
+): Promise<void> {
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ func: "completeSeasonPunishment", ...body }),
+  });
+  await readJson(res);
+}
+
 export async function completePunishment(
   endpoint: string,
   body: {
@@ -453,6 +536,8 @@ export function useBallots({
 }): {
   voters: string[];
   mine: Ballot | null;
+  /** Null when they have not voted; [] when they voted for nothing. */
+  seasonPick: number[] | null;
   ready: boolean;
   /** Replace the local copy after a save, rather than refetching. */
   applySaved: (ballot: Ballot) => void;
@@ -495,6 +580,7 @@ export function useBallots({
                 ? prev.data.voters
                 : [...prev.data.voters, ballot.voter],
               mine: ballot,
+              seasonPick: prev.data.seasonPick,
             },
           }
         : prev,
@@ -505,6 +591,9 @@ export function useBallots({
   return {
     voters: data?.voters ?? [],
     mine: data?.mine ?? null,
+    // Null means no ballot; [] means one cast for nothing. Kept distinct all
+    // the way to the UI, which is what decides Cast vs Edit.
+    seasonPick: data?.seasonPick ?? null,
     ready: data != null,
     applySaved,
   };
