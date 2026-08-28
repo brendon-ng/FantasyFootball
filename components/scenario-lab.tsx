@@ -185,7 +185,13 @@ export function ScenarioLab({
   /** Kept players only: where the draft would take them if released. */
   let releasedPicks: Map<string, ProjectedPick> | null = null;
   const d = draft.data;
-  if (d && d.status !== "complete" && (d.orderSet || api.scenario.order)) {
+  /*
+   * A FINISHED DRAFT STILL COMPUTES. Every cell is in `taken` by then, so the
+   * placement is the real board and the projection has nothing left to project
+   * — which is exactly the review view: who went where, and what became of the
+   * players you starred.
+   */
+  if (d && (d.orderSet || api.scenario.order)) {
     const shape: DraftShape = {
       rounds: d.rounds,
       teams: d.teams,
@@ -268,6 +274,7 @@ export function ScenarioLab({
         <ProjectedDraftBoard
           leagueRef={leagueRef}
           season={season}
+          renderCompleted
           contracts={contracts}
           players={players}
           userIdToSlug={userIdToSlug}
@@ -286,9 +293,19 @@ export function ScenarioLab({
       <AvailablePool
         adp={adp}
         keptBy={keptBy}
-        drafted={
-          new Set(
-            (picks.data ?? []).filter((p) => !p.isKeeper).map((p) => p.playerId),
+        /* WHO TOOK HIM, not just that he is gone — after the draft this list is
+           the only record of what happened to a starred player, and "drafted"
+           without a name answers half the question. Keeper picks are excluded:
+           they are already covered by `keptBy`, which says the same thing in the
+           language this page uses for them. */
+        draftedBy={
+          new Map(
+            (picks.data ?? [])
+              .filter((p) => !p.isKeeper)
+              .map((p) => [
+                p.playerId,
+                teams.find((t) => t.rosterId === p.rosterId)?.slug ?? "",
+              ]),
           )
         }
         myRoster={

@@ -35,7 +35,7 @@ export function AvailablePool({
   adp,
   keptBy,
   myRoster,
-  drafted,
+  draftedBy,
   projectedPicks,
   livePicksByRound,
   starred,
@@ -60,14 +60,15 @@ export function AvailablePool({
    */
   myRoster: number | null;
   /**
-   * Players the draft has actually taken, while it is running.
+   * Players the draft has taken, and who took them.
    *
-   * GONE, NOT DIMMED, and with no toggle to bring them back — unlike a keeper
-   * selection, which is a hypothesis this page exists to play with, a made pick
-   * is a fact. "Available" has to mean available or the list is worthless at the
-   * one moment it is most useful.
+   * HIDDEN BY DEFAULT, BUT REACHABLE. While a draft is running "available" has
+   * to mean available or the list is worthless at the one moment it is most
+   * useful. Afterwards the same list is the only record of what happened to the
+   * players you starred — so there is a toggle, exactly as there is for kept
+   * players, and it is offered only once somebody has actually been drafted.
    */
-  drafted: Set<string>;
+  draftedBy: Map<string, string>;
   /**
    * Where the draft would take each player, from the same walk the board uses,
    * so a highlighted row and the board cannot disagree about whose pick it is.
@@ -97,6 +98,7 @@ export function AvailablePool({
   const [q, setQ] = useState("");
   const [starsOnly, setStarsOnly] = useState(false);
   const [showKept, setShowKept] = useState(false);
+  const [showDrafted, setShowDrafted] = useState(false);
   /**
    * ADP ASCENDING IS THE DEFAULT AND IT IS NOT ARBITRARY: it is the order the
    * draft actually happens in, which is what makes the round breaks meaningful.
@@ -121,7 +123,7 @@ export function AvailablePool({
     [adp],
   );
   const undraftedCount = all.filter(
-    (e) => !keptBy.has(e.playerId as string) && !drafted.has(e.playerId as string),
+    (e) => !keptBy.has(e.playerId as string) && !draftedBy.has(e.playerId as string),
   ).length;
 
   const sortValue = (e: AdpEntry): number | string | null => {
@@ -158,6 +160,7 @@ export function AvailablePool({
     needle !== "" ||
     starsOnly ||
     showKept ||
+    showDrafted ||
     sort.key !== "adp" ||
     sort.dir !== "asc";
 
@@ -171,9 +174,11 @@ export function AvailablePool({
    * never does.
    */
   const includeKept = showKept || needle !== "" || starsOnly;
+  // Same rule as kept: a deliberate act reaches them, idle scrolling does not.
+  const includeDrafted = showDrafted || needle !== "" || starsOnly;
   const rows = all.filter((e) => {
     const id = e.playerId as string;
-    if (drafted.has(id)) return false;
+    if (draftedBy.has(id) && !includeDrafted) return false;
     if (keptBy.has(id) && !includeKept) return false;
     return (
       (pos === "ALL" || e.position === pos) &&
@@ -253,6 +258,24 @@ export function AvailablePool({
               {p}
             </button>
           ))}
+          {draftedBy.size ? (
+            <button
+              type="button"
+              onClick={() => setShowDrafted((v) => !v)}
+              title={
+                showDrafted
+                  ? "Hide players already drafted — back to who is still available"
+                  : "Show players the draft has taken, dimmed, with who took them. Useful for finding a starred player after the fact."
+              }
+              className={`rounded border px-1.5 py-0.5 text-[10px] font-medium transition-colors ${
+                showDrafted
+                  ? "border-accent-dim bg-accent/10 text-accent"
+                  : "border-ink-500 text-chalk-500 hover:text-chalk-300"
+              }`}
+            >
+              drafted
+            </button>
+          ) : null}
           <button
             type="button"
             onClick={() => setShowKept((v) => !v)}
@@ -375,7 +398,7 @@ export function AvailablePool({
                */
               className={`flex items-center gap-2 border-l-2 px-3 py-1 text-[11px] hover:bg-ink-800/50 ${
                 mine ? "border-me bg-me/[0.07]" : "border-transparent"
-              } ${heldBy ? "opacity-50" : ""}`}
+              } ${heldBy || draftedBy.has(id) ? "opacity-50" : ""}`}
             >
               <button
                 type="button"
@@ -426,7 +449,11 @@ export function AvailablePool({
                 {/* The released-by column is gone, but not the fact — it is the
                     reason a good player is in this list at all. Demoted to a
                     suffix rather than dropped. */}
-                {heldBy ? (
+                {draftedBy.has(id) ? (
+                  <span className="ml-1.5 text-[10px] text-chalk-500">
+                    drafted · {ownerNames[draftedBy.get(id)!] ?? draftedBy.get(id)}
+                  </span>
+                ) : heldBy ? (
                   <span className="ml-1.5 text-[10px] text-accent">kept · {ownerNames[heldBy] ?? heldBy}</span>
                 ) : c?.ownerSlug ? (
                   <span className="ml-1.5 text-[10px] text-loss">

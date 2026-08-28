@@ -69,6 +69,7 @@ export function ProjectedDraftBoard({
   adp,
   draftRounds,
   override,
+  renderCompleted = false,
   showAdp = false,
   fillEmptyPicks = false,
   starred,
@@ -85,6 +86,16 @@ export function ProjectedDraftBoard({
   /** Last round of the draft — the floor an expired contract is revalued to. */
   draftRounds: number;
   override?: BoardOverride;
+  /**
+   * Draw the board even once the draft is over.
+   *
+   * `/keepers` says "the draft is done" and points at the archived board, which
+   * is right for a page about what to keep. The LAB wants the opposite: after a
+   * draft it becomes a record, and the board is the thing worth looking at. The
+   * picks feed has every cell by then, so there is nothing projected left in it
+   * — it draws what actually happened.
+   */
+  renderCompleted?: boolean;
   /**
    * Price each keeper against the market — his ADP rank, and cost round minus
    * market round beside it.
@@ -176,7 +187,7 @@ export function ProjectedDraftBoard({
   // Once the draft has run this board is a projection of the past. The real one
   // is derived from the committed picks — `sync` writes them the moment the draft
   // completes, and derive records them without waiting for the season to end.
-  if (d.status === "complete") {
+  if (d.status === "complete" && !renderCompleted) {
     return (
       <div className="px-4 py-8 text-center text-sm text-chalk-600 sm:px-5">
         <p className="flex items-center justify-center gap-2">

@@ -69,18 +69,13 @@ export default function LabPage() {
   /**
    * The draft this page plans is already in the books.
    *
-   * `nextSeason` is `max(finished seasons) + 1`, which does NOT advance when a
-   * draft is archived — only when the SEASON ends — so for the five months
-   * between the two this page would otherwise render a full what-if editor over
-   * a draft that has already happened, and a board that refuses to draw because
-   * the provider says `complete`.
+   * IT BECOMES A RECORD, NOT A DEAD PAGE. Standing the whole thing down was the
+   * wrong call: the board and the available pool are still worth reading after a
+   * draft — which players went where, and what happened to the ones you starred.
+   * So the page stays and only its framing changes; what it cannot do is plan the
+   * NEXT draft, since that needs a league the provider has not created yet.
    *
-   * There is nothing to move it on to, either: planning the next one needs a
-   * league id, rounds and a slot map, and the provider has no such league until
-   * it is created. So it says so rather than inventing a shape to draw.
-   *
-   * Build-time, from the committed picks — the board inside could only discover
-   * this in the browser, and by then the editor is already on screen.
+   * Build-time, from the committed picks, so the copy is right on first paint.
    */
   const drafted = getDrafts().some((d) => d.season === nextSeason);
 
@@ -139,37 +134,29 @@ export default function LabPage() {
     }
   }
 
-  if (drafted) {
-    return (
-      <div className="space-y-5 sm:space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Scenario Lab</h1>
-          <p className="mt-1 max-w-2xl text-sm text-chalk-500">
-            The {nextSeason} draft is done, so there is nothing left to plan against it.{" "}
-            <Link
-              href={`/history/${nextSeason}/draft/`}
-              className="text-chalk-400 transition-colors hover:text-accent"
-            >
-              See the board as it happened →
-            </Link>
-          </p>
-          <p className="mt-3 max-w-2xl text-xs text-chalk-600">
-            This page comes back when next season&rsquo;s league exists — it needs a real
-            draft to know the rounds, the teams and the slots.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-5 sm:space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Scenario Lab</h1>
         <p className="mt-1 max-w-2xl text-sm text-chalk-500">
-          Set {keepers ? <>every team&rsquo;s keepers and </> : null}the draft order by hand, and
-          watch the {nextSeason} board redraw. Nothing here is real and nothing is sent anywhere —
-          it lives in this browser until you reset it.
+          {drafted ? (
+            <>
+              The {nextSeason} draft is done, so this is a record of it rather than a plan —
+              the board below is how it fell, and the pool remembers who you starred.{" "}
+              <Link
+                href={`/history/${nextSeason}/draft/`}
+                className="text-chalk-400 transition-colors hover:text-accent"
+              >
+                See it as a board →
+              </Link>
+            </>
+          ) : (
+            <>
+              Set {keepers ? <>every team&rsquo;s keepers and </> : null}the draft order by hand,
+              and watch the {nextSeason} board redraw. Nothing here is real and nothing is sent
+              anywhere — it lives in this browser until you reset it.
+            </>
+          )}
         </p>
       </div>
 

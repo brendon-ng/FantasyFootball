@@ -1386,18 +1386,27 @@ lands three days before the draft and the ORDER IS DRAWN AFTER IT (bylaw 1.7), s
 every keeper decision is made without knowing your slot — and the only way to
 reason about that is to try orders.
 
-IT STANDS DOWN ONCE ITS OWN DRAFT IS ARCHIVED. `nextSeason` is `max(finished
-seasons) + 1`, which advances when a SEASON ends and not when a draft is run — so
-for the five months between the two, this page would otherwise put a full what-if
-editor over a draft that has already happened, above a board refusing to draw
-because the provider says `complete`. There is nowhere to move it on to either:
-planning the next draft needs a league id, rounds and a slot map, and no such
-league exists until the provider creates one. So it says so and links to the real
-board. Decided at BUILD time from the committed picks, because the board inside it
-could only find out in the browser, by which point the editor is already up.
+ONCE ITS DRAFT HAS RUN IT BECOMES A RECORD, not a dead page. `nextSeason` is
+`max(finished seasons) + 1`, which advances when a SEASON ends and not when a
+draft is run, so for five months this page describes a draft already in the
+books. It cannot plan the NEXT one — that needs a league id, rounds and a slot
+map, and none exists until the provider creates one — but the board and the pool
+are still worth reading: which players went where, and what became of the ones
+you starred. So only the framing changes, decided at BUILD time from the
+committed picks.
 
-A side effect worth knowing: den-ops' lab page went from 642KB to 16KB, having
-been shipping a 389-player pool nobody could draft from.
+`renderCompleted` is what draws a finished board. `/keepers` wants the opposite
+and keeps its "the draft is done" signpost, which is right for a page about what
+to keep; the lab wants the board itself. By then every cell is in `taken`, so
+nothing is projected — it draws what happened.
+
+THE POOL HIDES DRAFTED PLAYERS BEHIND A TOGGLE, not outright. During a draft
+"available" has to mean available or the list is worthless at the one moment it
+earns its keep; afterwards it is the only record of what happened to a starred
+player. So `drafted` mirrors the `kept` toggle exactly, appears only once
+somebody has been drafted, and a search or the star filter reaches them anyway —
+a deliberate act surfaces them, idle scrolling does not. A shown row names WHO
+took him, because "drafted" alone answers half the question.
 
 EVERY LEAGUE GETS IT, KEEPER OR NOT. It used to be gated on `features.keepers`,
 which was too broad: the draft order, the projected board and the available pool
