@@ -2166,7 +2166,7 @@
     "birth_date": "1998-03-12",
     "full_name": "Mecole Hardman",
     "position": "WR",
-    "team": "BUF",
+    "team": null,
     "years_exp": 7
   },
   "5927": {
@@ -2719,7 +2719,7 @@
     "birth_date": "1998-04-29",
     "full_name": "Patrick Taylor",
     "position": "RB",
-    "team": "SF",
+    "team": null,
     "years_exp": 6
   },
   "6984": {
