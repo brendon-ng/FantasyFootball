@@ -129,7 +129,7 @@
     "birth_date": "1986-05-15",
     "full_name": "Josh Johnson",
     "position": "QB",
-    "team": "CIN",
+    "team": null,
     "years_exp": 18
   },
   "268": {
@@ -1739,7 +1739,7 @@
     "birth_date": "1995-10-23",
     "full_name": "Dante Pettis",
     "position": "WR",
-    "team": "BUF",
+    "team": null,
     "years_exp": 8
   },
   "4993": {
@@ -2292,7 +2292,7 @@
     "birth_date": "1996-04-11",
     "full_name": "Jake Browning",
     "position": "QB",
-    "team": "TB",
+    "team": null,
     "years_exp": 7
   },
   "6126": {
@@ -2586,7 +2586,7 @@
     "birth_date": "1997-10-10",
     "full_name": "Denzel Mims",
     "position": "WR",
-    "team": "DAL",
+    "team": null,
     "years_exp": 6
   },
   "6853": {
@@ -2663,7 +2663,7 @@
     "birth_date": "1998-10-21",
     "full_name": "Isaiah Hodgins",
     "position": "WR",
-    "team": "NYG",
+    "team": null,
     "years_exp": 6
   },
   "6931": {
@@ -2922,7 +2922,7 @@
     "birth_date": "2000-06-09",
     "full_name": "Terrace Marshall",
     "position": "WR",
-    "team": "MIA",
+    "team": null,
     "years_exp": 5
   },
   "7567": {
@@ -3153,7 +3153,7 @@
     "birth_date": "1999-11-26",
     "full_name": "Hassan Haskins",
     "position": "RB",
-    "team": "NE",
+    "team": null,
     "years_exp": 4
   },
   "8125": {
@@ -3951,7 +3951,7 @@
     "birth_date": "2002-10-21",
     "full_name": "Carson Steele",
     "position": "RB",
-    "team": "PHI",
+    "team": null,
     "years_exp": 2
   },
   "11583": {
@@ -4147,7 +4147,7 @@
     "birth_date": "2001-01-10",
     "full_name": "Bub Means",
     "position": "WR",
-    "team": "NO",
+    "team": null,
     "years_exp": 2
   },
   "11783": {
@@ -4329,7 +4329,7 @@
     "birth_date": "2003-08-14",
     "full_name": "Kaleb Johnson",
     "position": "RB",
-    "team": "PIT",
+    "team": "GB",
     "years_exp": 1
   },
   "12506": {
