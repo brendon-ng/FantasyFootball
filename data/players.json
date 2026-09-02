@@ -129,7 +129,7 @@
     "birth_date": "1986-05-15",
     "full_name": "Josh Johnson",
     "position": "QB",
-    "team": null,
+    "team": "CIN",
     "years_exp": 18
   },
   "268": {
@@ -850,7 +850,7 @@
     "birth_date": "1993-01-05",
     "full_name": "Phillip Dorsett",
     "position": "WR",
-    "team": "LV",
+    "team": null,
     "years_exp": 11
   },
   "2342": {
@@ -1613,7 +1613,7 @@
     "birth_date": "1994-05-04",
     "full_name": "Dare Ogunbowale",
     "position": "RB",
-    "team": null,
+    "team": "LV",
     "years_exp": 9
   },
   "4741": {
@@ -2355,7 +2355,7 @@
     "birth_date": "1995-09-15",
     "full_name": "Easton Stick",
     "position": "QB",
-    "team": "IND",
+    "team": "TB",
     "years_exp": 7
   },
   "6208": {
@@ -2383,7 +2383,7 @@
     "birth_date": "1997-07-31",
     "full_name": "Scotty Miller",
     "position": "WR",
-    "team": null,
+    "team": "CHI",
     "years_exp": 7
   },
   "6311": {
@@ -2481,7 +2481,7 @@
     "birth_date": "1999-01-02",
     "full_name": "Jalen Reagor",
     "position": "WR",
-    "team": "MIA",
+    "team": null,
     "years_exp": 6
   },
   "6801": {
@@ -2670,7 +2670,7 @@
     "birth_date": "1998-09-16",
     "full_name": "DeeJay Dallas",
     "position": "RB",
-    "team": "JAX",
+    "team": null,
     "years_exp": 6
   },
   "6938": {
@@ -2712,7 +2712,7 @@
     "birth_date": "1998-08-25",
     "full_name": "Tyler Johnson",
     "position": "WR",
-    "team": "DAL",
+    "team": null,
     "years_exp": 6
   },
   "6963": {
@@ -2740,7 +2740,7 @@
     "birth_date": "1996-09-12",
     "full_name": "JaMycal Hasty",
     "position": "RB",
-    "team": "NE",
+    "team": null,
     "years_exp": 6
   },
   "7002": {
@@ -2789,7 +2789,7 @@
     "birth_date": "1997-06-10",
     "full_name": "K.J. Osborn",
     "position": "WR",
-    "team": null,
+    "team": "TEN",
     "years_exp": 6
   },
   "7083": {
@@ -2936,7 +2936,7 @@
     "birth_date": "2000-07-16",
     "full_name": "Brevin Jordan",
     "position": "TE",
-    "team": null,
+    "team": "HOU",
     "years_exp": 5
   },
   "7569": {
@@ -3020,14 +3020,14 @@
     "birth_date": "1999-05-07",
     "full_name": "Michael Carter",
     "position": "RB",
-    "team": null,
+    "team": "TEN",
     "years_exp": 5
   },
   "7608": {
     "birth_date": "1998-04-21",
     "full_name": "Khalil Herbert",
     "position": "RB",
-    "team": "SF",
+    "team": null,
     "years_exp": 5
   },
   "7609": {
@@ -3153,7 +3153,7 @@
     "birth_date": "1999-11-26",
     "full_name": "Hassan Haskins",
     "position": "RB",
-    "team": null,
+    "team": "NE",
     "years_exp": 4
   },
   "8125": {
@@ -3237,7 +3237,7 @@
     "birth_date": "1999-09-18",
     "full_name": "Zamir White",
     "position": "RB",
-    "team": null,
+    "team": "NO",
     "years_exp": 4
   },
   "8142": {
@@ -3489,7 +3489,7 @@
     "birth_date": "2000-10-26",
     "full_name": "Evan Hull",
     "position": "RB",
-    "team": null,
+    "team": "ARI",
     "years_exp": 3
   },
   "9221": {
@@ -3783,7 +3783,7 @@
     "birth_date": "2000-04-19",
     "full_name": "Cedric Tillman",
     "position": "WR",
-    "team": null,
+    "team": "NO",
     "years_exp": 3
   },
   "10859": {
@@ -3811,7 +3811,7 @@
     "birth_date": "1999-11-23",
     "full_name": "Jake Moody",
     "position": "K",
-    "team": null,
+    "team": "BAL",
     "years_exp": 3
   },
   "11008": {
@@ -3825,21 +3825,21 @@
     "birth_date": "1998-11-05",
     "full_name": "Blake Grupe",
     "position": "K",
-    "team": null,
+    "team": "NYJ",
     "years_exp": 3
   },
   "11199": {
     "birth_date": "1999-01-20",
     "full_name": "Emari Demercado",
     "position": "RB",
-    "team": null,
+    "team": "DAL",
     "years_exp": 3
   },
   "11299": {
     "birth_date": "1999-07-17",
     "full_name": "Zavier Scott",
     "position": "RB",
-    "team": "MIN",
+    "team": "CHI",
     "years_exp": 3
   },
   "11435": {
@@ -3853,7 +3853,7 @@
     "birth_date": "2000-09-13",
     "full_name": "Jaleel McLaughlin",
     "position": "RB",
-    "team": "DEN",
+    "team": "CLE",
     "years_exp": 3
   },
   "11533": {

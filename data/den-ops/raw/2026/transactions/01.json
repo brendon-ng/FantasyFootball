@@ -1,5 +1,30 @@
 [
   {
+    "adds": {
+      "11618": 10
+    },
+    "consenter_ids": [
+      10
+    ],
+    "created": 1788318600877,
+    "creator": "1133643357365972992",
+    "draft_picks": [],
+    "drops": {
+      "8154": 10
+    },
+    "leg": 1,
+    "metadata": null,
+    "roster_ids": [
+      10
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1788318600877,
+    "transaction_id": "1400713370717446144",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
     "adds": null,
     "consenter_ids": [
       8
