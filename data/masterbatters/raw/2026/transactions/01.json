@@ -1,6 +1,31 @@
 [
   {
     "adds": {
+      "KC": 12
+    },
+    "consenter_ids": [
+      12
+    ],
+    "created": 1788664948916,
+    "creator": "1266656315036405760",
+    "draft_picks": [],
+    "drops": {
+      "LAR": 12
+    },
+    "leg": 1,
+    "metadata": null,
+    "roster_ids": [
+      12
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1788664948916,
+    "transaction_id": "1402166059686985728",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
       "DET": 7
     },
     "consenter_ids": [
