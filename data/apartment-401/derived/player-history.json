@@ -25416,6 +25416,20 @@
       "week": 12
     }
   ],
+  "11370": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1788903976842,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    }
+  ],
   "11435": [
     {
       "action": "add",

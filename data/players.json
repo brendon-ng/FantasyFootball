@@ -2327,7 +2327,7 @@
     "birth_date": "1997-01-12",
     "full_name": "Darius Slayton",
     "position": "WR",
-    "team": "NYG",
+    "team": null,
     "years_exp": 7
   },
   "6151": {
@@ -4147,7 +4147,7 @@
     "birth_date": "2001-01-10",
     "full_name": "Bub Means",
     "position": "WR",
-    "team": null,
+    "team": "CLE",
     "years_exp": 2
   },
   "11783": {
