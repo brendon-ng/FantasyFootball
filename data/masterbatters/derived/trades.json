@@ -229,5 +229,38 @@
     "timestamp": 1787983983593,
     "vetoed": false,
     "week": 1
+  },
+  {
+    "id": "1403477335876845568",
+    "legs": [
+      {
+        "fromSlug": "aidan-kelleher",
+        "kind": "player",
+        "playerId": "5872",
+        "toSlug": "josh-greenebaum"
+      },
+      {
+        "fromSlug": "aidan-kelleher",
+        "kind": "player",
+        "playerId": "11581",
+        "toSlug": "josh-greenebaum"
+      },
+      {
+        "fromSlug": "josh-greenebaum",
+        "kind": "player",
+        "playerId": "11628",
+        "toSlug": "aidan-kelleher"
+      }
+    ],
+    "ownerSlugs": [
+      "aidan-kelleher",
+      "josh-greenebaum"
+    ],
+    "preseason": false,
+    "season": 2026,
+    "source": "sleeper",
+    "timestamp": 1789009272962,
+    "vetoed": false,
+    "week": 1
   }
 ]
