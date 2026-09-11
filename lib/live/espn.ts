@@ -19,7 +19,7 @@
  * player is worse than one showing none.
  */
 
-import type { LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "../types.ts";
+import type { LiveLineupSlot, LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "../types.ts";
 import { withBasePath } from "../base-path.ts";
 import { ESPN_POS, PRO_TEAM } from "../espn-maps.ts";
 
@@ -73,6 +73,8 @@ interface EspnEntry {
   lineupSlotId: number;
   playerId?: number;
   playerPoolEntry?: {
+    /** This player's fantasy points for the scoring period requested. */
+    appliedStatTotal?: number;
     player?: {
       id?: number;
       fullName?: string;
@@ -215,6 +217,38 @@ function lastFinishedLeg(league: EspnLeague): number | null {
     for (const leg of spanOf(league, mp)) last = Math.max(last ?? 0, leg);
   }
   return last;
+}
+
+/**
+ * One side's lineup for the week, starters first.
+ *
+ * Straight off the boxscore entries `startedTeams` already reads, so it costs
+ * nothing extra. Ids stay `espn-<id>`: resolving them here would mean pulling
+ * the 132KB player map into `season()`, which every visitor of an ESPN league
+ * would pay for. `matchLivePlayer` does it in the browser, where only a lineup
+ * view asks — and it resolves far more of them than the id map alone, since
+ * `espn_id` coverage thins badly for recent arrivals.
+ */
+function lineupOf(side: EspnGameSide | undefined): LiveLineupSlot[] | undefined {
+  const entries = side?.rosterForCurrentScoringPeriod?.entries;
+  if (!entries?.length) return undefined;
+  return entries
+    .map((e): LiveLineupSlot | null => {
+      const pl = e.playerPoolEntry?.player;
+      const pid = e.playerId ?? pl?.id;
+      if (pid == null) return null;
+      return {
+        id: `espn-${pid}`,
+        name: pl?.fullName ?? null,
+        position: ESPN_POS[pl?.defaultPositionId ?? -1] ?? null,
+        team: PRO_TEAM[pl?.proTeamId ?? -1] ?? null,
+        points: round2(e.playerPoolEntry?.appliedStatTotal ?? 0),
+        started: !BENCH_SLOTS.has(e.lineupSlotId),
+      };
+    })
+    .filter((p): p is LiveLineupSlot => p !== null)
+    // Starters first; ESPN already returns them in lineup-slot order.
+    .sort((a, b) => Number(b.started) - Number(a.started));
 }
 
 export const espnProvider: LiveProvider = {
@@ -596,6 +630,7 @@ export const espnProvider: LiveProvider = {
           const side = (s: EspnGameSide) => ({
             ownerSlug: slugOf(s.teamId),
             startedTeams: startedTeams(s),
+            lineup: lineupOf(s),
             // The WEEK's points, not the matchup's running total: a two-week
             // playoff game would otherwise show week 16 and 17 added together
             // while week 17 is still being played.

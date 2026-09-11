@@ -1,0 +1,93 @@
+"use client";
+
+import { useMemo } from "react";
+
+import { LineupPanel, type LineupRow } from "@/components/lineup-panel";
+import { fmt } from "@/components/ui";
+import { positionRank } from "@/lib/espn-maps";
+import { buildNameIndex, matchLivePlayer, type NameIndex } from "@/lib/player-match";
+import type { LiveLineupSlot, PlayerMeta } from "@/lib/types";
+
+/**
+ * A live lineup, in the same panel the finished matchup page draws.
+ *
+ * THE RENDERING IS SHARED — `LineupPanel` — so a game looks the same on Sunday
+ * as it does once the archive catches up on Tuesday. All this does is turn what
+ * the provider says into the rows that panel wants, which is the one part that
+ * genuinely differs: the archive has slot ordering and record marks, the live
+ * feed has neither, and only the live feed needs its players resolved.
+ */
+export function LiveLineup({
+  title,
+  lineup,
+  players,
+}: {
+  title: string;
+  lineup: LiveLineupSlot[] | undefined;
+  /** The baked index. Also decides which names can link — a page exists per key. */
+  players: Record<string, PlayerMeta>;
+}) {
+  /**
+   * Built once per lineup, not per row. Same reasoning as `LiveRosters`: a
+   * lineup resolves a dozen names against a few hundred players, and rebuilding
+   * the index inside the row would make it quadratic.
+   */
+  const nameIndex = useMemo(() => buildNameIndex(players), [players]);
+
+  const rows = useMemo(
+    () => (lineup ?? []).map((p) => toRow(p, players, nameIndex)),
+    [lineup, players, nameIndex],
+  );
+  const startersTotal = rows.filter((r) => r.started).reduce((t, r) => t + r.points, 0);
+
+  return (
+    <LineupPanel
+      title={title}
+      meta={`${fmt.pts(startersTotal)} from starters`}
+      // Sorted like a depth chart rather than by the provider's slot order,
+      // which is the one thing the live feed cannot tell us. `LineupPanel`
+      // drops the Slot column when nothing fills it.
+      rows={[...rows].sort(
+        (a, b) =>
+          Number(b.started) - Number(a.started) ||
+          positionRank(a.position) - positionRank(b.position) ||
+          b.points - a.points ||
+          a.name.localeCompare(b.name),
+      )}
+      emptyLabel="No lineup set yet."
+      // No "left on it" here: the week may still be running, so points on the
+      // bench are not yet a regret.
+      benchLabel={(n, pts) => `Bench · ${n} players · ${fmt.pts(pts)}`}
+    />
+  );
+}
+
+function toRow(
+  p: LiveLineupSlot,
+  players: Record<string, PlayerMeta>,
+  index: NameIndex,
+): LineupRow {
+  /**
+   * The provider's id is not enough on ESPN — see `matchLivePlayer`. Sleeper
+   * publishes no `espn_id` for plenty of current players, so falling straight
+   * through would leave recognisable names unclickable.
+   */
+  const matchedId = matchLivePlayer(p, players, index);
+  const meta = matchedId ? players[matchedId] : undefined;
+  return {
+    id: p.id,
+    // The live feed names the lineup but not the slot ordering, so there is
+    // nothing honest to put here. The column disappears rather than guessing.
+    slot: null,
+    started: p.started,
+    // NAME from the baked index first — that is what the rest of the site
+    // shows, "James Cook" rather than ESPN's "James Cook III".
+    name: meta?.full_name ?? p.name ?? p.id,
+    position: meta?.position ?? p.position,
+    // TEAM from the PROVIDER first, the other way round: `PlayerMeta.team` is
+    // recorded per season and is stale the moment somebody is traded.
+    team: p.team ?? meta?.team ?? null,
+    points: p.points,
+    href: meta ? `/players/${matchedId}/` : null,
+  };
+}

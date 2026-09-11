@@ -584,6 +584,41 @@ export interface LiveMatchupSide {
    * see `useMatchupSettled`.
    */
   startedTeams?: string[];
+  /**
+   * This side's lineup with per-player scores, newest state the provider has.
+   *
+   * UNDEFINED MEANS THE PROVIDER DID NOT SAY, which is the normal state before
+   * a draft has run. Costs no extra request either side: Sleeper returns
+   * `starters` and `players_points` on the matchups call it already makes, and
+   * ESPN's `mBoxscore` — fetched anyway for `startedTeams` — carries the entry
+   * and its `appliedStatTotal`.
+   */
+  lineup?: LiveLineupSlot[];
+}
+
+/**
+ * One player in a live lineup, with what he has scored so far.
+ *
+ * SAME SHAPE AS `LiveRosterPlayer` PLUS THE SCORE, deliberately — both are "a
+ * player the provider is describing right now", both need `matchLivePlayer` to
+ * become a link, and a second shape would mean a second copy of that.
+ */
+export interface LiveLineupSlot {
+  /**
+   * The Sleeper id on Sleeper; `espn-<id>` on ESPN, resolved in the browser by
+   * `matchLivePlayer`. NOT resolved in the provider: that would pull the 132KB
+   * id map into `season()`, which every visitor pays for, to answer a question
+   * only a lineup view asks.
+   */
+  id: string;
+  /** The provider's own name. Null on Sleeper, where the baked index has it. */
+  name: string | null;
+  position: string | null;
+  /** NFL team abbreviation. */
+  team: string | null;
+  points: number;
+  /** False for bench and IR — their points do not count toward the score. */
+  started: boolean;
 }
 
 export interface LiveMatchup {

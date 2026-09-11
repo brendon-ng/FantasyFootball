@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { LineupPanel, type LineupRow } from "@/components/lineup-panel";
 import { MatchupPreview } from "@/components/matchup-preview";
 import { SeriesPanel } from "@/components/series-panel";
 import {
@@ -16,16 +17,8 @@ import { BackLink } from "@/components/back-link";
 
 import { Bracket } from "@/components/bracket";
 import { WeeklyLowBadge } from "@/components/weekly-low";
-import { PositionPill } from "@/components/keeper-table";
 import { Tip } from "@/components/tooltip";
-import {
-  Col,
-  ListHeader,
-  Panel,
-  PanelHeader,
-  Stat,
-  fmt,
-} from "@/components/ui";
+import { Panel, PanelHeader, Stat, fmt } from "@/components/ui";
 import type { BracketMatch } from "@/lib/types";
 import {
   getAllMeetings,
@@ -409,12 +402,6 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                     name={name(side.ownerSlug)}
                     players={players}
                     teamsThen={getPlayerTeamsAt(game.season, leg.week)}
-                    /* Per WEEK, not the winner of the whole matchup — the team
-                       that lost the round can still have won a week. */
-                    won={
-                      leg.a.points !== leg.b.points &&
-                      side.points === Math.max(leg.a.points, leg.b.points)
-                    }
                     playerFlags={legFlags.filter((f) => f.playerId)}
                   />
                 ))}
@@ -483,7 +470,6 @@ function Lineup({
   name,
   players,
   teamsThen,
-  won,
   playerFlags,
 }: {
   side: MeetingSide;
@@ -495,7 +481,6 @@ function Lineup({
    * which is what the page showed before and is still right for a recent game.
    */
   teamsThen: Record<string, string>;
-  won: boolean;
   /**
    * Every player-week record set in this game, either side.
    *
@@ -506,114 +491,51 @@ function Lineup({
   playerFlags: RecordFlag[];
 }) {
   const startersTotal = side.starters.reduce((t, pid) => t + (side.playerPoints[pid] ?? 0), 0);
-  const bench = Object.keys(side.playerPoints).filter((pid) => !side.starters.includes(pid));
-  const benchTotal = bench.reduce((t, pid) => t + (side.playerPoints[pid] ?? 0), 0);
-  const best = Math.max(0, ...side.starters.map((pid) => side.playerPoints[pid] ?? 0));
+  const benchIds = Object.keys(side.playerPoints).filter((pid) => !side.starters.includes(pid));
 
-  const row = (pid: string, slot: string | null) => {
+  const row = (pid: string, slot: string | null): LineupRow => {
     const p = players[pid];
-    const pts = side.playerPoints[pid] ?? 0;
-    // STARTERS ONLY, asserted here rather than assumed. The all-time list is
-    // built from started players (`buildLeagueRecords` skips the bench), so this
-    // is belt-and-braces — but a chip on a bench row would claim a record that
-    // the record book does not contain, and the bench is collapsed, so it would
-    // be a wrong badge that is also hard to spot.
-    const mark = side.starters.includes(pid)
-      ? (playerFlags.find((f) => f.playerId === pid) ?? null)
-      : null;
-    return (
-      <div key={pid} className="flex items-center gap-2.5 px-3 py-1.5 sm:px-4">
-        {slot ? (
-          <span className="w-10 shrink-0 text-[10px] font-bold uppercase tracking-wide text-chalk-600">
-            {slot}
-          </span>
-        ) : (
-          <span className="w-10 shrink-0" />
-        )}
-        <PositionPill position={p?.position ?? null} />
-        <Link
-          href={`/players/${pid}/`}
-          className="min-w-0 flex-1 truncate text-sm transition-colors hover:text-accent"
-        >
-          {p?.full_name ?? pid}
-          {teamsThen[pid] ?? p?.team ? (
-            <span className="ml-1.5 text-[11px] text-chalk-600">
-              {teamsThen[pid] ?? p?.team}
-            </span>
-          ) : null}
-          {/* ON THE ROW, not only in the badge strip at the top. The strip names
-              the player in prose, so finding him in a 17-man lineup meant reading
-              both and matching by eye. */}
-          {mark ? (
-            <span
-              title={mark.full}
-              className="ml-1.5 whitespace-nowrap rounded border border-gold/50 bg-gold/10 px-1 py-px align-middle text-[9px] font-bold uppercase tracking-wide text-gold"
-            >
-              {`#${mark.rank} player week`}
-            </span>
-          ) : null}
-        </Link>
-        <span
-          className={`tabular w-14 shrink-0 text-right text-sm ${
-            slot && pts === best && best > 0 ? "font-bold text-accent" : "text-chalk-300"
-          }`}
-        >
-          {fmt.pts(pts)}
-        </span>
-      </div>
-    );
+    return {
+      id: pid,
+      slot,
+      started: slot !== null,
+      name: p?.full_name ?? pid,
+      position: p?.position ?? null,
+      team: teamsThen[pid] ?? p?.team ?? null,
+      points: side.playerPoints[pid] ?? 0,
+      // Every player here came out of committed data, so a page exists for all
+      // of them — unlike the live lineup, where a rookie may have none.
+      href: `/players/${pid}/`,
+      // STARTERS ONLY, asserted rather than assumed. The all-time list is built
+      // from started players (`buildLeagueRecords` skips the bench), so this is
+      // belt-and-braces — but a chip on a bench row would claim a record the
+      // book does not contain, inside a collapsed section where nobody would
+      // catch it.
+      mark: slot !== null
+        ? (() => {
+            const f = playerFlags.find((x) => x.playerId === pid);
+            return f ? { short: `#${f.rank} player week`, full: f.full } : null;
+          })()
+        : null,
+    };
   };
 
-  // Nothing is in this state today: every game in league history has a lineup on
-  // file. The path stays because a newly imported season has scores before it has
-  // been through the lineup importer, and saying so beats an empty table headed
-  // "0.00 from starters", which reads as a team that scored nothing.
-  if (!side.starters.length && !Object.keys(side.playerPoints).length) {
-    return (
-      <Panel>
-        <PanelHeader title={name} meta={`${fmt.pts(side.points)} total`} />
-        <div className="px-4 py-8 text-center text-xs text-chalk-600 sm:px-5">
-          No lineup on record for this game yet.
-        </div>
-      </Panel>
-    );
-  }
-
   return (
-    <Panel>
-      <PanelHeader
-        title={name}
-        meta={`${fmt.pts(startersTotal)} from starters`}
-        legend={won ? undefined : undefined}
-      />
-      <ListHeader>
-        <Col className="w-10 shrink-0">Slot</Col>
-        <Col className="w-8 shrink-0 text-center">Pos</Col>
-        <Col className="flex-1">Player</Col>
-        <Col className="w-14 shrink-0 text-right" hint="Fantasy points scored in this game">
-          Pts
-        </Col>
-      </ListHeader>
-      <div className="divide-y divide-ink-700">
-        {side.starters.map((pid, i) => row(pid, slots[i] ?? "FLEX"))}
-      </div>
-
-      {bench.length ? (
-        <details className="group border-t border-ink-600">
-          <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-2 text-[11px] text-chalk-600 transition-colors hover:bg-ink-700/40 sm:px-5">
-            <span>
-              Bench · {bench.length} players · {fmt.pts(benchTotal)} left on it
-            </span>
-            <span className="transition-transform group-open:rotate-90">▸</span>
-          </summary>
-          <div className="divide-y divide-ink-700 bg-ink-850/60 opacity-70">
-            {bench
-              .sort((a, b) => (side.playerPoints[b] ?? 0) - (side.playerPoints[a] ?? 0))
-              .map((pid) => row(pid, null))}
-          </div>
-        </details>
-      ) : null}
-    </Panel>
+    <LineupPanel
+      title={name}
+      meta={`${fmt.pts(startersTotal)} from starters`}
+      rows={[
+        ...side.starters.map((pid, i) => row(pid, slots[i] ?? "FLEX")),
+        ...benchIds.map((pid) => row(pid, null)),
+      ]}
+      // Nothing is in this state today: every game in league history has a
+      // lineup on file. The path stays because a newly imported season has
+      // scores before it has been through the lineup importer, and saying so
+      // beats an empty table headed "0.00 from starters", which reads as a team
+      // that scored nothing.
+      emptyLabel="No lineup on record for this game yet."
+      benchLabel={(n, pts) => `Bench · ${n} players · ${fmt.pts(pts)} left on it`}
+    />
   );
 }
 
@@ -671,26 +593,11 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
         <BackLink
           fallback={{ href: `/history/${fixture.season}/`, label: `${fixture.season} Season` }}
         />
-        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-2">
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            {fixture.season} · Week {fixture.week}
-          </h1>
-          {/* Says what the page IS, because it looks like a matchup page and a
-              reader arriving from a link needs to know there is no result here. */}
-          <span className="rounded-full border border-accent-dim px-2.5 py-1 text-[11px] font-semibold tracking-wide text-accent">
-            PREVIEW
-          </span>
-        </div>
-        <p className="mt-1 text-sm text-chalk-500">
-          {headline} ·{" "}
-          <Link href={pairHref} className="hover:text-accent">
-            head to head
-          </Link>
-          {" · "}
-          <Link href={`/history/${fixture.season}/`} className="hover:text-accent">
-            {fixture.season} season
-          </Link>
-        </p>
+        {/* The heading, the state badge and this line all live in
+            `MatchupPreview` rather than here: the badge has to say PREVIEW /
+            LIVE / FINAL, which only the live layer knows, and rendering it in a
+            second client component would mean a second `useLiveSeason` fetch
+            purely to label the page. */}
       </div>
 
       {/* THE STATE OF THE RIVALRY AT KICKOFF, which is the one thing a preview
@@ -730,6 +637,9 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
         b={fixture.b}
         ownerNames={Object.fromEntries([...owners.values()].map((o) => [o.slug, o.name]))}
         seasonWeeks={seasonWeekCount()}
+        players={getPlayers()}
+        headline={headline}
+        pairHref={pairHref}
       />
 
       <SeriesPanel series={series} nameOf={name} pairHref={pairHref} />

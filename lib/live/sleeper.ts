@@ -16,7 +16,7 @@
 import { orderIsSet } from "../draft-slots.ts";
 
 import { fetchRetry } from "./retry.ts";
-import type { LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "../types.ts";
+import type { LiveLineupSlot, LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "../types.ts";
 
 import {
   round2,
@@ -67,6 +67,10 @@ interface RawMatchup {
   points: number | null;
   /** Player ids in lineup order; "0" is an empty slot. */
   starters?: string[] | null;
+  /** Everyone rostered, starters included. */
+  players?: string[] | null;
+  /** player id -> points this week, bench included. */
+  players_points?: Record<string, number> | null;
 }
 
 interface RawTxn {
@@ -97,6 +101,37 @@ async function sleeperWeekGames(id: string, week: number): Promise<LiveWeekGame[
     ]);
   }
   return [...byId.entries()].map(([matchupId, sides]) => ({ matchupId, sides }));
+}
+
+/**
+ * One side's lineup for the week, starters first in lineup order.
+ *
+ * Sleeper says nothing about who a player IS — no name, no position, no team —
+ * because every id it returns is a Sleeper id and the baked index already has
+ * all three. `"0"` is an empty lineup slot and is dropped rather than rendered
+ * as a player nobody has.
+ *
+ * Undefined when the payload carries no lineup at all, which is how it reads
+ * before a draft: an empty array would claim a team fielded nobody.
+ */
+function lineupOf(m: RawMatchup): LiveLineupSlot[] | undefined {
+  const starters = (m.starters ?? []).filter((id) => id && id !== "0");
+  const all = m.players ?? [];
+  if (!starters.length && !all.length) return undefined;
+  const pts = m.players_points ?? {};
+  const started = new Set(starters);
+  const slot = (id: string, isStarter: boolean): LiveLineupSlot => ({
+    id,
+    name: null,
+    position: null,
+    team: null,
+    points: round2(pts[id] ?? 0),
+    started: isStarter,
+  });
+  return [
+    ...starters.map((id) => slot(id, true)),
+    ...all.filter((id) => !started.has(id)).map((id) => slot(id, false)),
+  ];
 }
 
 export const sleeperProvider: LiveProvider = {
@@ -420,11 +455,13 @@ export const sleeperProvider: LiveProvider = {
             ownerSlug: slugOf(x.roster_id),
             points: round2(x.points ?? 0),
             startedTeams: teamsOf(x.starters),
+            lineup: lineupOf(x),
           },
           b: {
             ownerSlug: slugOf(y.roster_id),
             points: round2(y.points ?? 0),
             startedTeams: teamsOf(y.starters),
+            lineup: lineupOf(y),
           },
         }));
     }

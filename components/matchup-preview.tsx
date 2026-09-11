@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 
+import { LiveLineup } from "@/components/live-lineup";
 import { Panel, fmt } from "@/components/ui";
-import { useLiveSeason, useSeasonGames } from "@/lib/live";
+import { useLiveSeason, useMatchupSettled, useSeasonGames } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
-import type { LiveSeason, LiveTeam } from "@/lib/types";
+import type { LiveSeason, LiveTeam, PlayerMeta } from "@/lib/types";
 
 /**
  * The live half of a matchup that has not been played.
@@ -41,6 +42,11 @@ export interface MatchupPreviewProps {
   ownerNames: Record<string, string>;
   /** How long the season runs, so the form table covers all of it. */
   seasonWeeks: number;
+  /** The baked player index, for naming and linking a live lineup. */
+  players: Record<string, PlayerMeta>;
+  /** e.g. "All square at 6-6". Computed on the server from the committed series. */
+  headline: string;
+  pairHref: string;
 }
 
 /** One completed week for one team. */
@@ -63,6 +69,9 @@ export function MatchupPreview({
   b,
   ownerNames,
   seasonWeeks,
+  players,
+  headline,
+  pairHref,
 }: MatchupPreviewProps) {
   const live = useLiveSeason(refBySeason, initial, userIdToSlug, teamByPlayer);
   const games = useSeasonGames(refBySeason[String(season)] ?? null, seasonWeeks);
@@ -120,8 +129,72 @@ export function MatchupPreview({
   const liveScore =
     thisWeek && (thisWeek.a.points > 0 || thisWeek.b.points > 0) ? thisWeek : null;
 
+  /**
+   * PREVIEW -> LIVE -> FINAL, and the badge has to be CLIENT-RENDERED to say so.
+   *
+   * It used to be a static "PREVIEW" printed by the server page, which meant a
+   * game being played was labelled a preview all Sunday while live scores ran
+   * underneath it — the badge and the numbers disagreeing on the same screen.
+   *
+   * FINAL is `useMatchupSettled`, not "the archive has it": the archive is a
+   * day or two behind, and the whole point of that hook is that a matchup whose
+   * starters have all finished is decided on Sunday evening. Once it fires, the
+   * winner may be called and record chips may be shown — see AGENTS.md.
+   */
+  const settled = useMatchupSettled(live);
+  const isFinal = Boolean(thisWeek && settled(thisWeek));
+  const state = isFinal ? "FINAL" : liveScore ? "LIVE" : "PREVIEW";
+
+  /** Only once settled: a lead at 1pm is not a win. */
+  const winner =
+    isFinal && liveScore && liveScore.a.points !== liveScore.b.points
+      ? (liveScore.a.points > liveScore.b.points ? liveScore.a : liveScore.b).ownerSlug
+      : null;
+
+  const lineupOf = (slug: string) =>
+    liveScore
+      ? (liveScore.a.ownerSlug === slug ? liveScore.a : liveScore.b).lineup
+      : thisWeek
+        ? (thisWeek.a.ownerSlug === slug ? thisWeek.a : thisWeek.b).lineup
+        : undefined;
+  const anyLineup = Boolean(lineupOf(a)?.length || lineupOf(b)?.length);
+
   return (
     <>
+      <div>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            {season} · Week {week}
+          </h1>
+          {/* Says what the page IS, because it looks like a matchup page and a
+              reader arriving from a link needs to know whether there is a
+              result here. LIVE gets the pulsing dot the rest of the site uses
+              for a running fetch, for the same reason. */}
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold tracking-wide ${
+              state === "FINAL"
+                ? "border-ink-500 text-chalk-400"
+                : "border-accent-dim text-accent"
+            }`}
+          >
+            {state === "LIVE" ? (
+              <span className="live-dot inline-block h-1.5 w-1.5 rounded-full bg-accent" />
+            ) : null}
+            {state}
+          </span>
+        </div>
+        <p className="mt-1 text-sm text-chalk-500">
+          {headline} ·{" "}
+          <Link href={pairHref} className="hover:text-accent">
+            head to head
+          </Link>
+          {" · "}
+          <Link href={`/history/${season}/`} className="hover:text-accent">
+            {season} season
+          </Link>
+        </p>
+      </div>
+
       <div className="grid gap-3 sm:grid-cols-2">
         {[a, b].map((slug) => {
           const t = teamOf(slug);
@@ -143,7 +216,11 @@ export function MatchupPreview({
                     {label(slug)}
                   </Link>
                   {mine != null ? (
-                    <span className="tabular shrink-0 text-xl font-bold text-chalk-100">
+                    <span
+                      className={`tabular shrink-0 text-xl font-bold ${
+                        winner === slug ? "text-accent" : "text-chalk-100"
+                      }`}
+                    >
                       {fmt.pts1(mine)}
                     </span>
                   ) : null}
@@ -258,13 +335,30 @@ export function MatchupPreview({
       </div>
 
       {/* The whole reason the drawer can be absent. Said once, under both cards,
-          rather than as an empty panel per team. */}
-      {played ? null : (
+          rather than as an empty panel per team. Suppressed once this week has
+          a lineup on the board — "neither team has played yet" beside a running
+          scoreline is the contradiction this page used to print. */}
+      {played || anyLineup ? null : (
         <p className="text-[13px] text-chalk-600">
           Neither team has played yet — this is week {week}.
         </p>
       )}
 
+      {/* THE LINEUPS, once the provider has them — which is from the moment
+          lineups are set, before kickoff. Side by side so the two can be read
+          against each other, which is the whole question during a game. */}
+      {anyLineup ? (
+        <div className="grid gap-5 lg:grid-cols-2">
+          {[a, b].map((slug) => (
+            <LiveLineup
+              key={slug}
+              title={label(slug)}
+              lineup={lineupOf(slug)}
+              players={players}
+            />
+          ))}
+        </div>
+      ) : null}
     </>
   );
 }
