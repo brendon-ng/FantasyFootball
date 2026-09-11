@@ -28,6 +28,7 @@ import {
   getPlayerTeamsAt,
   getPlayers,
   getRecordFlags,
+  onBye,
   type RecordFlag,
   getSeasons,
   getWeeklyLowKeys,
@@ -400,6 +401,8 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                     side={side}
                     slots={season?.rosterPositions ?? []}
                     name={name(side.ownerSlug)}
+                    season={game.season}
+                    week={leg.week}
                     players={players}
                     teamsThen={getPlayerTeamsAt(game.season, leg.week)}
                     playerFlags={legFlags.filter((f) => f.playerId)}
@@ -468,6 +471,8 @@ function Lineup({
   side,
   slots,
   name,
+  season,
+  week,
   players,
   teamsThen,
   playerFlags,
@@ -475,6 +480,9 @@ function Lineup({
   side: MeetingSide;
   slots: string[];
   name: string;
+  /** Needed to look a bye up; the team on file is per season and per week. */
+  season: number;
+  week: number;
   players: Record<string, { full_name: string; position: string | null; team: string | null }>;
   /**
    * Team by player FOR THIS SEASON. Falls back to the player's current team,
@@ -503,6 +511,19 @@ function Lineup({
       position: p?.position ?? null,
       team: teamsThen[pid] ?? p?.team ?? null,
       points: side.playerPoints[pid] ?? 0,
+      /**
+       * A BYE IS NOT A BAD GAME, and a finished lineup can say so from
+       * committed data alone — `onBye` resolves the player's team that week
+       * against the bye map `import:player-teams` records. It is the SAME rule
+       * `getPlayerUsage` and the trade tree already use; a second copy of "a
+       * zero on a bye is not a zero he earned" is how the two would drift.
+       *
+       * The other two states the live page shows are not derivable here.
+       * "Yet to play" cannot apply — the game is over — and a DNP is
+       * indistinguishable from a real 0.00 in `playerPoints`, which is a bare
+       * number with no stat line behind it.
+       */
+      state: onBye(season, week, pid, side.playerPoints[pid] ?? 0) ? "bye" : undefined,
       // Every player here came out of committed data, so a page exists for all
       // of them — unlike the live lineup, where a rookie may have none.
       href: `/players/${pid}/`,
