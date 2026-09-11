@@ -167,6 +167,19 @@ export interface LiveWeekGame {
   sides: Array<{ rosterId: number; points: number }>;
 }
 
+/**
+ * What a player's week is DOING, beyond the number beside his name.
+ *
+ * A bare 0.00 is four different situations and the reader cannot tell them
+ * apart: on a bye, kickoff not reached, his team played without him, or he
+ * played and did nothing. Only the last is his own doing.
+ *
+ * Lives here rather than in `index.tsx` because the finished matchup page —
+ * a SERVER component — renders the shared lineup panel, and that panel should
+ * not reach into a `"use client"` module even for a type.
+ */
+export type PlayerWeekState = "bye" | "upcoming" | "live" | "dnp" | "final";
+
 export interface LiveProvider {
   /** Shown to the reader, e.g. "live from ESPN". */
   readonly name: string;
@@ -222,6 +235,17 @@ export interface LiveProvider {
   ): Promise<Record<number, LiveWeekGame[]>>;
   /** EVERY completed move from `fromWeek` onward, for the keeper adjuster. */
   leagueMoves(id: string, season: number, fromWeek: number, weeks: number): Promise<LeagueMove[]>;
+  /**
+   * Players with a real stat line this week, for `LiveLineupSlot.played`.
+   *
+   * NULL MEANS "ALREADY ANSWERED", not "nobody" — ESPN puts the actual/projected
+   * split on the boxscore entry, so its lineups arrive with `played` already
+   * set and there is nothing more to ask. Sleeper's matchup payload carries
+   * only points, so it fetches a weekly stat line here; keeping that out of
+   * `season()` means the home strip and the season page do not pay for a
+   * question only a lineup view asks.
+   */
+  playedThisWeek(season: number, week: number): Promise<Set<string> | null>;
 }
 
 /**

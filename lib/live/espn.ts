@@ -80,6 +80,12 @@ interface EspnEntry {
       fullName?: string;
       defaultPositionId?: number;
       proTeamId?: number;
+      /**
+       * One entry per scoring period PER SOURCE. `statSourceId: 0` is what he
+       * actually did; `1` is the projection. A player who has not taken a snap
+       * carries only the projection, which is what makes this the DNP signal.
+       */
+      stats?: Array<{ scoringPeriodId?: number; statSourceId?: number }>;
     };
   };
 }
@@ -229,7 +235,7 @@ function lastFinishedLeg(league: EspnLeague): number | null {
  * view asks — and it resolves far more of them than the id map alone, since
  * `espn_id` coverage thins badly for recent arrivals.
  */
-function lineupOf(side: EspnGameSide | undefined): LiveLineupSlot[] | undefined {
+function lineupOf(side: EspnGameSide | undefined, week: number): LiveLineupSlot[] | undefined {
   const entries = side?.rosterForCurrentScoringPeriod?.entries;
   if (!entries?.length) return undefined;
   return entries
@@ -244,6 +250,12 @@ function lineupOf(side: EspnGameSide | undefined): LiveLineupSlot[] | undefined 
         team: PRO_TEAM[pl?.proTeamId ?? -1] ?? null,
         points: round2(e.playerPoolEntry?.appliedStatTotal ?? 0),
         started: !BENCH_SLOTS.has(e.lineupSlotId),
+        // `statSourceId: 0` is the real stat line, `1` the projection. Scoped
+        // to THIS period, or a player who played last week would read as having
+        // played this one.
+        played: (pl?.stats ?? []).some(
+          (st) => st.statSourceId === 0 && st.scoringPeriodId === week,
+        ),
       };
     })
     .filter((p): p is LiveLineupSlot => p !== null)
@@ -528,6 +540,11 @@ export const espnProvider: LiveProvider = {
     return out;
   },
 
+  /** Already answered: `lineupOf` reads the actual/projected split off the boxscore. */
+  async playedThisWeek() {
+    return null;
+  },
+
   async season(id, st: ProviderState, ctx: SeasonContext): Promise<LiveSeason | null> {
     const league = await get<EspnLeague>(
       leagueUrl(id, st.season, ["mTeam", "mSettings", "mMatchupScore", "mBoxscore"]),
@@ -630,7 +647,7 @@ export const espnProvider: LiveProvider = {
           const side = (s: EspnGameSide) => ({
             ownerSlug: slugOf(s.teamId),
             startedTeams: startedTeams(s),
-            lineup: lineupOf(s),
+            lineup: lineupOf(s, week),
             // The WEEK's points, not the matchup's running total: a two-week
             // playoff game would otherwise show week 16 and 17 added together
             // while week 17 is still being played.

@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { PositionPill } from "@/components/keeper-table";
 import { Col, ListHeader, Panel, PanelHeader, fmt } from "@/components/ui";
+import type { PlayerWeekState } from "@/lib/live/types";
 
 /**
  * One team's lineup, as a panel.
@@ -35,7 +36,34 @@ export interface LineupRow {
   href: string | null;
   /** A record chip on the row, e.g. "#1 player week". */
   mark?: { short: string; full: string } | null;
+  /**
+   * What this player's week is doing, when the caller can tell.
+   *
+   * UNDEFINED IS THE ARCHIVED CASE and renders exactly as it always did — a
+   * finished game has no states to distinguish, every player's week is over.
+   */
+  state?: PlayerWeekState | null;
 }
+
+/**
+ * How each state reads in the points column.
+ *
+ * THE NUMBER IS REPLACED where it would be a lie by omission. "0.00" against a
+ * player on a bye, or one whose team played without him, is true and useless —
+ * it looks identical to a player who took the field and did nothing, which is
+ * the one case that is actually his fault. Where he has played, the number
+ * stands and the STATE is carried by colour instead.
+ */
+const STATE: Record<PlayerWeekState, { label: string | null; tone: string; title: string }> = {
+  bye: { label: "BYE", tone: "text-chalk-600", title: "On a bye this week" },
+  upcoming: { label: "—", tone: "text-chalk-600", title: "Has not played yet" },
+  // NOT GREEN. The accent already means "best starter of this lineup" one row
+  // up, and two different greens in one column is one green too many. Being
+  // mid-game is carried by the pulsing dot alone, which nothing else uses here.
+  live: { label: null, tone: "text-chalk-300", title: "Playing right now" },
+  dnp: { label: "DNP", tone: "text-chalk-600", title: "His team played; he did not" },
+  final: { label: null, tone: "text-chalk-300", title: "Final" },
+};
 
 export function LineupPanel({
   title,
@@ -107,6 +135,34 @@ export function LineupPanel({
   );
 }
 
+/**
+ * The points, and what state they are in.
+ *
+ * BEST-STARTER EMPHASIS STILL WINS over a state tone: it is the louder fact
+ * about a finished lineup, and the only state it can collide with is `final`,
+ * which is the plain one anyway.
+ */
+function PointsCell({ row, best }: { row: LineupRow; best: number }) {
+  const st = row.state ? STATE[row.state] : null;
+  const isBest = row.started && row.points === best && best > 0;
+  const tone = isBest ? "font-bold text-accent" : (st?.tone ?? "text-chalk-300");
+
+  return (
+    <span
+      title={st?.title}
+      className={`tabular flex w-14 shrink-0 items-center justify-end gap-1 text-right text-sm ${tone}`}
+    >
+      {/* A pulsing dot rather than a word: the column is 14 wide and already
+          carries a number, and this is the same signal the rest of the site
+          uses for something still moving. */}
+      {row.state === "live" ? (
+        <span className="live-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+      ) : null}
+      {st?.label ?? fmt.pts(row.points)}
+    </span>
+  );
+}
+
 function Row({
   row,
   showSlots,
@@ -159,15 +215,7 @@ function Row({
       ) : (
         <span className="min-w-0 flex-1 truncate text-sm">{body}</span>
       )}
-      <span
-        className={`tabular w-14 shrink-0 text-right text-sm ${
-          row.started && row.points === best && best > 0
-            ? "font-bold text-accent"
-            : "text-chalk-300"
-        }`}
-      >
-        {fmt.pts(row.points)}
-      </span>
+      <PointsCell row={row} best={best} />
     </div>
   );
 }

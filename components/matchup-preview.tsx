@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { LiveLineup } from "@/components/live-lineup";
 import { Panel, fmt } from "@/components/ui";
-import { useLiveSeason, useMatchupSettled, useSeasonGames } from "@/lib/live";
+import { useLineupStates, useLiveSeason, useMatchupSettled, useSeasonGames } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
 import type { LiveSeason, LiveTeam, PlayerMeta } from "@/lib/types";
 
@@ -74,7 +74,18 @@ export function MatchupPreview({
   pairHref,
 }: MatchupPreviewProps) {
   const live = useLiveSeason(refBySeason, initial, userIdToSlug, teamByPlayer);
-  const games = useSeasonGames(refBySeason[String(season)] ?? null, seasonWeeks);
+  /**
+   * ONLY THE WEEKS THE FORM TABLE READS, which is the ones already played.
+   *
+   * `formOf` discards every week from this one onward, and Sleeper has no bulk
+   * scoreboard — `seasonGames` is one request per week — so asking for the
+   * whole season fired seventeen requests on a week-1 page and threw all
+   * seventeen away. ESPN serves the season in one payload either way.
+   */
+  const games = useSeasonGames(
+    refBySeason[String(season)] ?? null,
+    Math.max(0, Math.min(seasonWeeks, week - 1)),
+  );
 
   const name = (slug: string) => ownerNames[slug] ?? slug;
   const teamOf = (slug: string): LiveTeam | undefined =>
@@ -142,6 +153,8 @@ export function MatchupPreview({
    * winner may be called and record chips may be shown — see AGENTS.md.
    */
   const settled = useMatchupSettled(live);
+  // Hoisted so both lineups share one NFL-clock fetch rather than one each.
+  const { stateOf } = useLineupStates(live, refBySeason[String(season)] ?? null);
   const isFinal = Boolean(thisWeek && settled(thisWeek));
   const state = isFinal ? "FINAL" : liveScore ? "LIVE" : "PREVIEW";
 
@@ -348,6 +361,7 @@ export function MatchupPreview({
           lineups are set, before kickoff. Side by side so the two can be read
           against each other, which is the whole question during a game. */}
       {anyLineup ? (
+        <>
         <div className="grid gap-5 lg:grid-cols-2">
           {[a, b].map((slug) => (
             <LiveLineup
@@ -355,9 +369,11 @@ export function MatchupPreview({
               title={label(slug)}
               lineup={lineupOf(slug)}
               players={players}
+              stateOf={stateOf}
             />
           ))}
         </div>
+        </>
       ) : null}
     </>
   );

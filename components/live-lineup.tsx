@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { LineupPanel, type LineupRow } from "@/components/lineup-panel";
 import { fmt } from "@/components/ui";
 import { positionRank } from "@/lib/espn-maps";
+import type { LineupStates } from "@/lib/live";
 import { buildNameIndex, matchLivePlayer, type NameIndex } from "@/lib/player-match";
 import type { LiveLineupSlot, PlayerMeta } from "@/lib/types";
 
@@ -21,11 +22,14 @@ export function LiveLineup({
   title,
   lineup,
   players,
+  stateOf,
 }: {
   title: string;
   lineup: LiveLineupSlot[] | undefined;
   /** The baked index. Also decides which names can link — a page exists per key. */
   players: Record<string, PlayerMeta>;
+  /** From `useLineupStates`, hoisted so both lineups share one NFL-clock fetch. */
+  stateOf: LineupStates["stateOf"];
 }) {
   /**
    * Built once per lineup, not per row. Same reasoning as `LiveRosters`: a
@@ -35,8 +39,15 @@ export function LiveLineup({
   const nameIndex = useMemo(() => buildNameIndex(players), [players]);
 
   const rows = useMemo(
-    () => (lineup ?? []).map((p) => toRow(p, players, nameIndex)),
-    [lineup, players, nameIndex],
+    () =>
+      (lineup ?? []).map((p) => {
+        const row = toRow(p, players, nameIndex);
+        // THE RESOLVED TEAM, not the slot's. Sleeper sends no team on a lineup
+        // — every id it returns is a Sleeper id and the baked index has it — so
+        // asking the raw slot left every Sleeper player with no state at all.
+        return { ...row, state: stateOf({ id: p.id, team: row.team, played: p.played }) };
+      }),
+    [lineup, players, nameIndex, stateOf],
   );
   const startersTotal = rows.filter((r) => r.started).reduce((t, r) => t + r.points, 0);
 

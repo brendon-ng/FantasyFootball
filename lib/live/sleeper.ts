@@ -334,6 +334,27 @@ export const sleeperProvider: LiveProvider = {
       }));
   },
 
+  /**
+   * Players Sleeper has a stat line for this week.
+   *
+   * `gp` is games played, and it appears the moment somebody takes a snap — so
+   * presence here separates "his team played and he did not" from "he played
+   * and scored nothing", which a bare 0.00 cannot. About 9KB gzipped for a
+   * week, and only the lineup view asks for it.
+   */
+  async playedThisWeek(season, week) {
+    const raw = await json<Record<string, { gp?: number | null }> | null>(
+      `${BASE}/stats/nfl/regular/${season}/${week}`,
+      null,
+    );
+    if (!raw) return null;
+    const out = new Set<string>();
+    for (const [id, line] of Object.entries(raw)) {
+      if ((line?.gp ?? 0) >= 1) out.add(id);
+    }
+    return out;
+  },
+
   async season(id, st: ProviderState, ctx: SeasonContext): Promise<LiveSeason | null> {
     const [league, users, rosters] = await Promise.all([
       json<{ status?: string; settings?: { last_scored_leg?: number } } | null>(

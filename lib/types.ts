@@ -619,6 +619,19 @@ export interface LiveLineupSlot {
   points: number;
   /** False for bench and IR — their points do not count toward the score. */
   started: boolean;
+  /**
+   * The provider has REAL, non-projected stats for him this week.
+   *
+   * This is what separates "his team played and he did not" from "he played and
+   * scored nothing" — two states a bare 0.00 cannot tell apart, and the reason
+   * an owner is either annoyed or unlucky.
+   *
+   * UNDEFINED MEANS THE PROVIDER DID NOT SAY. ESPN fills it from the boxscore
+   * for free (`statSourceId: 0` is actual, `1` is projected); Sleeper needs a
+   * separate weekly stats call, so the lineup view fills it in instead of every
+   * page paying for it. Never read as false.
+   */
+  played?: boolean;
 }
 
 export interface LiveMatchup {

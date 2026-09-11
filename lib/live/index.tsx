@@ -32,6 +32,7 @@ import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
 import type { LiveMatchup, LiveSeason } from "@/lib/types";
 
 import { espnProvider } from "./espn.ts";
+import { fetchNflLive, type TeamGameState } from "./nfl-live.ts";
 import { fetchNflWeek, teamsSettled, type NflWeekState } from "./nfl-schedule.ts";
 import { sleeperProvider } from "./sleeper.ts";
 import type {
@@ -44,6 +45,7 @@ import type {
   LiveState,
   LiveTradedPick,
   LiveWeekGame,
+  PlayerWeekState,
 } from "./types.ts";
 
 export type {
@@ -54,6 +56,7 @@ export type {
   LiveRoster,
   LiveState,
   LiveTradedPick,
+  PlayerWeekState,
 } from "./types.ts";
 
 /** One team's week, with whoever they played. */
@@ -461,6 +464,121 @@ export async function leagueMoves(
   const provider = providerFor(ref);
   if (!ref || !provider) return [];
   return provider.leagueMoves(ref.id, ref.season, fromWeek, weeks);
+}
+
+/**
+ * What a player's week is DOING, beyond the number beside his name.
+ *
+ * A bare 0.00 is four different situations and the reader cannot tell them
+ * apart: on a bye, kickoff not reached, his team played without him, or he
+ * played and did nothing. Only the last is his fault, and only the third is
+ * worth being annoyed about.
+ */
+export interface LineupStates {
+  /** Null until the clock is known; callers render no annotation meanwhile. */
+  stateOf: (slot: { id: string; team: string | null; played?: boolean }) => PlayerWeekState | null;
+  /** True once the NFL clock has been consulted, so a legend can appear. */
+  ready: boolean;
+}
+
+/**
+ * Resolves a player's week state from the NFL clock plus the provider's stats.
+ *
+ * TWO CLOCKS, because neither is sufficient. Sleeper's season schedule says
+ * whether a team's game is OVER and, by absence, whether it is a bye — one
+ * request for the year, already fetched by `useMatchupSettled`. It cannot say
+ * whether a game is on RIGHT NOW: a game in the third quarter still reads
+ * `pre_game` there. ESPN's scoreboard has that, per game, for 16.5KB.
+ *
+ * THE SCHEDULE IS THE AUTHORITY ON "OVER", not the scoreboard, so a scoreboard
+ * outage can only ever cost the live/upcoming distinction — never turn a
+ * finished game back into a pending one.
+ *
+ * GATED LIKE `useMatchupSettled`: only inside a live, unscored week, and never
+ * under a phase mock, where the real clock says a replayed season ended months
+ * ago and would mark every player final.
+ */
+export function useLineupStates(
+  live: LiveSeason | null,
+  ref: LeagueRef | null,
+): LineupStates {
+  const inSeason = live?.seasonType === "regular" || live?.seasonType === "post";
+  const week = live?.week ?? 0;
+  const season = live?.season ?? 0;
+  const scored = week > 0 && (live?.lastScoredLeg ?? 0) >= week;
+  const ask = Boolean(inSeason && week > 0 && !scored && !mockPhase());
+  const key = `${season}:${week}`;
+
+  const [slate, setSlate] = useState<{ key: string; wk: NflWeekState } | null>(null);
+  const [states, setStates] = useState<{ key: string; by: Record<string, TeamGameState> } | null>(
+    null,
+  );
+  /**
+   * Who has a real stat line, for the providers that do not say on the lineup.
+   *
+   * ESPN answers on the boxscore entry for free and returns null here; Sleeper
+   * fetches a ~9KB weekly stat line. Asked ONCE per week from this hook rather
+   * than by each panel, so a two-lineup page makes one request, not two.
+   */
+  const [playedSet, setPlayedSet] = useState<{ key: string; ids: Set<string> } | null>(null);
+
+  useEffect(() => {
+    if (!ask) return;
+    let cancelled = false;
+    fetchNflWeek(season, week)
+      .then((wk) => {
+        if (!cancelled && wk) setSlate({ key, wk });
+      })
+      .catch(() => {});
+    fetchNflLive(season, week)
+      .then((by) => {
+        if (!cancelled && by) setStates({ key, by });
+      })
+      .catch(() => {});
+    providerFor(ref)
+      ?.playedThisWeek(season, week)
+      .then((ids) => {
+        if (!cancelled && ids) setPlayedSet({ key, ids });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+    // `refKey` stands in for `ref`, a fresh object each render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ask, key, season, week, refKey(ref)]);
+
+  const wk = slate?.key === key ? slate.wk : null;
+  const by = states?.key === key ? states.by : null;
+
+  return {
+    ready: Boolean(wk || by || scored),
+    stateOf: ({ id, team, played: onSlot }) => {
+      if (!team) return null;
+      // The provider's own answer wins; the fetched set is the fallback for the
+      // one that does not give it. Undefined stays undefined — never false —
+      // so an unknown reads as "played" rather than accusing somebody of a DNP.
+      const ids = playedSet?.key === key ? playedSet.ids : null;
+      const played = onSlot ?? (ids ? ids.has(id) : undefined);
+      // The week is archived: everything in it is over, whatever the clocks say.
+      if (scored) return played === false ? "dnp" : "final";
+      if (!wk && !by) return null;
+      // ABSENT FROM THE SCHEDULE IS A BYE. Checked against the schedule and not
+      // the scoreboard, because a team missing from the scoreboard could just be
+      // a request that came back short.
+      if (wk && !(team in wk.doneByTeam)) return "bye";
+
+      const done = wk?.doneByTeam[team];
+      if (done === true) return played === false ? "dnp" : "final";
+
+      const gs = by?.[team];
+      if (gs === "post") return played === false ? "dnp" : "final";
+      if (gs === "in") return "live";
+      if (gs === "pre") return "upcoming";
+      // The schedule says not finished and the scoreboard has no opinion.
+      return done === false ? "upcoming" : null;
+    },
+  };
 }
 
 /** Small badge describing where the live layer stands. */
