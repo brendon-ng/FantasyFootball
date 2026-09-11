@@ -2481,7 +2481,7 @@
     "birth_date": "1999-01-02",
     "full_name": "Jalen Reagor",
     "position": "WR",
-    "team": null,
+    "team": "MIA",
     "years_exp": 6
   },
   "6801": {
@@ -3251,7 +3251,7 @@
     "birth_date": "1999-09-12",
     "full_name": "Jerome Ford",
     "position": "RB",
-    "team": "WAS",
+    "team": null,
     "years_exp": 4
   },
   "8144": {
