@@ -236,6 +236,23 @@ export const getMatchups = (leagueId: string, week: number) =>
   fetchJson<SleeperMatchup[]>(`/league/${leagueId}/matchups/${week}`);
 
 /**
+ * Every player's stat line for one week, by player id.
+ *
+ * UNDOCUMENTED — `docs.sleeper.com` lists no stats resource — but stable, and
+ * it is the only place Sleeper says whether somebody actually PLAYED. `gp` is
+ * games played and appears the moment a player takes a snap, which is what
+ * separates a zero he earned from his team playing without him. Roughly 2,350
+ * entries a week, of which about 1,560 carry a `gp`.
+ *
+ * Treated like the ADP scrape: a layer that must never be load-bearing for a
+ * build. A week with no answer simply records nobody as having sat out.
+ */
+export const getWeekStats = (season: number, week: number) =>
+  fetchJson<Record<string, { gp?: number | null } | null>>(
+    `/stats/nfl/regular/${season}/${week}`,
+  );
+
+/**
  * Note the endpoint is `losers_bracket`. The Sleeper docs' HTTP Request line
  * misspells it `loses_bracket`, which 404s.
  */

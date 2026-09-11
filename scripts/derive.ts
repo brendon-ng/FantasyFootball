@@ -217,6 +217,13 @@ interface SeasonData {
   losers: SleeperBracketMatch[];
   matchups: Map<number, SleeperMatchup[]>;
   transactions: Map<number, SleeperTransaction[]>;
+  /**
+   * week -> players who actually took the field, from `sync`.
+   *
+   * A MISSING WEEK MEANS UNKNOWN, not "nobody played" — the feed is a third
+   * party and a gap must not turn every zero into a DNP.
+   */
+  played: Map<number, Set<string>>;
   /** roster_id -> primary owner slug (franchise key). */
   rosterToOwner: Map<number, string>;
   /** roster_id -> every owner credited, primary first. */
@@ -249,13 +256,15 @@ function loadSeason(season: number): SeasonData | null {
 
   const matchups = new Map<number, SleeperMatchup[]>();
   const transactions = new Map<number, SleeperTransaction[]>();
-  for (const kind of ["matchups", "transactions"] as const) {
+  const played = new Map<number, Set<string>>();
+  for (const kind of ["matchups", "transactions", "played"] as const) {
     const sub = join(dir, kind);
     if (!existsSync(sub)) continue;
     for (const f of readdirSync(sub).sort()) {
       const week = Number(f.replace(".json", ""));
       const body = readJson<unknown[]>(join(sub, f)) ?? [];
       if (kind === "matchups") matchups.set(week, body as SleeperMatchup[]);
+      else if (kind === "played") played.set(week, new Set(body as string[]));
       else transactions.set(week, body as SleeperTransaction[]);
     }
   }
@@ -287,6 +296,7 @@ function loadSeason(season: number): SeasonData | null {
     losers: readJson<SleeperBracketMatch[]>(join(dir, "losers-bracket.json")) ?? [],
     matchups,
     transactions,
+    played,
     rosterToOwner,
     rosterToOwners,
     rules: rulesFor(season),
@@ -508,6 +518,7 @@ function buildMatchups(d: SeasonData, throughWeek: number): Matchup[] {
 
   for (const [week, rows] of [...d.matchups].sort((a, b) => a[0] - b[0])) {
     if (week > throughWeek) continue;
+    const played = d.played.get(week) ?? null;
 
     // Playoff weeks pair teams via the bracket, but Sleeper still emits
     // matchup_id groupings, so the same pairing logic works throughout.
@@ -527,13 +538,30 @@ function buildMatchups(d: SeasonData, throughWeek: number): Matchup[] {
 
     for (const [matchupId, pair] of byMatchup) {
       if (pair.length !== 2) continue;
-      const side = (m: SleeperMatchup): MatchupSide => ({
-        ownerSlug: d.rosterToOwner.get(m.roster_id)!,
-        // custom_points is a commissioner override and wins when present.
-        points: round2(m.custom_points ?? m.points ?? 0),
-        starters: m.starters ?? [],
-        playerPoints: m.players_points ?? {},
-      });
+      const side = (m: SleeperMatchup): MatchupSide => {
+        const playerPoints = m.players_points ?? {};
+        /**
+         * Whose team played without them.
+         *
+         * `played` is the positive fact `sync` captured, so a MISSING file
+         * means unknown and yields nothing — never "everybody sat out". Only
+         * players on zero are considered: anybody who scored obviously played,
+         * and saying so for 200 players a week would triple the file.
+         */
+        const dnp = played
+          ? Object.keys(playerPoints)
+              .filter((pid) => playerPoints[pid] === 0 && !played.has(pid))
+              .sort()
+          : [];
+        return {
+          ownerSlug: d.rosterToOwner.get(m.roster_id)!,
+          // custom_points is a commissioner override and wins when present.
+          points: round2(m.custom_points ?? m.points ?? 0),
+          starters: m.starters ?? [],
+          playerPoints,
+          ...(dnp.length ? { didNotPlay: dnp } : {}),
+        };
+      };
       const [a, b] = [side(pair[0]), side(pair[1])];
 
       const isPlayoffWeek = week >= d.rules.playoffWeekStart;
@@ -1969,7 +1997,13 @@ interface ManualDraft {
 interface ManualLineups {
   season: number;
   rosterPositions: string[];
-  weeks: Record<string, Record<string, { starters: string[]; playerPoints: Record<string, number> }>>;
+  weeks: Record<
+    string,
+    Record<
+      string,
+      { starters: string[]; playerPoints: Record<string, number>; didNotPlay?: string[] }
+    >
+  >;
 }
 
 interface ManualSeason {
@@ -2065,6 +2099,12 @@ function importedMatchups(): Matchup[] {
             points: x.points,
             starters: forWeek?.[x.ownerSlug]?.starters ?? [],
             playerPoints: forWeek?.[x.ownerSlug]?.playerPoints ?? {},
+            // Computed by `import:espn:lineups` off the actual-vs-projected
+            // stat line; passed through rather than recomputed, since the raw
+            // boxscore is not committed and this is the only place it survives.
+            ...(forWeek?.[x.ownerSlug]?.didNotPlay?.length
+              ? { didNotPlay: forWeek[x.ownerSlug].didNotPlay }
+              : {}),
           };
         };
       // TOTALS ON THE MATCHUP, LINEUPS PER WEEK. The combined points decide the

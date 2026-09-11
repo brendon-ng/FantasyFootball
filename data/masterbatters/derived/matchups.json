@@ -1,6 +1,9 @@
 [
   {
     "away": {
+      "didNotPlay": [
+        "4018"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 10.9,
@@ -33,6 +36,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12457"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "2133": 9.1,
@@ -72,6 +78,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "7090"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "4046": 26.02,
@@ -141,6 +150,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4037"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 12.7,
@@ -241,6 +253,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10229",
+        "6803"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "1339": 11.6,
@@ -311,6 +327,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "9756"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "1945": 15,
@@ -349,6 +368,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4950"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 19.8,
@@ -449,6 +471,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5022"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "2133": 22.6,
@@ -626,6 +651,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4018"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 33.96,
@@ -658,6 +686,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10229",
+        "6803"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "1339": 18.4,
@@ -697,6 +729,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4217"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "3214": 1.9,
@@ -729,6 +764,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "9756"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "1945": 12,
@@ -767,6 +805,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11624",
+        "4037",
+        "8183"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 10.1,
@@ -799,6 +842,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4950"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 17.1,
@@ -837,6 +883,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10229",
+        "6803"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "1339": 6.8,
@@ -869,6 +919,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "6770",
+        "9753"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "2133": 14.6,
@@ -908,6 +962,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "9756"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "1945": 3,
@@ -939,6 +996,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10222"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4195": 3,
@@ -1047,6 +1107,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4018"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 12.68,
@@ -1079,6 +1142,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4199",
+        "7049"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 0,
@@ -1118,6 +1185,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11565",
+        "11624",
+        "4037",
+        "8183"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 6.6,
@@ -1188,6 +1261,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4217"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "3214": 29,
@@ -1220,6 +1296,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11566"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "3678": 9,
@@ -1328,6 +1407,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4199"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 0,
@@ -1360,6 +1442,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10222"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4195": 7,
@@ -1430,6 +1515,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5927",
+        "8228"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "5850": 31.7,
@@ -1468,6 +1557,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11655",
+        "4137",
+        "4217"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "3214": 11.9,
@@ -1500,6 +1594,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10229",
+        "6803"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "1339": 6.1,
@@ -1539,6 +1637,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4018"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "2449": 16.1,
@@ -1609,6 +1710,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2216"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 9.8,
@@ -1641,6 +1745,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11566",
+        "6786"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "3678": 4,
@@ -1680,6 +1788,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4144",
+        "6790"
+      ],
       "ownerSlug": "kaitlin-zarbis",
       "playerPoints": {
         "4039": 11.9,
@@ -1749,6 +1861,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10229",
+        "11560",
+        "11620",
+        "12501",
+        "6803"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "1339": 0,
@@ -1781,6 +1900,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10222",
+        "6804",
+        "8121"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4195": 5,
@@ -1820,6 +1944,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11584",
+        "11589",
+        "11638",
+        "6786",
+        "7594"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "3678": 9,
@@ -1852,6 +1983,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5850",
+        "5927",
+        "8132",
+        "8228",
+        "9484"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "5850": 0,
@@ -1891,6 +2029,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2216",
+        "8183",
+        "8917"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 19.1,
@@ -1923,6 +2066,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7553",
+        "8112"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "5012": 4.2,
@@ -1961,6 +2108,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11655",
+        "4137",
+        "4217",
+        "7090"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "3214": 6.6,
@@ -1993,6 +2146,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11604",
+        "4199",
+        "7049",
+        "7567"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 0,
@@ -2032,6 +2191,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4881",
+        "5846",
+        "9509"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 10.8,
@@ -2063,6 +2227,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4018",
+        "4983",
+        "GB"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "2449": 24.6,
@@ -2103,6 +2272,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10222",
+        "5844",
+        "8408"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4195": 6,
@@ -2173,6 +2347,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10229",
+        "12507",
+        "3451",
+        "6803"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "1339": 16.3,
@@ -2205,6 +2385,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11638"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "5850": 32,
@@ -2243,6 +2426,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11646",
+        "6149"
+      ],
       "ownerSlug": "kaitlin-zarbis",
       "playerPoints": {
         "4039": 12,
@@ -2275,6 +2462,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7569",
+        "9756"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "17": 2,
@@ -2313,6 +2504,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2216",
+        "4037",
+        "4988",
+        "8183",
+        "8917"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 13.8,
@@ -2345,6 +2543,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11604",
+        "4199",
+        "6794"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 0,
@@ -2384,6 +2587,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4137",
+        "4217",
+        "7090"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "3214": 5.7,
@@ -2416,6 +2624,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12474",
+        "4018",
+        "5849",
+        "9754"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 16.82,
@@ -2455,6 +2669,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11584",
+        "11589",
+        "5927",
+        "6786",
+        "7594"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "3678": 9,
@@ -2487,6 +2708,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10236",
+        "11792",
+        "4881"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 6.7,
@@ -2525,6 +2751,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "BAL"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "3214": 7.3,
@@ -2556,6 +2785,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11638",
+        "5947"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "2133": 26.5,
@@ -2595,6 +2828,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3198",
+        "4018",
+        "5849",
+        "9997"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 10.34,
@@ -2627,6 +2866,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8146"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4195": 3,
@@ -2665,6 +2907,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11604",
+        "4199",
+        "4984"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 0,
@@ -2697,6 +2944,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4981"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "4981": 0,
@@ -2735,6 +2985,16 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11637",
+        "12711",
+        "4033",
+        "4037",
+        "5872",
+        "8138",
+        "8183",
+        "9500"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 8.4,
@@ -2769,6 +3029,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12507",
+        "6803"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "1339": 12.7,
@@ -2808,6 +3072,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10236",
+        "4881"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 28.9,
@@ -2840,6 +3108,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5012"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "2747": 9,
@@ -2878,6 +3149,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11584",
+        "11589",
+        "5927"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "1945": 8,
@@ -2910,6 +3186,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8134",
+        "9493"
+      ],
       "ownerSlug": "kaitlin-zarbis",
       "playerPoints": {
         "3451": 8,
@@ -2949,6 +3229,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11566",
+        "11584",
+        "11589",
+        "8122",
+        "8148"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "19": 24.32,
@@ -2982,6 +3269,14 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11638",
+        "2133",
+        "5947",
+        "8150",
+        "9753",
+        "LAR"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "2133": 0,
@@ -3022,6 +3317,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4037",
+        "4171",
+        "8183"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 21.9,
@@ -3054,6 +3354,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8146",
+        "9221",
+        "9488"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4195": 8,
@@ -3124,6 +3429,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10213",
+        "12530",
+        "4981",
+        "7547"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "4981": 0,
@@ -3162,6 +3473,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4039",
+        "421",
+        "5859",
+        "8130",
+        "8151",
+        "9493"
+      ],
       "ownerSlug": "kaitlin-zarbis",
       "playerPoints": {
         "421": 0,
@@ -3195,6 +3514,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12507",
+        "12527",
+        "6803",
+        "7543",
+        "8112"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "1339": 5.6,
@@ -3234,6 +3560,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10859",
+        "11628",
+        "11631",
+        "3163",
+        "4018"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 0,
@@ -3266,6 +3599,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7569",
+        "DET"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "3200": 1.8,
@@ -3305,6 +3642,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4881",
+        "5892"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 8.4,
@@ -3336,6 +3677,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11604"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 5,
@@ -3375,6 +3719,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12514",
+        "6650",
+        "8155"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "17": 3,
@@ -3406,6 +3755,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11638",
+        "4866",
+        "PHI"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "2133": 23,
@@ -3445,6 +3799,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12530",
+        "4981",
+        "6904",
+        "7525",
+        "7611"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "4981": 0,
@@ -3477,6 +3838,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4195",
+        "4892",
+        "5022",
+        "8146"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4195": 0,
@@ -3516,6 +3883,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12481"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 6.1,
@@ -3548,6 +3918,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12506",
+        "12507",
+        "6803"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "1339": 8.6,
@@ -3586,6 +3961,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4039",
+        "5859",
+        "6790"
+      ],
       "ownerSlug": "kaitlin-zarbis",
       "playerPoints": {
         "421": 26.84,
@@ -3618,6 +3998,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12485",
+        "8136"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 11.8,
@@ -3656,6 +4040,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11584",
+        "11589",
+        "12512",
+        "5927"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "1945": 10,
@@ -3688,6 +4078,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4018"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 19.36,
@@ -3727,6 +4120,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6783",
+        "NYJ"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "96": 12.12,
@@ -3759,6 +4156,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4033",
+        "4037",
+        "5849",
+        "8183"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 12.6,
@@ -3798,6 +4201,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11624",
+        "1466",
+        "4037",
+        "5849",
+        "8183"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 0,
@@ -3830,6 +4240,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11638",
+        "19",
+        "5967"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "19": 0,
@@ -3869,6 +4284,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12481",
+        "3294",
+        "6801"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 3.9,
@@ -3939,6 +4359,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11631",
+        "4018"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "2020": 6,
@@ -3971,6 +4395,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12530",
+        "4981",
+        "7611"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "2747": 15,
@@ -4010,6 +4439,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "8110"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "17": 1,
@@ -4041,6 +4473,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10229",
+        "12507",
+        "4098",
+        "6803"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "2449": 15.6,
@@ -4080,6 +4518,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11566",
+        "11584",
+        "11589",
+        "5927",
+        "6786",
+        "9508"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "1945": 5,
@@ -4112,6 +4558,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11533",
+        "8137"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 15.9,
@@ -4150,6 +4600,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4046",
+        "7564",
+        "9224"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "96": 6.44,
@@ -4181,6 +4636,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3451",
+        "7588",
+        "9504"
+      ],
       "ownerSlug": "kaitlin-zarbis",
       "playerPoints": {
         "421": 26.9,
@@ -4220,6 +4680,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "7611"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "2747": 14,
@@ -4251,6 +4714,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5870",
+        "7002"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "19": 9.86,
@@ -4289,6 +4756,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "9504"
+      ],
       "ownerSlug": "kaitlin-zarbis",
       "playerPoints": {
         "421": 13.2,
@@ -4321,6 +4791,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "6813",
+        "6819",
+        "8144",
+        "8146"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4892": 16.82,
@@ -4360,6 +4836,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11566",
+        "11584",
+        "11589",
+        "5927"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "1945": 10,
@@ -4392,6 +4874,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12507"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "2449": 19.5,
@@ -4431,6 +4916,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12508",
+        "6770"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4177": 10.4,
@@ -4501,6 +4990,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11637",
+        "4037",
+        "5849",
+        "9500"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 24.1,
@@ -4533,6 +5028,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10859",
+        "11628",
+        "11631",
+        "4035"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "2020": 15,
@@ -4572,6 +5073,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6806"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "96": 9.44,
@@ -4603,6 +5107,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10236",
+        "12518",
+        "8142"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 9.3,
@@ -4641,6 +5150,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11628",
+        "11631",
+        "9754"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "2020": 8,
@@ -4672,6 +5186,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11635"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "19": 9.62,
@@ -4710,6 +5227,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6806",
+        "7564",
+        "8259"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "3214": 24.5,
@@ -4742,6 +5264,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8146"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4892": 3.54,
@@ -4781,6 +5306,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11199",
+        "5849",
+        "5872"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 8.4,
@@ -4813,6 +5343,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4981",
+        "5850"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "2747": 13,
@@ -4851,6 +5385,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12508",
+        "6770",
+        "DEN"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4177": 5,
@@ -4883,6 +5422,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12489",
+        "12507",
+        "8112"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "2449": 4,
@@ -4922,6 +5466,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11566",
+        "11584",
+        "11589",
+        "12493",
+        "5045",
+        "5927"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "1945": 4,
@@ -4954,6 +5506,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11647",
+        "6797",
+        "9226"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "3257": 18.68,
@@ -4992,6 +5549,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10236",
+        "1479",
+        "7526"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 0,
@@ -5023,6 +5585,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11563",
+        "11627"
+      ],
       "ownerSlug": "kaitlin-zarbis",
       "playerPoints": {
         "421": 22.92,
@@ -5130,6 +5696,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11566",
+        "11589"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "1945": 1,
@@ -5162,6 +5732,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8146"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4892": 14.46,
@@ -5232,6 +5805,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4981"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "2747": 19,
@@ -5270,6 +5846,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4035"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "2020": 6,
@@ -5301,6 +5880,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12507",
+        "8112"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "2449": 5.6,
@@ -5340,6 +5923,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6806"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "3214": 11.3,
@@ -5410,6 +5996,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11199",
+        "5849"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 15.5,
@@ -5442,6 +6032,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10236",
+        "6801"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "1479": 7,
@@ -5480,6 +6074,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11564",
+        "11620",
+        "5189",
+        "8112",
+        "NE"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "4098": 9,
@@ -5513,6 +6114,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "6130"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "827": -1.76,
@@ -5551,6 +6155,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "8126"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "3257": 19.04,
@@ -5582,6 +6189,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8146"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4892": 11.08,
@@ -5621,6 +6231,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12713"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "17": 7,
@@ -5652,6 +6265,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7611"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "2747": 14,
@@ -5690,6 +6306,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11628",
+        "4035",
+        "7049"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 16.16,
@@ -5721,6 +6342,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11638",
+        "12508"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 7.6,
@@ -5759,6 +6384,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4034",
+        "5849",
+        "8183"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 1.8,
@@ -5791,6 +6421,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12529",
+        "9504"
+      ],
       "ownerSlug": "kaitlin-zarbis",
       "playerPoints": {
         "421": 23.24,
@@ -5829,6 +6463,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12526",
+        "3214",
+        "4217",
+        "6806",
+        "9487",
+        "SF"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "1339": 2.1,
@@ -5862,6 +6504,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11589",
+        "2449",
+        "7021"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "1945": 9,
@@ -5970,6 +6617,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10219",
+        "5849"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 14,
@@ -6040,6 +6691,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12469",
+        "6806"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "3214": 2.8,
@@ -6072,6 +6727,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11620",
+        "8112"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "2216": 19.2,
@@ -6111,6 +6770,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6801"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "17": 5,
@@ -6211,6 +6873,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2133"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "2133": 0,
@@ -6250,6 +6915,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10229"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "2216": 14.1,
@@ -6281,6 +6949,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8146"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4892": 12.7,
@@ -6320,6 +6991,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "17"
+      ],
       "ownerSlug": "lindsey-freeze",
       "playerPoints": {
         "17": 0,
@@ -6351,6 +7025,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11620"
+      ],
       "ownerSlug": "josh-greenebaum",
       "playerPoints": {
         "2747": 2,
@@ -6389,6 +7066,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4035"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 26.46,
@@ -6420,6 +7100,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "12490"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "3257": 10.62,
@@ -6458,6 +7141,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "12469",
+        "4046",
+        "6806"
+      ],
       "ownerSlug": "allison-fosbery",
       "playerPoints": {
         "96": 15.54,
@@ -6490,6 +7178,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11638"
+      ],
       "ownerSlug": "kate-olson",
       "playerPoints": {
         "4199": 11.3,
@@ -6528,6 +7219,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11834",
+        "5849",
+        "8122"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 1.6,
@@ -6560,6 +7256,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11566",
+        "12476"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "1945": 10,
@@ -6599,6 +7299,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6804",
+        "8146"
+      ],
       "ownerSlug": "jake-gibbons",
       "playerPoints": {
         "4892": 17.44,
@@ -6631,6 +7335,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2133"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "2133": 0,
@@ -6698,6 +7405,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10229"
+      ],
       "ownerSlug": "aidan-kelleher",
       "playerPoints": {
         "2216": 12.1,
@@ -6737,6 +7447,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11566",
+        "12476",
+        "12512"
+      ],
       "ownerSlug": "robbie-goodman",
       "playerPoints": {
         "1945": 7,
@@ -6769,6 +7484,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "11647",
+        "12490"
+      ],
       "ownerSlug": "vance-armstrong",
       "playerPoints": {
         "3257": 16.48,
@@ -6807,6 +7526,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10219",
+        "11834",
+        "5849",
+        "8122"
+      ],
       "ownerSlug": "srishti-dhawan",
       "playerPoints": {
         "1466": 8.6,
@@ -6839,6 +7564,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4035"
+      ],
       "ownerSlug": "ross-bechtel",
       "playerPoints": {
         "3163": 2.08,

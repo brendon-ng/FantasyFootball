@@ -1588,6 +1588,8 @@ export interface MeetingSide {
   points: number;
   starters: string[];
   playerPoints: Record<string, number>;
+  /** Rostered players whose NFL team played without them. See `MatchupSide`. */
+  didNotPlay?: string[];
 }
 
 /**
@@ -1762,12 +1764,14 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
           points: x.points,
           starters: x.starters,
           playerPoints: x.playerPoints,
+          ...(x.didNotPlay?.length ? { didNotPlay: x.didNotPlay } : {}),
         },
         b: {
           ownerSlug: y.ownerSlug,
           points: y.points,
           starters: y.starters,
           playerPoints: y.playerPoints,
+          ...(y.didNotPlay?.length ? { didNotPlay: y.didNotPlay } : {}),
         },
         hasLineups: true,
         // Oriented the same way round as `a`/`b`, which flip depending on which
@@ -1786,12 +1790,14 @@ function computeMeetings(slugA: string, slugB: string): Meeting[] {
                     points: wa.points,
                     starters: wa.starters,
                     playerPoints: wa.playerPoints,
+                    ...(wa.didNotPlay?.length ? { didNotPlay: wa.didNotPlay } : {}),
                   },
                   b: {
                     ownerSlug: wb.ownerSlug,
                     points: wb.points,
                     starters: wb.starters,
                     playerPoints: wb.playerPoints,
+                    ...(wb.didNotPlay?.length ? { didNotPlay: wb.didNotPlay } : {}),
                   },
                 };
               }),

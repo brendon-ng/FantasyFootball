@@ -46,9 +46,11 @@ import {
   getRosters,
   getState,
   getTransactions,
+  getWeekStats,
   getUserLeagues,
   getWinnersBracket,
   type SleeperLeague,
+  type SleeperMatchup,
   type SleeperPlayer,
 } from "../lib/sleeper.ts";
 import { syncEspnSeasons } from "./lib/espn-seasons.ts";
@@ -242,15 +244,23 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
   for (let week = 1; week <= Math.max(through, txnThrough); week++) {
     if (week <= through) {
       const mPath = join(dir, "matchups", `${wk(week)}.json`);
+      let matchups: SleeperMatchup[] | null = null;
       if (!existsSync(mPath) || FORCE) {
-        const matchups = await getMatchups(leagueId, week);
+        matchups = (await getMatchups(leagueId, week)) ?? null;
         if (matchups?.length) {
           writeIfChanged(mPath, matchups, `${season}/matchups/${wk(week)}.json`);
           await snapshotTeams(Number(season), week, matchups);
         }
       } else {
         log.skip(`${season}/matchups/${wk(week)}.json`);
+        // Read back rather than refetch: `snapshotPlayed` only needs the roster
+        // lists, and a finalized week's are already on disk.
+        matchups = readJson<SleeperMatchup[]>(mPath);
       }
+      // OUTSIDE the write branch, and deliberately. It has its own existence
+      // guard, and gating it on the matchup file being NEW meant every week
+      // already archived — which is all of them — never got one.
+      if (matchups?.length) await snapshotPlayed(Number(season), week, matchups);
     }
 
     if (week > txnThrough) continue;
@@ -331,6 +341,56 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
  * it, on the Tuesday, so a player traded that Tuesday is recorded under his new
  * team for the week just played. Rarer and far smaller than the error it removes.
  */
+/**
+ * Which of this week's rostered players actually took the field.
+ *
+ * WHY IT IS STORED AT ALL: a player who was inactive and one who played and did
+ * nothing both land in `players_points` as 0, so an archived lineup cannot tell
+ * them apart — and only one of those is a bad start. Sleeper knows, in a weekly
+ * stat line that is not part of the matchup payload.
+ *
+ * NARROWED TO THIS LEAGUE'S ROSTERS, which is what keeps it committable. The
+ * raw feed is ~2,350 players and 83KB a week; the players any one league had on
+ * a roster that week is about 180 ids and 2KB. Nothing downstream asks about
+ * anybody else.
+ *
+ * STORES WHO PLAYED, not who did not. Absence from the feed is ambiguous — it
+ * could equally be a stats outage — so recording the positive fact means a
+ * missing file makes derive claim nobody sat out, rather than claiming everyone
+ * did. Fails soft for the same reason: this is an annotation, and a third-party
+ * gap must not stop a week being archived.
+ */
+async function snapshotPlayed(
+  season: number,
+  week: number,
+  matchups: Array<{ players?: string[] | null; starters?: string[] | null }>,
+): Promise<void> {
+  const path = join(RAW_DIR, String(season), "played", `${wk(week)}.json`);
+  if (existsSync(path) && !FORCE) return;
+
+  const rostered = new Set<string>();
+  for (const m of matchups) {
+    for (const id of [...(m.players ?? []), ...(m.starters ?? [])]) {
+      if (id && id !== "0") rostered.add(id);
+    }
+  }
+  if (!rostered.size) return;
+
+  let stats: Record<string, { gp?: number | null } | null> | null = null;
+  try {
+    stats = await getWeekStats(season, week);
+  } catch {
+    stats = null;
+  }
+  if (!stats) {
+    log.warn(`${season}/played/${wk(week)}.json — no stat line available, skipped`);
+    return;
+  }
+
+  const played = [...rostered].filter((id) => ((stats[id] ?? {})?.gp ?? 0) >= 1).sort();
+  writeIfChanged(path, played, `${season}/played/${wk(week)}.json (${played.length}/${rostered.size})`);
+}
+
 async function snapshotTeams(
   season: number,
   week: number,

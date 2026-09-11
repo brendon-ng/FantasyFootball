@@ -34,6 +34,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2078",
+        "4082"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "503": 1,
@@ -74,6 +78,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3157",
+        "7593"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1234": 27.06,
@@ -107,6 +115,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3199"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "2133": 8.1,
@@ -148,6 +159,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6845"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1352": 10.9,
@@ -221,6 +235,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6806"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 27.16,
@@ -294,6 +311,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3157"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 17.9,
@@ -327,6 +347,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5850"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 26.8,
@@ -367,6 +390,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2078",
+        "4082"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "947": 15.8,
@@ -401,6 +428,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3199"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "2133": 16.1,
@@ -442,6 +472,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6806"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 29.64,
@@ -475,6 +508,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5038"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1352": 9.5,
@@ -588,6 +624,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5850"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 18.54,
@@ -621,6 +660,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3199"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "2133": 25.2,
@@ -662,6 +704,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4029",
+        "4082"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "947": 6.2,
@@ -736,6 +782,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5038"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1352": 5.3,
@@ -809,6 +858,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5937"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1992": 3.7,
@@ -842,6 +894,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1825",
+        "536",
+        "5916",
+        "6801"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 28.68,
@@ -882,6 +940,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4034",
+        "5038"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1352": 12.8,
@@ -916,6 +978,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "6886"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 24.12,
@@ -989,6 +1054,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4951",
+        "5859",
+        "947"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "947": 0,
@@ -1030,6 +1100,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1825",
+        "6801"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 11.06,
@@ -1063,6 +1137,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "515",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 0,
@@ -1137,6 +1215,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3199"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "421": 19.3,
@@ -1178,6 +1259,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4029",
+        "4951",
+        "947"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "947": 0,
@@ -1212,6 +1298,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4034",
+        "4981",
+        "5038"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1352": 21,
@@ -1253,6 +1344,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3200",
+        "515"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 0,
@@ -1287,6 +1382,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5892"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1992": 5.2,
@@ -1327,6 +1425,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3199",
+        "4217"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "421": 16.5,
@@ -1361,6 +1463,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1825"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 37.74,
@@ -1435,6 +1540,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4273"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 7,
@@ -1475,6 +1583,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1535",
+        "1833",
+        "4034",
+        "4981",
+        "5038",
+        "7553"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1352": 10.1,
@@ -1509,6 +1625,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2431",
+        "515",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 0,
@@ -1550,6 +1671,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4988",
+        "5892"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1992": 7.3,
@@ -1583,6 +1708,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3199",
+        "4217"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "421": 25.24,
@@ -1624,6 +1753,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1825",
+        "6820"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 17.98,
@@ -1658,6 +1791,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4036",
+        "4866",
+        "5022"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 23.7,
@@ -1699,6 +1837,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4035",
+        "4131",
+        "4273",
+        "5872"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 6,
@@ -1732,6 +1876,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4082",
+        "4951"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "947": 7.4,
@@ -1773,6 +1921,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3199",
+        "4217",
+        "4663",
+        "538",
+        "5906"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "421": 27.16,
@@ -1807,6 +1962,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4034",
+        "5038",
+        "6130",
+        "6814"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1352": 12,
@@ -1848,6 +2009,16 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2309",
+        "3164",
+        "4866",
+        "5001",
+        "6794",
+        "6845",
+        "6886",
+        "DAL"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 24.66,
@@ -1882,6 +2053,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4098",
+        "4988",
+        "5892",
+        "5937",
+        "7042"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1099": 11,
@@ -1922,6 +2100,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4029",
+        "4082",
+        "4951",
+        "6786",
+        "6797",
+        "7528"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "24": 17.44,
@@ -1956,6 +2142,14 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1067",
+        "2505",
+        "4984",
+        "536",
+        "6820",
+        "BUF"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 24.44,
@@ -1997,6 +2191,15 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1479",
+        "1689",
+        "3200",
+        "3294",
+        "4068",
+        "515",
+        "6955"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 0,
@@ -2031,6 +2234,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2449",
+        "4131",
+        "4273"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "17": 7,
@@ -2072,6 +2280,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4082",
+        "4951",
+        "6789",
+        "947"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "24": 6.14,
@@ -2106,6 +2320,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4866",
+        "5850"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 15.66,
@@ -2147,6 +2365,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2133",
+        "3199",
+        "4217",
+        "4881",
+        "5906"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "421": 24.2,
@@ -2181,6 +2406,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3294",
+        "5095"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "503": 5,
@@ -2222,6 +2451,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3242",
+        "4098",
+        "4149",
+        "5892"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1992": 3.6,
@@ -2255,6 +2490,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4034",
+        "4981",
+        "5038",
+        "6151"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1352": 19.2,
@@ -2296,6 +2537,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4131",
+        "4273",
+        "5012",
+        "5848"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "17": 3,
@@ -2330,6 +2577,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1264",
+        "2505",
+        "536",
+        "6820"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 25.2,
@@ -2371,6 +2624,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4866",
+        "5844",
+        "5927",
+        "96"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 0,
@@ -2405,6 +2664,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3200",
+        "515",
+        "6955",
+        "TB"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 0,
@@ -2446,6 +2711,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2216",
+        "3969",
+        "5906",
+        "6790"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "421": 13.06,
@@ -2480,6 +2751,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2078",
+        "4082",
+        "5857",
+        "6945"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "24": 28.52,
@@ -2521,6 +2798,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1426",
+        "2319",
+        "4981",
+        "5038",
+        "5849",
+        "6151"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "184": 9.1,
@@ -2555,6 +2840,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "167",
+        "3198",
+        "4037",
+        "536",
+        "6820"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 0,
@@ -2596,6 +2888,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4273",
+        "5846"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "17": 7,
@@ -2630,6 +2926,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2374",
+        "4098",
+        "4149"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1992": 8.8,
@@ -2670,6 +2971,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4018",
+        "7564"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "538": 6.1,
@@ -2703,6 +3008,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4866",
+        "6886"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 10.48,
@@ -2744,6 +3053,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3200",
+        "3225",
+        "515",
+        "7606"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 0,
@@ -2778,6 +3093,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4082",
+        "947",
+        "CIN"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "24": 0.68,
@@ -2819,6 +3139,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2197",
+        "4035",
+        "4131",
+        "4273",
+        "5000",
+        "5890"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "17": 5,
@@ -2853,6 +3181,14 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1352",
+        "1426",
+        "2319",
+        "3209",
+        "5849",
+        "6151"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "184": 2.5,
@@ -2894,6 +3230,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3198",
+        "536",
+        "6801",
+        "6820",
+        "7608"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 13,
@@ -2928,6 +3271,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1992",
+        "4098",
+        "4149",
+        "4988",
+        "5892"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1992": 0,
@@ -2968,6 +3318,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2309",
+        "421",
+        "5045"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 33.5,
@@ -3002,6 +3357,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1426",
+        "1535",
+        "5849",
+        "6853"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "184": 5.4,
@@ -3043,6 +3404,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2078",
+        "4039",
+        "4082",
+        "5857",
+        "6083",
+        "947"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "24": 2.12,
@@ -3077,6 +3446,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1992",
+        "3271",
+        "4098"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1992": 0,
@@ -3117,6 +3491,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3200",
+        "4199",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 10.1,
@@ -3151,6 +3530,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3198",
+        "536",
+        "5916"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 19.28,
@@ -3192,6 +3576,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2320",
+        "4881"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "538": 4.1,
@@ -3225,6 +3613,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4035",
+        "5000",
+        "5848"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "17": 4,
@@ -3266,6 +3659,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1426",
+        "5849",
+        "ARI"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1144": 7.1,
@@ -3299,6 +3697,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5859",
+        "6786",
+        "7607",
+        "947"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "24": 10.2,
@@ -3340,6 +3744,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1992"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1992": 0,
@@ -3373,6 +3780,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1466"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 15.8,
@@ -3413,6 +3823,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3198",
+        "3321",
+        "536",
+        "5549",
+        "6820"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "536": 0,
@@ -3487,6 +3904,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "17",
+        "4035",
+        "4046",
+        "4137",
+        "5000",
+        "956"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "17": 0,
@@ -3521,6 +3946,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2309",
+        "4227",
+        "6845"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 26.28,
@@ -3562,6 +3992,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4199",
+        "6828",
+        "7594"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 19.8,
@@ -3595,6 +4030,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4111"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1144": 1.6,
@@ -3635,6 +4073,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2133",
+        "2320",
+        "4983",
+        "6790"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "650": 7,
@@ -3668,6 +4112,14 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1992",
+        "3214",
+        "4098",
+        "4988",
+        "6904",
+        "TEN"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1992": 0,
@@ -3708,6 +4160,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "96"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 0,
@@ -3742,6 +4197,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2505",
+        "3198",
+        "536",
+        "5916"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "536": 0,
@@ -3783,6 +4244,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4029",
+        "5859",
+        "7607",
+        "947"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "24": 12.08,
@@ -3817,6 +4284,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1099",
+        "4035",
+        "5000",
+        "5872"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "17": 9,
@@ -3858,6 +4331,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1479",
+        "1689",
+        "7561",
+        "7596"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 8.7,
@@ -3892,6 +4371,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5859",
+        "7607",
+        "MIA"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "24": 11.9,
@@ -3932,6 +4416,12 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "1479",
+            "1689",
+            "7561",
+            "7596"
+          ],
           "ownerSlug": "brendon-ng",
           "playerPoints": {
             "515": 8.7,
@@ -3966,6 +4456,11 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "5859",
+            "7607",
+            "MIA"
+          ],
           "ownerSlug": "sam-ellison",
           "playerPoints": {
             "24": 11.9,
@@ -4003,6 +4498,11 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "1689",
+            "5987",
+            "7561"
+          ],
           "ownerSlug": "brendon-ng",
           "playerPoints": {
             "515": 3.9,
@@ -4037,6 +4537,9 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "5859"
+          ],
           "ownerSlug": "sam-ellison",
           "playerPoints": {
             "24": 13.44,
@@ -4077,6 +4580,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "650",
+        "6790",
+        "7526"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "59": 9,
@@ -4110,6 +4618,15 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3214",
+        "3271",
+        "5980",
+        "6813",
+        "6904",
+        "IND",
+        "NE"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "2374": 24.7,
@@ -4149,6 +4666,11 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "650",
+            "6790",
+            "7526"
+          ],
           "ownerSlug": "jivan-gubbi",
           "playerPoints": {
             "59": 9,
@@ -4182,6 +4704,15 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "3214",
+            "3271",
+            "5980",
+            "6813",
+            "6904",
+            "IND",
+            "NE"
+          ],
           "ownerSlug": "jay-uppuluri",
           "playerPoints": {
             "2374": 24.7,
@@ -4218,6 +4749,11 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "4881",
+            "6790",
+            "7526"
+          ],
           "ownerSlug": "jivan-gubbi",
           "playerPoints": {
             "650": 5,
@@ -4252,6 +4788,10 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "2374",
+            "3271"
+          ],
           "ownerSlug": "jay-uppuluri",
           "playerPoints": {
             "2374": 0,
@@ -4291,6 +4831,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2505",
+        "3198",
+        "5022",
+        "5916",
+        "6819"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "1264": 15,
@@ -4325,6 +4872,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4149",
+        "5844"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 29.64,
@@ -4365,6 +4916,13 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "2505",
+            "3198",
+            "5022",
+            "5916",
+            "6819"
+          ],
           "ownerSlug": "charlie-stoksik",
           "playerPoints": {
             "1264": 15,
@@ -4399,6 +4957,10 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4149",
+            "5844"
+          ],
           "ownerSlug": "kate-grillo",
           "playerPoints": {
             "96": 29.64,
@@ -4436,6 +4998,10 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "2505",
+            "3198"
+          ],
           "ownerSlug": "charlie-stoksik",
           "playerPoints": {
             "1264": 6,
@@ -4470,6 +5036,10 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4149",
+            "5844"
+          ],
           "ownerSlug": "kate-grillo",
           "playerPoints": {
             "96": 23.82,
@@ -4510,6 +5080,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4993",
+        "6151",
+        "7611"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1144": 10.9,
@@ -4543,6 +5118,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5000",
+        "5890",
+        "956"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "17": 16,
@@ -4583,6 +5163,11 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "4993",
+            "6151",
+            "7611"
+          ],
           "ownerSlug": "diana-gonzalez",
           "playerPoints": {
             "1144": 10.9,
@@ -4616,6 +5201,11 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "5000",
+            "5890",
+            "956"
+          ],
           "ownerSlug": "haley-rao",
           "playerPoints": {
             "17": 16,
@@ -4653,6 +5243,9 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "1426"
+          ],
           "ownerSlug": "diana-gonzalez",
           "playerPoints": {
             "1144": 5.5,
@@ -4686,6 +5279,9 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "5890"
+          ],
           "ownerSlug": "haley-rao",
           "playerPoints": {
             "17": 6,
@@ -4726,6 +5322,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2216",
+        "4663",
+        "4881",
+        "6790"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "650": 3,
@@ -4760,6 +5362,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4029"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "24": 13.1,
@@ -4799,6 +5404,12 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "2216",
+            "4663",
+            "4881",
+            "6790"
+          ],
           "ownerSlug": "jivan-gubbi",
           "playerPoints": {
             "650": 3,
@@ -4833,6 +5444,9 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4029"
+          ],
           "ownerSlug": "sam-ellison",
           "playerPoints": {
             "24": 13.1,
@@ -4869,6 +5483,10 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "4863",
+            "4881"
+          ],
           "ownerSlug": "jivan-gubbi",
           "playerPoints": {
             "650": 8,
@@ -4903,6 +5521,10 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "6945",
+            "947"
+          ],
           "ownerSlug": "sam-ellison",
           "playerPoints": {
             "24": 6.58,
@@ -4942,6 +5564,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1466",
+        "4068",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "515": 2.8,
@@ -4976,6 +5603,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4381"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "2374": 4.5,
@@ -5015,6 +5645,11 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "1466",
+            "4068",
+            "7561"
+          ],
           "ownerSlug": "brendon-ng",
           "playerPoints": {
             "515": 2.8,
@@ -5049,6 +5684,9 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4381"
+          ],
           "ownerSlug": "jay-uppuluri",
           "playerPoints": {
             "2374": 4.5,
@@ -5085,6 +5723,10 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "1689",
+            "6955"
+          ],
           "ownerSlug": "brendon-ng",
           "playerPoints": {
             "515": 15,
@@ -5158,6 +5800,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2197",
+        "4137"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "17": 1,
@@ -5192,6 +5838,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2505",
+        "3198",
+        "4037",
+        "7600"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "1264": 3,
@@ -5232,6 +5884,10 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "2197",
+            "4137"
+          ],
           "ownerSlug": "haley-rao",
           "playerPoints": {
             "17": 1,
@@ -5266,6 +5922,12 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "2505",
+            "3198",
+            "4037",
+            "7600"
+          ],
           "ownerSlug": "charlie-stoksik",
           "playerPoints": {
             "1264": 3,
@@ -5303,6 +5965,10 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "4137",
+            "956"
+          ],
           "ownerSlug": "haley-rao",
           "playerPoints": {
             "17": 15,
@@ -5337,6 +6003,13 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "2505",
+            "3198",
+            "4037",
+            "5916",
+            "6820"
+          ],
           "ownerSlug": "charlie-stoksik",
           "playerPoints": {
             "1264": 15,
@@ -5377,6 +6050,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1144",
+        "6943",
+        "7611"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1144": 0,
@@ -5411,6 +6089,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4227"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "96": 19.98,
@@ -5451,6 +6132,11 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "1144",
+            "6943",
+            "7611"
+          ],
           "ownerSlug": "diana-gonzalez",
           "playerPoints": {
             "1144": 0,
@@ -5485,6 +6171,9 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4227"
+          ],
           "ownerSlug": "kate-grillo",
           "playerPoints": {
             "96": 19.98,
@@ -5522,6 +6211,10 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "1166",
+            "7596"
+          ],
           "ownerSlug": "diana-gonzalez",
           "playerPoints": {
             "1166": 0,
@@ -5629,6 +6322,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4017",
+        "4217"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "1992": 1.7,
@@ -5702,6 +6399,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8151"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "1339": 10.4,
@@ -5775,6 +6475,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1426",
+        "5038"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "830": 2.3,
@@ -5889,6 +6593,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5185",
+        "6806"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 3.7,
@@ -6035,6 +6743,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4017",
+        "4217",
+        "4227"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 10,
@@ -6108,6 +6821,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6819",
+        "6943"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 4,
@@ -6141,6 +6858,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1479",
+        "6806"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 16.36,
@@ -6254,6 +6975,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1426",
+        "4035",
+        "4037",
+        "5038"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1387": 1.9,
@@ -6288,6 +7015,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7561",
+        "947"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "947": 0,
@@ -6329,6 +7060,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1479"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 16.1,
@@ -6362,6 +7096,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2216",
+        "5001"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 4,
@@ -6475,6 +7213,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "7561",
+        "947"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "947": 0,
@@ -6582,6 +7324,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4017",
+        "4227",
+        "5955"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 8,
@@ -6622,6 +7369,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1426",
+        "4037",
+        "5038",
+        "5947"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 0,
@@ -6656,6 +7409,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7606"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 10,
@@ -6696,6 +7452,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4080",
+        "7547",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "947": 1.2,
@@ -6730,6 +7491,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3199",
+        "5892"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "2449": 8.2,
@@ -6804,6 +7569,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "6790"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 9,
@@ -6845,6 +7613,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1479"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 16.14,
@@ -6878,6 +7649,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1426",
+        "4035",
+        "5947"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 0,
@@ -6919,6 +7695,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4951"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "17": 8,
@@ -6952,6 +7731,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4227"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 8,
@@ -7025,6 +7807,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7606"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 6,
@@ -7065,6 +7850,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1426",
+        "8135"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 0,
@@ -7099,6 +7888,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "6790"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 10,
@@ -7140,6 +7932,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4227"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 8,
@@ -7173,6 +7968,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3199"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "2449": 20.2,
@@ -7214,6 +8012,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4197",
+        "5906",
+        "7588",
+        "7606"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 18,
@@ -7247,6 +8051,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1535",
+        "7553",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1535": 0,
@@ -7288,6 +8097,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4951",
+        "6813",
+        "7571"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "421": 10.32,
@@ -7321,6 +8135,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2251"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 10,
@@ -7361,6 +8178,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6768"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "167": 19.74,
@@ -7394,6 +8214,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1479"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 16.88,
@@ -7434,6 +8257,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2028",
+        "4951",
+        "6813",
+        "7571"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1373": 12.68,
@@ -7467,6 +8296,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5844",
+        "7606"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 7,
@@ -7507,6 +8340,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4985",
+        "5001",
+        "5850",
+        "8119"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 13,
@@ -7540,6 +8379,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1352",
+        "2197",
+        "2505",
+        "6768"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "167": 13.72,
@@ -7580,6 +8425,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3199",
+        "5347",
+        "5890",
+        "7600"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "2449": 25.8,
@@ -7614,6 +8465,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1479"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 11.84,
@@ -7654,6 +8508,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6790",
+        "8144"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 6,
@@ -7688,6 +8546,14 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1535",
+        "3198",
+        "4137",
+        "4149",
+        "7547",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1535": 0,
@@ -7729,6 +8595,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2133",
+        "6938"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 14,
@@ -7762,6 +8632,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1426",
+        "8129",
+        "8135"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 0,
@@ -7803,6 +8678,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1234",
+        "4039",
+        "4197",
+        "5906",
+        "6943",
+        "7596"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 2,
@@ -7836,6 +8719,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4985",
+        "8119"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 2,
@@ -7877,6 +8764,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2505",
+        "5848"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "167": 11.7,
@@ -7911,6 +8802,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2449",
+        "3199",
+        "4029"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "2449": 0,
@@ -7952,6 +8848,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5022",
+        "6806"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 15.76,
@@ -7985,6 +8885,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4984",
+        "6151",
+        "6790",
+        "6794",
+        "BUF"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 11,
@@ -8026,6 +8933,15 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1535",
+        "4137",
+        "5859",
+        "6904",
+        "7525",
+        "7561",
+        "PHI"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1476": 9.3,
@@ -8060,6 +8976,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1992",
+        "3271",
+        "5916",
+        "6938"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 3,
@@ -8133,6 +9055,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1689",
+        "6130"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1373": 13.1,
@@ -8173,6 +9099,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3199",
+        "4033"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "2449": 19.8,
@@ -8207,6 +9137,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "6797"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 21,
@@ -8247,6 +9180,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4040",
+        "4068",
+        "6820",
+        "7594"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 8,
@@ -8281,6 +9220,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2505",
+        "4089",
+        "4663",
+        "5848"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1266": 4,
@@ -8322,6 +9267,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3164",
+        "4227",
+        "6938",
+        "7564"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 10,
@@ -8355,6 +9306,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1479",
+        "5086",
+        "5185",
+        "5872",
+        "6806"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 15.22,
@@ -8429,6 +9387,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1535",
+        "4137",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1476": 12.4,
@@ -8470,6 +9433,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4046",
+        "4985",
+        "8119"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1166": 23.48,
@@ -8504,6 +9472,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1466"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 27.9,
@@ -8544,6 +9515,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4098",
+        "4988"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 17,
@@ -8577,6 +9552,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4068",
+        "503",
+        "7594"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 0,
@@ -8618,6 +9598,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3199",
+        "4033",
+        "5045",
+        "5890",
+        "7600",
+        "SF"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "2020": 6,
@@ -8652,6 +9640,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3164",
+        "4217",
+        "5038",
+        "6783",
+        "7564"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 11,
@@ -8692,6 +9687,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4866",
+        "5937",
+        "8172"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 11.6,
@@ -8725,6 +9725,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2197",
+        "2505",
+        "3294",
+        "5848",
+        "6786"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1266": 10,
@@ -8766,6 +9773,16 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2309",
+        "2320",
+        "4034",
+        "4171",
+        "4985",
+        "5001",
+        "5967",
+        "DAL"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "2216": 6.5,
@@ -8800,6 +9817,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5000",
+        "5012",
+        "6813"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1373": 20.8,
@@ -8840,6 +9862,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5248",
+        "6803"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1535": 17.8,
@@ -8874,6 +9900,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1479",
+        "5870",
+        "5872",
+        "6806",
+        "7528"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 13.64,
@@ -8915,6 +9948,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2078",
+        "3225",
+        "5848"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "2078": 0,
@@ -8949,6 +9987,14 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3164",
+        "5917",
+        "6770",
+        "7564",
+        "7607",
+        "NE"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "167": 16.02,
@@ -8989,6 +10035,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4068"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 7,
@@ -9023,6 +10072,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3242",
+        "5012",
+        "6955"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1373": 19.2,
@@ -9063,6 +10117,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1264",
+        "1479",
+        "6806",
+        "8146"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "49": 9,
@@ -9097,6 +10157,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "650",
+        "7596"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 0,
@@ -9137,6 +10201,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4033",
+        "4881",
+        "5890",
+        "6801",
+        "7611"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1837": 15.9,
@@ -9171,6 +10242,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4171",
+        "4973",
+        "4985"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "2216": 7.9,
@@ -9212,6 +10288,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5248",
+        "7551",
+        "7839"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1535": 2.5,
@@ -9246,6 +10327,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4018",
+        "5849",
+        "5947"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 14.8,
@@ -9286,6 +10372,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5022",
+        "5846",
+        "6806",
+        "7523",
+        "7543"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "49": 8,
@@ -9319,6 +10412,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1373",
+        "3969",
+        "4950"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1373": 0,
@@ -9359,6 +10457,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2216",
+        "2747",
+        "3321",
+        "4171",
+        "4985"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 13,
@@ -9393,6 +10498,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "391",
+        "5917",
+        "6783",
+        "7564"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 0,
@@ -9433,6 +10544,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2078",
+        "4089",
+        "5848",
+        "6768"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "2078": 0,
@@ -9467,6 +10584,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5248"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1535": 10.9,
@@ -9508,6 +10628,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4066",
+        "5284"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1837": 25.42,
@@ -9542,6 +10666,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1339",
+        "2374",
+        "4040",
+        "8151"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": -2,
@@ -9583,6 +10713,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2749",
+        "4039"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 2,
@@ -9616,6 +10750,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4037",
+        "5849",
+        "7526",
+        "TB"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 13.6,
@@ -9656,6 +10796,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1992"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1535": 8.6,
@@ -9690,6 +10833,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2320",
+        "4985"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 3,
@@ -9731,6 +10878,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3969",
+        "5000",
+        "6955"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1373": 19.32,
@@ -9805,6 +10957,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4018",
+        "7591"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 16.7,
@@ -9839,6 +10995,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5022",
+        "6806"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 9.5,
@@ -9880,6 +11040,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5916",
+        "5917",
+        "6783",
+        "7564"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 6,
@@ -9913,6 +11079,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4068"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 11,
@@ -9953,6 +11122,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2749",
+        "4039",
+        "7601"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 15,
@@ -9986,6 +11160,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2078"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "2078": 0,
@@ -10027,6 +11204,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1426",
+        "4018",
+        "4983",
+        "5849"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 0,
@@ -10060,6 +11243,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4033",
+        "5890"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1837": 2.24,
@@ -10101,6 +11288,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4068"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 8,
@@ -10134,6 +11324,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4985",
+        "7090"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 13,
@@ -10175,6 +11369,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4137",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1535": 6,
@@ -10209,6 +11407,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4039",
+        "7601"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 3,
@@ -10249,6 +11451,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5916",
+        "5917",
+        "7607"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 5,
@@ -10282,6 +11489,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5000"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1373": 22.98,
@@ -10322,6 +11532,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5022",
+        "6806"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 13.68,
@@ -10356,6 +11570,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2197",
+        "4111",
+        "5848"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "2197": 0,
@@ -10396,6 +11615,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1837",
+        "4881",
+        "5045",
+        "5892",
+        "8112",
+        "8132"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1166": 25,
@@ -10430,6 +11657,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4381",
+        "4973",
+        "4985",
+        "7090"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 4,
@@ -10470,6 +11703,14 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "1837",
+            "4881",
+            "5045",
+            "5892",
+            "8112",
+            "8132"
+          ],
           "ownerSlug": "kate-grillo",
           "playerPoints": {
             "1166": 25,
@@ -10504,6 +11745,12 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4381",
+            "4973",
+            "4985",
+            "7090"
+          ],
           "ownerSlug": "haley-rao",
           "playerPoints": {
             "1433": 4,
@@ -10541,6 +11788,11 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "1837",
+            "5045",
+            "5284"
+          ],
           "ownerSlug": "kate-grillo",
           "playerPoints": {
             "1166": 32.4,
@@ -10575,6 +11827,12 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4973",
+            "4985",
+            "5536",
+            "7090"
+          ],
           "ownerSlug": "haley-rao",
           "playerPoints": {
             "1433": 7,
@@ -10615,6 +11873,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1535",
+        "6828",
+        "7561"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1535": 0,
@@ -10649,6 +11912,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4035",
+        "5947",
+        "7591"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 9.4,
@@ -10688,6 +11956,11 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "1535",
+            "6828",
+            "7561"
+          ],
           "ownerSlug": "brendon-ng",
           "playerPoints": {
             "1535": 0,
@@ -10722,6 +11995,11 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4035",
+            "5947",
+            "7591"
+          ],
           "ownerSlug": "eric-wong",
           "playerPoints": {
             "1426": 9.4,
@@ -10758,6 +12036,9 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "7561"
+          ],
           "ownerSlug": "brendon-ng",
           "playerPoints": {
             "1535": 11.7,
@@ -10792,6 +12073,9 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "8129"
+          ],
           "ownerSlug": "eric-wong",
           "playerPoints": {
             "1426": 9.5,
@@ -10831,6 +12115,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2197",
+        "6826",
+        "6945"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "2197": 0,
@@ -10864,6 +12153,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4039",
+        "6268",
+        "6819",
+        "7601",
+        "ATL"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": 11,
@@ -10903,6 +12199,11 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "2197",
+            "6826",
+            "6945"
+          ],
           "ownerSlug": "mark-mcgreal",
           "playerPoints": {
             "2197": 0,
@@ -10936,6 +12237,13 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4039",
+            "6268",
+            "6819",
+            "7601",
+            "ATL"
+          ],
           "ownerSlug": "diana-gonzalez",
           "playerPoints": {
             "650": 11,
@@ -10972,6 +12280,9 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "2197"
+          ],
           "ownerSlug": "mark-mcgreal",
           "playerPoints": {
             "2197": 0,
@@ -11005,6 +12316,11 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4039",
+            "6268",
+            "7601"
+          ],
           "ownerSlug": "diana-gonzalez",
           "playerPoints": {
             "650": 13,
@@ -11044,6 +12360,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5916",
+        "5917"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "391": 0,
@@ -11077,6 +12397,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4199",
+        "8144",
+        "8151",
+        "8167",
+        "NO"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 2,
@@ -11116,6 +12443,10 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "5916",
+            "5917"
+          ],
           "ownerSlug": "charlie-stoksik",
           "playerPoints": {
             "391": 0,
@@ -11149,6 +12480,13 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4199",
+            "8144",
+            "8151",
+            "8167",
+            "NO"
+          ],
           "ownerSlug": "jivan-gubbi",
           "playerPoints": {
             "503": 2,
@@ -11185,6 +12523,10 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "5916",
+            "5917"
+          ],
           "ownerSlug": "charlie-stoksik",
           "playerPoints": {
             "391": 4,
@@ -11257,6 +12599,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4082",
+        "5022",
+        "5185",
+        "96"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 0,
@@ -11291,6 +12639,14 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4666",
+        "5880",
+        "5927",
+        "6813",
+        "8154",
+        "IND"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1373": 20.56,
@@ -11330,6 +12686,12 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "4082",
+            "5022",
+            "5185",
+            "96"
+          ],
           "ownerSlug": "sam-ellison",
           "playerPoints": {
             "96": 0,
@@ -11364,6 +12726,14 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4666",
+            "5880",
+            "5927",
+            "6813",
+            "8154",
+            "IND"
+          ],
           "ownerSlug": "jay-uppuluri",
           "playerPoints": {
             "1373": 20.56,
@@ -11400,6 +12770,10 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "5022",
+            "5872"
+          ],
           "ownerSlug": "sam-ellison",
           "playerPoints": {
             "96": 10.86,
@@ -11473,6 +12847,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6904"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "167": 11.34,
@@ -11507,6 +12884,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4973",
+        "4985",
+        "5536",
+        "7090"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 9,
@@ -11547,6 +12930,9 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "6904"
+          ],
           "ownerSlug": "brendon-ng",
           "playerPoints": {
             "167": 11.34,
@@ -11581,6 +12967,12 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4973",
+            "4985",
+            "5536",
+            "7090"
+          ],
           "ownerSlug": "haley-rao",
           "playerPoints": {
             "1433": 9,
@@ -11618,6 +13010,11 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "3198",
+            "6904",
+            "7042"
+          ],
           "ownerSlug": "brendon-ng",
           "playerPoints": {
             "167": 37.68,
@@ -11652,6 +13049,13 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4973",
+            "4985",
+            "5536",
+            "5967",
+            "7090"
+          ],
           "ownerSlug": "haley-rao",
           "playerPoints": {
             "1433": 7,
@@ -11692,6 +13096,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1837",
+        "4881"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1166": 24.16,
@@ -11726,6 +13134,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8129"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "1426": 0.9,
@@ -11765,6 +13176,10 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "1837",
+            "4881"
+          ],
           "ownerSlug": "kate-grillo",
           "playerPoints": {
             "1166": 24.16,
@@ -11799,6 +13214,9 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "8129"
+          ],
           "ownerSlug": "eric-wong",
           "playerPoints": {
             "1426": 0.9,
@@ -11835,6 +13253,13 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "1837",
+            "2449",
+            "4881",
+            "6801",
+            "7839"
+          ],
           "ownerSlug": "kate-grillo",
           "playerPoints": {
             "1166": 7.9,
@@ -11869,6 +13294,11 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "1426",
+            "4018",
+            "8129"
+          ],
           "ownerSlug": "eric-wong",
           "playerPoints": {
             "1426": 0,
@@ -11941,6 +13371,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4039",
+        "6268",
+        "7601"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "650": -2,
@@ -12013,6 +13448,11 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4039",
+            "6268",
+            "7601"
+          ],
           "ownerSlug": "diana-gonzalez",
           "playerPoints": {
             "650": -2,
@@ -12049,6 +13489,10 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "6770",
+            "7564"
+          ],
           "ownerSlug": "charlie-stoksik",
           "playerPoints": {
             "391": 1,
@@ -12082,6 +13526,13 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4039",
+            "5906",
+            "6268",
+            "6943",
+            "7601"
+          ],
           "ownerSlug": "diana-gonzalez",
           "playerPoints": {
             "650": 5,
@@ -12121,6 +13572,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5872"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "96": 13.32,
@@ -12194,6 +13648,9 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "5872"
+          ],
           "ownerSlug": "sam-ellison",
           "playerPoints": {
             "96": 13.32,
@@ -12264,6 +13721,9 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "5872"
+          ],
           "ownerSlug": "sam-ellison",
           "playerPoints": {
             "96": 16.56,
@@ -12298,6 +13758,11 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "3225",
+            "6768",
+            "6945"
+          ],
           "ownerSlug": "mark-mcgreal",
           "playerPoints": {
             "2197": 5.9,
@@ -12337,6 +13802,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6813"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "1373": 12.2,
@@ -12370,6 +13838,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2374",
+        "8144"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": 14,
@@ -12409,6 +13881,9 @@
     "weeks": [
       {
         "away": {
+          "didNotPlay": [
+            "6813"
+          ],
           "ownerSlug": "jay-uppuluri",
           "playerPoints": {
             "1373": 12.2,
@@ -12442,6 +13917,10 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "2374",
+            "8144"
+          ],
           "ownerSlug": "jivan-gubbi",
           "playerPoints": {
             "503": 14,
@@ -12478,6 +13957,11 @@
       },
       {
         "away": {
+          "didNotPlay": [
+            "2028",
+            "6130",
+            "6813"
+          ],
           "ownerSlug": "jay-uppuluri",
           "playerPoints": {
             "1689": 2.1,
@@ -12511,6 +13995,10 @@
           ]
         },
         "home": {
+          "didNotPlay": [
+            "4984",
+            "BUF"
+          ],
           "ownerSlug": "jivan-gubbi",
           "playerPoints": {
             "503": 8,
@@ -12549,6 +14037,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4039",
+        "5012",
+        "6813"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 21.2,
@@ -12583,6 +14076,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1466"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 8,
@@ -12623,6 +14119,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6783"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "3199": 8.6,
@@ -12656,6 +14155,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4985"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "503": -2,
@@ -12769,6 +14271,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4035",
+        "4951",
+        "8167"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 9.6,
@@ -12915,6 +14422,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4035",
+        "4199",
+        "5947"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 17.4,
@@ -13021,6 +14533,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7567"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "2078": 4.4,
@@ -13094,6 +14609,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4663"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2161": 3.7,
@@ -13134,6 +14652,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2197"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 8.6,
@@ -13167,6 +14688,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4039",
+        "6813",
+        "6938",
+        "7561"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 10.1,
@@ -13314,6 +14841,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4663"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2161": 16.3,
@@ -13354,6 +14884,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2078",
+        "6803"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "2078": 0,
@@ -13388,6 +14922,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4035",
+        "4199",
+        "8167"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 35.7,
@@ -13428,6 +14967,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4039",
+        "4080",
+        "5995",
+        "6813"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 15.1,
@@ -13462,6 +15007,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5937"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1166": 25.68,
@@ -13503,6 +15051,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4149",
+        "4988",
+        "5892"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "3164": 9.2,
@@ -13609,6 +15162,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4866",
+        "7526"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1234": 14.24,
@@ -13649,6 +15206,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4039",
+        "4080",
+        "6813"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 33,
@@ -13723,6 +15285,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4663"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 5.5,
@@ -13756,6 +15321,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2078"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "2078": 0,
@@ -13797,6 +15365,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4017",
+        "4866"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1234": 22.22,
@@ -13870,6 +15442,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5937"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1166": 9.56,
@@ -13904,6 +15479,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4149"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "3164": 3.2,
@@ -14017,6 +15595,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "7588"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1689": 22.2,
@@ -14050,6 +15631,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4149",
+        "8151"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "3164": 5.8,
@@ -14090,6 +15675,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6797",
+        "8143"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "2078": 2.3,
@@ -14124,6 +15713,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8136"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 20.1,
@@ -14164,6 +15756,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4199"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 6.5,
@@ -14197,6 +15792,15 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2216",
+        "2374",
+        "4663",
+        "6801",
+        "7547",
+        "7596",
+        "9221"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 0,
@@ -14237,6 +15841,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4037",
+        "7670"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 6,
@@ -14270,6 +15878,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4033",
+        "5937",
+        "7600"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1166": 19.86,
@@ -14311,6 +15924,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2309",
+        "5846",
+        "9488",
+        "9753"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 8,
@@ -14344,6 +15963,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1479",
+        "4017",
+        "4866"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "17": 1,
@@ -14384,6 +16008,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4137",
+        "6151",
+        "8121"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 17,
@@ -14418,6 +16047,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8137"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1689": 23,
@@ -14458,6 +16090,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4149",
+        "5870"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "3164": 11.4,
@@ -14491,6 +16127,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5284",
+        "7528",
+        "9226"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "5022": 6.7,
@@ -14532,6 +16173,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6828",
+        "9502"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 15,
@@ -14566,6 +16211,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4199",
+        "8167"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 3.9,
@@ -14640,6 +16289,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7608",
+        "9221"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 6.9,
@@ -14680,6 +16333,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4040",
+        "5937",
+        "6794",
+        "7600",
+        "8228"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1166": 8.74,
@@ -14714,6 +16374,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10235"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 3.2,
@@ -14754,6 +16417,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1689",
+        "3294",
+        "6770"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1689": 0,
@@ -14787,6 +16455,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2197",
+        "4018",
+        "5846",
+        "7569",
+        "9753"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 3.4,
@@ -14827,6 +16502,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "7564",
+        "8129",
+        "9226"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "5022": 16.2,
@@ -14861,6 +16541,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4137",
+        "6130",
+        "6151",
+        "6786"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 8,
@@ -14902,6 +16588,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3198",
+        "4951",
+        "5038",
+        "8150",
+        "DAL"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 9.2,
@@ -14936,6 +16629,14 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "10235",
+        "5001",
+        "5870",
+        "5872",
+        "5892",
+        "5967"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "3164": 9.1,
@@ -14977,6 +16678,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6801",
+        "7608"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 17.2,
@@ -15010,6 +16715,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "9502",
+        "9758",
+        "NYJ"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 14.8,
@@ -15051,6 +16761,15 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3225",
+        "4040",
+        "6794",
+        "7591",
+        "7600",
+        "8146",
+        "8155"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1166": 21.02,
@@ -15085,6 +16804,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1426",
+        "7594"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1234": 13.86,
@@ -15125,6 +16848,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6794",
+        "7591",
+        "7600"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1166": 19.86,
@@ -15199,6 +16927,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1339"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -15233,6 +16964,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "9226"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "3451": 1,
@@ -15274,6 +17008,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5870",
+        "5872",
+        "5892"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "421": 11.38,
@@ -15307,6 +17046,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7608"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 11.4,
@@ -15347,6 +17089,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "9222"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1234": 17.56,
@@ -15421,6 +17166,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4137"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 16,
@@ -15455,6 +17203,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8150"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 1.6,
@@ -15496,6 +17247,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4217",
+        "6783",
+        "7588",
+        "JAX"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1689": 5.4,
@@ -15529,6 +17286,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1234",
+        "2505",
+        "5045"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1234": 0,
@@ -15569,6 +17331,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10859",
+        "6803",
+        "8112",
+        "8129",
+        "9226"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "650": 11,
@@ -15603,6 +17372,14 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4082",
+        "4981",
+        "6794",
+        "7543",
+        "7591",
+        "7600"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1264": 14,
@@ -15644,6 +17421,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3163",
+        "4066",
+        "8150"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 5.4,
@@ -15678,6 +17460,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1339",
+        "4034"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -15719,6 +17505,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "11439",
+        "7523",
+        "7547",
+        "7608",
+        "9221"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2028": 16.74,
@@ -15753,6 +17546,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1433",
+        "4137"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 0,
@@ -15828,6 +17625,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4950",
+        "5872",
+        "5892"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "3164": 4.7,
@@ -15868,6 +17670,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10229",
+        "5022",
+        "5859",
+        "8129",
+        "9226",
+        "KC"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "650": 5,
@@ -15902,6 +17712,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3321",
+        "6790"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1689": 7.2,
@@ -15942,6 +17756,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6794",
+        "7591",
+        "7600"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1264": 6,
@@ -15976,6 +17795,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4195",
+        "6904",
+        "8150"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 11.6,
@@ -16017,6 +17841,14 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1339",
+        "5916",
+        "6768",
+        "7569",
+        "8205",
+        "PHI"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -16051,6 +17883,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "3271",
+        "6801",
+        "7608",
+        "8168"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2028": 5.4,
@@ -16092,6 +17930,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1466",
+        "4046"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 3,
@@ -16125,6 +17967,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4039",
+        "9493"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 4.9,
@@ -16165,6 +18011,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2505",
+        "2749",
+        "7526"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1234": 18.72,
@@ -16199,6 +18050,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7525"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "3164": 9.8,
@@ -16239,6 +18093,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4666",
+        "8144"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1689": 11.4,
@@ -16272,6 +18130,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4035",
+        "8150"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 17.7,
@@ -16313,6 +18175,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5022",
+        "8112",
+        "8129"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "650": 2,
@@ -16346,6 +18213,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2505",
+        "6819",
+        "8132",
+        "9509"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1426": 13.9,
@@ -16387,6 +18260,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6801"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 12.8,
@@ -16420,6 +18296,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "6794",
+        "6845"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1264": 11,
@@ -16461,6 +18341,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6813"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 4.7,
@@ -16494,6 +18377,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1339",
+        "7553"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -16535,6 +18422,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3164",
+        "9500"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "3164": 0,
@@ -16568,6 +18459,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4381",
+        "7611"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 10,
@@ -16608,6 +18503,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4111",
+        "6801"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 22,
@@ -16681,6 +18580,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4199"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 9.8,
@@ -16714,6 +18616,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5022",
+        "9226"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "650": 7,
@@ -16754,6 +18660,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6794"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1264": 9,
@@ -16788,6 +18697,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5012"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 16.4,
@@ -16829,6 +18741,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1339",
+        "5916"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -16863,6 +18779,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8151"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "3164": 6.2,
@@ -16903,6 +18822,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2505"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1426": 6.4,
@@ -16977,6 +18899,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "10236",
+        "5850",
+        "5987"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1689": 4,
@@ -17010,6 +18937,13 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2449",
+        "4984",
+        "5012",
+        "6813",
+        "9756"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 0,
@@ -17051,6 +18985,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5022",
+        "5248",
+        "8138",
+        "MIN"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "650": 8,
@@ -17084,6 +19024,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4111",
+        "5844",
+        "7608"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 25.7,
@@ -17124,6 +19069,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "2133",
+        "4199",
+        "5947",
+        "6943",
+        "9501"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 0,
@@ -17157,6 +19109,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2505",
+        "4866"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1426": 16.4,
@@ -17198,6 +19154,13 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4983",
+        "5001",
+        "6826",
+        "8151",
+        "BAL"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "4950": 3.1,
@@ -17231,6 +19194,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "6794",
+        "7591"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1945": 3,
@@ -17272,6 +19239,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5995",
+        "9997",
+        "BUF"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 7,
@@ -17305,6 +19277,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1339",
+        "4881",
+        "5916",
+        "8230"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -17379,6 +19357,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4082",
+        "8162"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1945": 6,
@@ -17453,6 +19435,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1339",
+        "8130",
+        "8205"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -17494,6 +19481,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4199",
+        "5927",
+        "8167",
+        "9501"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 8.8,
@@ -17527,6 +19520,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4137",
+        "7611",
+        "8119"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 3,
@@ -17567,6 +19565,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "3271"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 1.3,
@@ -17600,6 +19601,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4950",
+        "5001"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "4950": 0,
@@ -17640,6 +19645,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4381",
+        "5848",
+        "6813",
+        "8154"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 4.4,
@@ -17674,6 +19685,11 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "2251",
+        "2505",
+        "5849"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1234": 15.46,
@@ -17715,6 +19731,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "7611"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": -1,
@@ -17788,6 +19807,12 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6813",
+        "6828",
+        "8154",
+        "9758"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 6.8,
@@ -17861,6 +19886,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "1339",
+        "7569",
+        "8205"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -17895,6 +19925,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1479"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1234": 17.52,
@@ -17970,6 +20003,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "4950",
+        "7922"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "4950": 0,
@@ -18010,6 +20047,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "7564"
+      ],
       "ownerSlug": "jivan-gubbi",
       "playerPoints": {
         "1264": 16,
@@ -18043,6 +20083,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8167"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 0.9,
@@ -18083,6 +20126,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4111"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "2216": 24.1,
@@ -18116,6 +20162,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5850"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1689": 12.4,
@@ -18156,6 +20205,11 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5848",
+        "8154",
+        "9758"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 5.4,
@@ -18189,6 +20243,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7611"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": -1,
@@ -18229,6 +20286,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4950"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "650": 5,
@@ -18262,6 +20322,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1339"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -18303,6 +20366,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6845"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1945": 12,
@@ -18336,6 +20402,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1479",
+        "6819"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1234": 23.52,
@@ -18376,6 +20446,10 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5844",
+        "7523"
+      ],
       "ownerSlug": "sam-ellison",
       "playerPoints": {
         "421": 12.58,
@@ -18409,6 +20483,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "8167"
+      ],
       "ownerSlug": "charlie-stoksik",
       "playerPoints": {
         "2133": 31.1,
@@ -18482,6 +20559,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "5850"
+      ],
       "ownerSlug": "brendon-ng",
       "playerPoints": {
         "1689": 6.8,
@@ -18522,6 +20602,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "5848"
+      ],
       "ownerSlug": "eric-wong",
       "playerPoints": {
         "2449": 5.1,
@@ -18555,6 +20638,9 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "7611"
+      ],
       "ownerSlug": "haley-rao",
       "playerPoints": {
         "1433": 14,
@@ -18595,6 +20681,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "6845"
+      ],
       "ownerSlug": "diana-gonzalez",
       "playerPoints": {
         "1945": 12,
@@ -18628,6 +20717,10 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1339",
+        "2309"
+      ],
       "ownerSlug": "kate-grillo",
       "playerPoints": {
         "1339": 0,
@@ -18669,6 +20762,9 @@
   },
   {
     "away": {
+      "didNotPlay": [
+        "4950"
+      ],
       "ownerSlug": "jay-uppuluri",
       "playerPoints": {
         "650": 5,
@@ -18702,6 +20798,12 @@
       ]
     },
     "home": {
+      "didNotPlay": [
+        "1479",
+        "2749",
+        "5045",
+        "7526"
+      ],
       "ownerSlug": "mark-mcgreal",
       "playerPoints": {
         "1426": 10.7,

@@ -54,7 +54,13 @@ const SLOT_ORDER = [0, 1, 2, 3, 4, 5, 6, 7, 23, 16, 17, 18, 19];
 
 interface EspnEntry {
   lineupSlotId: number;
-  playerPoolEntry: { appliedStatTotal?: number; player: EspnPlayer };
+  playerPoolEntry: {
+    appliedStatTotal?: number;
+    player: EspnPlayer & {
+      /** One per period per source; `statSourceId: 0` is what he actually did. */
+      stats?: Array<{ scoringPeriodId?: number; statSourceId?: number; stats?: Record<string, number> }>;
+    };
+  };
 }
 interface EspnSide {
   teamId: number;
@@ -77,6 +83,20 @@ export interface LineupSide {
   starters: string[];
   /** player id -> points, starters and bench alike. */
   playerPoints: Record<string, number>;
+  /**
+   * Rostered players whose NFL team played WITHOUT them — inactive, injured,
+   * or simply never on the field.
+   *
+   * A 0.00 in `playerPoints` is two different things and only one of them is a
+   * bad start. ESPN separates them: the actual stat line for the period
+   * (`statSourceId: 0`, as against `1` for the projection) is EMPTY for a
+   * player who did not appear and populated for one who did, even when what he
+   * did was worth nothing. Checked on 2019 week 3 — of 23 players on zero, 20
+   * had an empty line and 3 had real stats that scored nothing.
+   *
+   * OMITTED WHEN EMPTY so a week with everybody active adds nothing to the file.
+   */
+  didNotPlay?: string[];
 }
 
 export interface SeasonLineups {
@@ -211,6 +231,7 @@ async function main(): Promise<void> {
 
             const playerPoints: Record<string, number> = {};
             const started: Array<{ slot: number; id: string }> = [];
+            const didNotPlay: string[] = [];
             for (const e of entries) {
               const m = matchPlayer(e.playerPoolEntry.player, idx);
               via[m.via] += 1;
@@ -225,6 +246,14 @@ async function main(): Promise<void> {
                 };
               }
               playerPoints[m.id] = Number((e.playerPoolEntry.appliedStatTotal ?? 0).toFixed(2));
+              // EMPTY ACTUAL LINE MEANS HE DID NOT APPEAR. Presence of the line
+              // alone is not the test for a finished season — ESPN backfills one
+              // for every rostered player, scorer or not — so it is the raw stat
+              // map inside it that has to be non-empty.
+              const actual = (e.playerPoolEntry.player.stats ?? []).find(
+                (st) => st.statSourceId === 0 && st.scoringPeriodId === week,
+              );
+              if (!actual || !Object.keys(actual.stats ?? {}).length) didNotPlay.push(m.id);
               if (!BENCH.has(e.lineupSlotId)) started.push({ slot: e.lineupSlotId, id: m.id });
             }
 
@@ -234,7 +263,11 @@ async function main(): Promise<void> {
             if (!out.rosterPositions.length) {
               out.rosterPositions = started.map((s) => SLOT[s.slot] ?? String(s.slot));
             }
-            forWeek[owner] = { starters: started.map((s) => s.id), playerPoints };
+            forWeek[owner] = {
+              starters: started.map((s) => s.id),
+              playerPoints,
+              ...(didNotPlay.length ? { didNotPlay: didNotPlay.sort() } : {}),
+            };
           }
         }
         // THE INVARIANT, enforced here rather than trusted. Started points must

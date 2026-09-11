@@ -143,6 +143,20 @@ export interface MatchupSide {
   starters: string[];
   /** player_id -> points, starters and bench alike. */
   playerPoints: Record<string, number>;
+  /**
+   * Rostered players whose NFL team played WITHOUT them.
+   *
+   * A 0.00 is otherwise two different situations — inactive, or played and did
+   * nothing — and only the second is a bad start. Neither platform puts this in
+   * the matchup payload, so it comes from a second source per era: Sleeper's
+   * weekly `gp`, captured by `sync` into `raw/<season>/played/`, and ESPN's
+   * actual-versus-projected stat line, captured by `import:espn:lineups`.
+   *
+   * ABSENT MEANS UNKNOWN, NOT "EVERYBODY PLAYED". A week the stats feed could
+   * not answer for records nothing rather than accusing every zero of being a
+   * DNP, so the page falls back to showing the number.
+   */
+  didNotPlay?: string[];
 }
 
 export interface Matchup {

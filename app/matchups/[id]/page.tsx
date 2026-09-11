@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { LineupPanel, type LineupRow } from "@/components/lineup-panel";
+import type { PlayerWeekState } from "@/lib/live/types";
 import { MatchupPreview } from "@/components/matchup-preview";
 import { SeriesPanel } from "@/components/series-panel";
 import {
@@ -467,6 +468,31 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
  * is the only way to know a given player filled the FLEX rather than RB2 — the
  * player object itself just says "RB".
  */
+/**
+ * What a finished lineup can say about a zero.
+ *
+ * TWO OF THE FOUR LIVE STATES SURVIVE ARCHIVING. "Yet to play" is meaningless
+ * once the game is over, and "playing now" doubly so; a bye and a did-not-play
+ * are permanent facts about the week and belong here.
+ *
+ * BYE WINS OVER DNP. Both are true of a player whose team was idle — he did not
+ * play, and the reason is the bye — and naming the reason is more use than
+ * restating the symptom.
+ */
+function rowState(
+  side: MeetingSide,
+  season: number,
+  week: number,
+  pid: string,
+): PlayerWeekState | undefined {
+  const points = side.playerPoints[pid] ?? 0;
+  if (onBye(season, week, pid, points)) return "bye";
+  // Only ever asserted from recorded evidence: an absent `didNotPlay` means the
+  // stats feed had nothing to say, not that everybody suited up.
+  if (side.didNotPlay?.includes(pid)) return "dnp";
+  return undefined;
+}
+
 function Lineup({
   side,
   slots,
@@ -523,7 +549,7 @@ function Lineup({
        * indistinguishable from a real 0.00 in `playerPoints`, which is a bare
        * number with no stat line behind it.
        */
-      state: onBye(season, week, pid, side.playerPoints[pid] ?? 0) ? "bye" : undefined,
+      state: rowState(side, season, week, pid),
       // Every player here came out of committed data, so a page exists for all
       // of them — unlike the live lineup, where a rookie may have none.
       href: `/players/${pid}/`,
