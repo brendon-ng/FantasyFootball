@@ -23407,6 +23407,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1789294781595,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "9484": [

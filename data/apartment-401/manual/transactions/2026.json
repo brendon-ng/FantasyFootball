@@ -105,6 +105,24 @@
       "timestamp": 1788903976842,
       "vetoed": false,
       "week": 1
+    },
+    {
+      "faab": 0,
+      "id": "68e33e39-db7c-4abc-a55d-fb3e09854c65",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "9482",
+          "toSlug": "eric-wong"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "eric-wong"
+      ],
+      "timestamp": 1789294781595,
+      "vetoed": false,
+      "week": 1
     }
   ]
 }
