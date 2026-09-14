@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { LiveLineup } from "@/components/live-lineup";
-import { RecordChip } from "@/components/record-chip";
+import { RecordBanner } from "@/components/record-banner";
 import { Panel, fmt } from "@/components/ui";
 import { useLineupStates, useLiveSeason, useMatchupSettled, useSeasonGames } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
@@ -217,13 +217,6 @@ export function MatchupPreview({
             ) : null}
             {state}
           </span>
-          {marks.length ? (
-            <span className="flex flex-wrap gap-1">
-              {marks.map((mark) => (
-                <RecordChip key={`${mark.short}-${mark.side ?? "game"}`} mark={mark} />
-              ))}
-            </span>
-          ) : null}
         </div>
         <p className="mt-1 text-sm text-chalk-500">
           {headline} ·{" "}
@@ -236,6 +229,26 @@ export function MatchupPreview({
           </Link>
         </p>
       </div>
+
+      {/* SAME BANNER AS THE ARCHIVED PAGE, in the same place. A record is the
+          same claim whichever state the page is in, and rendering it as the
+          strip's 9px chip here made one game look like two different facts. */}
+      <RecordBanner
+        items={marks.map((m) => {
+          const who = m.side === "a" ? a : m.side === "b" ? b : null;
+          return {
+            short: m.short,
+            full: m.full,
+            tone: m.tone,
+            titleSuffix: who ? ` — ${name(who)}` : "",
+            // First names, matching the archived banner: a whole-game record
+            // names both sides, a one-team record names the one.
+            detail: who
+              ? (ownerNames[who]?.split(" ")[0] ?? who)
+              : `${ownerNames[a]?.split(" ")[0] ?? a} v ${ownerNames[b]?.split(" ")[0] ?? b}`,
+          };
+        })}
+      />
 
       <div className="grid gap-3 sm:grid-cols-2">
         {[a, b].map((slug) => {

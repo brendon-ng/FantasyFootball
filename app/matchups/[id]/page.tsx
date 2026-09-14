@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { LineupPanel, type LineupRow } from "@/components/lineup-panel";
+import { RecordBanner } from "@/components/record-banner";
 import type { PlayerWeekState } from "@/lib/live/types";
 import { MatchupPreview } from "@/components/matchup-preview";
 import { SeriesPanel } from "@/components/series-panel";
@@ -274,42 +275,21 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
         </div>
       ) : null}
 
-      {flags.length ? (
-        <div className="flex flex-wrap items-center gap-2 rounded-xl border border-gold/35 bg-gold/[0.07] px-4 py-3">
-          <span className="text-[10px] font-bold uppercase tracking-wide text-gold">
-            Record book
-          </span>
-          {flags.map((f, i) => (
-            <span
-              key={i}
-              title={`${f.full}${f.ownerSlug ? ` — ${name(f.ownerSlug)}` : ""}`}
-              className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold ${
-                f.tone === "bad"
-                  ? "border-loss/40 bg-loss/10 text-loss"
-                  : "border-gold/40 bg-gold/10 text-gold"
-              }`}
-            >
-              {f.short}
-              {/* Whole-game records name both sides — one name is only half
-                  the fact for a blowout or a combined total. */}
-              {f.playerId ? (
-                <span className="ml-1 font-normal opacity-80">
-                  {players[f.playerId]?.full_name ?? ""}
-                </span>
-              ) : f.opponentSlug ? (
-                <span className="ml-1 font-normal opacity-80">
-                  {owners.get(f.ownerSlug ?? "")?.firstName ?? ""} def.{" "}
-                  {owners.get(f.opponentSlug)?.firstName ?? ""}
-                </span>
-              ) : f.ownerSlug ? (
-                <span className="ml-1 font-normal opacity-80">
-                  {owners.get(f.ownerSlug)?.firstName ?? ""}
-                </span>
-              ) : null}
-            </span>
-          ))}
-        </div>
-      ) : null}
+      <RecordBanner
+        items={flags.map((f) => ({
+          short: f.short,
+          full: f.full,
+          tone: f.tone === "bad" ? "bad" : "good",
+          titleSuffix: f.ownerSlug ? ` — ${name(f.ownerSlug)}` : "",
+          detail: f.playerId
+            ? (players[f.playerId]?.full_name ?? "")
+            : f.opponentSlug
+              ? `${owners.get(f.ownerSlug ?? "")?.firstName ?? ""} def. ${owners.get(f.opponentSlug)?.firstName ?? ""}`
+              : f.ownerSlug
+                ? (owners.get(f.ownerSlug)?.firstName ?? "")
+                : null,
+        }))}
+      />
 
       {/* Scoreboard */}
       <div className="grid gap-2.5 sm:grid-cols-2">
