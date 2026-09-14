@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { MARK_DEPTH } from "@/lib/record-marks";
 import { BackLink } from "@/components/back-link";
 import { LiveSeasonDetail } from "@/components/live-season-detail";
 
@@ -606,7 +607,7 @@ async function InProgressSeasonPage({ season }: { season: number }) {
         playoffTeams={playoffTeams}
         regularSeasonWeeks={last?.regularSeasonWeeks ?? null}
         seasonWeeks={seasonWeeks}
-        thresholds={getRecordThresholds()}
+        thresholds={getRecordThresholds(MARK_DEPTH)}
         h2h={h2h}
         archivedThrough={last?.season ?? 0}
         upcomingIds={(await getLiveSchedule()).map((g) => g.id)}

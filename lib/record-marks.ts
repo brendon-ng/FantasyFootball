@@ -39,6 +39,16 @@ export interface RecordThresholds {
 }
 
 export interface RecordMark {
+  /**
+   * The MATCHUP PAGE's wording, matching `getRecordFlags` exactly.
+   *
+   * `short` is written for a card the width of a thumb, where "#7 lowest
+   * scoring matchup" does not fit. A page has room, and its archived
+   * counterpart already says the long form — so the same game must not read
+   * "#7 low combined" today and "#7 lowest scoring matchup" once it is
+   * archived.
+   */
+  long: string;
   rank: number;
   /** Fits in a card chip. */
   short: string;
@@ -80,6 +90,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
       out.push({
         rank: hi,
         short: `#${hi} high`,
+        long: `#${hi} highest score`,
         full: `${ordinal(hi)}-highest single-week score in league history`,
         tone: "good",
         side,
@@ -90,6 +101,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
       out.push({
         rank: lo,
         short: `#${lo} low`,
+        long: `#${lo} lowest score`,
         full: `${ordinal(lo)}-lowest single-week score in league history`,
         tone: "bad",
         side,
@@ -103,6 +115,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
     out.push({
       rank: blowout,
       short: `#${blowout} blowout`,
+      long: `#${blowout} blowout`,
       full: `${ordinal(blowout)}-biggest margin of victory in league history`,
       tone: "good",
     });
@@ -114,6 +127,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
       out.push({
         rank: narrow,
         short: `#${narrow} closest`,
+      long: `#${narrow} closest win`,
         full: `${ordinal(narrow)}-narrowest margin of victory in league history`,
         tone: "good",
       });
@@ -126,6 +140,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
     out.push({
       rank: ch,
       short: `#${ch} high combined`,
+      long: `#${ch} highest scoring matchup`,
       full: `${ordinal(ch)}-highest combined score of any matchup in league history`,
       tone: "good",
     });
@@ -135,6 +150,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
     out.push({
       rank: cl,
       short: `#${cl} low combined`,
+      long: `#${cl} lowest scoring matchup`,
       full: `${ordinal(cl)}-lowest combined score of any matchup in league history`,
       tone: "bad",
     });

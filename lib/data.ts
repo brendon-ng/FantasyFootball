@@ -25,7 +25,7 @@ import { sleeperProvider } from "./live/sleeper.ts";
 import type { LiveProvider } from "./live/types.ts";
 import { meetingId } from "./meeting.ts";
 import type { DerivedLow, SeasonLows, TeamMap } from "./punishments.ts";
-import { MARK_DEPTH, type RecordThresholds } from "./record-marks.ts";
+import type { RecordThresholds } from "./record-marks.ts";
 import {
   resolveSeasonPunishment,
   type SeasonPunishment,
@@ -2106,12 +2106,19 @@ export function getRecordFlags(
  * Shipped to the client so a card can mark a record the moment a week is scored,
  * without refetching history — the record arrays are build-time data.
  *
- * Capped at `MARK_DEPTH`, not the record book's twenty: a card marks a top-five
- * result only. That also keeps the shipped arrays tiny.
+ * DEPTH IS THE CALLER'S CHOICE, because the two surfaces want different ones.
+ * A CARD marks a top-five result only — chips are worth reading on the home
+ * strip precisely because most weeks no card has one, and twenty-five would put
+ * one on nearly every card. A matchup PAGE has room, and its archived
+ * counterpart already shows whatever rank the record book holds — up to #25, and
+ * #20 has really been rendered — so the live page passes no cap and the two
+ * agree. Same game, same chips, whether or not the week has been archived yet.
+ *
+ * The shipped array stays small either way: six lists of at most 25 numbers.
  */
-export function getRecordThresholds(): RecordThresholds {
+export function getRecordThresholds(depth?: number): RecordThresholds {
   const r = getRecords();
-  const cap = <T>(xs: T[]) => xs.slice(0, MARK_DEPTH);
+  const cap = <T>(xs: T[]) => (depth == null ? xs : xs.slice(0, depth));
   return {
     high: cap(r.weeklyHigh).map((s) => s.points),
     low: cap(r.weeklyLow).map((s) => s.points),

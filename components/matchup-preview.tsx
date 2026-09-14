@@ -237,7 +237,8 @@ export function MatchupPreview({
         items={marks.map((m) => {
           const who = m.side === "a" ? a : m.side === "b" ? b : null;
           return {
-            short: m.short,
+            // The PAGE wording, so an archived copy of this game reads the same.
+            short: m.long,
             full: m.full,
             tone: m.tone,
             titleSuffix: who ? ` — ${name(who)}` : "",

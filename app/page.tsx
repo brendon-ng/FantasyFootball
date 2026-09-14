@@ -1,3 +1,4 @@
+import { MARK_DEPTH } from "@/lib/record-marks";
 
 import { DraftPlan } from "@/components/draft-plan";
 import { SeasonPanels } from "@/components/season-panels";
@@ -75,7 +76,7 @@ export default async function HomePage() {
 
   const MAX_KEEPERS = 4;
 
-  const thresholds = getRecordThresholds();
+  const thresholds = getRecordThresholds(MARK_DEPTH);
   const recordBook = getRecords();
   // Only link record rows whose matchup page was actually generated; a dead link
   // is worse than a plain row.
