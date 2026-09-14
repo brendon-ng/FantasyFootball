@@ -363,7 +363,21 @@ export function PunishmentTracker({
         ? `Draws open once the ${active} pool is set.`
         : !drawWeek
           ? "No week to draw for."
-          : !drawRow
+          : // A URL THAT NAMES THE LOSER NEEDS NO LEDGER ROW.
+            //
+            // A draw happens in the days after a week and BEFORE it is
+            // archived — often before the sheet has a row for it either, since
+            // rows are written as the season goes. Requiring one meant the
+            // commissioner could not draw for the week that had just been lost,
+            // which is the only week anybody ever draws for. The link is sent to
+            // the loser by hand, so the week and the name in it are the
+            // deliberate input, not a guess to be validated away.
+            //
+            // The SERVER still decides. It draws inside the lock that writes the
+            // row, refuses a second draw, and refuses a loser that disagrees
+            // with a row it already has — so nothing here is load-bearing for
+            // correctness, and its message is shown verbatim if it says no.
+            !drawRow && !drawLoser
             ? `Nothing recorded for week ${drawWeek} yet.`
             : null;
 
