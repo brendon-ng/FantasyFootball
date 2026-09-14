@@ -5,7 +5,8 @@ import Link from "next/link";
 import { fmt } from "@/components/ui";
 import { useMatchupSettled } from "@/lib/live";
 import { meetingId } from "@/lib/meeting";
-import { matchupMarks, type RecordMark, type RecordThresholds } from "@/lib/record-marks";
+import { RecordChip } from "@/components/record-chip";
+import { matchupMarks, type RecordThresholds } from "@/lib/record-marks";
 import type { LiveSeason } from "@/lib/types";
 
 /**
@@ -212,21 +213,3 @@ export function MatchupCards({
   );
 }
 
-/**
- * A record this game entered. Tone carries the direction — green for a peak, red
- * for a floor — and the title spells the rank out, since "#3 low" is terse.
- */
-function RecordChip({ mark }: { mark: RecordMark }) {
-  return (
-    <span
-      title={mark.full}
-      className={`rounded border px-1 py-px text-[9px] font-bold uppercase tracking-wide ${
-        mark.tone === "good"
-          ? "border-accent-dim/60 bg-accent/10 text-accent"
-          : "border-loss/50 bg-loss/10 text-loss"
-      }`}
-    >
-      {mark.short}
-    </span>
-  );
-}

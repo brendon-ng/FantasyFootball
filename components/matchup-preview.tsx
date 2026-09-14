@@ -3,9 +3,11 @@
 import Link from "next/link";
 
 import { LiveLineup } from "@/components/live-lineup";
+import { RecordChip } from "@/components/record-chip";
 import { Panel, fmt } from "@/components/ui";
 import { useLineupStates, useLiveSeason, useMatchupSettled, useSeasonGames } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
+import { matchupMarks, type RecordThresholds } from "@/lib/record-marks";
 import type { LiveSeason, LiveTeam, PlayerMeta } from "@/lib/types";
 
 /**
@@ -47,6 +49,8 @@ export interface MatchupPreviewProps {
   /** e.g. "All square at 6-6". Computed on the server from the committed series. */
   headline: string;
   pairHref: string;
+  /** Record-book cut lines, for the chips. Same source the home strip uses. */
+  thresholds: RecordThresholds;
 }
 
 /** One completed week for one team. */
@@ -72,6 +76,7 @@ export function MatchupPreview({
   players,
   headline,
   pairHref,
+  thresholds,
 }: MatchupPreviewProps) {
   const live = useLiveSeason(refBySeason, initial, userIdToSlug, teamByPlayer);
   /**
@@ -164,6 +169,23 @@ export function MatchupPreview({
       ? (liveScore.a.points > liveScore.b.points ? liveScore.a : liveScore.b).ownerSlug
       : null;
 
+  /**
+   * Records this game has entered, on the SAME rule the home strip uses.
+   *
+   * A record is a claim about a finished game, so it waits for
+   * `useMatchupSettled` — per MATCHUP, so a game that is over does not wait on
+   * one that is not. Without this the strip could show "#2 low" on a card while
+   * the page behind it showed nothing, which is the same fact rendered two
+   * ways.
+   *
+   * MEASURED AGAINST THE ARCHIVE, which is what `thresholds` is built from, so
+   * a week earlier in this same season that has not been archived is not in the
+   * baseline yet. A chip can therefore move once the week lands — the accepted
+   * cost of being early, the same one stat corrections impose.
+   */
+  const marks =
+    isFinal && liveScore ? matchupMarks(liveScore.a.points, liveScore.b.points, thresholds) : [];
+
   const lineupOf = (slug: string) =>
     liveScore
       ? (liveScore.a.ownerSlug === slug ? liveScore.a : liveScore.b).lineup
@@ -195,6 +217,13 @@ export function MatchupPreview({
             ) : null}
             {state}
           </span>
+          {marks.length ? (
+            <span className="flex flex-wrap gap-1">
+              {marks.map((mark) => (
+                <RecordChip key={`${mark.short}-${mark.side ?? "game"}`} mark={mark} />
+              ))}
+            </span>
+          ) : null}
         </div>
         <p className="mt-1 text-sm text-chalk-500">
           {headline} ·{" "}

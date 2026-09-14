@@ -29,6 +29,7 @@ import {
   getPlayerTeamsAt,
   getPlayers,
   getRecordFlags,
+  getRecordThresholds,
   onBye,
   type RecordFlag,
   getSeasons,
@@ -687,6 +688,7 @@ async function UpcomingMatchupPage({ fixture }: { fixture: ScheduledGame }) {
         players={getPlayers()}
         headline={headline}
         pairHref={pairHref}
+        thresholds={getRecordThresholds()}
       />
 
       <SeriesPanel series={series} nameOf={name} pairHref={pairHref} />
