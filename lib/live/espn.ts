@@ -35,6 +35,7 @@ import {
   type RawDraft,
   type SeasonContext,
 } from "./types.ts";
+import { fetchNflWeek } from "./nfl-week.ts";
 import { fetchRetry } from "./retry.ts";
 
 const API = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl";
@@ -595,10 +596,34 @@ export const espnProvider: LiveProvider = {
     // Clamped: `latestScoringPeriod` runs PAST the end of the season (19 for a
     // 17-period year), which would leave a finished league pointing at a week
     // that never existed.
-    const week =
+    const espnWeek =
       seasonType === "off"
         ? st.week
         : Math.min(Math.max(1, latest || st.week), finalLeg || Number.MAX_SAFE_INTEGER);
+
+    /**
+     * NEVER PAST THE WEEK THE NFL IS SHOWING.
+     *
+     * ESPN rolls `latestScoringPeriod` over the moment a period ends, so this
+     * league moved to week 2 on the Tuesday and showed ten fixtures with no
+     * scores for three days while the Sleeper leagues beside it still showed
+     * week 1's results. Sleeper's `display_week` is the answer to exactly this
+     * question and is a fact about the NFL, not about a league, so both
+     * providers now defer to it. See `nfl-week.ts`.
+     *
+     * REGULAR SEASON ONLY, because that is where a matchup period and an NFL
+     * week are the same thing. A postseason period can span two weeks, and
+     * clamping one to the other would hold a league on the first half of its
+     * own final — so after the regular season ESPN's answer stands.
+     *
+     * The lower of the two either way: a week ESPN has not opened is no more
+     * showable than one the NFL has not played.
+     */
+    const nfl = await fetchNflWeek();
+    const week =
+      seasonType === "regular" && nfl && nfl.season === st.season
+        ? Math.min(espnWeek, Math.max(1, nfl.displayWeek))
+        : espnWeek;
 
     /** See the Sleeper provider: browser has `slugByRoster`, the build does not. */
     const primaryOf = (t: EspnTeam): string | undefined =>
