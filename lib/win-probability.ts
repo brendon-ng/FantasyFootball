@@ -15,11 +15,11 @@
  * of the two distributions, clamped to 1–99% so a card never claims certainty
  * while anybody is still playing.
  *
- * WHAT IS VERIFIED AND WHAT IS NOT. The maths below is transcribed from the
- * bundle and is exact. The PROJECTION it consumes is not: Sleeper blends a
- * player's pre-game projection with the state of his NFL game in a function
- * this could not reach, so `liveProjection` is our own reading of it — see
- * there. Expect agreement to a point or two, not to the decimal.
+ * ALL THREE PIECES ARE TRANSCRIBED, not inferred: the probability maths here,
+ * the seconds-remaining arithmetic, and the per-player projection blend in
+ * `liveProjection`. The blend was guessed at first and the guess was wrong
+ * enough to move a mid-game probability by double digits, which is how it got
+ * found; anything still approximate would show up the same way.
  */
 
 /**
@@ -124,21 +124,50 @@ export function secondsRemaining(game: {
 /**
  * A player's projected FINAL, given what he has scored and how much is left.
  *
- * OUR APPROXIMATION, NOT SLEEPER'S. Theirs blends the same three inputs in a
- * function that lives in a module the bundle does not inline, so this is the
- * obvious reading of it: what he has already banked, plus the share of his
- * pre-game projection the remaining clock can still deliver.
+ * SLEEPER'S OWN BLEND, transcribed from their bundle like the probability maths
+ * above. An earlier version of this file guessed at it — banked points plus a
+ * pro-rata share of the projection — and the guess was wrong enough to move the
+ * probability by double digits mid-game, which is what gave this away.
  *
- * It is right at both ends by construction — a finished player projects to
- * exactly what he scored, an unstarted one to exactly his projection — so any
- * disagreement is confined to players mid-game, and shrinks as the day goes on.
+ * What it actually does is anchor on the PRE-GAME projection and drag it toward
+ * the player's CURRENT PACE as the game runs down:
+ *
+ *   o  fraction of the game REMAINING (1 at kickoff, 0 at the whistle)
+ *   s  pace estimate — what he has, plus his points-per-minute so far
+ *      extrapolated over the minutes left, damped by `o`
+ *   h  the anchor: his projection, or his current score if he has beaten it
+ *
+ *   result = h + (1 - o) * (max(s, current) - h)
+ *
+ * So at kickoff `1 - o` is 0 and it returns the projection untouched; at the
+ * final whistle `o` is 0 and it returns exactly what he scored. In between the
+ * weight shifts from forecast to evidence. Both ends are exact, which is why
+ * the earlier guess looked plausible all week and only diverged mid-game.
  */
 export function liveProjection(
   current: number,
   preGame: number,
   secondsLeft: number,
 ): number {
-  if (secondsLeft <= 0) return current;
-  if (secondsLeft >= 3600) return Math.max(preGame, current);
-  return current + preGame * (secondsLeft / 3600);
+  // Minutes in a game. 90 for soccer and 48 for basketball in their code; this
+  // site is football only, so 60.
+  const minutes = 60;
+  const o = secondsLeft / (60 * minutes);
+  // `|| 1` guards the kickoff divide-by-zero, exactly as they do.
+  const pace =
+    current + (current / (minutes - secondsLeft / 60 || 1)) * (secondsLeft / minutes) * o;
+
+  // Kept as three terms rather than folded to `pace`, which is what they sum
+  // to: the split is theirs, and collapsing it would hide a change if they ever
+  // reweight it.
+  const low = 0.2 * o * pace;
+  const mid = (0.35 + 0.65 * (1 - o)) * pace;
+  const high = 0.45 * o * pace;
+
+  const notStarted = o >= 1;
+  const over = o <= 0;
+  const ceiling = Math.max(low + mid + high, current);
+  const anchor = notStarted ? preGame : Math.max(preGame, current);
+  if (over && current < 0) return current;
+  return anchor + (1 - o) * (ceiling - anchor);
 }
