@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 
+import { MatchupCards } from "@/components/matchup-cards";
 import { PunishmentLedger, TeamNames } from "@/components/punishment-ledger";
 import { SeasonPunishmentPanel } from "@/components/season-punishment";
 import { CloseVoteModal } from "@/components/close-vote-modal";
@@ -32,6 +33,10 @@ import {
   type SeasonPunishment,
 } from "@/lib/season-punishment";
 import type { LeagueRef } from "@/lib/league-ref";
+import { useLiveSeason } from "@/lib/live";
+import type { RecordThresholds } from "@/lib/record-marks";
+import type { H2HRecord } from "@/components/matchup-cards";
+import type { LiveSeason } from "@/lib/types";
 import { useUrlState } from "@/lib/url-state";
 import {
   buildLedger,
@@ -78,6 +83,12 @@ export function PunishmentTracker({
   names,
   activeOwners,
   leagueRefs,
+  initialLive,
+  thresholds,
+  h2h,
+  archivedThrough,
+  upcomingIds,
+  teamByPlayer,
   userIdToSlug,
   drawTitle,
   commissioner,
@@ -99,6 +110,17 @@ export function PunishmentTracker({
   activeOwners: number;
   /** Per-season provider refs, for the draw screen's live scoreline. */
   leagueRefs: Record<string, LeagueRef>;
+  /**
+   * Everything the home page's scoreboard strip needs, so this page can show
+   * the SAME one. Build-time data, threaded through rather than refetched.
+   */
+  initialLive: LiveSeason | null;
+  thresholds: RecordThresholds;
+  h2h: Record<string, Record<string, H2HRecord>>;
+  archivedThrough: number;
+  upcomingIds: string[];
+  /** Sleeper player id -> NFL team; see `useLiveSeason`. */
+  teamByPlayer?: Record<string, string>;
   userIdToSlug: Record<string, string>;
   /** Tab title while the wheel is open, composed with the league's name. */
   drawTitle: string;
@@ -174,6 +196,15 @@ export function PunishmentTracker({
   const [freshVotes, setFreshVotes] = useState<Record<number, number> | null>(
     null,
   );
+  /**
+   * The same live season the home page's strip reads.
+   *
+   * One more `useLiveSeason` on this page, not a second copy of the strip's
+   * rules: `MatchupCards` owns every one of those — when a score may be shown,
+   * when a lead may be called a win, when a chip is allowed — and this hands it
+   * the same inputs the home page does.
+   */
+  const live = useLiveSeason(leagueRefs, initialLive, userIdToSlug, teamByPlayer);
   const { identity, ready: identityReady, openPicker } = useIdentity();
   const me = identityReady && identity.kind === "owner" ? identity.slug : null;
 
@@ -418,6 +449,33 @@ export function PunishmentTracker({
     [seasons, active],
   );
 
+  /**
+   * The last-place punishment panel, positioned per branch.
+   *
+   * UNDER THE LEDGER, which is what it summarises the year of — but still
+   * OUTSIDE the block that waits on the sheet, because this is committed data
+   * and has to survive the feed being down. So it is declared once and placed
+   * in each branch rather than rendered before the split.
+   */
+  const seasonPanel =
+    active && shownPunishment ? (
+      <SeasonPunishmentPanel
+        league={league}
+        punishment={shownPunishment}
+        teams={teams}
+        names={names}
+        cloud={cloudinaryCloud}
+        preset={cloudinaryPreset}
+        onSpin={
+          // ANYONE MAY SPIN, like the weekly draw — the server picks and the
+          // sheet refuses a second attempt, so there is nothing to protect.
+          endpoint && shownPunishment?.state === "shortlist"
+            ? () => setSpinning(true)
+            : undefined
+        }
+      />
+    ) : null;
+
   return (
     <div className="space-y-5 sm:space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
@@ -425,10 +483,6 @@ export function PunishmentTracker({
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Punishments
           </h1>
-          <p className="mt-1 max-w-2xl text-sm text-chalk-500">
-            Score the fewest points in a regular-season week and you owe the
-            league a punishment, drawn from a pool the whole league votes on.
-          </p>
         </div>
         <div className="flex items-center gap-2">
           {isMock ? <SampleBadge /> : null}
@@ -467,37 +521,47 @@ export function PunishmentTracker({
           Not gated on `phase` either: the yearly punishment has a lifecycle of
           its own and can be decided, owed or done while the weekly pool is
           still being voted on. */}
-      {active && shownPunishment ? (
-        <SeasonPunishmentPanel
-          league={league}
-          punishment={shownPunishment}
-          teams={teams}
-          names={names}
-          cloud={cloudinaryCloud}
-          preset={cloudinaryPreset}
-          onSpin={
-            // ANYONE MAY SPIN, like the weekly draw — the server picks and the
-            // sheet refuses a second attempt, so there is nothing to protect.
-            endpoint && shownPunishment?.state === "shortlist"
-              ? () => setSpinning(true)
-              : undefined
-          }
+      {/* THE SAME SCOREBOARD THE HOME PAGE SHOWS, and literally the same
+          component — every rule about what a card may claim lives in it.
+
+          ONLY FOR THE SEASON BEING PLAYED. The switcher can select 2025 while
+          the league is in 2026, and a strip of this week's games under a
+          heading about last year's punishments would be describing a different
+          year. `MatchupCards` returns null outside a season anyway, so this is
+          about the SWITCHER, not the calendar. */}
+      {live && active === live.season ? (
+        <MatchupCards
+          live={live}
+          ownerNames={names}
+          thresholds={thresholds}
+          h2h={h2h}
+          archivedThrough={archivedThrough}
+          upcomingIds={upcomingIds}
         />
       ) : null}
 
+
       {status === "loading" ? (
-        <TrackerSkeleton rows={pendingRows} teams={teams} names={names} />
+        <>
+          <TrackerSkeleton rows={pendingRows} teams={teams} names={names} />
+          {seasonPanel}
+        </>
       ) : status === "error" ? (
+        <>
         <Panel>
           <EmptyState>
             Could not reach the punishment sheet ({error}). Everything else on
             the site is unaffected — this is the one page that reads it.
           </EmptyState>
         </Panel>
+        </>
       ) : !feedSeason ? (
-        <Panel>
-          <EmptyState>Nothing recorded for {active}.</EmptyState>
-        </Panel>
+        <>
+          <Panel>
+            <EmptyState>Nothing recorded for {active}.</EmptyState>
+          </Panel>
+          {seasonPanel}
+        </>
       ) : (
         <>
           {phase !== "live" ? null : rows.length ? (
@@ -533,6 +597,8 @@ export function PunishmentTracker({
               </EmptyState>
             </Panel>
           )}
+
+          {seasonPanel}
 
           {/* THE TILES SIT UNDER THE LEDGER, not above it.
 
