@@ -6,7 +6,7 @@ import { fmt } from "@/components/ui";
 import { useMatchupSettled } from "@/lib/live";
 import { meetingId } from "@/lib/meeting";
 import { RecordChip } from "@/components/record-chip";
-import { matchupMarks, recordHref, type RecordThresholds } from "@/lib/record-marks";
+import { matchupMarks, peerScore, recordHref, type RecordThresholds } from "@/lib/record-marks";
 import type { LiveSeason } from "@/lib/types";
 
 /**
@@ -141,6 +141,8 @@ export function MatchupCards({
   };
 
   const strip = layout === "strip";
+  /** This week's already-final games, in week order — the peer field. */
+  const finished = live ? live.matchups.filter(settled) : [];
 
   return (
     <div
@@ -152,7 +154,23 @@ export function MatchupCards({
     >
       {live.matchups.map((m) => {
         const done = settled(m);
-        const marks = done ? matchupMarks(m.a.points, m.b.points, thresholds) : [];
+        /**
+         * RANKED AGAINST THIS WEEK TOO, not history alone.
+         *
+         * The cut lines in `thresholds` are the record book as the build left
+         * it, so a game finishing this afternoon is invisible to the game
+         * beside it — which is how two cards came to show "#2 high" with
+         * different scores. Every OTHER matchup already settled this week is
+         * handed over as a peer, split on the week's own order so an exact tie
+         * gets two consecutive places rather than one shared.
+         */
+        const at = finished.indexOf(m);
+        const marks = done
+          ? matchupMarks(m.a.points, m.b.points, thresholds, {
+              ahead: finished.slice(0, at).map(peerScore),
+              behind: finished.slice(at + 1).map(peerScore),
+            })
+          : [];
         /**
          * A CARD IS ONLY A LINK IF ITS MATCHUP PAGE EXISTS.
          *

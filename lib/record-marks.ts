@@ -96,10 +96,67 @@ const ORDINALS = ["1st", "2nd", "3rd"];
 const ordinal = (n: number): string =>
   n <= 3 ? ORDINALS[n - 1] : `${n}${["th", "st", "nd", "rd"][n % 10 > 3 || (n % 100) - (n % 10) === 10 ? 0 : n % 10]}`;
 
-/** Where a value places, or 0 for "nowhere". */
-const place = (value: number, cuts: number[], beats: (a: number, b: number) => boolean): number => {
-  const i = cuts.findIndex((c) => beats(value, c));
-  return i < 0 ? 0 : i + 1;
+/**
+ * A finished matchup that is NOT in the record book yet.
+ *
+ * Every score from the same week that is already final, plus the opponent in
+ * this very matchup. Without them each game is ranked against history alone
+ * and cannot see its own week, which is how two cards both claimed "#2 high"
+ * with different scores.
+ */
+export interface PeerMatchup {
+  a: number;
+  b: number;
+}
+
+/**
+ * Peers split by WHICH SIDE OF A TIE THEY FALL ON.
+ *
+ * Ranks on the record book are positional — the page numbers its rows `i + 1`
+ * — so two equal scores take two consecutive places rather than sharing one.
+ * A chip links into that list, so it has to number things the same way, which
+ * means an exact tie needs an order. `ahead` wins ties, `behind` loses them,
+ * and callers fill them from the week's own matchup order so the answer is
+ * stable from render to render rather than depending on object identity.
+ */
+export interface Peers {
+  ahead: PeerMatchup[];
+  behind: PeerMatchup[];
+}
+
+const NO_PEERS: Peers = { ahead: [], behind: [] };
+
+/** A live matchup as a peer — the two scores are all the ranking needs. */
+export const peerScore = (m: { a: { points: number }; b: { points: number } }): PeerMatchup => ({
+  a: m.a.points,
+  b: m.b.points,
+});
+
+/**
+ * Where a value places, or 0 for "nowhere".
+ *
+ * Counts what finishes above rather than scanning for the first cut it beats.
+ * The two agree on the archive alone — a tied cut is "above", exactly as
+ * `findIndex` with a strict `beats` used to treat it — but only counting
+ * generalises to peers, which arrive unsorted and on both sides of a tie.
+ */
+const place = (
+  value: number,
+  cuts: number[],
+  beats: (a: number, b: number) => boolean,
+  ahead: number[] = [],
+  behind: number[] = [],
+): number => {
+  let rank = 1;
+  // A TIE COUNTS AS AHEAD for the archive and for `ahead` peers: an equal score
+  // already in the book keeps the better number, and the newcomer takes the
+  // next one down.
+  for (const v of cuts) if (beats(v, value) || v === value) rank++;
+  for (const v of ahead) if (beats(v, value) || v === value) rank++;
+  for (const v of behind) if (beats(v, value)) rank++;
+  // The cut lists are already truncated to MARK_DEPTH, so anything past it is
+  // out of the book whether or not the peers pushed it there.
+  return rank <= MARK_DEPTH ? rank : 0;
 };
 
 const higher = (a: number, b: number) => a > b;
@@ -111,14 +168,34 @@ const lower = (a: number, b: number) => a < b;
  * Player-week records are deliberately absent: they need a lineup, which the
  * matchup page has and a card does not.
  */
-export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordMark[] {
+export function matchupMarks(
+  a: number,
+  b: number,
+  t: RecordThresholds,
+  peers: Peers = NO_PEERS,
+): RecordMark[] {
   const out: RecordMark[] = [];
+
+  const singles = (ms: PeerMatchup[]) => ms.flatMap((m) => [m.a, m.b]);
+  const margins = (ms: PeerMatchup[]) => ms.map((m) => Math.abs(m.a - m.b));
+  const combinedOf = (ms: PeerMatchup[]) => ms.map((m) => m.a + m.b);
+  // A TIE IS NOT A NARROW WIN, for a peer either — the same rule applied below
+  // to this game's own margin.
+  const wins = (ms: PeerMatchup[]) => margins(ms).filter((m) => m > 0);
 
   for (const [points, side] of [
     [a, "a"],
     [b, "b"],
   ] as Array<[number, "a" | "b"]>) {
-    const hi = place(points, t.high, higher);
+    /**
+     * THE OPPONENT IS A PEER TOO. Both halves of one matchup can make the same
+     * list — two big scores against each other is exactly when that happens —
+     * and ranked only against history they would both claim the same number.
+     * Side `a` takes ties, matching the order the card renders them in.
+     */
+    const aheadSingles = [...singles(peers.ahead), ...(side === "a" ? [] : [a])];
+    const behindSingles = [...singles(peers.behind), ...(side === "a" ? [b] : [])];
+    const hi = place(points, t.high, higher, aheadSingles, behindSingles);
     if (hi) {
       out.push({
         rank: hi,
@@ -130,7 +207,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
         side,
       });
     }
-    const lo = place(points, t.low, lower);
+    const lo = place(points, t.low, lower, aheadSingles, behindSingles);
     if (lo) {
       out.push({
         rank: lo,
@@ -145,7 +222,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
   }
 
   const margin = Math.abs(a - b);
-  const blowout = place(margin, t.blowout, higher);
+  const blowout = place(margin, t.blowout, higher, margins(peers.ahead), margins(peers.behind));
   if (blowout) {
     out.push({
       rank: blowout,
@@ -158,7 +235,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
   }
   // A TIE IS NOT A NARROW WIN. Zero would top this list forever, and nobody won.
   if (margin > 0) {
-    const narrow = place(margin, t.narrow, lower);
+    const narrow = place(margin, t.narrow, lower, wins(peers.ahead), wins(peers.behind));
     if (narrow) {
       out.push({
         rank: narrow,
@@ -172,7 +249,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
   }
 
   const combined = a + b;
-  const ch = place(combined, t.combinedHigh, higher);
+  const ch = place(combined, t.combinedHigh, higher, combinedOf(peers.ahead), combinedOf(peers.behind));
   if (ch) {
     out.push({
       rank: ch,
@@ -183,7 +260,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
       tone: "good",
     });
   }
-  const cl = place(combined, t.combinedLow, lower);
+  const cl = place(combined, t.combinedLow, lower, combinedOf(peers.ahead), combinedOf(peers.behind));
   if (cl) {
     out.push({
       rank: cl,

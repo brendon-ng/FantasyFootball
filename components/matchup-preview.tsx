@@ -13,7 +13,7 @@ import {
   useWinProbability,
 } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
-import { matchupMarks, recordHref, type RecordThresholds } from "@/lib/record-marks";
+import { matchupMarks, peerScore, recordHref, type RecordThresholds } from "@/lib/record-marks";
 import type { LiveSeason, LiveTeam, PlayerMeta } from "@/lib/types";
 
 /**
@@ -167,6 +167,10 @@ export function MatchupPreview({
   // Hoisted so both lineups share one NFL-clock fetch rather than one each.
   const { stateOf } = useLineupStates(live, refBySeason[String(season)] ?? null);
   const isFinal = Boolean(thisWeek && settled(thisWeek));
+  /** This week's already-final games, in week order — see `marks` below. */
+  const finishedThisWeek =
+    live?.week === week ? live.matchups.filter(settled) : [];
+  const peerAt = thisWeek ? finishedThisWeek.indexOf(thisWeek) : -1;
   const state = isFinal ? "FINAL" : liveScore ? "LIVE" : "PREVIEW";
 
   /** Only once settled: a lead at 1pm is not a win. */
@@ -184,13 +188,24 @@ export function MatchupPreview({
    * the page behind it showed nothing, which is the same fact rendered two
    * ways.
    *
-   * MEASURED AGAINST THE ARCHIVE, which is what `thresholds` is built from, so
-   * a week earlier in this same season that has not been archived is not in the
-   * baseline yet. A chip can therefore move once the week lands — the accepted
+   * MEASURED AGAINST THE ARCHIVE PLUS THIS WEEK. `thresholds` is the record
+   * book as the build left it, so on its own it cannot see a game that
+   * finished an hour ago — two matchups would then claim the same place with
+   * different scores. The week's other settled games are passed as peers, on
+   * the same rule and in the same order the strip uses, so a card and the page
+   * behind it cannot print different numbers for one game.
+   *
+   * A week EARLIER in this same season that has not been archived is still
+   * outside the baseline, so a chip can move once the week lands — the accepted
    * cost of being early, the same one stat corrections impose.
    */
   const marks =
-    isFinal && liveScore ? matchupMarks(liveScore.a.points, liveScore.b.points, thresholds) : [];
+    isFinal && liveScore
+      ? matchupMarks(liveScore.a.points, liveScore.b.points, thresholds, {
+          ahead: finishedThisWeek.slice(0, peerAt).map(peerScore),
+          behind: finishedThisWeek.slice(peerAt + 1).map(peerScore),
+        })
+      : [];
 
   /**
    * Live win probability, and only while it is still a question.
