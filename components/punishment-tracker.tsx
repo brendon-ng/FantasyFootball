@@ -175,6 +175,7 @@ export function PunishmentTracker({
     status,
     feed,
     error,
+    reload,
     insertSuggestion,
     recordDraw,
     recordCompletion,
@@ -588,6 +589,13 @@ export function PunishmentTracker({
           <EmptyState>
             Could not reach the punishment sheet ({error}). Everything else on
             the site is unaffected — this is the one page that reads it.
+            <button
+              type="button"
+              onClick={reload}
+              className="ml-2 rounded border border-ink-500 px-2 py-0.5 text-[11px] font-semibold text-chalk-300 transition-colors hover:border-chalk-600 hover:text-chalk-100"
+            >
+              Try again
+            </button>
           </EmptyState>
         </Panel>
         </>

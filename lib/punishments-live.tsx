@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+import { assertScriptOk, fetchScriptJson } from "./apps-script.ts";
 import {
   parseBallot,
   parseBallotState,
@@ -169,14 +170,7 @@ async function readJson(res: Response): Promise<Record<string, unknown>> {
       "The sheet returned an error page instead of data — the script threw.",
     );
   }
-  const data =
-    typeof payload === "object" && payload !== null
-      ? (payload as Record<string, unknown>)
-      : {};
-  if (data.ok === false) {
-    throw new Error(String(data.error ?? "The sheet rejected the request."));
-  }
-  return data;
+  return assertScriptOk(payload);
 }
 
 /**
@@ -200,8 +194,10 @@ export async function fetchBallots(
     ...(voter ? { voter } : {}),
   });
   const join = endpoint.includes("?") ? "&" : "?";
-  const res = await fetch(`${endpoint}${join}${query}`, { cache: "no-store" });
-  return parseBallotState(await readJson(res));
+  // Retried and timed out like the feed: a READ, so asking again is free.
+  return parseBallotState(
+    assertScriptOk(await fetchScriptJson(`${endpoint}${join}${query}`)),
+  );
 }
 
 /**
@@ -246,6 +242,15 @@ export async function castBallot(
 }
 
 export function usePunishments(src: string): FeedState & {
+  /**
+   * Ask for the feed again.
+   *
+   * THE RETRIES ABOVE ARE NOT A GUARANTEE, only three of them, and this page is
+   * useless without the feed. A reader who lost all three should not have to
+   * know that reloading the tab is the fix — especially on a draw link, where
+   * reloading means going back to whoever sent it.
+   */
+  reload: () => void;
   /** Show a row this browser just created, without waiting for a refetch. */
   insertSuggestion: (season: number, created: PunishmentSuggestion) => void;
   /** Show a punishment this browser just drew, likewise. */
@@ -262,6 +267,8 @@ export function usePunishments(src: string): FeedState & {
     completed: string | null,
   ) => void;
 } {
+  /** Bumped by `reload`, to re-run the effect below. */
+  const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<FeedState>({
     status: "loading",
     feed: null,
@@ -318,11 +325,7 @@ export function usePunishments(src: string): FeedState & {
 
     (async () => {
       try {
-        // no-store because an Apps Script /exec URL is a plain GET that browsers
-        // will happily cache, and a vote cast a minute ago must not be missing.
-        const res = await fetch(src, { cache: "no-store" });
-        if (!res.ok) throw new Error(`${res.status}`);
-        const body: unknown = await res.json();
+        const body = await fetchScriptJson(src);
         // APPS SCRIPT CANNOT SET A STATUS CODE, so a rejected request still
         // arrives as HTTP 200 and announces itself with `ok: false`. Checking
         // only `res.ok` would parse the error object into an empty feed and
@@ -353,9 +356,14 @@ export function usePunishments(src: string): FeedState & {
     return () => {
       cancelled = true;
     };
-  }, [src]);
+  }, [src, attempt]);
 
-  return { ...state, insertSuggestion, recordDraw, recordCompletion };
+  const reload = () => {
+    setState({ status: "loading", feed: null, error: null });
+    setAttempt((n) => n + 1);
+  };
+
+  return { ...state, reload, insertSuggestion, recordDraw, recordCompletion };
 }
 
 /**
