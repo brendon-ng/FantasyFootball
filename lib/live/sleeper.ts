@@ -15,7 +15,6 @@
 
 import { orderIsSet } from "../draft-slots.ts";
 
-import { TEMP_WEEK_OFFSET } from "./nfl-week.ts"; // TEMPORARY
 import { fetchRetry } from "./retry.ts";
 import type { LiveLineupSlot, LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "../types.ts";
 
@@ -221,7 +220,7 @@ export const sleeperProvider: LiveProvider = {
     if (!st) return null;
     return {
       season: Number(st.season),
-      week: Math.max(1, st.display_week || st.week || 1) + TEMP_WEEK_OFFSET, // TEMPORARY
+      week: Math.max(1, st.display_week || st.week || 1),
       displayWeek: st.display_week,
       seasonType: st.season_type,
     };
