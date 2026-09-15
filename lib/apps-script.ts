@@ -23,15 +23,27 @@
  * real, and the next attempt usually works.
  *
  * EACH ATTEMPT USES A DIFFERENT DEPLOYMENT, when the league has more than one.
- * Several deployments of one Apps Script project share an owner, a quota and a
- * spreadsheet, so this does NOT divide the load — that was the hope, and it is
- * not what this buys. What it buys is REDUNDANCY, which turned out to be the
- * failure that actually happens: a deployment can stop serving entirely, 404ing
- * on the FIRST hop with no redirect at all, and stay that way. One dead
- * deployment out of five then costs a retry instead of a broken page.
+ * This does NOT divide the load: several deployments of one Apps Script project
+ * share an owner, a quota and a spreadsheet. It is redundancy, and it is cheap
+ * — a URL that fails instantly costs a fifth of a second before the next one is
+ * tried.
  *
- * The starting point is random per reader, so a dead one is not always first
- * and the healthy ones are not all hit in the same order.
+ * WHAT IS ACTUALLY KNOWN, since the reason matters less than the shape:
+ *   - the slow intermittent failures are real and were seen from an ordinary
+ *     connection, roughly two in seven on a bad run
+ *   - a deployment CAN enter a state where it 404s instantly on the first hop,
+ *     with no redirect, and stays there for over an hour
+ *   - that state is scoped to the CALLER, not the deployment: the same URL
+ *     answered a browser on one network while refusing another at the same
+ *     moment
+ *
+ * What is NOT known is what induces it. It looked like a per-caller rate
+ * penalty — the URL it happened to was the one that had been called most —
+ * but hammering a healthy deployment did not reproduce it, so that is a guess
+ * and is not worth encoding as one. Rotating costs nothing either way.
+ *
+ * The starting point is random per reader, so one deployment is not always
+ * tried first and the healthy ones are not all hit in the same order.
  *
  * TIMED OUT PER ATTEMPT, AND THE FIRST ONE IS IMPATIENT. This is the fix for
  * the symptom people actually report — not an error, just a page that shimmers
