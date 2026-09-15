@@ -52,6 +52,16 @@ export default async function PunishmentsPage() {
   // The scoreboard strip's inputs, exactly as the home page assembles them.
   const live = await getLiveSeason();
   const upcomingIds = (await getLiveSchedule()).map((g) => g.id);
+  /**
+   * From the LAST FINISHED SEASON, the same rule the live season page uses.
+   * Neither provider publishes it for a season in progress in a shape worth
+   * trusting, and it is a setting that changes about never.
+   */
+  const finished = getSeasons().filter((s) => s.finalized);
+  const regularSeasonWeeks =
+    finished.length
+      ? (finished[finished.length - 1].regularSeasonWeeks ?? 14)
+      : 14;
   const archivedThrough = Math.max(
     0,
     ...getSeasons().filter((s) => s.finalized).map((s) => s.season),
@@ -87,6 +97,7 @@ export default async function PunishmentsPage() {
       h2h={h2h}
       archivedThrough={archivedThrough}
       upcomingIds={upcomingIds}
+      regularSeasonWeeks={regularSeasonWeeks}
       teamByPlayer={getPlayerTeams()}
       userIdToSlug={getUserIdToSlug()}
       drawTitle={pageTitle("Wheel of Punishments")}

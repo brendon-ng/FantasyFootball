@@ -31,6 +31,7 @@ import { applyPhaseMock, type Replay } from "@/lib/phase-mock";
 import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
 import type { LiveMatchup, LiveSeason } from "@/lib/types";
 import {
+  lastPlaceOdds,
   liveProjection,
   winProbability,
   type WinProbability,
@@ -579,30 +580,28 @@ export function useLineupStates(
 }
 
 /**
- * Live win probability for one matchup, or null when there is nothing to say.
+ * Every team's current and live-projected total for the week.
  *
- * SLEEPER'S OWN MODEL — see `lib/win-probability`, which is transcribed from
- * their bundle so the number here agrees with the number in the app.
+ * THE SHARED HALF of the two things built on it — a head-to-head win
+ * probability and a league-wide last-place probability. Both need the same two
+ * fetches (the clock, and Sleeper's weekly projections where the provider does
+ * not put them on the lineup), both cached per season+week on the module, so a
+ * page showing both makes one set of requests.
  *
- * Needs two things beyond the scoreline: each starter's pre-game projection,
- * and how much of his NFL game is left. ESPN puts the projection on the
- * boxscore it already sends; Sleeper needs a weekly feed. The clock is one
- * ~15KB request either way.
- *
- * GATED HARD, like every other live extra: only inside a live, unscored week,
- * never under a phase mock, and only for a matchup that has actually started.
- * Everything fails soft to null, which renders nothing.
+ * GATED HARD: only inside a live, unscored week where somebody has actually
+ * scored, and never under a phase mock. Everything fails soft to null.
  */
-export function useWinProbability(
+function useLiveTotals(
   live: LiveSeason | null,
   ref: LeagueRef | null,
-  matchup: LiveMatchup | null,
-): WinProbability | null {
+): Map<string, { current: number; projected: number }> | null {
   const inSeason = live?.seasonType === "regular" || live?.seasonType === "post";
   const week = live?.week ?? 0;
   const season = live?.season ?? 0;
   const scored = week > 0 && (live?.lastScoredLeg ?? 0) >= week;
-  const started = Boolean(matchup && (matchup.a.points > 0 || matchup.b.points > 0));
+  const started = Boolean(
+    live?.matchups.some((m) => m.a.points > 0 || m.b.points > 0),
+  );
   const ask = Boolean(inSeason && week > 0 && !scored && started && !mockPhase());
   const key = `${season}:${week}`;
 
@@ -629,7 +628,7 @@ export function useWinProbability(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ask, key, season, week, refKey(ref)]);
 
-  if (!ask || !matchup) return null;
+  if (!ask || !live) return null;
   const by = clock?.key === key ? clock.by : null;
   if (!by) return null;
   const projById = proj?.key === key ? proj.by : null;
@@ -637,11 +636,11 @@ export function useWinProbability(
   /**
    * A side's projected final, summed over its STARTERS.
    *
-   * Returns null if the lineup is missing or any starter has no projection
-   * from either source — a total built from a partial lineup understates that
-   * team and would hand the other one a probability it has not earned.
+   * Null if the lineup is missing or any starter has no projection from either
+   * source — a total built from a partial lineup understates that team, which
+   * would hand somebody else a probability they have not earned.
    */
-  const projectedOf = (side: LiveMatchup["a"]): number | null => {
+  const totalOf = (side: LiveMatchup["a"]): number | null => {
     const lineup = side.lineup?.filter((p) => p.started);
     if (!lineup?.length) return null;
     let total = 0;
@@ -655,10 +654,67 @@ export function useWinProbability(
     return total;
   };
 
-  const pa = projectedOf(matchup.a);
-  const pb = projectedOf(matchup.b);
-  if (pa == null || pb == null) return null;
-  return winProbability(matchup.a.points, pa, matchup.b.points, pb);
+  const out = new Map<string, { current: number; projected: number }>();
+  for (const m of live.matchups) {
+    for (const side of [m.a, m.b]) {
+      const projected = totalOf(side);
+      if (projected == null) continue;
+      out.set(side.ownerSlug, { current: side.points, projected });
+    }
+  }
+  return out.size ? out : null;
+}
+
+/**
+ * Live win probability for one matchup, or null when there is nothing to say.
+ *
+ * SLEEPER'S OWN MODEL — see `lib/win-probability`, transcribed from their
+ * bundle so the number here agrees with the number in the app.
+ */
+export function useWinProbability(
+  live: LiveSeason | null,
+  ref: LeagueRef | null,
+  matchup: LiveMatchup | null,
+): WinProbability | null {
+  const totals = useLiveTotals(live, ref);
+  if (!totals || !matchup) return null;
+  const a = totals.get(matchup.a.ownerSlug);
+  const b = totals.get(matchup.b.ownerSlug);
+  if (!a || !b) return null;
+  return winProbability(a.current, a.projected, b.current, b.projected);
+}
+
+/**
+ * Each team's chance of posting the LOWEST score in the league this week.
+ *
+ * The weekly punishment question, and a different one from who wins a matchup:
+ * a team can be losing comfortably and still be nowhere near last. Uses the
+ * same per-team distributions the win probability does, so the two numbers on
+ * the site cannot disagree about how good a team's week is going.
+ *
+ * REGULAR SEASON ONLY, because the punishment is. A postseason week is not
+ * every team playing, so "lowest of the week" would rank a six-team playoff
+ * field against a twelve-team one — the same rule `buildWeeklyLows` follows in
+ * derive.
+ */
+export function useLastPlaceOdds(
+  live: LiveSeason | null,
+  ref: LeagueRef | null,
+  regularSeasonWeeks: number,
+): Array<{ ownerSlug: string; current: number; projected: number; odds: number }> | null {
+  const totals = useLiveTotals(live, ref);
+  if (!totals || !live) return null;
+  if (live.week > regularSeasonWeeks) return null;
+  // Every team must be accounted for, or the field is not the whole league and
+  // "lowest of the league" is not what is being computed.
+  if (totals.size !== live.teams.length) return null;
+
+  const rows = [...totals.entries()].map(([ownerSlug, t]) => ({ ownerSlug, ...t }));
+  const odds = lastPlaceOdds(rows);
+  if (!odds) return null;
+  return rows
+    .map((r, i) => ({ ...r, odds: odds[i] }))
+    .sort((x, y) => y.odds - x.odds);
 }
 
 /** Small badge describing where the live layer stands. */

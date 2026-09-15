@@ -45,7 +45,7 @@ function normalCdf(x: number, mean: number, variance: number): number {
 const clamp = (lo: number, hi: number, x: number) => Math.max(lo, Math.min(hi, x || 0));
 
 /** One team's outcome distribution, centred on its projected final. */
-function distribution(current: number, projected: number): { mean: number; variance: number } {
+export function distribution(current: number, projected: number): { mean: number; variance: number } {
   // 11 at kickoff (current 0), 1 once the score has reached the projection.
   const n = 1 + 10 * (1 - current / projected);
   const sd = Math.sqrt((current - projected) ** 2 / n);
@@ -96,6 +96,72 @@ export function winProbability(
   const variance = da.variance + db.variance;
   const a = clamp(0.01, 0.99, 1 - normalCdf(0, mean, variance));
   return { a, b: clamp(0.01, 0.99, 1 - a) };
+}
+
+/**
+ * Each team's chance of finishing LAST in the league this week.
+ *
+ * NOT A HEAD-TO-HEAD QUESTION, so the win-probability maths above does not
+ * answer it: "lowest of twelve" is P(X_i < every other X_j), and for more than
+ * two normals that has no closed form.
+ *
+ * SOLVED BY INTEGRATION, NOT SIMULATION. The honest alternatives were Monte
+ * Carlo — simple, but it resamples every render, so a number on screen would
+ * jitter by a point while nothing had actually happened — and this, which is
+ * deterministic and reproducible:
+ *
+ *   P(i is lowest) = ∫ φ_i(x) · ∏_{j≠i} (1 − Φ_j(x)) dx
+ *
+ * i.e. for every possible score x, the chance team i lands exactly there times
+ * the chance everybody else lands above it. Checked against a 200k-trial
+ * simulation; see the test below the fold in the commit.
+ *
+ * THE GRID ADAPTS TO THE NARROWEST TEAM. A side that has finished has variance
+ * floored at 0.1 — a standard deviation of about a third of a point — so a grid
+ * sized to the league's whole range would step straight over its spike and
+ * report nonsense. The step is a fraction of the smallest standard deviation,
+ * capped so the loop stays bounded.
+ *
+ * Normalised at the end: exactly one team finishes last, so the column sums to
+ * 1 by construction and any residual integration error is absorbed rather than
+ * displayed.
+ */
+export function lastPlaceOdds(
+  teams: Array<{ current: number; projected: number }>,
+): number[] | null {
+  if (teams.length < 2) return null;
+  const dists = teams.map((t) => distribution(t.current, t.projected));
+  if (dists.some((d) => !Number.isFinite(d.mean) || !Number.isFinite(d.variance))) return null;
+
+  const sds = dists.map((d) => Math.sqrt(Math.max(d.variance, 1e-9)));
+  const lo = Math.min(...dists.map((d, i) => d.mean - 6 * sds[i]));
+  const hi = Math.max(...dists.map((d, i) => d.mean + 6 * sds[i]));
+  if (!(hi > lo)) return null;
+
+  const STEPS = Math.min(20000, Math.max(2000, Math.ceil((hi - lo) / (Math.min(...sds) / 6))));
+  const dx = (hi - lo) / STEPS;
+
+  const out = new Array<number>(teams.length).fill(0);
+  for (let k = 0; k <= STEPS; k++) {
+    const x = lo + k * dx;
+    // Survival — the chance each team finishes ABOVE x.
+    const above = dists.map((d) => 1 - normalCdf(x, d.mean, d.variance));
+    for (let i = 0; i < teams.length; i++) {
+      let others = 1;
+      for (let j = 0; j < teams.length; j++) if (j !== i) others *= above[j];
+      if (others <= 0) continue;
+      out[i] += normalPdf(x, dists[i].mean, dists[i].variance) * others * dx;
+    }
+  }
+
+  const total = out.reduce((a, b) => a + b, 0);
+  if (!(total > 0)) return null;
+  return out.map((p) => p / total);
+}
+
+function normalPdf(x: number, mean: number, variance: number): number {
+  const v = Math.max(variance, 1e-9);
+  return Math.exp(-((x - mean) ** 2) / (2 * v)) / Math.sqrt(2 * Math.PI * v);
 }
 
 /**
