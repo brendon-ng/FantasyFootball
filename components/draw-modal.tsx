@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { useIdentity } from "@/components/identity";
 import { Sheet } from "@/components/sheet";
@@ -57,7 +57,6 @@ export function DrawModal({
   unavailable,
   leagueRef,
   userIdToSlug,
-  documentTitle,
   alreadyDrawn,
   onDrawn,
   onClose,
@@ -79,7 +78,6 @@ export function DrawModal({
   leagueRef: LeagueRef | null;
   userIdToSlug: Record<string, string>;
   /** Already composed with the league's short name by the page. */
-  documentTitle: string;
   /** Set when this week was drawn before the dialog was opened. */
   alreadyDrawn: PunishmentSuggestion | null;
   onDrawn: (punishmentId: number) => void;
@@ -125,22 +123,6 @@ export function DrawModal({
    */
   const live = useWeekScore(leagueRef, week, losers[0] ?? null, userIdToSlug);
   const score = live?.points ?? null;
-
-  /**
-   * THE TAB SAYS WHAT IS ON SCREEN.
-   *
-   * The route's own title is baked at build time and cannot know about a query
-   * parameter, and this dialog is a different thing from the page underneath
-   * it — worth naming when the draw is what got shared or bookmarked. Restored
-   * on close, so dismissing the wheel puts the page's own title back.
-   */
-  useEffect(() => {
-    const previous = document.title;
-    document.title = documentTitle;
-    return () => {
-      document.title = previous;
-    };
-  }, [documentTitle]);
 
   const [spinning, setSpinning] = useState(false);
   const [landOn, setLandOn] = useState<number | null>(null);

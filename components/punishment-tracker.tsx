@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 
+import { useDocumentTitle } from "@/lib/document-title";
 import { MatchupCards } from "@/components/matchup-cards";
 import { PunishmentLedger, TeamNames } from "@/components/punishment-ledger";
 import { SeasonPunishmentPanel } from "@/components/season-punishment";
@@ -408,6 +409,17 @@ export function PunishmentTracker({
    * which reads as a mis-click.
    */
   const drawOpen = drawFlag === "1" && Boolean(endpoint);
+  /**
+   * THE TAB SAYS WHAT IS ON SCREEN. The route's title is baked at build time
+   * and cannot know about `?draw=1`, and the wheel is a different thing from
+   * the page behind it — worth naming when the draw is what got shared or
+   * bookmarked, which on this page it usually is.
+   *
+   * KEYED ON `drawOpen`, NOT ON THE FLAG ALONE, so the tab cannot announce a
+   * wheel that never appeared: a league with no endpoint ignores `?draw=1`
+   * entirely, and titling the tab for it would be a straightforward lie.
+   */
+  useDocumentTitle(drawOpen ? drawTitle : null);
   const drawUnavailable =
     status !== "ready"
       ? null
@@ -929,7 +941,6 @@ export function PunishmentTracker({
           names={names}
           leagueRef={leagueRefs[String(active)] ?? null}
           userIdToSlug={userIdToSlug}
-          documentTitle={drawTitle}
           loading={status !== "ready"}
           unavailable={drawUnavailable}
           alreadyDrawn={drawRow?.punishment ?? null}
