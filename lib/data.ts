@@ -2135,5 +2135,6 @@ export function getRecordThresholds(depth?: number): RecordThresholds {
     narrow: cap(r.narrowestWin).map((s) => s.margin),
     combinedHigh: cap(r.highestCombined).map((s) => s.total),
     combinedLow: cap(r.lowestCombined).map((s) => s.total),
+    playerWeek: cap(r.playerHigh).map((s) => s.points),
   };
 }

@@ -13,7 +13,13 @@ import {
   useWinProbability,
 } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
-import { matchupMarks, peerScore, recordHref, type RecordThresholds } from "@/lib/record-marks";
+import {
+  matchupMarks,
+  peerScore,
+  playerMark,
+  recordHref,
+  type RecordThresholds,
+} from "@/lib/record-marks";
 import type { LiveSeason, LiveTeam, PlayerMeta } from "@/lib/types";
 
 /**
@@ -208,6 +214,41 @@ export function MatchupPreview({
       : [];
 
   /**
+   * PLAYER-WEEK RECORDS, the same ones the finished page shows.
+   *
+   * The archive reads them out of `getRecordFlags`; here they are ranked
+   * against the shipped cut lines, so a monster game is credited on Sunday
+   * rather than waiting for the archive to catch up on Tuesday.
+   *
+   * RANKED AGAINST THE WHOLE WEEK, not just this matchup. A week starts a
+   * couple of hundred players, so two landing near each other on the list is
+   * ordinary — without peers they would print the same number, the same bug
+   * the team chips had. The order is the week's own: matchup, then side, then
+   * lineup position, which is stable across renders.
+   */
+  const weekStarters: Array<{ id: string; points: number }> = [];
+  for (const m of finishedThisWeek) {
+    for (const sideOf of [m.a, m.b]) {
+      for (const p of sideOf.lineup ?? []) {
+        if (p.started) weekStarters.push({ id: p.id, points: p.points });
+      }
+    }
+  }
+
+  // Left for the compiler to memoize. Doing it by hand here defeated it
+  // outright — `finishedThisWeek` is built conditionally, so a useMemo over it
+  // could not be preserved and the whole component fell out of optimization.
+  const playerMarkOf = (slot: { id: string; points: number }) => {
+    if (!isFinal) return null;
+    // Its own position in the week decides which side of a tie it falls on, so
+    // a player is never compared with himself.
+    const at = weekStarters.findIndex((p) => p.id === slot.id);
+    const ahead = (at < 0 ? weekStarters : weekStarters.slice(0, at)).map((p) => p.points);
+    const behind = at < 0 ? [] : weekStarters.slice(at + 1).map((p) => p.points);
+    return playerMark(slot.points, thresholds, ahead, behind);
+  };
+
+  /**
    * Live win probability, and only while it is still a question.
    *
    * SUPPRESSED ONCE SETTLED. `useMatchupSettled` already decided the game is
@@ -224,6 +265,22 @@ export function MatchupPreview({
         ? (thisWeek.a.ownerSlug === slug ? thisWeek.a : thisWeek.b).lineup
         : undefined;
   const anyLineup = Boolean(lineupOf(a)?.length || lineupOf(b)?.length);
+
+  /** Player-week records in this matchup, for the banner. */
+  const playerBanner = [a, b].flatMap((slug) =>
+    (lineupOf(slug) ?? [])
+      .filter((p) => p.started)
+      .map((p) => ({ p, m: playerMarkOf(p) }))
+      .filter((x): x is { p: (typeof x)["p"]; m: NonNullable<(typeof x)["m"]> } => x.m != null)
+      .map(({ p, m }) => ({
+        short: m.long,
+        full: m.full,
+        tone: m.tone,
+        titleSuffix: ` — ${name(slug)}`,
+        href: recordHref(m.list),
+        detail: players[p.id]?.full_name ?? p.name,
+      })),
+  );
 
   return (
     <>
@@ -265,7 +322,8 @@ export function MatchupPreview({
           same claim whichever state the page is in, and rendering it as the
           strip's 9px chip here made one game look like two different facts. */}
       <RecordBanner
-        items={marks.map((m) => {
+        items={[
+          ...marks.map((m) => {
           const who = m.side === "a" ? a : m.side === "b" ? b : null;
           return {
             // The PAGE wording, so an archived copy of this game reads the same.
@@ -280,7 +338,15 @@ export function MatchupPreview({
               ? (ownerNames[who]?.split(" ")[0] ?? who)
               : `${ownerNames[a]?.split(" ")[0] ?? a} v ${ownerNames[b]?.split(" ")[0] ?? b}`,
           };
-        })}
+        }),
+        /*
+          PLAYER WEEKS IN THE BANNER TOO, because the archived page puts them
+          there — a chip on the lineup row alone would make the same game read
+          differently before and after the archive catches up. Named in the
+          detail, since "#3 player week" on its own does not say who.
+        */
+        ...playerBanner,
+        ]}
       />
 
       <div className="grid gap-3 sm:grid-cols-2">
@@ -469,6 +535,7 @@ export function MatchupPreview({
               lineup={lineupOf(slug)}
               players={players}
               stateOf={stateOf}
+              markOf={playerMarkOf}
             />
           ))}
         </div>

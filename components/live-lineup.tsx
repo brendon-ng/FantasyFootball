@@ -23,6 +23,7 @@ export function LiveLineup({
   lineup,
   players,
   stateOf,
+  markOf,
 }: {
   title: string;
   lineup: LiveLineupSlot[] | undefined;
@@ -30,6 +31,13 @@ export function LiveLineup({
   players: Record<string, PlayerMeta>;
   /** From `useLineupStates`, hoisted so both lineups share one NFL-clock fetch. */
   stateOf: LineupStates["stateOf"];
+  /**
+   * A record-book mark for a STARTED player, once the game is settled.
+   *
+   * Passed in rather than computed here: ranking needs the rest of the week,
+   * which the caller has and a lineup does not.
+   */
+  markOf?: (slot: LiveLineupSlot) => { short: string; full: string } | null;
 }) {
   /**
    * Built once per lineup, not per row. Same reasoning as `LiveRosters`: a
@@ -45,9 +53,16 @@ export function LiveLineup({
         // THE RESOLVED TEAM, not the slot's. Sleeper sends no team on a lineup
         // — every id it returns is a Sleeper id and the baked index has it — so
         // asking the raw slot left every Sleeper player with no state at all.
-        return { ...row, state: stateOf({ id: p.id, team: row.team, played: p.played }) };
+        return {
+          ...row,
+          state: stateOf({ id: p.id, team: row.team, played: p.played }),
+          // STARTERS ONLY, matching the archive: the all-time list is built
+          // from started players, so a chip on a bench row would claim a
+          // record the book does not contain.
+          mark: p.started ? (markOf?.(p) ?? null) : null,
+        };
       }),
-    [lineup, players, nameIndex, stateOf],
+    [lineup, players, nameIndex, stateOf, markOf],
   );
   const startersTotal = rows.filter((r) => r.started).reduce((t, r) => t + r.points, 0);
 
