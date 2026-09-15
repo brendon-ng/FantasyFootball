@@ -150,8 +150,17 @@ export function playerMark(
   t: RecordThresholds,
   ahead: number[] = [],
   behind: number[] = [],
+  /** See `matchupMarks` — the archive already has this week. */
+  selfInBaseline = false,
 ): RecordMark | null {
-  const rank = place(points, t.playerWeek, higher, ahead, behind);
+  const rank = place(
+    points,
+    t.playerWeek,
+    higher,
+    selfInBaseline ? [] : ahead,
+    selfInBaseline ? [] : behind,
+    selfInBaseline,
+  );
   if (!rank) return null;
   return {
     rank,
@@ -185,19 +194,38 @@ const place = (
   beats: (a: number, b: number) => boolean,
   ahead: number[] = [],
   behind: number[] = [],
+  /**
+   * This game is ALREADY IN `cuts`, so one entry there is its own.
+   *
+   * Once derive archives a finished week, the cut lines contain the very score
+   * being ranked — and since a tied cut counts as ahead, a game was ranked
+   * behind itself. Joe's 182.5 read "#3 high" off a list whose #2 was Joe's
+   * 182.5. Skipping the first exact match removes the double count; everything
+   * else in the list, including the opponent and the rest of the week, is a
+   * real competitor and still counts.
+   */
+  selfInCuts = false,
 ): number => {
   let rank = 1;
+  let selfSkipped = !selfInCuts;
   // A TIE COUNTS AS AHEAD for the archive and for `ahead` peers: an equal score
   // already in the book keeps the better number, and the newcomer takes the
   // next one down.
-  for (const v of cuts) if (beats(v, value) || v === value) rank++;
+  for (const v of cuts) {
+    if (!selfSkipped && v === value) {
+      selfSkipped = true;
+      continue;
+    }
+    if (beats(v, value) || v === value) rank++;
+  }
   for (const v of ahead) if (beats(v, value) || v === value) rank++;
   for (const v of behind) if (beats(v, value)) rank++;
   // BOUNDED BY THE LIST, NOT BY `MARK_DEPTH`. The caller chose the depth: a
   // card passes five and a matchup page passes the whole book, which really
   // does render a #20. Capping at MARK_DEPTH here would silently drop every
   // chip past fifth on the page that has room for them.
-  return rank <= cuts.length ? rank : 0;
+  // One shorter when the list is carrying this game's own entry.
+  return rank <= cuts.length - (selfInCuts && selfSkipped ? 1 : 0) ? rank : 0;
 };
 
 const higher = (a: number, b: number) => a > b;
@@ -214,8 +242,19 @@ export function matchupMarks(
   b: number,
   t: RecordThresholds,
   peers: Peers = NO_PEERS,
+  /**
+   * The archive already has this game — derive ran and its week is in the
+   * record book.
+   *
+   * Then `thresholds` is the whole answer and PEERS MUST NOT BE ADDED: every
+   * other game of the week is in those cut lines too, so handing them over
+   * again counts each of them twice. Peers exist for the opposite case, the
+   * hours between a game finishing and the archive catching up.
+   */
+  selfInBaseline = false,
 ): RecordMark[] {
   const out: RecordMark[] = [];
+  const p = selfInBaseline ? NO_PEERS : peers;
 
   const singles = (ms: PeerMatchup[]) => ms.flatMap((m) => [m.a, m.b]);
   const margins = (ms: PeerMatchup[]) => ms.map((m) => Math.abs(m.a - m.b));
@@ -234,9 +273,9 @@ export function matchupMarks(
      * and ranked only against history they would both claim the same number.
      * Side `a` takes ties, matching the order the card renders them in.
      */
-    const aheadSingles = [...singles(peers.ahead), ...(side === "a" ? [] : [a])];
-    const behindSingles = [...singles(peers.behind), ...(side === "a" ? [b] : [])];
-    const hi = place(points, t.high, higher, aheadSingles, behindSingles);
+    const aheadSingles = [...singles(p.ahead), ...(side === "a" ? [] : [a])];
+    const behindSingles = [...singles(p.behind), ...(side === "a" ? [b] : [])];
+    const hi = place(points, t.high, higher, aheadSingles, behindSingles, selfInBaseline);
     if (hi) {
       out.push({
         rank: hi,
@@ -248,7 +287,7 @@ export function matchupMarks(
         side,
       });
     }
-    const lo = place(points, t.low, lower, aheadSingles, behindSingles);
+    const lo = place(points, t.low, lower, aheadSingles, behindSingles, selfInBaseline);
     if (lo) {
       out.push({
         rank: lo,
@@ -263,7 +302,7 @@ export function matchupMarks(
   }
 
   const margin = Math.abs(a - b);
-  const blowout = place(margin, t.blowout, higher, margins(peers.ahead), margins(peers.behind));
+  const blowout = place(margin, t.blowout, higher, margins(p.ahead), margins(p.behind), selfInBaseline);
   if (blowout) {
     out.push({
       rank: blowout,
@@ -276,7 +315,7 @@ export function matchupMarks(
   }
   // A TIE IS NOT A NARROW WIN. Zero would top this list forever, and nobody won.
   if (margin > 0) {
-    const narrow = place(margin, t.narrow, lower, wins(peers.ahead), wins(peers.behind));
+    const narrow = place(margin, t.narrow, lower, wins(p.ahead), wins(p.behind), selfInBaseline);
     if (narrow) {
       out.push({
         rank: narrow,
@@ -290,7 +329,7 @@ export function matchupMarks(
   }
 
   const combined = a + b;
-  const ch = place(combined, t.combinedHigh, higher, combinedOf(peers.ahead), combinedOf(peers.behind));
+  const ch = place(combined, t.combinedHigh, higher, combinedOf(p.ahead), combinedOf(p.behind), selfInBaseline);
   if (ch) {
     out.push({
       rank: ch,
@@ -301,7 +340,7 @@ export function matchupMarks(
       tone: "good",
     });
   }
-  const cl = place(combined, t.combinedLow, lower, combinedOf(peers.ahead), combinedOf(peers.behind));
+  const cl = place(combined, t.combinedLow, lower, combinedOf(p.ahead), combinedOf(p.behind), selfInBaseline);
   if (cl) {
     out.push({
       rank: cl,

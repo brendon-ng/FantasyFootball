@@ -111,6 +111,12 @@ export default async function HomePage() {
         // whole matrix has to ship — but a departed owner cannot appear in this
         // week's fixtures, and dropping them cuts it by about a third.
         upcomingIds={(await getLiveSchedule()).map((g) => g.id)}
+        // THIS SEASON ONLY. Earlier seasons are covered by `archivedThrough`,
+        // and shipping every meeting id ever played would be most of a
+        // megabyte to answer a question about six cards.
+        archivedIds={getAllMeetings()
+          .filter((m) => m.season === currentSeason)
+          .map((m) => m.id)}
         weeklyLowPunishment={features().weeklyLowPunishment}
         // From the last FINISHED season, the same rule /punishments uses:
         // neither provider publishes it mid-season in a shape worth trusting.

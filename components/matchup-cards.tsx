@@ -67,6 +67,16 @@ export interface MatchupCardsProps {
    */
   punishmentLocked?: string[];
   /**
+   * Meeting ids derive has already archived, for the season being played.
+   *
+   * A finished week now reaches the record book within a day, so a card can be
+   * looking at a game that is BOTH live-fetched and in the cut lines. Ranking
+   * it against those lines without saying so counted it twice and put it below
+   * itself. Ids rather than a week number because a week lands as a unit but
+   * this does not have to assume that.
+   */
+  archivedIds?: string[];
+  /**
    * `strip` is the home page's horizontally scrolling row; `list` is a stack of
    * rows for a panel, which is the only thing that fits half a two-column grid.
    */
@@ -80,12 +90,14 @@ export function MatchupCards({
   h2h,
   archivedThrough,
   upcomingIds,
+  archivedIds,
   punishmentOdds,
   punishmentBars = false,
   punishmentLocked,
   layout = "strip",
 }: MatchupCardsProps) {
   const upcoming = new Set(upcomingIds ?? []);
+  const archived = new Set(archivedIds ?? []);
   const lockedSlugs = new Set(punishmentLocked ?? []);
   /**
    * ONE MARKER SILENCES EVERY BAR. Once the week's loser is settled the
@@ -164,12 +176,22 @@ export function MatchupCards({
          * handed over as a peer, split on the week's own order so an exact tie
          * gets two consecutive places rather than one shared.
          */
+        const id = meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug);
         const at = finished.indexOf(m);
+        // Already in the cut lines, so rank against those alone — see
+        // `matchupMarks`. Peers are for the gap before derive catches up.
+        const inBaseline = live.season <= archivedThrough || archived.has(id);
         const marks = done
-          ? matchupMarks(m.a.points, m.b.points, thresholds, {
-              ahead: finished.slice(0, at).map(peerScore),
-              behind: finished.slice(at + 1).map(peerScore),
-            })
+          ? matchupMarks(
+              m.a.points,
+              m.b.points,
+              thresholds,
+              {
+                ahead: finished.slice(0, at).map(peerScore),
+                behind: finished.slice(at + 1).map(peerScore),
+              },
+              inBaseline,
+            )
           : [];
         /**
          * A CARD IS ONLY A LINK IF ITS MATCHUP PAGE EXISTS.
@@ -180,7 +202,6 @@ export function MatchupCards({
          * playoff week added to the schedule since — renders as plain text rather
          * than a link to a page nobody generated.
          */
-        const id = meetingId(live.season, live.week, m.a.ownerSlug, m.b.ownerSlug);
         const href =
           live.season <= archivedThrough || upcoming.has(id) ? `/matchups/${id}/` : null;
         const card = strip

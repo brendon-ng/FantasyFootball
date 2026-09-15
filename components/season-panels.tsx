@@ -59,6 +59,7 @@ export function SeasonPanels({
   lastSeasonTiles,
   h2h,
   upcomingIds,
+  archivedIds,
   weeklyLowPunishment,
   regularSeasonWeeks,
   children,
@@ -87,6 +88,8 @@ export function SeasonPanels({
   h2h: Record<string, Record<string, H2HRecord>>;
   /** Fixture ids the build generated a preview page for. See `MatchupCards`. */
   upcomingIds?: string[];
+  /** Meeting ids derive has already archived this season. See `MatchupCards`. */
+  archivedIds?: string[];
   /**
    * Whether this league punishes the week's lowest score.
    *
@@ -178,6 +181,7 @@ export function SeasonPanels({
               h2h={h2h}
               archivedThrough={lastSeason?.season ?? 0}
               upcomingIds={upcomingIds}
+              archivedIds={archivedIds}
               punishmentLocked={punishmentLocked}
             />
         ) : (

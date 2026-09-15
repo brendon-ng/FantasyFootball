@@ -88,6 +88,7 @@ export function PunishmentTracker({
   thresholds,
   h2h,
   archivedThrough,
+  archivedIds,
   upcomingIds,
   regularSeasonWeeks,
   teamByPlayer,
@@ -120,6 +121,8 @@ export function PunishmentTracker({
   thresholds: RecordThresholds;
   h2h: Record<string, Record<string, H2HRecord>>;
   archivedThrough: number;
+  /** See `MatchupCards`. */
+  archivedIds?: string[];
   upcomingIds: string[];
   /** Where the regular season ends, so the odds hide once it is the postseason. */
   regularSeasonWeeks: number;

@@ -12,6 +12,7 @@ import {
   getLeagueRefs,
   getLiveSchedule,
   getLiveSeason,
+  getAllMeetings,
   getMeetings,
   getPlayerTeams,
   getRecordThresholds,
@@ -62,6 +63,11 @@ export default async function PunishmentsPage() {
     finished.length
       ? (finished[finished.length - 1].regularSeasonWeeks ?? 14)
       : 14;
+  // Meetings derive has archived for the season being played; see `MatchupCards`.
+  const liveSeason = Math.max(0, ...getAllMeetings().map((m) => m.season));
+  const archivedIds = getAllMeetings()
+    .filter((m) => m.season === liveSeason)
+    .map((m) => m.id);
   const archivedThrough = Math.max(
     0,
     ...getSeasons().filter((s) => s.finalized).map((s) => s.season),
@@ -96,6 +102,7 @@ export default async function PunishmentsPage() {
       thresholds={getRecordThresholds(MARK_DEPTH)}
       h2h={h2h}
       archivedThrough={archivedThrough}
+      archivedIds={archivedIds}
       upcomingIds={upcomingIds}
       regularSeasonWeeks={regularSeasonWeeks}
       teamByPlayer={getPlayerTeams()}
