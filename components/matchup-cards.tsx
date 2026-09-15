@@ -213,16 +213,29 @@ export function MatchupCards({
           </div>
         ) : null;
 
+        /**
+         * THE WHOLE CARD IS THE LINK, via an overlay rather than a wrapper.
+         *
+         * Wrapping the content meant the card's own padding was dead space —
+         * most of the card, on a narrow strip — and wrapping EVERYTHING would
+         * put the record chips, which are links themselves, inside an anchor.
+         * An absolutely positioned link covers the card instead; the chips come
+         * after it in the DOM and are positioned, so they paint above it and
+         * take their own clicks. Nothing else in a card is interactive — the
+         * owner names are plain spans — so there is nothing else to shadow.
+         */
         return (
-          <div key={m.matchupId} className={card} style={style}>
+          <div key={m.matchupId} className={`relative ${card}`} style={style}>
+            {body}
             {href ? (
-              <Link href={href} className="block">
-                {body}
-              </Link>
-            ) : (
-              body
-            )}
-            {chips}
+              <Link
+                href={href}
+                // Named for a screen reader, which otherwise meets an empty link.
+                aria-label={`${name(m.a.ownerSlug)} vs ${name(m.b.ownerSlug)}`}
+                className="absolute inset-0 rounded-lg"
+              />
+            ) : null}
+            {chips ? <div className="relative">{chips}</div> : null}
           </div>
         );
       })}
