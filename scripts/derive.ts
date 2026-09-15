@@ -259,9 +259,11 @@ function inProgressLeague(season: number, s: SeasonIndexEntry): SleeperLeague | 
     league_id: s.leagueId,
     name: `${season}`,
     status: s.status,
-    // Unknown until the season ends, and unused: only `summariseSeason` reads
-    // it, and an in-progress season is never summarised.
-    roster_positions: [],
+    // `sync` commits the lineup shape weekly; see its note. Absent only for a
+    // season archived before that existed, where the fallback is an empty list
+    // and the Slot column simply stays blank.
+    roster_positions:
+      readJson<{ roster_positions?: string[] }>(join(dir, "settings.json"))?.roster_positions ?? [],
   } as unknown as SleeperLeague;
 }
 
@@ -2225,6 +2227,25 @@ function importedMatchups(): Matchup[] {
  * knows its season is fourteen weeks long, and without this its weekly lows
  * were dropped exactly as the Sleeper ones were.
  */
+/**
+ * Lineup shape per imported season, taken from the recovered lineups file.
+ *
+ * `importedSeasons` already reads it for the same purpose, but it skips a
+ * season still being played, so that path cannot serve the current year.
+ */
+function importedRosterPositions(): Array<readonly [number, string[]]> {
+  const dir = join(DATA_DIR, "manual", "lineups");
+  if (!existsSync(dir)) return [];
+  const out: Array<readonly [number, string[]]> = [];
+  for (const file of readdirSync(dir).sort()) {
+    if (!/^\d{4}\.json$/.test(file)) continue;
+    const m = readJson<ManualLineups>(join(dir, file));
+    const season = Number(file.replace(".json", ""));
+    if (m?.rosterPositions?.length) out.push([season, m.rosterPositions] as const);
+  }
+  return out;
+}
+
 function importedRegularWeeks(): Array<readonly [number, number]> {
   const dir = join(DATA_DIR, "manual");
   if (!existsSync(dir)) return [];
@@ -2854,6 +2875,27 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   out("player-history.json", playerHistory);
   out("drafts.json", drafts);
   out("trades.json", trades);
+  /**
+   * Season -> starting lineup shape, for the Slot column on a matchup page.
+   *
+   * SEPARATE FROM `seasons.json` because a season still being PLAYED has no
+   * summary there and is not going to get one — standings and placements are
+   * not facts yet. The lineup shape is a fact from the day the league was set
+   * up, so it needs a channel that does not wait for the season to finish.
+   *
+   * Three sources, all of them already on disk: the league object for a
+   * finished Sleeper season, `settings.json` for one still running, and the
+   * recovered lineups file for an ESPN season either way.
+   */
+  const rosterPositions: Record<string, string[]> = {};
+  for (const [season, positions] of importedRosterPositions()) {
+    if (positions.length) rosterPositions[String(season)] = positions;
+  }
+  for (const d of loaded) {
+    const positions = (d.league.roster_positions ?? []).filter((x) => x !== "BN");
+    if (positions.length) rosterPositions[String(d.season)] = positions;
+  }
+  out("roster-positions.json", rosterPositions);
   out("weekly-lows.json", weeklyLows);
   writeReplay(league.slug, summaries, matchups);
 

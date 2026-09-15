@@ -206,6 +206,25 @@ async function syncSeason(league: SleeperLeague): Promise<SeasonRecord> {
     }
   }
 
+  /**
+   * THE LINEUP SHAPE, which is settled before a down is played.
+   *
+   * `league.json` is withheld until the season ends because most of what it
+   * holds is a moving target. `roster_positions` is not one: it is how many of
+   * each slot a team starts, fixed when the league was configured. Without it
+   * committed, derive had nothing to label a lineup with while a season ran,
+   * and every row of an in-progress matchup page read "FLEX".
+   *
+   * Written every run, not just mid-season, so the file is never the stale one:
+   * once the season completes `league.json` carries the same list and derive
+   * prefers that.
+   */
+  writeIfChanged(
+    join(dir, "settings.json"),
+    { roster_positions: league.roster_positions ?? [] },
+    `${season}/settings.json`,
+  );
+
   // League settings, users, and the final roster snapshot are only permanent
   // once the season is over. Storing them mid-season would bake in a moving
   // target (records, FAAB, rosters all still change).

@@ -29,6 +29,7 @@ import {
   getMeetingsToDate,
   getOwnerMap,
   getPlayerTeamsAt,
+  getRosterPositions,
   getPlayers,
   getRecordFlags,
   getRecordThresholds,
@@ -383,7 +384,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
                   <Lineup
                     key={side.ownerSlug}
                     side={side}
-                    slots={season?.rosterPositions ?? []}
+                    slots={getRosterPositions(game.season)}
                     name={name(side.ownerSlug)}
                     season={game.season}
                     week={leg.week}

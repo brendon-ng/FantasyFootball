@@ -308,6 +308,17 @@ export const getWeeklyLows = (): WeeklyLow[] =>
   load("derived/weekly-lows.json", []);
 
 /**
+ * The starting lineup shape for a season — "QB, RB, RB, WR, ...".
+ *
+ * NOT READ OFF THE SEASON SUMMARY, because the season being played has none:
+ * derive emits summaries only for finished seasons. The shape is settled before
+ * kickoff though, so it travels separately and a matchup page can label its
+ * Slot column in week one instead of printing FLEX down the whole list.
+ */
+export const getRosterPositions = (season: number): string[] =>
+  load<Record<string, string[]>>("derived/roster-positions.json", {})[String(season)] ?? [];
+
+/**
  * Lookup for "was this team the low scorer that week", keyed `season:week:slug`.
  *
  * Returns an EMPTY set unless the league attaches a punishment to it, so callers
