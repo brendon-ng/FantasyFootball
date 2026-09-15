@@ -528,8 +528,19 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
  *
  * A tie produces one row per tied team, since a shared low is shared.
  */
-function buildWeeklyLows(matchups: Matchup[], summaries: SeasonSummary[]): WeeklyLow[] {
-  const regularWeeks = new Map(summaries.map((s) => [s.season, s.regularSeasonWeeks]));
+/**
+ * `regularWeeks` is passed in rather than read off the summaries, because a
+ * season being PLAYED has no summary — see the caller. Taking it from there
+ * meant `get(2026)` was undefined, the `?? 0` turned every week of it into
+ * "past the regular season", and the whole season was skipped: a punishment
+ * taken in week one never appeared in the ledger or in the history page's
+ * count. It is a fixture-list fact, known from config, not something that has
+ * to wait for the season to end.
+ */
+function buildWeeklyLows(
+  matchups: Matchup[],
+  regularWeeks: Map<number, number>,
+): WeeklyLow[] {
   const byWeek = new Map<string, Array<{ ownerSlug: string; points: number }>>();
 
   for (const m of matchups) {
@@ -2205,6 +2216,27 @@ function importedMatchups(): Matchup[] {
  *   - the championship bracket is inferred by team identity, since a team in
  *     round N either won a round N-1 match or had a bye
  */
+/**
+ * Regular-season length for every IMPORTED season, finished or not.
+ *
+ * `importedSeasons` deliberately skips a season still being played, so its
+ * summary — and with it `regularSeasonWeeks` — never exists. That is right for
+ * standings and wrong for the fixture list: an ESPN league in week one still
+ * knows its season is fourteen weeks long, and without this its weekly lows
+ * were dropped exactly as the Sleeper ones were.
+ */
+function importedRegularWeeks(): Array<readonly [number, number]> {
+  const dir = join(DATA_DIR, "manual");
+  if (!existsSync(dir)) return [];
+  const out: Array<readonly [number, number]> = [];
+  for (const file of readdirSync(dir).sort()) {
+    if (!/^\d{4}\.json$/.test(file)) continue;
+    const m = readJson<ManualSeason>(join(dir, file));
+    if (m?.season && m.regularSeasonWeeks) out.push([m.season, m.regularSeasonWeeks] as const);
+  }
+  return out;
+}
+
 function importedSeasons(): SeasonSummary[] {
   const dir = join(DATA_DIR, "manual");
   if (!existsSync(dir)) return [];
@@ -2791,7 +2823,17 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   ].sort(
     (a, b) => a.season - b.season || a.pickNo - b.pickNo,
   );
-  const weeklyLows = buildWeeklyLows(byWeek, summaries);
+  /**
+   * Regular-season length per season, INCLUDING the one being played.
+   * `loaded` carries it from config for every season on disk; `summaries`
+   * only knows about the finished ones.
+   */
+  const regularWeeksBySeason = new Map<number, number>([
+    ...summaries.map((s) => [s.season, s.regularSeasonWeeks] as const),
+    ...importedRegularWeeks(),
+    ...loaded.map((d) => [d.season, d.rules.regularSeasonWeeks] as const),
+  ]);
+  const weeklyLows = buildWeeklyLows(byWeek, regularWeeksBySeason);
   const trades = buildTrades(loaded, loadLiveTradeSources(loaded));
 
   for (const o of owners.values()) o.seasons = [...new Set(o.seasons)].sort();
