@@ -19,6 +19,13 @@
  *   {"status":"complete","date":"2025-09-07","home":"ATL","week":1,
  *    "game_id":"202510102","away":"TB"}
  *
+ * FOUR STATUSES, and `in_game` is one of them — checked across a whole live
+ * week and a whole finished season: `pre_game` 256, `complete` 15, `in_game` 1,
+ * `canceled` 1. An earlier note here claimed only three, which was an
+ * observation never made while a game was actually being played, and it cost a
+ * second request to ESPN's scoreboard to learn something this file already
+ * knew.
+ *
  * THE COST OF BEING EARLY IS STAT CORRECTIONS. A total can still shift by a
  * fraction on Tuesday, so anything derived from one — a record threshold, a
  * margin — can flip for a day. Worth it for a chip, never for deciding what to
@@ -40,11 +47,22 @@ interface RawGame {
   away?: string;
 }
 
+/** `pre` not started · `in` being played · `post` finished or cancelled. */
+export type TeamGameState = "pre" | "in" | "post";
+
 export interface NflWeekState {
   /** Every game in the week has finished. */
   final: boolean;
   /** At least one game has kicked off. */
   started: boolean;
+  /**
+   * NFL team -> whether that team is playing RIGHT NOW.
+   *
+   * Distinct from `doneByTeam`, which only separates finished from not: a team
+   * yet to kick off and one in the third quarter are both "not done", and only
+   * the second means a score on the board is still moving.
+   */
+  stateByTeam: Record<string, TeamGameState>;
   /**
    * NFL team -> whether that team's game this week is over.
    *
@@ -82,13 +100,21 @@ function loadSeason(season: number): Promise<Map<number, NflWeekState> | null> {
     const byWeek = new Map<number, NflWeekState>();
     for (const g of games) {
       if (!g.week) continue;
-      const wk = byWeek.get(g.week) ?? { final: true, started: false, doneByTeam: {} };
+      const wk =
+        byWeek.get(g.week) ?? { final: true, started: false, doneByTeam: {}, stateByTeam: {} };
       // A CANCELLED GAME IS OVER, not pending. Nobody in it will score again, so
       // waiting on it would hold a matchup open for the rest of the season.
       const done = g.status === "complete" || g.status === "canceled";
       if (!done) wk.final = false;
       if (g.status !== "pre_game") wk.started = true;
-      for (const team of [g.home, g.away]) if (team) wk.doneByTeam[team] = done;
+      // A CANCELLED GAME COUNTS AS FINISHED, here as everywhere: nobody in it
+      // will score again, so nothing is waiting on it.
+      const state: TeamGameState = done ? "post" : g.status === "in_game" ? "in" : "pre";
+      for (const team of [g.home, g.away]) {
+        if (!team) continue;
+        wk.doneByTeam[team] = done;
+        wk.stateByTeam[team] = state;
+      }
       byWeek.set(g.week, wk);
     }
     return byWeek;

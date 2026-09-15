@@ -32,7 +32,6 @@ import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
 import type { LiveMatchup, LiveSeason } from "@/lib/types";
 
 import { espnProvider } from "./espn.ts";
-import { fetchNflLive, type TeamGameState } from "./nfl-live.ts";
 import { fetchNflWeek, teamsSettled, type NflWeekState } from "./nfl-schedule.ts";
 import { sleeperProvider } from "./sleeper.ts";
 import type {
@@ -510,9 +509,6 @@ export function useLineupStates(
   const key = `${season}:${week}`;
 
   const [slate, setSlate] = useState<{ key: string; wk: NflWeekState } | null>(null);
-  const [states, setStates] = useState<{ key: string; by: Record<string, TeamGameState> } | null>(
-    null,
-  );
   /**
    * Who has a real stat line, for the providers that do not say on the lineup.
    *
@@ -530,11 +526,6 @@ export function useLineupStates(
         if (!cancelled && wk) setSlate({ key, wk });
       })
       .catch(() => {});
-    fetchNflLive(season, week)
-      .then((by) => {
-        if (!cancelled && by) setStates({ key, by });
-      })
-      .catch(() => {});
     providerFor(ref)
       ?.playedThisWeek(season, week)
       .then((ids) => {
@@ -549,10 +540,9 @@ export function useLineupStates(
   }, [ask, key, season, week, refKey(ref)]);
 
   const wk = slate?.key === key ? slate.wk : null;
-  const by = states?.key === key ? states.by : null;
 
   return {
-    ready: Boolean(wk || by || scored),
+    ready: Boolean(wk || scored),
     stateOf: ({ id, team, played: onSlot }) => {
       if (!team) return null;
       // The provider's own answer wins; the fetched set is the fallback for the
@@ -562,21 +552,21 @@ export function useLineupStates(
       const played = onSlot ?? (ids ? ids.has(id) : undefined);
       // The week is archived: everything in it is over, whatever the clocks say.
       if (scored) return played === false ? "dnp" : "final";
-      if (!wk && !by) return null;
+      if (!wk) return null;
       // ABSENT FROM THE SCHEDULE IS A BYE. Checked against the schedule and not
       // the scoreboard, because a team missing from the scoreboard could just be
       // a request that came back short.
       if (wk && !(team in wk.doneByTeam)) return "bye";
 
-      const done = wk?.doneByTeam[team];
-      if (done === true) return played === false ? "dnp" : "final";
-
-      const gs = by?.[team];
+      // ONE FEED ANSWERS ALL OF IT. `in_game` is a real status, so the season
+      // schedule already fetched for the record chips separates "not kicked
+      // off" from "being played" — which is what a second request to ESPN's
+      // scoreboard used to be for.
+      const gs = wk.stateByTeam[team];
       if (gs === "post") return played === false ? "dnp" : "final";
       if (gs === "in") return "live";
       if (gs === "pre") return "upcoming";
-      // The schedule says not finished and the scoreboard has no opinion.
-      return done === false ? "upcoming" : null;
+      return null;
     },
   };
 }

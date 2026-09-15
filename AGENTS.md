@@ -276,7 +276,11 @@ GET https://api.sleeper.app/schedule/nfl/regular/<season>
 
 Undocumented but stable, `access-control-allow-origin: *`, and ONE REQUEST FOR
 THE WHOLE SEASON at ~27KB — it replaced ESPN's public scoreboard, which was 137KB
-PER WEEK. Statuses seen: `pre_game`, `complete`, `canceled`. A CANCELLED GAME
+PER WEEK. Four statuses: `pre_game`, `in_game`, `complete`, `canceled` —
+checked across a live week and a finished season. `in_game` IS THERE, which an
+earlier note here denied; that claim was an observation never made while a game
+was being played, and it cost a redundant 16.5KB request to ESPN's scoreboard
+until somebody looked on a Sunday night. A CANCELLED GAME
 COUNTS AS OVER; nobody in it will score again, and waiting on it would hold a
 matchup open for the rest of the year.
 
