@@ -600,10 +600,22 @@ function useLiveTotals(
   const week = live?.week ?? 0;
   const season = live?.season ?? 0;
   const scored = week > 0 && (live?.lastScoredLeg ?? 0) >= week;
-  const started = Boolean(
-    live?.matchups.some((m) => m.a.points > 0 || m.b.points > 0),
-  );
-  const ask = Boolean(inSeason && week > 0 && !scored && started && !mockPhase());
+  /**
+   * NOT GATED ON ANYONE HAVING SCORED, deliberately.
+   *
+   * It used to also require a matchup with points on the board, which meant a
+   * projection only appeared once the week was already underway — and a
+   * projected final is at its most useful BEFORE kickoff, when it is all there
+   * is. Sleeper shows one from the moment the week flips, and both feeds this
+   * needs are published then: the scores endpoint lists the week's games with
+   * a null quarter, which `secondsRemaining` reads as a full 3600, and the
+   * projections endpoint is up days early.
+   *
+   * With nothing played, `liveProjection` returns the pre-game projection
+   * untouched — `o` is 1, so the weight on the live pace is zero. So the number
+   * is the projection, which is exactly what it should say on a Wednesday.
+   */
+  const ask = Boolean(inSeason && week > 0 && !scored && !mockPhase());
   const key = `${season}:${week}`;
 
   const [clock, setClock] = useState<{ key: string; by: Record<string, number> } | null>(null);
