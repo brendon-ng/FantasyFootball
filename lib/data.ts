@@ -1325,17 +1325,33 @@ export async function getLiveMeetings(): Promise<Meeting[]> {
  * whether this year counts. Ordering is newest first throughout.
  */
 export async function getMeetingsToDate(a: string, b: string): Promise<Meeting[]> {
+  const archived = getMeetings(a, b);
+  /**
+   * THE ARCHIVED COPY WINS, and there can now be one.
+   *
+   * A finished week reaches derive within a day, so for that day a game is
+   * BOTH in the live scoreboard and in the record book. Concatenating the two
+   * listed it twice — the rivalry gained a phantom game, and React reported
+   * duplicate keys because `meetingId` rightly gives the same id to both.
+   *
+   * The live copy is the lesser of the two: `getLiveMeetings` builds it from
+   * the scoreboard, so `hasLineups` is false and the per-player detail is
+   * empty. It exists to cover the gap before the archive catches up, and the
+   * moment it has, it has nothing left to add.
+   */
+  const have = new Set(archived.map((m) => m.id));
   const live = (await getLiveMeetings()).filter(
     (m) =>
-      (m.a.ownerSlug === a && m.b.ownerSlug === b) ||
-      (m.a.ownerSlug === b && m.b.ownerSlug === a),
+      !have.has(m.id) &&
+      ((m.a.ownerSlug === a && m.b.ownerSlug === b) ||
+        (m.a.ownerSlug === b && m.b.ownerSlug === a)),
   );
   // Oriented so `a` is always the caller's first argument, which is what every
   // tally and record string downstream assumes.
   const oriented = live.map((m) =>
     m.a.ownerSlug === a ? m : { ...m, a: m.b, b: m.a },
   );
-  return [...oriented, ...getMeetings(a, b)];
+  return [...oriented, ...archived];
 }
 
 /**
