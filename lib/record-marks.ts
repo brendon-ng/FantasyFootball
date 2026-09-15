@@ -67,6 +67,13 @@ export interface RecordThresholds {
   combinedHigh: number[];
   /** Both teams added together, ascending. */
   combinedLow: number[];
+  /**
+   * Points by one STARTED player in a week, descending.
+   *
+   * Only a surface that has the lineup can use these, which is the matchup
+   * page and not a card — see `playerMark`.
+   */
+  playerWeek: number[];
 }
 
 export interface RecordMark {
@@ -126,6 +133,38 @@ export interface Peers {
 
 const NO_PEERS: Peers = { ahead: [], behind: [] };
 
+/**
+ * Where a started player's week places all-time, or null for nowhere.
+ *
+ * SEPARATE FROM `matchupMarks` because it needs the lineup, which the matchup
+ * page has and a card does not — the same split the record book itself makes.
+ *
+ * Peers work exactly as they do for a team score, and matter MORE here: a
+ * single matchup starts about twenty players and a whole week starts a couple
+ * hundred, so two of them landing in the same stretch of the list is ordinary
+ * rather than a coincidence. Without peers they would both print the same
+ * number.
+ */
+export function playerMark(
+  points: number,
+  t: RecordThresholds,
+  ahead: number[] = [],
+  behind: number[] = [],
+): RecordMark | null {
+  const rank = place(points, t.playerWeek, higher, ahead, behind);
+  if (!rank) return null;
+  return {
+    rank,
+    list: "playerWeek",
+    // WORDED LIKE THE ARCHIVE'S, down to the string: the same player week must
+    // not read one way today and another once `getRecordFlags` takes over.
+    short: `#${rank} player week`,
+    long: `#${rank} player week`,
+    full: `${ordinal(rank)}-best single week by a started player in league history`,
+    tone: "good",
+  };
+}
+
 /** A live matchup as a peer — the two scores are all the ranking needs. */
 export const peerScore = (m: { a: { points: number }; b: { points: number } }): PeerMatchup => ({
   a: m.a.points,
@@ -154,9 +193,11 @@ const place = (
   for (const v of cuts) if (beats(v, value) || v === value) rank++;
   for (const v of ahead) if (beats(v, value) || v === value) rank++;
   for (const v of behind) if (beats(v, value)) rank++;
-  // The cut lists are already truncated to MARK_DEPTH, so anything past it is
-  // out of the book whether or not the peers pushed it there.
-  return rank <= MARK_DEPTH ? rank : 0;
+  // BOUNDED BY THE LIST, NOT BY `MARK_DEPTH`. The caller chose the depth: a
+  // card passes five and a matchup page passes the whole book, which really
+  // does render a #20. Capping at MARK_DEPTH here would silently drop every
+  // chip past fifth on the page that has room for them.
+  return rank <= cuts.length ? rank : 0;
 };
 
 const higher = (a: number, b: number) => a > b;
