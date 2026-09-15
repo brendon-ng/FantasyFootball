@@ -675,6 +675,33 @@ function useLiveTotals(
 }
 
 /**
+ * Each team's PROJECTED FINAL for the week, or null when there is none to give.
+ *
+ * Sleeper's own blend — see `liveProjection` — so the number beside a score
+ * here is the number in the app people have open next to this page. It is also
+ * exactly what the win probability and the last-place odds are built on, so a
+ * card cannot show a projection that disagrees with its own percentages.
+ *
+ * NOT FETCHED OUTSIDE A LIVE WEEK. `useLiveTotals` asks for the clock and the
+ * per-player projections only while a week is running and unscored, so a
+ * reader on a Tuesday downloads neither and gets null here.
+ *
+ * `done` says the team's last game has ended, which is when the projection
+ * stops being a projection: it equals the score, and repeating the score in
+ * smaller type underneath it is noise.
+ */
+export function useLiveProjections(
+  live: LiveSeason | null,
+  ref: LeagueRef | null,
+): Record<string, { projected: number; done: boolean }> | null {
+  const totals = useLiveTotals(live, ref);
+  if (!totals) return null;
+  const out: Record<string, { projected: number; done: boolean }> = {};
+  for (const [ownerSlug, t] of totals) out[ownerSlug] = { projected: t.projected, done: t.done };
+  return Object.keys(out).length ? out : null;
+}
+
+/**
  * Live win probability for one matchup, or null when there is nothing to say.
  *
  * SLEEPER'S OWN MODEL — see `lib/win-probability`, transcribed from their

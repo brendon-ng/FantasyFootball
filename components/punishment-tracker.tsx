@@ -34,7 +34,7 @@ import {
   type SeasonPunishment,
 } from "@/lib/season-punishment";
 import type { LeagueRef } from "@/lib/league-ref";
-import { useLastPlaceOdds, useLiveSeason } from "@/lib/live";
+import { useLastPlaceOdds, useLiveProjections, useLiveSeason } from "@/lib/live";
 import type { RecordThresholds } from "@/lib/record-marks";
 import type { H2HRecord } from "@/components/matchup-cards";
 import type { LiveSeason } from "@/lib/types";
@@ -220,6 +220,10 @@ export function PunishmentTracker({
    * the same inputs the home page does.
    */
   const live = useLiveSeason(leagueRefs, initialLive, userIdToSlug, teamByPlayer);
+  const projections = useLiveProjections(
+    live,
+    leagueRefs[String(live?.season ?? "")] ?? null,
+  );
   const lastPlace = useLastPlaceOdds(
     live,
     leagueRefs[String(live?.season ?? "")] ?? null,
@@ -585,6 +589,7 @@ export function PunishmentTracker({
           punishmentOdds={oddsBySlug}
           punishmentLocked={lockedSlugs}
           markWeeklyLow
+          projections={projections ?? undefined}
           punishmentBars
         />
       ) : null}

@@ -17,7 +17,12 @@ import {
 import { MatchupCards, type H2HRecord } from "@/components/matchup-cards";
 import { isCurrentSeason, resolvePhase } from "@/lib/phase";
 import type { RecordThresholds } from "@/lib/record-marks";
-import { useLastPlaceOdds, useLiveDraft, useLiveSeason } from "@/lib/live";
+import {
+  useLastPlaceOdds,
+  useLiveDraft,
+  useLiveProjections,
+  useLiveSeason,
+} from "@/lib/live";
 import type { LiveSeason, OwnerRecord, SeasonSummary } from "@/lib/types";
 
 /**
@@ -122,6 +127,9 @@ export function SeasonPanels({
   );
   // ONLY THE LOCKED SET reaches the strip — no `punishmentOdds`, so no bars
   // can be drawn here even by accident. See `punishmentBars`.
+  // Every league gets these, punishment or not — a projected final is just
+  // context for a score in progress.
+  const projections = useLiveProjections(live, refBySeason[String(live?.season ?? "")] ?? null);
   const punishmentLocked = useMemo(
     () => (lastPlace ?? []).filter((r) => r.locked).map((r) => r.ownerSlug),
     [lastPlace],
@@ -184,6 +192,7 @@ export function SeasonPanels({
               archivedIds={archivedIds}
               punishmentLocked={punishmentLocked}
               markWeeklyLow={weeklyLowPunishment}
+              projections={projections ?? undefined}
             />
         ) : (
           lastSeasonTiles

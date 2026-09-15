@@ -80,6 +80,15 @@ export interface MatchupCardsProps {
    */
   markWeeklyLow?: boolean;
   /**
+   * Each team's projected final for the week, from `useLiveProjections`.
+   *
+   * Sleeper's own blend, and the same figure the win probability and the
+   * last-place odds are computed from — so a card cannot show a projection
+   * that disagrees with its own percentages. `done` means every starter has
+   * finished, at which point the projection IS the score and is dropped.
+   */
+  projections?: Record<string, { projected: number; done: boolean }>;
+  /**
    * Meeting ids derive has already archived, for the season being played.
    *
    * A finished week now reaches the record book within a day, so a card can be
@@ -108,6 +117,7 @@ export function MatchupCards({
   punishmentBars = false,
   punishmentLocked,
   markWeeklyLow = false,
+  projections,
   layout = "strip",
 }: MatchupCardsProps) {
   const upcoming = new Set(upcomingIds ?? []);
@@ -258,8 +268,60 @@ export function MatchupCards({
               const rec = recordOf(side.ownerSlug);
               const odds = punishmentOdds?.[side.ownerSlug];
               const locked = lockedSlugs.has(side.ownerSlug);
+              /**
+               * The projected final, while there is still football to play.
+               *
+               * DROPPED THE MOMENT EVERY STARTER IS DONE, which is what `done`
+               * means: from then on the projection equals the score, and
+               * repeating the score in smaller type under it says nothing.
+               */
+              const p = projections?.[side.ownerSlug];
+              const proj = p && !p.done ? p.projected : null;
+              /**
+               * The last-place bar, when this surface draws them.
+               *
+               * DRAWN FOR EVERY TEAM STILL IN IT rather than only the ones at
+               * risk: it is read by comparing it with the others on screen, so
+               * a row that omits its bar reads as missing data rather than as
+               * a team who is fine. A near-zero bar is simply empty, which
+               * says it. Gone entirely once anybody is `locked` — a settled
+               * question is not a percentage.
+               */
+              const oddsRow =
+                odds != null && punishmentBars && !punishmentSettled ? (
+                  <span
+                    title={`${(odds * 100).toFixed(1)}% chance of the league's lowest score this week`}
+                    className="flex min-w-0 flex-1 items-center gap-1"
+                  >
+                    {/* Labelled, because a bare red bar under a name in a
+                        fantasy app reads as "how badly they are losing". */}
+                    <span className="shrink-0 text-[8px] uppercase leading-none text-chalk-600">
+                      Last
+                    </span>
+                    <span className="h-0.5 min-w-0 flex-1 overflow-hidden rounded-full bg-ink-700">
+                      <span
+                        className="block h-full bg-loss"
+                        style={{ width: `${Math.min(100, odds * 100)}%` }}
+                      />
+                    </span>
+                    {/* NEITHER END IS ALLOWED TO ROUND TO A CERTAINTY. The bar
+                        only renders while nobody is locked, so a 99.6% here is
+                        a team who CAN still escape — printing "100%" beside
+                        them would claim the one thing the marker exists to
+                        say, and it would be wrong. Mirrors "<1%" at the
+                        bottom, which is the same lie upside down. */}
+                    <span className="tabular shrink-0 text-[8px] leading-none text-chalk-600">
+                      {odds < 0.005
+                        ? "<1%"
+                        : odds >= 0.995
+                          ? ">99%"
+                          : `${Math.round(odds * 100)}%`}
+                    </span>
+                  </span>
+                ) : null;
               return (
-                <div key={side.ownerSlug} className="flex items-baseline gap-1.5">
+                <div key={side.ownerSlug}>
+                  <div className="flex items-baseline gap-1.5">
                   <span className="min-w-0 flex-1">
                     <span className="flex items-baseline gap-1.5">
                       <span
@@ -284,45 +346,6 @@ export function MatchupCards({
                         </span>
                       ) : null}
                     </span>
-                    {/* UNDER THE NAME, and drawn for EVERY team still in it
-                        rather than only the ones at risk: the bar is read by
-                        comparing it with the others on screen, and a row that
-                        omits its bar reads as missing data rather than as a
-                        team who is fine. A near-zero bar is simply empty,
-                        which says it. Gone entirely once anybody is `locked`
-                        — a settled question is not a percentage. */}
-                    {odds != null && punishmentBars && !punishmentSettled ? (
-                      <span
-                        title={`${(odds * 100).toFixed(1)}% chance of the league's lowest score this week`}
-                        className="mt-0.5 flex items-center gap-1"
-                      >
-                        {/* Labelled, because a bare red bar under a name in a
-                            fantasy app reads as "how badly they are losing". */}
-                        <span className="shrink-0 text-[8px] uppercase leading-none text-chalk-600">
-                          Last
-                        </span>
-                        <span className="h-0.5 min-w-0 flex-1 overflow-hidden rounded-full bg-ink-700">
-                          <span
-                            className="block h-full bg-loss"
-                            style={{ width: `${Math.min(100, odds * 100)}%` }}
-                          />
-                        </span>
-                        <span className="tabular shrink-0 text-[8px] leading-none text-chalk-600">
-                          {/* NEITHER END IS ALLOWED TO ROUND TO A CERTAINTY.
-                              The bar only renders while nobody is locked, so a
-                              99.6% here is a team who CAN still escape —
-                              printing "100%" beside them would claim the one
-                              thing the marker exists to say, and it would be
-                              wrong. Mirrors "<1%" at the bottom, which is the
-                              same lie upside down. */}
-                          {odds < 0.005
-                            ? "<1%"
-                            : odds >= 0.995
-                              ? ">99%"
-                              : `${Math.round(odds * 100)}%`}
-                        </span>
-                      </span>
-                    ) : null}
                   </span>
                   {started ? (
                     <span className="ml-auto flex shrink-0 items-center gap-1">
@@ -338,6 +361,30 @@ export function MatchupCards({
                         {fmt.pts1(side.points)}
                       </span>
                     </span>
+                  ) : null}
+                  </div>
+                  {/*
+                    ONE LINE UNDER THE ROW, carrying whatever applies: the
+                    last-place bar on the left under the name, the projected
+                    final on the right under the score it belongs to. They
+                    share a line because they are the same kind of thing — a
+                    smaller, dimmer footnote to the number above — and because
+                    two separate lines would push a six-card strip taller than
+                    the panel beside it.
+                  */}
+                  {oddsRow || proj != null ? (
+                    <div className="mt-0.5 flex items-center gap-1.5">
+                      {oddsRow ?? <span className="flex-1" />}
+                      {proj != null ? (
+                        <span
+                          title={`Projected final: ${fmt.pts1(proj)}`}
+                          className="tabular shrink-0 text-[9px] leading-none text-chalk-600"
+                        >
+                          <span className="mr-0.5 text-[8px] uppercase">proj</span>
+                          {fmt.pts1(proj)}
+                        </span>
+                      ) : null}
+                    </div>
                   ) : null}
                 </div>
               );
