@@ -85,14 +85,15 @@ interface Rules {
     tradeInheritsContract: boolean;
   };
 }
+interface SeasonIndexEntry {
+  season: string;
+  leagueId: string;
+  status: string;
+  finalized: boolean;
+  finalizedThroughWeek: number;
+}
 interface SeasonIndex {
-  seasons: Array<{
-    season: string;
-    leagueId: string;
-    status: string;
-    finalized: boolean;
-    finalizedThroughWeek: number;
-  }>;
+  seasons: SeasonIndexEntry[];
 }
 
 let config!: LeagueConfig;
@@ -231,12 +232,53 @@ interface SeasonData {
   rules: Rules;
 }
 
-function loadSeason(season: number): SeasonData | null {
+/**
+ * A season still being played, assembled from the little `sync` commits while
+ * it runs.
+ *
+ * WHY THIS EXISTS. `sync` writes `league.json`, `users.json` and `rosters.json`
+ * only once a season is COMPLETE, deliberately — mid-season they are a moving
+ * target. But it writes each finalized WEEK as it happens, so by week two the
+ * scores of week one are on disk and permanent. Without this they sat there
+ * unread until January: the record book, the thresholds a chip is ranked
+ * against and the head-to-head series all behaved as though the current season
+ * had not happened, and week one's matchup pages stopped being generated the
+ * moment the live schedule moved on.
+ *
+ * It supplies only what `buildMatchups` needs — the roster-to-owner mapping,
+ * which `sync` does commit weekly, plus enough of a league object to identify
+ * the season. Nothing here is used for standings or placements; see the caller,
+ * which keeps an in-progress season out of `summaries` entirely.
+ */
+function inProgressLeague(season: number, s: SeasonIndexEntry): SleeperLeague | null {
   const dir = join(RAW_DIR, String(season));
-  const league = readJson<SleeperLeague>(join(dir, "league.json"));
+  // The weekly files are the whole point: no archived week, nothing to add.
+  if (!existsSync(join(dir, "matchups"))) return null;
+  if (!existsSync(join(dir, "roster-owners.json"))) return null;
+  return {
+    league_id: s.leagueId,
+    name: `${season}`,
+    status: s.status,
+    // Unknown until the season ends, and unused: only `summariseSeason` reads
+    // it, and an in-progress season is never summarised.
+    roster_positions: [],
+  } as unknown as SleeperLeague;
+}
+
+function loadSeason(season: number, index?: SeasonIndexEntry): SeasonData | null {
+  const dir = join(RAW_DIR, String(season));
+  const league =
+    readJson<SleeperLeague>(join(dir, "league.json")) ??
+    (index ? inProgressLeague(season, index) : null);
   if (!league) return null;
 
-  const rosters = readJson<SleeperRoster[]>(join(dir, "rosters.json")) ?? [];
+  const rosters =
+    readJson<SleeperRoster[]>(join(dir, "rosters.json")) ??
+    // Mid-season stand-in. `sync` commits this weekly precisely because the
+    // full roster snapshot cannot be trusted until the season is over.
+    (readJson<Array<{ roster_id: number; owner_id: string | null; co_owners: string[] | null }>>(
+      join(dir, "roster-owners.json"),
+    ) ?? []).map((r) => ({ ...r, settings: {} }) as unknown as SleeperRoster);
   const rosterToOwner = new Map<number, string>();
   const rosterToOwners = new Map<number, string[]>();
   for (const r of rosters) {
@@ -2007,6 +2049,13 @@ interface ManualLineups {
 }
 
 interface ManualSeason {
+  /**
+   * Written while the season is still being played, so it holds only the weeks
+   * already finished and no bracket. Its MATCHUPS are real and belong in the
+   * record book; its standings are a snapshot of an unfinished table and are
+   * not a season summary. See `importedSeasons`.
+   */
+  inProgress?: boolean;
   season: number;
   teams: number;
   playoffWeekStart: number;
@@ -2165,6 +2214,13 @@ function importedSeasons(): SeasonSummary[] {
     if (!/^\d{4}\.json$/.test(file)) continue;
     const m = readJson<ManualSeason>(join(dir, file));
     if (!m) continue;
+    /**
+     * NO SUMMARY FOR A SEASON STILL BEING PLAYED — the same rule the Sleeper
+     * path follows by only summarising `completed`. A summary is standings,
+     * placements and a champion; none of those are facts yet. The finished
+     * weeks still reach the record book through `importedMatchups`.
+     */
+    if (m.inProgress) continue;
 
     const slugOf = new Map(m.standings.map((r) => [r.teamName, r.teamSlug]));
     // The slot labels the recovered lineups actually used, so the matchup page's
@@ -2650,21 +2706,56 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   const throughByseason = new Map<number, number>();
   for (const s of index.seasons) {
     const season = Number(s.season);
-    const d = loadSeason(season);
+    const d = loadSeason(season, s);
     if (!d) {
       log.skip(`${season} — no finalized data yet (${s.status})`);
       continue;
     }
-    throughByseason.set(season, s.finalizedThroughWeek);
+    /**
+     * AN IN-PROGRESS SEASON STOPS AT THE REGULAR SEASON.
+     *
+     * `buildMatchups` tells a playoff game from a consolation one by looking
+     * the roster up in the winners bracket, and there is no bracket until the
+     * season ends — so every postseason game would be filed as consolation.
+     * Weeks before the playoffs need no bracket and are safe, which is all this
+     * is for: the record book seeing the season being played.
+     */
+    const complete = d.league.status === "complete";
+    throughByseason.set(
+      season,
+      complete
+        ? s.finalizedThroughWeek
+        : Math.min(s.finalizedThroughWeek, d.rules.playoffWeekStart - 1),
+    );
     loaded.push(d);
     log.info(`${season}: ${d.rosters.length} rosters, ${d.picks.length} picks, ${d.matchups.size} weeks`);
   }
   loaded.sort((a, b) => a.season - b.season);
 
   log.step("Deriving");
+  /**
+   * SUMMARIES ARE FINALIZED SEASONS ONLY, unchanged.
+   *
+   * A summary is standings, placements and brackets — final facts, every one of
+   * which needs the end-of-season roster snapshot `sync` withholds while a
+   * season runs. An in-progress season contributes its finished WEEKS to the
+   * record book and nothing else; the live layer is what describes the season
+   * as it stands.
+   */
+  /**
+   * Seasons that are OVER. Anything reconstructing a final state — standings,
+   * placements, keeper contracts — must use this rather than `loaded`, which
+   * now also carries the season being played.
+   *
+   * The keeper resolver is the sharp edge: it reads each season's closing
+   * roster to decide who still holds a contract, and an in-progress season's
+   * roster file lists owners without players. Handed that, it concluded every
+   * player in the league was "not rostered" and dropped the lot.
+   */
+  const completed = loaded.filter((d) => d.league.status === "complete");
   const summaries = [
     ...importedSeasons(),
-    ...loaded.map((d) => summariseSeason(d, throughByseason.get(d.season) ?? 0)),
+    ...completed.map((d) => summariseSeason(d, throughByseason.get(d.season) ?? 0)),
   ].sort((a, b) => a.season - b.season);
   const matchups = [
     ...importedMatchups(),
@@ -2679,15 +2770,22 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
   // rather than on the per-season rules so the whole subsystem is off in one place.
   // Loaded before the keeper pass: a completed draft advances every contract to
   // the next cycle, so the resolver needs it.
-  const draftOnly = loadDraftOnly(loaded);
+  /**
+   * `loadDraftOnly` returns the seasons NOT in the list it is handed, so this
+   * must see `completed` for the same reason `buildDraftHistory` does: between
+   * them they have to cover every season exactly once. Handing one `loaded` and
+   * the other `completed` emitted the season being played from both, and its
+   * picks appeared in the draft history twice.
+   */
+  const draftOnly = loadDraftOnly(completed);
   const keepers = league.features?.keepers
-    ? resolveKeepers(loaded, draftOnly)
+    ? resolveKeepers(completed, draftOnly)
     : { perSeason: [], final: [] };
   // WHOLE matchups: it splits them into week and game events itself.
   const atTheTime = recordsAtTheTime(summaries, matchups);
   const playerHistory = buildPlayerHistory(loaded);
   const drafts = [
-    ...buildDraftHistory(loaded),
+    ...buildDraftHistory(completed),
     ...draftOnlySeasons(draftOnly),
     ...importedDrafts(),
   ].sort(

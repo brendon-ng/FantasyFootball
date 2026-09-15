@@ -2100,6 +2100,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 123,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619679,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "491": [
@@ -5628,6 +5642,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 97,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619653,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "1476": [
@@ -7503,6 +7531,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 31,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619587,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "2146": [
@@ -7906,6 +7948,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756168364904,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 44,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619600,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -9635,6 +9691,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 99,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619655,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "2460": [
@@ -10451,6 +10521,33 @@
       "toSlug": null,
       "type": "waiver",
       "week": 11
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "brendon-ng",
+      "ownerSlug": "jake-gibbons",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1786601695995,
+      "toSlug": "jake-gibbons",
+      "tradeId": "1393098787043442688",
+      "type": "trade",
+      "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 146,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619702,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "2749": [
@@ -10975,6 +11072,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 16
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 128,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619684,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "3164": [
@@ -11230,6 +11341,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756168364900,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 13,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619569,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -11792,6 +11917,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 120,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619676,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "3225": [
@@ -12406,6 +12545,20 @@
       "round": 13,
       "season": 2025,
       "timestamp": 1756168365010,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 57,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619613,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -13117,6 +13270,33 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "tyler-jung",
+      "ownerSlug": "brendon-ng",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1786601695995,
+      "toSlug": "brendon-ng",
+      "tradeId": "1393098787043442688",
+      "type": "trade",
+      "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 134,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619690,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "3503": [
@@ -14320,6 +14500,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 10,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619566,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4035": [
@@ -14420,6 +14614,44 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 157,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619713,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788187366571,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789317095117,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "4036": [
@@ -14656,6 +14888,20 @@
       "round": 9,
       "season": 2025,
       "timestamp": 1756168364968,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 75,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619631,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -15027,6 +15273,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756168364922,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 115,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619671,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -17103,6 +17363,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 117,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619673,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4217": [
@@ -17213,6 +17487,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756168364930,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 74,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619630,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -17388,6 +17676,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 121,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619677,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4233": [
@@ -18770,6 +19072,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 4,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619560,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4881": [
@@ -18867,6 +19183,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756168364928,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 28,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619584,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -18985,6 +19315,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756168364924,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 160,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619716,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -19955,6 +20299,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 36,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619592,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "4984": [
@@ -20077,6 +20435,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756168364907,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 23,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619579,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -21180,6 +21552,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 139,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619695,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5013": [
@@ -21328,6 +21714,20 @@
       "round": 16,
       "season": 2025,
       "timestamp": 1756168365037,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 154,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619710,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -21639,6 +22039,20 @@
       "round": 12,
       "season": 2025,
       "timestamp": 1756168365001,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 48,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619604,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -24372,6 +24786,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 58,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619614,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5848": [
@@ -24765,6 +25193,20 @@
       "tradeId": "1298376570926288896",
       "type": "trade",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 24,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619580,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5854": [
@@ -24978,6 +25420,20 @@
       "round": 1,
       "season": 2025,
       "timestamp": 1756168364886,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 8,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619564,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -25350,6 +25806,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 100,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619656,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5878": [
@@ -25637,6 +26107,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756168364917,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 27,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619583,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -26024,6 +26508,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 41,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619597,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "5937": [
@@ -26250,6 +26748,20 @@
       "round": 11,
       "season": 2025,
       "timestamp": 1756168364982,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 95,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619651,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -26551,6 +27063,20 @@
       "round": 6,
       "season": 2025,
       "timestamp": 1756168364936,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 60,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619616,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -28794,6 +29320,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 34,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619590,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6783": [
@@ -29026,6 +29566,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 2,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619558,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6789": [
@@ -29139,6 +29693,20 @@
       "round": 6,
       "season": 2025,
       "timestamp": 1756168364934,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 37,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619593,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -29262,6 +29830,20 @@
       "round": 1,
       "season": 2025,
       "timestamp": 1756168364890,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 6,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619562,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -29397,6 +29979,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 109,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619665,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6798": [
@@ -29510,6 +30106,20 @@
       "round": 7,
       "season": 2025,
       "timestamp": 1756168364946,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 67,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619623,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -29749,6 +30359,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 167,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619723,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6805": [
@@ -29873,6 +30497,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 13
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 76,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619632,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "6813": [
@@ -29968,6 +30606,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756168364893,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 19,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619575,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -30144,6 +30796,20 @@
       "round": 11,
       "season": 2025,
       "timestamp": 1756168364986,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 78,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619634,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -31091,6 +31757,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756168364923,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 32,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619588,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -32146,6 +32826,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 61,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619617,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7042": [
@@ -33196,6 +33890,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 104,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619660,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7525": [
@@ -33268,6 +33976,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 50,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619606,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7526": [
@@ -33337,6 +34059,20 @@
       "round": 7,
       "season": 2025,
       "timestamp": 1756168364950,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 70,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619626,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -33523,6 +34259,20 @@
       "tradeId": "1276220066534273024",
       "type": "trade",
       "week": 3
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 26,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619582,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7547": [
@@ -33590,6 +34340,20 @@
       "round": 1,
       "season": 2025,
       "timestamp": 1756168364888,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 1,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619557,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -33750,6 +34514,20 @@
       "round": 12,
       "season": 2025,
       "timestamp": 1756168364995,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 62,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619618,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -33991,6 +34769,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 3,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619559,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7565": [
@@ -34227,6 +35019,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 91,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619647,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7568": [
@@ -34348,6 +35154,20 @@
       "tradeId": "1276220066534273024",
       "type": "trade",
       "week": 3
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 39,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619595,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7571": [
@@ -34682,6 +35502,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 94,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619650,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "7591": [
@@ -34939,6 +35773,20 @@
       "round": 15,
       "season": 2025,
       "timestamp": 1756168365023,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 148,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619704,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -35374,6 +36222,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1787324588214,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "7608": [
@@ -35697,6 +36557,20 @@
       "round": 17,
       "season": 2025,
       "timestamp": 1756168365047,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 54,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619610,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -36168,6 +37042,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 77,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619633,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8111": [
@@ -36273,6 +37161,20 @@
       "round": 1,
       "season": 2025,
       "timestamp": 1756168364891,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 7,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619563,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -36544,6 +37446,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 127,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619683,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8122": [
@@ -36720,6 +37636,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 114,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619670,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8129": [
@@ -36837,6 +37767,20 @@
       "round": 5,
       "season": 2025,
       "timestamp": 1756168364925,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 45,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619601,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -36979,6 +37923,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 113,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619669,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8132": [
@@ -37167,6 +38125,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 136,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619692,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8134": [
@@ -37218,6 +38190,20 @@
       "round": 11,
       "season": 2025,
       "timestamp": 1756168364991,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 132,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619688,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -37441,6 +38427,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 119,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619675,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8137": [
@@ -37496,6 +38496,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756168364920,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 35,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619591,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -37578,6 +38592,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756168364901,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 17,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619573,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -37745,6 +38773,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 90,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619646,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8143": [
@@ -37905,6 +38947,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 64,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619620,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8146": [
@@ -37960,6 +39016,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756168364897,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 22,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619578,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -38070,6 +39140,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 124,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619680,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8150": [
@@ -38175,6 +39259,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 21,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619577,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8151": [
@@ -38230,6 +39328,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756168364914,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 11,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619567,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -38342,6 +39454,32 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 161,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619717,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788318600877,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "8155": [
@@ -38409,6 +39547,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756168364906,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 15,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619571,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -38592,6 +39744,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 49,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619605,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8168": [
@@ -38774,6 +39940,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1787974798643,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "8183": [
@@ -38890,6 +40068,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 16
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 110,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619666,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8188": [
@@ -39022,6 +40214,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788865013121,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "8210": [
@@ -39304,6 +40508,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 52,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619608,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8230": [
@@ -39571,6 +40789,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 129,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619685,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8408": [
@@ -39731,6 +40963,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 16
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 98,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619654,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8676": [
@@ -39797,6 +41043,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 152,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619708,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "8698": [
@@ -39835,6 +41095,32 @@
       "toSlug": null,
       "type": "waiver",
       "week": 16
+    }
+  ],
+  "8800": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1787716308323,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788971725689,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "9220": [
@@ -39904,6 +41190,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756168364895,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 20,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619576,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -39984,6 +41284,20 @@
       "round": 11,
       "season": 2025,
       "timestamp": 1756168364990,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 102,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619658,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -40125,6 +41439,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 163,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619719,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9226": [
@@ -40188,6 +41516,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756168364899,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 12,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619568,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -40437,6 +41779,20 @@
       "week": 4
     }
   ],
+  "9482": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789312803234,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    }
+  ],
   "9484": [
     {
       "action": "add",
@@ -40484,6 +41840,20 @@
       "round": 10,
       "season": 2025,
       "timestamp": 1756168364980,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 93,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619649,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -40563,6 +41933,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 107,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619663,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9488": [
@@ -40679,6 +42063,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 105,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619661,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9493": [
@@ -40718,6 +42116,20 @@
       "round": 2,
       "season": 2025,
       "timestamp": 1756168364896,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 18,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619574,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -40923,6 +42335,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 85,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619641,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9501": [
@@ -41025,6 +42451,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788864926367,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "9504": [
@@ -41301,6 +42739,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 158,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619714,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9509": [
@@ -41345,6 +42797,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 9,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619565,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9511": [
@@ -41383,6 +42849,32 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 170,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619726,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788971973805,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "9753": [
@@ -41488,6 +42980,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 106,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619662,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9754": [
@@ -41552,6 +43058,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 137,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619693,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9756": [
@@ -41621,6 +43141,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 87,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619643,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9757": [
@@ -41853,6 +43387,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 68,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619624,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "9999": [
@@ -41991,6 +43539,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 14
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 122,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619678,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "10222": [
@@ -42104,6 +43666,20 @@
       "round": 14,
       "season": 2025,
       "timestamp": 1756168365015,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 108,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619664,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -42228,6 +43804,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 79,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619635,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "10232": [
@@ -42266,6 +43856,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 11
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 56,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619612,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "10235": [
@@ -42330,6 +43934,30 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 14
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788650110854,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789118221135,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "10236": [
@@ -42395,6 +44023,20 @@
       "round": 10,
       "season": 2025,
       "timestamp": 1756168364979,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 103,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619659,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -42537,6 +44179,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756168364912,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 29,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619585,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -43002,6 +44658,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 84,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619640,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11539": [
@@ -43078,6 +44748,31 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "jake-gibbons",
+      "ownerSlug": "tyler-jung",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1786601695995,
+      "toSlug": "tyler-jung",
+      "tradeId": "1393098787043442688",
+      "type": "trade",
+      "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1787716289078,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "11559": [
@@ -43131,6 +44826,20 @@
       "round": 11,
       "season": 2025,
       "timestamp": 1756168364988,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 101,
+      "preseason": true,
+      "round": 11,
+      "season": 2026,
+      "timestamp": 1787712619657,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -43188,6 +44897,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 116,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619672,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11564": [
@@ -43201,6 +44924,20 @@
       "round": 13,
       "season": 2025,
       "timestamp": 1756168365005,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 125,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619681,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -43247,6 +44984,20 @@
       "round": 12,
       "season": 2025,
       "timestamp": 1756168364998,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 59,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619615,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -43455,6 +45206,22 @@
       "week": 16
     }
   ],
+  "11581": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 166,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619722,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
   "11582": [
     {
       "action": "add",
@@ -43492,6 +45259,20 @@
       "round": 10,
       "season": 2024,
       "timestamp": 1724720405761,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 82,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619638,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -43535,6 +45316,20 @@
       "round": 16,
       "season": 2025,
       "timestamp": 1756168365032,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 155,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619711,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -43674,6 +45469,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 16
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 80,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619636,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11589": [
@@ -43838,6 +45647,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 63,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619619,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11610": [
@@ -43914,6 +45737,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788318600877,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "11620": [
@@ -43941,6 +45776,20 @@
       "round": 6,
       "season": 2025,
       "timestamp": 1756168364941,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 42,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619598,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -43984,6 +45833,20 @@
       "round": 9,
       "season": 2025,
       "timestamp": 1756168364971,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 153,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619709,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -44150,6 +46013,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 51,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619607,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11631": [
@@ -44177,6 +46054,20 @@
       "round": 12,
       "season": 2025,
       "timestamp": 1756168364999,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 112,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619668,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -44223,6 +46114,20 @@
       "tradeId": "1298376570926288896",
       "type": "trade",
       "week": 12
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 46,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619602,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11635": [
@@ -44250,6 +46155,20 @@
       "round": 8,
       "season": 2025,
       "timestamp": 1756168364959,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 72,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619628,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -44475,6 +46394,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 142,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619698,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11647": [
@@ -44679,6 +46612,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 144,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619700,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11748": [
@@ -44805,6 +46752,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 156,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619712,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "11789": [
@@ -44881,6 +46842,44 @@
       "week": 10
     }
   ],
+  "11792": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789314076182,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789317095117,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789317123352,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    }
+  ],
   "11834": [
     {
       "action": "add",
@@ -44929,6 +46928,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 14
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788865090655,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "11949": [
@@ -44955,6 +46966,22 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    }
+  ],
+  "12015": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 143,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619699,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12185": [
@@ -45097,6 +47124,32 @@
       "toSlug": null,
       "type": "waiver",
       "week": 16
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 135,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619691,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789312803234,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "12474": [
@@ -45111,6 +47164,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 149,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619705,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12476": [
@@ -45138,6 +47205,20 @@
       "round": 9,
       "season": 2025,
       "timestamp": 1756168364967,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 30,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619586,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -45275,6 +47356,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 53,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619609,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12490": [
@@ -45364,6 +47459,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 13
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 33,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619589,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12493": [
@@ -45378,6 +47487,32 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 126,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619682,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788650110854,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "12495": [
@@ -45538,6 +47673,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 141,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619697,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12504": [
@@ -45580,6 +47729,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 69,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619625,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12507": [
@@ -45593,6 +47756,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756168364905,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 25,
+      "preseason": true,
+      "round": 3,
+      "season": 2026,
+      "timestamp": 1787712619581,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -45610,6 +47787,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 66,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619622,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12509": [
@@ -45654,6 +47845,33 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "brendon-ng",
+      "ownerSlug": "jake-gibbons",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1787447737142,
+      "toSlug": "jake-gibbons",
+      "tradeId": "1397014125854363648",
+      "type": "trade",
+      "week": 1
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 133,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619689,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12514": [
@@ -45667,6 +47885,20 @@
       "round": 6,
       "season": 2025,
       "timestamp": 1756168364940,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 55,
+      "preseason": true,
+      "round": 6,
+      "season": 2026,
+      "timestamp": 1787712619611,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -45710,6 +47942,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 81,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619637,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12518": [
@@ -45723,6 +47969,20 @@
       "round": 8,
       "season": 2025,
       "timestamp": 1756168364953,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "keep",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 71,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619627,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -45766,6 +48026,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 40,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619596,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12526": [
@@ -45779,6 +48053,20 @@
       "round": 3,
       "season": 2025,
       "timestamp": 1756168364911,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 16,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619572,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -45798,6 +48086,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 5,
+      "preseason": true,
+      "round": 1,
+      "season": 2026,
+      "timestamp": 1787712619561,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12529": [
@@ -45811,6 +48113,20 @@
       "round": 4,
       "season": 2025,
       "timestamp": 1756168364913,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 38,
+      "preseason": true,
+      "round": 4,
+      "season": 2026,
+      "timestamp": 1787712619594,
       "toSlug": null,
       "type": "draft",
       "week": 0
@@ -45854,6 +48170,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 169,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619725,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12533": [
@@ -45882,6 +48212,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "pickNo": 86,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619642,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12534": [
@@ -45896,6 +48240,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 65,
+      "preseason": true,
+      "round": 7,
+      "season": 2026,
+      "timestamp": 1787712619621,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12541": [
@@ -45962,6 +48320,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 150,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619706,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "12547": [
@@ -46040,6 +48412,294 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788971973805,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    }
+  ],
+  "13279": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 47,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619603,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13281": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 83,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619639,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13286": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 43,
+      "preseason": true,
+      "round": 5,
+      "season": 2026,
+      "timestamp": 1787712619599,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13287": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 14,
+      "preseason": true,
+      "round": 2,
+      "season": 2026,
+      "timestamp": 1787712619570,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13288": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 165,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619721,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788864926367,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    }
+  ],
+  "13293": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 138,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619694,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13294": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 73,
+      "preseason": true,
+      "round": 8,
+      "season": 2026,
+      "timestamp": 1787712619629,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13298": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 92,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619648,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13305": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 159,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619715,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789314076182,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    }
+  ],
+  "13330": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 131,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619687,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13337": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 151,
+      "preseason": true,
+      "round": 16,
+      "season": 2026,
+      "timestamp": 1787712619707,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788972626297,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
+    }
+  ],
+  "13345": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 130,
+      "preseason": true,
+      "round": 13,
+      "season": 2026,
+      "timestamp": 1787712619686,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13346": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 168,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619724,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13413": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 145,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619701,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
+    }
+  ],
+  "13417": [
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "pickNo": 111,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619667,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "ARI": [
@@ -47118,6 +49778,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "pickNo": 147,
+      "preseason": true,
+      "round": 15,
+      "season": 2026,
+      "timestamp": 1787712619703,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "BUF": [
@@ -49228,6 +51902,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "pickNo": 118,
+      "preseason": true,
+      "round": 12,
+      "season": 2026,
+      "timestamp": 1787712619674,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "DET": [
@@ -49965,6 +52653,33 @@
       "tradeId": "1289646453962051584",
       "type": "trade",
       "week": 9
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "tyler-jung",
+      "ownerSlug": "jake-gibbons",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1786601695995,
+      "toSlug": "jake-gibbons",
+      "tradeId": "1393098787043442688",
+      "type": "trade",
+      "week": 1
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "pickNo": 96,
+      "preseason": true,
+      "round": 10,
+      "season": 2026,
+      "timestamp": 1787712619652,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "IND": [
@@ -50555,6 +53270,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "pickNo": 164,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619720,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "KC": [
@@ -51001,6 +53730,19 @@
       "toSlug": null,
       "type": "waiver",
       "week": 14
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "brendon-ng",
+      "ownerSlug": "tyler-jung",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1786601695995,
+      "toSlug": "tyler-jung",
+      "tradeId": "1393098787043442688",
+      "type": "trade",
+      "week": 1
     }
   ],
   "LAC": [
@@ -51358,6 +54100,20 @@
       "tradeId": "1289646453962051584",
       "type": "trade",
       "week": 9
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "pickNo": 162,
+      "preseason": true,
+      "round": 17,
+      "season": 2026,
+      "timestamp": 1787712619718,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "LAR": [
@@ -51652,6 +54408,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "pickNo": 88,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619644,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "LV": [
@@ -52632,6 +55402,31 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 14
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "jake-gibbons",
+      "ownerSlug": "brendon-ng",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1786601695995,
+      "toSlug": "brendon-ng",
+      "tradeId": "1393098787043442688",
+      "type": "trade",
+      "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789118221135,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "NE": [
@@ -53014,6 +55809,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1785751430810,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "NO": [
@@ -54048,6 +56855,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 16
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "pickNo": 140,
+      "preseason": true,
+      "round": 14,
+      "season": 2026,
+      "timestamp": 1787712619696,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "PIT": [
@@ -54316,6 +57137,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1788972626297,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "SEA": [
@@ -54522,6 +57355,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "draft",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "pickNo": 89,
+      "preseason": true,
+      "round": 9,
+      "season": 2026,
+      "timestamp": 1787712619645,
+      "toSlug": null,
+      "type": "draft",
+      "week": 0
     }
   ],
   "SF": [
@@ -54702,6 +57549,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": true,
+      "season": 2026,
+      "timestamp": 1785751435110,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 1
     }
   ],
   "TB": [

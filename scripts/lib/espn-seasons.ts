@@ -342,12 +342,55 @@ export async function syncEspnSeasons(
      */
     const latest = data.status?.latestScoringPeriod ?? 0;
     const final = data.status?.finalScoringPeriod ?? 0;
-    if (!final || latest < final) {
-      log.skip(`${season} — in progress (scored through ${latest} of ${final || "?"})`);
-      continue;
-    }
+    const inProgress = !final || latest < final;
 
-    const built = buildSeason(season, data, cfg, `${league.slug} ${season}`);
+    let built: ReturnType<typeof buildSeason> & { inProgress?: boolean } = buildSeason(
+      season,
+      data,
+      cfg,
+      `${league.slug} ${season}`,
+    );
+
+    /**
+     * A SEASON STILL BEING PLAYED IS COMMITTED WEEK BY WEEK, like a Sleeper one.
+     *
+     * It used to be skipped outright, which left an ESPN league with nothing
+     * archived until January while its Sleeper neighbours banked each week as it
+     * finished — so the record book, the cut lines a chip is ranked against and
+     * the matchup pages all behaved as though the season had not started.
+     *
+     * Only FINISHED weeks go in, and the original objection is the reason why:
+     * writing the whole schedule in week one would file sixty unplayed 0-0 games
+     * and hand the record book a 0.00 low. What goes in is:
+     *
+     *   - weeks strictly BEFORE `latestScoringPeriod`, which is ESPN's marker for
+     *     the period it is scoring NOW, not the last one it finished — during
+     *     week two it reads 2 while week two is still being played
+     *   - regular season only. `kind` separates a playoff game from a
+     *     consolation one by final placement, which does not exist yet; the
+     *     Sleeper path caps itself for the same reason
+     *   - no bracket entries, for the same reason
+     *
+     * `inProgress` keeps derive from reading standings off it. The file is
+     * rewritten as each week lands and replaced wholesale once the season ends.
+     */
+    if (inProgress) {
+      const through = Math.min(latest - 1, built.regularSeasonWeeks);
+      if (through < 1) {
+        log.skip(`${season} — in progress, no completed week yet (scoring period ${latest})`);
+        continue;
+      }
+      built = {
+        ...built,
+        inProgress: true,
+        matchups: built.matchups.filter((m) => Number(m.week) <= through),
+        games: [],
+      };
+      if (!built.matchups.length) {
+        log.skip(`${season} — in progress, nothing scored through week ${through}`);
+        continue;
+      }
+    }
     const next = `${JSON.stringify(stable(built), null, 2)}\n`;
 
     if (opts.check) {

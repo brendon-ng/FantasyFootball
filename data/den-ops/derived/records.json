@@ -691,6 +691,15 @@
       "week": 1
     },
     {
+      "margin": 0.2,
+      "opponentPoints": 129.96,
+      "opponentSlug": "tyler-jung",
+      "ownerSlug": "cassidy-pensa",
+      "points": 130.16,
+      "season": 2026,
+      "week": 1
+    },
+    {
       "margin": 0.26,
       "opponentPoints": 138.72,
       "opponentSlug": "safvet-besen",
@@ -734,6 +743,15 @@
       "points": 115,
       "season": 2021,
       "week": 17
+    },
+    {
+      "margin": 0.56,
+      "opponentPoints": 148.6,
+      "opponentSlug": "spencer-kim",
+      "ownerSlug": "jake-gibbons",
+      "points": 149.16,
+      "season": 2026,
+      "week": 1
     },
     {
       "margin": 0.62,
@@ -887,24 +905,6 @@
       "points": 101.36,
       "season": 2020,
       "week": 8
-    },
-    {
-      "margin": 1.84,
-      "opponentPoints": 101.94,
-      "opponentSlug": "tyler-jung",
-      "ownerSlug": "michaela-frederick",
-      "points": 103.78,
-      "season": 2020,
-      "week": 7
-    },
-    {
-      "margin": 1.86,
-      "opponentPoints": 109.62,
-      "opponentSlug": "jake-gibbons",
-      "ownerSlug": "jaymie-lew",
-      "points": 111.48,
-      "season": 2019,
-      "week": 2
     }
   ],
   "playerHigh": [

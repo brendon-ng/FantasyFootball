@@ -33301,5 +33301,100 @@
     "season": 2025,
     "week": 17,
     "winner": "charlie-stoksik"
+  },
+  {
+    "away": {
+      "ownerSlug": "isaac-edejer",
+      "playerPoints": {},
+      "points": 144.26,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jivan-gubbi",
+      "playerPoints": {},
+      "points": 104.56,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 1,
+    "season": 2026,
+    "week": 1,
+    "winner": "isaac-edejer"
+  },
+  {
+    "away": {
+      "ownerSlug": "diana-gonzalez",
+      "playerPoints": {},
+      "points": 116.3,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "sam-ellison",
+      "playerPoints": {},
+      "points": 144.96,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 2,
+    "season": 2026,
+    "week": 1,
+    "winner": "sam-ellison"
+  },
+  {
+    "away": {
+      "ownerSlug": "mark-mcgreal",
+      "playerPoints": {},
+      "points": 123.42,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "jay-uppuluri",
+      "playerPoints": {},
+      "points": 155.84,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 3,
+    "season": 2026,
+    "week": 1,
+    "winner": "jay-uppuluri"
+  },
+  {
+    "away": {
+      "ownerSlug": "haley-rao",
+      "playerPoints": {},
+      "points": 112.06,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "charlie-stoksik",
+      "playerPoints": {},
+      "points": 151.2,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 4,
+    "season": 2026,
+    "week": 1,
+    "winner": "charlie-stoksik"
+  },
+  {
+    "away": {
+      "ownerSlug": "brendon-ng",
+      "playerPoints": {},
+      "points": 118,
+      "starters": []
+    },
+    "home": {
+      "ownerSlug": "eric-wong",
+      "playerPoints": {},
+      "points": 111.36,
+      "starters": []
+    },
+    "kind": "regular",
+    "matchupId": 5,
+    "season": 2026,
+    "week": 1,
+    "winner": "brendon-ng"
   }
 ]
