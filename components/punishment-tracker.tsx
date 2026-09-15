@@ -222,6 +222,10 @@ export function PunishmentTracker({
     () => Object.fromEntries((lastPlace ?? []).map((r) => [r.ownerSlug, r.odds])),
     [lastPlace],
   );
+  const lockedSlugs = useMemo(
+    () => (lastPlace ?? []).filter((r) => r.locked).map((r) => r.ownerSlug),
+    [lastPlace],
+  );
   const { identity, ready: identityReady, openPicker } = useIdentity();
   const me = identityReady && identity.kind === "owner" ? identity.slug : null;
 
@@ -555,6 +559,7 @@ export function PunishmentTracker({
           archivedThrough={archivedThrough}
           upcomingIds={upcomingIds}
           punishmentOdds={oddsBySlug}
+      punishmentLocked={lockedSlugs}
       punishmentBars
         />
       ) : null}

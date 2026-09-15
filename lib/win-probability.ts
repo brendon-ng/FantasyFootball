@@ -159,6 +159,35 @@ export function lastPlaceOdds(
   return out.map((p) => p / total);
 }
 
+/**
+ * Who is CERTAINLY last — decided by arithmetic, not by the integral above.
+ *
+ * NOT A PROBABILITY, AND DELIBERATELY NOT READ AS ONE. `lastPlaceOdds` is a
+ * numerical integral over normals that is then normalised; it returns 0.9999…
+ * for a settled week and will never return a float equal to 1, so thresholding
+ * it at "close enough" would either mark a team who could still escape or fail
+ * to mark one who cannot. Certainty is a fact about the schedule, so it is
+ * computed from the schedule:
+ *
+ *   a team is last for sure when their own score CANNOT MOVE and every other
+ *   team is ALREADY STRICTLY ABOVE it
+ *
+ * Other teams may still have football left — that only pushes them further
+ * ahead, so it cannot rescue anybody. Strict inequality is what makes this
+ * safe, and it is also why a tie at the bottom marks NOBODY: two teams level
+ * on a final score is an unresolved question for the commissioner, not a
+ * determined loser, and the marker should not pre-empt it.
+ *
+ * Returns one flag per team, in the order given.
+ */
+export function lockedIntoLast(
+  teams: Array<{ current: number; done: boolean }>,
+): boolean[] {
+  return teams.map(
+    (t, i) => t.done && teams.every((o, j) => j === i || o.current > t.current),
+  );
+}
+
 function normalPdf(x: number, mean: number, variance: number): number {
   const v = Math.max(variance, 1e-9);
   return Math.exp(-((x - mean) ** 2) / (2 * v)) / Math.sqrt(2 * Math.PI * v);

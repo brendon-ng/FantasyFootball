@@ -117,8 +117,10 @@ export function SeasonPanels({
     refBySeason[String(live?.season ?? "")] ?? null,
     regularSeasonWeeks ?? 0,
   );
-  const punishmentOdds = useMemo(
-    () => Object.fromEntries((lastPlace ?? []).map((r) => [r.ownerSlug, r.odds])),
+  // ONLY THE LOCKED SET reaches the strip — no `punishmentOdds`, so no bars
+  // can be drawn here even by accident. See `punishmentBars`.
+  const punishmentLocked = useMemo(
+    () => (lastPlace ?? []).filter((r) => r.locked).map((r) => r.ownerSlug),
     [lastPlace],
   );
 
@@ -176,7 +178,7 @@ export function SeasonPanels({
               h2h={h2h}
               archivedThrough={lastSeason?.season ?? 0}
               upcomingIds={upcomingIds}
-              punishmentOdds={punishmentOdds}
+              punishmentLocked={punishmentLocked}
             />
         ) : (
           lastSeasonTiles

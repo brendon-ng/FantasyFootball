@@ -33,6 +33,7 @@ import type { LiveMatchup, LiveSeason } from "@/lib/types";
 import {
   lastPlaceOdds,
   liveProjection,
+  lockedIntoLast,
   winProbability,
   type WinProbability,
 } from "@/lib/win-probability";
@@ -594,7 +595,7 @@ export function useLineupStates(
 function useLiveTotals(
   live: LiveSeason | null,
   ref: LeagueRef | null,
-): Map<string, { current: number; projected: number }> | null {
+): Map<string, { current: number; projected: number; done: boolean }> | null {
   const inSeason = live?.seasonType === "regular" || live?.seasonType === "post";
   const week = live?.week ?? 0;
   const season = live?.season ?? 0;
@@ -640,26 +641,34 @@ function useLiveTotals(
    * source — a total built from a partial lineup understates that team, which
    * would hand somebody else a probability they have not earned.
    */
-  const totalOf = (side: LiveMatchup["a"]): number | null => {
+  const totalOf = (side: LiveMatchup["a"]): { projected: number; done: boolean } | null => {
     const lineup = side.lineup?.filter((p) => p.started);
     if (!lineup?.length) return null;
     let total = 0;
+    // Whether this team's score can still MOVE. Only used by the certainty
+    // check in `lockedIntoLast`; the probability does not need it.
+    let done = true;
     for (const p of lineup) {
       const pre = p.projected ?? (projById ? projById[p.id] : undefined);
       if (pre == null) return null;
-      // A player on a bye has no game, so nothing is left for him to add.
+      // A player on a bye has no game, so nothing is left for him to add — he
+      // is absent from the clock feed entirely, which is the same `undefined`
+      // a missing team would give. Both are treated as nothing-left, exactly
+      // as the projection below already does, so the two cannot disagree
+      // about whether a team has finished.
       const left = p.team ? (by[p.team] ?? 0) : 0;
+      if (left > 0) done = false;
       total += liveProjection(p.points, pre, left);
     }
-    return total;
+    return { projected: total, done };
   };
 
-  const out = new Map<string, { current: number; projected: number }>();
+  const out = new Map<string, { current: number; projected: number; done: boolean }>();
   for (const m of live.matchups) {
     for (const side of [m.a, m.b]) {
-      const projected = totalOf(side);
-      if (projected == null) continue;
-      out.set(side.ownerSlug, { current: side.points, projected });
+      const t = totalOf(side);
+      if (t == null) continue;
+      out.set(side.ownerSlug, { current: side.points, ...t });
     }
   }
   return out.size ? out : null;
@@ -701,7 +710,14 @@ export function useLastPlaceOdds(
   live: LiveSeason | null,
   ref: LeagueRef | null,
   regularSeasonWeeks: number,
-): Array<{ ownerSlug: string; current: number; projected: number; odds: number }> | null {
+): Array<{
+  ownerSlug: string;
+  current: number;
+  projected: number;
+  odds: number;
+  /** Mathematically settled, not merely likely. See `lockedIntoLast`. */
+  locked: boolean;
+}> | null {
   const totals = useLiveTotals(live, ref);
   if (!totals || !live) return null;
   if (live.week > regularSeasonWeeks) return null;
@@ -712,8 +728,9 @@ export function useLastPlaceOdds(
   const rows = [...totals.entries()].map(([ownerSlug, t]) => ({ ownerSlug, ...t }));
   const odds = lastPlaceOdds(rows);
   if (!odds) return null;
+  const locked = lockedIntoLast(rows);
   return rows
-    .map((r, i) => ({ ...r, odds: odds[i] }))
+    .map((r, i) => ({ ...r, odds: odds[i], locked: locked[i] }))
     .sort((x, y) => y.odds - x.odds);
 }
 

@@ -60,6 +60,13 @@ export interface MatchupCardsProps {
    */
   punishmentBars?: boolean;
   /**
+   * Slugs who are MATHEMATICALLY last already — see `lockedIntoLast`. Not
+   * derived from `punishmentOdds` here on purpose: the odds are a normalised
+   * integral that never quite reaches 1, so certainty has to be passed in as
+   * the separate fact it is rather than recovered from a threshold.
+   */
+  punishmentLocked?: string[];
+  /**
    * `strip` is the home page's horizontally scrolling row; `list` is a stack of
    * rows for a panel, which is the only thing that fits half a two-column grid.
    */
@@ -75,9 +82,18 @@ export function MatchupCards({
   upcomingIds,
   punishmentOdds,
   punishmentBars = false,
+  punishmentLocked,
   layout = "strip",
 }: MatchupCardsProps) {
   const upcoming = new Set(upcomingIds ?? []);
+  const lockedSlugs = new Set(punishmentLocked ?? []);
+  /**
+   * ONE MARKER SILENCES EVERY BAR. Once the week's loser is settled the
+   * remaining percentages are all zero and answer a question nobody is asking;
+   * leaving them up invites the reader to keep comparing bars in a race that
+   * has already finished.
+   */
+  const punishmentSettled = lockedSlugs.size > 0;
   /**
    * MARKS AND RESULTS ONLY ONCE A GAME IS SETTLED. A record is a fact about a
    * finished game; a partial score cannot have set one, and half a lineup
@@ -170,13 +186,7 @@ export function MatchupCards({
               const won = done && side.points > other.points;
               const rec = recordOf(side.ownerSlug);
               const odds = punishmentOdds?.[side.ownerSlug];
-              // 99.5%, i.e. exactly when the bar would round to "100%" — the
-              // threshold is the DISPLAY's, so the two can never disagree by
-              // showing a full bar labelled 100% next to no marker. Short of
-              // certainty on purpose: the remaining half-point is a team with
-              // its whole lineup still to play, and the marker being a hair
-              // early is better than a bar that sits at 100% for three hours.
-              const locked = odds != null && odds >= 0.995;
+              const locked = lockedSlugs.has(side.ownerSlug);
               return (
                 <div key={side.ownerSlug} className="flex items-baseline gap-1.5">
                   <span className="min-w-0 flex-1">
@@ -208,9 +218,9 @@ export function MatchupCards({
                         comparing it with the others on screen, and a row that
                         omits its bar reads as missing data rather than as a
                         team who is fine. A near-zero bar is simply empty,
-                        which says it. Dropped once `locked` takes over — a
-                        settled question is not a percentage. */}
-                    {odds != null && punishmentBars && !locked ? (
+                        which says it. Gone entirely once anybody is `locked`
+                        — a settled question is not a percentage. */}
+                    {odds != null && punishmentBars && !punishmentSettled ? (
                       <span
                         title={`${(odds * 100).toFixed(1)}% chance of the league's lowest score this week`}
                         className="mt-0.5 flex items-center gap-1"
@@ -227,7 +237,18 @@ export function MatchupCards({
                           />
                         </span>
                         <span className="tabular shrink-0 text-[8px] leading-none text-chalk-600">
-                          {odds < 0.005 ? "<1%" : `${Math.round(odds * 100)}%`}
+                          {/* NEITHER END IS ALLOWED TO ROUND TO A CERTAINTY.
+                              The bar only renders while nobody is locked, so a
+                              99.6% here is a team who CAN still escape —
+                              printing "100%" beside them would claim the one
+                              thing the marker exists to say, and it would be
+                              wrong. Mirrors "<1%" at the bottom, which is the
+                              same lie upside down. */}
+                          {odds < 0.005
+                            ? "<1%"
+                            : odds >= 0.995
+                              ? ">99%"
+                              : `${Math.round(odds * 100)}%`}
                         </span>
                       </span>
                     ) : null}
