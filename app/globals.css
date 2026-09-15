@@ -45,6 +45,12 @@
    */
   --color-trade: #5aa9f0;
   --color-gold: #f5c451;
+  /*
+   * The orange step between gold and loss, for a risk ramp that needs four
+   * rungs rather than three. Not `bronze`, which is a medal and has to keep
+   * meaning that — the same argument as the violet above.
+   */
+  --color-caution: #ff9448;
   --color-silver: #c8ccd4;
   --color-bronze: #cd8b5b;
 

@@ -276,6 +276,11 @@ export function MatchupCards({
                */
               const p = projections?.[side.ownerSlug];
               const proj = p && !p.done ? p.projected : null;
+              /** Every starter has played — from the live clock, or from the
+               *  matchup being settled once that stops being fetched. */
+              const finishedSide = done || (p?.done ?? false);
+              /** Settled AND ahead. A tie has no winner. */
+              const won = done && side.points > other.points;
               /**
                * The last-place bar, when this surface draws them.
                *
@@ -286,6 +291,22 @@ export function MatchupCards({
                * says it. Gone entirely once anybody is `locked` — a settled
                * question is not a percentage.
                */
+              /**
+               * GREEN THROUGH RED BY RISK, because a bar that is always red
+               * says "danger" at a team sitting on 3%. The reader is scanning
+               * six cards for who is in trouble, and colour does that faster
+               * than comparing lengths.
+               */
+              const barTone =
+                odds == null
+                  ? ""
+                  : odds < 0.1
+                    ? "bg-accent"
+                    : odds < 0.2
+                      ? "bg-gold"
+                      : odds < 0.5
+                        ? "bg-caution"
+                        : "bg-loss";
               const oddsRow =
                 odds != null && punishmentBars && !punishmentSettled ? (
                   <span
@@ -299,7 +320,7 @@ export function MatchupCards({
                     </span>
                     <span className="h-0.5 min-w-0 flex-1 overflow-hidden rounded-full bg-ink-700">
                       <span
-                        className="block h-full bg-loss"
+                        className={`block h-full ${barTone}`}
                         style={{ width: `${Math.min(100, odds * 100)}%` }}
                       />
                     </span>
@@ -355,14 +376,27 @@ export function MatchupCards({
                   */}
                   <span className="ml-auto flex shrink-0 items-center gap-1">
                     {/*
-                      ONE COLOUR, WHOEVER IS WINNING. The score used to turn
-                      green on a win and dim on a loss, which made a scoreboard
-                      of six cards read as a wall of verdicts. Who is ahead is
-                      already said once, by the name going bold; saying it
-                      again in the number only makes the losing half harder to
-                      read.
+                      BOLD MEANS FINISHED, GREEN MEANS WON.
+                      
+                      Two separate facts, so they get two separate signals. A
+                      team whose starters have all played is done arguing and
+                      goes bold whatever the result; only the winner of a
+                      settled matchup also turns green. A team still playing
+                      stays light — nothing about it is final yet.
+
+                      `done` covers the matchup being settled, which is the
+                      only signal left once the week is scored and the live
+                      projections stop being fetched.
                     */}
-                    <span className="tabular text-sm text-chalk-100">
+                    <span
+                      className={`tabular text-sm ${
+                        finishedSide
+                          ? won
+                            ? "font-semibold text-accent"
+                            : "font-semibold text-chalk-100"
+                          : "text-chalk-100"
+                      }`}
+                    >
                       {fmt.pts1(side.points)}
                     </span>
                   </span>
