@@ -584,6 +584,7 @@ export function PunishmentTracker({
           upcomingIds={upcomingIds}
           punishmentOdds={oddsBySlug}
           punishmentLocked={lockedSlugs}
+          markWeeklyLow
           punishmentBars
         />
       ) : null}

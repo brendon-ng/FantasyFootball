@@ -183,6 +183,7 @@ export function SeasonPanels({
               upcomingIds={upcomingIds}
               archivedIds={archivedIds}
               punishmentLocked={punishmentLocked}
+              markWeeklyLow={weeklyLowPunishment}
             />
         ) : (
           lastSeasonTiles

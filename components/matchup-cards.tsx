@@ -67,6 +67,19 @@ export interface MatchupCardsProps {
    */
   punishmentLocked?: string[];
   /**
+   * This league punishes the week's lowest score, so mark whoever took it.
+   *
+   * `punishmentLocked` only answers DURING the week: it comes from the live
+   * projections, which stop being fetched the moment the platform marks the
+   * week scored. So the marker appeared on Sunday and vanished on Tuesday,
+   * which is backwards — mid-week it is a forecast hardening into certainty,
+   * and afterwards it is simply what happened.
+   *
+   * Once every game is in, no projection is needed: the lowest of the week's
+   * final scores is the answer, and this computes it directly.
+   */
+  markWeeklyLow?: boolean;
+  /**
    * Meeting ids derive has already archived, for the season being played.
    *
    * A finished week now reaches the record book within a day, so a card can be
@@ -94,18 +107,11 @@ export function MatchupCards({
   punishmentOdds,
   punishmentBars = false,
   punishmentLocked,
+  markWeeklyLow = false,
   layout = "strip",
 }: MatchupCardsProps) {
   const upcoming = new Set(upcomingIds ?? []);
   const archived = new Set(archivedIds ?? []);
-  const lockedSlugs = new Set(punishmentLocked ?? []);
-  /**
-   * ONE MARKER SILENCES EVERY BAR. Once the week's loser is settled the
-   * remaining percentages are all zero and answer a question nobody is asking;
-   * leaving them up invites the reader to keep comparing bars in a race that
-   * has already finished.
-   */
-  const punishmentSettled = lockedSlugs.size > 0;
   /**
    * MARKS AND RESULTS ONLY ONCE A GAME IS SETTLED. A record is a fact about a
    * finished game; a partial score cannot have set one, and half a lineup
@@ -155,6 +161,32 @@ export function MatchupCards({
   const strip = layout === "strip";
   /** This week's already-final games, in week order — the peer field. */
   const finished = live ? live.matchups.filter(settled) : [];
+
+  /**
+   * Who took the weekly punishment, once the week is over.
+   *
+   * THE WHOLE WEEK, not this matchup: the punishment goes to the lowest score
+   * in the LEAGUE, so it cannot be read off one card. Every game must be
+   * settled before the question has an answer at all — one lineup still
+   * playing can undercut anybody.
+   *
+   * Ties are all marked, matching `buildWeeklyLows`, which records every team
+   * level on the low rather than picking one.
+   */
+  const settledLow: string[] = [];
+  if (markWeeklyLow && live && live.matchups.length && finished.length === live.matchups.length) {
+    const sides = live.matchups.flatMap((m) => [m.a, m.b]);
+    const low = Math.min(...sides.map((x) => x.points));
+    for (const x of sides) if (x.points === low) settledLow.push(x.ownerSlug);
+  }
+  const lockedSlugs = new Set([...(punishmentLocked ?? []), ...settledLow]);
+  /**
+   * ONE MARKER SILENCES EVERY BAR. Once the week's loser is settled the
+   * remaining percentages are all zero and answer a question nobody is asking;
+   * leaving them up invites the reader to keep comparing bars in a race that
+   * has already finished.
+   */
+  const punishmentSettled = lockedSlugs.size > 0;
 
   return (
     <div
