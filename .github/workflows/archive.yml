@@ -126,7 +126,12 @@ jobs:
 
           failed=""
           while read -r slug season; do
-            for job in transactions drafts; do
+            # `lineups` joins these so the season being PLAYED gets per-player
+            # detail as it happens. Without it an ESPN matchup page for the
+            # current season showed team scores and nothing underneath, while
+            # every archived season had full lineups. All three are incremental
+            # and idempotent, so re-running a week rewrites it identically.
+            for job in transactions drafts lineups; do
               echo "::group::$slug $season — $job"
               npm run "import:espn:$job" -- --league="$slug" --season="$season" \
                 || failed="$failed $slug/$job"
