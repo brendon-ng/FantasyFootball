@@ -41,7 +41,7 @@ export function SeasonPunishments({
   lows,
   teams,
   names,
-  src,
+  srcs,
   isMock,
 }: {
   season: number;
@@ -49,10 +49,10 @@ export function SeasonPunishments({
   /** Season-scoped team rosters, so a co-owned team is named in full. */
   teams: TeamMap;
   names: Record<string, string>;
-  src: string;
+  srcs: string[];
   isMock: boolean;
 }) {
-  const { status, feed } = usePunishments(src);
+  const { status, feed } = usePunishments(srcs);
 
   // Everything the build knows: a row per week lost, with the punishment and the
   // completion still to come. Also what the panel is drawn from while waiting.

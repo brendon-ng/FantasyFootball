@@ -47,6 +47,15 @@ export interface LeagueConfig {
   commissioner?: string;
   /** Apps Script `/exec` URL fronting this league's sheet; empty means mock. */
   appsScriptEndpoint?: string;
+  /**
+   * Extra deployments of the SAME Apps Script project, used as fallbacks.
+   *
+   * Not load balancing — they share an owner, a quota and a spreadsheet. It is
+   * redundancy: Google throttles per client IP per deployment with a sticky
+   * penalty, so a reader who has been refreshing can find one URL dead while
+   * the others answer fine. See `lib/apps-script.ts`.
+   */
+  appsScriptEndpoints?: string[];
   owners: Array<{
     slug?: string;
     userId: string | null;

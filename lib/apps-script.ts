@@ -22,6 +22,17 @@
  * the next attempt. Here it is a delivery fault on a URL that is definitely
  * real, and the next attempt usually works.
  *
+ * EACH ATTEMPT USES A DIFFERENT DEPLOYMENT, when the league has more than one.
+ * Several deployments of one Apps Script project share an owner, a quota and a
+ * spreadsheet, so this does NOT divide the load — that was the hope, and it is
+ * not what this buys. What it buys is REDUNDANCY, which turned out to be the
+ * failure that actually happens: a deployment can stop serving entirely, 404ing
+ * on the FIRST hop with no redirect at all, and stay that way. One dead
+ * deployment out of five then costs a retry instead of a broken page.
+ *
+ * The starting point is random per reader, so a dead one is not always first
+ * and the healthy ones are not all hit in the same order.
+ *
  * TIMED OUT PER ATTEMPT, AND THE FIRST ONE IS IMPATIENT. This is the fix for
  * the symptom people actually report — not an error, just a page that shimmers
  * for half a minute until they give up and reload, which then works. A healthy
@@ -38,28 +49,40 @@
  * a server-side lock, so a blind retry risks reporting a failure for something
  * that already happened.
  */
-const FEED_BACKOFF_MS = [500, 1500];
+const FEED_BACKOFF_MS = [400, 900, 2000];
 /** One per attempt; see above. */
-const FEED_TIMEOUT_MS = [8000, 12000, 15000];
+const FEED_TIMEOUT_MS = [8000, 8000, 10000, 12000];
 
-export async function fetchScriptJson(src: string): Promise<unknown> {
+export interface ScriptResponse {
+  body: unknown;
+  /** Which deployment answered, so a WRITE can go to one known to be alive. */
+  index: number;
+}
+
+export async function fetchScriptJson(
+  urls: string[],
+  /** Which deployment to try first. Random per reader; see above. */
+  start = 0,
+): Promise<ScriptResponse> {
+  if (!urls.length) throw new Error("no endpoint configured");
   let last = "unknown error";
   for (let attempt = 0; ; attempt++) {
+    const index = (start + attempt) % urls.length;
     const control = new AbortController();
     const limit = FEED_TIMEOUT_MS[Math.min(attempt, FEED_TIMEOUT_MS.length - 1)];
     const timer = setTimeout(() => control.abort(), limit);
     try {
       // no-store because an Apps Script /exec URL is a plain GET that browsers
       // will happily cache, and a vote cast a minute ago must not be missing.
-      const res = await fetch(src, { cache: "no-store", signal: control.signal });
+      const res = await fetch(urls[index], { cache: "no-store", signal: control.signal });
       const text = await res.text();
       try {
         const body: unknown = JSON.parse(text);
         // A PARSED BODY IS THE SCRIPT TALKING, even under a non-200, so it is
         // returned rather than retried — `ok: false` is handled by the caller.
-        if (res.ok) return body;
+        if (res.ok) return { body, index };
         last = `the sheet answered ${res.status}`;
-        return body;
+        return { body, index };
       } catch {
         // Not JSON: Google's error page, whatever status it arrived under.
         last = `the sheet served an error page (${res.status})`;

@@ -195,9 +195,8 @@ export async function fetchBallots(
   });
   const join = endpoint.includes("?") ? "&" : "?";
   // Retried and timed out like the feed: a READ, so asking again is free.
-  return parseBallotState(
-    assertScriptOk(await fetchScriptJson(`${endpoint}${join}${query}`)),
-  );
+  const { body } = await fetchScriptJson([`${endpoint}${join}${query}`]);
+  return parseBallotState(assertScriptOk(body));
 }
 
 /**
@@ -241,7 +240,13 @@ export async function castBallot(
   return { ballot, votes };
 }
 
-export function usePunishments(src: string): FeedState & {
+export function usePunishments(srcs: string[]): FeedState & {
+  /**
+   * Which deployment answered, or the one that will be tried first if none has
+   * yet. A WRITE should go here: it is the one deployment just proven to be
+   * alive, which matters when a league has several and one of them is not.
+   */
+  servedIndex: number;
   /**
    * Ask for the feed again.
    *
@@ -267,6 +272,14 @@ export function usePunishments(src: string): FeedState & {
     completed: string | null,
   ) => void;
 } {
+  /**
+   * Where in the deployment list to start, chosen once per reader.
+   *
+   * RANDOM so the load does not all land on the first one and a sick
+   * deployment is not always the first thing everybody tries.
+   */
+  const [start] = useState(() => Math.floor(Math.random() * Math.max(1, srcs.length)));
+  const [served, setServed] = useState<number | null>(null);
   /** Bumped by `reload`, to re-run the effect below. */
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<FeedState>({
@@ -320,12 +333,15 @@ export function usePunishments(src: string): FeedState & {
     [],
   );
 
+  const key = srcs.join("|");
+
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
       try {
-        const body = await fetchScriptJson(src);
+        const { body, index } = await fetchScriptJson(srcs, start);
+        if (!cancelled) setServed(index);
         // APPS SCRIPT CANNOT SET A STATUS CODE, so a rejected request still
         // arrives as HTTP 200 and announces itself with `ok: false`. Checking
         // only `res.ok` would parse the error object into an empty feed and
@@ -356,14 +372,24 @@ export function usePunishments(src: string): FeedState & {
     return () => {
       cancelled = true;
     };
-  }, [src, attempt]);
+    // `srcs` is spread from build-time config and only ever changes identity,
+    // not contents; `key` is what actually decides whether to refetch.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, attempt, start]);
 
   const reload = () => {
     setState({ status: "loading", feed: null, error: null });
     setAttempt((n) => n + 1);
   };
 
-  return { ...state, reload, insertSuggestion, recordDraw, recordCompletion };
+  return {
+    ...state,
+    servedIndex: served ?? start,
+    reload,
+    insertSuggestion,
+    recordDraw,
+    recordCompletion,
+  };
 }
 
 /**

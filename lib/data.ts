@@ -958,6 +958,8 @@ export interface LeagueConfig {
   commissioner?: string;
   /** Apps Script `/exec` URL fronting this league's Google Sheet. See below. */
   appsScriptEndpoint?: string;
+  /** Extra deployments of the same project; see `lib/leagues.ts`. */
+  appsScriptEndpoints?: string[];
 }
 export const getConfig = (): LeagueConfig =>
   JSON.parse(readFileSync(join(CONFIG, "league.json"), "utf8"));
@@ -982,18 +984,23 @@ export const getConfig = (): LeagueConfig =>
  * own shared secret, because anyone reading the page source can POST to it.
  */
 export function punishmentsSource(): {
-  /** Fully-formed GET URL, or the bundled sample. */
-  src: string;
-  /** The bare `/exec` URL for writes. Null when there is nothing to write to. */
-  endpoint: string | null;
+  /** Fully-formed GET URLs, one per deployment — or the bundled sample. */
+  srcs: string[];
+  /** The bare `/exec` URLs for writes, aligned with `srcs`. Empty means mock. */
+  endpoints: string[];
   league: string;
   isMock: boolean;
 } {
-  const endpoint = getConfig().appsScriptEndpoint?.trim();
-  if (!endpoint) {
+  const cfg = getConfig();
+  // Several deployments of one project, tried in turn. See `lib/apps-script.ts`
+  // for why that is redundancy rather than load balancing.
+  const endpoints = [cfg.appsScriptEndpoint, ...(cfg.appsScriptEndpoints ?? [])]
+    .map((e) => e?.trim())
+    .filter((e): e is string => Boolean(e));
+  if (!endpoints.length) {
     return {
-      src: withBasePath(`/mock/${LEAGUE}.punishments.json`),
-      endpoint: null,
+      srcs: [withBasePath(`/mock/${LEAGUE}.punishments.json`)],
+      endpoints: [],
       league: LEAGUE,
       isMock: true,
     };
@@ -1002,8 +1009,8 @@ export function punishmentsSource(): {
   // fetch serves every year rather than a round trip per tab.
   const query = `func=getWeeklyPunishments&league=${encodeURIComponent(LEAGUE)}`;
   return {
-    src: `${endpoint}${endpoint.includes("?") ? "&" : "?"}${query}`,
-    endpoint,
+    srcs: endpoints.map((e) => `${e}${e.includes("?") ? "&" : "?"}${query}`),
+    endpoints,
     league: LEAGUE,
     isMock: false,
   };

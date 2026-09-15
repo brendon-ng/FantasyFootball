@@ -55,6 +55,12 @@
   ],
   "commissioner": "brendon-ng",
   "appsScriptEndpoint": "https://script.google.com/macros/s/AKfycbz5JeSYyXcvcrXV8-i7XwZya3y78TWWIyFy36LPeYPibjZz-r-AngP54oAyRdpLK3fk/exec",
+  "appsScriptEndpoints": [
+    "https://script.google.com/macros/s/AKfycbzlwxWV4UAV8YUoR1EP9Af27X_qfaA1RU65PfLOM4ce_PzGRGdNRML2oX6ZoI-DSOrU/exec",
+    "https://script.google.com/macros/s/AKfycbyPBRV5D-ndjf1LrKz4lInEg1QyBMQHGBczhjXaX7KbOcLgj6fN6i2a-Jc0vwSq_NBr/exec",
+    "https://script.google.com/macros/s/AKfycbwOpHNxIu9MJ5bQSbxec2ajHmWzkSJP57tID9Hedkq_HUfeF_iKHnEgo4fxhBrPw1QI/exec",
+    "https://script.google.com/macros/s/AKfycbyOr-j2s85rMRmJvwLMg3L2lU7HyG2ARuAmg-NxqhL71Ddg6xUx4Iuk3bhzZob3whM4/exec"
+  ],
   "//discovery": [
     "Sleeper creates a NEW league_id every season and links it backward via",
     "`previous_league_id`. There is no forward pointer, so the sync script finds",

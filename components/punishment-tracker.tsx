@@ -98,8 +98,8 @@ export function PunishmentTracker({
   lastPlaceBySeason,
   cloudinaryCloud,
   cloudinaryPreset,
-  src,
-  endpoint,
+  srcs,
+  endpoints,
   league,
   isMock,
 }: {
@@ -165,9 +165,9 @@ export function PunishmentTracker({
    */
   cloudinaryCloud: string | null;
   cloudinaryPreset: string | null;
-  src: string;
+  srcs: string[];
   /** Bare `/exec` URL for writes; null when reading the bundled sample. */
-  endpoint: string | null;
+  endpoints: string[];
   league: string;
   isMock: boolean;
 }) {
@@ -179,7 +179,14 @@ export function PunishmentTracker({
     insertSuggestion,
     recordDraw,
     recordCompletion,
-  } = usePunishments(src);
+    servedIndex,
+  } = usePunishments(srcs);
+  /**
+   * WRITES GO TO WHICHEVER DEPLOYMENT JUST ANSWERED. With several of them one
+   * can be dead for this reader while the rest are fine, and a draw posted into
+   * the dead one fails for no reason the reader could act on.
+   */
+  const endpoint = endpoints[servedIndex] ?? endpoints[0] ?? null;
   const [composing, setComposing] = useState(false);
   const [voting, setVoting] = useState(false);
   /** The ledger row whose completion date is being edited. */
