@@ -663,7 +663,20 @@ function useLiveTotals(
     // check in `lockedIntoLast`; the probability does not need it.
     let done = true;
     for (const p of lineup) {
-      const pre = p.projected ?? (projById ? projById[p.id] : undefined);
+      /**
+       * AN UNPROJECTED PLAYER IS WORTH 0, not a reason to give up on the team.
+       *
+       * Sleeper publishes a line for essentially every player but a `pts_ppr`
+       * for only the ones it has actually projected, so a starter it has no
+       * opinion on — A.J. Brown in week 2, no injury flag, simply no
+       * projection — used to void his whole team. One card in five then had a
+       * score with nothing under it, which reads as broken rather than as
+       * missing data. Sleeper counts him as zero in its own total.
+       *
+       * The bail is kept for the case it was written for: no feed at all.
+       * Then nothing is known about anybody and a total would be fiction.
+       */
+      const pre = p.projected ?? (projById ? (projById[p.id] ?? 0) : undefined);
       if (pre == null) return null;
       // A player on a bye has no game, so nothing is left for him to add — he
       // is absent from the clock feed entirely, which is the same `undefined`

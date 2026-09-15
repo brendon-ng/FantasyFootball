@@ -201,7 +201,16 @@ function leagueScoring(leagueId: string): Promise<Record<string, number> | null>
     `${BASE}/league/${leagueId}`,
     null,
   )
-    .then((l) => l?.scoring_settings ?? null)
+    /**
+     * AN EMPTY OBJECT IS NOT SCORING SETTINGS. `?? null` let `{}` through, and
+     * every weight then came back undefined, so every player scored 0 and every
+     * team projected zero — a total wipeout dressed up as data. Anything
+     * unpopulated falls back to `pts_ppr` instead.
+     */
+    .then((l) => {
+      const sc = l?.scoring_settings;
+      return sc && Object.keys(sc).length ? sc : null;
+    })
     .catch(() => null);
   scoringCache.set(leagueId, p);
   return p;
@@ -576,6 +585,30 @@ export const sleeperProvider: LiveProvider = {
         }
         return out.size ? [...out] : undefined;
       };
+      /**
+       * THE LINEUP SLEEPER HAS NOW, when the week's scoreboard has none yet.
+       *
+       * `/matchups/<week>` returns `starters: null` for a week it has not
+       * processed, which on a Wednesday is most of the league — three of ten
+       * teams in Den Ops. The lineup is not missing, it is just on the ROSTER
+       * endpoint instead, which this already fetches. Without the fallback
+       * those teams had no lineup to sum and their cards showed a score with
+       * no projection under it, beside cards that had one.
+       *
+       * Only used when the scoreboard is silent. Once the week is live, its
+       * starters are the ones that count — they are what was actually locked
+       * in, which the roster's current lineup need not still match.
+       */
+      const rosterStarters = new Map<number, string[]>();
+      for (const r of rosters) {
+        const st = (r.starters ?? []).filter((x) => x && x !== "0");
+        if (st.length) rosterStarters.set(r.roster_id, r.starters as string[]);
+      }
+      const withLineup = (m: RawMatchup): RawMatchup =>
+        (m.starters ?? []).filter((x) => x && x !== "0").length
+          ? m
+          : { ...m, starters: rosterStarters.get(m.roster_id) ?? m.starters };
+
       const byId = new Map<number, RawMatchup[]>();
       for (const m of raw ?? []) {
         if (m.matchup_id == null) continue;
@@ -585,21 +618,25 @@ export const sleeperProvider: LiveProvider = {
         teams.find((t) => t.rosterId === rid)?.ownerSlug ?? `roster-${rid}`;
       matchups = [...byId.entries()]
         .filter(([, pair]) => pair.length === 2)
-        .map(([matchupId, [x, y]]) => ({
-          matchupId,
-          a: {
-            ownerSlug: slugOf(x.roster_id),
-            points: round2(x.points ?? 0),
-            startedTeams: teamsOf(x.starters),
-            lineup: lineupOf(x, ctx.teamByPlayer),
-          },
-          b: {
-            ownerSlug: slugOf(y.roster_id),
-            points: round2(y.points ?? 0),
-            startedTeams: teamsOf(y.starters),
-            lineup: lineupOf(y, ctx.teamByPlayer),
-          },
-        }));
+        .map(([matchupId, [rawX, rawY]]) => {
+          const x = withLineup(rawX);
+          const y = withLineup(rawY);
+          return {
+            matchupId,
+            a: {
+              ownerSlug: slugOf(x.roster_id),
+              points: round2(x.points ?? 0),
+              startedTeams: teamsOf(x.starters),
+              lineup: lineupOf(x, ctx.teamByPlayer),
+            },
+            b: {
+              ownerSlug: slugOf(y.roster_id),
+              points: round2(y.points ?? 0),
+              startedTeams: teamsOf(y.starters),
+              lineup: lineupOf(y, ctx.teamByPlayer),
+            },
+          };
+        });
     }
 
     return {
