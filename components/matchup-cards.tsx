@@ -347,21 +347,26 @@ export function MatchupCards({
                       ) : null}
                     </span>
                   </span>
-                  {started ? (
-                    <span className="ml-auto flex shrink-0 items-center gap-1">
-                      <span
-                        className={`tabular text-sm ${
-                          won
-                            ? "font-semibold text-accent"
-                            : leading
-                              ? "font-semibold text-chalk-200"
-                              : "text-chalk-500"
-                        }`}
-                      >
-                        {fmt.pts1(side.points)}
-                      </span>
+                  {/*
+                    SHOWN EVEN AT 0.0, once a week is on screen. A blank where
+                    the score goes reads as missing data, and it leaves the
+                    projected final underneath with nothing to be a projection
+                    OF. Nobody LEADS at nil-nil, which `leading` and `won`
+                    already handle, so the pair just renders grey.
+                  */}
+                  <span className="ml-auto flex shrink-0 items-center gap-1">
+                    <span
+                      className={`tabular text-sm ${
+                        won
+                          ? "font-semibold text-accent"
+                          : leading
+                            ? "font-semibold text-chalk-200"
+                            : "text-chalk-500"
+                      }`}
+                    >
+                      {fmt.pts1(side.points)}
                     </span>
-                  ) : null}
+                  </span>
                   </div>
                   {/*
                     ONE LINE UNDER THE ROW, carrying whatever applies: the
@@ -380,7 +385,6 @@ export function MatchupCards({
                           title={`Projected final: ${fmt.pts1(proj)}`}
                           className="tabular shrink-0 text-[9px] leading-none text-chalk-600"
                         >
-                          <span className="mr-0.5 text-[8px] uppercase">proj</span>
                           {fmt.pts1(proj)}
                         </span>
                       ) : null}
