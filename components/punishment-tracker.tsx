@@ -213,6 +213,15 @@ export function PunishmentTracker({
     leagueRefs[String(live?.season ?? "")] ?? null,
     regularSeasonWeeks,
   );
+  /**
+   * ON THE CARDS, not in a panel of its own. The strip already names every team
+   * and what they have scored; a second list underneath it repeating the same
+   * twelve names in a different order made the reader match them up by eye.
+   */
+  const oddsBySlug = useMemo(
+    () => Object.fromEntries((lastPlace ?? []).map((r) => [r.ownerSlug, r.odds])),
+    [lastPlace],
+  );
   const { identity, ready: identityReady, openPicker } = useIdentity();
   const me = identityReady && identity.kind === "owner" ? identity.slug : null;
 
@@ -537,41 +546,6 @@ export function PunishmentTracker({
           heading about last year's punishments would be describing a different
           year. `MatchupCards` returns null outside a season anyway, so this is
           about the SWITCHER, not the calendar. */}
-      {live && active === live.season && lastPlace ? (
-        <Panel>
-          <PanelHeader
-            title={`Week ${live.week} punishment odds`}
-            meta="live"
-            legend="Chance of posting the league's lowest score this week, from each team's projected finish and how much of their games is left."
-          />
-          <ol className="divide-y divide-ink-700">
-            {lastPlace.map((r) => (
-              <li key={r.ownerSlug} className="flex items-center gap-3 px-4 py-2 sm:px-5">
-                <span className="tabular w-11 shrink-0 text-sm font-bold text-chalk-100">
-                  {r.odds < 0.005 ? "<1%" : `${Math.round(r.odds * 100)}%`}
-                </span>
-                <span className="min-w-0 flex-1 truncate text-sm">
-                  <TeamNames season={active} slugs={[r.ownerSlug]} teams={teams} names={names} />
-                </span>
-                <span className="tabular hidden shrink-0 text-right text-[13px] text-chalk-500 sm:block">
-                  {r.current.toFixed(1)}
-                  <span className="text-chalk-600"> → {r.projected.toFixed(1)}</span>
-                </span>
-                {/* The bar is the same number again, which is the point: a
-                    column of percentages is read one row at a time, a column of
-                    bars is read at a glance. */}
-                <span className="hidden h-1.5 w-20 shrink-0 overflow-hidden rounded-full bg-ink-700 sm:block">
-                  <span
-                    className="block h-full bg-loss"
-                    style={{ width: `${Math.max(2, r.odds * 100)}%` }}
-                  />
-                </span>
-              </li>
-            ))}
-          </ol>
-        </Panel>
-      ) : null}
-
       {live && active === live.season ? (
         <MatchupCards
           live={live}
@@ -580,6 +554,7 @@ export function PunishmentTracker({
           h2h={h2h}
           archivedThrough={archivedThrough}
           upcomingIds={upcomingIds}
+          punishmentOdds={oddsBySlug}
         />
       ) : null}
 

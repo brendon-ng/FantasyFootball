@@ -44,6 +44,13 @@ export interface MatchupCardsProps {
    */
   upcomingIds?: string[];
   /**
+   * Owner slug -> chance of posting the league's LOWEST score this week.
+   *
+   * Only the punishments page passes it; everywhere else a card has no business
+   * ranking a team against the whole league rather than its opponent.
+   */
+  punishmentOdds?: Record<string, number>;
+  /**
    * `strip` is the home page's horizontally scrolling row; `list` is a stack of
    * rows for a panel, which is the only thing that fits half a two-column grid.
    */
@@ -57,6 +64,7 @@ export function MatchupCards({
   h2h,
   archivedThrough,
   upcomingIds,
+  punishmentOdds,
   layout = "strip",
 }: MatchupCardsProps) {
   const upcoming = new Set(upcomingIds ?? []);
@@ -151,6 +159,7 @@ export function MatchupCards({
               const leading = started && side.points > other.points;
               const won = done && side.points > other.points;
               const rec = recordOf(side.ownerSlug);
+              const odds = punishmentOdds?.[side.ownerSlug];
               return (
                 <div key={side.ownerSlug} className="flex items-baseline gap-1.5">
                   <span
@@ -164,6 +173,18 @@ export function MatchupCards({
                   {rec ? (
                     <span className="tabular shrink-0 text-[10px] text-chalk-600">
                       {fmt.record(rec.wins, rec.losses, rec.ties)}
+                    </span>
+                  ) : null}
+                  {/* ONLY WHERE THERE IS SOMETHING TO WORRY ABOUT. Twelve rows
+                      reading "<1%" is a column of noise that buries the one
+                      team it matters to, so anything under 1% shows nothing at
+                      all — the absence is the message. */}
+                  {odds != null && odds >= 0.005 ? (
+                    <span
+                      title={`${Math.round(odds * 100)}% chance of the league's lowest score this week`}
+                      className="tabular shrink-0 rounded border border-loss/50 bg-loss/10 px-1 py-px text-[9px] font-bold text-loss"
+                    >
+                      🚽 {Math.round(odds * 100)}%
                     </span>
                   ) : null}
                   {started ? (
