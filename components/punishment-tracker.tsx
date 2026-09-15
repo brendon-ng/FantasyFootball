@@ -580,10 +580,11 @@ export function PunishmentTracker({
           thresholds={thresholds}
           h2h={h2h}
           archivedThrough={archivedThrough}
+          archivedIds={archivedIds}
           upcomingIds={upcomingIds}
           punishmentOdds={oddsBySlug}
-      punishmentLocked={lockedSlugs}
-      punishmentBars
+          punishmentLocked={lockedSlugs}
+          punishmentBars
         />
       ) : null}
 
