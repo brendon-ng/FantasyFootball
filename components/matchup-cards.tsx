@@ -259,12 +259,11 @@ export function MatchupCards({
           <>
             {[m.a, m.b].map((side, i) => {
               const other = i === 0 ? m.b : m.a;
-              // LEADING IS NOT WINNING. Bold marks who is ahead; the accent is
-              // reserved for a result, so it waits until the game is settled — a
-              // green number at 2pm on Sunday asserts an outcome that has not
-              // happened, and half these leads will not survive the late games.
+              // WHO IS AHEAD, WHICH IS NOT WHO HAS WON. Bold on the name is
+              // the only thing that says it, and it says nothing stronger than
+              // "ahead right now" — half these leads will not survive the late
+              // games. Nothing green until the archive calls it.
               const leading = started && side.points > other.points;
-              const won = done && side.points > other.points;
               const rec = recordOf(side.ownerSlug);
               const odds = punishmentOdds?.[side.ownerSlug];
               const locked = lockedSlugs.has(side.ownerSlug);
@@ -351,19 +350,19 @@ export function MatchupCards({
                     SHOWN EVEN AT 0.0, once a week is on screen. A blank where
                     the score goes reads as missing data, and it leaves the
                     projected final underneath with nothing to be a projection
-                    OF. Nobody LEADS at nil-nil, which `leading` and `won`
-                    already handle, so the pair just renders grey.
+                    OF. Nobody LEADS at nil-nil, which `leading` already
+                    handles, so neither name goes bold.
                   */}
                   <span className="ml-auto flex shrink-0 items-center gap-1">
-                    <span
-                      className={`tabular text-sm ${
-                        won
-                          ? "font-semibold text-accent"
-                          : leading
-                            ? "font-semibold text-chalk-200"
-                            : "text-chalk-500"
-                      }`}
-                    >
+                    {/*
+                      ONE COLOUR, WHOEVER IS WINNING. The score used to turn
+                      green on a win and dim on a loss, which made a scoreboard
+                      of six cards read as a wall of verdicts. Who is ahead is
+                      already said once, by the name going bold; saying it
+                      again in the number only makes the losing half harder to
+                      read.
+                    */}
+                    <span className="tabular text-sm text-chalk-100">
                       {fmt.pts1(side.points)}
                     </span>
                   </span>
