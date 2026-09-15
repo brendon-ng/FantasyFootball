@@ -162,31 +162,44 @@ export function MatchupCards({
               const odds = punishmentOdds?.[side.ownerSlug];
               return (
                 <div key={side.ownerSlug} className="flex items-baseline gap-1.5">
-                  <span
-                    data-owner={side.ownerSlug}
-                    className={`min-w-0 truncate text-sm ${
-                      leading ? "font-semibold text-chalk-100" : "text-chalk-400"
-                    }`}
-                  >
-                    {credited(side.ownerSlug)}
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-baseline gap-1.5">
+                      <span
+                        data-owner={side.ownerSlug}
+                        className={`min-w-0 truncate text-sm ${
+                          leading ? "font-semibold text-chalk-100" : "text-chalk-400"
+                        }`}
+                      >
+                        {credited(side.ownerSlug)}
+                      </span>
+                      {rec ? (
+                        <span className="tabular shrink-0 text-[10px] text-chalk-600">
+                          {fmt.record(rec.wins, rec.losses, rec.ties)}
+                        </span>
+                      ) : null}
+                    </span>
+                    {/* UNDER THE NAME, and drawn for EVERY team rather than
+                        only the ones at risk: the bar is read by comparing it
+                        with the others on screen, and a row that omits its bar
+                        reads as missing data rather than as a team who is fine.
+                        A near-zero bar is simply empty, which says it. */}
+                    {odds != null ? (
+                      <span
+                        title={`${(odds * 100).toFixed(1)}% chance of the league's lowest score this week`}
+                        className="mt-0.5 flex items-center gap-1"
+                      >
+                        <span className="h-0.5 min-w-0 flex-1 overflow-hidden rounded-full bg-ink-700">
+                          <span
+                            className="block h-full bg-loss"
+                            style={{ width: `${Math.min(100, odds * 100)}%` }}
+                          />
+                        </span>
+                        <span className="tabular shrink-0 text-[8px] leading-none text-chalk-600">
+                          {odds < 0.005 ? "<1%" : `${Math.round(odds * 100)}%`}
+                        </span>
+                      </span>
+                    ) : null}
                   </span>
-                  {rec ? (
-                    <span className="tabular shrink-0 text-[10px] text-chalk-600">
-                      {fmt.record(rec.wins, rec.losses, rec.ties)}
-                    </span>
-                  ) : null}
-                  {/* ONLY WHERE THERE IS SOMETHING TO WORRY ABOUT. Twelve rows
-                      reading "<1%" is a column of noise that buries the one
-                      team it matters to, so anything under 1% shows nothing at
-                      all — the absence is the message. */}
-                  {odds != null && odds >= 0.005 ? (
-                    <span
-                      title={`${Math.round(odds * 100)}% chance of the league's lowest score this week`}
-                      className="tabular shrink-0 rounded border border-loss/50 bg-loss/10 px-1 py-px text-[9px] font-bold text-loss"
-                    >
-                      🚽 {Math.round(odds * 100)}%
-                    </span>
-                  ) : null}
                   {started ? (
                     <span className="ml-auto flex shrink-0 items-center gap-1">
                       <span
