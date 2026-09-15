@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { LineupPanel, type LineupRow } from "@/components/lineup-panel";
+import { recordHref } from "@/lib/record-marks";
 import { RecordBanner } from "@/components/record-banner";
 import type { PlayerWeekState } from "@/lib/live/types";
 import { MatchupPreview } from "@/components/matchup-preview";
@@ -281,6 +282,7 @@ export default async function MatchupPage({ params }: { params: Promise<{ id: st
           full: f.full,
           tone: f.tone === "bad" ? "bad" : "good",
           titleSuffix: f.ownerSlug ? ` — ${name(f.ownerSlug)}` : "",
+          href: recordHref(f.list),
           detail: f.playerId
             ? (players[f.playerId]?.full_name ?? "")
             : f.opponentSlug

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import type { RecordMark } from "@/lib/record-marks";
 
 /**
@@ -11,16 +13,21 @@ import type { RecordMark } from "@/lib/record-marks";
  * the same; a card that says "#2 low" and a page that renders it differently
  * reads as two different facts.
  */
-export function RecordChip({ mark }: { mark: RecordMark }) {
-  return (
-    <span
-      title={mark.full}
-      className={`rounded border px-1 py-px text-[9px] font-bold uppercase tracking-wide ${
-        mark.tone === "good"
-          ? "border-accent-dim/60 bg-accent/10 text-accent"
-          : "border-loss/50 bg-loss/10 text-loss"
-      }`}
-    >
+export function RecordChip({ mark, href }: { mark: RecordMark; href?: string }) {
+  const cls = `rounded border px-1 py-px text-[9px] font-bold uppercase tracking-wide ${
+    mark.tone === "good"
+      ? "border-accent-dim/60 bg-accent/10 text-accent"
+      : "border-loss/50 bg-loss/10 text-loss"
+  }`;
+  // The card around this is usually a link to the matchup, so the chip is
+  // rendered OUTSIDE it by the caller — an anchor inside an anchor is invalid
+  // and browsers resolve it unpredictably.
+  return href ? (
+    <Link href={href} title={mark.full} className={`${cls} transition-opacity hover:opacity-80`}>
+      {mark.short}
+    </Link>
+  ) : (
+    <span title={mark.full} className={cls}>
       {mark.short}
     </span>
   );

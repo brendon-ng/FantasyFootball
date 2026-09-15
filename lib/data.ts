@@ -25,7 +25,7 @@ import { sleeperProvider } from "./live/sleeper.ts";
 import type { LiveProvider } from "./live/types.ts";
 import { meetingId } from "./meeting.ts";
 import type { DerivedLow, SeasonLows, TeamMap } from "./punishments.ts";
-import type { RecordThresholds } from "./record-marks.ts";
+import { type RecordList, type RecordThresholds } from "./record-marks.ts";
 import {
   resolveSeasonPunishment,
   type SeasonPunishment,
@@ -1956,6 +1956,8 @@ export const getAtTheTime = (): Record<string, AtTheTimeFlag[]> =>
 // ---------------------------------------------------------------------------
 
 export interface RecordFlag {
+  /** Which record-book list this is, so a chip can link to it. */
+  list: RecordList;
   /**
    * Short chip text, e.g. "#3 highest score".
    *
@@ -2014,6 +2016,7 @@ export function getRecordFlags(
     if (hit(s)) {
       out.push({
         short: `#${i + 1} highest score`,
+        list: "high",
         full: `${ordinalOf(i + 1)}-highest single-week score in league history`,
         rank: i + 1,
         tone: "good",
@@ -2025,6 +2028,7 @@ export function getRecordFlags(
     if (hit(s)) {
       out.push({
         short: `#${i + 1} lowest score`,
+        list: "low",
         full: `${ordinalOf(i + 1)}-lowest single-week score in league history`,
         rank: i + 1,
         tone: "bad",
@@ -2036,6 +2040,7 @@ export function getRecordFlags(
     if (hit(s)) {
       out.push({
         short: `#${i + 1} blowout`,
+        list: "blowout",
         full: `${ordinalOf(i + 1)}-biggest margin of victory in league history`,
         rank: i + 1,
         tone: "good",
@@ -2048,6 +2053,7 @@ export function getRecordFlags(
     if (hit(s)) {
       out.push({
         short: `#${i + 1} closest win`,
+        list: "narrow",
         full: `${ordinalOf(i + 1)}-narrowest margin of victory in league history`,
         rank: i + 1,
         tone: "good",
@@ -2060,6 +2066,7 @@ export function getRecordFlags(
     if (hit(s)) {
       out.push({
         short: `#${i + 1} highest scoring matchup`,
+        list: "combinedHigh",
         full: `${ordinalOf(i + 1)}-highest combined score of any matchup in league history`,
         rank: i + 1,
         tone: "good",
@@ -2072,6 +2079,7 @@ export function getRecordFlags(
     if (hit(s)) {
       out.push({
         short: `#${i + 1} lowest scoring matchup`,
+        list: "combinedLow",
         full: `${ordinalOf(i + 1)}-lowest combined score of any matchup in league history`,
         rank: i + 1,
         tone: "bad",
@@ -2085,6 +2093,7 @@ export function getRecordFlags(
     if (hit(s)) {
       out.push({
         short: `#${i + 1} player week`,
+        list: "playerWeek",
         full: `${ordinalOf(i + 1)}-best single week by a started player in league history`,
         rank: i + 1,
         tone: "good",

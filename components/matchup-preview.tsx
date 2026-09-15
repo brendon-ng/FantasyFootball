@@ -7,7 +7,7 @@ import { RecordBanner } from "@/components/record-banner";
 import { Panel, fmt } from "@/components/ui";
 import { useLineupStates, useLiveSeason, useMatchupSettled, useSeasonGames } from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
-import { matchupMarks, type RecordThresholds } from "@/lib/record-marks";
+import { matchupMarks, recordHref, type RecordThresholds } from "@/lib/record-marks";
 import type { LiveSeason, LiveTeam, PlayerMeta } from "@/lib/types";
 
 /**
@@ -242,6 +242,7 @@ export function MatchupPreview({
             full: m.full,
             tone: m.tone,
             titleSuffix: who ? ` — ${name(who)}` : "",
+            href: recordHref(m.list),
             // First names, matching the archived banner: a whole-game record
             // names both sides, a one-team record names the one.
             detail: who

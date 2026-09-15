@@ -22,6 +22,37 @@
  */
 export const MARK_DEPTH = 5;
 
+/** The record-book lists a mark can belong to. */
+export type RecordList =
+  | "high"
+  | "low"
+  | "combinedHigh"
+  | "combinedLow"
+  | "blowout"
+  | "narrow"
+  | "playerWeek";
+
+/**
+ * Anchor per list, shared by the record book and by anything linking into it.
+ *
+ * ONE DEFINITION, because the two ends cannot be checked against each other by
+ * the compiler: a chip's href is a string and a panel's id is a string, and a
+ * typo in either produces a link that silently lands at the top of the page.
+ */
+export const RECORD_ANCHOR: Record<RecordList, string> = {
+  high: "highest-scores",
+  low: "lowest-scores",
+  combinedHigh: "highest-scoring-matchups",
+  combinedLow: "lowest-scoring-matchups",
+  blowout: "biggest-blowouts",
+  narrow: "narrowest-wins",
+  playerWeek: "best-player-weeks",
+};
+
+/** Deep link to the list a mark belongs to. */
+export const recordHref = (list: RecordList): string =>
+  `/records/#${RECORD_ANCHOR[list]}`;
+
 /** Cut-offs a score has to beat, in rank order. Only the top `MARK_DEPTH`. */
 export interface RecordThresholds {
   /** Team single-week points, descending. */
@@ -39,6 +70,8 @@ export interface RecordThresholds {
 }
 
 export interface RecordMark {
+  /** Which record-book list this is, so a chip can link to it. */
+  list: RecordList;
   /**
    * The MATCHUP PAGE's wording, matching `getRecordFlags` exactly.
    *
@@ -89,6 +122,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
     if (hi) {
       out.push({
         rank: hi,
+      list: "high",
         short: `#${hi} high`,
         long: `#${hi} highest score`,
         full: `${ordinal(hi)}-highest single-week score in league history`,
@@ -100,6 +134,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
     if (lo) {
       out.push({
         rank: lo,
+      list: "low",
         short: `#${lo} low`,
         long: `#${lo} lowest score`,
         full: `${ordinal(lo)}-lowest single-week score in league history`,
@@ -114,6 +149,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
   if (blowout) {
     out.push({
       rank: blowout,
+      list: "blowout",
       short: `#${blowout} blowout`,
       long: `#${blowout} blowout`,
       full: `${ordinal(blowout)}-biggest margin of victory in league history`,
@@ -126,6 +162,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
     if (narrow) {
       out.push({
         rank: narrow,
+      list: "narrow",
         short: `#${narrow} closest`,
       long: `#${narrow} closest win`,
         full: `${ordinal(narrow)}-narrowest margin of victory in league history`,
@@ -139,6 +176,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
   if (ch) {
     out.push({
       rank: ch,
+      list: "combinedHigh",
       short: `#${ch} high combined`,
       long: `#${ch} highest scoring matchup`,
       full: `${ordinal(ch)}-highest combined score of any matchup in league history`,
@@ -149,6 +187,7 @@ export function matchupMarks(a: number, b: number, t: RecordThresholds): RecordM
   if (cl) {
     out.push({
       rank: cl,
+      list: "combinedLow",
       short: `#${cl} low combined`,
       long: `#${cl} lowest scoring matchup`,
       full: `${ordinal(cl)}-lowest combined score of any matchup in league history`,

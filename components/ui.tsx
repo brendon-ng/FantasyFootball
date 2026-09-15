@@ -7,16 +7,22 @@ import type { ReactNode } from "react";
 export function Panel({
   children,
   className = "",
+  id,
 }: {
   children: ReactNode;
   className?: string;
+  /** Anchor target, so a chip elsewhere can deep-link to this list. */
+  id?: string;
 }) {
   return (
     // overflow-hidden clips full-bleed children (row backgrounds, divide-y
     // borders, the last row in a list) to the rounded corners. Without it the
     // final row's square corners bleed past the border and read as a cut-off.
     <section
-      className={`overflow-hidden rounded-xl border border-ink-600 bg-ink-800/80 ${className}`}
+      id={id}
+      // `scroll-mt` clears the sticky nav: without it a deep link puts the
+      // panel's heading underneath the header bar.
+      className={`overflow-hidden rounded-xl border border-ink-600 bg-ink-800/80 scroll-mt-20 ${className}`}
     >
       {children}
     </section>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { RECORD_ANCHOR } from "@/lib/record-marks";
+
 import { ExpandableList, ExpandableRow } from "@/components/expandable-list";
 
 import {
@@ -99,6 +101,7 @@ export default function RecordsPage() {
       <ExpandableRow>
         <ScoreList
           title="Highest Scores"
+          anchor={RECORD_ANCHOR.high}
           rows={records.weeklyHigh}
           name={name}
           tone="text-accent"
@@ -107,6 +110,7 @@ export default function RecordsPage() {
         />
         <ScoreList
           title="Lowest Scores"
+          anchor={RECORD_ANCHOR.low}
           rows={records.weeklyLow}
           name={name}
           tone="text-loss"
@@ -118,6 +122,7 @@ export default function RecordsPage() {
       <ExpandableRow>
         <CombinedList
           title="Highest Scoring Matchups"
+          anchor={RECORD_ANCHOR.combinedHigh}
           rows={records.highestCombined}
           name={name}
           tone="text-accent"
@@ -126,6 +131,7 @@ export default function RecordsPage() {
         />
         <CombinedList
           title="Lowest Scoring Matchups"
+          anchor={RECORD_ANCHOR.combinedLow}
           rows={records.lowestCombined}
           name={name}
           tone="text-loss"
@@ -137,6 +143,7 @@ export default function RecordsPage() {
       <ExpandableRow>
         <MarginList
           title="Biggest Blowouts"
+          anchor={RECORD_ANCHOR.blowout}
           rows={records.biggestBlowout}
           name={name}
           meetingHref={meetingHref}
@@ -144,6 +151,7 @@ export default function RecordsPage() {
         />
         <MarginList
           title="Narrowest Wins"
+          anchor={RECORD_ANCHOR.narrow}
           rows={records.narrowestWin}
           name={name}
           meetingHref={meetingHref}
@@ -151,7 +159,7 @@ export default function RecordsPage() {
         />
       </ExpandableRow>
 
-      <Panel>
+      <Panel id={RECORD_ANCHOR.playerWeek}>
         <PanelHeader
           title="Best Player Weeks"
           meta="started only"
@@ -248,6 +256,7 @@ function KindChip({ kind }: { kind: string | null }) {
 
 function ScoreList({
   title,
+  anchor,
   rows,
   name,
   tone,
@@ -255,6 +264,8 @@ function ScoreList({
   kindOf,
 }: {
   title: string;
+  /** Anchor id, so a record chip elsewhere can deep-link to this list. */
+  anchor: string;
   rows: ScoreRecord[];
   name: (s: string | null | undefined) => string;
   tone: string;
@@ -262,7 +273,7 @@ function ScoreList({
   kindOf: KindOf;
 }) {
   return (
-    <Panel>
+    <Panel id={anchor}>
       <PanelHeader
         title={title}
         meta={`top ${Math.min(rows.length, RECORD_BOOK_DEPTH)}`}
@@ -324,6 +335,7 @@ function ScoreList({
  */
 function CombinedList({
   title,
+  anchor,
   rows,
   name,
   tone,
@@ -331,6 +343,8 @@ function CombinedList({
   kindOf,
 }: {
   title: string;
+  /** Anchor id, so a record chip elsewhere can deep-link to this list. */
+  anchor: string;
   rows: CombinedRecord[];
   name: (s: string | null | undefined) => string;
   tone: string;
@@ -338,7 +352,7 @@ function CombinedList({
   kindOf: KindOf;
 }) {
   return (
-    <Panel>
+    <Panel id={anchor}>
       <PanelHeader
         title={title}
         meta={`top ${Math.min(rows.length, RECORD_BOOK_DEPTH)}`}
@@ -393,19 +407,22 @@ function CombinedList({
 
 function MarginList({
   title,
+  anchor,
   rows,
   name,
   meetingHref,
   kindOf,
 }: {
   title: string;
+  /** Anchor id, so a record chip elsewhere can deep-link to this list. */
+  anchor: string;
   rows: Array<ScoreRecord & { margin: number }>;
   name: (s: string | null | undefined) => string;
   meetingHref: MeetingHref;
   kindOf: KindOf;
 }) {
   return (
-    <Panel>
+    <Panel id={anchor}>
       <PanelHeader
         title={title}
         legend="Winner def. loser · season, week and final score · margin of victory"

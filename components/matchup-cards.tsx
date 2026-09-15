@@ -6,7 +6,7 @@ import { fmt } from "@/components/ui";
 import { useMatchupSettled } from "@/lib/live";
 import { meetingId } from "@/lib/meeting";
 import { RecordChip } from "@/components/record-chip";
-import { matchupMarks, type RecordThresholds } from "@/lib/record-marks";
+import { matchupMarks, recordHref, type RecordThresholds } from "@/lib/record-marks";
 import type { LiveSeason } from "@/lib/types";
 
 /**
@@ -187,25 +187,42 @@ export function MatchupCards({
             <div className="mt-1 truncate text-[10px] text-chalk-600">
               {series(m.a.ownerSlug, m.b.ownerSlug)}
             </div>
-            {/* Only a game that actually made a record book gets chips, which is
-                what keeps them worth reading — most weeks no card has one. */}
-            {marks.length ? (
-              <div className="mt-1.5 flex flex-wrap gap-1">
-                {marks.map((mark) => (
-                  <RecordChip key={`${mark.short}-${mark.side ?? "game"}`} mark={mark} />
-                ))}
-              </div>
-            ) : null}
           </>
         );
 
-        return href ? (
-          <Link key={m.matchupId} href={href} className={card} style={style}>
-            {body}
-          </Link>
-        ) : (
+        /**
+         * OUTSIDE THE CARD'S LINK, deliberately.
+         *
+         * Each chip links into the record book, and the card itself usually
+         * links to the matchup — an anchor inside an anchor is invalid HTML and
+         * browsers disagree about which one wins. So the card's link wraps the
+         * scoreline only, and the chips sit beside it under the same border.
+         *
+         * Only a game that actually made a record book gets them, which is what
+         * keeps them worth reading — most weeks no card has one.
+         */
+        const chips = marks.length ? (
+          <div className="mt-1.5 flex flex-wrap gap-1">
+            {marks.map((mark) => (
+              <RecordChip
+                key={`${mark.short}-${mark.side ?? "game"}`}
+                mark={mark}
+                href={recordHref(mark.list)}
+              />
+            ))}
+          </div>
+        ) : null;
+
+        return (
           <div key={m.matchupId} className={card} style={style}>
-            {body}
+            {href ? (
+              <Link href={href} className="block">
+                {body}
+              </Link>
+            ) : (
+              body
+            )}
+            {chips}
           </div>
         );
       })}
