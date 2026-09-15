@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import Link from "next/link";
 import { type LeagueRef } from "@/lib/league-ref";
 
@@ -16,7 +17,7 @@ import {
 import { MatchupCards, type H2HRecord } from "@/components/matchup-cards";
 import { isCurrentSeason, resolvePhase } from "@/lib/phase";
 import type { RecordThresholds } from "@/lib/record-marks";
-import { useLiveDraft, useLiveSeason } from "@/lib/live";
+import { useLastPlaceOdds, useLiveDraft, useLiveSeason } from "@/lib/live";
 import type { LiveSeason, OwnerRecord, SeasonSummary } from "@/lib/types";
 
 /**
@@ -58,6 +59,8 @@ export function SeasonPanels({
   lastSeasonTiles,
   h2h,
   upcomingIds,
+  weeklyLowPunishment,
+  regularSeasonWeeks,
   children,
 }: {
   initial: LiveSeason | null;
@@ -85,6 +88,19 @@ export function SeasonPanels({
   /** Fixture ids the build generated a preview page for. See `MatchupCards`. */
   upcomingIds?: string[];
   /**
+   * Whether this league punishes the week's lowest score.
+   *
+   * Only used to decide whether a team can be MARKED as having locked it in.
+   * The home strip never draws the odds bar itself — the running percentage is
+   * what /punishments is for, and a number beside a Sunday scoreline reads as a
+   * forecast of the game rather than of the league. But "they are taking the
+   * punishment" stops being a forecast once it is settled, and it is the single
+   * most interesting thing on the page that week, so it belongs here too.
+   */
+  weeklyLowPunishment?: boolean;
+  /** Regular-season length; the marker is a regular-season thing. */
+  regularSeasonWeeks?: number;
+  /**
    * Rendered between the header and the panels.
    *
    * The draft panel and last season's tiles sit there and are SERVER content, so
@@ -96,6 +112,15 @@ export function SeasonPanels({
   const live = useLiveSeason(refBySeason, initial, userIdToSlug, teamByPlayer);
   const draft = useLiveDraft(refBySeason[String(live?.season ?? fallbackSeason)] ?? null);
   const phase = resolvePhase({ live, draft: draft.data });
+  const lastPlace = useLastPlaceOdds(
+    weeklyLowPunishment ? live : null,
+    refBySeason[String(live?.season ?? "")] ?? null,
+    regularSeasonWeeks ?? 0,
+  );
+  const punishmentOdds = useMemo(
+    () => Object.fromEntries((lastPlace ?? []).map((r) => [r.ownerSlug, r.odds])),
+    [lastPlace],
+  );
 
   // Keyed on the PHASE, not on seasonType. Sleeper still reports "pre" between
   // the draft and week 1, but by then last season is over — the draft is what
@@ -151,6 +176,7 @@ export function SeasonPanels({
               h2h={h2h}
               archivedThrough={lastSeason?.season ?? 0}
               upcomingIds={upcomingIds}
+              punishmentOdds={punishmentOdds}
             />
         ) : (
           lastSeasonTiles

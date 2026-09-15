@@ -555,6 +555,7 @@ export function PunishmentTracker({
           archivedThrough={archivedThrough}
           upcomingIds={upcomingIds}
           punishmentOdds={oddsBySlug}
+      punishmentBars
         />
       ) : null}
 

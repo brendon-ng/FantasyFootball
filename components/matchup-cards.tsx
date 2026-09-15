@@ -51,6 +51,15 @@ export interface MatchupCardsProps {
    */
   punishmentOdds?: Record<string, number>;
   /**
+   * Draw the full odds bar, not just the locked-in marker.
+   *
+   * THE MARKER IS A FACT AND THE BAR IS ANALYSIS. "This team is taking the
+   * punishment" belongs anywhere the league is on screen; "this team is 23%
+   * likely to" is what the punishments page is for, and would be a
+   * non sequitur beside a home-page scoreline.
+   */
+  punishmentBars?: boolean;
+  /**
    * `strip` is the home page's horizontally scrolling row; `list` is a stack of
    * rows for a panel, which is the only thing that fits half a two-column grid.
    */
@@ -65,6 +74,7 @@ export function MatchupCards({
   archivedThrough,
   upcomingIds,
   punishmentOdds,
+  punishmentBars = false,
   layout = "strip",
 }: MatchupCardsProps) {
   const upcoming = new Set(upcomingIds ?? []);
@@ -160,6 +170,13 @@ export function MatchupCards({
               const won = done && side.points > other.points;
               const rec = recordOf(side.ownerSlug);
               const odds = punishmentOdds?.[side.ownerSlug];
+              // 99.5%, i.e. exactly when the bar would round to "100%" — the
+              // threshold is the DISPLAY's, so the two can never disagree by
+              // showing a full bar labelled 100% next to no marker. Short of
+              // certainty on purpose: the remaining half-point is a team with
+              // its whole lineup still to play, and the marker being a hair
+              // early is better than a bar that sits at 100% for three hours.
+              const locked = odds != null && odds >= 0.995;
               return (
                 <div key={side.ownerSlug} className="flex items-baseline gap-1.5">
                   <span className="min-w-0 flex-1">
@@ -177,17 +194,32 @@ export function MatchupCards({
                           {fmt.record(rec.wins, rec.losses, rec.ties)}
                         </span>
                       ) : null}
+                      {locked ? (
+                        <span
+                          title="Locked in for the league's lowest score this week"
+                          className="shrink-0 rounded border border-loss/50 bg-loss/10 px-1 py-px text-[9px] leading-none text-loss"
+                        >
+                          🚽
+                        </span>
+                      ) : null}
                     </span>
-                    {/* UNDER THE NAME, and drawn for EVERY team rather than
-                        only the ones at risk: the bar is read by comparing it
-                        with the others on screen, and a row that omits its bar
-                        reads as missing data rather than as a team who is fine.
-                        A near-zero bar is simply empty, which says it. */}
-                    {odds != null ? (
+                    {/* UNDER THE NAME, and drawn for EVERY team still in it
+                        rather than only the ones at risk: the bar is read by
+                        comparing it with the others on screen, and a row that
+                        omits its bar reads as missing data rather than as a
+                        team who is fine. A near-zero bar is simply empty,
+                        which says it. Dropped once `locked` takes over — a
+                        settled question is not a percentage. */}
+                    {odds != null && punishmentBars && !locked ? (
                       <span
                         title={`${(odds * 100).toFixed(1)}% chance of the league's lowest score this week`}
                         className="mt-0.5 flex items-center gap-1"
                       >
+                        {/* Labelled, because a bare red bar under a name in a
+                            fantasy app reads as "how badly they are losing". */}
+                        <span className="shrink-0 text-[8px] uppercase leading-none text-chalk-600">
+                          Last
+                        </span>
                         <span className="h-0.5 min-w-0 flex-1 overflow-hidden rounded-full bg-ink-700">
                           <span
                             className="block h-full bg-loss"

@@ -111,6 +111,10 @@ export default async function HomePage() {
         // whole matrix has to ship — but a departed owner cannot appear in this
         // week's fixtures, and dropping them cuts it by about a third.
         upcomingIds={(await getLiveSchedule()).map((g) => g.id)}
+        weeklyLowPunishment={features().weeklyLowPunishment}
+        // From the last FINISHED season, the same rule /punishments uses:
+        // neither provider publishes it mid-season in a shape worth trusting.
+        regularSeasonWeeks={lastSeason?.regularSeasonWeeks ?? 14}
         h2h={Object.fromEntries(
           records
             .filter((r) => owners.get(r.ownerSlug)?.active)
