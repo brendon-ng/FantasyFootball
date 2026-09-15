@@ -114,7 +114,10 @@ async function sleeperWeekGames(id: string, week: number): Promise<LiveWeekGame[
  * Undefined when the payload carries no lineup at all, which is how it reads
  * before a draft: an empty array would claim a team fielded nobody.
  */
-function lineupOf(m: RawMatchup): LiveLineupSlot[] | undefined {
+function lineupOf(
+  m: RawMatchup,
+  teamByPlayer: Record<string, string> | undefined,
+): LiveLineupSlot[] | undefined {
   const starters = (m.starters ?? []).filter((id) => id && id !== "0");
   const all = m.players ?? [];
   if (!starters.length && !all.length) return undefined;
@@ -124,7 +127,16 @@ function lineupOf(m: RawMatchup): LiveLineupSlot[] | undefined {
     id,
     name: null,
     position: null,
-    team: null,
+    /**
+     * FROM THE BAKED INDEX, because Sleeper does not say.
+     *
+     * Its matchup payload names starters by id and nothing else — the same
+     * reason `startedTeams` needs this map. Leaving it null here made every
+     * Sleeper player look like he had no NFL game, so the win probability read
+     * zero seconds left for all of them, decided both lineups were complete,
+     * and printed a flat 100%.
+     */
+    team: teamByPlayer?.[id] ?? null,
     points: round2(pts[id] ?? 0),
     started: isStarter,
   });
@@ -505,13 +517,13 @@ export const sleeperProvider: LiveProvider = {
             ownerSlug: slugOf(x.roster_id),
             points: round2(x.points ?? 0),
             startedTeams: teamsOf(x.starters),
-            lineup: lineupOf(x),
+            lineup: lineupOf(x, ctx.teamByPlayer),
           },
           b: {
             ownerSlug: slugOf(y.roster_id),
             points: round2(y.points ?? 0),
             startedTeams: teamsOf(y.starters),
-            lineup: lineupOf(y),
+            lineup: lineupOf(y, ctx.teamByPlayer),
           },
         }));
     }
