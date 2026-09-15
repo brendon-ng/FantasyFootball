@@ -251,11 +251,21 @@ export interface LiveProvider {
    * provider already put them on the lineup.
    *
    * ESPN answers null: its boxscore carries the projection beside the actual,
-   * so `season()` fills `LiveLineupSlot.projected` for free. Sleeper publishes
-   * them only on a separate ~88KB weekly feed, so it is fetched from here —
-   * once, and only on a page that shows a win probability.
+   * so `season()` fills `LiveLineupSlot.projected` for free — already scored
+   * with the league's own settings, because ESPN does that server-side.
+   * Sleeper publishes them only on a separate ~88KB weekly feed, so it is
+   * fetched from here — once, and only on a page that shows a win probability.
+   *
+   * `leagueId` because the answer DEPENDS ON THE LEAGUE: Sleeper's feed carries
+   * a projected stat line plus a `pts_ppr` convenience total under default
+   * scoring, and a league that scores anything differently needs the stat line
+   * run through its own settings instead. See the Sleeper implementation.
    */
-  weekProjections(season: number, week: number): Promise<Record<string, number> | null>;
+  weekProjections(
+    season: number,
+    week: number,
+    leagueId: string,
+  ): Promise<Record<string, number> | null>;
 }
 
 /**

@@ -15,6 +15,7 @@
 
 import { orderIsSet } from "../draft-slots.ts";
 
+import { TEMP_WEEK_OFFSET } from "./nfl-week.ts"; // TEMPORARY
 import { fetchRetry } from "./retry.ts";
 import type { LiveLineupSlot, LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "../types.ts";
 
@@ -146,6 +147,67 @@ function lineupOf(
   ];
 }
 
+/**
+ * A projected stat line, scored the way THIS LEAGUE scores.
+ *
+ * Sleeper's feed hands back a projected stat line per player plus `pts_ppr`, a
+ * convenience total under DEFAULT scoring. Reading that total was close but not
+ * right, and Sleeper's own app does not do it — it scores the stat line with
+ * the league's settings, which is why the two disagreed. In masterbatters, a
+ * league that is otherwise plain PPR:
+ *
+ *   Jaxson Dart   18.07 -> 17.22   `pass_int` is -2, not -1
+ *   LA Rams DEF    8.78 ->  8.74   `fum_rec` and `int` are 2, not 1
+ *   Malik Nabers  13.85 -> 13.80   a WR barely touches any of it
+ *
+ * Small per player and ALWAYS THE SAME DIRECTION, so a nine-starter lineup
+ * drifted a point or two high every week — and the same total feeds the win
+ * probability and the last-place odds, so it drifted too.
+ *
+ * ONLY THE THREE SUMMARY TOTALS ARE SKIPPED. An earlier pass dropped everything
+ * prefixed `pts_`, which also threw away `pts_allow_14_20` — a real scoring
+ * bucket worth a point to a defense — and made the Rams read 7.74 against the
+ * 8.74 Sleeper showed. Anything the league gives a weight to counts; anything
+ * it does not is ignored by having no weight, so no list of stat names has to
+ * be kept in step here.
+ */
+const SUMMARY_KEYS = new Set(["pts_ppr", "pts_std", "pts_half_ppr"]);
+
+function scoreLine(
+  line: Record<string, number | null>,
+  scoring: Record<string, number>,
+): number {
+  let total = 0;
+  for (const [stat, value] of Object.entries(line)) {
+    if (value == null || SUMMARY_KEYS.has(stat)) continue;
+    const weight = scoring[stat];
+    if (weight) total += value * weight;
+  }
+  return round2(total);
+}
+
+/**
+ * A league's scoring settings, fetched once per league per page.
+ *
+ * FAILS SOFT TO NULL, and the caller then falls back to `pts_ppr` — a default
+ * PPR total is a good approximation of most leagues and much better than no
+ * projection at all.
+ */
+const scoringCache = new Map<string, Promise<Record<string, number> | null>>();
+
+function leagueScoring(leagueId: string): Promise<Record<string, number> | null> {
+  const hit = scoringCache.get(leagueId);
+  if (hit) return hit;
+  const p = json<{ scoring_settings?: Record<string, number> } | null>(
+    `${BASE}/league/${leagueId}`,
+    null,
+  )
+    .then((l) => l?.scoring_settings ?? null)
+    .catch(() => null);
+  scoringCache.set(leagueId, p);
+  return p;
+}
+
 export const sleeperProvider: LiveProvider = {
   name: "Sleeper",
 
@@ -159,7 +221,7 @@ export const sleeperProvider: LiveProvider = {
     if (!st) return null;
     return {
       season: Number(st.season),
-      week: Math.max(1, st.display_week || st.week || 1),
+      week: Math.max(1, st.display_week || st.week || 1) + TEMP_WEEK_OFFSET, // TEMPORARY
       displayWeek: st.display_week,
       seasonType: st.season_type,
     };
@@ -369,16 +431,29 @@ export const sleeperProvider: LiveProvider = {
    * the 600KB payload that carries raw stats is not worth downloading to
    * rederive a number we already have.
    */
-  async weekProjections(season, week) {
-    const raw = await json<Record<string, { pts_ppr?: number | null } | null> | null>(
-      `${BASE}/projections/nfl/regular/${season}/${week}`,
-      null,
-    );
+  async weekProjections(season, week, leagueId) {
+    const [raw, scoring] = await Promise.all([
+      json<Record<string, Record<string, number | null> | null> | null>(
+        `${BASE}/projections/nfl/regular/${season}/${week}`,
+        null,
+      ),
+      leagueScoring(leagueId),
+    ]);
     if (!raw) return null;
     const out: Record<string, number> = {};
     for (const [id, line] of Object.entries(raw)) {
+      /**
+       * STILL GATED ON `pts_ppr` EXISTING, which is what decides whether this
+       * player HAS a projection at all. Scoring the line instead would hand
+       * back 0 for the nine thousand entries that carry no stats — and a zero
+       * is not the same answer as "no projection". `totalOf` refuses to build
+       * a team total when a starter is missing one, precisely so a team is
+       * never understated by a silent zero, and that guard only works if
+       * absence stays absent.
+       */
       const p = line?.pts_ppr;
-      if (typeof p === "number") out[id] = p;
+      if (typeof p !== "number") continue;
+      out[id] = scoring && line ? scoreLine(line, scoring) : p;
     }
     return Object.keys(out).length ? out : null;
   },

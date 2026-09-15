@@ -629,12 +629,14 @@ function useLiveTotals(
         if (!cancelled && by) setClock({ key, by });
       })
       .catch(() => {});
-    providerFor(ref)
-      ?.weekProjections(season, week)
-      .then((by) => {
-        if (!cancelled && by) setProj({ key, by });
-      })
-      .catch(() => {});
+    if (ref) {
+      providerFor(ref)
+        ?.weekProjections(season, week, ref.id)
+        .then((by) => {
+          if (!cancelled && by) setProj({ key, by });
+        })
+        .catch(() => {});
+    }
     return () => {
       cancelled = true;
     };

@@ -557,6 +557,7 @@ export const espnProvider: LiveProvider = {
 
   /** Also already answered — `statSourceId: 1` rides along on the boxscore. */
   async weekProjections() {
+    // ESPN scores its own projections with the league's settings server-side.
     return null;
   },
 
