@@ -85,7 +85,11 @@ interface EspnEntry {
        * actually did; `1` is the projection. A player who has not taken a snap
        * carries only the projection, which is what makes this the DNP signal.
        */
-      stats?: Array<{ scoringPeriodId?: number; statSourceId?: number }>;
+      stats?: Array<{
+        scoringPeriodId?: number;
+        statSourceId?: number;
+        appliedTotal?: number;
+      }>;
     };
   };
 }
@@ -256,6 +260,11 @@ function lineupOf(side: EspnGameSide | undefined, week: number): LiveLineupSlot[
         played: (pl?.stats ?? []).some(
           (st) => st.statSourceId === 0 && st.scoringPeriodId === week,
         ),
+        // `statSourceId: 1` is the projection, already in this payload — so
+        // ESPN's half of the win probability costs nothing extra.
+        projected: (pl?.stats ?? []).find(
+          (st) => st.statSourceId === 1 && st.scoringPeriodId === week,
+        )?.appliedTotal,
       };
     })
     .filter((p): p is LiveLineupSlot => p !== null)
@@ -542,6 +551,11 @@ export const espnProvider: LiveProvider = {
 
   /** Already answered: `lineupOf` reads the actual/projected split off the boxscore. */
   async playedThisWeek() {
+    return null;
+  },
+
+  /** Also already answered — `statSourceId: 1` rides along on the boxscore. */
+  async weekProjections() {
     return null;
   },
 

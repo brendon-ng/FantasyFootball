@@ -646,6 +646,17 @@ export interface LiveLineupSlot {
    * page paying for it. Never read as false.
    */
   played?: boolean;
+  /**
+   * His PRE-GAME projection in this league's scoring, when the provider gives
+   * one. Blended with the clock into a live projected final; see
+   * `lib/win-probability`.
+   *
+   * ESPN supplies it free on the boxscore entry (`statSourceId: 1` is the
+   * projection, `0` the actual). Sleeper does not put it on the matchup
+   * payload, so the win-probability hook fetches a weekly projection map only
+   * where it is actually shown.
+   */
+  projected?: number;
 }
 
 export interface LiveMatchup {

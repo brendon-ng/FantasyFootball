@@ -5,7 +5,13 @@ import Link from "next/link";
 import { LiveLineup } from "@/components/live-lineup";
 import { RecordBanner } from "@/components/record-banner";
 import { Panel, fmt } from "@/components/ui";
-import { useLineupStates, useLiveSeason, useMatchupSettled, useSeasonGames } from "@/lib/live";
+import {
+  useLineupStates,
+  useLiveSeason,
+  useMatchupSettled,
+  useSeasonGames,
+  useWinProbability,
+} from "@/lib/live";
 import type { LeagueRef } from "@/lib/league-ref";
 import { matchupMarks, recordHref, type RecordThresholds } from "@/lib/record-marks";
 import type { LiveSeason, LiveTeam, PlayerMeta } from "@/lib/types";
@@ -185,6 +191,16 @@ export function MatchupPreview({
    */
   const marks =
     isFinal && liveScore ? matchupMarks(liveScore.a.points, liveScore.b.points, thresholds) : [];
+
+  /**
+   * Live win probability, and only while it is still a question.
+   *
+   * SUPPRESSED ONCE SETTLED. `useMatchupSettled` already decided the game is
+   * over and the page says FINAL; a probability beside that reads as doubt
+   * about a result, and the model would print 99% rather than 100% anyway.
+   */
+  const odds = useWinProbability(live, refBySeason[String(season)] ?? null, thisWeek ?? null);
+  const showOdds = odds && !isFinal;
 
   const lineupOf = (slug: string) =>
     liveScore
@@ -390,6 +406,30 @@ export function MatchupPreview({
           );
         })}
       </div>
+
+      {showOdds ? (
+        <div>
+          <div className="mb-1 flex items-baseline justify-between text-[11px] text-chalk-500">
+            <span className="tabular font-semibold text-chalk-300">
+              {Math.round(odds.a * 100)}%
+            </span>
+            <span className="uppercase tracking-wide text-chalk-600">win probability</span>
+            <span className="tabular font-semibold text-chalk-300">
+              {Math.round(odds.b * 100)}%
+            </span>
+          </div>
+          {/* A SPLIT BAR, not two. The two numbers always sum to 100, so one bar
+              divided between them says that on sight; two independent bars
+              invite reading them as separate quantities. */}
+          <div className="flex h-1.5 overflow-hidden rounded-full bg-ink-700">
+            <div className="bg-accent" style={{ width: `${odds.a * 100}%` }} />
+            <div className="bg-chalk-600" style={{ width: `${odds.b * 100}%` }} />
+          </div>
+          <p className="mt-1 text-[10px] text-chalk-600">
+            From each side&rsquo;s projected finish and how much of their games is left.
+          </p>
+        </div>
+      ) : null}
 
       {/* The whole reason the drawer can be absent. Said once, under both cards,
           rather than as an empty panel per team. Suppressed once this week has

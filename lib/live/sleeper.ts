@@ -342,6 +342,35 @@ export const sleeperProvider: LiveProvider = {
    * and scored nothing", which a bare 0.00 cannot. About 9KB gzipped for a
    * week, and only the lineup view asks for it.
    */
+  /**
+   * Pre-game projections for the week, player id -> PPR points.
+   *
+   * UNDOCUMENTED, like the season projections the Scenario Lab already uses,
+   * and sourced from rotowire. ~88KB on the wire for 9,420 entries of which
+   * about 850 carry a points figure — everyone who is actually projected to
+   * play. Treated like the ADP scrape: never load-bearing, and a week with no
+   * answer simply shows no win probability.
+   *
+   * `pts_ppr` IS TAKEN AT FACE VALUE. Sleeper's own app rescores the raw stat
+   * line under each league's settings, which is the more correct thing; every
+   * league here is PPR, so the published figure is already the right one and
+   * the 600KB payload that carries raw stats is not worth downloading to
+   * rederive a number we already have.
+   */
+  async weekProjections(season, week) {
+    const raw = await json<Record<string, { pts_ppr?: number | null } | null> | null>(
+      `${BASE}/projections/nfl/regular/${season}/${week}`,
+      null,
+    );
+    if (!raw) return null;
+    const out: Record<string, number> = {};
+    for (const [id, line] of Object.entries(raw)) {
+      const p = line?.pts_ppr;
+      if (typeof p === "number") out[id] = p;
+    }
+    return Object.keys(out).length ? out : null;
+  },
+
   async playedThisWeek(season, week) {
     const raw = await json<Record<string, { gp?: number | null }> | null>(
       `${BASE}/stats/nfl/regular/${season}/${week}`,

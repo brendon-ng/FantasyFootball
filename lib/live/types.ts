@@ -246,6 +246,16 @@ export interface LiveProvider {
    * question only a lineup view asks.
    */
   playedThisWeek(season: number, week: number): Promise<Set<string> | null>;
+  /**
+   * Pre-game projections for the week, player id -> points, or null when the
+   * provider already put them on the lineup.
+   *
+   * ESPN answers null: its boxscore carries the projection beside the actual,
+   * so `season()` fills `LiveLineupSlot.projected` for free. Sleeper publishes
+   * them only on a separate ~88KB weekly feed, so it is fetched from here —
+   * once, and only on a page that shows a win probability.
+   */
+  weekProjections(season: number, week: number): Promise<Record<string, number> | null>;
 }
 
 /**

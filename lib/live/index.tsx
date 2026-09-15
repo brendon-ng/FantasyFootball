@@ -30,8 +30,14 @@ import {
 import { applyPhaseMock, type Replay } from "@/lib/phase-mock";
 import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
 import type { LiveMatchup, LiveSeason } from "@/lib/types";
+import {
+  liveProjection,
+  winProbability,
+  type WinProbability,
+} from "@/lib/win-probability";
 
 import { espnProvider } from "./espn.ts";
+import { fetchNflClock } from "./nfl-clock.ts";
 import { fetchNflWeek, teamsSettled, type NflWeekState } from "./nfl-schedule.ts";
 import { sleeperProvider } from "./sleeper.ts";
 import type {
@@ -47,6 +53,7 @@ import type {
   PlayerWeekState,
 } from "./types.ts";
 
+export type { WinProbability } from "@/lib/win-probability";
 export type {
   LeagueMove,
   LiveDraft,
@@ -569,6 +576,89 @@ export function useLineupStates(
       return null;
     },
   };
+}
+
+/**
+ * Live win probability for one matchup, or null when there is nothing to say.
+ *
+ * SLEEPER'S OWN MODEL — see `lib/win-probability`, which is transcribed from
+ * their bundle so the number here agrees with the number in the app.
+ *
+ * Needs two things beyond the scoreline: each starter's pre-game projection,
+ * and how much of his NFL game is left. ESPN puts the projection on the
+ * boxscore it already sends; Sleeper needs a weekly feed. The clock is one
+ * ~15KB request either way.
+ *
+ * GATED HARD, like every other live extra: only inside a live, unscored week,
+ * never under a phase mock, and only for a matchup that has actually started.
+ * Everything fails soft to null, which renders nothing.
+ */
+export function useWinProbability(
+  live: LiveSeason | null,
+  ref: LeagueRef | null,
+  matchup: LiveMatchup | null,
+): WinProbability | null {
+  const inSeason = live?.seasonType === "regular" || live?.seasonType === "post";
+  const week = live?.week ?? 0;
+  const season = live?.season ?? 0;
+  const scored = week > 0 && (live?.lastScoredLeg ?? 0) >= week;
+  const started = Boolean(matchup && (matchup.a.points > 0 || matchup.b.points > 0));
+  const ask = Boolean(inSeason && week > 0 && !scored && started && !mockPhase());
+  const key = `${season}:${week}`;
+
+  const [clock, setClock] = useState<{ key: string; by: Record<string, number> } | null>(null);
+  const [proj, setProj] = useState<{ key: string; by: Record<string, number> } | null>(null);
+
+  useEffect(() => {
+    if (!ask) return;
+    let cancelled = false;
+    fetchNflClock(season, week)
+      .then((by) => {
+        if (!cancelled && by) setClock({ key, by });
+      })
+      .catch(() => {});
+    providerFor(ref)
+      ?.weekProjections(season, week)
+      .then((by) => {
+        if (!cancelled && by) setProj({ key, by });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ask, key, season, week, refKey(ref)]);
+
+  if (!ask || !matchup) return null;
+  const by = clock?.key === key ? clock.by : null;
+  if (!by) return null;
+  const projById = proj?.key === key ? proj.by : null;
+
+  /**
+   * A side's projected final, summed over its STARTERS.
+   *
+   * Returns null if the lineup is missing or any starter has no projection
+   * from either source — a total built from a partial lineup understates that
+   * team and would hand the other one a probability it has not earned.
+   */
+  const projectedOf = (side: LiveMatchup["a"]): number | null => {
+    const lineup = side.lineup?.filter((p) => p.started);
+    if (!lineup?.length) return null;
+    let total = 0;
+    for (const p of lineup) {
+      const pre = p.projected ?? (projById ? projById[p.id] : undefined);
+      if (pre == null) return null;
+      // A player on a bye has no game, so nothing is left for him to add.
+      const left = p.team ? (by[p.team] ?? 0) : 0;
+      total += liveProjection(p.points, pre, left);
+    }
+    return total;
+  };
+
+  const pa = projectedOf(matchup.a);
+  const pb = projectedOf(matchup.b);
+  if (pa == null || pb == null) return null;
+  return winProbability(matchup.a.points, pa, matchup.b.points, pb);
 }
 
 /** Small badge describing where the live layer stands. */
