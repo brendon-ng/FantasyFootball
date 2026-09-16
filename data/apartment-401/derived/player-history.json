@@ -12125,6 +12125,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789542489998,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "5850": [
@@ -27176,6 +27188,20 @@
       "week": 1
     }
   ],
+  "11834": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789542489998,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
+    }
+  ],
   "12015": [
     {
       "action": "draft",
@@ -28253,6 +28279,32 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789534023269,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
+    }
+  ],
+  "13296": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789542489998,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "13298": [
@@ -28313,6 +28365,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    }
+  ],
+  "13414": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789542489998,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "13417": [
@@ -29651,6 +29717,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789542489998,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "CLE": [
@@ -31573,6 +31651,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789542489998,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "LAC": [
@@ -31831,6 +31921,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789533979991,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "LAR": [

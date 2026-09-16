@@ -1039,7 +1039,7 @@
     "birth_date": "1993-02-10",
     "full_name": "Sterling Shepard",
     "position": "WR",
-    "team": null,
+    "team": "NYJ",
     "years_exp": 10
   },
   "3202": {
@@ -1886,7 +1886,7 @@
     "birth_date": "1994-10-10",
     "full_name": "Marquez Valdes-Scantling",
     "position": "WR",
-    "team": null,
+    "team": "LAC",
     "years_exp": 8
   },
   "5094": {
@@ -2712,7 +2712,7 @@
     "birth_date": "1998-08-25",
     "full_name": "Tyler Johnson",
     "position": "WR",
-    "team": null,
+    "team": "NYJ",
     "years_exp": 6
   },
   "6963": {
@@ -3153,7 +3153,7 @@
     "birth_date": "1999-11-26",
     "full_name": "Hassan Haskins",
     "position": "RB",
-    "team": "NE",
+    "team": null,
     "years_exp": 4
   },
   "8125": {
@@ -3842,6 +3842,13 @@
     "team": "CHI",
     "years_exp": 3
   },
+  "11370": {
+    "birth_date": "2000-01-11",
+    "full_name": "Chris Brooks",
+    "position": "RB",
+    "team": "GB",
+    "years_exp": 3
+  },
   "11435": {
     "birth_date": "1999-05-08",
     "full_name": "Emanuel Wilson",
@@ -4283,6 +4290,13 @@
     "team": "JAX",
     "years_exp": 1
   },
+  "12492": {
+    "birth_date": "2002-12-10",
+    "full_name": "Pat Bryant",
+    "position": "WR",
+    "team": "DEN",
+    "years_exp": 1
+  },
   "12493": {
     "birth_date": "2003-06-25",
     "full_name": "Oronde Gadsden",
@@ -4542,6 +4556,13 @@
     "team": "PHI",
     "years_exp": 0
   },
+  "13296": {
+    "birth_date": "2003-09-09",
+    "full_name": "Caleb Douglas",
+    "position": "WR",
+    "team": "MIA",
+    "years_exp": 0
+  },
   "13298": {
     "birth_date": "2004-09-23",
     "full_name": "KC Concepcion",
@@ -4596,6 +4617,13 @@
     "full_name": "Cyrus Allen",
     "position": "WR",
     "team": "KC",
+    "years_exp": 0
+  },
+  "13414": {
+    "birth_date": "2001-10-17",
+    "full_name": "Kaelon Black",
+    "position": "RB",
+    "team": "SF",
     "years_exp": 0
   },
   "13417": {

@@ -1,0 +1,27 @@
+[
+  {
+    "adds": {
+      "NE": 7
+    },
+    "consenter_ids": [
+      7
+    ],
+    "created": 1789542858001,
+    "creator": "1265012191099113472",
+    "draft_picks": [],
+    "drops": {
+      "DET": 7
+    },
+    "leg": 2,
+    "metadata": null,
+    "roster_ids": [
+      7
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1789542858001,
+    "transaction_id": "1405848277273817088",
+    "type": "free_agent",
+    "waiver_budget": []
+  }
+]
