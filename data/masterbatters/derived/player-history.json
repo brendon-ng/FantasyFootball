@@ -920,6 +920,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "robbie-goodman",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789622692611,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "3198": [
@@ -1781,6 +1793,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 13
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789569957891,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "4195": [
@@ -2468,6 +2492,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789588149165,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "5012": [
@@ -3852,6 +3888,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "robbie-goodman",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789622692611,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "6806": [
@@ -6377,6 +6425,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789588149165,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "8800": [
@@ -8768,6 +8828,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789591537950,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "11620": [
@@ -11290,6 +11362,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789569957891,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "12533": [
@@ -11827,6 +11911,20 @@
       "week": 1
     }
   ],
+  "13301": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789577796874,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
+    }
+  ],
   "13305": [
     {
       "action": "draft",
@@ -11867,6 +11965,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789577796874,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "13346": [
@@ -11883,6 +11993,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789591537950,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "13414": [
@@ -12437,6 +12559,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789588230183,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "CIN": [
@@ -12463,6 +12597,30 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789583198902,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789583294320,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "CLE": [
@@ -13801,6 +13959,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789588230183,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "MIA": [
