@@ -43180,6 +43180,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": 5,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789712403953,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "9756": [

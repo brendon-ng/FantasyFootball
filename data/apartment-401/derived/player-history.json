@@ -2911,6 +2911,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789692995697,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "2028": [
@@ -28163,6 +28175,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789692987378,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "12713": [
@@ -28304,6 +28328,18 @@
       "timestamp": 1789542489998,
       "toSlug": null,
       "type": "waiver",
+      "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789677691284,
+      "toSlug": null,
+      "type": "free_agent",
       "week": 2
     }
   ],
@@ -29729,6 +29765,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789666507471,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "CLE": [
@@ -30605,6 +30653,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789654445210,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "GB": [
@@ -31662,6 +31722,18 @@
       "timestamp": 1789542489998,
       "toSlug": null,
       "type": "waiver",
+      "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789677691284,
+      "toSlug": null,
+      "type": "free_agent",
       "week": 2
     }
   ],
@@ -34553,6 +34625,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 13
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789666507471,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "TB": [
@@ -34667,6 +34751,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 13
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789654445210,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "TEN": [

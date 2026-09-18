@@ -2835,6 +2835,42 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789680863289,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789681007840,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789688572015,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "5846": [
@@ -4811,6 +4847,32 @@
       "week": 0
     }
   ],
+  "7600": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789681007840,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789682243922,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
+    }
+  ],
   "7607": [
     {
       "action": "add",
@@ -6319,6 +6381,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789716196278,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "8676": [
@@ -6722,6 +6796,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789716196278,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "9481": [
@@ -7212,6 +7298,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789682243922,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "9509": [
@@ -7660,6 +7758,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789680863289,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "10222": [
@@ -8924,6 +9034,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789688572015,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "11625": [
@@ -11838,6 +11960,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "robbie-goodman",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789712210901,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "13294": [
@@ -11909,6 +12043,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "robbie-goodman",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789712210901,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "13301": [
@@ -12570,6 +12716,18 @@
       "timestamp": 1789588230183,
       "toSlug": null,
       "type": "free_agent",
+      "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789712210901,
+      "toSlug": null,
+      "type": "waiver",
       "week": 2
     }
   ],
@@ -13677,6 +13835,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789712210901,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "LAR": [
