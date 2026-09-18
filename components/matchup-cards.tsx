@@ -331,11 +331,17 @@ export function MatchupCards({
                         say, and it would be wrong. Mirrors "<1%" at the
                         bottom, which is the same lie upside down. */}
                     <span className="tabular shrink-0 text-[8px] leading-none text-chalk-600">
-                      {odds < 0.005
-                        ? "<1%"
-                        : odds >= 0.995
-                          ? ">99%"
-                          : `${Math.round(odds * 100)}%`}
+                      {/* 0% ONLY WHEN IT IS 0. `safeFromLast` zeroes the
+                          teams somebody has already finished below; everything
+                          else that rounds down is "<1%", because a team with a
+                          lineup still out there has not escaped anything. */}
+                      {odds === 0
+                        ? "0%"
+                        : odds < 0.005
+                          ? "<1%"
+                          : odds >= 0.995
+                            ? ">99%"
+                            : `${Math.round(odds * 100)}%`}
                     </span>
                   </span>
                 ) : null;

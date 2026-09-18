@@ -34,6 +34,7 @@ import {
   lastPlaceOdds,
   liveProjection,
   lockedIntoLast,
+  safeFromLast,
   winProbability,
   type WinProbability,
 } from "@/lib/win-probability";
@@ -771,6 +772,11 @@ export function useLastPlaceOdds(
   odds: number;
   /** Mathematically settled, not merely likely. See `lockedIntoLast`. */
   locked: boolean;
+  /**
+   * Exactly zero, not merely small — somebody has already finished below them.
+   * See `safeFromLast`; `odds` is forced to 0 for these.
+   */
+  safe: boolean;
 }> | null {
   const totals = useLiveTotals(live, ref);
   if (!totals || !live) return null;
@@ -783,8 +789,21 @@ export function useLastPlaceOdds(
   const odds = lastPlaceOdds(rows);
   if (!odds) return null;
   const locked = lockedIntoLast(rows);
+  /**
+   * ZEROED RATHER THAN LEFT TO ROUND. The integral gives these about 1e-100,
+   * which is not a number anybody should have to read as "impossible" — see
+   * `safeFromLast`. Not renormalised afterwards, deliberately: the mass being
+   * removed is far below anything the arithmetic elsewhere can notice, and
+   * rescaling the column would hide it if that ever stopped being true.
+   */
+  const safe = safeFromLast(rows);
   return rows
-    .map((r, i) => ({ ...r, odds: odds[i], locked: locked[i] }))
+    .map((r, i) => ({
+      ...r,
+      odds: safe[i] ? 0 : odds[i],
+      locked: locked[i],
+      safe: safe[i],
+    }))
     .sort((x, y) => y.odds - x.odds);
 }
 

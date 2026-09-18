@@ -188,6 +188,32 @@ export function lockedIntoLast(
   );
 }
 
+/**
+ * Who CANNOT finish last — the mirror of `lockedIntoLast`, and decided the same
+ * way: by arithmetic, not by the integral.
+ *
+ * The integral cannot say zero. `distribution` keeps Sleeper's `|| 0.1`
+ * variance floor, so a team that has finished is still modelled as a normal
+ * with a standard deviation of about a third of a point rather than as a point
+ * mass. Two finished teams ten points apart sit twenty-odd sigma from each
+ * other, which comes out somewhere around 1e-108 — vanishingly small, never
+ * 0.0, and the display then rounded it to "<1%" when the honest answer was 0%.
+ *
+ *   a team cannot be last once some OTHER team has FINISHED below it
+ *
+ * The other team's score is fixed and this one's can only rise, so the gap can
+ * never close. Note this team need NOT have finished itself: still having
+ * players out there only helps it. Strict, so being level with a finished team
+ * is not safety — that is a tie for last, which is still last.
+ */
+export function safeFromLast(
+  teams: Array<{ current: number; done: boolean }>,
+): boolean[] {
+  return teams.map((t, i) =>
+    teams.some((o, j) => j !== i && o.done && o.current < t.current),
+  );
+}
+
 function normalPdf(x: number, mean: number, variance: number): number {
   const v = Math.max(variance, 1e-9);
   return Math.exp(-((x - mean) ** 2) / (2 * v)) / Math.sqrt(2 * Math.PI * v);
