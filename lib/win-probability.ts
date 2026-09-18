@@ -160,6 +160,21 @@ export function lastPlaceOdds(
 }
 
 /**
+ * A FANTASY SCORE CAN GO DOWN. This is the fact both certainty checks below
+ * turn on, and getting it wrong is what made them claim more than they knew.
+ *
+ * A lost fumble, an interception, negative rushing yards, a defence shipping
+ * another touchdown — a team with players still out there can FALL, not only
+ * climb. So "nobody below them can catch up" is not established by anybody's
+ * current score while a single game is unfinished; the team above can come
+ * down to meet them instead.
+ *
+ * Both functions therefore require the teams they reason about to have
+ * FINISHED. A finished score is the only one that cannot move, and certainty
+ * about an ordering needs both ends of it pinned.
+ */
+
+/**
  * Who is CERTAINLY last — decided by arithmetic, not by the integral above.
  *
  * NOT A PROBABILITY, AND DELIBERATELY NOT READ AS ONE. `lastPlaceOdds` is a
@@ -169,14 +184,18 @@ export function lastPlaceOdds(
  * to mark one who cannot. Certainty is a fact about the schedule, so it is
  * computed from the schedule:
  *
- *   a team is last for sure when their own score CANNOT MOVE and every other
- *   team is ALREADY STRICTLY ABOVE it
+ *   a team is last for sure when EVERY team has finished and this one is
+ *   strictly the lowest
  *
- * Other teams may still have football left — that only pushes them further
- * ahead, so it cannot rescue anybody. Strict inequality is what makes this
- * safe, and it is also why a tie at the bottom marks NOBODY: two teams level
- * on a final score is an unresolved question for the commissioner, not a
- * determined loser, and the marker should not pre-empt it.
+ * EVERY team, including the ones above. An earlier version asked only that
+ * this team had finished and the rest were currently ahead, on the reasoning
+ * that the rest could only climb further away. They cannot — see the note
+ * above — so a side still playing with a comfortable lead could come back down
+ * and take last off them.
+ *
+ * Strict inequality, which is also why a tie at the bottom marks NOBODY: two
+ * teams level on a final score is an unresolved question for the commissioner,
+ * not a determined loser, and the marker should not pre-empt it.
  *
  * Returns one flag per team, in the order given.
  */
@@ -184,7 +203,7 @@ export function lockedIntoLast(
   teams: Array<{ current: number; done: boolean }>,
 ): boolean[] {
   return teams.map(
-    (t, i) => t.done && teams.every((o, j) => j === i || o.current > t.current),
+    (t, i) => t.done && teams.every((o, j) => j === i || (o.done && o.current > t.current)),
   );
 }
 
@@ -199,18 +218,22 @@ export function lockedIntoLast(
  * other, which comes out somewhere around 1e-108 — vanishingly small, never
  * 0.0, and the display then rounded it to "<1%" when the honest answer was 0%.
  *
- *   a team cannot be last once some OTHER team has FINISHED below it
+ *   a team is safe once IT has finished and some OTHER finished team is below
  *
- * The other team's score is fixed and this one's can only rise, so the gap can
- * never close. Note this team need NOT have finished itself: still having
- * players out there only helps it. Strict, so being level with a finished team
- * is not safety — that is a tie for last, which is still last.
+ * BOTH must have finished. An earlier version asked only for the other team,
+ * reasoning that this one could only climb away from it. It cannot: a side on
+ * 80 with players still out can fumble and throw its way below a finished 74.1
+ * — unlikely, and not impossible, which is the whole difference between "<1%"
+ * and "0%".
+ *
+ * Strict, so being level with a finished team is not safety — that is a tie
+ * for last, which is still last.
  */
 export function safeFromLast(
   teams: Array<{ current: number; done: boolean }>,
 ): boolean[] {
-  return teams.map((t, i) =>
-    teams.some((o, j) => j !== i && o.done && o.current < t.current),
+  return teams.map(
+    (t, i) => t.done && teams.some((o, j) => j !== i && o.done && o.current < t.current),
   );
 }
 
