@@ -10552,6 +10552,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789760816427,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "12493": [
@@ -12125,6 +12137,20 @@
       "week": 2
     }
   ],
+  "13337": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789761567000,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
+    }
+  ],
   "13346": [
     {
       "action": "draft",
@@ -12150,6 +12176,18 @@
       "timestamp": 1789591537950,
       "toSlug": null,
       "type": "free_agent",
+      "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789760816427,
+      "toSlug": null,
+      "type": "waiver",
       "week": 2
     }
   ],
@@ -14839,6 +14877,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789761567000,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "WAS": [

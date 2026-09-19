@@ -38211,6 +38211,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789806139137,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "8134": [
@@ -56067,6 +56079,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789806139137,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "NO": [
@@ -58069,6 +58093,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 13
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789762445864,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "TEN": [
