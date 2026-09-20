@@ -23697,6 +23697,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 16
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789855045198,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "5209": [
@@ -47643,6 +47655,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789823997370,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "12493": [
@@ -54360,6 +54384,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789823997370,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "LAR": [
@@ -58102,6 +58138,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1789762445864,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789855045198,
       "toSlug": null,
       "type": "free_agent",
       "week": 2

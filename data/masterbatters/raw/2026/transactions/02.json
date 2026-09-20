@@ -1,6 +1,31 @@
 [
   {
     "adds": {
+      "2020": 1
+    },
+    "consenter_ids": [
+      1
+    ],
+    "created": 1789853418768,
+    "creator": "887589851141427200",
+    "draft_picks": [],
+    "drops": {
+      "13417": 1
+    },
+    "leg": 2,
+    "metadata": null,
+    "roster_ids": [
+      1
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1789853418768,
+    "transaction_id": "1407150863536967680",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
       "13337": 4
     },
     "consenter_ids": [
