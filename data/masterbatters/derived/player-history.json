@@ -6758,6 +6758,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789922078964,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "9480": [
@@ -9949,6 +9961,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789921698811,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "11834": [
@@ -11866,6 +11890,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789921698811,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "12713": [
@@ -11904,6 +11940,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    }
+  ],
+  "12718": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789922078964,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "13279": [

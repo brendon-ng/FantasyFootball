@@ -369,6 +369,29 @@
       "timestamp": 1789874699875,
       "vetoed": false,
       "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "8eb08624-d12c-43ae-b93c-9240a0aecc1b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "10213",
+          "toSlug": "jivan-gubbi"
+        },
+        {
+          "fromSlug": "jivan-gubbi",
+          "playerId": "3161",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jivan-gubbi"
+      ],
+      "timestamp": 1789923227948,
+      "vetoed": false,
+      "week": 2
     }
   ]
 }

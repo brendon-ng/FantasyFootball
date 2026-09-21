@@ -4335,6 +4335,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789923227948,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "3163": [
@@ -24722,6 +24734,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1789923227948,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "10219": [
