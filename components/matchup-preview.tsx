@@ -9,7 +9,6 @@ import {
   useLineupStates,
   useLivePlayerProjections,
   useLiveSeason,
-  useWeekLineups,
   useMatchupSettled,
   useSeasonGames,
   useWinProbability,
@@ -184,14 +183,6 @@ export function MatchupPreview({
     refBySeason[String(season)] ?? null,
   );
   const projectionOf = (slot: { id: string }) => {
-    /**
-     * THE LIVE WEEK ONLY. `playerProjections` is keyed by player id for
-     * whichever week is being played, so on a page for a LATER week the same
-     * player would match and his number from this week would be printed
-     * against next week's fixture. `thisWeek` is what says the page and the
-     * live season are talking about the same games.
-     */
-    if (!thisWeek) return null;
     const p = playerProjections?.[slot.id];
     // GONE ONCE HIS GAME ENDS: from then the projection is the score.
     return p && !p.done ? p.projected : null;
@@ -282,26 +273,12 @@ export function MatchupPreview({
   const odds = useWinProbability(live, refBySeason[String(season)] ?? null, thisWeek ?? null);
   const showOdds = odds && !isFinal;
 
-  /**
-   * A LATER WEEK'S LINEUPS, which `LiveSeason` does not carry.
-   *
-   * It holds whichever week the provider calls current, so a preview of next
-   * week's game had a scoreline and a series and no teams at all. Only asked
-   * for when this page is not that week; see `useWeekLineups`.
-   */
-  const aheadLineups = useWeekLineups(
-    refBySeason[String(season)] ?? null,
-    season,
-    week,
-    { userIdToSlug, teamByPlayer },
-    Boolean(thisWeek),
-  );
   const lineupOf = (slug: string) =>
     liveScore
       ? (liveScore.a.ownerSlug === slug ? liveScore.a : liveScore.b).lineup
       : thisWeek
         ? (thisWeek.a.ownerSlug === slug ? thisWeek.a : thisWeek.b).lineup
-        : (aheadLineups?.[slug] ?? undefined);
+        : undefined;
   const anyLineup = Boolean(lineupOf(a)?.length || lineupOf(b)?.length);
 
   /** Player-week records in this matchup, for the banner. */

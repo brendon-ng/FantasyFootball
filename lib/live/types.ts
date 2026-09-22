@@ -10,9 +10,7 @@
  * Dependency-free: this ships to the browser.
  */
 
-import type { LiveSeason, SeasonType,
-  LiveLineupSlot,
-} from "../types.ts";
+import type { LiveSeason, SeasonType } from "../types.ts";
 
 export type LiveState<T> =
   | { status: "loading"; data: null; error: null }
@@ -220,26 +218,6 @@ export interface LiveProvider {
    * exactly the window a punishment gets drawn in.
    */
   weekGames(id: string, season: number, week: number): Promise<LiveWeekGame[]>;
-  /**
-   * Lineups for ONE named week, owner slug -> starters, for a week that is not
-   * the one being played.
-   *
-   * A preview page for next week could not show a lineup: the only lineups on
-   * hand are the ones baked into `LiveSeason`, and that is whichever week the
-   * provider says is current. Sleeper publishes a future week's starters days
-   * early — whatever each manager has set right now — which is exactly what a
-   * preview wants.
-   *
-   * Optional, and null is a fine answer. ESPN only fills
-   * `rosterForCurrentScoringPeriod` for the period it is scoring, so it has
-   * nothing to give for a week that has not arrived.
-   */
-  weekLineups?(
-    id: string,
-    season: number,
-    week: number,
-    ctx: SeasonContext,
-  ): Promise<Record<string, LiveLineupSlot[]> | null>;
   /**
    * Every week's scoreboard up to and including `throughWeek`, keyed by week.
    *

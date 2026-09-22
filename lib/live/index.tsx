@@ -29,7 +29,7 @@ import {
 } from "@/lib/league-ref";
 import { applyPhaseMock, type Replay } from "@/lib/phase-mock";
 import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
-import type { LiveLineupSlot, LiveMatchup, LiveSeason } from "@/lib/types";
+import type { LiveMatchup, LiveSeason } from "@/lib/types";
 import {
   defenseProjection,
   lastPlaceOdds,
@@ -752,53 +752,6 @@ function useLiveTotals(
     }
   }
   return out.size ? { byTeam: out, byPlayer } : null;
-}
-
-/**
- * Lineups for a week that is NOT the one being played.
- *
- * The lineups baked into `LiveSeason` are the current week's, so a preview of
- * next week's matchup had a scoreline, a series and no teams — the page simply
- * had nothing to draw. Sleeper publishes a future week's starters days early,
- * so this asks for them.
- *
- * SKIPPED FOR THE LIVE WEEK, where `LiveSeason` already has better: those
- * lineups carry points and these do not.
- */
-export function useWeekLineups(
-  ref: LeagueRef | null,
-  season: number,
-  week: number,
-  ctx: { userIdToSlug: Record<string, string>; teamByPlayer?: Record<string, string> },
-  skip: boolean,
-): Record<string, LiveLineupSlot[]> | null {
-  const [state, setState] = useState<{
-    key: string;
-    by: Record<string, LiveLineupSlot[]>;
-  } | null>(null);
-  const key = `${refKey(ref)}:${season}:${week}`;
-  const ask = Boolean(ref && season > 0 && week > 0 && !skip && !mockPhase());
-
-  useEffect(() => {
-    if (!ask || !ref) return;
-    let cancelled = false;
-    providerFor(ref)
-      ?.weekLineups?.(ref.id, season, week, {
-        slugByRoster: new Map(),
-        userIdToSlug: ctx.userIdToSlug,
-        teamByPlayer: ctx.teamByPlayer,
-      })
-      .then((by) => {
-        if (!cancelled && by) setState({ key, by });
-      })
-      .catch(() => {});
-    return () => {
-      cancelled = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ask, key]);
-
-  return state?.key === key ? state.by : null;
 }
 
 /**
