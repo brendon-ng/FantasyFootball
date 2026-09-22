@@ -94,12 +94,6 @@ export function LineupPanel({
   // THE COLUMN GOES AWAY WHEN NOTHING FILLS IT. A live lineup has no slot
   // ordering, and a permanently empty 10-wide gutter reads as a broken table.
   const showSlots = rows.some((r) => r.slot);
-  /**
-   * Whether any row carries a projection, which only decides how WIDE the
-   * points column is. An archived lineup has none, so it keeps the narrow
-   * column it always had rather than gaining an empty gutter.
-   */
-  const showProjected = rows.some((r) => r.projected != null);
   const best = Math.max(0, ...starters.map((r) => r.points));
 
   if (!rows.length) {
@@ -118,16 +112,13 @@ export function LineupPanel({
         {showSlots ? <Col className="w-10 shrink-0">Slot</Col> : null}
         <Col className="w-8 shrink-0 text-center">Pos</Col>
         <Col className="flex-1">Player</Col>
-        <Col
-          className={`${showProjected ? "w-24" : "w-14"} shrink-0 text-right`}
-          hint="Fantasy points scored in this game"
-        >
+        <Col className="w-20 shrink-0 text-right" hint="Fantasy points scored in this game">
           Pts
         </Col>
       </ListHeader>
       <div className="divide-y divide-ink-700">
         {starters.map((r) => (
-          <Row key={r.id} row={r} showSlots={showSlots} best={best} wide={showProjected} />
+          <Row key={r.id} row={r} showSlots={showSlots} best={best} />
         ))}
       </div>
 
@@ -143,7 +134,7 @@ export function LineupPanel({
             {[...bench]
               .sort((a, b) => b.points - a.points)
               .map((r) => (
-                <Row key={r.id} row={r} showSlots={showSlots} best={best} wide={showProjected} />
+                <Row key={r.id} row={r} showSlots={showSlots} best={best} />
               ))}
           </div>
         </details>
@@ -159,15 +150,7 @@ export function LineupPanel({
  * about a finished lineup, and the only state it can collide with is `final`,
  * which is the plain one anyway.
  */
-function PointsCell({
-  row,
-  best,
-  wide,
-}: {
-  row: LineupRow;
-  best: number;
-  wide: boolean;
-}) {
+function PointsCell({ row, best }: { row: LineupRow; best: number }) {
   const st = row.state ? STATE[row.state] : null;
   const isBest = row.started && row.points === best && best > 0;
   const tone = isBest ? "font-bold text-accent" : (st?.tone ?? "text-chalk-300");
@@ -175,13 +158,13 @@ function PointsCell({
   return (
     <span
       title={st?.title}
-      className={`tabular flex ${wide ? "w-24" : "w-14"} shrink-0 items-baseline justify-end gap-1 text-right text-sm ${tone}`}
+      className={`tabular flex w-20 shrink-0 items-center justify-end gap-1 text-right text-sm ${tone}`}
     >
       {/* A pulsing dot rather than a word: the column is 14 wide and already
           carries a number, and this is the same signal the rest of the site
           uses for something still moving. */}
       {row.state === "live" ? (
-        <span className="live-dot inline-block h-1.5 w-1.5 shrink-0 self-center rounded-full bg-accent" />
+        <span className="live-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
       ) : null}
       {/*
         THE PROJECTION SITS TO THE LEFT OF THE SCORE, dimmer and smaller. The
@@ -189,11 +172,11 @@ function PointsCell({
         where the eye already looks for it; the projection leans in beside it
         rather than pushing it off its line.
 
-        ON THE SAME BASELINE, not the same centre. Two numbers of different
-        sizes centred against each other leave the smaller one riding high,
-        which is what "slightly off" looks like; numerals line up by sitting on
-        a shared baseline. The live dot is not a numeral and has no baseline
-        worth sharing, so it centres itself.
+        NO `leading-none` ON IT, which is what had it riding high. The row
+        centres each item's line box; `leading-none` clamps this one to the em
+        box, and the em box's centre sits above where the digits actually are,
+        because they rest on the baseline with the descender space below them
+        excluded. A normal line box makes the two comparable and they centre.
 
         Only while the player has football left: afterwards the two are the
         same figure and the second one is noise.
@@ -201,19 +184,12 @@ function PointsCell({
       {row.projected != null ? (
         <span
           title={`Projected final: ${fmt.pts(row.projected)}`}
-          className="tabular shrink-0 text-[11px] font-normal text-chalk-600"
+          className="tabular shrink-0 text-[10px] font-normal text-chalk-600"
         >
           {fmt.pts(row.projected)}
         </span>
       ) : null}
-      {/*
-        FIXED WIDTH, WHICH IS THE WHOLE ALIGNMENT FIX. Right-aligned text in a
-        box that shrinks to fit puts every score at the right edge but every
-        projection somewhere different, because "5.30" and "10.00" are not the
-        same width and the one on the left gets shoved along. Pinning the box
-        gives the projections a straight edge to sit against.
-      */}
-      <span className="w-11 shrink-0 text-right">{st?.label ?? fmt.pts(row.points)}</span>
+      {st?.label ?? fmt.pts(row.points)}
     </span>
   );
 }
@@ -222,13 +198,10 @@ function Row({
   row,
   showSlots,
   best,
-  wide = false,
 }: {
   row: LineupRow;
   showSlots: boolean;
   best: number;
-  /** Room for a projection beside the score; see `showProjected`. */
-  wide?: boolean;
 }) {
   const body = (
     <>
@@ -273,7 +246,7 @@ function Row({
       ) : (
         <span className="min-w-0 flex-1 truncate text-sm">{body}</span>
       )}
-      <PointsCell row={row} best={best} wide={wide} />
+      <PointsCell row={row} best={best} />
     </div>
   );
 }
