@@ -7,6 +7,7 @@ import { RecordBanner } from "@/components/record-banner";
 import { Panel, fmt } from "@/components/ui";
 import {
   useLineupStates,
+  useLivePlayerProjections,
   useLiveSeason,
   useMatchupSettled,
   useSeasonGames,
@@ -172,6 +173,20 @@ export function MatchupPreview({
   const settled = useMatchupSettled(live);
   // Hoisted so both lineups share one NFL-clock fetch rather than one each.
   const { stateOf } = useLineupStates(live, refBySeason[String(season)] ?? null);
+  /**
+   * Each starter's projected final, beside his score while he is still playing.
+   * Hoisted here so both lineups read the same map and neither can disagree
+   * with the team total the page already shows.
+   */
+  const playerProjections = useLivePlayerProjections(
+    live,
+    refBySeason[String(season)] ?? null,
+  );
+  const projectionOf = (slot: { id: string }) => {
+    const p = playerProjections?.[slot.id];
+    // GONE ONCE HIS GAME ENDS: from then the projection is the score.
+    return p && !p.done ? p.projected : null;
+  };
   const isFinal = Boolean(thisWeek && settled(thisWeek));
   /** This week's already-final games, in week order — see `marks` below. */
   const finishedThisWeek =
@@ -536,6 +551,7 @@ export function MatchupPreview({
               players={players}
               stateOf={stateOf}
               markOf={playerMarkOf}
+              projectionOf={projectionOf}
             />
           ))}
         </div>

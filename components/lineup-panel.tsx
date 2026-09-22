@@ -43,6 +43,14 @@ export interface LineupRow {
    * finished game has no states to distinguish, every player's week is over.
    */
   state?: PlayerWeekState | null;
+  /**
+   * This player's projected final, while he still has football left.
+   *
+   * Set only for a player whose game is unfinished — once it ends the
+   * projection IS the score and printing both says nothing. Absent on an
+   * archived lineup, where every game is over by definition.
+   */
+  projected?: number | null;
 }
 
 /**
@@ -104,7 +112,7 @@ export function LineupPanel({
         {showSlots ? <Col className="w-10 shrink-0">Slot</Col> : null}
         <Col className="w-8 shrink-0 text-center">Pos</Col>
         <Col className="flex-1">Player</Col>
-        <Col className="w-14 shrink-0 text-right" hint="Fantasy points scored in this game">
+        <Col className="w-20 shrink-0 text-right" hint="Fantasy points scored in this game">
           Pts
         </Col>
       </ListHeader>
@@ -150,13 +158,30 @@ function PointsCell({ row, best }: { row: LineupRow; best: number }) {
   return (
     <span
       title={st?.title}
-      className={`tabular flex w-14 shrink-0 items-center justify-end gap-1 text-right text-sm ${tone}`}
+      className={`tabular flex w-20 shrink-0 items-center justify-end gap-1 text-right text-sm ${tone}`}
     >
       {/* A pulsing dot rather than a word: the column is 14 wide and already
           carries a number, and this is the same signal the rest of the site
           uses for something still moving. */}
       {row.state === "live" ? (
         <span className="live-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+      ) : null}
+      {/*
+        THE PROJECTION SITS TO THE LEFT OF THE SCORE, dimmer and smaller. The
+        score stays hard against the right edge where the column aligns and
+        where the eye already looks for it; the projection leans in beside it
+        rather than pushing it off its line.
+
+        Only while the player has football left: afterwards the two are the
+        same figure and the second one is noise.
+      */}
+      {row.projected != null ? (
+        <span
+          title={`Projected final: ${fmt.pts(row.projected)}`}
+          className="tabular shrink-0 text-[10px] font-normal leading-none text-chalk-600"
+        >
+          {fmt.pts(row.projected)}
+        </span>
       ) : null}
       {st?.label ?? fmt.pts(row.points)}
     </span>

@@ -610,7 +610,10 @@ function isDefense(slot: { id: string; position: string | null }): boolean {
 function useLiveTotals(
   live: LiveSeason | null,
   ref: LeagueRef | null,
-): Map<string, { current: number; projected: number; done: boolean }> | null {
+): {
+  byTeam: Map<string, { current: number; projected: number; done: boolean }>;
+  byPlayer: Record<string, { projected: number; done: boolean }>;
+} | null {
   const inSeason = live?.seasonType === "regular" || live?.seasonType === "post";
   const week = live?.week ?? 0;
   const season = live?.season ?? 0;
@@ -682,6 +685,9 @@ function useLiveTotals(
    * source — a total built from a partial lineup understates that team, which
    * would hand somebody else a probability they have not earned.
    */
+  /** Per player, for the lineup rows. Filled as the totals are built. */
+  const byPlayer: Record<string, { projected: number; done: boolean }> = {};
+
   const totalOf = (side: LiveMatchup["a"]): { projected: number; done: boolean } | null => {
     const lineup = side.lineup?.filter((p) => p.started);
     if (!lineup?.length) return null;
@@ -728,9 +734,11 @@ function useLiveTotals(
        * which at least decays rather than banking. The offence blend is not
        * used for a defence at all.
        */
-      total += isDefense(p)
+      const projected = isDefense(p)
         ? (defBy?.[p.id] ?? defenseProjection(p.points, pre, left))
         : liveProjection(p.points, pre, left);
+      byPlayer[p.id] = { projected, done: left <= 0 };
+      total += projected;
     }
     return { projected: total, done };
   };
@@ -743,7 +751,23 @@ function useLiveTotals(
       out.set(side.ownerSlug, { current: side.points, ...t });
     }
   }
-  return out.size ? out : null;
+  return out.size ? { byTeam: out, byPlayer } : null;
+}
+
+/**
+ * Each STARTER's projected final, for the lineup rows on a matchup page.
+ *
+ * The same numbers the team totals are built from, exposed rather than
+ * recomputed, so a row and the total above it can never disagree. `done` is
+ * that player's own game being over, which is when a projection stops being
+ * one and the caller should drop it.
+ */
+export function useLivePlayerProjections(
+  live: LiveSeason | null,
+  ref: LeagueRef | null,
+): Record<string, { projected: number; done: boolean }> | null {
+  const totals = useLiveTotals(live, ref);
+  return totals?.byPlayer ?? null;
 }
 
 /**
@@ -766,7 +790,7 @@ export function useLiveProjections(
   live: LiveSeason | null,
   ref: LeagueRef | null,
 ): Record<string, { projected: number; done: boolean }> | null {
-  const totals = useLiveTotals(live, ref);
+  const totals = useLiveTotals(live, ref)?.byTeam;
   if (!totals) return null;
   const out: Record<string, { projected: number; done: boolean }> = {};
   for (const [ownerSlug, t] of totals) out[ownerSlug] = { projected: t.projected, done: t.done };
@@ -784,7 +808,7 @@ export function useWinProbability(
   ref: LeagueRef | null,
   matchup: LiveMatchup | null,
 ): WinProbability | null {
-  const totals = useLiveTotals(live, ref);
+  const totals = useLiveTotals(live, ref)?.byTeam;
   if (!totals || !matchup) return null;
   const a = totals.get(matchup.a.ownerSlug);
   const b = totals.get(matchup.b.ownerSlug);
@@ -822,7 +846,7 @@ export function useLastPlaceOdds(
    */
   safe: boolean;
 }> | null {
-  const totals = useLiveTotals(live, ref);
+  const totals = useLiveTotals(live, ref)?.byTeam;
   if (!totals || !live) return null;
   if (live.week > regularSeasonWeeks) return null;
   // Every team must be accounted for, or the field is not the whole league and

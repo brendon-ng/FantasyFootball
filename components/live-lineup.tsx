@@ -24,6 +24,7 @@ export function LiveLineup({
   players,
   stateOf,
   markOf,
+  projectionOf,
 }: {
   title: string;
   lineup: LiveLineupSlot[] | undefined;
@@ -38,6 +39,12 @@ export function LiveLineup({
    * which the caller has and a lineup does not.
    */
   markOf?: (slot: LiveLineupSlot) => { short: string; full: string } | null;
+  /**
+   * That player's projected final, from `useLivePlayerProjections`. Passed in
+   * rather than derived: it is the same figure the team total is built from,
+   * and recomputing it here would let a row disagree with the total above it.
+   */
+  projectionOf?: (slot: LiveLineupSlot) => number | null;
 }) {
   /**
    * Built once per lineup, not per row. Same reasoning as `LiveRosters`: a
@@ -60,9 +67,10 @@ export function LiveLineup({
           // from started players, so a chip on a bench row would claim a
           // record the book does not contain.
           mark: p.started ? (markOf?.(p) ?? null) : null,
+          projected: projectionOf?.(p) ?? null,
         };
       }),
-    [lineup, players, nameIndex, stateOf, markOf],
+    [lineup, players, nameIndex, stateOf, markOf, projectionOf],
   );
   const startersTotal = rows.filter((r) => r.started).reduce((t, r) => t + r.points, 0);
 
