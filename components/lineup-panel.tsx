@@ -94,6 +94,19 @@ export function LineupPanel({
   // THE COLUMN GOES AWAY WHEN NOTHING FILLS IT. A live lineup has no slot
   // ordering, and a permanently empty 10-wide gutter reads as a broken table.
   const showSlots = rows.some((r) => r.slot);
+  /**
+   * Whether to reserve a projection column.
+   *
+   * Decided for the WHOLE PANEL rather than per row, which is the alignment
+   * fix: hung off each score individually, the projections landed at a
+   * different x on every line, because "5.30" and "10.00" are not the same
+   * width. A column that every row shares — blank on the rows that have
+   * nothing to say — keeps both numbers in a straight line.
+   *
+   * Off entirely for an archived lineup, where no game is unfinished and the
+   * column would be permanently empty.
+   */
+  const showProjected = rows.some((r) => r.projected != null);
   const best = Math.max(0, ...starters.map((r) => r.points));
 
   if (!rows.length) {
@@ -112,13 +125,21 @@ export function LineupPanel({
         {showSlots ? <Col className="w-10 shrink-0">Slot</Col> : null}
         <Col className="w-8 shrink-0 text-center">Pos</Col>
         <Col className="flex-1">Player</Col>
-        <Col className="w-20 shrink-0 text-right" hint="Fantasy points scored in this game">
+        {showProjected ? (
+          <Col className="w-12 shrink-0 text-center" hint="Projected final for this game">
+            Proj
+          </Col>
+        ) : null}
+        <Col
+          className="w-14 shrink-0 text-center"
+          hint="Fantasy points scored in this game"
+        >
           Pts
         </Col>
       </ListHeader>
       <div className="divide-y divide-ink-700">
         {starters.map((r) => (
-          <Row key={r.id} row={r} showSlots={showSlots} best={best} />
+          <Row key={r.id} row={r} showSlots={showSlots} best={best} showProjected={showProjected} />
         ))}
       </div>
 
@@ -134,7 +155,7 @@ export function LineupPanel({
             {[...bench]
               .sort((a, b) => b.points - a.points)
               .map((r) => (
-                <Row key={r.id} row={r} showSlots={showSlots} best={best} />
+                <Row key={r.id} row={r} showSlots={showSlots} best={best} showProjected={showProjected} />
               ))}
           </div>
         </details>
@@ -150,41 +171,47 @@ export function LineupPanel({
  * about a finished lineup, and the only state it can collide with is `final`,
  * which is the plain one anyway.
  */
-function PointsCell({ row, best }: { row: LineupRow; best: number }) {
+function PointsCell({
+  row,
+  best,
+  showProjected,
+}: {
+  row: LineupRow;
+  best: number;
+  showProjected: boolean;
+}) {
   const st = row.state ? STATE[row.state] : null;
   const isBest = row.started && row.points === best && best > 0;
   const tone = isBest ? "font-bold text-accent" : (st?.tone ?? "text-chalk-300");
 
   return (
-    <span
-      title={st?.title}
-      className={`tabular flex w-20 shrink-0 items-center justify-end gap-1 text-right text-sm ${tone}`}
-    >
-      {/* A pulsing dot rather than a word: the column is 14 wide and already
-          carries a number, and this is the same signal the rest of the site
-          uses for something still moving. */}
-      {row.state === "live" ? (
-        <span className="live-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-      ) : null}
+    <>
       {/*
-        THE PROJECTION SITS TO THE LEFT OF THE SCORE, dimmer and smaller. The
-        score stays hard against the right edge where the column aligns and
-        where the eye already looks for it; the projection leans in beside it
-        rather than pushing it off its line.
-
-        Only while the player has football left: afterwards the two are the
-        same figure and the second one is noise.
+        ITS OWN CENTRED COLUMN, present on every row once any row has one, so
+        the projections line up with each other and with the header rather than
+        floating off whatever width the score beside them happened to be.
       */}
-      {row.projected != null ? (
+      {showProjected ? (
         <span
-          title={`Projected final: ${fmt.pts(row.projected)}`}
-          className="tabular shrink-0 text-[10px] font-normal leading-none text-chalk-600"
+          title={row.projected != null ? `Projected final: ${fmt.pts(row.projected)}` : undefined}
+          className="tabular w-12 shrink-0 text-center text-[11px] leading-none text-chalk-600"
         >
-          {fmt.pts(row.projected)}
+          {row.projected != null ? fmt.pts(row.projected) : null}
         </span>
       ) : null}
-      {st?.label ?? fmt.pts(row.points)}
-    </span>
+      <span
+        title={st?.title}
+        className={`tabular flex w-14 shrink-0 items-center justify-center gap-1 text-center text-sm ${tone}`}
+      >
+        {/* A pulsing dot rather than a word: the column is narrow and already
+            carries a number, and this is the same signal the rest of the site
+            uses for something still moving. */}
+        {row.state === "live" ? (
+          <span className="live-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+        ) : null}
+        {st?.label ?? fmt.pts(row.points)}
+      </span>
+    </>
   );
 }
 
@@ -192,10 +219,12 @@ function Row({
   row,
   showSlots,
   best,
+  showProjected = false,
 }: {
   row: LineupRow;
   showSlots: boolean;
   best: number;
+  showProjected?: boolean;
 }) {
   const body = (
     <>
@@ -240,7 +269,7 @@ function Row({
       ) : (
         <span className="min-w-0 flex-1 truncate text-sm">{body}</span>
       )}
-      <PointsCell row={row} best={best} />
+      <PointsCell row={row} best={best} showProjected={showProjected} />
     </div>
   );
 }
