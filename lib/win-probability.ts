@@ -29,7 +29,7 @@
  * on the site that needs one, and the error is under 1.5e-7 — four orders of
  * magnitude smaller than the percentage point this rounds to.
  */
-function normalCdf(x: number, mean: number, variance: number): number {
+export function normalCdf(x: number, mean: number, variance: number): number {
   const sd = Math.sqrt(Math.max(variance, 1e-9));
   const z = (x - mean) / (sd * Math.SQRT2);
   const t = 1 / (1 + 0.3275911 * Math.abs(z));

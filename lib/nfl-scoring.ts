@@ -25,6 +25,22 @@
  * numbers beyond their being a distribution that sums to 1.
  */
 
+/**
+ * Yards allowed by one defence in one game: the league baseline.
+ *
+ * From 544 team-games of Sleeper's weekly stats feed. Yards behave nothing like
+ * points — they accumulate in small increments across a hundred plays rather
+ * than in lumps of three and seven — so this one is summarised as a mean and a
+ * spread and treated as normal, where points are kept as a measured pmf.
+ *
+ * The per-quarter split that `SCORING_SHARE_REMAINING` gives for points has no
+ * equivalent here: the feed reports yards for the game and not by quarter. The
+ * scoring curve is reused for yards on the assumption that yards and points
+ * arrive together, which is plausible and UNVERIFIED.
+ */
+export const LEAGUE_MEAN_YARDS_ALLOWED = 326.6;
+export const LEAGUE_SD_YARDS_ALLOWED = 84.5;
+
 /** Team-games behind the tables below. */
 export const CALIBRATION_SAMPLE = 1088;
 

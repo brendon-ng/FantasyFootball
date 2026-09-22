@@ -41,9 +41,12 @@
 
 import {
   LEAGUE_MEAN_POINTS,
+  LEAGUE_MEAN_YARDS_ALLOWED,
+  LEAGUE_SD_YARDS_ALLOWED,
   REMAINING_POINTS_PMF,
   SCORING_SHARE_REMAINING,
 } from "./nfl-scoring.ts";
+import { normalCdf } from "./win-probability.ts";
 
 /** Sleeper stat keys that accumulate and cannot be lost. */
 const COUNTING = [
@@ -61,6 +64,7 @@ const COUNTING = [
   "def_kr_td",
   "int_ret_yd",
   "fum_rec_td",
+  "st_td",
 ] as const;
 
 /**
@@ -79,6 +83,27 @@ const PA_TIERS: Array<{ key: string; upTo: number }> = [
   { key: "pts_allow_35p", upTo: Infinity },
 ];
 
+/**
+ * Yards-allowed tiers, the second decaying stat and easily the larger one.
+ *
+ * Both Sleeper leagues here score these from +5 for holding a team under 100
+ * to -7 for giving up 550, a twelve-point swing — bigger than the
+ * points-allowed ladder. Leaving them out, which the first version of this
+ * file did, meant the projection ignored the single biggest thing a defence
+ * is scored on.
+ */
+const YDS_TIERS: Array<{ key: string; upTo: number }> = [
+  { key: "yds_allow_0_100", upTo: 99 },
+  { key: "yds_allow_100_199", upTo: 199 },
+  { key: "yds_allow_200_299", upTo: 299 },
+  { key: "yds_allow_300_349", upTo: 349 },
+  { key: "yds_allow_350_399", upTo: 399 },
+  { key: "yds_allow_400_449", upTo: 449 },
+  { key: "yds_allow_450_499", upTo: 499 },
+  { key: "yds_allow_500_549", upTo: 549 },
+  { key: "yds_allow_550p", upTo: Infinity },
+];
+
 export interface DefenseInputs {
   /** This week's stat line so far, Sleeper's keys. */
   now: Record<string, number>;
@@ -88,6 +113,44 @@ export interface DefenseInputs {
   scoring: Record<string, number>;
   /** Seconds left in this defence's game. 0 once it is over. */
   secondsLeft: number;
+}
+
+/**
+ * Expected points from the yards-allowed ladder.
+ *
+ * Final yards are taken as normal around "what is conceded already, plus this
+ * defence's share of what it was projected to give up". The spread narrows
+ * with the game: a full game's yards vary by about 85, and the remainder of a
+ * game by roughly that scaled by the square root of the share left, which is
+ * what independent increments give.
+ *
+ * Returns 0 when the league scores no yardage tier, which costs nothing.
+ */
+function expectedYardsTier(
+  now: Record<string, number>,
+  pre: Record<string, number>,
+  scoring: Record<string, number>,
+  share: number,
+): number {
+  if (!YDS_TIERS.some((t) => scoring[t.key])) return 0;
+  const soFar = now.yds_allow ?? 0;
+  const projectedTotal = pre.yds_allow ?? LEAGUE_MEAN_YARDS_ALLOWED;
+  const mean = soFar + projectedTotal * share;
+  const sd = Math.max(1, LEAGUE_SD_YARDS_ALLOWED * Math.sqrt(Math.max(0, share)));
+  if (share <= 0) {
+    // Game over: no uncertainty left, just read the tier off the final figure.
+    for (const t of YDS_TIERS) if (soFar <= t.upTo) return scoring[t.key] ?? 0;
+    return 0;
+  }
+  let expected = 0;
+  let below = 0;
+  for (const t of YDS_TIERS) {
+    const upTo = t.upTo === Infinity ? Infinity : t.upTo + 0.5;
+    const cum = upTo === Infinity ? 1 : normalCdf(upTo, mean, sd * sd);
+    expected += (cum - below) * (scoring[t.key] ?? 0);
+    below = cum;
+  }
+  return expected;
 }
 
 /** Points from the tier a given points-allowed total lands in. */
@@ -175,6 +238,11 @@ export function projectDefense(input: DefenseInputs): number | null {
   for (const { points, p } of pmf) {
     tier += p * tierPoints(allowedSoFar + points, scoring);
   }
+
+  // 3. Yards allowed, the same idea with a different distribution. Yards come
+  //    in small pieces across a hundred plays rather than in lumps, so a
+  //    normal is the right shape where points needed a measured pmf.
+  tier += expectedYardsTier(now, pre, scoring, share);
 
   return Number((counting + tier).toFixed(2));
 }
