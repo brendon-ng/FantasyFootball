@@ -46,8 +46,24 @@ const clamp = (lo: number, hi: number, x: number) => Math.max(lo, Math.min(hi, x
 
 /** One team's outcome distribution, centred on its projected final. */
 export function distribution(current: number, projected: number): { mean: number; variance: number } {
-  // 11 at kickoff (current 0), 1 once the score has reached the projection.
-  const n = 1 + 10 * (1 - current / projected);
+  /**
+   * 11 at kickoff (current 0), 1 once the score has reached the projection.
+   *
+   * FLOORED AT 1, WHICH MATTERS NOW THAT A PROJECTION CAN SIT BELOW THE SCORE.
+   * Sleeper's blend guarantees per-player `projected >= current`, so a team
+   * total never fell below its own score and this expression never went under
+   * 1. `defenseProjection` breaks that guarantee deliberately, and unclamped
+   * the heuristic did not degrade, it inverted: a projection five points below
+   * the score produced MORE uncertainty than one ten points above, and past
+   * roughly `current / 1.1` the term went negative, the square root returned
+   * NaN, and the `|| 0.1` below caught it — pinning a wide-open team at a
+   * third of a point of spread.
+   *
+   * Inert on everything that could already happen: for `projected >= current`
+   * this is the same expression it always was, including the finished case
+   * where the two are equal.
+   */
+  const n = 1 + 10 * Math.max(0, 1 - current / projected);
   const sd = Math.sqrt((current - projected) ** 2 / n);
   // `|| 0.1` is load-bearing and inherited: a team that OVERSHOOTS its
   // projection makes `n` negative, `sd` NaN, and NaN is falsy — so an
@@ -240,6 +256,41 @@ export function safeFromLast(
 function normalPdf(x: number, mean: number, variance: number): number {
   const v = Math.max(variance, 1e-9);
   return Math.exp(-((x - mean) ** 2) / (2 * v)) / Math.sqrt(2 * Math.PI * v);
+}
+
+/**
+ * A DEFENCE's projected final, which is not the same shape as everyone else's.
+ *
+ * ESPN'S MODEL, solved from their published `totalProjectedPointsLive` and
+ * confirmed to the fourth decimal at two different clocks:
+ *
+ *   projected = current × (1 − f) + preGame × f
+ *
+ * A WEIGHTED AVERAGE, where every other position gets banked-plus-share. The
+ * difference is that most of a defence's score is not BANKED, it is a
+ * STATEMENT ABOUT THE GAME SO FAR that the rest of the game can revoke. The
+ * Rams sat on 10 points in the second quarter tonight: five for allowing no
+ * points and five for a yards-allowed tier, and nothing else — no sack, no
+ * takeaway, no touchdown. Treating that as money in the bank, which the
+ * offence model does, projected them at 14.27. ESPN said 6.84, because a
+ * shutout at half-time is not a shutout.
+ *
+ * This is the one place the site deliberately disagrees with Sleeper's app,
+ * which applies its single blend to defences too and had them at 15.52.
+ *
+ * KNOWN CRUDE, in the other direction: a defence that has actually banked
+ * something permanent — a pick-six is six points nobody can take back — gets
+ * regressed along with everything else, because the model works on the total
+ * rather than on the stat line. Decomposing banked events from decaying tiers
+ * would beat both providers; that is not what this does.
+ */
+export function defenseProjection(
+  current: number,
+  preGame: number,
+  secondsLeft: number,
+): number {
+  const f = Math.max(0, Math.min(1, secondsLeft / 3600));
+  return current * (1 - f) + preGame * f;
 }
 
 /**

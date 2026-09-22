@@ -31,6 +31,7 @@ import { applyPhaseMock, type Replay } from "@/lib/phase-mock";
 import { draftMocks, mockPhase, mockWeek } from "@/lib/sticky-params";
 import type { LiveMatchup, LiveSeason } from "@/lib/types";
 import {
+  defenseProjection,
   lastPlaceOdds,
   liveProjection,
   lockedIntoLast,
@@ -593,6 +594,19 @@ export function useLineupStates(
  * GATED HARD: only inside a live, unscored week where somebody has actually
  * scored, and never under a phase mock. Everything fails soft to null.
  */
+/**
+ * Is this lineup slot a team defence?
+ *
+ * The two providers say so differently. ESPN fills `position` from its own
+ * slot map, so "DEF" is right there. Sleeper leaves `position` null on a
+ * matchup payload — but its D/ST player ids ARE the team abbreviation, all 32
+ * of them, and the only other non-numeric id in the index belongs to a single
+ * `espn-` prefixed player the pattern excludes.
+ */
+function isDefense(slot: { id: string; position: string | null }): boolean {
+  return slot.position === "DEF" || /^[A-Z]{2,4}$/.test(slot.id);
+}
+
 function useLiveTotals(
   live: LiveSeason | null,
   ref: LeagueRef | null,
@@ -686,7 +700,18 @@ function useLiveTotals(
       // about whether a team has finished.
       const left = p.team ? (by[p.team] ?? 0) : 0;
       if (left > 0) done = false;
-      total += liveProjection(p.points, pre, left);
+      /**
+       * A DEFENCE PROJECTS DIFFERENTLY FROM EVERYONE ELSE — see
+       * `defenseProjection`. Most of its score is a claim about the game so
+       * far rather than points in the bank, so it decays toward the pre-game
+       * projection instead of being added to it.
+       *
+       * Kickers use the offence model, which is what ESPN does and what the
+       * fit confirmed.
+       */
+      total += isDefense(p)
+        ? defenseProjection(p.points, pre, left)
+        : liveProjection(p.points, pre, left);
     }
     return { projected: total, done };
   };
