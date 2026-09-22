@@ -53,10 +53,10 @@ export interface MatchupCardsProps {
   /**
    * Draw the full odds bar, not just the locked-in marker.
    *
-   * THE MARKER IS A FACT AND THE BAR IS ANALYSIS. "This team is taking the
-   * punishment" belongs anywhere the league is on screen; "this team is 23%
-   * likely to" is what the punishments page is for, and would be a
-   * non sequitur beside a home-page scoreline.
+   * Both tickers set this for a league that plays the weekly punishment. It
+   * stays a flag separate from `punishmentOdds` so a surface can still take
+   * the locked-in marker — a settled fact — without the running percentage,
+   * which is a forecast.
    */
   punishmentBars?: boolean;
   /**

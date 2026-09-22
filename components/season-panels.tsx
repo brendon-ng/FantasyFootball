@@ -125,11 +125,13 @@ export function SeasonPanels({
     refBySeason[String(live?.season ?? "")] ?? null,
     regularSeasonWeeks ?? 0,
   );
-  // ONLY THE LOCKED SET reaches the strip — no `punishmentOdds`, so no bars
-  // can be drawn here even by accident. See `punishmentBars`.
   // Every league gets these, punishment or not — a projected final is just
   // context for a score in progress.
   const projections = useLiveProjections(live, refBySeason[String(live?.season ?? "")] ?? null);
+  const punishmentOdds = useMemo(
+    () => Object.fromEntries((lastPlace ?? []).map((r) => [r.ownerSlug, r.odds])),
+    [lastPlace],
+  );
   const punishmentLocked = useMemo(
     () => (lastPlace ?? []).filter((r) => r.locked).map((r) => r.ownerSlug),
     [lastPlace],
@@ -191,6 +193,16 @@ export function SeasonPanels({
               upcomingIds={upcomingIds}
               archivedIds={archivedIds}
               punishmentLocked={punishmentLocked}
+              /*
+                THE BARS RUN ON THE HOME STRIP TOO, not only on /punishments.
+                The week's punishment race is one of the things people open
+                this page for, and it was odd that the row saying who is in
+                trouble lived only on the page you go to once you already know.
+                Gated on the league actually playing it, so the two that do not
+                show nothing.
+              */
+              punishmentOdds={weeklyLowPunishment ? punishmentOdds : undefined}
+              punishmentBars={weeklyLowPunishment}
               markWeeklyLow={weeklyLowPunishment}
               projections={projections ?? undefined}
             />
