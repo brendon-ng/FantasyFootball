@@ -461,13 +461,33 @@ export const getSeasonPunishments = once((): Map<number, SeasonPunishment> => {
       >)
     : {};
 
-  for (const s of getSeasons()) {
+  /**
+   * EVERY SEASON THE CONFIG NAMES, not only the finished ones.
+   *
+   * This used to walk `getSeasons()`, which holds finalized seasons alone —
+   * derive writes no summary for one still being played. A punishment decided
+   * for the CURRENT season was therefore read, resolved and thrown away, and
+   * nothing appeared anywhere until January. That is backwards: the panel has
+   * a `pending` state for exactly this, "decided, and nobody knows yet who
+   * owes it", and the season in play is when people most want to see it.
+   *
+   * Last place is looked up where it exists and passed as null where it does
+   * not, which is what puts the entry in that pending state.
+   */
+  const lastPlaceBy = new Map(getSeasons().map((s) => [s.season, s.lastPlace]));
+  const years = new Set<number>([
+    ...lastPlaceBy.keys(),
+    ...Object.keys(entries)
+      .map(Number)
+      .filter((n) => Number.isFinite(n)),
+  ]);
+  for (const season of [...years].sort((a, b) => a - b)) {
     const resolved = resolveSeasonPunishment(
-      s.season,
-      entries[String(s.season)],
-      s.lastPlace,
+      season,
+      entries[String(season)],
+      lastPlaceBy.get(season) ?? null,
     );
-    if (resolved) out.set(s.season, resolved);
+    if (resolved) out.set(season, resolved);
   }
   return out;
 });
