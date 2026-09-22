@@ -389,6 +389,36 @@ export const sleeperProvider: LiveProvider = {
     } satisfies RawDraft;
   },
 
+  /**
+   * See the interface — a named week's lineups, for a preview of a week that
+   * is not the live one.
+   *
+   * WHATEVER IS SET RIGHT NOW, which for a week days away is last week's
+   * lineup carried forward. That is the honest answer to "who are they
+   * starting", and it moves as managers move it.
+   */
+  async weekLineups(id, _season, week, ctx) {
+    const [raw, rosters] = await Promise.all([
+      json<RawMatchup[]>(`${BASE}/league/${id}/matchups/${week}`, []),
+      json<RawRoster[]>(`${BASE}/league/${id}/rosters`, []),
+    ]);
+    if (!raw?.length || !rosters?.length) return null;
+    const slugOf = new Map<number, string | undefined>(
+      rosters.map((r) => [
+        r.roster_id,
+        ctx.slugByRoster.get(r.roster_id) ??
+          (r.owner_id ? ctx.userIdToSlug[r.owner_id] : undefined),
+      ]),
+    );
+    const out: Record<string, LiveLineupSlot[]> = {};
+    for (const m of raw) {
+      const slug = slugOf.get(m.roster_id);
+      const lineup = slug ? lineupOf(m, ctx.teamByPlayer) : undefined;
+      if (slug && lineup?.length) out[slug] = lineup;
+    }
+    return Object.keys(out).length ? out : null;
+  },
+
   async weekGames(id, _season, week) {
     return sleeperWeekGames(id, week);
   },
