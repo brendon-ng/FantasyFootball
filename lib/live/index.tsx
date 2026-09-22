@@ -635,6 +635,8 @@ function useLiveTotals(
 
   const [clock, setClock] = useState<{ key: string; by: Record<string, number> } | null>(null);
   const [proj, setProj] = useState<{ key: string; by: Record<string, number> } | null>(null);
+  /** Decomposed defence projections; see `lib/defense-projection`. */
+  const [defProj, setDefProj] = useState<{ key: string; by: Record<string, number> } | null>(null);
 
   useEffect(() => {
     if (!ask) return;
@@ -642,6 +644,15 @@ function useLiveTotals(
     fetchNflClock(season, week)
       .then((by) => {
         if (!cancelled && by) setClock({ key, by });
+        // Needs the clock, so it is chained rather than run alongside.
+        if (!cancelled && by && ref) {
+          providerFor(ref)
+            ?.defenseProjections?.(season, week, ref.id, by)
+            .then((d) => {
+              if (!cancelled && d) setDefProj({ key, by: d });
+            })
+            .catch(() => {});
+        }
       })
       .catch(() => {});
     if (ref) {
@@ -661,6 +672,7 @@ function useLiveTotals(
   if (!ask || !live) return null;
   const by = clock?.key === key ? clock.by : null;
   if (!by) return null;
+  const defBy = defProj?.key === key ? defProj.by : null;
   const projById = proj?.key === key ? proj.by : null;
 
   /**
@@ -709,8 +721,15 @@ function useLiveTotals(
        * Kickers use the offence model, which is what ESPN does and what the
        * fit confirmed.
        */
+      /**
+       * A DEFENCE, IN ORDER OF PREFERENCE. The decomposed model first — it
+       * reads the stat line and can tell a banked pick-six from a shutout
+       * that is only true so far. Failing that, ESPN's weighted average,
+       * which at least decays rather than banking. The offence blend is not
+       * used for a defence at all.
+       */
       total += isDefense(p)
-        ? defenseProjection(p.points, pre, left)
+        ? (defBy?.[p.id] ?? defenseProjection(p.points, pre, left))
         : liveProjection(p.points, pre, left);
     }
     return { projected: total, done };

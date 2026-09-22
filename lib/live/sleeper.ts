@@ -15,6 +15,7 @@
 
 import { orderIsSet } from "../draft-slots.ts";
 
+import { projectDefense } from "../defense-projection.ts";
 import { fetchRetry } from "./retry.ts";
 import type { LiveLineupSlot, LiveMatchup, LiveSeason, LiveTeam, SeasonType } from "../types.ts";
 
@@ -213,6 +214,47 @@ function leagueScoring(leagueId: string): Promise<Record<string, number> | null>
     })
     .catch(() => null);
   scoringCache.set(leagueId, p);
+  return p;
+}
+
+/**
+ * The week's raw projected stat lines, fetched once however many callers ask.
+ *
+ * `weekProjections` scores them into totals and `defenseProjections` needs the
+ * lines themselves; without this the page would pull the same ~590KB twice.
+ */
+const rawProjCache = new Map<string, Promise<Record<string, Record<string, number>> | null>>();
+
+function rawProjections(
+  season: number,
+  week: number,
+): Promise<Record<string, Record<string, number>> | null> {
+  const key = `${season}:${week}`;
+  const hit = rawProjCache.get(key);
+  if (hit) return hit;
+  const p = json<Record<string, Record<string, number>> | null>(
+    `${BASE}/projections/nfl/regular/${season}/${week}`,
+    null,
+  );
+  rawProjCache.set(key, p);
+  return p;
+}
+
+/** The week's actual stat lines so far, cached the same way. */
+const rawStatsCache = new Map<string, Promise<Record<string, Record<string, number>> | null>>();
+
+function rawStats(
+  season: number,
+  week: number,
+): Promise<Record<string, Record<string, number>> | null> {
+  const key = `${season}:${week}`;
+  const hit = rawStatsCache.get(key);
+  if (hit) return hit;
+  const p = json<Record<string, Record<string, number>> | null>(
+    `${BASE}/stats/nfl/regular/${season}/${week}`,
+    null,
+  );
+  rawStatsCache.set(key, p);
   return p;
 }
 
@@ -441,10 +483,7 @@ export const sleeperProvider: LiveProvider = {
    */
   async weekProjections(season, week, leagueId) {
     const [raw, scoring] = await Promise.all([
-      json<Record<string, Record<string, number | null> | null> | null>(
-        `${BASE}/projections/nfl/regular/${season}/${week}`,
-        null,
-      ),
+      rawProjections(season, week),
       leagueScoring(leagueId),
     ]);
     if (!raw) return null;
@@ -462,6 +501,35 @@ export const sleeperProvider: LiveProvider = {
       const p = line?.pts_ppr;
       if (typeof p !== "number") continue;
       out[id] = scoring && line ? scoreLine(line, scoring) : p;
+    }
+    return Object.keys(out).length ? out : null;
+  },
+
+  /**
+   * See `lib/defense-projection` — the decomposed model, for defences only.
+   *
+   * A defence is keyed in Sleeper's feeds by its team abbreviation, which is
+   * also its player id, so the two stat lines and the lineup slot all line up
+   * on the same key with nothing to resolve.
+   */
+  async defenseProjections(season, week, leagueId, secondsLeftByTeam) {
+    const [now, pre, scoring] = await Promise.all([
+      rawStats(season, week),
+      rawProjections(season, week),
+      leagueScoring(leagueId),
+    ]);
+    if (!pre || !scoring) return null;
+    const out: Record<string, number> = {};
+    for (const [id, line] of Object.entries(pre)) {
+      // Team defences only: their id IS the NFL team abbreviation.
+      if (!/^[A-Z]{2,4}$/.test(id) || !line) continue;
+      const projected = projectDefense({
+        now: now?.[id] ?? {},
+        pre: line,
+        scoring,
+        secondsLeft: secondsLeftByTeam[id] ?? 0,
+      });
+      if (projected != null) out[id] = projected;
     }
     return Object.keys(out).length ? out : null;
   },

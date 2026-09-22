@@ -266,6 +266,26 @@ export interface LiveProvider {
     week: number,
     leagueId: string,
   ): Promise<Record<string, number> | null>;
+  /**
+   * Live projections for TEAM DEFENCES only, player id -> points, built from
+   * the stat line rather than the total. See `lib/defense-projection`.
+   *
+   * Separate from `weekProjections` because it is a different kind of answer:
+   * that one is a pre-game number the generic blend then works on, this one is
+   * already the final projection and replaces the blend entirely. A defence's
+   * score is half decaying tiers and half banked events, and no blend over the
+   * total can tell those apart.
+   *
+   * Optional. ESPN returns null — it publishes its own live projection and
+   * `season()` already reads it — so a provider that has nothing to add says
+   * so and the caller falls back.
+   */
+  defenseProjections?(
+    season: number,
+    week: number,
+    leagueId: string,
+    secondsLeftByTeam: Record<string, number>,
+  ): Promise<Record<string, number> | null>;
 }
 
 /**
