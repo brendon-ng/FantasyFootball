@@ -109,6 +109,15 @@
       "week": 13
     },
     {
+      "margin": 57.76,
+      "opponentPoints": 102.86,
+      "opponentSlug": "joe-gibbons",
+      "ownerSlug": "aidan-kelleher",
+      "points": 160.62,
+      "season": 2026,
+      "week": 2
+    },
+    {
       "margin": 56.64,
       "opponentPoints": 109.92,
       "opponentSlug": "srishti-dhawan",
@@ -125,6 +134,15 @@
       "points": 143.64,
       "season": 2025,
       "week": 14
+    },
+    {
+      "margin": 51.8,
+      "opponentPoints": 96.4,
+      "opponentSlug": "jake-gibbons",
+      "ownerSlug": "lindsey-freeze",
+      "points": 148.2,
+      "season": 2026,
+      "week": 2
     },
     {
       "margin": 51.32,
@@ -206,24 +224,6 @@
       "points": 129.3,
       "season": 2025,
       "week": 6
-    },
-    {
-      "margin": 44.62,
-      "opponentPoints": 117.54,
-      "opponentSlug": "robbie-goodman",
-      "ownerSlug": "kaitlin-zarbis",
-      "points": 162.16,
-      "season": 2025,
-      "week": 7
-    },
-    {
-      "margin": 43.44,
-      "opponentPoints": 93.24,
-      "opponentSlug": "vance-armstrong",
-      "ownerSlug": "kate-olson",
-      "points": 136.68,
-      "season": 2025,
-      "week": 11
     }
   ],
   "highestCombined": [
@@ -408,6 +408,15 @@
       "week": 9
     },
     {
+      "opponentPoints": 102.86,
+      "opponentSlug": "joe-gibbons",
+      "ownerSlug": "aidan-kelleher",
+      "points": 160.62,
+      "season": 2026,
+      "total": 263.48,
+      "week": 2
+    },
+    {
       "opponentPoints": 118.62,
       "opponentSlug": "ross-bechtel",
       "ownerSlug": "kaitlin-zarbis",
@@ -435,22 +444,13 @@
       "week": 1
     },
     {
-      "opponentPoints": 115.9,
-      "opponentSlug": "robbie-goodman",
-      "ownerSlug": "jake-gibbons",
-      "points": 138.1,
-      "season": 2025,
-      "total": 254,
+      "opponentPoints": 122.68,
+      "opponentSlug": "kaitlin-zarbis",
+      "ownerSlug": "ross-bechtel",
+      "points": 132.76,
+      "season": 2026,
+      "total": 255.44,
       "week": 2
-    },
-    {
-      "opponentPoints": 100.8,
-      "opponentSlug": "josh-greenebaum",
-      "ownerSlug": "vance-armstrong",
-      "points": 152.12,
-      "season": 2025,
-      "total": 252.92,
-      "week": 4
     }
   ],
   "lowestCombined": [
@@ -471,6 +471,24 @@
       "season": 2025,
       "total": 178.22,
       "week": 7
+    },
+    {
+      "opponentPoints": 85.86,
+      "opponentSlug": "srishti-dhawan",
+      "ownerSlug": "robbie-goodman",
+      "points": 95.24,
+      "season": 2026,
+      "total": 181.1,
+      "week": 2
+    },
+    {
+      "opponentPoints": 82.72,
+      "opponentSlug": "brendon-ng",
+      "ownerSlug": "josh-greenebaum",
+      "points": 98.62,
+      "season": 2026,
+      "total": 181.34,
+      "week": 2
     },
     {
       "opponentPoints": 92.52,
@@ -660,24 +678,6 @@
       "season": 2025,
       "total": 207.4,
       "week": 17
-    },
-    {
-      "opponentPoints": 90.7,
-      "opponentSlug": "josh-greenebaum",
-      "ownerSlug": "robbie-goodman",
-      "points": 116.84,
-      "season": 2025,
-      "total": 207.54,
-      "week": 5
-    },
-    {
-      "opponentPoints": 84.78,
-      "opponentSlug": "vance-armstrong",
-      "ownerSlug": "allison-fosbery",
-      "points": 123.38,
-      "season": 2025,
-      "total": 208.16,
-      "week": 2
     }
   ],
   "narrowestWin": [
@@ -898,13 +898,13 @@
       "week": 13
     },
     {
-      "margin": 10.68,
-      "opponentPoints": 97.1,
-      "opponentSlug": "allison-fosbery",
-      "ownerSlug": "aidan-kelleher",
-      "points": 107.78,
-      "season": 2025,
-      "week": 4
+      "margin": 9.38,
+      "opponentPoints": 85.86,
+      "opponentSlug": "srishti-dhawan",
+      "ownerSlug": "robbie-goodman",
+      "points": 95.24,
+      "season": 2026,
+      "week": 2
     }
   ],
   "playerHigh": [
@@ -965,12 +965,28 @@
       "week": 11
     },
     {
+      "ownerSlug": "aidan-kelleher",
+      "playerId": "9488",
+      "points": 42.5,
+      "season": 2026,
+      "started": true,
+      "week": 2
+    },
+    {
       "ownerSlug": "josh-greenebaum",
       "playerId": "7547",
       "points": 41.4,
       "season": 2025,
       "started": true,
       "week": 15
+    },
+    {
+      "ownerSlug": "kate-olson",
+      "playerId": "4984",
+      "points": 40.82,
+      "season": 2026,
+      "started": true,
+      "week": 2
     },
     {
       "ownerSlug": "vance-armstrong",
@@ -987,6 +1003,14 @@
       "season": 2025,
       "started": true,
       "week": 7
+    },
+    {
+      "ownerSlug": "aidan-kelleher",
+      "playerId": "2133",
+      "points": 39.5,
+      "season": 2026,
+      "started": true,
+      "week": 2
     },
     {
       "ownerSlug": "josh-greenebaum",
@@ -1083,30 +1107,6 @@
       "season": 2025,
       "started": true,
       "week": 14
-    },
-    {
-      "ownerSlug": "jake-gibbons",
-      "playerId": "9488",
-      "points": 37.1,
-      "season": 2025,
-      "started": true,
-      "week": 12
-    },
-    {
-      "ownerSlug": "robbie-goodman",
-      "playerId": "MIN",
-      "points": 37,
-      "season": 2025,
-      "started": true,
-      "week": 3
-    },
-    {
-      "ownerSlug": "jake-gibbons",
-      "playerId": "9221",
-      "points": 37,
-      "season": 2025,
-      "started": true,
-      "week": 14
     }
   ],
   "weeklyHigh": [
@@ -1199,6 +1199,14 @@
       "week": 12
     },
     {
+      "opponentPoints": 102.86,
+      "opponentSlug": "joe-gibbons",
+      "ownerSlug": "aidan-kelleher",
+      "points": 160.62,
+      "season": 2026,
+      "week": 2
+    },
+    {
       "opponentPoints": 112.74,
       "opponentSlug": "robbie-goodman",
       "ownerSlug": "lindsey-freeze",
@@ -1255,6 +1263,14 @@
       "week": 5
     },
     {
+      "opponentPoints": 96.4,
+      "opponentSlug": "jake-gibbons",
+      "ownerSlug": "lindsey-freeze",
+      "points": 148.2,
+      "season": 2026,
+      "week": 2
+    },
+    {
       "opponentPoints": 128.9,
       "opponentSlug": "aidan-kelleher",
       "ownerSlug": "vance-armstrong",
@@ -1293,22 +1309,6 @@
       "points": 146.38,
       "season": 2025,
       "week": 8
-    },
-    {
-      "opponentPoints": 87.7,
-      "opponentSlug": "ross-bechtel",
-      "ownerSlug": "srishti-dhawan",
-      "points": 146.1,
-      "season": 2025,
-      "week": 11
-    },
-    {
-      "opponentPoints": 85.76,
-      "opponentSlug": "vance-armstrong",
-      "ownerSlug": "jake-gibbons",
-      "points": 145.28,
-      "season": 2025,
-      "week": 14
     }
   ],
   "weeklyLow": [
@@ -1385,6 +1385,14 @@
       "week": 7
     },
     {
+      "opponentPoints": 98.62,
+      "opponentSlug": "josh-greenebaum",
+      "ownerSlug": "brendon-ng",
+      "points": 82.72,
+      "season": 2026,
+      "week": 2
+    },
+    {
       "opponentPoints": 111.22,
       "opponentSlug": "brendon-ng",
       "ownerSlug": "aidan-kelleher",
@@ -1431,6 +1439,14 @@
       "points": 85.76,
       "season": 2025,
       "week": 14
+    },
+    {
+      "opponentPoints": 95.24,
+      "opponentSlug": "robbie-goodman",
+      "ownerSlug": "srishti-dhawan",
+      "points": 85.86,
+      "season": 2026,
+      "week": 2
     },
     {
       "opponentPoints": 120.56,
@@ -1495,22 +1511,6 @@
       "points": 89.76,
       "season": 2025,
       "week": 14
-    },
-    {
-      "opponentPoints": 123.58,
-      "opponentSlug": "lindsey-freeze",
-      "ownerSlug": "brendon-ng",
-      "points": 90.28,
-      "season": 2025,
-      "week": 4
-    },
-    {
-      "opponentPoints": 116.84,
-      "opponentSlug": "robbie-goodman",
-      "ownerSlug": "josh-greenebaum",
-      "points": 90.7,
-      "season": 2025,
-      "week": 5
     }
   ]
 }

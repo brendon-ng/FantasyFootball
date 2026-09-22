@@ -11954,6 +11954,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790032136145,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "13279": [
@@ -11986,6 +11998,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    }
+  ],
+  "13285": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790032136145,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 2
     }
   ],
   "13286": [

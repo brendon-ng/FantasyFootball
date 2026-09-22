@@ -12,7 +12,7 @@
     {
       "draftId": "1314672262590251008",
       "finalized": false,
-      "finalizedThroughWeek": 1,
+      "finalizedThroughWeek": 2,
       "leagueId": "1314672262581850112",
       "previousLeagueId": "1263422021434363904",
       "season": "2026",
@@ -22,6 +22,6 @@
   "syncedAgainst": {
     "season": "2026",
     "seasonType": "regular",
-    "week": 2
+    "week": 3
   }
 }

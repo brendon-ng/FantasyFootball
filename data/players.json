@@ -458,7 +458,7 @@
     "birth_date": "1990-11-10",
     "full_name": "Zach Ertz",
     "position": "TE",
-    "team": null,
+    "team": "PHI",
     "years_exp": 13
   },
   "1348": {
@@ -2327,7 +2327,7 @@
     "birth_date": "1997-01-12",
     "full_name": "Darius Slayton",
     "position": "WR",
-    "team": null,
+    "team": "IND",
     "years_exp": 7
   },
   "6151": {
@@ -4526,6 +4526,13 @@
     "full_name": "Jordyn Tyson",
     "position": "WR",
     "team": "NO",
+    "years_exp": 0
+  },
+  "13285": {
+    "birth_date": "2003-08-26",
+    "full_name": "Malachi Fields",
+    "position": "WR",
+    "team": "NYG",
     "years_exp": 0
   },
   "13286": {
