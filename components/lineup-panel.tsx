@@ -175,13 +175,13 @@ function PointsCell({
   return (
     <span
       title={st?.title}
-      className={`tabular flex ${wide ? "w-24" : "w-14"} shrink-0 items-center justify-end gap-1 text-right text-sm ${tone}`}
+      className={`tabular flex ${wide ? "w-24" : "w-14"} shrink-0 items-baseline justify-end gap-1 text-right text-sm ${tone}`}
     >
       {/* A pulsing dot rather than a word: the column is 14 wide and already
           carries a number, and this is the same signal the rest of the site
           uses for something still moving. */}
       {row.state === "live" ? (
-        <span className="live-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+        <span className="live-dot inline-block h-1.5 w-1.5 shrink-0 self-center rounded-full bg-accent" />
       ) : null}
       {/*
         THE PROJECTION SITS TO THE LEFT OF THE SCORE, dimmer and smaller. The
@@ -189,13 +189,19 @@ function PointsCell({
         where the eye already looks for it; the projection leans in beside it
         rather than pushing it off its line.
 
+        ON THE SAME BASELINE, not the same centre. Two numbers of different
+        sizes centred against each other leave the smaller one riding high,
+        which is what "slightly off" looks like; numerals line up by sitting on
+        a shared baseline. The live dot is not a numeral and has no baseline
+        worth sharing, so it centres itself.
+
         Only while the player has football left: afterwards the two are the
         same figure and the second one is noise.
       */}
       {row.projected != null ? (
         <span
           title={`Projected final: ${fmt.pts(row.projected)}`}
-          className="tabular shrink-0 text-[10px] font-normal leading-none text-chalk-600"
+          className="tabular shrink-0 text-[11px] font-normal text-chalk-600"
         >
           {fmt.pts(row.projected)}
         </span>
