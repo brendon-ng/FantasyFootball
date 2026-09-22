@@ -207,13 +207,19 @@ const place = (
   selfInCuts = false,
 ): number => {
   let rank = 1;
-  let selfSkipped = !selfInCuts;
   // A TIE COUNTS AS AHEAD for the archive and for `ahead` peers: an equal score
   // already in the book keeps the better number, and the newcomer takes the
   // next one down.
   for (const v of cuts) {
-    if (!selfSkipped && v === value) {
-      selfSkipped = true;
+    if (selfInCuts && v === value) {
+      /**
+       * A TIE IS JOINT, because nothing here can tell which of two identical
+       * numbers is this game's own. Skipping only the first and counting the
+       * rest as ahead handed BOTH tied games the worse of the two places —
+       * masterbatters has two weeks on exactly 74.14, and the book lists them
+       * third and fourth while every chip said fourth. Sharing the better
+       * place is at least true of one of them and defensible for both.
+       */
       continue;
     }
     if (beats(v, value) || v === value) rank++;
@@ -224,9 +230,31 @@ const place = (
   // card passes five and a matchup page passes the whole book, which really
   // does render a #20. Capping at MARK_DEPTH here would silently drop every
   // chip past fifth on the page that has room for them.
-  // One shorter when the list is carrying this game's own entry.
-  return rank <= cuts.length - (selfInCuts && selfSkipped ? 1 : 0) ? rank : 0;
+  /**
+   * BOUNDED BY THE LIST, and NOT one shorter when the list holds this game's
+   * own entry. That subtraction was wrong: if the game is the last of five,
+   * four others beat it, so its rank is five — a legitimate place in a
+   * five-deep book, not one past the end. It silenced the chip on every game
+   * sitting at the bottom of a list it genuinely belonged to.
+   */
+  return rank <= cuts.length ? rank : 0;
 };
+
+/**
+ * Two decimal places, which is the precision the record book is stored at.
+ *
+ * DERIVE ROUNDS AND THE CARD DID NOT, and `place` matches a game to its own
+ * entry with `===`. So a margin of |152.72 - 153.02|, which floating point
+ * makes 0.30000000000001137, failed to equal the 0.3 sitting in the cut list —
+ * the game was not recognised as already being in the book, its own entry
+ * counted as one place ahead of it, and a card read "#5 closest" for a game the
+ * record page had at #4.
+ *
+ * Only the DERIVED values need it. A team's points arrive from the provider
+ * already rounded; it is subtracting and adding them that reintroduces the
+ * error.
+ */
+const round2 = (n: number): number => Number(n.toFixed(2));
 
 const higher = (a: number, b: number) => a > b;
 const lower = (a: number, b: number) => a < b;
@@ -256,16 +284,16 @@ export function matchupMarks(
   const out: RecordMark[] = [];
   const p = selfInBaseline ? NO_PEERS : peers;
 
-  const singles = (ms: PeerMatchup[]) => ms.flatMap((m) => [m.a, m.b]);
-  const margins = (ms: PeerMatchup[]) => ms.map((m) => Math.abs(m.a - m.b));
-  const combinedOf = (ms: PeerMatchup[]) => ms.map((m) => m.a + m.b);
+  const singles = (ms: PeerMatchup[]) => ms.flatMap((m) => [round2(m.a), round2(m.b)]);
+  const margins = (ms: PeerMatchup[]) => ms.map((m) => round2(Math.abs(m.a - m.b)));
+  const combinedOf = (ms: PeerMatchup[]) => ms.map((m) => round2(m.a + m.b));
   // A TIE IS NOT A NARROW WIN, for a peer either — the same rule applied below
   // to this game's own margin.
   const wins = (ms: PeerMatchup[]) => margins(ms).filter((m) => m > 0);
 
   for (const [points, side] of [
-    [a, "a"],
-    [b, "b"],
+    [round2(a), "a"],
+    [round2(b), "b"],
   ] as Array<[number, "a" | "b"]>) {
     /**
      * THE OPPONENT IS A PEER TOO. Both halves of one matchup can make the same
@@ -273,8 +301,17 @@ export function matchupMarks(
      * and ranked only against history they would both claim the same number.
      * Side `a` takes ties, matching the order the card renders them in.
      */
-    const aheadSingles = [...singles(p.ahead), ...(side === "a" ? [] : [a])];
-    const behindSingles = [...singles(p.behind), ...(side === "a" ? [b] : [])];
+    /**
+     * THE OPPONENT COUNTS ONCE. He is a peer while the week is unarchived —
+     * see the note above — but once the game is in the book his score is one
+     * of the cut lines, and adding him again put a team one place below
+     * itself. Both sides of masterbatters' 2025 week 11 were in the low five,
+     * and the second of them read "#3" against a record book that said "#2".
+     */
+    const opponentAhead = selfInBaseline ? [] : side === "a" ? [] : [round2(a)];
+    const opponentBehind = selfInBaseline ? [] : side === "a" ? [round2(b)] : [];
+    const aheadSingles = [...singles(p.ahead), ...opponentAhead];
+    const behindSingles = [...singles(p.behind), ...opponentBehind];
     const hi = place(points, t.high, higher, aheadSingles, behindSingles, selfInBaseline);
     if (hi) {
       out.push({
@@ -301,7 +338,7 @@ export function matchupMarks(
     }
   }
 
-  const margin = Math.abs(a - b);
+  const margin = round2(Math.abs(a - b));
   const blowout = place(margin, t.blowout, higher, margins(p.ahead), margins(p.behind), selfInBaseline);
   if (blowout) {
     out.push({
@@ -328,7 +365,7 @@ export function matchupMarks(
     }
   }
 
-  const combined = a + b;
+  const combined = round2(a + b);
   const ch = place(combined, t.combinedHigh, higher, combinedOf(p.ahead), combinedOf(p.behind), selfInBaseline);
   if (ch) {
     out.push({
