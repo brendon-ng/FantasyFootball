@@ -19368,6 +19368,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790162065873,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "4943": [
@@ -20874,6 +20886,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "4994": [
@@ -21308,6 +21332,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": 22,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "5004": [
@@ -25140,6 +25176,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": 6,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "5850": [
@@ -25305,6 +25353,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790162065873,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "5857": [
@@ -28990,6 +29050,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": 3,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "6659": [
@@ -32747,6 +32819,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": 8,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "7021": [
@@ -36988,6 +37072,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "7922": [
@@ -40911,6 +41007,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "8408": [
@@ -41165,6 +41273,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "8698": [
@@ -41655,6 +41775,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": 15,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "9229": [
@@ -41911,6 +42043,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "9484": [
@@ -43621,6 +43765,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 14
+    },
+    {
+      "action": "add",
+      "faabSpent": 3,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "10219": [
@@ -43697,6 +43853,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "10222": [
@@ -44684,6 +44852,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "11439": [
@@ -46034,6 +46214,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 13
+    },
+    {
+      "action": "add",
+      "faabSpent": 9,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "11626": [
@@ -46922,6 +47114,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "11789": [
@@ -47508,6 +47712,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 14
+    }
+  ],
+  "12487": [
+    {
+      "action": "add",
+      "faabSpent": 2,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "12489": [
@@ -48768,6 +48986,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "13298": [
@@ -51062,6 +51292,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "CLE": [
@@ -52938,6 +53180,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "IND": [
@@ -54001,6 +54255,18 @@
       "tradeId": "1393098787043442688",
       "type": "trade",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": 3,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "LAC": [
@@ -54395,6 +54661,18 @@
       "timestamp": 1789823997370,
       "toSlug": null,
       "type": "free_agent",
+      "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
       "week": 2
     }
   ],
@@ -56127,6 +56405,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "NO": [
@@ -56413,6 +56703,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 2
     }
   ],
   "NYG": [
@@ -57878,6 +58180,18 @@
       "timestamp": 1789561504336,
       "toSlug": null,
       "type": "free_agent",
+      "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790147381767,
+      "toSlug": null,
+      "type": "waiver",
       "week": 2
     }
   ],

@@ -392,6 +392,75 @@
       "timestamp": 1789923227948,
       "vetoed": false,
       "week": 2
+    },
+    {
+      "faab": 0,
+      "id": "e58c74d9-f646-41f0-8111-2ba3c2a5e7e5",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "12185",
+          "toSlug": "haley-rao"
+        },
+        {
+          "fromSlug": "haley-rao",
+          "playerId": "12015",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "haley-rao"
+      ],
+      "timestamp": 1790148199027,
+      "vetoed": false,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "21796c86-56dd-4dd3-a430-cebd5c70ee26",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "13346",
+          "toSlug": "eric-wong"
+        },
+        {
+          "fromSlug": "eric-wong",
+          "playerId": "9482",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "eric-wong"
+      ],
+      "timestamp": 1790148199027,
+      "vetoed": false,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "ec55ddb4-446b-4d45-8c39-139a9123f09c",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7571",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "8205",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "isaac-edejer"
+      ],
+      "timestamp": 1790148199027,
+      "vetoed": false,
+      "week": 3
     }
   ]
 }

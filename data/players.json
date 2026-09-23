@@ -745,7 +745,7 @@
     "birth_date": "1993-09-25",
     "full_name": "Brandin Cooks",
     "position": "WR",
-    "team": null,
+    "team": "SF",
     "years_exp": 12
   },
   "2214": {
@@ -2663,7 +2663,7 @@
     "birth_date": "1998-10-21",
     "full_name": "Isaiah Hodgins",
     "position": "WR",
-    "team": null,
+    "team": "PIT",
     "years_exp": 6
   },
   "6931": {
@@ -2852,7 +2852,7 @@
     "birth_date": "1999-12-23",
     "full_name": "Jaret Patterson",
     "position": "RB",
-    "team": null,
+    "team": "MIN",
     "years_exp": 5
   },
   "7538": {
@@ -3713,7 +3713,7 @@
     "birth_date": "1999-06-27",
     "full_name": "Will Levis",
     "position": "QB",
-    "team": null,
+    "team": "NYJ",
     "years_exp": 3
   },
   "10213": {
@@ -4274,6 +4274,13 @@
     "full_name": "Tez Johnson",
     "position": "WR",
     "team": "TB",
+    "years_exp": 1
+  },
+  "12487": {
+    "birth_date": "2003-03-07",
+    "full_name": "Terrance Ferguson",
+    "position": "TE",
+    "team": "LAR",
     "years_exp": 1
   },
   "12489": {
