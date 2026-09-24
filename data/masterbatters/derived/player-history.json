@@ -3089,6 +3089,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790200062467,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "5850": [
@@ -8352,6 +8364,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790195684740,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "11533": [
@@ -10451,6 +10475,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790195684740,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "12484": [
@@ -12230,6 +12266,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790200062467,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "13286": [

@@ -39672,6 +39672,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790172885408,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "8155": [
@@ -47354,6 +47366,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790221862701,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "12185": [
@@ -49188,6 +49212,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    }
+  ],
+  "13545": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790221862701,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "ARI": [
@@ -55999,6 +56037,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790180185384,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "NE": [
@@ -57757,6 +57807,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790180185384,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "SEA": [
