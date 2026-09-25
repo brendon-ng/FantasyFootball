@@ -624,6 +624,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790275885329,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "503": [
@@ -2923,6 +2935,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790261316915,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "2028": [
@@ -8389,6 +8413,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790261316915,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "4234": [
@@ -18673,6 +18709,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790278582583,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "7588": [
@@ -23353,6 +23401,20 @@
       "week": 0
     }
   ],
+  "9228": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790285600344,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
+    }
+  ],
   "9229": [
     {
       "action": "draft",
@@ -23655,6 +23717,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790278582583,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "9487": [
@@ -28341,6 +28415,20 @@
       "week": 0
     }
   ],
+  "12545": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790275885329,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
+    }
+  ],
   "12711": [
     {
       "action": "add",
@@ -28576,6 +28664,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1790195424219,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790285600344,
       "toSlug": null,
       "type": "free_agent",
       "week": 3
@@ -29247,6 +29347,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790261273417,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "BUF": [
@@ -29595,6 +29707,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790261273417,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "CHI": [

@@ -1182,6 +1182,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "ross-bechtel",
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790264606500,
+      "toSlug": "aidan-kelleher",
+      "tradeId": "1408506664885174272",
+      "type": "trade",
+      "week": 3
     }
   ],
   "3321": [
@@ -2366,6 +2379,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790295089402,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "4983": [
@@ -2420,6 +2445,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "joe-gibbons",
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790264614087,
+      "toSlug": "kaitlin-zarbis",
+      "tradeId": "1408648890504220672",
+      "type": "trade",
+      "week": 3
     }
   ],
   "4984": [
@@ -3426,6 +3464,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "aidan-kelleher",
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790264606500,
+      "toSlug": "ross-bechtel",
+      "tradeId": "1408506664885174272",
+      "type": "trade",
+      "week": 3
     }
   ],
   "5970": [
@@ -5285,6 +5336,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "joe-gibbons",
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790264614087,
+      "toSlug": "kaitlin-zarbis",
+      "tradeId": "1408648890504220672",
+      "type": "trade",
+      "week": 3
     }
   ],
   "8111": [
@@ -5524,6 +5588,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790270089483,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "8130": [
@@ -11613,6 +11689,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "kaitlin-zarbis",
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790264614087,
+      "toSlug": "joe-gibbons",
+      "tradeId": "1408648890504220672",
+      "type": "trade",
+      "week": 3
     }
   ],
   "12519": [
@@ -12595,6 +12684,19 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "kaitlin-zarbis",
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790264614087,
+      "toSlug": "joe-gibbons",
+      "tradeId": "1408648890504220672",
+      "type": "trade",
+      "week": 3
     }
   ],
   "13417": [
@@ -12623,6 +12725,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    }
+  ],
+  "13545": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790270089483,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "ARI": [
@@ -14833,6 +14949,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790269764487,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "NO": [
@@ -14931,6 +15059,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    }
+  ],
+  "NYG": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790269764487,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "NYJ": [

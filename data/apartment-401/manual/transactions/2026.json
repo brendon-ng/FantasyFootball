@@ -162,6 +162,24 @@
     },
     {
       "faab": 0,
+      "id": "95fbdc29-88f2-4a55-8889-e48b5990880d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "11834",
+          "toSlug": "brendon-ng"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1789542489998,
+      "vetoed": false,
+      "week": 2
+    },
+    {
+      "faab": 0,
       "id": "c0d3e522-6018-419d-ae04-2838191ddfac",
       "items": [
         {
@@ -178,24 +196,6 @@
       "kind": "waiver",
       "ownerSlugs": [
         "isaac-edejer"
-      ],
-      "timestamp": 1789542489998,
-      "vetoed": false,
-      "week": 2
-    },
-    {
-      "faab": 0,
-      "id": "95fbdc29-88f2-4a55-8889-e48b5990880d",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "11834",
-          "toSlug": "brendon-ng"
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "brendon-ng"
       ],
       "timestamp": 1789542489998,
       "vetoed": false,
@@ -551,6 +551,121 @@
         "brendon-ng"
       ],
       "timestamp": 1790197313535,
+      "vetoed": false,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "88123f45-ded6-464d-8a1a-6a62f84ca0f9",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CAR",
+          "toSlug": "diana-gonzalez"
+        },
+        {
+          "fromSlug": "diana-gonzalez",
+          "playerId": "BAL",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "diana-gonzalez"
+      ],
+      "timestamp": 1790261273417,
+      "vetoed": false,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "7c9faa01-a46d-4815-8812-d28681d919f2",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4227",
+          "toSlug": "diana-gonzalez"
+        },
+        {
+          "fromSlug": "diana-gonzalez",
+          "playerId": "2020",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "diana-gonzalez"
+      ],
+      "timestamp": 1790261316915,
+      "vetoed": false,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "db3be2dc-edf6-45ff-b8be-b4f6a030ed63",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "12545",
+          "toSlug": "sam-ellison"
+        },
+        {
+          "fromSlug": "sam-ellison",
+          "playerId": "421",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "sam-ellison"
+      ],
+      "timestamp": 1790275885329,
+      "vetoed": false,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "dc282871-691e-4b67-838f-70f10d8ca71d",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "9486",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "7571",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "isaac-edejer"
+      ],
+      "timestamp": 1790278582583,
+      "vetoed": false,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "d79c418c-7255-45eb-8a9d-fe9d5fc954b2",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "9228",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "13345",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1790285600344,
       "vetoed": false,
       "week": 3
     }
