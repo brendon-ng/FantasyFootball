@@ -1,6 +1,109 @@
 [
   {
     "adds": {
+      "9486": 3
+    },
+    "consenter_ids": [
+      3
+    ],
+    "created": 1790375907050,
+    "creator": "999142984568557568",
+    "draft_picks": [],
+    "drops": {
+      "11435": 3
+    },
+    "leg": 3,
+    "metadata": null,
+    "roster_ids": [
+      3
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1790375907050,
+    "transaction_id": "1409342338232320000",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "4943": 8
+    },
+    "consenter_ids": [
+      8
+    ],
+    "created": 1790358863914,
+    "creator": "868608373288034304",
+    "draft_picks": [],
+    "drops": {
+      "3634": 8
+    },
+    "leg": 3,
+    "metadata": null,
+    "roster_ids": [
+      8
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1790358863914,
+    "transaction_id": "1409270854134583296",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": null,
+    "consenter_ids": [
+      1
+    ],
+    "created": 1790356885957,
+    "creator": "887589851141427200",
+    "draft_picks": [],
+    "drops": {
+      "12508": 1
+    },
+    "leg": 3,
+    "metadata": null,
+    "roster_ids": [
+      1
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1790356885957,
+    "transaction_id": "1409262557981646848",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "PIT": 5
+    },
+    "consenter_ids": [
+      5
+    ],
+    "created": 1790222810060,
+    "creator": "1049492055615266816",
+    "draft_picks": [],
+    "drops": {
+      "DEN": 5
+    },
+    "leg": 3,
+    "metadata": {
+      "notes": "Your waiver claim was processed successfully!"
+    },
+    "roster_ids": [
+      5
+    ],
+    "settings": {
+      "seq": 0,
+      "waiver_bid": 2
+    },
+    "status": "complete",
+    "status_updated": 1790349616174,
+    "transaction_id": "1408700202914693120",
+    "type": "waiver",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
       "13545": 5
     },
     "consenter_ids": [

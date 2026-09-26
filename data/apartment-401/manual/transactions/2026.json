@@ -668,6 +668,29 @@
       "timestamp": 1790285600344,
       "vetoed": false,
       "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "fa44ec0d-29e8-42fa-9214-b5427f40c397",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "12487",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "12533",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1790360447416,
+      "vetoed": false,
+      "week": 3
     }
   ]
 }
