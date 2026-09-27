@@ -4935,6 +4935,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790484846110,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "3225": [
@@ -26362,6 +26374,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790484797657,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "11584": [
@@ -33869,6 +33893,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790444854905,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "NYJ": [
@@ -35131,6 +35167,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790444854905,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "TEN": [

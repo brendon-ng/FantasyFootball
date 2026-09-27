@@ -4814,6 +4814,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790452739275,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "7569": [
@@ -9577,6 +9589,18 @@
       "tradeId": "1398936846829936640",
       "type": "trade",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790493671247,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "11632": [

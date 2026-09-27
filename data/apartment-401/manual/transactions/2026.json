@@ -691,6 +691,65 @@
       "timestamp": 1790360447416,
       "vetoed": false,
       "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "762ae0a0-f9ec-4081-a0ad-6862d0c53783",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "NYG",
+          "toSlug": "mark-mcgreal"
+        },
+        {
+          "fromSlug": "mark-mcgreal",
+          "playerId": "TB",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "mark-mcgreal"
+      ],
+      "timestamp": 1790444854905,
+      "vetoed": false,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "fc83dab6-86f0-4e42-8e95-d870eca15ac4",
+      "items": [
+        {
+          "fromSlug": "eric-wong",
+          "playerId": "11583",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "eric-wong"
+      ],
+      "timestamp": 1790484797657,
+      "vetoed": false,
+      "week": 3
+    },
+    {
+      "faab": 0,
+      "id": "9ca6577e-1658-4fa7-be4e-13c309ef57b3",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "3214",
+          "toSlug": "eric-wong"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "eric-wong"
+      ],
+      "timestamp": 1790484846110,
+      "vetoed": false,
+      "week": 3
     }
   ]
 }

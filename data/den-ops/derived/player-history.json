@@ -4972,6 +4972,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790439033520,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "1379": [
@@ -25386,6 +25398,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1790162065873,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790439033520,
       "toSlug": null,
       "type": "free_agent",
       "week": 3
