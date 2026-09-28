@@ -10383,6 +10383,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790528137039,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "12457": [
@@ -11955,6 +11967,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790528108275,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "12534": [
@@ -12775,6 +12799,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790528108275,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 3
     }
   ],
   "13545": [

@@ -1,6 +1,77 @@
 [
   {
     "adds": {
+      "4035": 3
+    },
+    "consenter_ids": [
+      3
+    ],
+    "created": 1790535002986,
+    "creator": "999142984568557568",
+    "draft_picks": [],
+    "drops": {
+      "9486": 3
+    },
+    "leg": 3,
+    "metadata": null,
+    "roster_ids": [
+      3
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1790535002986,
+    "transaction_id": "1410009634948857856",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "7670": 8
+    },
+    "consenter_ids": [
+      8
+    ],
+    "created": 1790526885874,
+    "creator": "868608373288034304",
+    "draft_picks": [],
+    "drops": null,
+    "leg": 3,
+    "metadata": null,
+    "roster_ids": [
+      8
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1790526885874,
+    "transaction_id": "1409975589313499136",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "2505": 1
+    },
+    "consenter_ids": [
+      1
+    ],
+    "created": 1790524188131,
+    "creator": "887589851141427200",
+    "draft_picks": [],
+    "drops": null,
+    "leg": 3,
+    "metadata": null,
+    "roster_ids": [
+      1
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1790524188131,
+    "transaction_id": "1409964274159271936",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
       "1373": 10
     },
     "consenter_ids": [
@@ -72,6 +143,36 @@
     "status_updated": 1790358863914,
     "transaction_id": "1409270854134583296",
     "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "12508": 8
+    },
+    "consenter_ids": [
+      8
+    ],
+    "created": 1790356981359,
+    "creator": "868608373288034304",
+    "draft_picks": [],
+    "drops": {
+      "7600": 8
+    },
+    "leg": 3,
+    "metadata": {
+      "notes": "Your waiver claim was processed successfully!"
+    },
+    "roster_ids": [
+      8
+    ],
+    "settings": {
+      "seq": 0,
+      "waiver_bid": 0
+    },
+    "status": "complete",
+    "status_updated": 1790526632760,
+    "transaction_id": "1409262958130835456",
+    "type": "waiver",
     "waiver_budget": []
   },
   {
