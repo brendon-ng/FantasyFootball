@@ -154,6 +154,15 @@
       "week": 5
     },
     {
+      "margin": 80.56,
+      "opponentPoints": 101.92,
+      "opponentSlug": "safvet-besen",
+      "ownerSlug": "david-collier",
+      "points": 182.48,
+      "season": 2026,
+      "week": 3
+    },
+    {
       "margin": 78.54,
       "opponentPoints": 99.78,
       "opponentSlug": "michaela-frederick",
@@ -215,15 +224,6 @@
       "points": 152.98,
       "season": 2021,
       "week": 10
-    },
-    {
-      "margin": 73.86,
-      "opponentPoints": 78.86,
-      "opponentSlug": "spencer-kim",
-      "ownerSlug": "david-collier",
-      "points": 152.72,
-      "season": 2021,
-      "week": 13
     }
   ],
   "highestCombined": [
@@ -1255,6 +1255,14 @@
       "week": 9
     },
     {
+      "opponentPoints": 101.92,
+      "opponentSlug": "safvet-besen",
+      "ownerSlug": "david-collier",
+      "points": 182.48,
+      "season": 2026,
+      "week": 3
+    },
+    {
       "opponentPoints": 162.26,
       "opponentSlug": "jaymie-lew",
       "ownerSlug": "jake-gibbons",
@@ -1301,14 +1309,6 @@
       "points": 178.32,
       "season": 2019,
       "week": 10
-    },
-    {
-      "opponentPoints": 134.7,
-      "opponentSlug": "david-collier",
-      "ownerSlug": "cassidy-pensa",
-      "points": 178.24,
-      "season": 2025,
-      "week": 8
     }
   ],
   "weeklyLow": [

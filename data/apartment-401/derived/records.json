@@ -1069,6 +1069,14 @@
       "week": 17
     },
     {
+      "ownerSlug": "isaac-edejer",
+      "playerId": "9221",
+      "points": 43.4,
+      "season": 2026,
+      "started": true,
+      "week": 3
+    },
+    {
       "ownerSlug": "eric-wong",
       "playerId": "7564",
       "points": 43.1,
@@ -1099,14 +1107,6 @@
       "season": 2022,
       "started": true,
       "week": 2
-    },
-    {
-      "ownerSlug": "mark-mcgreal",
-      "playerId": "4034",
-      "points": 42.6,
-      "season": 2025,
-      "started": true,
-      "week": 7
     }
   ],
   "weeklyHigh": [
