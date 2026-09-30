@@ -1,0 +1,27 @@
+[
+  {
+    "adds": {
+      "CHI": 6
+    },
+    "consenter_ids": [
+      6
+    ],
+    "created": 1790752792668,
+    "creator": "609168288324321280",
+    "draft_picks": [],
+    "drops": {
+      "CIN": 6
+    },
+    "leg": 4,
+    "metadata": null,
+    "roster_ids": [
+      6
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1790752792668,
+    "transaction_id": "1410923111083229184",
+    "type": "free_agent",
+    "waiver_budget": []
+  }
+]
