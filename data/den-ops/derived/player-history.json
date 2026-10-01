@@ -5928,6 +5928,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790793237680,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "1500": [
@@ -30221,6 +30233,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790793146197,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "6798": [
@@ -37036,6 +37060,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790785014930,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "7741": [
@@ -42315,6 +42351,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790785014930,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "9487": [
@@ -43811,6 +43859,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 16
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790793146197,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "9997": [

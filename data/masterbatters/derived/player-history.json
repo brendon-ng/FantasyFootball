@@ -1518,6 +1518,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790801344345,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "4037": [
@@ -2843,6 +2855,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790796686633,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "5230": [
@@ -3677,6 +3701,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 14
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790796686633,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "6111": [
@@ -7114,6 +7150,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790792089363,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "9481": [
@@ -7884,6 +7932,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790801344345,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "9997": [
@@ -13445,6 +13505,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790791308592,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "CHI": [
@@ -13555,6 +13627,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790791308592,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "CIN": [
@@ -14029,6 +14113,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790791971292,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "HOU": [
@@ -15675,6 +15771,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790791971292,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "TB": [

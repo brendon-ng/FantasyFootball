@@ -5811,6 +5811,20 @@
       "week": 0
     }
   ],
+  "3634": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790813494465,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
+    }
+  ],
   "3664": [
     {
       "action": "draft",
@@ -25046,6 +25060,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790816047533,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "10229": [
@@ -26262,6 +26288,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790813494465,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "11576": [
@@ -27572,6 +27610,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790807856732,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "11834": [
@@ -28579,6 +28629,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790816010597,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "12534": [
@@ -28959,6 +29021,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790807856732,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "ARI": [
@@ -30593,6 +30667,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790809969525,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "DAL": [
@@ -34085,6 +34171,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790809969525,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "NYJ": [
