@@ -529,6 +529,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "aidan-kelleher",
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790893349289,
+      "toSlug": "srishti-dhawan",
+      "tradeId": "1411427398443937792",
+      "type": "trade",
+      "week": 4
     }
   ],
   "1479": [
@@ -900,6 +913,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790911510739,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "2747": [
@@ -1259,6 +1284,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790879572418,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "3451": [
@@ -1337,6 +1374,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    }
+  ],
+  "3634": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790897319676,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "3678": [
@@ -7844,6 +7895,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790911510739,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "9758": [
@@ -8214,6 +8277,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790879475869,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "10226": [
@@ -9745,6 +9820,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790897435703,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "11632": [
@@ -11009,6 +11096,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "srishti-dhawan",
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790893349289,
+      "toSlug": "aidan-kelleher",
+      "tradeId": "1411427398443937792",
+      "type": "trade",
+      "week": 4
     }
   ],
   "12490": [
@@ -11152,6 +11252,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790897319676,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "12495": [
@@ -12722,6 +12834,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790897435703,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "13296": [

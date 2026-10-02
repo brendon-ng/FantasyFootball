@@ -328,5 +328,32 @@
     "timestamp": 1790264614087,
     "vetoed": false,
     "week": 3
+  },
+  {
+    "id": "1411427398443937792",
+    "legs": [
+      {
+        "fromSlug": "aidan-kelleher",
+        "kind": "player",
+        "playerId": "1466",
+        "toSlug": "srishti-dhawan"
+      },
+      {
+        "fromSlug": "srishti-dhawan",
+        "kind": "player",
+        "playerId": "12489",
+        "toSlug": "aidan-kelleher"
+      }
+    ],
+    "ownerSlugs": [
+      "aidan-kelleher",
+      "srishti-dhawan"
+    ],
+    "preseason": false,
+    "season": 2026,
+    "source": "sleeper",
+    "timestamp": 1790893349289,
+    "vetoed": false,
+    "week": 4
   }
 ]

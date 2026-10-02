@@ -4984,6 +4984,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790941533542,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "1379": [
@@ -25936,6 +25948,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790941533542,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "5872": [
@@ -50908,6 +50932,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790941981226,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "CAR": [
@@ -57899,6 +57935,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790941981226,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "PIT": [
