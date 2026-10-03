@@ -1581,6 +1581,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790971018108,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 4
     }
   ],
   "4037": [
@@ -1611,6 +1623,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790971018108,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 4
     }
   ],
   "4039": [
@@ -2755,6 +2779,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790982794012,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "5022": [
@@ -3092,6 +3128,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790982794012,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "5846": [
@@ -13567,6 +13615,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 16
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790955477729,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "CAR": [

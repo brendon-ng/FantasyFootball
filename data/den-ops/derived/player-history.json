@@ -12852,6 +12852,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790982582552,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "3327": [
@@ -45832,6 +45844,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790967580482,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "11582": [
@@ -46229,6 +46253,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790999920566,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "11604": [
@@ -46361,6 +46397,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790982582552,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "11620": [
@@ -53626,6 +53674,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1790967580482,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "IND": [
