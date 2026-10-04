@@ -822,29 +822,6 @@
     },
     {
       "faab": 0,
-      "id": "cf0ed711-1450-47ba-b402-54e37eedb553",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "7002",
-          "toSlug": "brendon-ng"
-        },
-        {
-          "fromSlug": "brendon-ng",
-          "playerId": "12487",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "brendon-ng"
-      ],
-      "timestamp": 1790754829910,
-      "vetoed": false,
-      "week": 4
-    },
-    {
-      "faab": 0,
       "id": "b2641401-b395-47e8-bf00-33801a191302",
       "items": [
         {
@@ -861,6 +838,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "eric-wong"
+      ],
+      "timestamp": 1790754829910,
+      "vetoed": false,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "cf0ed711-1450-47ba-b402-54e37eedb553",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7002",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "12487",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
       ],
       "timestamp": 1790754829910,
       "vetoed": false,
@@ -1150,6 +1150,24 @@
         "eric-wong"
       ],
       "timestamp": 1790927201459,
+      "vetoed": false,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "ef56a8d7-dc2d-4799-9988-743499fdcf0b",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "6149",
+          "toSlug": "mark-mcgreal"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "mark-mcgreal"
+      ],
+      "timestamp": 1791045431583,
       "vetoed": false,
       "week": 4
     }

@@ -45152,6 +45152,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791057777996,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "11439": [
@@ -46323,6 +46335,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791062514004,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
     }
   ],
   "11618": [
@@ -53683,6 +53707,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1790967580482,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791057777996,
       "toSlug": null,
       "type": "free_agent",
       "week": 4
