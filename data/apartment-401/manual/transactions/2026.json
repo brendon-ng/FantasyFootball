@@ -1170,6 +1170,29 @@
       "timestamp": 1791045431583,
       "vetoed": false,
       "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "1005b3a1-bce1-4f8e-8e30-d89b73a3b1eb",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "CHI",
+          "toSlug": "jivan-gubbi"
+        },
+        {
+          "fromSlug": "jivan-gubbi",
+          "playerId": "HOU",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jivan-gubbi"
+      ],
+      "timestamp": 1791129472666,
+      "vetoed": false,
+      "week": 4
     }
   ]
 }
