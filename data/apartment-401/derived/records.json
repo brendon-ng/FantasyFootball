@@ -46,6 +46,15 @@
       "week": 4
     },
     {
+      "margin": 89.24,
+      "opponentPoints": 50.12,
+      "opponentSlug": "diana-gonzalez",
+      "ownerSlug": "eric-wong",
+      "points": 139.36,
+      "season": 2026,
+      "week": 4
+    },
+    {
       "margin": 84.1,
       "opponentPoints": 70.16,
       "opponentSlug": "kate-grillo",
@@ -215,15 +224,6 @@
       "points": 176.4,
       "season": 2023,
       "week": 13
-    },
-    {
-      "margin": 64.5,
-      "opponentPoints": 78.2,
-      "opponentSlug": "jivan-gubbi",
-      "ownerSlug": "mark-mcgreal",
-      "points": 142.7,
-      "season": 2023,
-      "week": 2
     }
   ],
   "highestCombined": [
@@ -298,6 +298,15 @@
       "season": 2025,
       "total": 310.48,
       "week": 7
+    },
+    {
+      "opponentPoints": 133.68,
+      "opponentSlug": "isaac-edejer",
+      "ownerSlug": "haley-rao",
+      "points": 174.62,
+      "season": 2026,
+      "total": 308.3,
+      "week": 4
     },
     {
       "opponentPoints": 145.74,
@@ -417,6 +426,15 @@
       "week": 16
     },
     {
+      "opponentPoints": 123.12,
+      "opponentSlug": "jivan-gubbi",
+      "ownerSlug": "charlie-stoksik",
+      "points": 157.88,
+      "season": 2026,
+      "total": 281,
+      "week": 4
+    },
+    {
       "opponentPoints": 135.52,
       "opponentSlug": "jivan-gubbi",
       "ownerSlug": "haley-rao",
@@ -433,24 +451,6 @@
       "season": 2024,
       "total": 280.16,
       "week": 14
-    },
-    {
-      "opponentPoints": 135.12,
-      "opponentSlug": "diana-gonzalez",
-      "ownerSlug": "eric-wong",
-      "points": 144.48,
-      "season": 2024,
-      "total": 279.6,
-      "week": 17
-    },
-    {
-      "opponentPoints": 125.32,
-      "opponentSlug": "diana-gonzalez",
-      "ownerSlug": "mark-mcgreal",
-      "points": 153.98,
-      "season": 2024,
-      "total": 279.3,
-      "week": 1
     }
   ],
   "lowestCombined": [
@@ -1183,6 +1183,14 @@
       "week": 17
     },
     {
+      "opponentPoints": 133.68,
+      "opponentSlug": "isaac-edejer",
+      "ownerSlug": "haley-rao",
+      "points": 174.62,
+      "season": 2026,
+      "week": 4
+    },
+    {
       "opponentPoints": 89.8,
       "opponentSlug": "brendon-ng",
       "ownerSlug": "eric-wong",
@@ -1301,14 +1309,6 @@
       "points": 162.24,
       "season": 2022,
       "week": 8
-    },
-    {
-      "opponentPoints": 144.88,
-      "opponentSlug": "diana-gonzalez",
-      "ownerSlug": "mark-mcgreal",
-      "points": 162,
-      "season": 2024,
-      "week": 9
     }
   ],
   "weeklyLow": [
@@ -1335,6 +1335,14 @@
       "points": 49.7,
       "season": 2025,
       "week": 9
+    },
+    {
+      "opponentPoints": 139.36,
+      "opponentSlug": "eric-wong",
+      "ownerSlug": "diana-gonzalez",
+      "points": 50.12,
+      "season": 2026,
+      "week": 4
     },
     {
       "opponentPoints": 60.66,
@@ -1503,14 +1511,6 @@
       "points": 68.98,
       "season": 2025,
       "week": 14
-    },
-    {
-      "opponentPoints": 125.66,
-      "opponentSlug": "charlie-stoksik",
-      "ownerSlug": "haley-rao",
-      "points": 69.14,
-      "season": 2024,
-      "week": 13
     }
   ]
 }

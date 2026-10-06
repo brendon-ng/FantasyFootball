@@ -336,6 +336,15 @@
       "week": 5
     },
     {
+      "opponentPoints": 119.1,
+      "opponentSlug": "aidan-kelleher",
+      "ownerSlug": "allison-fosbery",
+      "points": 160.08,
+      "season": 2026,
+      "total": 279.18,
+      "week": 4
+    },
+    {
       "opponentPoints": 128.9,
       "opponentSlug": "aidan-kelleher",
       "ownerSlug": "vance-armstrong",
@@ -435,22 +444,13 @@
       "week": 4
     },
     {
-      "opponentPoints": 123.54,
-      "opponentSlug": "josh-greenebaum",
-      "ownerSlug": "lindsey-freeze",
-      "points": 135.52,
-      "season": 2025,
-      "total": 259.06,
-      "week": 3
-    },
-    {
-      "opponentPoints": 103.16,
-      "opponentSlug": "allison-fosbery",
-      "ownerSlug": "srishti-dhawan",
-      "points": 153.02,
+      "opponentPoints": 115.32,
+      "opponentSlug": "kate-olson",
+      "ownerSlug": "jake-gibbons",
+      "points": 147.28,
       "season": 2026,
-      "total": 256.18,
-      "week": 1
+      "total": 262.6,
+      "week": 4
     }
   ],
   "lowestCombined": [
@@ -617,6 +617,15 @@
       "week": 10
     },
     {
+      "opponentPoints": 100.62,
+      "opponentSlug": "josh-greenebaum",
+      "ownerSlug": "kaitlin-zarbis",
+      "points": 101.22,
+      "season": 2026,
+      "total": 201.84,
+      "week": 4
+    },
+    {
       "opponentPoints": 96.62,
       "opponentSlug": "kate-olson",
       "ownerSlug": "brendon-ng",
@@ -669,15 +678,6 @@
       "season": 2025,
       "total": 206.08,
       "week": 3
-    },
-    {
-      "opponentPoints": 86.84,
-      "opponentSlug": "kaitlin-zarbis",
-      "ownerSlug": "lindsey-freeze",
-      "points": 120.56,
-      "season": 2025,
-      "total": 207.4,
-      "week": 1
     }
   ],
   "narrowestWin": [
@@ -691,6 +691,15 @@
       "week": 8
     },
     {
+      "margin": 0.6,
+      "opponentPoints": 100.62,
+      "opponentSlug": "josh-greenebaum",
+      "ownerSlug": "kaitlin-zarbis",
+      "points": 101.22,
+      "season": 2026,
+      "week": 4
+    },
+    {
       "margin": 1.2,
       "opponentPoints": 96.92,
       "opponentSlug": "brendon-ng",
@@ -698,6 +707,15 @@
       "points": 98.12,
       "season": 2025,
       "week": 1
+    },
+    {
+      "margin": 2.14,
+      "opponentPoints": 118.64,
+      "opponentSlug": "ross-bechtel",
+      "ownerSlug": "robbie-goodman",
+      "points": 120.78,
+      "season": 2026,
+      "week": 4
     },
     {
       "margin": 2.2,
@@ -887,24 +905,6 @@
       "points": 97.68,
       "season": 2025,
       "week": 12
-    },
-    {
-      "margin": 8.82,
-      "opponentPoints": 94.92,
-      "opponentSlug": "brendon-ng",
-      "ownerSlug": "jake-gibbons",
-      "points": 103.74,
-      "season": 2025,
-      "week": 17
-    },
-    {
-      "margin": 9.22,
-      "opponentPoints": 96.62,
-      "opponentSlug": "kate-olson",
-      "ownerSlug": "brendon-ng",
-      "points": 105.84,
-      "season": 2025,
-      "week": 13
     }
   ],
   "playerHigh": [
@@ -949,6 +949,14 @@
       "week": 17
     },
     {
+      "ownerSlug": "robbie-goodman",
+      "playerId": "12526",
+      "points": 45.2,
+      "season": 2026,
+      "started": true,
+      "week": 4
+    },
+    {
       "ownerSlug": "kate-olson",
       "playerId": "11604",
       "points": 43.3,
@@ -987,6 +995,14 @@
       "season": 2026,
       "started": true,
       "week": 3
+    },
+    {
+      "ownerSlug": "jake-gibbons",
+      "playerId": "6786",
+      "points": 41.3,
+      "season": 2026,
+      "started": true,
+      "week": 4
     },
     {
       "ownerSlug": "kate-olson",
@@ -1091,22 +1107,6 @@
       "season": 2025,
       "started": true,
       "week": 2
-    },
-    {
-      "ownerSlug": "jake-gibbons",
-      "playerId": "6813",
-      "points": 37.4,
-      "season": 2025,
-      "started": true,
-      "week": 8
-    },
-    {
-      "ownerSlug": "aidan-kelleher",
-      "playerId": "11560",
-      "points": 37.26,
-      "season": 2026,
-      "started": true,
-      "week": 1
     }
   ],
   "weeklyHigh": [
@@ -1207,6 +1207,14 @@
       "week": 2
     },
     {
+      "opponentPoints": 119.1,
+      "opponentSlug": "aidan-kelleher",
+      "ownerSlug": "allison-fosbery",
+      "points": 160.08,
+      "season": 2026,
+      "week": 4
+    },
+    {
       "opponentPoints": 112.74,
       "opponentSlug": "robbie-goodman",
       "ownerSlug": "lindsey-freeze",
@@ -1287,28 +1295,20 @@
       "week": 10
     },
     {
+      "opponentPoints": 115.32,
+      "opponentSlug": "kate-olson",
+      "ownerSlug": "jake-gibbons",
+      "points": 147.28,
+      "season": 2026,
+      "week": 4
+    },
+    {
       "opponentPoints": 133.54,
       "opponentSlug": "kaitlin-zarbis",
       "ownerSlug": "kate-olson",
       "points": 147.02,
       "season": 2025,
       "week": 9
-    },
-    {
-      "opponentPoints": 96.12,
-      "opponentSlug": "lindsey-freeze",
-      "ownerSlug": "allison-fosbery",
-      "points": 146.94,
-      "season": 2025,
-      "week": 11
-    },
-    {
-      "opponentPoints": 138.16,
-      "opponentSlug": "josh-greenebaum",
-      "ownerSlug": "allison-fosbery",
-      "points": 146.46,
-      "season": 2025,
-      "week": 8
     }
   ],
   "weeklyLow": [
