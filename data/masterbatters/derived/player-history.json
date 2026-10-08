@@ -171,6 +171,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 16
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791397812811,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "421": [
@@ -8379,6 +8391,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791397812811,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "10219": [
