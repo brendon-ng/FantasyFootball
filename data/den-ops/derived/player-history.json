@@ -19682,6 +19682,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791501729092,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "4949": [

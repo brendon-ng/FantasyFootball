@@ -27864,6 +27864,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791516143622,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "12185": [
@@ -30237,6 +30249,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791516132968,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "CHI": [
@@ -34667,6 +34691,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791516115648,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "PHI": [
