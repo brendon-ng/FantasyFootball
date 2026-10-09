@@ -56,6 +56,8 @@ export interface LeagueConfig {
    * broken page into a retry. See `lib/apps-script.ts`.
    */
   appsScriptEndpoints?: string[];
+  /** The same sheet, read directly through the Sheets API. See `lib/sheets-read.ts`. */
+  punishmentsSpreadsheetId?: string;
   owners: Array<{
     slug?: string;
     userId: string | null;

@@ -29,6 +29,7 @@ import {
 } from "@/components/ui";
 import { useIdentity } from "@/components/identity";
 import { useBallots, usePunishments } from "@/lib/punishments-live";
+import type { SheetSource } from "@/lib/sheets-read";
 import {
   resolveSeasonPunishment,
   type SeasonPunishment,
@@ -101,6 +102,7 @@ export function PunishmentTracker({
   cloudinaryPreset,
   srcs,
   endpoints,
+  sheet,
   league,
   isMock,
 }: {
@@ -171,6 +173,8 @@ export function PunishmentTracker({
   srcs: string[];
   /** Bare `/exec` URL for writes; null when reading the bundled sample. */
   endpoints: string[];
+  /** Read the sheet directly instead of through `srcs`; see lib/sheets-read. */
+  sheet: SheetSource | null;
   league: string;
   isMock: boolean;
 }) {
@@ -183,7 +187,7 @@ export function PunishmentTracker({
     recordDraw,
     recordCompletion,
     servedIndex,
-  } = usePunishments(srcs);
+  } = usePunishments(srcs, sheet);
   /**
    * WRITES GO TO WHICHEVER DEPLOYMENT JUST ANSWERED. With several of them one
    * can be dead for this reader while the rest are fine, and a draw posted into
@@ -348,6 +352,7 @@ export function PunishmentTracker({
 
   const ballots = useBallots({
     endpoint,
+    sheet,
     league,
     season: active,
     voter: me,

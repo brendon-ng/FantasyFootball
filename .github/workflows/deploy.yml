@@ -52,8 +52,14 @@ jobs:
       # GITHUB_REPOSITORY ("owner/repo") is set by Actions; next.config.ts reads it
       # to derive the /<repo>/<league> basePath, so a repo rename can't break asset
       # URLs. `npm run build` builds EVERY configured league and assembles them.
+      # The punishment tracker reads its Google Sheet straight from the browser,
+      # so this key ships in the page's JavaScript by design — it is a repo
+      # secret only to keep it out of git and out of secret-scanning alerts.
+      # Restricted in Google Cloud to the Sheets API and this site's origin.
       - name: Build static export
         run: npm run build
+        env:
+          NEXT_PUBLIC_SHEETS_API_KEY: ${{ secrets.SHEETS_API_KEY }}
 
       # Guard against the classic Pages subpath regression: assets referenced from
       # the domain root instead of /<repo>/ silently 404 in production.

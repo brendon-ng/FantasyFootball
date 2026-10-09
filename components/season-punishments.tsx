@@ -4,6 +4,7 @@ import { PunishmentLedger } from "@/components/punishment-ledger";
 import { SampleBadge } from "@/components/punishment-tracker";
 import { Panel, PanelHeader, Skeleton } from "@/components/ui";
 import { usePunishments } from "@/lib/punishments-live";
+import type { SheetSource } from "@/lib/sheets-read";
 import {
   buildLedger,
   ledgerTotals,
@@ -42,6 +43,7 @@ export function SeasonPunishments({
   teams,
   names,
   srcs,
+  sheet,
   isMock,
 }: {
   season: number;
@@ -50,9 +52,11 @@ export function SeasonPunishments({
   teams: TeamMap;
   names: Record<string, string>;
   srcs: string[];
+  /** Read the sheet directly instead of through `srcs`; see lib/sheets-read. */
+  sheet: SheetSource | null;
   isMock: boolean;
 }) {
-  const { status, feed } = usePunishments(srcs);
+  const { status, feed } = usePunishments(srcs, sheet);
 
   // Everything the build knows: a row per week lost, with the punishment and the
   // completion still to come. Also what the panel is drawn from while waiting.

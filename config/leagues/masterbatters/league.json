@@ -29,6 +29,16 @@
     "Public by construction: a static site ships this URL in its JavaScript. Fine",
     "for reads; the write endpoints will need a shared secret of their own."
   ],
+  "//punishmentsSpreadsheetId": [
+    "The same Google Sheet, read DIRECTLY through the Sheets API instead of",
+    "through Apps Script — the ID is the long segment of the sheet's URL. Reads",
+    "only: writes still go to appsScriptEndpoint, which holds the lock.",
+    "",
+    "Needs NEXT_PUBLIC_SHEETS_API_KEY at build time too (a repo secret in CI,",
+    ".env.local locally). With either missing, reads fall back to Apps Script.",
+    "The sheet must stay shared as anyone-with-the-link can view."
+  ],
+  "punishmentsSpreadsheetId": "1JI31CPEIJQdaGHm9h7yEyizhV7ZBzPazo_pWhDGNCo8",
   "//cloudinary": [
     "Photos and videos of punishments live in Cloudinary, not in the sheet and",
     "not in this repo. The browser uploads straight there with an UNSIGNED",

@@ -25,6 +25,7 @@ import { sleeperProvider } from "./live/sleeper.ts";
 import type { LiveProvider } from "./live/types.ts";
 import { meetingId } from "./meeting.ts";
 import type { DerivedLow, SeasonLows, TeamMap } from "./punishments.ts";
+import type { SheetSource } from "./sheets-read.ts";
 import { type RecordList, type RecordThresholds } from "./record-marks.ts";
 import {
   resolveSeasonPunishment,
@@ -991,6 +992,8 @@ export interface LeagueConfig {
   appsScriptEndpoint?: string;
   /** Extra deployments of the same project; see `lib/leagues.ts`. */
   appsScriptEndpoints?: string[];
+  /** The same sheet, read directly through the Sheets API. See below. */
+  punishmentsSpreadsheetId?: string;
 }
 export const getConfig = (): LeagueConfig =>
   JSON.parse(readFileSync(join(CONFIG, "league.json"), "utf8"));
@@ -1013,12 +1016,20 @@ export const getConfig = (): LeagueConfig =>
  * The URL is public by construction: a static site has to ship it in its
  * JavaScript. Fine for reads. When the write endpoints land they will need their
  * own shared secret, because anyone reading the page source can POST to it.
+ *
+ * READS SKIP APPS SCRIPT when `sheet` is set — the spreadsheet id from config
+ * plus the API key from the build environment. Both are needed, and with either
+ * missing it is null and reads fall back to `srcs`, so a checkout without the
+ * key still loads the real feed. Writes go to `endpoints` regardless; see
+ * `lib/sheets-read.ts` for why the split falls there.
  */
 export function punishmentsSource(): {
   /** Fully-formed GET URLs, one per deployment — or the bundled sample. */
   srcs: string[];
   /** The bare `/exec` URLs for writes, aligned with `srcs`. Empty means mock. */
   endpoints: string[];
+  /** Read the sheet directly instead of `srcs`; null means do not. */
+  sheet: SheetSource | null;
   league: string;
   isMock: boolean;
 } {
@@ -1028,10 +1039,15 @@ export function punishmentsSource(): {
   const endpoints = [cfg.appsScriptEndpoint, ...(cfg.appsScriptEndpoints ?? [])]
     .map((e) => e?.trim())
     .filter((e): e is string => Boolean(e));
-  if (!endpoints.length) {
+  const spreadsheetId = cfg.punishmentsSpreadsheetId?.trim();
+  const apiKey = process.env.NEXT_PUBLIC_SHEETS_API_KEY?.trim();
+  const sheet =
+    spreadsheetId && apiKey ? { spreadsheetId, apiKey, league: LEAGUE } : null;
+  if (!endpoints.length && !sheet) {
     return {
       srcs: [withBasePath(`/mock/${LEAGUE}.punishments.json`)],
       endpoints: [],
+      sheet: null,
       league: LEAGUE,
       isMock: true,
     };
@@ -1042,6 +1058,7 @@ export function punishmentsSource(): {
   return {
     srcs: endpoints.map((e) => `${e}${e.includes("?") ? "&" : "?"}${query}`),
     endpoints,
+    sheet,
     league: LEAGUE,
     isMock: false,
   };

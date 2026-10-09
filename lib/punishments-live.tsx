@@ -4,6 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 
 import { assertScriptOk, fetchScriptJson } from "./apps-script.ts";
 import {
+  fetchSheetBallots,
+  fetchSheetFeed,
+  type SheetSource,
+} from "./sheets-read.ts";
+import {
   parseBallot,
   parseBallotState,
   parseFeed,
@@ -180,13 +185,22 @@ async function readJson(res: Response): Promise<Record<string, unknown>> {
  * ballot comes back null. Asking for somebody is the only way to see their
  * picks, which is how the secrecy is enforced server-side rather than by this
  * component agreeing not to look.
+ *
+ * With `sheet` set it reads the Ballots table directly instead, and the secrecy
+ * becomes this function agreeing not to return anyone else's picks — which is
+ * all it ever was, the sheet being public. See `lib/sheets-read.ts`.
  */
 export async function fetchBallots(
-  endpoint: string,
+  endpoint: string | null,
   league: string,
   season: number,
   voter: string | null,
+  sheet: SheetSource | null = null,
 ): Promise<BallotState> {
+  if (sheet) {
+    return parseBallotState(assertScriptOk(await fetchSheetBallots(sheet, season, voter)));
+  }
+  if (!endpoint) throw new Error("no endpoint configured");
   const query = new URLSearchParams({
     func: "getBallots",
     league,
@@ -240,11 +254,18 @@ export async function castBallot(
   return { ballot, votes };
 }
 
-export function usePunishments(srcs: string[]): FeedState & {
+export function usePunishments(
+  srcs: string[],
+  /** Read the sheet directly rather than through `srcs`. */
+  sheet: SheetSource | null = null,
+): FeedState & {
   /**
    * Which deployment answered, or the one that will be tried first if none has
    * yet. A WRITE should go here: it is the one deployment just proven to be
    * alive, which matters when a league has several and one of them is not.
+   *
+   * Reading through `sheet` proves nothing about any deployment, so it stays at
+   * the random starting point — writes still spread across them.
    */
   servedIndex: number;
   /**
@@ -333,15 +354,19 @@ export function usePunishments(srcs: string[]): FeedState & {
     [],
   );
 
-  const key = srcs.join("|");
+  const key = sheet
+    ? `${sheet.spreadsheetId}:${sheet.league}`
+    : srcs.join("|");
 
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
       try {
-        const { body, index } = await fetchScriptJson(srcs, start);
-        if (!cancelled) setServed(index);
+        const { body, index } = sheet
+          ? { body: await fetchSheetFeed(sheet), index: null }
+          : await fetchScriptJson(srcs, start);
+        if (!cancelled && index !== null) setServed(index);
         // APPS SCRIPT CANNOT SET A STATUS CODE, so a rejected request still
         // arrives as HTTP 200 and announces itself with `ok: false`. Checking
         // only `res.ok` would parse the error object into an empty feed and
@@ -372,8 +397,8 @@ export function usePunishments(srcs: string[]): FeedState & {
     return () => {
       cancelled = true;
     };
-    // `srcs` is spread from build-time config and only ever changes identity,
-    // not contents; `key` is what actually decides whether to refetch.
+    // `srcs` and `sheet` are spread from build-time config and only ever change
+    // identity, not contents; `key` is what actually decides whether to refetch.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, attempt, start]);
 
@@ -557,7 +582,7 @@ export async function completePunishment(
  * The viewer's ballot and the season's turnout.
  *
  * FETCHED SEPARATELY FROM THE FEED, and only when there is something to fetch:
- * the phase is `voting`, an endpoint exists, and a season is selected. The feed
+ * the phase is `voting`, there is somewhere to read from, and a season is selected. The feed
  * is the same for everyone and cacheable; this depends on who is looking, and
  * folding it in would make the main request churn every time somebody changed
  * identity.
@@ -573,12 +598,15 @@ export async function completePunishment(
  */
 export function useBallots({
   endpoint,
+  sheet = null,
   league,
   season,
   voter,
   enabled,
 }: {
   endpoint: string | null;
+  /** Read ballots from the sheet directly; wins over `endpoint`. */
+  sheet?: SheetSource | null;
   league: string;
   season: number | null;
   voter: string | null;
@@ -593,7 +621,7 @@ export function useBallots({
   applySaved: (ballot: Ballot) => void;
 } {
   const key =
-    enabled && endpoint && season != null
+    enabled && (sheet || endpoint) && season != null
       ? `${league}:${season}:${voter ?? ""}`
       : null;
   const [loaded, setLoaded] = useState<{
@@ -602,11 +630,11 @@ export function useBallots({
   } | null>(null);
 
   useEffect(() => {
-    if (!key || !endpoint || season == null) return;
+    if (!key || season == null) return;
     let cancelled = false;
     (async () => {
       try {
-        const data = await fetchBallots(endpoint, league, season, voter);
+        const data = await fetchBallots(endpoint, league, season, voter, sheet);
         if (!cancelled) setLoaded({ key, data });
       } catch {
         // Fails soft: the rest of the page comes from the feed and is unaffected;
@@ -616,6 +644,8 @@ export function useBallots({
     return () => {
       cancelled = true;
     };
+    // `sheet` is build-time config like `srcs` above; `key` covers it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, endpoint, league, season, voter]);
 
   const applySaved = useCallback((ballot: Ballot) => {
