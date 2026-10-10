@@ -39017,6 +39017,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791574200717,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "8137": [
@@ -49764,6 +49776,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791574200717,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "13330": [
