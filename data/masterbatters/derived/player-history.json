@@ -2305,6 +2305,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791646808386,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "4663": [

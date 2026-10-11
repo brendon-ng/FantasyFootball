@@ -1242,29 +1242,6 @@
     },
     {
       "faab": 0,
-      "id": "7075294d-3d35-4848-803e-dce28fced223",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "11630",
-          "toSlug": "isaac-edejer"
-        },
-        {
-          "fromSlug": "isaac-edejer",
-          "playerId": "6819",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "isaac-edejer"
-      ],
-      "timestamp": 1791359099987,
-      "vetoed": false,
-      "week": 5
-    },
-    {
-      "faab": 0,
       "id": "c268e94a-ece8-40ee-a3f1-b34df8ef4bc8",
       "items": [
         {
@@ -1281,6 +1258,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "eric-wong"
+      ],
+      "timestamp": 1791359099987,
+      "vetoed": false,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "7075294d-3d35-4848-803e-dce28fced223",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "11630",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "6819",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "isaac-edejer"
       ],
       "timestamp": 1791359099987,
       "vetoed": false,
@@ -1429,6 +1429,29 @@
         "diana-gonzalez"
       ],
       "timestamp": 1791516143622,
+      "vetoed": false,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "78b60821-e402-4f44-99dd-74884fd23ece",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "WAS",
+          "toSlug": "mark-mcgreal"
+        },
+        {
+          "fromSlug": "mark-mcgreal",
+          "playerId": "CLE",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "mark-mcgreal"
+      ],
+      "timestamp": 1791700686196,
       "vetoed": false,
       "week": 5
     }

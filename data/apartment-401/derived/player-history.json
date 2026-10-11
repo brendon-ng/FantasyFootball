@@ -30953,6 +30953,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791700686196,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "DAL": [
@@ -36267,6 +36279,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 14
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791700686196,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "espn-4427728": [

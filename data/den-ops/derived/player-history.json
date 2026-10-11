@@ -12912,6 +12912,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791668102575,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "3327": [
@@ -46507,6 +46519,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791725571856,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "11604": [
@@ -46953,6 +46977,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    }
+  ],
+  "11630": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791646362331,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "11631": [
