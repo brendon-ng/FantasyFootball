@@ -48989,6 +48989,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791735687921,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "12512": [
@@ -49882,6 +49894,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791735687921,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 5
     }
   ],
   "13345": [
