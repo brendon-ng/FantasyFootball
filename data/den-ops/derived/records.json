@@ -282,6 +282,15 @@
       "week": 6
     },
     {
+      "opponentPoints": 150.9,
+      "opponentSlug": "reagan-schmidt",
+      "ownerSlug": "brendon-ng",
+      "points": 185.12,
+      "season": 2026,
+      "total": 336.02,
+      "week": 5
+    },
+    {
       "opponentPoints": 149.6,
       "opponentSlug": "cassidy-pensa",
       "ownerSlug": "tyler-jung",
@@ -363,6 +372,15 @@
       "week": 2
     },
     {
+      "opponentPoints": 150.7,
+      "opponentSlug": "jaymie-lew",
+      "ownerSlug": "lauren-gross",
+      "points": 167.44,
+      "season": 2026,
+      "total": 318.14,
+      "week": 5
+    },
+    {
       "opponentPoints": 143.66,
       "opponentSlug": "cassidy-pensa",
       "ownerSlug": "tyler-jung",
@@ -433,24 +451,6 @@
       "season": 2024,
       "total": 310.54,
       "week": 13
-    },
-    {
-      "opponentPoints": 99.62,
-      "opponentSlug": "david-collier",
-      "ownerSlug": "olivia-nelli",
-      "points": 210.18,
-      "season": 2023,
-      "total": 309.8,
-      "week": 16
-    },
-    {
-      "opponentPoints": 113.84,
-      "opponentSlug": "david-collier",
-      "ownerSlug": "tyler-jung",
-      "points": 195.28,
-      "season": 2021,
-      "total": 309.12,
-      "week": 5
     }
   ],
   "lowestCombined": [
@@ -1231,6 +1231,14 @@
       "week": 2
     },
     {
+      "opponentPoints": 150.9,
+      "opponentSlug": "reagan-schmidt",
+      "ownerSlug": "brendon-ng",
+      "points": 185.12,
+      "season": 2026,
+      "week": 5
+    },
+    {
       "opponentPoints": 70.82,
       "opponentSlug": "jaymie-lew",
       "ownerSlug": "reagan-schmidt",
@@ -1301,14 +1309,6 @@
       "points": 178.32,
       "season": 2019,
       "week": 9
-    },
-    {
-      "opponentPoints": 99.78,
-      "opponentSlug": "michaela-frederick",
-      "ownerSlug": "jaymie-lew",
-      "points": 178.32,
-      "season": 2019,
-      "week": 10
     }
   ],
   "weeklyLow": [

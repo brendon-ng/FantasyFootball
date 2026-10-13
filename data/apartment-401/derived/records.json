@@ -118,6 +118,15 @@
       "week": 2
     },
     {
+      "margin": 76.46,
+      "opponentPoints": 103.7,
+      "opponentSlug": "haley-rao",
+      "ownerSlug": "eric-wong",
+      "points": 180.16,
+      "season": 2026,
+      "week": 5
+    },
+    {
       "margin": 74.12,
       "opponentPoints": 88.68,
       "opponentSlug": "jay-uppuluri",
@@ -215,15 +224,6 @@
       "points": 145.7,
       "season": 2023,
       "week": 10
-    },
-    {
-      "margin": 65.4,
-      "opponentPoints": 111,
-      "opponentSlug": "haley-rao",
-      "ownerSlug": "kate-grillo",
-      "points": 176.4,
-      "season": 2023,
-      "week": 13
     }
   ],
   "highestCombined": [
@@ -253,6 +253,15 @@
       "season": 2022,
       "total": 324.4,
       "week": 2
+    },
+    {
+      "opponentPoints": 136,
+      "opponentSlug": "jivan-gubbi",
+      "ownerSlug": "sam-ellison",
+      "points": 182.66,
+      "season": 2026,
+      "total": 318.66,
+      "week": 5
     },
     {
       "opponentPoints": 143.34,
@@ -426,6 +435,15 @@
       "week": 16
     },
     {
+      "opponentPoints": 103.7,
+      "opponentSlug": "haley-rao",
+      "ownerSlug": "eric-wong",
+      "points": 180.16,
+      "season": 2026,
+      "total": 283.86,
+      "week": 5
+    },
+    {
       "opponentPoints": 123.12,
       "opponentSlug": "jivan-gubbi",
       "ownerSlug": "charlie-stoksik",
@@ -433,24 +451,6 @@
       "season": 2026,
       "total": 281,
       "week": 4
-    },
-    {
-      "opponentPoints": 135.52,
-      "opponentSlug": "jivan-gubbi",
-      "ownerSlug": "haley-rao",
-      "points": 144.66,
-      "season": 2022,
-      "total": 280.18,
-      "week": 4
-    },
-    {
-      "opponentPoints": 135.1,
-      "opponentSlug": "haley-rao",
-      "ownerSlug": "eric-wong",
-      "points": 145.06,
-      "season": 2024,
-      "total": 280.16,
-      "week": 14
     }
   ],
   "lowestCombined": [
@@ -1151,6 +1151,22 @@
       "week": 17
     },
     {
+      "opponentPoints": 136,
+      "opponentSlug": "jivan-gubbi",
+      "ownerSlug": "sam-ellison",
+      "points": 182.66,
+      "season": 2026,
+      "week": 5
+    },
+    {
+      "opponentPoints": 103.7,
+      "opponentSlug": "haley-rao",
+      "ownerSlug": "eric-wong",
+      "points": 180.16,
+      "season": 2026,
+      "week": 5
+    },
+    {
       "opponentPoints": 87.16,
       "opponentSlug": "brendon-ng",
       "ownerSlug": "charlie-stoksik",
@@ -1293,22 +1309,6 @@
       "points": 163.32,
       "season": 2025,
       "week": 5
-    },
-    {
-      "opponentPoints": 88.68,
-      "opponentSlug": "jay-uppuluri",
-      "ownerSlug": "brendon-ng",
-      "points": 162.8,
-      "season": 2022,
-      "week": 8
-    },
-    {
-      "opponentPoints": 145.74,
-      "opponentSlug": "haley-rao",
-      "ownerSlug": "eric-wong",
-      "points": 162.24,
-      "season": 2022,
-      "week": 8
     }
   ],
   "weeklyLow": [

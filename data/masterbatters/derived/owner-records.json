@@ -14,10 +14,10 @@
     "losses": 6,
     "ownerSlug": "jake-gibbons",
     "playoffAppearances": 1,
-    "pointsAgainst": 2267.12,
-    "pointsAgainstPerGame": 113.36,
-    "pointsFor": 2600.58,
-    "pointsForPerGame": 130.03,
+    "pointsAgainst": 2386.64,
+    "pointsAgainstPerGame": 113.65,
+    "pointsFor": 2747.62,
+    "pointsForPerGame": 130.84,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -126,10 +126,10 @@
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 74.14,
-        "pointsFor": 165.82,
+        "pointsAgainst": 193.66,
+        "pointsFor": 312.86,
         "ties": 0,
-        "wins": 1
+        "wins": 2
       },
       "srishti-dhawan": {
         "losses": 0,
@@ -168,8 +168,8 @@
         "wins": 2
       }
     },
-    "winPct": 0.7,
-    "wins": 14,
+    "winPct": 0.7143,
+    "wins": 15,
     "worstFinish": 1
   },
   {
@@ -187,10 +187,10 @@
     "losses": 8,
     "ownerSlug": "aidan-kelleher",
     "playoffAppearances": 1,
-    "pointsAgainst": 2434.78,
-    "pointsAgainstPerGame": 115.94,
-    "pointsFor": 2573.38,
-    "pointsForPerGame": 122.54,
+    "pointsAgainst": 2554.74,
+    "pointsAgainstPerGame": 116.12,
+    "pointsFor": 2696.22,
+    "pointsForPerGame": 122.56,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -299,10 +299,10 @@
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 98.2,
-        "pointsFor": 116.14,
+        "pointsAgainst": 218.16,
+        "pointsFor": 238.98,
         "ties": 0,
-        "wins": 1
+        "wins": 2
       },
       "ross-bechtel": {
         "losses": 0,
@@ -353,8 +353,8 @@
         "wins": 0
       }
     },
-    "winPct": 0.619,
-    "wins": 13,
+    "winPct": 0.6364,
+    "wins": 14,
     "worstFinish": 4
   },
   {
@@ -372,10 +372,10 @@
     "losses": 9,
     "ownerSlug": "brendon-ng",
     "playoffAppearances": 1,
-    "pointsAgainst": 2188.84,
-    "pointsAgainstPerGame": 104.23,
-    "pointsFor": 2185.22,
-    "pointsForPerGame": 104.06,
+    "pointsAgainst": 2313.04,
+    "pointsAgainstPerGame": 105.14,
+    "pointsFor": 2351.16,
+    "pointsForPerGame": 106.87,
     "runnerUps": 1,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -508,10 +508,10 @@
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 91.92,
-        "pointsFor": 133.9,
+        "pointsAgainst": 216.12,
+        "pointsFor": 299.84,
         "ties": 0,
-        "wins": 1
+        "wins": 2
       },
       "thomas-moore": {
         "losses": 0,
@@ -538,8 +538,8 @@
         "wins": 1
       }
     },
-    "winPct": 0.5714,
-    "wins": 12,
+    "winPct": 0.5909,
+    "wins": 13,
     "worstFinish": 2
   },
   {
@@ -557,10 +557,10 @@
     "losses": 8,
     "ownerSlug": "kate-olson",
     "playoffAppearances": 1,
-    "pointsAgainst": 2304.04,
-    "pointsAgainstPerGame": 115.2,
-    "pointsFor": 2299.52,
-    "pointsForPerGame": 114.98,
+    "pointsAgainst": 2430.52,
+    "pointsAgainstPerGame": 115.74,
+    "pointsFor": 2429.12,
+    "pointsForPerGame": 115.67,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -645,10 +645,10 @@
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 92.52,
-        "pointsFor": 92.82,
+        "pointsAgainst": 219,
+        "pointsFor": 222.42,
         "ties": 0,
-        "wins": 1
+        "wins": 2
       },
       "robbie-goodman": {
         "losses": 0,
@@ -711,8 +711,8 @@
         "wins": 1
       }
     },
-    "winPct": 0.6,
-    "wins": 12,
+    "winPct": 0.619,
+    "wins": 13,
     "worstFinish": 6
   },
   {
@@ -727,13 +727,13 @@
       }
     ],
     "lastPlaces": 0,
-    "losses": 9,
+    "losses": 10,
     "ownerSlug": "kaitlin-zarbis",
     "playoffAppearances": 1,
-    "pointsAgainst": 2247.42,
-    "pointsAgainstPerGame": 112.37,
-    "pointsFor": 2528.92,
-    "pointsForPerGame": 126.45,
+    "pointsAgainst": 2385.36,
+    "pointsAgainstPerGame": 113.59,
+    "pointsFor": 2630.78,
+    "pointsForPerGame": 125.28,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 1,
@@ -786,6 +786,18 @@
         "pointsFor": 129.5,
         "ties": 0,
         "wins": 1
+      },
+      "joe-gibbons": {
+        "losses": 1,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 137.94,
+        "pointsFor": 101.86,
+        "ties": 0,
+        "wins": 0
       },
       "josh-greenebaum": {
         "losses": 1,
@@ -884,7 +896,7 @@
         "wins": 0
       }
     },
-    "winPct": 0.55,
+    "winPct": 0.5238,
     "wins": 11,
     "worstFinish": 3
   },
@@ -900,13 +912,13 @@
       }
     ],
     "lastPlaces": 0,
-    "losses": 9,
+    "losses": 10,
     "ownerSlug": "lindsey-freeze",
     "playoffAppearances": 0,
-    "pointsAgainst": 2325.54,
-    "pointsAgainstPerGame": 116.28,
-    "pointsFor": 2472.34,
-    "pointsForPerGame": 123.62,
+    "pointsAgainst": 2455.14,
+    "pointsAgainstPerGame": 116.91,
+    "pointsFor": 2598.82,
+    "pointsForPerGame": 123.75,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -985,14 +997,14 @@
         "wins": 1
       },
       "kate-olson": {
-        "losses": 1,
+        "losses": 2,
         "playoff": {
           "losses": 0,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 92.82,
-        "pointsFor": 92.52,
+        "pointsAgainst": 222.42,
+        "pointsFor": 219,
         "ties": 0,
         "wins": 0
       },
@@ -1057,7 +1069,7 @@
         "wins": 1
       }
     },
-    "winPct": 0.55,
+    "winPct": 0.5238,
     "wins": 11,
     "worstFinish": 8
   },
@@ -1073,13 +1085,13 @@
       }
     ],
     "lastPlaces": 0,
-    "losses": 10,
+    "losses": 11,
     "ownerSlug": "allison-fosbery",
     "playoffAppearances": 1,
-    "pointsAgainst": 2404.34,
-    "pointsAgainstPerGame": 120.22,
-    "pointsFor": 2395.72,
-    "pointsForPerGame": 119.79,
+    "pointsAgainst": 2534.66,
+    "pointsAgainstPerGame": 120.7,
+    "pointsFor": 2516.46,
+    "pointsForPerGame": 119.83,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -1122,14 +1134,14 @@
         "wins": 0
       },
       "josh-greenebaum": {
-        "losses": 0,
+        "losses": 1,
         "playoff": {
           "losses": 0,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 138.16,
-        "pointsFor": 146.46,
+        "pointsAgainst": 268.48,
+        "pointsFor": 267.2,
         "ties": 0,
         "wins": 1
       },
@@ -1230,7 +1242,7 @@
         "wins": 2
       }
     },
-    "winPct": 0.5,
+    "winPct": 0.4762,
     "wins": 10,
     "worstFinish": 5
   },
@@ -1246,13 +1258,13 @@
       }
     ],
     "lastPlaces": 0,
-    "losses": 11,
+    "losses": 12,
     "ownerSlug": "srishti-dhawan",
     "playoffAppearances": 0,
-    "pointsAgainst": 2505.82,
-    "pointsAgainstPerGame": 119.32,
-    "pointsFor": 2433.26,
-    "pointsForPerGame": 115.87,
+    "pointsAgainst": 2671.76,
+    "pointsAgainstPerGame": 121.44,
+    "pointsFor": 2557.46,
+    "pointsForPerGame": 116.25,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -1283,14 +1295,14 @@
         "wins": 2
       },
       "brendon-ng": {
-        "losses": 1,
+        "losses": 2,
         "playoff": {
           "losses": 0,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 133.9,
-        "pointsFor": 91.92,
+        "pointsAgainst": 299.84,
+        "pointsFor": 216.12,
         "ties": 0,
         "wins": 0
       },
@@ -1403,7 +1415,7 @@
         "wins": 1
       }
     },
-    "winPct": 0.4762,
+    "winPct": 0.4545,
     "wins": 10,
     "worstFinish": 9
   },
@@ -1422,10 +1434,10 @@
     "losses": 12,
     "ownerSlug": "josh-greenebaum",
     "playoffAppearances": 0,
-    "pointsAgainst": 2338.34,
-    "pointsAgainstPerGame": 116.92,
-    "pointsFor": 2307.08,
-    "pointsForPerGame": 115.35,
+    "pointsAgainst": 2459.08,
+    "pointsAgainstPerGame": 117.1,
+    "pointsFor": 2437.4,
+    "pointsForPerGame": 116.07,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -1450,10 +1462,10 @@
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 146.46,
-        "pointsFor": 138.16,
+        "pointsAgainst": 267.2,
+        "pointsFor": 268.48,
         "ties": 0,
-        "wins": 0
+        "wins": 1
       },
       "brendon-ng": {
         "losses": 1,
@@ -1588,8 +1600,8 @@
         "wins": 0
       }
     },
-    "winPct": 0.4,
-    "wins": 8,
+    "winPct": 0.4286,
+    "wins": 9,
     "worstFinish": 7
   },
   {
@@ -1777,27 +1789,27 @@
       }
     ],
     "lastPlaces": 1,
-    "losses": 14,
+    "losses": 15,
     "ownerSlug": "robbie-goodman",
     "playoffAppearances": 0,
-    "pointsAgainst": 2412.62,
-    "pointsAgainstPerGame": 120.63,
-    "pointsFor": 2187.46,
-    "pointsForPerGame": 109.37,
+    "pointsAgainst": 2535.46,
+    "pointsAgainstPerGame": 120.74,
+    "pointsFor": 2307.42,
+    "pointsForPerGame": 109.88,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
     "ties": 0,
     "vs": {
       "aidan-kelleher": {
-        "losses": 1,
+        "losses": 2,
         "playoff": {
           "losses": 0,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 116.14,
-        "pointsFor": 98.2,
+        "pointsAgainst": 238.98,
+        "pointsFor": 218.16,
         "ties": 0,
         "wins": 0
       },
@@ -1922,7 +1934,7 @@
         "wins": 0
       }
     },
-    "winPct": 0.3,
+    "winPct": 0.2857,
     "wins": 6,
     "worstFinish": 12
   },
@@ -1938,13 +1950,13 @@
       }
     ],
     "lastPlaces": 0,
-    "losses": 15,
+    "losses": 16,
     "ownerSlug": "ross-bechtel",
     "playoffAppearances": 0,
-    "pointsAgainst": 2522.22,
-    "pointsAgainstPerGame": 126.11,
-    "pointsFor": 2141.08,
-    "pointsForPerGame": 107.05,
+    "pointsAgainst": 2669.26,
+    "pointsAgainstPerGame": 127.11,
+    "pointsFor": 2260.6,
+    "pointsForPerGame": 107.65,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -1987,14 +1999,14 @@
         "wins": 2
       },
       "jake-gibbons": {
-        "losses": 1,
+        "losses": 2,
         "playoff": {
           "losses": 0,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 165.82,
-        "pointsFor": 74.14,
+        "pointsAgainst": 312.86,
+        "pointsFor": 193.66,
         "ties": 0,
         "wins": 0
       },
@@ -2107,7 +2119,7 @@
         "wins": 1
       }
     },
-    "winPct": 0.25,
+    "winPct": 0.2381,
     "wins": 5,
     "worstFinish": 10
   },
@@ -2281,10 +2293,10 @@
     "losses": 2,
     "ownerSlug": "joe-gibbons",
     "playoffAppearances": 0,
-    "pointsAgainst": 513.62,
-    "pointsAgainstPerGame": 128.41,
-    "pointsFor": 517.12,
-    "pointsForPerGame": 129.28,
+    "pointsAgainst": 615.48,
+    "pointsAgainstPerGame": 123.1,
+    "pointsFor": 655.06,
+    "pointsForPerGame": 131.01,
     "runnerUps": 0,
     "seasonsPlayed": 0,
     "thirdPlaces": 0,
@@ -2326,6 +2338,18 @@
         "ties": 0,
         "wins": 1
       },
+      "kaitlin-zarbis": {
+        "losses": 0,
+        "playoff": {
+          "losses": 0,
+          "ties": 0,
+          "wins": 0
+        },
+        "pointsAgainst": 101.86,
+        "pointsFor": 137.94,
+        "ties": 0,
+        "wins": 1
+      },
       "ross-bechtel": {
         "losses": 0,
         "playoff": {
@@ -2339,8 +2363,8 @@
         "wins": 1
       }
     },
-    "winPct": 0.5,
-    "wins": 2,
+    "winPct": 0.6,
+    "wins": 3,
     "worstFinish": null
   }
 ]
