@@ -2734,6 +2734,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 13
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791970911824,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "676": [
@@ -4242,6 +4254,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791970911824,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "1169": [
@@ -7909,6 +7933,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": 7,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "2214": [
@@ -12266,6 +12302,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "3271": [
@@ -12458,6 +12506,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": 14,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "3286": [
@@ -17161,6 +17221,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "4179": [
@@ -21114,6 +21186,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "4994": [
@@ -23985,6 +24069,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "5209": [
@@ -25034,6 +25130,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791962137977,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "5846": [
@@ -36526,6 +36634,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": 7,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "7601": [
@@ -38727,6 +38847,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "8134": [
@@ -43497,6 +43629,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "9509": [
@@ -46110,6 +46254,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": 10,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "11582": [
@@ -46991,6 +47147,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "11631": [
@@ -47368,6 +47536,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "11646": [
@@ -47789,6 +47969,18 @@
       "timestamp": 1791371022098,
       "toSlug": null,
       "type": "free_agent",
+      "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
       "week": 5
     }
   ],
@@ -49001,6 +49193,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791962990502,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "12512": [
@@ -49422,6 +49626,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": 1,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "12534": [
@@ -49620,6 +49836,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    }
+  ],
+  "13274": [
+    {
+      "action": "add",
+      "faabSpent": 4,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "13279": [
@@ -49838,6 +50068,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "13330": [
@@ -50022,6 +50264,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    }
+  ],
+  "13833": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791962137977,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "ARI": [
@@ -52210,6 +52466,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791962087498,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "CLE": [
@@ -53910,6 +54178,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "HOU": [
@@ -54456,6 +54736,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791962087498,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "JAX": [
@@ -55257,6 +55549,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": 4,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "LAC": [
@@ -57419,6 +57723,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791962990502,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "NO": [
@@ -59243,6 +59559,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": 2,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1791961822546,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 5
     }
   ],
   "TB": [

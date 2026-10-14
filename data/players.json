@@ -2292,7 +2292,7 @@
     "birth_date": "1996-04-11",
     "full_name": "Jake Browning",
     "position": "QB",
-    "team": null,
+    "team": "LAC",
     "years_exp": 7
   },
   "6126": {
@@ -2712,7 +2712,7 @@
     "birth_date": "1998-08-25",
     "full_name": "Tyler Johnson",
     "position": "WR",
-    "team": "NYJ",
+    "team": null,
     "years_exp": 6
   },
   "6963": {
@@ -3153,7 +3153,7 @@
     "birth_date": "1999-11-26",
     "full_name": "Hassan Haskins",
     "position": "RB",
-    "team": null,
+    "team": "NE",
     "years_exp": 4
   },
   "8125": {
@@ -3825,14 +3825,14 @@
     "birth_date": "1998-11-05",
     "full_name": "Blake Grupe",
     "position": "K",
-    "team": "NYJ",
+    "team": "LAR",
     "years_exp": 3
   },
   "11199": {
     "birth_date": "1999-01-20",
     "full_name": "Emari Demercado",
     "position": "RB",
-    "team": null,
+    "team": "DAL",
     "years_exp": 3
   },
   "11299": {
@@ -4259,7 +4259,7 @@
     "birth_date": "2003-08-12",
     "full_name": "Devin Neal",
     "position": "RB",
-    "team": null,
+    "team": "WAS",
     "years_exp": 1
   },
   "12481": {
@@ -4493,6 +4493,13 @@
     "team": "LV",
     "years_exp": 1
   },
+  "12542": {
+    "birth_date": "2001-10-26",
+    "full_name": "Efton Chism",
+    "position": "WR",
+    "team": "NE",
+    "years_exp": 1
+  },
   "12545": {
     "birth_date": "1999-09-28",
     "full_name": "Tyler Shough",
@@ -4535,11 +4542,25 @@
     "team": "CAR",
     "years_exp": 1
   },
+  "13150": {
+    "birth_date": "2001-11-22",
+    "full_name": "Darius Cooper",
+    "position": "WR",
+    "team": "PHI",
+    "years_exp": 1
+  },
   "13264": {
     "birth_date": "2000-07-06",
     "full_name": "Dohnte Meyers",
     "position": "WR",
     "team": "CIN",
+    "years_exp": 0
+  },
+  "13274": {
+    "birth_date": "2003-12-02",
+    "full_name": "Germie Bernard",
+    "position": "WR",
+    "team": "PIT",
     "years_exp": 0
   },
   "13279": {
@@ -4687,6 +4708,13 @@
     "full_name": "Trey Smack",
     "position": "K",
     "team": "GB",
+    "years_exp": 0
+  },
+  "13833": {
+    "birth_date": "2003-10-25",
+    "full_name": "Dominic Zvada",
+    "position": "K",
+    "team": "NYG",
     "years_exp": 0
   },
   "ARI": {
