@@ -38412,6 +38412,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792050279190,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "8130": [
@@ -46176,6 +46188,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792050279190,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "11579": [

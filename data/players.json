@@ -3251,7 +3251,7 @@
     "birth_date": "1999-09-12",
     "full_name": "Jerome Ford",
     "position": "RB",
-    "team": null,
+    "team": "ARI",
     "years_exp": 4
   },
   "8144": {
@@ -4217,7 +4217,7 @@
     "birth_date": "2002-03-27",
     "full_name": "Harrison Mevis",
     "position": "K",
-    "team": "LAR",
+    "team": null,
     "years_exp": 2
   },
   "12185": {
