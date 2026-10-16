@@ -2746,6 +2746,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792131617357,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 6
     }
   ],
   "676": [
@@ -48006,6 +48018,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792131617357,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 6
     }
   ],
   "11789": [

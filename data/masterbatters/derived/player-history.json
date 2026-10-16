@@ -5459,6 +5459,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792122556775,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "7607": [
@@ -10646,6 +10658,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792122556775,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "11638": [
@@ -14529,6 +14553,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792084303831,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "CHI": [
@@ -15750,6 +15786,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1791963262479,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792084297110,
       "toSlug": null,
       "type": "free_agent",
       "week": 6
