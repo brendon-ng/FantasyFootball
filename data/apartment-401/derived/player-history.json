@@ -21131,6 +21131,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 13
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792181976380,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "8130": [
@@ -26680,6 +26692,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792181976380,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "11579": [

@@ -3580,6 +3580,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792180390668,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "5872": [
@@ -9249,6 +9261,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792174737933,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "11533": [
@@ -10237,6 +10261,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792174737933,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "11625": [
