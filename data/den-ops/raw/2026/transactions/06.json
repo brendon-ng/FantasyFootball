@@ -1,6 +1,117 @@
 [
   {
     "adds": {
+      "8136": 9
+    },
+    "consenter_ids": [
+      9
+    ],
+    "created": 1792304399866,
+    "creator": "1133573613518716928",
+    "draft_picks": [],
+    "drops": null,
+    "leg": 6,
+    "metadata": null,
+    "roster_ids": [
+      9
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1792304399866,
+    "transaction_id": "1417431023364362240",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": null,
+    "consenter_ids": [
+      7
+    ],
+    "created": 1792270003592,
+    "creator": "1132133697135869952",
+    "draft_picks": [],
+    "drops": {
+      "11631": 7
+    },
+    "leg": 6,
+    "metadata": null,
+    "roster_ids": [
+      7
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1792270003592,
+    "transaction_id": "1417286754934722560",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "1166": 4
+    },
+    "consenter_ids": [
+      4
+    ],
+    "created": 1792256433686,
+    "creator": "1049399449467871232",
+    "draft_picks": [],
+    "drops": {
+      "9754": 4
+    },
+    "leg": 6,
+    "metadata": null,
+    "roster_ids": [
+      4
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1792256433686,
+    "transaction_id": "1417229838623817728",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "8228": 1,
+      "9480": 1,
+      "9753": 7,
+      "11584": 7,
+      "12514": 7
+    },
+    "consenter_ids": [
+      1,
+      7
+    ],
+    "created": 1792173007171,
+    "creator": "1132133697135869952",
+    "draft_picks": [],
+    "drops": {
+      "8228": 7,
+      "9480": 7,
+      "9753": 1,
+      "11584": 1,
+      "12514": 1
+    },
+    "leg": 6,
+    "metadata": {
+      "poll_id": "1416891335700488192",
+      "veto_msg_id": "1416891335780167680"
+    },
+    "roster_ids": [
+      1,
+      7
+    ],
+    "settings": {
+      "is_counter": 1
+    },
+    "status": "complete",
+    "status_updated": 1792269471323,
+    "transaction_id": "1416879922453975040",
+    "type": "trade",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
       "8132": 3
     },
     "consenter_ids": [

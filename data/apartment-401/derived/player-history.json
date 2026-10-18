@@ -5213,6 +5213,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792311909409,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "3271": [
@@ -21619,6 +21631,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792311672206,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "8137": [
@@ -23891,6 +23915,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    }
+  ],
+  "9480": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792311909409,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "9482": [
@@ -28068,6 +28106,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792311672206,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "12185": [

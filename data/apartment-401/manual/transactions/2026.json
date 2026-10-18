@@ -1794,6 +1794,52 @@
       "timestamp": 1792181976380,
       "vetoed": false,
       "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "cfce7bd6-69b1-4507-8162-6ae54c416bbd",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "8136",
+          "toSlug": "diana-gonzalez"
+        },
+        {
+          "fromSlug": "diana-gonzalez",
+          "playerId": "12015",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "diana-gonzalez"
+      ],
+      "timestamp": 1792311672206,
+      "vetoed": false,
+      "week": 6
+    },
+    {
+      "faab": 0,
+      "id": "0d5287c8-d0a8-4053-a34d-38d4cdb3fa3a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "9480",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "3257",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1792311909409,
+      "vetoed": false,
+      "week": 6
     }
   ]
 }

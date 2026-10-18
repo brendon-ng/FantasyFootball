@@ -4278,6 +4278,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792256433686,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "1169": [
@@ -39257,6 +39269,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792304399866,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "8137": [
@@ -41362,6 +41386,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "lauren-gross",
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792269471323,
+      "toSlug": "brendon-ng",
+      "tradeId": "1416879922453975040",
+      "type": "trade",
+      "week": 6
     }
   ],
   "8230": [
@@ -42613,6 +42650,19 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "lauren-gross",
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792269471323,
+      "toSlug": "brendon-ng",
+      "tradeId": "1416879922453975040",
+      "type": "trade",
+      "week": 6
     }
   ],
   "9481": [
@@ -43966,6 +44016,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "brendon-ng",
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792269471323,
+      "toSlug": "lauren-gross",
+      "tradeId": "1416879922453975040",
+      "type": "trade",
+      "week": 6
     }
   ],
   "9754": [
@@ -44068,6 +44131,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792256433686,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "9756": [
@@ -46475,6 +46550,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "brendon-ng",
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792269471323,
+      "toSlug": "lauren-gross",
+      "tradeId": "1416879922453975040",
+      "type": "trade",
+      "week": 6
     }
   ],
   "11586": [
@@ -47299,6 +47387,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792270003592,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "11632": [
@@ -49398,6 +49498,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "brendon-ng",
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792269471323,
+      "toSlug": "lauren-gross",
+      "tradeId": "1416879922453975040",
+      "type": "trade",
+      "week": 6
     }
   ],
   "12517": [

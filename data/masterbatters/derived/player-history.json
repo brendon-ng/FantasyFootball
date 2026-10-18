@@ -744,6 +744,20 @@
       "week": 0
     }
   ],
+  "2197": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792273851953,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
+    }
+  ],
   "2216": [
     {
       "action": "draft",
@@ -6380,6 +6394,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792255826969,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "8137": [
@@ -6738,6 +6764,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792255817139,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "8155": [
@@ -8191,6 +8229,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792255826969,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "9509": [
@@ -8235,6 +8285,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792273851953,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "9753": [
