@@ -596,6 +596,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792340307519,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "1945": [
@@ -4378,6 +4390,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792340307519,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "6801": [
@@ -10768,6 +10792,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792340276057,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "11638": [
@@ -13565,6 +13601,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792340276057,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "13279": [

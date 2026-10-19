@@ -977,6 +977,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792327115628,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "110": [
@@ -44584,6 +44596,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792327115628,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "10219": [
