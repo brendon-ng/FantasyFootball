@@ -1729,13 +1729,63 @@ right for the common shapes and wrong once two flex slots overlap without
 nesting. A fullback is an RB, and Sleeper's `fantasy_positions` wins where known —
 Travis Hunter fills a WR slot.
 
-FREE AGENTS ARE IN THE POOL. A lineup may start anyone nobody rosters, so losing a
-team's only kicker costs the gap to the best kicker on waivers, not a whole
-kicker. Two teams cannot start the same free agent in one week: they claim in
-REVERSE STANDINGS ORDER, worst first, and a player one team takes is gone for
-the rest. Every pickup assumes a bench spot can be cleared. Only the few best
-free agents per position — as many as that position has slots — are offered to
-the optimiser, since nobody below them could make a lineup.
+FREE AGENTS ARE A SETTING, NOT AN ASSUMPTION: rosters only, the two trading
+teams, or everyone (`?fa=none|all`; the default spells nothing). A team allowed
+to stream may start anyone nobody rosters, so losing its only kicker costs the gap
+to the best kicker on waivers, not a whole kicker. The default is THE TRADING
+TEAMS ONLY — crediting every opponent with working the wire perfectly every week
+overstated every lineup in the league, and the question being asked is what the
+trade is worth to the two sides. Where several streaming teams want one player
+they claim in REVERSE STANDINGS ORDER, worst first. Every pickup assumes a bench
+spot can be cleared. Only the few best free agents per position — as many as that
+position has slots — are offered to the optimiser.
+
+On the Jefferson-for-nothing check the trade's own swing barely moved across the
+three settings (−53 to −55 points); the baseline odds did, by up to seven points,
+because opponents without waiver help are weaker. The setting mostly moves the
+starting line, not the trade.
+
+The one-week sheet shows the BENCH under the lineup, paired by rank rather than
+by player — the two benches are different people — with traded-in players marked
+TRADE, traded-away ones OUT, and anyone whose NFL team is idle BYE. Byes come
+from `fetchByeTeams()` in `lib/live/nfl-schedule.ts`, off the same one-request
+season schedule the settlement tiers use: a team absent from a week is on a bye.
+
+### The average lineup
+
+Beside the week-by-week view, each side gets its AVERAGE lineup: the best lineup
+from every player's projection per game over the rest of the season, BYE WEEKS
+LEFT OUT. A bye says nothing about a player, and counting it as a zero sinks
+everyone whose bye is still ahead — Bhayshul Tuten, with his week-7 bye to come,
+read 11.86 that way and 13.05 properly. A week with no projection that is not a
+bye (injured, out) still counts as the zero it is. Until the schedule loads, a
+week with no projection stands in for a bye, which is how Sleeper's feed shows
+one anyway.
+
+It follows the free-agent setting, so a streaming team's average lineup can hold
+the best waiver option by rest-of-season average — which understates week-to-week
+streaming, since no single free agent is the best one every week. It is a picture
+of the roster, not a forecast; the points and the odds come from the weekly view.
+
+`LineupCompare` in `components/trade-week-sheet.tsx` is the ONE renderer for both
+views, so the markers cannot come to mean different things in each.
+
+### Projection overrides
+
+Any player, any remaining week, rostered or not: `lib/projection-overrides.ts`
+and `components/projection-overrides.tsx`. Laid over Sleeper's numbers by
+`applyOverrides()` BEFORE anything else reads them, so they reach the lineups,
+the win chances and the odds — in both scenarios, because an override is a belief
+about a player rather than part of the trade.
+
+IN LOCALSTORAGE, NOT THE URL (`ff:<league>:projection-overrides`). "He is back in
+week 9" should hold whichever trade is on screen. The cost is that a shared link
+does not carry them, so the page puts an amber notice above the results whenever
+any are active, and the sheet colours overridden points amber — the reason
+`<MockBadge />` exists: an overridden board renders exactly like a real one.
+
+Cells COMMIT ON BLUR OR ENTER, since every edit re-runs the simulation, and an
+empty cell means "Sleeper's number", which it shows as the placeholder.
 
 THE BAKED PLAYER INDEX CANNOT PLACE A FREE AGENT — it holds only players this
 league has referenced. `fetchPlayerPool()` reads names, positions and injury

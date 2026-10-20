@@ -42,7 +42,7 @@ import {
 
 import { espnProvider } from "./espn.ts";
 import { fetchNflClock } from "./nfl-clock.ts";
-import { fetchNflWeek, teamsSettled, type NflWeekState } from "./nfl-schedule.ts";
+import { fetchByeTeams, fetchNflWeek, teamsSettled, type NflWeekState } from "./nfl-schedule.ts";
 import { fetchPlayerPool, sleeperProvider, type PoolPlayer } from "./sleeper.ts";
 import type {
   LeagueMove,
@@ -1101,4 +1101,27 @@ export function usePlayerPool(
 
   const hit = state?.key === key ? state : null;
   return { ready: Boolean(hit), pool: hit?.pool ?? null };
+}
+
+/**
+ * Week -> NFL teams on a bye, from the same one-request season schedule the
+ * settlement tiers use. Null until it lands, and stays null if it fails — a
+ * missing bye marker is a cosmetic loss, not a wrong number, since a player on
+ * a bye already projects to nothing.
+ */
+export function useByeTeams(season: number): Map<number, Set<string>> | null {
+  const [state, setState] = useState<{ season: number; byes: Map<number, Set<string>> | null } | null>(null);
+  useEffect(() => {
+    if (!season) return;
+    let cancelled = false;
+    fetchByeTeams(season)
+      .then((byes) => {
+        if (!cancelled) setState({ season, byes });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [season]);
+  return state?.season === season ? state.byes : null;
 }

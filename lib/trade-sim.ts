@@ -11,11 +11,14 @@
  *   is what it does to the best team a manager could field, and a lineup left
  *   untouched in week 12 says nothing about that.
  *
- * - FREE AGENTS ARE IN THE POOL. A lineup may start anyone nobody rosters, so a
- *   trade that strips a team's only kicker costs it the gap to the best kicker
- *   on waivers, not a whole kicker. Two teams cannot both start the same free
- *   agent in one week: they claim in REVERSE STANDINGS ORDER, worst first, the
- *   way waivers usually run. Every pickup assumes a bench spot can be cleared.
+ * - FREE AGENTS ARE OPTIONAL, AND PER TEAM. A team allowed to stream may start
+ *   anyone nobody rosters, so a trade that strips its only kicker costs the gap
+ *   to the best kicker on waivers, not a whole kicker. Which teams stream is the
+ *   caller's choice — assuming the whole league works the wire perfectly every
+ *   week overstates every lineup, so the page defaults to just the two sides of
+ *   the trade. Where several teams stream and want the same player, they claim
+ *   in REVERSE STANDINGS ORDER, worst first, the way waivers usually run. Every
+ *   pickup assumes a bench spot can be cleared.
  *
  * - ONE SCORE MODEL, SLEEPER'S. A team's week is normal around its projection
  *   with a standard deviation of projection / √11 — exactly what
@@ -78,7 +81,8 @@ export interface WeekInput {
 }
 
 /**
- * Every team's best lineup for one week, free agents included.
+ * Every team's best lineup for one week, free agents included for the teams
+ * `streams` allows.
  *
  * Teams are solved one at a time in `order`, and a free agent one team starts is
  * gone for every team after it. Only the few best free agents at each position
@@ -92,6 +96,11 @@ export function weekLineups(
   slots: readonly string[],
   positionsOf: (id: string) => readonly string[],
   freeAgents: readonly string[],
+  /**
+   * Roster ids of the teams that may pick free agents up at all. Everyone else
+   * fields their own roster and claims nobody. Null or omitted means every team.
+   */
+  streams?: ReadonlySet<number> | null,
 ): Map<number, Lineup> {
   const pts = (id: string) => week.points[id] ?? 0;
 
@@ -117,7 +126,8 @@ export function weekLineups(
     const roster = rosters.get(rosterId) ?? [];
     const cands: Candidate[] = roster.map((id) => ({ id, positions: positionsOf(id), points: pts(id) }));
     const offered = new Set<string>();
-    for (const [p, list] of byPos) {
+    const pool = streams && !streams.has(rosterId) ? new Map<string, string[]>() : byPos;
+    for (const [p, list] of pool) {
       let left = depth.get(p) ?? 0;
       for (const id of list) {
         if (!left) break;

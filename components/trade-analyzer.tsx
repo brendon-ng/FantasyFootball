@@ -3,12 +3,22 @@
 import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 
 import { useIdentity } from "@/components/identity";
-import { Delta, PlayerName, TradeWeekSheet, type WeekDetail } from "@/components/trade-week-sheet";
+import { ProjectionOverridesPanel } from "@/components/projection-overrides";
+import {
+  Delta,
+  LineupCompare,
+  LineupLegend,
+  PlayerName,
+  TradeWeekSheet,
+  type WeekDetail,
+} from "@/components/trade-week-sheet";
 import { Col, EmptyState, ListHeader, Panel, PanelHeader, Skeleton, Stat, fmt } from "@/components/ui";
 import { positionRank } from "@/lib/espn-maps";
 import type { LeagueRef } from "@/lib/league-ref";
 import { lineupPositions, startingSlots, type Lineup } from "@/lib/lineup";
+import { applyOverrides, useProjectionOverrides } from "@/lib/projection-overrides";
 import {
+  useByeTeams,
   useLiveProjections,
   useLiveSeason,
   usePlayerPool,
@@ -84,6 +94,10 @@ export function TradeAnalyzer({
   const [aParam, setA] = useUrlText("a");
   const [bParam, setB] = useUrlText("b");
   const [give, setGive] = useUrlList("give");
+  const [faParam, setFaParam] = useUrlText("fa");
+  const faMode: FaMode = faParam === "none" || faParam === "all" ? faParam : "traders";
+  // The default spells nothing, so an untouched page keeps a clean URL.
+  const setFaMode = (m: FaMode) => setFaParam(m === "traders" ? "" : m);
 
   const creditOf = (t: LiveTeam) => (t.ownerSlugs.length ? t.ownerSlugs : [t.ownerSlug]);
   const teamA =
@@ -124,6 +138,18 @@ export function TradeAnalyzer({
   const proj = useWeekProjections(ref, projWeeks);
   const pool = usePlayerPool(ref, Math.min(firstOpen, format.finalWeek));
   const liveTotals = useLiveProjections(live, ref);
+  const byeTeams = useByeTeams(season.season);
+  const overridesApi = useProjectionOverrides();
+  /**
+   * Every number below reads THESE, never `proj.byWeek` directly: an override is
+   * the reader saying the projection is wrong, so it has to reach the lineups,
+   * the win chances and the odds alike — and both scenarios, since it is a
+   * belief about a player rather than part of the trade.
+   */
+  const projected = useMemo(
+    () => applyOverrides(proj.byWeek, overridesApi.overrides),
+    [proj.byWeek, overridesApi.overrides],
+  );
   const gamesReady = Object.keys(games).length > 0;
   const ready = proj.ready && pool.ready;
 
@@ -164,31 +190,90 @@ export function TradeAnalyzer({
     return Object.keys(pool.pool).filter((id) => !rostered.has(id));
   }, [pool.pool, teams]);
 
+  /**
+   * WHO MAY PICK UP FREE AGENTS, the reader's choice. Assuming the whole league
+   * works the wire perfectly every week overstates every lineup, so the default
+   * is just the two sides of the trade — which answers "what is this worth to
+   * us, given we would fill a hole off waivers" without crediting every
+   * opponent with the same diligence.
+   */
+  // A string key, so the memo below depends on one primitive.
+  const streamKey =
+    faMode === "all" ? "*" : faMode === "none" ? "" : `${teamA?.rosterId ?? ""},${teamB?.rosterId ?? ""}`;
+  const streams = useMemo(
+    () => (streamKey === "*" ? null : new Set(streamKey.split(",").filter(Boolean).map(Number))),
+    [streamKey],
+  );
+
   const lineupsFor = useCallback(
     (rosters: ReadonlyMap<number, readonly string[]>): Lineups => {
       const out: Lineups = new Map();
       for (const w of projWeeks) {
-        const points = proj.byWeek[w];
+        const points = projected[w];
         if (!points) continue;
-        out.set(w, weekLineups({ week: w, points }, rosters, order, slots, positionsOf, freeAgents));
+        out.set(w, weekLineups({ week: w, points }, rosters, order, slots, positionsOf, freeAgents, streams));
       }
       return out;
     },
-    [projWeeks, proj.byWeek, order, slots, positionsOf, freeAgents],
+    [projWeeks, projected, order, slots, positionsOf, freeAgents, streams],
   );
 
-  const before = useMemo(
-    () => (ready ? lineupsFor(new Map(teamStates.map((t) => [t.rosterId, t.players]))) : null),
-    [ready, lineupsFor, teamStates],
+  const rostersBefore = useMemo(
+    () => new Map<number, readonly string[]>(teamStates.map((t) => [t.rosterId, t.players])),
+    [teamStates],
   );
   const tradeKey = `${teamA?.rosterId}:${teamB?.rosterId}:${fromA.join(",")}:${fromB.join(",")}`;
-  const after = useMemo(() => {
-    if (!ready || !before) return null;
-    if (!hasTrade || !teamA || !teamB) return before;
-    return lineupsFor(applyTrade(teamStates, { a: teamA.rosterId, b: teamB.rosterId, fromA, fromB }));
+  const rostersAfter = useMemo(
+    () =>
+      hasTrade && teamA && teamB
+        ? applyTrade(teamStates, { a: teamA.rosterId, b: teamB.rosterId, fromA, fromB })
+        : rostersBefore,
     // `tradeKey` stands in for the four trade inputs, which are fresh arrays each render.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, before, lineupsFor, teamStates, tradeKey, hasTrade]);
+    [teamStates, tradeKey, hasTrade, rostersBefore],
+  );
+  const before = useMemo(() => (ready ? lineupsFor(rostersBefore) : null), [ready, lineupsFor, rostersBefore]);
+  const after = useMemo(() => {
+    if (!ready || !before) return null;
+    return rostersAfter === rostersBefore ? before : lineupsFor(rostersAfter);
+  }, [ready, before, lineupsFor, rostersAfter, rostersBefore]);
+
+  /**
+   * Each player's projection PER GAME over the rest of the season, bye weeks
+   * left out — a bye says nothing about how good he is, and counting it as a
+   * zero would sink every player whose bye is still to come against one whose
+   * bye has passed. A week with no projection that is NOT a bye (injured, out)
+   * still counts as the zero it is.
+   *
+   * Byes come from the NFL schedule. Until it lands, a week with no projection
+   * stands in for one, which is how Sleeper's feed represents a bye anyway.
+   */
+  const averages = useMemo(() => {
+    if (!ready) return null;
+    const weeks = openWeeks.filter((w) => projected[w]);
+    if (!weeks.length) return null;
+    const ids = new Set<string>();
+    for (const w of weeks) for (const id of Object.keys(projected[w])) ids.add(id);
+    const out: Record<string, number> = {};
+    for (const id of ids) {
+      const nfl = nflTeamOf(id) ?? (/^[A-Z]{2,4}$/.test(id) ? id : null);
+      const games = weeks.filter((w) =>
+        byeTeams && nfl ? !byeTeams.get(w)?.has(nfl) : projected[w][id] != null,
+      );
+      if (!games.length) continue;
+      out[id] = games.reduce((sum, w) => sum + (projected[w][id] ?? 0), 0) / games.length;
+    }
+    return out;
+  }, [ready, openWeeks, projected, nflTeamOf, byeTeams]);
+
+  /** The best lineup each team could field from those averages — no particular week. */
+  const averageLineups = useMemo(() => {
+    if (!averages) return null;
+    const of = (rosters: ReadonlyMap<number, readonly string[]>) =>
+      weekLineups({ week: 0, points: averages }, rosters, order, slots, positionsOf, freeAgents, streams);
+    const b = of(rostersBefore);
+    return { before: b, after: rostersAfter === rostersBefore ? b : of(rostersAfter) };
+  }, [averages, rostersBefore, rostersAfter, order, slots, positionsOf, freeAgents, streams]);
 
   // Regular-season fixtures, roster id pairs by week.
   const fixtures = useMemo(() => {
@@ -289,6 +374,23 @@ export function TradeAnalyzer({
     });
 
   const label = (t: LiveTeam | null | undefined) => (t ? teamLabel(t, owners) : "—");
+
+  // Players with an override in any week still to play, for the average view.
+  const overriddenAny = new Set(
+    Object.entries(overridesApi.overrides)
+      .filter(([, w]) => openWeeks.some((wk) => typeof w[String(wk)] === "number"))
+      .map(([id]) => id),
+  );
+
+  // Anyone the override search can find: every rostered player, plus the pool.
+  const candidates = useMemo(
+    () => [...new Set([...teams.flatMap((t) => t.players), ...Object.keys(pool.pool ?? {})])],
+    [teams, pool.pool],
+  );
+  const holderOf = (id: string) => {
+    const t = teams.find((x) => x.players.includes(id));
+    return t ? teamLabel(t, owners) : null;
+  };
   const sides = teamA && teamB ? [teamA, teamB] : [];
 
   const detailData: WeekDetail | null = (() => {
@@ -309,6 +411,23 @@ export function TradeAnalyzer({
       oppBefore: opp != null ? before?.get(detail.week)?.get(opp)?.total ?? null : null,
       oppAfter: opp != null ? after?.get(detail.week)?.get(opp)?.total ?? null : null,
       incoming: new Set(team.rosterId === teamA?.rosterId ? fromB : fromA),
+      outgoing: new Set(team.rosterId === teamA?.rosterId ? fromA : fromB),
+      benchBefore: benchOf(rostersBefore.get(team.rosterId) ?? [], b, projected[detail.week]),
+      benchAfter: benchOf(rostersAfter.get(team.rosterId) ?? [], a, projected[detail.week]),
+      onBye: new Set(
+        [...(rostersBefore.get(team.rosterId) ?? []), ...(rostersAfter.get(team.rosterId) ?? [])].filter(
+          (id) => {
+            // A team defence's id IS its abbreviation.
+            const nfl = nflTeamOf(id) ?? (/^[A-Z]{2,4}$/.test(id) ? id : null);
+            return nfl != null && Boolean(byeTeams?.get(detail.week)?.has(nfl));
+          },
+        ),
+      ),
+      overridden: new Set(
+        Object.entries(overridesApi.overrides)
+          .filter(([, w]) => typeof w[String(detail.week)] === "number")
+          .map(([id]) => id),
+      ),
     };
   })();
 
@@ -365,7 +484,7 @@ export function TradeAnalyzer({
                   nameOf={nameOf}
                   positionOf={positionOf}
                   nflTeamOf={nflTeamOf}
-                  average={(id) => averageOf(id, openWeeks, proj.byWeek)}
+                  average={(id) => averageOf(id, openWeeks, projected)}
                   loading={!ready}
                 />
               ) : (
@@ -374,8 +493,28 @@ export function TradeAnalyzer({
             </div>
           ))}
         </div>
-        {give.length ? (
-          <div className="flex justify-end border-t border-ink-600 px-4 py-2 sm:px-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-ink-600 px-4 py-2.5 sm:px-5">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="eyebrow text-[10px]">Free agents</span>
+            <div role="radiogroup" aria-label="Who may pick up free agents" className="flex rounded-lg border border-ink-500 p-0.5">
+              {FA_MODES.map((m) => (
+                <button
+                  key={m.value}
+                  type="button"
+                  role="radio"
+                  aria-checked={faMode === m.value}
+                  title={m.hint}
+                  onClick={() => setFaMode(m.value)}
+                  className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
+                    faMode === m.value ? "bg-ink-600 text-chalk-100" : "text-chalk-500 hover:text-chalk-300"
+                  }`}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          {give.length ? (
             <button
               type="button"
               onClick={() => setGive([])}
@@ -383,9 +522,24 @@ export function TradeAnalyzer({
             >
               Clear the trade
             </button>
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </Panel>
+
+      {overridesApi.activeCount ? (
+        // AN OVERRIDDEN BOARD RENDERS EXACTLY LIKE A REAL ONE, and the overrides
+        // live in this browser only — so a screenshot of these numbers has to
+        // say they are not Sleeper's. Same reason `<MockBadge />` exists.
+        <div className="rounded-lg border border-caution/40 bg-caution/10 px-4 py-2 text-[12px] text-caution">
+          {overridesApi.activeCount === 1
+            ? "1 player's projections are overridden"
+            : `${overridesApi.activeCount} players' projections are overridden`}{" "}
+          — every number below uses them.{" "}
+          <a href="#overrides" className="underline underline-offset-2 hover:text-chalk-100">
+            Review
+          </a>
+        </div>
+      ) : null}
 
       {!hasTrade ? (
         <Panel>
@@ -434,6 +588,46 @@ export function TradeAnalyzer({
             })}
           </div>
 
+          {averageLineups && averages ? (
+            <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
+              {sides.map((team) => {
+                const b = averageLineups.before.get(team.rosterId);
+                const a = averageLineups.after.get(team.rosterId);
+                if (!b || !a) return null;
+                const mine = team.rosterId === teamA.rosterId;
+                return (
+                  <Panel key={team.rosterId}>
+                    <PanelHeader
+                      title={`${label(team)} · average lineup`}
+                      meta={
+                        <>
+                          {b.total.toFixed(1)} → {a.total.toFixed(1)} <Delta n={a.total - b.total} />
+                        </>
+                      }
+                      legend="Best lineup from each player's projection per game over the rest of the season, bye weeks left out."
+                    />
+                    <div className="pb-4">
+                      <LineupCompare
+                        before={b}
+                        after={a}
+                        benchBefore={benchOf(rostersBefore.get(team.rosterId) ?? [], b, averages)}
+                        benchAfter={benchOf(rostersAfter.get(team.rosterId) ?? [], a, averages)}
+                        incoming={new Set(mine ? fromB : fromA)}
+                        outgoing={new Set(mine ? fromA : fromB)}
+                        overridden={overriddenAny}
+                        onBye={NO_BYES}
+                        nameOf={nameOf}
+                        positionOf={positionOf}
+                        canLink={canLink}
+                      />
+                      <LineupLegend byes={false} />
+                    </div>
+                  </Panel>
+                );
+              })}
+            </div>
+          ) : null}
+
           {sides.map((team) => (
             <WeekTable
               key={team.rosterId}
@@ -457,11 +651,23 @@ export function TradeAnalyzer({
         available={regularLeft}
       />
 
+      <div id="overrides" className="scroll-mt-20">
+        <ProjectionOverridesPanel
+          api={overridesApi}
+          weeks={openWeeks}
+          sleeper={proj.byWeek}
+          candidates={candidates}
+          nameOf={nameOf}
+          positionOf={positionOf}
+          nflTeamOf={nflTeamOf}
+          holderOf={holderOf}
+        />
+      </div>
+
       <p className="max-w-3xl text-[11px] leading-relaxed text-chalk-600">
-        Every lineup is the best one each team could field that week from its roster and the free
-        agent pool, using Sleeper&rsquo;s weekly projections scored with this league&rsquo;s
-        settings — never the lineup a team actually set. Free agents are claimed worst team first,
-        one team each per week, assuming a bench spot can always be cleared. Win chances treat a
+        Every lineup is the best one each team could field that week, using Sleeper&rsquo;s weekly
+        projections scored with this league&rsquo;s settings — never the lineup a team actually
+        set. {FA_MODES.find((m) => m.value === faMode)!.note} Win chances treat a
         week&rsquo;s score as a normal curve around its projection, spread the way Sleeper&rsquo;s own
         win probability is; the playoff odds play out the rest of the season{" "}
         {SIMS.toLocaleString()} times on the same draws before and after the trade, so the
@@ -844,6 +1050,45 @@ function LeagueOdds({
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+type FaMode = "none" | "traders" | "all";
+
+/** The average lineup has no week, so nobody in it is on a bye. */
+const NO_BYES: Set<string> = new Set();
+
+const FA_MODES: Array<{ value: FaMode; label: string; hint: string; note: string }> = [
+  {
+    value: "none",
+    label: "Rosters only",
+    hint: "Every lineup comes from the team's current roster",
+    note: "Nobody picks up free agents: every lineup comes from the roster as it stands.",
+  },
+  {
+    value: "traders",
+    label: "Trading teams",
+    hint: "The two teams in the trade may start free agents; everyone else uses their roster",
+    note: "The two teams in the trade may start free agents, assuming a bench spot can be cleared; every other team fields its own roster.",
+  },
+  {
+    value: "all",
+    label: "Everyone",
+    hint: "Every team may start free agents, worst record claiming first",
+    note: "Every team may start free agents, assuming a bench spot can be cleared — where two want the same player, the worse record claims him first.",
+  },
+];
+
+/** Everyone on the roster who is not starting, best projection first. */
+function benchOf(
+  roster: readonly string[],
+  lineup: Lineup,
+  points: Record<string, number> | undefined,
+): Array<{ id: string; points: number }> {
+  const starting = new Set(lineup.slots.map((s) => s.id));
+  return roster
+    .filter((id) => !starting.has(id))
+    .map((id) => ({ id, points: points?.[id] ?? 0 }))
+    .sort((x, y) => y.points - x.points);
+}
 
 const range = (from: number, to: number): number[] =>
   from > to ? [] : Array.from({ length: to - from + 1 }, (_, i) => from + i);

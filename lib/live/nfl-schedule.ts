@@ -149,3 +149,22 @@ export function teamsSettled(
   if (!wk || !teams?.length) return null;
   return teams.every((t) => wk.doneByTeam[t] !== false);
 }
+
+/**
+ * Week -> NFL teams on a BYE that week, for the whole season.
+ *
+ * A team absent from a week's games is idle, which is the same rule
+ * `teamsSettled` relies on. The league's full set of teams is every team that
+ * appears anywhere in the season, so this needs nothing hard-coded.
+ */
+export async function fetchByeTeams(season: number): Promise<Map<number, Set<string>> | null> {
+  const byWeek = await loadSeason(season);
+  if (!byWeek) return null;
+  const all = new Set<string>();
+  for (const wk of byWeek.values()) for (const t of Object.keys(wk.doneByTeam)) all.add(t);
+  const out = new Map<number, Set<string>>();
+  for (const [week, wk] of byWeek) {
+    out.set(week, new Set([...all].filter((t) => !(t in wk.doneByTeam))));
+  }
+  return out;
+}

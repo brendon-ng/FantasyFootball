@@ -18,6 +18,15 @@ export interface WeekDetail {
   oppAfter: number | null;
   /** Players this team receives in the trade, marked in the after column. */
   incoming: Set<string>;
+  /** Players this team gives up, marked in the before column. */
+  outgoing: Set<string>;
+  /** Everyone rostered but not starting, best projection first. */
+  benchBefore: Array<{ id: string; points: number }>;
+  benchAfter: Array<{ id: string; points: number }>;
+  /** Players whose projection this week is the reader's override, not Sleeper's. */
+  overridden: Set<string>;
+  /** Players whose NFL team is idle this week. */
+  onBye: Set<string>;
 }
 
 /**
@@ -43,9 +52,22 @@ export function TradeWeekSheet({
   canLink: Set<string>;
   onClose: () => void;
 }) {
-  const { week, playoff, team, opponent, before, after, oppBefore, oppAfter, incoming } = detail;
-  const beforeIds = new Set(before.slots.map((s) => s.id).filter(Boolean));
-  const afterIds = new Set(after.slots.map((s) => s.id).filter(Boolean));
+  const {
+    week,
+    playoff,
+    team,
+    opponent,
+    before,
+    after,
+    oppBefore,
+    oppAfter,
+    incoming,
+    outgoing,
+    benchBefore,
+    benchAfter,
+    overridden,
+    onBye,
+  } = detail;
   const winBefore = oppBefore != null ? winChance(before.total, oppBefore) : null;
   const winAfter = oppAfter != null ? winChance(after.total, oppAfter) : null;
 
@@ -124,51 +146,177 @@ export function TradeWeekSheet({
           </div>
 
           <div className="pb-6 sm:pb-1">
-            <div className="flex items-center gap-2 border-b border-ink-600 bg-ink-850/60 px-4 py-1.5 sm:px-5">
-              <span className="eyebrow w-14 shrink-0 text-[10px]">Slot</span>
-              <span className="eyebrow min-w-0 flex-1 text-[10px]">Before</span>
-              <span className="eyebrow min-w-0 flex-1 text-[10px]">After</span>
-            </div>
-            <ul className="divide-y divide-ink-700">
-              {after.slots.map((a, i) => {
-                const b = before.slots[i];
-                return (
-                  <li key={i} className="flex items-center gap-2 px-4 py-1.5 text-[13px] sm:px-5">
-                    <span className="w-14 shrink-0 text-[10px] font-bold uppercase tracking-wide text-chalk-600">
-                      {slotLabel(a.slot)}
-                    </span>
-                    <Cell
-                      slot={b}
-                      faded={Boolean(b?.id && !afterIds.has(b.id))}
-                      nameOf={nameOf}
-                      positionOf={positionOf}
-                      canLink={canLink}
-                    />
-                    <Cell
-                      slot={a}
-                      fresh={Boolean(a.id && !beforeIds.has(a.id))}
-                      traded={Boolean(a.id && incoming.has(a.id))}
-                      nameOf={nameOf}
-                      positionOf={positionOf}
-                      canLink={canLink}
-                    />
-                  </li>
-                );
-              })}
-              <li className="flex items-center gap-2 px-4 py-2 text-[13px] font-semibold sm:px-5">
-                <span className="w-14 shrink-0 text-[10px] uppercase tracking-wide text-chalk-500">Total</span>
-                <span className="min-w-0 flex-1 text-right tabular text-chalk-400">{before.total.toFixed(2)}</span>
-                <span className="min-w-0 flex-1 text-right tabular text-chalk-100">{after.total.toFixed(2)}</span>
-              </li>
-            </ul>
-            <p className="px-4 pt-3 text-[11px] text-chalk-600 sm:px-5">
-              <Badge tone="trade">TRADE</Badge> arrives in the deal · <Badge tone="fa">FA</Badge> picked up
-              off waivers that week · struck through: no longer starts.
-            </p>
+            <LineupCompare
+              before={before}
+              after={after}
+              benchBefore={benchBefore}
+              benchAfter={benchAfter}
+              incoming={incoming}
+              outgoing={outgoing}
+              overridden={overridden}
+              onBye={onBye}
+              nameOf={nameOf}
+              positionOf={positionOf}
+              canLink={canLink}
+            />
+            <LineupLegend />
           </div>
         </>
       )}
     </Sheet>
+  );
+}
+
+/**
+ * Two lineups and their benches side by side, before and after the trade.
+ *
+ * ONE RENDERER FOR BOTH VIEWS — a single week in the sheet and the average
+ * lineup on the page — so the two cannot drift on what a marker means.
+ *
+ * A ROW IS MARKED ONLY WHEN THE PLAYER IS NEW, not whenever the slot changed
+ * hands: the optimiser shuffles the same people between flex and fixed slots,
+ * and highlighting every shuffle would bury the row that says what changed.
+ */
+export function LineupCompare({
+  before,
+  after,
+  benchBefore,
+  benchAfter,
+  incoming,
+  outgoing,
+  overridden,
+  onBye,
+  nameOf,
+  positionOf,
+  canLink,
+}: {
+  before: Lineup;
+  after: Lineup;
+  benchBefore: Array<{ id: string; points: number }>;
+  benchAfter: Array<{ id: string; points: number }>;
+  incoming: Set<string>;
+  outgoing: Set<string>;
+  overridden: Set<string>;
+  onBye: Set<string>;
+  nameOf: (id: string) => string;
+  positionOf: (id: string) => string | null;
+  canLink: Set<string>;
+}) {
+  const benchRows = Math.max(benchBefore.length, benchAfter.length);
+  const asSlot = (p: { id: string; points: number } | undefined): LineupSlot | undefined =>
+    p ? { slot: "BN", id: p.id, points: p.points, freeAgent: false } : undefined;
+  const beforeIds = new Set(before.slots.map((s) => s.id).filter(Boolean));
+  const afterIds = new Set(after.slots.map((s) => s.id).filter(Boolean));
+  return (
+    <>
+      <div className="flex items-center gap-2 border-b border-ink-600 bg-ink-850/60 px-4 py-1.5 sm:px-5">
+        <span className="eyebrow w-14 shrink-0 text-[10px]">Slot</span>
+        <span className="eyebrow min-w-0 flex-1 text-[10px]">Before</span>
+        <span className="eyebrow min-w-0 flex-1 text-[10px]">After</span>
+      </div>
+      <ul className="divide-y divide-ink-700">
+        {after.slots.map((a, i) => {
+          const b = before.slots[i];
+          return (
+            <li key={i} className="flex items-center gap-2 px-4 py-1.5 text-[13px] sm:px-5">
+              <span className="w-14 shrink-0 text-[10px] font-bold uppercase tracking-wide text-chalk-600">
+                {slotLabel(a.slot)}
+              </span>
+              <Cell
+                slot={b}
+                faded={Boolean(b?.id && !afterIds.has(b.id))}
+                out={Boolean(b?.id && outgoing.has(b.id))}
+                nameOf={nameOf}
+                positionOf={positionOf}
+                canLink={canLink}
+                overridden={overridden}
+                onBye={onBye}
+              />
+              <Cell
+                slot={a}
+                fresh={Boolean(a.id && !beforeIds.has(a.id))}
+                traded={Boolean(a.id && incoming.has(a.id))}
+                nameOf={nameOf}
+                positionOf={positionOf}
+                canLink={canLink}
+                overridden={overridden}
+                onBye={onBye}
+              />
+            </li>
+          );
+        })}
+        <li className="flex items-center gap-2 px-4 py-2 text-[13px] font-semibold sm:px-5">
+          <span className="w-14 shrink-0 text-[10px] uppercase tracking-wide text-chalk-500">Total</span>
+          <span className="min-w-0 flex-1 text-right tabular text-chalk-400">{before.total.toFixed(2)}</span>
+          <span className="min-w-0 flex-1 text-right tabular text-chalk-100">{after.total.toFixed(2)}</span>
+        </li>
+      </ul>
+      {/* THE BENCH, so a row that left the lineup can be found again — and
+          so it is visible who the trade pushed out of a start rather than
+          off the roster. Paired by rank, not by player: the two benches are
+          different lists of people. */}
+      {benchRows ? (
+        <>
+          <div className="flex items-center gap-2 border-y border-ink-600 bg-ink-850/60 px-4 py-1.5 sm:px-5">
+            <span className="eyebrow text-[10px]">Bench</span>
+          </div>
+          <ul className="divide-y divide-ink-700">
+            {Array.from({ length: benchRows }, (_, i) => {
+              const b = asSlot(benchBefore[i]);
+              const a = asSlot(benchAfter[i]);
+              return (
+                <li key={i} className="flex items-center gap-2 px-4 py-1.5 text-[13px] sm:px-5">
+                  <span className="w-14 shrink-0 text-[10px] font-bold uppercase tracking-wide text-chalk-600">BN</span>
+                  {b ? (
+                    <Cell
+                      slot={b}
+                      out={Boolean(b.id && outgoing.has(b.id))}
+                      nameOf={nameOf}
+                      positionOf={positionOf}
+                      canLink={canLink}
+                      overridden={overridden}
+                onBye={onBye}
+                    />
+                  ) : (
+                    <span className="min-w-0 flex-1" />
+                  )}
+                  {a ? (
+                    <Cell
+                      slot={a}
+                      traded={Boolean(a.id && incoming.has(a.id))}
+                      nameOf={nameOf}
+                      positionOf={positionOf}
+                      canLink={canLink}
+                      overridden={overridden}
+                onBye={onBye}
+                    />
+                  ) : (
+                    <span className="min-w-0 flex-1" />
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      ) : null}
+    </>
+  );
+}
+
+/** What the markers in `LineupCompare` mean. `byes` off where none can appear. */
+export function LineupLegend({ byes = true }: { byes?: boolean }) {
+  return (
+    <p className="px-4 pt-3 text-[11px] text-chalk-600 sm:px-5">
+      <Badge tone="trade">TRADE</Badge> arrives in the deal · <Badge tone="out">OUT</Badge> leaves in it ·{" "}
+      <Badge tone="fa">FA</Badge> picked up off waivers ·{" "}
+      {byes ? (
+        <>
+          <Badge tone="bye">BYE</Badge> his team is idle ·{" "}
+        </>
+      ) : null}
+      struck through: no longer starts. Bench players show their position;{" "}
+      <span className="text-caution">amber</span> points are your overrides.
+    </p>
   );
 }
 
@@ -186,17 +334,23 @@ function Cell({
   fresh = false,
   faded = false,
   traded = false,
+  out = false,
   nameOf,
   positionOf,
   canLink,
+  overridden,
+  onBye,
 }: {
   slot: LineupSlot | undefined;
   fresh?: boolean;
   faded?: boolean;
   traded?: boolean;
+  out?: boolean;
   nameOf: (id: string) => string;
   positionOf: (id: string) => string | null;
   canLink: Set<string>;
+  overridden: Set<string>;
+  onBye: Set<string>;
 }) {
   if (!slot?.id) return <span className="min-w-0 flex-1 text-chalk-600">Empty</span>;
   return (
@@ -207,20 +361,33 @@ function Cell({
     >
       <PlayerName id={slot.id} name={nameOf(slot.id)} canLink={canLink} />
       {traded ? <Badge tone="trade">TRADE</Badge> : null}
+      {out ? <Badge tone="out">OUT</Badge> : null}
+      {onBye.has(slot.id) ? <Badge tone="bye">BYE</Badge> : null}
       {slot.freeAgent ? <Badge tone="fa">FA</Badge> : null}
       <span className="ml-auto shrink-0 pl-1 tabular text-[12px] text-chalk-500 no-underline">
         {positionOf(slot.id) && slot.slot !== positionOf(slot.id) ? (
           <span className="mr-1 text-[10px] text-chalk-600">{positionOf(slot.id)}</span>
         ) : null}
-        {slot.points.toFixed(1)}
+        <span
+          className={overridden.has(slot.id) ? "text-caution" : undefined}
+          title={overridden.has(slot.id) ? "Your override, not Sleeper's projection" : undefined}
+        >
+          {slot.points.toFixed(1)}
+        </span>
       </span>
     </span>
   );
 }
 
-function Badge({ tone, children }: { tone: "trade" | "fa"; children: React.ReactNode }) {
+function Badge({ tone, children }: { tone: "trade" | "out" | "fa" | "bye"; children: React.ReactNode }) {
   const cls =
-    tone === "trade" ? "border-trade/50 text-trade" : "border-caution/50 text-caution";
+    tone === "trade"
+      ? "border-trade/50 text-trade"
+      : tone === "out"
+        ? "border-loss/50 text-loss"
+        : tone === "bye"
+          ? "border-ink-400 text-chalk-500"
+          : "border-caution/50 text-caution";
   return (
     <span className={`shrink-0 rounded border px-1 text-[9px] font-bold tracking-wide no-underline ${cls}`}>
       {children}
