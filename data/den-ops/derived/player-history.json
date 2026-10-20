@@ -25190,6 +25190,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792451593592,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "5846": [
@@ -25608,6 +25620,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792451611606,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "5850": [
@@ -50491,6 +50515,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792451593592,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 6
     }
   ],
   "13417": [

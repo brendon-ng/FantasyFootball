@@ -136,6 +136,15 @@
       "week": 14
     },
     {
+      "margin": 52.96,
+      "opponentPoints": 62.54,
+      "opponentSlug": "josh-greenebaum",
+      "ownerSlug": "robbie-goodman",
+      "points": 115.5,
+      "season": 2026,
+      "week": 6
+    },
+    {
       "margin": 51.8,
       "opponentPoints": 96.4,
       "opponentSlug": "jake-gibbons",
@@ -213,15 +222,6 @@
       "opponentSlug": "robbie-goodman",
       "ownerSlug": "lindsey-freeze",
       "points": 158.86,
-      "season": 2025,
-      "week": 6
-    },
-    {
-      "margin": 46,
-      "opponentPoints": 83.3,
-      "opponentSlug": "srishti-dhawan",
-      "ownerSlug": "kate-olson",
-      "points": 129.3,
       "season": 2025,
       "week": 6
     }
@@ -464,6 +464,24 @@
       "week": 11
     },
     {
+      "opponentPoints": 68.28,
+      "opponentSlug": "srishti-dhawan",
+      "ownerSlug": "kate-olson",
+      "points": 91.2,
+      "season": 2026,
+      "total": 159.48,
+      "week": 6
+    },
+    {
+      "opponentPoints": 62.54,
+      "opponentSlug": "josh-greenebaum",
+      "ownerSlug": "robbie-goodman",
+      "points": 115.5,
+      "season": 2026,
+      "total": 178.04,
+      "week": 6
+    },
+    {
       "opponentPoints": 82.44,
       "opponentSlug": "srishti-dhawan",
       "ownerSlug": "aidan-kelleher",
@@ -660,24 +678,6 @@
       "season": 2025,
       "total": 204.88,
       "week": 4
-    },
-    {
-      "opponentPoints": 89.72,
-      "opponentSlug": "allison-fosbery",
-      "ownerSlug": "jake-gibbons",
-      "points": 116.18,
-      "season": 2025,
-      "total": 205.9,
-      "week": 1
-    },
-    {
-      "opponentPoints": 95.36,
-      "opponentSlug": "ross-bechtel",
-      "ownerSlug": "kate-olson",
-      "points": 110.72,
-      "season": 2025,
-      "total": 206.08,
-      "week": 3
     }
   ],
   "narrowestWin": [
@@ -898,13 +898,13 @@
       "week": 7
     },
     {
-      "margin": 8.2,
-      "opponentPoints": 121.22,
-      "opponentSlug": "kate-olson",
-      "ownerSlug": "allison-fosbery",
-      "points": 129.42,
-      "season": 2025,
-      "week": 5
+      "margin": 8.18,
+      "opponentPoints": 101.52,
+      "opponentSlug": "aidan-kelleher",
+      "ownerSlug": "jake-gibbons",
+      "points": 109.7,
+      "season": 2026,
+      "week": 6
     }
   ],
   "playerHigh": [
@@ -1287,6 +1287,14 @@
       "week": 5
     },
     {
+      "opponentPoints": 109.44,
+      "opponentSlug": "joe-gibbons",
+      "ownerSlug": "allison-fosbery",
+      "points": 148.38,
+      "season": 2026,
+      "week": 6
+    },
+    {
       "opponentPoints": 96.4,
       "opponentSlug": "jake-gibbons",
       "ownerSlug": "lindsey-freeze",
@@ -1301,14 +1309,6 @@
       "points": 147.8,
       "season": 2025,
       "week": 10
-    },
-    {
-      "opponentPoints": 115.32,
-      "opponentSlug": "kate-olson",
-      "ownerSlug": "jake-gibbons",
-      "points": 147.28,
-      "season": 2026,
-      "week": 4
     }
   ],
   "weeklyLow": [
@@ -1321,12 +1321,28 @@
       "week": 11
     },
     {
+      "opponentPoints": 115.5,
+      "opponentSlug": "robbie-goodman",
+      "ownerSlug": "josh-greenebaum",
+      "points": 62.54,
+      "season": 2026,
+      "week": 6
+    },
+    {
       "opponentPoints": 62.3,
       "opponentSlug": "josh-greenebaum",
       "ownerSlug": "brendon-ng",
       "points": 66.06,
       "season": 2025,
       "week": 11
+    },
+    {
+      "opponentPoints": 91.2,
+      "opponentSlug": "kate-olson",
+      "ownerSlug": "srishti-dhawan",
+      "points": 68.28,
+      "season": 2026,
+      "week": 6
     },
     {
       "opponentPoints": 115.84,
@@ -1495,22 +1511,6 @@
       "points": 89.22,
       "season": 2025,
       "week": 10
-    },
-    {
-      "opponentPoints": 100.3,
-      "opponentSlug": "allison-fosbery",
-      "ownerSlug": "robbie-goodman",
-      "points": 89.52,
-      "season": 2025,
-      "week": 14
-    },
-    {
-      "opponentPoints": 116.18,
-      "opponentSlug": "jake-gibbons",
-      "ownerSlug": "allison-fosbery",
-      "points": 89.72,
-      "season": 2025,
-      "week": 1
     }
   ]
 }
