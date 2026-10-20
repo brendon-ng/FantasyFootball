@@ -1899,6 +1899,14 @@ nothing from an old-style search ranked by your gain belonged in the new top 20
 and was missing. Changing a floor or the sort after a search re-filters and
 re-sorts the list at once, and says to search again for a complete one.
 
+POSITION BALANCE, per position the league starts: how many more of it you get
+than you give — any, gain 1+, exactly +2 / +1 / even / −1 / −2, or lose 1+.
+"One more RB than I give" is RB +1. A player counts at his primary position (a
+fullback as an RB). `meetsPositionRules()` runs BEFORE ANY LINEUP IS SCORED,
+since it needs only positions, so a constrained search skips what it rules out
+and gets faster: RB +1 and WR −1 on Masterbatters returned 135 trades, every one
+balanced, in 1.2s against ~1.6s unconstrained.
+
 WHICH TESTS COUNT IS A TOGGLE (`AcceptMode`): either (the default), both, rest of
 season only, or playoffs only, applied identically by every stage through one
 `accepts()`. With no playoff weeks left the playoff test falls back to the

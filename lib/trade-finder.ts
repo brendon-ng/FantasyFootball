@@ -53,6 +53,43 @@ export function accepts(mode: AcceptMode, seasonOk: boolean, playoffOk: boolean 
 /** The four numbers a result carries, any of which can rank or filter. */
 export type GainKey = "senderSeason" | "senderPlayoffs" | "partnerSeason" | "partnerPlayoffs";
 
+/**
+ * A bound on how many more players of one position the sender gets than gives
+ * — `{ min: 1, max: 1 }` is "exactly one more RB", `{ max: -1 }` "at least one
+ * fewer WR". Either end may be missing.
+ */
+export interface NetRule {
+  min?: number;
+  max?: number;
+}
+
+/** A player's position for the balance rules: his first, a fullback an RB. */
+const primaryPosition = (positionsOf: (id: string) => readonly string[], id: string) => positionsOf(id)[0] ?? "";
+
+/**
+ * Whether a give / get pair meets every position rule.
+ *
+ * Checked BEFORE ANY LINEUP IS SCORED: it needs only the players' positions, so
+ * a constrained search skips the combinations it rules out instead of paying to
+ * evaluate them — narrowing the rules speeds the search up.
+ */
+export function meetsPositionRules(
+  give: readonly string[],
+  get: readonly string[],
+  rules: Readonly<Record<string, NetRule>>,
+  positionsOf: (id: string) => readonly string[],
+): boolean {
+  for (const [pos, rule] of Object.entries(rules)) {
+    if (rule.min == null && rule.max == null) continue;
+    let net = 0;
+    for (const id of get) if (primaryPosition(positionsOf, id) === pos) net++;
+    for (const id of give) if (primaryPosition(positionsOf, id) === pos) net--;
+    if (rule.min != null && net < rule.min) return false;
+    if (rule.max != null && net > rule.max) return false;
+  }
+  return true;
+}
+
 /** Minimum total points per measure; a missing or null entry is no limit. */
 export type GainLimits = Partial<Record<GainKey, number | null>>;
 
@@ -114,6 +151,8 @@ export interface ScreenInput {
    * best trades for the sender are not the 300 best for the partner.
    */
   rankBy: GainKey;
+  /** Position balance rules, keyed by position. Empty for none. */
+  positionNet: Readonly<Record<string, NetRule>>;
   descending: boolean;
   /**
    * How far below the line each stage still lets a trade through, for BOTH
@@ -215,6 +254,7 @@ export function* screenTrades(input: ScreenInput): Generator<ScreenProgress, Scr
       for (const get of plan.ins) {
         done++;
         if (done % 2000 === 0) yield { done, total };
+        if (!meetsPositionRules(give, get, input.positionNet, input.positionsOf)) continue;
         const getSet = new Set(get);
 
         // Stage 1: average lineups, a generous cut for both sides.

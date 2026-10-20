@@ -9,13 +9,16 @@ import { normalise } from "@/lib/player-match";
 import type { Lineup } from "@/lib/lineup";
 import {
   accepts,
+  meetsPositionRules,
   screenTrades,
   withinLimits,
   type AcceptMode,
   type GainKey,
   type GainLimits,
+  type NetRule,
   type Screened,
 } from "@/lib/trade-finder";
+import { SLOT_ELIGIBLE } from "@/lib/lineup";
 import { applyTrade, FREE_AGENT_MARGIN, type TeamState } from "@/lib/trade-sim";
 import type { LiveTeam } from "@/lib/types";
 
@@ -137,6 +140,14 @@ export function TradeFinder({
     partnerPlayoffs: "",
   });
   const [rankBy, setRankBy] = useState<GainKey>("senderSeason");
+  const [netKeys, setNetKeys] = useState<Record<string, NetKey>>({});
+  // Only positions the league starts — a balance rule on one it does not is noise.
+  const positions = POSITION_ORDER.filter((p) => slots.some((s) => SLOT_ELIGIBLE[s]?.includes(p)));
+  const positionNet: Record<string, NetRule> = Object.fromEntries(
+    Object.entries(netKeys)
+      .filter(([, k]) => k !== "any")
+      .map(([pos, k]) => [pos, NET_RULES[k]]),
+  );
   const [descending, setDescending] = useState(true);
   const limits: GainLimits = Object.fromEntries(
     (Object.keys(mins) as GainKey[]).map((k) => {
@@ -173,6 +184,7 @@ export function TradeFinder({
     limits,
     rankBy,
     descending,
+    positionNet,
     streamingOn,
     weeks,
     giveRange,
@@ -221,6 +233,7 @@ export function TradeFinder({
       min: limits,
       rankBy,
       descending,
+      positionNet,
       slackAverage: SLACK_AVERAGE,
       slackWeekly: SLACK_WEEKLY,
       keep: EXACT,
@@ -318,7 +331,9 @@ export function TradeFinder({
    */
   const shown =
     run.phase === "done"
-      ? run.found.filter((f) => withinLimits(exactOf(f), limits)).sort(rankFound(rankBy, descending))
+      ? run.found
+          .filter((f) => withinLimits(exactOf(f), limits) && meetsPositionRules(f.give, f.get, positionNet, positionsOf))
+          .sort(rankFound(rankBy, descending))
       : [];
   const stale = run.phase === "done" && run.key !== settingsKey;
 
@@ -486,6 +501,25 @@ export function TradeFinder({
                 />
               </Field>
             ))}
+
+            <FieldGroup label="Position balance — you get minus you give" className="sm:col-span-2 lg:col-span-4">
+              <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+                {positions.map((pos) => (
+                  <Select
+                    key={pos}
+                    value={netKeys[pos] ?? "any"}
+                    aria-label={`${pos} balance`}
+                    onChange={(e) => setNetKeys({ ...netKeys, [pos]: e.target.value as NetKey })}
+                  >
+                    {NET_OPTIONS.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {pos} · {o.label}
+                      </option>
+                    ))}
+                  </Select>
+                ))}
+              </div>
+            </FieldGroup>
 
             <FieldGroup label="They accept if their lineup holds up over" className="sm:col-span-2">
               <Segmented label="Acceptance test" value={accept} options={ACCEPT_MODES} onChange={setAccept} fill />
@@ -716,6 +750,34 @@ function Side({
     </div>
   );
 }
+
+const POSITION_ORDER = ["QB", "RB", "WR", "TE", "K", "DEF"];
+
+/**
+ * Position balance choices: how many more of a position you get than you give.
+ * "1+" ends are open — "Gain 1+" is one or more extra, whatever the exact count.
+ */
+type NetKey = "any" | "gain" | "+2" | "+1" | "0" | "-1" | "-2" | "loss";
+const NET_RULES: Record<NetKey, NetRule> = {
+  any: {},
+  gain: { min: 1 },
+  "+2": { min: 2, max: 2 },
+  "+1": { min: 1, max: 1 },
+  "0": { min: 0, max: 0 },
+  "-1": { min: -1, max: -1 },
+  "-2": { min: -2, max: -2 },
+  loss: { max: -1 },
+};
+const NET_OPTIONS: Array<{ value: NetKey; label: string }> = [
+  { value: "any", label: "Any" },
+  { value: "gain", label: "Gain 1+" },
+  { value: "+2", label: "+2" },
+  { value: "+1", label: "+1" },
+  { value: "0", label: "Even" },
+  { value: "-1", label: "−1" },
+  { value: "-2", label: "−2" },
+  { value: "loss", label: "Lose 1+" },
+];
 
 /** The four measures, as the filters, the sort and the results name them. */
 const GAIN_FIELDS: Array<{ key: GainKey; label: string }> = [
