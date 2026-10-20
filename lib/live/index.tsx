@@ -43,7 +43,7 @@ import {
 import { espnProvider } from "./espn.ts";
 import { fetchNflClock } from "./nfl-clock.ts";
 import { fetchNflWeek, teamsSettled, type NflWeekState } from "./nfl-schedule.ts";
-import { sleeperProvider } from "./sleeper.ts";
+import { fetchPlayerPool, sleeperProvider, type PoolPlayer } from "./sleeper.ts";
 import type {
   LeagueMove,
   LiveDraft,
@@ -58,6 +58,7 @@ import type {
 } from "./types.ts";
 
 export type { WinProbability } from "@/lib/win-probability";
+export type { PoolPlayer } from "./sleeper.ts";
 export type {
   LeagueMove,
   LiveDraft,
@@ -1025,4 +1026,79 @@ export function useSeasonGames(
   }, [key]);
 
   return games;
+}
+
+/**
+ * Pregame projections for every week in `weeks`, week -> player id -> points,
+ * each scored with the league's own settings.
+ *
+ * FOR THE TRADE ANALYZER, which needs the rest of the season at once. One
+ * request per week — about 100KB gzipped each — in parallel, through the same
+ * `weekProjections` the matchup cards use, so a number here and a number on a
+ * card are the same number. Weeks the provider has nothing for are simply
+ * absent; `ready` turns true once every request has settled either way.
+ */
+export function useWeekProjections(
+  ref: LeagueRef | null,
+  weeks: readonly number[],
+): { ready: boolean; byWeek: Record<number, Record<string, number>> } {
+  const key = `${refKey(ref)}:${weeks.join(",")}`;
+  const [state, setState] = useState<{
+    key: string;
+    byWeek: Record<number, Record<string, number>>;
+  } | null>(null);
+
+  useEffect(() => {
+    const provider = providerFor(ref);
+    if (!ref || !provider || !weeks.length) return;
+    let cancelled = false;
+    Promise.all(
+      weeks.map((w) =>
+        provider
+          .weekProjections(ref.season, w, ref.id)
+          .then((by) => [w, by] as const)
+          .catch(() => [w, null] as const),
+      ),
+    ).then((rows) => {
+      if (cancelled) return;
+      const byWeek: Record<number, Record<string, number>> = {};
+      for (const [w, by] of rows) if (by) byWeek[w] = by;
+      setState({ key, byWeek });
+    });
+    return () => {
+      cancelled = true;
+    };
+    // `key` stands in for `ref` and `weeks`, both fresh each render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
+
+  const hit = state?.key === key ? state : null;
+  return { ready: Boolean(hit), byWeek: hit?.byWeek ?? {} };
+}
+
+/**
+ * Names and positions for every fantasy-relevant player. Sleeper only — see
+ * `fetchPlayerPool`. Null while loading, and stays null if it fails.
+ */
+export function usePlayerPool(
+  ref: LeagueRef | null,
+  week: number,
+): { ready: boolean; pool: Record<string, PoolPlayer> | null } {
+  const season = ref?.provider === "sleeper" ? ref.season : 0;
+  const key = `${season}:${week}`;
+  const [state, setState] = useState<{ key: string; pool: Record<string, PoolPlayer> | null } | null>(null);
+
+  useEffect(() => {
+    if (!season || week < 1) return;
+    let cancelled = false;
+    fetchPlayerPool(season, week).then((pool) => {
+      if (!cancelled) setState({ key, pool });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [key, season, week]);
+
+  const hit = state?.key === key ? state : null;
+  return { ready: Boolean(hit), pool: hit?.pool ?? null };
 }

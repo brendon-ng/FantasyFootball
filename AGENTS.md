@@ -106,7 +106,8 @@ week was won by the team that scored it.
 **Pages:** `/` (league at a glance, adapts to offseason), `/keepers`,
 `/keepers/history`, `/history`, `/history/[season]`, `/records`,
 `/owners/[slug]`, `/players/[id]`, `/h2h/[pair]`, `/matchups/[id]`,
-`/punishments`, and `/lab` — which is NOT in the nav; see the Scenario Lab.
+`/punishments`, and `/lab` and `/trade-analyzer` — neither is in the nav; see the
+Scenario Lab and the Trade Analyzer.
 
 `/matchups/[id]` is the single home for lineups — the head-to-head page lists a
 series and links into it. Never render a per-player breakdown in both; two
@@ -1691,6 +1692,87 @@ goes late in round 2 of a ten-team draft and "#15" does not. Sleeper's own numbe
 where there is one, consensus (marked °) for the ~130 players without — and
 `adpSortKey` applies the SAME fallback the display does, because a table sorted on
 an invisible key reads as a bug however defensible the key is.
+
+## The Trade Analyzer
+
+`/trade-analyzer` weighs a hypothetical trade between two teams against the rest
+of the season: each team's best lineup every remaining week, its chance of
+winning each game, the points gained or lost over the regular season and the
+playoffs, and its odds of making the playoffs, of winning it all once in, and of
+winning it all from today. NOT IN THE NAV, for the reason `/lab` is not — do not
+add it to `LINKS`.
+
+`lib/lineup.ts` and `lib/trade-sim.ts` are the model, pure and dependency-free so
+they run under plain `node` against saved responses, which is how they were
+checked. `components/trade-analyzer.tsx` is the glue and the page;
+`components/trade-week-sheet.tsx` is the one-week lineup comparison.
+
+EVERYTHING THAT MOVES IS FETCHED IN THE BROWSER: rosters and records through
+`useLiveSeason`, fixtures through `useSeasonGames`, and every remaining week's
+projections through `useWeekProjections`, which calls the same
+`weekProjections` the matchup cards use — so a projection here and one on a card
+are the same number, scored with the league's own settings. About 100KB gzipped
+per week, ~1.1MB for a full rest of season. The build supplies only what is
+settled: `getSeasonFormat()` (regular-season length, playoff field, rounds — off
+the rules files, inheriting forward) and the season's lineup shape.
+
+SLEEPER ONLY. The projections are keyed by Sleeper ids; an ESPN league would need
+its rosters matched across and its scoring translated, and the page says so
+instead of guessing.
+
+### The lineup is the best one, never the one that was set
+
+A trade's value is what it does to the best team a manager could field, so the
+optimiser ignores the lineup a team actually set. It is an EXACT ASSIGNMENT (the
+Hungarian algorithm), not a greedy fill: fixed slots first and flexes after is
+right for the common shapes and wrong once two flex slots overlap without
+nesting. A fullback is an RB, and Sleeper's `fantasy_positions` wins where known —
+Travis Hunter fills a WR slot.
+
+FREE AGENTS ARE IN THE POOL. A lineup may start anyone nobody rosters, so losing a
+team's only kicker costs the gap to the best kicker on waivers, not a whole
+kicker. Two teams cannot start the same free agent in one week: they claim in
+REVERSE STANDINGS ORDER, worst first, and a player one team takes is gone for
+the rest. Every pickup assumes a bench spot can be cleared. Only the few best
+free agents per position — as many as that position has slots — are offered to
+the optimiser, since nobody below them could make a lineup.
+
+THE BAKED PLAYER INDEX CANNOT PLACE A FREE AGENT — it holds only players this
+league has referenced. `fetchPlayerPool()` reads names, positions and injury
+status for everybody off Sleeper's un-versioned projections feed (the v1 feed
+has no player block), asked for ONE week at ~234KB; the points still come from
+`weekProjections`. If it fails, free agents are left out and the page says so.
+
+### The odds
+
+ONE SCORE MODEL, SLEEPER'S: a team's week is normal around its projection with a
+standard deviation of projection / √11, which is `distribution(0, projected)` in
+`lib/win-probability` — so a percentage here agrees with the matchup cards.
+
+20,000 SEASONS, BOTH SCENARIOS ON THE SAME DRAWS. Each simulated season draws one
+z-score per team per week and "before" and "after" reuse it, so the difference is
+the trade rather than sampling noise of the same size. SEEDED, so a reload and a
+screenshot show the same numbers. Checked: across all simulations the field sums
+to exactly six playoff teams, two byes and one champion.
+
+Seeding is wins (a tie half a win) then points for, a tied playoff game goes to
+the higher seed (bylaws 1.8.2), and the bracket is fixed rather than re-seeded:
+1 meets the winner of 4 v 5. Every other team's odds move too — a stronger rival
+is a harder schedule — which is what the Whole league panel shows.
+
+A WEEK ALREADY UNDER WAY IS LOCKED TO THE TRADE. Once a matchup has points on the
+board, that week enters the simulation at each team's LIVE distribution — score
+so far plus `useLiveProjections` — identically in both scenarios, and the trade's
+effects start the week after. Otherwise nothing mid-week is modelled; before
+kickoff the coming week is open and the trade applies to it.
+
+The trade lives in the query string (`a`, `b`, `give`), so a link reproduces it.
+`useUrlState` takes an allow-list and cannot hold player ids, so the page carries
+a free-form twin of it.
+
+Not modelled: a team pushed over the roster limit is not made to drop anyone (the
+player it would cut is the one who never starts), three-team trades, and a
+season already in its playoffs.
 
 ## Default all-time ordering
 

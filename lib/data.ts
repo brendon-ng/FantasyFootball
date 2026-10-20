@@ -1092,6 +1092,43 @@ export const getRules = once((): { draftRounds: number; teams: number } => {
   return { draftRounds: 17, teams: 10 };
 });
 
+/** How a season is shaped: when the regular season ends and how the playoffs run. */
+export interface SeasonFormat {
+  regularSeasonWeeks: number;
+  playoffWeekStart: number;
+  finalWeek: number;
+  playoffTeams: number;
+  playoffRounds: number;
+}
+
+/**
+ * The season's format, from `rules/<year>.json`.
+ *
+ * INHERITS FORWARD like every rules lookup: a season with no file of its own
+ * takes the most recent earlier one, which is what lets the season being played
+ * be described before anybody writes its file. Null only for a season older than
+ * every rules file. The defaults are the shape every league here plays — 14
+ * weeks, six teams, three one-week rounds — for a file that omits a key.
+ */
+export const getSeasonFormat = (season: number): SeasonFormat | null => {
+  const dir = join(CONFIG, "rules");
+  const year = (existsSync(dir) ? readdirSync(dir) : [])
+    .map((f) => Number(f.replace(".json", "")))
+    .filter((y) => Number.isFinite(y) && y <= season)
+    .sort((a, b) => b - a)[0];
+  if (year == null) return null;
+  const r = JSON.parse(readFileSync(join(dir, `${year}.json`), "utf8")) as Partial<SeasonFormat>;
+  const regularSeasonWeeks = r.regularSeasonWeeks ?? 14;
+  const playoffWeekStart = r.playoffWeekStart ?? regularSeasonWeeks + 1;
+  return {
+    regularSeasonWeeks,
+    playoffWeekStart,
+    finalWeek: r.finalWeek ?? playoffWeekStart + 2,
+    playoffTeams: r.playoffTeams ?? 6,
+    playoffRounds: r.playoffRounds ?? 3,
+  };
+};
+
 /**
  * Feature flags for the league this build serves.
  *

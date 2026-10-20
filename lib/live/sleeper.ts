@@ -258,6 +258,69 @@ function rawStats(
   return p;
 }
 
+/** Who a player is, for a page that has to place people the league never rostered. */
+export interface PoolPlayer {
+  name: string;
+  position: string | null;
+  /** Every position Sleeper lets him fill — Travis Hunter is WR and DB. */
+  fantasyPositions: string[];
+  team: string | null;
+  injuryStatus: string | null;
+}
+
+/**
+ * Every fantasy-relevant player, keyed by Sleeper id — names and positions,
+ * not points.
+ *
+ * FOR THE TRADE ANALYZER'S FREE AGENTS. The baked index only holds players this
+ * league has referenced, so a free agent nobody ever rostered has no position
+ * and could never be placed in a lineup. The v1 projections feed has no player
+ * block; this un-versioned one does, at about 234KB gzipped against 100KB, so
+ * it is asked for ONE week and the points still come from `weekProjections`.
+ * Undocumented, like every projections endpoint — fails soft to null.
+ */
+const poolCache = new Map<string, Promise<Record<string, PoolPlayer> | null>>();
+
+export function fetchPlayerPool(season: number, week: number): Promise<Record<string, PoolPlayer> | null> {
+  const key = `${season}:${week}`;
+  const hit = poolCache.get(key);
+  if (hit) return hit;
+  const positions = ["QB", "RB", "WR", "TE", "K", "DEF"].map((p) => `position%5B%5D=${p}`).join("&");
+  const p = json<Array<{
+    player_id: string;
+    player?: {
+      first_name?: string;
+      last_name?: string;
+      position?: string | null;
+      fantasy_positions?: string[] | null;
+      team?: string | null;
+      injury_status?: string | null;
+    } | null;
+  }> | null>(
+    `https://api.sleeper.app/projections/nfl/${season}/${week}?season_type=regular&${positions}`,
+    null,
+  )
+    .then((rows) => {
+      if (!rows?.length) return null;
+      const out: Record<string, PoolPlayer> = {};
+      for (const r of rows) {
+        const pl = r.player;
+        if (!pl) continue;
+        out[r.player_id] = {
+          name: `${pl.first_name ?? ""} ${pl.last_name ?? ""}`.trim() || r.player_id,
+          position: pl.position ?? null,
+          fantasyPositions: pl.fantasy_positions ?? [],
+          team: pl.team ?? null,
+          injuryStatus: pl.injury_status ?? null,
+        };
+      }
+      return out;
+    })
+    .catch(() => null);
+  poolCache.set(key, p);
+  return p;
+}
+
 export const sleeperProvider: LiveProvider = {
   name: "Sleeper",
 
