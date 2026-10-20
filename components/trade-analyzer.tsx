@@ -3,7 +3,9 @@
 import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 
 import { useIdentity } from "@/components/identity";
+import { PlayerCardProvider, usePlayerCard } from "@/components/player-card";
 import { ProjectionOverridesPanel } from "@/components/projection-overrides";
+import { TradeFinder } from "@/components/trade-finder";
 import {
   Delta,
   LineupCompare,
@@ -95,6 +97,8 @@ export function TradeAnalyzer({
   const [aParam, setA] = useUrlText("a");
   const [bParam, setB] = useUrlText("b");
   const [give, setGive] = useUrlList("give");
+  const [viewParam, setViewParam] = useUrlText("view");
+  const view = viewParam === "finder" ? "finder" : "analyzer";
   const [faParam, setFaParam] = useUrlText("fa");
   const faMode: FaMode = faParam === "none" || faParam === "traders" ? faParam : "all";
   // The default spells nothing, so an untouched page keeps a clean URL.
@@ -206,17 +210,30 @@ export function TradeAnalyzer({
     [streamKey],
   );
 
+  /**
+   * Every team's best lineup for every week, for one set of rosters.
+   *
+   * `who` overrides which teams may stream — the finder weighs trades with
+   * partners the analyzer has not selected, and under "Trading teams" the
+   * streamers are whichever two are in the deal being weighed.
+   */
   const lineupsFor = useCallback(
-    (rosters: ReadonlyMap<number, readonly string[]>): Lineups => {
+    (rosters: ReadonlyMap<number, readonly string[]>, who: ReadonlySet<number> | null = streams): Lineups => {
       const out: Lineups = new Map();
       for (const w of projWeeks) {
         const points = projected[w];
         if (!points) continue;
-        out.set(w, weekLineups({ week: w, points }, rosters, order, slots, positionsOf, freeAgents, streams));
+        out.set(w, weekLineups({ week: w, points }, rosters, order, slots, positionsOf, freeAgents, who));
       }
       return out;
     },
     [projWeeks, projected, order, slots, positionsOf, freeAgents, streams],
+  );
+  /** Who may stream when `a` trades with `b`, under the current setting. */
+  const streamersFor = useCallback(
+    (a: number, b: number): ReadonlySet<number> | null =>
+      faMode === "all" ? null : new Set(faMode === "none" ? [] : [a, b]),
+    [faMode],
   );
 
   const rostersBefore = useMemo(
@@ -249,23 +266,19 @@ export function TradeAnalyzer({
    * Byes come from the NFL schedule. Until it lands, a week with no projection
    * stands in for one, which is how Sleeper's feed represents a bye anyway.
    */
-  const averages = useMemo(() => {
-    if (!ready) return null;
-    const weeks = openWeeks.filter((w) => projected[w]);
-    if (!weeks.length) return null;
-    const ids = new Set<string>();
-    for (const w of weeks) for (const id of Object.keys(projected[w])) ids.add(id);
-    const out: Record<string, number> = {};
-    for (const id of ids) {
-      const nfl = nflTeamOf(id) ?? (/^[A-Z]{2,4}$/.test(id) ? id : null);
-      const games = weeks.filter((w) =>
-        byeTeams && nfl ? !byeTeams.get(w)?.has(nfl) : projected[w][id] != null,
-      );
-      if (!games.length) continue;
-      out[id] = games.reduce((sum, w) => sum + (projected[w][id] ?? 0), 0) / games.length;
-    }
-    return out;
-  }, [ready, openWeeks, projected, nflTeamOf, byeTeams]);
+  const averages = useMemo(
+    () => (ready ? averageOver(openWeeks, projected, nflTeamOf, byeTeams) : null),
+    [ready, openWeeks, projected, nflTeamOf, byeTeams],
+  );
+  /** The same, over the playoff weeks alone — the finder's second acceptance test. */
+  const playoffWeeks = useMemo(
+    () => openWeeks.filter((w) => w >= format.playoffWeekStart),
+    [openWeeks, format.playoffWeekStart],
+  );
+  const playoffAverages = useMemo(
+    () => (ready && playoffWeeks.length ? averageOver(playoffWeeks, projected, nflTeamOf, byeTeams) : null),
+    [ready, playoffWeeks, projected, nflTeamOf, byeTeams],
+  );
 
   /** The best lineup each team could field from those averages — no particular week. */
   const averageLineups = useMemo(() => {
@@ -465,83 +478,55 @@ export function TradeAnalyzer({
   }
 
   return (
-    <>
-      <Panel>
-        <PanelHeader
-          title="The trade"
-          meta={hasTrade ? `${fromA.length} for ${fromB.length}` : undefined}
-          legend="Tick the players each side gives up. Average is each player's projection per remaining week."
-        />
-        <div className="grid gap-px bg-ink-600 sm:grid-cols-2">
-          {[
-            { team: teamA, set: setA, other: teamB, picked: fromA, which: "a" as const },
-            { team: teamB, set: setB, other: teamA, picked: fromB, which: "b" as const },
-          ].map(({ team, set, other, picked, which }) => (
-            <div key={which} className="min-w-0 bg-ink-850 p-3 sm:p-4">
-              <select
-                value={team?.ownerSlug ?? ""}
-                onChange={(e) => set(e.target.value)}
-                aria-label={which === "a" ? "First team" : "Second team"}
-                className="mb-3 w-full rounded-lg border border-ink-500 bg-ink-800 px-3 py-2 text-base text-chalk-100 sm:text-sm"
-              >
-                {which === "b" && !team ? <option value="">Pick a trade partner…</option> : null}
-                {teams
-                  .filter((t) => t.rosterId !== other?.rosterId)
-                  .map((t) => (
-                    <option key={t.rosterId} value={t.ownerSlug}>
-                      {label(t)}
-                    </option>
-                  ))}
-              </select>
-              {team ? (
-                <RosterPicker
-                  team={team}
-                  picked={picked}
-                  onToggle={toggle}
-                  nameOf={nameOf}
-                  positionOf={positionOf}
-                  nflTeamOf={nflTeamOf}
-                  average={(id) => averageOf(id, openWeeks, projected)}
-                  loading={!ready}
-                />
-              ) : (
-                <EmptyState>Pick a team to trade with.</EmptyState>
-              )}
-            </div>
+    <PlayerCardProvider
+      leagueId={ref?.id ?? null}
+      season={season.season}
+      week={Math.max(1, season.week)}
+      holderOf={(id) => {
+        const t = teams.find((x) => x.players.includes(id));
+        return t ? { label: label(t), slug: t.ownerSlug } : null;
+      }}
+      nameOf={nameOf}
+      linkable={canLink}
+    >
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div role="tablist" aria-label="View" className="flex rounded-lg border border-ink-500 p-0.5">
+          {(["analyzer", "finder"] as const).map((v) => (
+            <button
+              key={v}
+              type="button"
+              role="tab"
+              aria-selected={view === v}
+              onClick={() => setViewParam(v === "analyzer" ? "" : v)}
+              className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
+                view === v ? "bg-ink-600 text-chalk-100" : "text-chalk-500 hover:text-chalk-300"
+              }`}
+            >
+              {v === "analyzer" ? "Analyzer" : "Finder"}
+            </button>
           ))}
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-ink-600 px-4 py-2.5 sm:px-5">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="eyebrow text-[10px]">Free agents</span>
-            <div role="radiogroup" aria-label="Who may pick up free agents" className="flex rounded-lg border border-ink-500 p-0.5">
-              {FA_MODES.map((m) => (
-                <button
-                  key={m.value}
-                  type="button"
-                  role="radio"
-                  aria-checked={faMode === m.value}
-                  title={m.hint}
-                  onClick={() => setFaMode(m.value)}
-                  className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
-                    faMode === m.value ? "bg-ink-600 text-chalk-100" : "text-chalk-500 hover:text-chalk-300"
-                  }`}
-                >
-                  {m.label}
-                </button>
-              ))}
-            </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="eyebrow text-[10px]">Free agents</span>
+          <div role="radiogroup" aria-label="Who may pick up free agents" className="flex rounded-lg border border-ink-500 p-0.5">
+            {FA_MODES.map((m) => (
+              <button
+                key={m.value}
+                type="button"
+                role="radio"
+                aria-checked={faMode === m.value}
+                title={m.hint}
+                onClick={() => setFaMode(m.value)}
+                className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
+                  faMode === m.value ? "bg-ink-600 text-chalk-100" : "text-chalk-500 hover:text-chalk-300"
+                }`}
+              >
+                {m.label}
+              </button>
+            ))}
           </div>
-          {give.length ? (
-            <button
-              type="button"
-              onClick={() => setGive([])}
-              className="rounded-md border border-ink-500 px-2.5 py-1 text-xs text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent"
-            >
-              Clear the trade
-            </button>
-          ) : null}
         </div>
-      </Panel>
+      </div>
 
       {overridesApi.activeCount ? (
         // AN OVERRIDDEN BOARD RENDERS EXACTLY LIKE A REAL ONE, and the overrides
@@ -558,104 +543,193 @@ export function TradeAnalyzer({
         </div>
       ) : null}
 
-      {!hasTrade ? (
-        <Panel>
-          <EmptyState>
-            {teamB
-              ? "Tick at least one player to see what the trade does."
-              : "Pick a trade partner, then tick the players each side gives up."}
-          </EmptyState>
-        </Panel>
+      {view === "finder" ? (
+        <TradeFinder
+          teams={teams}
+          label={label}
+          defaultSender={teamA}
+          slots={slots}
+          positionsOf={positionsOf}
+          freeAgents={freeAgents}
+          averages={averages}
+          playoffAverages={playoffAverages}
+          projected={projected}
+          weeks={openWeeks}
+          playoffWeeks={playoffWeeks}
+          lineupsFor={lineupsFor}
+          streamersFor={streamersFor}
+          teamStates={teamStates}
+          streamingOn={faMode !== "none"}
+          nameOf={nameOf}
+          positionOf={positionOf}
+          canLink={canLink}
+          ready={ready}
+          onOpen={(sender, partner, giveIds, getIds) => {
+            setA(sender);
+            setB(partner);
+            setGive([...giveIds, ...getIds]);
+            setViewParam("");
+            window.scrollTo({ top: 0 });
+          }}
+        />
       ) : (
         <>
-          <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
-            {sides.map((team) => {
-              const rows = rowsFor(team);
-              const sum = (list: typeof rows) =>
-                list.reduce((s, r) => s + ((r.after ?? 0) - (r.before ?? 0)), 0);
-              const reg = sum(rows.filter((r) => !r.playoff));
-              const post = sum(rows.filter((r) => r.playoff));
-              const b = odds?.[0]?.get(team.rosterId);
-              const a = odds?.[1]?.get(team.rosterId);
-              const gets = team.rosterId === teamA.rosterId ? fromB : fromA;
-              const sends = team.rosterId === teamA.rosterId ? fromA : fromB;
-              return (
-                <Panel key={team.rosterId}>
-                  <PanelHeader title={label(team)} meta={fmt.record(team.wins, team.losses, team.ties)} />
-                  <div className="space-y-4 p-4 sm:p-5">
-                    <div className="grid grid-cols-2 gap-3 text-[13px]">
-                      <TradeSide title="Gets" ids={gets} nameOf={nameOf} positionOf={positionOf} canLink={canLink} />
-                      <TradeSide title="Gives" ids={sends} nameOf={nameOf} positionOf={positionOf} canLink={canLink} />
-                    </div>
-                    <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                      {ready ? (
-                        <>
-                          <Stat label="Regular season" value={<Delta n={reg} />} sub="projected pts" />
-                          <Stat label="Playoffs" value={<Delta n={post} />} sub={`wks ${format.playoffWeekStart}–${format.finalWeek}`} />
-                          <Stat label="Combined" value={<Delta n={reg + post} />} sub="projected pts" />
-                        </>
-                      ) : (
-                        Array.from({ length: 3 }, (_, i) => <Skeleton key={i} className="h-[74px] w-full rounded-lg" />)
-                      )}
-                    </div>
-                    <OddsTable before={b} after={a} loading={!odds && regularLeft} available={regularLeft} />
-                  </div>
-                </Panel>
-              );
-            })}
-          </div>
-
-          {averageLineups && averages ? (
-            <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
-              {sides.map((team) => {
-                const b = averageLineups.before.get(team.rosterId);
-                const a = averageLineups.after.get(team.rosterId);
-                if (!b || !a) return null;
-                const mine = team.rosterId === teamA.rosterId;
-                return (
-                  <Panel key={team.rosterId}>
-                    <PanelHeader
-                      title={`${label(team)} · average lineup`}
-                      meta={
-                        <>
-                          {b.total.toFixed(1)} → {a.total.toFixed(1)} <Delta n={a.total - b.total} />
-                        </>
-                      }
-                      legend="Best lineup from each player's projection per game over the rest of the season, bye weeks left out."
-                    />
-                    <div className="pb-4">
-                      <LineupCompare
-                        before={b}
-                        after={a}
-                        benchBefore={benchOf(rostersBefore.get(team.rosterId) ?? [], b, averages)}
-                        benchAfter={benchOf(rostersAfter.get(team.rosterId) ?? [], a, averages)}
-                        incoming={new Set(mine ? fromB : fromA)}
-                        outgoing={new Set(mine ? fromA : fromB)}
-                        overridden={overriddenAny}
-                        onBye={NO_BYES}
-                        nameOf={nameOf}
-                        positionOf={positionOf}
-                        canLink={canLink}
-                      />
-                      <LineupLegend byes={false} />
-                    </div>
-                  </Panel>
-                );
-              })}
-            </div>
-          ) : null}
-
-          {sides.map((team) => (
-            <WeekTable
-              key={team.rosterId}
-              team={team}
-              label={label}
-              rows={rowsFor(team)}
-              loading={!ready}
-              onOpen={(week) => setDetail({ rosterId: team.rosterId, week })}
-              regularSeasonWeeks={format.regularSeasonWeeks}
+          <Panel>
+            <PanelHeader
+              title="The trade"
+              meta={hasTrade ? `${fromA.length} for ${fromB.length}` : undefined}
+              legend="Tick the players each side gives up. Average is each player's projection per remaining week."
             />
-          ))}
+            <div className="grid gap-px bg-ink-600 sm:grid-cols-2">
+              {[
+                { team: teamA, set: setA, other: teamB, picked: fromA, which: "a" as const },
+                { team: teamB, set: setB, other: teamA, picked: fromB, which: "b" as const },
+              ].map(({ team, set, other, picked, which }) => (
+                <div key={which} className="min-w-0 bg-ink-850 p-3 sm:p-4">
+                  <select
+                    value={team?.ownerSlug ?? ""}
+                    onChange={(e) => set(e.target.value)}
+                    aria-label={which === "a" ? "First team" : "Second team"}
+                    className="mb-3 w-full rounded-lg border border-ink-500 bg-ink-800 px-3 py-2 text-base text-chalk-100 sm:text-sm"
+                  >
+                    {which === "b" && !team ? <option value="">Pick a trade partner…</option> : null}
+                    {teams
+                      .filter((t) => t.rosterId !== other?.rosterId)
+                      .map((t) => (
+                        <option key={t.rosterId} value={t.ownerSlug}>
+                          {label(t)}
+                        </option>
+                      ))}
+                  </select>
+                  {team ? (
+                    <RosterPicker
+                      team={team}
+                      picked={picked}
+                      onToggle={toggle}
+                      nameOf={nameOf}
+                      positionOf={positionOf}
+                      nflTeamOf={nflTeamOf}
+                      average={(id) => averageOf(id, openWeeks, projected)}
+                      loading={!ready}
+                    />
+                  ) : (
+                    <EmptyState>Pick a team to trade with.</EmptyState>
+                  )}
+                </div>
+              ))}
+            </div>
+            {give.length ? (
+              <div className="flex justify-end border-t border-ink-600 px-4 py-2 sm:px-5">
+                <button
+                  type="button"
+                  onClick={() => setGive([])}
+                  className="rounded-md border border-ink-500 px-2.5 py-1 text-xs text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent"
+                >
+                  Clear the trade
+                </button>
+              </div>
+            ) : null}
+          </Panel>
+
+
+          {!hasTrade ? (
+            <Panel>
+              <EmptyState>
+                {teamB
+                  ? "Tick at least one player to see what the trade does."
+                  : "Pick a trade partner, then tick the players each side gives up."}
+              </EmptyState>
+            </Panel>
+          ) : (
+            <>
+              <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
+                {sides.map((team) => {
+                  const rows = rowsFor(team);
+                  const sum = (list: typeof rows) =>
+                    list.reduce((s, r) => s + ((r.after ?? 0) - (r.before ?? 0)), 0);
+                  const reg = sum(rows.filter((r) => !r.playoff));
+                  const post = sum(rows.filter((r) => r.playoff));
+                  const b = odds?.[0]?.get(team.rosterId);
+                  const a = odds?.[1]?.get(team.rosterId);
+                  const gets = team.rosterId === teamA.rosterId ? fromB : fromA;
+                  const sends = team.rosterId === teamA.rosterId ? fromA : fromB;
+                  return (
+                    <Panel key={team.rosterId}>
+                      <PanelHeader title={label(team)} meta={fmt.record(team.wins, team.losses, team.ties)} />
+                      <div className="space-y-4 p-4 sm:p-5">
+                        <div className="grid grid-cols-2 gap-3 text-[13px]">
+                          <TradeSide title="Gets" ids={gets} nameOf={nameOf} positionOf={positionOf} canLink={canLink} />
+                          <TradeSide title="Gives" ids={sends} nameOf={nameOf} positionOf={positionOf} canLink={canLink} />
+                        </div>
+                        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                          {ready ? (
+                            <>
+                              <Stat label="Regular season" value={<Delta n={reg} />} sub="projected pts" />
+                              <Stat label="Playoffs" value={<Delta n={post} />} sub={`wks ${format.playoffWeekStart}–${format.finalWeek}`} />
+                              <Stat label="Combined" value={<Delta n={reg + post} />} sub="projected pts" />
+                            </>
+                          ) : (
+                            Array.from({ length: 3 }, (_, i) => <Skeleton key={i} className="h-[74px] w-full rounded-lg" />)
+                          )}
+                        </div>
+                        <OddsTable before={b} after={a} loading={!odds && regularLeft} available={regularLeft} />
+                      </div>
+                    </Panel>
+                  );
+                })}
+              </div>
+
+              {averageLineups && averages ? (
+                <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
+                  {sides.map((team) => {
+                    const b = averageLineups.before.get(team.rosterId);
+                    const a = averageLineups.after.get(team.rosterId);
+                    if (!b || !a) return null;
+                    const mine = team.rosterId === teamA.rosterId;
+                    return (
+                      <Panel key={team.rosterId}>
+                        <PanelHeader
+                          title={`${label(team)} · average lineup`}
+                          meta={
+                            <>
+                              {b.total.toFixed(1)} → {a.total.toFixed(1)} <Delta n={a.total - b.total} />
+                            </>
+                          }
+                          legend="Best lineup from each player's projection per game over the rest of the season, bye weeks left out."
+                        />
+                        <div className="pb-4">
+                          <LineupCompare
+                            before={b}
+                            after={a}
+                            benchBefore={benchOf(rostersBefore.get(team.rosterId) ?? [], b, averages)}
+                            benchAfter={benchOf(rostersAfter.get(team.rosterId) ?? [], a, averages)}
+                            incoming={new Set(mine ? fromB : fromA)}
+                            outgoing={new Set(mine ? fromA : fromB)}
+                            overridden={overriddenAny}
+                            onBye={NO_BYES}
+                            nameOf={nameOf}
+                            positionOf={positionOf}
+                            canLink={canLink}
+                          />
+                          <LineupLegend byes={false} />
+                        </div>
+                      </Panel>
+                    );
+                  })}
+                </div>
+              ) : null}
+
+              {sides.map((team) => (
+                <WeekTable
+                  key={team.rosterId}
+                  team={team}
+                  label={label}
+                  rows={rowsFor(team)}
+                  loading={!ready}
+                  onOpen={(week) => setDetail({ rosterId: team.rosterId, week })}
+                  regularSeasonWeeks={format.regularSeasonWeeks}
+                />
+              ))}
         </>
       )}
 
@@ -667,6 +741,8 @@ export function TradeAnalyzer({
         involved={new Set(hasTrade ? [teamA.rosterId, teamB!.rosterId] : [])}
         available={regularLeft}
       />
+        </>
+      )}
 
       <div id="overrides" className="scroll-mt-20">
         <ProjectionOverridesPanel
@@ -681,27 +757,29 @@ export function TradeAnalyzer({
         />
       </div>
 
-      <p className="max-w-3xl text-[11px] leading-relaxed text-chalk-600">
-        Every lineup is the best one each team could field that week, using Sleeper&rsquo;s weekly
-        projections scored with this league&rsquo;s settings — never the lineup a team actually
-        set. {FA_MODES.find((m) => m.value === faMode)!.note}{" "}
-        {faMode !== "none"
-          ? `A free agent only starts where he projects at least ${Math.round(FREE_AGENT_MARGIN * 100)}% more than the rostered player he would replace. `
-          : null}
-        Win chances treat a
-        week&rsquo;s score as a normal curve around its projection, spread the way Sleeper&rsquo;s own
-        win probability is; the playoff odds play out the rest of the season{" "}
-        {SIMS.toLocaleString()} times on the same draws before and after the trade, so the
-        difference is the trade and not luck. Seeding is record then points for,{" "}
-        {byes > 0 ? `the top ${byes} take first-round byes, ` : ""}and a tied playoff game goes to the
-        higher seed.
-        {liveWeek
-          ? ` Week ${liveWeek} is already under way, so it counts at its live odds and the trade starts from week ${firstOpen}.`
-          : null}
-        {ready && !pool.pool
-          ? " Sleeper's player list could not be reached, so free agents are left out this time."
-          : null}
-      </p>
+      {view === "analyzer" ? (
+        <p className="max-w-3xl text-[11px] leading-relaxed text-chalk-600">
+          Every lineup is the best one each team could field that week, using Sleeper&rsquo;s weekly
+          projections scored with this league&rsquo;s settings — never the lineup a team actually
+          set. {FA_MODES.find((m) => m.value === faMode)!.note}{" "}
+          {faMode !== "none"
+            ? `A free agent only starts where he projects at least ${Math.round(FREE_AGENT_MARGIN * 100)}% more than the rostered player he would replace. `
+            : null}
+          Win chances treat a
+          week&rsquo;s score as a normal curve around its projection, spread the way Sleeper&rsquo;s own
+          win probability is; the playoff odds play out the rest of the season{" "}
+          {SIMS.toLocaleString()} times on the same draws before and after the trade, so the
+          difference is the trade and not luck. Seeding is record then points for,{" "}
+          {byes > 0 ? `the top ${byes} take first-round byes, ` : ""}and a tied playoff game goes to the
+          higher seed.
+          {liveWeek
+            ? ` Week ${liveWeek} is already under way, so it counts at its live odds and the trade starts from week ${firstOpen}.`
+            : null}
+          {ready && !pool.pool
+            ? " Sleeper's player list could not be reached, so free agents are left out this time."
+            : null}
+        </p>
+      ) : null}
 
       {detailData ? (
         <TradeWeekSheet
@@ -713,7 +791,7 @@ export function TradeAnalyzer({
           onClose={() => setDetail(null)}
         />
       ) : null}
-    </>
+    </PlayerCardProvider>
   );
 }
 
@@ -747,6 +825,7 @@ function RosterPicker({
   average: (id: string) => number | null;
   loading: boolean;
 }) {
+  const card = usePlayerCard();
   const sorted = [...team.players].sort(
     (x, y) =>
       positionRank(positionOf(x)) - positionRank(positionOf(y)) ||
@@ -775,6 +854,22 @@ function RosterPicker({
                 {positionOf(id) ?? "—"}
               </span>
               <span className="min-w-0 flex-1 truncate">{nameOf(id)}</span>
+              {card ? (
+                <button
+                  type="button"
+                  aria-label={`${nameOf(id)} player card`}
+                  title="Player card"
+                  onClick={(e) => {
+                    // Inside a <label>: without this the click also ticks the box.
+                    e.preventDefault();
+                    e.stopPropagation();
+                    card.open(id);
+                  }}
+                  className="shrink-0 rounded px-1 text-[11px] text-chalk-600 transition-colors hover:text-accent"
+                >
+                  ⓘ
+                </button>
+              ) : null}
               <span className="w-8 shrink-0 text-[10px] text-chalk-600">{nflTeamOf(id) ?? ""}</span>
               <span className="w-10 shrink-0 text-right tabular text-[12px] text-chalk-500">
                 {loading ? <Skeleton className="ml-auto h-3 w-7" /> : avg != null ? avg.toFixed(1) : "—"}
@@ -1097,6 +1192,28 @@ const FA_MODES: Array<{ value: FaMode; label: string; hint: string; note: string
     note: "Every team may start free agents, assuming a bench spot can be cleared — where two want the same player, the worse record claims him first.",
   },
 ];
+
+/** Per-game projection over `weeks`, byes left out. See `averages` in the component. */
+function averageOver(
+  weeks: readonly number[],
+  projected: Record<number, Record<string, number>>,
+  nflTeamOf: (id: string) => string | null,
+  byeTeams: Map<number, Set<string>> | null,
+): Record<string, number> | null {
+  const known = weeks.filter((w) => projected[w]);
+  if (!known.length) return null;
+  const ids = new Set<string>();
+  for (const w of known) for (const id of Object.keys(projected[w])) ids.add(id);
+  const out: Record<string, number> = {};
+  for (const id of ids) {
+    // A team defence's id IS its abbreviation.
+    const nfl = nflTeamOf(id) ?? (/^[A-Z]{2,4}$/.test(id) ? id : null);
+    const games = known.filter((w) => (byeTeams && nfl ? !byeTeams.get(w)?.has(nfl) : projected[w][id] != null));
+    if (!games.length) continue;
+    out[id] = games.reduce((sum, w) => sum + (projected[w][id] ?? 0), 0) / games.length;
+  }
+  return out;
+}
 
 /** Everyone on the roster who is not starting, best projection first. */
 function benchOf(

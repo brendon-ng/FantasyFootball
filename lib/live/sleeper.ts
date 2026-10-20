@@ -173,7 +173,7 @@ function lineupOf(
  */
 const SUMMARY_KEYS = new Set(["pts_ppr", "pts_std", "pts_half_ppr"]);
 
-function scoreLine(
+export function scoreLine(
   line: Record<string, number | null>,
   scoring: Record<string, number>,
 ): number {
@@ -195,7 +195,7 @@ function scoreLine(
  */
 const scoringCache = new Map<string, Promise<Record<string, number> | null>>();
 
-function leagueScoring(leagueId: string): Promise<Record<string, number> | null> {
+export function leagueScoring(leagueId: string): Promise<Record<string, number> | null> {
   const hit = scoringCache.get(leagueId);
   if (hit) return hit;
   const p = json<{ scoring_settings?: Record<string, number> } | null>(

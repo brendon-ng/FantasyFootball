@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import { usePlayerCard } from "@/components/player-card";
 import { Sheet } from "@/components/sheet";
 import type { Lineup, LineupSlot } from "@/lib/lineup";
 import { winChance } from "@/lib/trade-sim";
@@ -511,7 +512,25 @@ const slotLabel = (s: string) => SLOT_LABELS[s] ?? s;
 const pct = (p: number) => `${(p * 100).toFixed(1)}%`;
 const signed = (n: number) => `${n > 0 ? "+" : n < 0 ? "−" : "±"}${Math.abs(n).toFixed(1)}`;
 
+/**
+ * A player's name. Inside a `PlayerCardProvider` it opens his card; outside one
+ * it links to his page where one exists. `text-decoration: inherit` because a
+ * button is inline-block, and a struck-through row would otherwise lose the
+ * strike on the one word that matters.
+ */
 export function PlayerName({ id, name, canLink }: { id: string; name: string; canLink: Set<string> }) {
+  const card = usePlayerCard();
+  if (card) {
+    return (
+      <button
+        type="button"
+        onClick={() => card.open(id)}
+        className="min-w-0 truncate text-left [text-decoration:inherit] transition-colors hover:text-accent"
+      >
+        {name}
+      </button>
+    );
+  }
   return canLink.has(id) ? (
     <Link href={`/players/${id}/`} className="min-w-0 truncate transition-colors hover:text-accent">
       {name}

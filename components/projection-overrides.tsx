@@ -5,6 +5,10 @@ import { useMemo, useState } from "react";
 import { EmptyState, Panel, PanelHeader } from "@/components/ui";
 import { normalise } from "@/lib/player-match";
 import type { OverridesApi } from "@/lib/projection-overrides";
+import { PlayerName } from "@/components/trade-week-sheet";
+
+// The card opens from the name; a bare link out would leave the page.
+const NO_LINKS: Set<string> = new Set();
 
 /**
  * Hand-set weekly projections for any player — on a roster or not, in the trade
@@ -157,7 +161,9 @@ function OverrideRow({
     <li className="px-4 py-3 sm:px-5">
       <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-2">
         <div className="min-w-0 flex-1">
-          <div className="truncate text-sm font-semibold text-chalk-200">{label}</div>
+          <div className="truncate text-sm font-semibold text-chalk-200">
+            <PlayerName id={id} name={label} canLink={NO_LINKS} />
+          </div>
           <div className="text-[11px] text-chalk-600">{meta}</div>
         </div>
         <label className="flex items-center gap-1.5 text-[11px] text-chalk-500">

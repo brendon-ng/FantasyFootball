@@ -1839,6 +1839,153 @@ Not modelled: a team pushed over the roster limit is not made to drop anyone (th
 player it would cut is the one who never starts), three-team trades, and a
 season already in its playoffs.
 
+### The trade finder
+
+A second tab on the same page (`?view=finder`): the best trades one team could
+propose, up to FOUR PLAYERS A SIDE in any combination, uneven ones included.
+Filters: the sending team (required), and optionally a trade partner, players
+that must be sold, players that must be bought — a required buy fixes the
+partner, since it can only come from one roster — and a minimum and maximum
+number of players to give and to get, 1 to 4, required players counted. Narrow
+limits also shrink the search: one-for-two-or-three is ~7,000 combinations
+against ~278,000 for the full range.
+
+BEST MEANS REST-OF-SEASON POINTS for the sender, every remaining week including
+the playoffs. "WOULD ACCEPT" MEANS THE RECEIVING TEAM DOES NOT GET WORSE on
+EITHER of two readings: its rest-of-season points, or its playoff-weeks points,
+each within a tolerance in points per week (0 by default). The playoff clause
+admits a contender giving up regular-season points for a stronger playoff
+lineup. Each result shows BOTH SIDES IN BOTH WINDOWS — rest of season (every
+remaining week, playoffs included, the ranking's figure) and the playoff weeks
+alone. Worth knowing: with Den Ops in week 7 nearly every top result passed on
+that clause alone — the receiver losing 15-30 rest-of-season points while its
+playoff lineup held level — so the results say which clause each one passed on.
+
+THREE PASSES: two screening stages in `lib/trade-finder.ts`, then the analyzer's
+own model. Up to 4-for-4 against every partner is ~226,000 combinations for Den
+Ops and ~278,000 for Masterbatters, and the exact model is milliseconds a trade.
+
+1. AVERAGE LINEUPS — per-game projections, byes excluded, the best few free
+   agents standing by at the 15% margin — a cheap cut at one point a game below
+   the line, for BOTH sides.
+2. EVERY WEEK with the fast lineup, byes included but no free-agent contention,
+   at two points of total below the line, again for both sides. This ranks the
+   survivors; the best 150 go on.
+3. The component runs those through `lineupsFor`, the same week-by-week lineups
+   the analyzer draws. The ranking and the acceptance test both come from it, so
+   a trade's number in the finder is its number once opened in the analyzer.
+
+THE WEEKLY STAGE EXISTS BECAUSE THE AVERAGE ONE WAS ASYMMETRIC. It screened the
+receiver with a margin and the sender with none, and an average lineup cannot
+see depth — two-for-one value is mostly bye cover. So a Brendon-Aidan trade
+turned up searching from Brendon's side and not from Aidan's: the average stage
+put Aidan's side at −0.60 a game where the weekly model said −0.11. Checked
+since by searching from one side and re-searching each mutual-gain trade from the
+other: every miss left is a trade below the other team's 150 best — roster 7 had
+79 acceptable deals with Aidan, its 20th worth +34.4, and the "missed" ones
++0.1 to +4.3. Measured: 1.2s to screen, 0.4s for the exact pass.
+
+Results show the top 20 with a "Show all" for the rest.
+
+FILTERS AND SORT ON ALL FOUR MEASURES — your rest of season, your playoffs,
+their rest of season, their playoffs: a floor on any of them (blank is none;
+yours defaults to 0, which is what "worth proposing" meant before), and a sort on
+any, either way. BOTH GO INTO THE SEARCH, NOT JUST THE LIST. The exact pass only
+sees 300 trades, so the screen has to rank survivors by the reader's own sort
+and drop anything under a floor — the 300 best trades for you are not the 300
+best for them. Checked with the case that prompted it, "I gain at least 20,
+sorted by their gain": 72 results, every one at 20 or more and in order, and
+nothing from an old-style search ranked by your gain belonged in the new top 20
+and was missing. Changing a floor or the sort after a search re-filters and
+re-sorts the list at once, and says to search again for a complete one.
+
+WHICH TESTS COUNT IS A TOGGLE (`AcceptMode`): either (the default), both, rest of
+season only, or playoffs only, applied identically by every stage through one
+`accepts()`. With no playoff weeks left the playoff test falls back to the
+season one, or "Playoffs" would accept nothing.
+
+THE EXACT PASS TAKES 300, NOT 150. At 150 the broad mode starved: "Either" found
+32 while "Rest of season" — every result of which "Either" should also show —
+found 104, because the screen's margin let through high-gain trades that
+narrowly failed and they used up the exact checks. At 300, checked by running
+all four modes and asking whether any trade that qualifies under a narrower one
+and out-gains a broader one's 20th result is missing from it: none. Tightening
+the weekly margin to half a point instead made it worse (one top-20 miss).
+About 1.9s a search.
+
+WHO GETS CONSIDERED: each roster's players worth more than a waiver replacement
+at their position, capped at eight a side, plus anyone required. A player below
+replacement adds nothing to the other lineup, so offering him only multiplies the
+search. A trade that is a smaller trade plus passengers — a throw-in who never
+starts — is dropped when the smaller one is at least as good for both sides.
+
+THE FAST LINEUP IS GREEDY, AND ONLY WHERE GREEDY IS EXACT: best player first,
+into the most restrictive open slot he fits. That is optimal when slot types nest
+(QB/RB/WR/TE inside FLEX inside SUPER_FLEX) AND each player has one position. A
+random check against the Hungarian optimiser found the exception the second
+condition guards — a DEF/WR dropped into DEF when WR was worth more — so any
+multi-position player, or overlapping flexes, falls back to `optimalLineup`.
+Zero mismatches across 1,200 random rosters after that.
+
+It runs IN SLICES of 30ms with a progress bar rather than in a worker, so it
+needs no bundler configuration; a new search cancels a running one. It runs on
+demand, not as filters change, and says so when the filters have moved since.
+It follows the free-agent setting — now in a bar shared by both tabs — and the
+projection overrides, and "Analyze" loads a result into the analyzer tab.
+
+### The player card
+
+Any player name on the analyzer or the finder opens a read-only copy of
+Sleeper's own player card (`components/player-card.tsx`): headshot over the team
+colour, bio, position and overall rank, rostered and started share, a game log
+per season with position-specific columns, the WHOLE news feed rather than the
+latest item, and the team's depth chart. The feed opens five stories deep —
+the card is a glance — and "Show more" steps to 50, then 100 at a time. No star or drop buttons.
+
+EVERY ENDPOINT IS THE ONE SLEEPER'S CARD CALLS, found in its bundle, and each was
+checked for `access-control-allow-origin: *` before use — `lib/live/player-card.ts`
+lists them. The bio, game logs, projections, research and depth chart are REST
+on `api.sleeper.com`; the news is the GraphQL `get_player_news`, which needs no
+login and answers the preflight for a JSON POST from any origin. It has no
+offset, only a `limit` — `limit: 1000` returned 981 items for Mahomes, back to
+2017 — so "Show more" re-asks with a bigger limit and shows the previous page,
+already cached, while it loads.
+
+THE RANKS ARE THE SEASON LINE'S `pos_rank_ppr` / `rank_ppr` — "#16 QB, #39
+overall" for Mahomes matched to the digit. Rostered and started come from
+`/players/nfl/research/regular/<season>/<week>` for the live week.
+
+POINTS ARE SCORED THE LEAGUE'S WAY, `scoreLine` over the stat line with
+`leagueScoring` — both now exported from `lib/live/sleeper.ts` — exactly as the
+projections on the trade pages are. Checked against Sleeper's own card for
+Mahomes 2026: every PROJ and FPTS cell in weeks 1-8 matched (17.71 / 10.48 in
+week 6). Past seasons are scored with this season's settings.
+
+A week with neither a stat line nor a projection is a BYE; a week with a
+projection and no `gp` has not been played. Snap share is `off_snp /
+tm_off_snp`.
+
+ON A WIDE SCREEN THE CARD ITSELF DOES NOT SCROLL. It is a fixed `92dvh`, and the
+game log, the news and the depth chart each scroll on their own, the right
+column split about 3:2 so the depth chart is always on screen. The first cut
+let the whole card scroll with the news inside it, which was two scrollbars
+side by side; the second let only the card scroll, which put the depth chart
+several hundred news items down. A phone stacks the three, where fixed-height
+boxes would be cramped, so there the card scrolls as one. The game log's
+headings are sticky inside their own scroll.
+
+OPENED THROUGH CONTEXT, not props: `PlayerCardProvider` wraps both tabs and
+`PlayerName` asks it to open a card, so no surface threads a callback to its
+rows. Outside a provider `PlayerName` is the plain link it always was. The
+roster picker's names are checkbox labels, so it gets a separate ⓘ button that
+stops the click reaching the checkbox. The card sits at `z-[60]`, above the
+week sheet it is often opened from, and a depth-chart name opens that player's
+card in its place.
+
+`lib/nfl-teams.ts` holds each team's nickname and header colour — the
+RECOGNISABLE colour rather than always the primary, since near-black navies and
+browns vanish behind white text on this surface.
+
 ## Default all-time ordering
 
 `byAllTimeRank()` in `lib/ranking.ts` is the one definition: titles, wins, average
