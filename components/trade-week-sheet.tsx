@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import { Sheet } from "@/components/sheet";
 import type { Lineup, LineupSlot } from "@/lib/lineup";
@@ -25,8 +26,15 @@ export interface WeekDetail {
   benchAfter: Array<{ id: string; points: number }>;
   /** Players whose projection this week is the reader's override, not Sleeper's. */
   overridden: Set<string>;
-  /** Players whose NFL team is idle this week. */
+  /** Players whose NFL team is idle this week — this team's and the opponent's. */
   onBye: Set<string>;
+  /** The opponent's lineup AFTER the trade, shown on request. Null in the playoffs. */
+  oppLineup: {
+    lineup: Lineup;
+    bench: Array<{ id: string; points: number }>;
+    /** What the opponent receives, when it is the other side of the trade. */
+    incoming: Set<string>;
+  } | null;
 }
 
 /**
@@ -67,7 +75,14 @@ export function TradeWeekSheet({
     benchAfter,
     overridden,
     onBye,
+    oppLineup,
   } = detail;
+  /**
+   * COLLAPSED BY DEFAULT. The sheet is about this team's week; the opponent's
+   * side is context someone asks for, and opening with two full lineups would
+   * push the one that changed below the fold on a phone.
+   */
+  const [showOpp, setShowOpp] = useState(false);
   const winBefore = oppBefore != null ? winChance(before.total, oppBefore) : null;
   const winAfter = oppAfter != null ? winChance(after.total, oppAfter) : null;
 
@@ -159,6 +174,37 @@ export function TradeWeekSheet({
               positionOf={positionOf}
               canLink={canLink}
             />
+            {oppLineup && opponent ? (
+              <div className="mt-3 border-t border-ink-600">
+                <button
+                  type="button"
+                  onClick={() => setShowOpp((v) => !v)}
+                  aria-expanded={showOpp}
+                  className="flex w-full items-center justify-between px-4 py-2.5 text-left text-[13px] text-chalk-400 transition-colors hover:bg-ink-700 hover:text-chalk-200 sm:px-5"
+                >
+                  <span>
+                    {showOpp ? "Hide" : "Show"}{" "}
+                    <span data-owner={opponent.ownerSlug}>{label(opponent)}</span>&rsquo;s lineup
+                    <span className="text-chalk-600"> · after the trade</span>
+                  </span>
+                  <span className="tabular text-chalk-500">
+                    {oppLineup.lineup.total.toFixed(1)} <span aria-hidden>{showOpp ? "▴" : "▾"}</span>
+                  </span>
+                </button>
+                {showOpp ? (
+                  <LineupSingle
+                    lineup={oppLineup.lineup}
+                    bench={oppLineup.bench}
+                    incoming={oppLineup.incoming}
+                    overridden={overridden}
+                    onBye={onBye}
+                    nameOf={nameOf}
+                    positionOf={positionOf}
+                    canLink={canLink}
+                  />
+                ) : null}
+              </div>
+            ) : null}
             <LineupLegend />
           </div>
         </>
@@ -300,6 +346,65 @@ export function LineupCompare({
         </>
       ) : null}
     </>
+  );
+}
+
+/**
+ * One lineup and its bench, for the opponent's side of a week — after the trade
+ * only, so a single column. Same `Cell`, so the markers mean the same thing.
+ */
+function LineupSingle({
+  lineup,
+  bench,
+  incoming,
+  overridden,
+  onBye,
+  nameOf,
+  positionOf,
+  canLink,
+}: {
+  lineup: Lineup;
+  bench: Array<{ id: string; points: number }>;
+  incoming: Set<string>;
+  overridden: Set<string>;
+  onBye: Set<string>;
+  nameOf: (id: string) => string;
+  positionOf: (id: string) => string | null;
+  canLink: Set<string>;
+}) {
+  const rows: Array<{ label: string; slot: LineupSlot }> = [
+    ...lineup.slots.map((s) => ({ label: slotLabel(s.slot), slot: s })),
+    ...bench.map((p) => ({
+      label: "BN",
+      slot: { slot: "BN", id: p.id, points: p.points, freeAgent: false } as LineupSlot,
+    })),
+  ];
+  return (
+    <ul className="divide-y divide-ink-700 border-t border-ink-700">
+      {rows.map((r, i) => (
+        <li
+          key={i}
+          className={`flex items-center gap-2 px-4 py-1.5 text-[13px] sm:px-5 ${
+            i === lineup.slots.length ? "border-t border-ink-500" : ""
+          }`}
+        >
+          <span className="w-14 shrink-0 text-[10px] font-bold uppercase tracking-wide text-chalk-600">{r.label}</span>
+          <Cell
+            slot={r.slot}
+            traded={Boolean(r.slot.id && incoming.has(r.slot.id))}
+            nameOf={nameOf}
+            positionOf={positionOf}
+            canLink={canLink}
+            overridden={overridden}
+            onBye={onBye}
+          />
+        </li>
+      ))}
+      <li className="flex items-center gap-2 px-4 py-2 text-[13px] font-semibold sm:px-5">
+        <span className="w-14 shrink-0 text-[10px] uppercase tracking-wide text-chalk-500">Total</span>
+        <span className="min-w-0 flex-1 text-right tabular text-chalk-100">{lineup.total.toFixed(2)}</span>
+      </li>
+    </ul>
   );
 }
 

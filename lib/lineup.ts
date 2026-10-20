@@ -71,13 +71,34 @@ export interface Lineup {
 }
 
 /**
- * A free agent has to be WORTH the pickup: on a tie the rostered player starts.
- * Small enough never to outweigh a real hundredth of a point.
+ * On an exact tie the rostered player starts. Small enough never to outweigh a
+ * real hundredth of a point.
  */
 const FA_PENALTY = 1e-6;
 const BLOCKED = 1e9;
 
-export function optimalLineup(candidates: readonly Candidate[], slots: readonly string[]): Lineup {
+export interface LineupOptions {
+  /**
+   * How much better a free agent must project than the rostered player he would
+   * displace before he is worth picking up — 0.15 means 15%. 0 starts any free
+   * agent who is better at all.
+   *
+   * APPLIED BY DISCOUNTING THE FREE AGENT WHILE CHOOSING, not by comparing slot
+   * against slot afterwards. Valued at `points / (1 + margin)`, he wins a start
+   * only where his real projection clears the margin over whoever actually loses
+   * one — which, once the optimiser reshuffles the flex, need not be the player
+   * in the slot he ends up in. The lineup's total still counts his real points.
+   * An empty slot takes him whatever the margin, since anything beats nobody.
+   */
+  freeAgentMargin?: number;
+}
+
+export function optimalLineup(
+  candidates: readonly Candidate[],
+  slots: readonly string[],
+  options: LineupOptions = {},
+): Lineup {
+  const faScale = 1 / (1 + Math.max(0, options.freeAgentMargin ?? 0));
   const n = slots.length;
   if (!n) return { slots: [], total: 0 };
   // One empty filler per slot, eligible everywhere and worth nothing, so the
@@ -89,7 +110,7 @@ export function optimalLineup(candidates: readonly Candidate[], slots: readonly 
     const c = candidates[j];
     const ok = SLOT_ELIGIBLE[slots[i]]?.some((p) => c.positions.includes(p));
     if (!ok) return BLOCKED;
-    return -c.points + (c.freeAgent ? FA_PENALTY : 0);
+    return c.freeAgent ? -c.points * faScale + FA_PENALTY : -c.points;
   };
 
   const assign = hungarian(n, m, cost);

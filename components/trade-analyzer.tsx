@@ -32,6 +32,7 @@ import {
   simulate,
   weekLineups,
   winChance,
+  FREE_AGENT_MARGIN,
   type Odds,
   type ScoreDist,
   type TeamState,
@@ -95,9 +96,9 @@ export function TradeAnalyzer({
   const [bParam, setB] = useUrlText("b");
   const [give, setGive] = useUrlList("give");
   const [faParam, setFaParam] = useUrlText("fa");
-  const faMode: FaMode = faParam === "none" || faParam === "all" ? faParam : "traders";
+  const faMode: FaMode = faParam === "none" || faParam === "traders" ? faParam : "all";
   // The default spells nothing, so an untouched page keeps a clean URL.
-  const setFaMode = (m: FaMode) => setFaParam(m === "traders" ? "" : m);
+  const setFaMode = (m: FaMode) => setFaParam(m === "all" ? "" : m);
 
   const creditOf = (t: LiveTeam) => (t.ownerSlugs.length ? t.ownerSlugs : [t.ownerSlug]);
   const teamA =
@@ -191,11 +192,11 @@ export function TradeAnalyzer({
   }, [pool.pool, teams]);
 
   /**
-   * WHO MAY PICK UP FREE AGENTS, the reader's choice. Assuming the whole league
-   * works the wire perfectly every week overstates every lineup, so the default
-   * is just the two sides of the trade — which answers "what is this worth to
-   * us, given we would fill a hole off waivers" without crediting every
-   * opponent with the same diligence.
+   * WHO MAY PICK UP FREE AGENTS, the reader's choice. The default is EVERYONE,
+   * opponents included — once a pickup has to clear `FREE_AGENT_MARGIN`, the
+   * league streams only where it obviously pays, which is a fair thing to expect
+   * of any manager. "Trading teams" isolates the two sides; "Rosters only" turns
+   * the wire off entirely.
    */
   // A string key, so the memo below depends on one primitive.
   const streamKey =
@@ -401,6 +402,10 @@ export function TradeAnalyzer({
     if (!team || !b || !a) return null;
     const playoff = detail.week > format.regularSeasonWeeks;
     const opp = playoff ? null : opponentOf(detail.week, detail.rosterId);
+    const oppLineup = opp != null ? after?.get(detail.week)?.get(opp) ?? null : null;
+    // The other side of the trade can be this week's opponent; its arrivals are marked too.
+    const oppIncoming =
+      opp === teamA?.rosterId ? fromB : opp === teamB?.rosterId && hasTrade ? fromA : [];
     return {
       week: detail.week,
       playoff,
@@ -414,8 +419,20 @@ export function TradeAnalyzer({
       outgoing: new Set(team.rosterId === teamA?.rosterId ? fromA : fromB),
       benchBefore: benchOf(rostersBefore.get(team.rosterId) ?? [], b, projected[detail.week]),
       benchAfter: benchOf(rostersAfter.get(team.rosterId) ?? [], a, projected[detail.week]),
+      oppLineup:
+        oppLineup && opp != null
+          ? {
+              lineup: oppLineup,
+              bench: benchOf(rostersAfter.get(opp) ?? [], oppLineup, projected[detail.week]),
+              incoming: new Set(oppIncoming),
+            }
+          : null,
       onBye: new Set(
-        [...(rostersBefore.get(team.rosterId) ?? []), ...(rostersAfter.get(team.rosterId) ?? [])].filter(
+        [
+          ...(rostersBefore.get(team.rosterId) ?? []),
+          ...(rostersAfter.get(team.rosterId) ?? []),
+          ...(opp != null ? rostersAfter.get(opp) ?? [] : []),
+        ].filter(
           (id) => {
             // A team defence's id IS its abbreviation.
             const nfl = nflTeamOf(id) ?? (/^[A-Z]{2,4}$/.test(id) ? id : null);
@@ -667,7 +684,11 @@ export function TradeAnalyzer({
       <p className="max-w-3xl text-[11px] leading-relaxed text-chalk-600">
         Every lineup is the best one each team could field that week, using Sleeper&rsquo;s weekly
         projections scored with this league&rsquo;s settings — never the lineup a team actually
-        set. {FA_MODES.find((m) => m.value === faMode)!.note} Win chances treat a
+        set. {FA_MODES.find((m) => m.value === faMode)!.note}{" "}
+        {faMode !== "none"
+          ? `A free agent only starts where he projects at least ${Math.round(FREE_AGENT_MARGIN * 100)}% more than the rostered player he would replace. `
+          : null}
+        Win chances treat a
         week&rsquo;s score as a normal curve around its projection, spread the way Sleeper&rsquo;s own
         win probability is; the playoff odds play out the rest of the season{" "}
         {SIMS.toLocaleString()} times on the same draws before and after the trade, so the

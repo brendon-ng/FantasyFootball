@@ -14,11 +14,12 @@
  * - FREE AGENTS ARE OPTIONAL, AND PER TEAM. A team allowed to stream may start
  *   anyone nobody rosters, so a trade that strips its only kicker costs the gap
  *   to the best kicker on waivers, not a whole kicker. Which teams stream is the
- *   caller's choice — assuming the whole league works the wire perfectly every
- *   week overstates every lineup, so the page defaults to just the two sides of
- *   the trade. Where several teams stream and want the same player, they claim
- *   in REVERSE STANDINGS ORDER, worst first, the way waivers usually run. Every
- *   pickup assumes a bench spot can be cleared.
+ *   caller's choice; the page defaults to everyone. A pickup also has to be
+ *   WORTH IT: a free agent starts only where
+ *   he projects at least `FREE_AGENT_MARGIN` (15%) more than the rostered player
+ *   he would displace. Where several teams stream and want the same player, they
+ *   claim in REVERSE STANDINGS ORDER, worst first, the way waivers usually run.
+ *   Every pickup assumes a bench spot can be cleared.
  *
  * - ONE SCORE MODEL, SLEEPER'S. A team's week is normal around its projection
  *   with a standard deviation of projection / √11 — exactly what
@@ -27,6 +28,15 @@
  */
 
 import { optimalLineup, SLOT_ELIGIBLE, type Candidate, type Lineup } from "./lineup.ts";
+
+/**
+ * A pickup has to be worth the trouble: a free agent starts only where he
+ * projects at least 15% more than the rostered player he would displace.
+ * Nobody burns a waiver claim and a roster spot for half a point, and a model
+ * that streams on any edge credits every team with more diligence than any
+ * league sees. See `LineupOptions.freeAgentMargin`.
+ */
+export const FREE_AGENT_MARGIN = 0.15;
 import { normalCdf } from "./win-probability.ts";
 
 export interface TeamState {
@@ -138,7 +148,7 @@ export function weekLineups(
         cands.push({ id, positions: positionsOf(id), points: pts(id), freeAgent: true });
       }
     }
-    const lineup = optimalLineup(cands, slots);
+    const lineup = optimalLineup(cands, slots, { freeAgentMargin: FREE_AGENT_MARGIN });
     for (const s of lineup.slots) if (s.freeAgent && s.id) claimed.add(s.id);
     out.set(rosterId, lineup);
   }

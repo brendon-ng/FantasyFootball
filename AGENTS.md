@@ -1730,13 +1730,25 @@ nesting. A fullback is an RB, and Sleeper's `fantasy_positions` wins where known
 Travis Hunter fills a WR slot.
 
 FREE AGENTS ARE A SETTING, NOT AN ASSUMPTION: rosters only, the two trading
-teams, or everyone (`?fa=none|all`; the default spells nothing). A team allowed
-to stream may start anyone nobody rosters, so losing its only kicker costs the gap
-to the best kicker on waivers, not a whole kicker. The default is THE TRADING
-TEAMS ONLY — crediting every opponent with working the wire perfectly every week
-overstated every lineup in the league, and the question being asked is what the
-trade is worth to the two sides. Where several streaming teams want one player
-they claim in REVERSE STANDINGS ORDER, worst first. Every pickup assumes a bench
+teams, or everyone (`?fa=none|traders`; the default spells nothing). A team
+allowed to stream may start anyone nobody rosters, so losing its only kicker costs
+the gap to the best kicker on waivers, not a whole kicker. The default is
+EVERYONE, opponents included. It was the two trading teams for a while, on the
+grounds that crediting every opponent with perfect streaming overstated the whole
+league; the 15% margin below answers that better, since a league that streams
+only where it obviously pays is a fair expectation of every manager. Where
+several streaming teams want one player they claim in REVERSE STANDINGS ORDER,
+worst first.
+
+A PICKUP HAS TO CLEAR 15% (`FREE_AGENT_MARGIN`): a free agent starts only where
+he projects at least 15% more than the rostered player he would displace.
+Nobody spends a claim and a roster spot on half a point. It is applied INSIDE
+the optimiser, by valuing a free agent at `points / 1.15` while choosing and
+counting his real points in the total — so the comparison is against whoever
+actually loses a start after the flex reshuffles, not whoever happens to sit in
+the slot he lands in. An empty slot takes him regardless. Checked on week 7:
+Rodgers at 16.96 no longer streams over Mahomes at 15.21 (+11.5%); the Jets
+defence at 7.76 still does over the 49ers at 6.18 (+25.6%). Every pickup assumes a bench
 spot can be cleared. Only the few best free agents per position — as many as that
 position has slots — are offered to the optimiser.
 
@@ -1747,7 +1759,10 @@ starting line, not the trade.
 
 The one-week sheet shows the BENCH under the lineup, paired by rank rather than
 by player — the two benches are different people — with traded-in players marked
-TRADE, traded-away ones OUT, and anyone whose NFL team is idle BYE. Byes come
+TRADE, traded-away ones OUT, and anyone whose NFL team is idle BYE. The
+opponent's lineup AFTER the trade sits behind a toggle underneath — collapsed by
+default, since the sheet is about this team's week — through the same `Cell`, so
+when the opponent is the other side of the deal its arrivals are marked too. Byes come
 from `fetchByeTeams()` in `lib/live/nfl-schedule.ts`, off the same one-request
 season schedule the settlement tiers use: a team absent from a week is on a bye.
 
