@@ -82,20 +82,33 @@ export interface NflWeekState {
  */
 const cache = new Map<number, Promise<Map<number, NflWeekState> | null>>();
 
+/** The season's raw games, one request however many readers ask. */
+const rawCache = new Map<number, Promise<RawGame[] | null>>();
+
+function loadGames(season: number): Promise<RawGame[] | null> {
+  const existing = rawCache.get(season);
+  if (existing) return existing;
+  const p = (async () => {
+    const res = await fetchRetry(`${SCHEDULE}/${season}`);
+    if (!res?.ok) return null;
+    try {
+      const games = (await res.json()) as RawGame[];
+      return Array.isArray(games) && games.length ? games : null;
+    } catch {
+      return null;
+    }
+  })();
+  rawCache.set(season, p);
+  return p;
+}
+
 function loadSeason(season: number): Promise<Map<number, NflWeekState> | null> {
   const existing = cache.get(season);
   if (existing) return existing;
 
   const p = (async () => {
-    const res = await fetchRetry(`${SCHEDULE}/${season}`);
-    if (!res?.ok) return null;
-    let games: RawGame[];
-    try {
-      games = (await res.json()) as RawGame[];
-    } catch {
-      return null;
-    }
-    if (!Array.isArray(games) || !games.length) return null;
+    const games = await loadGames(season);
+    if (!games) return null;
 
     const byWeek = new Map<number, NflWeekState>();
     for (const g of games) {
@@ -165,6 +178,31 @@ export async function fetchByeTeams(season: number): Promise<Map<number, Set<str
   const out = new Map<number, Set<string>>();
   for (const [week, wk] of byWeek) {
     out.set(week, new Set([...all].filter((t) => !(t in wk.doneByTeam))));
+  }
+  return out;
+}
+
+/**
+ * One NFL team's regular season, week -> opponent, from the same schedule.
+ *
+ * FOR THE PLAYER CARD, which cannot take a week's opponent from the player's
+ * own feed: a player who did not play that week has NO entry there at all —
+ * neither a stat line nor a projection — and reading that silence as a bye put
+ * "BYE" against RJ Harvey's week 2, which Denver spent beating Jacksonville. The
+ * schedule says who the team played whether he did or not, and a week the team
+ * is absent from is the only real bye.
+ */
+export async function fetchTeamSchedule(
+  season: number,
+  team: string,
+): Promise<Record<number, { opponent: string; away: boolean }> | null> {
+  const games = await loadGames(season);
+  if (!games) return null;
+  const out: Record<number, { opponent: string; away: boolean }> = {};
+  for (const g of games) {
+    if (!g.week || !g.home || !g.away) continue;
+    if (g.home === team) out[g.week] = { opponent: g.away, away: false };
+    else if (g.away === team) out[g.week] = { opponent: g.home, away: true };
   }
   return out;
 }

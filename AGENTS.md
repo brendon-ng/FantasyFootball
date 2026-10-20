@@ -1984,8 +1984,15 @@ projections on the trade pages are. Checked against Sleeper's own card for
 Mahomes 2026: every PROJ and FPTS cell in weeks 1-8 matched (17.71 / 10.48 in
 week 6). Past seasons are scored with this season's settings.
 
-A week with neither a stat line nor a projection is a BYE; a week with a
-projection and no `gp` has not been played. Snap share is `off_snp /
+THE OPPONENT AND THE BYE COME FROM THE NFL SCHEDULE, never from the player's own
+feed. A week he did not play has NO entry there — no stat line, no projection —
+and the first cut read that silence as a bye: RJ Harvey's week 2 said "BYE"
+while Denver was beating Jacksonville. `fetchTeamSchedule()` in
+`lib/live/nfl-schedule.ts` reads the same one-request season schedule the
+settlement tiers use, for the team his entries name most that season (this
+season falls back to his current team). A week his team is absent from is a
+bye — a shaded band in the log and a card of its own in the projection strip;
+a past week his team played and he did not is DNP. Snap share is `off_snp /
 tm_off_snp`.
 
 ON A WIDE SCREEN THE CARD ITSELF DOES NOT SCROLL. It is a fixed `92dvh`, and the

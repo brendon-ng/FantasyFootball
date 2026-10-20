@@ -21,6 +21,7 @@ import {
   type PlayerBio,
   type StatEntry,
 } from "@/lib/live/player-card";
+import { fetchTeamSchedule } from "@/lib/live/nfl-schedule";
 import { leagueScoring, scoreLine } from "@/lib/live/sleeper";
 import { NFL_TEAMS } from "@/lib/nfl-teams";
 
@@ -153,6 +154,21 @@ function PlayerCard({
   const prevNews = useFetched(prevLimit ? `news:${id}:${prevLimit}` : null, () => fetchNews(id, prevLimit));
   const shownNews: NewsItem[] | null = news.ready ? news.data : prevNews.data;
   const history = useFetched(`history:${historyUrl}`, () => fetchHistory(historyUrl));
+  /**
+   * WHO HE PLAYED FOR EACH SEASON, and that team's schedule. The opponent and
+   * the bye come from the schedule, not from his own feed — a week he did not
+   * play has no entry there at all, and reading the silence as a bye is how RJ
+   * Harvey's week 2 against Jacksonville came out "BYE". His team for a season
+   * is the one his entries name most; this season falls back to his current team.
+   */
+  const logTeam = seasonTeam(stats.data, proj.data) ?? (tab === season ? team : null);
+  const logSchedule = useFetched(logTeam ? `sched:${tab}:${logTeam}` : null, () =>
+    logTeam ? fetchTeamSchedule(tab, logTeam) : Promise.resolve(null),
+  );
+  const nowTeam = seasonTeam(nowStats.data, nowProj.data) ?? team;
+  const nowSchedule = useFetched(nowTeam ? `sched:${season}:${nowTeam}` : null, () =>
+    nowTeam ? fetchTeamSchedule(season, nowTeam) : Promise.resolve(null),
+  );
 
   const b = bio.data;
   const rookieYear = Number(b?.metadata?.rookie_year) || (b?.years_exp != null ? season - b.years_exp : season);
@@ -223,6 +239,7 @@ function PlayerCard({
       position={position}
       stats={stats.data}
       proj={proj.data}
+      schedule={logSchedule.data}
       loading={!stats.ready || !proj.ready}
       points={points}
       currentWeek={tab === season ? week : null}
@@ -310,6 +327,7 @@ function PlayerCard({
                   <ProjectionStrip
                     stats={nowStats.data}
                     proj={nowProj.data}
+                    schedule={nowSchedule.data}
                     points={points}
                     currentWeek={week}
                     maxWeek={season >= 2021 ? 18 : 17}
@@ -660,12 +678,15 @@ function Figure({ value, label }: { value: string; label: string }) {
 function ProjectionStrip({
   stats,
   proj,
+  schedule,
   points,
   currentWeek,
   maxWeek,
 }: {
   stats: Record<number, StatEntry> | null;
   proj: Record<number, StatEntry> | null;
+  /** His team's opponents; a week it is absent from is a bye. */
+  schedule: TeamSchedule | null;
   points: (s: Record<string, number> | undefined) => number | null;
   currentWeek: number;
   maxWeek: number;
@@ -679,15 +700,30 @@ function ProjectionStrip({
   }, [ready, currentWeek]);
 
   if (!proj) return <div className="skeleton mx-4 h-20 rounded" />;
-  const weeks = Array.from({ length: maxWeek }, (_, i) => i + 1).filter((w) => proj[w] || stats?.[w]);
+  // Every week of the season once the schedule is in — byes get a card of their
+  // own, and a week he sat out reads DNP. Without the schedule, his own feed.
+  const weeks = Array.from({ length: maxWeek }, (_, i) => i + 1).filter(
+    (w) => schedule || proj[w] || stats?.[w],
+  );
   return (
     <div ref={strip} className="flex gap-3 overflow-x-auto px-4 pb-1">
       {weeks.map((w) => {
         const s = stats?.[w];
         const p = proj[w];
-        const opp = s?.opponent ?? p?.opponent;
-        const away = s?.is_away_team ?? p?.is_away_team;
+        const opp = s?.opponent ?? p?.opponent ?? schedule?.[w]?.opponent;
+        const away = s?.is_away_team ?? p?.is_away_team ?? schedule?.[w]?.away;
         const played = Boolean(s && (s.stats.gp ?? 0) > 0);
+        const sat = !played && w < currentWeek;
+        if (!opp) {
+          return (
+            <div key={w} data-week={w} className="w-36 shrink-0">
+              <div className="mb-1 text-center text-[12px] font-bold text-chalk-300">WK {w}</div>
+              <div className="flex h-[76px] items-center justify-center rounded-lg border border-dashed border-ink-500 bg-ink-850">
+                <span className="text-sm font-bold tracking-[0.2em] text-chalk-500">BYE</span>
+              </div>
+            </div>
+          );
+        }
         return (
           <div key={w} data-week={w} className="w-36 shrink-0">
             <div className="mb-1 text-center text-[12px] font-bold text-chalk-300">
@@ -701,7 +737,7 @@ function ProjectionStrip({
               <div className="flex items-baseline justify-between bg-ink-800 px-3 py-2">
                 <span className="text-[10px] font-bold tracking-wide text-chalk-500">FINAL</span>
                 <span className="tabular text-base font-bold text-chalk-100">
-                  {played ? fmtNum(points(s?.stats), 2) : "-"}
+                  {played ? fmtNum(points(s?.stats), 2) : sat ? <span className="text-chalk-500">DNP</span> : "-"}
                 </span>
               </div>
             </div>
@@ -1002,6 +1038,7 @@ function GameLog({
   position,
   stats,
   proj,
+  schedule,
   loading,
   points,
   currentWeek,
@@ -1010,8 +1047,11 @@ function GameLog({
   position: string | null;
   stats: Record<number, StatEntry> | null;
   proj: Record<number, StatEntry> | null;
+  /** His team's opponents that season. Null until loaded, or if unreachable. */
+  schedule: TeamSchedule | null;
   loading: boolean;
   points: (s: Record<string, number> | undefined) => number | null;
+  /** This week, for the season being played; null for a finished one. */
   currentWeek: number | null;
   maxWeek: number;
 }) {
@@ -1070,9 +1110,12 @@ function GameLog({
           {weeks.map((w) => {
             const s = stats?.[w];
             const p = proj?.[w];
-            const opp = s?.opponent ?? p?.opponent ?? null;
-            const away = s?.is_away_team ?? p?.is_away_team ?? false;
+            const opp = s?.opponent ?? p?.opponent ?? schedule?.[w]?.opponent ?? null;
+            const away = s?.is_away_team ?? p?.is_away_team ?? schedule?.[w]?.away ?? false;
             const played = Boolean(s && (s.stats.gp ?? 0) > 0);
+            // His team played and he did not. Past weeks only, so a future week
+            // with no projection yet is not called a DNP.
+            const sat = !played && (currentWeek == null || w < currentWeek);
             const fpts = played ? points(s?.stats) : null;
             const projected = p ? points(p.stats) : null;
             return (
@@ -1084,7 +1127,9 @@ function GameLog({
                 {opp ? (
                   <>
                     <td className={`${cell} border-l border-ink-600 text-chalk-500`}>{fmtNum(projected, 2)}</td>
-                    <td className={`${cell} font-semibold text-chalk-100`}>{fmtNum(fpts, 2)}</td>
+                    <td className={`${cell} font-semibold text-chalk-100`}>
+                      {sat ? <span className="font-normal text-chalk-500">DNP</span> : fmtNum(fpts, 2)}
+                    </td>
                     {showSnaps ? <td className={`${cell} text-chalk-400`}>{played ? fmtNum(snapPct(s!.stats)) : "-"}</td> : null}
                     {groups.map((g) =>
                       g.cols.map((c, i) => (
@@ -1098,7 +1143,13 @@ function GameLog({
                     )}
                   </>
                 ) : (
-                  <td colSpan={2 + (showSnaps ? 1 : 0) + groups.reduce((n, g) => n + g.cols.length, 0)} />
+                  // A bye gets a band across the whole row, not a blank one.
+                  <td
+                    colSpan={2 + (showSnaps ? 1 : 0) + groups.reduce((n, g) => n + g.cols.length, 0)}
+                    className="border-l border-ink-600 bg-ink-800/60 px-3 py-1.5 text-center text-[10px] font-bold tracking-[0.25em] text-chalk-600"
+                  >
+                    BYE WEEK
+                  </td>
                 )}
               </tr>
             );
@@ -1205,6 +1256,18 @@ function DepthChart({
 // ---------------------------------------------------------------------------
 // Formatting
 // ---------------------------------------------------------------------------
+
+type TeamSchedule = Record<number, { opponent: string; away: boolean }>;
+
+/** The team a player's entries name most often in a season, or null with none. */
+function seasonTeam(...feeds: Array<Record<number, StatEntry> | null>): string | null {
+  const count = new Map<string, number>();
+  for (const feed of feeds)
+    for (const e of Object.values(feed ?? {})) if (e.team) count.set(e.team, (count.get(e.team) ?? 0) + 1);
+  let best: string | null = null;
+  for (const [t, n] of count) if (best == null || n > (count.get(best) ?? 0)) best = t;
+  return best;
+}
 
 /** 74 -> 6'2". */
 function feetInches(height: string | null | undefined): string | null {
