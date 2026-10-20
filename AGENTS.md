@@ -1939,8 +1939,31 @@ Any player name on the analyzer or the finder opens a read-only copy of
 Sleeper's own player card (`components/player-card.tsx`): headshot over the team
 colour, bio, position and overall rank, rostered and started share, a game log
 per season with position-specific columns, the WHOLE news feed rather than the
-latest item, and the team's depth chart. The feed opens five stories deep —
-the card is a glance — and "Show more" steps to 50, then 100 at a time. No star or drop buttons.
+latest item, the team's depth chart, this league's transactions and a career
+table. The feed opens five stories deep — the card is a glance — and "Show
+more" steps to 50, then 100 at a time.
+
+TRANSACTIONS COME FROM THIS SITE, NOT SLEEPER. Sleeper's card reads them from
+`league_transactions_by_player`, which answers `unauthorized` without a logged-in
+session, so a public page cannot use it. The derived `player-history.json` is the
+same record, so the page emits it as a static file —
+`app/trade-analyzer/history.json/route.ts`, a GET handler with no Request, which
+`output: "export"` writes out as a file — and the card fetches it once, on the
+first card opened (~70KB gzipped for Den Ops, against ~1.3MB raw if it were baked
+into every visit). It is rendered by the player page's own `PlayerTransactions`,
+which also merges moves not yet archived from the live layer, probing the latest
+four weeks. One renderer, so the card and the player page cannot disagree.
+
+TWO LAYOUTS FROM ONE SET OF DATA. A wide screen gets the desktop card; a phone
+gets Sleeper's app layout — a tall header (headshot, team and position under
+it, the name in two lines, age / height / weight / exp), then Summary, Game log,
+Team and History tabs. Summary is rank, ownership, points per game, a strip of
+projected-and-final cards scrolled to this week, and the news; Team is the depth
+chart as starter / 2nd / 3rd; History is the transactions and the career table.
+Both layouts are rendered and CSS shows one, so the data is fetched once and a
+resize never refetches. The wide card's lower-right pane is tabbed — depth chart,
+transactions, career — and the career table, a request per season, is only
+fetched once one of those views is opened. No star or drop buttons.
 
 EVERY ENDPOINT IS THE ONE SLEEPER'S CARD CALLS, found in its bundle, and each was
 checked for `access-control-allow-origin: *` before use — `lib/live/player-card.ts`

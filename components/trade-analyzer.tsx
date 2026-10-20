@@ -16,6 +16,7 @@ import {
 } from "@/components/trade-week-sheet";
 import { Col, EmptyState, ListHeader, Panel, PanelHeader, Skeleton, Stat, fmt } from "@/components/ui";
 import { positionRank } from "@/lib/espn-maps";
+import { withBasePath } from "@/lib/base-path";
 import type { LeagueRef } from "@/lib/league-ref";
 import { lineupPositions, startingSlots, type Lineup } from "@/lib/lineup";
 import { applyOverrides, useProjectionOverrides } from "@/lib/projection-overrides";
@@ -479,7 +480,10 @@ export function TradeAnalyzer({
 
   return (
     <PlayerCardProvider
-      leagueId={ref?.id ?? null}
+      leagueRef={ref}
+      historyUrl={withBasePath("/trade-analyzer/history.json")}
+      userIdToSlug={userIdToSlug}
+      ownerNames={Object.fromEntries(Object.entries(owners).map(([slug, o]) => [slug, o.name]))}
       season={season.season}
       week={Math.max(1, season.week)}
       holderOf={(id) => {

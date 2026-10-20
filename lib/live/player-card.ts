@@ -22,6 +22,7 @@
  * Dependency-free: this ships to the browser.
  */
 
+import type { PlayerTransaction } from "../types.ts";
 import { fetchRetry } from "./retry.ts";
 
 const API = "https://api.sleeper.com";
@@ -141,3 +142,10 @@ export const headshotUrl = (id: string) =>
     ? `https://sleepercdn.com/images/team_logos/nfl/${id.toLowerCase()}.png`
     : `https://sleepercdn.com/content/nfl/players/${id}.jpg`;
 export const teamLogoUrl = (team: string) => `https://sleepercdn.com/images/team_logos/nfl/${team.toLowerCase()}.png`;
+
+/**
+ * The league's committed transaction history, player id -> events, from the
+ * static file the trade page emits. One fetch serves every card on the page.
+ */
+export const fetchHistory = (url: string) =>
+  cached(`history:${url}`, () => getJson<Record<string, PlayerTransaction[]>>(url));
