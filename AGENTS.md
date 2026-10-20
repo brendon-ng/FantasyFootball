@@ -2346,6 +2346,10 @@ for a season older than every rules file — that is a real gap, not a new year.
 
 ### Sleeper API reference
 
+WRITING to Sleeper — lineups, adds, drops, waiver claims, IR — is not in these
+docs at all. It goes through the app's private GraphQL endpoint, and
+`docs/sleeper-write-api.md` covers it. The site itself never writes.
+
 `https://docs.sleeper.com` is a SINGLE-PAGE Slate doc, so every `#anchor` below
 returns the same HTML. Fetch the root once; do not fetch per section.
 

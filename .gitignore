@@ -52,3 +52,7 @@ next-env.d.ts
 # these — `espn_s2` is a session token for the whole ESPN account, not just one
 # league. Read only by the import scripts, only when present.
 .espn-auth.json
+
+# Sleeper session JWT for writing to a league (lineups, etc.) — it can act as the
+# whole account, so it never leaves this machine.
+.sleeper-token
