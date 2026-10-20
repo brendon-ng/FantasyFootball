@@ -1933,6 +1933,20 @@ demand, not as filters change, and says so when the filters have moved since.
 It follows the free-agent setting — now in a bar shared by both tabs — and the
 projection overrides, and "Analyze" loads a result into the analyzer tab.
 
+### One set of form controls
+
+`components/form.tsx` is every input, select, segmented control and button on
+the trade pages: `Field` / `FieldGroup` (label above, always the eyebrow),
+`Select`, `TextInput`, `Segmented`, `BUTTON`. ONE HEIGHT — `h-9`, `h-8` compact —
+so controls placed side by side share a top and a bottom; before it each set its
+own padding and a row of them drifted by a few pixels each, which is what the
+screenshot that prompted it showed. `Select` draws its own chevron 12px in from
+the edge, because the native one sat against the border in Chrome. Focus rings
+are `focus-visible` only, replacing the browser outline that boxed a tab after
+every click. The finder's settings are one grid on these, so the acceptance
+modes, the tolerance and the search button end on one baseline. Use them for
+any new control on these pages rather than restyling a raw element.
+
 ### The player card
 
 Any player name on the analyzer or the finder opens a read-only copy of

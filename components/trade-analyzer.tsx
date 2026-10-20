@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 
 import { useIdentity } from "@/components/identity";
+import { BUTTON, Segmented, Select } from "@/components/form";
 import { PlayerCardProvider, usePlayerCard } from "@/components/player-card";
 import { ProjectionOverridesPanel } from "@/components/projection-overrides";
 import { TradeFinder } from "@/components/trade-finder";
@@ -494,41 +495,19 @@ export function TradeAnalyzer({
       linkable={canLink}
     >
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div role="tablist" aria-label="View" className="flex rounded-lg border border-ink-500 p-0.5">
-          {(["analyzer", "finder"] as const).map((v) => (
-            <button
-              key={v}
-              type="button"
-              role="tab"
-              aria-selected={view === v}
-              onClick={() => setViewParam(v === "analyzer" ? "" : v)}
-              className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
-                view === v ? "bg-ink-600 text-chalk-100" : "text-chalk-500 hover:text-chalk-300"
-              }`}
-            >
-              {v === "analyzer" ? "Analyzer" : "Finder"}
-            </button>
-          ))}
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
+        <Segmented
+          kind="tab"
+          label="View"
+          value={view}
+          onChange={(v) => setViewParam(v === "analyzer" ? "" : v)}
+          options={[
+            { value: "analyzer", label: "Analyzer" },
+            { value: "finder", label: "Finder" },
+          ]}
+        />
+        <div className="flex flex-wrap items-center gap-3">
           <span className="eyebrow text-[10px]">Free agents</span>
-          <div role="radiogroup" aria-label="Who may pick up free agents" className="flex rounded-lg border border-ink-500 p-0.5">
-            {FA_MODES.map((m) => (
-              <button
-                key={m.value}
-                type="button"
-                role="radio"
-                aria-checked={faMode === m.value}
-                title={m.hint}
-                onClick={() => setFaMode(m.value)}
-                className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
-                  faMode === m.value ? "bg-ink-600 text-chalk-100" : "text-chalk-500 hover:text-chalk-300"
-                }`}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
+          <Segmented label="Who may pick up free agents" value={faMode} onChange={setFaMode} options={FA_MODES} />
         </div>
       </div>
 
@@ -590,11 +569,11 @@ export function TradeAnalyzer({
                 { team: teamB, set: setB, other: teamA, picked: fromB, which: "b" as const },
               ].map(({ team, set, other, picked, which }) => (
                 <div key={which} className="min-w-0 bg-ink-850 p-3 sm:p-4">
-                  <select
+                  <Select
+                    className="mb-3"
                     value={team?.ownerSlug ?? ""}
                     onChange={(e) => set(e.target.value)}
                     aria-label={which === "a" ? "First team" : "Second team"}
-                    className="mb-3 w-full rounded-lg border border-ink-500 bg-ink-800 px-3 py-2 text-base text-chalk-100 sm:text-sm"
                   >
                     {which === "b" && !team ? <option value="">Pick a trade partner…</option> : null}
                     {teams
@@ -604,7 +583,7 @@ export function TradeAnalyzer({
                           {label(t)}
                         </option>
                       ))}
-                  </select>
+                  </Select>
                   {team ? (
                     <RosterPicker
                       team={team}
@@ -627,7 +606,7 @@ export function TradeAnalyzer({
                 <button
                   type="button"
                   onClick={() => setGive([])}
-                  className="rounded-md border border-ink-500 px-2.5 py-1 text-xs text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent"
+                  className={BUTTON.secondarySm}
                 >
                   Clear the trade
                 </button>

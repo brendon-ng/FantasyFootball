@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 
 import { EmptyState, Panel, PanelHeader } from "@/components/ui";
 import { normalise } from "@/lib/player-match";
+import { BUTTON, TextInput, fieldClass } from "@/components/form";
 import type { OverridesApi } from "@/lib/projection-overrides";
 import { PlayerName } from "@/components/trade-week-sheet";
 
@@ -72,13 +73,12 @@ export function ProjectionOverridesPanel({
         legend="Your own number for any player, any week. Saved in this browser and applied to every trade — a shared link does not carry them."
       />
       <div className="relative border-b border-ink-600 px-4 py-3 sm:px-5">
-        <input
+        <TextInput
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Find a player to override…"
           aria-label="Find a player"
-          className="w-full rounded-lg border border-ink-500 bg-ink-850 px-3 py-2 text-base text-chalk-100 placeholder:text-chalk-600 sm:text-sm"
         />
         {results.length ? (
           <ul className="mt-2 divide-y divide-ink-700 overflow-hidden rounded-lg border border-ink-600">
@@ -129,7 +129,7 @@ export function ProjectionOverridesPanel({
           <button
             type="button"
             onClick={api.clearAll}
-            className="rounded-md border border-ink-500 px-2.5 py-1 text-xs text-chalk-400 transition-colors hover:border-loss/60 hover:text-loss"
+            className={BUTTON.danger}
           >
             Clear every override
           </button>
@@ -166,21 +166,22 @@ function OverrideRow({
           </div>
           <div className="text-[11px] text-chalk-600">{meta}</div>
         </div>
-        <label className="flex items-center gap-1.5 text-[11px] text-chalk-500">
-          All weeks
+        <label className="flex items-center gap-2">
+          <span className="eyebrow text-[10px]">All weeks</span>
           <NumberCell
             value={null}
             placeholder="—"
             onCommit={(v) => api.setWeeks(id, weeks, v)}
             label={`${label}, every week`}
             clearOnCommit
+            className="w-20"
           />
         </label>
         {edited ? (
           <button
             type="button"
             onClick={() => api.setWeeks(id, weeks, null)}
-            className="rounded-md border border-ink-500 px-2 py-1 text-[11px] text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent"
+            className={BUTTON.secondarySm}
           >
             Reset
           </button>
@@ -189,7 +190,7 @@ function OverrideRow({
           type="button"
           onClick={() => api.remove(id)}
           aria-label={`Remove ${label}`}
-          className="rounded-md border border-ink-500 px-2 py-1 text-[11px] text-chalk-400 transition-colors hover:border-loss/60 hover:text-loss"
+          className={BUTTON.danger}
         >
           Remove
         </button>
@@ -230,6 +231,7 @@ function NumberCell({
   label,
   highlighted = false,
   clearOnCommit = false,
+  className = "",
 }: {
   value: number | null;
   placeholder: string;
@@ -238,6 +240,7 @@ function NumberCell({
   highlighted?: boolean;
   /** A one-shot field — "All weeks" — that empties once applied. */
   clearOnCommit?: boolean;
+  className?: string;
 }) {
   const commit = (raw: string) => {
     const t = raw.trim();
@@ -264,9 +267,9 @@ function NumberCell({
       onKeyDown={(e) => {
         if (e.key === "Enter") (e.target as HTMLInputElement).blur();
       }}
-      className={`w-full min-w-0 appearance-none rounded-md border bg-ink-850 px-2 py-1 text-base tabular sm:w-16 sm:text-sm ${
-        highlighted ? "border-caution/60 text-caution" : "border-ink-500 text-chalk-100 placeholder:text-chalk-600"
-      }`}
+      // Fills its grid cell: a fixed width left every input hugging the left
+      // of a wider cell on a desktop.
+      className={`${fieldClass("sm", highlighted ? "caution" : "default", true)} ${className}`}
     />
   );
 }

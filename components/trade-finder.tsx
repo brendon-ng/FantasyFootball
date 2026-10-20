@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 
+import { BUTTON, Field, FieldGroup, Segmented, Select, TextInput } from "@/components/form";
 import { Delta, PlayerName } from "@/components/trade-week-sheet";
 import { EmptyState, Panel, PanelHeader } from "@/components/ui";
 import { normalise } from "@/lib/player-match";
@@ -327,7 +328,7 @@ export function TradeFinder({
       type="button"
       onClick={toggle}
       aria-pressed={on}
-      className={`rounded-md border px-2 py-1 text-[12px] transition-colors ${
+      className={`inline-flex h-8 items-center rounded-lg border px-2.5 text-[12px] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent-dim ${
         on
           ? tone === "sell"
             ? "border-loss/60 bg-loss/10 text-chalk-100"
@@ -347,32 +348,25 @@ export function TradeFinder({
           title="Find trades"
           legend="The trades that add the most rest-of-season points for one team, where the other side's lineup holds up — over the rest of the season, the playoffs, or both, as chosen below."
         />
-        <div className="space-y-4 p-4 sm:p-5">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <label className="block text-[11px] text-chalk-500">
-              <span className="eyebrow text-[10px]">Sending team</span>
-              <select
+        <div className="space-y-5 p-4 sm:p-5">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Field label="Sending team">
+              <Select
                 value={sender.ownerSlug}
                 onChange={(e) => {
                   setSenderSlug(e.target.value);
                   setSell([]);
                 }}
-                className="mt-1 w-full rounded-lg border border-ink-500 bg-ink-800 px-3 py-2 text-base text-chalk-100 sm:text-sm"
               >
                 {teams.map((t) => (
                   <option key={t.rosterId} value={t.ownerSlug}>
                     {label(t)}
                   </option>
                 ))}
-              </select>
-            </label>
-            <label className="block text-[11px] text-chalk-500">
-              <span className="eyebrow text-[10px]">Trade partner</span>
-              <select
-                value={partner?.ownerSlug ?? ""}
-                onChange={(e) => setPartnerSlug(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-ink-500 bg-ink-800 px-3 py-2 text-base text-chalk-100 sm:text-sm"
-              >
+              </Select>
+            </Field>
+            <Field label="Trade partner">
+              <Select value={partner?.ownerSlug ?? ""} onChange={(e) => setPartnerSlug(e.target.value)}>
                 <option value="">Any team</option>
                 {teams
                   .filter((t) => t.rosterId !== sender.rosterId)
@@ -381,12 +375,11 @@ export function TradeFinder({
                       {label(t)}
                     </option>
                   ))}
-              </select>
-            </label>
+              </Select>
+            </Field>
           </div>
 
-          <div>
-            <div className="eyebrow mb-1.5 text-[10px]">Must sell</div>
+          <FieldGroup label="Must sell">
             <div className="flex flex-wrap gap-1.5">
               {byValue(sender.players).map((id) =>
                 chip(id, sell.includes(id), () =>
@@ -394,10 +387,9 @@ export function TradeFinder({
                 "sell"),
               )}
             </div>
-          </div>
+          </FieldGroup>
 
-          <div>
-            <div className="eyebrow mb-1.5 text-[10px]">Must buy</div>
+          <FieldGroup label="Must buy">
             {buyNow.length ? (
               <div className="mb-2 flex flex-wrap gap-1.5">
                 {buyNow.map((id) => chip(id, true, () => setBuy(buy.filter((x) => x !== id)), "buy"))}
@@ -411,13 +403,12 @@ export function TradeFinder({
               </div>
             ) : (
               <>
-                <input
+                <TextInput
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Find a player on another team…"
                   aria-label="Find a player to buy"
-                  className="w-full rounded-lg border border-ink-500 bg-ink-850 px-3 py-2 text-base text-chalk-100 placeholder:text-chalk-600 sm:text-sm"
                 />
                 {buyResults.length ? (
                   <ul className="mt-2 divide-y divide-ink-700 overflow-hidden rounded-lg border border-ink-600">
@@ -447,100 +438,78 @@ export function TradeFinder({
                 ) : null}
               </>
             )}
-          </div>
+          </FieldGroup>
 
-          <div className="flex flex-wrap gap-x-6 gap-y-3">
-            <CountRange label="Players you give" value={giveRange} onChange={setGiveRange} />
-            <CountRange label="Players you get" value={getRange} onChange={setGetRange} />
-          </div>
-
-          <div>
-            <div className="eyebrow mb-1.5 text-[10px]">Only trades where, over the rest of the season…</div>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {GAIN_FIELDS.map((g) => (
-                <label key={g.key} className="block text-[11px] text-chalk-500">
-                  {g.label} ≥
-                  <input
-                    type="number"
-                    inputMode="decimal"
-                    step={1}
-                    value={mins[g.key]}
-                    placeholder="any"
-                    onChange={(e) => setMins({ ...mins, [g.key]: e.target.value })}
-                    className="mt-1 w-full min-w-0 appearance-none rounded-md border border-ink-500 bg-ink-850 px-2 py-1 text-base tabular text-chalk-100 placeholder:text-chalk-600 sm:text-sm"
-                  />
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="eyebrow text-[10px]">Sort by</span>
-            <select
-              value={rankBy}
-              onChange={(e) => setRankBy(e.target.value as GainKey)}
-              aria-label="Sort by"
-              className="rounded-md border border-ink-500 bg-ink-800 px-2 py-1 text-base text-chalk-100 sm:text-sm"
-            >
-              {GAIN_FIELDS.map((g) => (
-                <option key={g.key} value={g.key}>
-                  {g.label}
-                </option>
-              ))}
-            </select>
-            <button
-              type="button"
-              onClick={() => setDescending((d) => !d)}
-              className="rounded-md border border-ink-500 px-2 py-1 text-xs text-chalk-300 transition-colors hover:border-accent-dim hover:text-accent"
-            >
-              {descending ? "Highest first ↓" : "Lowest first ↑"}
-            </button>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="eyebrow text-[10px]">They accept if their lineup holds up over</span>
-            <div role="radiogroup" aria-label="Acceptance test" className="flex flex-wrap rounded-lg border border-ink-500 p-0.5">
-              {ACCEPT_MODES.map((m) => (
-                <button
-                  key={m.value}
-                  type="button"
-                  role="radio"
-                  aria-checked={accept === m.value}
-                  title={m.hint}
-                  onClick={() => setAccept(m.value)}
-                  className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
-                    accept === m.value ? "bg-ink-600 text-chalk-100" : "text-chalk-500 hover:text-chalk-300"
-                  }`}
+          {/* Settings: one grid, one control height, every label above. */}
+          <div className="grid gap-4 border-t border-ink-700 pt-5 sm:grid-cols-2 lg:grid-cols-4">
+            <FieldGroup label="Players you give">
+              <CountRange label="Players you give" value={giveRange} onChange={setGiveRange} />
+            </FieldGroup>
+            <FieldGroup label="Players you get">
+              <CountRange label="Players you get" value={getRange} onChange={setGetRange} />
+            </FieldGroup>
+            <FieldGroup label="Sort by" className="sm:col-span-2">
+              <div className="flex gap-2">
+                <Select
+                  className="flex-1"
+                  value={rankBy}
+                  onChange={(e) => setRankBy(e.target.value as GainKey)}
+                  aria-label="Sort by"
                 >
-                  {m.label}
+                  {GAIN_FIELDS.map((g) => (
+                    <option key={g.key} value={g.key}>
+                      {g.label}
+                    </option>
+                  ))}
+                </Select>
+                <button
+                  type="button"
+                  onClick={() => setDescending((d) => !d)}
+                  aria-label={descending ? "Highest first; switch to lowest first" : "Lowest first; switch to highest first"}
+                  // Fixed width, so the button does not resize as its label flips.
+                  className={`${BUTTON.secondary} w-36`}
+                >
+                  {descending ? "Highest first ↓" : "Lowest first ↑"}
                 </button>
-              ))}
-            </div>
-          </div>
+              </div>
+            </FieldGroup>
 
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <label className="flex items-center gap-2 text-[12px] text-chalk-400">
-              Their lineup may drop by up to
-              <input
+            {GAIN_FIELDS.map((g) => (
+              <Field key={g.key} label={`${g.label} ≥`}>
+                <TextInput
+                  type="number"
+                  inputMode="decimal"
+                  step={1}
+                  value={mins[g.key]}
+                  placeholder="Any"
+                  onChange={(e) => setMins({ ...mins, [g.key]: e.target.value })}
+                />
+              </Field>
+            ))}
+
+            <FieldGroup label="They accept if their lineup holds up over" className="sm:col-span-2">
+              <Segmented label="Acceptance test" value={accept} options={ACCEPT_MODES} onChange={setAccept} fill />
+            </FieldGroup>
+            <Field label="Their lineup may drop, pts/week">
+              <TextInput
                 type="number"
                 inputMode="decimal"
                 min={0}
                 step={0.5}
                 value={tolerance}
                 onChange={(e) => setTolerance(Math.max(0, Number(e.target.value) || 0))}
-                aria-label="Tolerance, points per week"
-                className="w-16 min-w-0 appearance-none rounded-md border border-ink-500 bg-ink-850 px-2 py-1 text-base tabular text-chalk-100 sm:text-sm"
               />
-              pts/week
-            </label>
-            <button
-              type="button"
-              onClick={start}
-              disabled={!ready || !averages || running || tooMany || splitBuys}
-              className="rounded-lg border border-accent-dim bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent/20 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {running ? "Searching…" : run.phase === "done" ? "Search again" : "Find trades"}
-            </button>
+            </Field>
+            <div className="flex items-end sm:justify-end">
+              <button
+                type="button"
+                onClick={start}
+                disabled={!ready || !averages || running || tooMany || splitBuys}
+                className={`${BUTTON.primary} w-full sm:w-auto sm:min-w-36`}
+              >
+                {running ? "Searching…" : run.phase === "done" ? "Search again" : "Find trades"}
+              </button>
+            </div>
           </div>
 
           {tooMany ? (
@@ -570,10 +539,10 @@ export function TradeFinder({
             </div>
           ) : null}
 
-          <p className="text-[11px] text-chalk-600">
-            Up to four players a side, in any combination within the limits above. Each team&rsquo;s players worth more than a waiver
-            replacement are considered, plus anyone you require. Follows the free-agent setting and your
-            projection overrides.
+          <p className="text-[11px] leading-relaxed text-chalk-600">
+            Up to four players a side, in any combination within the limits above. Each team&rsquo;s players worth
+            more than a waiver replacement are considered, plus anyone you require. Follows the free-agent setting and
+            your projection overrides.
           </p>
         </div>
       </Panel>
@@ -639,7 +608,7 @@ export function TradeFinder({
                       <button
                         type="button"
                         onClick={() => other && onOpen(sender.ownerSlug, other.ownerSlug, f.give, f.get)}
-                        className="mt-1 self-start rounded-md border border-ink-500 px-2.5 py-1 text-xs text-chalk-400 transition-colors hover:border-accent-dim hover:text-accent sm:mt-0"
+                        className={`${BUTTON.secondarySm} mt-1 self-start sm:mt-0`}
                       >
                         Analyze →
                       </button>
@@ -693,7 +662,8 @@ function CountRange({
 }) {
   const options = [1, 2, 3, 4];
   const select = (which: "min" | "max") => (
-    <select
+    <Select
+      className="flex-1"
       value={value[which]}
       aria-label={`${label}, ${which === "min" ? "at least" : "at most"}`}
       onChange={(e) => {
@@ -702,20 +672,18 @@ function CountRange({
           which === "min" ? { min: n, max: Math.max(n, value.max) } : { min: Math.min(n, value.min), max: n },
         );
       }}
-      className="rounded-md border border-ink-500 bg-ink-800 px-2 py-1 text-base text-chalk-100 sm:text-sm"
     >
       {options.map((n) => (
         <option key={n} value={n}>
           {n}
         </option>
       ))}
-    </select>
+    </Select>
   );
   return (
-    <div className="flex items-center gap-2 text-[12px] text-chalk-400">
-      <span className="eyebrow text-[10px]">{label}</span>
+    <div className="flex items-center gap-2">
       {select("min")}
-      <span className="text-chalk-600">to</span>
+      <span className="shrink-0 text-xs text-chalk-600">to</span>
       {select("max")}
     </div>
   );
