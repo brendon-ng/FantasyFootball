@@ -528,7 +528,7 @@
     "birth_date": "1991-07-25",
     "full_name": "Brandon McManus",
     "position": "K",
-    "team": null,
+    "team": "LAR",
     "years_exp": 13
   },
   "1466": {
@@ -1515,7 +1515,7 @@
     "birth_date": "1995-05-07",
     "full_name": "Zane Gonzalez",
     "position": "K",
-    "team": null,
+    "team": "MIA",
     "years_exp": 9
   },
   "4234": {
@@ -1886,7 +1886,7 @@
     "birth_date": "1994-10-10",
     "full_name": "Marquez Valdes-Scantling",
     "position": "WR",
-    "team": null,
+    "team": "PIT",
     "years_exp": 8
   },
   "5094": {
@@ -2166,7 +2166,7 @@
     "birth_date": "1998-03-12",
     "full_name": "Mecole Hardman",
     "position": "WR",
-    "team": null,
+    "team": "IND",
     "years_exp": 7
   },
   "5927": {
@@ -2845,7 +2845,7 @@
     "birth_date": "1998-03-09",
     "full_name": "Najee Harris",
     "position": "RB",
-    "team": "NYG",
+    "team": null,
     "years_exp": 5
   },
   "7537": {
@@ -2901,7 +2901,7 @@
     "birth_date": "1998-05-02",
     "full_name": "Elijah Mitchell",
     "position": "RB",
-    "team": null,
+    "team": "PHI",
     "years_exp": 5
   },
   "7562": {
@@ -3097,7 +3097,7 @@
     "birth_date": "1999-09-07",
     "full_name": "Riley Patterson",
     "position": "K",
-    "team": "MIA",
+    "team": null,
     "years_exp": 5
   },
   "8110": {
@@ -3119,6 +3119,13 @@
     "full_name": "Drake London",
     "position": "WR",
     "team": "ATL",
+    "years_exp": 4
+  },
+  "8116": {
+    "birth_date": "1998-12-10",
+    "full_name": "Pierre Strong",
+    "position": "RB",
+    "team": "GB",
     "years_exp": 4
   },
   "8117": {
@@ -4561,6 +4568,13 @@
     "full_name": "Germie Bernard",
     "position": "WR",
     "team": "PIT",
+    "years_exp": 0
+  },
+  "13276": {
+    "birth_date": "2003-12-14",
+    "full_name": "Omar Cooper",
+    "position": "WR",
+    "team": "NYJ",
     "years_exp": 0
   },
   "13279": {
