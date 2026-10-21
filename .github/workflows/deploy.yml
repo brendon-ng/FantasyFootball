@@ -56,10 +56,16 @@ jobs:
       # so this key ships in the page's JavaScript by design — it is a repo
       # secret only to keep it out of git and out of secret-scanning alerts.
       # Restricted in Google Cloud to the Sheets API and this site's origin.
+      # The trade pages' passphrase lock: a salt and an Ed25519 PUBLIC key, made
+      # by `node scripts/trade-lock.ts`. Neither unlocks anything — they are
+      # secrets only to keep them out of the repo. Missing, the page stays
+      # locked for everyone and says it is not set up.
       - name: Build static export
         run: npm run build
         env:
           NEXT_PUBLIC_SHEETS_API_KEY: ${{ secrets.SHEETS_API_KEY }}
+          NEXT_PUBLIC_TRADE_LOCK_SALT: ${{ secrets.TRADE_LOCK_SALT }}
+          NEXT_PUBLIC_TRADE_LOCK_KEY: ${{ secrets.TRADE_LOCK_KEY }}
 
       # Guard against the classic Pages subpath regression: assets referenced from
       # the domain root instead of /<repo>/ silently 404 in production.

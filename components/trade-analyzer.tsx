@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 
 import { useIdentity } from "@/components/identity";
 import { BUTTON, Segmented, Select } from "@/components/form";
+import { LockScreen, ShareButton } from "@/components/trade-lock";
 import { PlayerCardProvider, usePlayerCard } from "@/components/player-card";
 import { ProjectionOverridesPanel } from "@/components/projection-overrides";
 import { TradeFinder } from "@/components/trade-finder";
@@ -20,7 +21,8 @@ import { positionRank } from "@/lib/espn-maps";
 import { withBasePath } from "@/lib/base-path";
 import type { LeagueRef } from "@/lib/league-ref";
 import { lineupPositions, startingSlots, type Lineup } from "@/lib/lineup";
-import { applyOverrides, useProjectionOverrides } from "@/lib/projection-overrides";
+import { applyOverrides, useProjectionOverrides, type ProjectionOverrides } from "@/lib/projection-overrides";
+import { useTradeLock, verifyTrade, type TradeLock } from "@/lib/trade-lock";
 import {
   useByeTeams,
   useLiveProjections,
@@ -62,16 +64,7 @@ const SEED = 20261019;
 
 type Lineups = Map<number, Map<number, Lineup>>;
 
-export function TradeAnalyzer({
-  refBySeason,
-  initial,
-  userIdToSlug,
-  owners,
-  format,
-  rosterPositions,
-  baked,
-  linkable,
-}: {
+type AnalyzerProps = {
   refBySeason: Record<string, LeagueRef>;
   initial: LiveSeason;
   userIdToSlug: Record<string, string>;
@@ -86,7 +79,69 @@ export function TradeAnalyzer({
   rosterPositions: string[];
   baked: Record<string, BakedPlayer>;
   linkable: string[];
+};
+
+/**
+ * The gate. Nothing below it mounts — no rosters, no projections, no finder —
+ * until the visitor has unlocked this browser or arrived on a validly signed
+ * share link. See lib/trade-lock for what that does and does not protect.
+ */
+export function TradeAnalyzer(props: AnalyzerProps) {
+  const lock = useTradeLock();
+  const [a] = useUrlText("a");
+  const [b] = useUrlText("b");
+  const [giveRaw] = useUrlText("give");
+  const [sig] = useUrlText("sig");
+  const linkKey = `${a}|${b}|${giveRaw}|${sig}`;
+  const [shared, setShared] = useState<{ key: string; ok: boolean } | null>(null);
+
+  useEffect(() => {
+    if (!sig || lock.status !== "locked") return;
+    let cancelled = false;
+    verifyTrade({ a, b, give: giveRaw ? giveRaw.split(",").filter(Boolean) : [] }, sig).then((ok) => {
+      if (!cancelled) setShared({ key: linkKey, ok });
+    });
+    return () => {
+      cancelled = true;
+    };
+    // `linkKey` stands in for the four params it is built from.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [linkKey, lock.status]);
+
+  const sharedOk = sig && shared?.key === linkKey ? shared.ok : null;
+  if (lock.status === "checking" || (lock.status === "locked" && sig && sharedOk == null)) {
+    return (
+      <Panel>
+        <EmptyState>Checking…</EmptyState>
+      </Panel>
+    );
+  }
+  if (lock.status === "unlocked") return <AnalyzerBody {...props} mode="full" lock={lock} />;
+  if (sharedOk) return <AnalyzerBody {...props} mode="shared" lock={lock} />;
+  return <LockScreen status={lock.status} badLink={Boolean(sig)} onUnlock={lock.unlock} />;
+}
+
+function AnalyzerBody({
+  mode,
+  lock,
+  refBySeason,
+  initial,
+  userIdToSlug,
+  owners,
+  format,
+  rosterPositions,
+  baked,
+  linkable,
+}: AnalyzerProps & {
+  /**
+   * "shared" is a signed link opened by someone who has not unlocked: the trade
+   * is fixed, the finder and overrides are gone, and only view settings — the
+   * free-agent setting, a week, a lineup, a player card — can change.
+   */
+  mode: "full" | "shared";
+  lock: TradeLock;
 }) {
+  const shared = mode === "shared";
   const live = useLiveSeason(refBySeason, initial, userIdToSlug);
   const season = live ?? initial;
   const ref = refBySeason[String(season.season)] ?? null;
@@ -100,7 +155,7 @@ export function TradeAnalyzer({
   const [bParam, setB] = useUrlText("b");
   const [give, setGive] = useUrlList("give");
   const [viewParam, setViewParam] = useUrlText("view");
-  const view = viewParam === "finder" ? "finder" : "analyzer";
+  const view = !shared && viewParam === "finder" ? "finder" : "analyzer";
   const [faParam, setFaParam] = useUrlText("fa");
   const faMode: FaMode = faParam === "none" || faParam === "traders" ? faParam : "all";
   // The default spells nothing, so an untouched page keeps a clean URL.
@@ -120,6 +175,7 @@ export function TradeAnalyzer({
   const hasTrade = Boolean(teamA && teamB && (fromA.length || fromB.length));
 
   const toggle = (id: string) =>
+    shared ||
     setGive(give.includes(id) ? give.filter((x) => x !== id) : [...fromA, ...fromB, id]);
 
   // ---------------------------------------------------------------- the clock
@@ -147,6 +203,8 @@ export function TradeAnalyzer({
   const liveTotals = useLiveProjections(live, ref);
   const byeTeams = useByeTeams(season.season);
   const overridesApi = useProjectionOverrides();
+  // A shared trade shows Sleeper's numbers, never the viewer's own overrides.
+  const overrides = shared ? NO_OVERRIDES : overridesApi.overrides;
   /**
    * Every number below reads THESE, never `proj.byWeek` directly: an override is
    * the reader saying the projection is wrong, so it has to reach the lineups,
@@ -154,8 +212,8 @@ export function TradeAnalyzer({
    * belief about a player rather than part of the trade.
    */
   const projected = useMemo(
-    () => applyOverrides(proj.byWeek, overridesApi.overrides),
-    [proj.byWeek, overridesApi.overrides],
+    () => applyOverrides(proj.byWeek, overrides),
+    [proj.byWeek, overrides],
   );
   const gamesReady = Object.keys(games).length > 0;
   const ready = proj.ready && pool.ready;
@@ -393,7 +451,7 @@ export function TradeAnalyzer({
 
   // Players with an override in any week still to play, for the average view.
   const overriddenAny = new Set(
-    Object.entries(overridesApi.overrides)
+    Object.entries(overrides)
       .filter(([, w]) => openWeeks.some((wk) => typeof w[String(wk)] === "number"))
       .map(([id]) => id),
   );
@@ -456,7 +514,7 @@ export function TradeAnalyzer({
         ),
       ),
       overridden: new Set(
-        Object.entries(overridesApi.overrides)
+        Object.entries(overrides)
           .filter(([, w]) => typeof w[String(detail.week)] === "number")
           .map(([id]) => id),
       ),
@@ -495,23 +553,34 @@ export function TradeAnalyzer({
       linkable={canLink}
     >
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <Segmented
-          kind="tab"
-          label="View"
-          value={view}
-          onChange={(v) => setViewParam(v === "analyzer" ? "" : v)}
-          options={[
-            { value: "analyzer", label: "Analyzer" },
-            { value: "finder", label: "Finder" },
-          ]}
-        />
+        {shared ? (
+          <span className="inline-flex h-9 items-center rounded-lg border border-trade/40 bg-trade/10 px-3 text-[13px] text-trade">
+            Shared trade · read only
+          </span>
+        ) : (
+          <Segmented
+            kind="tab"
+            label="View"
+            value={view}
+            onChange={(v) => setViewParam(v === "analyzer" ? "" : v)}
+            options={[
+              { value: "analyzer", label: "Analyzer" },
+              { value: "finder", label: "Finder" },
+            ]}
+          />
+        )}
         <div className="flex flex-wrap items-center gap-3">
           <span className="eyebrow text-[10px]">Free agents</span>
           <Segmented label="Who may pick up free agents" value={faMode} onChange={setFaMode} options={FA_MODES} />
+          {!shared ? (
+            <button type="button" onClick={lock.lock} className={BUTTON.secondary} title="Forget the passphrase on this device">
+              Lock
+            </button>
+          ) : null}
         </div>
       </div>
 
-      {overridesApi.activeCount ? (
+      {!shared && overridesApi.activeCount ? (
         // AN OVERRIDDEN BOARD RENDERS EXACTLY LIKE A REAL ONE, and the overrides
         // live in this browser only — so a screenshot of these numbers has to
         // say they are not Sleeper's. Same reason `<MockBadge />` exists.
@@ -572,6 +641,7 @@ export function TradeAnalyzer({
                   <Select
                     className="mb-3"
                     value={team?.ownerSlug ?? ""}
+                    disabled={shared}
                     onChange={(e) => set(e.target.value)}
                     aria-label={which === "a" ? "First team" : "Second team"}
                   >
@@ -594,6 +664,7 @@ export function TradeAnalyzer({
                       nflTeamOf={nflTeamOf}
                       average={(id) => averageOf(id, openWeeks, projected)}
                       loading={!ready}
+                      readOnly={shared}
                     />
                   ) : (
                     <EmptyState>Pick a team to trade with.</EmptyState>
@@ -601,13 +672,16 @@ export function TradeAnalyzer({
                 </div>
               ))}
             </div>
-            {give.length ? (
-              <div className="flex justify-end border-t border-ink-600 px-4 py-2 sm:px-5">
-                <button
-                  type="button"
-                  onClick={() => setGive([])}
-                  className={BUTTON.secondarySm}
-                >
+            {!shared && give.length ? (
+              <div className="flex flex-wrap justify-end gap-2 border-t border-ink-600 px-4 py-2 sm:px-5">
+                {hasTrade && teamA && teamB && lock.sign ? (
+                  <ShareButton
+                    sign={lock.sign}
+                    trade={{ a: teamA.ownerSlug, b: teamB.ownerSlug, give: [...fromA, ...fromB] }}
+                    fa={faParam}
+                  />
+                ) : null}
+                <button type="button" onClick={() => setGive([])} className={BUTTON.secondarySm}>
                   Clear the trade
                 </button>
               </div>
@@ -727,18 +801,20 @@ export function TradeAnalyzer({
         </>
       )}
 
-      <div id="overrides" className="scroll-mt-20">
-        <ProjectionOverridesPanel
-          api={overridesApi}
-          weeks={openWeeks}
-          sleeper={proj.byWeek}
-          candidates={candidates}
-          nameOf={nameOf}
-          positionOf={positionOf}
-          nflTeamOf={nflTeamOf}
-          holderOf={holderOf}
-        />
-      </div>
+      {!shared ? (
+        <div id="overrides" className="scroll-mt-20">
+          <ProjectionOverridesPanel
+            api={overridesApi}
+            weeks={openWeeks}
+            sleeper={proj.byWeek}
+            candidates={candidates}
+            nameOf={nameOf}
+            positionOf={positionOf}
+            nflTeamOf={nflTeamOf}
+            holderOf={holderOf}
+          />
+        </div>
+      ) : null}
 
       {view === "analyzer" ? (
         <p className="max-w-3xl text-[11px] leading-relaxed text-chalk-600">
@@ -798,6 +874,7 @@ function RosterPicker({
   nflTeamOf,
   average,
   loading,
+  readOnly = false,
 }: {
   team: LiveTeam;
   picked: string[];
@@ -807,6 +884,8 @@ function RosterPicker({
   nflTeamOf: (id: string) => string | null;
   average: (id: string) => number | null;
   loading: boolean;
+  /** A shared trade: the ticks show the deal and cannot be changed. */
+  readOnly?: boolean;
 }) {
   const card = usePlayerCard();
   const sorted = [...team.players].sort(
@@ -823,13 +902,14 @@ function RosterPicker({
         return (
           <li key={id}>
             <label
-              className={`flex cursor-pointer items-baseline gap-2 rounded px-1.5 py-1 text-[13px] transition-colors ${
-                on ? "bg-trade/15 text-chalk-100" : "text-chalk-400 hover:bg-ink-700"
-              }`}
+              className={`flex items-baseline gap-2 rounded px-1.5 py-1 text-[13px] transition-colors ${
+                readOnly ? "" : "cursor-pointer"
+              } ${on ? "bg-trade/15 text-chalk-100" : readOnly ? "text-chalk-500" : "text-chalk-400 hover:bg-ink-700"}`}
             >
               <input
                 type="checkbox"
                 checked={on}
+                disabled={readOnly}
                 onChange={() => onToggle(id)}
                 className="translate-y-0.5 accent-[var(--color-trade)]"
               />
@@ -1151,6 +1231,8 @@ function LeagueOdds({
 // ---------------------------------------------------------------------------
 
 type FaMode = "none" | "traders" | "all";
+
+const NO_OVERRIDES: ProjectionOverrides = {};
 
 /** The average lineup has no week, so nobody in it is on a bye. */
 const NO_BYES: Set<string> = new Set();

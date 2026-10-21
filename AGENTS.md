@@ -1941,6 +1941,49 @@ demand, not as filters change, and says so when the filters have moved since.
 It follows the free-agent setting — now in a bar shared by both tabs — and the
 projection overrides, and "Analyze" loads a result into the analyzer tab.
 
+### The passphrase lock and signed share links
+
+Both tabs are behind a passphrase (`lib/trade-lock.ts`, `components/trade-lock.tsx`).
+Without it the page is a lock screen and NOTHING BELOW MOUNTS — no rosters, no
+projections, no finder. With it: everything, plus "Copy share link" and "Lock".
+
+A share link opens ONE TRADE READ-ONLY for anyone. The teams and players cannot
+change, the finder and the projection overrides are gone (a shared trade shows
+Sleeper's numbers, never the viewer's own); the free-agent setting, the weeks,
+the lineups and the player cards still work — views, not edits.
+
+BE CLEAR-EYED ABOUT WHAT THIS STOPS. The repo is public and the site is static,
+so anyone who edits the JavaScript, or clones the repo and runs it, gets past
+it. Only a server or a private repo could stop that, and both were declined.
+What it does stop is everyone else — without shipping anything a coding agent
+can crack.
+
+THAT IS WHY A PASSPHRASE AND NOT A PIN. Whatever the page checks against is in
+its JavaScript, and a 4-6 digit PIN behind even a slow hash falls to trying
+them all in minutes to hours. A few random words cannot be enumerated.
+
+HOW, WITH NOTHING UNLOCKABLE ON THE PAGE: PBKDF2-SHA256 at 600,000 rounds turns
+the normalised passphrase (case and whitespace folded, for phones) into a seed,
+and the seed is an Ed25519 private key. The page holds only the SALT and the
+PUBLIC key; unlocking re-derives the key and compares public halves. The unlock
+is remembered as the seed itself, re-checked against the public key on load —
+not as a flag the console could set.
+
+SHARE LINKS ARE SIGNED, not merely encoded: `a`, `b`, `give` and the league are
+signed with the private key and verified with the public one, so only someone
+holding the passphrase can make one, and editing any part lands on the lock.
+The player list is sorted before signing; the free-agent setting rides unsigned.
+Checked: right passphrase in any case or spacing matches, a near-miss does not,
+reordered players still verify, a swapped player, a swapped team and a forged
+signature all fail.
+
+SETUP: `node scripts/trade-lock.ts` prompts for the passphrase (unechoed) and
+prints a fresh salt and the public key. Store them as the repo secrets
+`TRADE_LOCK_SALT` and `TRADE_LOCK_KEY` — `deploy.yml` passes them in as
+`NEXT_PUBLIC_TRADE_LOCK_*` — and in `.env.local` for a local build. Missing, the
+page says it is not set up and stays locked for everyone. Re-running the script
+rotates the passphrase and invalidates every link and every remembered unlock.
+
 ### One set of form controls
 
 `components/form.tsx` is every input, select, segmented control and button on
