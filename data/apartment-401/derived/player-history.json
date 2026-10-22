@@ -5919,6 +5919,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792673499327,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "3664": [
@@ -29473,6 +29485,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792673259632,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "13274": [
@@ -30801,6 +30825,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792673525556,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "CHI": [
@@ -33927,6 +33963,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792673525556,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "LV": [
@@ -34758,6 +34806,18 @@
       "timestamp": 1792568144907,
       "toSlug": null,
       "type": "waiver",
+      "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792673499327,
+      "toSlug": null,
+      "type": "free_agent",
       "week": 7
     }
   ],

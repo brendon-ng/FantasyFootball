@@ -37920,6 +37920,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792648011668,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "8111": [
@@ -43013,6 +43025,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792648332055,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "9487": [
@@ -48170,6 +48194,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792648332055,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "11748": [
@@ -55223,6 +55259,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792612642727,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "JAX": [
@@ -58924,6 +58972,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792612642727,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "PHI": [

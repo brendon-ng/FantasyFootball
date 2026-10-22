@@ -694,7 +694,7 @@
   },
   "2078": {
     "birth_date": "1992-11-05",
-    "full_name": "Odell Beckham",
+    "full_name": "Odell Beckham Jr.",
     "position": "WR",
     "team": "MIN",
     "years_exp": 12
@@ -848,7 +848,7 @@
   },
   "2334": {
     "birth_date": "1993-01-05",
-    "full_name": "Phillip Dorsett",
+    "full_name": "Phillip Dorsett II",
     "position": "WR",
     "team": "LV",
     "years_exp": 11
@@ -1282,7 +1282,7 @@
   },
   "4037": {
     "birth_date": "1996-02-27",
-    "full_name": "Chris Godwin",
+    "full_name": "Chris Godwin Jr.",
     "position": "WR",
     "team": "TB",
     "years_exp": 9
@@ -1485,7 +1485,7 @@
   },
   "4199": {
     "birth_date": "1994-12-02",
-    "full_name": "Aaron Jones",
+    "full_name": "Aaron Jones Sr.",
     "position": "RB",
     "team": "MIN",
     "years_exp": 9
@@ -2115,7 +2115,7 @@
   },
   "5872": {
     "birth_date": "1996-01-15",
-    "full_name": "Deebo Samuel",
+    "full_name": "Deebo Samuel Sr.",
     "position": "WR",
     "team": "SF",
     "years_exp": 7
@@ -2164,7 +2164,7 @@
   },
   "5917": {
     "birth_date": "1998-03-12",
-    "full_name": "Mecole Hardman",
+    "full_name": "Mecole Hardman Jr.",
     "position": "WR",
     "team": "IND",
     "years_exp": 7
@@ -2248,7 +2248,7 @@
   },
   "6011": {
     "birth_date": "1996-05-16",
-    "full_name": "Gardner Minshew",
+    "full_name": "Gardner Minshew II",
     "position": "QB",
     "team": "ARI",
     "years_exp": 7
@@ -2535,7 +2535,7 @@
   },
   "6819": {
     "birth_date": "1997-10-05",
-    "full_name": "Michael Pittman",
+    "full_name": "Michael Pittman Jr.",
     "position": "WR",
     "team": "PIT",
     "years_exp": 6
@@ -2864,7 +2864,7 @@
   },
   "7543": {
     "birth_date": "1999-01-26",
-    "full_name": "Travis Etienne",
+    "full_name": "Travis Etienne Jr.",
     "position": "RB",
     "team": "NO",
     "years_exp": 5
@@ -2885,7 +2885,7 @@
   },
   "7553": {
     "birth_date": "2000-10-06",
-    "full_name": "Kyle Pitts",
+    "full_name": "Kyle Pitts Sr.",
     "position": "TE",
     "team": "ATL",
     "years_exp": 5
@@ -3123,7 +3123,7 @@
   },
   "8116": {
     "birth_date": "1998-12-10",
-    "full_name": "Pierre Strong",
+    "full_name": "Pierre Strong Jr.",
     "position": "RB",
     "team": "GB",
     "years_exp": 4
@@ -3165,7 +3165,7 @@
   },
   "8125": {
     "birth_date": "1999-03-24",
-    "full_name": "Calvin Austin",
+    "full_name": "Calvin Austin III",
     "position": "WR",
     "team": "NYG",
     "years_exp": 4
@@ -3235,7 +3235,7 @@
   },
   "8138": {
     "birth_date": "1999-09-25",
-    "full_name": "James Cook",
+    "full_name": "James Cook III",
     "position": "RB",
     "team": "BUF",
     "years_exp": 4
@@ -3277,7 +3277,7 @@
   },
   "8147": {
     "birth_date": "2000-07-18",
-    "full_name": "John Metchie",
+    "full_name": "John Metchie III",
     "position": "WR",
     "team": "CAR",
     "years_exp": 4
@@ -3298,7 +3298,7 @@
   },
   "8151": {
     "birth_date": "2000-10-20",
-    "full_name": "Kenneth Walker",
+    "full_name": "Kenneth Walker III",
     "position": "RB",
     "team": "KC",
     "years_exp": 4
@@ -3312,7 +3312,7 @@
   },
   "8154": {
     "birth_date": "1999-03-22",
-    "full_name": "Brian Robinson",
+    "full_name": "Brian Robinson Jr.",
     "position": "RB",
     "team": "ATL",
     "years_exp": 4
@@ -3543,7 +3543,7 @@
   },
   "9229": {
     "birth_date": "2002-05-22",
-    "full_name": "Anthony Richardson",
+    "full_name": "Anthony Richardson Sr.",
     "position": "QB",
     "team": "IND",
     "years_exp": 3
@@ -3613,7 +3613,7 @@
   },
   "9494": {
     "birth_date": "2002-03-19",
-    "full_name": "Marvin Mims",
+    "full_name": "Marvin Mims Jr.",
     "position": "WR",
     "team": "DEN",
     "years_exp": 3
@@ -3732,7 +3732,7 @@
   },
   "10219": {
     "birth_date": "1999-09-26",
-    "full_name": "Chris Rodriguez",
+    "full_name": "Chris Rodriguez Jr.",
     "position": "RB",
     "team": "JAX",
     "years_exp": 3
@@ -3886,7 +3886,7 @@
   },
   "11559": {
     "birth_date": "2000-05-08",
-    "full_name": "Michael Penix",
+    "full_name": "Michael Penix Jr.",
     "position": "QB",
     "team": "ATL",
     "years_exp": 2
@@ -3972,7 +3972,7 @@
     "birth_date": "2002-10-21",
     "full_name": "Carson Steele",
     "position": "RB",
-    "team": "PHI",
+    "team": null,
     "years_exp": 2
   },
   "11583": {
@@ -4082,7 +4082,7 @@
   },
   "11628": {
     "birth_date": "2002-08-11",
-    "full_name": "Marvin Harrison",
+    "full_name": "Marvin Harrison Jr.",
     "position": "WR",
     "team": "HOU",
     "years_exp": 2
@@ -4096,7 +4096,7 @@
   },
   "11631": {
     "birth_date": "2002-10-08",
-    "full_name": "Brian Thomas",
+    "full_name": "Brian Thomas Jr.",
     "position": "WR",
     "team": "JAX",
     "years_exp": 2
@@ -4166,7 +4166,7 @@
   },
   "11655": {
     "birth_date": "1999-11-23",
-    "full_name": "Tyrone Tracy",
+    "full_name": "Tyrone Tracy Jr.",
     "position": "RB",
     "team": "NYG",
     "years_exp": 2
@@ -4238,7 +4238,7 @@
     "birth_date": "2004-01-08",
     "full_name": "Jaydon Blue",
     "position": "RB",
-    "team": "PHI",
+    "team": null,
     "years_exp": 1
   },
   "12469": {
@@ -4334,7 +4334,7 @@
   },
   "12495": {
     "birth_date": "2004-01-15",
-    "full_name": "Ollie Gordon",
+    "full_name": "Ollie Gordon II",
     "position": "RB",
     "team": "MIA",
     "years_exp": 1
@@ -4376,7 +4376,7 @@
   },
   "12506": {
     "birth_date": "2004-07-20",
-    "full_name": "Harold Fannin",
+    "full_name": "Harold Fannin Jr.",
     "position": "TE",
     "team": "CLE",
     "years_exp": 1
@@ -4432,7 +4432,7 @@
   },
   "12519": {
     "birth_date": "2003-12-12",
-    "full_name": "Luther Burden",
+    "full_name": "Luther Burden III",
     "position": "WR",
     "team": "CHI",
     "years_exp": 1
@@ -4486,6 +4486,13 @@
     "team": "DET",
     "years_exp": 1
   },
+  "12536": {
+    "birth_date": "2002-09-04",
+    "full_name": "Jaylin Noel",
+    "position": "WR",
+    "team": "HOU",
+    "years_exp": 1
+  },
   "12540": {
     "birth_date": "2001-12-14",
     "full_name": "Chimere Dike",
@@ -4495,14 +4502,14 @@
   },
   "12541": {
     "birth_date": "2002-11-30",
-    "full_name": "Dont'e Thornton",
+    "full_name": "Dont'e Thornton Jr.",
     "position": "WR",
     "team": "LV",
     "years_exp": 1
   },
   "12542": {
     "birth_date": "2001-10-26",
-    "full_name": "Efton Chism",
+    "full_name": "Efton Chism III",
     "position": "WR",
     "team": "NE",
     "years_exp": 1
@@ -4572,7 +4579,7 @@
   },
   "13276": {
     "birth_date": "2003-12-14",
-    "full_name": "Omar Cooper",
+    "full_name": "Omar Cooper Jr.",
     "position": "WR",
     "team": "NYJ",
     "years_exp": 0
@@ -4642,7 +4649,7 @@
   },
   "13298": {
     "birth_date": "2004-09-23",
-    "full_name": "KC Concepcion",
+    "full_name": "KC Concepcion Jr.",
     "position": "WR",
     "team": "CLE",
     "years_exp": 0
@@ -4656,7 +4663,7 @@
   },
   "13305": {
     "birth_date": "2003-07-03",
-    "full_name": "Mike Washington",
+    "full_name": "Mike Washington Jr.",
     "position": "RB",
     "team": "LV",
     "years_exp": 0
