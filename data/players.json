@@ -4238,7 +4238,7 @@
     "birth_date": "2004-01-08",
     "full_name": "Jaydon Blue",
     "position": "RB",
-    "team": null,
+    "team": "PHI",
     "years_exp": 1
   },
   "12469": {
@@ -4722,6 +4722,13 @@
     "full_name": "De'Zhaun Stribling",
     "position": "WR",
     "team": "SF",
+    "years_exp": 0
+  },
+  "13424": {
+    "birth_date": "2001-10-23",
+    "full_name": "Seth McGowan",
+    "position": "RB",
+    "team": "IND",
     "years_exp": 0
   },
   "13545": {

@@ -12165,6 +12165,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792713612309,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "5846": [
@@ -17426,6 +17438,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792713612309,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "7042": [
@@ -21263,6 +21287,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792687830772,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "8130": [
@@ -24111,6 +24147,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792717058560,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "9484": [
@@ -24767,6 +24815,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792717058560,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "9509": [
@@ -25462,6 +25522,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792687830772,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "10219": [
@@ -29369,6 +29441,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792716739910,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "12711": [
@@ -29673,6 +29757,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792716739910,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "13345": [

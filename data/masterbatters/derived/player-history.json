@@ -325,6 +325,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792727209860,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "1339": [
@@ -1317,6 +1329,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792702203612,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "3294": [
@@ -1448,6 +1472,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792736200881,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 7
     }
   ],
   "3451": [
@@ -4508,6 +4544,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "joe-gibbons",
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792726931298,
+      "toSlug": "josh-greenebaum",
+      "tradeId": "1419134860513087488",
+      "type": "trade",
+      "week": 7
     }
   ],
   "6797": [
@@ -5104,6 +5153,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "josh-greenebaum",
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792726931298,
+      "toSlug": "joe-gibbons",
+      "tradeId": "1419134860513087488",
+      "type": "trade",
+      "week": 7
     }
   ],
   "7528": [
@@ -6153,6 +6215,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792710804569,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "8121": [
@@ -6243,6 +6317,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792702203612,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "8123": [
@@ -6371,6 +6457,19 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "joe-gibbons",
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792726931298,
+      "toSlug": "josh-greenebaum",
+      "tradeId": "1419134860513087488",
+      "type": "trade",
+      "week": 7
     }
   ],
   "8129": [
@@ -7999,6 +8098,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792708819694,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "9484": [
@@ -8179,6 +8290,19 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "josh-greenebaum",
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792726931298,
+      "toSlug": "joe-gibbons",
+      "tradeId": "1419134860513087488",
+      "type": "trade",
+      "week": 7
     }
   ],
   "9494": [
@@ -8727,6 +8851,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792710804569,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "9757": [
@@ -10713,6 +10849,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792736200881,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 7
     }
   ],
   "11625": [
@@ -12578,6 +12726,19 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "trade",
+      "faabSpent": null,
+      "fromSlug": "joe-gibbons",
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792726931298,
+      "toSlug": "josh-greenebaum",
+      "tradeId": "1419134860513087488",
+      "type": "trade",
+      "week": 7
     }
   ],
   "12497": [
