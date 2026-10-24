@@ -8005,6 +8005,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792792345614,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "2214": [
@@ -29698,6 +29710,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792790087156,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "6659": [

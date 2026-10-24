@@ -804,6 +804,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792767070529,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "2216": [
@@ -2527,6 +2539,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792807982907,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "4663": [
@@ -3045,6 +3069,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792767070529,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "5012": [
@@ -4904,6 +4940,18 @@
       "timestamp": 1792636115760,
       "toSlug": null,
       "type": "free_agent",
+      "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792805835699,
+      "toSlug": null,
+      "type": "waiver",
       "week": 7
     }
   ],
@@ -6775,6 +6823,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792777007184,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 7
     }
   ],
   "8137": [
@@ -8409,6 +8469,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792777007184,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 7
     }
   ],
   "9501": [
@@ -14824,6 +14896,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    }
+  ],
+  "13424": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792807982907,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "13545": [

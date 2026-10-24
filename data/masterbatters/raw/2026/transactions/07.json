@@ -1,5 +1,111 @@
 [
   {
+    "adds": {
+      "13424": 3
+    },
+    "consenter_ids": [
+      3
+    ],
+    "created": 1792807982907,
+    "creator": "839620800469393408",
+    "draft_picks": [],
+    "drops": {
+      "4454": 3
+    },
+    "leg": 7,
+    "metadata": null,
+    "roster_ids": [
+      3
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1792807982907,
+    "transaction_id": "1419543203727638528",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "2197": 6
+    },
+    "consenter_ids": [
+      6
+    ],
+    "created": 1792767070529,
+    "creator": "1264677752292790272",
+    "draft_picks": [],
+    "drops": {
+      "5001": 6
+    },
+    "leg": 7,
+    "metadata": null,
+    "roster_ids": [
+      6
+    ],
+    "settings": null,
+    "status": "complete",
+    "status_updated": 1792767070529,
+    "transaction_id": "1419371604776939520",
+    "type": "free_agent",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "8136": 6
+    },
+    "consenter_ids": [
+      6
+    ],
+    "created": 1792767058873,
+    "creator": "1264677752292790272",
+    "draft_picks": [],
+    "drops": {
+      "9500": 6
+    },
+    "leg": 7,
+    "metadata": {
+      "notes": "Your waiver claim was processed successfully!"
+    },
+    "roster_ids": [
+      6
+    ],
+    "settings": {
+      "seq": 0
+    },
+    "status": "complete",
+    "status_updated": 1792777007184,
+    "transaction_id": "1419371555883884544",
+    "type": "waiver",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
+      "7002": 5
+    },
+    "consenter_ids": [
+      5
+    ],
+    "created": 1792736362874,
+    "creator": "1118648108470116352",
+    "draft_picks": [],
+    "drops": null,
+    "leg": 7,
+    "metadata": {
+      "notes": "Your waiver claim was processed successfully!"
+    },
+    "roster_ids": [
+      5
+    ],
+    "settings": {
+      "seq": 0
+    },
+    "status": "complete",
+    "status_updated": 1792805835699,
+    "transaction_id": "1419242807536697344",
+    "type": "waiver",
+    "waiver_budget": []
+  },
+  {
     "adds": null,
     "consenter_ids": [
       3
