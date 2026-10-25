@@ -12499,6 +12499,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792887725731,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "5850": [
@@ -26678,6 +26690,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792887725731,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "11564": [

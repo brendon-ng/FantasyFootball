@@ -753,16 +753,16 @@
     },
     {
       "faab": 0,
-      "id": "15f252bd-69a1-4183-897b-fd9d8c96816e",
+      "id": "97e7723b-a948-4ed4-b91d-6c996eb6d302",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "421",
+          "playerId": "MIN",
           "toSlug": "isaac-edejer"
         },
         {
           "fromSlug": "isaac-edejer",
-          "playerId": "6797",
+          "playerId": "SF",
           "toSlug": null
         }
       ],
@@ -776,16 +776,16 @@
     },
     {
       "faab": 0,
-      "id": "97e7723b-a948-4ed4-b91d-6c996eb6d302",
+      "id": "15f252bd-69a1-4183-897b-fd9d8c96816e",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "MIN",
+          "playerId": "421",
           "toSlug": "isaac-edejer"
         },
         {
           "fromSlug": "isaac-edejer",
-          "playerId": "SF",
+          "playerId": "6797",
           "toSlug": null
         }
       ],
@@ -1976,22 +1976,17 @@
     },
     {
       "faab": 0,
-      "id": "04946a3a-4c2d-4bb8-8047-fa033bb54958",
+      "id": "6674db76-745e-41b3-965c-d6909188d1d6",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "13301",
-          "toSlug": "mark-mcgreal"
-        },
-        {
-          "fromSlug": "mark-mcgreal",
-          "playerId": "5927",
-          "toSlug": null
+          "playerId": "96",
+          "toSlug": "sam-ellison"
         }
       ],
       "kind": "waiver",
       "ownerSlugs": [
-        "mark-mcgreal"
+        "sam-ellison"
       ],
       "timestamp": 1792568144907,
       "vetoed": false,
@@ -2022,17 +2017,22 @@
     },
     {
       "faab": 0,
-      "id": "6674db76-745e-41b3-965c-d6909188d1d6",
+      "id": "04946a3a-4c2d-4bb8-8047-fa033bb54958",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "96",
-          "toSlug": "sam-ellison"
+          "playerId": "13301",
+          "toSlug": "mark-mcgreal"
+        },
+        {
+          "fromSlug": "mark-mcgreal",
+          "playerId": "5927",
+          "toSlug": null
         }
       ],
       "kind": "waiver",
       "ownerSlugs": [
-        "sam-ellison"
+        "mark-mcgreal"
       ],
       "timestamp": 1792568144907,
       "vetoed": false,
@@ -2260,6 +2260,29 @@
         "haley-rao"
       ],
       "timestamp": 1792717058560,
+      "vetoed": false,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "831618bc-3e85-4841-ab68-761332de0dcc",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5849",
+          "toSlug": "jay-uppuluri"
+        },
+        {
+          "fromSlug": "jay-uppuluri",
+          "playerId": "11563",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jay-uppuluri"
+      ],
+      "timestamp": 1792887725731,
       "vetoed": false,
       "week": 7
     }

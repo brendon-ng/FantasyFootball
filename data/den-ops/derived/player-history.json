@@ -15024,6 +15024,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792909863390,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "4036": [
@@ -20157,6 +20169,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792853570111,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "4951": [
@@ -36172,6 +36196,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792909244280,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "7574": [
@@ -40560,6 +40596,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792909298738,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "8155": [
@@ -44600,6 +44648,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792909298738,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "9758": [
@@ -46103,6 +46163,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792856372104,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "11539": [
@@ -46713,6 +46785,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792909863390,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "11582": [
@@ -50393,6 +50477,34 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    }
+  ],
+  "12718": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792856372104,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
+    }
+  ],
+  "13150": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792909244280,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 7
     }
   ],
   "13274": [
