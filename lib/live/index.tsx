@@ -859,11 +859,10 @@ export function useLastPlaceOdds(
   if (!odds) return null;
   const locked = lockedIntoLast(rows);
   /**
-   * ZEROED RATHER THAN LEFT TO ROUND. The integral gives these about 1e-100,
-   * which is not a number anybody should have to read as "impossible" — see
-   * `safeFromLast`. Not renormalised afterwards, deliberately: the mass being
-   * removed is far below anything the arithmetic elsewhere can notice, and
-   * rescaling the column would hide it if that ever stopped being true.
+   * ZEROED BY THE FLAG, not trusted to the float. `lastPlaceOdds` already
+   * returns exactly 0 under the same condition, so today this changes nothing;
+   * it stays so "impossible" is decided by `safeFromLast` alone and a change
+   * to the odds cannot quietly start printing "0%" for a team that could fall.
    */
   const safe = safeFromLast(rows);
   return rows

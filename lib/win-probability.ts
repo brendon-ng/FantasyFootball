@@ -132,47 +132,86 @@ export function winProbability(
  * the chance everybody else lands above it. Checked against a 200k-trial
  * simulation; see the test below the fold in the commit.
  *
- * THE GRID ADAPTS TO THE NARROWEST TEAM. A side that has finished has variance
- * floored at 0.1 — a standard deviation of about a third of a point — so a grid
- * sized to the league's whole range would step straight over its spike and
- * report nonsense. The step is a fraction of the smallest standard deviation,
- * capped so the loop stays bounded.
+ * A FINISHED TEAM IS A FIXED SCORE, NOT A NARROW NORMAL. It used to be
+ * integrated like everyone else, as a spike a third of a point wide, on one
+ * grid spanning the whole league — and the spike was routinely narrower than
+ * that: `distribution`'s `|| 0.1` floor only catches an EXACT zero, and a
+ * projection that sums to 59.2000000x leaves a variance near 1e-14 that slips
+ * past it. The grid stepped straight over the spike, the team scored nothing,
+ * and normalising handed its share to the teams still playing. Week 7 of 2026
+ * showed a team finished on 59.20, bottom of the league, at 0.0% while two
+ * teams in the seventies split 100% between them.
+ *
+ * So the field is split. A team that is DONE is a point at its score, and its
+ * chance is exact with no integral at all: everybody still playing ending above
+ * it, and no other finished score below it. Each team still playing is
+ * integrated on ITS OWN grid, ±8σ in steps of σ/40, with σ floored at the third
+ * of a point `distribution` meant to give it and the finished scores as a hard
+ * ceiling — so no team's width sets the resolution for anybody else's.
+ *
+ * EXACTLY ZERO ONLY WHERE `safeFromLast` WOULD SAY SO: a finished team with a
+ * finished team below it. Anybody whose score can still move is floored above
+ * zero, because the card prints a literal 0 as "0%", which is a claim of
+ * certainty the schedule has not made — a team still playing can fall.
+ *
+ * A tie between fixed scores at the bottom splits that mass evenly, which is
+ * the probability statement; whether the punishment can be pinned on either is
+ * `lockedIntoLast`'s question, not this one.
  *
  * Normalised at the end: exactly one team finishes last, so the column sums to
  * 1 by construction and any residual integration error is absorbed rather than
  * displayed.
  */
 export function lastPlaceOdds(
-  teams: Array<{ current: number; projected: number }>,
+  teams: Array<{ current: number; projected: number; done?: boolean }>,
 ): number[] | null {
   if (teams.length < 2) return null;
   const dists = teams.map((t) => distribution(t.current, t.projected));
   if (dists.some((d) => !Number.isFinite(d.mean) || !Number.isFinite(d.variance))) return null;
 
-  const sds = dists.map((d) => Math.sqrt(Math.max(d.variance, 1e-9)));
-  const lo = Math.min(...dists.map((d, i) => d.mean - 6 * sds[i]));
-  const hi = Math.max(...dists.map((d, i) => d.mean + 6 * sds[i]));
-  if (!(hi > lo)) return null;
+  const sds = dists.map((d) => Math.sqrt(Math.max(d.variance, 0.1)));
+  /** A fixed score, or null for a team whose score can still move. */
+  const fixed = teams.map((t) => (t.done ? t.current : null));
+  const variance = sds.map((sd) => sd * sd);
+  const moving = teams.map((_, i) => i).filter((i) => fixed[i] == null);
+  const above = (j: number, x: number) => 1 - normalCdf(x, dists[j].mean, variance[j]);
 
-  const STEPS = Math.min(20000, Math.max(2000, Math.ceil((hi - lo) / (Math.min(...sds) / 6))));
-  const dx = (hi - lo) / STEPS;
-
-  const out = new Array<number>(teams.length).fill(0);
-  for (let k = 0; k <= STEPS; k++) {
-    const x = lo + k * dx;
-    // Survival — the chance each team finishes ABOVE x.
-    const above = dists.map((d) => 1 - normalCdf(x, d.mean, d.variance));
-    for (let i = 0; i < teams.length; i++) {
-      let others = 1;
-      for (let j = 0; j < teams.length; j++) if (j !== i) others *= above[j];
-      if (others <= 0) continue;
-      out[i] += normalPdf(x, dists[i].mean, dists[i].variance) * others * dx;
+  const out = teams.map((_, i) => {
+    const f = fixed[i];
+    if (f != null) {
+      let ties = 1;
+      for (let j = 0; j < teams.length; j++) {
+        const g = fixed[j];
+        if (j === i || g == null) continue;
+        if (g < f) return 0;
+        if (g === f) ties++;
+      }
+      let p = 1 / ties;
+      for (const j of moving) p *= above(j, f);
+      return Math.max(p, Number.MIN_VALUE);
     }
-  }
+
+    const ceiling = Math.min(Infinity, ...fixed.filter((g): g is number => g != null));
+    const lo = dists[i].mean - 8 * sds[i];
+    const hi = Math.min(dists[i].mean + 8 * sds[i], ceiling);
+    if (!(hi > lo)) return Number.MIN_VALUE;
+    const STEPS = Math.max(1, Math.ceil(((hi - lo) / sds[i]) * 40));
+    const dx = (hi - lo) / STEPS;
+    let p = 0;
+    // Midpoint rule: no sample lands on the ceiling itself.
+    for (let k = 0; k < STEPS; k++) {
+      const x = lo + (k + 0.5) * dx;
+      let others = 1;
+      for (const j of moving) if (j !== i) others *= above(j, x);
+      if (others <= 0) continue;
+      p += normalPdf(x, dists[i].mean, variance[i]) * others * dx;
+    }
+    return Math.max(p, Number.MIN_VALUE);
+  });
 
   const total = out.reduce((a, b) => a + b, 0);
   if (!(total > 0)) return null;
-  return out.map((p) => p / total);
+  return out.map((p) => (p === 0 ? 0 : Math.max(p / total, Number.MIN_VALUE)));
 }
 
 /**
@@ -193,11 +232,11 @@ export function lastPlaceOdds(
 /**
  * Who is CERTAINLY last — decided by arithmetic, not by the integral above.
  *
- * NOT A PROBABILITY, AND DELIBERATELY NOT READ AS ONE. `lastPlaceOdds` is a
- * numerical integral over normals that is then normalised; it returns 0.9999…
- * for a settled week and will never return a float equal to 1, so thresholding
- * it at "close enough" would either mark a team who could still escape or fail
- * to mark one who cannot. Certainty is a fact about the schedule, so it is
+ * NOT A PROBABILITY, AND DELIBERATELY NOT READ AS ONE. `lastPlaceOdds` returns
+ * a float, and a float rounds: a team finished thirty points under a field
+ * still playing comes out at 1.0 while a fumble-fest could, in principle, still
+ * rescue it. Thresholding it at "close enough" would either mark a team who
+ * could still escape or fail to mark one who cannot. Certainty is a fact about the schedule, so it is
  * computed from the schedule:
  *
  *   a team is last for sure when EVERY team has finished and this one is
@@ -227,12 +266,10 @@ export function lockedIntoLast(
  * Who CANNOT finish last — the mirror of `lockedIntoLast`, and decided the same
  * way: by arithmetic, not by the integral.
  *
- * The integral cannot say zero. `distribution` keeps Sleeper's `|| 0.1`
- * variance floor, so a team that has finished is still modelled as a normal
- * with a standard deviation of about a third of a point rather than as a point
- * mass. Two finished teams ten points apart sit twenty-odd sigma from each
- * other, which comes out somewhere around 1e-108 — vanishingly small, never
- * 0.0, and the display then rounded it to "<1%" when the honest answer was 0%.
+ * `lastPlaceOdds` now agrees — it treats a finished team as a fixed score and
+ * returns exactly 0 under the same condition — but this stays the authority,
+ * because the flag is what says WHY, and the odds were once a numerical
+ * integral that could only ever say 1e-108 and rendered it as "<1%".
  *
  *   a team is safe once IT has finished and some OTHER finished team is below
  *
