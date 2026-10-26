@@ -8517,6 +8517,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792946792445,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 7
     }
   ],
   "9501": [
@@ -14432,6 +14444,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1792946792445,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 7
     }
   ],
   "13287": [

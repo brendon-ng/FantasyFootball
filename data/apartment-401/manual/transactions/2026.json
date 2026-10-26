@@ -822,29 +822,6 @@
     },
     {
       "faab": 0,
-      "id": "0619b160-caa8-45f5-b706-eb6c00326008",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "12495",
-          "toSlug": "jivan-gubbi"
-        },
-        {
-          "fromSlug": "jivan-gubbi",
-          "playerId": "10213",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "jivan-gubbi"
-      ],
-      "timestamp": 1790754829910,
-      "vetoed": false,
-      "week": 4
-    },
-    {
-      "faab": 0,
       "id": "b2641401-b395-47e8-bf00-33801a191302",
       "items": [
         {
@@ -861,6 +838,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "eric-wong"
+      ],
+      "timestamp": 1790754829910,
+      "vetoed": false,
+      "week": 4
+    },
+    {
+      "faab": 0,
+      "id": "0619b160-caa8-45f5-b706-eb6c00326008",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "12495",
+          "toSlug": "jivan-gubbi"
+        },
+        {
+          "fromSlug": "jivan-gubbi",
+          "playerId": "10213",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "jivan-gubbi"
       ],
       "timestamp": 1790754829910,
       "vetoed": false,
@@ -1976,24 +1976,6 @@
     },
     {
       "faab": 0,
-      "id": "6674db76-745e-41b3-965c-d6909188d1d6",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "96",
-          "toSlug": "sam-ellison"
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "sam-ellison"
-      ],
-      "timestamp": 1792568144907,
-      "vetoed": false,
-      "week": 7
-    },
-    {
-      "faab": 0,
       "id": "b8359688-4d89-4fa3-aa12-0afb123866fc",
       "items": [
         {
@@ -2010,6 +1992,24 @@
       "kind": "waiver",
       "ownerSlugs": [
         "eric-wong"
+      ],
+      "timestamp": 1792568144907,
+      "vetoed": false,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "6674db76-745e-41b3-965c-d6909188d1d6",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "96",
+          "toSlug": "sam-ellison"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "sam-ellison"
       ],
       "timestamp": 1792568144907,
       "vetoed": false,
@@ -2283,6 +2283,52 @@
         "jay-uppuluri"
       ],
       "timestamp": 1792887725731,
+      "vetoed": false,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "bc696925-8a1b-4ae3-be41-3dfdcdb9925a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "11435",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "4147",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "brendon-ng"
+      ],
+      "timestamp": 1792947064355,
+      "vetoed": false,
+      "week": 7
+    },
+    {
+      "faab": 0,
+      "id": "8fe671b5-cf57-4c08-9e1c-a28f734051a3",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "espn-4427728",
+          "toSlug": "diana-gonzalez"
+        },
+        {
+          "fromSlug": "diana-gonzalez",
+          "playerId": "8154",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "diana-gonzalez"
+      ],
+      "timestamp": 1792947361011,
       "vetoed": false,
       "week": 7
     }
