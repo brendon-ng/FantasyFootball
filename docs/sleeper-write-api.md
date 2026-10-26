@@ -14,7 +14,7 @@ introspection. Each section says which one it rests on.
 | --- | --- | --- |
 | Set a week's lineup | `update_matchup_leg` | **Verified** — benched 400 starters for weeks 7-18 |
 | Drop | `league_create_transaction` | **Verified** — 106 drops, each `complete` |
-| Add a free agent (optionally with a drop) | `league_create_transaction` | From the bundle, not yet run |
+| Add a free agent (optionally with a drop) | `league_create_transaction` | **Add verified** — 5 adds, each `complete`; add-plus-drop not yet run |
 | Claim off waivers | `submit_waiver_claim` | From the bundle, not yet run |
 | Change a claim's FAAB bid | `update_waiver_claim` | From the bundle, not yet run |
 | Cancel a claim | `cancel_waiver_claim` | From the bundle, not yet run |
@@ -122,7 +122,7 @@ override.
 
 ## 3. Drop, add, and add-plus-drop
 
-**Drop verified; add from the bundle.** One mutation covers all three:
+**Drop and add verified; add-plus-drop from the bundle.** One mutation covers all three:
 
 ```graphql
 mutation league_create_transaction($k_adds: [String], $v_adds: [Int],
