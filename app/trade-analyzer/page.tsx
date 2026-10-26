@@ -27,9 +27,9 @@ export const generateMetadata = () => ({ title: pageTitle("Trade Analyzer") });
  * The build supplies only what is settled: the season's format, its lineup
  * shape and who the owners are.
  *
- * SLEEPER ONLY, for now. The projections are Sleeper's, keyed by Sleeper ids and
- * scored from Sleeper scoring settings; an ESPN league would need its rosters
- * matched across and its scoring translated, and says so instead of guessing.
+ * BOTH PROVIDERS. A Sleeper league runs on Sleeper's projections scored with its
+ * settings; an ESPN league on ESPN's own, which ESPN has already scored with the
+ * league's settings — see `fetchTradePool` in lib/live/espn.
  */
 export default async function TradeAnalyzerPage() {
   const initial = await getLiveSeason();
@@ -52,11 +52,9 @@ export default async function TradeAnalyzerPage() {
 
   const blocked = !season || !ref || !format || !rosterPositions.length
     ? "There is no season in progress to trade in."
-    : ref.provider !== "sleeper"
-      ? "The analyzer runs on Sleeper's projections, so it only works for a league on Sleeper for now."
-      : !initial?.teams.length
-        ? "Trades open once the league has teams on it."
-        : null;
+    : !initial?.teams.length
+      ? "Trades open once the league has teams on it."
+      : null;
 
   if (blocked) {
     return (

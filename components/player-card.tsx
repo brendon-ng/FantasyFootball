@@ -69,14 +69,21 @@ interface CardEnv {
   historyUrl: string;
   userIdToSlug: Record<string, string>;
   ownerNames: Record<string, string>;
+  /**
+   * Turns whatever id a name carries into the Sleeper id the card's feeds want.
+   * An ESPN league's trade page keys players `espn-<id>`; everything the card
+   * fetches is Sleeper's. Omitted means the ids already are Sleeper's.
+   */
+  resolveId?: (id: string) => string;
 }
 
-export function PlayerCardProvider({ children, ...env }: CardEnv & { children: ReactNode }) {
+export function PlayerCardProvider({ children, resolveId, ...env }: CardEnv & { children: ReactNode }) {
   const [id, setId] = useState<string | null>(null);
+  const open = (raw: string) => setId(resolveId ? resolveId(raw) : raw);
   return (
-    <Ctx.Provider value={{ open: setId }}>
+    <Ctx.Provider value={{ open }}>
       {children}
-      {id ? <PlayerCard key={id} id={id} env={env} onOpen={setId} onClose={() => setId(null)} /> : null}
+      {id ? <PlayerCard key={id} id={id} env={env} onOpen={open} onClose={() => setId(null)} /> : null}
     </Ctx.Provider>
   );
 }

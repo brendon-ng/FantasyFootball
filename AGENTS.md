@@ -1716,9 +1716,32 @@ per week, ~1.1MB for a full rest of season. The build supplies only what is
 settled: `getSeasonFormat()` (regular-season length, playoff field, rounds — off
 the rules files, inheriting forward) and the season's lineup shape.
 
-SLEEPER ONLY. The projections are keyed by Sleeper ids; an ESPN league would need
-its rosters matched across and its scoring translated, and the page says so
-instead of guessing.
+BOTH PROVIDERS. An ESPN league runs on ESPN'S OWN PROJECTIONS, not Sleeper's:
+`fetchTradePool()` in `lib/live/espn.ts` asks `kona_player_info` for every
+rostered player and the 150 best free agents, each with ESPN's projection for
+every remaining week, already scored with the league's settings server-side —
+so a number on the page is the number the league sees in the ESPN app, and
+nothing is translated into Sleeper's stat vocabulary (that route would need
+ESPN's whole scoring table mapped by hand, and would disagree with the app).
+
+TWO REQUESTS FOR THE WHOLE SEASON. The stats filter takes a LIST of scoring
+periods, so one request carries all the remaining weeks — 545KB gzipped for
+apartment-401's 166 rostered players, 380KB for the free agents. Week by week it
+was ~420KB a WEEK, because every player object carries several KB of outlooks
+and ownership whatever the stats filter says; the RANK filters strip
+`rankings`, 8KB a player on its own. A limit needs a sort or ESPN refuses.
+ESPN answers the preflight for `x-fantasy-filter` from this origin and gzips
+when asked, which a browser always does.
+
+THE ESPN PATH KEYS PLAYERS `espn-<id>` END TO END — rosters (from `onTeamId`,
+current whatever week is asked), the pool and the projections — so they agree
+with no translation. Sleeper ids appear only when a player card opens:
+`resolveCardId` tries the map sync commits (`espn-players.json`), then a unique
+name-and-position match against Sleeper's full player list, and refuses to
+guess on a tie. The card's own points fall back to Sleeper's PPR total there,
+since a Sleeper league-settings lookup has nothing to find for an ESPN id.
+Checked on apartment-401: ten teams, every week projected, and a week-8 lineup
+filling the D/ST slot and streaming a free-agent kicker over the 15% bar.
 
 ### The lineup is the best one, never the one that was set
 

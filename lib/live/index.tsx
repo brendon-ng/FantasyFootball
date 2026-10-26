@@ -40,7 +40,7 @@ import {
   type WinProbability,
 } from "@/lib/win-probability";
 
-import { espnProvider } from "./espn.ts";
+import { espnPlayerIds, espnProvider, fetchTradePool, type EspnTradePool } from "./espn.ts";
 import { fetchNflClock } from "./nfl-clock.ts";
 import { fetchByeTeams, fetchNflWeek, teamsSettled, type NflWeekState } from "./nfl-schedule.ts";
 import { fetchPlayerPool, sleeperProvider, type PoolPlayer } from "./sleeper.ts";
@@ -1077,14 +1077,15 @@ export function useWeekProjections(
 }
 
 /**
- * Names and positions for every fantasy-relevant player. Sleeper only — see
- * `fetchPlayerPool`. Null while loading, and stays null if it fails.
+ * Names and positions for every fantasy-relevant player, from Sleeper — see
+ * `fetchPlayerPool`. Takes a SEASON, not a league: an ESPN league's trade page
+ * wants it too, to match ESPN players to the Sleeper ids the player card runs
+ * on. Null while loading, and stays null if it fails.
  */
 export function usePlayerPool(
-  ref: LeagueRef | null,
+  season: number,
   week: number,
 ): { ready: boolean; pool: Record<string, PoolPlayer> | null } {
-  const season = ref?.provider === "sleeper" ? ref.season : 0;
   const key = `${season}:${week}`;
   const [state, setState] = useState<{ key: string; pool: Record<string, PoolPlayer> | null } | null>(null);
 
@@ -1101,6 +1102,52 @@ export function usePlayerPool(
 
   const hit = state?.key === key ? state : null;
   return { ready: Boolean(hit), pool: hit?.pool ?? null };
+}
+
+/**
+ * An ESPN league's trade pool: rosters, the best free agents and ESPN's own
+ * projections for every week in `weeks`, all keyed `espn-<id>`. See
+ * `fetchTradePool`. Inert for a Sleeper league.
+ */
+export function useEspnTradePool(
+  ref: LeagueRef | null,
+  weeks: readonly number[],
+): { ready: boolean; pool: EspnTradePool | null } {
+  const active = ref?.provider === "espn";
+  const key = `${refKey(ref)}:${weeks.join(",")}`;
+  const [state, setState] = useState<{ key: string; pool: EspnTradePool | null } | null>(null);
+
+  useEffect(() => {
+    if (!active || !ref || !weeks.length) return;
+    let cancelled = false;
+    fetchTradePool(ref.id, ref.season, weeks).then((pool) => {
+      if (!cancelled) setState({ key, pool });
+    });
+    return () => {
+      cancelled = true;
+    };
+    // `key` stands in for `ref` and `weeks`.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key, active]);
+
+  const hit = state?.key === key ? state : null;
+  return { ready: Boolean(hit), pool: hit?.pool ?? null };
+}
+
+/** ESPN player id -> Sleeper player id, as committed by sync. Empty until loaded. */
+export function useEspnPlayerIds(active: boolean): Record<string, string> {
+  const [ids, setIds] = useState<Record<string, string>>({});
+  useEffect(() => {
+    if (!active) return;
+    let cancelled = false;
+    espnPlayerIds().then((m) => {
+      if (!cancelled) setIds(m);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [active]);
+  return ids;
 }
 
 /**

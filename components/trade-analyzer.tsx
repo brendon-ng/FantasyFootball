@@ -21,10 +21,13 @@ import { positionRank } from "@/lib/espn-maps";
 import { withBasePath } from "@/lib/base-path";
 import type { LeagueRef } from "@/lib/league-ref";
 import { lineupPositions, startingSlots, type Lineup } from "@/lib/lineup";
+import { normalise } from "@/lib/player-match";
 import { applyOverrides, useProjectionOverrides, type ProjectionOverrides } from "@/lib/projection-overrides";
 import { useTradeLock, verifyTrade, type TradeLock } from "@/lib/trade-lock";
 import {
   useByeTeams,
+  useEspnPlayerIds,
+  useEspnTradePool,
   useLiveProjections,
   useLiveSeason,
   usePlayerPool,
@@ -145,8 +148,43 @@ function AnalyzerBody({
   const live = useLiveSeason(refBySeason, initial, userIdToSlug);
   const season = live ?? initial;
   const ref = refBySeason[String(season.season)] ?? null;
-  const teams = season.teams;
   const canLink = useMemo(() => new Set(linkable), [linkable]);
+
+  // ---------------------------------------------------------------- the clock
+  const scored = season.lastScoredLeg ?? 0;
+  /**
+   * A week with points on the board is LOCKED to the trade: its lineups are set
+   * and half played. It still counts towards the playoff odds, with each team's
+   * live distribution — but it is the same in both scenarios, and the trade's
+   * effects start the week after.
+   */
+  const underway =
+    season.week > scored && season.matchups.some((m) => m.a.points > 0 || m.b.points > 0);
+  const liveWeek = underway ? season.week : null;
+  const firstOpen = Math.max(scored + 1, liveWeek ? liveWeek + 1 : 1);
+  const openWeeks = useMemo(() => range(firstOpen, format.finalWeek), [firstOpen, format.finalWeek]);
+  const projWeeks = useMemo(
+    () => (liveWeek ? [liveWeek, ...openWeeks] : openWeeks),
+    [liveWeek, openWeeks],
+  );
+
+  /**
+   * AN ESPN LEAGUE RUNS ON ESPN'S OWN PROJECTIONS, keyed `espn-<id>` end to end.
+   * Its rosters, its free agents and every remaining week's projection arrive
+   * together from `fetchTradePool`, already scored with the league's settings,
+   * so nothing is translated into Sleeper's stat vocabulary. Sleeper ids only
+   * appear where a player card is opened — see `resolveCardId`.
+   */
+  const espn = ref?.provider === "espn";
+  const espnPool = useEspnTradePool(espn ? ref : null, projWeeks);
+  const espnToSleeper = useEspnPlayerIds(espn);
+  const teams = useMemo(
+    () =>
+      espn
+        ? season.teams.map((t) => ({ ...t, players: espnPool.pool?.rosters[t.rosterId] ?? [] }))
+        : season.teams,
+    [espn, season.teams, espnPool.pool],
+  );
 
   // ---------------------------------------------------------------- the trade
   const { identity } = useIdentity();
@@ -178,28 +216,12 @@ function AnalyzerBody({
     shared ||
     setGive(give.includes(id) ? give.filter((x) => x !== id) : [...fromA, ...fromB, id]);
 
-  // ---------------------------------------------------------------- the clock
-  const scored = season.lastScoredLeg ?? 0;
-  /**
-   * A week with points on the board is LOCKED to the trade: its lineups are set
-   * and half played. It still counts towards the playoff odds, with each team's
-   * live distribution — but it is the same in both scenarios, and the trade's
-   * effects start the week after.
-   */
-  const underway =
-    season.week > scored && season.matchups.some((m) => m.a.points > 0 || m.b.points > 0);
-  const liveWeek = underway ? season.week : null;
-  const firstOpen = Math.max(scored + 1, liveWeek ? liveWeek + 1 : 1);
-  const openWeeks = useMemo(() => range(firstOpen, format.finalWeek), [firstOpen, format.finalWeek]);
-  const projWeeks = useMemo(
-    () => (liveWeek ? [liveWeek, ...openWeeks] : openWeeks),
-    [liveWeek, openWeeks],
-  );
 
   // ----------------------------------------------------------------- the data
   const games = useSeasonGames(ref, format.regularSeasonWeeks);
-  const proj = useWeekProjections(ref, projWeeks);
-  const pool = usePlayerPool(ref, Math.min(firstOpen, format.finalWeek));
+  const sleeperProj = useWeekProjections(espn ? null : ref, projWeeks);
+  const proj = espn ? { ready: espnPool.ready, byWeek: espnPool.pool?.byWeek ?? {} } : sleeperProj;
+  const pool = usePlayerPool(season.season, Math.min(firstOpen, format.finalWeek));
   const liveTotals = useLiveProjections(live, ref);
   const byeTeams = useByeTeams(season.season);
   const overridesApi = useProjectionOverrides();
@@ -216,23 +238,54 @@ function AnalyzerBody({
     [proj.byWeek, overrides],
   );
   const gamesReady = Object.keys(games).length > 0;
-  const ready = proj.ready && pool.ready;
+  // An ESPN league does not wait on Sleeper's list: it only serves the cards.
+  const ready = espn ? espnPool.ready : proj.ready && pool.ready;
+  const espnPlayers = espnPool.pool?.players;
 
+  // ESPN's own record first for an `espn-` id; Sleeper's list for everyone else,
+  // which is also what names the depth-chart rows on a card.
   const nameOf = useCallback(
-    (id: string) => pool.pool?.[id]?.name ?? baked[id]?.name ?? id,
-    [pool.pool, baked],
+    (id: string) => espnPlayers?.[id]?.name ?? pool.pool?.[id]?.name ?? baked[id]?.name ?? id,
+    [espnPlayers, pool.pool, baked],
   );
   const positionOf = useCallback(
-    (id: string) => pool.pool?.[id]?.position ?? baked[id]?.position ?? null,
-    [pool.pool, baked],
+    (id: string) => espnPlayers?.[id]?.position ?? pool.pool?.[id]?.position ?? baked[id]?.position ?? null,
+    [espnPlayers, pool.pool, baked],
   );
   const nflTeamOf = useCallback(
-    (id: string) => pool.pool?.[id]?.team ?? baked[id]?.team ?? null,
-    [pool.pool, baked],
+    (id: string) => espnPlayers?.[id]?.team ?? pool.pool?.[id]?.team ?? baked[id]?.team ?? null,
+    [espnPlayers, pool.pool, baked],
   );
   const positionsOf = useCallback(
-    (id: string) => lineupPositions(positionOf(id), pool.pool?.[id]?.fantasyPositions),
-    [positionOf, pool.pool],
+    (id: string) =>
+      lineupPositions(positionOf(id), espnPlayers?.[id]?.fantasyPositions ?? pool.pool?.[id]?.fantasyPositions),
+    [positionOf, espnPlayers, pool.pool],
+  );
+
+  /**
+   * The Sleeper id a card should open for. An `espn-` id goes through the map
+   * sync commits first, then a unique name-and-position match against Sleeper's
+   * full player list — the same refusal to guess `matchLivePlayer` makes: two
+   * candidates and the card opens on the ESPN id, which shows less but is not
+   * somebody else.
+   */
+  const sleeperByName = useMemo(() => {
+    const out = new Map<string, string[]>();
+    for (const [sid, p] of Object.entries(pool.pool ?? {})) {
+      const k = `${normalise(p.name)}|${p.position ?? ""}`;
+      out.set(k, [...(out.get(k) ?? []), sid]);
+    }
+    return out;
+  }, [pool.pool]);
+  const resolveCardId = useCallback(
+    (id: string): string => {
+      if (!id.startsWith("espn-")) return id;
+      const mapped = espnToSleeper[id.slice(5)];
+      if (mapped) return mapped;
+      const hits = sleeperByName.get(`${normalise(nameOf(id))}|${positionOf(id) ?? ""}`) ?? [];
+      return hits.length === 1 ? hits[0] : id;
+    },
+    [espnToSleeper, sleeperByName, nameOf, positionOf],
   );
 
   const teamStates: TeamState[] = useMemo(
@@ -250,10 +303,11 @@ function AnalyzerBody({
   const slots = useMemo(() => startingSlots(rosterPositions), [rosterPositions]);
   const order = useMemo(() => claimOrder(teamStates), [teamStates]);
   const freeAgents = useMemo(() => {
-    if (!pool.pool) return [];
+    const source = espn ? espnPlayers : pool.pool;
+    if (!source) return [];
     const rostered = new Set(teams.flatMap((t) => t.players));
-    return Object.keys(pool.pool).filter((id) => !rostered.has(id));
-  }, [pool.pool, teams]);
+    return Object.keys(source).filter((id) => !rostered.has(id));
+  }, [espn, espnPlayers, pool.pool, teams]);
 
   /**
    * WHO MAY PICK UP FREE AGENTS, the reader's choice. The default is EVERYONE,
@@ -458,8 +512,10 @@ function AnalyzerBody({
 
   // Anyone the override search can find: every rostered player, plus the pool.
   const candidates = useMemo(
-    () => [...new Set([...teams.flatMap((t) => t.players), ...Object.keys(pool.pool ?? {})])],
-    [teams, pool.pool],
+    () => [
+      ...new Set([...teams.flatMap((t) => t.players), ...Object.keys((espn ? espnPlayers : pool.pool) ?? {})]),
+    ],
+    [teams, espn, espnPlayers, pool.pool],
   );
   const holderOf = (id: string) => {
     const t = teams.find((x) => x.players.includes(id));
@@ -545,8 +601,10 @@ function AnalyzerBody({
       ownerNames={Object.fromEntries(Object.entries(owners).map(([slug, o]) => [slug, o.name]))}
       season={season.season}
       week={Math.max(1, season.week)}
+      resolveId={espn ? resolveCardId : undefined}
       holderOf={(id) => {
-        const t = teams.find((x) => x.players.includes(id));
+        // The card holds a Sleeper id; an ESPN roster holds `espn-` ids.
+        const t = teams.find((x) => x.players.some((p) => p === id || (espn && resolveCardId(p) === id)));
         return t ? { label: label(t), slug: t.ownerSlug } : null;
       }}
       nameOf={nameOf}

@@ -37,7 +37,13 @@ export function useUrlState<T extends string>(
    * codebase has already made once, in `back-link.tsx`.
    */
   const search = useSyncExternalStore(subscribe, read, onServer);
-  const raw = new URLSearchParams(search).get(key);
+  /**
+   * A TRAILING SLASH IS STRIPPED. Every route here ends in one, so a hand-typed
+   * link picks up the habit on its last param — `loser=josh-greenebaum/` — and
+   * the value then misses the allow-list and silently falls back, which opened
+   * the wheel with nobody to draw for. No allowed value ends in a slash.
+   */
+  const raw = new URLSearchParams(search).get(key)?.replace(/\/+$/, "") ?? null;
   /**
    * AN ABSENT PARAM IS THE FALLBACK, always — `raw` is checked for null before
    * the allow-list rather than being coerced to `""` first.

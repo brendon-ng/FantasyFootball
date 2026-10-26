@@ -168,7 +168,7 @@ interface EspnLeague {
  * rosters on the same render and the file is the same for every one of them.
  */
 let playerMap: Promise<Record<string, string>> | null = null;
-function espnPlayerIds(): Promise<Record<string, string>> {
+export function espnPlayerIds(): Promise<Record<string, string>> {
   playerMap ??= fetch(withBasePath("/espn-players.json"))
     .then((r) => (r.ok ? r.json() : {}))
     .catch(() => ({}));
@@ -724,3 +724,134 @@ export const espnProvider: LiveProvider = {
     };
   },
 };
+
+// ---------------------------------------------------------------------------
+// The trade tools' player pool
+// ---------------------------------------------------------------------------
+
+/** One player as the trade tools see him — the shape `fetchPlayerPool` gives for Sleeper. */
+export interface EspnPoolPlayer {
+  name: string;
+  position: string | null;
+  fantasyPositions: string[];
+  team: string | null;
+  injuryStatus: string | null;
+}
+
+export interface EspnTradePool {
+  /** ESPN team id -> its players, as `espn-<id>`. */
+  rosters: Record<number, string[]>;
+  /** Everyone fetched — rostered and the best free agents. */
+  players: Record<string, EspnPoolPlayer>;
+  /** Week -> player -> ESPN's projection, already scored with the league's settings. */
+  byWeek: Record<number, Record<string, number>>;
+}
+
+const INJURY: Record<string, string> = {
+  QUESTIONABLE: "Questionable",
+  DOUBTFUL: "Doubtful",
+  OUT: "Out",
+  INJURY_RESERVE: "IR",
+  SUSPENSION: "Sus",
+};
+
+/** How many free agents to fetch. Past this nobody is good enough to stream. */
+const FREE_AGENTS = 150;
+
+interface EspnPoolEntry {
+  onTeamId?: number;
+  player?: {
+    id?: number;
+    fullName?: string;
+    defaultPositionId?: number;
+    proTeamId?: number;
+    injuryStatus?: string;
+    stats?: Array<{ scoringPeriodId?: number; statSourceId?: number; appliedTotal?: number }>;
+  };
+}
+
+/**
+ * Every rostered player and the best free agents, with ESPN's OWN projection
+ * for every week in `weeks` — for the trade tools in an ESPN league.
+ *
+ * ESPN'S PROJECTIONS, NOT SLEEPER'S, because they are already scored with this
+ * league's settings server-side, so a number here is the number the league sees
+ * in the ESPN app. Sleeper's would need ESPN's whole scoring vocabulary
+ * translated by hand, and would quietly disagree with the app even then.
+ *
+ * TWO REQUESTS FOR THE WHOLE SEASON, not two per week. `kona_player_info` takes
+ * a LIST of scoring periods, so one request returns every rostered player with
+ * all the remaining weeks — 545KB gzipped for apartment-401 — and a second the
+ * free agents. Asked week by week it was ~420KB a WEEK, because each player
+ * object carries several KB of outlooks and ownership whatever the stats filter
+ * says. The rank filters strip `rankings`, which was 8KB a player on its own.
+ *
+ * Keys are `espn-<id>` throughout, rostered or not, so the rosters, the pool
+ * and the projections all agree without any translation to Sleeper ids.
+ * `onTeamId` is the CURRENT team whatever week is asked for.
+ *
+ * A limit needs a sort or ESPN refuses the request ("Limit request must be
+ * accompanied by a sort"), hence `sortPercOwned` on both.
+ */
+const tradePoolCache = new Map<string, Promise<EspnTradePool | null>>();
+
+export function fetchTradePool(id: string, season: number, weeks: readonly number[]): Promise<EspnTradePool | null> {
+  const key = `${id}:${season}:${weeks.join(",")}`;
+  const hit = tradePoolCache.get(key);
+  if (hit) return hit;
+  const filter = (status: string[], limit: number) =>
+    JSON.stringify({
+      players: {
+        filterStatus: { value: status },
+        limit,
+        sortPercOwned: { sortPriority: 1, sortAsc: false },
+        filterStatsForSourceIds: { value: [1] },
+        filterStatsForSplitTypeIds: { value: [1] },
+        filterStatsForCurrentSeasonScoringPeriodId: { value: weeks },
+        filterRanksForScoringPeriodIds: { value: [weeks[0] ?? 1] },
+        filterRanksForRankTypes: { value: ["PPR"] },
+        filterRanksForSlotIds: { value: [0] },
+      },
+    });
+  const ask = async (status: string[], limit: number) => {
+    const res = await fetchRetry(
+      `${leagueUrl(id, season, ["kona_player_info"])}&scoringPeriodId=${weeks[0] ?? 1}`,
+      { headers: { "x-fantasy-filter": filter(status, limit) } },
+    );
+    if (!res?.ok) return null;
+    return ((await res.json()) as { players?: EspnPoolEntry[] }).players ?? null;
+  };
+
+  const p = (async () => {
+    if (!weeks.length) return null;
+    const [rostered, free] = await Promise.all([
+      ask(["ONTEAM"], 500),
+      ask(["FREEAGENT", "WAIVERS"], FREE_AGENTS),
+    ]);
+    if (!rostered) return null;
+    const wanted = new Set(weeks);
+    const out: EspnTradePool = { rosters: {}, players: {}, byWeek: {} };
+    for (const w of weeks) out.byWeek[w] = {};
+    for (const e of [...rostered, ...(free ?? [])]) {
+      const pl = e.player;
+      if (pl?.id == null) continue;
+      const key = `espn-${pl.id}`;
+      const position = ESPN_POS[pl.defaultPositionId ?? -1] ?? null;
+      out.players[key] = {
+        name: pl.fullName ?? key,
+        position,
+        fantasyPositions: position ? [position] : [],
+        team: PRO_TEAM[pl.proTeamId ?? -1] ?? null,
+        injuryStatus: INJURY[pl.injuryStatus ?? ""] ?? null,
+      };
+      if (e.onTeamId) (out.rosters[e.onTeamId] ??= []).push(key);
+      for (const st of pl.stats ?? []) {
+        if (st.statSourceId !== 1 || !wanted.has(st.scoringPeriodId ?? -1)) continue;
+        out.byWeek[st.scoringPeriodId!][key] = round2(st.appliedTotal ?? 0);
+      }
+    }
+    return out;
+  })().catch(() => null);
+  tradePoolCache.set(key, p);
+  return p;
+}
