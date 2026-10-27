@@ -536,6 +536,15 @@
       "week": 12
     },
     {
+      "opponentPoints": 66.32,
+      "opponentSlug": "diana-gonzalez",
+      "ownerSlug": "mark-mcgreal",
+      "points": 95.32,
+      "season": 2026,
+      "total": 161.64,
+      "week": 7
+    },
+    {
       "opponentPoints": 61.38,
       "opponentSlug": "jivan-gubbi",
       "ownerSlug": "kate-grillo",
@@ -669,15 +678,6 @@
       "season": 2023,
       "total": 172.28,
       "week": 14
-    },
-    {
-      "opponentPoints": 79.14,
-      "opponentSlug": "mark-mcgreal",
-      "ownerSlug": "sam-ellison",
-      "points": 93.36,
-      "season": 2022,
-      "total": 172.5,
-      "week": 13
     }
   ],
   "narrowestWin": [
@@ -743,6 +743,15 @@
       "points": 95.3,
       "season": 2026,
       "week": 6
+    },
+    {
+      "margin": 0.48,
+      "opponentPoints": 104.72,
+      "opponentSlug": "charlie-stoksik",
+      "ownerSlug": "isaac-edejer",
+      "points": 105.2,
+      "season": 2026,
+      "week": 7
     },
     {
       "margin": 0.88,
@@ -896,15 +905,6 @@
       "points": 130.12,
       "season": 2022,
       "week": 8
-    },
-    {
-      "margin": 2.26,
-      "opponentPoints": 127.52,
-      "opponentSlug": "diana-gonzalez",
-      "ownerSlug": "sam-ellison",
-      "points": 129.78,
-      "season": 2024,
-      "week": 5
     }
   ],
   "playerHigh": [
@@ -1465,6 +1465,14 @@
       "week": 14
     },
     {
+      "opponentPoints": 95.32,
+      "opponentSlug": "mark-mcgreal",
+      "ownerSlug": "diana-gonzalez",
+      "points": 66.32,
+      "season": 2026,
+      "week": 7
+    },
+    {
       "opponentPoints": 135.68,
       "opponentSlug": "haley-rao",
       "ownerSlug": "kate-grillo",
@@ -1503,14 +1511,6 @@
       "points": 68.92,
       "season": 2023,
       "week": 4
-    },
-    {
-      "opponentPoints": 101.86,
-      "opponentSlug": "sam-ellison",
-      "ownerSlug": "isaac-edejer",
-      "points": 68.98,
-      "season": 2025,
-      "week": 14
     }
   ]
 }

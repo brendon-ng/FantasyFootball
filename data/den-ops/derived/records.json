@@ -300,6 +300,15 @@
       "week": 5
     },
     {
+      "opponentPoints": 162.52,
+      "opponentSlug": "reagan-schmidt",
+      "ownerSlug": "safvet-besen",
+      "points": 166.84,
+      "season": 2026,
+      "total": 329.36,
+      "week": 7
+    },
+    {
       "opponentPoints": 142.8,
       "opponentSlug": "reagan-schmidt",
       "ownerSlug": "tyler-jung",
@@ -442,15 +451,6 @@
       "season": 2021,
       "total": 310.98,
       "week": 5
-    },
-    {
-      "opponentPoints": 135.28,
-      "opponentSlug": "tyler-jung",
-      "ownerSlug": "lauren-gross",
-      "points": 175.26,
-      "season": 2024,
-      "total": 310.54,
-      "week": 13
     }
   ],
   "lowestCombined": [

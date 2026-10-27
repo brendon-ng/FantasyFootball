@@ -123,7 +123,7 @@
       "kind": "weekly-low",
       "label": "Lowest score in league history",
       "ownerSlug": "josh-greenebaum",
-      "stillStands": true,
+      "stillStands": false,
       "value": 62.3
     },
     {
@@ -342,6 +342,15 @@
       "playerId": "11604",
       "stillStands": false,
       "value": 43.3
+    }
+  ],
+  "2026-7-ross-bechtel-vs-srishti-dhawan": [
+    {
+      "kind": "weekly-low",
+      "label": "Lowest score in league history",
+      "ownerSlug": "srishti-dhawan",
+      "stillStands": true,
+      "value": 59.2
     }
   ]
 }
