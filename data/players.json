@@ -444,8 +444,8 @@
     "birth_date": "1989-11-21",
     "full_name": "Justin Tucker",
     "position": "K",
-    "team": null,
-    "years_exp": 13
+    "team": "KC",
+    "years_exp": 14
   },
   "1266": {
     "birth_date": "1987-12-27",
@@ -1347,7 +1347,7 @@
     "birth_date": "1995-03-30",
     "full_name": "Zay Jones",
     "position": "WR",
-    "team": null,
+    "team": "ARI",
     "years_exp": 9
   },
   "4082": {
@@ -3331,6 +3331,13 @@
     "team": "CAR",
     "years_exp": 4
   },
+  "8161": {
+    "birth_date": "1999-05-25",
+    "full_name": "Malik Willis",
+    "position": "QB",
+    "team": "MIA",
+    "years_exp": 4
+  },
   "8162": {
     "birth_date": "2000-09-16",
     "full_name": "Sam Howell",
@@ -3819,6 +3826,13 @@
     "full_name": "Jake Moody",
     "position": "K",
     "team": "BAL",
+    "years_exp": 3
+  },
+  "10955": {
+    "birth_date": "1999-10-15",
+    "full_name": "Chad Ryland",
+    "position": "K",
+    "team": "ARI",
     "years_exp": 3
   },
   "11008": {
