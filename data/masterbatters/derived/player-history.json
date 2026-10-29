@@ -547,6 +547,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793221439264,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "1433": [
@@ -710,6 +722,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793222235381,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "2020": [
@@ -5563,6 +5587,20 @@
       "week": 6
     }
   ],
+  "7561": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793222150876,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
+    }
+  ],
   "7562": [
     {
       "action": "add",
@@ -6700,6 +6738,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793222150876,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "8130": [
@@ -8713,6 +8763,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793222186588,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "9502": [
@@ -10359,6 +10421,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793221439264,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "11564": [
@@ -11371,6 +11445,18 @@
       "tradeId": "1403477335876845568",
       "type": "trade",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793222196175,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "11631": [
@@ -15208,6 +15294,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793219737753,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "13417": [
@@ -16274,6 +16372,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793215756507,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "DEN": [
@@ -17570,6 +17680,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793215756507,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "LV": [
@@ -18766,6 +18888,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793222250603,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ]
 }

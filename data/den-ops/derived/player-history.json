@@ -4302,6 +4302,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793216008846,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "1169": [
@@ -8017,6 +8029,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793225671500,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "2214": [
@@ -51217,6 +51241,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793241107186,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "ARI": [
@@ -59472,6 +59508,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793241141726,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "PHI": [
@@ -61596,6 +61644,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793241141726,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ]
 }

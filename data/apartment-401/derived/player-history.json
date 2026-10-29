@@ -21347,6 +21347,30 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793218170774,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793261342812,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 8
     }
   ],
   "8130": [
@@ -24169,6 +24193,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793209957305,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "9482": [
@@ -26482,6 +26518,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793261342812,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 8
     }
   ],
   "11439": [
@@ -28010,6 +28058,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793210019974,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "11638": [
@@ -29571,6 +29631,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793218170774,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "12545": [
@@ -29737,6 +29809,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793209957305,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "13274": [
@@ -31115,6 +31199,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793210019974,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "CHI": [
@@ -33371,6 +33467,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793234150907,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "KC": [
@@ -33677,6 +33785,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793234150907,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "LAC": [
