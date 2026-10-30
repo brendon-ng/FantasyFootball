@@ -559,6 +559,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793340991528,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 8
     }
   ],
   "1433": [
@@ -2659,6 +2671,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793371169433,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "4663": [
@@ -3860,6 +3884,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793340991528,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 8
     }
   ],
   "5850": [
@@ -10538,6 +10574,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "robbie-goodman",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793306308519,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "11566": [
@@ -12490,6 +12538,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "robbie-goodman",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793306308519,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "12469": [
@@ -14598,6 +14658,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793371169433,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "13264": [
@@ -16322,6 +16394,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793365594616,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 8
     }
   ],
   "DAL": [
@@ -17963,6 +18047,18 @@
       "timestamp": 1793196235583,
       "toSlug": null,
       "type": "free_agent",
+      "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793365594616,
+      "toSlug": null,
+      "type": "waiver",
       "week": 8
     }
   ],

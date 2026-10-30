@@ -9903,6 +9903,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793342526987,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "4983": [
@@ -12960,6 +12972,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793342526987,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "5880": [
@@ -17661,6 +17685,18 @@
       "preseason": false,
       "season": 2025,
       "timestamp": 1761232023192,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793291183213,
       "toSlug": null,
       "type": "free_agent",
       "week": 8
@@ -25319,6 +25355,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793299296991,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "9757": [
@@ -26280,6 +26328,20 @@
       "toSlug": null,
       "type": "waiver",
       "week": 11
+    }
+  ],
+  "10955": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793299296991,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "11008": [
@@ -30173,6 +30235,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793291183213,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "ARI": [
@@ -30815,6 +30889,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793291200326,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "BUF": [
@@ -37469,6 +37555,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793291200326,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "espn-4427728": [
