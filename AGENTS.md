@@ -1974,6 +1974,16 @@ demand, not as filters change, and says so when the filters have moved since.
 It follows the free-agent setting — now in a bar shared by both tabs — and the
 projection overrides, and "Analyze" loads a result into the analyzer tab.
 
+TABS KEEP THEIR STATE: the finder stays mounted, hidden, on the analyzer tab,
+so its settings and any search results survive a switch — `contents` when
+visible, so the panels lay out exactly as the fragment did. The analyzer's
+trade, free-agent setting, overrides and open week detail already live in the
+URL, local storage and the parent, so they survive too; only transient toggles
+inside its panels reset. Only the tab switch itself pushes a history entry —
+player ticks and settings replace in place — so the back button returns to the
+other tab exactly as it was, and Analyze pushes one entry whose back target is
+the finder it came from. Clicking the active tab pushes nothing.
+
 ### The passphrase lock and signed share links
 
 Both tabs are behind a passphrase (`lib/trade-lock.ts`, `components/trade-lock.tsx`).

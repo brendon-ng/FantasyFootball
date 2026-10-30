@@ -98,6 +98,7 @@ export function TradeFinder({
   canLink,
   ready,
   onOpen,
+  hidden = false,
 }: {
   teams: LiveTeam[];
   label: (t: LiveTeam | null | undefined) => string;
@@ -121,6 +122,13 @@ export function TradeFinder({
   canLink: Set<string>;
   ready: boolean;
   onOpen: (sender: string, partner: string, give: string[], get: string[]) => void;
+  /**
+   * True on the analyzer tab: the finder stays mounted but renders nothing
+   * visible, so its settings — and any search results — survive a tab switch
+   * instead of resetting to the defaults on every remount. `contents` when
+   * visible keeps the panels laying out exactly as the fragment did.
+   */
+  hidden?: boolean;
 }) {
   const [senderSlug, setSenderSlug] = useState(defaultSender.ownerSlug);
   const [partnerSlug, setPartnerSlug] = useState("");
@@ -407,7 +415,7 @@ export function TradeFinder({
   );
 
   return (
-    <>
+    <div className={hidden ? "hidden" : "contents"}>
       <Panel>
         <PanelHeader
           title="Find trades"
@@ -735,7 +743,7 @@ export function TradeFinder({
           )}
         </Panel>
       ) : null}
-    </>
+    </div>
   );
 }
 

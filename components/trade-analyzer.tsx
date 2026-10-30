@@ -192,7 +192,7 @@ function AnalyzerBody({
   const [aParam, setA] = useUrlText("a");
   const [bParam, setB] = useUrlText("b");
   const [give, setGive] = useUrlList("give");
-  const [viewParam, setViewParam] = useUrlText("view");
+  const [viewParam, , pushViewParam] = useUrlText("view");
   const view = !shared && viewParam === "finder" ? "finder" : "analyzer";
   const [faParam, setFaParam] = useUrlText("fa");
   const faMode: FaMode = faParam === "none" || faParam === "traders" ? faParam : "all";
@@ -620,7 +620,11 @@ function AnalyzerBody({
             kind="tab"
             label="View"
             value={view}
-            onChange={(v) => setViewParam(v === "analyzer" ? "" : v)}
+            onChange={(v) => {
+              // Clicking the active tab is not a navigation — pushing it
+              // would stack a duplicate entry the back button has to unwind.
+              if (v !== view) pushViewParam(v === "analyzer" ? "" : v);
+            }}
             options={[
               { value: "analyzer", label: "Analyzer" },
               { value: "finder", label: "Finder" },
@@ -653,8 +657,9 @@ function AnalyzerBody({
         </div>
       ) : null}
 
-      {view === "finder" ? (
+      {!shared ? (
         <TradeFinder
+          hidden={view !== "finder"}
           teams={teams}
           label={label}
           defaultSender={teamA}
@@ -678,11 +683,14 @@ function AnalyzerBody({
             setA(sender);
             setB(partner);
             setGive([...giveIds, ...getIds]);
-            setViewParam("");
+            // The trade params replace into the current entry; only the tab
+            // change pushes, so back lands on the finder exactly as it was.
+            pushViewParam("");
             window.scrollTo({ top: 0 });
           }}
         />
-      ) : (
+      ) : null}
+      {view === "analyzer" ? (
         <>
           <Panel>
             <PanelHeader
@@ -857,7 +865,7 @@ function AnalyzerBody({
         available={regularLeft}
       />
         </>
-      )}
+      ) : null}
 
       {!shared ? (
         <div id="overrides" className="scroll-mt-20">
@@ -1375,21 +1383,29 @@ function averageOf(
  * exactly the thing worth sending somebody — so this is the same idea without
  * the list: `replaceState`, the existing history state passed through, the param
  * removed when empty, and a trailing slash stripped off the last value.
+ *
+ * `set` replaces, so ticking players and flipping settings never spam the
+ * history. `push` is for a real navigation — switching tabs, or opening a
+ * finder trade in the analyzer — so the back button returns to the tab it came
+ * from, with that tab's state, instead of leaving the page.
  */
-function useUrlText(key: string): [string, (next: string) => void] {
+function useUrlText(key: string): [string, (next: string) => void, (next: string) => void] {
   const search = useSyncExternalStore(subscribe, () => window.location.search, () => "");
   const value = new URLSearchParams(search).get(key)?.replace(/\/+$/, "") ?? "";
-  const set = useCallback(
-    (next: string) => {
+  const write = useCallback(
+    (next: string, push: boolean) => {
       const url = new URL(window.location.href);
       if (next) url.searchParams.set(key, next);
       else url.searchParams.delete(key);
-      window.history.replaceState(window.history.state, "", url);
+      if (push) window.history.pushState(window.history.state, "", url);
+      else window.history.replaceState(window.history.state, "", url);
       emit();
     },
     [key],
   );
-  return [value, set];
+  const set = useCallback((next: string) => write(next, false), [write]);
+  const push = useCallback((next: string) => write(next, true), [write]);
+  return [value, set, push];
 }
 
 function useUrlList(key: string): [string[], (next: string[]) => void] {
