@@ -123,6 +123,12 @@ export interface ScreenInput {
   sell: readonly string[];
   buy: readonly string[];
   /**
+   * Players the sender will not give up, whatever they are worth. They never
+   * appear in a give set, even if they would otherwise make the pool, and
+   * exclusion wins over a required sell — a player cannot be both.
+   */
+  exclude: readonly string[];
+  /**
    * How many players the sender gives and gets, inclusive, required ones
    * counted. The page caps both at four.
    */
@@ -212,7 +218,10 @@ export function* screenTrades(input: ScreenInput): Generator<ScreenProgress, Scr
     return { base, now: evaluate(base, EMPTY, []) };
   });
 
-  const senderPool = pool(input.sender, input.sell, input, season.level);
+  // Excluded players never enter the pool, so no give set can contain one —
+  // and filtering before the poolSize cut means an excluded star does not
+  // waste one of the eight pool slots.
+  const senderPool = pool(input.sender, input.sell, input, season.level, input.exclude);
   const outs = subsets(senderPool, input.sell, input.give.min, input.give.max);
 
   // Required buys fix the partner: they can only come from one roster.
@@ -463,16 +472,22 @@ function replacements(
  * replacement adds nothing to the other side's lineup, so offering him only
  * multiplies the search.
  */
-function pool(team: FinderTeam, required: readonly string[], input: ScreenInput, level: Map<string, number>): string[] {
+function pool(
+  team: FinderTeam,
+  required: readonly string[],
+  input: ScreenInput,
+  level: Map<string, number>,
+  exclude: readonly string[] = [],
+): string[] {
   const above = (id: string) => {
     const rep = Math.max(0, ...input.positionsOf(id).map((p) => level.get(p) ?? 0));
     return input.value(id) - rep;
   };
   const ranked = team.players
-    .filter((id) => !required.includes(id) && above(id) > 0)
+    .filter((id) => !required.includes(id) && !exclude.includes(id) && above(id) > 0)
     .sort((a, b) => above(b) - above(a))
     .slice(0, input.poolSize);
-  return [...required.filter((id) => team.players.includes(id)), ...ranked];
+  return [...required.filter((id) => team.players.includes(id) && !exclude.includes(id)), ...ranked];
 }
 
 /** Every subset of `pool` of size min..max (at least 1) that contains all of `required`. */

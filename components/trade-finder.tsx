@@ -126,6 +126,7 @@ export function TradeFinder({
   const [partnerSlug, setPartnerSlug] = useState("");
   const [sell, setSell] = useState<string[]>([]);
   const [buy, setBuy] = useState<string[]>([]);
+  const [untouchable, setUntouchable] = useState<string[]>([]);
   const [tolerance, setTolerance] = useState(0);
   const [accept, setAccept] = useState<AcceptMode>("either");
   /**
@@ -174,11 +175,24 @@ export function TradeFinder({
     const h = holder(id);
     return h && h.rosterId !== sender.rosterId && (!partner || h.rosterId === partner.rosterId);
   });
+  // Only what still applies, as with a sell: untouchable follows the sender.
+  const untouchableNow = untouchable.filter((id) => sender.players.includes(id));
+  // A player cannot be both required to sell and untouchable — each toggle
+  // clears the other, so the search never has to guess which wins.
+  const toggleSell = (id: string) => {
+    setSell(sell.includes(id) ? sell.filter((x) => x !== id) : [...sell, id]);
+    if (!sell.includes(id)) setUntouchable(untouchable.filter((x) => x !== id));
+  };
+  const toggleUntouchable = (id: string) => {
+    setUntouchable(untouchable.includes(id) ? untouchable.filter((x) => x !== id) : [...untouchable, id]);
+    if (!untouchable.includes(id)) setSell(sell.filter((x) => x !== id));
+  };
   const settingsKey = JSON.stringify([
     sender.rosterId,
     partner?.rosterId ?? null,
     sellNow,
     buyNow,
+    untouchableNow,
     tolerance,
     accept,
     limits,
@@ -224,6 +238,7 @@ export function TradeFinder({
       freeAgentMargin: FREE_AGENT_MARGIN,
       sell: sellNow,
       buy: buyNow,
+      exclude: untouchableNow,
       give: giveRange,
       get: getRange,
       poolSize: 8,
@@ -332,12 +347,17 @@ export function TradeFinder({
   const shown =
     run.phase === "done"
       ? run.found
-          .filter((f) => withinLimits(exactOf(f), limits) && meetsPositionRules(f.give, f.get, positionNet, positionsOf))
+          .filter(
+            (f) =>
+              withinLimits(exactOf(f), limits) &&
+              meetsPositionRules(f.give, f.get, positionNet, positionsOf) &&
+              !f.give.some((id) => untouchableNow.includes(id)),
+          )
           .sort(rankFound(rankBy, descending))
       : [];
   const stale = run.phase === "done" && run.key !== settingsKey;
 
-  const chip = (id: string, on: boolean, toggle: () => void, tone: "sell" | "buy") => (
+  const chip = (id: string, on: boolean, toggle: () => void, tone: "sell" | "buy" | "keep") => (
     <button
       key={id}
       type="button"
@@ -347,7 +367,9 @@ export function TradeFinder({
         on
           ? tone === "sell"
             ? "border-loss/60 bg-loss/10 text-chalk-100"
-            : "border-trade/60 bg-trade/10 text-chalk-100"
+            : tone === "buy"
+              ? "border-trade/60 bg-trade/10 text-chalk-100"
+              : "border-accent/60 bg-accent/10 text-chalk-100"
           : "border-ink-500 text-chalk-400 hover:border-ink-400 hover:text-chalk-200"
       }`}
     >
@@ -371,6 +393,7 @@ export function TradeFinder({
                 onChange={(e) => {
                   setSenderSlug(e.target.value);
                   setSell([]);
+                  setUntouchable([]);
                 }}
               >
                 {teams.map((t) => (
@@ -396,10 +419,14 @@ export function TradeFinder({
 
           <FieldGroup label="Must sell">
             <div className="flex flex-wrap gap-1.5">
+              {byValue(sender.players).map((id) => chip(id, sell.includes(id), () => toggleSell(id), "sell"))}
+            </div>
+          </FieldGroup>
+
+          <FieldGroup label="Untouchable — never trade away">
+            <div className="flex flex-wrap gap-1.5">
               {byValue(sender.players).map((id) =>
-                chip(id, sell.includes(id), () =>
-                  setSell(sell.includes(id) ? sell.filter((x) => x !== id) : [...sell, id]),
-                "sell"),
+                chip(id, untouchable.includes(id), () => toggleUntouchable(id), "keep"),
               )}
             </div>
           </FieldGroup>
@@ -575,8 +602,8 @@ export function TradeFinder({
 
           <p className="text-[11px] leading-relaxed text-chalk-600">
             Up to four players a side, in any combination within the limits above. Each team&rsquo;s players worth
-            more than a waiver replacement are considered, plus anyone you require. Follows the free-agent setting and
-            your projection overrides.
+            more than a waiver replacement are considered, plus anyone you require. Players you mark untouchable are
+            never given away. Follows the free-agent setting and your projection overrides.
           </p>
         </div>
       </Panel>
