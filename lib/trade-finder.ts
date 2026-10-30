@@ -129,6 +129,12 @@ export interface ScreenInput {
    */
   exclude: readonly string[];
   /**
+   * Players the sender will not receive, whatever they are worth. They never
+   * appear in a get set from any partner, even if they would otherwise make
+   * that partner's pool, and exclusion wins over a required buy.
+   */
+  excludeBuy: readonly string[];
+  /**
    * How many players the sender gives and gets, inclusive, required ones
    * counted. The page caps both at four.
    */
@@ -230,7 +236,15 @@ export function* screenTrades(input: ScreenInput): Generator<ScreenProgress, Scr
     : input.partners;
 
   const plans = partners.map((p) => {
-    const ins = subsets(pool(p, input.buy, input, season.level), input.buy, input.get.min, input.get.max);
+    // Don't-buy players never enter a partner's pool, so no get set can
+    // contain one — filtered before the poolSize cut, as with the sender's
+    // exclusion, so an excluded star does not waste a pool slot.
+    const ins = subsets(
+      pool(p, input.buy, input, season.level, input.excludeBuy),
+      input.buy,
+      input.get.min,
+      input.get.max,
+    );
     const base = season.baseList(p);
     const poBase = playoffs?.baseList(p) ?? null;
     return {

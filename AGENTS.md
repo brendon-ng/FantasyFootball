@@ -1950,6 +1950,16 @@ replacement adds nothing to the other lineup, so offering him only multiplies th
 search. A trade that is a smaller trade plus passengers — a throw-in who never
 starts — is dropped when the smaller one is at least as good for both sides.
 
+EACH CHIP HAS THREE STATES, NOT TWO: tapping a player on the sending team
+cycles neutral → must sell → untouchable → neutral, and tapping a player on
+another team cycles neutral → must buy → don't buy → neutral, so each roster
+is listed once. Untouchable players never appear in a give set and don't-buy
+players never appear in a get set from any partner; both are cut from the pool
+before the eight-player cut, so an excluded star does not waste a pool slot,
+and exclusion wins over a required player on the same side. Results already on
+screen are re-filtered the same way when a state changes, and the search is
+flagged stale until it runs again.
+
 THE FAST LINEUP IS GREEDY, AND ONLY WHERE GREEDY IS EXACT: best player first,
 into the most restrictive open slot he fits. That is optimal when slot types nest
 (QB/RB/WR/TE inside FLEX inside SUPER_FLEX) AND each player has one position. A

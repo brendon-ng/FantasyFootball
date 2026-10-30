@@ -127,6 +127,7 @@ export function TradeFinder({
   const [sell, setSell] = useState<string[]>([]);
   const [buy, setBuy] = useState<string[]>([]);
   const [untouchable, setUntouchable] = useState<string[]>([]);
+  const [dontBuy, setDontBuy] = useState<string[]>([]);
   const [tolerance, setTolerance] = useState(0);
   const [accept, setAccept] = useState<AcceptMode>("either");
   /**
@@ -177,15 +178,37 @@ export function TradeFinder({
   });
   // Only what still applies, as with a sell: untouchable follows the sender.
   const untouchableNow = untouchable.filter((id) => sender.players.includes(id));
-  // A player cannot be both required to sell and untouchable — each toggle
-  // clears the other, so the search never has to guess which wins.
-  const toggleSell = (id: string) => {
-    setSell(sell.includes(id) ? sell.filter((x) => x !== id) : [...sell, id]);
-    if (!sell.includes(id)) setUntouchable(untouchable.filter((x) => x !== id));
+  // A don't-buy must be on someone else's roster, whatever the partner
+  // filter says — it excludes that player from every partner's pool.
+  const dontBuyNow = dontBuy.filter((id) => {
+    const h = holder(id);
+    return h && h.rosterId !== sender.rosterId;
+  });
+  /**
+   * ONE ROW, THREE STATES: tapping a chip cycles neutral → required →
+   * excluded → neutral, so the roster is listed once instead of twice. A
+   * player is never in both lists at once, so the search never has to guess
+   * which wins.
+   */
+  const cycleSell = (id: string) => {
+    if (sell.includes(id)) {
+      setSell(sell.filter((x) => x !== id));
+      setUntouchable([...untouchable, id]);
+    } else if (untouchable.includes(id)) {
+      setUntouchable(untouchable.filter((x) => x !== id));
+    } else {
+      setSell([...sell, id]);
+    }
   };
-  const toggleUntouchable = (id: string) => {
-    setUntouchable(untouchable.includes(id) ? untouchable.filter((x) => x !== id) : [...untouchable, id]);
-    if (!untouchable.includes(id)) setSell(sell.filter((x) => x !== id));
+  const cycleBuy = (id: string) => {
+    if (buy.includes(id)) {
+      setBuy(buy.filter((x) => x !== id));
+      setDontBuy([...dontBuy, id]);
+    } else if (dontBuy.includes(id)) {
+      setDontBuy(dontBuy.filter((x) => x !== id));
+    } else {
+      setBuy([...buy, id]);
+    }
   };
   const settingsKey = JSON.stringify([
     sender.rosterId,
@@ -193,6 +216,7 @@ export function TradeFinder({
     sellNow,
     buyNow,
     untouchableNow,
+    dontBuyNow,
     tolerance,
     accept,
     limits,
@@ -212,7 +236,9 @@ export function TradeFinder({
       : teams
           .filter((t) => t.rosterId !== sender.rosterId && (!partner || t.rosterId === partner.rosterId))
           .flatMap((t) => t.players.map((id) => ({ id, team: t })))
-          .filter(({ id }) => !buy.includes(id) && normalise(nameOf(id)).includes(q))
+          .filter(
+            ({ id }) => !buy.includes(id) && !dontBuy.includes(id) && normalise(nameOf(id)).includes(q),
+          )
           .sort((a, b) => value(b.id) - value(a.id))
           .slice(0, 8);
 
@@ -239,6 +265,7 @@ export function TradeFinder({
       sell: sellNow,
       buy: buyNow,
       exclude: untouchableNow,
+      excludeBuy: dontBuyNow,
       give: giveRange,
       get: getRange,
       poolSize: 8,
@@ -351,13 +378,14 @@ export function TradeFinder({
             (f) =>
               withinLimits(exactOf(f), limits) &&
               meetsPositionRules(f.give, f.get, positionNet, positionsOf) &&
-              !f.give.some((id) => untouchableNow.includes(id)),
+              !f.give.some((id) => untouchableNow.includes(id)) &&
+              !f.get.some((id) => dontBuyNow.includes(id)),
           )
           .sort(rankFound(rankBy, descending))
       : [];
   const stale = run.phase === "done" && run.key !== settingsKey;
 
-  const chip = (id: string, on: boolean, toggle: () => void, tone: "sell" | "buy" | "keep") => (
+  const chip = (id: string, on: boolean, toggle: () => void, tone: "sell" | "buy" | "keep" | "skip") => (
     <button
       key={id}
       type="button"
@@ -365,7 +393,7 @@ export function TradeFinder({
       aria-pressed={on}
       className={`inline-flex h-8 items-center rounded-lg border px-2.5 text-[12px] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent-dim ${
         on
-          ? tone === "sell"
+          ? tone === "sell" || tone === "skip"
             ? "border-loss/60 bg-loss/10 text-chalk-100"
             : tone === "buy"
               ? "border-trade/60 bg-trade/10 text-chalk-100"
@@ -419,29 +447,30 @@ export function TradeFinder({
 
           <FieldGroup label="Must sell">
             <div className="flex flex-wrap gap-1.5">
-              {byValue(sender.players).map((id) => chip(id, sell.includes(id), () => toggleSell(id), "sell"))}
-            </div>
-          </FieldGroup>
-
-          <FieldGroup label="Untouchable — never trade away">
-            <div className="flex flex-wrap gap-1.5">
               {byValue(sender.players).map((id) =>
-                chip(id, untouchable.includes(id), () => toggleUntouchable(id), "keep"),
+                chip(
+                  id,
+                  sell.includes(id) || untouchable.includes(id),
+                  () => cycleSell(id),
+                  sell.includes(id) ? "sell" : "keep",
+                ),
               )}
             </div>
+            <p className="mt-1.5 text-[11px] text-chalk-600">Tap once: must sell · again: untouchable · again: clear</p>
           </FieldGroup>
 
           <FieldGroup label="Must buy">
-            {buyNow.length ? (
+            {buyNow.length || dontBuyNow.length ? (
               <div className="mb-2 flex flex-wrap gap-1.5">
-                {buyNow.map((id) => chip(id, true, () => setBuy(buy.filter((x) => x !== id)), "buy"))}
+                {buyNow.map((id) => chip(id, true, () => cycleBuy(id), "buy"))}
+                {dontBuyNow.map((id) => chip(id, true, () => cycleBuy(id), "skip"))}
               </div>
             ) : null}
             {partner ? (
               <div className="flex flex-wrap gap-1.5">
                 {byValue(partner.players)
-                  .filter((id) => !buyNow.includes(id))
-                  .map((id) => chip(id, false, () => setBuy([...buy, id]), "buy"))}
+                  .filter((id) => !buyNow.includes(id) && !dontBuyNow.includes(id))
+                  .map((id) => chip(id, false, () => cycleBuy(id), "buy"))}
               </div>
             ) : (
               <>
@@ -480,6 +509,7 @@ export function TradeFinder({
                 ) : null}
               </>
             )}
+            <p className="mt-1.5 text-[11px] text-chalk-600">Tap once: must buy · again: don&rsquo;t buy · again: clear</p>
           </FieldGroup>
 
           {/* Settings: one grid, one control height, every label above. */}
@@ -603,7 +633,8 @@ export function TradeFinder({
           <p className="text-[11px] leading-relaxed text-chalk-600">
             Up to four players a side, in any combination within the limits above. Each team&rsquo;s players worth
             more than a waiver replacement are considered, plus anyone you require. Players you mark untouchable are
-            never given away. Follows the free-agent setting and your projection overrides.
+            never given away, and players you mark don&rsquo;t buy are never received. Follows the free-agent setting
+            and your projection overrides.
           </p>
         </div>
       </Panel>
