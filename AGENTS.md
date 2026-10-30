@@ -1960,6 +1960,13 @@ and exclusion wins over a required player on the same side. Results already on
 screen are re-filtered the same way when a state changes, and the search is
 flagged stale until it runs again.
 
+SELECTION NEVER REORDERS A ROSTER: a partner's players render once, in value
+order, and tapping one only changes its tone — must buy, don't buy, neutral.
+Selected players are never pulled into a separate row above the roster, so the
+button order never depends on selection state. Don't-buys on other teams still
+show in a small row above, since those are not this team's buttons. The
+sending team's row already worked this way.
+
 THE FAST LINEUP IS GREEDY, AND ONLY WHERE GREEDY IS EXACT: best player first,
 into the most restrictive open slot he fits. That is optimal when slot types nest
 (QB/RB/WR/TE inside FLEX inside SUPER_FLEX) AND each player has one position. A

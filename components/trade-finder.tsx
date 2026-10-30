@@ -468,18 +468,32 @@ export function TradeFinder({
           </FieldGroup>
 
           <FieldGroup label="Must buy">
-            {buyNow.length || dontBuyNow.length ? (
+            {!partner && (buyNow.length || dontBuyNow.length) ? (
               <div className="mb-2 flex flex-wrap gap-1.5">
                 {buyNow.map((id) => chip(id, true, () => cycleBuy(id), "buy"))}
                 {dontBuyNow.map((id) => chip(id, true, () => cycleBuy(id), "skip"))}
               </div>
             ) : null}
             {partner ? (
-              <div className="flex flex-wrap gap-1.5">
-                {byValue(partner.players)
-                  .filter((id) => !buyNow.includes(id) && !dontBuyNow.includes(id))
-                  .map((id) => chip(id, false, () => cycleBuy(id), "buy"))}
-              </div>
+              <>
+                {dontBuyNow.filter((id) => holder(id)?.rosterId !== partner.rosterId).length ? (
+                  <div className="mb-2 flex flex-wrap gap-1.5">
+                    {dontBuyNow
+                      .filter((id) => holder(id)?.rosterId !== partner.rosterId)
+                      .map((id) => chip(id, true, () => cycleBuy(id), "skip"))}
+                  </div>
+                ) : null}
+                <div className="flex flex-wrap gap-1.5">
+                  {byValue(partner.players).map((id) =>
+                    chip(
+                      id,
+                      buyNow.includes(id) || dontBuyNow.includes(id),
+                      () => cycleBuy(id),
+                      buyNow.includes(id) ? "buy" : "skip",
+                    ),
+                  )}
+                </div>
+              </>
             ) : (
               <>
                 <TextInput
