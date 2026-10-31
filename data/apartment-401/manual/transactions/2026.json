@@ -2699,6 +2699,29 @@
       "timestamp": 1793342526987,
       "vetoed": false,
       "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "65a3e22a-9222-4040-991c-c4371d640219",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "9501",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "7021",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "isaac-edejer"
+      ],
+      "timestamp": 1793387890079,
+      "vetoed": false,
+      "week": 8
     }
   ]
 }
