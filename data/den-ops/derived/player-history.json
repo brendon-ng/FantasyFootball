@@ -17015,6 +17015,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793481205887,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "4149": [
@@ -18782,6 +18794,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793514175899,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "4455": [
@@ -37030,6 +37054,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793502648914,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "7601": [
@@ -46175,6 +46211,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793481205887,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "11439": [
@@ -47845,6 +47893,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793502648914,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "11630": [

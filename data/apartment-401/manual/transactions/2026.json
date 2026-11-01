@@ -162,17 +162,22 @@
     },
     {
       "faab": 0,
-      "id": "95fbdc29-88f2-4a55-8889-e48b5990880d",
+      "id": "c0d3e522-6018-419d-ae04-2838191ddfac",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "11834",
-          "toSlug": "brendon-ng"
+          "playerId": "CIN",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "KC",
+          "toSlug": null
         }
       ],
       "kind": "waiver",
       "ownerSlugs": [
-        "brendon-ng"
+        "isaac-edejer"
       ],
       "timestamp": 1789542489998,
       "vetoed": false,
@@ -203,22 +208,17 @@
     },
     {
       "faab": 0,
-      "id": "c0d3e522-6018-419d-ae04-2838191ddfac",
+      "id": "95fbdc29-88f2-4a55-8889-e48b5990880d",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "CIN",
-          "toSlug": "isaac-edejer"
-        },
-        {
-          "fromSlug": "isaac-edejer",
-          "playerId": "KC",
-          "toSlug": null
+          "playerId": "11834",
+          "toSlug": "brendon-ng"
         }
       ],
       "kind": "waiver",
       "ownerSlugs": [
-        "isaac-edejer"
+        "brendon-ng"
       ],
       "timestamp": 1789542489998,
       "vetoed": false,
@@ -1219,29 +1219,6 @@
     },
     {
       "faab": 0,
-      "id": "25d9ba72-d701-47ad-805e-dd4c59deedce",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "5844",
-          "toSlug": "isaac-edejer"
-        },
-        {
-          "fromSlug": "isaac-edejer",
-          "playerId": "5001",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "isaac-edejer"
-      ],
-      "timestamp": 1791359099987,
-      "vetoed": false,
-      "week": 5
-    },
-    {
-      "faab": 0,
       "id": "c268e94a-ece8-40ee-a3f1-b34df8ef4bc8",
       "items": [
         {
@@ -1258,6 +1235,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "eric-wong"
+      ],
+      "timestamp": 1791359099987,
+      "vetoed": false,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "25d9ba72-d701-47ad-805e-dd4c59deedce",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5844",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "5001",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "isaac-edejer"
       ],
       "timestamp": 1791359099987,
       "vetoed": false,
@@ -2357,16 +2357,16 @@
     },
     {
       "faab": 0,
-      "id": "bad532da-65bf-4a84-a664-0262ac7f426a",
+      "id": "34e231f6-9707-4405-97b4-7bd23b0d4326",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "8210",
+          "playerId": "13276",
           "toSlug": "brendon-ng"
         },
         {
           "fromSlug": "brendon-ng",
-          "playerId": "11435",
+          "playerId": "11655",
           "toSlug": null
         }
       ],
@@ -2380,16 +2380,16 @@
     },
     {
       "faab": 0,
-      "id": "34e231f6-9707-4405-97b4-7bd23b0d4326",
+      "id": "bad532da-65bf-4a84-a664-0262ac7f426a",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "13276",
+          "playerId": "8210",
           "toSlug": "brendon-ng"
         },
         {
           "fromSlug": "brendon-ng",
-          "playerId": "11655",
+          "playerId": "11435",
           "toSlug": null
         }
       ],
@@ -2720,6 +2720,29 @@
         "isaac-edejer"
       ],
       "timestamp": 1793387890079,
+      "vetoed": false,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "7f80e98c-3666-4f9a-88c9-e527729c4b93",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "13345",
+          "toSlug": "haley-rao"
+        },
+        {
+          "fromSlug": "haley-rao",
+          "playerId": "12545",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "haley-rao"
+      ],
+      "timestamp": 1793468674386,
       "vetoed": false,
       "week": 8
     }

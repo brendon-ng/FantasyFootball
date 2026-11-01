@@ -571,6 +571,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793510210092,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 8
     }
   ],
   "1433": [
@@ -1399,6 +1411,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793510210092,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 8
     }
   ],
   "3271": [
@@ -12562,6 +12586,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "robbie-goodman",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793510289185,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "12469": [
@@ -14846,6 +14882,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "robbie-goodman",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793510289185,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "13287": [
