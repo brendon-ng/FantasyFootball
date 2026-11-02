@@ -15487,6 +15487,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793555358250,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "4040": [
@@ -20253,6 +20265,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793553890382,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "4951": [
@@ -46367,6 +46391,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793553975042,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "11539": [
@@ -52429,6 +52465,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793553975042,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "BUF": [
@@ -56704,6 +56752,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "cassidy-pensa",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793553890382,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 8
     }
   ],
   "LAC": [
