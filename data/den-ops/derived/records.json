@@ -273,6 +273,15 @@
       "week": 15
     },
     {
+      "opponentPoints": 166.2,
+      "opponentSlug": "spencer-kim",
+      "ownerSlug": "safvet-besen",
+      "points": 174.26,
+      "season": 2026,
+      "total": 340.46,
+      "week": 8
+    },
+    {
       "opponentPoints": 144.06,
       "opponentSlug": "david-collier",
       "ownerSlug": "lauren-gross",
@@ -442,15 +451,6 @@
       "season": 2024,
       "total": 312.36,
       "week": 11
-    },
-    {
-      "opponentPoints": 153.66,
-      "opponentSlug": "jaymie-lew",
-      "ownerSlug": "cassidy-pensa",
-      "points": 157.32,
-      "season": 2021,
-      "total": 310.98,
-      "week": 5
     }
   ],
   "lowestCombined": [

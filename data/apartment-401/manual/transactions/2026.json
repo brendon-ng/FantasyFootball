@@ -2380,29 +2380,6 @@
     },
     {
       "faab": 0,
-      "id": "bad532da-65bf-4a84-a664-0262ac7f426a",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "8210",
-          "toSlug": "brendon-ng"
-        },
-        {
-          "fromSlug": "brendon-ng",
-          "playerId": "11435",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "brendon-ng"
-      ],
-      "timestamp": 1793171422802,
-      "vetoed": false,
-      "week": 8
-    },
-    {
-      "faab": 0,
       "id": "617110bb-e16c-403f-a298-765d491bfe1a",
       "items": [
         {
@@ -2419,6 +2396,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "isaac-edejer"
+      ],
+      "timestamp": 1793171422802,
+      "vetoed": false,
+      "week": 8
+    },
+    {
+      "faab": 0,
+      "id": "bad532da-65bf-4a84-a664-0262ac7f426a",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "8210",
+          "toSlug": "brendon-ng"
+        },
+        {
+          "fromSlug": "brendon-ng",
+          "playerId": "11435",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "brendon-ng"
       ],
       "timestamp": 1793171422802,
       "vetoed": false,

@@ -426,6 +426,15 @@
       "week": 3
     },
     {
+      "opponentPoints": 120.26,
+      "opponentSlug": "eric-wong",
+      "ownerSlug": "jivan-gubbi",
+      "points": 163.78,
+      "season": 2026,
+      "total": 284.04,
+      "week": 8
+    },
+    {
       "opponentPoints": 137.94,
       "opponentSlug": "eric-wong",
       "ownerSlug": "mark-mcgreal",
@@ -442,15 +451,6 @@
       "season": 2026,
       "total": 283.86,
       "week": 5
-    },
-    {
-      "opponentPoints": 123.12,
-      "opponentSlug": "jivan-gubbi",
-      "ownerSlug": "charlie-stoksik",
-      "points": 157.88,
-      "season": 2026,
-      "total": 281,
-      "week": 4
     }
   ],
   "lowestCombined": [
@@ -1295,20 +1295,20 @@
       "week": 11
     },
     {
+      "opponentPoints": 120.26,
+      "opponentSlug": "eric-wong",
+      "ownerSlug": "jivan-gubbi",
+      "points": 163.78,
+      "season": 2026,
+      "week": 8
+    },
+    {
       "opponentPoints": 102.32,
       "opponentSlug": "jivan-gubbi",
       "ownerSlug": "haley-rao",
       "points": 163.46,
       "season": 2022,
       "week": 13
-    },
-    {
-      "opponentPoints": 105.9,
-      "opponentSlug": "diana-gonzalez",
-      "ownerSlug": "sam-ellison",
-      "points": 163.32,
-      "season": 2025,
-      "week": 5
     }
   ],
   "weeklyLow": [

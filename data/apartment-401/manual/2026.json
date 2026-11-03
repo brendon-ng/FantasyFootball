@@ -426,6 +426,66 @@
       },
       "kind": "regular",
       "week": 7
+    },
+    {
+      "away": {
+        "ownerSlug": "jay-uppuluri",
+        "points": 115
+      },
+      "home": {
+        "ownerSlug": "isaac-edejer",
+        "points": 82.3
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "charlie-stoksik",
+        "points": 132.1
+      },
+      "home": {
+        "ownerSlug": "sam-ellison",
+        "points": 74.08
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "eric-wong",
+        "points": 120.26
+      },
+      "home": {
+        "ownerSlug": "jivan-gubbi",
+        "points": 163.78
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "brendon-ng",
+        "points": 109.16
+      },
+      "home": {
+        "ownerSlug": "diana-gonzalez",
+        "points": 90
+      },
+      "kind": "regular",
+      "week": 8
+    },
+    {
+      "away": {
+        "ownerSlug": "haley-rao",
+        "points": 155.16
+      },
+      "home": {
+        "ownerSlug": "mark-mcgreal",
+        "points": 99.6
+      },
+      "kind": "regular",
+      "week": 8
     }
   ],
   "playoffTeams": 6,
@@ -440,22 +500,22 @@
       "ownerSlugs": [
         "brendon-ng"
       ],
-      "pointsAgainst": 875.88,
-      "pointsFor": 836.2,
+      "pointsAgainst": 965.88,
+      "pointsFor": 945.36,
       "seed": 5,
       "teamName": "Strike a Cord Its Prob AYOMANOR",
       "teamSlug": "brendon-ng",
       "ties": 0,
-      "wins": 3
+      "wins": 4
     },
     {
       "finalPlace": 0,
-      "losses": 5,
+      "losses": 6,
       "ownerSlugs": [
         "diana-gonzalez"
       ],
-      "pointsAgainst": 877.06,
-      "pointsFor": 703.42,
+      "pointsAgainst": 986.22,
+      "pointsFor": 793.42,
       "seed": 10,
       "teamName": "Summer I turned Purdy",
       "teamSlug": "diana-gonzalez",
@@ -464,13 +524,13 @@
     },
     {
       "finalPlace": 0,
-      "losses": 1,
+      "losses": 2,
       "ownerSlugs": [
         "sam-ellison"
       ],
-      "pointsAgainst": 778.16,
-      "pointsFor": 926.78,
-      "seed": 2,
+      "pointsAgainst": 910.26,
+      "pointsFor": 1000.86,
+      "seed": 3,
       "teamName": "Gibbs Free Energy",
       "teamSlug": "sam-ellison",
       "ties": 0,
@@ -482,22 +542,22 @@
       "ownerSlugs": [
         "jay-uppuluri"
       ],
-      "pointsAgainst": 831.74,
-      "pointsFor": 757.96,
+      "pointsAgainst": 914.04,
+      "pointsFor": 872.96,
       "seed": 8,
       "teamName": "El Diablo",
       "teamSlug": "jay-uppuluri",
       "ties": 0,
-      "wins": 2
+      "wins": 3
     },
     {
       "finalPlace": 0,
-      "losses": 1,
+      "losses": 2,
       "ownerSlugs": [
         "isaac-edejer"
       ],
-      "pointsAgainst": 809.58,
-      "pointsFor": 942.28,
+      "pointsAgainst": 924.58,
+      "pointsFor": 1024.58,
       "seed": 1,
       "teamName": "waiting for goedert",
       "teamSlug": "isaac-edejer",
@@ -510,39 +570,11 @@
       "ownerSlugs": [
         "haley-rao"
       ],
-      "pointsAgainst": 930.8,
-      "pointsFor": 877.18,
+      "pointsAgainst": 1030.4,
+      "pointsFor": 1032.34,
       "seed": 4,
       "teamName": "Shraderbrau",
       "teamSlug": "haley-rao",
-      "ties": 0,
-      "wins": 4
-    },
-    {
-      "finalPlace": 0,
-      "losses": 5,
-      "ownerSlugs": [
-        "jivan-gubbi"
-      ],
-      "pointsAgainst": 965.68,
-      "pointsFor": 880.6,
-      "seed": 7,
-      "teamName": "McConkey Kong",
-      "teamSlug": "jivan-gubbi",
-      "ties": 0,
-      "wins": 2
-    },
-    {
-      "finalPlace": 0,
-      "losses": 2,
-      "ownerSlugs": [
-        "charlie-stoksik"
-      ],
-      "pointsAgainst": 736.26,
-      "pointsFor": 879.12,
-      "seed": 3,
-      "teamName": "Child McBride",
-      "teamSlug": "charlie-stoksik",
       "ties": 0,
       "wins": 5
     },
@@ -550,10 +582,38 @@
       "finalPlace": 0,
       "losses": 5,
       "ownerSlugs": [
+        "jivan-gubbi"
+      ],
+      "pointsAgainst": 1085.94,
+      "pointsFor": 1044.38,
+      "seed": 6,
+      "teamName": "McConkey Kong",
+      "teamSlug": "jivan-gubbi",
+      "ties": 0,
+      "wins": 3
+    },
+    {
+      "finalPlace": 0,
+      "losses": 2,
+      "ownerSlugs": [
+        "charlie-stoksik"
+      ],
+      "pointsAgainst": 810.34,
+      "pointsFor": 1011.22,
+      "seed": 2,
+      "teamName": "Child McBride",
+      "teamSlug": "charlie-stoksik",
+      "ties": 0,
+      "wins": 6
+    },
+    {
+      "finalPlace": 0,
+      "losses": 6,
+      "ownerSlugs": [
         "mark-mcgreal"
       ],
-      "pointsAgainst": 813.82,
-      "pointsFor": 710.3,
+      "pointsAgainst": 968.98,
+      "pointsFor": 809.9,
       "seed": 9,
       "teamName": "Dobbins Is A Free Elf",
       "teamSlug": "mark-mcgreal",
@@ -562,13 +622,13 @@
     },
     {
       "finalPlace": 0,
-      "losses": 4,
+      "losses": 5,
       "ownerSlugs": [
         "eric-wong"
       ],
-      "pointsAgainst": 725.76,
-      "pointsFor": 830.9,
-      "seed": 6,
+      "pointsAgainst": 889.54,
+      "pointsFor": 951.16,
+      "seed": 7,
       "teamName": "Eric's In Paris",
       "teamSlug": "eric-wong",
       "ties": 0,

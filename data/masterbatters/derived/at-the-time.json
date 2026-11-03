@@ -151,7 +151,7 @@
       "label": "Highest scoring matchup in league history",
       "opponentSlug": "srishti-dhawan",
       "ownerSlug": "josh-greenebaum",
-      "stillStands": true,
+      "stillStands": false,
       "value": 305.6
     }
   ],
@@ -351,6 +351,16 @@
       "ownerSlug": "srishti-dhawan",
       "stillStands": true,
       "value": 59.2
+    }
+  ],
+  "2026-8-kaitlin-zarbis-vs-robbie-goodman": [
+    {
+      "kind": "combined-high",
+      "label": "Highest scoring matchup in league history",
+      "opponentSlug": "robbie-goodman",
+      "ownerSlug": "kaitlin-zarbis",
+      "stillStands": true,
+      "value": 307.46
     }
   ]
 }
