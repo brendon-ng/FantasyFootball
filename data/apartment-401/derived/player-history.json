@@ -9371,6 +9371,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "4892": [
@@ -12996,6 +13008,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "5880": [
@@ -18867,6 +18891,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "7562": [
@@ -21727,6 +21763,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "8134": [
@@ -22905,6 +22953,20 @@
       "week": 0
     }
   ],
+  "8161": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
+    }
+  ],
   "8162": [
     {
       "action": "add",
@@ -23349,6 +23411,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793801656961,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "8228": [
@@ -24675,6 +24749,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793804499695,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "9501": [
@@ -25555,6 +25641,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "9997": [
@@ -26378,6 +26476,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "11008": [
@@ -26628,6 +26738,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "11439": [
@@ -28078,6 +28200,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793801656961,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "11637": [
@@ -28180,6 +28314,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "11638": [
@@ -29247,6 +29393,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "12507": [
@@ -31551,6 +31709,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "CIN": [
@@ -31817,6 +31987,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793783008718,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "CLE": [
@@ -35841,6 +36023,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793804512553,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "NYJ": [
@@ -37675,6 +37869,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793804512553,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "espn-4427728": [
