@@ -1884,6 +1884,29 @@
     },
     {
       "faab": 0,
+      "id": "d138b5ea-9ffb-49e8-9db2-c6206409fbc3",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "HOU",
+          "toSlug": "sam-ellison"
+        },
+        {
+          "fromSlug": "sam-ellison",
+          "playerId": "12711",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "sam-ellison"
+      ],
+      "timestamp": 1792568144907,
+      "vetoed": false,
+      "week": 7
+    },
+    {
+      "faab": 0,
       "id": "37f192bc-21ed-4484-adb1-92e59e7fc044",
       "items": [
         {
@@ -1907,22 +1930,22 @@
     },
     {
       "faab": 0,
-      "id": "d138b5ea-9ffb-49e8-9db2-c6206409fbc3",
+      "id": "b8359688-4d89-4fa3-aa12-0afb123866fc",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "HOU",
-          "toSlug": "sam-ellison"
+          "playerId": "TEN",
+          "toSlug": "eric-wong"
         },
         {
-          "fromSlug": "sam-ellison",
-          "playerId": "12711",
+          "fromSlug": "eric-wong",
+          "playerId": "8132",
           "toSlug": null
         }
       ],
       "kind": "waiver",
       "ownerSlugs": [
-        "sam-ellison"
+        "eric-wong"
       ],
       "timestamp": 1792568144907,
       "vetoed": false,
@@ -1969,29 +1992,6 @@
       "kind": "waiver",
       "ownerSlugs": [
         "mark-mcgreal"
-      ],
-      "timestamp": 1792568144907,
-      "vetoed": false,
-      "week": 7
-    },
-    {
-      "faab": 0,
-      "id": "b8359688-4d89-4fa3-aa12-0afb123866fc",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "TEN",
-          "toSlug": "eric-wong"
-        },
-        {
-          "fromSlug": "eric-wong",
-          "playerId": "8132",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "eric-wong"
       ],
       "timestamp": 1792568144907,
       "vetoed": false,
@@ -2825,29 +2825,6 @@
     },
     {
       "faab": 0,
-      "id": "e353241e-f7ce-4087-8b9f-df2fe4dd7fef",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "8161",
-          "toSlug": "isaac-edejer"
-        },
-        {
-          "fromSlug": "isaac-edejer",
-          "playerId": "4881",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "isaac-edejer"
-      ],
-      "timestamp": 1793783008718,
-      "vetoed": false,
-      "week": 9
-    },
-    {
-      "faab": 0,
       "id": "9d85a920-47c6-4b55-9d73-23e8687c07ea",
       "items": [
         {
@@ -2864,6 +2841,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "eric-wong"
+      ],
+      "timestamp": 1793783008718,
+      "vetoed": false,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "e353241e-f7ce-4087-8b9f-df2fe4dd7fef",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "8161",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "4881",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "isaac-edejer"
       ],
       "timestamp": 1793783008718,
       "vetoed": false,
@@ -2917,29 +2917,6 @@
     },
     {
       "faab": 0,
-      "id": "bb350e15-b146-43f1-beac-fb5e34023c5e",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "7561",
-          "toSlug": "isaac-edejer"
-        },
-        {
-          "fromSlug": "isaac-edejer",
-          "playerId": "11435",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "isaac-edejer"
-      ],
-      "timestamp": 1793783008718,
-      "vetoed": false,
-      "week": 9
-    },
-    {
-      "faab": 0,
       "id": "f42e8a82-640a-44b5-b395-bfa114f4178b",
       "items": [
         {
@@ -2956,6 +2933,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "eric-wong"
+      ],
+      "timestamp": 1793783008718,
+      "vetoed": false,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "bb350e15-b146-43f1-beac-fb5e34023c5e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7561",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "11435",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "isaac-edejer"
       ],
       "timestamp": 1793783008718,
       "vetoed": false,
@@ -3022,6 +3022,75 @@
         "jivan-gubbi"
       ],
       "timestamp": 1793804512553,
+      "vetoed": false,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "13598ab7-a106-4b09-b887-78bcff7507bd",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "9757",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "ATL",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "isaac-edejer"
+      ],
+      "timestamp": 1793815171751,
+      "vetoed": false,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "33a36271-9f21-465d-8ec7-5f970d758fb5",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "13833",
+          "toSlug": "mark-mcgreal"
+        },
+        {
+          "fromSlug": "mark-mcgreal",
+          "playerId": "1945",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "mark-mcgreal"
+      ],
+      "timestamp": 1793816350639,
+      "vetoed": false,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "c32fe027-6de1-401c-be47-6c073f9018f9",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "DET",
+          "toSlug": "jay-uppuluri"
+        },
+        {
+          "fromSlug": "jay-uppuluri",
+          "playerId": "7600",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jay-uppuluri"
+      ],
+      "timestamp": 1793847661873,
       "vetoed": false,
       "week": 9
     }

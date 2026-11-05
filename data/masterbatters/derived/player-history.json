@@ -349,6 +349,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793820208538,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "1339": [
@@ -832,6 +844,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793822102791,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "2133": [
@@ -1211,6 +1235,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793822102791,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "3163": [
@@ -1385,6 +1421,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793820300134,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "3257": [
@@ -2867,6 +2915,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793820208538,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "4892": [
@@ -3249,6 +3309,20 @@
       "week": 17
     }
   ],
+  "4993": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793820300134,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
+    }
+  ],
   "5001": [
     {
       "action": "add",
@@ -3411,6 +3485,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793844894697,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "5022": [
@@ -3524,6 +3610,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793861702164,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "5189": [
@@ -10952,6 +11050,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 17
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793844894697,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "11581": [
@@ -15808,6 +15918,20 @@
       "week": 7
     }
   ],
+  "13968": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793861702164,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
+    }
+  ],
   "ARI": [
     {
       "action": "draft",
@@ -16934,6 +17058,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793814841089,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "GB": [
@@ -18642,6 +18778,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793814841089,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "NYG": [

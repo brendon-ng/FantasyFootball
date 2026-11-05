@@ -1900,7 +1900,7 @@
     "birth_date": "1995-01-23",
     "full_name": "Daniel Carlson",
     "position": "K",
-    "team": "NO",
+    "team": null,
     "years_exp": 8
   },
   "5096": {
@@ -3160,7 +3160,7 @@
     "birth_date": "1999-11-26",
     "full_name": "Hassan Haskins",
     "position": "RB",
-    "team": null,
+    "team": "CLE",
     "years_exp": 4
   },
   "8125": {
@@ -4189,7 +4189,7 @@
     "birth_date": "2001-01-10",
     "full_name": "Bub Means",
     "position": "WR",
-    "team": "CLE",
+    "team": null,
     "years_exp": 2
   },
   "11783": {
@@ -4757,6 +4757,13 @@
     "full_name": "Dominic Zvada",
     "position": "K",
     "team": "NYG",
+    "years_exp": 0
+  },
+  "13968": {
+    "birth_date": "2003-12-09",
+    "full_name": "Drew Stevens",
+    "position": "K",
+    "team": "WAS",
     "years_exp": 0
   },
   "ARI": {

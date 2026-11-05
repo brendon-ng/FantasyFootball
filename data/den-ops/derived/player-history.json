@@ -12446,6 +12446,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793858182101,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "3271": [
@@ -15511,6 +15523,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793818025723,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "4040": [
@@ -34110,6 +34134,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 14
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793858089551,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "7045": [
@@ -38952,6 +38988,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793856827267,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "8130": [
@@ -45284,6 +45332,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793858182101,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "10222": [
@@ -47888,6 +47948,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793856827267,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "11626": [
@@ -50849,6 +50921,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793858089551,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "12718": [
@@ -50889,6 +50973,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793856353698,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "13274": [
@@ -51091,6 +51187,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793810423660,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "13298": [
@@ -53341,6 +53449,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793856353698,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "CIN": [
@@ -59392,6 +59512,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793865094502,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "NYG": [
@@ -60975,6 +61107,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1793801536428,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793865094502,
       "toSlug": null,
       "type": "free_agent",
       "week": 9

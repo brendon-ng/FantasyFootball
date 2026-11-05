@@ -2827,6 +2827,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793816350639,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "1992": [
@@ -19971,6 +19983,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793847661873,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "7601": [
@@ -25551,6 +25575,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793815171751,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "9758": [
@@ -30489,6 +30525,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "mark-mcgreal",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793816350639,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "ARI": [
@@ -30829,6 +30877,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793815171751,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "BAL": [
@@ -32971,6 +33031,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793847661873,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "GB": [
