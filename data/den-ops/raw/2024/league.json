@@ -250,7 +250,8 @@
     "waiver_budget": 100,
     "waiver_clear_days": 2,
     "waiver_day_of_week": 2,
-    "waiver_type": 2
+    "waiver_type": 2,
+    "was_auto_archived": 1
   },
   "shard": 197,
   "sport": "nfl",
