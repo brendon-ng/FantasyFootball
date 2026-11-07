@@ -856,6 +856,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793991400522,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "2133": [
@@ -1246,6 +1258,18 @@
       "timestamp": 1793822102791,
       "toSlug": null,
       "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793991400522,
+      "toSlug": null,
+      "type": "waiver",
       "week": 9
     }
   ],
@@ -4116,6 +4140,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793995319392,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "5850": [
@@ -5126,6 +5162,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1793802305517,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793991553757,
       "toSlug": null,
       "type": "free_agent",
       "week": 9
@@ -8580,6 +8628,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793995319392,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "9480": [
@@ -11112,6 +11172,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793988925877,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "11581": [
@@ -12561,6 +12633,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1793915414876,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793988925877,
       "toSlug": null,
       "type": "free_agent",
       "week": 9
@@ -16842,6 +16926,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793984198647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "CLE": [
@@ -18924,6 +19020,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793984198647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "NYG": [
@@ -19416,6 +19524,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793991553757,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "TB": [

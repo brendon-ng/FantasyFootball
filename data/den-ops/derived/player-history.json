@@ -33884,6 +33884,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793984312344,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "7042": [
@@ -43072,6 +43084,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "reagan-schmidt",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793984312344,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "9229": [
@@ -44996,6 +45020,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1793982491876,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "9758": [
