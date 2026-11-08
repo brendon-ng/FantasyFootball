@@ -850,7 +850,7 @@
     "birth_date": "1993-01-05",
     "full_name": "Phillip Dorsett II",
     "position": "WR",
-    "team": "LV",
+    "team": null,
     "years_exp": 11
   },
   "2342": {
@@ -3181,7 +3181,7 @@
     "birth_date": "2000-02-19",
     "full_name": "Dameon Pierce",
     "position": "RB",
-    "team": "PHI",
+    "team": null,
     "years_exp": 4
   },
   "8130": {

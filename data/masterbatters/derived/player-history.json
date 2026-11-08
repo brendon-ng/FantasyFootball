@@ -15426,6 +15426,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "robbie-goodman",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794089365278,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "13287": [

@@ -12772,6 +12772,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794113439311,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "3294": [
@@ -36137,6 +36149,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794079875975,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "7568": [
@@ -37186,6 +37210,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794093434116,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "7601": [
@@ -45032,6 +45068,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794079875975,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "9758": [
@@ -51232,6 +51280,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1793810423660,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "david-collier",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794093434116,
       "toSlug": null,
       "type": "free_agent",
       "week": 9

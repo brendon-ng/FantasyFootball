@@ -1874,6 +1874,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794117174545,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "1387": [
@@ -14589,6 +14601,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794090213302,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "6149": [
@@ -17504,6 +17528,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794117326098,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "7021": [
@@ -23447,6 +23483,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794117133405,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "8228": [
@@ -25584,6 +25632,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1793815171751,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794090213302,
       "toSlug": null,
       "type": "free_agent",
       "week": 9
@@ -30193,6 +30253,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    }
+  ],
+  "13281": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794117326098,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "13286": [
