@@ -399,6 +399,15 @@
       "week": 7
     },
     {
+      "opponentPoints": 130.76,
+      "opponentSlug": "allison-fosbery",
+      "ownerSlug": "robbie-goodman",
+      "points": 140.86,
+      "season": 2026,
+      "total": 271.62,
+      "week": 9
+    },
+    {
       "opponentPoints": 112.74,
       "opponentSlug": "robbie-goodman",
       "ownerSlug": "lindsey-freeze",
@@ -435,21 +444,12 @@
       "week": 2
     },
     {
-      "opponentPoints": 119.52,
-      "opponentSlug": "ross-bechtel",
-      "ownerSlug": "jake-gibbons",
-      "points": 147.04,
+      "opponentPoints": 133.48,
+      "opponentSlug": "srishti-dhawan",
+      "ownerSlug": "josh-greenebaum",
+      "points": 133.78,
       "season": 2026,
-      "total": 266.56,
-      "week": 5
-    },
-    {
-      "opponentPoints": 131.66,
-      "opponentSlug": "lindsey-freeze",
-      "ownerSlug": "aidan-kelleher",
-      "points": 134.76,
-      "season": 2025,
-      "total": 266.42,
+      "total": 267.26,
       "week": 9
     }
   ],
@@ -691,6 +691,24 @@
       "week": 8
     },
     {
+      "margin": 0.3,
+      "opponentPoints": 133.48,
+      "opponentSlug": "srishti-dhawan",
+      "ownerSlug": "josh-greenebaum",
+      "points": 133.78,
+      "season": 2026,
+      "week": 9
+    },
+    {
+      "margin": 0.54,
+      "opponentPoints": 108.22,
+      "opponentSlug": "ross-bechtel",
+      "ownerSlug": "brendon-ng",
+      "points": 108.76,
+      "season": 2026,
+      "week": 9
+    },
+    {
       "margin": 0.6,
       "opponentPoints": 100.62,
       "opponentSlug": "josh-greenebaum",
@@ -887,24 +905,6 @@
       "points": 111.08,
       "season": 2025,
       "week": 9
-    },
-    {
-      "margin": 7.56,
-      "opponentPoints": 113.36,
-      "opponentSlug": "ross-bechtel",
-      "ownerSlug": "robbie-goodman",
-      "points": 120.92,
-      "season": 2025,
-      "week": 9
-    },
-    {
-      "margin": 7.82,
-      "opponentPoints": 106.22,
-      "opponentSlug": "brendon-ng",
-      "ownerSlug": "allison-fosbery",
-      "points": 114.04,
-      "season": 2025,
-      "week": 7
     }
   ],
   "playerHigh": [

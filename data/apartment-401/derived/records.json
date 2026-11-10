@@ -464,6 +464,15 @@
       "week": 4
     },
     {
+      "opponentPoints": 50.18,
+      "opponentSlug": "jay-uppuluri",
+      "ownerSlug": "jivan-gubbi",
+      "points": 89.74,
+      "season": 2026,
+      "total": 139.92,
+      "week": 9
+    },
+    {
       "opponentPoints": 63.68,
       "opponentSlug": "sam-ellison",
       "ownerSlug": "charlie-stoksik",
@@ -669,15 +678,6 @@
       "season": 2022,
       "total": 171.86,
       "week": 6
-    },
-    {
-      "opponentPoints": 77.54,
-      "opponentSlug": "charlie-stoksik",
-      "ownerSlug": "haley-rao",
-      "points": 94.74,
-      "season": 2023,
-      "total": 172.28,
-      "week": 14
     }
   ],
   "narrowestWin": [
@@ -1345,6 +1345,14 @@
       "week": 4
     },
     {
+      "opponentPoints": 89.74,
+      "opponentSlug": "jivan-gubbi",
+      "ownerSlug": "jay-uppuluri",
+      "points": 50.18,
+      "season": 2026,
+      "week": 9
+    },
+    {
       "opponentPoints": 60.66,
       "opponentSlug": "jay-uppuluri",
       "ownerSlug": "jivan-gubbi",
@@ -1503,14 +1511,6 @@
       "points": 68.6,
       "season": 2022,
       "week": 13
-    },
-    {
-      "opponentPoints": 158.34,
-      "opponentSlug": "charlie-stoksik",
-      "ownerSlug": "mark-mcgreal",
-      "points": 68.92,
-      "season": 2023,
-      "week": 4
     }
   ]
 }

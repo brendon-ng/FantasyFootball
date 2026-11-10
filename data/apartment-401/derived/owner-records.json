@@ -34,10 +34,10 @@
     "losses": 37,
     "ownerSlug": "haley-rao",
     "playoffAppearances": 4,
-    "pointsAgainst": 10396.02,
-    "pointsAgainstPerGame": 119.49,
-    "pointsFor": 10898.96,
-    "pointsForPerGame": 125.28,
+    "pointsAgainst": 10505.4,
+    "pointsAgainstPerGame": 119.38,
+    "pointsFor": 11032.02,
+    "pointsForPerGame": 125.36,
     "runnerUps": 1,
     "seasonsPlayed": 5,
     "thirdPlaces": 0,
@@ -50,10 +50,10 @@
           "ties": 0,
           "wins": 1
         },
-        "pointsAgainst": 811.52,
-        "pointsFor": 800.98,
+        "pointsAgainst": 920.9,
+        "pointsFor": 934.04,
         "ties": 0,
-        "wins": 3
+        "wins": 4
       },
       "charlie-stoksik": {
         "losses": 6,
@@ -164,8 +164,8 @@
         "wins": 4
       }
     },
-    "winPct": 0.5747,
-    "wins": 50,
+    "winPct": 0.5795,
+    "wins": 51,
     "worstFinish": 5
   },
   {
@@ -200,13 +200,13 @@
       }
     ],
     "lastPlaces": 0,
-    "losses": 42,
+    "losses": 43,
     "ownerSlug": "charlie-stoksik",
     "playoffAppearances": 1,
-    "pointsAgainst": 10129.04,
-    "pointsAgainstPerGame": 115.1,
-    "pointsFor": 10329.8,
-    "pointsForPerGame": 117.38,
+    "pointsAgainst": 10279.82,
+    "pointsAgainstPerGame": 115.5,
+    "pointsFor": 10436.58,
+    "pointsForPerGame": 117.26,
     "runnerUps": 0,
     "seasonsPlayed": 5,
     "thirdPlaces": 0,
@@ -225,14 +225,14 @@
         "wins": 6
       },
       "diana-gonzalez": {
-        "losses": 4,
+        "losses": 5,
         "playoff": {
           "losses": 0,
           "ties": 0,
           "wins": 2
         },
-        "pointsAgainst": 1006.08,
-        "pointsFor": 993.62,
+        "pointsAgainst": 1156.86,
+        "pointsFor": 1100.4,
         "ties": 0,
         "wins": 5
       },
@@ -333,7 +333,7 @@
         "wins": 3
       }
     },
-    "winPct": 0.5227,
+    "winPct": 0.5169,
     "wins": 46,
     "worstFinish": 9
   },
@@ -367,10 +367,10 @@
     "losses": 29,
     "ownerSlug": "eric-wong",
     "playoffAppearances": 4,
-    "pointsAgainst": 8326.68,
-    "pointsAgainstPerGame": 114.06,
-    "pointsFor": 8958.86,
-    "pointsForPerGame": 122.72,
+    "pointsAgainst": 8435.28,
+    "pointsAgainstPerGame": 113.99,
+    "pointsFor": 9108.32,
+    "pointsForPerGame": 123.09,
     "runnerUps": 0,
     "seasonsPlayed": 4,
     "thirdPlaces": 2,
@@ -479,10 +479,10 @@
           "ties": 0,
           "wins": 1
         },
-        "pointsAgainst": 1278.68,
-        "pointsFor": 1283.88,
+        "pointsAgainst": 1387.28,
+        "pointsFor": 1433.34,
         "ties": 0,
-        "wins": 3
+        "wins": 4
       },
       "sam-ellison": {
         "losses": 4,
@@ -497,8 +497,8 @@
         "wins": 6
       }
     },
-    "winPct": 0.6027,
-    "wins": 44,
+    "winPct": 0.6081,
+    "wins": 45,
     "worstFinish": 6
   },
   {
@@ -536,10 +536,10 @@
     "losses": 46,
     "ownerSlug": "jivan-gubbi",
     "playoffAppearances": 3,
-    "pointsAgainst": 10614.48,
-    "pointsAgainstPerGame": 119.26,
-    "pointsFor": 10971.48,
-    "pointsForPerGame": 123.28,
+    "pointsAgainst": 10664.66,
+    "pointsAgainstPerGame": 118.5,
+    "pointsFor": 11061.22,
+    "pointsForPerGame": 122.9,
     "runnerUps": 0,
     "seasonsPlayed": 5,
     "thirdPlaces": 1,
@@ -624,10 +624,10 @@
           "ties": 0,
           "wins": 2
         },
-        "pointsAgainst": 1409.68,
-        "pointsFor": 1484.66,
+        "pointsAgainst": 1459.86,
+        "pointsFor": 1574.4,
         "ties": 0,
-        "wins": 8
+        "wins": 9
       },
       "kate-grillo": {
         "losses": 6,
@@ -666,8 +666,8 @@
         "wins": 6
       }
     },
-    "winPct": 0.4831,
-    "wins": 43,
+    "winPct": 0.4889,
+    "wins": 44,
     "worstFinish": 10
   },
   {
@@ -697,13 +697,13 @@
       }
     ],
     "lastPlaces": 1,
-    "losses": 34,
+    "losses": 35,
     "ownerSlug": "mark-mcgreal",
     "playoffAppearances": 2,
-    "pointsAgainst": 8766.64,
-    "pointsAgainstPerGame": 120.09,
-    "pointsFor": 8857.32,
-    "pointsForPerGame": 121.33,
+    "pointsAgainst": 8916.1,
+    "pointsAgainstPerGame": 120.49,
+    "pointsFor": 8965.92,
+    "pointsForPerGame": 121.16,
     "runnerUps": 0,
     "seasonsPlayed": 4,
     "thirdPlaces": 1,
@@ -746,14 +746,14 @@
         "wins": 5
       },
       "eric-wong": {
-        "losses": 3,
+        "losses": 4,
         "playoff": {
           "losses": 1,
           "ties": 0,
           "wins": 1
         },
-        "pointsAgainst": 1283.88,
-        "pointsFor": 1278.68,
+        "pointsAgainst": 1433.34,
+        "pointsFor": 1387.28,
         "ties": 0,
         "wins": 7
       },
@@ -830,7 +830,7 @@
         "wins": 5
       }
     },
-    "winPct": 0.5342,
+    "winPct": 0.527,
     "wins": 39,
     "worstFinish": 10
   },
@@ -869,10 +869,10 @@
     "losses": 41,
     "ownerSlug": "sam-ellison",
     "playoffAppearances": 4,
-    "pointsAgainst": 10399.88,
-    "pointsAgainstPerGame": 116.85,
-    "pointsFor": 10494.92,
-    "pointsForPerGame": 117.92,
+    "pointsAgainst": 10511.3,
+    "pointsAgainstPerGame": 116.79,
+    "pointsFor": 10644.18,
+    "pointsForPerGame": 118.27,
     "runnerUps": 2,
     "seasonsPlayed": 5,
     "thirdPlaces": 0,
@@ -945,10 +945,10 @@
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 170.06,
-        "pointsFor": 201.18,
+        "pointsAgainst": 281.48,
+        "pointsFor": 350.44,
         "ties": 0,
-        "wins": 1
+        "wins": 2
       },
       "jay-uppuluri": {
         "losses": 3,
@@ -999,8 +999,8 @@
         "wins": 4
       }
     },
-    "winPct": 0.5393,
-    "wins": 48,
+    "winPct": 0.5444,
+    "wins": 49,
     "worstFinish": 8
   },
   {
@@ -1035,13 +1035,13 @@
       }
     ],
     "lastPlaces": 0,
-    "losses": 42,
+    "losses": 43,
     "ownerSlug": "brendon-ng",
     "playoffAppearances": 5,
-    "pointsAgainst": 10449.4,
-    "pointsAgainstPerGame": 118.74,
-    "pointsFor": 10663.2,
-    "pointsForPerGame": 121.17,
+    "pointsAgainst": 10582.46,
+    "pointsAgainstPerGame": 118.9,
+    "pointsFor": 10772.58,
+    "pointsForPerGame": 121.04,
     "runnerUps": 1,
     "seasonsPlayed": 5,
     "thirdPlaces": 1,
@@ -1084,14 +1084,14 @@
         "wins": 4
       },
       "haley-rao": {
-        "losses": 3,
+        "losses": 4,
         "playoff": {
           "losses": 1,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 800.98,
-        "pointsFor": 811.52,
+        "pointsAgainst": 934.04,
+        "pointsFor": 920.9,
         "ties": 0,
         "wins": 3
       },
@@ -1168,7 +1168,7 @@
         "wins": 7
       }
     },
-    "winPct": 0.5227,
+    "winPct": 0.5169,
     "wins": 46,
     "worstFinish": 6
   },
@@ -1204,13 +1204,13 @@
       }
     ],
     "lastPlaces": 1,
-    "losses": 51,
+    "losses": 52,
     "ownerSlug": "jay-uppuluri",
     "playoffAppearances": 1,
-    "pointsAgainst": 10396.96,
-    "pointsAgainstPerGame": 116.82,
-    "pointsFor": 9811.86,
-    "pointsForPerGame": 110.25,
+    "pointsAgainst": 10486.7,
+    "pointsAgainstPerGame": 116.52,
+    "pointsFor": 9862.04,
+    "pointsForPerGame": 109.58,
     "runnerUps": 0,
     "seasonsPlayed": 5,
     "thirdPlaces": 0,
@@ -1289,14 +1289,14 @@
         "wins": 4
       },
       "jivan-gubbi": {
-        "losses": 8,
+        "losses": 9,
         "playoff": {
           "losses": 2,
           "ties": 0,
           "wins": 1
         },
-        "pointsAgainst": 1484.66,
-        "pointsFor": 1409.68,
+        "pointsAgainst": 1574.4,
+        "pointsFor": 1459.86,
         "ties": 0,
         "wins": 4
       },
@@ -1337,7 +1337,7 @@
         "wins": 3
       }
     },
-    "winPct": 0.427,
+    "winPct": 0.4222,
     "wins": 38,
     "worstFinish": 10
   },
@@ -1376,10 +1376,10 @@
     "losses": 58,
     "ownerSlug": "diana-gonzalez",
     "playoffAppearances": 1,
-    "pointsAgainst": 10785.82,
-    "pointsAgainstPerGame": 121.19,
-    "pointsFor": 9831.94,
-    "pointsForPerGame": 110.47,
+    "pointsAgainst": 10892.6,
+    "pointsAgainstPerGame": 121.03,
+    "pointsFor": 9982.72,
+    "pointsForPerGame": 110.92,
     "runnerUps": 1,
     "seasonsPlayed": 5,
     "thirdPlaces": 0,
@@ -1404,10 +1404,10 @@
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 993.62,
-        "pointsFor": 1006.08,
+        "pointsAgainst": 1100.4,
+        "pointsFor": 1156.86,
         "ties": 0,
-        "wins": 4
+        "wins": 5
       },
       "eric-wong": {
         "losses": 8,
@@ -1506,8 +1506,8 @@
         "wins": 3
       }
     },
-    "winPct": 0.3483,
-    "wins": 31,
+    "winPct": 0.3556,
+    "wins": 32,
     "worstFinish": 10
   },
   {
@@ -1674,13 +1674,13 @@
       }
     ],
     "lastPlaces": 0,
-    "losses": 12,
+    "losses": 13,
     "ownerSlug": "isaac-edejer",
     "playoffAppearances": 0,
-    "pointsAgainst": 2769.6,
-    "pointsAgainstPerGame": 110.78,
-    "pointsFor": 2582.78,
-    "pointsForPerGame": 103.31,
+    "pointsAgainst": 2918.86,
+    "pointsAgainstPerGame": 112.26,
+    "pointsFor": 2694.2,
+    "pointsForPerGame": 103.62,
     "runnerUps": 0,
     "seasonsPlayed": 1,
     "thirdPlaces": 0,
@@ -1783,19 +1783,19 @@
         "wins": 1
       },
       "sam-ellison": {
-        "losses": 1,
+        "losses": 2,
         "playoff": {
           "losses": 0,
           "ties": 0,
           "wins": 0
         },
-        "pointsAgainst": 201.18,
-        "pointsFor": 170.06,
+        "pointsAgainst": 350.44,
+        "pointsFor": 281.48,
         "ties": 0,
         "wins": 1
       }
     },
-    "winPct": 0.52,
+    "winPct": 0.5,
     "wins": 13,
     "worstFinish": 8
   }

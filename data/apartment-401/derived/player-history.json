@@ -22395,6 +22395,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794324691348,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "8143": [

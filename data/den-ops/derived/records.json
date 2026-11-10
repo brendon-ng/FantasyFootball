@@ -318,6 +318,15 @@
       "week": 7
     },
     {
+      "opponentPoints": 161.08,
+      "opponentSlug": "david-collier",
+      "ownerSlug": "lauren-gross",
+      "points": 168.06,
+      "season": 2026,
+      "total": 329.14,
+      "week": 9
+    },
+    {
       "opponentPoints": 142.8,
       "opponentSlug": "reagan-schmidt",
       "ownerSlug": "tyler-jung",
@@ -442,15 +451,6 @@
       "season": 2024,
       "total": 312.6,
       "week": 9
-    },
-    {
-      "opponentPoints": 141.48,
-      "opponentSlug": "david-collier",
-      "ownerSlug": "jaymie-lew",
-      "points": 170.88,
-      "season": 2024,
-      "total": 312.36,
-      "week": 11
     }
   ],
   "lowestCombined": [

@@ -11241,6 +11241,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794325340900,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "11584": [
@@ -19545,6 +19557,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1793991553757,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794322718222,
       "toSlug": null,
       "type": "free_agent",
       "week": 9

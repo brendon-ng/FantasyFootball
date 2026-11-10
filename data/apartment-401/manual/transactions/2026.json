@@ -3198,6 +3198,24 @@
       "timestamp": 1794194719185,
       "vetoed": false,
       "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "00902bf3-379a-47ec-8920-177f5c6fdca5",
+      "items": [
+        {
+          "fromSlug": "haley-rao",
+          "playerId": "8142",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "haley-rao"
+      ],
+      "timestamp": 1794324691348,
+      "vetoed": false,
+      "week": 10
     }
   ]
 }
