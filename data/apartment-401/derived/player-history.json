@@ -317,6 +317,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "167": [
@@ -4141,6 +4153,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "2711": [
@@ -4467,6 +4491,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "3163": [
@@ -12607,6 +12643,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "5850": [
@@ -17820,6 +17868,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jivan-gubbi",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "7045": [
@@ -25785,6 +25845,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "9997": [
@@ -27528,6 +27600,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "sam-ellison",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "11581": [
@@ -28138,6 +28222,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "11630": [
@@ -29263,6 +29359,20 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    }
+  ],
+  "12491": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "12493": [
@@ -31313,6 +31423,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "BUF": [
@@ -33153,6 +33275,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "GB": [
@@ -33409,6 +33543,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "haley-rao",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384310028,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "HOU": [

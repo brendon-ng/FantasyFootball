@@ -1583,6 +1583,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "3294": [
@@ -2185,6 +2197,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "4039": [
@@ -3055,6 +3079,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "4950": [
@@ -4578,6 +4614,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "6039": [
@@ -9201,6 +9249,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "9504": [
@@ -10017,6 +10077,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "10222": [
@@ -10167,6 +10239,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794344900517,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 9
     }
   ],
   "10235": [
@@ -10881,6 +10965,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384704717,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "11564": [
@@ -11183,6 +11279,18 @@
       "timestamp": 1793988925877,
       "toSlug": null,
       "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
       "week": 9
     }
   ],
@@ -12928,6 +13036,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 1
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384704717,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "12015": [
@@ -13122,6 +13242,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "12472": [
@@ -13640,6 +13772,20 @@
       "week": 0
     }
   ],
+  "12491": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
+    }
+  ],
   "12492": [
     {
       "action": "add",
@@ -13664,6 +13810,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "12493": [
@@ -15028,6 +15186,20 @@
       "week": 2
     }
   ],
+  "12634": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
+    }
+  ],
   "12711": [
     {
       "action": "add",
@@ -15176,6 +15348,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "13150": [
@@ -15301,6 +15485,18 @@
       "timestamp": 1793897202356,
       "toSlug": null,
       "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
       "week": 9
     }
   ],
@@ -15449,6 +15645,18 @@
       "timestamp": 1794089365278,
       "toSlug": null,
       "type": "free_agent",
+      "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
       "week": 9
     }
   ],
@@ -15609,6 +15817,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kate-olson",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "13298": [
@@ -15751,6 +15971,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "13311": [
@@ -16132,6 +16364,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "kaitlin-zarbis",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "13545": [
@@ -16424,6 +16668,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "BUF": [
@@ -16596,6 +16852,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794385068105,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "CAR": [
@@ -16864,6 +17132,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794385068105,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "CIN": [
@@ -17494,6 +17774,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
     }
   ],
   "HOU": [
@@ -19053,6 +19345,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1793984198647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "srishti-dhawan",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794384410295,
       "toSlug": null,
       "type": "waiver",
       "week": 9
