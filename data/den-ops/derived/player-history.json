@@ -29104,6 +29104,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794414283701,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "6146": [
@@ -53249,6 +53261,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794414283701,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "CAR": [

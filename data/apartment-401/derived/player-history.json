@@ -31589,6 +31589,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 17
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794416476153,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "CAR": [
@@ -35945,6 +35957,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794416476153,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "NO": [
