@@ -14673,6 +14673,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794505600681,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "6149": [
@@ -17678,6 +17690,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794503372200,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "7042": [
@@ -19035,6 +19059,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794503372200,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "7562": [
@@ -23121,6 +23157,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794505119670,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "8162": [
@@ -25057,6 +25105,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 1
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794505600681,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "9504": [
@@ -30215,6 +30275,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794505153966,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "12711": [
@@ -33977,6 +34049,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794527405520,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "JAX": [

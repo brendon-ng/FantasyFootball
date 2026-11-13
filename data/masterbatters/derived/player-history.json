@@ -2929,6 +2929,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794520495557,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "4866": [
@@ -6179,6 +6191,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794520495557,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "7569": [
@@ -19014,6 +19038,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 14
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794513091569,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "MIN": [
@@ -19610,6 +19646,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794513091569,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "PIT": [

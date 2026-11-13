@@ -1976,16 +1976,16 @@
     },
     {
       "faab": 0,
-      "id": "d400d987-b447-4f7f-aded-ef89c58c41ab",
+      "id": "fce3cce3-f7bf-42da-ab77-9ffc9622567b",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "CLE",
+          "playerId": "4147",
           "toSlug": "brendon-ng"
         },
         {
           "fromSlug": "brendon-ng",
-          "playerId": "NE",
+          "playerId": "9480",
           "toSlug": null
         }
       ],
@@ -1999,16 +1999,16 @@
     },
     {
       "faab": 0,
-      "id": "fce3cce3-f7bf-42da-ab77-9ffc9622567b",
+      "id": "d400d987-b447-4f7f-aded-ef89c58c41ab",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "4147",
+          "playerId": "CLE",
           "toSlug": "brendon-ng"
         },
         {
           "fromSlug": "brendon-ng",
-          "playerId": "9480",
+          "playerId": "NE",
           "toSlug": null
         }
       ],
@@ -3242,16 +3242,16 @@
     },
     {
       "faab": 0,
-      "id": "94449aed-37ad-4e80-9cee-eaa2f749c240",
+      "id": "ce4274e3-bfff-44bd-aaf5-ef733ce31c3f",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "9758",
+          "playerId": "BAL",
           "toSlug": "jay-uppuluri"
         },
         {
           "fromSlug": "jay-uppuluri",
-          "playerId": "5849",
+          "playerId": "DET",
           "toSlug": null
         }
       ],
@@ -3265,16 +3265,16 @@
     },
     {
       "faab": 0,
-      "id": "ce4274e3-bfff-44bd-aaf5-ef733ce31c3f",
+      "id": "94449aed-37ad-4e80-9cee-eaa2f749c240",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "BAL",
+          "playerId": "9758",
           "toSlug": "jay-uppuluri"
         },
         {
           "fromSlug": "jay-uppuluri",
-          "playerId": "DET",
+          "playerId": "5849",
           "toSlug": null
         }
       ],
@@ -3388,6 +3388,106 @@
         "charlie-stoksik"
       ],
       "timestamp": 1794416476153,
+      "vetoed": false,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "54d9bcfe-663d-4ad7-b360-6fd2ef87cb10",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7021",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "7561",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "isaac-edejer"
+      ],
+      "timestamp": 1794503372200,
+      "vetoed": false,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "56cea63b-9f39-470d-bcc8-bd6a6f3603cb",
+      "items": [
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "8161",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "isaac-edejer"
+      ],
+      "timestamp": 1794505119670,
+      "vetoed": false,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "3bfdfb54-c47e-4d03-85f6-34c2c5451b8e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "12545",
+          "toSlug": "isaac-edejer"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "isaac-edejer"
+      ],
+      "timestamp": 1794505153966,
+      "vetoed": false,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "d9311d15-8cf2-461f-ab42-7731d355fb8f",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "9502",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "6130",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "isaac-edejer"
+      ],
+      "timestamp": 1794505600681,
+      "vetoed": false,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "38881263-d1a5-41f8-85b8-81ac2344e82e",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "IND",
+          "toSlug": "eric-wong"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "eric-wong"
+      ],
+      "timestamp": 1794527405520,
       "vetoed": false,
       "week": 10
     }
