@@ -10909,6 +10909,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794678285561,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "5038": [
@@ -30643,6 +30655,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    }
+  ],
+  "13337": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794678285561,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "13345": [

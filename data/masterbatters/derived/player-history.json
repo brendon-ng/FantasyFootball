@@ -6227,6 +6227,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794689797437,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "7569": [
@@ -12001,6 +12013,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "josh-greenebaum",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794689797437,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 10
     }
   ],
   "11626": [
@@ -12852,6 +12876,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794696934054,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "11786": [
@@ -13338,6 +13374,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794724120389,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "12472": [
@@ -15925,6 +15973,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794696934054,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "13298": [
@@ -16393,6 +16453,18 @@
       "timestamp": 1794662194826,
       "toSlug": null,
       "type": "waiver",
+      "week": 10
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lindsey-freeze",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794724120389,
+      "toSlug": null,
+      "type": "free_agent",
       "week": 10
     }
   ],
