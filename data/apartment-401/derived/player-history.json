@@ -19109,6 +19109,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794766804787,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "7564": [

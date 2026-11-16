@@ -2848,29 +2848,6 @@
     },
     {
       "faab": 0,
-      "id": "e353241e-f7ce-4087-8b9f-df2fe4dd7fef",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "8161",
-          "toSlug": "isaac-edejer"
-        },
-        {
-          "fromSlug": "isaac-edejer",
-          "playerId": "4881",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "isaac-edejer"
-      ],
-      "timestamp": 1793783008718,
-      "vetoed": false,
-      "week": 9
-    },
-    {
-      "faab": 0,
       "id": "a267429b-b3d7-4193-8264-215e6d1d30ca",
       "items": [
         {
@@ -2887,6 +2864,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "charlie-stoksik"
+      ],
+      "timestamp": 1793783008718,
+      "vetoed": false,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "e353241e-f7ce-4087-8b9f-df2fe4dd7fef",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "8161",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "4881",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "isaac-edejer"
       ],
       "timestamp": 1793783008718,
       "vetoed": false,
@@ -3511,6 +3511,24 @@
         "isaac-edejer"
       ],
       "timestamp": 1794678285561,
+      "vetoed": false,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "646978b9-c64c-4152-a80c-d539b98837c8",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "7562",
+          "toSlug": "diana-gonzalez"
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "diana-gonzalez"
+      ],
+      "timestamp": 1794766804787,
       "vetoed": false,
       "week": 10
     }

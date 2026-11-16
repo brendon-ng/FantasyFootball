@@ -21534,6 +21534,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794772393576,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "4994": [
@@ -35873,6 +35885,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794772393576,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "7564": [
@@ -53739,6 +53763,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794787799644,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "CIN": [
@@ -57737,6 +57773,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794787799644,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "LAR": [
