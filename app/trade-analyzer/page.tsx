@@ -5,6 +5,7 @@ import {
   getLeagueRefs,
   getLiveSeason,
   getOwners,
+  getPlayerTeams,
   getPlayers,
   getRosterPositions,
   getSeasonFormat,
@@ -88,6 +89,7 @@ export default async function TradeAnalyzerPage() {
         refBySeason={refs}
         initial={initial!}
         userIdToSlug={getUserIdToSlug()}
+        teamByPlayer={getPlayerTeams()}
         owners={Object.fromEntries(owners.map((o) => [o.slug, { name: o.name, first: o.firstName }]))}
         format={format!}
         rosterPositions={rosterPositions}

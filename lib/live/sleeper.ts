@@ -321,6 +321,51 @@ export function fetchPlayerPool(season: number, week: number): Promise<Record<st
   return p;
 }
 
+/**
+ * The baked team index, completed for whoever it does not know.
+ *
+ * THE INDEX ONLY HOLDS PLAYERS THE LEAGUE'S COMMITTED DATA REFERENCES, so a
+ * starter picked up since the last sync is missing from it — and a starter
+ * with no team has no game on the clock, which reads as a game already
+ * finished: his projection collapses to the points he has, and `startedTeams`
+ * gives up on his whole side. So each unknown starter is looked up on the
+ * player endpoint Sleeper's own card calls (`access-control-allow-origin: *`),
+ * one small request apiece, and usually none at all.
+ *
+ * A defence needs no lookup — its id IS its team. Capped, and fails soft per
+ * player: an id still unresolved stays absent, which is the answer the index
+ * would have given anyway. Undefined in, undefined out, so a caller that never
+ * passed an index does not start making requests.
+ */
+async function completeTeams(
+  starters: readonly (string | null | undefined)[],
+  known: Record<string, string> | undefined,
+): Promise<Record<string, string> | undefined> {
+  if (!known) return known;
+  const missing = [...new Set(starters)].filter(
+    (id): id is string => Boolean(id) && id !== "0" && !known[id!],
+  );
+  if (!missing.length) return known;
+  const out = { ...known };
+  const lookup: string[] = [];
+  for (const id of missing) {
+    if (/^[A-Z]{2,4}$/.test(id)) out[id] = id;
+    else lookup.push(id);
+  }
+  const found = await Promise.all(
+    lookup.slice(0, 30).map((id) =>
+      json<{ team?: string | null } | null>(`https://api.sleeper.com/players/nfl/${id}`, null).catch(
+        () => null,
+      ),
+    ),
+  );
+  lookup.slice(0, 30).forEach((id, i) => {
+    const team = found[i]?.team;
+    if (team) out[id] = team;
+  });
+  return out;
+}
+
 export const sleeperProvider: LiveProvider = {
   name: "Sleeper",
 
@@ -705,12 +750,15 @@ export const sleeperProvider: LiveProvider = {
        * "0" IS AN EMPTY SLOT, not a player, and a bye is a real team with no
        * game — `teamsSettled` handles that end.
        */
-      const teamsOf = (starters: string[] | null | undefined): string[] | undefined => {
-        if (!ctx.teamByPlayer) return undefined;
+      const teamsOf = (
+        starters: string[] | null | undefined,
+        teamByPlayer: Record<string, string> | undefined,
+      ): string[] | undefined => {
+        if (!teamByPlayer) return undefined;
         const out = new Set<string>();
         for (const pid of starters ?? []) {
           if (!pid || pid === "0") continue;
-          const team = ctx.teamByPlayer[pid];
+          const team = teamByPlayer[pid];
           if (!team) return undefined;
           out.add(team);
         }
@@ -747,27 +795,30 @@ export const sleeperProvider: LiveProvider = {
       }
       const slugOf = (rid: number) =>
         teams.find((t) => t.rosterId === rid)?.ownerSlug ?? `roster-${rid}`;
-      matchups = [...byId.entries()]
+      const pairs = [...byId.entries()]
         .filter(([, pair]) => pair.length === 2)
-        .map(([matchupId, [rawX, rawY]]) => {
-          const x = withLineup(rawX);
-          const y = withLineup(rawY);
-          return {
-            matchupId,
-            a: {
-              ownerSlug: slugOf(x.roster_id),
-              points: round2(x.points ?? 0),
-              startedTeams: teamsOf(x.starters),
-              lineup: lineupOf(x, ctx.teamByPlayer),
-            },
-            b: {
-              ownerSlug: slugOf(y.roster_id),
-              points: round2(y.points ?? 0),
-              startedTeams: teamsOf(y.starters),
-              lineup: lineupOf(y, ctx.teamByPlayer),
-            },
-          };
-        });
+        .map(
+          ([matchupId, [rawX, rawY]]) => [matchupId, withLineup(rawX), withLineup(rawY)] as const,
+        );
+      const teamByPlayer = await completeTeams(
+        pairs.flatMap(([, x, y]) => [...(x.starters ?? []), ...(y.starters ?? [])]),
+        ctx.teamByPlayer,
+      );
+      matchups = pairs.map(([matchupId, x, y]) => ({
+        matchupId,
+        a: {
+          ownerSlug: slugOf(x.roster_id),
+          points: round2(x.points ?? 0),
+          startedTeams: teamsOf(x.starters, teamByPlayer),
+          lineup: lineupOf(x, teamByPlayer),
+        },
+        b: {
+          ownerSlug: slugOf(y.roster_id),
+          points: round2(y.points ?? 0),
+          startedTeams: teamsOf(y.starters, teamByPlayer),
+          lineup: lineupOf(y, teamByPlayer),
+        },
+      }));
     }
 
     return {

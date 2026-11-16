@@ -288,6 +288,17 @@ matchup open for the rest of the year.
 A TEAM ABSENT FROM THE WEEK IS ON A BYE, which is not the same as pending — week
 6 of 2025 lists 30 teams, not 32.
 
+A STARTER THE BAKED INDEX DOES NOT KNOW IS LOOKED UP, not given up on.
+The index only holds players the league's committed data references, so a
+pickup since the last sync has no team — and no team means no game on the
+clock, which `useLiveTotals` reads as FINISHED: his projection collapses to
+the points he has. `completeTeams()` in `lib/live/sleeper.ts` asks
+`api.sleeper.com/players/nfl/<id>` (`access-control-allow-origin: *`) for
+each one, usually none a week. The trade analyzer once passed no index at
+all, so every Monday-night starter counted as a final 0 in the locked week —
+Masterbatters' Brendon read 39% to make the playoffs instead of 70% because
+Zay Flowers had not played yet.
+
 `startedTeams` IS ALL OR NOTHING. One starter whose NFL team cannot be resolved
 and the side reports UNDEFINED rather than a short list, because a short list is
 indistinguishable from a complete one and would settle the matchup while that
@@ -1742,6 +1753,14 @@ guess on a tie. The card's own points fall back to Sleeper's PPR total there,
 since a Sleeper league-settings lookup has nothing to find for an ESPN id.
 Checked on apartment-401: ten teams, every week projected, and a week-8 lineup
 filling the D/ST slot and streaming a free-agent kicker over the 15% bar.
+
+IMPOSSIBLE PROJECTIONS ARE REFUSED before anything reads them —
+`lib/projection-sanity.ts`, ahead of the overrides. Sleeper's 2026 week-15 line
+for Harrison Butker carried 17 field goals (60 points); streamed as a free
+agent it gave the worst team a 190-point playoff week. The ceilings are about
+twice the real maximum (K 20, DEF 25, everyone else 45), a tripped value
+becomes the player's median over his other weeks, and the page names every
+correction, shared links included.
 
 ### The lineup is the best one, never the one that was set
 

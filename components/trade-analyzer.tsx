@@ -23,6 +23,7 @@ import type { LeagueRef } from "@/lib/league-ref";
 import { lineupPositions, startingSlots, type Lineup } from "@/lib/lineup";
 import { normalise } from "@/lib/player-match";
 import { applyOverrides, useProjectionOverrides, type ProjectionOverrides } from "@/lib/projection-overrides";
+import { sanitizeProjections } from "@/lib/projection-sanity";
 import { useTradeLock, verifyTrade, type TradeLock } from "@/lib/trade-lock";
 import {
   useByeTeams,
@@ -71,6 +72,14 @@ type AnalyzerProps = {
   refBySeason: Record<string, LeagueRef>;
   initial: LiveSeason;
   userIdToSlug: Record<string, string>;
+  /**
+   * Sleeper player id -> NFL team. WITHOUT IT A LIVE WEEK READS AS FINISHED:
+   * the Sleeper provider cannot say which game a starter is in, so the clock
+   * reports nothing left for him and his projection collapses to the points he
+   * already has — a Monday-night starter on 0 counted as a final 0, in the
+   * locked week the odds treat as near-certain. ESPN ignores it.
+   */
+  teamByPlayer: Record<string, string>;
   owners: Record<string, OwnerLabel>;
   format: {
     regularSeasonWeeks: number;
@@ -130,6 +139,7 @@ function AnalyzerBody({
   refBySeason,
   initial,
   userIdToSlug,
+  teamByPlayer,
   owners,
   format,
   rosterPositions,
@@ -145,7 +155,7 @@ function AnalyzerBody({
   lock: TradeLock;
 }) {
   const shared = mode === "shared";
-  const live = useLiveSeason(refBySeason, initial, userIdToSlug);
+  const live = useLiveSeason(refBySeason, initial, userIdToSlug, teamByPlayer);
   const season = live ?? initial;
   const ref = refBySeason[String(season.season)] ?? null;
   const canLink = useMemo(() => new Set(linkable), [linkable]);
@@ -227,16 +237,6 @@ function AnalyzerBody({
   const overridesApi = useProjectionOverrides();
   // A shared trade shows Sleeper's numbers, never the viewer's own overrides.
   const overrides = shared ? NO_OVERRIDES : overridesApi.overrides;
-  /**
-   * Every number below reads THESE, never `proj.byWeek` directly: an override is
-   * the reader saying the projection is wrong, so it has to reach the lineups,
-   * the win chances and the odds alike — and both scenarios, since it is a
-   * belief about a player rather than part of the trade.
-   */
-  const projected = useMemo(
-    () => applyOverrides(proj.byWeek, overrides),
-    [proj.byWeek, overrides],
-  );
   const gamesReady = Object.keys(games).length > 0;
   // An ESPN league does not wait on Sleeper's list: it only serves the cards.
   const ready = espn ? espnPool.ready : proj.ready && pool.ready;
@@ -251,6 +251,22 @@ function AnalyzerBody({
   const positionOf = useCallback(
     (id: string) => espnPlayers?.[id]?.position ?? pool.pool?.[id]?.position ?? baked[id]?.position ?? null,
     [espnPlayers, pool.pool, baked],
+  );
+  /**
+   * Sleeper's numbers with the impossible ones refused — see
+   * lib/projection-sanity. BEFORE the overrides, which are the reader's own
+   * beliefs and are never second-guessed.
+   */
+  const sanitized = useMemo(() => sanitizeProjections(proj.byWeek, positionOf), [proj.byWeek, positionOf]);
+  /**
+   * Every number below reads THESE, never `proj.byWeek` directly: an override is
+   * the reader saying the projection is wrong, so it has to reach the lineups,
+   * the win chances and the odds alike — and both scenarios, since it is a
+   * belief about a player rather than part of the trade.
+   */
+  const projected = useMemo(
+    () => applyOverrides(sanitized.byWeek, overrides),
+    [sanitized.byWeek, overrides],
   );
   const nflTeamOf = useCallback(
     (id: string) => espnPlayers?.[id]?.team ?? pool.pool?.[id]?.team ?? baked[id]?.team ?? null,
@@ -657,6 +673,22 @@ function AnalyzerBody({
         </div>
       ) : null}
 
+      {sanitized.corrections.length ? (
+        // A CORRECTED BOARD RENDERS EXACTLY LIKE A RAW ONE, so it says which
+        // numbers it refused. Shown on shared links too: unlike an override,
+        // this changes what everybody sees.
+        <div className="rounded-lg border border-caution/40 bg-caution/10 px-4 py-2 text-[12px] text-caution">
+          Ignoring {sanitized.corrections.length === 1 ? "a projection" : "projections"} too high to be real:{" "}
+          {sanitized.corrections
+            .map(
+              (c) =>
+                `${nameOf(c.id)} week ${c.week} (${fmt.pts1(c.was)} → ${c.now == null ? "none" : fmt.pts1(c.now)})`,
+            )
+            .join(", ")}
+          .
+        </div>
+      ) : null}
+
       {!shared ? (
         <TradeFinder
           hidden={view !== "finder"}
@@ -872,7 +904,7 @@ function AnalyzerBody({
           <ProjectionOverridesPanel
             api={overridesApi}
             weeks={openWeeks}
-            sleeper={proj.byWeek}
+            sleeper={sanitized.byWeek}
             candidates={candidates}
             nameOf={nameOf}
             positionOf={positionOf}
