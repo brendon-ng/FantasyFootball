@@ -345,6 +345,15 @@
       "week": 9
     },
     {
+      "opponentPoints": 127.24,
+      "opponentSlug": "haley-rao",
+      "ownerSlug": "charlie-stoksik",
+      "points": 177.48,
+      "season": 2026,
+      "total": 304.72,
+      "week": 10
+    },
+    {
       "opponentPoints": 133,
       "opponentSlug": "charlie-stoksik",
       "ownerSlug": "haley-rao",
@@ -399,6 +408,15 @@
       "week": 2
     },
     {
+      "opponentPoints": 126.42,
+      "opponentSlug": "eric-wong",
+      "ownerSlug": "brendon-ng",
+      "points": 163.52,
+      "season": 2026,
+      "total": 289.94,
+      "week": 10
+    },
+    {
       "opponentPoints": 111,
       "opponentSlug": "haley-rao",
       "ownerSlug": "kate-grillo",
@@ -433,24 +451,6 @@
       "season": 2026,
       "total": 284.04,
       "week": 8
-    },
-    {
-      "opponentPoints": 137.94,
-      "opponentSlug": "eric-wong",
-      "ownerSlug": "mark-mcgreal",
-      "points": 146,
-      "season": 2025,
-      "total": 283.94,
-      "week": 16
-    },
-    {
-      "opponentPoints": 103.7,
-      "opponentSlug": "haley-rao",
-      "ownerSlug": "eric-wong",
-      "points": 180.16,
-      "season": 2026,
-      "total": 283.86,
-      "week": 5
     }
   ],
   "lowestCombined": [
@@ -691,6 +691,15 @@
       "week": 5
     },
     {
+      "margin": 0.02,
+      "opponentPoints": 95.22,
+      "opponentSlug": "mark-mcgreal",
+      "ownerSlug": "jay-uppuluri",
+      "points": 95.24,
+      "season": 2026,
+      "week": 10
+    },
+    {
       "margin": 0.12,
       "opponentPoints": 99.56,
       "opponentSlug": "jivan-gubbi",
@@ -896,15 +905,6 @@
       "points": 100.64,
       "season": 2025,
       "week": 13
-    },
-    {
-      "margin": 2.16,
-      "opponentPoints": 127.96,
-      "opponentSlug": "diana-gonzalez",
-      "ownerSlug": "kate-grillo",
-      "points": 130.12,
-      "season": 2022,
-      "week": 8
     }
   ],
   "playerHigh": [
@@ -981,12 +981,28 @@
       "week": 12
     },
     {
+      "ownerSlug": "charlie-stoksik",
+      "playerId": "4034",
+      "points": 47.8,
+      "season": 2026,
+      "started": true,
+      "week": 10
+    },
+    {
       "ownerSlug": "mark-mcgreal",
       "playerId": "4035",
       "points": 47.5,
       "season": 2024,
       "started": true,
       "week": 2
+    },
+    {
+      "ownerSlug": "isaac-edejer",
+      "playerId": "9221",
+      "points": 46.2,
+      "season": 2026,
+      "started": true,
+      "week": 10
     },
     {
       "ownerSlug": "kate-grillo",
@@ -1091,22 +1107,6 @@
       "season": 2021,
       "started": true,
       "week": 5
-    },
-    {
-      "ownerSlug": "brendon-ng",
-      "playerId": "6813",
-      "points": 42.8,
-      "season": 2024,
-      "started": true,
-      "week": 16
-    },
-    {
-      "ownerSlug": "kate-grillo",
-      "playerId": "4881",
-      "points": 42.62,
-      "season": 2022,
-      "started": true,
-      "week": 2
     }
   ],
   "weeklyHigh": [
@@ -1173,6 +1173,14 @@
       "points": 178.16,
       "season": 2021,
       "week": 4
+    },
+    {
+      "opponentPoints": 127.24,
+      "opponentSlug": "haley-rao",
+      "ownerSlug": "charlie-stoksik",
+      "points": 177.48,
+      "season": 2026,
+      "week": 10
     },
     {
       "opponentPoints": 111,
@@ -1301,14 +1309,6 @@
       "points": 163.78,
       "season": 2026,
       "week": 8
-    },
-    {
-      "opponentPoints": 102.32,
-      "opponentSlug": "jivan-gubbi",
-      "ownerSlug": "haley-rao",
-      "points": 163.46,
-      "season": 2022,
-      "week": 13
     }
   ],
   "weeklyLow": [

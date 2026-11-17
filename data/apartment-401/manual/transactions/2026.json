@@ -2871,29 +2871,6 @@
     },
     {
       "faab": 0,
-      "id": "e353241e-f7ce-4087-8b9f-df2fe4dd7fef",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "8161",
-          "toSlug": "isaac-edejer"
-        },
-        {
-          "fromSlug": "isaac-edejer",
-          "playerId": "4881",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "isaac-edejer"
-      ],
-      "timestamp": 1793783008718,
-      "vetoed": false,
-      "week": 9
-    },
-    {
-      "faab": 0,
       "id": "8440e9ad-7e17-4e46-865c-877a1d6fcf04",
       "items": [
         {
@@ -2910,6 +2887,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "charlie-stoksik"
+      ],
+      "timestamp": 1793783008718,
+      "vetoed": false,
+      "week": 9
+    },
+    {
+      "faab": 0,
+      "id": "e353241e-f7ce-4087-8b9f-df2fe4dd7fef",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "8161",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "4881",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "isaac-edejer"
       ],
       "timestamp": 1793783008718,
       "vetoed": false,
@@ -3219,29 +3219,6 @@
     },
     {
       "faab": 0,
-      "id": "ce4274e3-bfff-44bd-aaf5-ef733ce31c3f",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "BAL",
-          "toSlug": "jay-uppuluri"
-        },
-        {
-          "fromSlug": "jay-uppuluri",
-          "playerId": "DET",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "jay-uppuluri"
-      ],
-      "timestamp": 1794384310028,
-      "vetoed": false,
-      "week": 10
-    },
-    {
-      "faab": 0,
       "id": "0e9a33c4-2a9f-4334-8daa-de3c77446172",
       "items": [
         {
@@ -3258,6 +3235,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "jivan-gubbi"
+      ],
+      "timestamp": 1794384310028,
+      "vetoed": false,
+      "week": 10
+    },
+    {
+      "faab": 0,
+      "id": "ce4274e3-bfff-44bd-aaf5-ef733ce31c3f",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "BAL",
+          "toSlug": "jay-uppuluri"
+        },
+        {
+          "fromSlug": "jay-uppuluri",
+          "playerId": "DET",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "jay-uppuluri"
       ],
       "timestamp": 1794384310028,
       "vetoed": false,

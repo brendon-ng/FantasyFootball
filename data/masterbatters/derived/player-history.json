@@ -4862,6 +4862,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794929658807,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "6149": [
@@ -9693,6 +9705,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 2
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794853714578,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "9756": [
@@ -17990,6 +18014,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1794929669461,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 10
     }
   ],
   "HOU": [
