@@ -1836,10 +1836,26 @@ the win chances and the odds — in both scenarios, because an override is a bel
 about a player rather than part of the trade.
 
 IN LOCALSTORAGE, NOT THE URL (`ff:<league>:projection-overrides`). "He is back in
-week 9" should hold whichever trade is on screen. The cost is that a shared link
-does not carry them, so the page puts an amber notice above the results whenever
-any are active, and the sheet colours overridden points amber — the reason
-`<MockBadge />` exists: an overridden board renders exactly like a real one.
+week 9" should hold whichever trade is on screen. The page puts an amber notice
+above the results whenever any are active, and the sheet colours overridden
+points amber — the reason `<MockBadge />` exists: an overridden board renders
+exactly like a real one.
+
+A SHARE LINK CARRIES THE SHARER'S OVERRIDES, SIGNED. `ov=id~week~points_…`
+(`encodeOverrides`, every character URL-unreserved, weeks already played left
+out) is appended to the signed message only when non-empty, so links made
+before it existed still verify. Editing, adding or stripping an override breaks
+the signature like editing a player. The recipient sees exactly those numbers,
+listed in an amber notice, and never their own.
+
+AN UNLOCKED VIEWER SEES THEM TOO, once the signature verifies — the link is a
+claim about what its sharer saw, whoever opens it. The page is editable then,
+so the check happens ONCE per visit and the overrides are held in state: the
+first change to the trade breaks the signature, and re-checking would silently
+swap the numbers back. The notice offers "Keep these as mine" (replaces the
+viewer's own) or "Use my own instead"; either clears `ov` and `sig`, and the
+overrides panel stays hidden until one is chosen, since edits made there would
+not show while the link's set is on screen.
 
 Cells COMMIT ON BLUR OR ENTER, since every edit re-runs the simulation, and an
 empty cell means "Sleeper's number", which it shows as the placeholder.
@@ -2017,8 +2033,9 @@ Without it the page is a lock screen and NOTHING BELOW MOUNTS — no rosters, no
 projections, no finder. With it: everything, plus "Copy share link" and "Lock".
 
 A share link opens ONE TRADE READ-ONLY for anyone. The teams and players cannot
-change, the finder and the projection overrides are gone (a shared trade shows
-Sleeper's numbers, never the viewer's own); the free-agent setting, the weeks,
+change, the finder and the overrides panel are gone (a shared trade shows the
+SHARER'S overrides, signed into the link, never the viewer's own); the
+free-agent setting, the weeks,
 the lineups and the player cards still work — views, not edits.
 
 BE CLEAR-EYED ABOUT WHAT THIS STOPS. The repo is public and the site is static,

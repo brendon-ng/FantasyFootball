@@ -68,6 +68,13 @@ export interface SignedTrade {
   a: string;
   b: string;
   give: readonly string[];
+  /**
+   * The sharer's projection overrides, CANONICALLY encoded
+   * (`encodeOverrides`). Signed, because they change every number on the page
+   * as much as the players do — an unsigned one would let anybody hand a link
+   * around claiming Jefferson projects for 60.
+   */
+  ov?: string;
 }
 
 export function useTradeLock(): TradeLock {
@@ -146,9 +153,14 @@ export async function verifyTrade(trade: SignedTrade, sig: string): Promise<bool
   }
 }
 
-/** What gets signed. Players sorted, so the order they were ticked in does not matter. */
-function message({ a, b, give }: SignedTrade): Bytes {
-  return new Uint8Array(new TextEncoder().encode(`trade-v1|${LEAGUE}|${a}|${b}|${[...give].sort().join(",")}`));
+/**
+ * What gets signed. Players sorted, so the order they were ticked in does not
+ * matter. Overrides are appended ONLY WHEN THERE ARE ANY, so a link signed
+ * before they were carried is still exactly the message it was signed over.
+ */
+function message({ a, b, give, ov }: SignedTrade): Bytes {
+  const base = `trade-v1|${LEAGUE}|${a}|${b}|${[...give].sort().join(",")}`;
+  return new Uint8Array(new TextEncoder().encode(ov ? `${base}|ov=${ov}` : base));
 }
 
 async function deriveSeed(passphrase: string): Promise<Bytes> {

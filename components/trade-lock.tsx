@@ -94,8 +94,9 @@ export function LockScreen({
 }
 
 /**
- * Copies a signed link to this exact trade. The free-agent setting rides along
- * unsigned — it is a view the recipient may change, not part of the deal.
+ * Copies a signed link to this exact trade, the sharer's projection overrides
+ * included and signed. The free-agent setting rides along unsigned — it is a
+ * view the recipient may change, not part of the deal.
  */
 export function ShareButton({
   sign,
@@ -116,6 +117,7 @@ export function ShareButton({
       url.searchParams.set("a", trade.a);
       url.searchParams.set("b", trade.b);
       url.searchParams.set("give", trade.give.join(","));
+      if (trade.ov) url.searchParams.set("ov", trade.ov);
       if (fa) url.searchParams.set("fa", fa);
       url.searchParams.set("sig", sig);
       await navigator.clipboard.writeText(url.toString());

@@ -78,6 +78,8 @@ export interface OverridesApi {
   /** Drop the player from the panel entirely. */
   remove: (id: string) => void;
   clearAll: () => void;
+  /** Replace every override at once — adopting a share link's set. */
+  replaceAll: (next: ProjectionOverrides) => void;
 }
 
 export function useProjectionOverrides(): OverridesApi {
@@ -110,10 +112,11 @@ export function useProjectionOverrides(): OverridesApi {
   }, []);
 
   const clearAll = useCallback(() => commit({}), []);
+  const replaceAll = useCallback((next: ProjectionOverrides) => commit({ ...next }), []);
 
   const activeCount = Object.values(overrides).filter((w) => Object.keys(w).length > 0).length;
 
-  return { overrides, activeCount, pin, setWeek, setWeeks, remove, clearAll };
+  return { overrides, activeCount, pin, setWeek, setWeeks, remove, clearAll, replaceAll };
 }
 
 /**
@@ -137,6 +140,47 @@ export function applyOverrides(
       if (typeof v === "number" && Number.isFinite(v)) copy[id] = v;
     }
     out[Number(w)] = copy;
+  }
+  return out;
+}
+
+/**
+ * Overrides as a share-link parameter: `id~week~points`, joined by `_`.
+ *
+ * EVERY CHARACTER IS URL-UNRESERVED, so the link carries it verbatim rather
+ * than a wall of percent escapes — the same reason `give` is a bare list.
+ * CANONICAL: sorted by player then week, numbers as `String()` writes them,
+ * because the signature covers this string and the signer and the verifier
+ * must produce it byte for byte. Only weeks in `weeks` are kept when given, so
+ * an override for a week already played does not lengthen every link.
+ */
+export function encodeOverrides(overrides: ProjectionOverrides, weeks?: readonly number[]): string {
+  const keep = weeks ? new Set(weeks.map(String)) : null;
+  const out: string[] = [];
+  for (const id of Object.keys(overrides).sort()) {
+    const byWeek = overrides[id];
+    for (const w of Object.keys(byWeek).sort((x, y) => Number(x) - Number(y))) {
+      const v = byWeek[w];
+      if (keep && !keep.has(w)) continue;
+      // Two decimals, so `String()` never reaches for exponent notation.
+      if (typeof v === "number" && Number.isFinite(v)) out.push(`${id}~${w}~${Math.round(v * 100) / 100}`);
+    }
+  }
+  return out.join("_");
+}
+
+/**
+ * The reverse, refusing anything malformed outright rather than salvaging
+ * part of it: a link either carries the overrides it was signed with or it
+ * verifies as nothing, and a half-read set would be a third answer.
+ */
+export function decodeOverrides(raw: string): ProjectionOverrides | null {
+  if (!raw) return {};
+  const out: ProjectionOverrides = {};
+  for (const part of raw.split("_")) {
+    const m = /^([A-Za-z0-9-]+)~(\d{1,2})~(-?\d+(?:\.\d+)?)$/.exec(part);
+    if (!m) return null;
+    (out[m[1]] ??= {})[String(Number(m[2]))] = Number(m[3]);
   }
   return out;
 }

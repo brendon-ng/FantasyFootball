@@ -22,7 +22,13 @@ import { withBasePath } from "@/lib/base-path";
 import type { LeagueRef } from "@/lib/league-ref";
 import { lineupPositions, startingSlots, type Lineup } from "@/lib/lineup";
 import { normalise } from "@/lib/player-match";
-import { applyOverrides, useProjectionOverrides, type ProjectionOverrides } from "@/lib/projection-overrides";
+import {
+  applyOverrides,
+  decodeOverrides,
+  encodeOverrides,
+  useProjectionOverrides,
+  type ProjectionOverrides,
+} from "@/lib/projection-overrides";
 import { sanitizeProjections } from "@/lib/projection-sanity";
 import { useTradeLock, verifyTrade, type TradeLock } from "@/lib/trade-lock";
 import {
@@ -104,32 +110,59 @@ export function TradeAnalyzer(props: AnalyzerProps) {
   const [b] = useUrlText("b");
   const [giveRaw] = useUrlText("give");
   const [sig] = useUrlText("sig");
-  const linkKey = `${a}|${b}|${giveRaw}|${sig}`;
+  const [ovRaw] = useUrlText("ov");
+  /**
+   * The sharer's overrides, as the link carries them. Malformed is null and
+   * fails verification outright; verified, they replace the viewer's own, so a
+   * shared trade shows the numbers its sharer was looking at.
+   */
+  const linkOverrides = useMemo(() => decodeOverrides(ovRaw), [ovRaw]);
+  const linkKey = `${a}|${b}|${giveRaw}|${ovRaw}|${sig}`;
   const [shared, setShared] = useState<{ key: string; ok: boolean } | null>(null);
+  /**
+   * AN UNLOCKED VIEWER SEES THE LINK'S OVERRIDES TOO, once the signature
+   * checks out — a link is a claim about what its sharer saw, whoever opens
+   * it. Decided ONCE per visit rather than per URL: the unlocked page is
+   * editable, and the first change to the trade would otherwise break the
+   * signature and silently swap the numbers back. Undefined is "not checked
+   * yet", null is "nothing carried".
+   */
+  const [carried, setCarried] = useState<ProjectionOverrides | null | undefined>(undefined);
+  const checkCarried = lock.status === "unlocked" && Boolean(sig && ovRaw) && carried === undefined;
 
   useEffect(() => {
-    if (!sig || lock.status !== "locked") return;
+    if (!sig || (lock.status !== "locked" && !checkCarried)) return;
     let cancelled = false;
-    verifyTrade({ a, b, give: giveRaw ? giveRaw.split(",").filter(Boolean) : [] }, sig).then((ok) => {
-      if (!cancelled) setShared({ key: linkKey, ok });
+    const give = giveRaw ? giveRaw.split(",").filter(Boolean) : [];
+    const verified = linkOverrides
+      ? verifyTrade({ a, b, give, ov: encodeOverrides(linkOverrides) }, sig)
+      : Promise.resolve(false);
+    verified.then((ok) => {
+      if (cancelled) return;
+      if (lock.status === "unlocked") setCarried(ok ? linkOverrides : null);
+      else setShared({ key: linkKey, ok });
     });
     return () => {
       cancelled = true;
     };
     // `linkKey` stands in for the four params it is built from.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [linkKey, lock.status]);
+  }, [linkKey, lock.status, checkCarried]);
 
   const sharedOk = sig && shared?.key === linkKey ? shared.ok : null;
-  if (lock.status === "checking" || (lock.status === "locked" && sig && sharedOk == null)) {
+  if (lock.status === "checking" || (lock.status === "locked" && sig && sharedOk == null) || checkCarried) {
     return (
       <Panel>
         <EmptyState>Checking…</EmptyState>
       </Panel>
     );
   }
-  if (lock.status === "unlocked") return <AnalyzerBody {...props} mode="full" lock={lock} />;
-  if (sharedOk) return <AnalyzerBody {...props} mode="shared" lock={lock} />;
+  if (lock.status === "unlocked") {
+    return <AnalyzerBody {...props} mode="full" lock={lock} carriedOverrides={carried ?? null} />;
+  }
+  if (sharedOk) {
+    return <AnalyzerBody {...props} mode="shared" lock={lock} linkOverrides={linkOverrides ?? NO_OVERRIDES} />;
+  }
   return <LockScreen status={lock.status} badLink={Boolean(sig)} onUnlock={lock.unlock} />;
 }
 
@@ -145,7 +178,13 @@ function AnalyzerBody({
   rosterPositions,
   baked,
   linkable,
+  linkOverrides = NO_OVERRIDES,
+  carriedOverrides = null,
 }: AnalyzerProps & {
+  /** The overrides a verified share link carries; only read in "shared" mode. */
+  linkOverrides?: ProjectionOverrides;
+  /** The same, for an UNLOCKED viewer who opened a link that carries some. */
+  carriedOverrides?: ProjectionOverrides | null;
   /**
    * "shared" is a signed link opened by someone who has not unlocked: the trade
    * is fixed, the finder and overrides are gone, and only view settings — the
@@ -235,8 +274,27 @@ function AnalyzerBody({
   const liveTotals = useLiveProjections(live, ref);
   const byeTeams = useByeTeams(season.season);
   const overridesApi = useProjectionOverrides();
-  // A shared trade shows Sleeper's numbers, never the viewer's own overrides.
-  const overrides = shared ? NO_OVERRIDES : overridesApi.overrides;
+  /**
+   * A shared trade shows THE SHARER'S overrides, signed into the link, and
+   * never the viewer's own — the link is a claim about what one person saw,
+   * and the viewer's browser has no business changing it.
+   */
+  /**
+   * An unlocked viewer on a link with overrides sees THE LINK'S until they
+   * choose: keep them as their own, or go back to theirs. Held in state, not
+   * read from the URL, so editing the trade does not drop them.
+   */
+  const [fromLink, setFromLink] = useState(carriedOverrides);
+  const [, setOvParam] = useUrlText("ov");
+  const [, setSigParam] = useUrlText("sig");
+  const leaveLinkOverrides = (keep: boolean) => {
+    if (keep && fromLink) overridesApi.replaceAll(fromLink);
+    setFromLink(null);
+    setOvParam("");
+    setSigParam("");
+  };
+  const overrides = shared ? linkOverrides : (fromLink ?? overridesApi.overrides);
+  const viewingLink = shared || fromLink != null;
   const gamesReady = Object.keys(games).length > 0;
   // An ESPN league does not wait on Sleeper's list: it only serves the cards.
   const ready = espn ? espnPool.ready : proj.ready && pool.ready;
@@ -533,6 +591,18 @@ function AnalyzerBody({
     ],
     [teams, espn, espnPlayers, pool.pool],
   );
+  /** "Zay Flowers wk 11 12.5, wk 12 0" per player, for the shared-link notice. */
+  const sharedOverrideList = viewingLink
+    ? Object.entries(overrides)
+        .map(([id, weeks]) => {
+          const ws = Object.entries(weeks)
+            .filter(([w]) => openWeeks.includes(Number(w)))
+            .sort(([x], [y]) => Number(x) - Number(y))
+            .map(([w, v]) => `wk ${w} ${fmt.pts1(v)}`);
+          return ws.length ? `${nameOf(id)} ${ws.join(", ")}` : null;
+        })
+        .filter((x): x is string => x != null)
+    : [];
   const holderOf = (id: string) => {
     const t = teams.find((x) => x.players.includes(id));
     return t ? teamLabel(t, owners) : null;
@@ -658,7 +728,7 @@ function AnalyzerBody({
         </div>
       </div>
 
-      {!shared && overridesApi.activeCount ? (
+      {!viewingLink && overridesApi.activeCount ? (
         // AN OVERRIDDEN BOARD RENDERS EXACTLY LIKE A REAL ONE, and the overrides
         // live in this browser only — so a screenshot of these numbers has to
         // say they are not Sleeper's. Same reason `<MockBadge />` exists.
@@ -670,6 +740,30 @@ function AnalyzerBody({
           <a href="#overrides" className="underline underline-offset-2 hover:text-chalk-100">
             Review
           </a>
+        </div>
+      ) : null}
+
+      {viewingLink && (sharedOverrideList.length || !shared) ? (
+        // Same reason as the notice above: these numbers are not Sleeper's.
+        <div className="rounded-lg border border-caution/40 bg-caution/10 px-4 py-2 text-[12px] text-caution">
+          {sharedOverrideList.length ? (
+            <>
+              Whoever shared this link overrode {sharedOverrideList.length === 1 ? "a projection" : "projections"},
+              and every number below uses them: {sharedOverrideList.join("; ")}.
+            </>
+          ) : (
+            "The link you opened carries projection overrides, none for a week still to play."
+          )}
+          {!shared ? (
+            <span className="mt-2 flex flex-wrap gap-2">
+              <button type="button" onClick={() => leaveLinkOverrides(true)} className={BUTTON.secondarySm}>
+                Keep these as mine
+              </button>
+              <button type="button" onClick={() => leaveLinkOverrides(false)} className={BUTTON.secondarySm}>
+                Use my own instead
+              </button>
+            </span>
+          ) : null}
         </div>
       ) : null}
 
@@ -775,7 +869,12 @@ function AnalyzerBody({
                 {hasTrade && teamA && teamB && lock.sign ? (
                   <ShareButton
                     sign={lock.sign}
-                    trade={{ a: teamA.ownerSlug, b: teamB.ownerSlug, give: [...fromA, ...fromB] }}
+                    trade={{
+                      a: teamA.ownerSlug,
+                      b: teamB.ownerSlug,
+                      give: [...fromA, ...fromB],
+                      ov: encodeOverrides(overrides, openWeeks),
+                    }}
                     fa={faParam}
                   />
                 ) : null}
@@ -899,7 +998,7 @@ function AnalyzerBody({
         </>
       ) : null}
 
-      {!shared ? (
+      {!viewingLink ? (
         <div id="overrides" className="scroll-mt-20">
           <ProjectionOverridesPanel
             api={overridesApi}
