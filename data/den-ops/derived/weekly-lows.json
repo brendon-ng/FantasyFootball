@@ -174,6 +174,12 @@
     "week": 2
   },
   {
+    "ownerSlug": "lauren-gross",
+    "points": 72.82,
+    "season": 2021,
+    "week": 3
+  },
+  {
     "ownerSlug": "olivia-nelli",
     "points": 72.82,
     "season": 2021,
@@ -184,6 +190,12 @@
     "points": 76.96,
     "season": 2021,
     "week": 4
+  },
+  {
+    "ownerSlug": "lauren-gross",
+    "points": 84.68,
+    "season": 2021,
+    "week": 5
   },
   {
     "ownerSlug": "olivia-nelli",
@@ -330,6 +342,12 @@
     "week": 14
   },
   {
+    "ownerSlug": "lauren-gross",
+    "points": 64.34,
+    "season": 2023,
+    "week": 1
+  },
+  {
     "ownerSlug": "olivia-nelli",
     "points": 64.34,
     "season": 2023,
@@ -426,6 +444,12 @@
     "week": 2
   },
   {
+    "ownerSlug": "katie-barnes",
+    "points": 76.36,
+    "season": 2024,
+    "week": 2
+  },
+  {
     "ownerSlug": "cassidy-pensa",
     "points": 88.18,
     "season": 2024,
@@ -480,7 +504,19 @@
     "week": 11
   },
   {
+    "ownerSlug": "maddy-perdue",
+    "points": 104.24,
+    "season": 2024,
+    "week": 11
+  },
+  {
     "ownerSlug": "jake-gibbons",
+    "points": 88.76,
+    "season": 2024,
+    "week": 12
+  },
+  {
+    "ownerSlug": "maddy-perdue",
     "points": 88.76,
     "season": 2024,
     "week": 12
@@ -510,7 +546,19 @@
     "week": 2
   },
   {
+    "ownerSlug": "maddy-perdue",
+    "points": 94.54,
+    "season": 2025,
+    "week": 2
+  },
+  {
     "ownerSlug": "jake-gibbons",
+    "points": 105.04,
+    "season": 2025,
+    "week": 3
+  },
+  {
+    "ownerSlug": "maddy-perdue",
     "points": 105.04,
     "season": 2025,
     "week": 3
@@ -535,6 +583,12 @@
   },
   {
     "ownerSlug": "jake-gibbons",
+    "points": 89.94,
+    "season": 2025,
+    "week": 7
+  },
+  {
+    "ownerSlug": "maddy-perdue",
     "points": 89.94,
     "season": 2025,
     "week": 7
@@ -570,6 +624,12 @@
     "week": 12
   },
   {
+    "ownerSlug": "katie-barnes",
+    "points": 70.82,
+    "season": 2025,
+    "week": 12
+  },
+  {
     "ownerSlug": "reagan-schmidt",
     "points": 74.14,
     "season": 2025,
@@ -588,6 +648,12 @@
     "week": 1
   },
   {
+    "ownerSlug": "katie-barnes",
+    "points": 108.76,
+    "season": 2026,
+    "week": 1
+  },
+  {
     "ownerSlug": "brendon-ng",
     "points": 74.3,
     "season": 2026,
@@ -595,6 +661,12 @@
   },
   {
     "ownerSlug": "jaymie-lew",
+    "points": 101.56,
+    "season": 2026,
+    "week": 3
+  },
+  {
+    "ownerSlug": "katie-barnes",
     "points": 101.56,
     "season": 2026,
     "week": 3
@@ -634,5 +706,17 @@
     "points": 70.48,
     "season": 2026,
     "week": 9
+  },
+  {
+    "ownerSlug": "maddy-perdue",
+    "points": 70.48,
+    "season": 2026,
+    "week": 9
+  },
+  {
+    "ownerSlug": "spencer-kim",
+    "points": 86.28,
+    "season": 2026,
+    "week": 10
   }
 ]

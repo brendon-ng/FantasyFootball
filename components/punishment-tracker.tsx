@@ -304,8 +304,9 @@ export function PunishmentTracker({
       buildLedger(
         feedSeason,
         seasons.find((s) => s.season === active)?.lows ?? [],
+        teams,
       ),
-    [feedSeason, seasons, active],
+    [feedSeason, seasons, active, teams],
   );
   const totals = ledgerTotals(rows);
   const pool = poolRemaining(feedSeason, rows);
@@ -498,8 +499,12 @@ export function PunishmentTracker({
    */
   const pendingRows = useMemo(
     () =>
-      buildLedger(null, seasons.find((s) => s.season === active)?.lows ?? []),
-    [seasons, active],
+      buildLedger(
+        null,
+        seasons.find((s) => s.season === active)?.lows ?? [],
+        teams,
+      ),
+    [seasons, active, teams],
   );
 
   /**

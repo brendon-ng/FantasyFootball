@@ -584,6 +584,7 @@ const sameSet = (a: string[], b: string[]) =>
 export function buildLedger(
   season: PunishmentSeason | null,
   lows: DerivedLow[],
+  teams: TeamMap = {},
 ): LedgerRow[] {
   const byId = new Map((season?.suggestions ?? []).map((s) => [s.id, s]));
   const assignments = new Map(
@@ -599,6 +600,10 @@ export function buildLedger(
     ...new Set([...derivedByWeek.keys(), ...assignments.keys()]),
   ].sort((a, b) => a - b);
 
+  // The season this ledger is for, carried on every row so a renderer can
+  // resolve co-owners without also being told which season it is looking at.
+  const year = season?.season ?? lows[0]?.season ?? 0;
+
   return weeks.map((week) => {
     const derived = derivedByWeek.get(week) ?? [];
     const a = assignments.get(week);
@@ -607,15 +612,27 @@ export function buildLedger(
 
     const useDerived = derivedLosers.length > 0;
     const losers = useDerived ? derivedLosers : sheetLosers;
+    // Compared as TEAMS, not slugs: a sheet naming the primary and a build
+    // naming both co-owners describe the same low. `primaryOwner` resolves
+    // either half to the team's key; a slug the map does not know passes
+    // through unchanged, so an unarchived week's sheet loser still compares.
+    const toPrimaries = (slugs: string[]) => [
+      ...new Set(slugs.map((s) => primaryOwner(teams, year, s))),
+    ];
     const disagrees =
       useDerived &&
       sheetLosers.length > 0 &&
-      !sameSet(derivedLosers, sheetLosers);
+      !sameSet(toPrimaries(derivedLosers), toPrimaries(sheetLosers));
+    // The game link survives a shared low only when every row in the week
+    // points at the same game: co-owners share one, tied teams do not.
+    const matchupIds = [
+      ...new Set(
+        derived.map((d) => d.matchupId).filter((x): x is string => x != null),
+      ),
+    ];
 
     return {
-      // Carried on the row so a renderer can resolve co-owners without also
-      // being told which season it is looking at.
-      season: season?.season ?? lows[0]?.season ?? 0,
+      season: year,
       week,
       losers,
       source: losers.length ? (useDerived ? "derived" : "sheet") : "none",
@@ -623,7 +640,7 @@ export function buildLedger(
       sheetLosers: disagrees ? sheetLosers : [],
       // A tie has two teams on the same score, so either one states it.
       points: derived.length ? derived[0].points : null,
-      matchupId: derived.length === 1 ? derived[0].matchupId : null,
+      matchupId: matchupIds.length === 1 ? matchupIds[0] : null,
       punishment:
         a?.punishmentId != null ? (byId.get(a.punishmentId) ?? null) : null,
       punishmentId: a?.punishmentId ?? null,

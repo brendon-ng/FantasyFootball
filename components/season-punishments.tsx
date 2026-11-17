@@ -60,7 +60,7 @@ export function SeasonPunishments({
 
   // Everything the build knows: a row per week lost, with the punishment and the
   // completion still to come. Also what the panel is drawn from while waiting.
-  const pending = buildLedger(null, lows);
+  const pending = buildLedger(null, lows, teams);
 
   if (status !== "ready") {
     // An outage leaves the page as it was rather than showing a broken panel —
@@ -80,7 +80,7 @@ export function SeasonPunishments({
   const feedSeason = feed.seasons.find((s) => s.season === season) ?? null;
   if (!feedSeason) return null;
 
-  const rows = buildLedger(feedSeason, lows);
+  const rows = buildLedger(feedSeason, lows, teams);
   if (!rows.length) return null;
 
   const totals = ledgerTotals(rows);

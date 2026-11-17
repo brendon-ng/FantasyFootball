@@ -528,7 +528,9 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
  * low scorer is a fact, and `features.weeklyLowPunishment` only decides whether
  * the UI says anything about it. That keeps enabling the rule a config change.
  *
- * A tie produces one row per tied team, since a shared low is shared.
+ * A tie produces one row per tied team, since a shared low is shared. A
+ * co-owned team's low produces one row per credited owner, for the same
+ * reason: the low is the team's, and every owner on the team owns it.
  */
 /**
  * `regularWeeks` is passed in rather than read off the summaries, because a
@@ -542,7 +544,10 @@ function summariseSeason(d: SeasonData, finalizedThroughWeek: number): SeasonSum
 function buildWeeklyLows(
   matchups: Matchup[],
   regularWeeks: Map<number, number>,
+  ownersOfTeam: Map<string, string[]>,
 ): WeeklyLow[] {
+  const sideOwners = (season: number, slug: string) =>
+    ownersOfTeam.get(`${season}:${slug}`) ?? [slug];
   const byWeek = new Map<string, Array<{ ownerSlug: string; points: number }>>();
 
   for (const m of matchups) {
@@ -551,7 +556,10 @@ function buildWeeklyLows(
     const key = `${m.season}:${m.week}`;
     const list = byWeek.get(key) ?? [];
     for (const side of [m.home, m.away]) {
-      if (side.ownerSlug) list.push({ ownerSlug: side.ownerSlug, points: side.points });
+      if (!side.ownerSlug) continue;
+      for (const slug of sideOwners(m.season, side.ownerSlug)) {
+        list.push({ ownerSlug: slug, points: side.points });
+      }
     }
     byWeek.set(key, list);
   }
@@ -1067,6 +1075,35 @@ function resolveKeepers(seasons: SeasonData[], draftOnly: DraftOnlySeason[] = []
 const seasonsWithWeeklyData = (matchups: Matchup[]): Set<number> =>
   new Set(matchups.map((m) => m.season));
 
+/**
+ * Season -> primary owner slug -> every owner credited with that team-season.
+ *
+ * Summaries are authoritative for finished seasons: a standings row already
+ * carries the whole owner set. An in-progress season has no summary — standings
+ * are a moving target — but its roster-to-owner mapping is on disk, and its
+ * finished weeks already feed the matchups. Without that second source a
+ * co-owner's credit silently stops at the last finalized season. Summaries
+ * stay authoritative: only fill keys they did not already set.
+ */
+function buildOwnersOfTeam(
+  summaries: SeasonSummary[],
+  loaded: SeasonData[],
+): Map<string, string[]> {
+  const ownersOfTeam = new Map<string, string[]>();
+  for (const s of summaries) {
+    for (const row of s.standings) ownersOfTeam.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
+  }
+  for (const d of loaded) {
+    for (const [rosterId, slugs] of d.rosterToOwners) {
+      const primary = d.rosterToOwner.get(rosterId);
+      if (!primary) continue;
+      const key = `${d.season}:${primary}`;
+      if (!ownersOfTeam.has(key)) ownersOfTeam.set(key, slugs);
+    }
+  }
+  return ownersOfTeam;
+}
+
 function buildOwnerRecords(
   summaries: SeasonSummary[],
   matchups: Matchup[],
@@ -1089,24 +1126,7 @@ function buildOwnerRecords(
 
   // Head-to-head needs the full owner set on each side, so a co-owned team's
   // record lands on every co-owner and against every opponent co-owner.
-  const ownersOfTeam = new Map<string, string[]>();
-  for (const s of summaries) {
-    for (const row of s.standings) ownersOfTeam.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
-  }
-  // An in-progress season has no summary — standings are a moving target —
-  // but its roster-to-owner mapping is on disk, and its finished weeks already
-  // feed the matchups below. Without this, `sideOwners` falls back to the
-  // primary owner alone and a co-owner's all-time record silently stops at
-  // the last finalized season. Summaries stay authoritative: only fill keys
-  // they did not already set.
-  for (const d of loaded) {
-    for (const [rosterId, slugs] of d.rosterToOwners) {
-      const primary = d.rosterToOwner.get(rosterId);
-      if (!primary) continue;
-      const key = `${d.season}:${primary}`;
-      if (!ownersOfTeam.has(key)) ownersOfTeam.set(key, slugs);
-    }
-  }
+  const ownersOfTeam = buildOwnersOfTeam(summaries, loaded);
   const sideOwners = (season: number, slug: string) =>
     ownersOfTeam.get(`${season}:${slug}`) ?? [slug];
 
@@ -2871,7 +2891,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
     ...importedRegularWeeks(),
     ...loaded.map((d) => [d.season, d.rules.regularSeasonWeeks] as const),
   ]);
-  const weeklyLows = buildWeeklyLows(byWeek, regularWeeksBySeason);
+  const weeklyLows = buildWeeklyLows(byWeek, regularWeeksBySeason, buildOwnersOfTeam(summaries, loaded));
   const trades = buildTrades(loaded, loadLiveTradeSources(loaded));
 
   for (const o of owners.values()) o.seasons = [...new Set(o.seasons)].sort();

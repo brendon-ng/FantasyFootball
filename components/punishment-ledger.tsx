@@ -44,7 +44,12 @@ export function TeamNames({
   full?: boolean;
 }) {
   if (!slugs.length) return <span className="text-chalk-600">—</span>;
-  const people = slugs.flatMap((slug) => teamFor(teams, names, season, slug));
+  // A shared team named twice — once per co-owner in `slugs` — renders once.
+  // `teamFor` expands each slug to the whole team, so without this a co-owned
+  // low reads "Robbie & Thomas & Robbie & Thomas".
+  const people = slugs
+    .flatMap((slug) => teamFor(teams, names, season, slug))
+    .filter((p, i, arr) => arr.findIndex((q) => q.slug === p.slug) === i);
   return (
     <>
       {people.map((p, i) => (

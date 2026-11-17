@@ -60,6 +60,12 @@
     "week": 10
   },
   {
+    "ownerSlug": "thomas-moore",
+    "points": 89.22,
+    "season": 2025,
+    "week": 10
+  },
+  {
     "ownerSlug": "josh-greenebaum",
     "points": 62.3,
     "season": 2025,
@@ -67,6 +73,12 @@
   },
   {
     "ownerSlug": "robbie-goodman",
+    "points": 89.02,
+    "season": 2025,
+    "week": 12
+  },
+  {
+    "ownerSlug": "thomas-moore",
     "points": 89.02,
     "season": 2025,
     "week": 12
@@ -136,5 +148,11 @@
     "points": 99.36,
     "season": 2026,
     "week": 9
+  },
+  {
+    "ownerSlug": "lindsey-freeze",
+    "points": 92.2,
+    "season": 2026,
+    "week": 10
   }
 ]
