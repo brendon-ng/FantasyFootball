@@ -1070,6 +1070,9 @@ const seasonsWithWeeklyData = (matchups: Matchup[]): Set<number> =>
 function buildOwnerRecords(
   summaries: SeasonSummary[],
   matchups: Matchup[],
+  // Every season on disk, in-progress included: the only source of a
+  // co-owner mapping for a season with no summary yet.
+  loaded: SeasonData[],
 ): OwnerRecord[] {
   const rec = new Map<string, OwnerRecord>();
   const blank = (slug: string): OwnerRecord => ({
@@ -1089,6 +1092,20 @@ function buildOwnerRecords(
   const ownersOfTeam = new Map<string, string[]>();
   for (const s of summaries) {
     for (const row of s.standings) ownersOfTeam.set(`${s.season}:${row.ownerSlug}`, row.ownerSlugs);
+  }
+  // An in-progress season has no summary — standings are a moving target —
+  // but its roster-to-owner mapping is on disk, and its finished weeks already
+  // feed the matchups below. Without this, `sideOwners` falls back to the
+  // primary owner alone and a co-owner's all-time record silently stops at
+  // the last finalized season. Summaries stay authoritative: only fill keys
+  // they did not already set.
+  for (const d of loaded) {
+    for (const [rosterId, slugs] of d.rosterToOwners) {
+      const primary = d.rosterToOwner.get(rosterId);
+      if (!primary) continue;
+      const key = `${d.season}:${primary}`;
+      if (!ownersOfTeam.has(key)) ownersOfTeam.set(key, slugs);
+    }
   }
   const sideOwners = (season: number, slug: string) =>
     ownersOfTeam.get(`${season}:${slug}`) ?? [slug];
@@ -2814,7 +2831,7 @@ async function deriveLeague(league: ScriptLeague): Promise<void> {
     ...importedMatchups(),
     ...loaded.flatMap((d) => buildMatchups(d, throughByseason.get(d.season) ?? 0)),
   ];
-  const ownerRecords = buildOwnerRecords(summaries, matchups);
+  const ownerRecords = buildOwnerRecords(summaries, matchups, loaded);
   const byWeek = matchups.flatMap(weeklyViews);
   // Whole matchups: the builder splits them itself, because scores and margins
   // want different views of the same game.
