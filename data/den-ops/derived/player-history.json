@@ -7044,6 +7044,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795133838072,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "1971": [

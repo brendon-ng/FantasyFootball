@@ -27060,6 +27060,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795125009934,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "11370": [
@@ -30379,6 +30391,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795125009934,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "12534": [

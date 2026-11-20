@@ -4906,6 +4906,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795147353611,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "6111": [
@@ -5031,6 +5043,20 @@
       "timestamp": 1763240052869,
       "toSlug": null,
       "type": "waiver",
+      "week": 11
+    }
+  ],
+  "6528": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795147353611,
+      "toSlug": null,
+      "type": "free_agent",
       "week": 11
     }
   ],
@@ -11171,6 +11197,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795111737705,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "11560": [
@@ -15628,6 +15666,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795191368107,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "12545": [
@@ -16104,6 +16154,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795191337980,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "13279": [
@@ -18138,6 +18200,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jake-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795111737705,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "DEN": [
