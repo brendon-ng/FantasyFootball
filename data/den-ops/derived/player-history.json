@@ -7216,6 +7216,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 12
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795237616213,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "2025": [
@@ -23862,6 +23874,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795196162955,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "5122": [
@@ -28988,6 +29012,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795196162955,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "6111": [
@@ -31977,6 +32013,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795196066968,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "6820": [
@@ -50529,6 +50577,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795196066968,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "12501": [
@@ -51849,6 +51909,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795229127853,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "13330": [
@@ -57185,6 +57257,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795237616213,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "KC": [

@@ -3820,6 +3820,47 @@
       "timestamp": 1795125009934,
       "vetoed": false,
       "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "d9de349c-ab89-4b8c-97be-947658398d72",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "5022",
+          "toSlug": "haley-rao"
+        },
+        {
+          "fromSlug": "haley-rao",
+          "playerId": "9482",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "haley-rao"
+      ],
+      "timestamp": 1795193207841,
+      "vetoed": false,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "a43b1b43-cc8c-42e7-bc7e-0dbb5374d1e4",
+      "items": [
+        {
+          "fromSlug": "eric-wong",
+          "playerId": "9493",
+          "toSlug": null
+        }
+      ],
+      "kind": "drop",
+      "ownerSlugs": [
+        "eric-wong"
+      ],
+      "timestamp": 1795196556357,
+      "vetoed": false,
+      "week": 11
     }
   ]
 }
