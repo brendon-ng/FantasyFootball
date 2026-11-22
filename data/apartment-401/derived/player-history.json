@@ -3043,6 +3043,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795326422618,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "2028": [
@@ -14565,6 +14577,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795326422618,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "6111": [
@@ -24748,6 +24772,18 @@
       "timestamp": 1795193207841,
       "toSlug": null,
       "type": "free_agent",
+      "week": 11
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795334528971,
+      "toSlug": null,
+      "type": "waiver",
       "week": 11
     }
   ],

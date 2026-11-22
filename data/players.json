@@ -2110,7 +2110,7 @@
     "birth_date": "1997-05-27",
     "full_name": "Daniel Jones",
     "position": "QB",
-    "team": "IND",
+    "team": null,
     "years_exp": 7
   },
   "5872": {
@@ -3132,7 +3132,7 @@
     "birth_date": "1998-12-10",
     "full_name": "Pierre Strong Jr.",
     "position": "RB",
-    "team": null,
+    "team": "GB",
     "years_exp": 4
   },
   "8117": {

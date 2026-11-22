@@ -26,6 +26,33 @@
   },
   {
     "adds": {
+      "13276": 3
+    },
+    "consenter_ids": [
+      3
+    ],
+    "created": 1795193217244,
+    "creator": "839620800469393408",
+    "draft_picks": [],
+    "drops": null,
+    "leg": 11,
+    "metadata": {
+      "notes": "Unfortunately, your roster will have too many players after this transaction."
+    },
+    "roster_ids": [
+      3
+    ],
+    "settings": {
+      "seq": 0
+    },
+    "status": "failed",
+    "status_updated": 1795360596415,
+    "transaction_id": "1429547601643995136",
+    "type": "waiver",
+    "waiver_budget": []
+  },
+  {
+    "adds": {
       "12540": 4
     },
     "consenter_ids": [

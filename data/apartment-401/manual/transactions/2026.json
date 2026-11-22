@@ -208,11 +208,11 @@
     },
     {
       "faab": 0,
-      "id": "95fbdc29-88f2-4a55-8889-e48b5990880d",
+      "id": "a4a2395f-d09e-414a-8e4a-9a565213a2d3",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "11834",
+          "playerId": "13296",
           "toSlug": "brendon-ng"
         }
       ],
@@ -226,11 +226,11 @@
     },
     {
       "faab": 0,
-      "id": "a4a2395f-d09e-414a-8e4a-9a565213a2d3",
+      "id": "95fbdc29-88f2-4a55-8889-e48b5990880d",
       "items": [
         {
           "fromSlug": null,
-          "playerId": "13296",
+          "playerId": "11834",
           "toSlug": "brendon-ng"
         }
       ],
@@ -3859,6 +3859,47 @@
         "eric-wong"
       ],
       "timestamp": 1795196556357,
+      "vetoed": false,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "5274174d-c02b-4873-8702-8da08d76b902",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "2020",
+          "toSlug": "jay-uppuluri"
+        },
+        {
+          "fromSlug": "jay-uppuluri",
+          "playerId": "6083",
+          "toSlug": null
+        }
+      ],
+      "kind": "add",
+      "ownerSlugs": [
+        "jay-uppuluri"
+      ],
+      "timestamp": 1795326422618,
+      "vetoed": false,
+      "week": 11
+    },
+    {
+      "faab": 0,
+      "id": "72f9aa52-edf8-466e-a86e-61d39088e382",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "9482",
+          "toSlug": "eric-wong"
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "eric-wong"
+      ],
+      "timestamp": 1795334528971,
       "vetoed": false,
       "week": 11
     }
