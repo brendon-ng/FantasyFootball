@@ -27626,6 +27626,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795374536932,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "11565": [
@@ -30745,6 +30757,20 @@
       "week": 8
     }
   ],
+  "13269": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795374546719,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
+    }
+  ],
   "13274": [
     {
       "action": "add",
@@ -33033,6 +33059,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795366429121,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "DAL": [
@@ -37059,6 +37097,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "diana-gonzalez",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795366429121,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "PHI": [

@@ -14761,6 +14761,20 @@
       "week": 0
     }
   ],
+  "12502": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795367993957,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
+    }
+  ],
   "12504": [
     {
       "action": "draft",
@@ -15512,6 +15526,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795367291807,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "12534": [
@@ -15699,6 +15725,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1795191368107,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795367442478,
       "toSlug": null,
       "type": "free_agent",
       "week": 11
