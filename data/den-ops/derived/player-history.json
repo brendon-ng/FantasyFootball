@@ -50196,6 +50196,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 6
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795463365744,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "12489": [

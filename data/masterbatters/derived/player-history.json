@@ -1517,6 +1517,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795480596657,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "3257": [
@@ -14669,6 +14681,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795540688926,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "12501": [
@@ -14770,6 +14794,18 @@
       "preseason": false,
       "season": 2026,
       "timestamp": 1795367993957,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795540678514,
       "toSlug": null,
       "type": "free_agent",
       "week": 11
@@ -17164,6 +17200,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "aidan-kelleher",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795540673846,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "13545": [
@@ -20122,6 +20170,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "allison-fosbery",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795480596657,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 11
     }
   ],
   "NO": [

@@ -2502,7 +2502,7 @@
     "birth_date": "1998-03-17",
     "full_name": "Brandon Aiyuk",
     "position": "WR",
-    "team": "SF",
+    "team": null,
     "years_exp": 6
   },
   "6804": {
@@ -4624,6 +4624,13 @@
     "full_name": "Dohnte Meyers",
     "position": "WR",
     "team": "CIN",
+    "years_exp": 0
+  },
+  "13269": {
+    "birth_date": "2003-10-01",
+    "full_name": "Fernando Mendoza",
+    "position": "QB",
+    "team": "LV",
     "years_exp": 0
   },
   "13274": {
