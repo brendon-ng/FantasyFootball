@@ -7228,6 +7228,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795594203286,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 11
     }
   ],
   "2025": [
@@ -15433,6 +15445,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 5
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795594203286,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 11
     }
   ],
   "4038": [
@@ -45778,6 +45802,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": 10,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795594203286,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 11
     }
   ],
   "10222": [
@@ -47130,6 +47166,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "spencer-kim",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795606428061,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "11559": [
@@ -49968,6 +50016,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795594203286,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 11
     }
   ],
   "12474": [
@@ -50600,6 +50660,18 @@
       "timestamp": 1795196066968,
       "toSlug": null,
       "type": "free_agent",
+      "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795594203286,
+      "toSlug": null,
+      "type": "waiver",
       "week": 11
     }
   ],
@@ -51591,6 +51663,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 10
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "jaymie-lew",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795594203286,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 11
     }
   ],
   "13276": [
@@ -52241,6 +52325,20 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    }
+  ],
+  "13968": [
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795617427039,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "ARI": [
@@ -54149,6 +54247,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795597187156,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "CIN": [
@@ -55941,6 +56051,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795594203286,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 11
     }
   ],
   "GB": [
@@ -56593,6 +56715,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 4
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "tyler-jung",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795617427039,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "IND": [
@@ -57280,6 +57414,18 @@
       "timestamp": 1795237616213,
       "toSlug": null,
       "type": "free_agent",
+      "week": 11
+    },
+    {
+      "action": "add",
+      "faabSpent": 0,
+      "fromSlug": null,
+      "ownerSlug": "safvet-besen",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795594203286,
+      "toSlug": null,
+      "type": "waiver",
       "week": 11
     }
   ],

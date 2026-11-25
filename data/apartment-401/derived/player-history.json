@@ -1354,6 +1354,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 12
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795595758647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 12
     }
   ],
   "1234": [
@@ -7989,6 +8001,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795595758647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 12
     }
   ],
   "4149": [
@@ -24033,6 +24057,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795595758647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 12
     }
   ],
   "8408": [
@@ -24523,6 +24559,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 3
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795619916053,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "9229": [
@@ -24785,6 +24833,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795589593690,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "9484": [
@@ -25321,6 +25381,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795595758647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 12
     }
   ],
   "9504": [
@@ -26316,6 +26388,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795595758647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 12
     }
   ],
   "10218": [
@@ -26344,6 +26428,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 15
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795619916053,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "10222": [
@@ -27596,6 +27692,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "isaac-edejer",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795595758647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 12
     }
   ],
   "11564": [
@@ -30381,6 +30489,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795595758647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 12
     }
   ],
   "12530": [
@@ -34989,6 +35109,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 11
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795619871891,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "LAC": [
@@ -36899,6 +37031,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795619871891,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "NYJ": [
@@ -38757,6 +38901,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "eric-wong",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795595758647,
+      "toSlug": null,
+      "type": "waiver",
+      "week": 12
     }
   ],
   "espn-4427728": [
