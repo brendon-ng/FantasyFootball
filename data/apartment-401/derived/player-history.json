@@ -22111,6 +22111,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795675524003,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "8134": [
@@ -33191,6 +33203,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "charlie-stoksik",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795675524003,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "DAL": [
@@ -33367,6 +33391,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 6
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795650702468,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "DEN": [
@@ -37767,6 +37803,18 @@
       "toSlug": null,
       "type": "draft",
       "week": 0
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "jay-uppuluri",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795650702468,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "SEA": [

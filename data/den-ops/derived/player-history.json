@@ -17581,6 +17581,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 5
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795644452793,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "4179": [
@@ -46739,6 +46751,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "lauren-gross",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795644408013,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "11435": [
@@ -53455,6 +53479,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795636964633,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "BUF": [
@@ -60918,6 +60954,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795636964633,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "PHI": [

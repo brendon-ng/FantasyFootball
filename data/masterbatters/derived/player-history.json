@@ -607,6 +607,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 8
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795646460810,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "1433": [
@@ -5503,6 +5515,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 9
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795635378415,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "6804": [
@@ -14474,6 +14498,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 9
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "brendon-ng",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795646460810,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "12493": [
@@ -16348,6 +16384,18 @@
       "toSlug": null,
       "type": "free_agent",
       "week": 11
+    },
+    {
+      "action": "add",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795665400269,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "13276": [
@@ -16588,6 +16636,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 10
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "joe-gibbons",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795665400269,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "13294": [
@@ -19516,6 +19576,18 @@
       "toSlug": null,
       "type": "waiver",
       "week": 7
+    },
+    {
+      "action": "drop",
+      "faabSpent": null,
+      "fromSlug": null,
+      "ownerSlug": "ross-bechtel",
+      "preseason": false,
+      "season": 2026,
+      "timestamp": 1795635378415,
+      "toSlug": null,
+      "type": "free_agent",
+      "week": 12
     }
   ],
   "LAC": [
