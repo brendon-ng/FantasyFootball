@@ -1265,29 +1265,6 @@
     },
     {
       "faab": 0,
-      "id": "7075294d-3d35-4848-803e-dce28fced223",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "11630",
-          "toSlug": "isaac-edejer"
-        },
-        {
-          "fromSlug": "isaac-edejer",
-          "playerId": "6819",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "isaac-edejer"
-      ],
-      "timestamp": 1791359099987,
-      "vetoed": false,
-      "week": 5
-    },
-    {
-      "faab": 0,
       "id": "e6ac5b87-3443-48c7-9ae1-aedb3cd7d095",
       "items": [
         {
@@ -1304,6 +1281,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "eric-wong"
+      ],
+      "timestamp": 1791359099987,
+      "vetoed": false,
+      "week": 5
+    },
+    {
+      "faab": 0,
+      "id": "7075294d-3d35-4848-803e-dce28fced223",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "11630",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "6819",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "isaac-edejer"
       ],
       "timestamp": 1791359099987,
       "vetoed": false,
@@ -4005,29 +4005,6 @@
     },
     {
       "faab": 0,
-      "id": "e2ebcc92-abe9-4bf5-a005-7efdd9415b02",
-      "items": [
-        {
-          "fromSlug": null,
-          "playerId": "4147",
-          "toSlug": "isaac-edejer"
-        },
-        {
-          "fromSlug": "isaac-edejer",
-          "playerId": "8259",
-          "toSlug": null
-        }
-      ],
-      "kind": "waiver",
-      "ownerSlugs": [
-        "isaac-edejer"
-      ],
-      "timestamp": 1795595758647,
-      "vetoed": false,
-      "week": 12
-    },
-    {
-      "faab": 0,
       "id": "18675791-11b7-47af-ad3a-b3704f542a62",
       "items": [
         {
@@ -4044,6 +4021,29 @@
       "kind": "waiver",
       "ownerSlugs": [
         "eric-wong"
+      ],
+      "timestamp": 1795595758647,
+      "vetoed": false,
+      "week": 12
+    },
+    {
+      "faab": 0,
+      "id": "e2ebcc92-abe9-4bf5-a005-7efdd9415b02",
+      "items": [
+        {
+          "fromSlug": null,
+          "playerId": "4147",
+          "toSlug": "isaac-edejer"
+        },
+        {
+          "fromSlug": "isaac-edejer",
+          "playerId": "8259",
+          "toSlug": null
+        }
+      ],
+      "kind": "waiver",
+      "ownerSlugs": [
+        "isaac-edejer"
       ],
       "timestamp": 1795595758647,
       "vetoed": false,
